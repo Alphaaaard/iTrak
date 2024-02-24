@@ -661,11 +661,6 @@ input#roleField.form-control{
   gap: 1em;
 }
 
-.export-container {
-  left: 50px;
-  top: 75px;
-}
-
 .add-btn {
   background-color: #1E56A0;
   border: #1E56A0 1px solid;
@@ -689,7 +684,7 @@ input#roleField.form-control{
   color: white;
   font-weight: 500;
   font-size: .5em;
-  padding: .75em 7.5em;
+  padding: .75em 3.5em;
 }
 
 .archive-btn {

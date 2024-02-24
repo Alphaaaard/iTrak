@@ -70,7 +70,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
         <link rel="stylesheet" href="../../src/css/main.css">
         <link rel="stylesheet" href="../../src/css/attendance-logs.css">
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -343,8 +342,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 if ($attendanceResult->num_rows > 0) {
 
                                     // Table header
-                                    echo '<div class="table-whole-content">';
-                                    echo '<div class="table-header">';
+                                    echo '<div class="table-whole-content1">';
+                                    echo '<div class="table-header1">';
                                     echo '<table>';
                                     echo '<tr>';
                                     echo '<th>Day</th>';
@@ -609,7 +608,59 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 }
             }
         </script>
+        
         <script>
+            $(document).ready(function() {
+                // Bind the filter function to the input field
+                $("#search-box").on("input", function() {
+                    var query = $(this).val().toLowerCase();
+                    filterTable(query);
+                });
+
+                function filterTable(query) {
+                    $(".table-container tbody tr").each(function() {
+                        var row = $(this);
+                        var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
+                        var firstNameCell = row.find("td:eq(1)"); // FirstName column
+                        var middleNameCell = row.find("td:eq(2)");
+                        var lastNameCell = row.find("td:eq(3)");
+                        var dateCell = row.find("td:eq(5)");
+                        var actionCell = row.find("td:eq(6)");
+
+                        // Get the text content of each cell
+                        var archiveIDText = archiveIDCell.text().toLowerCase();
+                        var firstNameText = firstNameCell.text().toLowerCase();
+                        var middleNameText = middleNameCell.text().toLowerCase();
+                        var lastNameText = lastNameCell.text().toLowerCase();
+                        var dateText = dateCell.text().toLowerCase();
+                        var actionText = actionCell.text().toLowerCase();
+
+                        // Check if any of the cells contain the query
+                        var showRow = archiveIDText.includes(query) ||
+                            firstNameText.includes(query) ||
+                            middleNameText.includes(query) ||
+                            lastNameText.includes(query) ||
+                            dateText.includes(query) ||
+                            actionText.includes(query) ||
+                            archiveIDText == query || // Exact match for Archive ID
+                            firstNameText == query || // Exact match for FirstName
+                            middleNameText == query || // Exact match for LastName
+                            lastNameText == query || // Exact match for LastName
+                            dateText == query || // Exact match for LastName
+                            actionText == query; // Exact match for LastName
+
+                        // Show or hide the row based on the result
+                        if (showRow) {
+                            row.show();
+                        } else {
+                            row.hide();
+                        }
+                    });
+                }
+            });
+        </script>
+
+<script>
             function filterAttendanceData(accountId) {
                 var selectedValue = document.getElementById('filterType' + accountId).value;
                 var tableRows = document.querySelectorAll('#attendanceTable' + accountId + ' tbody tr');
@@ -664,57 +715,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             function isSameYear(date1, date2) {
                 return date1.getFullYear() === date2.getFullYear();
             }
-        </script>
-
-        <script>
-            $(document).ready(function() {
-                // Bind the filter function to the input field
-                $("#search-box").on("input", function() {
-                    var query = $(this).val().toLowerCase();
-                    filterTable(query);
-                });
-
-                function filterTable(query) {
-                    $(".table-container tbody tr").each(function() {
-                        var row = $(this);
-                        var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
-                        var firstNameCell = row.find("td:eq(1)"); // FirstName column
-                        var middleNameCell = row.find("td:eq(2)");
-                        var lastNameCell = row.find("td:eq(3)");
-                        var dateCell = row.find("td:eq(5)");
-                        var actionCell = row.find("td:eq(6)");
-
-                        // Get the text content of each cell
-                        var archiveIDText = archiveIDCell.text().toLowerCase();
-                        var firstNameText = firstNameCell.text().toLowerCase();
-                        var middleNameText = middleNameCell.text().toLowerCase();
-                        var lastNameText = lastNameCell.text().toLowerCase();
-                        var dateText = dateCell.text().toLowerCase();
-                        var actionText = actionCell.text().toLowerCase();
-
-                        // Check if any of the cells contain the query
-                        var showRow = archiveIDText.includes(query) ||
-                            firstNameText.includes(query) ||
-                            middleNameText.includes(query) ||
-                            lastNameText.includes(query) ||
-                            dateText.includes(query) ||
-                            actionText.includes(query) ||
-                            archiveIDText == query || // Exact match for Archive ID
-                            firstNameText == query || // Exact match for FirstName
-                            middleNameText == query || // Exact match for LastName
-                            lastNameText == query || // Exact match for LastName
-                            dateText == query || // Exact match for LastName
-                            actionText == query; // Exact match for LastName
-
-                        // Show or hide the row based on the result
-                        if (showRow) {
-                            row.show();
-                        } else {
-                            row.hide();
-                        }
-                    });
-                }
-            });
         </script>
     </body>
 
