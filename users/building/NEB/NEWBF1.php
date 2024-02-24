@@ -194,6 +194,39 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $description10 = $row10['description'];
 
 
+     //FOR IMAGE UPLOAD BASED ON ASSET ID
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['upload_img']) && isset($_POST['assetId'])) {
+    // Check for upload errors
+    if ($_FILES['upload_img']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['upload_img']['tmp_name'])) {
+        $image = $_FILES['upload_img']['tmp_name'];
+        $imgContent = file_get_contents($image); // Get the content of the file
+
+        // Get the asset ID from the form
+        $assetId = $_POST['assetId'];
+
+        // Prepare SQL query to update the asset with the image based on asset ID
+        $sql = "UPDATE asset SET upload_img = ? WHERE assetId = ?";
+        $stmt = $conn->prepare($sql);
+
+        // Null for blob data
+        $null = NULL;
+        $stmt->bind_param('bi', $null, $assetId);
+        // Send blob data in packets
+        $stmt->send_long_data(0, $imgContent);
+
+        if ($stmt->execute()) {
+            echo "<script>alert('Asset and image updated successfully!');</script>";
+            header("Location: NEWBF1.php");
+        } else {
+            echo "<script>alert('Failed to update asset and image. Error: " . $stmt->error . "');</script>";
+        }
+        $stmt->close();
+    } else {
+        echo "<script>alert('Failed to upload image. Error: " . $_FILES['upload_img']['error'] . "');</script>";
+    }
+}
+
+
     //FOR ID 1
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit'])) {
         // Get form data
