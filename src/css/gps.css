@@ -1,0 +1,256 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap");
+
+* {
+  box-sizing: border-box;
+  font-family: "Poppins";
+  margin: 0;
+  padding: 0;
+}
+
+.content {
+  display: block;
+}
+
+.content-container {
+  height: 83vh;
+  transition: 0.3s ease;
+}
+
+#content.hide .content-container {
+  /* height: 76vh; */
+  transition: 0.3s ease;
+}
+
+
+#map {
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+  z-index:0;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0 5px;
+  table-layout: unset;
+  cursor: default;
+}
+
+td {
+  border: solid 1px #000;
+  border-style: solid none;
+  padding: 10px;
+  background-color: cyan;
+}
+td:first-child {
+  border-left-style: solid;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+td:last-child {
+  border-right-style: solid;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.locationTbl {
+  position: absolute;
+  right: 25px;
+  top: 35px;
+  z-index: 2;
+  border-radius: 15px;
+  background-color: white;
+  /* padding: 0px 5px 0 5px; */
+}
+
+#content.hide .locationTbl {
+  top: 90px;
+}
+
+table .tableth {
+  background-color: #3d518c;
+}
+
+table .tableth tr th {
+  opacity: 0;
+  border-radius: 15px;
+}
+
+.table-header {
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  height: 35px;
+  background-color: #3d518c;
+}
+
+.table-container {
+  padding: 0 5px;
+}
+
+th,
+td {
+  font-size: 12px;
+  text-align: center;
+  padding: 0 5px;
+  margin: 0;
+  background-color: #f1f6ff;
+  height: 7.5vh;
+}
+
+.rounded-img {
+  border-radius: 50%;
+  overflow: hidden; /* This ensures the image does not overflow the rounded corners */
+  width: 40px!important; /* Adjust as needed */
+  height: 40px!important; /* Adjust as needed */
+}
+
+#LocBurger{
+  display: none;
+  cursor: pointer;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.accordion-content {
+  display: none;
+}
+
+.accordion-button {
+  background-color: white; /* Set the background color to white */
+  color: #3D3B40
+  ; /* Set the text color to #3D3B40 */
+}
+
+/* Style for clicked accordion items */
+.accordion-button.active {
+  background-color: white; /* Set the background color when clicked */
+  color: white; /* Set the text color when clicked */
+}
+
+.accordion{
+  border-radius: 15px;
+  background-color: white;
+  border: solid 1px #3D3B40;
+}
+
+.accordion-button{
+  background-color: none !important;
+  
+}
+
+.accordion-item{
+  width: 350px;
+  border-radius: 15px;
+  margin: 0 .5em .25em .5em;
+}
+
+.accordion-header{
+  border-radius: 15px;
+}
+
+.fake-header{
+  /* display: flex; */
+  background-color: #163172;
+  text-align: center;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  margin-bottom: .25em;
+  align-items: center;
+}
+
+.fake-header p{
+  color: white;
+  margin: 0;
+  padding: .5em .5em .5em 5em;
+  font-weight: bold;
+  font-size: .75em;
+}
+
+.accordion-body{
+  border-radius: 15px;
+} 
+.accordion-item:first-of-type{
+  border-radius: 15px;
+}
+.accordion-item:last-of-type{
+  border-radius: 15px;
+
+}
+
+.gps-info{
+  width: 100%;
+  text-align: left;
+  font-size: 12px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center ;
+  background-color: white;
+  height: 7vh;
+  gap: 3em;
+  padding: 0 2em;
+  border: #3D3B40 1px solid;
+}
+
+.gps-info:hover{
+  background-color: #F6F6F6;
+}
+
+@media (max-width: 600px) {
+
+  #content{
+    padding: 10px 20px;
+  }
+  #locationTbl{
+    display: none;
+    border: #3D3B40
+    1px solid;
+    outline: #3D3B40
+    1px solid;
+    z-index: 2;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    width: 90%; /* Need a specific value to work */
+    border: unset;
+    outline: unset;
+    height: unset;
+    top: 56px;
+    color: #3D3B40;
+  }
+
+  .accordion-item{
+    width: unset;
+    margin: 0 .25em .25em .25em;
+
+  }
+
+  .gps-info{
+    height: unset;
+    outline: unset;
+    /* border: #3D3B40 1px solid; */
+  }
+
+  #content.hide .locationTbl {
+    top: 56px;
+  }
+
+  #LocBurger{
+    display: block;
+  }
+
+  .cont-header{
+    display: flex;
+    margin-bottom: 5px;
+    justify-content: end;
+    padding: 0;
+  }
+
+  .tab-name-only{
+    position: unset!important;
+  }
+
+  #content .content-container {
+    height: 79vh;
+    transition: 0.3s ease;
+  }
+}

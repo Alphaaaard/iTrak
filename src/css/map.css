@@ -1,0 +1,231 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap");
+
+* {
+  box-sizing: border-box;
+  font-family: "Poppins";
+  margin: 0;
+  padding: 0;
+}
+
+.content-container {
+  overflow: hidden;
+  border: #163172 5px solid;
+    border: #163172 5px solid;
+  height: 83vh;
+}
+
+/* Add this CSS code to your stylesheet */
+.modal,
+.modal-content,
+.modal-header,
+.modal-body,
+.modal-footer {
+  cursor: auto !important;
+}
+
+.content {
+  display: none; /* Hide all content initially */
+}
+
+.active-content {
+  display: block; /* Show active content */
+}
+
+/* .content-container{
+  height: 84vh!important;
+
+} */
+
+/* .modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 60.7%;
+  top: 13.2%;
+  width: 37.5%;
+  overflow: auto;
+
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px 10px;
+  border: 1px solid #ccc;
+  width: 100%;
+  border-radius: 5px;
+  height: 81%;
+  z-index: 100;
+  border: #3D3B40 1px solid;
+} */
+
+.modal-content {
+  position: absolute;
+  top: 100px;
+  right: 30px;
+  width: 40%;
+  border-radius: 10px;
+  height: 80vh;
+}
+
+.building-name {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 3em;
+  width: 100%;
+}
+
+.close {
+  color: red;
+  float: right;
+  cursor: pointer;
+  width: fit-content;
+  position: absolute;
+  top: 10px;
+  right: 12.5px;
+  font-size: 20px;
+  font-weight: 100;
+}
+
+.close:hover {
+  color: #f00;
+}
+.status-circle {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+}
+
+.working {
+  background-color: green;
+}
+.maintenance {
+  background-color: yellow;
+}
+.repair {
+  background-color: blue;
+}
+.replacement {
+  background-color: red;
+}
+.form-control {
+  border: none !important;
+}
+.modal-header {
+  border-bottom: none;
+}
+.center-content {
+  display: flex;
+  justify-content: center;
+}
+
+#sidebar {
+  z-index: 1;
+}
+
+#model-container {
+  z-index: 0;
+  height: 100vh;
+  width: 100%;
+}
+
+.Floor-container {
+  width: 100%;
+  height: 78vh;
+}
+.Floor-container-1 {
+  width: 100%;
+  height: 78vh;
+}
+
+.sample {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10px;
+}
+
+.buildings {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+.building {
+  height: 10vh;
+  width: 40%;
+  background-color: #d6e4f0;
+  border-radius: 25px;
+  flex-grow: 1;
+  color: #3d3b40;
+}
+
+.nav-tabs .nav-link {
+  width: 100%;
+  color: #3d3b40;
+}
+
+.nav-tabs .nav-link:hover {
+  background-color: #9ed9ff;
+}
+
+.nav-container {
+  /* border: #3D3B40 2px solid; */
+  border-radius: 10px;
+}
+
+.nav-tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+h3 {
+  text-align: center;
+  font-weight: bold;
+  /* font-size: medium; */
+  padding: 3em;
+  color: #3d3b40;
+}
+
+
+
+@media (max-width: 992px) {
+  .content-container {
+    overflow: hidden;
+    border: #3d518c 0.25em solid;
+    outline: #3d3b40 2px solid;
+  }
+}
+
+@media (max-width: 600px) {
+  /* .tab-name {
+    padding-bottom: 1em;
+} */
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 5%;
+    top: 2.5%;
+    width: 90%;
+    overflow: auto;
+  }
+
+  .buildings {
+    visibility: visible !important;
+    display: flex;
+  }
+
+  .content-container {
+    overflow: hidden;
+    border: unset;
+    outline: unset;
+  }
+  .modal-content {
+    top: 2px;
+    height: 95%;
+    width: 100%;
+    right: 0;
+  }
+}

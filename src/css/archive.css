@@ -1,0 +1,149 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap");
+
+* {
+  box-sizing: border-box;
+  font-family: "Poppins";
+  margin: 0;
+  padding: 0;
+}
+
+.table-container {
+  padding: 5px 5px;
+  background-color: #fcfcfc;
+  border: 1px solid whitesmoke;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0 5px;
+  /* table-layout: unset; */
+  cursor: default;
+}
+
+.table-container table tbody tr td {
+  background-color: #f1f6ff;
+}
+
+.table-header {
+  background-color: #3d518c;
+}
+
+.table-content {
+  margin-top: 0;
+  padding: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 15px;
+}
+
+/* .table-content table{
+  background-color: white;
+} */
+
+.new-nav {
+  padding: 0.5em 0.5em 0 0.5em;
+  background-color: #3d518c;
+}
+
+.new-nav ul {
+  background-color: #3d518c;
+  display: flex;
+  gap: .3em;
+}
+
+.new-nav ul li a {
+  font-size: .85em;
+}
+
+/* .new-nav li {
+  border-radius: 7px;
+  font-size: 0.85em;
+} */
+
+table thead {
+  background-color: #3d518c;
+}
+
+table tr {
+  border-bottom: 5px solid White;
+}
+
+td {
+  border: solid 1px #3D3B40;
+  border-style: solid none;
+  /* padding: 10px; */
+  /* background-color: cyan; */
+}
+td:first-child {
+  border-left-style: solid;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  text-align: center;
+}
+td:last-child {
+  border-right-style: solid;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  text-align: center;
+}
+
+/* ... (your existing styles) ... */
+.table-header table tr th:nth-child(1),
+.table-header table tr th:nth-child(2) {
+  width: 15%; /* Adjust the width as needed */
+}
+
+.table-header table tr th:nth-child(3) {
+  width: 25%; /* Adjust the width as needed */
+}
+
+/* ... (your existing styles) ... */
+
+.table-container table tbody tr td:nth-child(1),
+.table-container table tbody tr td:nth-child(2) {
+  width: 15%; /* Adjust the width as needed */
+}
+
+.table-container table tbody tr td:nth-child(3) {
+  width: 25%; /* Adjust the width as needed */
+}
+
+.modal-body {
+  margin-bottom: 1.8em;
+}
+
+.noDataImgH {
+  height: 50vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.noDataImg {
+  width: 35%;
+}
+
+.rounded-img {
+  border-radius: 50%;
+  border: 1px #3D3B40 solid;
+  height: 50px;
+  width: 50px;
+}
+
+@media (max-width: 600px) {
+  .tab-name {
+    padding-bottom: 0;
+}
+
+.tbl-filter {
+  /* padding-bottom: 1em; */
+  display: flex;
+  justify-content: end;
+}
+
+.add-btn{
+  padding: 0.3em 3em;
+}
+}

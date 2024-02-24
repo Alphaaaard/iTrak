@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap");
+
+* {
+  box-sizing: border-box;
+  font-family: "Poppins";
+  margin: 0;
+  padding: 0;
+}
+
+*{
+    border: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+#rfid_form {
+    opacity: 0;
+    position: fixed;
+}
+body{
+    background-color: #163172;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+}
+
+.content{
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.Logo{
+    height: 25%;
+    width: 40%;
+    }
+
+.Scan{
+    height: 70%;
+    width: 40%;
+    }
