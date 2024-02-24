@@ -463,149 +463,55 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/profileModalController.js"></script>
 
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var managerPill = document.getElementById('manager-pill');
-                var personnelPill = document.getElementById('personnel-pill');
+    document.addEventListener('DOMContentLoaded', function() {
+        var managerPill = document.getElementById('manager-pill');
+        var personnelPill = document.getElementById('personnel-pill');
 
-                // Function to filter table rows based on role
-                function filterTable(role) {
-                    var tableRows = document.querySelectorAll('.table-container tbody tr');
-                    tableRows.forEach(function(row) {
-                        var roleCellText = row.cells[5].textContent.trim(); // Adjust the index if necessary
-                        if (roleCellText === role || role === 'all') {
-                            row.style.display = '';
-                        } else {
-                            row.style.display = 'none';
-                        }
-                    });
+        function filterTable(role) {
+            var tableRows = document.querySelectorAll('.table-container tbody tr');
+            tableRows.forEach(function(row) {
+                var roleCellText = row.cells[5].textContent.trim(); // Adjust if your role is in a different column
+                if (roleCellText === role || role === 'all') {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
                 }
-
-
-                // Function to toggle the active class between buttons
-                function toggleActiveClass(active, inactive) {
-                    active.classList.add('active'); // Add 'active' class to the clicked button
-                    inactive.classList.remove('active'); // Remove 'active' class from the other button
-                }
-
-                let lastPillSelected = sessionStorage.getItem('lastPillAttendance');
-
-                if(!lastPillSelected) {
-                    managerPill.click();
-                } 
-                else {
-                    switch(lastPillSelected) {
-                        case 'manager':
-                            managerPill.click();
-                        break;
-                        case 'personnel':
-                            personnelPill.click();
-                        break;
-                    }
-                       
-                }
-
-                // Event listener for the Manager button
-                managerPill.addEventListener('click', function(e) {
-                    e.preventDefault(); // Prevent default anchor click behavior
-                    filterTable('Maintenance Manager');
-                    toggleActiveClass(managerPill, personnelPill);
-
-                    sessionStorage.setItem('lastPillAttendance', 'manager');
-                });
-
-                // Event listener for the Personnel button
-                personnelPill.addEventListener('click', function(e) {
-                    e.preventDefault(); // Prevent default anchor click behavior
-                    filterTable('Maintenance Personnel');
-                    toggleActiveClass(personnelPill, managerPill);
-
-                    sessionStorage.setItem('lastPillAttendance', 'personnel');
-                    // alert(sessionStorage.getItem('lastPillAttenadance'));
-                });
-
-                // Simulate a click on the Manager button
-                // Check if the PHP content is loaded, if required
-                // If the PHP content is loaded via AJAX or other asynchronous methods,
-                // you might need to trigger this click event after the content has loaded.
-                // managerPill.click();
             });
-        </script>
-
-        <!-- <script>
-            function exportTableToCSV(filename, tableId) {
-    var table = document.getElementById(tableId);
-    var rows = table.querySelectorAll('tbody tr');
-
-    // Check if there are no data rows in the table
-    if (rows.length === 0) {
-        Swal.fire({
-            title: 'Failed!',
-            text: 'No data available to export.',
-            icon: 'error',
-            confirmButtonText: 'OK'
-        });
-        return; // Exit the function if no data is found
-    }
-
-    // Continue with CSV export if data is present...
-    // Show initial SweetAlert that export is starting
-    Swal.fire({
-        title: 'Preparing your CSV file...',
-        text: 'Please wait.',
-        icon: 'info',
-        showConfirmButton: false,
-        allowOutsideClick: false,
-        timerProgressBar: true,
-        didOpen: () => {
-            Swal.showLoading();
         }
+
+        function toggleActiveClass(active, inactive) {
+            active.classList.add('active');
+            inactive.classList.remove('active');
+        }
+
+        // This function ensures the Manager Pill is selected by default or based on last selection
+        function selectDefaultPill() {
+            let lastPillSelected = sessionStorage.getItem('lastPillAttendance');
+            if (!lastPillSelected || lastPillSelected === 'manager') {
+                managerPill.click();
+            } else if (lastPillSelected === 'personnel') {
+                personnelPill.click();
+            }
+        }
+
+        managerPill.addEventListener('click', function(e) {
+            e.preventDefault();
+            filterTable('Maintenance Manager');
+            toggleActiveClass(managerPill, personnelPill);
+            sessionStorage.setItem('lastPillAttendance', 'manager');
+        });
+
+        personnelPill.addEventListener('click', function(e) {
+            e.preventDefault();
+            filterTable('Maintenance Personnel');
+            toggleActiveClass(personnelPill, managerPill);
+            sessionStorage.setItem('lastPillAttendance', 'personnel');
+        });
+
+        // Call selectDefaultPill to ensure the Manager Pill is selected by default
+        selectDefaultPill();
     });
-
-    // Simulate a short delay for CSV generation (if necessary)
-    setTimeout(() => {
-        var csv = [];
-    
-    // Select rows from the thead and tbody
-    var rows = table.querySelectorAll('tr');
-
-    // Include headers in CSV
-    var headers = rows[0].querySelectorAll('th');
-    var headerRow = Array.from(headers).map(header => `"${header.innerText.replace(/"/g, '""')}"`);
-    csv.push(headerRow.join(","));
-
-    // Include body rows in CSV
-    for (var i = 1; i < rows.length; i++) { // Start from 1 to skip header row
-        var row = [], cols = rows[i].querySelectorAll('td');
-        
-        cols.forEach(col => {
-            var data = col.innerText.replace(/"/g, '""');
-            data = '"' + data + '"';
-            row.push(data);
-        });
-        csv.push(row.join(","));
-    }
-
-    var csvString = csv.join('\n');
-    
-        // Trigger the download
-        var blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
-        var link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.setAttribute('download', filename);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
-        // Stop loading and show the success message
-        Swal.fire({
-            title: 'Done!',
-            text: 'Your CSV file has been downloaded.',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        });
-    }, 1000); // Adjust this timeout as needed
-}
-        </script> -->
+</script>
 
 
         <script>
