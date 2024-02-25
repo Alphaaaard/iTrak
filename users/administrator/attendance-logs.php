@@ -462,55 +462,62 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/profileModalController.js"></script>
 
         <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var managerPill = document.getElementById('manager-pill');
-        var personnelPill = document.getElementById('personnel-pill');
+            document.addEventListener('DOMContentLoaded', function() {
+                var managerPill = document.getElementById('manager-pill');
+                var personnelPill = document.getElementById('personnel-pill');
+                var searchBox = document.getElementById('search-box'); // Ensure you have an element with ID 'search-box'
 
-        function filterTable(role) {
-            var tableRows = document.querySelectorAll('.table-container tbody tr');
-            tableRows.forEach(function(row) {
-                var roleCellText = row.cells[5].textContent.trim(); // Adjust if your role is in a different column
-                if (roleCellText === role || role === 'all') {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        }
-
-        function toggleActiveClass(active, inactive) {
-            active.classList.add('active');
-            inactive.classList.remove('active');
-        }
-
-        // This function ensures the Manager Pill is selected by default or based on last selection
-        function selectDefaultPill() {
-            let lastPillSelected = sessionStorage.getItem('lastPillAttendance');
-            if (!lastPillSelected || lastPillSelected === 'manager') {
-                managerPill.click();
-            } else if (lastPillSelected === 'personnel') {
-                personnelPill.click();
+            function filterTable(role, query = '') {
+                var tableRows = document.querySelectorAll('.table-container tbody tr');
+                    tableRows.forEach(function(row) {
+                var roleCellText = row.cells[5].textContent.trim().toLowerCase(); // Adjust if your role is in a different column
+                var searchText = query.toLowerCase();
+                var rowText = row.textContent.toLowerCase();
+                    if ((roleCellText === role.toLowerCase() || role === '') && (rowText.includes(searchText) || searchText === '')) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
             }
-        }
 
-        managerPill.addEventListener('click', function(e) {
+            function toggleActiveClass(active, inactive) {
+                active.classList.add('active');
+                inactive.classList.remove('active');
+            }
+
+            // Modified click event for managerPill
+            managerPill.addEventListener('click', function(e) {
             e.preventDefault();
-            filterTable('Maintenance Manager');
             toggleActiveClass(managerPill, personnelPill);
             sessionStorage.setItem('lastPillAttendance', 'manager');
-        });
+            // Trigger search with current search box value and 'Maintenance Manager' role
+            filterTable('Maintenance Manager', searchBox.value);
+            });
 
-        personnelPill.addEventListener('click', function(e) {
+            // Modified click event for personnelPill
+            personnelPill.addEventListener('click', function(e) {
             e.preventDefault();
-            filterTable('Maintenance Personnel');
             toggleActiveClass(personnelPill, managerPill);
             sessionStorage.setItem('lastPillAttendance', 'personnel');
-        });
+            // Trigger search with current search box value and 'Maintenance Personnel' role
+            filterTable('Maintenance Personnel', searchBox.value);
+            });
 
-        // Call selectDefaultPill to ensure the Manager Pill is selected by default
-        selectDefaultPill();
-    });
-</script>
+            // This function ensures the Manager Pill is selected by default or based on last selection
+            function selectDefaultPill() {
+            let lastPillSelected = sessionStorage.getItem('lastPillAttendance');
+            if (!lastPillSelected || lastPillSelected === 'manager') {
+            managerPill.click();
+            } else if (lastPillSelected === 'personnel') {
+            personnelPill.click();
+            }
+            }
+
+            // Call selectDefaultPill to ensure the Manager Pill is selected by default
+            selectDefaultPill();
+            });
+            </script>
 
 
         <script>
@@ -611,53 +618,58 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         
         <script>
             $(document).ready(function() {
-                // Bind the filter function to the input field
-                $("#search-box").on("input", function() {
-                    var query = $(this).val().toLowerCase();
-                    filterTable(query);
-                });
+    // Bind the filter function to the input field
+    $("#search-box").on("input", function() {
+        var query = $(this).val().toLowerCase();
+        var activeRole = $('#manager-pill').hasClass('active') ? 'Maintenance Manager' : 'Maintenance Personnel';
+        filterTable(query, activeRole);
+    });
 
-                function filterTable(query) {
-                    $(".table-container tbody tr").each(function() {
-                        var row = $(this);
-                        var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
-                        var firstNameCell = row.find("td:eq(1)"); // FirstName column
-                        var middleNameCell = row.find("td:eq(2)");
-                        var lastNameCell = row.find("td:eq(3)");
-                        var dateCell = row.find("td:eq(5)");
-                        var actionCell = row.find("td:eq(6)");
+    function filterTable(query, activeRole) {
+        $(".table-container tbody tr").each(function() {
+            var row = $(this);
+            // Assuming the role is stored in the 6th cell (index 5), adjust if necessary
+            var roleCell = row.find("td:eq(5)").text().toLowerCase(); // Role column
 
-                        // Get the text content of each cell
-                        var archiveIDText = archiveIDCell.text().toLowerCase();
-                        var firstNameText = firstNameCell.text().toLowerCase();
-                        var middleNameText = middleNameCell.text().toLowerCase();
-                        var lastNameText = lastNameCell.text().toLowerCase();
-                        var dateText = dateCell.text().toLowerCase();
-                        var actionText = actionCell.text().toLowerCase();
+            // Only proceed if the row's role matches the active tab's role
+            if (roleCell === activeRole.toLowerCase()) {
+                var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
+                var firstNameCell = row.find("td:eq(1)"); // FirstName column
+                var middleNameCell = row.find("td:eq(2)");
+                var lastNameCell = row.find("td:eq(3)");
+                var dateCell = row.find("td:eq(5)");
+                var actionCell = row.find("td:eq(6)");
 
-                        // Check if any of the cells contain the query
-                        var showRow = archiveIDText.includes(query) ||
-                            firstNameText.includes(query) ||
-                            middleNameText.includes(query) ||
-                            lastNameText.includes(query) ||
-                            dateText.includes(query) ||
-                            actionText.includes(query) ||
-                            archiveIDText == query || // Exact match for Archive ID
-                            firstNameText == query || // Exact match for FirstName
-                            middleNameText == query || // Exact match for LastName
-                            lastNameText == query || // Exact match for LastName
-                            dateText == query || // Exact match for LastName
-                            actionText == query; // Exact match for LastName
+                // Get the text content of each cell
+                var archiveIDText = archiveIDCell.text().toLowerCase();
+                var firstNameText = firstNameCell.text().toLowerCase();
+                var middleNameText = middleNameCell.text().toLowerCase();
+                var lastNameText = lastNameCell.text().toLowerCase();
+                var dateText = dateCell.text().toLowerCase();
+                var actionText = actionCell.text().toLowerCase();
 
-                        // Show or hide the row based on the result
-                        if (showRow) {
-                            row.show();
-                        } else {
-                            row.hide();
-                        }
-                    });
+                // Check if any of the cells contain the query
+                var showRow = archiveIDText.includes(query) ||
+                    firstNameText.includes(query) ||
+                    middleNameText.includes(query) ||
+                    lastNameText.includes(query) ||
+                    dateText.includes(query) ||
+                    actionText.includes(query);
+
+                // Show or hide the row based on the result
+                if (showRow) {
+                    row.show();
+                } else {
+                    row.hide();
                 }
-            });
+            } else {
+                // Hide rows that don't match the active role
+                row.hide();
+            }
+        });
+    }
+});
+
         </script>
 
 <script>
