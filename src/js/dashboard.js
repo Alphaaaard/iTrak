@@ -641,17 +641,9 @@ function setBuilding(buildingName) {
   buildingSelected = buildingName;
 }
 
-function confirm(accId, fname, lname, e) {
-  e.stopPropagation();
-
-  let uname = fname+' '+lname;
-
-}
-
 function confirmAlert() {
   Swal.fire({
     icon: "info",
-    html: `<h3>Are you sure you want to archive <b>${uname}</b>?</h3>`,
     title: "Are you sure you want to save changes?",
     showCancelButton: true,
     cancelButtonText: "No",

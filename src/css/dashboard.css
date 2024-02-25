@@ -7,18 +7,6 @@ p {
   color: #3d3b40;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 .content1 {
   width: 70%;
 }
@@ -183,6 +171,15 @@ p {
   border-radius: 15px;
 }
 
+.personnel-building {
+  width: 47%;
+  min-height: 150px;
+  margin: 10px;
+  overflow: hidden;
+  border: 1px solid;
+  border-radius: 15px;
+}
+
 .mini-header {
   width: 100%;
   font-weight: 900;
@@ -326,15 +323,17 @@ button {
     width: 175px;
     background-color: #f6f6f6;
     border-color: #aaaaaa;
-    font-size: 0.875rem!important;
+    font-size: 0.875rem !important;
     border-radius: 5px;
     margin-bottom: 5px;
-
-
   }
 }
 /*Input boxes sa buildings */
-
+.personnel-building {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 .building-body {
   width: 100%;
   height: 100%;
@@ -718,7 +717,6 @@ button {
   width: 70%;
 }
 
-
 @media (max-width: 1000px) {
   .content-container {
     display: block;
@@ -800,7 +798,7 @@ button {
     margin: 0;
   }
 
-  .content1 .present-buttons-container .present-main-per{
+  .content1 .present-buttons-container .present-main-per {
     width: unset;
   }
 
@@ -809,7 +807,7 @@ button {
     left: 2em;
   }
 
-  .hover-box-2{
+  .hover-box-2 {
     top: 11.3em;
     left: 13.3em;
   }
