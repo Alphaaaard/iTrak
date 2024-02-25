@@ -249,10 +249,25 @@ function renderCalendar1() {
   }
 
   // This function updates the divs with data for the selected date
-  // This function updates the divs with data for the selected date
   function updateSelectedDate(selectedDate) {
     // Format the date to YYYY-MM-DD
     const formattedDate = selectedDate.toISOString().split("T")[0];
+
+    // Mapping of building codes to full building names
+    const buildingNameMap = {
+      techVoc: "Tech-Voc Building",
+      oldAcad: "Yellow Building",
+      belmonte: "Belmonte Building",
+      metalcasting: "Metal Casting",
+      korphil: "KorPhil Building",
+      multipurpose: "Multipurpose Building",
+      chineseA: "Chinese A Building",
+      chineseB: "Chinese B Building",
+      urbanFarming: "Urban Farming",
+      administration: "Administration Building",
+      bautista: "Bautista Building",
+      newAcad: "New Academic Building",
+    };
 
     // Clear the 'personnel-building' div before inserting new data
     const personnelBuildingDiv = document.querySelector(".personnel-building");
@@ -269,10 +284,11 @@ function renderCalendar1() {
       .then((response) => response.json())
       .then((data) => {
         if (data.length > 0) {
-          data.forEach((building) => {
+          data.forEach((buildingCode) => {
             // Create a paragraph for each building and append to div
             const pElement = document.createElement("p");
-            pElement.textContent = building; // Display only the building name
+            pElement.textContent =
+              buildingNameMap[buildingCode] || buildingCode; // Display the full building name
             personnelBuildingDiv.appendChild(pElement);
           });
         } else {
@@ -281,9 +297,9 @@ function renderCalendar1() {
       })
       .catch((error) => console.error("Error:", error));
   }
-  // When you initially render the calendar, you should also set up the correct state
-  // for the building-body elements based on today's date
-  updateSelectedDate(new Date()); // Call this function on initial load
+
+  // Call this function on initial load to populate with today's date
+  updateSelectedDate(new Date());
 }
 
 // Call the function to render the calendar
