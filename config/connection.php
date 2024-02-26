@@ -2,16 +2,16 @@
 function connection()
 {
     //LOCAL
-    $host = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "upkeep";
+    // $host = "localhost";
+    // $username = "root";
+    // $password = "";
+    // $database = "upkeep";
 
     // HOSTED
-    // $host = "localhost";
-    // $username = "u483250324_UpKeep";
-    // $password = ":El7+4xg";
-    // $database = "u483250324_UpKeep";
+    $host = "localhost";
+    $username = "u226014500_iTrak";
+    $password = "iTrak123";
+    $database = "u226014500_iTrak";
 
     $conn = new mysqli($host, $username, $password, $database);
 
