@@ -122,9 +122,10 @@ $(".updateSelfBtn").click(function () {
         title: "Success",
         text: "Changes Saved Successfully!",
         icon: "success",
-        confirmButtonText: "Okay",
+        timer: 1000,
+        showConfirmButton: false,
       }).then((result) => {
-        if (result.isDismissed || result.isConfirmed) {
+        if (result.dismiss || Swal.DismissReason.timer) {
           window.location.reload();
         }
       });

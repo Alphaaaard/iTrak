@@ -709,7 +709,8 @@ function confirmAlert() {
         type: "POST",
         success: function (res) {
           Swal.fire({
-            title: `Maintenance Personnel has been assigned to ${building}`,
+            // title: `Maintenance Personnel has been assigned to ${building}`,
+            title: `Maintenance Personnel has been assigned successfully`,
             icon: "success",
             timer: 1000, //timer (in ms) for the success alertbox before closing
             showConfirmButton: false,

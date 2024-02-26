@@ -132,19 +132,54 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/reports.css" />
+        <script src="../../src/js/reports.js"></script>
         
 
 
         <!--JS for the fcking tabs-->
         <script>
             $(document).ready(function() {
-                $("#pills-manager").addClass("show active");
-                $("#pills-profile").removeClass("show active");
-                $(".nav-link[data-bs-target='pills-manager']").addClass("active");
-                $(".nav-link[data-bs-target='pills-profile']").removeClass("active");
+                // this is for staying at the same pill when reloading.
+                let tabLastSelected = sessionStorage.getItem("lastTab");
+
+                if(!tabLastSelected) {
+                    // if no last tab was selected, use the pills-manager for default
+                    $("#pills-manager").addClass("show active");
+                    // $("#pills-profile").removeClass("show active");
+                    $(".nav-link[data-bs-target='pills-manager']").addClass("active");
+                    // $(".nav-link[data-bs-target='pills-profile']").removeClass("active");
+                    
+                } else {
+
+                    //* checks the last tab that was selected
+                    switch(tabLastSelected) {
+                        case 'pills-manager':
+                            $("#pills-manager").addClass("show active");
+                            $(".nav-link[data-bs-target='pills-manager']").addClass("active");
+                        break;
+                        case 'pills-profile':
+                            $("#pills-profile").addClass("show active");
+                            $(".nav-link[data-bs-target='pills-profile']").addClass("active");
+                        break;
+                        case 'pills-replace':
+                            $("#pills-replace").addClass("show active");
+                            $(".nav-link[data-bs-target='pills-replace']").addClass("active");
+                        break;
+                        case 'pills-repair':
+                            $("#pills-repair").addClass("show active");
+                            $(".nav-link[data-bs-target='pills-repair']").addClass("active");
+                        break;
+                    }
+                }
+
+                // $("#pills-manager").addClass("show active");
+                // $("#pills-profile").removeClass("show active");
 
                 $(".nav-link").click(function() {
                     const targetId = $(this).data("bs-target");
+                    
+                    sessionStorage.setItem("lastTab", targetId); //* sets the targetId to the sessionStorage lastTab item
+
                     $(".tab-pane").removeClass("show active");
                     $(`#${targetId}`).addClass("show active");
                     $(".nav-link").removeClass("active");
@@ -224,8 +259,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             <hr>
                         </div>
                         <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><img src="../../src/icons/Profile.svg" alt="" class="profile-icons">Profile</a>
-                        <a class="profile-hover" href="#"><img src="../../src/icons/Logout.svg" alt="" class="profile-icons">Settings</a>
-                        <a class="profile-hover" href="#" id="logoutBtn"><img src="../../src/icons/Settings.svg" alt="" class="profile-icons">Logout</a>
+                        <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
                     </div>
                 <?php
             } else {
@@ -593,10 +627,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <div class="col-4" style="display: none">
                                         <label for="assignedBy" class="form-label">Assigned By:</label>
                                         <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="" readonly />
-                                    </div>
+                                        </div>
+                                </form>
                             </div>
                             <div class="footer">
-                                <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+                                <button type="button" class="btn add-modal-btn" onclick="confirmAlert('working')">
                                     Save
                                 </button>
                             </div>
@@ -606,7 +641,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
 
-            <!--Edit for table 1-->
+            <!-- Edit for table 1
             <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -620,7 +655,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                 </div>
             </div>
-            </form>
+            </form> -->
 
             <!--Modal for table 2-->
             <div class="modal-parent">
@@ -686,10 +721,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <div class="col-4" style="display: none">
                                         <label for="assignedBy" class="form-label">Assigned By:</label>
                                         <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="" readonly />
-                                    </div>
+                                        </div>
+                                </form>
                             </div>
                             <div class="footer">
-                                <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+                                <button type="button" class="btn add-modal-btn" onclick="confirmAlert('maintenance')">
                                     Save
                                 </button>
                             </div>
@@ -698,7 +734,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
 
-            <!--Edit for table 2-->
+            <!-- Edit for table 2
             <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -712,7 +748,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                 </div>
             </div>
-            </form>
+            </form> -->
 
 
             <!--Modal for table 3-->
@@ -779,10 +815,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <div class="col-4" style="display: none">
                                         <label for="assignedBy" class="form-label">Assigned By:</label>
                                         <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="" readonly />
-                                    </div>
+                                        </div>
+                                </form>
                             </div>
                             <div class="footer">
-                                <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">
+                                <button type="button" class="btn add-modal-btn" onclick="confirmAlert('replace')">
                                     Save
                                 </button>
                             </div>
@@ -791,7 +828,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
 
-            <!--Edit for table 3-->
+            <!-- Edit for table 3
             <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -805,7 +842,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                 </div>
             </div>
-            </form>
+            </form> -->
 
 
             <!--Modal for table 4-->
@@ -872,10 +909,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <div class="col-4">
                                         <label for="assignedBy" class="form-label">Assigned By:</label>
                                         <input type="text" class="form-control" id="assignedBy" name="assignedBy" readonly />
-                                    </div>
+                                        </div>
+                                </form>
                             </div>
                             <div class="footer">
-                                <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop4">
+                                <button type="button" class="btn add-modal-btn" onclick="confirmAlert('repair')">
                                     Save
                                 </button>
                             </div>
@@ -884,7 +922,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
 
-            <!--Edit for table 4-->
+            <!-- Edit for table 4
             <div class="modal fade" id="staticBackdrop4" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -898,7 +936,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                 </div>
             </div>
-            </form>
+            </form> -->
 
             <!--Assign Modal for table 4-->
             <div class="modal-parent">
@@ -979,8 +1017,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 echo '<option value="No Maintenance Personnel Found">';
                                             }
                                             ?>
-                                        </select>
+                                         </select>
                                     </div>
+                                </form>
 
                                     <div class="col-4" style="display:none">
                                         <label for="assignedBy" class="form-label">Assigned By:</label>
@@ -988,7 +1027,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     </div>
                             </div>
                             <div class="footer">
-                                <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop5">
+                                <button type="button" class="btn add-modal-btn" onclick="assignPersonnel()">
                                     Save
                                 </button>
                             </div>
@@ -997,7 +1036,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
 
-            <!--Edit for table 4-->
+            <!-- Edit for table 4
             <div class="modal fade" id="staticBackdrop5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -1011,7 +1050,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                 </div>
             </div>
-            </form>
+            </form> -->
         </section>
 
         <!-- PROFILE MODALS -->
@@ -1036,7 +1075,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/main.js"></script>
         <script src="../../src/js/archive.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
-        
+        <script src="../../src/js/reports.js"></script>
         <!-- Add this script after your existing scripts -->
         <!-- Add this script after your existing scripts -->
 
@@ -1242,7 +1281,6 @@ $(document).ready(function() {
     $("#search-box").keyup(searchTable);
 });
 </script>
-
 
     </body>
 
