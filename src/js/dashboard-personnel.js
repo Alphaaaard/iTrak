@@ -243,6 +243,9 @@ function renderCalendar1() {
       );
       updateSelectedDate(selectedDate);
       updateScheduleVisibility(selectedDate);
+      updateCurrentDateDisplay(
+        new Date(currentDate1.getFullYear(), currentDate1.getMonth(), i)
+      );
     });
 
     dateGrid.appendChild(dateDiv);
@@ -250,8 +253,16 @@ function renderCalendar1() {
 
   // This function updates the divs with data for the selected date
   function updateSelectedDate(selectedDate) {
+    // Create a new date object with the UTC date corresponding to the local date selected.
+    const dateWithUTC = new Date(
+      Date.UTC(
+        selectedDate.getFullYear(),
+        selectedDate.getMonth(),
+        selectedDate.getDate()
+      )
+    );
     // Format the date to YYYY-MM-DD
-    const formattedDate = selectedDate.toISOString().split("T")[0];
+    const formattedDate = dateWithUTC.toISOString().split("T")[0];
 
     // Mapping of building codes to full building names
     const buildingNameMap = {
@@ -309,6 +320,6 @@ renderCalendar1();
 document.querySelector(".today-btn").addEventListener("click", function () {
   const today = new Date(); // Get today's date
   updateCalendar(today); // Update the calendar to today's date
-  renderCalendar1(); // Re-render the calendar with the updated date
+  updateCurrentDateDisplay(today); // Update the current-date span to today's date
 });
 //----------------------------------------------------------------------------------------------------------------------------------

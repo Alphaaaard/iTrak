@@ -24,6 +24,10 @@ function confirmAlert(reportType) {
                 case 'repair':
                     formData = new FormData(document.querySelector('#repairForm'));
                 break;
+                 // Consider adding a default case for unexpected reportTypes
+                 default:
+                    console.error('Invalid report type:', reportType);
+                    return; // Exit the function early if reportType is invalid
             }
 
             $.ajax({
@@ -37,7 +41,7 @@ function confirmAlert(reportType) {
                     Swal.fire({
                         title: "Changes Saved Successfully!",
                         icon: "success",
-                        timer: 1000, 
+                        timer: 1000, //timer (in ms) for the success alertbox before closing 
                         showConfirmButton: false,
                     }).then((result) => {
 
@@ -74,9 +78,9 @@ function assignPersonnel() {
                 success: function(res) {
 
                     Swal.fire({
-                        title: "Maintenance Personnel has been assign",
+                        title: "Maintenance Personnel has been",
                         icon: "success",
-                        timer: 1000,
+                        timer: 1000, //timer (in ms) for the success alertbox before closing 
                         showConfirmButton: false,
                     })
                     .then((result) => {

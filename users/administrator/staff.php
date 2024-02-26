@@ -3,15 +3,7 @@ session_start();
 include_once("../../config/connection.php");
 $conn = connection();
 
-if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
-
-
-    // For personnel page, check if userLevel is 3
-    if($_SESSION['userLevel'] != 1) {
-        // If not personnel, redirect to an error page or login
-        header("Location:error.php");
-        exit;
-    }
+if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
 
     $sql = "SELECT * FROM account";
     $result = $conn->query($sql) or die($conn->error);
@@ -157,9 +149,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 <div class="content-nav">
                     <div class="notification-dropdown">
                         <a href="#" class="notification" id="notification-button">
-                            <!-- <i class="bi bi-bell"></i> -->
+                            <i class="bi bi-bell"></i>
                             <!-- <i class="bx bxs-bell"></i> -->
-                            <!-- <span class="num"></span> -->
+                            <span class="num"></span>
                         </a>
                         <div class="dropdown-content" id="notification-dropdown-content">
                             <h6 class="dropdown-header">Alerts Center</h6>
@@ -521,17 +513,17 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             <form method="post" enctype="multipart/form-data" class="row g-3" id="addForm">
 
                                                 <div class="col-4">
-                                                    <label for="firstName" class="form-label label">First name <span class="d-none text-danger error">*</span></label>
+                                                    <label for="firstName" class="form-label label">First Name <span class="d-none text-danger error">*</span></label>
                                                     <input type="text" class="form-control" id="firstNameField" name="firstName" placeholder="First Name" required />
                                                 </div>
 
                                                 <div class="col-4">
-                                                    <label for="middleName" class="form-label label">Middle name <span class="d-none text-danger error">*</span></label>
+                                                    <label for="middleName" class="form-label label">Middle Name <span class="d-none text-danger error">*</span></label>
                                                     <input type="text" class="form-control" id="middleNameField" name="middleName" placeholder="Middle Name" />
                                                 </div>
 
                                                 <div class="col-4">
-                                                    <label for="lastName" class="form-label">Last name <span class="d-none text-danger error">*</span></label>
+                                                    <label for="lastName" class="form-label">Last Name <span class="d-none text-danger error">*</span></label>
                                                     <input type="text" class="form-control" id="lastNameField" name="lastName" placeholder="Last Name" required />
                                                 </div>
 
