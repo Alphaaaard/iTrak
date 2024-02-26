@@ -2,7 +2,7 @@
 session_start();
 include_once("../../config/connection.php");
 $conn = connection();
-
+date_default_timezone_set('Asia/Manila');
 function logActivity($conn, $accountId, $actionDescription, $tabValue)
 {
     $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, NOW(), ?, ?)");
@@ -12,6 +12,70 @@ function logActivity($conn, $accountId, $actionDescription, $tabValue)
     }
     $stmt->close();
 }
+
+
+
+
+// Fetch Report activity logs
+$loggedInUserFirstName = $_SESSION['firstName']; // or the name field you have in session that you want to check against
+$loggedInUsermiddleName = $_SESSION['middleName']; // assuming you also have the last name in the session
+$loggedInUserLastName = $_SESSION['lastName']; //kung ano ung naka declare dito eto lang ung magiging data 
+// Concatenate first name and last name for the action field check
+$loggedInFullName = $loggedInUserFirstName . " " . $loggedInUsermiddleName . " " . $loggedInUserLastName; //kung ano ung naka declare dito eto lang ung magiging data 
+
+// Adjust the SQL to check the 'action' field for the logged-in user's name
+$sqlReport = "SELECT ac.*, a.firstName, a.middleName, a.lastName
+FROM activitylogs AS ac
+LEFT JOIN account AS a ON ac.accountID = a.accountID
+WHERE ac.tab='Report' AND ac.action LIKE ?
+ORDER BY ac.date DESC";
+
+// Prepare the SQL statement
+$stmt = $conn->prepare($sqlReport);
+
+// Create a wildcard search term for the name
+$searchTerm = "%" . $loggedInFullName . "%";
+
+// Bind the parameter and execute
+$stmt->bind_param("s", $searchTerm);
+$stmt->execute();
+$resultReport = $stmt->get_result();
+
+
+// for notif below
+// Update the SQL to join with the account and asset tables to get the admin's name and asset information
+$loggedInUserFirstName = $_SESSION['firstName']; 
+$loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
+$loggedInUserLastName = $_SESSION['lastName'];
+
+$loggedInFullName = $loggedInUserFirstName . ' '.$loggedInUserMiddleName .' '. $loggedInUserLastName;
+
+
+
+// Adjust the SQL to fetch only the notifications for the logged-in user
+$sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName
+              FROM activitylogs AS al
+              JOIN account AS acc ON al.accountID = acc.accountID
+              WHERE al.tab='Report' 
+              AND al.seen = '0' AND al.action LIKE ?
+              ORDER BY al.date DESC 
+              LIMIT 1000";
+
+// Prepare the SQL statement
+$stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+
+// Create a wildcard search term for the logged-in user's full name
+$searchTerm = "%Assigned maintenance personnel " . $loggedInFullName . "%";
+
+// Bind the parameter and execute
+$stmtLatestLogs->bind_param("s", $searchTerm);
+$stmtLatestLogs->execute();
+$resultLatestLogs = $stmtLatestLogs->get_result();
+
+$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '3'";
+$result = $conn->query($unseenCountQuery);
+$unseenCountRow = $result->fetch_assoc();
+$unseenCount = $unseenCountRow['unseenCount'];
 
 
     if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['userLevel']) && isset($_SESSION['role'])) {
@@ -76,7 +140,22 @@ function logActivity($conn, $accountId, $actionDescription, $tabValue)
         }
         header("Location: reports.php");
     }
-
+    if (isset($_SESSION['accountId'])) {
+        $accountId = $_SESSION['accountId'];
+        $todayDate = date("Y-m-d");
+    
+        // Check if there's a timeout value for this user for today
+        $timeoutQuery = "SELECT timeout FROM attendancelogs WHERE accountId = '$accountId' AND date = '$todayDate'";
+        $timeoutResult = $conn->query($timeoutQuery);
+        $timeoutRow = $timeoutResult->fetch_assoc();
+    
+        if ($timeoutRow && $timeoutRow['timeout'] !== null) {
+            // User has a timeout value, force logout
+            session_destroy(); // Destroy all session data
+            header("Location: ../../index.php?logout=timeout"); // Redirect to the login page with a timeout flag
+            exit;
+        }
+    }
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -89,6 +168,8 @@ function logActivity($conn, $accountId, $actionDescription, $tabValue)
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>  
+ <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>  
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/reports.css" />
@@ -123,20 +204,84 @@ function logActivity($conn, $accountId, $actionDescription, $tabValue)
                 </div>
                 <div class="content-nav">
                     <div class="notification-dropdown">
-                        <a href="#" class="notification" id="notification-button">
-                            <!-- <i class="bi bi-bell"></i> -->
-                            <!-- <i class="bx bxs-bell"></i> -->
-                            <!-- <span class="num"></span> -->
-                        </a>
-                        <div class="dropdown-content" id="notification-dropdown-content">
-                            <h6 class="dropdown-header">Alerts Center</h6>
-                            <a href="#">May hindi nagbuhos sa Cr sa Belmonte building</a>
-                            <a href="#">Notification 2</a>
-                            <a href="#">Notification 3</a>
-                            <!-- Add more notification items here -->
-                            <a href="#" class="view-all">View All</a>
-                        </div>
-                    </div>
+                       
+
+
+
+
+ <a href="#" class="notification" id="notification-button">
+
+
+
+
+
+
+<i class="fa fa-bell" aria-hidden="true"></i>
+<span id="noti_number"><?php echo $unseenCount; ?></span>
+
+    </td>
+    </tr>
+    </table>
+    <script type="text/javascript">
+        function loadDoc() {
+
+
+            setInterval(function() {
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("noti_number").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", "update_single_notification.php", true);
+                xhttp.send();
+
+            }, 10);
+
+
+        }
+        loadDoc();
+    </script>
+
+</a>
+
+
+
+<div class="dropdown-content" id="notification-dropdown-content">
+    <h6 class="dropdown-header">Alerts Center</h6>
+    <!-- PHP code to display notifications will go here -->
+    <?php
+if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
+// Loop through each notification
+while ($row = $resultLatestLogs->fetch_assoc()) {
+$adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+$actionText = $row["action"];
+$assetId = 'unknown'; // Default value
+
+// Extract personnel name and asset ID from action text
+if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
+$assignedName = $matches[1];
+$assetId = $matches[2];
+}
+
+// Generate the notification text
+// Generate the notification text including the name of the assigned personnel
+$notificationText = "Admin $adminName assigned $assignedName to asset ID " . htmlspecialchars($assetId);
+
+
+// Output the notification as a clickable element with a data attribute for the activityId
+echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . $notificationText . '</a>';
+}
+} else {
+echo '<a href="#">No new notifications</a>';
+}
+?>
+<a href="activity-logs.php" class="view-all">View All</a>
+
+</div>
+</div>
+
                     <a href="#" class="settings profile">
                         <div class="profile-container" title="settings">
                             <div class="profile-img">
@@ -496,6 +641,57 @@ function logActivity($conn, $accountId, $actionDescription, $tabValue)
 
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+            <script src="../../src/js/locationTracker.js"></script>
+      
+            <script>
+        setInterval(function() {
+            // Call a script to check if the user has timed out
+            fetch('../../check_timeout.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.timeout) {
+                        alert('You have been logged out due to timeout.');
+                        window.location.href = '../index.php?logout=timeout'; // Redirect to login page
+                    }
+                });
+        }, 60000); // Checks every minute, you can adjust the interval
+    </script>
+            <script>
+$(document).ready(function() {
+    $('.notification-item').on('click', function(e) {
+        e.preventDefault();
+        var activityId = $(this).data('activity-id');
+        var notificationItem = $(this); // Store the clicked element
+
+        $.ajax({
+            type: "POST",
+            url: "update_single_notification.php", // The URL to the PHP file
+            data: { activityId: activityId },
+            success: function(response) {
+                if (response.trim() === "Notification updated successfully") {
+                    // If the notification is updated successfully, remove the clicked element
+                    notificationItem.remove();
+
+                    // Update the notification count
+                    var countElement = $('#noti_number');
+                    var count = parseInt(countElement.text()) || 0;
+                    countElement.text(count > 1 ? count - 1 : '');
+                } else {
+                    // Handle error
+                    console.error("Failed to update notification:", response);
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle AJAX error
+                console.error("AJAX error:", status, error);
+            }
+        });
+    });
+});
+
+
+    </script>
+
 
             <script>
                 $(document).ready(function() {

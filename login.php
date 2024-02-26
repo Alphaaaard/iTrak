@@ -64,7 +64,7 @@ if ($result->num_rows > 0) {
 
 
         // Log the login activity
-        // logLoginActivity($accountId, 'logged in', $row['firstName'], date("Y-m-d H:i:s"), 'General');     //! UNCOMMENT LATER
+        logLoginActivity($accountId, 'logged in', $row['firstName'], date("Y-m-d H:i:s"), 'General');     //! UNCOMMENT LATER
 
 
         // Redirect to the super admin dashboard
@@ -127,18 +127,18 @@ if ($result->num_rows > 0) {
             $_SESSION['userLevel'] = $row['userLevel'];
 
 
-            //     // Check if there's a timeout value for this user
-            //     $timeoutQuery = "SELECT timeout FROM attendancelogs WHERE accountId = '$accountId' AND date = '$todayDate'";
-            //     $timeoutResult = $conn->query($timeoutQuery);
-            //     $timeoutRow = $timeoutResult->fetch_assoc();
+                // Check if there's a timeout value for this user
+                $timeoutQuery = "SELECT timeout FROM attendancelogs WHERE accountId = '$accountId' AND date = '$todayDate'";
+                $timeoutResult = $conn->query($timeoutQuery);
+                $timeoutRow = $timeoutResult->fetch_assoc();
 
-            //     if ($timeoutRow['timeout'] !== null) {
-            //         // User has a timeout value, deny login
-            //         $_SESSION['login_error'] = 'timeout';
-            //         header("Location: index.php");
-            //         exit;
-            //     }
-            //     logLoginActivity($accountId, 'logged in', $row['firstName'], date("Y-m-d H:i:s"), 'General');
+                if ($timeoutRow['timeout'] !== null) {
+                    // User has a timeout value, deny login
+                    $_SESSION['login_error'] = 'timeout';
+                    header("Location: index.php");
+                    exit;
+                }
+                logLoginActivity($accountId, 'logged in', $row['firstName'], date("Y-m-d H:i:s"), 'General');
 
 
             // Redirect to the appropriate landing page based on user level

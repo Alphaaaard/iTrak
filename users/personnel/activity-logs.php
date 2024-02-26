@@ -3,7 +3,7 @@ session_start();
 include_once("../../config/connection.php");
 $conn = connection();
 
-
+date_default_timezone_set('Asia/Manila');
  
     if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
         // For personnel page, check if userLevel is 3
@@ -80,7 +80,7 @@ $conn = connection();
     $stmtLatestLogs->execute();
     $resultLatestLogs = $stmtLatestLogs->get_result();
 
-  $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0'";
+  $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '3'";
   $result = $conn->query($unseenCountQuery);
   $unseenCountRow = $result->fetch_assoc();
   $unseenCount = $unseenCountRow['unseenCount'];
@@ -93,6 +93,22 @@ $conn = connection();
 
   $sql2 = "SELECT * FROM reportlogs";
   $result2 = $conn->query($sql2) or die($conn->error);
+  if (isset($_SESSION['accountId'])) {
+    $accountId = $_SESSION['accountId'];
+    $todayDate = date("Y-m-d");
+
+    // Check if there's a timeout value for this user for today
+    $timeoutQuery = "SELECT timeout FROM attendancelogs WHERE accountId = '$accountId' AND date = '$todayDate'";
+    $timeoutResult = $conn->query($timeoutQuery);
+    $timeoutRow = $timeoutResult->fetch_assoc();
+
+    if ($timeoutRow && $timeoutRow['timeout'] !== null) {
+        // User has a timeout value, force logout
+        session_destroy(); // Destroy all session data
+        header("Location: ../../index.php?logout=timeout"); // Redirect to the login page with a timeout flag
+        exit;
+    }
+}
 ?>
 
     <!DOCTYPE html>
@@ -439,7 +455,21 @@ $notificationText = "Admin $adminName assigned $assignedName to asset ID " . htm
                     row.hide();
                 }
             });
-        </script>
+        </script><script src="../../src/js/locationTracker.js"></script>
+       <script>
+        setInterval(function() {
+            // Call a script to check if the user has timed out
+            fetch('../../check_timeout.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.timeout) {
+                        alert('You have been logged out due to timeout.');
+                        window.location.href = '../index.php?logout=timeout'; // Redirect to login page
+                    }
+                });
+        }, 60000); // Checks every minute, you can adjust the interval
+    </script>
+       
         <script>
             function filterDate(order) {
                 var activeTabContainer = document.querySelector('.tab-pane.fade.active .table-container'); // Select only the active tab's table container
