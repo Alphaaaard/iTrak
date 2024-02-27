@@ -7,6 +7,11 @@ p {
   color: #3d3b40;
 }
 
+#doughnutChart{
+  height: 360px!important;
+    width: 360px!important;
+}
+
 .content1 {
   width: 70%;
 }
@@ -422,8 +427,8 @@ button {
   padding: 10px;
   font-size: 1em;
   display: flex;
-  justify-content: space-evenly;
-  gap: 5px;
+  justify-content: space-between;
+  /* gap: 5px; */
 }
 
 .calendar .day-of-week {
