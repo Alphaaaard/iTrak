@@ -816,4 +816,8 @@ button {
     top: 11.3em;
     left: 13.3em;
   }
+  .mini-header-border{
+    font-size: 12px;
+
+  }
 }

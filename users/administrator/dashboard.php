@@ -8,7 +8,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
     // For personnel page, check if userLevel is 3
-    if($_SESSION['userLevel'] != 1) {
+    if ($_SESSION['userLevel'] != 1) {
         // If not personnel, redirect to an error page or login
         header("Location:error.php");
         exit;
@@ -568,7 +568,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="header">
-                                                <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal">X</button>
+                                                <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                                             </div>
                                             <div class="modal-body modal-new-class">
                                                 <!-- Modal Body-->
@@ -604,7 +604,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="header">
-                                                <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal">X</button>
+                                                <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                                             </div>
                                             <div class="modal-body modal-new-class">
                                                 <!-- Modal Body-->
@@ -815,7 +815,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         <div class="modal-content">
                                             <div class="header-modal">
                                                 <h5>Tech-Voc Building</h5>
-                                                <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal">X</button>
+                                                <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                                             </div>
 
                                             <div class="modal-body modal-new-class">
@@ -941,7 +941,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         <div class="modal-content">
                                             <div class="header-modal">
                                                 <h5>Yellow Building</h5>
-                                                <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal">X</button>
+                                                <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                                             </div>
 
                                             <div class="modal-body modal-new-class">
@@ -1051,7 +1051,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         <div class="modal-content">
                                             <div class="header-modal">
                                                 <h5>Belmonte Building</h5>
-                                                <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal">X</button>
+                                                <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                                             </div>
 
                                             <div class="modal-body modal-new-class">
@@ -1166,7 +1166,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         <div class="modal-content">
                                             <div class="header-modal">
                                                 <h5>Metal Casting Building</h5>
-                                                <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal">X</button>
+                                                <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                                             </div>
                                             <div class="modal-body modal-new-class">
                                                 <form method="post" id="metalcastingForm">
@@ -1279,7 +1279,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             <div class="modal-content">
                                 <div class="header-modal">
                                     <h5>KorPhil Building</h5>
-                                    <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal">X</button>
+                                    <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                                 </div>
                                 <div class="modal-body modal-new-class">
                                     <form method="post" id="korphilForm">
@@ -1392,7 +1392,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <div class="modal-content">
                         <div class="header-modal">
                             <h5>Multipurpose Building</h5>
-                            <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal">X</button>
+                            <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                         </div>
                         <div class="modal-body modal-new-class">
                             <form method="post" id="multipurposeForm">
@@ -1503,7 +1503,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <div class="modal-content">
                         <div class="header-modal">
                             <h5>Chinese A Building</h5>
-                            <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal">X</button>
+                            <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                         </div>
 
                         <div class="modal-body modal-new-class">
@@ -1618,7 +1618,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <div class="modal-content">
                         <div class="header-modal">
                             <h5>Chinese B Building</h5>
-                            <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal">X</button>
+                            <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                         </div>
                         <div class="modal-body modal-new-class">
                             <form method="post" id="chineseBForm">
@@ -1731,7 +1731,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <div class="modal-content">
                         <div class="header-modal">
                             <h5>Urban Farming Site</h5>
-                            <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal">X</button>
+                            <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                         </div>
                         <div class="modal-body modal-new-class">
                             <form method="post" id="urbanFarmingForm">
@@ -1844,7 +1844,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <div class="modal-content">
                         <div class="header-modal">
                             <h5>Administration Building</h5>
-                            <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal">X</button>
+                            <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                         </div>
 
                         <div class="modal-body modal-new-class">
@@ -1957,7 +1957,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <div class="modal-content">
                         <div class="header-modal">
                             <h5>Bautista Building</h5>
-                            <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal">X</button>
+                            <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                         </div>
 
                         <div class="modal-body modal-new-class">
@@ -2073,7 +2073,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <div class="modal-content">
                         <div class="header-modal">
                             <h5>New Academic Building</h5>
-                            <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal">X</button>
+                            <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                         </div>
 
                         <div class="modal-body modal-new-class">

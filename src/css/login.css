@@ -7,6 +7,15 @@
   padding: 0;
 }
 
+body{
+  background-color: #F6F6F6;
+}
+
+input::-ms-reveal,
+      input::-ms-clear {
+        display: none;
+      }
+
 
 .forgot {
     color: 0057FF;
@@ -26,8 +35,8 @@
   .custom-button:hover,
   .custom-button:active,
   .custom-button:focus {
-    background-color: white!important;
-    color: #163172!important;
+    background-color: #F6F6F6!important;
+    color: #1E5680!important;
     border: #163172 1px solid!important;
     outline: none!important; /* Remove the default focus outline */
   }
@@ -100,11 +109,11 @@
     }
     
     .form-control {
-      border: var(--bs-border-width) solid #000;
+      border: var(--bs-border-width) solid #3D3B40;
     }
     
     .form-control:focus {
-      border: 2px solid #000 !important;
+      border: 2px solid #3D3B40 !important;
       outline: none !important;
       box-shadow: none !important;
     }
@@ -159,11 +168,16 @@
       font-weight: 400;
       line-height: 1.5;
       color: #495057;
-      background-color: #fff;
+      background-color: #F6F6F6;
       background-clip: padding-box;
-      border: 1px solid #000000;
+      border: 1px solid #3D3B40;
       border-radius: 0.3rem;
       
+      
+    }
+
+    .form-textbox::placeholder{
+      font-size: 15px;
     }
 
     .box2 .brand{

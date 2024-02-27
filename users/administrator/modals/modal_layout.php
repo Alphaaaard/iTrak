@@ -10,7 +10,7 @@ $user = get_current_user_data();
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="mb-5">Profile Information</h5>
-                        <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal">X</button>
+                        <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                     </div>
                     <div class="modal-body">
 

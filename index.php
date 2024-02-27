@@ -1,6 +1,7 @@
 <?php
 session_start();
 date_default_timezone_set('Asia/Manila');
+$email = isset($_SESSION['login_email']) ? $_SESSION['login_email'] : '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +33,7 @@ date_default_timezone_set('Asia/Manila');
                         <div class="row">
                             <div class="col-md-12">
                                 <b><label for="email" class="text-left">Email</label></b>
-                                <input type="email" id="email" name="email" class="form-textbox" style="width: 100%; height: 40px;" required>
+                                <input type="email" id="email" name="email" class="form-textbox" style="width: 100%; height: 40px;" placeholder="Email" required value="<?php echo $email; ?>">
                                 <br>
                             </div>
                         </div>
@@ -43,7 +44,7 @@ date_default_timezone_set('Asia/Manila');
                                 <br>
                                 <b><label for="password" class="text-left">Password</label></b>
                                 <div class="password-container">
-                                    <input type="password" name="password" id="password" class="form-textbox" style="width: 100%; height: 40px;" required>
+                                    <input type="password" name="password" id="password" class="form-textbox" style="width: 100%; height: 40px;" placeholder="Password" required>
                                     <i class="bi bi-eye-slash" id="togglePassword"></i>
                                     <div class="forgot">
                                         </p>
@@ -102,25 +103,18 @@ date_default_timezone_set('Asia/Manila');
             </a>
         </div>
     </div>
-    <!-- <script>
+    <script>
         const togglePassword = document.querySelector("#togglePassword");
         const password = document.querySelector("#password");
 
         togglePassword.addEventListener("click", function() {
-            // toggle the type attribute
             const type = password.getAttribute("type") === "password" ? "text" : "password";
             password.setAttribute("type", type);
 
-            // toggle the icon
+            // Toggle the eye icon class properly
             this.classList.toggle("bi-eye");
         });
-
-        // prevent form submit
-        const form = document.querySelector("form");
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-        });
-    </script> -->
+    </script>
 </body>
 
 </html>

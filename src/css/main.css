@@ -232,7 +232,7 @@ color: #3D3B40;
   position: absolute;
   right: 15px;
   top: 60px;
-  z-index: 3;
+  z-index: 1;
   /* height: 29vh; */
 }
 
@@ -598,7 +598,7 @@ form i {
 
 input#roleField.form-control{
   background-color: #D6E4F0 !important;
-  border: #3D3B40 1px solid;
+  border: #3D3B40 2px solid;
 }
 
 .profile-container .modal-content{
@@ -1040,6 +1040,7 @@ div:where(.swal2-icon).swal2-error{
   font-weight: bold;
   font-size: .85em;
   background-color: #FFFFFF!important;
+  padding: 0 .5em;
 }
 
 .table-container table tbody tr:hover td{

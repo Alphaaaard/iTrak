@@ -22,12 +22,15 @@
                 </div>
                 <form id="password-reset-form" action="send_reset_link.php" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <input type="email" id="email" name="email" class="form-textbox form-control" required>
+                        <input type="email" id="email" name="email" class="form-textbox" placeholder="Email" required>
                     </div>
 
                 </form>
                 <div class="mb-3 d-flex justify-content-end">
-                    <button type="button" id="continue-button" class="custom-button btn">Continue</button>
+                    <button type="button" id="continue-button" class="custom-button">Continue</button>
+                </div>
+                <div class="back-to-login">
+                    <a href="index.php">Back To Login</a>
                 </div>
             </main>
         </div>

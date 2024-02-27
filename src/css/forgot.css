@@ -7,14 +7,19 @@
   padding: 0;
 }
 
+body{
+  background-color: #F6F6F6;
+
+}
+
 .forgot {
     color: 0057FF;
     }
   
   
     .custom-button {
-        background-color: #06283D;
-        border: 2px solid #06283D;
+        background-color: #1E56A0;
+        border: 1px solid #1E56A0;
         color: #ffffff;
         padding: .5em 5em;
         transition: background-color 0.3s, border-color 0.3s, color 0.3s;
@@ -26,9 +31,9 @@
     .custom-button:hover,
     .custom-button:active,
     .custom-button:focus {
-        background-color: #06283D;
-        border-color: #06283D;
-        color: #ffffff;
+        background-color: #F6F6F6;
+        border-color: #1E56A0;
+        color: #163172;
         outline: none; /* Remove the default focus outline */
     }
     
@@ -39,7 +44,7 @@
     }
     
     .container-of-box .box2 {
-      background-color: #06283d;
+      background-color: #163172;
       color: white;
       width: 100%;
   
@@ -92,7 +97,7 @@
     }
     
     .container-of-box .box2 {
-      background-color: #06283d;
+      background-color: #163172;
       flex: 1;
       border-radius: 3rem 0 0 3rem;
       color: white;
@@ -126,6 +131,10 @@
       position: relative;
     }
 
+    .back-to-login{
+      text-align: center;
+    }
+
 
    
     * {
@@ -150,9 +159,9 @@
       font-weight: 400;
       line-height: 1.5;
       color: #495057;
-      background-color: #fff;
+      background-color: #F6F6F6;
       background-clip: padding-box;
-      border: 1px solid #000000;
+      border: 1px solid #3D3B40;
       border-radius: 0.3rem;
     }
   
@@ -171,6 +180,7 @@
   .login-header{
     letter-spacing: 1.5px;
     text-align: center;
+    color: #3D3B40;
     
   }
 
@@ -181,7 +191,7 @@
 
   .login-header {
     text-align: center; /* Center the text horizontally */
-    margin-bottom: 2rem; /* Add some space below the header */
+    margin-bottom: 3rem; /* Add some space below the header */
   }
   .container-of-box .box1 {
     display: flex;
@@ -205,11 +215,11 @@
     font-weight: 400;
     line-height: 1.5;
     color: #495057;
-    background-color: #fff;
+    background-color: #F6F6F6;
     background-clip: padding-box;
-    border: 1px solid #000000;
+    border: 1px solid #3D3B40;
     border-radius: 0.3rem;
-    margin-bottom: 3rem!important;
+    margin-bottom: 2rem!important;
   }
 
 
@@ -252,6 +262,10 @@ text-align: center; /* This will align the button to the right */
       .login-header h5{
         width: 90%;
         font-size: .75em;
+      }
+
+      .form-textbox{
+        margin-bottom: unset!important;
       }
     }
 
