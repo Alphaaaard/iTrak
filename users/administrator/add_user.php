@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) {
     $photo = $_FILES['picture']['name'];
 
     if (
-        !empty($firstName) && !empty($middleName) && !empty($lastName) && !empty($contact)
+        !empty($firstName) && !empty($lastName) && !empty($contact)
         && !empty($email) && !empty($birthday) && !empty($password) && !empty($role) && !empty($photo)
     ) {
         // Generate a random color

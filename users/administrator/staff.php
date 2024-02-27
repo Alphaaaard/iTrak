@@ -565,7 +565,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
 
                                                 <div class="col-4">
                                                     <label for="role" class="form-label" style="display: none;">userLevel</label>
-                                                    <input type="hidden" class="form-control" name="userLevel" id="userLevelField" />
+                                                    <input type="hidden" class="form-control" name="userLevel" id="userLevelField"/>
                                                 </div>
 
                                             </form>

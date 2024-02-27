@@ -681,6 +681,7 @@ $notificationText = "Admin $adminName assigned $assignedName to asset ID " . htm
                 </div>
             </div>
         </div>
+        
         <script>
 $(document).ready(function() {
     $('.notification-item').on('click', function(e) {

@@ -525,6 +525,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </script>
         <script>
             $(document).ready(function() {
+                let fullname;
 
                 class AccountManager {
                     constructor() {
@@ -556,7 +557,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             },
                             success: (response) => {
                                 console.log(response);
-                                this.showAlert("", "Account restored successfully!", "success");
+                                this.showAlert("", fullname+" have successfully restored!", "success");
                                 setTimeout(() => {
                                     location.reload();
                                 }, 1000);
@@ -569,6 +570,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     }
 
                     confirmRestore(rowData) {
+                        fullname = rowData.firstName+' '+rowData.lastName;
+
                         Swal.fire({
                             title: `Are you sure you want to restore<span style="font-weight: bold;">${rowData.firstName}</span>, <span style="font-weight: bold;">${rowData.lastName}</span>?`,
                             showCancelButton: true,

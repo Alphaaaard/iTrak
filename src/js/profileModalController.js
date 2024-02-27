@@ -22,11 +22,19 @@ if(contactCurrentValue.length <= 2 && e.keyCode == 8) {
 }
 });
 
+function showErrorAlert(msg) {
+  Swal.fire({
+    icon: "error",
+    title: "Error",
+    text: msg,
+    timer: 800,
+    showConfirmButton: false
+  });
+}
 
 
 //*update current user alertbox
 $(".updateSelfBtn").click(function () {
-
   const firstName = $('#firstnameEditSelf').val().trim();
   const middleName = $('#middlenameEditSelf').val().trim();
   const lastName = $('#lastnameEditSelf').val().trim();
@@ -34,6 +42,7 @@ $(".updateSelfBtn").click(function () {
   const email = $('#emailEditSelf').val().trim();
   const password = $('#passwordEditSelf').val().trim();
   const birthday = $('#birthdayEditSelf').val().trim();
+
 
   // Validate First Name
   if (!firstName) {
@@ -107,12 +116,14 @@ $(".updateSelfBtn").click(function () {
 
       // xhr.onload = function () {
       //   if (this.status == 200) {
-      //     console.log(this.response);
+      //     alert('jo');
       //   }
       // };
 
+
       let formData = new FormData(form);
       formData.set("updateBtn", swalConfirm);
+      console.log(form)
       xhr.send(formData);
 
       

@@ -4,9 +4,10 @@ use PHPMailer\PHPMailer\Exception;
 
 
 
-//require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 
-require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
+
+// require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
 
 
 
@@ -35,7 +36,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sql3 = "SELECT * FROM asset WHERE status = 'For Replacement'";
     $result3 = $conn->query($sql3) or die($conn->error);
 
-    $sql4 = "SELECT * FROM asset WHERE status = 'Need Repair'";
+    $sql4 = "SELECT * FROM asset WHERE status = 'Need Repair' ORDER BY CASE WHEN assignedName IS NULL OR assignedName = '' THEN 0 ELSE 1 END, assignedName ASC, assetId ASC";
     $result4 = $conn->query($sql4) or die($conn->error);
 
 
@@ -145,7 +146,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             $(document).ready(function() {
                 // this is for staying at the same pill when reloading.
                 let tabLastSelected = sessionStorage.getItem("lastTab");
-
+                
                 if(!tabLastSelected) {
                     // if no last tab was selected, use the pills-manager for default
                     $("#pills-manager").addClass("show active");
@@ -160,18 +161,25 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         case 'pills-manager':
                             $("#pills-manager").addClass("show active");
                             $(".nav-link[data-bs-target='pills-manager']").addClass("active");
+                            $(".nav-link[data-bs-target='pills-profile']").removeClass("active");
                         break;
                         case 'pills-profile':
                             $("#pills-profile").addClass("show active");
+                            $("#pills-manager").removeClass("show active");
                             $(".nav-link[data-bs-target='pills-profile']").addClass("active");
+                            $(".nav-link[data-bs-target='pills-manager']").removeClass("active");
                         break;
                         case 'pills-replace':
                             $("#pills-replace").addClass("show active");
+                            $("#pills-manager").removeClass("show active");
                             $(".nav-link[data-bs-target='pills-replace']").addClass("active");
+                            $(".nav-link[data-bs-target='pills-manager']").removeClass("active");
                         break;
                         case 'pills-repair':
                             $("#pills-repair").addClass("show active");
+                            $("#pills-manager").removeClass("show active");
                             $(".nav-link[data-bs-target='pills-repair']").addClass("active");
+                            $(".nav-link[data-bs-target='pills-manager']").removeClass("active");
                         break;
                     }
                 }
@@ -577,7 +585,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="row g-3">
+                                <form method="post" class="row g-3" id="workingForm">
+                                    <input type="hidden" name="edit">
                                     <div class="col-4">
                                         <label for="assetId" class="form-label">Tracking #:</label>
                                         <input type="text" class="form-control" id="assetId" name="assetId" readonly />
@@ -670,8 +679,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="row g-3">
+                                <form method="post" class="row g-3" id="maintenanceForm">
                                     <h5>Report Modal for Under Maintenance</h5>
+                                    <input type="hidden" name="edit">
                                     <div class="col-4">
                                         <label for="assetId" class="form-label">Tracking #:</label>
                                         <input type="text" class="form-control" id="assetId" name="assetId" readonly />
@@ -764,8 +774,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="row g-3">
+                                <form method="post" class="row g-3" id="replacementForm">
                                     <h5>Report Modal for Replacement</h5>
+                                    <input type="hidden" name="edit">
                                     <div class="col-4">
                                         <label for="assetId" class="form-label">Tracking #:</label>
                                         <input type="text" class="form-control" id="assetId" name="assetId" readonly />
@@ -858,8 +869,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="row g-3">
+                                <form method="post" class="row g-3" id="repairForm">
                                     <h5>Report Modal for Repair</h5>
+                                    <input type="hidden" name="edit">
                                     <div class="col-4">
                                         <label for="assetId" class="form-label">Tracking #:</label>
                                         <input type="text" class="form-control" id="assetId" name="assetId" readonly />
@@ -954,8 +966,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="row g-3">
+                                <form method="post" class="row g-3" id="assignPersonnelForm">
                                     <h5></h5>
+                                    <input type="hidden" name="assignMaintenance">
                                     <div class="col-4" style="display:none">
                                         <label for="assetId" class="form-label">Tracking #:</label>
                                         <input type="text" class="form-control" id="assetId" name="assetId" readonly />
@@ -1086,6 +1099,21 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+        <script>
+            function redirectToPage(building, floor) {
+    if (building === 'New Academic' && floor === '1F') {
+        window.location.href = "../../users/building/NEB/NEWBF1.php";
+    }
+}
+
+$(document).on('click', 'table tr', function() {
+    var building = $(this).find('td:eq(3)').text().split(' / ')[0]; // Adjust the index as needed
+    var floor = $(this).find('td:eq(3)').text().split(' / ')[1]; // Adjust the index as needed
+    redirectToPage(building, floor);
+});
+
+        </script>
 
         <script>
             $(document).ready(function() {

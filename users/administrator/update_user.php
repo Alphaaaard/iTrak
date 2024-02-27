@@ -3,8 +3,11 @@ session_start();
 include_once("../../config/connection.php");
 $conn = connection();
 
+echo 'hehe';
+
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
+    echo 'in';
 
 
     // For personnel page, check if userLevel is 3
@@ -26,7 +29,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $role = $_POST['role'];
     $rfid = $_POST['rfid'];
 
-    if(!empty($firstname) && !empty($middlename) && !empty($lastname) && !empty($contact)
+    if(!empty($firstname) && !empty($lastname) && !empty($contact)
     && !empty($email) && !empty( $birthday) && !empty($password) && !empty($role)) {
 
         //* if uploaded an image, update the image, if not, leave it
