@@ -4,6 +4,7 @@ include_once("../../../config/connection.php");
 $conn = connection();
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role'])) {
+    
 
 
 
@@ -2172,7 +2173,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['upload_img']) && isse
                 </div>
             </main>
         </section>
+        <script>
+            $(document).ready(function() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var assetId = urlParams.get('assetId'); // Get the assetId from the URL
 
+    if (assetId) {
+        var modalId = '#imageModal' + assetId;
+        $(modalId).modal('show'); // Open the modal with the corresponding ID
+    }
+});
+
+        </script>
         <script src="../../../src/js/main.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
