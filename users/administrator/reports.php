@@ -4,10 +4,10 @@ use PHPMailer\PHPMailer\Exception;
 
 
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 
 
-require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
+// require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
 
 
 
@@ -654,7 +654,21 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
 
-        
+            <!-- Edit for table 1
+            <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-footer">
+                            Are you sure you want to save changes?
+                            <div class="modal-popups">
+                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                <button class="btn add-modal-btn" name="edit" data-bs-dismiss="modal">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form> -->
 
             <!--Modal for table 2-->
             <div class="modal-parent">
@@ -734,6 +748,21 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
 
+            <!-- Edit for table 2
+            <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-footer">
+                            Are you sure you want to save changes?
+                            <div class="modal-popups">
+                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                <button class="btn add-modal-btn" name="edit" data-bs-dismiss="modal">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form> -->
 
 
             <!--Modal for table 3-->
@@ -814,7 +843,21 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
 
-         
+            <!-- Edit for table 3
+            <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-footer">
+                            Are you sure you want to save changes?
+                            <div class="modal-popups">
+                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                <button class="btn add-modal-btn" name="edit" data-bs-dismiss="modal">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form> -->
 
 
             <!--Modal for table 4-->
@@ -895,7 +938,21 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
 
-         
+            <!-- Edit for table 4
+            <div class="modal fade" id="staticBackdrop4" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-footer">
+                            Are you sure you want to save changes?
+                            <div class="modal-popups">
+                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                <button class="btn add-modal-btn" name="edit" data-bs-dismiss="modal">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form> -->
 
             <!--Assign Modal for table 4-->
             <div class="modal-parent">
@@ -996,7 +1053,21 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
 
-          
+            <!-- Edit for table 4
+            <div class="modal fade" id="staticBackdrop5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-footer">
+                            Are you sure you want to save changes?
+                            <div class="modal-popups">
+                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                <button class="btn add-modal-btn" name="assignMaintenance" data-bs-dismiss="modal">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form> -->
         </section>
 
         <!-- PROFILE MODALS -->
@@ -1029,29 +1100,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-        <script>
-    function redirectToPage(building, floor, assetId) {
-    var newLocation = '';
-    if (building === 'New Academic' && floor === '1F') {
-        newLocation = "../../users/building/NEB/NEWBF1.php";
-    } else if (building === 'Yellow' && floor === '1F') {
-        newLocation = "../../users/building/OLB/OLBF1.php";
-    } else if (building === 'Korphil' && floor === '1F') {
-        newLocation = "../../users/building/KOB/KOBF1.php";
-    }
-
-    // Append the assetId to the URL as a query parameter
-    window.location.href = newLocation + '?assetId=' + assetId;
-}
-
-$(document).on('click', 'table tr', function() {
-    var assetId = $(this).find('td:eq(0)').text(); // Assuming first TD is the assetId
-    var building = $(this).find('td:eq(3)').text().split(' / ')[0]; // Adjust the index as needed
-    var floor = $(this).find('td:eq(3)').text().split(' / ')[1]; // Adjust the index as needed
-    redirectToPage(building, floor, assetId);
-});
-</script>
-
+        
 
         <script>
             $(document).ready(function() {
