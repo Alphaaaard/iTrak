@@ -2173,6 +2173,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['upload_img']) && isse
                 </div>
             </main>
         </section>
+        
         <script>
             $(document).ready(function() {
     var urlParams = new URLSearchParams(window.location.search);
