@@ -127,7 +127,7 @@ function showErrorAlert(msg) {
 
 //*prevents user from erasing 09 in contact value
 $('#contactField').on('keydown', function(e) {
-  contactCurrentValue = $(this).val();
+  let contactCurrentValue = $(this).val();
 
   if(e.ctrlKey) {
     e.preventDefault();
@@ -141,12 +141,25 @@ $('#contactField').on('keydown', function(e) {
   }
 });
 
+//*prevents from entering e on the keyboard
+$("#contactField").on('keypress', function(e) {
+  let contactCurrentValue = $(this).val();
+
+  if(e.key == 'e') {
+    e.preventDefault();
+  }
+
+  if(contactCurrentValue.length == 11) {
+    e.preventDefault();
+  }
+})
+
 // Sweet alertboxes
 //* add alertbox
 $("#addBtn").click(function (e) {
   let isValid = false;
   const firstName = document.getElementById("firstNameField").value.trim();
-  const middleName = document.getElementById("middleNameField").value.trim();
+  // const middleName = document.getElementById("middleNameField").value.trim();
   const lastName = document.getElementById("lastNameField").value.trim();
   const contact = document.getElementById("contactField").value.trim();
   const email = document.getElementById("emailField").value.trim();
@@ -162,12 +175,24 @@ $("#addBtn").click(function (e) {
     return;
   }
 
+  if(firstName.length == 1) {
+    showErrorAlert("Please provide a complete First name");
+    isValid = false;
+    return;
+  }
+
   if (!lastName) {
     showErrorAlert("Last name is required.");
     isValid = false;
     return;
   }
 
+  if(lastName.length == 1) {
+    showErrorAlert("Please provide a complete Last name");
+    isValid = false;
+    return;
+  }
+  
   if (!contact) {
     showErrorAlert("Contact is required");
     isValid = false;
@@ -186,6 +211,7 @@ $("#addBtn").click(function (e) {
     isValid = false;
     return;
   }
+  
 
   // Validate Password - Example: At least 6 characters
   if (password.length < 6) {
@@ -211,6 +237,7 @@ $("#addBtn").click(function (e) {
     isValid = false;
     return;
   }
+
 
   isValid = true;
 
@@ -284,8 +311,20 @@ $(".updateBtn").click(function () {
     return;
   }
 
+  if(firstName.length == 1) {
+    showErrorAlert("Please provide a complete First name");
+    isValid = false;
+    return;
+  }
+
   if (!lastName) {
     showErrorAlert("Last name is required.");
+    isValid = false;
+    return;
+  }
+
+  if(lastName.length == 1) {
+    showErrorAlert("Please provide a complete Last name");
     isValid = false;
     return;
   }
