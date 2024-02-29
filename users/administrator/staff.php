@@ -453,8 +453,25 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                             <input type="hidden" name="archiveAccId" id="archiveAccId">
                         </form>
 
-                        <!-- RFID MODAL -->
-                        <div class="modal" id="staticBackdrop112" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true" onclick="saveRFIDToValue(event)">
+                        <!-- RFID MODAL ADMIN -->
+                        <div class="modal fade" id="staticBackdrop112" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-body" onclick="saveRFIDToValue(event, 'add')">
+                                        <img src="../../src/img/taprfid.jpg" width="100%" alt="" class="Scan" />
+
+                                        <form id="rfidForm">
+                                            <input type="text" id="rfid" name="rfid" value="12345">
+                                        </form>
+                                    </div> 
+                                    
+                                    <label class="btn btn-close-modal-emp close-modal-btn" data-bs-toggle="modal" data-bs-target="#updateSelfModal"><i class="bi bi-x-lg"></i></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- RFID MODAL STAFF -->
+                        <div class="modal" id="staffRFIDModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-body">
@@ -463,36 +480,41 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                                         <form id="rfidForm">
                                             <input type="text" id="rfid" name="rfid" value="12345">
                                         </form>
-                                    </div> <label class="btn btn-close-modal-emp close-modal-btn" data-bs-toggle="modal" data-bs-target="#updateSelfModal"><i class="bi bi-x-lg"></i></label>
+                                    </div> 
+                                    
+                                    <label class="btn btn-close-modal-emp close-modal-btn" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="bi bi-x-lg"></i></label>
                                 </div>
                             </div>
                         </div>
 
                         <script>
-                            function saveRFIDToValue(event) {
-                                console.log('SUBMIT??')
+                            function saveRFIDToValue(event, action) {
                                 event.preventDefault();
+
+                                setAction(action);
 
                                 // Get value from the RFID input
                                 var rfidValue = document.getElementById('rfid').value;
                                 document.getElementById('rfidFieldAdd').value = rfidValue;
 
+                                $('#rfid').val("");
+
+                                if (action === 'add') {
+                                    $("#exampleModal1").modal("show");
+                                    checkRole(); //refer to staff.js
+                                } else {
+                                    $("#updateModal").modal("show");
+                                    $("#rfidFieldEdit").val(rfidValue)
+                                }
+
+                                $("#staticBackdrop112").modal("hide");
+
 
                                 // Check if the RFID value is not empty
-                                if (rfidValue.trim() !== "") {
-                                    console.log("meron ba");
-                                    $('#rfid').val("");
-
-                                    if (action === 'add') {
-                                        $("#exampleModal1").modal("show");
-                                        checkRole(); //refer to staff.js
-                                    } else {
-                                        $("#updateModal").modal("show");
-                                        $("#rfidFieldEdit").val(rfidValue)
-                                    }
-
-                                    $("#staticBackdrop112").modal("hide");
-                                }
+                                // if (rfidValue.trim() !== "") {
+                                //     console.log("meron ba");
+                                    
+                                // }
                             }
 
                                 document.getElementById('rfidForm').addEventListener('submit', saveRFIDToValue);
@@ -533,7 +555,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
 
                                                 <div class="col-4">
                                                     <label for="contactField" class="form-label">Contact Number <span class="d-none text-danger error">*</span></label>
-                                                    <input type="number" class="form-control" id="contactField" name="contact" required pattern="\d{10,11}"  value="09" title="Contact number must be 10 to 11 digits long"/>
+                                                    <input type="number" class="form-control contactEdit" id="contactField" name="contact" required pattern="\d{10,11}"  value="09" title="Contact number must be 10 to 11 digits long"/>
                                                 </div>
 
                                                 <div class="col-4">
@@ -558,7 +580,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
 
                                                 <div class="col-4">
                                                     <label for="user_pass" class="form-label">Register RFID <span class="d-none text-danger error">*</span></label>
-                                                    <button type="button" class="form-control btn-custom" data-bs-toggle="modal" data-bs-target="#staticBackdrop112" onclick="setAction('add');" value="123456789">SCAN</button>
+                                                    <button type="button" class="form-control btn-custom" data-bs-toggle="modal" data-bs-target="#staffRFIDModal" onclick="setAction('add');" value="123456789">SCAN</button>
                                                     <input type="password" name="rfidNumber" id="rfidFieldAdd" title="" value="1234567" required />
                                                 </div>
 
@@ -641,7 +663,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
 
                                                 <div class="col-4">
                                                     <label for="user_pass" class="form-label">Register RFID</label>
-                                                    <button type="button" class="form-control btn-custom" data-bs-toggle="modal" data-bs-target="#staticBackdrop112" onclick="setAction('edit')">RFID</button>
+                                                    <button type="button" class="form-control btn-custom" data-bs-toggle="modal" data-bs-target="#staffRFIDModal" onclick="setAction('edit')">RFID</button>
 
                                                     <input type="password" id="rfidFieldEdit" name="rfid">
                                                 </div>

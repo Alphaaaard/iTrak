@@ -110,7 +110,7 @@ $user = get_current_user_data();
 
                             <div class="col-4">
                                 <label for="contact" class="form-label">Contact Number</label>
-                                <input type="text" class="form-control contactEdit" id="contactEditSelf" name="contact" maxlength="11" value="<?php echo $user['contact'] ?>" />
+                                <input type="tel" class="form-control contactEdit" id="contactEditSelf" name="contact" maxlength="11" value="<?php echo $user['contact'] ?>" />
                             </div>
 
 

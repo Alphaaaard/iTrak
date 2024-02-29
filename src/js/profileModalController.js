@@ -22,6 +22,38 @@ if(contactCurrentValue.length <= 2 && e.keyCode == 8) {
 }
 });
 
+//*prevents user from erasing 09 in contact value
+$('.contactEdit').on('keydown', function(e) {
+  let contactCurrentValue = $(this).val();
+
+  if(e.ctrlKey) {
+    e.preventDefault();
+    return false;
+  }
+
+  // Check if the input length is 1 and the event type is 'deleteContentBackward'
+  if(contactCurrentValue.length <= 2 && e.keyCode == 8) {
+    e.preventDefault();
+    return false;
+  }
+});
+
+//*prevents from entering e on the keyboard
+$(".contactEdit").on('keypress', function(e) {
+  let contactCurrentValue = $(this).val();
+
+  // alert(e.keyCode);
+
+  //for some reason, nagana sya
+  if(e.key >= 'a' && e.key <= 'z') {
+    e.preventDefault();
+  }
+
+  if(contactCurrentValue.length == 11) {
+    e.preventDefault();
+  }
+})
+
 function showErrorAlert(msg) {
   Swal.fire({
     icon: "error",
@@ -51,14 +83,26 @@ $(".updateSelfBtn").click(function () {
     return;
   }
 
-  if (!middleName) {
-    showErrorAlert("Middle name is required.");
+  // if (!middleName) {
+  //   showErrorAlert("Middle name is required.");
+  //   isValid = false;
+  //   return;
+  // }
+
+  if(firstName.length == 1) {
+    showErrorAlert("Please provide a complete First name");
     isValid = false;
     return;
   }
 
   if (!lastName) {
     showErrorAlert("Last name is required.");
+    isValid = false;
+    return;
+  }
+
+  if(lastName.length == 1) {
+    showErrorAlert("Please provide a complete Last name");
     isValid = false;
     return;
   }

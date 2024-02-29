@@ -125,35 +125,6 @@ function showErrorAlert(msg) {
   });
 }
 
-//*prevents user from erasing 09 in contact value
-$('#contactField').on('keydown', function(e) {
-  let contactCurrentValue = $(this).val();
-
-  if(e.ctrlKey) {
-    e.preventDefault();
-    return false;
-  }
-
-  // Check if the input length is 1 and the event type is 'deleteContentBackward'
-  if(contactCurrentValue.length <= 2 && e.keyCode == 8) {
-    e.preventDefault();
-    return false;
-  }
-});
-
-//*prevents from entering e on the keyboard
-$("#contactField").on('keypress', function(e) {
-  let contactCurrentValue = $(this).val();
-
-  if(e.key == 'e') {
-    e.preventDefault();
-  }
-
-  if(contactCurrentValue.length == 11) {
-    e.preventDefault();
-  }
-})
-
 // Sweet alertboxes
 //* add alertbox
 $("#addBtn").click(function (e) {
