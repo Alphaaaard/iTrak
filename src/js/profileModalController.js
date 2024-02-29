@@ -42,17 +42,19 @@ $('.contactEdit').on('keydown', function(e) {
 $(".contactEdit").on('keypress', function(e) {
   let contactCurrentValue = $(this).val();
 
-  // alert(e.keyCode);
+  
+  if(e.key >= 'a' && e.key <= 'z' || e.key >= 'A' && e.key <= 'Z') {
+    e.preventDefault();
+  }
 
-  //for some reason, nagana sya
-  if(e.key >= 'a' && e.key <= 'z') {
+  if(e.keyCode >= 33 && e.keyCode <= 47 || e.keyCode >= 58 && e.keyCode <= 64) {
     e.preventDefault();
   }
 
   if(contactCurrentValue.length == 11) {
     e.preventDefault();
   }
-})
+});
 
 function showErrorAlert(msg) {
   Swal.fire({

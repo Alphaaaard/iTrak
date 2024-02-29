@@ -4,10 +4,10 @@ use PHPMailer\PHPMailer\Exception;
 
 
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 
 
-require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
+// require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
 
 
 
@@ -36,7 +36,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sql3 = "SELECT * FROM asset WHERE status = 'For Replacement'";
     $result3 = $conn->query($sql3) or die($conn->error);
 
-    $sql4 = "SELECT * FROM asset WHERE status = 'Need Repair' ORDER BY CASE WHEN assignedName IS NULL OR assignedName = '' THEN 0 ELSE 1 END, assignedName ASC, assetId ASC";
+    $sql4 = "SELECT * FROM asset WHERE status = 'Need Repair'";
     $result4 = $conn->query($sql4) or die($conn->error);
 
 
@@ -575,7 +575,385 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <section>
             <!--Modal sections-->
-          
+            <!--Modal for table 1-->
+            <div class="modal-parent">
+                <div class="modal modal-xl fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5>Report Modal for Working</h5>
+                                <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" class="row g-3" id="workingForm">
+                                    <input type="hidden" name="edit">
+                                    <div class="col-4">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="category" class="form-label">Category:</label>
+                                        <input type="text" class="form-control" id="category" name="category" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="Building" class="form-label">Building:</label>
+                                        <input type="text" class="form-control" id="building" name="building" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="floor" class="form-label">Floor:</label>
+                                        <input type="text" class="form-control" id="floor" name="floor" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="room" class="form-label">Room:</label>
+                                        <input type="text" class="form-control" id="room" name="room" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="status" class="form-label">Status:</label>
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working">Working</option>
+                                            <option value="Under Maintenance">Under Maintenance</option>
+                                            <option value="For Replacement">For Replacement</option>
+                                            <option value="Need Repair">Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4" style="display: none">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName" value="" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display: none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="" readonly />
+                                        </div>
+                                </form>
+                            </div>
+                            <div class="footer">
+                                <button type="button" class="btn add-modal-btn" onclick="confirmAlert('working')">
+                                    Save
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit for table 1
+            <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-footer">
+                            Are you sure you want to save changes?
+                            <div class="modal-popups">
+                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                <button class="btn add-modal-btn" name="edit" data-bs-dismiss="modal">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form> -->
+
+            <!--Modal for table 2-->
+            <div class="modal-parent">
+                <div class="modal modal-xl fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="header">
+                                <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" class="row g-3" id="maintenanceForm">
+                                    <h5>Report Modal for Under Maintenance</h5>
+                                    <input type="hidden" name="edit">
+                                    <div class="col-4">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="category" class="form-label">Category:</label>
+                                        <input type="text" class="form-control" id="category" name="category" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="building" class="form-label">Building:</label>
+                                        <input type="text" class="form-control" id="building" name="building" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="floor" class="form-label">Floor:</label>
+                                        <input type="text" class="form-control" id="floor" name="floor" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="room" class="form-label">Room:</label>
+                                        <input type="text" class="form-control" id="room" name="room" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="status" class="form-label">Status:</label>
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working">Working</option>
+                                            <option value="Under Maintenance">Under Maintenance</option>
+                                            <option value="For Replacement">For Replacement</option>
+                                            <option value="Need Repair">Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4" style="display: none">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName" value="" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display: none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="" readonly />
+                                        </div>
+                                </form>
+                            </div>
+                            <div class="footer">
+                                <button type="button" class="btn add-modal-btn" onclick="confirmAlert('maintenance')">
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit for table 2
+            <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-footer">
+                            Are you sure you want to save changes?
+                            <div class="modal-popups">
+                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                <button class="btn add-modal-btn" name="edit" data-bs-dismiss="modal">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form> -->
+
+
+            <!--Modal for table 3-->
+            <div class="modal-parent">
+                <div class="modal modal-xl fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="header">
+                                <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" class="row g-3" id="replacementForm">
+                                    <h5>Report Modal for Replacement</h5>
+                                    <input type="hidden" name="edit">
+                                    <div class="col-4">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="category" class="form-label">Category:</label>
+                                        <input type="text" class="form-control" id="category" name="category" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="building" class="form-label">Building:</label>
+                                        <input type="text" class="form-control" id="building" name="building" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="floor" class="form-label">Floor:</label>
+                                        <input type="text" class="form-control" id="floor" name="floor" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="room" class="form-label">Room:</label>
+                                        <input type="text" class="form-control" id="room" name="room" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="status" class="form-label">Status:</label>
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working">Working</option>
+                                            <option value="Under Maintenance">Under Maintenance</option>
+                                            <option value="For Replacement">For Replacement</option>
+                                            <option value="Need Repair">Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4" style="display: none">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName" value="" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display: none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="" readonly />
+                                        </div>
+                                </form>
+                            </div>
+                            <div class="footer">
+                                <button type="button" class="btn add-modal-btn" onclick="confirmAlert('replace')">
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit for table 3
+            <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-footer">
+                            Are you sure you want to save changes?
+                            <div class="modal-popups">
+                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                <button class="btn add-modal-btn" name="edit" data-bs-dismiss="modal">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form> -->
+
+
+            <!--Modal for table 4-->
+            <div class="modal-parent">
+                <div class="modal modal-xl fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="header">
+                                <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" class="row g-3" id="repairForm">
+                                    <h5>Report Modal for Repair</h5>
+                                    <input type="hidden" name="edit">
+                                    <div class="col-4">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="category" class="form-label">Category:</label>
+                                        <input type="text" class="form-control" id="category" name="category" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="building" class="form-label">Building:</label>
+                                        <input type="text" class="form-control" id="building" name="building" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="floor" class="form-label">Floor:</label>
+                                        <input type="text" class="form-control" id="floor" name="floor" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="room" class="form-label">Room:</label>
+                                        <input type="text" class="form-control" id="room" name="room" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="status" class="form-label">Status:</label>
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working">Working</option>
+                                            <option value="Under Maintenance">Under Maintenance</option>
+                                            <option value="For Replacement">For Replacement</option>
+                                            <option value="Need Repair">Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy" readonly />
+                                        </div>
+                                </form>
+                            </div>
+                            <div class="footer">
+                                <button type="button" class="btn add-modal-btn" onclick="confirmAlert('repair')">
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit for table 4
+            <div class="modal fade" id="staticBackdrop4" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-footer">
+                            Are you sure you want to save changes?
+                            <div class="modal-popups">
+                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                <button class="btn add-modal-btn" name="edit" data-bs-dismiss="modal">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form> -->
+
             <!--Assign Modal for table 4-->
             <div class="modal-parent">
                 <div class="modal modal-xl fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -637,7 +1015,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     </div>
 
                                     <div class="col-6">
-                                        <select class="form-select" id="assignedName" name="assignedName" style="color: black;">
+                                        <select class="form-select assignedName" id="assignedName" name="assignedName" style="color: black;">
                                             <?php
                                             // Assuming you have a database connection established in $conn
                                             // SQL to fetch personnel with the role of "Maintenance Personnel"
@@ -675,7 +1053,21 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
 
-          
+            <!-- Edit for table 4
+            <div class="modal fade" id="staticBackdrop5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-footer">
+                            Are you sure you want to save changes?
+                            <div class="modal-popups">
+                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                <button class="btn add-modal-btn" name="assignMaintenance" data-bs-dismiss="modal">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form> -->
         </section>
 
         <!-- PROFILE MODALS -->
@@ -707,35 +1099,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
-        <script>
-            //PARA MAGDIRECT KA SA PAGE 
-    function redirectToPage(building, floor, assetId) {
-    var newLocation = '';
-    if (building === 'New Academic' && floor === '1F') {
-        newLocation = "../../users/building/NEB/NEWBF1.php";
-    } else if (building === 'Yellow' && floor === '1F') {
-        newLocation = "../../users/building/OLB/OLBF1.php";
-    } else if (building === 'Korphil' && floor === '1F') {
-        newLocation = "../../users/building/KOB/KOBF1.php";
-    } else if (building === 'Bautista' && floor === 'Basement') {
-        newLocation = "../../users/building/BAB/BABF1.php";
-    } else if (building === 'Belmonte' && floor === '1F') {
-        newLocation = "../../users/building/BEB/BEBF1.php";
-    }
-
-    // Append the assetId to the URL as a query parameter
-    window.location.href = newLocation + '?assetId=' + assetId;
-}
-
-$(document).on('click', 'table tr', function() {
-    var assetId = $(this).find('td:eq(0)').text(); // Assuming first TD is the assetId
-    var building = $(this).find('td:eq(3)').text().split(' / ')[0]; // Adjust the index as needed
-    var floor = $(this).find('td:eq(3)').text().split(' / ')[1]; // Adjust the index as needed
-    redirectToPage(building, floor, assetId);
-});
-</script>
-
 
         <script>
             $(document).ready(function() {
@@ -883,8 +1246,7 @@ $(document).on('click', 'table tr', function() {
             });
         });
     </script>
-
-<script>
+ <script>
 $(document).ready(function() {
     function searchTable() {
         var input, filter, table, tr, td, i;
