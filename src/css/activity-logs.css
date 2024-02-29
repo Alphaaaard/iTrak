@@ -92,7 +92,7 @@
     border-right-style: solid;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
-    /* text-align: center; */
+
   }
   .table-header table tr th:nth-child(1){
     width: 37.5%;

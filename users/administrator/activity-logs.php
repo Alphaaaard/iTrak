@@ -6,14 +6,14 @@ $conn = connection();
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
 
 
-        // For personnel page, check if userLevel is 3
-        if($_SESSION['userLevel'] != 1) {
-            // If not personnel, redirect to an error page or login
-            header("Location:error.php");
-            exit;
-        }
+    // For personnel page, check if userLevel is 3
+    if ($_SESSION['userLevel'] != 1) {
+        // If not personnel, redirect to an error page or login
+        header("Location:error.php");
+        exit;
+    }
 
-    
+
     // Fetch General activity logs
     $sqlGeneral = "SELECT ac.*, a.firstName, a.middleName, a.lastName
     FROM activitylogs AS ac
@@ -297,7 +297,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     echo "<tbody>";
                                     while ($row = $resultReport->fetch_assoc()) {
                                         echo '<tr>';
-                                        echo '<td>' . $row['firstName'] . "" . $row['lastName'] . '</td>';
+                                        echo '<td>' . $row['firstName'] . " " . $row['lastName'] . '</td>';
                                         echo '<td style="display:none">' . $row['activityId'] . '</td>';
                                         echo '<td style="display:none">' . $row['firstName'] . '</td>';
                                         echo '<td style="display:none">' . $row['middleName'] . '</td>';

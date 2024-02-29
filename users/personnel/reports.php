@@ -44,11 +44,11 @@ $resultReport = $stmt->get_result();
 
 // for notif below
 // Update the SQL to join with the account and asset tables to get the admin's name and asset information
-$loggedInUserFirstName = $_SESSION['firstName']; 
+$loggedInUserFirstName = $_SESSION['firstName'];
 $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
 $loggedInUserLastName = $_SESSION['lastName'];
 
-$loggedInFullName = $loggedInUserFirstName . ' '.$loggedInUserMiddleName .' '. $loggedInUserLastName;
+$loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
 
 
 
@@ -78,13 +78,13 @@ $unseenCountRow = $result->fetch_assoc();
 $unseenCount = $unseenCountRow['unseenCount'];
 
 
-    if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['userLevel']) && isset($_SESSION['role'])) {
-        // For personnel page, check if userLevel is 3
-        if($_SESSION['userLevel'] != 3) {
-            // If not personnel, redirect to an error page or login
-            header("Location:error.php");
-            exit;
-        }
+if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['userLevel']) && isset($_SESSION['role'])) {
+    // For personnel page, check if userLevel is 3
+    if ($_SESSION['userLevel'] != 3) {
+        // If not personnel, redirect to an error page or login
+        header("Location:error.php");
+        exit;
+    }
     $sql = "SELECT * FROM asset WHERE status = 'Working'";
     $result = $conn->query($sql) or die($conn->error);
 
@@ -143,12 +143,12 @@ $unseenCount = $unseenCountRow['unseenCount'];
     if (isset($_SESSION['accountId'])) {
         $accountId = $_SESSION['accountId'];
         $todayDate = date("Y-m-d");
-    
+
         // Check if there's a timeout value for this user for today
         $timeoutQuery = "SELECT timeout FROM attendancelogs WHERE accountId = '$accountId' AND date = '$todayDate'";
         $timeoutResult = $conn->query($timeoutQuery);
         $timeoutRow = $timeoutResult->fetch_assoc();
-    
+
         if ($timeoutRow && $timeoutRow['timeout'] !== null) {
             // User has a timeout value, force logout
             session_destroy(); // Destroy all session data
@@ -168,12 +168,17 @@ $unseenCount = $unseenCountRow['unseenCount'];
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>  
- <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>  
+        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/reports.css" />
-
+        <style>
+            #map {
+                display: none;
+            }
+        </style>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
         <!--JS for the fcking tabs-->
         <script>
@@ -204,83 +209,83 @@ $unseenCount = $unseenCountRow['unseenCount'];
                 </div>
                 <div class="content-nav">
                     <div class="notification-dropdown">
-                       
-
-
-
-
- <a href="#" class="notification" id="notification-button">
 
 
 
 
 
-
-<i class="fa fa-bell" aria-hidden="true"></i>
-<span id="noti_number"><?php echo $unseenCount; ?></span>
-
-    </td>
-    </tr>
-    </table>
-    <script type="text/javascript">
-        function loadDoc() {
-
-
-            setInterval(function() {
-
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("noti_number").innerHTML = this.responseText;
-                    }
-                };
-                xhttp.open("GET", "update_single_notification.php", true);
-                xhttp.send();
-
-            }, 10);
-
-
-        }
-        loadDoc();
-    </script>
-
-</a>
+                        <a href="#" class="notification" id="notification-button">
 
 
 
-<div class="dropdown-content" id="notification-dropdown-content">
-    <h6 class="dropdown-header">Alerts Center</h6>
-    <!-- PHP code to display notifications will go here -->
-    <?php
-if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
-// Loop through each notification
-while ($row = $resultLatestLogs->fetch_assoc()) {
-$adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
-$actionText = $row["action"];
-$assetId = 'unknown'; // Default value
-
-// Extract personnel name and asset ID from action text
-if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
-$assignedName = $matches[1];
-$assetId = $matches[2];
-}
-
-// Generate the notification text
-// Generate the notification text including the name of the assigned personnel
-$notificationText = "Admin $adminName assigned $assignedName to asset ID " . htmlspecialchars($assetId);
 
 
-// Output the notification as a clickable element with a data attribute for the activityId
-echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . $notificationText . '</a>';
-}
-} else {
-echo '<a href="#">No new notifications</a>';
-}
-?>
-<a href="activity-logs.php" class="view-all">View All</a>
 
-</div>
-</div>
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+                            <span id="noti_number"><?php echo $unseenCount; ?></span>
+
+                            </td>
+                            </tr>
+                            </table>
+                            <script type="text/javascript">
+                                function loadDoc() {
+
+
+                                    setInterval(function() {
+
+                                        var xhttp = new XMLHttpRequest();
+                                        xhttp.onreadystatechange = function() {
+                                            if (this.readyState == 4 && this.status == 200) {
+                                                document.getElementById("noti_number").innerHTML = this.responseText;
+                                            }
+                                        };
+                                        xhttp.open("GET", "update_single_notification.php", true);
+                                        xhttp.send();
+
+                                    }, 10);
+
+
+                                }
+                                loadDoc();
+                            </script>
+
+                        </a>
+
+
+
+                        <div class="dropdown-content" id="notification-dropdown-content">
+                            <h6 class="dropdown-header">Alerts Center</h6>
+                            <!-- PHP code to display notifications will go here -->
+                            <?php
+                            if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
+                                // Loop through each notification
+                                while ($row = $resultLatestLogs->fetch_assoc()) {
+                                    $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+                                    $actionText = $row["action"];
+                                    $assetId = 'unknown'; // Default value
+
+                                    // Extract personnel name and asset ID from action text
+                                    if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
+                                        $assignedName = $matches[1];
+                                        $assetId = $matches[2];
+                                    }
+
+                                    // Generate the notification text
+                                    // Generate the notification text including the name of the assigned personnel
+                                    $notificationText = "Admin $adminName assigned $assignedName to asset ID " . htmlspecialchars($assetId);
+
+
+                                    // Output the notification as a clickable element with a data attribute for the activityId
+                                    echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . $notificationText . '</a>';
+                                }
+                            } else {
+                                echo '<a href="#">No new notifications</a>';
+                            }
+                            ?>
+                            <a href="activity-logs.php" class="view-all">View All</a>
+
+                        </div>
+                    </div>
 
                     <a href="#" class="settings profile">
                         <div class="profile-container" title="settings">
@@ -386,6 +391,7 @@ echo '<a href="#">No new notifications</a>';
         <section id="content">
             <main>
                 <div class="content-container">
+                    <div id="map"></div>
                     <header>
                         <div class="cont-header">
                             <h1 class="tab-name">Reports</h1>
@@ -642,55 +648,55 @@ echo '<a href="#">No new notifications</a>';
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
             <script src="../../src/js/locationTracker.js"></script>
-      
+
             <script>
-        setInterval(function() {
-            // Call a script to check if the user has timed out
-            fetch('../../check_timeout.php')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.timeout) {
-                        alert('You have been logged out due to timeout.');
-                        window.location.href = '../index.php?logout=timeout'; // Redirect to login page
-                    }
+                setInterval(function() {
+                    // Call a script to check if the user has timed out
+                    fetch('../../check_timeout.php')
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.timeout) {
+                                alert('You have been logged out due to timeout.');
+                                window.location.href = '../index.php?logout=timeout'; // Redirect to login page
+                            }
+                        });
+                }, 60000); // Checks every minute, you can adjust the interval
+            </script>
+            <script>
+                $(document).ready(function() {
+                    $('.notification-item').on('click', function(e) {
+                        e.preventDefault();
+                        var activityId = $(this).data('activity-id');
+                        var notificationItem = $(this); // Store the clicked element
+
+                        $.ajax({
+                            type: "POST",
+                            url: "update_single_notification.php", // The URL to the PHP file
+                            data: {
+                                activityId: activityId
+                            },
+                            success: function(response) {
+                                if (response.trim() === "Notification updated successfully") {
+                                    // If the notification is updated successfully, remove the clicked element
+                                    notificationItem.remove();
+
+                                    // Update the notification count
+                                    var countElement = $('#noti_number');
+                                    var count = parseInt(countElement.text()) || 0;
+                                    countElement.text(count > 1 ? count - 1 : '');
+                                } else {
+                                    // Handle error
+                                    console.error("Failed to update notification:", response);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                // Handle AJAX error
+                                console.error("AJAX error:", status, error);
+                            }
+                        });
+                    });
                 });
-        }, 60000); // Checks every minute, you can adjust the interval
-    </script>
-            <script>
-$(document).ready(function() {
-    $('.notification-item').on('click', function(e) {
-        e.preventDefault();
-        var activityId = $(this).data('activity-id');
-        var notificationItem = $(this); // Store the clicked element
-
-        $.ajax({
-            type: "POST",
-            url: "update_single_notification.php", // The URL to the PHP file
-            data: { activityId: activityId },
-            success: function(response) {
-                if (response.trim() === "Notification updated successfully") {
-                    // If the notification is updated successfully, remove the clicked element
-                    notificationItem.remove();
-
-                    // Update the notification count
-                    var countElement = $('#noti_number');
-                    var count = parseInt(countElement.text()) || 0;
-                    countElement.text(count > 1 ? count - 1 : '');
-                } else {
-                    // Handle error
-                    console.error("Failed to update notification:", response);
-                }
-            },
-            error: function(xhr, status, error) {
-                // Handle AJAX error
-                console.error("AJAX error:", status, error);
-            }
-        });
-    });
-});
-
-
-    </script>
+            </script>
 
 
             <script>

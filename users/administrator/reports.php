@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -14,7 +15,7 @@ require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 session_start();
 include_once("../../config/connection.php");
 $conn = connection();
-    
+
 function logActivity($conn, $accountId, $actionDescription, $tabValue)
 {
     $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, NOW(), ?, ?)");
@@ -71,22 +72,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $assetId = $_POST['assetId'];
         $assignedName = $_POST['assignedName'];
         $assignSql = "UPDATE `asset` SET `assignedName`='$assignedName' WHERE `assetId`='$assetId'";
-    
+
         // Perform the query only if $assignSql is not empty
         if (!empty($assignSql) && $conn->query($assignSql) === TRUE) {
             logActivity($conn, $_SESSION['accountId'], "Assigned maintenance personnel $assignedName to asset ID $assetId.", 'Report');
-    
+
             // Fetch the email of the assigned personnel
             $emailQuery = "SELECT email FROM account WHERE CONCAT(firstName, ' ', middleName, ' ', lastName) = ?";
             $stmt = $conn->prepare($emailQuery);
             $stmt->bind_param("s", $assignedName);
             $stmt->execute();
             $result = $stmt->get_result();
-    
+
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 $toEmail = $row['email'];
-    
+
                 // Set up PHPMailer
                 $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
 
@@ -99,16 +100,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     $mail->Password   = 'qvpx bbcm bgmy hcvf'; // SMTP password
                     $mail->SMTPSecure = 'tls';
                     $mail->Port       = 587;
-    
+
                     //Recipients
                     $mail->setFrom('qcu.upkeep@gmail.com', 'UpKeep');
                     $mail->addAddress($toEmail); // Add a recipient
-    
+
                     // Content
                     $mail->isHTML(true); // Set email format to HTML
                     $mail->Subject = 'Task Assignment Notification';
                     $mail->Body    = 'The Admin assigned you to a new task. Please check the system for details.';
-    
+
                     $mail->send();
                     // You can add additional echo or logging here if needed
                 } catch (Exception $e) {
@@ -138,7 +139,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/reports.css" />
         <script src="../../src/js/reports.js"></script>
-        
+
 
 
         <!--JS for the fcking tabs-->
@@ -146,41 +147,41 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             $(document).ready(function() {
                 // this is for staying at the same pill when reloading.
                 let tabLastSelected = sessionStorage.getItem("lastTab");
-                
-                if(!tabLastSelected) {
+
+                if (!tabLastSelected) {
                     // if no last tab was selected, use the pills-manager for default
                     $("#pills-manager").addClass("show active");
                     // $("#pills-profile").removeClass("show active");
                     $(".nav-link[data-bs-target='pills-manager']").addClass("active");
                     // $(".nav-link[data-bs-target='pills-profile']").removeClass("active");
-                    
+
                 } else {
 
                     //* checks the last tab that was selected
-                    switch(tabLastSelected) {
+                    switch (tabLastSelected) {
                         case 'pills-manager':
                             $("#pills-manager").addClass("show active");
                             $(".nav-link[data-bs-target='pills-manager']").addClass("active");
                             $(".nav-link[data-bs-target='pills-profile']").removeClass("active");
-                        break;
+                            break;
                         case 'pills-profile':
                             $("#pills-profile").addClass("show active");
                             $("#pills-manager").removeClass("show active");
                             $(".nav-link[data-bs-target='pills-profile']").addClass("active");
                             $(".nav-link[data-bs-target='pills-manager']").removeClass("active");
-                        break;
+                            break;
                         case 'pills-replace':
                             $("#pills-replace").addClass("show active");
                             $("#pills-manager").removeClass("show active");
                             $(".nav-link[data-bs-target='pills-replace']").addClass("active");
                             $(".nav-link[data-bs-target='pills-manager']").removeClass("active");
-                        break;
+                            break;
                         case 'pills-repair':
                             $("#pills-repair").addClass("show active");
                             $("#pills-manager").removeClass("show active");
                             $(".nav-link[data-bs-target='pills-repair']").addClass("active");
                             $(".nav-link[data-bs-target='pills-manager']").removeClass("active");
-                        break;
+                            break;
                     }
                 }
 
@@ -189,7 +190,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                 $(".nav-link").click(function() {
                     const targetId = $(this).data("bs-target");
-                    
+
                     sessionStorage.setItem("lastTab", targetId); //* sets the targetId to the sessionStorage lastTab item
 
                     $(".tab-pane").removeClass("show active");
@@ -347,12 +348,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="cont-header">
                             <h1 class="tab-name">Reports</h1>
                             <div class="tbl-filter">
-                            <select id="filter-criteria">
-                                <option value="all">All</option> <!-- Added "All" option -->
-                                <option value="reportId">Tracking ID</option>
-                                <option value="date">Date</option>
-                                <option value="category">Category</option>
-                                <option value="location">Location</option>
+                                <select id="filter-criteria">
+                                    <option value="all">All</option> <!-- Added "All" option -->
+                                    <option value="reportId">Tracking ID</option>
+                                    <option value="date">Date</option>
+                                    <option value="category">Category</option>
+                                    <option value="location">Location</option>
                                 </select>
 
                                 <!-- Search Box -->
@@ -575,6 +576,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <section>
             <!--Modal sections-->
+<<<<<<< Updated upstream
             <!--Modal for table 1-->
             <div class="modal-parent">
                 <div class="modal modal-xl fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -953,6 +955,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
             </form> -->
+=======
+>>>>>>> Stashed changes
 
             <!--Assign Modal for table 4-->
             <div class="modal-parent">
@@ -1034,14 +1038,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 echo '<option value="No Maintenance Personnel Found">';
                                             }
                                             ?>
-                                         </select>
+                                        </select>
                                     </div>
                                 </form>
 
-                                    <div class="col-4" style="display:none">
-                                        <label for="assignedBy" class="form-label">Assigned By:</label>
-                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy" readonly />
-                                    </div>
+                                <div class="col-4" style="display:none">
+                                    <label for="assignedBy" class="form-label">Assigned By:</label>
+                                    <input type="text" class="form-control" id="assignedBy" name="assignedBy" readonly />
+                                </div>
                             </div>
                             <div class="footer">
                                 <button type="button" class="btn add-modal-btn" onclick="assignPersonnel()">
@@ -1053,6 +1057,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
 
+<<<<<<< Updated upstream
             <!-- Edit for table 4
             <div class="modal fade" id="staticBackdrop5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -1068,6 +1073,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
             </form> -->
+=======
+
+>>>>>>> Stashed changes
         </section>
 
         <!-- PROFILE MODALS -->
@@ -1101,6 +1109,38 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
         <script>
+<<<<<<< Updated upstream
+=======
+            //PARA MAGDIRECT KA SA PAGE 
+            function redirectToPage(building, floor, assetId) {
+                var newLocation = '';
+                if (building === 'New Academic' && floor === '1F') {
+                    newLocation = "../../users/building/NEB/NEWBF1.php";
+                } else if (building === 'Yellow' && floor === '1F') {
+                    newLocation = "../../users/building/OLB/OLBF1.php";
+                } else if (building === 'Korphil' && floor === '1F') {
+                    newLocation = "../../users/building/KOB/KOBF1.php";
+                } else if (building === 'Bautista' && floor === 'Basement') {
+                    newLocation = "../../users/building/BAB/BABF1.php";
+                } else if (building === 'Belmonte' && floor === '1F') {
+                    newLocation = "../../users/building/BEB/BEBF1.php";
+                }
+
+                // Append the assetId to the URL as a query parameter
+                window.location.href = newLocation + '?assetId=' + assetId;
+            }
+
+            $(document).on('click', 'table tr', function() {
+                var assetId = $(this).find('td:eq(0)').text(); // Assuming first TD is the assetId
+                var building = $(this).find('td:eq(3)').text().split(' / ')[0]; // Adjust the index as needed
+                var floor = $(this).find('td:eq(3)').text().split(' / ')[1]; // Adjust the index as needed
+                redirectToPage(building, floor, assetId);
+            });
+        </script>
+
+
+        <script>
+>>>>>>> Stashed changes
             $(document).ready(function() {
 
                 // Function to populate the modal fields
@@ -1220,30 +1260,32 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         </script>
 
-<script>
-        $(document).ready(function() {
-            function filterTable() {
-                var searchQuery = $('#search-box').val().toLowerCase();
-                var columnIndex = parseInt($('#search-filter').val());
+        <script>
+            $(document).ready(function() {
+                function filterTable() {
+                    var searchQuery = $('#search-box').val().toLowerCase();
+                    var columnIndex = parseInt($('#search-filter').val());
 
-                $('#data-table tbody tr').each(function() {
-                    var cellText = $(this).find('td').eq(columnIndex).text().toLowerCase();
-                    if(cellText.indexOf(searchQuery) !== -1) {
-                        $(this).show();
-                    } else {
-                        $(this).hide();
-                    }
+                    $('#data-table tbody tr').each(function() {
+                        var cellText = $(this).find('td').eq(columnIndex).text().toLowerCase();
+                        if (cellText.indexOf(searchQuery) !== -1) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                }
+
+                // Event listener for search input
+                $('#search-box').on('input', filterTable);
+
+                // Event listener for filter dropdown change
+                $('#search-filter').change(function() {
+                    $('#search-box').val(''); // Clear the search input
+                    filterTable(); // Filter table with new criteria
                 });
-            }
-
-            // Event listener for search input
-            $('#search-box').on('input', filterTable);
-
-            // Event listener for filter dropdown change
-            $('#search-filter').change(function() {
-                $('#search-box').val(''); // Clear the search input
-                filterTable(); // Filter table with new criteria
             });
+<<<<<<< Updated upstream
         });
     </script>
  <script>
@@ -1255,49 +1297,62 @@ $(document).ready(function() {
         table = document.getElementById("myTabContent"); // Use the ID of your table container
         tr = table.getElementsByTagName("tr");
         var selectedFilter = document.getElementById("filter-criteria").value;
+=======
+        </script>
 
-        for (i = 1; i < tr.length; i++) { // Start with 1 to avoid the header
-            td = tr[i].getElementsByTagName("td");
-            if (td.length > 0) {
-                var searchText = "";
-                if (selectedFilter === "all") {
-                    // Concatenate all the text content from the cells for "All" search
-                    for (var j = 0; j < td.length; j++) {
-                        searchText += td[j].textContent.toUpperCase();
+        <script>
+            $(document).ready(function() {
+                function searchTable() {
+                    var input, filter, table, tr, td, i;
+                    input = document.getElementById("search-box");
+                    filter = input.value.toUpperCase();
+                    table = document.getElementById("myTabContent"); // Use the ID of your table container
+                    tr = table.getElementsByTagName("tr");
+                    var selectedFilter = document.getElementById("filter-criteria").value;
+>>>>>>> Stashed changes
+
+                    for (i = 1; i < tr.length; i++) { // Start with 1 to avoid the header
+                        td = tr[i].getElementsByTagName("td");
+                        if (td.length > 0) {
+                            var searchText = "";
+                            if (selectedFilter === "all") {
+                                // Concatenate all the text content from the cells for "All" search
+                                for (var j = 0; j < td.length; j++) {
+                                    searchText += td[j].textContent.toUpperCase();
+                                }
+                            } else {
+                                // Find the index for the selected filter
+                                var columnIndex = getColumnIndex(selectedFilter);
+                                searchText = td[columnIndex].textContent.toUpperCase();
+                            }
+
+                            // Show or hide the row based on whether the searchText contains the filter
+                            if (searchText.indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
                     }
-                } else {
-                    // Find the index for the selected filter
-                    var columnIndex = getColumnIndex(selectedFilter);
-                    searchText = td[columnIndex].textContent.toUpperCase();
                 }
-                
-                // Show or hide the row based on whether the searchText contains the filter
-                if (searchText.indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
+
+                // Utility function to get the column index based on the filter selected
+                function getColumnIndex(filter) {
+                    // Adjust these indices to match your table's structure
+                    var columns = {
+                        'reportId': 0,
+                        'date': 1,
+                        'category': 2,
+                        'location': 3, // Assuming 'location' is a single column that includes building/floor/room
+                        'status': 4
+                    };
+                    return columns[filter] || 0; // Default to the first column if the filter is not found
                 }
-            }
-        }
-    }
 
-    // Utility function to get the column index based on the filter selected
-    function getColumnIndex(filter) {
-        // Adjust these indices to match your table's structure
-        var columns = {
-            'reportId': 0,
-            'date': 1,
-            'category': 2,
-            'location': 3, // Assuming 'location' is a single column that includes building/floor/room
-            'status': 4
-        };
-        return columns[filter] || 0; // Default to the first column if the filter is not found
-    }
-
-    // Attach the search function to the keyup event of the search box
-    $("#search-box").keyup(searchTable);
-});
-</script>
+                // Attach the search function to the keyup event of the search box
+                $("#search-box").keyup(searchTable);
+            });
+        </script>
 
     </body>
 
