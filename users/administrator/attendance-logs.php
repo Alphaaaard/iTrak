@@ -342,7 +342,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 if ($attendanceResult->num_rows > 0) {
 
                                     // Table header
-                                    echo '<div class="table-whole-content1">';
+                                    echo '<div class="table-whole-content1" id="exportContent' . $row['accountId'] . '">';
+                                    echo '<p class="h5-like visually-hidden" id="nameHeader' . $row['accountId'] . '">' . $row['firstname'] . ' ' . $row['lastname'] . '</p>';
                                     echo '<div class="table-header1">';
                                     echo '<table>';
                                     echo '<tr>';
@@ -417,7 +418,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 // Close the attendance log statement
                                 $attendanceStmt->close();
 
-                                echo '<button type="button" class="btn export-btn" onclick="exportTableToPDF(\'attendanceTable' . $row['accountId'] . '\', \'' . $row['firstname'] . '_' . $row['lastname'] . '.pdf\')">EXPORT PDF</button>';
+                                echo '<button type="button" class="btn export-btn" onclick="exportTableToPDF(\'exportContent' . $row['accountId'] . '\', \'' . $row['firstname'] . '_' . $row['lastname'] . '.pdf\', \'' . addslashes($row['firstname']) . ' ' . addslashes($row['lastname']) . '\')">EXPORT PDF</button>';
+
 
                                 echo '</div>';
                                 echo '</div>';
@@ -520,70 +522,83 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             </script>
 
 
-        <script>
-            function exportTableToPDF(tableId, filename) {
-                const table = document.getElementById(tableId);
+<script>
+function exportTableToPDF(exportContentId, filename, name) {
+    const exportContent = document.getElementById(exportContentId);
 
-                // Check if the table has data
-                if (table.rows.length === 0) {
-                    Swal.fire({
-                        title: 'Failed!',
-                        text: 'No data available to export.',
-                        icon: 'error',
-                        confirmButtonText: 'OK'
-                    });
-                    return; // Exit the function if no data is found
-                }
+    // Create an element to hold the name
+    const nameElement = document.createElement('div');
+    nameElement.textContent = name;
+    nameElement.style.position = 'absolute'; // Position it so it doesn't affect layout
+    nameElement.style.top = '0'; // You might need to adjust this
+    nameElement.style.left = '0'; // You might need to adjust this
+    document.body.appendChild(nameElement); // Append it to the body
 
-                Swal.fire({
-                    title: 'Preparing your PDF...',
-                    text: 'Please wait.',
-                    icon: 'info',
-                    showConfirmButton: false,
-                    allowOutsideClick: false,
-                    willOpen: () => {
-                        Swal.showLoading();
-                    }
-                });
+    // Check if the export content exists
+    if (!exportContent) {
+        Swal.fire({
+            title: 'Failed!',
+            text: 'No data available to export.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+        nameElement.remove(); // Clean up the name element
+        return; // Exit the function if no content is found
+    }
 
-                html2canvas(table).then(canvas => {
-                    // Necessary setting options
-                    let imgWidth = 208;
-                    let imgHeight = canvas.height * imgWidth / canvas.width;
+    Swal.fire({
+        title: 'Preparing your PDF...',
+        text: 'Please wait...',
+        icon: 'info',
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        willOpen: () => {
+            Swal.showLoading();
+        }
+    });
 
-                    const imgData = canvas.toDataURL('image/png');
-                    const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
-                    let position = 0;
+    html2canvas(exportContent, {
+        onclone: function(clonedDoc) {
+            // Append the name to the cloned document so it gets included in the canvas
+            const clonedContent = clonedDoc.getElementById(exportContentId);
+            clonedContent.appendChild(nameElement);
+        },
+        useCORS: true // This is important if you have images from other domains
+    }).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+        pdf.addImage(imgData, 'PNG', 0, 0);
+        pdf.save(filename); // Save the PDF
 
-                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                    pdf.save(filename); // Save the PDF with the specified filename
-
-                    // Close the loading alert and show success message
-                    Swal.close();
-                    Swal.fire({
-                        title: 'Done!',
-                        text: 'Your PDF has been downloaded.',
-                        icon: 'success',
-                        timer: 1000,
-            showConfirmButton: false,
-          }).then((result) => {
-
+        Swal.close();
+        Swal.fire({
+            title: 'Done!',
+            text: 'Your PDF has been downloaded.',
+            icon: 'success',
+            timer: 1000,
+            showConfirmButton: false
+        }).then((result) => {
             if (result.dismiss === Swal.DismissReason.timer) {
-              window.location.reload();
+                window.location.reload();
             }
-                    });
-                }).catch(error => {
-                    // Handle errors here
-                    Swal.fire({
-                        title: 'Error!',
-                        text: 'There was a problem generating the PDF.',
-                        icon: 'error',
-                        confirmButtonText: 'OK'
-                    });
-                    console.error('Error generating PDF: ', error);
-                });
-            }
-        </script>
+        });
+    }).catch(error => {
+        Swal.fire({
+            title: 'Error!',
+            text: 'There was a problem generating the PDF.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+        console.error('Error generating PDF: ', error);
+    }).finally(() => {
+        // Clean up the name element after PDF generation
+        nameElement.remove();
+    });
+}
+</script>
+
+
+
 
 
 
