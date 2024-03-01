@@ -1035,7 +1035,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                     <!--Edit for table 1-->
                     <div class="map-alert">
-<<<<<<< Updated upstream
                         <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
@@ -1045,17 +1044,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             <button type="submit" class="btn add-modal-btn" name="edit">Yes</button>
                                             <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
                                         </div>
-=======
-                    <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-footer">
-                                    Are you sure you want to save changes?
-                                    <div class="modal-popups">
-                                        <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        <button type="submit" class="btn add-modal-btn" name="edit">Yes</button>
-
->>>>>>> Stashed changes
                                     </div>
                                 </div>
                             </div>
@@ -1191,10 +1179,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-footer">
-                                    Are you sure you want to save changes?
-                                    <div class="modal-popups">
-                                        <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        <button type="submit" class="btn add-modal-btn" name="edit2">Yes</button>
+                                <p>Are you sure you want to save changes?</p>
+                                        <div class="modal-popups">
+                                            <button type="submit" class="btn add-modal-btn" name="edit2">Yes</button>
+                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
                                     </div>
                                 </div>
                             </div>
@@ -1329,10 +1317,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-footer">
-                                    Are you sure you want to save changes?
-                                    <div class="modal-popups">
-                                        <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        <button type="submit" class="btn add-modal-btn" name="edit3">Yes</button>
+                                <p>Are you sure you want to save changes?</p>
+                                        <div class="modal-popups">
+                                            <button type="submit" class="btn add-modal-btn" name="edit3">Yes</button>
+                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
                                     </div>
                                 </div>
                             </div>
@@ -1469,10 +1457,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-footer">
-                                    Are you sure you want to save changes?
-                                    <div class="modal-popups">
-                                        <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        <button type="submit" class="btn add-modal-btn" name="edit4">Yes</button>
+                                <p>Are you sure you want to save changes?</p>
+                                        <div class="modal-popups">
+                                            <button type="submit" class="btn add-modal-btn" name="edit4">Yes</button>
+                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
                                     </div>
                                 </div>
                             </div>
@@ -1607,10 +1595,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-footer">
-                                    Are you sure you want to save changes?
-                                    <div class="modal-popups">
-                                        <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        <button type="submit" class="btn add-modal-btn" name="edit5">Yes</button>
+                                <p>Are you sure you want to save changes?</p>
+                                        <div class="modal-popups">
+                                            <button type="submit" class="btn add-modal-btn" name="edit5">Yes</button>
+                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
                                     </div>
                                 </div>
                             </div>
@@ -1745,10 +1733,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-footer">
-                                    Are you sure you want to save changes?
-                                    <div class="modal-popups">
-                                        <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        <button type="submit" class="btn add-modal-btn" name="edit6">Yes</button>
+                                <p>Are you sure you want to save changes?</p>
+                                        <div class="modal-popups">
+                                            <button type="submit" class="btn add-modal-btn" name="edit6">Yes</button>
+                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
                                     </div>
                                 </div>
                             </div>
@@ -1882,10 +1870,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-footer">
-                                    Are you sure you want to save changes?
-                                    <div class="modal-popups">
-                                        <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        <button type="submit" class="btn add-modal-btn" name="edit7">Yes</button>
+                                <p>Are you sure you want to save changes?</p>
+                                        <div class="modal-popups">
+                                            <button type="submit" class="btn add-modal-btn" name="edit7">Yes</button>
+                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
                                     </div>
                                 </div>
                             </div>
@@ -2020,10 +2008,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-footer">
-                                    Are you sure you want to save changes?
-                                    <div class="modal-popups">
-                                        <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        <button type="submit" class="btn add-modal-btn" name="edit8">Yes</button>
+                                <p>Are you sure you want to save changes?</p>
+                                        <div class="modal-popups">
+                                            <button type="submit" class="btn add-modal-btn" name="edit8">Yes</button>
+                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
                                     </div>
                                 </div>
                             </div>
@@ -2158,10 +2146,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-footer">
-                                    Are you sure you want to save changes?
-                                    <div class="modal-popups">
-                                        <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        <button type="submit" class="btn add-modal-btn" name="edit9">Yes</button>
+                                <p>Are you sure you want to save changes?</p>
+                                        <div class="modal-popups">
+                                            <button type="submit" class="btn add-modal-btn" name="edit9">Yes</button>
+                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
                                     </div>
                                 </div>
                             </div>
@@ -2297,10 +2285,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-footer">
-                                    Are you sure you want to save changes?
-                                    <div class="modal-popups">
-                                        <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        <button type="submit" class="btn add-modal-btn" name="edit10">Yes</button>
+                                <p>Are you sure you want to save changes?</p>
+                                        <div class="modal-popups">
+                                            <button type="submit" class="btn add-modal-btn" name="edit10">Yes</button>
+                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
                                     </div>
                                 </div>
                             </div>
@@ -2435,10 +2423,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-footer">
-                                    Are you sure you want to save changes?
-                                    <div class="modal-popups">
-                                        <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        <button type="submit" class="btn add-modal-btn" name="edit11">Yes</button>
+                                <p>Are you sure you want to save changes?</p>
+                                        <div class="modal-popups">
+                                            <button type="submit" class="btn add-modal-btn" name="edit11">Yes</button>
+                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
                                     </div>
                                 </div>
                             </div>
@@ -2572,10 +2560,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-footer">
-                                    Are you sure you want to save changes?
-                                    <div class="modal-popups">
-                                        <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        <button type="submit" class="btn add-modal-btn" name="edit12">Yes</button>
+                                <p>Are you sure you want to save changes?</p>
+                                        <div class="modal-popups">
+                                            <button type="submit" class="btn add-modal-btn" name="edit12">Yes</button>
+                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
                                     </div>
                                 </div>
                             </div>
@@ -2585,13 +2573,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </form>
 
 
-<<<<<<< Updated upstream
-                    <!-- Modal structure for id 898-->
-                    <div class='modal fade' id='imageModal898' tabindex='-1' aria-labelledby='imageModalLabel898' aria-hidden='true'>
-=======
                      <!-- Modal structure for id 6866-->
                      <div class='modal fade' id='imageModal6866' tabindex='-1' aria-labelledby='imageModalLabel6866' aria-hidden='true'>
->>>>>>> Stashed changes
                         <div class='modal-dialog modal-xl modal-dialog-centered'>
                             <div class='modal-content'>
                                 <!-- Modal header -->
@@ -2715,10 +2698,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-footer">
-                                    Are you sure you want to save changes?
-                                    <div class="modal-popups">
-                                        <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        <button type="submit" class="btn add-modal-btn" name="edit6866">Yes</button>
+                                <p>Are you sure you want to save changes?</p>
+                                        <div class="modal-popups">
+                                            <button type="submit" class="btn add-modal-btn" name="edit6866">Yes</button>
+                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
                                     </div>
                                 </div>
                             </div>
