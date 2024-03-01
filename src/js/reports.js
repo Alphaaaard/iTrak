@@ -1,5 +1,4 @@
 function confirmAlert(reportType) {
-
     Swal.fire({
         icon: 'info',
         text: 'Do you want to save changes?',
@@ -9,6 +8,7 @@ function confirmAlert(reportType) {
     }).then((result) => {
 
         if(result.isConfirmed) {
+
             let formData;
 
             switch(reportType) {
@@ -58,6 +58,15 @@ function confirmAlert(reportType) {
 }
 
 function assignPersonnel() {
+
+     //checks if there is a name assigned
+     let assignedName = $(".assignedName").val(); 
+
+     if(!assignedName) {
+        showErrorAlert("Please assign a maintenance personnel");
+         return;
+     }
+
     Swal.fire({
         icon: 'info',
         title: 'Assigned this personnel?',
@@ -67,6 +76,7 @@ function assignPersonnel() {
     }).then((result)=>{
 
         if(result.isConfirmed) {
+
             let formData = new FormData(document.querySelector('#assignPersonnelForm'));
 
             $.ajax({
@@ -78,7 +88,7 @@ function assignPersonnel() {
                 success: function(res) {
 
                     Swal.fire({
-                        title: "Maintenance Personnel has been",
+                        title: "Maintenance Personnel has been assigned",
                         icon: "success",
                         timer: 1000, //timer (in ms) for the success alertbox before closing 
                         showConfirmButton: false,

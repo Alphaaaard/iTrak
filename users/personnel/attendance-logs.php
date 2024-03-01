@@ -5,7 +5,7 @@ $conn = connection();
 date_default_timezone_set('Asia/Manila');
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
     // For personnel page, check if userLevel is 3
-    if($_SESSION['userLevel'] != 3) {
+    if ($_SESSION['userLevel'] != 3) {
         // If not personnel, redirect to an error page or login
         header("Location:error.php");
         exit;
@@ -16,36 +16,36 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $loggedInUserLastName = $_SESSION['lastName']; //kung ano ung naka declare dito eto lang ung magiging data 
     // Concatenate first name and last name for the action field check
     $loggedInFullName = $loggedInUserFirstName . " " . $loggedInUsermiddleName . " " . $loggedInUserLastName; //kung ano ung naka declare dito eto lang ung magiging data 
-    
+
     // Adjust the SQL to check the 'action' field for the logged-in user's name
     $sqlReport = "SELECT ac.*, a.firstName, a.middleName, a.lastName
     FROM activitylogs AS ac
     LEFT JOIN account AS a ON ac.accountID = a.accountID
     WHERE ac.tab='Report' AND ac.action LIKE ?
     ORDER BY ac.date DESC";
-    
+
     // Prepare the SQL statement
     $stmt = $conn->prepare($sqlReport);
-    
+
     // Create a wildcard search term for the name
     $searchTerm = "%" . $loggedInFullName . "%";
-    
+
     // Bind the parameter and execute
     $stmt->bind_param("s", $searchTerm);
     $stmt->execute();
     $resultReport = $stmt->get_result();
-    
-    
+
+
     // for notif below
     // Update the SQL to join with the account and asset tables to get the admin's name and asset information
-    $loggedInUserFirstName = $_SESSION['firstName']; 
+    $loggedInUserFirstName = $_SESSION['firstName'];
     $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
     $loggedInUserLastName = $_SESSION['lastName'];
-    
-    $loggedInFullName = $loggedInUserFirstName . ' '.$loggedInUserMiddleName .' '. $loggedInUserLastName;
-    
-    
-    
+
+    $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
+
+
+
     // Adjust the SQL to fetch only the notifications for the logged-in user
     $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName
                   FROM activitylogs AS al
@@ -54,28 +54,28 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                   AND al.seen = '0' AND al.action LIKE ?
                   ORDER BY al.date DESC 
                   LIMIT 1000";
-    
+
     // Prepare the SQL statement
     $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
-    
+
     // Create a wildcard search term for the logged-in user's full name
     $searchTerm = "%Assigned maintenance personnel " . $loggedInFullName . "%";
-    
+
     // Bind the parameter and execute
     $stmtLatestLogs->bind_param("s", $searchTerm);
     $stmtLatestLogs->execute();
     $resultLatestLogs = $stmtLatestLogs->get_result();
-    
+
     $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '3'";
     $result = $conn->query($unseenCountQuery);
     $unseenCountRow = $result->fetch_assoc();
     $unseenCount = $unseenCountRow['unseenCount'];
-    
-    
-  
-    
-    
-    
+
+
+
+
+
+
     if ($conn->connect_error) {
         die('Connect Error (' . $conn->connect_errno . ') ' . $conn->connect_error);
     }
@@ -120,7 +120,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     if (!$stmt->execute()) {
         die('Error executing the query: ' . $stmt->error);
     }
-   
+
     $result = $stmt->get_result();
 
     $stmt->close();
@@ -128,21 +128,18 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     if (isset($_SESSION['accountId'])) {
         $accountId = $_SESSION['accountId'];
         $todayDate = date("Y-m-d");
-    
+
         // Check if there's a timeout value for this user for today
         $timeoutQuery = "SELECT timeout FROM attendancelogs WHERE accountId = '$accountId' AND date = '$todayDate'";
         $timeoutResult = $conn->query($timeoutQuery);
         $timeoutRow = $timeoutResult->fetch_assoc();
-    
+
         if ($timeoutRow && $timeoutRow['timeout'] !== null) {
             // User has a timeout value, force logout
             session_destroy(); // Destroy all session data
             header("Location: ../../index.php?logout=timeout"); // Redirect to the login page with a timeout flag
             exit;
         }
-    
-    
-    
     }
 
 
@@ -167,10 +164,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="../../src/css/attendance-logs.css">
         <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> -->
+        <style>
+            #map {
+                display: none;
+            }
+        </style>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
 
 
-        
+
     </head>
 
     <body>
@@ -184,81 +187,81 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
                 <div class="content-nav">
                     <div class="notification-dropdown">
-                  
-
-
-                    <a href="#" class="notification" id="notification-button">
 
 
 
+                        <a href="#" class="notification" id="notification-button">
 
 
 
-<i class="fa fa-bell" aria-hidden="true"></i>
-<span id="noti_number"><?php echo $unseenCount; ?></span>
-
-    </td>
-    </tr>
-    </table>
-    <script type="text/javascript">
-        function loadDoc() {
-
-
-            setInterval(function() {
-
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("noti_number").innerHTML = this.responseText;
-                    }
-                };
-                xhttp.open("GET", "update_single_notification.php", true);
-                xhttp.send();
-
-            }, 10);
-
-
-        }
-        loadDoc();
-    </script>
-
-</a>
 
 
 
-<div class="dropdown-content" id="notification-dropdown-content">
-    <h6 class="dropdown-header">Alerts Center</h6>
-    <!-- PHP code to display notifications will go here -->
-    <?php
-if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
-// Loop through each notification
-while ($row = $resultLatestLogs->fetch_assoc()) {
-$adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
-$actionText = $row["action"];
-$assetId = 'unknown'; // Default value
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+                            <span id="noti_number"><?php echo $unseenCount; ?></span>
 
-// Extract personnel name and asset ID from action text
-if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
-$assignedName = $matches[1];
-$assetId = $matches[2];
-}
-
-// Generate the notification text
-// Generate the notification text including the name of the assigned personnel
-$notificationText = "Admin $adminName assigned $assignedName to asset ID " . htmlspecialchars($assetId);
+                            </td>
+                            </tr>
+                            </table>
+                            <script type="text/javascript">
+                                function loadDoc() {
 
 
-// Output the notification as a clickable element with a data attribute for the activityId
-echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . $notificationText . '</a>';
-}
-} else {
-echo '<a href="#">No new notifications</a>';
-}
-?>
-<a href="activity-logs.php" class="view-all">View All</a>
+                                    setInterval(function() {
 
-</div>
-</div>
+                                        var xhttp = new XMLHttpRequest();
+                                        xhttp.onreadystatechange = function() {
+                                            if (this.readyState == 4 && this.status == 200) {
+                                                document.getElementById("noti_number").innerHTML = this.responseText;
+                                            }
+                                        };
+                                        xhttp.open("GET", "update_single_notification.php", true);
+                                        xhttp.send();
+
+                                    }, 10);
+
+
+                                }
+                                loadDoc();
+                            </script>
+
+                        </a>
+
+
+
+                        <div class="dropdown-content" id="notification-dropdown-content">
+                            <h6 class="dropdown-header">Alerts Center</h6>
+                            <!-- PHP code to display notifications will go here -->
+                            <?php
+                            if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
+                                // Loop through each notification
+                                while ($row = $resultLatestLogs->fetch_assoc()) {
+                                    $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+                                    $actionText = $row["action"];
+                                    $assetId = 'unknown'; // Default value
+
+                                    // Extract personnel name and asset ID from action text
+                                    if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
+                                        $assignedName = $matches[1];
+                                        $assetId = $matches[2];
+                                    }
+
+                                    // Generate the notification text
+                                    // Generate the notification text including the name of the assigned personnel
+                                    $notificationText = "Admin $adminName assigned $assignedName to asset ID " . htmlspecialchars($assetId);
+
+
+                                    // Output the notification as a clickable element with a data attribute for the activityId
+                                    echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . $notificationText . '</a>';
+                                }
+                            } else {
+                                echo '<a href="#">No new notifications</a>';
+                            }
+                            ?>
+                            <a href="activity-logs.php" class="view-all">View All</a>
+
+                        </div>
+                    </div>
 
 
 
@@ -372,6 +375,8 @@ echo '<a href="#">No new notifications</a>';
             <!-- MAIN -->
             <main>
                 <div class="content-container">
+                    <div id="map"></div>
+
                     <header>
                         <div class="cont-header">
                             <h1 class="tab-name">Attendance</h1>
@@ -428,33 +433,33 @@ echo '<a href="#">No new notifications</a>';
 
                                         date_default_timezone_set('Asia/Manila'); // Set the correct time zone, e.g., 'America/New_York'
 
-if (isset($row['timeIn'])) {
-    $timeIn = strtotime($row['timeIn']);
-    $currentTime = time(); // Current timestamp
+                                        if (isset($row['timeIn'])) {
+                                            $timeIn = strtotime($row['timeIn']);
+                                            $currentTime = time(); // Current timestamp
 
-    if (isset($row['timeOut'])) {
-        $timeOut = strtotime($row['timeOut']);
-        $timeDifference = $timeOut - $timeIn;
-        $hours = floor($timeDifference / 3600);
-        $totalHoursFormatted = $hours;
-        $timeOutFormatted = date('h:i A', $timeOut);
-    } else {
-        $timeSinceIn = $currentTime - $timeIn;
+                                            if (isset($row['timeOut'])) {
+                                                $timeOut = strtotime($row['timeOut']);
+                                                $timeDifference = $timeOut - $timeIn;
+                                                $hours = floor($timeDifference / 3600);
+                                                $totalHoursFormatted = $hours;
+                                                $timeOutFormatted = date('h:i A', $timeOut);
+                                            } else {
+                                                $timeSinceIn = $currentTime - $timeIn;
 
-        $currentHourAndMinute = date('H:i'); // Get the current hour and minute
+                                                $currentHourAndMinute = date('H:i'); // Get the current hour and minute
 
-        if ($timeSinceIn > (8 * 3600) || $currentHourAndMinute == '00:00') {
-            $totalHoursFormatted = "4";
-            $timeOutFormatted = 'Not Timed Out';
-        } else {
-            $totalHoursFormatted = ''; // Set totalHours to empty if 8 hours have NOT been exceeded and it's not midnight
-            $timeOutFormatted = ''; // Set timeOut to empty if 8 hours have NOT been exceeded and it's not midnight
-        }
-    }
-} else {
-    $totalHoursFormatted = "No TimeIn Recorded"; // In case the user hasn't timed in yet
-    $timeOutFormatted = ''; // Default value for timeOut in this case
-}
+                                                if ($timeSinceIn > (8 * 3600) || $currentHourAndMinute == '00:00') {
+                                                    $totalHoursFormatted = "4";
+                                                    $timeOutFormatted = 'Not Timed Out';
+                                                } else {
+                                                    $totalHoursFormatted = ''; // Set totalHours to empty if 8 hours have NOT been exceeded and it's not midnight
+                                                    $timeOutFormatted = ''; // Set timeOut to empty if 8 hours have NOT been exceeded and it's not midnight
+                                                }
+                                            }
+                                        } else {
+                                            $totalHoursFormatted = "No TimeIn Recorded"; // In case the user hasn't timed in yet
+                                            $timeOutFormatted = ''; // Default value for timeOut in this case
+                                        }
 
                                         echo '<tr data-day="' . htmlspecialchars($dayOfWeek) . '">';
                                         echo '<td>' . htmlspecialchars($dayOfWeek) . '</td>';
@@ -510,40 +515,40 @@ if (isset($row['timeIn'])) {
         <script src="path/to/bootstrap.min.js"></script>
 
         <script>
-$(document).ready(function() {
-    $('.notification-item').on('click', function(e) {
-        e.preventDefault();
-        var activityId = $(this).data('activity-id');
-        var notificationItem = $(this); // Store the clicked element
+            $(document).ready(function() {
+                $('.notification-item').on('click', function(e) {
+                    e.preventDefault();
+                    var activityId = $(this).data('activity-id');
+                    var notificationItem = $(this); // Store the clicked element
 
-        $.ajax({
-            type: "POST",
-            url: "update_single_notification.php", // The URL to the PHP file
-            data: { activityId: activityId },
-            success: function(response) {
-                if (response.trim() === "Notification updated successfully") {
-                    // If the notification is updated successfully, remove the clicked element
-                    notificationItem.remove();
+                    $.ajax({
+                        type: "POST",
+                        url: "update_single_notification.php", // The URL to the PHP file
+                        data: {
+                            activityId: activityId
+                        },
+                        success: function(response) {
+                            if (response.trim() === "Notification updated successfully") {
+                                // If the notification is updated successfully, remove the clicked element
+                                notificationItem.remove();
 
-                    // Update the notification count
-                    var countElement = $('#noti_number');
-                    var count = parseInt(countElement.text()) || 0;
-                    countElement.text(count > 1 ? count - 1 : '');
-                } else {
-                    // Handle error
-                    console.error("Failed to update notification:", response);
-                }
-            },
-            error: function(xhr, status, error) {
-                // Handle AJAX error
-                console.error("AJAX error:", status, error);
-            }
-        });
-    });
-});
-
-
-    </script>
+                                // Update the notification count
+                                var countElement = $('#noti_number');
+                                var count = parseInt(countElement.text()) || 0;
+                                countElement.text(count > 1 ? count - 1 : '');
+                            } else {
+                                // Handle error
+                                console.error("Failed to update notification:", response);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle AJAX error
+                            console.error("AJAX error:", status, error);
+                        }
+                    });
+                });
+            });
+        </script>
 
         <script>
             function filterAttendanceData(accountId) {
@@ -571,21 +576,22 @@ $(document).ready(function() {
                     lastVisibleRow.style.borderBottom = '1px solid black';
                 }
             }
-        </script><script src="../../src/js/locationTracker.js"></script>
+        </script>
+        <script src="../../src/js/locationTracker.js"></script>
         <script>
-        setInterval(function() {
-            // Call a script to check if the user has timed out
-            fetch('../../check_timeout.php')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.timeout) {
-                        alert('You have been logged out due to timeout.');
-                        window.location.href = '../index.php?logout=timeout'; // Redirect to login page
-                    }
-                });
-        }, 60000); // Checks every minute, you can adjust the interval
-    </script>
-       
+            setInterval(function() {
+                // Call a script to check if the user has timed out
+                fetch('../../check_timeout.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.timeout) {
+                            alert('You have been logged out due to timeout.');
+                            window.location.href = '../index.php?logout=timeout'; // Redirect to login page
+                        }
+                    });
+            }, 60000); // Checks every minute, you can adjust the interval
+        </script>
+
         <script>
             function filterAttendanceData(accountId) {
                 var selectedValue = document.getElementById('filterDate').value;

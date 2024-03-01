@@ -4,14 +4,14 @@ include_once("../../config/connection.php");
 $conn = connection();
 // include_once 'get_current_user_data.php';
 date_default_timezone_set('Asia/Manila');
-if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['middleName'])&& isset($_SESSION['role']) && isset($_SESSION['lastName']) && isset($_SESSION['userLevel'])) {
-  
-        // For personnel page, check if userLevel is 3
-        if($_SESSION['userLevel'] != 3) {
-            // If not personnel, redirect to an error page or login
-            header("Location:error.php");
-            exit;
-        }
+if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['middleName']) && isset($_SESSION['role']) && isset($_SESSION['lastName']) && isset($_SESSION['userLevel'])) {
+
+    // For personnel page, check if userLevel is 3
+    if ($_SESSION['userLevel'] != 3) {
+        // If not personnel, redirect to an error page or login
+        header("Location:error.php");
+        exit;
+    }
 
     function logActivity($conn, $accountId, $actionDescription, $tabValue)
 
@@ -26,21 +26,18 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     if (isset($_SESSION['accountId'])) {
         $accountId = $_SESSION['accountId'];
         $todayDate = date("Y-m-d");
-    
+
         // Check if there's a timeout value for this user for today
         $timeoutQuery = "SELECT timeout FROM attendancelogs WHERE accountId = '$accountId' AND date = '$todayDate'";
         $timeoutResult = $conn->query($timeoutQuery);
         $timeoutRow = $timeoutResult->fetch_assoc();
-    
+
         if ($timeoutRow && $timeoutRow['timeout'] !== null) {
             // User has a timeout value, force logout
             session_destroy(); // Destroy all session data
             header("Location: ../../index.php?logout=timeout"); // Redirect to the login page with a timeout flag
             exit;
         }
-    
-    
-    
     }
 
 
@@ -60,7 +57,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             WHERE a.status = 'Need Repair' AND b.firstName = '$fname' AND b.middleName = '$middleName' AND b.lastName = '$lastName'";
 
     $result = $conn->query($sql) or die($conn->error);
-    
+
     //Edit
     if (isset($_POST['edit'])) {
         $assetId = $_POST['assetId'];
@@ -86,46 +83,46 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         header("Location: reports.php");
     }
 
-    
 
-// Fetch Report activity logs
-$loggedInUserFirstName = $_SESSION['firstName']; // or the name field you have in session that you want to check against
-$loggedInUsermiddleName = $_SESSION['middleName']; // assuming you also have the last name in the session
-$loggedInUserLastName = $_SESSION['lastName']; //kung ano ung naka declare dito eto lang ung magiging data 
-// Concatenate first name and last name for the action field check
-$loggedInFullName = $loggedInUserFirstName . " " . $loggedInUsermiddleName . " " . $loggedInUserLastName; //kung ano ung naka declare dito eto lang ung magiging data 
 
-// Adjust the SQL to check the 'action' field for the logged-in user's name
-$sqlReport = "SELECT ac.*, a.firstName, a.middleName, a.lastName
+    // Fetch Report activity logs
+    $loggedInUserFirstName = $_SESSION['firstName']; // or the name field you have in session that you want to check against
+    $loggedInUsermiddleName = $_SESSION['middleName']; // assuming you also have the last name in the session
+    $loggedInUserLastName = $_SESSION['lastName']; //kung ano ung naka declare dito eto lang ung magiging data 
+    // Concatenate first name and last name for the action field check
+    $loggedInFullName = $loggedInUserFirstName . " " . $loggedInUsermiddleName . " " . $loggedInUserLastName; //kung ano ung naka declare dito eto lang ung magiging data 
+
+    // Adjust the SQL to check the 'action' field for the logged-in user's name
+    $sqlReport = "SELECT ac.*, a.firstName, a.middleName, a.lastName
 FROM activitylogs AS ac
 LEFT JOIN account AS a ON ac.accountID = a.accountID
 WHERE ac.tab='Report' AND ac.action LIKE ?
 ORDER BY ac.date DESC";
 
-// Prepare the SQL statement
-$stmt = $conn->prepare($sqlReport);
+    // Prepare the SQL statement
+    $stmt = $conn->prepare($sqlReport);
 
-// Create a wildcard search term for the name
-$searchTerm = "%" . $loggedInFullName . "%";
+    // Create a wildcard search term for the name
+    $searchTerm = "%" . $loggedInFullName . "%";
 
-// Bind the parameter and execute
-$stmt->bind_param("s", $searchTerm);
-$stmt->execute();
-$resultReport = $stmt->get_result();
-
-
-// for notif below
-// Update the SQL to join with the account and asset tables to get the admin's name and asset information
-$loggedInUserFirstName = $_SESSION['firstName']; 
-$loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
-$loggedInUserLastName = $_SESSION['lastName'];
-
-$loggedInFullName = $loggedInUserFirstName . ' '.$loggedInUserMiddleName .' '. $loggedInUserLastName;
+    // Bind the parameter and execute
+    $stmt->bind_param("s", $searchTerm);
+    $stmt->execute();
+    $resultReport = $stmt->get_result();
 
 
+    // for notif below
+    // Update the SQL to join with the account and asset tables to get the admin's name and asset information
+    $loggedInUserFirstName = $_SESSION['firstName'];
+    $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
+    $loggedInUserLastName = $_SESSION['lastName'];
 
-// Adjust the SQL to fetch only the notifications for the logged-in user
-$sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName
+    $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
+
+
+
+    // Adjust the SQL to fetch only the notifications for the logged-in user
+    $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName
               FROM activitylogs AS al
               JOIN account AS acc ON al.accountID = acc.accountID
               WHERE al.tab='Report' 
@@ -133,21 +130,21 @@ $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName A
               ORDER BY al.date DESC 
               LIMIT 1000";
 
-// Prepare the SQL statement
-$stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+    // Prepare the SQL statement
+    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
 
-// Create a wildcard search term for the logged-in user's full name
-$searchTerm = "%Assigned maintenance personnel " . $loggedInFullName . "%";
+    // Create a wildcard search term for the logged-in user's full name
+    $searchTerm = "%Assigned maintenance personnel " . $loggedInFullName . "%";
 
-// Bind the parameter and execute
-$stmtLatestLogs->bind_param("s", $searchTerm);
-$stmtLatestLogs->execute();
-$resultLatestLogs = $stmtLatestLogs->get_result();
+    // Bind the parameter and execute
+    $stmtLatestLogs->bind_param("s", $searchTerm);
+    $stmtLatestLogs->execute();
+    $resultLatestLogs = $stmtLatestLogs->get_result();
 
-$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '3'";
-$result = $conn->query($unseenCountQuery);
-$unseenCountRow = $result->fetch_assoc();
-$unseenCount = $unseenCountRow['unseenCount'];
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '3'";
+    $result = $conn->query($unseenCountQuery);
+    $unseenCountRow = $result->fetch_assoc();
+    $unseenCount = $unseenCountRow['unseenCount'];
 
 
 
@@ -168,7 +165,7 @@ $unseenCount = $unseenCountRow['unseenCount'];
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>  
+        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
 
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <link rel="stylesheet" href="../../src/css/main.css" />
@@ -193,81 +190,81 @@ $unseenCount = $unseenCountRow['unseenCount'];
                 </div>
                 <div class="content-nav">
                     <div class="notification-dropdown">
-                       
-
-
- <a href="#" class="notification" id="notification-button">
 
 
 
+                        <a href="#" class="notification" id="notification-button">
 
 
 
-<i class="fa fa-bell" aria-hidden="true"></i>
-<span id="noti_number"><?php echo $unseenCount; ?></span>
-
-    </td>
-    </tr>
-    </table>
-    <script type="text/javascript">
-        function loadDoc() {
-
-
-            setInterval(function() {
-
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("noti_number").innerHTML = this.responseText;
-                    }
-                };
-                xhttp.open("GET", "update_single_notification.php", true);
-                xhttp.send();
-
-            }, 10);
-
-
-        }
-        loadDoc();
-    </script>
-
-</a>
 
 
 
-<div class="dropdown-content" id="notification-dropdown-content">
-    <h6 class="dropdown-header">Alerts Center</h6>
-    <!-- PHP code to display notifications will go here -->
-    <?php
-if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
-// Loop through each notification
-while ($row = $resultLatestLogs->fetch_assoc()) {
-$adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
-$actionText = $row["action"];
-$assetId = 'unknown'; // Default value
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+                            <span id="noti_number"><?php echo $unseenCount; ?></span>
 
-// Extract personnel name and asset ID from action text
-if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
-$assignedName = $matches[1];
-$assetId = $matches[2];
-}
-
-// Generate the notification text
-// Generate the notification text including the name of the assigned personnel
-$notificationText = "Admin $adminName assigned $assignedName to asset ID " . htmlspecialchars($assetId);
+                            </td>
+                            </tr>
+                            </table>
+                            <script type="text/javascript">
+                                function loadDoc() {
 
 
-// Output the notification as a clickable element with a data attribute for the activityId
-echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . $notificationText . '</a>';
-}
-} else {
-echo '<a href="#">No new notifications</a>';
-}
-?>
-<a href="activity-logs.php" class="view-all">View All</a>
+                                    setInterval(function() {
 
-</div>
-</div>
+                                        var xhttp = new XMLHttpRequest();
+                                        xhttp.onreadystatechange = function() {
+                                            if (this.readyState == 4 && this.status == 200) {
+                                                document.getElementById("noti_number").innerHTML = this.responseText;
+                                            }
+                                        };
+                                        xhttp.open("GET", "update_single_notification.php", true);
+                                        xhttp.send();
+
+                                    }, 10);
+
+
+                                }
+                                loadDoc();
+                            </script>
+
+                        </a>
+
+
+
+                        <div class="dropdown-content" id="notification-dropdown-content">
+                            <h6 class="dropdown-header">Alerts Center</h6>
+                            <!-- PHP code to display notifications will go here -->
+                            <?php
+                            if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
+                                // Loop through each notification
+                                while ($row = $resultLatestLogs->fetch_assoc()) {
+                                    $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+                                    $actionText = $row["action"];
+                                    $assetId = 'unknown'; // Default value
+
+                                    // Extract personnel name and asset ID from action text
+                                    if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
+                                        $assignedName = $matches[1];
+                                        $assetId = $matches[2];
+                                    }
+
+                                    // Generate the notification text
+                                    // Generate the notification text including the name of the assigned personnel
+                                    $notificationText = "Admin $adminName assigned $assignedName to asset ID " . htmlspecialchars($assetId);
+
+
+                                    // Output the notification as a clickable element with a data attribute for the activityId
+                                    echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . $notificationText . '</a>';
+                                }
+                            } else {
+                                echo '<a href="#">No new notifications</a>';
+                            }
+                            ?>
+                            <a href="activity-logs.php" class="view-all">View All</a>
+
+                        </div>
+                    </div>
 
 
                     <a href="#" class="settings profile">
@@ -377,6 +374,8 @@ echo '<a href="#">No new notifications</a>';
         <!-- SIDEBAR -->
         <!-- CONTENT -->
         <section id="content">
+            <div id="map"></div>
+
             <!-- MAIN -->
             <main>
                 <header>
@@ -395,164 +394,164 @@ echo '<a href="#">No new notifications</a>';
                         </div>
                     </div>
                 </header>
-                        <!--Tab for table 4 - Repair -->
-                        <div class="tab-pane fade show active" id="pills-repair" role="tabpanel" aria-labelledby="repair-tab">
-                            <div class="table-content">
-                                <div class='table-header'>
-                                    <table>
-                                        <tr>
-                                            <th>TRACKING #</th>
-                                            <th>DATE & TIME</th>
-                                            <th>CATEGORY</th>
-                                            <th>LOCATION</th>
-                                            <th>STATUS</th>
-                                            <th>ASSIGNEE</th>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <!--Content of table 4-->
-                                <?php
-                                if ($result->num_rows > 0) {
-                                    echo "<div class='table-container'>";
-                                    while ($row = $result->fetch_assoc()) {
-                                        echo "<table>";
-                                        echo '<tr>';
-                                        echo '<td>' . $row['assetId'] . '</td>';
-                                        echo '<td>' . $row['date'] . '</td>';
-                                        echo '<td>' . $row['category'] . '</td>';
-                                        echo '<td>' . $row['building'] . " / " . $row['floor'] . " / " . $row['room'] . '</td>';
-                                        echo '<td style="display: none;">' . $row['building'] . '</td>';
-                                        echo '<td style="display: none;">' . $row['floor'] . '</td>';
-                                        echo '<td style="display: none;">' . $row['room'] . '</td>';
-                                        echo '<td style="display: none;">' . $row['images'] . '</td>';
-                                        echo '<td >' . $row['status'] . '</td>';
-                                        echo '<td style="display: none;">' . $row['assignedBy'] . '</td>';
-                                        if (empty($row['assignedName'])) {
-                                            // Pagwalang data eto ilalabas
-                                            echo '<td>';
-                                            echo '<form method="post" action="">';
-                                            echo '<input type="hidden" name="assetId" value="' . $row['assetId'] . '">';
-                                            echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#exampleModal5">Assign</button>';
-                                            echo '</form>';
-                                            echo '</td>';
-                                        } else {
-                                            // Pagmeron data eto ilalabas
-                                            echo '<td>' . $row['assignedName'] . '</td>';
-                                        }
-                                        echo '</tr>';
-                                    }
-                                    echo "</table>";
-                                    echo "</div>";
-                                } else {
-                                    echo '<table>';
-                                    echo "<div class=noDataImgH>";
-                                    echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
-                                    echo "</div>";
-                                    echo '</table>';
-                                }
-                                ?>
-                            </div>
+                <!--Tab for table 4 - Repair -->
+                <div class="tab-pane fade show active" id="pills-repair" role="tabpanel" aria-labelledby="repair-tab">
+                    <div class="table-content">
+                        <div class='table-header'>
+                            <table>
+                                <tr>
+                                    <th>TRACKING #</th>
+                                    <th>DATE & TIME</th>
+                                    <th>CATEGORY</th>
+                                    <th>LOCATION</th>
+                                    <th>STATUS</th>
+                                    <th>ASSIGNEE</th>
+                                </tr>
+                            </table>
                         </div>
+                        <!--Content of table 4-->
+                        <?php
+                        if ($result->num_rows > 0) {
+                            echo "<div class='table-container'>";
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<table>";
+                                echo '<tr>';
+                                echo '<td>' . $row['assetId'] . '</td>';
+                                echo '<td>' . $row['date'] . '</td>';
+                                echo '<td>' . $row['category'] . '</td>';
+                                echo '<td>' . $row['building'] . " / " . $row['floor'] . " / " . $row['room'] . '</td>';
+                                echo '<td style="display: none;">' . $row['building'] . '</td>';
+                                echo '<td style="display: none;">' . $row['floor'] . '</td>';
+                                echo '<td style="display: none;">' . $row['room'] . '</td>';
+                                echo '<td style="display: none;">' . $row['images'] . '</td>';
+                                echo '<td >' . $row['status'] . '</td>';
+                                echo '<td style="display: none;">' . $row['assignedBy'] . '</td>';
+                                if (empty($row['assignedName'])) {
+                                    // Pagwalang data eto ilalabas
+                                    echo '<td>';
+                                    echo '<form method="post" action="">';
+                                    echo '<input type="hidden" name="assetId" value="' . $row['assetId'] . '">';
+                                    echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#exampleModal5">Assign</button>';
+                                    echo '</form>';
+                                    echo '</td>';
+                                } else {
+                                    // Pagmeron data eto ilalabas
+                                    echo '<td>' . $row['assignedName'] . '</td>';
+                                }
+                                echo '</tr>';
+                            }
+                            echo "</table>";
+                            echo "</div>";
+                        } else {
+                            echo '<table>';
+                            echo "<div class=noDataImgH>";
+                            echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
+                            echo "</div>";
+                            echo '</table>';
+                        }
+                        ?>
                     </div>
+                </div>
+                </div>
                 </div>
             </main>
         </section>
 
-           
-            <!--Modal for table 4-->
-            <div class="modal-parent">
-                <div class="modal modal-xl fade show active" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="header">
-                                <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
-                            </div>
-                            <div class="modal-body">
-                                <form method="post" class="row g-3">
-                                    <h5>Report Modal for Repair</h5>
-                                    <div class="col-4">
-                                        <label for="assetId" class="form-label">Tracking #:</label>
-                                        <input type="text" class="form-control" id="assetId" name="assetId" readonly />
-                                    </div>
 
-                                    <div class="col-4">
-                                        <label for="date" class="form-label">Date:</label>
-                                        <input type="text" class="form-control" id="date" name="date" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="category" class="form-label">Category:</label>
-                                        <input type="text" class="form-control" id="category" name="category" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="building" class="form-label">Building:</label>
-                                        <input type="text" class="form-control" id="building" name="building" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="floor" class="form-label">Floor:</label>
-                                        <input type="text" class="form-control" id="floor" name="floor" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="room" class="form-label">Room:</label>
-                                        <input type="text" class="form-control" id="room" name="room" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="images" class="form-label">Images:</label>
-                                        <input type="text" class="form-control" id="" name="images" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="status" class="form-label">Status:</label>
-                                        <select class="form-select" id="status" name="status">
-                                            <option value="Working">Working</option>
-                                            <option value="Under Maintenance">Under Maintenance</option>
-                                            <option value="For Replacement">For Replacement</option>
-                                            <option value="Need Repair">Need Repair</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="assignedName" class="form-label">Assigned Name:</label>
-                                        <input type="text" class="form-control" id="assignedName" name="assignedName" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="assignedBy" class="form-label">Assigned By:</label>
-                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy" readonly />
-                                    </div>
-                            </div>
-                            <div class="footer">
-                                <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop4">
-                                    Save
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!--Edit for table 4-->
-            <div class="modal fade" id="staticBackdrop4" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <!--Modal for table 4-->
+        <div class="modal-parent">
+            <div class="modal modal-xl fade show active" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
-                        <div class="modal-footer">
-                            Are you sure you want to save changes?
-                            <div class="modal-popups">
-                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                <button class="btn add-modal-btn" name="edit" data-bs-dismiss="modal">Yes</button>
-                            </div>
+                        <div class="header">
+                            <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" class="row g-3">
+                                <h5>Report Modal for Repair</h5>
+                                <div class="col-4">
+                                    <label for="assetId" class="form-label">Tracking #:</label>
+                                    <input type="text" class="form-control" id="assetId" name="assetId" readonly />
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="date" class="form-label">Date:</label>
+                                    <input type="text" class="form-control" id="date" name="date" readonly />
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="category" class="form-label">Category:</label>
+                                    <input type="text" class="form-control" id="category" name="category" readonly />
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="building" class="form-label">Building:</label>
+                                    <input type="text" class="form-control" id="building" name="building" readonly />
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="floor" class="form-label">Floor:</label>
+                                    <input type="text" class="form-control" id="floor" name="floor" readonly />
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="room" class="form-label">Room:</label>
+                                    <input type="text" class="form-control" id="room" name="room" readonly />
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="images" class="form-label">Images:</label>
+                                    <input type="text" class="form-control" id="" name="images" readonly />
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="status" class="form-label">Status:</label>
+                                    <select class="form-select" id="status" name="status">
+                                        <option value="Working">Working</option>
+                                        <option value="Under Maintenance">Under Maintenance</option>
+                                        <option value="For Replacement">For Replacement</option>
+                                        <option value="Need Repair">Need Repair</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="assignedName" class="form-label">Assigned Name:</label>
+                                    <input type="text" class="form-control" id="assignedName" name="assignedName" readonly />
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="assignedBy" class="form-label">Assigned By:</label>
+                                    <input type="text" class="form-control" id="assignedBy" name="assignedBy" readonly />
+                                </div>
+                        </div>
+                        <div class="footer">
+                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop4">
+                                Save
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-            </form>
+        </div>
+
+        <!--Edit for table 4-->
+        <div class="modal fade" id="staticBackdrop4" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-footer">
+                        Are you sure you want to save changes?
+                        <div class="modal-popups">
+                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                            <button class="btn add-modal-btn" name="edit" data-bs-dismiss="modal">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
 
 
-                     
+
 
         <!-- PROFILE MODALS -->
         <?php include_once 'modals/modal_layout.php'; ?>
@@ -577,7 +576,9 @@ echo '<a href="#">No new notifications</a>';
                     $.ajax({
                         type: "POST",
                         url: "update_single_notification.php", // The URL to the PHP file
-                        data: { activityId: activityId },
+                        data: {
+                            activityId: activityId
+                        },
                         success: function(response) {
                             if (response.trim() === "Notification updated successfully") {
                                 // If the notification is updated successfully, remove the clicked element
@@ -601,23 +602,23 @@ echo '<a href="#">No new notifications</a>';
             });
         </script>
 
-<script src="../../src/js/main.js"></script>
-<script src="../../src/js/locationTracker.js"></script>
-<script src="../../src/js/profileModalController.js"></script>
-<script>
-        setInterval(function() {
-            // Call a script to check if the user has timed out
-            fetch('../../check_timeout.php')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.timeout) {
-                        alert('You have been logged out due to timeout.');
-                        window.location.href = '../index.php?logout=timeout'; // Redirect to login page
-                    }
-                });
-        }, 60000); // Checks every minute, you can adjust the interval
-    </script>
-       
+        <script src="../../src/js/main.js"></script>
+        <script src="../../src/js/locationTracker.js"></script>
+        <script src="../../src/js/profileModalController.js"></script>
+        <script>
+            setInterval(function() {
+                // Call a script to check if the user has timed out
+                fetch('../../check_timeout.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.timeout) {
+                            alert('You have been logged out due to timeout.');
+                            window.location.href = '../index.php?logout=timeout'; // Redirect to login page
+                        }
+                    });
+            }, 60000); // Checks every minute, you can adjust the interval
+        </script>
+
         <script>
             $(document).ready(function() {
 
@@ -635,14 +636,14 @@ echo '<a href="#">No new notifications</a>';
                     $(modalId + " #assignedName").val(row.find("td:eq(10)").text());
                 }
 
-             
+
                 $(document).on("click", "#pills-repair .table-container table tbody tr", function() {
                     var row = $(this);
                     populateModal(row, "#exampleModal4");
                     $("#exampleModal4").modal("show");
-                })});
-            
-                </script>
+                })
+            });
+        </script>
 
         <script>
             $(document).ready(function() {
@@ -695,84 +696,84 @@ echo '<a href="#">No new notifications</a>';
             });
         </script>
 
-<script>
-        $(document).ready(function() {
-            function filterTable() {
-                var searchQuery = $('#search-box').val().toLowerCase();
-                var columnIndex = parseInt($('#search-filter').val());
+        <script>
+            $(document).ready(function() {
+                function filterTable() {
+                    var searchQuery = $('#search-box').val().toLowerCase();
+                    var columnIndex = parseInt($('#search-filter').val());
 
-                $('#data-table tbody tr').each(function() {
-                    var cellText = $(this).find('td').eq(columnIndex).text().toLowerCase();
-                    if(cellText.indexOf(searchQuery) !== -1) {
-                        $(this).show();
-                    } else {
-                        $(this).hide();
-                    }
+                    $('#data-table tbody tr').each(function() {
+                        var cellText = $(this).find('td').eq(columnIndex).text().toLowerCase();
+                        if (cellText.indexOf(searchQuery) !== -1) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                }
+
+                // Event listener for search input
+                $('#search-box').on('input', filterTable);
+
+                // Event listener for filter dropdown change
+                $('#search-filter').change(function() {
+                    $('#search-box').val(''); // Clear the search input
+                    filterTable(); // Filter table with new criteria
                 });
-            }
-
-            // Event listener for search input
-            $('#search-box').on('input', filterTable);
-
-            // Event listener for filter dropdown change
-            $('#search-filter').change(function() {
-                $('#search-box').val(''); // Clear the search input
-                filterTable(); // Filter table with new criteria
             });
-        });
-    </script>
- <script>
-$(document).ready(function() {
-    function searchTable() {
-        var input, filter, table, tr, td, i;
-        input = document.getElementById("search-box");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("myTabContent"); // Use the ID of your table container
-        tr = table.getElementsByTagName("tr");
-        var selectedFilter = document.getElementById("filter-criteria").value;
+        </script>
+        <script>
+            $(document).ready(function() {
+                function searchTable() {
+                    var input, filter, table, tr, td, i;
+                    input = document.getElementById("search-box");
+                    filter = input.value.toUpperCase();
+                    table = document.getElementById("myTabContent"); // Use the ID of your table container
+                    tr = table.getElementsByTagName("tr");
+                    var selectedFilter = document.getElementById("filter-criteria").value;
 
-        for (i = 1; i < tr.length; i++) { // Start with 1 to avoid the header
-            td = tr[i].getElementsByTagName("td");
-            if (td.length > 0) {
-                var searchText = "";
-                if (selectedFilter === "all") {
-                    // Concatenate all the text content from the cells for "All" search
-                    for (var j = 0; j < td.length; j++) {
-                        searchText += td[j].textContent.toUpperCase();
+                    for (i = 1; i < tr.length; i++) { // Start with 1 to avoid the header
+                        td = tr[i].getElementsByTagName("td");
+                        if (td.length > 0) {
+                            var searchText = "";
+                            if (selectedFilter === "all") {
+                                // Concatenate all the text content from the cells for "All" search
+                                for (var j = 0; j < td.length; j++) {
+                                    searchText += td[j].textContent.toUpperCase();
+                                }
+                            } else {
+                                // Find the index for the selected filter
+                                var columnIndex = getColumnIndex(selectedFilter);
+                                searchText = td[columnIndex].textContent.toUpperCase();
+                            }
+
+                            // Show or hide the row based on whether the searchText contains the filter
+                            if (searchText.indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
                     }
-                } else {
-                    // Find the index for the selected filter
-                    var columnIndex = getColumnIndex(selectedFilter);
-                    searchText = td[columnIndex].textContent.toUpperCase();
                 }
-                
-                // Show or hide the row based on whether the searchText contains the filter
-                if (searchText.indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
+
+                // Utility function to get the column index based on the filter selected
+                function getColumnIndex(filter) {
+                    // Adjust these indices to match your table's structure
+                    var columns = {
+                        'reportId': 0,
+                        'date': 1,
+                        'category': 2,
+                        'location': 3, // Assuming 'location' is a single column that includes building/floor/room
+                        'status': 4
+                    };
+                    return columns[filter] || 0; // Default to the first column if the filter is not found
                 }
-            }
-        }
-    }
 
-    // Utility function to get the column index based on the filter selected
-    function getColumnIndex(filter) {
-        // Adjust these indices to match your table's structure
-        var columns = {
-            'reportId': 0,
-            'date': 1,
-            'category': 2,
-            'location': 3, // Assuming 'location' is a single column that includes building/floor/room
-            'status': 4
-        };
-        return columns[filter] || 0; // Default to the first column if the filter is not found
-    }
-
-    // Attach the search function to the keyup event of the search box
-    $("#search-box").keyup(searchTable);
-});
-</script>
+                // Attach the search function to the keyup event of the search box
+                $("#search-box").keyup(searchTable);
+            });
+        </script>
 
 
     </body>

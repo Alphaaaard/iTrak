@@ -6,12 +6,13 @@ $conn = connection();
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
 
 
-        // For personnel page, check if userLevel is 3
-        if($_SESSION['userLevel'] != 1) {
-            // If not personnel, redirect to an error page or login
-            header("Location:error.php");
-            exit;
-        }
+    // For personnel page, check if userLevel is 3
+    if ($_SESSION['userLevel'] != 1) {
+        // If not personnel, redirect to an error page or login
+        header("Location:error.php");
+        exit;
+    }
+
 
 
  // Fetch Report activity logs
@@ -69,7 +70,7 @@ $stmtLatestLogs->execute();
 $resultLatestLogs = $stmtLatestLogs->get_result();
 
 
-$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0'";
+$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '3'";
 $result = $conn->query($unseenCountQuery);
 $unseenCountRow = $result->fetch_assoc();
 $unseenCount = $unseenCountRow['unseenCount'];
@@ -107,28 +108,6 @@ $unseenCount = $unseenCountRow['unseenCount'];
     //! bracket later remove this later
 
 
-
-
-
-
-// Assuming you have variables like $assetId and $newStatus already set
-$actionText = "Changed status of asset ID {$assetId} to {$newStatus}.";
-
-// Prepare a statement to insert the log into the database
-$stmt = $conn->prepare("INSERT INTO activitylogs (accountId, action, tab, date) VALUES (?, ?, 'Report', NOW())");
-
-// Bind parameters to the prepared statement
-$stmt->bind_param("is", $_SESSION['accountId'], $actionText);
-
-// Execute the query
-if($stmt->execute()){
-    // Success, the log is now inserted
-} else {
-    // Error handling
-    echo "Error: " . $stmt->error;
-}
-
-$stmt->close();
 
 
 
@@ -466,7 +445,7 @@ echo '<a href="#">No new notifications</a>';
                                     echo "<tbody>";
                                     while ($row = $resultReport->fetch_assoc()) {
                                         echo '<tr>';
-                                        echo '<td>' . $row['firstName'] . "" . $row['lastName'] . '</td>';
+                                        echo '<td>' . $row['firstName'] . " " . $row['lastName'] . '</td>';
                                         echo '<td style="display:none">' . $row['activityId'] . '</td>';
                                         echo '<td style="display:none">' . $row['firstName'] . '</td>';
                                         echo '<td style="display:none">' . $row['middleName'] . '</td>';
