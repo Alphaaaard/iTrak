@@ -92,6 +92,7 @@
     border-right-style: solid;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
+    padding: 0 3em!important;
   }
   .table-header table tr th:nth-child(1){
     width: 37.5%;
@@ -158,5 +159,8 @@
 
   td{
     height: 5vh;
+  }
+  td:last-child { 
+    padding: 0 1em!important;
   }
   }

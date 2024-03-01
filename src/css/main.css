@@ -915,10 +915,10 @@ td {
 .add-modal-btn {
   border: #1E56A0 1px solid;
   background-color: #1E56A0;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   color: white;
   font-weight: 500;
-  padding: .5em 5em;
+  /* padding: unset!important; */
   font-size: 0.8em;
 }
 .add-modal-btn:hover {
@@ -929,27 +929,42 @@ td {
 .modal-footer {
   /* height: 200px; */
   text-align: center;
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   justify-content: center;
   overflow: hidden;
   /* border-radius: 25px; */
   font-size: 25px;
+  padding: 0 2em;
+  border-radius: 10px;
+  height: 10.5em;
 }
+
+.modal-footer p{
+font-size: 1.25em;
+font-weight: 600;
+color: #3D3B40;
+}
+
 .modal-popups {
   display: flex;
   justify-content: space-evenly;
-  width: 100%;
+  gap: 5px;
+}
+.add-modal-btn{
+  text-transform: capitalize!important;
 }
 .close-popups {
-  border-color: red;
-  border-radius: 25px;
+  background-color: #6e7881;
+  border-color: #6e7881;
+  /* border-radius: 10px; */
   border-width: 2px;
-  width: 200px;
+  /* width: 200px; */
+  padding: .5em 1em !important;
+  color: white;
 }
 .close-popups:hover {
-  background-color: #ffdfdf;
-  border-color: #ff5c5d;
+  border-color: #6e7881;
 }
 .accept-popups {
   border-color: green;
@@ -1028,9 +1043,8 @@ td {
 }
 
 .modal-content {
-  border-radius: 25px;
   font-size: larger;
-  width: 70%;
+  width: 32em;
   margin: 0 auto;
   border: #3d3b40 2px solid;
 }

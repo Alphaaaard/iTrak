@@ -4,7 +4,7 @@ include_once("../../../config/connection.php");
 $conn = connection();
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role'])) {
-    
+
     //FOR ID 1 SOFA
     $sql = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date, upload_img, description FROM asset WHERE assetId = 1";
     $stmt = $conn->prepare($sql);
@@ -623,38 +623,38 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         }
     }
 
-    
-     //FOR IMAGE UPLOAD BASED ON ASSET ID
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['upload_img']) && isset($_POST['assetId'])) {
-    // Check for upload errors
-    if ($_FILES['upload_img']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['upload_img']['tmp_name'])) {
-        $image = $_FILES['upload_img']['tmp_name'];
-        $imgContent = file_get_contents($image); // Get the content of the file
 
-        // Get the asset ID from the form
-        $assetId = $_POST['assetId'];
+    //FOR IMAGE UPLOAD BASED ON ASSET ID
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['upload_img']) && isset($_POST['assetId'])) {
+        // Check for upload errors
+        if ($_FILES['upload_img']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['upload_img']['tmp_name'])) {
+            $image = $_FILES['upload_img']['tmp_name'];
+            $imgContent = file_get_contents($image); // Get the content of the file
 
-        // Prepare SQL query to update the asset with the image based on asset ID
-        $sql = "UPDATE asset SET upload_img = ? WHERE assetId = ?";
-        $stmt = $conn->prepare($sql);
+            // Get the asset ID from the form
+            $assetId = $_POST['assetId'];
 
-        // Null for blob data
-        $null = NULL;
-        $stmt->bind_param('bi', $null, $assetId);
-        // Send blob data in packets
-        $stmt->send_long_data(0, $imgContent);
+            // Prepare SQL query to update the asset with the image based on asset ID
+            $sql = "UPDATE asset SET upload_img = ? WHERE assetId = ?";
+            $stmt = $conn->prepare($sql);
 
-        if ($stmt->execute()) {
-            echo "<script>alert('Asset and image updated successfully!');</script>";
-            header("Location: NEWBF1.php");
+            // Null for blob data
+            $null = NULL;
+            $stmt->bind_param('bi', $null, $assetId);
+            // Send blob data in packets
+            $stmt->send_long_data(0, $imgContent);
+
+            if ($stmt->execute()) {
+                echo "<script>alert('Asset and image updated successfully!');</script>";
+                header("Location: NEWBF1.php");
+            } else {
+                echo "<script>alert('Failed to update asset and image. Error: " . $stmt->error . "');</script>";
+            }
+            $stmt->close();
         } else {
-            echo "<script>alert('Failed to update asset and image. Error: " . $stmt->error . "');</script>";
+            echo "<script>alert('Failed to upload image. Error: " . $_FILES['upload_img']['error'] . "');</script>";
         }
-        $stmt->close();
-    } else {
-        echo "<script>alert('Failed to upload image. Error: " . $_FILES['upload_img']['error'] . "');</script>";
     }
-}
 
 ?>
 
@@ -1034,15 +1034,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['upload_img']) && isse
                         </div>
                     </div>
                     <!--Edit for table 1-->
-                    <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-footer">
-                                    Are you sure you want to save changes?
-                                    <div class="modal-popups">
-                                        <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        <button type="submit" class="btn add-modal-btn" name="edit">Yes</button>
-
+                    <div class="map-alert">
+                        <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-footer">
+                                        <p>Are you sure you want to save changes?</p>
+                                        <div class="modal-popups">
+                                            <button type="submit" class="btn add-modal-btn" name="edit">Yes</button>
+                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -2277,8 +2278,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['upload_img']) && isse
                     </form>
 
 
-                     <!-- Modal structure for id 11-->
-                     <div class='modal fade' id='imageModal11' tabindex='-1' aria-labelledby='imageModalLabel11' aria-hidden='true'>
+                    <!-- Modal structure for id 11-->
+                    <div class='modal fade' id='imageModal11' tabindex='-1' aria-labelledby='imageModalLabel11' aria-hidden='true'>
                         <div class='modal-dialog modal-xl modal-dialog-centered'>
                             <div class='modal-content'>
                                 <!-- Modal header -->
@@ -2412,8 +2413,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['upload_img']) && isse
                     </div>
                     </form>
 
-                     <!-- Modal structure for id 12-->
-                     <div class='modal fade' id='imageModal12' tabindex='-1' aria-labelledby='imageModalLabel12' aria-hidden='true'>
+                    <!-- Modal structure for id 12-->
+                    <div class='modal fade' id='imageModal12' tabindex='-1' aria-labelledby='imageModalLabel12' aria-hidden='true'>
                         <div class='modal-dialog modal-xl modal-dialog-centered'>
                             <div class='modal-content'>
                                 <!-- Modal header -->
@@ -2548,8 +2549,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['upload_img']) && isse
                     </form>
 
 
-                     <!-- Modal structure for id 898-->
-                     <div class='modal fade' id='imageModal898' tabindex='-1' aria-labelledby='imageModalLabel898' aria-hidden='true'>
+                    <!-- Modal structure for id 898-->
+                    <div class='modal fade' id='imageModal898' tabindex='-1' aria-labelledby='imageModalLabel898' aria-hidden='true'>
                         <div class='modal-dialog modal-xl modal-dialog-centered'>
                             <div class='modal-content'>
                                 <!-- Modal header -->
@@ -2688,18 +2689,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['upload_img']) && isse
                 </div>
             </main>
         </section>
-        
+
         <script>
             $(document).ready(function() {
-    var urlParams = new URLSearchParams(window.location.search);
-    var assetId = urlParams.get('assetId'); // Get the assetId from the URL
+                var urlParams = new URLSearchParams(window.location.search);
+                var assetId = urlParams.get('assetId'); // Get the assetId from the URL
 
-    if (assetId) {
-        var modalId = '#imageModal' + assetId;
-        $(modalId).modal('show'); // Open the modal with the corresponding ID
-    }
-});
-
+                if (assetId) {
+                    var modalId = '#imageModal' + assetId;
+                    $(modalId).modal('show'); // Open the modal with the corresponding ID
+                }
+            });
         </script>
         <script src="../../../src/js/main.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
