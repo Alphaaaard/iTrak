@@ -91,8 +91,8 @@ function createControls() {
   controls.enableDamping = true;
 
   // Set limits on vertical rotation (in radians)
-  controls.minPolarAngle = Math.PI / 100; // Adjust as needed
-  controls.maxPolarAngle = Math.PI / 1.9; // Adjust as needed
+  controls.minPolarAngle = Math.PI / 50; // Adjust as needed
+  controls.maxPolarAngle = Math.PI / 2.5; // Adjust as needed
 }
 
 function loadModels() {
