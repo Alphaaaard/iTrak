@@ -396,7 +396,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <form class="d-flex" role="search">
                                     <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" onkeyup="searchTable()" />
                                 </form>
-
                             </div>
                         </div>
                     </header>

@@ -15,6 +15,11 @@ a{
   text-decoration: none;
 }
 
+input::-ms-reveal,
+      input::-ms-clear {
+        display: none;
+      }
+
 /* NAVBAR */
 #navbar {
   align-items: center;
@@ -39,12 +44,20 @@ a{
   /* margin: .5em; */
   gap: 1em;
   align-items: center;
+  text-align: center;
 }
 
-.profile-img{
-width: 100%;
+.col-12 .profile-img{
+  margin: 0 auto;
+  width: 30%;
 display: flex;
 justify-content: center;
+border-radius: 50px;
+}
+
+.profile-img img{
+  border-radius: 50%;
+  border: #3D3B40 1px solid;
 }
 
 .profile-container:hover{
@@ -444,8 +457,6 @@ display: none;
   color: #163172;
 }
 
-
-
 .icons{
   height: 1.35em;
   width: 1.35em;
@@ -494,6 +505,18 @@ display: none;
 form i {
   margin-left: -30px;
   cursor: pointer;
+  z-index: 5;
+}
+.bi-eye-slash.bi::before, [class*=" bi-"]::before, [class^=bi-]::before{
+  vertical-align: -0.3em;
+}
+.input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback){
+  margin-left: -30px;
+}
+
+.input-group>.custom-select:not(:last-child), .input-group>.form-control:not(:last-child){
+  border-top-right-radius: 5px!important;
+  border-bottom-right-radius: 5px!important;
 }
 
 .form-control {
@@ -575,6 +598,10 @@ form i {
   width: 30%;
 }
 
+#togglePassword{
+  margin-right: 10px;
+}
+
 .btn-custom {
   /* color: white; */
   color: #1E56A0;
@@ -600,7 +627,7 @@ form i {
 
 input#roleField.form-control{
   background-color: #D6E4F0 !important;
-  border: #3D3B40 2px solid;
+  border: #3D3B40 1px solid;
 }
 
 .profile-container .modal-content{
@@ -825,6 +852,10 @@ table tr td{
   1px solid!important;
 }
 
+#roleEdit{
+  background-color: #D6E4F0 !important;
+}
+
 /* .noDataImgH{
   border: #AAAAAA 1px solid!important;
 } */
@@ -836,6 +867,10 @@ table tr td{
 .table-header {
   color: white;
   background-color: #163172!important;
+}
+
+div:where(.swal2-container) h2:where(.swal2-title){
+  font-weight: 400!important;
 }
 
 div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm{

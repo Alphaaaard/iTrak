@@ -369,7 +369,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             <li><a href="#" class="nav-link" data-bs-target="pills-manager">Working</a></li>
                             <li><a href="#" class="nav-link" data-bs-target="pills-profile">Under Maintenance</a></li>
                             <li><a href="#" class="nav-link" data-bs-target="pills-replace">For Replacement</a></li>
-                            <li><a href="#" class="nav-link" data-bs-target="pills-repair">For Repair</a></li>
+                            <li><a href="#" class="nav-link" data-bs-target="pills-repair">Need Repair</a></li>
                         </ul>
                     </div>
 

@@ -7,10 +7,7 @@ p {
   color: #3d3b40;
 }
 
-#doughnutChart{
-  height: 360px!important;
-    width: 360px!important;
-}
+
 
 .content1 {
   width: 70%;
@@ -824,5 +821,9 @@ button {
   .mini-header-border{
     font-size: 12px;
 
+  }
+  #doughnutChart{
+    height: 360px!important;
+      width: 360px!important;
   }
 }

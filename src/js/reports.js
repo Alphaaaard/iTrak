@@ -98,11 +98,9 @@ function assignPersonnel() {
                         if(result.dismiss === Swal.DismissReason.timer) {
                             window.location.reload();
                         }
-    
                     });
                 }
             });
         }
-        
     });
 }
