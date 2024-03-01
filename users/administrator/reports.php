@@ -5,10 +5,10 @@ use PHPMailer\PHPMailer\Exception;
 
 
 
-require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 
 
-// require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
+require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
 
 
 
