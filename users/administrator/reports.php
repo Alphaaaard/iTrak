@@ -5,10 +5,10 @@ use PHPMailer\PHPMailer\Exception;
 
 
 
-require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 
 
-// require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
+require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
 
 
 
@@ -576,7 +576,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <section>
             <!--Modal sections-->
-<<<<<<< Updated upstream
             <!--Modal for table 1-->
             <div class="modal-parent">
                 <div class="modal modal-xl fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -642,7 +641,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <div class="col-4" style="display: none">
                                         <label for="assignedBy" class="form-label">Assigned By:</label>
                                         <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="" readonly />
-                                        </div>
+                                    </div>
                                 </form>
                             </div>
                             <div class="footer">
@@ -737,7 +736,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <div class="col-4" style="display: none">
                                         <label for="assignedBy" class="form-label">Assigned By:</label>
                                         <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="" readonly />
-                                        </div>
+                                    </div>
                                 </form>
                             </div>
                             <div class="footer">
@@ -832,7 +831,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <div class="col-4" style="display: none">
                                         <label for="assignedBy" class="form-label">Assigned By:</label>
                                         <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="" readonly />
-                                        </div>
+                                    </div>
                                 </form>
                             </div>
                             <div class="footer">
@@ -927,7 +926,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <div class="col-4">
                                         <label for="assignedBy" class="form-label">Assigned By:</label>
                                         <input type="text" class="form-control" id="assignedBy" name="assignedBy" readonly />
-                                        </div>
+                                    </div>
                                 </form>
                             </div>
                             <div class="footer">
@@ -955,8 +954,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
             </form> -->
-=======
->>>>>>> Stashed changes
 
             <!--Assign Modal for table 4-->
             <div class="modal-parent">
@@ -1057,7 +1054,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
 
-<<<<<<< Updated upstream
             <!-- Edit for table 4
             <div class="modal fade" id="staticBackdrop5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -1073,9 +1069,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
             </form> -->
-=======
-
->>>>>>> Stashed changes
         </section>
 
         <!-- PROFILE MODALS -->
@@ -1109,8 +1102,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
         <script>
-<<<<<<< Updated upstream
-=======
             //PARA MAGDIRECT KA SA PAGE 
             function redirectToPage(building, floor, assetId) {
                 var newLocation = '';
@@ -1140,7 +1131,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
         <script>
->>>>>>> Stashed changes
             $(document).ready(function() {
 
                 // Function to populate the modal fields
@@ -1285,19 +1275,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     filterTable(); // Filter table with new criteria
                 });
             });
-<<<<<<< Updated upstream
-        });
-    </script>
- <script>
-$(document).ready(function() {
-    function searchTable() {
-        var input, filter, table, tr, td, i;
-        input = document.getElementById("search-box");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("myTabContent"); // Use the ID of your table container
-        tr = table.getElementsByTagName("tr");
-        var selectedFilter = document.getElementById("filter-criteria").value;
-=======
         </script>
 
         <script>
@@ -1309,7 +1286,6 @@ $(document).ready(function() {
                     table = document.getElementById("myTabContent"); // Use the ID of your table container
                     tr = table.getElementsByTagName("tr");
                     var selectedFilter = document.getElementById("filter-criteria").value;
->>>>>>> Stashed changes
 
                     for (i = 1; i < tr.length; i++) { // Start with 1 to avoid the header
                         td = tr[i].getElementsByTagName("td");

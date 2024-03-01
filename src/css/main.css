@@ -1178,9 +1178,9 @@ h5 {
   #sidebar{
     left: -250px;
   }
-  #settings-dropdown a{
+  /* #settings-dropdown a{
     width: 100%;
-  }
+  } */
 
   #sidebar .brand {
     display: flex;
@@ -1210,7 +1210,7 @@ h5 {
 
   #settings-dropdown {
     top: 60px;
-    padding-bottom: 1em;
+    /* padding-bottom: 1em; */
   }
 
   #settings-dropdown .profile-hover {
@@ -1222,6 +1222,7 @@ h5 {
   #settings-dropdown .profile-name{
     /* padding: 0 1em; */
     font-size: 1.5em!important;
+    width: 100%;
   }
 
   #settings-dropdown .profile-role{
