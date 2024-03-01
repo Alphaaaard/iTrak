@@ -13,9 +13,6 @@ function logActivity($conn, $accountId, $actionDescription, $tabValue)
     $stmt->close();
 }
 
-
-
-
 // Fetch Report activity logs
 $loggedInUserFirstName = $_SESSION['firstName']; // or the name field you have in session that you want to check against
 $loggedInUsermiddleName = $_SESSION['middleName']; // assuming you also have the last name in the session

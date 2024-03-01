@@ -406,7 +406,7 @@ button {
   overflow: hidden;
   margin: 10px;
   padding: 10px;
-  min-height: 270px;
+  height: 300px;
 }
 .calendar-ulit {
   border: 1px solid;
@@ -416,7 +416,7 @@ button {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   padding: 10px;
-  min-height: 202px;
+  /* min-height: 202px; */
 }
 
 .calendar .month-indicator {

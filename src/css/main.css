@@ -56,6 +56,10 @@ color: #3D3B40;
 
 } */
 
+i.bi.bi-x-lg::before{
+  font-weight: bold!important;
+}
+
 #navbar nav {
   height: 100%;
   width: 100%;
@@ -239,8 +243,7 @@ color: #3D3B40;
 #settings-dropdown a {
   color: #3D3B40;
   display: block;
-  padding: 5px 10px;
-  padding: 5px 10px;
+  padding: .25em 2em .25em 1em;
   text-decoration: none;
   transition: background-color 0.2s;
   /* font-size: 1.5em; */
@@ -249,8 +252,7 @@ color: #3D3B40;
   gap: 1em;
   display: flex;
   /* margin-left: .8em; */
-  width: 175px;
-  margin: 5px;
+  /* width: 175px; */
   margin: 5px;
 }
 
@@ -1178,9 +1180,9 @@ h5 {
   #sidebar{
     left: -250px;
   }
-  /* #settings-dropdown a{
-    width: 100%;
-  } */
+  #settings-dropdown a{
+    padding: 5px 10px!important;
+  }
 
   #sidebar .brand {
     display: flex;
@@ -1214,23 +1216,23 @@ h5 {
   }
 
   #settings-dropdown .profile-hover {
-    padding: 10px 25px;
+    /* padding: 10px 25px; */
     font-size: .8em!important;
     z-index: 3;
   }
 
   #settings-dropdown .profile-name{
     /* padding: 0 1em; */
-    font-size: 1.5em!important;
-    width: 100%;
+    font-size: 1.2em!important;
+    /* width: 100%; */
   }
 
   #settings-dropdown .profile-role{
     padding: 0 0 1em 0;
-    font-size: 1em!important;
+    font-size: .9em!important;
     text-align: center!important;
     display: block;
-    width: 100%;
+    /* width: 100%; */
   }
 
   .notification-dropdown{
