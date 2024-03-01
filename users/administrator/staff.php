@@ -3,7 +3,15 @@ session_start();
 include_once("../../config/connection.php");
 $conn = connection();
 
-if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
+if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
+
+
+    // For personnel page, check if userLevel is 3
+    if ($_SESSION['userLevel'] != 1) {
+        // If not personnel, redirect to an error page or login
+        header("Location:error.php");
+        exit;
+    }
 
     $sql = "SELECT * FROM account";
     $result = $conn->query($sql) or die($conn->error);
