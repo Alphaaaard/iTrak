@@ -329,7 +329,7 @@ ORDER BY ac.date DESC";
                     <div class="buildings" id="buildings" style="visibility:hidden">
                         <div class="building building1" style="display: none;">Floor</div>
                         <div class="building building2">TechVoc</div>
-                        <div class="building building3">Old Academic</div>
+                        <div class="building building3">Yellow</div>
                         <div class="building building4">Belmonte</div>
                         <div class="building building5">Metalcasting</div>
                         <div class="building building6">KORPHIL</div>
@@ -357,10 +357,10 @@ ORDER BY ac.date DESC";
                                 <h3>TECHVOC</h3>
                                 <div class="nav-container">
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="techvoc-floor1-tab" href="../building/TEB/TEBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
+                                        <a class="nav-link" id="techvoc-floor1-tab" href="../building-personnel/TEB/TEBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="techvoc-floor2-tab" href="../building/TEB/TEBF2.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
+                                        <a class="nav-link" id="techvoc-floor2-tab" href="../building-personnel/TEB/TEBF2.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
                                     </li>
                                 </div>
                             </ul>
@@ -372,13 +372,13 @@ ORDER BY ac.date DESC";
                         <div class="modal-content">
                             <span class="close" id="closeModal3"><i class="bi bi-x-lg"></i></span>
                             <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>OLD ACADEMIC BUILDING</h3>
+                                <h3>YELLOW BUILDING</h3>
                                 <div class="nav-container">
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="old-floor1-tab" href="../building/OLB/OLBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
+                                        <a class="nav-link" id="old-floor1-tab" href="../building-personnel/OLB/OLBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="old-floor2-tab" href="../building/OLB/OLBF1.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
+                                        <a class="nav-link" id="old-floor2-tab" href="../building-personnel/OLB/OLBF1.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
                                     </li>
                                 </div>
                             </ul>
@@ -393,16 +393,16 @@ ORDER BY ac.date DESC";
                                 <h3>BELMONTE BUILDING</h3>
                                 <div class="nav-container">
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="belmonte-floor1-tab" href="../building/BEB/BEBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
+                                        <a class="nav-link" id="belmonte-floor1-tab" href="../building-personnel/BEB/BEBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="belmonte-floor2-tab" href="../building/BEB/BEBF2.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
+                                        <a class="nav-link" id="belmonte-floor2-tab" href="../building-personnel/BEB/BEBF2.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="belmonte-floor3-tab" href="../building/BEB/BEBF3.php" role="tab" aria-controls="floor3" aria-selected="false">Floor3</a>
+                                        <a class="nav-link" id="belmonte-floor3-tab" href="../building-personnel/BEB/BEBF3.php" role="tab" aria-controls="floor3" aria-selected="false">Floor3</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="belmonte-floor4-tab" href="../building/BEB/BEBF4.php" role="tab" aria-controls="floor4" aria-selected="false">Floor4</a>
+                                        <a class="nav-link" id="belmonte-floor4-tab" href="../building-personnel/BEB/BEBF4.php" role="tab" aria-controls="floor4" aria-selected="false">Floor4</a>
                                     </li>
                                 </div>
                             </ul>
@@ -417,16 +417,16 @@ ORDER BY ac.date DESC";
                                 <h3>KORPHIL CASTING BUILDING</h3>
                                 <div class="nav-container">
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="korphil-floor1-tab" href="../building/KOB/KOBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
+                                        <a class="nav-link" id="korphil-floor1-tab" href="../building-personnel/KOB/KOBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="korphil-floor2-tab" href="../building/KOB/KOBF2.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
+                                        <a class="nav-link" id="korphil-floor2-tab" href="../building-personnel/KOB/KOBF2.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="korphil-floor3-tab" href="../building/KOB/KOBF3.php" role="tab" aria-controls="floor3" aria-selected="false">Floor3</a>
+                                        <a class="nav-link" id="korphil-floor3-tab" href="../building-personnel/KOB/KOBF3.php" role="tab" aria-controls="floor3" aria-selected="false">Floor3</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="korphil-floor4-tab" href="../building/KOB/KOBF4.php" role="tab" aria-controls="floor4" aria-selected="false">Floor4</a>
+                                        <a class="nav-link" id="korphil-floor4-tab" href="../building-personnel/KOB/KOBF4.php" role="tab" aria-controls="floor4" aria-selected="false">Floor4</a>
                                     </li>
                                 </div>
                             </ul>
@@ -441,16 +441,16 @@ ORDER BY ac.date DESC";
                                 <h3>BALLROOM BUILDING</h3>
                                 <div class="nav-container">
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="ballroom-floor1-tab" href="../building/CHB/CHBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
+                                        <a class="nav-link" id="ballroom-floor1-tab" href="../building-personnel/CHB/CHBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="ballroom-floor2-tab" href="../building/CHB/CHBF2.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
+                                        <a class="nav-link" id="ballroom-floor2-tab" href="../building-personnel/CHB/CHBF2.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="ballroom-floor3-tab" href="../building/CHB/CHBF3.php" role="tab" aria-controls="floor3" aria-selected="false">Floor3</a>
+                                        <a class="nav-link" id="ballroom-floor3-tab" href="../building-personnel/CHB/CHBF3.php" role="tab" aria-controls="floor3" aria-selected="false">Floor3</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="ballroom-floor4-tab" href="../building/CHB/CHBF4.php" role="tab" aria-controls="floor4" aria-selected="false">Floor4</a>
+                                        <a class="nav-link" id="ballroom-floor4-tab" href="../building-personnel/CHB/CHBF4.php" role="tab" aria-controls="floor4" aria-selected="false">Floor4</a>
                                     </li>
                                 </div>
                             </ul>
@@ -465,16 +465,16 @@ ORDER BY ac.date DESC";
                                 <h3>MULTIPURPOSE CASTING BUILDING</h3>
                                 <div class="nav-container">
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="multipurpose-floor1-tab" href="../building/MUB/MUBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
+                                        <a class="nav-link" id="multipurpose-floor1-tab" href="../building-personnel/MUB/MUBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="multipurpose-floor2-tab" href="../building/MUB/MUBF1.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
+                                        <a class="nav-link" id="multipurpose-floor2-tab" href="../building-personnel/MUB/MUBF1.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="multipurpose-floor3-tab" href="../building/MUB/MUBF1.php" role="tab" aria-controls="floor3" aria-selected="false">Floor3</a>
+                                        <a class="nav-link" id="multipurpose-floor3-tab" href="../building-personnel/MUB/MUBF1.php" role="tab" aria-controls="floor3" aria-selected="false">Floor3</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="multipurpose-floor4-tab" href="../building/MUB/MUBF1.php" role="tab" aria-controls="floor4" aria-selected="false">Floor4</a>
+                                        <a class="nav-link" id="multipurpose-floor4-tab" href="../building-personnel/MUB/MUBF1.php" role="tab" aria-controls="floor4" aria-selected="false">Floor4</a>
                                     </li>
                                 </div>
                             </ul>
@@ -489,19 +489,19 @@ ORDER BY ac.date DESC";
                                 <h3>ADMIN BUILDING</h3>
                                 <div class="nav-container">
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="admin-floor1-tab" href="../building/ADB/ADBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
+                                        <a class="nav-link" id="admin-floor1-tab" href="../building-personnel/ADB/ADBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="admin-floor2-tab" href="../building/ADB/ADBF2.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
+                                        <a class="nav-link" id="admin-floor2-tab" href="../building-personnel/ADB/ADBF2.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="admin-floor3-tab" href="../building/ADB/ADBF3.php" role="tab" aria-controls="floor3" aria-selected="false">Floor3</a>
+                                        <a class="nav-link" id="admin-floor3-tab" href="../building-personnel/ADB/ADBF3.php" role="tab" aria-controls="floor3" aria-selected="false">Floor3</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="admin-floor4-tab" href="../building/ADB/ADBF4.php" role="tab" aria-controls="floor4" aria-selected="false">Floor4</a>
+                                        <a class="nav-link" id="admin-floor4-tab" href="../building-personnel/ADB/ADBF4.php" role="tab" aria-controls="floor4" aria-selected="false">Floor4</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="admin-floor5-tab" href="../building/ADB/ADBF5.php" role="tab" aria-controls="floor4" aria-selected="false">Floor5</a>
+                                        <a class="nav-link" id="admin-floor5-tab" href="../building-personnel/ADB/ADBF5.php" role="tab" aria-controls="floor4" aria-selected="false">Floor5</a>
                                     </li>
                                 </div>
                             </ul>
@@ -516,16 +516,16 @@ ORDER BY ac.date DESC";
                                 <h3>BAUTISTA BUILDING</h3>
                                 <div class="nav-container">
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="bautista-floor1-tab" href="../building/BAB/BABF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
+                                        <a class="nav-link" id="bautista-floor1-tab" href="../building-personnel/BAB/BABF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="bautista-floor2-tab" href="../building/BAB/BABF2.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
+                                        <a class="nav-link" id="bautista-floor2-tab" href="../building-personnel/BAB/BABF2.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="bautista-floor3-tab" href="../building/BAB/BABF3.php" role="tab" aria-controls="floor3" aria-selected="false">Floor3</a>
+                                        <a class="nav-link" id="bautista-floor3-tab" href="../building-personnel/BAB/BABF3.php" role="tab" aria-controls="floor3" aria-selected="false">Floor3</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="bautista-floor4-tab" href="../building/BAB/BABF4.php" role="tab" aria-controls="floor4" aria-selected="false">Floor4</a>
+                                        <a class="nav-link" id="bautista-floor4-tab" href="../building-personnel/BAB/BABF4.php" role="tab" aria-controls="floor4" aria-selected="false">Floor4</a>
                                     </li>
                                 </div>
                             </ul>
@@ -540,25 +540,25 @@ ORDER BY ac.date DESC";
                                 <h3>ACADEMIC BUILDING</h3>
                                 <div class="nav-container">
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="academic-floor1-tab" href="../building/NEB/NEWBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
+                                        <a class="nav-link" id="academic-floor1-tab" href="../building-personnel/NEB/NEWBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="academic-floor2-tab" href="../building/NEB/NEWBF2.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
+                                        <a class="nav-link" id="academic-floor2-tab" href="../building-personnel/NEB/NEWBF2.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="academic-floor3-tab" href="../building/NEB/NEWBF3.php" role="tab" aria-controls="floor3" aria-selected="false">Floor3</a>
+                                        <a class="nav-link" id="academic-floor3-tab" href="../building-personnel/NEB/NEWBF3.php" role="tab" aria-controls="floor3" aria-selected="false">Floor3</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="academic-floor4-tab" href="../building/NEB/NEWBF4.php" role="tab" aria-controls="floor4" aria-selected="false">Floor4</a>
+                                        <a class="nav-link" id="academic-floor4-tab" href="../building-personnel/NEB/NEWBF4.php" role="tab" aria-controls="floor4" aria-selected="false">Floor4</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="academic-floor5-tab" href="../building/NEB/NEWBF5.php" role="tab" aria-controls="floor4" aria-selected="false">Floor5</a>
+                                        <a class="nav-link" id="academic-floor5-tab" href="../building-personnel/NEB/NEWBF5.php" role="tab" aria-controls="floor4" aria-selected="false">Floor5</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="academic-floor6-tab" href="../building/NEB/NEWBF6.php" role="tab" aria-controls="floor4" aria-selected="false">Floor6</a>
+                                        <a class="nav-link" id="academic-floor6-tab" href="../building-personnel/NEB/NEWBF6.php" role="tab" aria-controls="floor4" aria-selected="false">Floor6</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="academic-floor7-tab" href="../building/NEB/NEWBF7.php" role="tab" aria-controls="floor4" aria-selected="false">Floor7</a>
+                                        <a class="nav-link" id="academic-floor7-tab" href="../building-personnel/NEB/NEWBF7.php" role="tab" aria-controls="floor4" aria-selected="false">Floor7</a>
                                     </li>
                                 </div>
                             </ul>
@@ -700,7 +700,7 @@ ORDER BY ac.date DESC";
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
         <script src="../../src/js/main.js"></script>
-        <script type="module" src="../../src/js/map.js"></script>
+        <script type="module" src="../../src/js/map-personnel.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <script src="../../src/js/profileModalController.js"></script>
     </body>

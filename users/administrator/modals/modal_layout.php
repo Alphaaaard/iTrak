@@ -16,7 +16,7 @@ $user = get_current_user_data();
 
                         <form method="post" class="row g-3">
                             <input type="hidden" name="accountId" id="hiddenId" value="<?php echo $user['accountId'] ?>">
-                            <div class="col-4">
+                            <div class="col-12">
                                 <div class="profile-img">
                                     <img src="<?php echo 'data:image/jpeg;base64,' . base64_encode($user['picture']) ?>" width="40%" alt="Profile" id="image">
                                 </div>
@@ -49,7 +49,7 @@ $user = get_current_user_data();
 
                             <div class="col-4">
                                 <label for="password" class="form-label">Password</label>
-                                <p id="passwordDisplay"><?php echo $user['password'] ?></p>
+                                <!-- <p id="passwordDisplay"><?php echo $user['password'] ?></p> -->
                             </div>
 
                             <div class="col-4">
@@ -62,10 +62,10 @@ $user = get_current_user_data();
                                 <p id="roleDisplay"><?php echo $user['role'] ?></p>
                             </div>
 
-                            <div class="col-4">
+                            <!-- <div class="col-4">
                                 <label for="user_pass" class="form-label" value="<?php echo $user['rfidNumber'] ?>">Register RFID</label>
                                 <button type="button" class="form-control btn-custom">RFID</button>
-                            </div>
+                            </div> -->
                         </form>
                     </div>
 
@@ -121,8 +121,12 @@ $user = get_current_user_data();
 
                             <div class="col-4">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control passwordEdit" id="passwordEditSelf" name="password" value="<?php echo $user['password'] ?>" />
+                                <div class="input-group">
+                                    <input type="password" class="form-control passwordEdit" id="passwordEditSelf" name="password" value="<?php echo $user['password'] ?>" />
+                                    <i class="bi-eye-slash" id="togglePassword" onclick="togglePassword()"></i>
+                                </div>
                             </div>
+
 
                             <div class="col-4">
                                 <label for="birthday" class="form-label">Birthday</label>
@@ -134,12 +138,12 @@ $user = get_current_user_data();
                                 <input type="text" class="form-control disabled roleEdit" id="roleEditSelf" name="role" value="<?php echo $user['role'] ?>" readonly />
                             </div>
 
-                            <div class="col-4">
+                            <!-- <div class="col-4">
                                 <label for="user_pass" class="form-label">Register RFID</label>
                                 <button type="button" class="form-control btn-custom" data-bs-toggle="modal" data-bs-target="#staticBackdrop112" onclick="setAction('edit')">RFID</button>
 
                                 <input type="password rfidFieldEdit" id='rfidFieldEditSelf' name="rfid" class="d-none" data-bs-toggle="modal" data-bs-target="#staticBackdrop112" value="<?php echo $user['rfidNumber'] ?>">
-                            </div>
+                            </div> -->
 
                             <div class="col-4">
                                 <label for="picture" class="form-label">Picture:</label>
@@ -158,3 +162,20 @@ $user = get_current_user_data();
         </div>
     </div>
 </div>
+
+<script>
+    function togglePassword() {
+        var passwordField = document.getElementById("passwordEditSelf");
+        var toggleIcon = document.getElementById("togglePassword");
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            toggleIcon.classList.remove("bi-eye-slash");
+            toggleIcon.classList.add("bi-eye");
+        } else {
+            passwordField.type = "password";
+            toggleIcon.classList.remove("bi-eye");
+            toggleIcon.classList.add("bi-eye-slash");
+        }
+    }
+</script>

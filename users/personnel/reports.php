@@ -13,9 +13,6 @@ function logActivity($conn, $accountId, $actionDescription, $tabValue)
     $stmt->close();
 }
 
-
-
-
 // Fetch Report activity logs
 $loggedInUserFirstName = $_SESSION['firstName']; // or the name field you have in session that you want to check against
 $loggedInUsermiddleName = $_SESSION['middleName']; // assuming you also have the last name in the session
@@ -399,7 +396,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <form class="d-flex" role="search">
                                     <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" onkeyup="searchTable()" />
                                 </form>
-
                             </div>
                         </div>
                     </header>

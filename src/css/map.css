@@ -58,6 +58,15 @@
   border: #3D3B40 1px solid;
 } */
 
+.col-6 .form-control:disabled, .form-control[readonly]{
+  background-color: unset!important;
+}
+
+.map-alert .modal-content {
+  width: 100%!important;
+  border-radius: 10px;
+}
+
 .modal-content {
   position: absolute;
   top: 100px;

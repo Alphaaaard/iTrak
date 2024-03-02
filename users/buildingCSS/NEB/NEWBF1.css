@@ -9,7 +9,7 @@
   top: unset !important;
   left: unset !important;
   margin: 0 auto !important;
-  border-radius: 30px !important;
+  /* border-radius: 30px !important; */
 }
 
 .center-content img {
@@ -65,7 +65,7 @@ input.form-control {
 .add-modal-btn {
   text-transform: uppercase;
   width: unset;
-  padding: 0.5em 1em !important;
+  /* padding: 0.5em 1em !important; */
   text-align: end;
 }
 
@@ -87,7 +87,7 @@ input.form-control {
     top: unset!important;
     left: unset!important;
     margin: 0 auto!important;
-    border-radius: 30px!important;
+    /* border-radius: 30px!important; */
 }
 
 .center-content img{
@@ -147,7 +147,7 @@ input.form-control {
 .add-modal-btn{
     text-transform: uppercase;
     width:unset;
-    padding: .5em 1em!important;
+    /* padding: .5em 1em!important; */
     text-align: end;
 }
 
