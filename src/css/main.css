@@ -1075,6 +1075,13 @@ color: #3D3B40;
   padding: 25px;
 }
 
+.center-content img{
+  height: 150px!important;
+  width: 150px!important;
+  max-width: unset!important;
+  /* border-radius: 50%; */
+}
+
 .footer {
   padding: 15px 0;
 }

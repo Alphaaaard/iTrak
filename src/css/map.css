@@ -69,11 +69,11 @@
 
 .modal-content {
   position: absolute;
-  top: 100px;
-  right: 30px;
-  width: 40%;
+  top: 130px;
+  right: 50px;
+  width: 25%;
   border-radius: 10px;
-  height: 80vh;
+  height: 70vh;
 }
 
 .building-name {
@@ -121,9 +121,9 @@
 .form-control {
   border: none !important;
 }
-.modal-header {
+/* .modal-header {
   border-bottom: none;
-}
+} */
 .center-content {
   display: flex;
   justify-content: center;
@@ -156,22 +156,38 @@
 }
 
 .buildings {
-  display: flex;
   gap: 1em;
-  flex-wrap: wrap;
+  display: flex;
+  flex-flow: column wrap;
+  margin: .5em;
+  justify-content: flex-start;
+  align-self: center;
+  height: 80vh;
+  border: #163172 2px solid;
+  background-color: white;
+  border-radius: 15px;
+  /* width: 90%; */
+  padding: .5em;
 }
 .building {
-  height: 10vh;
-  width: 40%;
-  background-color: #d6e4f0;
-  border-radius: 25px;
-  flex-grow: 1;
-  color: #3d3b40;
+  /* border: #163172 1px solid; */
+  list-style: none;
+  padding: 1em 1em;
+  background-color: #F1F6FF;
+  cursor: pointer;
+  font-weight: bold;
+  color: #163172;
+  border-radius: 15px;
+  text-align: center;
 }
 
 .nav-tabs .nav-link {
   width: 100%;
   color: #3d3b40;
+}
+
+.nav-link{
+  text-align: center!important;
 }
 
 .nav-tabs .nav-link:hover {
@@ -181,19 +197,54 @@
 .nav-container {
   /* border: #3D3B40 2px solid; */
   border-radius: 10px;
+  gap: 1em;
+  display: flex;
+  flex-flow: column wrap;	
+  margin: 1em;
+  justify-content: flex-start;  
+  align-self: center;
+  height: 60vh;
 }
+
+.nav-container .nav-item{
+  list-style: none;
+  padding: .5em 1em;
+  background-color: #F1F6FF;
+  cursor: pointer;
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #163172;
+}
+
+.nav-container .nav-item:hover {
+  /* background-color: rgba(214,228,240,0.5);   */
+  color: #3D3B40;
+}
+
+
+
+
+
+
 
 .nav-tabs {
   display: flex;
   flex-direction: column;
+  border-bottom: unset;
+}
+
+.nav-tabs h3{
+  color:#163172;
 }
 
 h3 {
   text-align: center;
   font-weight: bold;
   /* font-size: medium; */
-  padding: 3em;
+  /* padding: 3em; */
   color: #3d3b40;
+  font-size: 1em;
+  margin-bottom: unset;
 }
 
 
@@ -236,5 +287,15 @@ h3 {
     height: 95%;
     width: 100%;
     right: 0;
+  }
+
+  .nav-container .nav-item{
+    font-size: 3.5rem;
+    padding: .5em .5em;
+  }
+
+  .nav-container{
+    height: 70vh;
+    margin: auto 1em;
   }
 }
