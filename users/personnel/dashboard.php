@@ -43,6 +43,19 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->execute();
     $PendingTask = $stmt->get_result();
 
+
+    // Adjust the SQL to check the 'action' field for the logged-in user's name
+    $sqlReport = "SELECT * FROM asset WHERE status = 'Need Repair'";
+
+    // Prepare the SQL statement
+    $stmt = $conn->prepare($sqlReport);
+
+    $stmt->execute();
+    $OverallTask = $stmt->get_result();
+
+
+
+
     // Fetch Report activity logs
     $loggedInUserFirstName = $_SESSION['firstName']; // or the name field you have in session that you want to check against
     $loggedInUsermiddleName = $_SESSION['middleName']; // assuming you also have the last name in the session
@@ -409,7 +422,7 @@ ORDER BY ac.date DESC";
                                     </h5>
                                     <?php
                                     // After executing the query and fetching the result
-                                    $totalRows = $PendingTask->num_rows + $CompletedTask->num_rows; // This will hold the total number of rows returned by the query
+                                    $totalRows = $OverallTask->num_rows; // This will hold the total number of rows returned by the query
                                     // Now, display the total number of rows
                                     echo "<p class='total-p'>" . $totalRows . "</p>"; // Display the total number of rows
                                     ?>
