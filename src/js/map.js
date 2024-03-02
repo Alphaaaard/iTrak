@@ -104,7 +104,7 @@ function loadModels() {
       description: "Description for Model 1",
       scale: 0.125,
       position: { x: -4.5, y: -1, z: 0 },
-      rotation: { x: 0, y: 0, z: 0 },
+      rotation: { x: 0, y: 1.5, z: 0 },
     },
     {
       path: "../../src/models/dino/TechVoc.glb",
