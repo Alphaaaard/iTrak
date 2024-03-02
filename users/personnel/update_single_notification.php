@@ -8,7 +8,7 @@ if (isset($_POST['activityId'])) {
     $activityId = $_POST['activityId'];
 
     // Update the seen status for the notification with the provided activityId
-    $stmt = $conn->prepare("UPDATE activitylogs SET seen = '1' WHERE activityId = ?");
+    $stmt = $conn->prepare("UPDATE activitylogs SET p_seen = '1' WHERE activityId = ?");
     $stmt->bind_param("i", $activityId);
     
     if ($stmt->execute()) {
@@ -38,7 +38,7 @@ FROM activitylogs AS al
 JOIN account AS acc ON al.accountId = acc.accountId
 WHERE al.tab='Report' 
 AND al.action LIKE ?
-AND al.seen = '0'";
+AND al.p_seen = '0'";
 
 $stmt = $conn->prepare($sql);
 

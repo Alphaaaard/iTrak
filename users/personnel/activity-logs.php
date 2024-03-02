@@ -15,7 +15,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $accountId = $_SESSION['accountId'];
 
     // Prepare a statement to count unseen notifications
-    $stmt = $conn->prepare("SELECT COUNT(*) AS unseenCount FROM activitylogs WHERE seen = '0' AND accountID = ?");
+    $stmt = $conn->prepare("SELECT COUNT(*) AS unseenCount FROM activitylogs WHERE p_seen = '0' AND accountID = ?");
     $stmt->bind_param("i", $accountId);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -65,7 +65,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                   FROM activitylogs AS al
                   JOIN account AS acc ON al.accountID = acc.accountID
                   WHERE al.tab='Report' 
-                  AND al.seen = '0' AND al.action LIKE ?
+                  AND al.p_seen = '0' AND al.action LIKE ?
                   ORDER BY al.date DESC 
                   LIMIT 1000";
 
@@ -80,7 +80,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmtLatestLogs->execute();
     $resultLatestLogs = $stmtLatestLogs->get_result();
 
-    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '3'";
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE p_seen = '3'";
     $result = $conn->query($unseenCountQuery);
     $unseenCountRow = $result->fetch_assoc();
     $unseenCount = $unseenCountRow['unseenCount'];

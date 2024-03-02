@@ -576,7 +576,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <section>
             <!--Modal sections-->
-<<<<<<< Updated upstream
             <!--Modal for table 1-->
             <div class="modal-parent">
                 <div class="modal modal-xl fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -955,8 +954,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
             </form> -->
-=======
->>>>>>> Stashed changes
 
             <!--Assign Modal for table 4-->
             <div class="modal-parent">
@@ -1057,7 +1054,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
 
-<<<<<<< Updated upstream
             <!-- Edit for table 4
             <div class="modal fade" id="staticBackdrop5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -1073,9 +1069,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
             </form> -->
-=======
-
->>>>>>> Stashed changes
         </section>
 
         <!-- PROFILE MODALS -->
@@ -1109,38 +1102,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
         <script>
-<<<<<<< Updated upstream
-=======
-            //PARA MAGDIRECT KA SA PAGE 
-            function redirectToPage(building, floor, assetId) {
-                var newLocation = '';
-                if (building === 'New Academic' && floor === '1F') {
-                    newLocation = "../../users/building/NEB/NEWBF1.php";
-                } else if (building === 'Yellow' && floor === '1F') {
-                    newLocation = "../../users/building/OLB/OLBF1.php";
-                } else if (building === 'Korphil' && floor === '1F') {
-                    newLocation = "../../users/building/KOB/KOBF1.php";
-                } else if (building === 'Bautista' && floor === 'Basement') {
-                    newLocation = "../../users/building/BAB/BABF1.php";
-                } else if (building === 'Belmonte' && floor === '1F') {
-                    newLocation = "../../users/building/BEB/BEBF1.php";
-                }
-
-                // Append the assetId to the URL as a query parameter
-                window.location.href = newLocation + '?assetId=' + assetId;
-            }
-
-            $(document).on('click', 'table tr', function() {
-                var assetId = $(this).find('td:eq(0)').text(); // Assuming first TD is the assetId
-                var building = $(this).find('td:eq(3)').text().split(' / ')[0]; // Adjust the index as needed
-                var floor = $(this).find('td:eq(3)').text().split(' / ')[1]; // Adjust the index as needed
-                redirectToPage(building, floor, assetId);
-            });
-        </script>
-
-
-        <script>
->>>>>>> Stashed changes
             $(document).ready(function() {
 
                 // Function to populate the modal fields
@@ -1285,7 +1246,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     filterTable(); // Filter table with new criteria
                 });
             });
-<<<<<<< Updated upstream
         });
     </script>
  <script>
@@ -1297,19 +1257,6 @@ $(document).ready(function() {
         table = document.getElementById("myTabContent"); // Use the ID of your table container
         tr = table.getElementsByTagName("tr");
         var selectedFilter = document.getElementById("filter-criteria").value;
-=======
-        </script>
-
-        <script>
-            $(document).ready(function() {
-                function searchTable() {
-                    var input, filter, table, tr, td, i;
-                    input = document.getElementById("search-box");
-                    filter = input.value.toUpperCase();
-                    table = document.getElementById("myTabContent"); // Use the ID of your table container
-                    tr = table.getElementsByTagName("tr");
-                    var selectedFilter = document.getElementById("filter-criteria").value;
->>>>>>> Stashed changes
 
                     for (i = 1; i < tr.length; i++) { // Start with 1 to avoid the header
                         td = tr[i].getElementsByTagName("td");

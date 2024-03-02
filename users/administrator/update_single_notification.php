@@ -16,50 +16,23 @@ if (isset($_POST['activityId'])) {
     } else {
         echo "Error updating notification: " . $stmt->error;
     }
-    
-
+    $stmt->close(); // Close the statement
     exit(); // Important: terminate the script here
 }
-$loggedInUserFirstName = $_SESSION['firstName'];
-$loggedInUserMiddleName = $_SESSION['middleName']; // Assuming you store middle name in the session
-$loggedInUserLastName = $_SESSION['lastName'];
-// Concatenate first, middle, and last names to form the full name
-$loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
 
-// If this is not an AJAX request, proceed to fetch the current notification count
-// Modify the SQL to count only the unseen notifications for the logged-in user
- 
-
-// Old code with specific name condition
-// $searchTerm = "%Assigned maintenance personnel " . $loggedInFullName . "%";
-
-// New SQL query without the specific name condition
+// Proceed to fetch the current notification count
+// This SQL counts only the unseen notifications for the Report tab
 $sql = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE tab='Report' AND seen = '0'";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$stmt->store_result();
+$stmt->bind_result($unseenCount);
+$stmt->fetch();
 
-// Execute the query directly without a prepared statement since there is no user input
-$result = $conn->query($sql);
+// Output the count
+echo $unseenCount;
 
-// Check if the query was successful
-if($result) {
-    $row = $result->fetch_assoc();
-    echo $row['unseenCount']; // Output the count of unseen notifications for the 'Report' tab
-} else {
-    echo "Error fetching notification count: " . $conn->error;
-}
-
+// Close the statement and connection
+$stmt->close();
 $conn->close();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>

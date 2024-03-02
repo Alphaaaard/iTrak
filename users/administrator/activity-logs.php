@@ -6,13 +6,12 @@ $conn = connection();
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
 
 
-    // For personnel page, check if userLevel is 3
-    if ($_SESSION['userLevel'] != 1) {
-        // If not personnel, redirect to an error page or login
-        header("Location:error.php");
-        exit;
-    }
-
+        // For personnel page, check if userLevel is 3
+        if($_SESSION['userLevel'] != 1) {
+            // If not personnel, redirect to an error page or login
+            header("Location:error.php");
+            exit;
+        }
 
 
  // Fetch Report activity logs
@@ -47,30 +46,27 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
  $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
  $loggedInUserLastName = $_SESSION['lastName'];
  
- $loggedInFullName = $loggedInUserFirstName . ' '.$loggedInUserMiddleName .' '. $loggedInUserLastName;
+ // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
 
+$loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
 
- 
- // Adjust the SQL to fetch only the notifications for the logged-in user
-// Old code with specific name condition
-// $searchTerm = "%Assigned maintenance personnel " . $loggedInFullName . "%";
-
-// New SQL query without the specific name condition
+// SQL query to fetch notifications related to report activities
 $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName
                FROM activitylogs AS al
                JOIN account AS acc ON al.accountID = acc.accountID
-               WHERE al.tab='Report' 
-               AND al.seen = '0'
+               WHERE al.tab='Report' AND al.seen = '0'
                ORDER BY al.date DESC 
-               LIMIT 1000";
+               LIMIT 5"; // Set limit to 5
 
-// Prepare and execute the new SQL statement
+// Prepare the SQL statement
 $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+
+// Execute the query
 $stmtLatestLogs->execute();
 $resultLatestLogs = $stmtLatestLogs->get_result();
 
 
-$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '3'";
+$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0'";
 $result = $conn->query($unseenCountQuery);
 $unseenCountRow = $result->fetch_assoc();
 $unseenCount = $unseenCountRow['unseenCount'];
@@ -118,12 +114,13 @@ $unseenCount = $unseenCountRow['unseenCount'];
 
 
 
+
+
+
+
     
 ?>
-
-
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="en">
 
     <head>
@@ -170,6 +167,21 @@ $unseenCount = $unseenCountRow['unseenCount'];
     </tr>
     </table>
     <script type="text/javascript">
+
+
+
+
+   
+    
+
+       
+       
+      
+    
+
+
+
+
         function loadDoc() {
 
 
@@ -200,43 +212,41 @@ $unseenCount = $unseenCountRow['unseenCount'];
     <!-- PHP code to display notifications will go here -->
     <?php
 if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
-// Loop through each notification
-while ($row = $resultLatestLogs->fetch_assoc()) {
-$adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
-$actionText = $row["action"];
-$assetId = 'unknown'; // Default value
-$assignedName = "default value or empty string"; // Set a default value
+    while ($row = $resultLatestLogs->fetch_assoc()) {
+        $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+        $actionText = $row["action"];
+        
+        // Initialize the notification text as empty
+        $notificationText = "";
+        
+        // Check for 'Assigned maintenance personnel' action
+        if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
+            $assignedName = $matches[1];
+            $assetId = $matches[2];
+            $notificationText = "Admin $adminName assigned $assignedName to asset ID $assetId";
+        }
+        // Check for 'Changed status of asset ID' action
+        elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
+            $assetId = $matches[1];
+            $newStatus = $matches[2];
+            $notificationText = "Admin $adminName changed status of asset ID $assetId to $newStatus";
+        }
 
-// ... your existing code ...
-
-// Inside the if statement where you expect $assignedName to be set
-if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
-    $assignedName = $matches[1];
-    $assetId = $matches[2];
-}
-
-// ... rest of your code ...
-
-
-// Generate the notification text
-// Generate the notification text including the name of the assigned personnel
-$notificationText = "Admin $adminName assigned $assignedName to asset ID " . htmlspecialchars($assetId);
-
-
-// Output the notification as a clickable element with a data attribute for the activityId
-echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . $notificationText . '</a>';
-}
+        // If notification text is set, echo the notification
+        if (!empty($notificationText)) {
+            // HTML for notification item
+            echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars($notificationText) . '</a>';
+        }
+    }
 } else {
-echo '<a href="#">No new notifications</a>';
+    // No notifications found
+    echo '<a href="#">No new notifications</a>';
 }
 ?>
 <a href="activity-logs.php" class="view-all">View All</a>
 
 </div>
 </div>
-
-
-
 
                     <a href="#" class="settings profile">
                         <div class="profile-container" title="settings">
