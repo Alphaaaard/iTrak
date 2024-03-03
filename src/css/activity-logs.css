@@ -61,6 +61,9 @@
     font-size: .85em;
     width: 10em;
   }
+  /* .tbl-filter select {
+    padding: 0.3em 5em 0.3em 0;
+  } */
 
   /* .nav-link.active {
     background-color: #9ED9FF;

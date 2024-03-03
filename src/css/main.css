@@ -341,7 +341,9 @@ display: none;
 
 #sidebar .brand .mobile-sidebar-close{
   align-items: center;
-
+  position: absolute;
+  top: 15px;
+  right: 0;
   }
 
 
@@ -681,7 +683,7 @@ input#roleField.form-control{
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  /* margin-bottom: 20px; */
+  margin-bottom: 20px;
 
 }
 
@@ -1144,9 +1146,9 @@ h5 {
 
  
 @media (max-width: 992px) {
-  .tab-name{
+  /* .tab-name{
     padding-bottom: .5em;
-  }
+  } */
 
   .table-header table tr th:nth-child(5){
     width: 15%;
@@ -1197,7 +1199,7 @@ h5 {
   }
   
   #navbar.hide nav .bi.bi-list {
-    margin-left: 7.7em;
+    margin-left: 0!important;
   
     transition: 0.3s ease;
   }
@@ -1352,7 +1354,7 @@ h5 {
   }
 
   .tab-name{
-    padding-bottom: .5em;
+    /* padding-bottom: .5em; */
     margin: 0;
   }
 
@@ -1538,7 +1540,7 @@ h5 {
 #sidebar.hide .brand img.logo {
   transition: 0.3s ease;
   width: 100%;
-  padding: 2em 3em;
+  padding: 1em 3em;
 }
 /* #sidebar.hide .brand img.logo {
   padding: 0;

@@ -16,36 +16,36 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
- // for notif below
- // Update the SQL to join with the account and asset tables to get the admin's name and asset information
- $loggedInUserFirstName = $_SESSION['firstName']; 
- $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
- $loggedInUserLastName = $_SESSION['lastName'];
- 
- // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
+    // for notif below
+    // Update the SQL to join with the account and asset tables to get the admin's name and asset information
+    $loggedInUserFirstName = $_SESSION['firstName'];
+    $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
+    $loggedInUserLastName = $_SESSION['lastName'];
 
-$loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
+    // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
 
-// SQL query to fetch notifications related to report activities
-$sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName
+    $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
+
+    // SQL query to fetch notifications related to report activities
+    $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName
                FROM activitylogs AS al
                JOIN account AS acc ON al.accountID = acc.accountID
                WHERE al.tab='Report' AND al.seen = '0'
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
 
-// Prepare the SQL statement
-$stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+    // Prepare the SQL statement
+    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
 
-// Execute the query
-$stmtLatestLogs->execute();
-$resultLatestLogs = $stmtLatestLogs->get_result();
+    // Execute the query
+    $stmtLatestLogs->execute();
+    $resultLatestLogs = $stmtLatestLogs->get_result();
 
 
-$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '3'";
-$result = $conn->query($unseenCountQuery);
-$unseenCountRow = $result->fetch_assoc();
-$unseenCount = $unseenCountRow['unseenCount'];
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '3'";
+    $result = $conn->query($unseenCountQuery);
+    $unseenCountRow = $result->fetch_assoc();
+    $unseenCount = $unseenCountRow['unseenCount'];
 
     // Get the current date in the same format as your date column
     //Personnel Attendance
@@ -280,149 +280,111 @@ $unseenCount = $unseenCountRow['unseenCount'];
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard</title>
-    <!-- BOOTSTRAP -->
-    <link rel="icon" type="image/x-icon" href="../../src/img/tab-logo.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <!-- jQuery library -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- jQuery UI library -->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dashboard</title>
+        <!-- BOOTSTRAP -->
+        <link rel="icon" type="image/x-icon" href="../../src/img/tab-logo.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- jQuery UI library -->
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
-    <link rel="stylesheet" href="../../src/css/main.css" />
-    <link rel="stylesheet" href="../../src/css/dashboard.css" />
-</head>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
+        <link rel="stylesheet" href="../../src/css/main.css" />
+        <link rel="stylesheet" href="../../src/css/dashboard.css" />
+    </head>
 
-<body>
-    <!-- NAVBAR -->
-    <div id="navbar" class="">
-        <nav>
-            <div class="hamburger">
-                <i class="bi bi-list"></i>
-                <a href="#" class="brand" title="logo">
-                    <!-- <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i> -->
-                </a>
-            </div>
-            <div class="content-nav">
-                <div class="notification-dropdown">
-         
- <a href="#" class="notification" id="notification-button">
-
-
-
-
-
-
-<i class="fa fa-bell" aria-hidden="true"></i>
-<span id="noti_number"><?php echo $unseenCount; ?></span>
-
-    </td>
-    </tr>
-    </table>
-    <script type="text/javascript">
-
-
-
-
-   
-    
-
-       
-       
-      
-    
-
-
-
-
-        function loadDoc() {
-
-
-            setInterval(function() {
-
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("noti_number").innerHTML = this.responseText;
-                    }
-                };
-                xhttp.open("GET", "update_single_notification.php", true);
-                xhttp.send();
-
-            }, 10);
-
-
-        }
-        loadDoc();
-    </script>
-
-</a>
-
-
-
-<div class="dropdown-content" id="notification-dropdown-content">
-    <h6 class="dropdown-header">Alerts Center</h6>
-    <!-- PHP code to display notifications will go here -->
-    <?php
-if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
-    while ($row = $resultLatestLogs->fetch_assoc()) {
-        $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
-        $actionText = $row["action"];
-        
-        // Initialize the notification text as empty
-        $notificationText = "";
-        
-        // Check for 'Assigned maintenance personnel' action
-        if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
-            $assignedName = $matches[1];
-            $assetId = $matches[2];
-            $notificationText = "Admin $adminName assigned $assignedName to asset ID $assetId";
-        }
-        // Check for 'Changed status of asset ID' action
-        elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
-            $assetId = $matches[1];
-            $newStatus = $matches[2];
-            $notificationText = "Admin $adminName changed status of asset ID $assetId to $newStatus";
-        }
-
-        // If notification text is set, echo the notification
-        if (!empty($notificationText)) {
-            // HTML for notification item
-            echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars($notificationText) . '</a>';
-        }
-    }
-} else {
-    // No notifications found
-    echo '<a href="#">No new notifications</a>';
-}
-?>
-<a href="activity-logs.php" class="view-all">View All</a>
-
-</div>
-</div>
-                <a href="#" class="settings profile">
-                    <div class="profile-container" title="settings">
-                        <div class="profile-img">
+    <body>
+        <!-- NAVBAR -->
+        <div id="navbar" class="">
+            <nav>
+                <div class="hamburger">
+                    <i class="bi bi-list"></i>
+                    <a href="#" class="brand" title="logo">
+                        <!-- <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i> -->
+                    </a>
+                </div>
+                <div class="content-nav">
+                    <div class="notification-dropdown">
+                        <a href="#" class="notification" id="notification-button">
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+                            <span id="noti_number"><?php echo $unseenCount; ?></span>
+                            </td>
+                            </tr>
+                            </table>
+                            <script type="text/javascript">
+                                function loadDoc() {
+                                    setInterval(function() {
+                                        var xhttp = new XMLHttpRequest();
+                                        xhttp.onreadystatechange = function() {
+                                            if (this.readyState == 4 && this.status == 200) {
+                                                document.getElementById("noti_number").innerHTML = this.responseText;
+                                            }
+                                        };
+                                        xhttp.open("GET", "update_single_notification.php", true);
+                                        xhttp.send();
+                                    }, 10);
+                                }
+                                loadDoc();
+                            </script>
+                        </a>
+                        <div class="dropdown-content" id="notification-dropdown-content">
+                            <h6 class="dropdown-header">Alerts Center</h6>
+                            <!-- PHP code to display notifications will go here -->
                             <?php
+                            if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
+                                while ($row = $resultLatestLogs->fetch_assoc()) {
+                                    $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+                                    $actionText = $row["action"];
+
+                                    // Initialize the notification text as empty
+                                    $notificationText = "";
+
+                                    // Check for 'Assigned maintenance personnel' action
+                                    if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
+                                        $assignedName = $matches[1];
+                                        $assetId = $matches[2];
+                                        $notificationText = "Admin $adminName assigned $assignedName to asset ID $assetId";
+                                    }
+                                    // Check for 'Changed status of asset ID' action
+                                    elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
+                                        $assetId = $matches[1];
+                                        $newStatus = $matches[2];
+                                        $notificationText = "Admin $adminName changed status of asset ID $assetId to $newStatus";
+                                    }
+
+                                    // If notification text is set, echo the notification
+                                    if (!empty($notificationText)) {
+                                        // HTML for notification item
+                                        echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars($notificationText) . '</a>';
+                                    }
+                                }
+                            } else {
+                                // No notifications found
+                                echo '<a href="#">No new notifications</a>';
+                            }
+                            ?>
+                            <a href="activity-logs.php" class="view-all">View All</a>
+
+                        </div>
+                    </div>
+                    <a href="#" class="settings profile">
+                        <div class="profile-container" title="settings">
+                            <div class="profile-img">
+                                <?php
                                 // Check the connection
                                 if ($conn->connect_error) {
                                     die('Connect Error (' . $conn->connect_errno . ') ' . $conn->connect_error);
@@ -449,182 +411,181 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
 
                                 $stmt->close();
                                 ?>
+                            </div>
+                            <div class="profile-name-container " id="desktop">
+                                <div><a class="profile-name">
+                                        <?php echo $_SESSION['firstName']; ?>
+                                    </a></div>
+                                <div><a class="profile-role">
+                                        <?php echo $_SESSION['role']; ?>
+                                    </a></div>
+                            </div>
                         </div>
-                        <div class="profile-name-container " id="desktop">
+                    </a>
+
+                    <div id="settings-dropdown" class="dropdown-content1">
+                        <div class="profile-name-container" id="mobile">
                             <div><a class="profile-name">
                                     <?php echo $_SESSION['firstName']; ?>
                                 </a></div>
                             <div><a class="profile-role">
                                     <?php echo $_SESSION['role']; ?>
                                 </a></div>
+                            <hr>
                         </div>
+                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i class="bi bi-person profile-icons"></i>Profile</a>
+                        <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
                     </div>
-                </a>
-
-                <div id="settings-dropdown" class="dropdown-content1">
-                    <div class="profile-name-container" id="mobile">
-                        <div><a class="profile-name">
-                                <?php echo $_SESSION['firstName']; ?>
-                            </a></div>
-                        <div><a class="profile-role">
-                                <?php echo $_SESSION['role']; ?>
-                            </a></div>
-                        <hr>
-                    </div>
-                    <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i
-                            class="bi bi-person profile-icons"></i>Profile</a>
-                    <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
-                </div>
                 <?php
             } else {
                 header("Location:../../index.php");
                 exit();
             }
                 ?>
-            </div>
-        </nav>
-    </div>
-    <!-- NAVBAR -->
-    <!-- SIDEBAR -->
-    <section id="sidebar">
-        <div href="#" class="brand" title="logo">
-            <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
-            <div class="mobile-sidebar-close">
-                <i class="bi bi-arrow-left-circle"></i>
-            </div>
+                </div>
+            </nav>
         </div>
-        <ul class="side-menu top">
-            <li class="active">
-                <a href="./dashboard.php">
-                    <i class="bi bi-grid"></i>
-                    <span class="text">Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="./attendance-logs.php">
-                    <i class="bi bi-calendar-week"></i>
-                    <span class="text">Attendance Logs</span>
-                </a>
-            </li>
-            <li>
-                <a href="./staff.php">
-                    <i class="bi bi-person"></i>
-                    <span class="text">Staff</span>
-                </a>
-            </li>
-            <li>
-                <a href="./gps.php">
-                    <i class="bi bi-geo-alt"></i>
-                    <span class="text">GPS</span>
-                </a>
-            </li>
-            <li>
-                <a href="./map.php">
-                    <i class="bi bi-map"></i>
-                    <span class="text">Map</span>
-                </a>
-            </li>
-            <li>
-                <a href="./reports.php">
-                    <i class="bi bi-clipboard"></i>
-                    <span class="text">Reports</span>
-                </a>
-            </li>
-            <li>
-                <a href="./archive.php">
-                    <i class="bi bi-archive"></i>
-                    <span class="text">Archive</span>
-                </a>
-            </li>
-            <li>
-                <a href="./activity-logs.php">
-                    <i class="bi bi-arrow-counterclockwise"></i>
-                    <span class="text">Activity Logs</span>
-                </a>
-            </li>
-        </ul>
-    </section>
-    <!-- SIDEBAR -->
-    <!-- CONTENT -->
-    <section id="content">
-        <!-- MAIN -->
-        <main>
-            <header>
-                <!-- <div class="cont-header">
+        <!-- NAVBAR -->
+        <!-- SIDEBAR -->
+        <section id="sidebar">
+            <div href="#" class="brand" title="logo">
+                <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
+                <div class="mobile-sidebar-close">
+                    <i class="bi bi-arrow-left-circle"></i>
+                </div>
+            </div>
+            <ul class="side-menu top">
+                <li class="active">
+                    <a href="./dashboard.php">
+                        <i class="bi bi-grid"></i>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./attendance-logs.php">
+                        <i class="bi bi-calendar-week"></i>
+                        <span class="text">Attendance Logs</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./staff.php">
+                        <i class="bi bi-person"></i>
+                        <span class="text">Staff</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./gps.php">
+                        <i class="bi bi-geo-alt"></i>
+                        <span class="text">GPS</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./map.php">
+                        <i class="bi bi-map"></i>
+                        <span class="text">Map</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./reports.php">
+                        <i class="bi bi-clipboard"></i>
+                        <span class="text">Reports</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./archive.php">
+                        <i class="bi bi-archive"></i>
+                        <span class="text">Archive</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./activity-logs.php">
+                        <i class="bi bi-arrow-counterclockwise"></i>
+                        <span class="text">Activity Logs</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <!-- SIDEBAR -->
+        <!-- CONTENT -->
+        <section id="content">
+            <!-- MAIN -->
+            <main>
+                <header>
+                    <!-- <div class="cont-header">
                         <h1 class="tab-name-only">Dashboard</h1>
                     </div> -->
-            </header>
+                </header>
 
-            <div class="content-container">
-                <section class="content1">
-                    <main class="present-buttons-container">
-                        <div class="present-total-container">
-                            <section class="present-total-section">
-                                <h5>
-                                    Present Today
-                                </h5>
-                                <?php
+                <div class="content-container">
+                    <section class="content1">
+                        <main class="present-buttons-container">
+                            <div class="present-total-container">
+                                <section class="present-total-section">
+                                    <h5>
+                                        Present Today
+                                    </h5>
+                                    <?php
                                     $totalPresent = $result->num_rows + $result20->num_rows; // Sum of both counts
                                     echo "<p class='total-p'>" . $totalPresent . "</p>"; // Display the total
                                     ?>
-                                <section>
-                        </div>
-                        <div class="present-main-per">
-                            <div class="button-1">
-                                <!--Para sa presents today ng personnel-->
-                                <div class="present-container">
-                                    <section class="present-image">
-                                        <img src="../../src/img/Vector.png" class="icon-present" />
-                                    </section>
-                                    <section class="present-numbers">
-                                        <p class="first-p">
-                                            <?php echo $result->num_rows; ?>
-                                        </p> <!-- Dynamically display the count -->
-                                        <p class="second-p">
-                                            <?php
-                if ($result->num_rows === 0) {
-                    echo 'Maintenance Personnel'; // Case for 0 attendees
-                } elseif ($result->num_rows === 1) {
-                    echo 'Maintenance Personnel'; // Case for 1 attendee
-                } else {
-                    echo 'Maintenance Personnel'; // Case for multiple attendees
-                }
-                ?>
-                                        </p> <!-- Adjust text based on count -->
-                                    </section>
+                                    <section>
+                            </div>
+                            <div class="present-main-per">
+                                <div class="button-1">
+                                    <!--Para sa presents today ng personnel-->
+                                    <div class="present-container">
+                                        <section class="present-image">
+                                            <img src="../../src/img/Vector.png" class="icon-present" />
+                                        </section>
+                                        <section class="present-numbers">
+                                            <p class="first-p">
+                                                <?php echo $result->num_rows; ?>
+                                            </p> <!-- Dynamically display the count -->
+                                            <p class="second-p">
+                                                <?php
+                                                if ($result->num_rows === 0) {
+                                                    echo 'Maintenance Personnel'; // Case for 0 attendees
+                                                } elseif ($result->num_rows === 1) {
+                                                    echo 'Maintenance Personnel'; // Case for 1 attendee
+                                                } else {
+                                                    echo 'Maintenance Personnel'; // Case for multiple attendees
+                                                }
+                                                ?>
+                                            </p> <!-- Adjust text based on count -->
+                                        </section>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <?php if ($result->num_rows > 0): ?>
-                            <div class="hover-box">
-                                <ul class="hover-ul">
-                                    <?php while ($row = $result->fetch_assoc()) : ?>
-                                    <li>
-                                        <?php echo htmlspecialchars($row['fullName']); ?>
-                                    </li>
-                                    <?php endwhile; ?>
-                                </ul>
-                            </div>
-                            <?php endif; ?>
-
+                                <?php if ($result->num_rows > 0) : ?>
+                                    <div class="hover-box">
+                                        <ul class="hover-ul">
+                                            <?php while ($row = $result->fetch_assoc()) : ?>
+                                                <li>
+                                                    <?php echo htmlspecialchars($row['fullName']); ?>
+                                                </li>
+                                            <?php endwhile; ?>
+                                        </ul>
+                                    </div>
+                                <?php endif; ?>
 
 
-                            <div class="button-2">
 
-                                <!--Para sa presents today ng manager-->
-                                <?php ($result20->num_rows > 0)  ?>
+                                <div class="button-2">
 
-                                <div class="present-container-2">
-                                    <section class="present-image">
-                                        <img src="../../src/img/Vector.png" class="icon-present" />
-                                    </section>
+                                    <!--Para sa presents today ng manager-->
+                                    <?php ($result20->num_rows > 0)  ?>
 
-                                    <section class="present-numbers">
-                                        <p class="first-p">
-                                            <?php echo $result20->num_rows; ?>
-                                        </p> <!-- Dynamically display the count -->
-                                        <p class="second-p">
-                                            <?php
+                                    <div class="present-container-2">
+                                        <section class="present-image">
+                                            <img src="../../src/img/Vector.png" class="icon-present" />
+                                        </section>
+
+                                        <section class="present-numbers">
+                                            <p class="first-p">
+                                                <?php echo $result20->num_rows; ?>
+                                            </p> <!-- Dynamically display the count -->
+                                            <p class="second-p">
+                                                <?php
                                                 if ($result20->num_rows === 0) {
                                                     echo ' Maintenance Manager'; // Case for 0 attendees
                                                 } elseif ($result20->num_rows === 1) {
@@ -633,329 +594,301 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                                     echo 'Maintenance Manager'; // Case for multiple attendees
                                                 }
                                                 ?>
-                                        </p> <!-- Adjust text based on count -->
-                                    </section>
+                                            </p> <!-- Adjust text based on count -->
+                                        </section>
+
+                                    </div>
 
                                 </div>
+                                <!--End of div for button-2-->
 
-                            </div>
-                            <!--End of div for button-2-->
+                                <?php if ($result20->num_rows > 0) : ?>
+                                    <div class="hover-box-2">
+                                        <ul class="hover-ul">
+                                            <?php while ($row20 = $result20->fetch_assoc()) : ?>
+                                                <li>
+                                                    <?php echo htmlspecialchars($row20['fullName']); ?>
+                                                </li>
+                                            <?php endwhile; ?>
+                                        </ul>
+                                    </div>
+                                <?php endif; ?>
 
-                        <?php if ($result20->num_rows > 0): ?>
-                            <div class="hover-box-2">
-                                <ul class="hover-ul">
-                                    <?php while ($row20 = $result20->fetch_assoc()) : ?>
-                                    <li>
-                                        <?php echo htmlspecialchars($row20['fullName']); ?>
-                                    </li>
-                                    <?php endwhile; ?>
-                                </ul>
-                            </div>
-                            <?php endif; ?>
 
-                        
-                        <!-- Personnel Attendance Modal -->
-                        <div class="modal-parent">
-                            <div class="modal modal-xl fade" id="Modal-Personnel" data-bs-backdrop="static"
-                                tabindex="-1" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="header">
-                                            <button class="btn btn-close-modal-emp close-modal-btn-new"
-                                                data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
-                                        </div>
-                                        <div class="modal-body modal-new-class">
-                                            <!-- Modal Body-->
-                                            <main>
-                                                <h5>Personnel Present Today:</h5>
+                                <!-- Personnel Attendance Modal -->
+                                <div class="modal-parent">
+                                    <div class="modal modal-xl fade" id="Modal-Personnel" data-bs-backdrop="static" tabindex="-1" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="header">
+                                                    <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                                </div>
+                                                <div class="modal-body modal-new-class">
+                                                    <!-- Modal Body-->
+                                                    <main>
+                                                        <h5>Personnel Present Today:</h5>
 
-                                                <section class="list-names">
-                                                    <ul class="ul-list">
-                                                        <?php while ($row = $result->fetch_assoc()) : ?>
-                                                        <li>
-                                                            <?php echo htmlspecialchars($row['fullName']); ?>
-                                                        </li>
-                                                        <?php endwhile; ?>
-                                                    </ul>
-                                                </section>
-                                            </main>
+                                                        <section class="list-names">
+                                                            <ul class="ul-list">
+                                                                <?php while ($row = $result->fetch_assoc()) : ?>
+                                                                    <li>
+                                                                        <?php echo htmlspecialchars($row['fullName']); ?>
+                                                                    </li>
+                                                                <?php endwhile; ?>
+                                                            </ul>
+                                                        </section>
+                                                    </main>
 
-                                        </div>
-                                        <div class="footer">
-                                            <button type="button" class="btn close-popups"
-                                                data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                                <div class="footer">
+                                                    <button type="button" class="btn close-popups" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <!-- End of Personnel Attendance Modal -->
+                                <!-- End of Personnel Attendance Modal -->
 
 
 
-                        <!-- Manager Attendance Modal -->
-                        <div class="modal-parent">
-                            <div class="modal modal-xl fade" id="Modal-Manager" data-bs-backdrop="static" tabindex="-1"
-                                data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="header">
-                                            <button class="btn btn-close-modal-emp close-modal-btn-new"
-                                                data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
-                                        </div>
-                                        <div class="modal-body modal-new-class">
-                                            <!-- Modal Body-->
-                                            <main>
-                                                <h5>Manager Present Today:</h5>
+                                <!-- Manager Attendance Modal -->
+                                <div class="modal-parent">
+                                    <div class="modal modal-xl fade" id="Modal-Manager" data-bs-backdrop="static" tabindex="-1" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="header">
+                                                    <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                                </div>
+                                                <div class="modal-body modal-new-class">
+                                                    <!-- Modal Body-->
+                                                    <main>
+                                                        <h5>Manager Present Today:</h5>
 
-                                                <section class="list-names">
-                                                    <ul class="ul-list">
-                                                        <?php while ($row20 = $result20->fetch_assoc()) : ?>
-                                                        <li>
-                                                            <?php echo htmlspecialchars($row20['fullName']); ?>
-                                                        </li>
-                                                        <?php endwhile; ?>
-                                                    </ul>
-                                                </section>
-                                            </main>
+                                                        <section class="list-names">
+                                                            <ul class="ul-list">
+                                                                <?php while ($row20 = $result20->fetch_assoc()) : ?>
+                                                                    <li>
+                                                                        <?php echo htmlspecialchars($row20['fullName']); ?>
+                                                                    </li>
+                                                                <?php endwhile; ?>
+                                                            </ul>
+                                                        </section>
+                                                    </main>
 
-                                        </div>
-                                        <div class="footer">
-                                            <button type="button" class="btn close-popups"
-                                                data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                                <div class="footer">
+                                                    <button type="button" class="btn close-popups" data-bs-dismiss="modal">Close</button>
 
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- End of Manager Attendance Modal -->
+                        </main>
+                        <!--End of main for the two button container-->
+
+                        <main id="calendar">
+                            <div id="calendar-header">
+                                <span class="calendar-header-span" id="current-date"></span>
                             </div>
-                        </div>
-                        <!-- End of Manager Attendance Modal -->
-                    </main>
-                    <!--End of main for the two button container-->
 
-                    <main id="calendar">
-                        <div id="calendar-header">
-                            <span class="calendar-header-span" id="current-date"></span>
-                        </div>
+                            <div id="calendar-body">
+                                <div class="building">
+                                    <div class="mini-header">
+                                        <div class="mini-header-border">
+                                            Tech-Voc
+                                        </div>
+                                    </div>
+                                    <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal3" id="techVoc" name="techVoc" onclick="setBuilding('techvoc')">
 
-                        <div id="calendar-body">
-                            <div class="building">
-                                <div class="mini-header">
-                                    <div class="mini-header-border">
-                                        Tech-Voc
+
                                     </div>
                                 </div>
-                                <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal3"
-                                    id="techVoc" name="techVoc" onclick="setBuilding('techvoc')">
+
+                                <div class="building">
+                                    <div class="mini-header">
+                                        <div class="mini-header-border">
+                                            Yellow
+                                        </div>
+                                    </div>
+                                    <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal4" id="oldAcad" name="oldAcad" onclick="setBuilding('oldacad')">
 
 
-                                </div>
-                            </div>
-
-                            <div class="building">
-                                <div class="mini-header">
-                                    <div class="mini-header-border">
-                                        Yellow
                                     </div>
                                 </div>
-                                <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal4"
-                                    id="oldAcad" name="oldAcad" onclick="setBuilding('oldacad')">
+
+                                <div class="building">
+                                    <div class="mini-header">
+                                        <div class="mini-header-border">
+                                            Belmonte
+                                        </div>
+                                    </div>
+                                    <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal5" id="belmonte" name="belmonte" onclick="setBuilding('belmonte')">
 
 
-                                </div>
-                            </div>
-
-                            <div class="building">
-                                <div class="mini-header">
-                                    <div class="mini-header-border">
-                                        Belmonte
                                     </div>
                                 </div>
-                                <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal5"
-                                    id="belmonte" name="belmonte" onclick="setBuilding('belmonte')">
+
+                                <div class="building">
+                                    <div class="mini-header">
+                                        <div class="mini-header-border">
+                                            Metal Casting
+                                        </div>
+                                    </div>
+                                    <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal6" id="metalcasting" name="metalcasting" onclick="setBuilding('metalcasting')">
 
 
-                                </div>
-                            </div>
-
-                            <div class="building">
-                                <div class="mini-header">
-                                    <div class="mini-header-border">
-                                        Metal Casting
                                     </div>
                                 </div>
-                                <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal6"
-                                    id="metalcasting" name="metalcasting" onclick="setBuilding('metalcasting')">
+
+                                <div class="building">
+                                    <div class="mini-header">
+                                        <div class="mini-header-border">
+                                            KorPhil
+                                        </div>
+                                    </div>
+                                    <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal7" id="korphil" name="korphil" onclick="setBuilding('korphil')">
 
 
-                                </div>
-                            </div>
-
-                            <div class="building">
-                                <div class="mini-header">
-                                    <div class="mini-header-border">
-                                        KorPhil
                                     </div>
                                 </div>
-                                <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal7"
-                                    id="korphil" name="korphil" onclick="setBuilding('korphil')">
+
+                                <div class="building">
+                                    <div class="mini-header">
+                                        <div class="mini-header-border">
+                                            Multipurpose
+                                        </div>
+                                    </div>
+                                    <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal8" id="multipurpose" name="multipurpose" onclick="setBuilding('multipurpose')">
 
 
-                                </div>
-                            </div>
-
-                            <div class="building">
-                                <div class="mini-header">
-                                    <div class="mini-header-border">
-                                        Multipurpose
                                     </div>
                                 </div>
-                                <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal8"
-                                    id="multipurpose" name="multipurpose" onclick="setBuilding('multipurpose')">
 
+                                <div class="building">
+                                    <div class="mini-header">
+                                        <div class="mini-header-border">
+                                            Bautista
+                                        </div>
+                                    </div>
+                                    <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal13" id="bautista" name="bautista" onclick="setBuilding('bautista')">
 
-                                </div>
-                            </div>
-
-                            <div class="building">
-                                <div class="mini-header">
-                                    <div class="mini-header-border">
-                                        Bautista
                                     </div>
                                 </div>
-                                <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal13"
-                                    id="bautista" name="bautista" onclick="setBuilding('bautista')">
 
-                                </div>
-                            </div>
+                                <div class="building">
+                                    <div class="mini-header">
+                                        <div class="mini-header-border">
+                                            New Academic
+                                        </div>
+                                    </div>
+                                    <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal14" id="newAcad" name="newAcad" onclick="setBuilding('newacad')">
 
-                            <div class="building">
-                                <div class="mini-header">
-                                    <div class="mini-header-border">
-                                        New Academic
+
                                     </div>
                                 </div>
-                                <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal14"
-                                    id="newAcad" name="newAcad" onclick="setBuilding('newacad')">
+
+                                <div class="building">
+                                    <div class="mini-header">
+                                        <div class="mini-header-border">
+                                            Administration
+                                        </div>
+                                    </div>
+                                    <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal12" id="administration" name="administration" onclick="setBuilding('administration')">
 
 
-                                </div>
-                            </div>
-
-                            <div class="building">
-                                <div class="mini-header">
-                                    <div class="mini-header-border">
-                                        Administration
                                     </div>
                                 </div>
-                                <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal12"
-                                    id="administration" name="administration" onclick="setBuilding('administration')">
 
+                                <div class="building">
+                                    <div class="mini-header">
+                                        <div class="mini-header-border">
+                                            Urban Farming
+                                        </div>
+                                    </div>
+                                    <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal11" id="urbanFarming" name="urbanFarming" onclick="setBuilding('urbanfarming')">
 
-                                </div>
-                            </div>
-
-                            <div class="building">
-                                <div class="mini-header">
-                                    <div class="mini-header-border">
-                                        Urban Farming
                                     </div>
                                 </div>
-                                <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal11"
-                                    id="urbanFarming" name="urbanFarming" onclick="setBuilding('urbanfarming')">
 
-                                </div>
-                            </div>
+                                <div class="building">
+                                    <div class="mini-header">
+                                        <div class="mini-header-border">
+                                            Chinese A
+                                        </div>
+                                    </div>
+                                    <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal9" id="chineseA" name="chineseA" onclick="setBuilding('chineseA')">
 
-                            <div class="building">
-                                <div class="mini-header">
-                                    <div class="mini-header-border">
-                                        Chinese A
+
                                     </div>
                                 </div>
-                                <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal9"
-                                    id="chineseA" name="chineseA" onclick="setBuilding('chineseA')">
+
+                                <div class="building">
+                                    <div class="mini-header">
+                                        <div class="mini-header-border">
+                                            Chinese B
+                                        </div>
+                                    </div>
+                                    <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal10" id="chineseB" name="chineseB" onclick="setBuilding('chineseB')">
 
 
-                                </div>
-                            </div>
-
-                            <div class="building">
-                                <div class="mini-header">
-                                    <div class="mini-header-border">
-                                        Chinese B
                                     </div>
                                 </div>
-                                <div class="building-body" data-bs-toggle="modal" data-bs-target="#exampleModal10"
-                                    id="chineseB" name="chineseB" onclick="setBuilding('chineseB')">
 
-
+                                <div class="pagination-container">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Previous" onclick="showBuildings(-1)">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item"><a class="page-link" href="#" onclick="showBuildings(1)">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#" onclick="showBuildings(2)">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#" onclick="showBuildings(3)">3</a></li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="#" aria-label="Next" onclick="showBuildings(2)">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
                                 </div>
                             </div>
 
-                            <div class="pagination-container">
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination">
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Previous"
-                                                onclick="showBuildings(-1)">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#"
-                                                onclick="showBuildings(1)">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#"
-                                                onclick="showBuildings(2)">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#"
-                                                onclick="showBuildings(3)">3</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Next" onclick="showBuildings(2)">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-
-                        <!-- 
+                            <!-- 
                             Change the position of the form tag in all building modals;
                             Commented old confirmation modals and changed into sweetalert modals.
                          -->
-                        <!--Modal for Tech-Voc-->
-                        <div class="modal-parent ">
-                            <div class="modal modal-xl fade" id="exampleModal3" tabindex="-1"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="header-modal">
-                                            <h5>Tech-Voc Building</h5>
-                                            <button class="btn btn-close-modal-emp close-modal-btn-new"
-                                                data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
-                                        </div>
+                            <!--Modal for Tech-Voc-->
+                            <div class="modal-parent ">
+                                <div class="modal modal-xl fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="header-modal">
+                                                <h5>Tech-Voc Building</h5>
+                                                <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                            </div>
 
-                                        <div class="modal-body modal-new-class">
-                                            <form method="post" id="techVocForm">
-                                                <section class="choose-personnel">
-                                                    <!-- <form method="post" class="row g-3"> -->
-                                                    <div class="col-4" style="display: none">
-                                                        <label for="date" class="form-label">Date:</label>
-                                                        <input type="text" class="form-control for-names" id="date"
-                                                            name="date" value="<?php echo date('Y-m-d'); ?>"
-                                                            style="display:none" />
-                                                    </div>
+                                            <div class="modal-body modal-new-class">
+                                                <form method="post" id="techVocForm">
+                                                    <section class="choose-personnel">
+                                                        <!-- <form method="post" class="row g-3"> -->
+                                                        <div class="col-4" style="display: none">
+                                                            <label for="date" class="form-label">Date:</label>
+                                                            <input type="text" class="form-control for-names" id="date" name="date" value="<?php echo date('Y-m-d'); ?>" style="display:none" />
+                                                        </div>
 
-                                                    <div class="col-12 choosy-new">
+                                                        <div class="col-12 choosy-new">
 
-                                                        <label for="techVoc col-8" class="form-label">
-                                                            Choose a maintenance personnel:
-                                                        </label>
+                                                            <label for="techVoc col-8" class="form-label">
+                                                                Choose a maintenance personnel:
+                                                            </label>
 
-                                                        <select class="form-control col-4 select-new" id="techVoc"
-                                                            name="techVoc">
-                                                            <option value="">Choose</option>
-                                                            <?php
+                                                            <select class="form-control col-4 select-new" id="techVoc" name="techVoc">
+                                                                <option value="">Choose</option>
+                                                                <?php
                                                                 // Execute your SQL query
                                                                 $new_date3 = date('Y-m-d');
                                                                 $new_sql3 = "SELECT a.accountId, CONCAT(acc.firstName, ' ', IFNULL(acc.middleName, ''), ' ', acc.lastName) AS fullName 
@@ -975,17 +908,17 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                                                     }
                                                                 }
                                                                 ?>
-                                                        </select>
-                                                    </div>
-                                                </section>
+                                                            </select>
+                                                        </div>
+                                                    </section>
 
-                                                <section class="table-personnel">
-                                                    <div>
-                                                        <label for="techVoc" class="form-label">
-                                                            Assigned maintenance personnel:
-                                                        </label>
+                                                    <section class="table-personnel">
+                                                        <div>
+                                                            <label for="techVoc" class="form-label">
+                                                                Assigned maintenance personnel:
+                                                            </label>
 
-                                                        <?php
+                                                            <?php
                                                             if ($result3->num_rows > 0) {
                                                                 echo "<div class='table-container-new'>";
                                                                 echo "<table class='new-table'>";
@@ -1020,25 +953,25 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                                                 echo '<div class="no-data-message">No personnel assigned for today.</div>';
                                                             }
                                                             ?>
-                                                    </div>
-                                                </section>
-                                            </form>
-                                        </div>
+                                                        </div>
+                                                    </section>
+                                                </form>
+                                            </div>
 
-                                        <div class="footer">
-                                            <!-- <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#save3"> -->
-                                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
-                                                Save
-                                            </button>
+                                            <div class="footer">
+                                                <!-- <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#save3"> -->
+                                                <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                                                    Save
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!--End of modal-->
+                            <!--End of modal-->
 
-                        <!--MODAL for Save-->
-                        <!-- <div class="modal fade" id="save3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <!--MODAL for Save-->
+                            <!-- <div class="modal fade" id="save3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-footer">
@@ -1051,41 +984,36 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                     </div>
                                 </div>
                             </div> -->
-                        <!--END OF TECHVOC-->
+                            <!--END OF TECHVOC-->
 
 
-                        <!--Modal for Old Acad-->
-                        <div class="modal-parent">
-                            <div class="modal modal-xl fade" id="exampleModal4" tabindex="-1"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="header-modal">
-                                            <h5>Yellow Building</h5>
-                                            <button class="btn btn-close-modal-emp close-modal-btn-new"
-                                                data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
-                                        </div>
+                            <!--Modal for Old Acad-->
+                            <div class="modal-parent">
+                                <div class="modal modal-xl fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="header-modal">
+                                                <h5>Yellow Building</h5>
+                                                <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                            </div>
 
-                                        <div class="modal-body modal-new-class">
-                                            <form method="post" id="oldacadForm">
-                                                <section class="choose-personnel">
+                                            <div class="modal-body modal-new-class">
+                                                <form method="post" id="oldacadForm">
+                                                    <section class="choose-personnel">
 
 
-                                                    <div class="col-4" style="display: none">
-                                                        <label for="date" class="form-label">Date:</label>
-                                                        <input type="text" class="form-control for-names" id="date"
-                                                            name="date" value="<?php echo date('Y-m-d'); ?>"
-                                                            style="display:none" />
-                                                    </div>
+                                                        <div class="col-4" style="display: none">
+                                                            <label for="date" class="form-label">Date:</label>
+                                                            <input type="text" class="form-control for-names" id="date" name="date" value="<?php echo date('Y-m-d'); ?>" style="display:none" />
+                                                        </div>
 
 
-                                                    <div class="col-12 choosy-new">
-                                                        <label for="techVoc col-8" class="form-label">Choose a
-                                                            maintenance personnel:</label>
-                                                        <select class="form-control col-4 select-new" id="oldAcad"
-                                                            name="oldAcad">
-                                                            <option value="">Choose</option>
-                                                            <?php
+                                                        <div class="col-12 choosy-new">
+                                                            <label for="techVoc col-8" class="form-label">Choose a
+                                                                maintenance personnel:</label>
+                                                            <select class="form-control col-4 select-new" id="oldAcad" name="oldAcad">
+                                                                <option value="">Choose</option>
+                                                                <?php
                                                                 // Execute your SQL query
                                                                 $new_date4 = date('Y-m-d');
                                                                 $new_sql4 = "SELECT a.accountId, CONCAT(acc.firstName, ' ', IFNULL(acc.middleName, ''), ' ', acc.lastName) AS fullName 
@@ -1104,15 +1032,15 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                                                     }
                                                                 }
                                                                 ?>
-                                                        </select>
-                                                    </div>
-                                                </section>
+                                                            </select>
+                                                        </div>
+                                                    </section>
 
-                                                <section class="table-personnel">
-                                                    <div>
-                                                        <label for="oldAcad" class="form-label">Assigned maintenance
-                                                            personnel:</label>
-                                                        <?php
+                                                    <section class="table-personnel">
+                                                        <div>
+                                                            <label for="oldAcad" class="form-label">Assigned maintenance
+                                                                personnel:</label>
+                                                            <?php
                                                             if ($result4->num_rows > 0) {
                                                                 echo "<div class='table-container-new'>";
                                                                 echo "<table class='new-table'>";
@@ -1140,23 +1068,23 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                                                 echo '<div class="no-data-message">No personnel assigned for today.</div>';
                                                             }
                                                             ?>
-                                                    </div>
-                                                </section>
-                                            </form>
-                                        </div>
+                                                        </div>
+                                                    </section>
+                                                </form>
+                                            </div>
 
-                                        <div class="footer">
-                                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
-                                                Save
-                                            </button>
+                                            <div class="footer">
+                                                <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                                                    Save
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!--MODAL for Save-->
-                        <!-- <div class="modal fade" id="save4" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <!--MODAL for Save-->
+                            <!-- <div class="modal fade" id="save4" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-footer">
@@ -1170,38 +1098,33 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                             </div>
                         </div> -->
 
-                        <!--Modal for belmonte-->
-                        <div class="modal-parent">
-                            <div class="modal modal-xl fade" id="exampleModal5" tabindex="-1"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="header-modal">
-                                            <h5>Belmonte Building</h5>
-                                            <button class="btn btn-close-modal-emp close-modal-btn-new"
-                                                data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
-                                        </div>
+                            <!--Modal for belmonte-->
+                            <div class="modal-parent">
+                                <div class="modal modal-xl fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="header-modal">
+                                                <h5>Belmonte Building</h5>
+                                                <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                            </div>
 
-                                        <div class="modal-body modal-new-class">
-                                            <form method="POST" id="belmonteForm">
-                                                <section class="choose-personnel">
-                                                    <!-- <form method="post" class="row g-3"> -->
+                                            <div class="modal-body modal-new-class">
+                                                <form method="POST" id="belmonteForm">
+                                                    <section class="choose-personnel">
+                                                        <!-- <form method="post" class="row g-3"> -->
 
-                                                    <div class="col-4" style="display: none">
-                                                        <label for="date" class="form-label">Date:</label>
-                                                        <input type="text" class="form-control for-names" id="date"
-                                                            name="date" value="<?php echo date('Y-m-d'); ?>"
-                                                            style="display:none" />
-                                                    </div>
+                                                        <div class="col-4" style="display: none">
+                                                            <label for="date" class="form-label">Date:</label>
+                                                            <input type="text" class="form-control for-names" id="date" name="date" value="<?php echo date('Y-m-d'); ?>" style="display:none" />
+                                                        </div>
 
-                                                    <form method="POST">
-                                                        <div class="col-12 choosy-new">
-                                                            <label for="techVoc col-8" class="form-label">Choose a
-                                                                maintenance personnel:</label>
-                                                            <select class="form-control col-4 select-new" id="belmonte"
-                                                                name="belmonte">
-                                                                <option value="">Choose</option>
-                                                                <?php
+                                                        <form method="POST">
+                                                            <div class="col-12 choosy-new">
+                                                                <label for="techVoc col-8" class="form-label">Choose a
+                                                                    maintenance personnel:</label>
+                                                                <select class="form-control col-4 select-new" id="belmonte" name="belmonte">
+                                                                    <option value="">Choose</option>
+                                                                    <?php
                                                                     // Execute your SQL query
                                                                     $new_date5 = date('Y-m-d');
                                                                     $new_sql5 = "SELECT a.accountId, CONCAT(acc.firstName, ' ', IFNULL(acc.middleName, ''), ' ', acc.lastName) AS fullName 
@@ -1220,18 +1143,18 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                                                         }
                                                                     }
                                                                     ?>
-                                                            </select>
-                                                        </div>
-                                                    </form>
-                                                </section>
+                                                                </select>
+                                                            </div>
+                                                        </form>
+                                                    </section>
 
 
-                                                <section class="table-personnel">
-                                                    <div>
-                                                        <label for="oldAcad" class="form-label">Assigned maintenance
-                                                            personnel:</label>
+                                                    <section class="table-personnel">
+                                                        <div>
+                                                            <label for="oldAcad" class="form-label">Assigned maintenance
+                                                                personnel:</label>
 
-                                                        <?php
+                                                            <?php
                                                             if ($result5->num_rows > 0) {
                                                                 echo "<div class='table-container-new'>";
                                                                 echo "<table class='new-table'>";
@@ -1259,24 +1182,24 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                                                 echo '<div class="no-data-message">No personnel assigned for today.</div>';
                                                             }
                                                             ?>
-                                                    </div>
-                                                </section>
-                                            </form>
-                                        </div>
+                                                        </div>
+                                                    </section>
+                                                </form>
+                                            </div>
 
-                                        <div class="footer">
-                                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
-                                                Save
-                                            </button>
+                                            <div class="footer">
+                                                <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                                                    Save
+                                                </button>
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!--MODAL for Save-->
-                        <!-- <div class="modal fade" id="save5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <!--MODAL for Save-->
+                            <!-- <div class="modal fade" id="save5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-footer">
@@ -1291,37 +1214,32 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                         </div> -->
 
 
-                        <!--Modal for metalcasting-->
-                        <div class="modal-parent">
-                            <div class="modal modal-xl fade" id="exampleModal6" tabindex="-1"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="header-modal">
-                                            <h5>Metal Casting Building</h5>
-                                            <button class="btn btn-close-modal-emp close-modal-btn-new"
-                                                data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
-                                        </div>
-                                        <div class="modal-body modal-new-class">
-                                            <form method="post" id="metalcastingForm">
-                                                <section class="choose-personnel">
-                                                    <!-- <form method="post" class="row g-3"> -->
+                            <!--Modal for metalcasting-->
+                            <div class="modal-parent">
+                                <div class="modal modal-xl fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="header-modal">
+                                                <h5>Metal Casting Building</h5>
+                                                <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                            </div>
+                                            <div class="modal-body modal-new-class">
+                                                <form method="post" id="metalcastingForm">
+                                                    <section class="choose-personnel">
+                                                        <!-- <form method="post" class="row g-3"> -->
 
-                                                    <div class="col-4" style="display: none">
-                                                        <label for="date" class="form-label">Date:</label>
-                                                        <input type="text" class="form-control for-names" id="date"
-                                                            name="date" value="<?php echo date('Y-m-d'); ?>"
-                                                            style="display:none" />
-                                                    </div>
+                                                        <div class="col-4" style="display: none">
+                                                            <label for="date" class="form-label">Date:</label>
+                                                            <input type="text" class="form-control for-names" id="date" name="date" value="<?php echo date('Y-m-d'); ?>" style="display:none" />
+                                                        </div>
 
 
-                                                    <div class="col-12 choosy-new">
-                                                        <label for="techVoc col-8" class="form-label">Choose a
-                                                            maintenance personnel:</label>
-                                                        <select class="form-control col-4 select-new" id="metalcasting"
-                                                            name="metalcasting">
-                                                            <option value="">Choose</option>
-                                                            <?php
+                                                        <div class="col-12 choosy-new">
+                                                            <label for="techVoc col-8" class="form-label">Choose a
+                                                                maintenance personnel:</label>
+                                                            <select class="form-control col-4 select-new" id="metalcasting" name="metalcasting">
+                                                                <option value="">Choose</option>
+                                                                <?php
                                                                 // Execute your SQL query
                                                                 $new_date6 = date('Y-m-d');
                                                                 $new_sql6 = "SELECT a.accountId, CONCAT(acc.firstName, ' ', IFNULL(acc.middleName, ''), ' ', acc.lastName) AS fullName 
@@ -1340,16 +1258,16 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                                                     }
                                                                 }
                                                                 ?>
-                                                        </select>
-                                                    </div>
-                                            </form>
-                </section>
+                                                            </select>
+                                                        </div>
+                                                </form>
+                    </section>
 
-                <section class="table-personnel">
-                    <div>
-                        <label for="metalcasting" class="form-label">Assigned maintenance personnel:</label>
+                    <section class="table-personnel">
+                        <div>
+                            <label for="metalcasting" class="form-label">Assigned maintenance personnel:</label>
 
-                        <?php
+                            <?php
                             if ($result6->num_rows > 0) {
                                 echo "<div class='table-container-new'>";
                                 echo "<table class='new-table'>";
@@ -1377,24 +1295,24 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                 echo '<div class="no-data-message">No personnel assigned for today.</div>';
                             }
                             ?>
-                    </div>
-                </section>
-                </form>
-            </div>
+                        </div>
+                    </section>
+                    </form>
+                </div>
 
-            <div class="footer">
-                <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
-                    Save
-                </button>
+                <div class="footer">
+                    <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                        Save
+                    </button>
 
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
 
-            <!--MODAL for Save-->
-            <!-- <div class="modal fade" id="save6" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <!--MODAL for Save-->
+                <!-- <div class="modal fade" id="save6" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-footer">
@@ -1409,35 +1327,32 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                         </div> -->
 
 
-            <!--Modal for korphil-->
-            <div class="modal-parent">
-                <div class="modal modal-xl fade" id="exampleModal7" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="header-modal">
-                                <h5>KorPhil Building</h5>
-                                <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i
-                                        class="bi bi-x-lg"></i></button>
-                            </div>
-                            <div class="modal-body modal-new-class">
-                                <form method="post" id="korphilForm">
-                                    <section class="choose-personnel">
+                <!--Modal for korphil-->
+                <div class="modal-parent">
+                    <div class="modal modal-xl fade" id="exampleModal7" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="header-modal">
+                                    <h5>KorPhil Building</h5>
+                                    <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                </div>
+                                <div class="modal-body modal-new-class">
+                                    <form method="post" id="korphilForm">
+                                        <section class="choose-personnel">
 
 
-                                        <div class="col-4" style="display: none">
-                                            <label for="date" class="form-label">Date:</label>
-                                            <input type="text" class="form-control for-names" id="date" name="date"
-                                                value="<?php echo date('Y-m-d'); ?>" style="display:none" />
-                                        </div>
+                                            <div class="col-4" style="display: none">
+                                                <label for="date" class="form-label">Date:</label>
+                                                <input type="text" class="form-control for-names" id="date" name="date" value="<?php echo date('Y-m-d'); ?>" style="display:none" />
+                                            </div>
 
 
-                                        <div class="col-12 choosy-new">
-                                            <label for="techVoc col-8" class="form-label">Choose a
-                                                maintenance personnel:</label>
-                                            <select class="form-control col-4 select-new" id="korphil" name="korphil">
-                                                <option value="">Choose</option>
-                                                <?php
+                                            <div class="col-12 choosy-new">
+                                                <label for="techVoc col-8" class="form-label">Choose a
+                                                    maintenance personnel:</label>
+                                                <select class="form-control col-4 select-new" id="korphil" name="korphil">
+                                                    <option value="">Choose</option>
+                                                    <?php
                                                     // Execute your SQL query
                                                     $new_date7 = date('Y-m-d');
                                                     $new_sql7 = "SELECT a.accountId, CONCAT(acc.firstName, ' ', IFNULL(acc.middleName, ''), ' ', acc.lastName) AS fullName 
@@ -1456,16 +1371,16 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                                         }
                                                     }
                                                     ?>
-                                            </select>
-                                        </div>
-                                </form>
-    </section>
+                                                </select>
+                                            </div>
+                                    </form>
+        </section>
 
-    <section class="table-personnel">
-        <div>
-            <label for="korphil" class="form-label">Assigned maintenance personnel:</label>
+        <section class="table-personnel">
+            <div>
+                <label for="korphil" class="form-label">Assigned maintenance personnel:</label>
 
-            <?php
+                <?php
                 if ($result7->num_rows > 0) {
                     echo "<div class='table-container-new'>";
                     echo "<table class='new-table'>";
@@ -1493,24 +1408,24 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                     echo '<div class="no-data-message">No personnel assigned for today.</div>';
                 }
                 ?>
+            </div>
+        </section>
+        </form>
         </div>
-    </section>
-    </form>
-    </div>
 
-    <div class="footer">
-        <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
-            Save
-        </button>
+        <div class="footer">
+            <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                Save
+            </button>
 
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
 
-    <!--MODAL for Save-->
-    <!-- <div class="modal fade" id="save7" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <!--MODAL for Save-->
+        <!-- <div class="modal fade" id="save7" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-footer">
@@ -1525,33 +1440,30 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                         </div> -->
 
 
-    <!--Modal for multipurpose-->
-    <div class="modal-parent">
-        <div class="modal modal-xl fade" id="exampleModal8" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="header-modal">
-                        <h5>Multipurpose Building</h5>
-                        <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i
-                                class="bi bi-x-lg"></i></button>
-                    </div>
-                    <div class="modal-body modal-new-class">
-                        <form method="post" id="multipurposeForm">
-                            <section class="choose-personnel">
-                                <div class="col-4" style="display: none">
-                                    <label for="date" class="form-label">Date:</label>
-                                    <input type="text" class="form-control for-names" id="date" name="date"
-                                        value="<?php echo date('Y-m-d'); ?>" style="display:none" />
-                                </div>
+        <!--Modal for multipurpose-->
+        <div class="modal-parent">
+            <div class="modal modal-xl fade" id="exampleModal8" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="header-modal">
+                            <h5>Multipurpose Building</h5>
+                            <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                        </div>
+                        <div class="modal-body modal-new-class">
+                            <form method="post" id="multipurposeForm">
+                                <section class="choose-personnel">
+                                    <div class="col-4" style="display: none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control for-names" id="date" name="date" value="<?php echo date('Y-m-d'); ?>" style="display:none" />
+                                    </div>
 
 
-                                <div class="col-12 choosy-new">
-                                    <label for="techVoc col-8" class="form-label">Choose a
-                                        maintenance personnel:</label>
-                                    <select class="form-control col-4 select-new" id="multipurpose" name="multipurpose">
-                                        <option value="">Choose</option>
-                                        <?php
+                                    <div class="col-12 choosy-new">
+                                        <label for="techVoc col-8" class="form-label">Choose a
+                                            maintenance personnel:</label>
+                                        <select class="form-control col-4 select-new" id="multipurpose" name="multipurpose">
+                                            <option value="">Choose</option>
+                                            <?php
                                             // Execute your SQL query
                                             $new_date8 = date('Y-m-d');
                                             $new_sql8 = "SELECT a.accountId, CONCAT(acc.firstName, ' ', IFNULL(acc.middleName, ''), ' ', acc.lastName) AS fullName 
@@ -1570,16 +1482,16 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                                 }
                                             }
                                             ?>
-                                    </select>
-                                </div>
-                        </form>
-                        </section>
+                                        </select>
+                                    </div>
+                            </form>
+                            </section>
 
-                        <section class="table-personnel">
-                            <div>
-                                <label for="multipurpose" class="form-label">Assigned maintenance personnel:</label>
+                            <section class="table-personnel">
+                                <div>
+                                    <label for="multipurpose" class="form-label">Assigned maintenance personnel:</label>
 
-                                <?php
+                                    <?php
                                     if ($result8->num_rows > 0) {
                                         echo "<div class='table-container-new'>";
                                         echo "<table class='new-table'>";
@@ -1607,23 +1519,23 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                         echo '<div class="no-data-message">No personnel assigned for today.</div>';
                                     }
                                     ?>
-                            </div>
-                        </section>
-                        </form>
-                    </div>
+                                </div>
+                            </section>
+                            </form>
+                        </div>
 
-                    <div class="footer">
-                        <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
-                            Save
-                        </button>
+                        <div class="footer">
+                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                                Save
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!--MODAL for Save-->
-    <!-- <div class="modal fade" id="save8" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <!--MODAL for Save-->
+        <!-- <div class="modal fade" id="save8" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-footer">
@@ -1639,37 +1551,34 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
 
 
 
-    <!--Modal for chineseA-->
-    <div class="modal-parent">
-        <div class="modal modal-xl fade" id="exampleModal9" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="header-modal">
-                        <h5>Chinese A Building</h5>
-                        <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i
-                                class="bi bi-x-lg"></i></button>
-                    </div>
+        <!--Modal for chineseA-->
+        <div class="modal-parent">
+            <div class="modal modal-xl fade" id="exampleModal9" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="header-modal">
+                            <h5>Chinese A Building</h5>
+                            <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                        </div>
 
-                    <div class="modal-body modal-new-class">
-                        <form method="post" id="chineseAForm">
-                            <section class="choose-personnel">
-                                <!-- <form method="post" class="row g-3"> -->
+                        <div class="modal-body modal-new-class">
+                            <form method="post" id="chineseAForm">
+                                <section class="choose-personnel">
+                                    <!-- <form method="post" class="row g-3"> -->
 
 
-                                <div class="col-4" style="display: none">
-                                    <label for="date" class="form-label">Date:</label>
-                                    <input type="text" class="form-control for-names" id="date" name="date"
-                                        value="<?php echo date('Y-m-d'); ?>" style="display:none" />
-                                </div>
+                                    <div class="col-4" style="display: none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control for-names" id="date" name="date" value="<?php echo date('Y-m-d'); ?>" style="display:none" />
+                                    </div>
 
 
-                                <div class="col-12 choosy-new">
-                                    <label for="techVoc col-8" class="form-label">Choose a
-                                        maintenance personnel:</label>
-                                    <select class="form-control col-4 select-new" id="chineseA" name="chineseA">
-                                        <option value="">Choose</option>
-                                        <?php
+                                    <div class="col-12 choosy-new">
+                                        <label for="techVoc col-8" class="form-label">Choose a
+                                            maintenance personnel:</label>
+                                        <select class="form-control col-4 select-new" id="chineseA" name="chineseA">
+                                            <option value="">Choose</option>
+                                            <?php
                                             // Execute your SQL query
                                             $new_date9 = date('Y-m-d');
                                             $new_sql9 = "SELECT a.accountId, CONCAT(acc.firstName, ' ', IFNULL(acc.middleName, ''), ' ', acc.lastName) AS fullName 
@@ -1688,16 +1597,16 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                                 }
                                             }
                                             ?>
-                                    </select>
-                                </div>
-                        </form>
-                        </section>
+                                        </select>
+                                    </div>
+                            </form>
+                            </section>
 
-                        <section class="table-personnel">
-                            <div>
-                                <label for="chineseA" class="form-label">Assigned maintenance personnel:</label>
+                            <section class="table-personnel">
+                                <div>
+                                    <label for="chineseA" class="form-label">Assigned maintenance personnel:</label>
 
-                                <?php
+                                    <?php
                                     if ($result9->num_rows > 0) {
                                         echo "<div class='table-container-new'>";
                                         echo "<table class='new-table'>";
@@ -1725,23 +1634,23 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                         echo '<div class="no-data-message">No personnel assigned for today.</div>';
                                     }
                                     ?>
-                            </div>
-                        </section>
-                        </form>
-                    </div>
+                                </div>
+                            </section>
+                            </form>
+                        </div>
 
-                    <div class="footer">
-                        <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
-                            Save
-                        </button>
+                        <div class="footer">
+                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                                Save
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!--MODAL for Save-->
-    <!-- <div class="modal fade" id="save9" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <!--MODAL for Save-->
+        <!-- <div class="modal fade" id="save9" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-footer">
@@ -1757,35 +1666,32 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
 
 
 
-    <!--Modal for chineseB-->
-    <div class="modal-parent">
-        <div class="modal modal-xl fade" id="exampleModal10" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="header-modal">
-                        <h5>Chinese B Building</h5>
-                        <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i
-                                class="bi bi-x-lg"></i></button>
-                    </div>
-                    <div class="modal-body modal-new-class">
-                        <form method="post" id="chineseBForm">
-                            <section class="choose-personnel">
-                                <!-- <form method="post" class="row g-3"> -->
+        <!--Modal for chineseB-->
+        <div class="modal-parent">
+            <div class="modal modal-xl fade" id="exampleModal10" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="header-modal">
+                            <h5>Chinese B Building</h5>
+                            <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                        </div>
+                        <div class="modal-body modal-new-class">
+                            <form method="post" id="chineseBForm">
+                                <section class="choose-personnel">
+                                    <!-- <form method="post" class="row g-3"> -->
 
-                                <div class="col-4" style="display: none">
-                                    <label for="date" class="form-label">Date:</label>
-                                    <input type="text" class="form-control for-names" id="date" name="date"
-                                        value="<?php echo date('Y-m-d'); ?>" style="display:none" />
-                                </div>
+                                    <div class="col-4" style="display: none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control for-names" id="date" name="date" value="<?php echo date('Y-m-d'); ?>" style="display:none" />
+                                    </div>
 
 
-                                <div class="col-12 choosy-new">
-                                    <label for="techVoc col-8" class="form-label">Choose a
-                                        maintenance personnel:</label>
-                                    <select class="form-control col-4 select-new" id="chineseB" name="chineseB">
-                                        <option value="">Choose</option>
-                                        <?php
+                                    <div class="col-12 choosy-new">
+                                        <label for="techVoc col-8" class="form-label">Choose a
+                                            maintenance personnel:</label>
+                                        <select class="form-control col-4 select-new" id="chineseB" name="chineseB">
+                                            <option value="">Choose</option>
+                                            <?php
                                             // Execute your SQL query
                                             $new_date10 = date('Y-m-d');
                                             $new_sql10 = "SELECT a.accountId, CONCAT(acc.firstName, ' ', IFNULL(acc.middleName, ''), ' ', acc.lastName) AS fullName 
@@ -1804,16 +1710,16 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                                 }
                                             }
                                             ?>
-                                    </select>
-                                </div>
-                        </form>
-                        </section>
+                                        </select>
+                                    </div>
+                            </form>
+                            </section>
 
-                        <section class="table-personnel">
-                            <div>
-                                <label for="chineseB" class="form-label">Assigned maintenance personnel:</label>
+                            <section class="table-personnel">
+                                <div>
+                                    <label for="chineseB" class="form-label">Assigned maintenance personnel:</label>
 
-                                <?php
+                                    <?php
                                     if ($result10->num_rows > 0) {
                                         echo "<div class='table-container-new'>";
                                         echo "<table class='new-table'>";
@@ -1841,24 +1747,24 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                         echo '<div class="no-data-message">No personnel assigned for today.</div>';
                                     }
                                     ?>
-                            </div>
-                        </section>
-                        </form>
-                    </div>
+                                </div>
+                            </section>
+                            </form>
+                        </div>
 
-                    <div class="footer">
-                        <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
-                            Save
-                        </button>
+                        <div class="footer">
+                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                                Save
+                            </button>
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!--MODAL for Save-->
-    <!-- <div class="modal fade" id="save10" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <!--MODAL for Save-->
+        <!-- <div class="modal fade" id="save10" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-footer">
@@ -1873,35 +1779,32 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                         </div> -->
 
 
-    <!--Modal for urbanFarming-->
-    <div class="modal-parent">
-        <div class="modal modal-xl fade" id="exampleModal11" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="header-modal">
-                        <h5>Urban Farming Site</h5>
-                        <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i
-                                class="bi bi-x-lg"></i></button>
-                    </div>
-                    <div class="modal-body modal-new-class">
-                        <form method="post" id="urbanFarmingForm">
-                            <section class="choose-personnel">
-                                <!-- <form method="post" class="row g-3"> -->
+        <!--Modal for urbanFarming-->
+        <div class="modal-parent">
+            <div class="modal modal-xl fade" id="exampleModal11" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="header-modal">
+                            <h5>Urban Farming Site</h5>
+                            <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                        </div>
+                        <div class="modal-body modal-new-class">
+                            <form method="post" id="urbanFarmingForm">
+                                <section class="choose-personnel">
+                                    <!-- <form method="post" class="row g-3"> -->
 
-                                <div class="col-4" style="display: none">
-                                    <label for="date" class="form-label">Date:</label>
-                                    <input type="text" class="form-control for-names" id="date" name="date"
-                                        value="<?php echo date('Y-m-d'); ?>" style="display:none" />
-                                </div>
+                                    <div class="col-4" style="display: none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control for-names" id="date" name="date" value="<?php echo date('Y-m-d'); ?>" style="display:none" />
+                                    </div>
 
 
-                                <div class="col-12 choosy-new">
-                                    <label for="techVoc col-8" class="form-label">Choose a
-                                        maintenance personnel:</label>
-                                    <select class="form-control col-4 select-new" id="urbanFarming" name="urbanFarming">
-                                        <option value="">Choose</option>
-                                        <?php
+                                    <div class="col-12 choosy-new">
+                                        <label for="techVoc col-8" class="form-label">Choose a
+                                            maintenance personnel:</label>
+                                        <select class="form-control col-4 select-new" id="urbanFarming" name="urbanFarming">
+                                            <option value="">Choose</option>
+                                            <?php
                                             // Execute your SQL query
                                             $new_date11 = date('Y-m-d');
                                             $new_sql11 = "SELECT a.accountId, CONCAT(acc.firstName, ' ', IFNULL(acc.middleName, ''), ' ', acc.lastName) AS fullName 
@@ -1920,16 +1823,16 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                                 }
                                             }
                                             ?>
-                                    </select>
-                                </div>
-                        </form>
-                        </section>
+                                        </select>
+                                    </div>
+                            </form>
+                            </section>
 
-                        <section class="table-personnel">
-                            <div>
-                                <label for="urbanFarming" class="form-label">Assigned maintenance personnel:</label>
+                            <section class="table-personnel">
+                                <div>
+                                    <label for="urbanFarming" class="form-label">Assigned maintenance personnel:</label>
 
-                                <?php
+                                    <?php
                                     if ($result11->num_rows > 0) {
                                         echo "<div class='table-container-new'>";
                                         echo "<table class='new-table'>";
@@ -1957,24 +1860,24 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                         echo '<div class="no-data-message">No personnel assigned for today.</div>';
                                     }
                                     ?>
-                            </div>
-                        </section>
-                        </form>
-                    </div>
+                                </div>
+                            </section>
+                            </form>
+                        </div>
 
-                    <div class="footer">
-                        <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
-                            Save
-                        </button>
+                        <div class="footer">
+                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                                Save
+                            </button>
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!--MODAL for Save-->
-    <!-- <div class="modal fade" id="save11" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <!--MODAL for Save-->
+        <!-- <div class="modal fade" id="save11" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-footer">
@@ -1989,36 +1892,32 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                         </div> -->
 
 
-    <!--Modal for administration-->
-    <div class="modal-parent">
-        <div class="modal modal-xl fade" id="exampleModal12" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="header-modal">
-                        <h5>Administration Building</h5>
-                        <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i
-                                class="bi bi-x-lg"></i></button>
-                    </div>
+        <!--Modal for administration-->
+        <div class="modal-parent">
+            <div class="modal modal-xl fade" id="exampleModal12" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="header-modal">
+                            <h5>Administration Building</h5>
+                            <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                        </div>
 
-                    <div class="modal-body modal-new-class">
-                        <form method="post" id="administrationForm">
-                            <section class="choose-personnel">
+                        <div class="modal-body modal-new-class">
+                            <form method="post" id="administrationForm">
+                                <section class="choose-personnel">
 
 
-                                <div class="col-4" style="display: none">
-                                    <label for="date" class="form-label">Date:</label>
-                                    <input type="text" class="form-control for-names" id="date" name="date"
-                                        value="<?php echo date('Y-m-d'); ?>" style="display:none" />
-                                </div>
+                                    <div class="col-4" style="display: none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control for-names" id="date" name="date" value="<?php echo date('Y-m-d'); ?>" style="display:none" />
+                                    </div>
 
-                                <div class="col-12 choosy-new">
-                                    <label for="techVoc col-8" class="form-label">Choose a
-                                        maintenance personnel:</label>
-                                    <select class="form-control col-4 select-new" id="administration"
-                                        name="administration">
-                                        <option value="">Choose</option>
-                                        <?php
+                                    <div class="col-12 choosy-new">
+                                        <label for="techVoc col-8" class="form-label">Choose a
+                                            maintenance personnel:</label>
+                                        <select class="form-control col-4 select-new" id="administration" name="administration">
+                                            <option value="">Choose</option>
+                                            <?php
                                             // Execute your SQL query
                                             $new_date12 = date('Y-m-d');
                                             $new_sql12 = "SELECT a.accountId, CONCAT(acc.firstName, ' ', IFNULL(acc.middleName, ''), ' ', acc.lastName) AS fullName 
@@ -2037,16 +1936,16 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                                 }
                                             }
                                             ?>
-                                    </select>
-                                </div>
-                            </section>
+                                        </select>
+                                    </div>
+                                </section>
 
-                            <section class="table-personnel">
-                                <div>
-                                    <label for="administration" class="form-label">Assigned maintenance
-                                        personnel:</label>
+                                <section class="table-personnel">
+                                    <div>
+                                        <label for="administration" class="form-label">Assigned maintenance
+                                            personnel:</label>
 
-                                    <?php
+                                        <?php
                                         if ($result12->num_rows > 0) {
                                             echo "<div class='table-container-new'>";
                                             echo "<table class='new-table'>";
@@ -2074,24 +1973,24 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                             echo '<div class="no-data-message">No personnel assigned for today.</div>';
                                         }
                                         ?>
-                                </div>
-                            </section>
-                        </form>
-                    </div>
+                                    </div>
+                                </section>
+                            </form>
+                        </div>
 
-                    <div class="footer">
-                        <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
-                            Save
-                        </button>
+                        <div class="footer">
+                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                                Save
+                            </button>
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!--MODAL for Save-->
-    <!-- <div class="modal fade" id="save12" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <!--MODAL for Save-->
+        <!-- <div class="modal fade" id="save12" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-footer">
@@ -2107,37 +2006,34 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
 
 
 
-    <!--Modal for bautista-->
-    <div class="modal-parent">
-        <div class="modal modal-xl fade" id="exampleModal13" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="header-modal">
-                        <h5>Bautista Building</h5>
-                        <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i
-                                class="bi bi-x-lg"></i></button>
-                    </div>
+        <!--Modal for bautista-->
+        <div class="modal-parent">
+            <div class="modal modal-xl fade" id="exampleModal13" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="header-modal">
+                            <h5>Bautista Building</h5>
+                            <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                        </div>
 
-                    <div class="modal-body modal-new-class">
-                        <form method="post" id="bautistaForm">
-                            <section class="choose-personnel">
+                        <div class="modal-body modal-new-class">
+                            <form method="post" id="bautistaForm">
+                                <section class="choose-personnel">
 
 
 
-                                <div class="col-4" style="display: none">
-                                    <label for="date" class="form-label">Date:</label>
-                                    <input type="text" class="form-control for-names" id="date" name="date"
-                                        value="<?php echo date('Y-m-d'); ?>" style="display:none" />
-                                </div>
+                                    <div class="col-4" style="display: none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control for-names" id="date" name="date" value="<?php echo date('Y-m-d'); ?>" style="display:none" />
+                                    </div>
 
 
-                                <div class="col-12 choosy-new">
-                                    <label for="techVoc col-8" class="form-label">Choose a
-                                        maintenance personnel:</label>
-                                    <select class="form-control col-4 select-new" id="bautista" name="bautista">
-                                        <option value="">Choose</option>
-                                        <?php
+                                    <div class="col-12 choosy-new">
+                                        <label for="techVoc col-8" class="form-label">Choose a
+                                            maintenance personnel:</label>
+                                        <select class="form-control col-4 select-new" id="bautista" name="bautista">
+                                            <option value="">Choose</option>
+                                            <?php
                                             // Execute your SQL query
                                             $new_date13 = date('Y-m-d');
                                             $new_sql13 = "SELECT a.accountId, CONCAT(acc.firstName, ' ', IFNULL(acc.middleName, ''), ' ', acc.lastName) AS fullName 
@@ -2156,16 +2052,16 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                                 }
                                             }
                                             ?>
-                                    </select>
-                                </div>
-                        </form>
-                        </section>
+                                        </select>
+                                    </div>
+                            </form>
+                            </section>
 
-                        <section class="table-personnel">
-                            <div>
-                                <label for="bautista" class="form-label">Assigned maintenance personnel:</label>
+                            <section class="table-personnel">
+                                <div>
+                                    <label for="bautista" class="form-label">Assigned maintenance personnel:</label>
 
-                                <?php
+                                    <?php
                                     if ($result13->num_rows > 0) {
                                         echo "<div class='table-container-new'>";
                                         echo "<table class='new-table'>";
@@ -2193,24 +2089,24 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                         echo '<div class="no-data-message">No personnel assigned for today.</div>';
                                     }
                                     ?>
-                            </div>
-                        </section>
-                        </form>
-                    </div>
+                                </div>
+                            </section>
+                            </form>
+                        </div>
 
-                    <div class="footer">
-                        <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
-                            Save
-                        </button>
+                        <div class="footer">
+                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                                Save
+                            </button>
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!--MODAL for Save-->
-    <!-- <div class="modal fade" id="save13" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <!--MODAL for Save-->
+        <!-- <div class="modal fade" id="save13" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-footer">
@@ -2226,36 +2122,33 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
 
 
 
-    <!--Modal for newAcad-->
-    <div class="modal-parent">
-        <div class="modal modal-xl fade" id="exampleModal14" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="header-modal">
-                        <h5>New Academic Building</h5>
-                        <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i
-                                class="bi bi-x-lg"></i></button>
-                    </div>
+        <!--Modal for newAcad-->
+        <div class="modal-parent">
+            <div class="modal modal-xl fade" id="exampleModal14" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="header-modal">
+                            <h5>New Academic Building</h5>
+                            <button class="btn btn-close-modal-emp close-modal-btn-new" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                        </div>
 
-                    <div class="modal-body modal-new-class">
-                        <form method="post" id="newacadForm">
-                            <section class="choose-personnel">
-                                <!-- <form method="post" class="row g-3"> -->
+                        <div class="modal-body modal-new-class">
+                            <form method="post" id="newacadForm">
+                                <section class="choose-personnel">
+                                    <!-- <form method="post" class="row g-3"> -->
 
 
-                                <div class="col-4" style="display: none">
-                                    <label for="date" class="form-label">Date:</label>
-                                    <input type="text" class="form-control for-names" id="date" name="date"
-                                        value="<?php echo date('Y-m-d'); ?>" style="display:none" />
-                                </div>
+                                    <div class="col-4" style="display: none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control for-names" id="date" name="date" value="<?php echo date('Y-m-d'); ?>" style="display:none" />
+                                    </div>
 
-                                <div class="col-12 choosy-new">
-                                    <label for="techVoc col-8" class="form-label">Choose a
-                                        maintenance personnel:</label>
-                                    <select class="form-control col-4 select-new" id="newAcad" name="newAcad">
-                                        <option value="">Choose</option>
-                                        <?php
+                                    <div class="col-12 choosy-new">
+                                        <label for="techVoc col-8" class="form-label">Choose a
+                                            maintenance personnel:</label>
+                                        <select class="form-control col-4 select-new" id="newAcad" name="newAcad">
+                                            <option value="">Choose</option>
+                                            <?php
                                             // Execute your SQL query
                                             $new_date14 = date('Y-m-d');
                                             $new_sql14 = "SELECT a.accountId, CONCAT(acc.firstName, ' ', IFNULL(acc.middleName, ''), ' ', acc.lastName) AS fullName 
@@ -2274,15 +2167,15 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                                 }
                                             }
                                             ?>
-                                    </select>
-                                </div>
-                            </section>
+                                        </select>
+                                    </div>
+                                </section>
 
-                            <section class="table-personnel">
-                                <div>
-                                    <label for="newAcad" class="form-label">Assigned maintenance personnel:</label>
+                                <section class="table-personnel">
+                                    <div>
+                                        <label for="newAcad" class="form-label">Assigned maintenance personnel:</label>
 
-                                    <?php
+                                        <?php
                                         if ($result14->num_rows > 0) {
                                             echo "<div class='table-container-new'>";
                                             echo "<table class='new-table'>";
@@ -2310,23 +2203,23 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                             echo '<div class="no-data-message">No personnel assigned for today.</div>';
                                         }
                                         ?>
-                                </div>
-                            </section>
-                        </form>
-                    </div>
+                                    </div>
+                                </section>
+                            </form>
+                        </div>
 
-                    <div class="footer">
-                        <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
-                            Save
-                        </button>
+                        <div class="footer">
+                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                                Save
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!--MODAL for Save-->
-    <!-- <div class="modal fade" id="save14" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <!--MODAL for Save-->
+        <!-- <div class="modal fade" id="save14" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-footer">
@@ -2340,16 +2233,16 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                             </div>
                         </div> -->
 
-    </main>
-    </section>
-    <!--End of Section content1-->
+        </main>
+        </section>
+        <!--End of Section content1-->
 
 
-    <section class="content2">
-        <!--start of attendance report chart-->
-        <div class="report-container">
+        <section class="content2">
+            <!--start of attendance report chart-->
+            <div class="report-container">
                 <div class="report-header">
-                <h5>Attendance Report</h5>
+                    <h5>Attendance Report</h5>
                     <div class="filter-container">
                         <select id="timeFilter" class="time-filter">
                             <option value="week">This Week</option>
@@ -2366,281 +2259,285 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                 </div>
             </div>
             <!--End of div for attendance report chart-->
-        <div class="calendar-container">
-            <div class="calendar">
+            <div class="calendar-container">
+                <div class="calendar">
 
-                <div class="month-indicator">
+                    <div class="month-indicator">
 
-                    <span class="today-btn">Today</span>
+                        <span class="today-btn">Today</span>
 
-                    <input type="text" id="datepicker" style="display: none;">
-                    <span class="month clickMe span-label">January</span>
-                    <span class="year clickMe span-label-2">2024</span>
-                </div>
+                        <input type="text" id="datepicker" style="display: none;">
 
-                <div class="calendar-ulit">
-                    <div class="day-of-week">
-                        <div>SUN</div>
-                        <div>MON</div>
-                        <div>TUE</div>
-                        <div>WED</div>
-                        <div>THU</div>
-                        <div>FRI</div>
-                        <div>SAT</div>
+                        <div class="date-selector">
+                            <span class="month clickMe span-label">January</span>
+                            <span class="year clickMe span-label-2">2024</span>
+                        </div>
                     </div>
 
-                    <div class="date-grid">
-                        <!-- Dynamically generated dates will go here -->
+                    <div class="calendar-ulit">
+                        <div class="day-of-week">
+                            <div>SUN</div>
+                            <div>MON</div>
+                            <div>TUE</div>
+                            <div>WED</div>
+                            <div>THU</div>
+                            <div>FRI</div>
+                            <div>SAT</div>
+                        </div>
+
+                        <div class="date-grid">
+                            <!-- Dynamically generated dates will go here -->
+                        </div>
                     </div>
+
                 </div>
 
             </div>
+            <!--End of div for calendar-container-->
+            <!-- Building Filter and Chart Container -->
+            <div class="doughnut-chart-container">
+                <div class="statistics">
+                    <h5>Select a Building</h5>
+                    <div class="filter-container">
+                        <select id="filter-select" onchange="updateChart()">
+                            <option value="all">All Buildings</option>
+                            <?php
+                            $buildingQuery = "SELECT DISTINCT building FROM asset";
+                            $buildings = $conn->query($buildingQuery);
+                            while ($building = $buildings->fetch_assoc()) {
+                                echo "<option value='" . $building['building'] . "'>" . $building['building'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
 
+                <div id="chart-container">
+                    <canvas id="doughnutChart"></canvas>
+                </div>
+            </div>
+            <!--End of div for dougnut-chart-container-->
+
+        </section>
         </div>
-        <!--End of div for calendar-container-->
-        <!-- Building Filter and Chart Container -->
-        <div class="doughnut-chart-container">
-            <div class="statistics">
-                <h5>Select a Building</h5>
+        </main>
+        <!-- MAIN -->
+        </section>
+
+        <!-- MODALS -->
+        <?php include_once 'modals/modal_layout.php'; ?>
+
+        <!-- RFID MODAL -->
+        <div class="modal" id="staticBackdrop112" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img src="../../src/img/taprfid.jpg" width="100%" alt="" class="Scan" />
+
+                        <form id="rfidForm">
+                            <input type="text" id="rfid" name="rfid" value="">
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="filter-container">
-                <select id="filter-select" onchange="updateChart()">
-                    <option value="all">All Buildings</option>
-                    <?php
-                        $buildingQuery = "SELECT DISTINCT building FROM asset";
-                        $buildings = $conn->query($buildingQuery);
-                        while ($building = $buildings->fetch_assoc()) {
-                            echo "<option value='" . $building['building'] . "'>" . $building['building'] . "</option>";
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+
+        <script>
+            $(document).ready(function() {
+                $('.notification-item').on('click', function(e) {
+                    e.preventDefault();
+                    var activityId = $(this).data('activity-id');
+                    var notificationItem = $(this); // Store the clicked element
+
+                    $.ajax({
+                        type: "POST",
+                        url: "update_single_notification.php", // The URL to the PHP file
+                        data: {
+                            activityId: activityId
+                        },
+                        success: function(response) {
+                            if (response.trim() === "Notification updated successfully") {
+                                // If the notification is updated successfully, remove the clicked element
+                                notificationItem.remove();
+
+                                // Update the notification count
+                                var countElement = $('#noti_number');
+                                var count = parseInt(countElement.text()) || 0;
+                                countElement.text(count > 1 ? count - 1 : '');
+                            } else {
+                                // Handle error
+                                console.error("Failed to update notification:", response);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle AJAX error
+                            console.error("AJAX error:", status, error);
                         }
-                        ?>
-                </select>
-            </div>
-            <div id="chart-container">
-                <canvas id="doughnutChart"></canvas>
-            </div>
-        </div>
-        <!--End of div for dougnut-chart-container-->
+                    });
+                });
+            });
+        </script>
+        <script>
+            // Status to color mapping
+            var statusColors = {
+                'Working': 'green',
+                'Under Maintenance': 'yellow',
+                'For Replacement': 'orange',
+            };
 
-    </section>
-    </div>
-    </main>
-    <!-- MAIN -->
-    </section>
+            // Initialize the chart with a gray segment
+            var ctx = document.getElementById('doughnutChart').getContext('2d');
+            var doughnutChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ["Select a Building"],
+                    datasets: [{
+                        data: [1], // A dummy value to show the gray segment
+                        backgroundColor: ['gray']
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'Building Status Chart'
+                    }
+                }
+            });
 
-    <!-- MODALS -->
-    <?php include_once 'modals/modal_layout.php'; ?>
-
-    <!-- RFID MODAL -->
-    <div class="modal" id="staticBackdrop112" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <img src="../../src/img/taprfid.jpg" width="100%" alt="" class="Scan" />
-
-                    <form id="rfidForm">
-                        <input type="text" id="rfid" name="rfid" value="">
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  
-                    
-                    
-  
- <script>
-$(document).ready(function() {
-    $('.notification-item').on('click', function(e) {
-        e.preventDefault();
-        var activityId = $(this).data('activity-id');
-        var notificationItem = $(this); // Store the clicked element
-
-        $.ajax({
-            type: "POST",
-            url: "update_single_notification.php", // The URL to the PHP file
-            data: { activityId: activityId },
-            success: function(response) {
-                if (response.trim() === "Notification updated successfully") {
-                    // If the notification is updated successfully, remove the clicked element
-                    notificationItem.remove();
-
-                    // Update the notification count
-                    var countElement = $('#noti_number');
-                    var count = parseInt(countElement.text()) || 0;
-                    countElement.text(count > 1 ? count - 1 : '');
+            // Update the chart when a new building is selected
+            function updateChart() {
+                var selectedBuilding = document.getElementById('filter-select').value;
+                if (selectedBuilding === "") {
+                    // Reset the chart to its initial gray state
+                    doughnutChart.data.labels = ["Select a Building"];
+                    doughnutChart.data.datasets[0].data = [1];
+                    doughnutChart.data.datasets[0].backgroundColor = ['gray'];
+                    doughnutChart.update();
                 } else {
-                    // Handle error
-                    console.error("Failed to update notification:", response);
-                }
-            },
-            error: function(xhr, status, error) {
-                // Handle AJAX error
-                console.error("AJAX error:", status, error);
-            }
-        });
-    });
-});
+                    // Make an AJAX request to fetch data for the selected building
+                    $.ajax({
+                        url: 'get_building_data.php',
+                        type: 'GET',
+                        data: {
+                            buildingName: selectedBuilding
+                        },
+                        success: function(response) {
+                            // Map the response to the chart data and colors
+                            var newLabels = Object.keys(response);
+                            var newValues = Object.values(response);
+                            var backgroundColors = newLabels.map(status => statusColors[status] || 'red');
 
-</script>
-  <script>
-        // Status to color mapping
-        var statusColors = {
-            'Working': 'green',
-            'Under Maintenance': 'yellow',
-            'For Replacement': 'orange',
-        };
-
-        // Initialize the chart with a gray segment
-        var ctx = document.getElementById('doughnutChart').getContext('2d');
-        var doughnutChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ["Select a Building"],
-                datasets: [{
-                    data: [1], // A dummy value to show the gray segment
-                    backgroundColor: ['gray']
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: 'Building Status Chart'
+                            // Update the chart with the new data and colors
+                            doughnutChart.data.labels = newLabels;
+                            doughnutChart.data.datasets[0].data = newValues;
+                            doughnutChart.data.datasets[0].backgroundColor = backgroundColors;
+                            doughnutChart.update();
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("An error occurred: " + xhr.status + " " + error);
+                        }
+                    });
                 }
             }
-        });
 
-        // Update the chart when a new building is selected
-        function updateChart() {
-            var selectedBuilding = document.getElementById('filter-select').value;
-            if (selectedBuilding === "") {
-                // Reset the chart to its initial gray state
-                doughnutChart.data.labels = ["Select a Building"];
-                doughnutChart.data.datasets[0].data = [1];
-                doughnutChart.data.datasets[0].backgroundColor = ['gray'];
-                doughnutChart.update();
-            } else {
-                // Make an AJAX request to fetch data for the selected building
+            // Trigger the chart update function when the page loads
+            $(document).ready(function() {
+                updateChart(); // This will set the chart to the initial gray state if no building is selected
+            });
+        </script>
+
+        <script>
+            // Function to fetch attendance data and render the chart
+            function fetchAttendanceData(period) {
                 $.ajax({
-                    url: 'get_building_data.php',
+                    url: 'get_attendance_data.php', // PHP file to process the AJAX request
                     type: 'GET',
                     data: {
-                        buildingName: selectedBuilding
+                        period: period
                     },
-                    success: function (response) {
-                        // Map the response to the chart data and colors
-                        var newLabels = Object.keys(response);
-                        var newValues = Object.values(response);
-                        var backgroundColors = newLabels.map(status => statusColors[status] || 'red');
+                    dataType: 'json',
+                    success: function(response) {
+                        // Assuming response is an object with the structure { 'Manager': [week1, week2, week3, week4], 'Personnel': [week1, week2, week3, week4] }
+                        var ctx = document.getElementById('attendanceChart').getContext('2d');
+                        if (window.attendanceChart instanceof Chart) {
+                            window.attendanceChart.destroy();
+                        }
+                        window.attendanceChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: response.labels, // Update to dynamic labels based on period
+                                datasets: [{
+                                    label: 'Manager',
+                                    data: response.Manager,
+                                    borderColor: 'orange',
+                                    backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                                    fill: true,
+                                    pointRadius: 5,
+                                    pointBackgroundColor: 'orange',
+                                    tension: 0.4 // This will make the line a bit smoother
+                                }, {
+                                    label: 'Personnel',
+                                    data: response.Personnel,
+                                    borderColor: 'purple',
+                                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                                    fill: true,
+                                    pointRadius: 5,
+                                    pointBackgroundColor: 'purple',
+                                    tension: 0.4
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                },
+                                responsive: true,
+                                title: {
+                                    display: true,
 
-                        // Update the chart with the new data and colors
-                        doughnutChart.data.labels = newLabels;
-                        doughnutChart.data.datasets[0].data = newValues;
-                        doughnutChart.data.datasets[0].backgroundColor = backgroundColors;
-                        doughnutChart.update();
+                                },
+                                maintainAspectRatio: true,
+                                legend: { // Here's where you add the legend options
+                                    display: true,
+                                    position: 'bottom'
+                                }
+
+                            }
+                        });
                     },
-                    error: function (xhr, status, error) {
+                    error: function(xhr, status, error) {
                         console.error("An error occurred: " + xhr.status + " " + error);
                     }
                 });
             }
-        }
 
-        // Trigger the chart update function when the page loads
-        $(document).ready(function () {
-            updateChart(); // This will set the chart to the initial gray state if no building is selected
-        });
-    </script>
+            // Event listener for the filter dropdown
+            document.getElementById('timeFilter').addEventListener('change', function() {
+                fetchAttendanceData(this.value);
+            });
 
-<script>
-    // Function to fetch attendance data and render the chart
-    function fetchAttendanceData(period) {
-        $.ajax({
-            url: 'get_attendance_data.php', // PHP file to process the AJAX request
-            type: 'GET',
-            data: { period: period },
-            dataType: 'json',
-            success: function(response) {
-                // Assuming response is an object with the structure { 'Manager': [week1, week2, week3, week4], 'Personnel': [week1, week2, week3, week4] }
-                var ctx = document.getElementById('attendanceChart').getContext('2d');
-                if (window.attendanceChart instanceof Chart) {
-                    window.attendanceChart.destroy();
-                }
-                window.attendanceChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: response.labels, // Update to dynamic labels based on period
-                        datasets: [{
-                            label: 'Manager',
-                            data: response.Manager,
-                            borderColor: 'orange',
-                            backgroundColor: 'rgba(255, 159, 64, 0.2)',
-                            fill: true,
-                            pointRadius: 5,
-                            pointBackgroundColor: 'orange',
-                            tension: 0.4 // This will make the line a bit smoother
-                        }, {
-                            label: 'Personnel',
-                            data: response.Personnel,
-                            borderColor: 'purple',
-                            backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                            fill: true,
-                            pointRadius: 5,
-                            pointBackgroundColor: 'purple',
-                            tension: 0.4
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        },
-                        responsive: true,
-                        title: {
-                            display: true,
-                            
-                        },
-                        maintainAspectRatio: true,
-                        legend: { // Here's where you add the legend options
-                        display: true,
-                        position: 'bottom'
-                    }
-
-                    }
-                });
-            },
-            error: function(xhr, status, error) {
-                console.error("An error occurred: " + xhr.status + " " + error);
-            }
-        });
-    }
-
-    // Event listener for the filter dropdown
-    document.getElementById('timeFilter').addEventListener('change', function() {
-        fetchAttendanceData(this.value);
-    });
-
-    // Trigger fetching attendance data when document is ready
-    $(document).ready(function() {
-        fetchAttendanceData('month');
-    });
-</script>
+            // Trigger fetching attendance data when document is ready
+            $(document).ready(function() {
+                fetchAttendanceData('month');
+            });
+        </script>
 
 
 
-    <!-- BOOTSTRAP -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-    <!-- BOOTSTRAP -->
-    <script src="../../src/js/main.js"></script>
-    <script src="../../src/js/dashboard.js"></script>
-    <script src="../../src/js/profileModalController.js"></script>
+        <!-- BOOTSTRAP -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <!-- BOOTSTRAP -->
+        <script src="../../src/js/main.js"></script>
+        <script src="../../src/js/dashboard.js"></script>
+        <script src="../../src/js/profileModalController.js"></script>
 
 
-</body>
+    </body>
 
-</html>
+    </html>

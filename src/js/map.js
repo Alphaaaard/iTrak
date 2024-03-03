@@ -199,10 +199,12 @@ function loadModels() {
 
         model.userData.name = modelData.name;
         model.userData.description = modelData.description;
-        models.push(model);
         scene.add(model);
 
-        setupModalListeners(model, index);
+        if (index > 0) {
+          models.push(model);
+          setupModalListeners(model, index);
+        }
       },
       undefined,
       (error) => {
@@ -306,6 +308,7 @@ function onDocumentClick(event) {
 
   raycaster.setFromCamera(mouse, camera);
 
+  // Start loop from index 1 to exclude the first model
   for (let i = 1; i < models.length; i++) {
     const model = models[i];
     const intersects = raycaster.intersectObject(model, true);
@@ -325,6 +328,7 @@ function onDocumentClick(event) {
     }
   }
 }
+
 
 animate();
 

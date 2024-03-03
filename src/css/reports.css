@@ -74,9 +74,17 @@ table {
   font-weight: bold;
 }
 
+.tbl-filter select{
+  padding: 0.3em 3.15em 0.3em 0!important;
+}
+
 /* .new-nav .box{
   padding: 9px 5px;
 } */
+
+.cont-header{
+  justify-content: right;
+}
 
 table thead {
   background-color: #3d518c;

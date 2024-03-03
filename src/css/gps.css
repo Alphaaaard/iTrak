@@ -68,9 +68,9 @@ td:last-child {
     align-items: center;
 }
 
-#content.hide .locationTbl {
+/* #content.hide .locationTbl {
   top: 90px;
-}
+} */
 
 table .tableth {
   background-color: #3d518c;
@@ -199,6 +199,14 @@ td {
 
 .gps-info:hover{
   background-color: #F6F6F6;
+}
+
+.cont-header{
+  margin-bottom: 0!important;
+}
+
+.cont-header.hide{
+  margin-bottom: 0!important;
 }
 
 @media (max-width: 600px) {

@@ -3,14 +3,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-
-
 // require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 
-
 require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
-
-
 
 session_start();
 include_once("../../config/connection.php");
@@ -130,7 +125,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Dashboard</title>
+        <title>Reports</title>
         <link rel="icon" type="image/x-icon" href="../../src/img/tab-logo.png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
@@ -346,7 +341,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 <div class="content-container">
                     <header>
                         <div class="cont-header">
-                            <h1 class="tab-name">Reports</h1>
+                            <!-- <h1 class="tab-name">Reports</h1> -->
                             <div class="tbl-filter">
                                 <select id="filter-criteria">
                                     <option value="all">All</option> <!-- Added "All" option -->
