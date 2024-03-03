@@ -831,3 +831,67 @@ button {
       width: 360px!important;
   }
 }
+/* CSS FOR THE ATTENDANCE LOGS CHART */
+.report-container {
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  margin-bottom: 20px; /* Adjust as needed */
+  /* Add more padding if necessary */
+}
+
+.report-title {
+  color: #1e56a0;
+  font-weight: 800;
+  line-height: 37.5px;
+  margin-bottom: 0;
+}
+
+/* Assuming you want to use the .chart-container1 class, ensure it's applied in your HTML */
+.chart-container1 {
+  max-width: 100%;
+  height: auto;
+  overflow: hidden;
+  padding: 15px; /* Adjust padding as needed */
+}
+
+/* If .chart-container1 is not used, apply these styles directly to .chart-container */
+.chart-container {
+  /* Styles... */
+  padding: 15px; /* Adjust padding as needed */
+}
+
+#attendanceChart {
+  width: 100% !important;
+  height: auto !important;
+}
+
+.time-filter {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.chart-legend {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.report-title h5 {
+  font-weight: 700;
+  color: #163172;
+}
+.title{
+  color: #1e56a0;
+  font-weight: 800;
+  line-height: 37.5px;
+  margin-bottom: 0;
+}
