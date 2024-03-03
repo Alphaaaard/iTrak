@@ -14,6 +14,9 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 $_SESSION['userLevel'] = $row['userLevel'];
 
+// Store the submitted email in the session to retain it on the form
+$_SESSION['login_email'] = $email;
+
 // Protect against SQL injection
 $email = mysqli_real_escape_string($conn, $email);
 $password = mysqli_real_escape_string($conn, $password);

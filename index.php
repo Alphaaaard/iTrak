@@ -1,6 +1,13 @@
 <?php
 session_start();
 date_default_timezone_set('Asia/Manila');
+
+// Check if the form has been submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
+    // Store the submitted email in the session to retain it in the email field
+    $_SESSION['login_email'] = $_POST['email'];
+}
+
 $email = isset($_SESSION['login_email']) ? $_SESSION['login_email'] : '';
 ?>
 <!DOCTYPE html>
@@ -33,7 +40,7 @@ $email = isset($_SESSION['login_email']) ? $_SESSION['login_email'] : '';
                         <div class="row">
                             <div class="col-md-12">
                                 <b><label for="email" class="text-left">Email</label></b>
-                                <input type="email" id="email" name="email" class="form-textbox" style="width: 100%; height: 40px;" placeholder="Email" required value="<?php echo $email; ?>">
+                                <input type="email" id="email" name="email" class="form-textbox" style="width: 100%; height: 40px;" placeholder="Email" required value="<?php echo htmlspecialchars(isset($_SESSION['login_email']) ? $_SESSION['login_email'] : ''); ?>">
                                 <br>
                             </div>
                         </div>
