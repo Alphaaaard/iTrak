@@ -355,10 +355,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <option value="category">Category</option>
                                     <option value="location">Location</option>
                                 </select>
-
                                 <!-- Search Box -->
-                                <input type="text" id="search-box" placeholder="Search...">
-
+                                <form class="d-flex" role="search" id="searchForm">
+                                    <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" name="q" />
+                                </form>
                             </div>
                         </div>
                     </header>

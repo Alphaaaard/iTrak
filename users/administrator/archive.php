@@ -6,7 +6,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
     // For personnel page, check if userLevel is 3
-    if($_SESSION['userLevel'] != 1) {
+    if ($_SESSION['userLevel'] != 1) {
         // If not personnel, redirect to an error page or login
         header("Location:error.php");
         exit;
@@ -101,25 +101,25 @@ $unseenCount = $unseenCountRow['unseenCount'];
             $(document).ready(function() {
                 let lastPillSelected = sessionStorage.getItem('lastPillArchive');
 
-                if(!lastPillSelected) {
+                if (!lastPillSelected) {
                     $("#pills-manager").addClass("show active");
                     $("#pills-profile").removeClass("show active");
                     $(".nav-link[data-bs-target='pills-manager']").addClass("active");
                     $(".nav-link[data-bs-target='pills-profile']").removeClass("active");
                 } else {
-                    switch(lastPillSelected) {
+                    switch (lastPillSelected) {
                         case 'pills-manager':
                             $("#pills-manager").addClass("show active");
                             $("#pills-profile").removeClass("show active");
                             $(".nav-link[data-bs-target='pills-manager']").addClass("active");
                             $(".nav-link[data-bs-target='pills-profile']").removeClass("active");
-                        break;
+                            break;
                         case 'pills-profile':
                             $("#pills-profile").addClass("show active");
                             $("#pills-manager").removeClass("show active");
                             $(".nav-link[data-bs-target='pills-profile']").addClass("active");
                             $(".nav-link[data-bs-target='pills-manager']").removeClass("active");
-                        break;
+                            break;
                     }
                 }
 
@@ -712,7 +712,7 @@ $(document).ready(function() {
                             },
                             success: (response) => {
                                 console.log(response);
-                                this.showAlert("", fullname+" have successfully restored!", "success");
+                                this.showAlert("", fullname + " have successfully restored!", "success");
                                 setTimeout(() => {
                                     location.reload();
                                 }, 1000);
@@ -725,7 +725,7 @@ $(document).ready(function() {
                     }
 
                     confirmRestore(rowData) {
-                        fullname = rowData.firstName+' '+rowData.lastName;
+                        fullname = rowData.firstName + ' ' + rowData.lastName;
 
                         Swal.fire({
                             title: `Are you sure you want to restore<span style="font-weight: bold;">${rowData.firstName}</span>, <span style="font-weight: bold;">${rowData.lastName}</span>?`,

@@ -674,7 +674,6 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5>Add Maintenance Staff</h5>
-
                                             <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                                         </div>
                                         <div class="modal-body">
