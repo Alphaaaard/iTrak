@@ -15,18 +15,38 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     }
 
 
-    $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.lastName AS adminLastName
-                  FROM activitylogs AS al
-                  JOIN account AS acc ON al.accountId = acc.accountId
-                  WHERE al.tab='Report' 
-                  AND al.action LIKE 'Assigned maintenance personnel%'
-                  ORDER BY al.date DESC 
-                  LIMIT 5";
 
-    // Prepare and execute the SQL statement for the latest logs
-    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
-    $stmtLatestLogs->execute();
-    $resultLatestLogs = $stmtLatestLogs->get_result();
+ // for notif below
+ // Update the SQL to join with the account and asset tables to get the admin's name and asset information
+ $loggedInUserFirstName = $_SESSION['firstName']; 
+ $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
+ $loggedInUserLastName = $_SESSION['lastName'];
+ 
+ // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
+
+$loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
+
+// SQL query to fetch notifications related to report activities
+$sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName
+               FROM activitylogs AS al
+               JOIN account AS acc ON al.accountID = acc.accountID
+               WHERE al.tab='Report' AND al.seen = '0'
+               ORDER BY al.date DESC 
+               LIMIT 5"; // Set limit to 5
+
+// Prepare the SQL statement
+$stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+
+// Execute the query
+$stmtLatestLogs->execute();
+$resultLatestLogs = $stmtLatestLogs->get_result();
+
+
+$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '3'";
+$result = $conn->query($unseenCountQuery);
+$unseenCountRow = $result->fetch_assoc();
+$unseenCount = $unseenCountRow['unseenCount'];
+
     // Get the current date in the same format as your date column
     //Personnel Attendance
     $current_date = date('Y-m-d');
@@ -304,42 +324,101 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             </div>
             <div class="content-nav">
                 <div class="notification-dropdown">
-                    <a href="#" class="notification" id="notification-button">
-                        <!-- <i class="bi bi-bell"></i> -->
+         
+ <a href="#" class="notification" id="notification-button">
 
-                    </a>
-                    <div class="dropdown-content" id="notification-dropdown-content">
-                        <h6 class="dropdown-header">Alerts Center</h6>
-                        <!-- PHP code to display notifications will go here -->
-                        <?php
-                            if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
-                                while ($row = $resultLatestLogs->fetch_assoc()) {
-                                    $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"]; // Get the admin's full name
 
-                                    // Parse the action text to extract personnel name and asset ID
-                                    // Assuming the action text is something like "Assigned maintenance personnel John Doe to asset ID 20."
-                                    $actionText = $row["action"];
-                                    if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
-                                        $assignedName = $matches[1]; // Captured assigned personnel name
-                                        $assetId = $matches[2]; // Captured asset ID
-                                    } else {
-                                        // If the pattern does not match, default to 'unknown'
-                                        $assignedName = 'unknown';
-                                        $assetId = 'unknown';
-                                    }
 
-                                    // Now create the notification text
-                                    $notificationText = "Admin  
-                                         assigned You to  
-                                         to asset ID " . htmlspecialchars($assetId);
-                                    echo '<a href="#">' . $notificationText . '</a>';
-                                }
-                            } else {
-                                echo '<a href="#">No new notifications</a>';
-                            }
-                            ?>
-                    </div>
-                </div>
+
+
+
+<i class="fa fa-bell" aria-hidden="true"></i>
+<span id="noti_number"><?php echo $unseenCount; ?></span>
+
+    </td>
+    </tr>
+    </table>
+    <script type="text/javascript">
+
+
+
+
+   
+    
+
+       
+       
+      
+    
+
+
+
+
+        function loadDoc() {
+
+
+            setInterval(function() {
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("noti_number").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", "update_single_notification.php", true);
+                xhttp.send();
+
+            }, 10);
+
+
+        }
+        loadDoc();
+    </script>
+
+</a>
+
+
+
+<div class="dropdown-content" id="notification-dropdown-content">
+    <h6 class="dropdown-header">Alerts Center</h6>
+    <!-- PHP code to display notifications will go here -->
+    <?php
+if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
+    while ($row = $resultLatestLogs->fetch_assoc()) {
+        $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+        $actionText = $row["action"];
+        
+        // Initialize the notification text as empty
+        $notificationText = "";
+        
+        // Check for 'Assigned maintenance personnel' action
+        if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
+            $assignedName = $matches[1];
+            $assetId = $matches[2];
+            $notificationText = "Admin $adminName assigned $assignedName to asset ID $assetId";
+        }
+        // Check for 'Changed status of asset ID' action
+        elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
+            $assetId = $matches[1];
+            $newStatus = $matches[2];
+            $notificationText = "Admin $adminName changed status of asset ID $assetId to $newStatus";
+        }
+
+        // If notification text is set, echo the notification
+        if (!empty($notificationText)) {
+            // HTML for notification item
+            echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars($notificationText) . '</a>';
+        }
+    }
+} else {
+    // No notifications found
+    echo '<a href="#">No new notifications</a>';
+}
+?>
+<a href="activity-logs.php" class="view-all">View All</a>
+
+</div>
+</div>
                 <a href="#" class="settings profile">
                     <div class="profile-container" title="settings">
                         <div class="profile-img">
@@ -2348,7 +2427,45 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
+  
+                    
+                    
+  
+ <script>
+$(document).ready(function() {
+    $('.notification-item').on('click', function(e) {
+        e.preventDefault();
+        var activityId = $(this).data('activity-id');
+        var notificationItem = $(this); // Store the clicked element
+
+        $.ajax({
+            type: "POST",
+            url: "update_single_notification.php", // The URL to the PHP file
+            data: { activityId: activityId },
+            success: function(response) {
+                if (response.trim() === "Notification updated successfully") {
+                    // If the notification is updated successfully, remove the clicked element
+                    notificationItem.remove();
+
+                    // Update the notification count
+                    var countElement = $('#noti_number');
+                    var count = parseInt(countElement.text()) || 0;
+                    countElement.text(count > 1 ? count - 1 : '');
+                } else {
+                    // Handle error
+                    console.error("Failed to update notification:", response);
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle AJAX error
+                console.error("AJAX error:", status, error);
+            }
+        });
+    });
+});
+
+</script>
+  <script>
         // Status to color mapping
         var statusColors = {
             'Working': 'green',

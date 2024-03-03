@@ -76,6 +76,42 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     // ARCHIVE CODE
     // Archive
 
+
+    
+
+ // for notif below
+ // Update the SQL to join with the account and asset tables to get the admin's name and asset information
+ $loggedInUserFirstName = $_SESSION['firstName']; 
+ $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
+ $loggedInUserLastName = $_SESSION['lastName'];
+ 
+ // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
+
+$loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
+
+// SQL query to fetch notifications related to report activities
+$sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName
+               FROM activitylogs AS al
+               JOIN account AS acc ON al.accountID = acc.accountID
+               WHERE al.tab='Report' AND al.seen = '0'
+               ORDER BY al.date DESC 
+               LIMIT 5"; // Set limit to 5
+
+// Prepare the SQL statement
+$stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+
+// Execute the query
+$stmtLatestLogs->execute();
+$resultLatestLogs = $stmtLatestLogs->get_result();
+
+
+$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '3'";
+$result = $conn->query($unseenCountQuery);
+$unseenCountRow = $result->fetch_assoc();
+$unseenCount = $unseenCountRow['unseenCount'];
+
+
+
 ?>
 
     <!DOCTYPE html>
@@ -89,7 +125,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
+        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
 
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/staff.css" />
@@ -158,20 +194,101 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
                 <div class="content-nav">
                     <div class="notification-dropdown">
-                        <a href="#" class="notification" id="notification-button">
-                            <i class="bi bi-bell"></i>
-                            <!-- <i class="bx bxs-bell"></i> -->
-                            <span class="num"></span>
-                        </a>
-                        <div class="dropdown-content" id="notification-dropdown-content">
-                            <h6 class="dropdown-header">Alerts Center</h6>
-                            <a href="#">May hindi nagbuhos sa Cr sa Belmonte building</a>
-                            <a href="#">Notification 2</a>
-                            <a href="#">Notification 3</a>
-                            <!-- Add more notification items here -->
-                            <a href="#" class="view-all">View All</a>
-                        </div>
-                    </div>
+                        
+ <a href="#" class="notification" id="notification-button">
+
+
+
+
+
+
+<i class="fa fa-bell" aria-hidden="true"></i>
+<span id="noti_number"><?php echo $unseenCount; ?></span>
+
+    </td>
+    </tr>
+    </table>
+    <script type="text/javascript">
+
+
+
+
+   
+    
+
+       
+       
+      
+    
+
+
+
+
+        function loadDoc() {
+
+
+            setInterval(function() {
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("noti_number").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", "update_single_notification.php", true);
+                xhttp.send();
+
+            }, 10);
+
+
+        }
+        loadDoc();
+    </script>
+
+</a>
+
+
+
+<div class="dropdown-content" id="notification-dropdown-content">
+    <h6 class="dropdown-header">Alerts Center</h6>
+    <!-- PHP code to display notifications will go here -->
+    <?php
+if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
+    while ($row = $resultLatestLogs->fetch_assoc()) {
+        $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+        $actionText = $row["action"];
+        
+        // Initialize the notification text as empty
+        $notificationText = "";
+        
+        // Check for 'Assigned maintenance personnel' action
+        if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
+            $assignedName = $matches[1];
+            $assetId = $matches[2];
+            $notificationText = "Admin $adminName assigned $assignedName to asset ID $assetId";
+        }
+        // Check for 'Changed status of asset ID' action
+        elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
+            $assetId = $matches[1];
+            $newStatus = $matches[2];
+            $notificationText = "Admin $adminName changed status of asset ID $assetId to $newStatus";
+        }
+
+        // If notification text is set, echo the notification
+        if (!empty($notificationText)) {
+            // HTML for notification item
+            echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars($notificationText) . '</a>';
+        }
+    }
+} else {
+    // No notifications found
+    echo '<a href="#">No new notifications</a>';
+}
+?>
+<a href="activity-logs.php" class="view-all">View All</a>
+
+</div>
+</div>
                     <a href="#" class="settings profile">
                         <div class="profile-container" title="settings">
                             <div class="profile-img">
@@ -727,6 +844,42 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/ajax.js"></script>
         <script src="../../src/js/staff.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
+        
+ <script>
+$(document).ready(function() {
+    $('.notification-item').on('click', function(e) {
+        e.preventDefault();
+        var activityId = $(this).data('activity-id');
+        var notificationItem = $(this); // Store the clicked element
+
+        $.ajax({
+            type: "POST",
+            url: "update_single_notification.php", // The URL to the PHP file
+            data: { activityId: activityId },
+            success: function(response) {
+                if (response.trim() === "Notification updated successfully") {
+                    // If the notification is updated successfully, remove the clicked element
+                    notificationItem.remove();
+
+                    // Update the notification count
+                    var countElement = $('#noti_number');
+                    var count = parseInt(countElement.text()) || 0;
+                    countElement.text(count > 1 ? count - 1 : '');
+                } else {
+                    // Handle error
+                    console.error("Failed to update notification:", response);
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle AJAX error
+                console.error("AJAX error:", status, error);
+            }
+        });
+    });
+});
+
+
+        </script>
         <script>
             $(document).ready(function() {
                 // Bind the filter function to the input field

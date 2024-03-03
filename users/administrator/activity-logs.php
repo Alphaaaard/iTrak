@@ -66,7 +66,7 @@ $stmtLatestLogs->execute();
 $resultLatestLogs = $stmtLatestLogs->get_result();
 
 
-$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0'";
+$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '3'";
 $result = $conn->query($unseenCountQuery);
 $unseenCountRow = $result->fetch_assoc();
 $unseenCount = $unseenCountRow['unseenCount'];
@@ -137,6 +137,7 @@ $unseenCount = $unseenCountRow['unseenCount'];
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/activity-logs.css" />
+        
     </head>
 
     <body>
