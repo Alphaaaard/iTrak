@@ -52,7 +52,7 @@ ORDER BY ac.date DESC";
               FROM activitylogs AS al
               JOIN account AS acc ON al.accountID = acc.accountID
               WHERE al.tab='Report' 
-              AND al.seen = '0' AND al.action LIKE ?
+              AND al.p_seen = '0' AND al.action LIKE ?
               ORDER BY al.date DESC 
               LIMIT 1000";
 
@@ -67,7 +67,7 @@ ORDER BY ac.date DESC";
     $stmtLatestLogs->execute();
     $resultLatestLogs = $stmtLatestLogs->get_result();
 
-    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '3'";
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE p_seen = '3'";
     $result = $conn->query($unseenCountQuery);
     $unseenCountRow = $result->fetch_assoc();
 

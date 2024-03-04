@@ -725,7 +725,7 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                                 <div class="col-4">
                                                     <label for="user_pass" class="form-label">Register RFID <span class="d-none text-danger error">*</span></label>
                                                     <button type="button" class="form-control btn-custom" data-bs-toggle="modal" data-bs-target="#addRFIDModal" onclick="setAction('add');" value="123456789">SCAN</button>
-                                                    <input type="password" name="rfidNumber" id="rfidFieldAdd" title="" value="1234567" required />
+                                                    <input type="password" name="rfidNumber" id="rfidFieldAdd" title="" value="" required />
                                                 </div>
 
                                                 <div class="col-5">

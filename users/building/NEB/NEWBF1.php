@@ -3,7 +3,48 @@ session_start();
 include_once("../../../config/connection.php");
 $conn = connection();
 
-if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role'])) {
+
+    if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
+        // For personnel page, check if userLevel is 3
+        if ($_SESSION['userLevel'] != 1) {
+            // If not personnel, redirect to an error page or login
+            header("Location:error.php");
+            exit;
+        }
+        
+ // for notif below
+ // Update the SQL to join with the account and asset tables to get the admin's name and asset information
+ $loggedInUserFirstName = $_SESSION['firstName']; 
+ $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
+ $loggedInUserLastName = $_SESSION['lastName'];
+ 
+ // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
+
+$loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
+
+// SQL query to fetch notifications related to report activities
+$sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName
+               FROM activitylogs AS al
+               JOIN account AS acc ON al.accountID = acc.accountID
+               WHERE al.tab='Report' AND al.seen = '0'
+               ORDER BY al.date DESC 
+               LIMIT 5"; // Set limit to 5
+
+// Prepare the SQL statement
+$stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+
+// Execute the query
+$stmtLatestLogs->execute();
+$resultLatestLogs = $stmtLatestLogs->get_result();
+
+
+$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '3'";
+$result = $conn->query($unseenCountQuery);
+$unseenCountRow = $result->fetch_assoc();
+$unseenCount = $unseenCountRow['unseenCount'];
+
+
+
 
     //FOR ID 1 SOFA
     $sql = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date, upload_img, description FROM asset WHERE assetId = 1";
@@ -24,7 +65,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $description = $row['description'];
 
     //FOR ID 2 SOFA
-    $sql2 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 2";
+    $sql2 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date, upload_img, description FROM asset WHERE assetId = 2";
     $stmt2 = $conn->prepare($sql2);
     $stmt2->execute();
     $result2 = $stmt2->get_result();
@@ -254,15 +295,19 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status = $_POST['status']; // Get the status from the form
         $description = $_POST['description']; // Get the description from the form
         $room = $_POST['room']; // Get the room from the form
+        $assignedBy = $_POST['assignedBy']; // Get the assignedBy value from the form
+
 
 
         // Check if status is "Need Repair" and set "Assigned Name" to none
         $assignedName = $status === 'Need Repair' ? '' : $assignedName;
 
         // Prepare SQL query to update the asset
-        $sql = "UPDATE asset SET status = ?, assignedName = ?, description = ?, room = ? WHERE assetId = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('ssssi', $status, $assignedName, $description, $room, $assetId);
+        $sql = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+         $stmt = $conn->prepare($sql);
+   
+        $stmt->bind_param('sssssi', $status, $assignedName, $assignedBy, $description, $room, $assetId);
+
 
         if ($stmt->execute()) {
             // Update success
@@ -282,14 +327,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status2 = $_POST['status']; // Get the status from the form
         $description2 = $_POST['description']; // Get the description from the form
         $room2 = $_POST['room']; // Get the room from the form
-
+        $assignedBy2 = $_POST['assignedBy'];
         // Check if status is "Need Repair" and set "Assigned Name" to none
         $assignedName2 = $status === 'Need Repair' ? '' : $assignedName2;
 
         // Prepare SQL query to update the asset
-        $sql2 = "UPDATE asset SET status = ?, assignedName = ?, description = ?, room = ? WHERE assetId = ?";
+        $sql2 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt2 = $conn->prepare($sql2);
-        $stmt2->bind_param('ssssi', $status2, $assignedName2, $description2, $room2, $assetId2);
+        $stmt2->bind_param('sssssi', $status2, $assignedName2, $assignedBy2, $description2, $room2, $assetId2);
 
         if ($stmt2->execute()) {
             // Update success
@@ -310,12 +355,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status3 = $_POST['status']; // Get the status from the form
         $description3 = $_POST['description']; // Get the description from the form
         $room3 = $_POST['room']; // Get the room from the form
-
+        $assignedBy3 = $_POST['assignedBy'];
         // Check if status is "Need Repair" and set "Assigned Name" to none
         $assignedName3 = $status3 === 'Need Repair' ? '' : $assignedName3;
 
         // Prepare SQL query to update the asset
-        $sql3 = "UPDATE asset SET status = ?, assignedName = ?, description = ?, room = ? WHERE assetId = ?";
+        $sql3 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt3 = $conn->prepare($sql3);
         $stmt3->bind_param('ssssi', $status3, $assignedName3, $description3, $room3, $assetId3);
 
@@ -338,12 +383,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status4 = $_POST['status']; // Get the status from the form
         $description4 = $_POST['description']; // Get the description from the form
         $room4 = $_POST['room']; // Get the room from the form
-
+        $assignedBy4 = $_POST['assignedBy'];
         // Check if status is "Need Repair" and set "Assigned Name" to none
         $assignedName4 = $status4 === 'Need Repair' ? '' : $assignedName4;
 
         // Prepare SQL query to update the asset
-        $sql4 = "UPDATE asset SET status = ?, assignedName = ?, description = ?, room = ? WHERE assetId = ?";
+        $sql4 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt4 = $conn->prepare($sql4);
         $stmt4->bind_param('ssssi', $status4, $assignedName4, $description4, $room4, $assetId4);
 
@@ -365,12 +410,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status5 = $_POST['status']; // Get the status from the form
         $description5 = $_POST['description']; // Get the description from the form
         $room5 = $_POST['room']; // Get the room from the form
-
+        $assignedBy5 = $_POST['assignedBy'];
         // Check if status is "Need Repair" and set "Assigned Name" to none
         $assignedName5 = $status5 === 'Need Repair' ? '' : $assignedName5;
 
         // Prepare SQL query to update the asset
-        $sql5 = "UPDATE asset SET status = ?, assignedName = ?, description = ?, room = ? WHERE assetId = ?";
+        $sql5 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt5 = $conn->prepare($sql5);
         $stmt5->bind_param('ssssi', $status5, $assignedName5, $description5, $room5, $assetId5);
 
@@ -392,12 +437,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status6 = $_POST['status']; // Get the status from the form
         $description6 = $_POST['description']; // Get the description from the form
         $room6 = $_POST['room']; // Get the room from the form
-
+        $assignedBy6 = $_POST['assignedBy'];
         // Check if status is "Need Repair" and set "Assigned Name" to none
         $assignedName6 = $status6 === 'Need Repair' ? '' : $assignedName6;
 
         // Prepare SQL query to update the asset
-        $sql6 = "UPDATE asset SET status = ?, assignedName = ?, description = ?, room = ? WHERE assetId = ?";
+        $sql6 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt6 = $conn->prepare($sql6);
         $stmt6->bind_param('ssssi', $status6, $assignedName6, $description6, $room6, $assetId6);
 
@@ -420,12 +465,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status7 = $_POST['status']; // Get the status from the form
         $description7 = $_POST['description']; // Get the description from the form
         $room7 = $_POST['room']; // Get the room from the form
-
+        $assignedBy7 = $_POST['assignedBy'];
         // Check if status is "Need Repair" and set "Assigned Name" to none
         $assignedName7 = $status7 === 'Need Repair' ? '' : $assignedName7;
 
         // Prepare SQL query to update the asset
-        $sql7 = "UPDATE asset SET status = ?, assignedName = ?, description = ?, room = ? WHERE assetId = ?";
+        $sql7 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt7 = $conn->prepare($sql7);
         $stmt7->bind_param('ssssi', $status7, $assignedName7, $description7, $room7, $assetId7);
 
@@ -447,12 +492,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status8 = $_POST['status']; // Get the status from the form
         $description8 = $_POST['description']; // Get the description from the form
         $room8 = $_POST['room']; // Get the room from the form
-
+        $assignedBy8 = $_POST['assignedBy'];
         // Check if status is "Need Repair" and set "Assigned Name" to none
         $assignedName8 = $status8 === 'Need Repair' ? '' : $assignedName8;
 
         // Prepare SQL query to update the asset
-        $sql8 = "UPDATE asset SET status = ?, assignedName = ?, description = ?, room = ? WHERE assetId = ?";
+        $sql8 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt8 = $conn->prepare($sql8);
         $stmt8->bind_param('ssssi', $status8, $assignedName8, $description8, $room8, $assetId8);
 
@@ -475,12 +520,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status9 = $_POST['status']; // Get the status from the form
         $description9 = $_POST['description']; // Get the description from the form
         $room9 = $_POST['room']; // Get the room from the form
-
+        $assignedBy9 = $_POST['assignedBy'];
         // Check if status is "Need Repair" and set "Assigned Name" to none
         $assignedName9 = $status9 === 'Need Repair' ? '' : $assignedName9;
 
         // Prepare SQL query to update the asset
-        $sql9 = "UPDATE asset SET status = ?, assignedName = ?, description = ?, room = ? WHERE assetId = ?";
+        $sql9 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt9 = $conn->prepare($sql9);
         $stmt9->bind_param('ssssi', $status9, $assignedName9, $description9, $room9, $assetId9);
 
@@ -503,12 +548,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status10 = $_POST['status']; // Get the status from the form
         $description10 = $_POST['description']; // Get the description from the form
         $room10 = $_POST['room']; // Get the room from the form
-
+        $assignedBy10 = $_POST['assignedBy'];
         // Check if status is "Need Repair" and set "Assigned Name" to none
         $assignedName10 = $status10 === 'Need Repair' ? '' : $assignedName10;
 
         // Prepare SQL query to update the asset
-        $sql10 = "UPDATE asset SET status = ?, assignedName = ?, description = ?, room = ? WHERE assetId = ?";
+        $sql10 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt10 = $conn->prepare($sql10);
         $stmt10->bind_param('ssssi', $status10, $assignedName10, $description10, $room10, $assetId10);
 
@@ -530,12 +575,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status11 = $_POST['status']; // Get the status from the form
         $description11 = $_POST['description']; // Get the description from the form
         $room11 = $_POST['room']; // Get the room from the form
-
+        $assignedBy11 = $_POST['assignedBy'];
         // Check if status is "Need Repair" and set "Assigned Name" to none
         $assignedName11 = $status11 === 'Need Repair' ? '' : $assignedName11;
 
         // Prepare SQL query to update the asset
-        $sql11 = "UPDATE asset SET status = ?, assignedName = ?, description = ?, room = ? WHERE assetId = ?";
+        $sql11 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt11 = $conn->prepare($sql11);
         $stmt11->bind_param('ssssi', $status11, $assignedName11, $description11, $room11, $assetId11);
 
@@ -557,12 +602,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status12 = $_POST['status']; // Get the status from the form
         $description12 = $_POST['description']; // Get the description from the form
         $room12 = $_POST['room']; // Get the room from the form
-
+        $assignedBy12 = $_POST['assignedBy'];
         // Check if status is "Need Repair" and set "Assigned Name" to none
         $assignedName12 = $status12 === 'Need Repair' ? '' : $assignedName12;
 
         // Prepare SQL query to update the asset
-        $sql12 = "UPDATE asset SET status = ?, assignedName = ?, description = ?, room = ? WHERE assetId = ?";
+        $sql12 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt12 = $conn->prepare($sql12);
         $stmt12->bind_param('ssssi', $status12, $assignedName12, $description12, $room12, $assetId12);
 
@@ -585,12 +630,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status6866 = $_POST['status']; // Get the status from the form
         $description6866 = $_POST['description']; // Get the description from the form
         $room6866 = $_POST['room']; // Get the room from the form
-
+        $assignedBy6866 = $_POST['assignedBy'];
         // Check if status is "Need Repair" and set "Assigned Name" to none
         $assignedName6866 = $status6866 === 'Need Repair' ? '' : $assignedName6866;
 
         // Prepare SQL query to update the asset
-        $sql6866 = "UPDATE asset SET status = ?, assignedName = ?, description = ?, room = ? WHERE assetId = ?";
+        $sql6866 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt6866 = $conn->prepare($sql6866);
         $stmt6866->bind_param('ssssi', $status6866, $assignedName6866, $description6866, $room6866, $assetId6866);
 
@@ -672,6 +717,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <link rel="stylesheet" href="../../../src/css/main.css" />
         <link rel="stylesheet" href="../../buildingCSS/NEB/NEWBF1.css" />
+        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
+        
         <link rel="stylesheet" href="../../../src/css/map.css" />
     </head>
 
@@ -685,18 +732,110 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
                 <div class="content-nav">
                     <div class="notification-dropdown">
-                        <a href="#" class="notification" id="notification-button">
-                            <i class="bi bi-bell"></i>
-                            <span class="num"></span>
-                        </a>
-                        <div class="dropdown-content" id="notification-dropdown-content">
-                            <h6 class="dropdown-header">Alerts Center</h6>
-                            <a href="#">May hindi nagbuhos sa Cr sa Belmonte building</a>
-                            <a href="#">Notification 2</a>
-                            <a href="#">Notification 3</a>
-                            <a href="#" class="view-all">View All</a>
-                        </div>
-                    </div>
+                       
+
+
+
+<a href="#" class="notification" id="notification-button">
+
+
+
+
+
+
+<i class="fa fa-bell" aria-hidden="true"></i>
+<span id="noti_number"><?php echo $unseenCount; ?></span>
+
+    </td>
+    </tr>
+    </table>
+    <script type="text/javascript">
+
+
+
+
+   
+    
+
+       
+       
+      
+    
+
+
+
+
+        function loadDoc() {
+
+
+            setInterval(function() {
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        document.getElementById("noti_number").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", "../../administrator/update_single_notification.php", true);
+                xhttp.send();
+
+            }, 10);
+
+
+        }
+        loadDoc();
+    </script>
+
+</a>
+
+
+
+<div class="dropdown-content" id="notification-dropdown-content">
+    <h6 class="dropdown-header">Alerts Center</h6>
+    <!-- PHP code to display notifications will go here -->
+    <?php
+if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
+    while ($row = $resultLatestLogs->fetch_assoc()) {
+        $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+        $actionText = $row["action"];
+        
+        // Initialize the notification text as empty
+        $notificationText = "";
+        
+        // Check for 'Assigned maintenance personnel' action
+        if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
+            $assignedName = $matches[1];
+            $assetId = $matches[2];
+            $notificationText = "Admin $adminName assigned $assignedName to asset ID $assetId";
+        }
+        // Check for 'Changed status of asset ID' action
+        elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
+            $assetId = $matches[1];
+            $newStatus = $matches[2];
+            $notificationText = "Admin $adminName changed status of asset ID $assetId to $newStatus";
+        }
+
+        // If notification text is set, echo the notification
+        if (!empty($notificationText)) {
+            // HTML for notification item
+            echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars($notificationText) . '</a>';
+        }
+    }
+} else {
+    // No notifications found
+    echo '<a href="#">No new notifications</a>';
+}
+?>
+<a href="activity-logs.php" class="view-all">View All</a>
+
+</div>
+</div>
+
+
+
+
+
+
                     <a href="#" class="settings profile">
                         <div class="profile-container" title="settings">
                             <div class="profile-img">
@@ -2715,7 +2854,39 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </main>
         </section>
+        <script>
+$(document).ready(function() {
+    $('.notification-item').on('click', function(e) {
+        e.preventDefault();
+        var activityId = $(this).data('activity-id');
+        var notificationItem = $(this); // Store the clicked element
 
+        $.ajax({
+            type: "POST",
+            url: "../../administrator/update_single_notification.php", // The URL to the PHP file
+            data: { activityId: activityId },
+            success: function(response) {
+                if (response.trim() === "Notification updated successfully") {
+                    // If the notification is updated successfully, remove the clicked element
+                    notificationItem.remove();
+
+                    // Update the notification count
+                    var countElement = $('#noti_number');
+                    var count = parseInt(countElement.text()) || 0;
+                    countElement.text(count > 1 ? count - 1 : '');
+                } else {
+                    // Handle error
+                    console.error("Failed to update notification:", response);
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle AJAX error
+                console.error("AJAX error:", status, error);
+            }
+        });
+    });
+});
+</script>
         <script>
             $(document).ready(function() {
                 var urlParams = new URLSearchParams(window.location.search);

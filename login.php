@@ -126,8 +126,11 @@ if ($result->num_rows > 0) {
             $_SESSION['accountId'] = $accountId;
             $_SESSION['email'] = $email;
             $_SESSION['firstName'] = $row['firstName'];
+            $_SESSION['middleName'] = $row['middleName'];
+            $_SESSION['lastName'] = $row['lastName'];
             $_SESSION['role'] = $row['role'];
             $_SESSION['userLevel'] = $row['userLevel'];
+
 
 
                 // Check if there's a timeout value for this user
