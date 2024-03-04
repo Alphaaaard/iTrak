@@ -488,7 +488,11 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                     echo "</table>";
                                     echo "</div>";
                                 } else {
-                                    echo '<tr><td colspan="7">No data available</td></tr>';
+                                    echo '<table>';
+                                    echo "<div class=noDataImgH>";
+                                    echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
+                                    echo "</div>";
+                                    echo '</table>';
                                 }
                                 $stmt->close();
                                 ?>
