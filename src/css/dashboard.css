@@ -999,23 +999,34 @@ select {
   }
 
   .flex-container {
-    flex-wrap: wrap; /* Allow the filters to wrap onto the next line */
-    justify-content: center; /* Center align if they wrap */
+    justify-content: flex-end; /* Align items to the right */
+    flex-wrap: wrap; /* Allow wrapping if necessary */
   }
 
   .labelTC {
-    padding-right: 10px;
     font-size: 90%; /* Smaller font size */
-    margin-bottom: 10px; /* Add margin bottom if label wraps to its own line */
+    padding-right: 10px; /* Right padding to separate from filters */
+    margin-bottom: 10px; /* Margin bottom if the label wraps */
+    flex: 0 1 auto; /* Do not grow, but allow shrinkage, with auto initial size */
   }
 
   #monthFilter, #employeeFilter {
-    width: 45%; /* Adjust width to be less than half of the container */
-    margin-bottom: 10px; /* Add margin bottom if filters wrap */
+    margin-bottom: 10px; /* Margin bottom for spacing */
+    font-size: 90%; /* Adjust font size if necessary */
   }
 
   #monthFilter {
-    margin-right: 5%; /* Adjust space between the filters */
+    margin-right: 20px; /* Proper space between the filters */
+  }
+
+  #employeeFilter {
+    margin-right: 0px;
+  }
+
+  /* Additional style to prevent filters from growing too large */
+  select {
+    width: auto; /* Let the filters size according to their content */
+    max-width: 150px; /* Maximum width for filters */
   }
 }
 
