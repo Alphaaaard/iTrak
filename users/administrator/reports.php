@@ -10,7 +10,7 @@ require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 session_start();
 include_once("../../config/connection.php");
 $conn = connection();
-date_default_timezone_set('Asia/Manila');
+
 
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
