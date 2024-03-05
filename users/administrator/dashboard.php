@@ -2601,7 +2601,7 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
 <script>
 $(document).ready(function() {
     // Define default month and week as January and Week 1
-    var defaultMonth = 1; // January
+    var defaultMonth = 3; // January
     var defaultWeek = 1; // Week 1
 
     // Set default selections for month and week filters
