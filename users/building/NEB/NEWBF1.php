@@ -2,6 +2,7 @@
 session_start();
 include_once("../../../config/connection.php");
 $conn = connection();
+date_default_timezone_set('Asia/Manila'); //need ata to sa lahat ng page para sa security hahah 
 
 
     if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
@@ -296,8 +297,6 @@ $unseenCount = $unseenCountRow['unseenCount'];
         $description = $_POST['description']; // Get the description from the form
         $room = $_POST['room']; // Get the room from the form
         $assignedBy = $_POST['assignedBy']; // Get the assignedBy value from the form
-
-
 
         // Check if status is "Need Repair" and set "Assigned Name" to none
         $assignedName = $status === 'Need Repair' ? '' : $assignedName;
