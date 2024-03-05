@@ -4,13 +4,6 @@ include_once("../../config/connection.php");
 $conn = connection();
 date_default_timezone_set('Asia/Manila');
 
-if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
-    // For personnel page, check if userLevel is 3
-    if ($_SESSION['userLevel'] != 3) {
-        // If not personnel, redirect to an error page or login
-        header("Location:error.php");
-        exit;
-    }
 
 
     $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.lastName AS adminLastName
@@ -155,7 +148,13 @@ ORDER BY ac.date DESC";
     $unseenCount = $unseenCountRow['unseenCount'];
 
 
-
+    if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
+        // For personnel page, check if userLevel is 3
+        if ($_SESSION['userLevel'] != 3) {
+            // If not personnel, redirect to an error page or login
+            header("Location:error.php");
+            exit;
+        }
 
 
     if (isset($_SESSION['accountId'])) {
