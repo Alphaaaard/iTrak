@@ -935,3 +935,98 @@ button {
   line-height: 37.5px;
   margin-bottom: 0;
 }
+
+/* Task Completion CSS */
+/* Base styles */
+
+.chart-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  margin-top: 15px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
+
+.labelTC {
+  margin: 0;
+  padding-right: 20px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #1e56a0;
+  align-self: center;
+  margin-right: auto;
+  font-weight: bold;
+}
+
+#monthFilter, #employeeFilter {
+  border-radius: 10px;
+  padding: 5px;
+  width: 100%; /* Set width to 100% to fill the container */
+  max-width: 150px; /* Maximum width */
+}
+
+#monthFilter {
+  margin-right: 10px;
+}
+
+#employeeFilter {
+  margin-right: 0;
+}
+
+select {
+  align-self: center;
+}
+
+/* Responsive styles */
+
+@media (max-width: 768px) { /* Adjustments for tablets and smaller screens */
+  .chart-container {
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+  .flex-container {
+    flex-wrap: wrap; /* Allow the filters to wrap onto the next line */
+    justify-content: center; /* Center align if they wrap */
+  }
+
+  .labelTC {
+    padding-right: 10px;
+    font-size: 90%; /* Smaller font size */
+    margin-bottom: 10px; /* Add margin bottom if label wraps to its own line */
+  }
+
+  #monthFilter, #employeeFilter {
+    width: 45%; /* Adjust width to be less than half of the container */
+    margin-bottom: 10px; /* Add margin bottom if filters wrap */
+  }
+
+  #monthFilter {
+    margin-right: 5%; /* Adjust space between the filters */
+  }
+}
+
+@media (max-width: 480px) { /* Adjustments for mobile screens */
+  .labelTC {
+    font-size: 80%; /* Even smaller font size for mobile */
+  }
+
+  #monthFilter, #employeeFilter {
+    width: 90%; /* Filters take up most of the container width */
+    margin-right: 5%; /* Ensure a little space between filters if they don't wrap */
+    margin-left: 5%; /* Ensure a little space from the left edge */
+  }
+}
