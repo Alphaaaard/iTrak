@@ -560,8 +560,7 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                             <div class="present-total-container">
                                 <section class="present-total-section">
                                     <h5>
-                                        Present Today
-                                    </h5>
+                                        Present TodayASDAS
                                     <?php
                                     $totalPresent = $result->num_rows + $result20->num_rows; // Sum of both counts
                                     echo "<p class='total-p'>" . $totalPresent . "</p>"; // Display the total
