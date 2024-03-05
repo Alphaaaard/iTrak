@@ -992,7 +992,7 @@ select {
 
 /* Responsive styles */
 
-@media (max-width: 768px) { /* Adjustments for tablets and smaller screens */
+@media (max-width: 768px) {
   .chart-container {
     padding: 10px;
     margin-top: 10px;
@@ -1004,15 +1004,15 @@ select {
   }
 
   .labelTC {
-    font-size: 90%; /* Smaller font size */
+    font-size: 90%; /* Adjust font size for smaller screens */
     padding-right: 10px; /* Right padding to separate from filters */
     margin-bottom: 10px; /* Margin bottom if the label wraps */
-    flex: 0 1 auto; /* Do not grow, but allow shrinkage, with auto initial size */
+    flex: 1 1 auto; /* Allows the label to shrink but not grow, keeping it aligned with filters */
   }
 
   #monthFilter, #employeeFilter {
-    margin-bottom: 10px; /* Margin bottom for spacing */
     font-size: 90%; /* Adjust font size if necessary */
+    margin-bottom: 10px; /* Margin bottom for spacing */
   }
 
   #monthFilter {
@@ -1020,24 +1020,45 @@ select {
   }
 
   #employeeFilter {
-    margin-right: 0px;
+    margin-right: 0; /* No additional margin on the right */
   }
 
-  /* Additional style to prevent filters from growing too large */
   select {
-    width: auto; /* Let the filters size according to their content */
-    max-width: 150px; /* Maximum width for filters */
+    width: auto; /* Allow select elements to size according to their content */
+    max-width: 150px; /* Maximum width to prevent overly large filters */
   }
 }
 
-@media (max-width: 480px) { /* Adjustments for mobile screens */
-  .labelTC {
-    font-size: 80%; /* Even smaller font size for mobile */
+@media (max-width: 480px) {
+  .flex-container {
+    flex-direction: row; /* Ensures filters are in a row for larger mobile screens */
   }
 
   #monthFilter, #employeeFilter {
-    width: 90%; /* Filters take up most of the container width */
-    margin-right: 5%; /* Ensure a little space between filters if they don't wrap */
-    margin-left: 5%; /* Ensure a little space from the left edge */
+    width: auto; /* Allows filters to size according to their content */
+    margin-right: 10px; /* Space between filters */
+    margin-left: 0; /* Reset left margin */
+  }
+
+  /* This ensures that when the filters cannot fit in a single row, they stack */
+  #employeeFilter {
+    margin-right: 0; /* Resets right margin for the last filter */
   }
 }
+
+@media (max-width: 320px) {
+  .flex-container {
+    flex-direction: column; /* Stacks filters vertically when there's not enough space */
+    align-items: flex-end; /* Aligns stacked filters to the right */
+  }
+
+  #monthFilter, #employeeFilter {
+    width: 100%; /* Filters take full width to avoid text compression */
+    margin-right: 0; /* Reset right margin for stacked layout */
+  }
+
+  select {
+    width: 100%; /* Ensures select elements take full width of filters in a stacked layout */
+  }
+}
+
