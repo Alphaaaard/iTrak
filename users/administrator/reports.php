@@ -68,6 +68,42 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     }
 
 
+ // for notif below
+ // Update the SQL to join with the account and asset tables to get the admin's name and asset information
+ $loggedInUserFirstName = $_SESSION['firstName']; 
+ $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
+ $loggedInUserLastName = $_SESSION['lastName'];
+ 
+ // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
+
+$loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
+$loggedInAccountId = $_SESSION['accountId'];
+// SQL query to fetch notifications related to report activities
+$sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
+                FROM activitylogs AS al
+               JOIN account AS acc ON al.accountID = acc.accountID
+               WHERE al.tab='Report' AND al.seen = '0' AND al.accountID != ?
+               ORDER BY al.date DESC 
+               LIMIT 5"; // Set limit to 5
+
+// Prepare the SQL statement
+$stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+
+// Bind the parameter to exclude the current user's account ID
+$stmtLatestLogs->bind_param("i", $loggedInAccountId);
+
+// Execute the query
+$stmtLatestLogs->execute();
+$resultLatestLogs = $stmtLatestLogs->get_result();
+
+
+$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
+$stmt = $conn->prepare($unseenCountQuery);
+$stmt->bind_param("i", $loggedInAccountId);
+$stmt->execute();
+$stmt->bind_result($unseenCount);
+$stmt->fetch();
+$stmt->close();
 
     if (isset($_POST['assignMaintenance'])) {
         $assetId = $_POST['assetId'];
@@ -140,6 +176,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/reports.css" />
         <script src="../../src/js/reports.js"></script>
+        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
 
 
 
@@ -202,7 +239,18 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         </script>
     </head>
-
+    <style>
+.notification-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: red;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+</style>
     <body>
         <div id="navbar" class="">
             <nav>
@@ -214,20 +262,63 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
                 <div class="content-nav">
                     <div class="notification-dropdown">
-                        <a href="#" class="notification" id="notification-button">
-                            <i class="bi bi-bell"></i>
-                            <!-- <i class="bx bxs-bell"></i> -->
-                            <span class="num"></span>
-                        </a>
-                        <div class="dropdown-content" id="notification-dropdown-content">
-                            <h6 class="dropdown-header">Alerts Center</h6>
-                            <a href="#">May hindi nagbuhos sa Cr sa Belmonte building</a>
-                            <a href="#">Notification 2</a>
-                            <a href="#">Notification 3</a>
-                            <!-- Add more notification items here -->
-                            <a href="#" class="view-all">View All</a>
-                        </div>
-                    </div>
+                                
+                    <a href="#" class="notification" id="notification-button">
+    <i class="fa fa-bell" aria-hidden="true"></i>
+    <!-- Notification Indicator Dot -->
+    <?php if ($unseenCount > 0): ?>
+    <span class="notification-indicator"></span>
+    <?php endif; ?>
+</a>
+
+
+
+
+<div class="dropdown-content" id="notification-dropdown-content">
+    <h6 class="dropdown-header">Alerts Center</h6>
+    <!-- PHP code to display notifications will go here -->
+    <?php
+if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
+    while ($row = $resultLatestLogs->fetch_assoc()) {
+        $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+        $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
+        $actionText = $row["action"];
+    
+        // Initialize the notification text as empty
+        $notificationText = "";
+        if (strpos($actionText, $adminRole) === false) {
+            // Role is not in the action text, so prepend it to the admin name
+            $adminName = "$adminRole $adminName";
+        }
+        // Check for 'Assigned maintenance personnel' action
+        if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
+            $assignedName = $matches[1];
+            $assetId = $matches[2];
+            $notificationText = "assigned $assignedName to asset ID $assetId";
+        }
+        // Check for 'Changed status of asset ID' action
+        elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
+            $assetId = $matches[1];
+            $newStatus = $matches[2];
+            $notificationText = "changed status of asset ID $assetId to $newStatus";
+        }
+
+        // If notification text is set, echo the notification
+        if (!empty($notificationText)) {
+            // HTML for notification item
+            echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
+        }
+    }
+} else {
+    // No notifications found
+    echo '<a href="#">No new notifications</a>';
+}
+?>
+<a href="activity-logs.php" class="view-all">View All</a>
+
+</div>
+</div>
+
                     <a href="#" class="settings profile">
                         <div class="profile-container" title="settings">
                             <div class="profile-img">
