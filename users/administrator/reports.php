@@ -11,15 +11,7 @@ session_start();
 include_once("../../config/connection.php");
 $conn = connection();
 
-function logActivity($conn, $accountId, $actionDescription, $tabValue)
-{
-    $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, NOW(), ?, ?)");
-    $stmt->bind_param("iss", $accountId, $actionDescription, $tabValue);
-    if (!$stmt->execute()) {
-        echo "Error logging activity: " . $stmt->error;
-    }
-    $stmt->close();
-}
+
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
     // For personnel page, check if userLevel is 3
@@ -67,7 +59,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         header("Location: reports.php");
     }
 
-
+    function logActivity($conn, $accountId, $actionDescription, $tabValue)
+    {
+        $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, NOW(), ?, ?)");
+        $stmt->bind_param("iss", $accountId, $actionDescription, $tabValue);
+        if (!$stmt->execute()) {
+            echo "Error logging activity: " . $stmt->error;
+        }
+        $stmt->close();
+    }
 
     if (isset($_POST['assignMaintenance'])) {
         $assetId = $_POST['assetId'];

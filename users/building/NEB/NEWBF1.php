@@ -362,7 +362,7 @@ $unseenCount = $unseenCountRow['unseenCount'];
         // Prepare SQL query to update the asset
         $sql3 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt3 = $conn->prepare($sql3);
-        $stmt3->bind_param('ssssi', $status3, $assignedName3, $description3, $room3, $assetId3);
+        $stmt3->bind_param('sssssi', $status3, $assignedName3, $assignedBy3, $description3, $room3, $assetId3);
 
         if ($stmt3->execute()) {
             // Update success
@@ -390,7 +390,7 @@ $unseenCount = $unseenCountRow['unseenCount'];
         // Prepare SQL query to update the asset
         $sql4 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt4 = $conn->prepare($sql4);
-        $stmt4->bind_param('ssssi', $status4, $assignedName4, $description4, $room4, $assetId4);
+        $stmt4->bind_param('sssssi', $status4, $assignedName4,  $assignedBy4, $description4, $room4, $assetId4);
 
         if ($stmt4->execute()) {
             // Update success
@@ -417,7 +417,7 @@ $unseenCount = $unseenCountRow['unseenCount'];
         // Prepare SQL query to update the asset
         $sql5 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt5 = $conn->prepare($sql5);
-        $stmt5->bind_param('ssssi', $status5, $assignedName5, $description5, $room5, $assetId5);
+        $stmt5->bind_param('sssssi', $status5, $assignedName5,   $assignedBy5, $description5, $room5, $assetId5);
 
         if ($stmt5->execute()) {
             // Update success
@@ -444,7 +444,7 @@ $unseenCount = $unseenCountRow['unseenCount'];
         // Prepare SQL query to update the asset
         $sql6 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt6 = $conn->prepare($sql6);
-        $stmt6->bind_param('ssssi', $status6, $assignedName6, $description6, $room6, $assetId6);
+        $stmt6->bind_param('sssssi', $status6, $assignedName6, $assignedBy6, $description6, $room6, $assetId6);
 
         if ($stmt6->execute()) {
             // Update success
@@ -472,7 +472,7 @@ $unseenCount = $unseenCountRow['unseenCount'];
         // Prepare SQL query to update the asset
         $sql7 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt7 = $conn->prepare($sql7);
-        $stmt7->bind_param('ssssi', $status7, $assignedName7, $description7, $room7, $assetId7);
+        $stmt7->bind_param('sssssi', $status7, $assignedName7, $description7, $assignedBy7, $room7, $assetId7);
 
         if ($stmt7->execute()) {
             // Update success
@@ -499,7 +499,7 @@ $unseenCount = $unseenCountRow['unseenCount'];
         // Prepare SQL query to update the asset
         $sql8 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt8 = $conn->prepare($sql8);
-        $stmt8->bind_param('ssssi', $status8, $assignedName8, $description8, $room8, $assetId8);
+        $stmt8->bind_param('sssssi', $status8, $assignedName8, $assignedBy8, $description8, $room8, $assetId8);
 
         if ($stmt8->execute()) {
             // Update success
@@ -527,7 +527,7 @@ $unseenCount = $unseenCountRow['unseenCount'];
         // Prepare SQL query to update the asset
         $sql9 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt9 = $conn->prepare($sql9);
-        $stmt9->bind_param('ssssi', $status9, $assignedName9, $description9, $room9, $assetId9);
+        $stmt9->bind_param('sssssi', $status9, $assignedName9,$assignedBy9, $description9, $room9, $assetId9);
 
         if ($stmt9->execute()) {
             // Update success
@@ -555,7 +555,7 @@ $unseenCount = $unseenCountRow['unseenCount'];
         // Prepare SQL query to update the asset
         $sql10 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt10 = $conn->prepare($sql10);
-        $stmt10->bind_param('ssssi', $status10, $assignedName10, $description10, $room10, $assetId10);
+        $stmt10->bind_param('sssssi', $status10, $assignedName10,$assignedBy10, $description10, $room10, $assetId10);
 
         if ($stmt10->execute()) {
             // Update success
@@ -582,7 +582,7 @@ $unseenCount = $unseenCountRow['unseenCount'];
         // Prepare SQL query to update the asset
         $sql11 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt11 = $conn->prepare($sql11);
-        $stmt11->bind_param('ssssi', $status11, $assignedName11, $description11, $room11, $assetId11);
+        $stmt11->bind_param('sssssi', $status11, $assignedName11, $assignedBy11, $description11, $room11, $assetId11);
 
         if ($stmt11->execute()) {
             // Update success
@@ -609,7 +609,7 @@ $unseenCount = $unseenCountRow['unseenCount'];
         // Prepare SQL query to update the asset
         $sql12 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt12 = $conn->prepare($sql12);
-        $stmt12->bind_param('ssssi', $status12, $assignedName12, $description12, $room12, $assetId12);
+        $stmt12->bind_param('sssssi', $status12, $assignedName12, $assignedBy12, $description12, $room12, $assetId12);
 
         if ($stmt12->execute()) {
             // Update success
@@ -637,7 +637,7 @@ $unseenCount = $unseenCountRow['unseenCount'];
         // Prepare SQL query to update the asset
         $sql6866 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt6866 = $conn->prepare($sql6866);
-        $stmt6866->bind_param('ssssi', $status6866, $assignedName6866, $description6866, $room6866, $assetId6866);
+        $stmt6866->bind_param('sssssi', $status6866, $assignedName6866, $assignedBy6866, $description6866, $room6866, $assetId6866);
 
         if ($stmt6866->execute()) {
             // Update success

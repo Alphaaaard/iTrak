@@ -60,7 +60,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
     
-
  // for notif below
  // Update the SQL to join with the account and asset tables to get the admin's name and asset information
  $loggedInUserFirstName = $_SESSION['firstName']; 
@@ -70,17 +69,20 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
  // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
 
 $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
-
+$loggedInAccountId = $_SESSION['accountId'];
 // SQL query to fetch notifications related to report activities
-$sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName
-               FROM activitylogs AS al
+$sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
+                FROM activitylogs AS al
                JOIN account AS acc ON al.accountID = acc.accountID
-               WHERE al.tab='Report' AND al.seen = '0'
+               WHERE al.tab='Report' AND al.seen = '0' AND al.accountID != ?
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
 
 // Prepare the SQL statement
 $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+
+// Bind the parameter to exclude the current user's account ID
+$stmtLatestLogs->bind_param("i", $loggedInAccountId);
 
 // Execute the query
 $stmtLatestLogs->execute();
@@ -91,7 +93,6 @@ $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen
 $result = $conn->query($unseenCountQuery);
 $unseenCountRow = $result->fetch_assoc();
 $unseenCount = $unseenCountRow['unseenCount'];
-
 ?>
 
     <!DOCTYPE html>
@@ -127,8 +128,9 @@ $unseenCount = $unseenCountRow['unseenCount'];
                 <div class="content-nav">
                     <div class="notification-dropdown">
                        
+                    <a href="#" class="notification" id="notification-button">
 
- <a href="#" class="notification" id="notification-button">
+
 
 
 
@@ -187,28 +189,32 @@ $unseenCount = $unseenCountRow['unseenCount'];
 if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
     while ($row = $resultLatestLogs->fetch_assoc()) {
         $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+        $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
         $actionText = $row["action"];
-        
+    
         // Initialize the notification text as empty
         $notificationText = "";
-        
+        if (strpos($actionText, $adminRole) === false) {
+            // Role is not in the action text, so prepend it to the admin name
+            $adminName = "$adminRole $adminName";
+        }
         // Check for 'Assigned maintenance personnel' action
         if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
             $assignedName = $matches[1];
             $assetId = $matches[2];
-            $notificationText = "Admin $adminName assigned $assignedName to asset ID $assetId";
+            $notificationText = "assigned $assignedName to asset ID $assetId";
         }
         // Check for 'Changed status of asset ID' action
         elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
             $assetId = $matches[1];
             $newStatus = $matches[2];
-            $notificationText = "Admin $adminName changed status of asset ID $assetId to $newStatus";
+            $notificationText = "changed status of asset ID $assetId to $newStatus";
         }
 
         // If notification text is set, echo the notification
         if (!empty($notificationText)) {
             // HTML for notification item
-            echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars($notificationText) . '</a>';
+            echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
         }
     }
 } else {

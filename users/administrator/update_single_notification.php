@@ -20,10 +20,17 @@ if (isset($_POST['activityId'])) {
     exit(); // Important: terminate the script here
 }
 
+// Get the current logged-in user's account ID from the session
+$loggedInAccountId = $_SESSION['accountId'];
+
 // Proceed to fetch the current notification count
-// This SQL counts only the unseen notifications for the Report tab
-$sql = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE tab='Report' AND seen = '0'";
+// This SQL counts only the unseen notifications for the Report tab and excludes the current user's activities
+$sql = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE tab='Report' AND seen = '0' AND accountID != ?";
 $stmt = $conn->prepare($sql);
+
+// Bind the parameter to exclude the current user's account ID
+$stmt->bind_param("i", $loggedInAccountId);
+
 $stmt->execute();
 $stmt->store_result();
 $stmt->bind_result($unseenCount);

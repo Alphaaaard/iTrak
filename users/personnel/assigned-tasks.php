@@ -13,16 +13,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         exit;
     }
 
-    function logActivity($conn, $accountId, $actionDescription, $tabValue)
-
-    {
-        $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, NOW(), ?, ?)");
-        $stmt->bind_param("iss", $accountId, $actionDescription, $tabValue);
-        if (!$stmt->execute()) {
-            echo "Error logging activity: " . $stmt->error;
-        }
-        $stmt->close();
-    }
+   
     if (isset($_SESSION['accountId'])) {
         $accountId = $_SESSION['accountId'];
         $todayDate = date("Y-m-d");
@@ -39,51 +30,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             exit;
         }
     }
-
-
-    $stmt = $conn->prepare("SELECT picture FROM account WHERE accountId = ?");
-    $stmt->bind_param('i', $_SESSION['accountId']);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-
-    $accountId = $_SESSION['accountId'];
-    $fname = $_SESSION['firstName'];
-    $middleName = $_SESSION['middleName'];
-    $lastName = $_SESSION['lastName'];
-
-    $sql = "SELECT a.* FROM asset AS a
-            JOIN account AS b ON CONCAT(b.firstName, ' ', b.middleName, ' ', b.lastName) = a.assignedName
-            WHERE a.status = 'Need Repair' AND b.firstName = '$fname' AND b.middleName = '$middleName' AND b.lastName = '$lastName'";
-
-    $result = $conn->query($sql) or die($conn->error);
-
-    //Edit
-    if (isset($_POST['edit'])) {
-        $assetId = $_POST['assetId'];
-        $category = $_POST['category'];
-        $building = $_POST['building'];
-        $floor = $_POST['floor'];
-        $room = $_POST['room'];
-
-        $status = $_POST['status'];
-        $assignedName = $_POST['assignedName'];
-        $assignedBy = $_POST['assignedBy'];
-        $date = $_POST['date'];
-
-
-
-
-        $updateSql = "UPDATE `asset` SET `category`='$category', `building`='$building', `floor`='$floor', `room`='$room', `status`='$status', `assignedName`='$assignedName', `assignedBy`='$assignedBy', `date`='$date' WHERE `assetId`='$assetId'";
-        if ($conn->query($updateSql) === TRUE) {
-            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId to $status.", 'Report');
-        } else {
-            echo "Error updating asset: " . $conn->error;
-        }
-        header("Location: reports.php");
-    }
-
-
 
     // Fetch Report activity logs
     $loggedInUserFirstName = $_SESSION['firstName']; // or the name field you have in session that you want to check against
@@ -145,6 +91,60 @@ ORDER BY ac.date DESC";
     $result = $conn->query($unseenCountQuery);
     $unseenCountRow = $result->fetch_assoc();
     $unseenCount = $unseenCountRow['unseenCount'];
+
+
+    $stmt = $conn->prepare("SELECT picture FROM account WHERE accountId = ?");
+    $stmt->bind_param('i', $_SESSION['accountId']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    $accountId = $_SESSION['accountId'];
+    $fname = $_SESSION['firstName'];
+    $middleName = $_SESSION['middleName'];
+    $lastName = $_SESSION['lastName'];
+
+    $sql = "SELECT a.* FROM asset AS a
+            JOIN account AS b ON CONCAT(b.firstName, ' ', b.middleName, ' ', b.lastName) = a.assignedName
+            WHERE a.status = 'Need Repair' AND b.firstName = '$fname' AND b.middleName = '$middleName' AND b.lastName = '$lastName'";
+
+    $result = $conn->query($sql) or die($conn->error);
+
+    //Edit
+    if (isset($_POST['edit'])) {
+        $assetId = $_POST['assetId'];
+        $category = $_POST['category'];
+        $building = $_POST['building'];
+        $floor = $_POST['floor'];
+        $room = $_POST['room'];
+
+        $status = $_POST['status'];
+        $assignedName = $_POST['assignedName'];
+        $assignedBy = $_POST['assignedBy'];
+        $date = $_POST['date'];
+
+
+ function logActivity($conn, $accountId, $actionDescription, $tabValue)
+
+    {
+        $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, NOW(), ?, ?)");
+        $stmt->bind_param("iss", $accountId, $actionDescription, $tabValue);
+        if (!$stmt->execute()) {
+            echo "Error logging activity: " . $stmt->error;
+        }
+        $stmt->close();
+    }
+
+        $updateSql = "UPDATE `asset` SET `category`='$category', `building`='$building', `floor`='$floor', `room`='$room', `status`='$status', `assignedName`='$assignedName', `assignedBy`='$assignedBy', `date`='$date' WHERE `assetId`='$assetId'";
+        if ($conn->query($updateSql) === TRUE) {
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId to $status.", 'Report');
+        } else {
+            echo "Error updating asset: " . $conn->error;
+        }
+        header("Location: reports.php");
+    }
+
+
 
 
 
