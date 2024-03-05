@@ -109,6 +109,7 @@ $stmt->close();
         <link rel="icon" type="image/x-icon" href="../../src/img/tab-logo.png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <link rel="stylesheet" href="../../src/css/main.css">
@@ -654,13 +655,25 @@ $(document).ready(function() {
 function exportTableToPDF(exportContentId, filename, name) {
     const exportContent = document.getElementById(exportContentId);
 
-    // Create an element to hold the name
-    const nameElement = document.createElement('div');
-    nameElement.textContent = name;
-    nameElement.style.position = 'absolute'; // Position it so it doesn't affect layout
-    nameElement.style.top = '0'; // You might need to adjust this
-    nameElement.style.left = '0'; // You might need to adjust this
-    document.body.appendChild(nameElement); // Append it to the body
+    // Find the visually hidden name header within the export content
+    const nameHeader = exportContent.querySelector('.h5-like.visually-hidden');
+    // Find the table header and increase its top margin to make space for the name
+    const tableHeader = exportContent.querySelector('.table-header1');
+
+    // Temporarily update the style to make it visible for the screenshot
+    if (nameHeader) {
+        nameHeader.style.position = 'relative'; // Make it affect layout
+        nameHeader.style.visibility = 'visible'; // Make it visible
+        nameHeader.style.fontFamily = 'Poppins, sans-serif'; // Set font family to Poppins
+        nameHeader.style.fontSize = '20px'; // Increase font size
+        nameHeader.style.fontWeight = 'bold'; // Make font-weight bold
+        nameHeader.style.marginBottom = '10px'; // Add some space below the name
+    }
+
+    // Increase the top margin of the table header
+    if (tableHeader) {
+        tableHeader.style.marginTop = '50px'; // Adjust the space as needed
+    }
 
     // Check if the export content exists
     if (!exportContent) {
@@ -670,7 +683,6 @@ function exportTableToPDF(exportContentId, filename, name) {
             icon: 'error',
             confirmButtonText: 'OK'
         });
-        nameElement.remove(); // Clean up the name element
         return; // Exit the function if no content is found
     }
 
@@ -686,17 +698,16 @@ function exportTableToPDF(exportContentId, filename, name) {
     });
 
     html2canvas(exportContent, {
-        onclone: function(clonedDoc) {
-            // Append the name to the cloned document so it gets included in the canvas
-            const clonedContent = clonedDoc.getElementById(exportContentId);
-            clonedContent.appendChild(nameElement);
-        },
         useCORS: true // This is important if you have images from other domains
     }).then(canvas => {
         const imgData = canvas.toDataURL('image/png');
         const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
         pdf.addImage(imgData, 'PNG', 0, 0);
-        pdf.save(filename); // Save the PDF
+
+        // Add the name text directly on the PDF
+        pdf.setFontSize(13); // Set font size
+        pdf.text(name, 10, 10); // Adjust coordinates as needed
+        pdf.save(filename); // Save the PDF after adding the text
 
         Swal.close();
         Swal.fire({
@@ -719,11 +730,22 @@ function exportTableToPDF(exportContentId, filename, name) {
         });
         console.error('Error generating PDF: ', error);
     }).finally(() => {
-        // Clean up the name element after PDF generation
-        nameElement.remove();
+        // Revert the name header style to its original state
+        if (nameHeader) {
+            nameHeader.style.position = '';
+            nameHeader.style.visibility = '';
+            nameHeader.style.fontSize = '';
+            nameHeader.style.marginBottom = '';
+        }
+        // Revert the table header style to its original state
+        if (tableHeader) {
+            tableHeader.style.marginTop = ''; // Remove the added margin
+        }
     });
 }
 </script>
+
+
 
 
 
