@@ -12,7 +12,17 @@ date_default_timezone_set('Asia/Manila'); //need ata to sa lahat ng page para sa
             header("Location:error.php");
             exit;
         }
-        
+        function logActivity($conn, $accountId, $actionDescription, $tabValue)
+{
+    $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, NOW(), ?, ?)");
+    $stmt->bind_param("iss", $accountId, $actionDescription, $tabValue);
+    if (!$stmt->execute()) {
+        echo "Error logging activity: " . $stmt->error;
+    }
+    $stmt->close();
+}
+
+ 
  // for notif below
  // Update the SQL to join with the account and asset tables to get the admin's name and asset information
  $loggedInUserFirstName = $_SESSION['firstName']; 
@@ -22,27 +32,34 @@ date_default_timezone_set('Asia/Manila'); //need ata to sa lahat ng page para sa
  // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
 
 $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
-
+$loggedInAccountId = $_SESSION['accountId'];
 // SQL query to fetch notifications related to report activities
-$sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName
-               FROM activitylogs AS al
+$sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
+                FROM activitylogs AS al
                JOIN account AS acc ON al.accountID = acc.accountID
-               WHERE al.tab='Report' AND al.seen = '0'
+               WHERE al.tab='Report' AND al.seen = '0' AND al.accountID != ?
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
 
 // Prepare the SQL statement
 $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
 
+// Bind the parameter to exclude the current user's account ID
+$stmtLatestLogs->bind_param("i", $loggedInAccountId);
+
 // Execute the query
 $stmtLatestLogs->execute();
 $resultLatestLogs = $stmtLatestLogs->get_result();
 
 
-$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '3'";
-$result = $conn->query($unseenCountQuery);
-$unseenCountRow = $result->fetch_assoc();
-$unseenCount = $unseenCountRow['unseenCount'];
+$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
+$stmt = $conn->prepare($unseenCountQuery);
+$stmt->bind_param("i", $loggedInAccountId);
+$stmt->execute();
+$stmt->bind_result($unseenCount);
+$stmt->fetch();
+$stmt->close();
+
 
 
 
@@ -296,20 +313,18 @@ $unseenCount = $unseenCountRow['unseenCount'];
         $status = $_POST['status']; // Get the status from the form
         $description = $_POST['description']; // Get the description from the form
         $room = $_POST['room']; // Get the room from the form
-        $assignedBy = $_POST['assignedBy']; // Get the assignedBy value from the form
-
+        $assignedBy = $_POST['assignedBy'];
         // Check if status is "Need Repair" and set "Assigned Name" to none
         $assignedName = $status === 'Need Repair' ? '' : $assignedName;
 
         // Prepare SQL query to update the asset
         $sql = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-         $stmt = $conn->prepare($sql);
-   
+        $stmt = $conn->prepare($sql);
         $stmt->bind_param('sssssi', $status, $assignedName, $assignedBy, $description, $room, $assetId);
-
 
         if ($stmt->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId to $status.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: NEWBF1.php");
         } else {
@@ -337,6 +352,7 @@ $unseenCount = $unseenCountRow['unseenCount'];
 
         if ($stmt2->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2 to $status2.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: NEWBF1.php");
         } else {
@@ -699,7 +715,9 @@ $unseenCount = $unseenCountRow['unseenCount'];
             echo "<script>alert('Failed to upload image. Error: " . $_FILES['upload_img']['error'] . "');</script>";
         }
     }
-
+   
+    
+    
 ?>
 
     <!DOCTYPE html>

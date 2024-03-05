@@ -25,7 +25,7 @@ $password = mysqli_real_escape_string($conn, $password);
 $query = "SELECT * FROM account WHERE email='$email' AND password='$password'";
 $result = $conn->query($query);
 
-function logLoginActivity($accountId, $action, $userName, $date, $tab)
+function logLoginActivity($accountId, $action, $userName, $date, $tab, $seen, $m_seen, $p_seen)
 {
     global $conn;
 
@@ -38,7 +38,7 @@ function logLoginActivity($accountId, $action, $userName, $date, $tab)
     $logMessage = "$userName $action";
 
 
-    $sql = "INSERT INTO activitylogs (accountId, action, date, tab) VALUES ('$accountId', '$logMessage', '$date', '$tab')";
+    $sql = "INSERT INTO activitylogs (accountId, action, date, tab, seen, m_seen, p_seen) VALUES ('$accountId', '$logMessage', '$date', '$tab','$seen', '$m_seen', '$p_seen')";
 
     if ($conn->query($sql) === TRUE) {
         return true; // Successfully logged the login activity
@@ -67,7 +67,7 @@ if ($result->num_rows > 0) {
 
 
         // Log the login activity
-        logLoginActivity($accountId, 'logged in', $row['firstName'], date("Y-m-d H:i:s"), 'General');     //! UNCOMMENT LATER
+        logLoginActivity($accountId, 'logged in', $row['firstName'], date("Y-m-d H:i:s"), 'General','1','1','1');     //! UNCOMMENT LATER
 
 
         // Redirect to the super admin dashboard
@@ -101,7 +101,7 @@ if ($result->num_rows > 0) {
                 header("Location: index.php");
                 exit;
             }
-            logLoginActivity($accountId, 'logged in', $row['firstName'], date("Y-m-d H:i:s"), 'General');
+            logLoginActivity($accountId, 'logged in', $row['firstName'], date("Y-m-d H:i:s"), 'General','1','1','1');  
 
 
             // Redirect to the personnel dashboard
@@ -144,7 +144,7 @@ if ($result->num_rows > 0) {
                     header("Location: index.php");
                     exit;
                 }
-                logLoginActivity($accountId, 'logged in', $row['firstName'], date("Y-m-d H:i:s"), 'General');
+                logLoginActivity($accountId, 'logged in', $row['firstName'], date("Y-m-d H:i:s"), 'General','1','1','1');  
 
 
             // Redirect to the appropriate landing page based on user level

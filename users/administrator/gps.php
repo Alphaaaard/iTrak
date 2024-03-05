@@ -49,10 +49,14 @@ $stmtLatestLogs->execute();
 $resultLatestLogs = $stmtLatestLogs->get_result();
 
 
-$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '3'";
-$result = $conn->query($unseenCountQuery);
-$unseenCountRow = $result->fetch_assoc();
-$unseenCount = $unseenCountRow['unseenCount'];
+$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
+$stmt = $conn->prepare($unseenCountQuery);
+$stmt->bind_param("i", $loggedInAccountId);
+$stmt->execute();
+$stmt->bind_result($unseenCount);
+$stmt->fetch();
+$stmt->close();
+
 
 ?>
 
@@ -77,7 +81,18 @@ $unseenCount = $unseenCountRow['unseenCount'];
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/gps.css" />
     </head>
-
+    <style>
+.notification-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: red;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+</style>
     <body>
         <!-- NAVBAR -->
         <div id="navbar" class="">
@@ -92,56 +107,13 @@ $unseenCount = $unseenCountRow['unseenCount'];
                     <div class="notification-dropdown">
 
                     <a href="#" class="notification" id="notification-button">
-
-
-
-
-
-
-<i class="fa fa-bell" aria-hidden="true"></i>
-<span id="noti_number"><?php echo $unseenCount; ?></span>
-
-    </td>
-    </tr>
-    </table>
-    <script type="text/javascript">
-
-
-
-
-   
-    
-
-       
-       
-      
-    
-
-
-
-
-        function loadDoc() {
-
-
-            setInterval(function() {
-
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4 && this.status == 200) {
-                        document.getElementById("noti_number").innerHTML = this.responseText;
-                    }
-                };
-                xhttp.open("GET", "update_single_notification.php", true);
-                xhttp.send();
-
-            }, 10);
-
-
-        }
-        loadDoc();
-    </script>
-
+    <i class="fa fa-bell" aria-hidden="true"></i>
+    <!-- Notification Indicator Dot -->
+    <?php if ($unseenCount > 0): ?>
+    <span class="notification-indicator"></span>
+    <?php endif; ?>
 </a>
+
 
 
 
@@ -189,6 +161,7 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
 
 </div>
 </div>
+
                     <a href="#" class="settings profile">
                         <div class="profile-container" title="settings">
                             <div class="profile-img">

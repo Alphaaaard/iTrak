@@ -3,15 +3,23 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 
-require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
+// require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
 $conn = connection();
-date_default_timezone_set('Asia/Manila');
 
+function logActivity($conn, $accountId, $actionDescription, $tabValue)
+{
+    $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, NOW(), ?, ?)");
+    $stmt->bind_param("iss", $accountId, $actionDescription, $tabValue);
+    if (!$stmt->execute()) {
+        echo "Error logging activity: " . $stmt->error;
+    }
+    $stmt->close();
+}
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
     // For personnel page, check if userLevel is 3
@@ -59,15 +67,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         header("Location: reports.php");
     }
 
-    function logActivity($conn, $accountId, $actionDescription, $tabValue)
-    {
-        $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, NOW(), ?, ?)");
-        $stmt->bind_param("iss", $accountId, $actionDescription, $tabValue);
-        if (!$stmt->execute()) {
-            echo "Error logging activity: " . $stmt->error;
-        }
-        $stmt->close();
-    }
+
 
     if (isset($_POST['assignMaintenance'])) {
         $assetId = $_POST['assetId'];
