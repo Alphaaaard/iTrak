@@ -946,7 +946,7 @@ button {
   margin-top: 15px;
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0px 16px rgba(0, 0, 0, 0.1);
   background-color: #f9f9f9;
 }
 
@@ -972,8 +972,8 @@ button {
 }
 
 #monthFilter, #employeeFilter {
-  border-radius: 10px;
-  padding: 5px;
+  border-radius: 5px;
+  padding: 0px;
   width: 100%; /* Set width to 100% to fill the container */
   max-width: 150px; /* Maximum width */
 }
