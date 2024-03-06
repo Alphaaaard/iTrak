@@ -104,7 +104,6 @@ if (isset($_GET['token'])) {
           title: 'Invalid or Expired Link',
           text: 'The password reset link is invalid or has expired.',
           icon: 'error',
-          confirmButtonText: 'OK'
         }).then((result) => {
           if (result.isConfirmed) {
             window.location.href = 'index.php'; // Redirect to your login page
