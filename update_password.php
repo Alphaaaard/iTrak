@@ -10,11 +10,10 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     $newPassword = mysqli_real_escape_string($conn, $_POST['password']);
 
     // Hash the new password before storing it
-    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
     // Update the user's password in the database
     $stmt = $conn->prepare("UPDATE account SET password = ?, reset_token = NULL, token_expiry = NULL WHERE email = ?");
-    $stmt->bind_param("ss", $hashedPassword, $email);
+    $stmt->bind_param("ss", $email);
     $stmt->execute();
 
     // Check if the update was successful
@@ -39,7 +38,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // Redirect to the login page or home page
-                        window.location.href = 'login.php';
+                        window.location.href = 'index.php';
                     }
                 });
             </script>

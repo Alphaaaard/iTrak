@@ -43,7 +43,20 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const continueButton = document.getElementById('continue-button');
+            const form = document.getElementById('password-reset-form');
+            const emailInput = document.getElementById('email');
+
+            function validateEmail(email) {
+                const re = /^(([^<>()[]\.,;:\s@"]+(.[^<>()[]\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase());
+            }
+
             continueButton.addEventListener('click', function() {
+                if (!validateEmail(emailInput.value)) {
+                    Swal.fire('', 'Please enter a valid email address.', 'error');
+                    return false;
+                }
+
                 Swal.fire({
                     text: 'A password reset message will be sent to your email address. Do you want to continue?',
                     icon: 'question',
@@ -52,35 +65,25 @@
                     cancelButtonText: 'No'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        const form = document.getElementById('password-reset-form');
                         const formData = new FormData(form);
                         fetch('send_reset_link.php', {
                                 method: 'POST',
                                 body: formData
                             })
-                            .then(response => {
-                                if (response.ok) {
-                                    return response.json();
-                                }
-                                throw new Error('Network response was not ok.');
-                            })
+                            .then(response => response.json())
                             .then(data => {
                                 if (data.success) {
-                                    Swal.fire(
-                                        '',
-                                        'Your password reset link has been emailed to you.',
-                                        'success'
-                                    );
+                                    Swal.fire('', data.message, 'success').then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.location.href = 'index.php'; // Redirect to login page
+                                        }
+                                    });
                                 } else {
-                                    throw new Error('Server processed request, but did not succeed.');
+                                    Swal.fire('', data.message, 'error');
                                 }
                             })
                             .catch(error => {
-                                Swal.fire(
-                                    '',
-                                    "There was a problem with your request. It looks like the email you entered isn't registered or invalid. Please try again.",
-                                    'error'
-                                );
+                                Swal.fire('', 'An error occurred. Please try again.', 'error');
                             });
                     }
                 });
