@@ -975,7 +975,7 @@ button {
   border-radius: 5px;
   padding: 0px;
   width: 100%; /* Set width to 100% to fill the container */
-  max-width: 150px; /* Maximum width */
+  max-width: 170px; /* Maximum width */
 }
 
 #monthFilter {
