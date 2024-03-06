@@ -32,7 +32,6 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                     title: 'Success!',
                     text: 'Your password has been updated successfully.',
                     icon: 'success',
-                    confirmButtonText: 'Login'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // Redirect to the login page or home page
