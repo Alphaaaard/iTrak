@@ -25,12 +25,12 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
             <!-- Include SweetAlert2 -->
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <link rel="stylesheet" href="./src/css/main.css">
+            <link rel="stylesheet" href="./src/css/update-pass.css">
         </head>
 
         <body>
             <script>
                 Swal.fire({
-                    title: 'Success!',
                     text: 'Your password has been updated successfully.',
                     icon: 'success',
                 }).then((result) => {

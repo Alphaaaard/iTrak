@@ -1,0 +1,11 @@
+div:where(.swal2-icon).swal2-success .swal2-success-fix{
+    background-color: none!important;
+}
+
+div:where(.swal2-icon).swal2-success [class^=swal2-success-circular-line][class$=right]{
+    background-color: none!important;
+}
+
+div:where(.swal2-icon).swal2-success [class^=swal2-success-circular-line][class$=left]{
+    background-color: none!important;
+}
