@@ -205,6 +205,13 @@ body{
     width: 70%;
     margin: 0 auto;
   }
+
+  div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm{
+    background-color: #1E56A0 !important;
+    outline: none;
+    border: none !important;
+    margin: 0;
+  }
   
   /* Form control styles */
   .form-textbox{
