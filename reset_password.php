@@ -107,7 +107,7 @@ if (isset($_GET['token'])) {
           confirmButtonText: 'OK'
         }).then((result) => {
           if (result.isConfirmed) {
-            window.location.href = 'login.php'; // Redirect to your login page
+            window.location.href = 'index.php'; // Redirect to your login page
           }
         });
       </script>

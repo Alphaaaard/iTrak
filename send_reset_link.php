@@ -27,7 +27,7 @@ if (isset($_POST['email'])) {
         $resetLink = "https://itrak.website/reset_password.php?token=$token";
 
         // Store the token in your database along with its expiration date
-        $conn->query("UPDATE account SET reset_token = '$token', token_expiry = DATE_ADD(NOW(), INTERVAL 1 HOUR) WHERE email = '$email'");
+        $conn->query("UPDATE account SET reset_token = '$token', token_expiry = DATE_ADD(NOW(), INTERVAL 60 SECOND) WHERE email = '$email'");
 
         // PHPMailer setup
         $mail = new PHPMailer(true);
