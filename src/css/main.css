@@ -939,7 +939,7 @@ td {
   font-size: 25px;
   padding: 0 2em;
   border-radius: 10px;
-  height: 10.5em;
+  /* height: 10.5em; */
 }
 
 .modal-footer p{
