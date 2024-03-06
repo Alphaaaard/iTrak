@@ -9,8 +9,6 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $newPassword = mysqli_real_escape_string($conn, $_POST['password']);
 
-    // Hash the new password before storing it
-
     // Update the user's password in the database
     $stmt = $conn->prepare("UPDATE account SET password = ?, reset_token = NULL, token_expiry = NULL WHERE email = ?");
     $stmt->bind_param("ss", $email);
