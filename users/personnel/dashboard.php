@@ -56,27 +56,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
-    // Fetch Report activity logs
-    $loggedInUserFirstName = $_SESSION['firstName']; // or the name field you have in session that you want to check against
-    $loggedInUsermiddleName = $_SESSION['middleName']; // assuming you also have the last name in the session
-    $loggedInUserLastName = $_SESSION['lastName']; //kung ano ung naka declare dito eto lang ung magiging data 
+    // Fetch the logged-in user's account ID from the session
+    $loggedInUserAccountId = $_SESSION['accountId']; // Assuming the account ID is stored in the session
 
-    // Concatenate first name and last name for the action field check
-    $loggedInFullName = $loggedInUserFirstName . " " . $loggedInUsermiddleName . " " . $loggedInUserLastName; //kung ano ung naka declare dito eto lang ung magiging data 
-
-    // Adjust the SQL to check the 'action' field for the logged-in user's name
-    $sqlReport = "SELECT * FROM asset WHERE status = 'Working' AND assignedName LIKE ?";
+    // SQL to fetch activity logs where the action contains "Changed Status of % to Working" and the account ID matches the logged-in user's account ID
+    $sqlReport = "SELECT * FROM activitylogs WHERE action LIKE '%Changed Status of% to Working%' AND accountId = ?";
 
     // Prepare the SQL statement
     $stmt = $conn->prepare($sqlReport);
 
-    // Create a wildcard search term for the name
-    $searchTerm = "%" . $loggedInFullName . "%";
-
-    // Bind the parameter and execute
-    $stmt->bind_param("s", $searchTerm);
+    // Bind the parameter (account ID) and execute the query
+    $stmt->bind_param("i", $loggedInUserAccountId); // Assuming accountId is an integer, use "i"
     $stmt->execute();
+
+    // Get the result
     $CompletedTask = $stmt->get_result();
+
 
     $current_date = date('Y-m-d');
     $sql = "SELECT a.accountId, CONCAT(acc.firstName, ' ', IFNULL(acc.middleName, ''), ' ', acc.lastName) AS fullName 

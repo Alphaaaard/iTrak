@@ -2635,23 +2635,23 @@ $(document).ready(function() {
         }
 
         $.ajax({
-            url: 'fetch_data.php',
-            type: 'GET',
-            data: {
-                month: month,
-                week: week,
-                employee: employee,
-                start: weekStart.format('YYYY-MM-DD'),
-                end: endDate.format('YYYY-MM-DD')
-            },
-            dataType: 'json',
-            success: function(response) {
-                if (statusChart) {
-                    statusChart.destroy();
-                }
-                var ctx = document.getElementById('statusChart').getContext('2d');
-                statusChart = new Chart(ctx, {
-                    type: 'bar',
+    url: 'fetch_data.php', // Ensure this points to your PHP script that handles the request
+    type: 'GET', // Using GET as per your setup
+    data: {
+        month: month, // Selected month
+        employee: employee, // Selected employee
+        // Assuming weekStart and endDate are defined for each week in the iteration
+        start: weekStart.format('YYYY-MM-DD'), // Start date of the week
+        end: endDate.format('YYYY-MM-DD') // End date of the week
+    },
+    dataType: 'json', // Expecting JSON response
+    success: function(response) {
+        if (statusChart) {
+            statusChart.destroy(); // Destroy existing chart if it exists
+        }
+        var ctx = document.getElementById('statusChart').getContext('2d');
+        statusChart = new Chart(ctx, {
+            type: 'bar', // Type of chart
                     data: {
                         labels: response.labels,
                         datasets: [{
