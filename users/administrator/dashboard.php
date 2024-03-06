@@ -16,42 +16,42 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
- // for notif below
- // Update the SQL to join with the account and asset tables to get the admin's name and asset information
- $loggedInUserFirstName = $_SESSION['firstName']; 
- $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
- $loggedInUserLastName = $_SESSION['lastName'];
- 
- // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
+    // for notif below
+    // Update the SQL to join with the account and asset tables to get the admin's name and asset information
+    $loggedInUserFirstName = $_SESSION['firstName'];
+    $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
+    $loggedInUserLastName = $_SESSION['lastName'];
 
-$loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
-$loggedInAccountId = $_SESSION['accountId'];
-// SQL query to fetch notifications related to report activities
-$sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
+    // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
+
+    $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
+    $loggedInAccountId = $_SESSION['accountId'];
+    // SQL query to fetch notifications related to report activities
+    $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
                 FROM activitylogs AS al
                JOIN account AS acc ON al.accountID = acc.accountID
                WHERE al.tab='Report' AND al.seen = '0' AND al.accountID != ?
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
 
-// Prepare the SQL statement
-$stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+    // Prepare the SQL statement
+    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
 
-// Bind the parameter to exclude the current user's account ID
-$stmtLatestLogs->bind_param("i", $loggedInAccountId);
+    // Bind the parameter to exclude the current user's account ID
+    $stmtLatestLogs->bind_param("i", $loggedInAccountId);
 
-// Execute the query
-$stmtLatestLogs->execute();
-$resultLatestLogs = $stmtLatestLogs->get_result();
+    // Execute the query
+    $stmtLatestLogs->execute();
+    $resultLatestLogs = $stmtLatestLogs->get_result();
 
 
-$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
-$stmt = $conn->prepare($unseenCountQuery);
-$stmt->bind_param("i", $loggedInAccountId);
-$stmt->execute();
-$stmt->bind_result($unseenCount);
-$stmt->fetch();
-$stmt->close();
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
+    $stmt = $conn->prepare($unseenCountQuery);
+    $stmt->bind_param("i", $loggedInAccountId);
+    $stmt->execute();
+    $stmt->bind_result($unseenCount);
+    $stmt->fetch();
+    $stmt->close();
 
     // Get the current date in the same format as your date column
     //Personnel Attendance
@@ -315,17 +315,18 @@ $stmt->close();
         <link rel="stylesheet" href="../../src/css/dashboard.css" />
     </head>
     <style>
-.notification-indicator {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: red;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-</style>
+        .notification-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: red;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+
     <body>
         <!-- NAVBAR -->
         <div id="navbar" class="">
@@ -338,61 +339,61 @@ $stmt->close();
                 </div>
                 <div class="content-nav">
                     <div class="notification-dropdown">
-                    <a href="#" class="notification" id="notification-button">
-    <i class="fa fa-bell" aria-hidden="true"></i>
-    <!-- Notification Indicator Dot -->
-    <?php if ($unseenCount > 0): ?>
-    <span class="notification-indicator"></span>
-    <?php endif; ?>
-</a>
+                        <a href="#" class="notification" id="notification-button">
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+                            <!-- Notification Indicator Dot -->
+                            <?php if ($unseenCount > 0) : ?>
+                                <span class="notification-indicator"></span>
+                            <?php endif; ?>
+                        </a>
 
 
 
 
-<div class="dropdown-content" id="notification-dropdown-content">
-    <h6 class="dropdown-header">Alerts Center</h6>
-    <!-- PHP code to display notifications will go here -->
-    <?php
-if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
-    while ($row = $resultLatestLogs->fetch_assoc()) {
-        $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
-        $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
-        $actionText = $row["action"];
-    
-        // Initialize the notification text as empty
-        $notificationText = "";
-        if (strpos($actionText, $adminRole) === false) {
-            // Role is not in the action text, so prepend it to the admin name
-            $adminName = "$adminRole $adminName";
-        }
-        // Check for 'Assigned maintenance personnel' action
-        if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
-            $assignedName = $matches[1];
-            $assetId = $matches[2];
-            $notificationText = "assigned $assignedName to asset ID $assetId";
-        }
-        // Check for 'Changed status of asset ID' action
-        elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
-            $assetId = $matches[1];
-            $newStatus = $matches[2];
-            $notificationText = "changed status of asset ID $assetId to $newStatus";
-        }
+                        <div class="dropdown-content" id="notification-dropdown-content">
+                            <h6 class="dropdown-header">Alerts Center</h6>
+                            <!-- PHP code to display notifications will go here -->
+                            <?php
+                            if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
+                                while ($row = $resultLatestLogs->fetch_assoc()) {
+                                    $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+                                    $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
+                                    $actionText = $row["action"];
 
-        // If notification text is set, echo the notification
-        if (!empty($notificationText)) {
-            // HTML for notification item
-            echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
-        }
-    }
-} else {
-    // No notifications found
-    echo '<a href="#">No new notifications</a>';
-}
-?>
-<a href="activity-logs.php" class="view-all">View All</a>
+                                    // Initialize the notification text as empty
+                                    $notificationText = "";
+                                    if (strpos($actionText, $adminRole) === false) {
+                                        // Role is not in the action text, so prepend it to the admin name
+                                        $adminName = "$adminRole $adminName";
+                                    }
+                                    // Check for 'Assigned maintenance personnel' action
+                                    if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
+                                        $assignedName = $matches[1];
+                                        $assetId = $matches[2];
+                                        $notificationText = "assigned $assignedName to asset ID $assetId";
+                                    }
+                                    // Check for 'Changed status of asset ID' action
+                                    elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
+                                        $assetId = $matches[1];
+                                        $newStatus = $matches[2];
+                                        $notificationText = "changed status of asset ID $assetId to $newStatus";
+                                    }
 
-</div>
-</div>
+                                    // If notification text is set, echo the notification
+                                    if (!empty($notificationText)) {
+                                        // HTML for notification item
+                                        echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
+                                    }
+                                }
+                            } else {
+                                // No notifications found
+                                echo '<a href="#">No new notifications</a>';
+                            }
+                            ?>
+                            <a href="activity-logs.php" class="view-all">View All</a>
+
+                        </div>
+                    </div>
 
                     <a href="#" class="settings profile">
                         <div class="profile-container" title="settings">
@@ -2249,32 +2250,32 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
         </main>
 
         <div class="chart-container">
-    <div class="filter-container1 flex-container">
-        <h5 class="labelTC">Task Completion</h5>
-            <div class="filter-wrapper">
-                <select id="monthFilter">
-                    <option value="">Select Month</option>
-                    <option value="1">January</option>
-                    <option value="2">February</option>
-                    <option value="3">March</option>
-                    <option value="4">April</option>
-                    <option value="5">May</option>
-                    <option value="6">June</option>
-                    <option value="7">July</option>
-                    <option value="8">August</option>
-                    <option value="9">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
+            <div class="filter-container1 flex-container">
+                <h5 class="labelTC">Task Completion</h5>
+                <div class="filter-wrapper">
+                    <select id="monthFilter">
+                        <option value="">Select Month</option>
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                </div>
+                <select id="employeeFilter">
+                    <option value="">Select Employee</option>
+                    <!-- Employee options will be populated dynamically via AJAX -->
                 </select>
             </div>
-            <select id="employeeFilter">
-                <option value="">Select Employee</option>
-                <!-- Employee options will be populated dynamically via AJAX -->
-            </select>
-    </div>
-        <canvas id="statusChart"></canvas>
-</div>                                
+            <canvas id="statusChart"></canvas>
+        </div>
 
         </section>
         <!--End of Section content1-->
@@ -2428,9 +2429,9 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
         <script>
             // Status to color mapping
             var statusColors = {
-                'Working': 'green',
-                'Under Maintenance': 'yellow',
-                'For Replacement': 'orange',
+                'Working': '#91D694',
+                'Under Maintenance': '#FCFF80',
+                'For Replacement': '#6EB5FF',
             };
 
             // Initialize the chart with a gray segment
@@ -2473,7 +2474,7 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                             // Map the response to the chart data and colors
                             var newLabels = Object.keys(response);
                             var newValues = Object.values(response);
-                            var backgroundColors = newLabels.map(status => statusColors[status] || 'red');
+                            var backgroundColors = newLabels.map(status => statusColors[status] || '#FF5C5D');
 
                             // Update the chart with the new data and colors
                             doughnutChart.data.labels = newLabels;
@@ -2571,166 +2572,166 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
             });
         </script>
 
-<script>
-$(document).ready(function() {
-    // Define default month and week as January and Week 1
-    var defaultMonth = 3; // January
-    var defaultWeek = 1; // Week 1
+        <script>
+            $(document).ready(function() {
+                // Define default month and week as January and Week 1
+                var defaultMonth = 3; // January
+                var defaultWeek = 1; // Week 1
 
-    // Set default selections for month and week filters
-    $('#monthFilter').val(defaultMonth);
-    $('#weekFilter').val(defaultWeek);
+                // Set default selections for month and week filters
+                $('#monthFilter').val(defaultMonth);
+                $('#weekFilter').val(defaultWeek);
 
-    // Populate employee filter options via AJAX
-    $.ajax({
-        url: 'get_employee_names.php',
-        type: 'GET',
-        dataType: 'json',
-        success: function(employeeNames) {
-            $('#employeeFilter').empty().append($('<option>').text('Select Employee').attr('value', ''));
-            employeeNames.forEach(function(name) {
-                $('#employeeFilter').append($('<option>').text(name).attr('value', name));
-            });
-        },
-        error: function(xhr, status, error) {
-            console.error("Error fetching employee names:", error);
-        }
-    });
-
-    var statusChart;
-
-    function updateWeekOptions() {
-        $('#weekFilter').empty().append($('<option>').text('Select Week').attr('value', ''));
-        for (var i = 1; i <= 5; i++) {
-            $('#weekFilter').append($('<option>').text('Week ' + i).attr('value', i));
-        }
-    }
-
-    // Update week options when month selection changes
-    $('#monthFilter').on('change', updateWeekOptions);
-
-    function fetchData() {
-        var month = $('#monthFilter').val() || defaultMonth;
-        var week = $('#weekFilter').val() || defaultWeek;
-        var employee = $('#employeeFilter').val() || '';
-
-        // Calculate the start date of the selected week within the selected month
-        var startDate = moment([new Date().getFullYear(), month - 1]).startOf('month').add((week - 1) * 7, 'days');
-        // Adjust to the start of the week (Monday)
-        var weekStart = startDate.clone().startOf('isoWeek');
-        if (weekStart.month() + 1 !== month) { // Ensure week start is within the month
-            weekStart = startDate.clone();
-        }
-
-        // Calculate the end date of the selected week within the selected month
-        var endDate = weekStart.clone().add(6, 'days');
-        if (endDate.month() + 1 !== month) { // Ensure week end is within the month
-            endDate = moment([new Date().getFullYear(), month - 1]).endOf('month');
-        }
-
-        // Ensure both month and week are selected
-        if (!month || !week) {
-            console.log('Both month and week need to be selected.');
-            return; // Exit the function if either is not selected
-        }
-
-        $.ajax({
-    url: 'fetch_data.php', // Ensure this points to your PHP script that handles the request
-    type: 'GET', // Using GET as per your setup
-    data: {
-        month: month, // Selected month
-        employee: employee, // Selected employee
-        // Assuming weekStart and endDate are defined for each week in the iteration
-        start: weekStart.format('YYYY-MM-DD'), // Start date of the week
-        end: endDate.format('YYYY-MM-DD') // End date of the week
-    },
-    dataType: 'json', // Expecting JSON response
-    success: function(response) {
-        if (statusChart) {
-            statusChart.destroy(); // Destroy existing chart if it exists
-        }
-        var ctx = document.getElementById('statusChart').getContext('2d');
-        statusChart = new Chart(ctx, {
-            type: 'bar', // Type of chart
-                    data: {
-                        labels: response.labels,
-                        datasets: [{
-                            label: 'Task Completion',
-                            data: response.data,
-                            backgroundColor: [
-                                'rgba(22, 49, 114)',
-                                'rgba(22, 49, 114)',
-                                'rgba(22, 49, 114)',
-                                'rgba(22, 49, 114)'
-                            ],
-                            borderColor: [
-                                'rgba(22, 49, 114)',
-                                'rgba(22, 49, 114)',
-                                'rgba(22, 49, 114)',
-                                'rgba(22, 49, 114)'
-                            ],
-                            borderWidth: 1,
-                            borderRadius: 30
-                        }]
+                // Populate employee filter options via AJAX
+                $.ajax({
+                    url: 'get_employee_names.php',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(employeeNames) {
+                        $('#employeeFilter').empty().append($('<option>').text('Select Employee').attr('value', ''));
+                        employeeNames.forEach(function(name) {
+                            $('#employeeFilter').append($('<option>').text(name).attr('value', name));
+                        });
                     },
-                    options: {
-    plugins: {
-        legend: {
-            display: false // This will hide the legend
-        }
-    },
-    scales: {
-        x: {
-            grid: {
-                drawBorder: false,
-                drawTicks: false,
-                display: false
-            },
-            ticks: {
-                display: true // Keep this true to show the labels
-            }
-        },
-        y: {
-            beginAtZero: true,
-            ticks: {
-                callback: function(value, index, values) {
-                    // Only return the tick if it is an even number
-                    if (value % 2 === 0) {
-                        return value;
+                    error: function(xhr, status, error) {
+                        console.error("Error fetching employee names:", error);
+                    }
+                });
+
+                var statusChart;
+
+                function updateWeekOptions() {
+                    $('#weekFilter').empty().append($('<option>').text('Select Week').attr('value', ''));
+                    for (var i = 1; i <= 5; i++) {
+                        $('#weekFilter').append($('<option>').text('Week ' + i).attr('value', i));
                     }
                 }
-            }
-        }
-    },
-    tooltips: {
-        callbacks: {
-            label: function(context) {
-                let label = context.dataset.label || '';
-                if (label) {
-                    label += ': ';
+
+                // Update week options when month selection changes
+                $('#monthFilter').on('change', updateWeekOptions);
+
+                function fetchData() {
+                    var month = $('#monthFilter').val() || defaultMonth;
+                    var week = $('#weekFilter').val() || defaultWeek;
+                    var employee = $('#employeeFilter').val() || '';
+
+                    // Calculate the start date of the selected week within the selected month
+                    var startDate = moment([new Date().getFullYear(), month - 1]).startOf('month').add((week - 1) * 7, 'days');
+                    // Adjust to the start of the week (Monday)
+                    var weekStart = startDate.clone().startOf('isoWeek');
+                    if (weekStart.month() + 1 !== month) { // Ensure week start is within the month
+                        weekStart = startDate.clone();
+                    }
+
+                    // Calculate the end date of the selected week within the selected month
+                    var endDate = weekStart.clone().add(6, 'days');
+                    if (endDate.month() + 1 !== month) { // Ensure week end is within the month
+                        endDate = moment([new Date().getFullYear(), month - 1]).endOf('month');
+                    }
+
+                    // Ensure both month and week are selected
+                    if (!month || !week) {
+                        console.log('Both month and week need to be selected.');
+                        return; // Exit the function if either is not selected
+                    }
+
+                    $.ajax({
+                        url: 'fetch_data.php', // Ensure this points to your PHP script that handles the request
+                        type: 'GET', // Using GET as per your setup
+                        data: {
+                            month: month, // Selected month
+                            employee: employee, // Selected employee
+                            // Assuming weekStart and endDate are defined for each week in the iteration
+                            start: weekStart.format('YYYY-MM-DD'), // Start date of the week
+                            end: endDate.format('YYYY-MM-DD') // End date of the week
+                        },
+                        dataType: 'json', // Expecting JSON response
+                        success: function(response) {
+                            if (statusChart) {
+                                statusChart.destroy(); // Destroy existing chart if it exists
+                            }
+                            var ctx = document.getElementById('statusChart').getContext('2d');
+                            statusChart = new Chart(ctx, {
+                                type: 'bar', // Type of chart
+                                data: {
+                                    labels: response.labels,
+                                    datasets: [{
+                                        label: 'Task Completion',
+                                        data: response.data,
+                                        backgroundColor: [
+                                            'rgba(22, 49, 114)',
+                                            'rgba(22, 49, 114)',
+                                            'rgba(22, 49, 114)',
+                                            'rgba(22, 49, 114)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(22, 49, 114)',
+                                            'rgba(22, 49, 114)',
+                                            'rgba(22, 49, 114)',
+                                            'rgba(22, 49, 114)'
+                                        ],
+                                        borderWidth: 1,
+                                        borderRadius: 30
+                                    }]
+                                },
+                                options: {
+                                    plugins: {
+                                        legend: {
+                                            display: false // This will hide the legend
+                                        }
+                                    },
+                                    scales: {
+                                        x: {
+                                            grid: {
+                                                drawBorder: false,
+                                                drawTicks: false,
+                                                display: false
+                                            },
+                                            ticks: {
+                                                display: true // Keep this true to show the labels
+                                            }
+                                        },
+                                        y: {
+                                            beginAtZero: true,
+                                            ticks: {
+                                                callback: function(value, index, values) {
+                                                    // Only return the tick if it is an even number
+                                                    if (value % 2 === 0) {
+                                                        return value;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    tooltips: {
+                                        callbacks: {
+                                            label: function(context) {
+                                                let label = context.dataset.label || '';
+                                                if (label) {
+                                                    label += ': ';
+                                                }
+                                                label += new Intl.NumberFormat().format(context.parsed.y);
+                                                return label;
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error fetching data:", error);
+                        }
+                    });
                 }
-                label += new Intl.NumberFormat().format(context.parsed.y);
-                return label;
-            }
-        }
-    }
-}
-                });
-            },
-            error: function(xhr, status, error) {
-                console.error("Error fetching data:", error);
-            }
-        });
-    }
 
-    // Trigger fetchData when selections change
-    $('#monthFilter, #weekFilter, #employeeFilter').change(fetchData);
+                // Trigger fetchData when selections change
+                $('#monthFilter, #weekFilter, #employeeFilter').change(fetchData);
 
-    // Call updateWeekOptions and fetchData on page load to display the default data
-    updateWeekOptions(); // This will populate the week filter based on the current month
-    fetchData(); // This will fetch and display data for the current month and week
-});
-</script>
+                // Call updateWeekOptions and fetchData on page load to display the default data
+                updateWeekOptions(); // This will populate the week filter based on the current month
+                fetchData(); // This will fetch and display data for the current month and week
+            });
+        </script>
 
 
 

@@ -24,7 +24,7 @@ if (isset($_POST['email'])) {
 
     if ($result->num_rows > 0) {
         $token = bin2hex(random_bytes(50)); // generate unique token
-        $resetLink = "https://upkeep.website/reset_password.php?token=$token";
+        $resetLink = "https://itrak.website/reset_password.php?token=$token";
 
         // Store the token in your database along with its expiration date
         $conn->query("UPDATE account SET reset_token = '$token', token_expiry = DATE_ADD(NOW(), INTERVAL 1 HOUR) WHERE email = '$email'");
