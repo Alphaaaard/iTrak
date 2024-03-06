@@ -13,8 +13,19 @@ $month = isset($_GET['month']) ? (int)$_GET['month'] : date('n');
 $employee = isset($_GET['employee']) ? $_GET['employee'] : null;
 
 function getCountByWeek($conn, $weekStart, $weekEnd, $employeeFullName = null) {
-    $sql = "SELECT COUNT(*) AS num FROM activitylogs WHERE action LIKE CONCAT(?, ' %logged in%') AND DATE(date) BETWEEN ? AND ?";
-    $params = ["sss", $employeeFullName . '%', $weekStart, $weekEnd];
+    // Modified SQL query to join with the account table and to check for a specific action
+    $sql = "SELECT COUNT(*) AS num 
+            FROM activitylogs al
+            INNER JOIN account ac ON al.accountId = ac.accountId
+            WHERE CONCAT(ac.firstName, ' ', ac.lastName) LIKE CONCAT(?, '%')
+            AND al.action LIKE '%Changed Status of% to Working%'
+            AND DATE(al.date) BETWEEN ? AND ?";
+
+    // Assuming $employeeFullName might be null, use a wildcard in such a case
+    $employeeFullName = $employeeFullName ? $employeeFullName . '%' : '%';
+
+    // Updated parameters - removed the first 's' since we're no longer using the 'action' column for the employee name
+    $params = ["sss", $employeeFullName, $weekStart, $weekEnd];
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param(...$params);
@@ -25,6 +36,7 @@ function getCountByWeek($conn, $weekStart, $weekEnd, $employeeFullName = null) {
     return $row ? $row['num'] : 0;
 }
 
+
 function getWeeksData($selectedMonth) {
     $weeksData = [];
     $year = date('Y');
@@ -32,31 +44,43 @@ function getWeeksData($selectedMonth) {
     $monthEnd = new DateTime("$year-$selectedMonth-" . cal_days_in_month(CAL_GREGORIAN, $selectedMonth, $year));
 
     // Adjust the month start to the first Monday of the month
-    if ($monthStart->format('N') > 5) {
-        $monthStart->modify('next monday');
+    if ($monthStart->format('N') > 1) {
+        $monthStart->modify('first monday of this month');
     }
 
-    // Iterate through each week of the month
-    for ($week = 1; $week <= 5; $week++) {
-        $weekStartDate = (clone $monthStart)->modify("+".($week - 1) * 7 ." days");
+    $weekCounter = 1;
 
-        // If the week start date is beyond the month end, we break the loop
-        if ($weekStartDate > $monthEnd) break;
+    // Iterate starting from the first Monday
+    while (true) {
+        $weekStartDate = (clone $monthStart)->modify("+" . ($weekCounter - 1) * 7 . " days");
 
-        $weekEndDate = (clone $weekStartDate)->modify('+4 days'); // Add 4 days to get to Friday
+        // Normally, the week ends 6 days after the start
+        $weekEndDate = (clone $weekStartDate)->modify('+6 days'); 
 
-        // If the week end date is beyond the month end, set it to the month end
-        if ($weekEndDate > $monthEnd) {
-            $weekEndDate = clone $monthEnd;
-        }
+        // If it's the last iteration and the week start date is in the selected month but the end date spills over to the next month
+        if ($weekStartDate->format('m') == $monthStart->format('m') && $weekEndDate->format('m') != $monthStart->format('m')) {
+            // Extend the weekEndDate to include the spill-over days into the next month
+            $weeksData["Week $weekCounter"] = [
+                'start' => $weekStartDate->format('Y-m-d 00:00:00'),
+                'end' => $weekEndDate->format('Y-m-d 23:59:59')
+            ];
+            break; // Exit the loop as this is the last week of the month
+        } elseif ($weekStartDate > $monthEnd) {
+            // If the week start date is beyond the month end, break the loop
+            break;
+        } else {
+            // For all other weeks within the month
+            if ($weekEndDate > $monthEnd) {
+                $weekEndDate = clone $monthEnd;
+            }
 
-        // Ensure the week's dates are within the month and weekdays only
-        if ($weekStartDate <= $monthEnd) {
-            $weeksData["Week $week"] = [
+            $weeksData["Week $weekCounter"] = [
                 'start' => $weekStartDate->format('Y-m-d 00:00:00'),
                 'end' => $weekEndDate->format('Y-m-d 23:59:59')
             ];
         }
+
+        $weekCounter++;
     }
 
     return $weeksData;
