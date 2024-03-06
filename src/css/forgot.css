@@ -212,6 +212,11 @@ body{
     border: none !important;
     margin: 0;
   }
+
+  .h5, h5{
+    color: #3D3B40!important;
+
+  }
   
   /* Form control styles */
   .form-textbox{

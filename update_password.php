@@ -24,6 +24,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         <head>
             <!-- Include SweetAlert2 -->
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <link rel="stylesheet" href="./src/css/main.css">
         </head>
 
         <body>
