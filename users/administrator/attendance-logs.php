@@ -366,7 +366,7 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                 </div>
                                 <?php
                                 // Modify your SQL query to fetch only the subset of results
-                                $result = $conn->query("SELECT accountId, picture, firstname, lastname, role FROM account WHERE LOWER(role) != 'Maintenance Personnel' AND UserLevel != 1");
+                                $result = $conn->query("SELECT accountId, picture, firstname, lastname, role FROM account WHERE role = 'Maintenance Manager'");
                                 if ($result->num_rows > 0) {
                                     echo "<div class='table-container'>";
                                     echo "<table>";
@@ -535,7 +535,7 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                 </div>
                                 <?php
                                 // Modify your SQL query to fetch only the subset of results
-                                $result = $conn->query("SELECT accountId, picture, firstname, lastname, role FROM account WHERE LOWER(role) != 'Maintenance Manager' AND UserLevel != 1");
+                                $result = $conn->query("SELECT accountId, picture, firstname, lastname, role FROM account WHERE role = 'Maintenance Personnel'");
                                 if ($result->num_rows > 0) {
                                     echo "<div class='table-container'>";
                                     echo "<table>";
