@@ -388,8 +388,16 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                         <div class="cont-header">
                             <h1 class="tab-name">Reports</h1>
                             <div class="tbl-filter">
-                                <form class="d-flex" role="search">
-                                    <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" onkeyup="searchTable()" />
+                                <select id="filter-criteria">
+                                    <option value="all">All</option> <!-- Added "All" option -->
+                                    <option value="reportId">Tracking ID</option>
+                                    <option value="date">Date</option>
+                                    <option value="category">Category</option>
+                                    <option value="location">Location</option>
+                                </select>
+                                <!-- Search Box -->
+                                <form class="d-flex" role="search" id="searchForm">
+                                    <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" name="q" />
                                 </form>
                             </div>
                         </div>
@@ -758,56 +766,137 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                 });
             </script>
 
-            <script>
-                $(document).ready(function() {
-                    // Bind the filter function to the input field
-                    $("#search-box").on("input", function() {
-                        var query = $(this).val().toLowerCase();
-                        filterTable(query);
-                    });
-
-                    function filterTable(query) {
-                        $(".table-container tbody tr").each(function() {
-                            var row = $(this);
-                            var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
-                            var firstNameCell = row.find("td:eq(1)"); // FirstName column
-                            var middleNameCell = row.find("td:eq(2)");
-                            var lastNameCell = row.find("td:eq(3)");
-                            var dateCell = row.find("td:eq(5)");
-                            var actionCell = row.find("td:eq(6)");
-
-                            // Get the text content of each cell
-                            var archiveIDText = archiveIDCell.text().toLowerCase();
-                            var firstNameText = firstNameCell.text().toLowerCase();
-                            var middleNameText = middleNameCell.text().toLowerCase();
-                            var lastNameText = lastNameCell.text().toLowerCase();
-                            var dateText = dateCell.text().toLowerCase();
-                            var actionText = actionCell.text().toLowerCase();
-
-                            // Check if any of the cells contain the query
-                            var showRow = archiveIDText.includes(query) ||
-                                firstNameText.includes(query) ||
-                                middleNameText.includes(query) ||
-                                lastNameText.includes(query) ||
-                                dateText.includes(query) ||
-                                actionText.includes(query) ||
-                                archiveIDText == query || // Exact match for Archive ID
-                                firstNameText == query || // Exact match for FirstName
-                                middleNameText == query || // Exact match for LastName
-                                lastNameText == query || // Exact match for LastName
-                                dateText == query || // Exact match for LastName
-                                actionText == query; // Exact match for LastName
-
-                            // Show or hide the row based on the result
-                            if (showRow) {
-                                row.show();
-                            } else {
-                                row.hide();
-                            }
-                        });
-                    }
+<script>
+            $(document).ready(function() {
+                // Bind the filter function to the input field
+                $("#search-box").on("input", function() {
+                    var query = $(this).val().toLowerCase();
+                    filterTable(query);
                 });
-            </script>
+
+
+                function filterTable(query) {
+                    $(".table-container tbody tr").each(function() {
+                        var row = $(this);
+                        var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
+                        var firstNameCell = row.find("td:eq(1)"); // FirstName column
+                        var middleNameCell = row.find("td:eq(2)");
+                        var lastNameCell = row.find("td:eq(3)");
+                        var dateCell = row.find("td:eq(5)");
+                        var actionCell = row.find("td:eq(6)");
+
+                        // Get the text content of each cell
+                        var archiveIDText = archiveIDCell.text().toLowerCase();
+                        var firstNameText = firstNameCell.text().toLowerCase();
+                        var middleNameText = middleNameCell.text().toLowerCase();
+                        var lastNameText = lastNameCell.text().toLowerCase();
+                        var dateText = dateCell.text().toLowerCase();
+                        var actionText = actionCell.text().toLowerCase();
+
+                        // Check if any of the cells contain the query
+                        var showRow = archiveIDText.includes(query) ||
+                            firstNameText.includes(query) ||
+                            middleNameText.includes(query) ||
+                            lastNameText.includes(query) ||
+                            dateText.includes(query) ||
+                            actionText.includes(query) ||
+                            archiveIDText == query || // Exact match for Archive ID
+                            firstNameText == query || // Exact match for FirstName
+                            middleNameText == query || // Exact match for LastName
+                            lastNameText == query || // Exact match for LastName
+                            dateText == query || // Exact match for LastName
+                            actionText == query; // Exact match for LastName
+
+                        // Show or hide the row based on the result
+                        if (showRow) {
+                            row.show();
+                        } else {
+                            row.hide();
+                        }
+                    });
+                }
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                function filterTable() {
+                    var searchQuery = $('#search-box').val().toLowerCase();
+                    var columnIndex = parseInt($('#search-filter').val());
+
+                    $('#data-table tbody tr').each(function() {
+                        var cellText = $(this).find('td').eq(columnIndex).text().toLowerCase();
+                        if (cellText.indexOf(searchQuery) !== -1) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                }
+
+                // Event listener for search input
+                $('#search-box').on('input', filterTable);
+
+                // Event listener for filter dropdown change
+                $('#search-filter').change(function() {
+                    $('#search-box').val(''); // Clear the search input
+                    filterTable(); // Filter table with new criteria
+                });
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                function searchTable() {
+                    var input, filter, table, tr, td, i;
+                    input = document.getElementById("search-box");
+                    filter = input.value.toUpperCase();
+                    table = document.getElementById("myTabContent"); // Use the ID of your table container
+                    tr = table.getElementsByTagName("tr");
+                    var selectedFilter = document.getElementById("filter-criteria").value;
+
+                    for (i = 1; i < tr.length; i++) { // Start with 1 to avoid the header
+                        td = tr[i].getElementsByTagName("td");
+                        if (td.length > 0) {
+                            var searchText = "";
+                            if (selectedFilter === "all") {
+                                // Concatenate all the text content from the cells for "All" search
+                                for (var j = 0; j < td.length; j++) {
+                                    searchText += td[j].textContent.toUpperCase();
+                                }
+                            } else {
+                                // Find the index for the selected filter
+                                var columnIndex = getColumnIndex(selectedFilter);
+                                searchText = td[columnIndex].textContent.toUpperCase();
+                            }
+
+                            // Show or hide the row based on whether the searchText contains the filter
+                            if (searchText.indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
+                }
+
+                // Utility function to get the column index based on the filter selected
+                function getColumnIndex(filter) {
+                    // Adjust these indices to match your table's structure
+                    var columns = {
+                        'reportId': 0,
+                        'date': 1,
+                        'category': 2,
+                        'location': 3, // Assuming 'location' is a single column that includes building/floor/room
+                        'status': 4
+                    };
+                    return columns[filter] || 0; // Default to the first column if the filter is not found
+                }
+
+                // Attach the search function to the keyup event of the search box
+                $("#search-box").keyup(searchTable);
+            });
+        </script>
 
 
     </body>

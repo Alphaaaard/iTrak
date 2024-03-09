@@ -101,12 +101,12 @@ ORDER BY ac.date DESC";
 
     $accountId = $_SESSION['accountId'];
     $fname = $_SESSION['firstName'];
-    $middleName = $_SESSION['middleName'];
+    // $middleName = $_SESSION['middleName'];
     $lastName = $_SESSION['lastName'];
 
     $sql = "SELECT a.* FROM asset AS a
-            JOIN account AS b ON CONCAT(b.firstName, ' ', b.middleName, ' ', b.lastName) = a.assignedName
-            WHERE a.status = 'Need Repair' AND b.firstName = '$fname' AND b.middleName = '$middleName' AND b.lastName = '$lastName'";
+            JOIN account AS b ON CONCAT(b.firstName, ' ', b.lastName) = a.assignedName
+            WHERE a.status = 'Need Repair' AND b.firstName = '$fname' AND b.lastName = '$lastName'";
 
     $result = $conn->query($sql) or die($conn->error);
 
@@ -375,19 +375,22 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                     <div class="cont-header">
                         <h1 class="tab-name">Activity Logs</h1>
                         <div class="tbl-filter">
-                            <select name="filterRole" id="filterRole" onchange="">
-                                <option value="all">Sort by date</option>
-                                <option value="all">Filter</option>
-                                <option value="all">Filter</option>
-                                <option value="all">Filter</option>
-                            </select>
-                            <form class="d-flex" role="search">
-                                <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" onkeyup="searchTable()" />
-                            </form>
-                        </div>
+                                <select id="filter-criteria">
+                                    <option value="all">All</option> <!-- Added "All" option -->
+                                    <option value="reportId">Tracking ID</option>
+                                    <option value="date">Date</option>
+                                    <option value="category">Category</option>
+                                    <option value="location">Location</option>
+                                </select>
+                                <!-- Search Box -->
+                                <form class="d-flex" role="search" id="searchForm">
+                                    <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" name="q" />
+                                </form>
+                            </div>
                     </div>
                 </header>
                 <!--Tab for table 4 - Repair -->
+            <div class="tab-content pt" id="myTabContent">
                 <div class="tab-pane fade show active" id="pills-repair" role="tabpanel" aria-labelledby="repair-tab">
                     <div class="table-content">
                         <div class='table-header'>
@@ -447,6 +450,7 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                 </div>
                 </div>
                 </div>
+                    </div>
             </main>
         </section>
 
@@ -646,6 +650,7 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                     filterTable(query);
                 });
 
+
                 function filterTable(query) {
                     $(".table-container tbody tr").each(function() {
                         var row = $(this);
@@ -715,6 +720,7 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                 });
             });
         </script>
+
         <script>
             $(document).ready(function() {
                 function searchTable() {
