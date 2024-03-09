@@ -345,14 +345,14 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                     <div class="new-nav">
                         <ul>
                             <li><a href="#" class="nav-link active" id="manager-pill" data-bs-target="pills-manager">Manager</a></li>
-                            <li><a href="#" class="nav-link" id="personnel-pill" data-bs-target="pills-profile">Personnel</a></li>
+                            <li><a href="#" class="nav-link" id="personnel-pill" data-bs-target="pills-personnel">Personnel</a></li>
                         </ul>
                     </div>
 
                     <!--PILL TABS-->
-                    <!-- Pills Tabs -->
+                    <!-- Maintenance Manager -->
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="pills-manager" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="tab-pane" id="pills-manager" role="tabpanel" aria-labelledby="home-tab">
                             <div class="table-content">
                                 <div class="table-header">
                                     <table>
@@ -365,9 +365,8 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                     </table>
                                 </div>
                                 <?php
-
                                 // Modify your SQL query to fetch only the subset of results
-                                $result = $conn->query("SELECT accountId, picture, firstname, lastname, role FROM account WHERE LOWER(role) != 'Administrator' AND UserLevel != 1");
+                                $result = $conn->query("SELECT accountId, picture, firstname, lastname, role FROM account WHERE LOWER(role) != 'Maintenance Personnel' AND UserLevel != 1");
                                 if ($result->num_rows > 0) {
                                     echo "<div class='table-container'>";
                                     echo "<table>";
@@ -389,16 +388,184 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                     echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
                                     echo "</div>";
                                 }
-
-                                // Your existing code to output the table goes here
-                                if ($result->num_rows > 0) {
-                                    // ... your table HTML and PHP loop
-                                }
-
-
                                 ?>
                             </div>
                         </div>
+                            </div>
+
+                         <!-- Modal -->
+                         <?php
+                        // Fetch and display attendance log data within modals
+                        if ($result->num_rows > 0) {
+                            $result->data_seek(0); // Reset result pointer to the beginning
+
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<div class="modal fade" id="attendanceModal' . $row['accountId'] . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+                                echo '<div class="modal-dialog modal-lg modal-dialog-centered">';
+                                echo '<div class="modal-content">';
+                                echo '<div class="modal-header">';
+                                echo '<div class="modal-close">';
+                                echo '<button class="btn btn-close-modal-emp close-modal-btn" id="closeAddModal" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>';
+                                echo '</div>';
+                                echo '</div>';
+                                echo '<div class="modal-footer">';
+
+                                echo '<div class="modal-content-header">';
+                                echo '<p class="h5-like">' . $row['firstname'] . ' ' . $row['lastname'] . '</p>';
+                                echo '<form class="filterType">';
+                                echo '<select name="filterType" id="filterType' . $row['accountId'] . '" onchange="filterAttendanceData(' . $row['accountId'] . ')" class="custom-select">';
+                                echo '<option value="all">All</option>';
+                                echo '<option value="week">This Week</option>';
+                                echo '<option value="month">This Month</option>';
+                                echo '<option value="year">This Year</option>';
+                                echo '</select>';
+                                echo '</form>';
+                                echo '</div>';
+
+                                $attendanceQuery = "SELECT date, timeIn, timeOut FROM attendancelogs WHERE accountId = ? ORDER BY date ASC";
+                                $attendanceStmt = $conn->prepare($attendanceQuery);
+                                $attendanceStmt->bind_param('i', $row['accountId']);
+                                $attendanceStmt->execute();
+                                $attendanceResult = $attendanceStmt->get_result();
+
+                                if ($attendanceResult->num_rows > 0) {
+
+                                    // Table header
+                                    echo '<div class="table-whole-content1" id="exportContent' . $row['accountId'] . '">';
+                                    echo '<p class="h5-like visually-hidden" id="nameHeader' . $row['accountId'] . '">' . $row['firstname'] . ' ' . $row['lastname'] . '</p>';
+                                    echo '<div class="table-header1">';
+                                    echo '<table>';
+                                    echo '<tr>';
+                                    echo '<th>Day</th>';
+                                    echo '<th>Date</th>';
+                                    echo '<th>Time In</th>';
+                                    echo '<th>Time Out</th>';
+                                    echo '<th>Total Hours</th>';
+                                    echo '</tr>';
+                                    echo '</table>';
+                                    echo '</div>';
+
+                                    echo '<div class="modal-content-th">';
+                                    // Start the table and use a unique ID
+                                    echo '<table id="attendanceTable' . $row['accountId'] . '">';
+                                    // Table body
+                                    while ($attendanceRow = $attendanceResult->fetch_assoc()) {
+                                        // Get the day of the week
+                                        $dayOfWeek = date('l', strtotime($attendanceRow['date']));
+
+                                        // Format timeIn and timeOut to show only the time with AM or PM
+                                        $timeInFormatted = date('h:i A', strtotime($attendanceRow['timeIn']));
+
+                                        date_default_timezone_set('Asia/Manila'); // Set the correct time zone, e.g., 'America/New_York'
+
+                                        if (isset($attendanceRow['timeIn'])) {
+                                            $timeIn = strtotime($attendanceRow['timeIn']);
+                                            $currentTime = time(); // Current timestamp
+
+                                            if (isset($attendanceRow['timeOut'])) {
+                                                $timeOut = strtotime($attendanceRow['timeOut']);
+                                                $timeDifference = $timeOut - $timeIn;
+                                                $hours = floor($timeDifference / 3600);
+                                                $totalHoursFormatted = $hours;
+                                                $timeOutFormatted = date('h:i A', $timeOut);
+                                            } else {
+                                                $timeSinceIn = $currentTime - $timeIn;
+
+                                                if ($timeSinceIn > (8 * 3600)) {
+                                                    $totalHoursFormatted = "4";
+                                                    $timeOutFormatted = 'Not Timed Out';
+                                                } else {
+                                                    $totalHoursFormatted = ''; // Set totalHours to empty if 8 hours have NOT been exceeded
+                                                    $timeOutFormatted = ''; // Set timeOut to empty if 8 hours have NOT been exceeded
+                                                }
+                                            }
+                                        } else {
+                                            $totalHoursFormatted = "No TimeIn Recorded"; // In case the user hasn't timed in yet
+                                            $timeOutFormatted = ''; // Default value for timeOut in this case
+                                        }
+
+                                        echo '<tr data-day="' . $dayOfWeek . '">';
+                                        echo '<td>' . $dayOfWeek . '</td>';
+                                        echo '<td>' . $attendanceRow['date'] . '</td>';
+                                        echo '<td>' . $timeInFormatted . '</td>';
+                                        echo '<td>' . $timeOutFormatted . '</td>';
+                                        echo '<td>' . $totalHoursFormatted . '</td>';
+                                        echo '</tr>';
+                                    }
+
+                                    echo '</table>';
+                                    echo "</div>";
+                                    echo "</div>";
+                                } else {
+                                    echo '<table>';
+                                    echo "<div class='noDataImgH'>";
+                                    echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
+                                    echo "</div>";
+                                    echo '</table>';
+                                }
+
+                                // Close the attendance log statement
+                                $attendanceStmt->close();
+
+                                echo '<button type="button" class="btn export-btn" onclick="exportTableToPDF(\'exportContent' . $row['accountId'] . '\', \'' . $row['firstname'] . '_' . $row['lastname'] . '.pdf\', \'' . addslashes($row['firstname']) . ' ' . addslashes($row['lastname']) . '\')">EXPORT PDF</button>';
+
+
+                                echo '</div>';
+                                echo '</div>';
+                                echo '</div>';
+                                echo '</div>';
+                            }
+                        }
+                        ?>
+                        <!-- Modal -->
+
+                        <!-- Maintenance Personnel -->
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane" id="pills-personnel" role="tabpanel" aria-labelledby="personnel-tab">
+                            <div class="table-content">
+                                <div class="table-header">
+                                    <table>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th>NAME</th>
+                                            <th>ROLE</th>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <?php
+                                // Modify your SQL query to fetch only the subset of results
+                                $result = $conn->query("SELECT accountId, picture, firstname, lastname, role FROM account WHERE LOWER(role) != 'Maintenance Manager' AND UserLevel != 1");
+                                if ($result->num_rows > 0) {
+                                    echo "<div class='table-container'>";
+                                    echo "<table>";
+                                    while ($row = $result->fetch_assoc()) {
+                                        // Output account information in each row
+                                        echo '<tr class="clickable-row" data-bs-toggle="modal" data-bs-target="#attendanceModal' . $row['accountId'] . '" data-account-id="' . $row['accountId'] . '">';
+                                        echo '<td>' . $row['accountId'] . '</td>';
+                                        echo '<td><img src="data:image/jpeg;base64,' . base64_encode($row['picture']) . '" class="rounded-img" alt="Profile Image" style="width: 50px; height: 50px; "></td>';
+                                        echo '<td>' . $row['firstname'] . ' ' . $row['lastname'] . '</td>';
+                                        echo '<td style="display:none">' . $row['firstname'] . '</td>';
+                                        echo '<td style="display:none">' . $row['lastname'] . '</td>';
+                                        echo '<td>' . $row['role'] . '</td>';
+                                        echo '</tr>';
+                                    }
+                                    echo "</table>";
+                                    echo "</div>";
+                                } else {
+                                    echo "<div class='noDataImgH'>";
+                                    echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
+                                    echo "</div>";
+                                }
+                                ?>
+                            </div>
+                        </div>
+                            </div>
+
+
+
+
+
                         <!-- Modal -->
                         <?php
                         // Fetch and display attendance log data within modals
@@ -593,61 +760,72 @@ $(document).ready(function() {
 
 </script>
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var managerPill = document.getElementById('manager-pill');
-                var personnelPill = document.getElementById('personnel-pill');
-                var searchBox = document.getElementById('search-box'); // Ensure you have an element with ID 'search-box'
+ document.addEventListener('DOMContentLoaded', function() {
+    var managerPill = document.getElementById('manager-pill');
+    var personnelPill = document.getElementById('personnel-pill');
+    var managerContent = document.getElementById('pills-manager');
+    var personnelContent = document.getElementById('pills-personnel');
 
-            function filterTable(role, query = '') {
-                var tableRows = document.querySelectorAll('.table-container tbody tr');
-                    tableRows.forEach(function(row) {
-                var roleCellText = row.cells[5].textContent.trim().toLowerCase(); // Adjust if your role is in a different column
-                var searchText = query.toLowerCase();
-                var rowText = row.textContent.toLowerCase();
-                    if ((roleCellText === role.toLowerCase() || role === '') && (rowText.includes(searchText) || searchText === '')) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
-            }
+    function toggleActiveClass(activePill, inactivePill) {
+        activePill.classList.add('active');
+        inactivePill.classList.remove('active');
+    }
 
-            function toggleActiveClass(active, inactive) {
-                active.classList.add('active');
-                inactive.classList.remove('active');
-            }
+    function toggleContent(activeContent, inactiveContent) {
+        activeContent.classList.add('show', 'active');
+        inactiveContent.classList.remove('show', 'active');
+    }
 
-            // Modified click event for managerPill
-            managerPill.addEventListener('click', function(e) {
-            e.preventDefault();
-            toggleActiveClass(managerPill, personnelPill);
-            sessionStorage.setItem('lastPillAttendance', 'manager');
-            // Trigger search with current search box value and 'Maintenance Manager' role
-            filterTable('Maintenance Manager', searchBox.value);
-            });
+    managerPill.addEventListener('click', function(e) {
+        e.preventDefault();
+        toggleActiveClass(managerPill, personnelPill);
+        toggleContent(managerContent, personnelContent);
+        sessionStorage.setItem('lastPill', 'manager');
+        filterTable(); // Ensure to call filterTable when a tab is clicked
+    });
 
-            // Modified click event for personnelPill
-            personnelPill.addEventListener('click', function(e) {
-            e.preventDefault();
+    personnelPill.addEventListener('click', function(e) {
+        e.preventDefault();
+        toggleActiveClass(personnelPill, managerPill);
+        toggleContent(personnelContent, managerContent);
+        sessionStorage.setItem('lastPill', 'personnel');
+        filterTable(); // Ensure to call filterTable when a tab is clicked
+    });
+
+    // Function to check sessionStorage for the last selected pill and show content accordingly
+    function checkAndShowActivePill() {
+        let lastPill = sessionStorage.getItem('lastPill');
+        if (lastPill === 'personnel') {
             toggleActiveClass(personnelPill, managerPill);
-            sessionStorage.setItem('lastPillAttendance', 'personnel');
-            // Trigger search with current search box value and 'Maintenance Personnel' role
-            filterTable('Maintenance Personnel', searchBox.value);
-            });
+            toggleContent(personnelContent, managerContent);
+        } else { // Default to manager if no last pill is found or it's set to 'manager'
+            toggleActiveClass(managerPill, personnelPill);
+            toggleContent(managerContent, personnelContent);
+        }
+        filterTable(); // Call filterTable here to ensure the table is filtered according to the active tab upon page load
+    }
 
-            // This function ensures the Manager Pill is selected by default or based on last selection
-            function selectDefaultPill() {
-            let lastPillSelected = sessionStorage.getItem('lastPillAttendance');
-            if (!lastPillSelected || lastPillSelected === 'manager') {
-            managerPill.click();
-            } else if (lastPillSelected === 'personnel') {
-            personnelPill.click();
-            }
-            }
+    checkAndShowActivePill(); // Call this function to set the correct tab and content when the page loads
+});
 
-            // Call selectDefaultPill to ensure the Manager Pill is selected by default
-            selectDefaultPill();
-            });
+// Include the filterTable function here or ensure it's accessible in this script context
+function filterTable() {
+    var query = $("#search-box").val().toLowerCase();
+    var activeRole = $('#manager-pill').hasClass('active') ? 'Maintenance Manager' : 'Maintenance Personnel';
+
+    $(".table-container tbody tr").each(function() {
+        var row = $(this);
+        var roleCell = row.find("td").last().text().toLowerCase(); // Adjust the index as necessary
+
+        if (roleCell === activeRole.toLowerCase()) {
+            var rowText = row.text().toLowerCase();
+            row.toggle(rowText.includes(query)); // Show or hide the row based on the query match
+        } else {
+            row.hide(); // Hide rows that don't match the active role
+        }
+    });
+}
+
             </script>
 
 
@@ -745,14 +923,6 @@ function exportTableToPDF(exportContentId, filename, name) {
 }
 </script>
 
-
-
-
-
-
-
-
-
         <script>
             function filterAttendanceData(accountId) {
                 var selectedValue = document.getElementById('filterType' + accountId).value;
@@ -782,57 +952,63 @@ function exportTableToPDF(exportContentId, filename, name) {
         </script>
         
         <script>
-            $(document).ready(function() {
-    // Bind the filter function to the input field
-    $("#search-box").on("input", function() {
-        var query = $(this).val().toLowerCase();
-        var activeRole = $('#manager-pill').hasClass('active') ? 'Maintenance Manager' : 'Maintenance Personnel';
-        filterTable(query, activeRole);
+$(window).on('load', function() {
+    var managerPill = $('#manager-pill');
+    var personnelPill = $('#personnel-pill');
+    var managerContent = $('#pills-manager');
+    var personnelContent = $('#pills-personnel');
+
+    // Function to explicitly set the active tab based on the lastPill value
+    function activateLastPill() {
+        var lastPill = sessionStorage.getItem('lastPill') || 'manager';
+
+        // Reset active states
+        $('.nav-link').removeClass('active');
+        $('.tab-pane').removeClass('show active');
+
+        if (lastPill === 'personnel') {
+            personnelPill.addClass('active');
+            personnelContent.addClass('show active');
+        } else {
+            managerPill.addClass('active');
+            managerContent.addClass('show active');
+        }
+    }
+
+    // Event listeners for tab clicks
+    managerPill.on('click', function(e) {
+        e.preventDefault();
+        sessionStorage.setItem('lastPill', 'manager');
+        activateLastPill();
     });
 
-    function filterTable(query, activeRole) {
+    personnelPill.on('click', function(e) {
+        e.preventDefault();
+        sessionStorage.setItem('lastPill', 'personnel');
+        activateLastPill();
+    });
+
+    function filterTable() {
+        var query = $("#search-box").val().toLowerCase();
+        var activeRole = managerPill.hasClass('active') ? 'Maintenance Manager' : 'Maintenance Personnel';
+
         $(".table-container tbody tr").each(function() {
             var row = $(this);
-            // Assuming the role is stored in the 6th cell (index 5), adjust if necessary
-            var roleCell = row.find("td:eq(5)").text().toLowerCase(); // Role column
+            var roleCell = row.find("td").last().text().toLowerCase();
 
-            // Only proceed if the row's role matches the active tab's role
-            if (roleCell === activeRole.toLowerCase()) {
-                var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
-                var firstNameCell = row.find("td:eq(1)"); // FirstName column
-                var middleNameCell = row.find("td:eq(2)");
-                var lastNameCell = row.find("td:eq(3)");
-                var dateCell = row.find("td:eq(5)");
-                var actionCell = row.find("td:eq(6)");
-
-                // Get the text content of each cell
-                var archiveIDText = archiveIDCell.text().toLowerCase();
-                var firstNameText = firstNameCell.text().toLowerCase();
-                var middleNameText = middleNameCell.text().toLowerCase();
-                var lastNameText = lastNameCell.text().toLowerCase();
-                var dateText = dateCell.text().toLowerCase();
-                var actionText = actionCell.text().toLowerCase();
-
-                // Check if any of the cells contain the query
-                var showRow = archiveIDText.includes(query) ||
-                    firstNameText.includes(query) ||
-                    middleNameText.includes(query) ||
-                    lastNameText.includes(query) ||
-                    dateText.includes(query) ||
-                    actionText.includes(query);
-
-                // Show or hide the row based on the result
-                if (showRow) {
-                    row.show();
-                } else {
-                    row.hide();
-                }
+            if (roleCell === activeRole.toLowerCase() && row.text().toLowerCase().includes(query)) {
+                row.show();
             } else {
-                // Hide rows that don't match the active role
                 row.hide();
             }
         });
     }
+
+    // Bind the input event to the search box for dynamic filtering
+    $("#search-box").on("input", filterTable);
+
+    // Activate the correct tab based on sessionStorage or default
+    activateLastPill();
 });
 
         </script>
