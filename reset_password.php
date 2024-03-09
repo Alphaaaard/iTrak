@@ -133,7 +133,7 @@ if (isset($_GET['token'])) {
           }
         });
       </script>
-      <script>
+      <!-- <script>
         const togglePassword = document
           .querySelector('#togglePassword');
         const password = document.querySelector('#password');
@@ -144,7 +144,7 @@ if (isset($_GET['token'])) {
           password.setAttribute('type', type);
           this.classList.toggle('bi-eye');
         });
-      </script>
+      </script> -->
     </body>
 
     </html>
