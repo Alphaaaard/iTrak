@@ -759,7 +759,7 @@ $(document).ready(function() {
 });
 
 </script>
-        <script>
+        <!-- <script>
  document.addEventListener('DOMContentLoaded', function() {
     var managerPill = document.getElementById('manager-pill');
     var personnelPill = document.getElementById('personnel-pill');
@@ -812,7 +812,57 @@ function filterTable(activeRole) {
 }
 
 
-            </script>
+            </script> -->
+
+<script>
+    var managerPill = document.getElementById('manager-pill');
+var personnelPill = document.getElementById('personnel-pill');
+var managerContent = document.getElementById('pills-manager');
+var personnelContent = document.getElementById('pills-personnel');
+
+function activateTab(pill, content, role) {
+    managerPill.classList.remove('active');
+    personnelPill.classList.remove('active');
+    managerContent.classList.remove('show', 'active');
+    personnelContent.classList.remove('show', 'active');
+
+    pill.classList.add('active');
+    content.classList.add('show', 'active');
+
+    sessionStorage.setItem('lastPill', role);
+    filterTable(role); // Adjusted to pass the active role
+}
+
+managerPill.addEventListener('click', function(e) {
+    e.preventDefault();
+    activateTab(managerPill, managerContent, 'manager');
+});
+
+personnelPill.addEventListener('click', function(e) {
+    e.preventDefault();
+    activateTab(personnelPill, personnelContent, 'personnel');
+});
+
+// Directly check and activate the tab from session storage on page load
+var lastPill = sessionStorage.getItem('lastPill') || 'manager';
+if (lastPill === 'personnel') {
+    activateTab(personnelPill, personnelContent, 'personnel');
+} else {
+    activateTab(managerPill, managerContent, 'manager');
+}
+
+function filterTable(activeRole) {
+    var query = document.getElementById('search-box').value.toLowerCase();
+    var rows = document.querySelectorAll('.table-container tbody tr');
+
+    rows.forEach(function(row) {
+        var roleCell = row.querySelector("td:last-child").textContent.toLowerCase(); // Using :last-child pseudo-class
+        var isRoleMatch = (activeRole === 'manager' && roleCell.includes('maintenance manager')) || (activeRole === 'personnel' && roleCell.includes('maintenance personnel'));
+        var isQueryMatch = row.textContent.toLowerCase().includes(query);
+        row.style.display = (isRoleMatch && isQueryMatch) ? '' : 'none';
+    });
+}
+</script>
 
 
 <script>
