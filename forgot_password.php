@@ -61,7 +61,7 @@
                                     position: 'center',
                                     icon: 'success',
                                     title: 'Reset link has been sent to your email.',
-                                    showConfirmButton: false,
+                                    // showConfirmButton: false,
                                     timer: 1500
                                 }).then(() => {
                                     window.location.href = 'index.php'; // Redirect to login page after notification
