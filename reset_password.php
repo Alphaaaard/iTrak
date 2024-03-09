@@ -86,6 +86,13 @@ if (isset($_GET['token'])) {
           var password = document.getElementById("password").value;
           var confirmPassword = document.getElementById("confirm_password").value;
 
+          // Check if the password is at least 8 characters long
+          if (password.length < 8) {
+            // Display an error message directly on the form instead of using SweetAlert
+            alert('The password must be at least 8 characters long.');
+            return false; // Prevent form submission
+          }
+
           if (password !== confirmPassword) {
             Swal.fire({
               icon: 'error',

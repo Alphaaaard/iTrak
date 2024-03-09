@@ -69,7 +69,7 @@
                                 Swal.fire({
                                     position: 'center',
                                     icon: 'success',
-                                    text: 'Reset link has been sent to your email.',
+                                    text: 'Password reset link sent! Please check your email.',
                                     showConfirmButton: false,
                                     timer: 1500
                                 }).then(() => {
