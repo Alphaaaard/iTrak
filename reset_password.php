@@ -46,10 +46,16 @@ if (isset($_GET['token'])) {
               <!-- Your existing input fields -->
               <input type="hidden" name="email" value="<?php echo htmlspecialchars($user['email']); ?>">
               <div class="mb-4">
-                <input type="password" id="password" name="password" class="form-textbox" placeholder="New password" required>
+                <div class="input-group">
+                  <input type="password" id="password" name="password" class="form-textbox" placeholder="New password" required>
+                  <i class="bi-eye-slash" id="togglePassword" onclick="togglePassword()"></i>
+                </div>
               </div>
               <div class="mb-4">
-                <input type="password" id="confirm_password" name="confirm_password" class="form-textbox" placeholder="Confirm new password" required>
+                <div class="input-group">
+                  <input type="password" id="confirm_password" name="confirm_password" class="form-textbox" placeholder="Confirm new password" required>
+                  <i class="bi-eye-slash" id="togglePassword" onclick="togglePassword()"></i>
+                </div>
               </div>
               <div class="mb-3 d-flex justify-content-end">
                 <button type="submit" id="reset-button" class="custom-button btn">Reset Password</button>
@@ -100,6 +106,22 @@ if (isset($_GET['token'])) {
 
     <body>
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script>
+        function togglePassword() {
+          var passwordField = document.getElementById("passwordField");
+          var toggleIcon = document.getElementById("togglePassword");
+
+          if (passwordField.type === "password") {
+            passwordField.type = "text";
+            toggleIcon.classList.remove("bi-eye-slash");
+            toggleIcon.classList.add("bi-eye");
+          } else {
+            passwordField.type = "password";
+            toggleIcon.classList.remove("bi-eye");
+            toggleIcon.classList.add("bi-eye-slash");
+          }
+        }
+      </script>
       <script>
         Swal.fire({
           title: 'Invalid or Expired Link',

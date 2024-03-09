@@ -53,7 +53,7 @@ if (isset($_POST['email'])) {
             $mail->AltBody = 'Click on this link to reset your password: ' . $resetLink;
 
             $mail->send();
-            $response = ['success' => true, 'message' => 'Reset link has been sent to your email.'];
+            $response = ['success' => true, 'message' => 'Password reset link sent! Please check your email.'];
         } catch (Exception $e) {
             $response = ['success' => false, 'message' => "Message could not be sent. Mailer Error: {$mail->ErrorInfo}"];
         }
