@@ -47,14 +47,14 @@ if (isset($_GET['token'])) {
               <input type="hidden" name="email" value="<?php echo htmlspecialchars($user['email']); ?>">
               <div class="mb-4">
                 <div class="input-group">
-                  <input type="password" id="password passwordField" name="password" class="form-textbox" placeholder="New password" required>
-                  <i class="bi-eye-slash" id="togglePassword" onclick="togglePassword()"></i>
+                  <input type="password" id="password" name="password" class="form-textbox" placeholder="New password" required>
+                  <i class="bi-eye-slash" id="togglePassword1" onclick="togglePassword('password')"></i>
                 </div>
               </div>
               <div class="mb-4">
                 <div class="input-group">
-                  <input type="password" id="confirm_password passwordField" name="confirm_password" class="form-textbox" placeholder="Confirm new password" required>
-                  <i class="bi-eye-slash" id="togglePassword" onclick="togglePassword()"></i>
+                  <input type="password" id="confirm_password" name="confirm_password" class="form-textbox" placeholder="Confirm new password" required>
+                  <i class="bi-eye-slash" id="togglePassword2" onclick="togglePassword('confirm_password')"></i>
                 </div>
               </div>
               <div class="mb-3 d-flex justify-content-end">
@@ -107,9 +107,9 @@ if (isset($_GET['token'])) {
     <body>
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <script>
-        function togglePassword() {
-          var passwordField = document.getElementById("passwordField");
-          var toggleIcon = document.getElementById("togglePassword");
+        function togglePassword(fieldId) {
+          var passwordField = document.getElementById(fieldId);
+          var toggleIcon = document.getElementById("togglePassword1");
 
           if (passwordField.type === "password") {
             passwordField.type = "text";
