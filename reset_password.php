@@ -110,7 +110,8 @@ if (isset($_GET['token'])) {
     <html lang="en">
 
     <head>
-      <!-- Head elements including the SweetAlert script -->
+      <link rel="stylesheet" href="./src/css/reset-password.css">
+      <link rel="stylesheet" href="./src/css/main.css">
     </head>
 
     <body>

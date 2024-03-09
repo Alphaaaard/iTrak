@@ -9,7 +9,14 @@
 
 body{
   background-color: #F6F6F6;
+}
 
+.d-flex{
+  width: unset!important;
+}
+
+a{
+  font-size: unset!important;
 }
 
 .forgot {
@@ -278,6 +285,10 @@ text-align: center; /* This will align the button to the right */
 
       .form-textbox{
         margin-bottom: unset!important;
+      }
+
+      a{
+        font-size: 1em!important;
       }
     }
 
