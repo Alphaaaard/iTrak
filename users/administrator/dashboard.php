@@ -2498,25 +2498,35 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </script>
 
         <script>
-            // Function to fetch attendance data and render the chart
             function fetchAttendanceData(period) {
                 $.ajax({
-                    url: 'get_attendance_data.php', // PHP file to process the AJAX request
+                    url: 'get_attendance_data.php',
                     type: 'GET',
                     data: {
                         period: period
                     },
                     dataType: 'json',
                     success: function(response) {
-                        // Assuming response is an object with the structure { 'Manager': [week1, week2, week3, week4], 'Personnel': [week1, week2, week3, week4] }
                         var ctx = document.getElementById('attendanceChart').getContext('2d');
+                        var labels;
+                        var format = 'week';
+                        if (period === 'week') {
+                            labels = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
+                        } else if (period === 'month') {
+                            labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+                            format = 'week';
+                        } else if (period === 'year') {
+                            labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                            format = 'month';
+                        }
+
                         if (window.attendanceChart instanceof Chart) {
                             window.attendanceChart.destroy();
                         }
                         window.attendanceChart = new Chart(ctx, {
                             type: 'line',
                             data: {
-                                labels: response.labels, // Update to dynamic labels based on period
+                                labels: labels,
                                 datasets: [{
                                     label: 'Manager',
                                     data: response.Manager,
@@ -2525,7 +2535,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     fill: true,
                                     pointRadius: 5,
                                     pointBackgroundColor: 'orange',
-                                    tension: 0.4 // This will make the line a bit smoother
+                                    tension: 0.4
                                 }, {
                                     label: 'Personnel',
                                     data: response.Personnel,
@@ -2541,19 +2551,18 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 scales: {
                                     y: {
                                         beginAtZero: true
+                                    },
+                                    x: {
+                                        type: 'category',
+                                        labels: labels
                                     }
                                 },
                                 responsive: true,
-                                title: {
-                                    display: true,
-
-                                },
-                                maintainAspectRatio: true,
-                                legend: { // Here's where you add the legend options
+                                maintainAspectRatio: false,
+                                legend: {
                                     display: true,
                                     position: 'bottom'
                                 }
-
                             }
                         });
                     },
@@ -2563,12 +2572,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 });
             }
 
-            // Event listener for the filter dropdown
             document.getElementById('timeFilter').addEventListener('change', function() {
                 fetchAttendanceData(this.value);
             });
 
-            // Trigger fetching attendance data when document is ready
             $(document).ready(function() {
                 fetchAttendanceData('month');
             });

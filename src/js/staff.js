@@ -276,7 +276,6 @@ $(".updateBtn").click(function () {
 
   // Validate First Name
   if (!firstName) {
-    alert('asdas');
     showErrorAlert("First name is required.");
     isValid = false;
     return;

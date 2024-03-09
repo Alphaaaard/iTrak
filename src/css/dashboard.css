@@ -499,6 +499,7 @@ button {
   border-radius: 10px;
   border: 2px solid;
   border-color: #aaaaaa;
+  z-index: 1;
 }
 .hover-ul {
   list-style: none;
@@ -507,6 +508,8 @@ button {
   font-size: 10px;
   font-weight: 500;
 }
+
+
 .button-1:hover + .hover-box,
 .hover-box:hover {
   display: block;
@@ -525,6 +528,7 @@ button {
   border-radius: 10px;
   border: 2px solid;
   border-color: #aaaaaa;
+  z-index: 1;
 }
 .hover-ul {
   list-style: none;

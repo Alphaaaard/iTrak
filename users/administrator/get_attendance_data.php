@@ -88,4 +88,3 @@ $conn->close();
 
 // Output the JSON encoded data
 echo json_encode($attendanceData);
-?>
