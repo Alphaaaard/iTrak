@@ -94,39 +94,39 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
 
                 let tabLastSelected = sessionStorage.getItem("lastTabReport");
 
-                if(!tabLastSelected) {
+                if (!tabLastSelected) {
                     // if no last tab was selected, use the pills-manager for default
                     $("#pills-manager").addClass("show active");
                     // $("#pills-profile").removeClass("show active");
                     $(".nav-link[data-bs-target='pills-manager']").addClass("active");
                     // $(".nav-link[data-bs-target='pills-profile']").removeClass("active");
-                    
+
                 } else {
 
-                    switch(tabLastSelected) {
+                    switch (tabLastSelected) {
                         case 'pills-manager':
                             $("#pills-manager").addClass("show active");
                             $(".nav-link[data-bs-target='pills-manager']").addClass("active");
                             $(".nav-link[data-bs-target='pills-profile']").removeClass("active");
-                        break;
+                            break;
                         case 'pills-profile':
                             $("#pills-profile").addClass("show active");
                             $("#pills-manager").removeClass("show active");
                             $(".nav-link[data-bs-target='pills-profile']").addClass("active");
                             $(".nav-link[data-bs-target='pills-manager']").removeClass("active");
-                        break;
+                            break;
                         case 'pills-replace':
                             $("#pills-replace").addClass("show active");
                             $("#pills-manager").removeClass("show active");
                             $(".nav-link[data-bs-target='pills-replace']").addClass("active");
                             $(".nav-link[data-bs-target='pills-manager']").removeClass("active");
-                        break;
+                            break;
                         case 'pills-repair':
                             $("#pills-repair").addClass("show active");
                             $("#pills-manager").removeClass("show active");
                             $(".nav-link[data-bs-target='pills-repair']").addClass("active");
                             $(".nav-link[data-bs-target='pills-manager']").removeClass("active");
-                        break;
+                            break;
                     }
                 }
 
@@ -279,7 +279,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                 <div class="content-container">
                     <header>
                         <div class="cont-header">
-                            <h1 class="tab-name">Reports</h1>
+                            <!-- <h1 class="tab-name">Reports</h1> -->
                             <div class="tbl-filter">
                                 <form class="d-flex" role="search">
                                     <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" onkeyup="searchTable()" />
@@ -597,7 +597,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                     </div>
                 </div>
             </div> -->
-            
+
 
             <!--Modal for table 2-->
             <div class="modal-parent">
@@ -694,7 +694,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                     </div>
                 </div>
             </div> -->
-            
+
 
 
             <!--Modal for table 3-->
@@ -708,7 +708,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                             <div class="modal-body">
                                 <form method="post" class="row g-3" id="replacementForm">
                                     <h5>Report Modal for Replacement</h5>
-                                    
+
                                     <input type="hidden" name="edit">
 
                                     <div class="col-4">
@@ -792,7 +792,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                     </div>
                 </div>
             </div> -->
-            
+
 
 
             <!--Modal for table 4-->
@@ -890,7 +890,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                     </div>
                 </div>
             </div> -->
-            
+
 
             <!--Assign Modal for table 4-->
             <div class="modal-parent">

@@ -185,7 +185,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
             <div class="content-container">
                 <header>
                     <div class="cont-header">
-                        <h1 class="tab-name">Activity Logs</h1>
+                        <!-- <h1 class="tab-name">Activity Logs</h1> -->
                         <div class="tbl-filter">
                             <select name="filterRole" id="filterRole" onchange="filterDate(this.value)">
                                 <option value="newest">Newest</option>

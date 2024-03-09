@@ -306,7 +306,7 @@ button {
 /*Para sa doughnut Chart*/
 
 .doughnut-chart-container {
-  width: 100%;
+  /* width: 100%; */
   border-radius: 10px;
   /* height: 53%; */
   padding: 10px;
@@ -404,14 +404,14 @@ button {
 
 .calendar-container {
   font-family: "Arial", sans-serif;
-  width: 100%; /* Adjust width as needed */
+  /* width: 100%; */
   background-color: #ffffff;
   /* border: 1px solid;
   border-color: #163172; */
   border-radius: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  margin: 10px;
+  margin: 0 0 10px 10px;
   padding: 10px;
   height: 300px;
 }
@@ -879,7 +879,7 @@ button {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
-  margin: 0 0 0 10px; /* Adjust as needed */
+  margin: 0 0 10px 10px; /* Adjust as needed */
   /* Add more padding if necessary */
 }
 
