@@ -2252,27 +2252,29 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <div class="chart-container">
             <div class="filter-container1 flex-container">
                 <h5 class="labelTC">Task Completion</h5>
-                <div class="filter-wrapper">
-                    <select id="monthFilter">
-                        <option value="">Select Month</option>
-                        <option value="1">January</option>
-                        <option value="2">February</option>
-                        <option value="3">March</option>
-                        <option value="4">April</option>
-                        <option value="5">May</option>
-                        <option value="6">June</option>
-                        <option value="7">July</option>
-                        <option value="8">August</option>
-                        <option value="9">September</option>
-                        <option value="10">October</option>
-                        <option value="11">November</option>
-                        <option value="12">December</option>
+                <div class="bar-filter">
+                    <div class="filter-wrapper">
+                        <select id="monthFilter">
+                            <option value="">Select Month</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+                    <select id="employeeFilter">
+                        <option value="">Select Employee</option>
+                        <!-- Employee options will be populated dynamically via AJAX -->
                     </select>
                 </div>
-                <select id="employeeFilter">
-                    <option value="">Select Employee</option>
-                    <!-- Employee options will be populated dynamically via AJAX -->
-                </select>
             </div>
             <canvas id="statusChart"></canvas>
         </div>

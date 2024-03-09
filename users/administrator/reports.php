@@ -674,13 +674,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 <div class="modal modal-xl fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content assingee-container">
-                            <div class="assignee-header">
-                                <label for="assignedName" class="form-label assignee-tag">CHOOSE A MAINTENANCE PERSONNEL: </label>
-                            </div>
+
                             <div class="header">
                                 <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                             </div>
                             <div class="modal-body">
+                                <div class="assignee-header">
+                                    <label for="assignedName" class="form-label assignee-tag">CHOOSE A MAINTENANCE PERSONNEL: </label>
+                                </div>
                                 <form method="post" class="row g-3" id="assignPersonnelForm">
                                     <h5></h5>
                                     <input type="hidden" name="assignMaintenance">

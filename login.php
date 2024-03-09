@@ -67,7 +67,7 @@ if ($result->num_rows > 0) {
 
 
         // Log the login activity
-        logLoginActivity($accountId, 'logged in', $row['firstName'], date("Y-m-d H:i:s"), 'General','1','1','1');     //! UNCOMMENT LATER
+        logLoginActivity($accountId, 'logged in', $row['firstName'], date("Y-m-d H:i:s"), 'General', '1', '1', '1');     //! UNCOMMENT LATER
 
 
         // Redirect to the super admin dashboard
@@ -101,7 +101,7 @@ if ($result->num_rows > 0) {
                 header("Location: index.php");
                 exit;
             }
-            logLoginActivity($accountId, 'logged in', $row['firstName'], date("Y-m-d H:i:s"), 'General','1','1','1');  
+            logLoginActivity($accountId, 'logged in', $row['firstName'], date("Y-m-d H:i:s"), 'General', '1', '1', '1');
 
 
             // Redirect to the personnel dashboard
@@ -133,18 +133,18 @@ if ($result->num_rows > 0) {
 
 
 
-                // Check if there's a timeout value for this user
-                $timeoutQuery = "SELECT timeout FROM attendancelogs WHERE accountId = '$accountId' AND date = '$todayDate'";
-                $timeoutResult = $conn->query($timeoutQuery);
-                $timeoutRow = $timeoutResult->fetch_assoc();
+            // Check if there's a timeout value for this user
+            $timeoutQuery = "SELECT timeout FROM attendancelogs WHERE accountId = '$accountId' AND date = '$todayDate'";
+            $timeoutResult = $conn->query($timeoutQuery);
+            $timeoutRow = $timeoutResult->fetch_assoc();
 
-                if ($timeoutRow['timeout'] !== null) {
-                    // User has a timeout value, deny login
-                    $_SESSION['login_error'] = 'timeout';
-                    header("Location: index.php");
-                    exit;
-                }
-                logLoginActivity($accountId, 'logged in', $row['firstName'], date("Y-m-d H:i:s"), 'General','1','1','1');  
+            if ($timeoutRow['timeout'] !== null) {
+                // User has a timeout value, deny login
+                $_SESSION['login_error'] = 'timeout';
+                header("Location: index.php");
+                exit;
+            }
+            logLoginActivity($accountId, 'logged in', $row['firstName'], date("Y-m-d H:i:s"), 'General', '1', '1', '1');
 
 
             // Redirect to the appropriate landing page based on user level

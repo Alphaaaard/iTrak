@@ -904,10 +904,6 @@ button {
   padding: 15px;
 } */
 
-#attendanceChart {
-  width: 100% !important;
-  height: 25vh !important;
-}
 
 .time-filter {
   position: absolute;
@@ -943,11 +939,17 @@ button {
   width: 100%;
   max-width: 1000px;
   margin: auto;
-  margin-top: 15px;
+  margin-top: 10px;
   padding: 20px;
-  border-radius: 15px;
+  border-radius: 10px;
   box-shadow: 0 0px 16px rgba(0, 0, 0, 0.1);
   background-color: #f9f9f9;
+}
+
+.bar-filter{
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
 }
 
 .flex-container {
@@ -976,6 +978,7 @@ button {
   padding: 0px;
   width: 100%; /* Set width to 100% to fill the container */
   max-width: 170px; /* Maximum width */
+  font-size: 14px;
 }
 
 #monthFilter {
@@ -984,6 +987,7 @@ button {
 
 #employeeFilter {
   margin-right: 0;
+  font-size: 14px;
 }
 
 select {
@@ -998,16 +1002,30 @@ select {
     margin-top: 10px;
   }
 
+  .bar-filter{
+    width: 100%;
+    justify-content: space-around;
+    gap: unset;
+  }
+
+  #attendanceChart {
+    width: 100% !important;
+    height: 25vh !important;
+  }
+  
+
   .flex-container {
     justify-content: flex-end; /* Align items to the right */
     flex-wrap: wrap; /* Allow wrapping if necessary */
+    margin: unset!important;
   }
 
   .labelTC {
-    font-size: 90%; /* Adjust font size for smaller screens */
+    font-size: 16px; /* Adjust font size for smaller screens */
     padding-right: 10px; /* Right padding to separate from filters */
     margin-bottom: 10px; /* Margin bottom if the label wraps */
     flex: 1 1 auto; /* Allows the label to shrink but not grow, keeping it aligned with filters */
+    text-align: left;
   }
 
   #monthFilter, #employeeFilter {

@@ -25,7 +25,6 @@
                     <div class="mb-3">
                         <input type="email" id="email" name="email" class="form-textbox" placeholder="Email" required>
                     </div>
-
                 </form>
                 <div class="mb-3 d-flex justify-content-end">
                     <button type="button" id="continue-button" class="custom-button">Continue</button>
