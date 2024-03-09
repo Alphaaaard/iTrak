@@ -741,7 +741,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                             if ($personnelResult) {
                                                 while ($row = $personnelResult->fetch_assoc()) {
-                                                    $fullName = $row['firstName'] . ' ' . $row['middleName'] . ' ' . $row['lastName'];
+                                                    $fullName = $row['firstName'] . ' ' . $row['lastName'];
                                                     // Echo each option within the select
                                                     echo '<option value="' . htmlspecialchars($fullName) . '">' . htmlspecialchars($fullName) . '</option>';
                                                 }

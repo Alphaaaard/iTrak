@@ -309,7 +309,7 @@ function onDocumentClick(event) {
   raycaster.setFromCamera(mouse, camera);
 
   // Start loop from index 1 to exclude the first model
-  for (let i = 1; i < models.length; i++) {
+  for (let i = 0; i < models.length; i++) {
     const model = models[i];
     const intersects = raycaster.intersectObject(model, true);
 
