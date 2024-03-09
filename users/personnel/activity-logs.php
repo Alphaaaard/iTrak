@@ -329,7 +329,7 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
 
                     <header>
                         <div class="cont-header">
-                            <!-- <h1 class="tab-name">Activity Logs</h1> -->
+                            <h1 class="tab-name"></h1>
                             <div class="tbl-filter">
                                 <select name="filterRole" id="filterRole" onchange="filterDate(this.value)">
                                     <option value="newest">Newest</option>
