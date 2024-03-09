@@ -82,20 +82,19 @@ if (isset($_GET['token'])) {
           }
         }
 
-
         function validatePassword() {
           var password = document.getElementById("password").value;
           var confirmPassword = document.getElementById("confirm_password").value;
 
           if (password !== confirmPassword) {
-            Swal.fire(
-              'Error!',
-              'Passwords do not match. Please try again.',
-              'error'
-            );
+            Swal.fire({
+              icon: 'error',
+              text: 'Passwords do not match. Please try again.',
+              showConfirmButton: false,
+              timer: 1500 // The alert will close after 1.5 seconds
+            });
             return false; // Prevent form submission
           }
-
           return true; // Allow form submission
         }
       </script>

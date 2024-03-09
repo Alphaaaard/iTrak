@@ -385,9 +385,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link" id="korphil-floor3-tab" href="../building/KOB/KOBF3.php" role="tab" aria-controls="floor3" aria-selected="false">3</a>
                                 </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="korphil-floor4-tab" href="../building/KOB/KOBF4.php" role="tab" aria-controls="floor4" aria-selected="false">4</a>
-
                             </div>
                             </ul>
                         </div>
@@ -420,15 +417,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link" id="multipurpose-floor1-tab" href="../building/MUB/MUBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
                                 </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="multipurpose-floor2-tab" href="../building/MUB/MUBF1.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="multipurpose-floor3-tab" href="../building/MUB/MUBF1.php" role="tab" aria-controls="floor3" aria-selected="false">3</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="multipurpose-floor4-tab" href="../building/MUB/MUBF1.php" role="tab" aria-controls="floor4" aria-selected="false">4</a>
-                                </li>
                             </div>
                             </ul>
                         </div>
@@ -454,9 +442,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link" id="admin-floor4-tab" href="../building/ADB/ADBF4.php" role="tab" aria-controls="floor4" aria-selected="false">4</a>
                                 </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="admin-floor5-tab" href="../building/ADB/ADBF5.php" role="tab" aria-controls="floor4" aria-selected="false">5</a>
-                                </li>
                             </div>
                             </ul>
                         </div>
@@ -473,7 +458,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link" id="bautista-floor1-tab" href="../building/BAB/BABF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
                                 </li>
-                                <li class="nav-item" role="presentat">
+                                <li class="nav-item" role="presentation">
                                     <a class=" nav-link" id="bautista-floor2-tab" href="../building/BAB/BABF2.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
@@ -481,6 +466,18 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link" id="bautista-floor4-tab" href="../building/BAB/BABF4.php" role="tab" aria-controls="floor4" aria-selected="false">4</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="bautista-floor5-tab" href="../building/BAB/BABF5.php" role="tab" aria-controls="floor5" aria-selected="false">5</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="bautista-floor6-tab" href="../building/BAB/BABF6.php" role="tab" aria-controls="floor6" aria-selected="false">6</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="bautista-floor7-tab" href="../building/BAB/BABF7.php" role="tab" aria-controls="floor7" aria-selected="false">7</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="bautista-floor8-tab" href="../building/BAB/BABF8.php" role="tab" aria-controls="floor8" aria-selected="false">8</a>
                                 </li>
                             </div>
                             </ul>
