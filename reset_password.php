@@ -118,27 +118,15 @@ if (isset($_GET['token'])) {
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <script>
         Swal.fire({
-          title: 'Invalid or Expired Link',
           text: 'The password reset link is invalid or has expired.',
           icon: 'error',
-        }).then((result) => {
-          if (result.isConfirmed) {
+          timer: 3000, // Time in milliseconds before the dialog closes
+          showConfirmButton: false, // This hides the confirm button
+          willClose: () => {
             window.location.href = 'index.php'; // Redirect to your login page
           }
         });
       </script>
-      <!-- <script>
-        const togglePassword = document
-          .querySelector('#togglePassword');
-        const password = document.querySelector('#password');
-        togglePassword.addEventListener('click', () => {
-          const type = password
-            .getAttribute('type') === 'password' ?
-            'text' : 'password';
-          password.setAttribute('type', type);
-          this.classList.toggle('bi-eye');
-        });
-      </script> -->
     </body>
 
     </html>

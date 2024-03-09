@@ -23,6 +23,8 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 
         <head>
             <!-- Include SweetAlert2 -->
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <link rel="stylesheet" href="./src/css/main.css">
             <link rel="stylesheet" href="./src/css/update-pass.css">
@@ -33,9 +35,8 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                 Swal.fire({
                     text: 'Your password has been updated successfully.',
                     icon: 'success',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Redirect to the login page or home page
+                    timer: 1500,
+                    willClose: () => {
                         window.location.href = 'index.php';
                     }
                 });
