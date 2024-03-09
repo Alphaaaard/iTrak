@@ -70,7 +70,6 @@
                                 // Auto-close alert after 2 seconds if no account found
                                 Swal.fire({
                                     icon: 'error',
-                                    title: 'Oops...',
                                     text: data.message,
                                     timer: 2000,
                                     showConfirmButton: false
