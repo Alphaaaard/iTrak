@@ -374,7 +374,7 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
 
                     <header>
                         <div class="cont-header">
-                            <h1 class="tab-name">Attendance</h1>
+                            <!-- <h1 class="tab-name">Attendance</h1> -->
                             <div class="form-wrapper">
                                 <div class="tbl-filter">
                                     <!-- Wrap the form in a div with the class 'form-container' -->

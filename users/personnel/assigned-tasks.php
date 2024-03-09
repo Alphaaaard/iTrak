@@ -373,7 +373,7 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
             <main>
                 <header>
                     <div class="cont-header">
-                        <h1 class="tab-name">Activity Logs</h1>
+                        <!-- <h1 class="tab-name">Activity Logs</h1> -->
                         <div class="tbl-filter">
                                 <select id="filter-criteria">
                                     <option value="all">All</option> <!-- Added "All" option -->
