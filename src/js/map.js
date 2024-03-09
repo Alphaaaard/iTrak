@@ -289,7 +289,7 @@ function onDocumentMouseMove(event) {
 
   let isClickable = false;
 
-  for (let i = 1; i < models.length; i++) {
+  for (let i = 0; i < models.length; i++) {
     const model = models[i];
     const intersects = raycaster.intersectObject(model, true);
 
