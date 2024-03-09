@@ -24,7 +24,7 @@
                 </div>
                 <form id="password-reset-form" action="send_reset_link.php" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <input type="email" id="email" name="email" class="form-textbox" placeholder="Email" required>
+                        <input type="email" id="email" name="email" class="form-textbox" placeholder="Email" required oninvalid="this.setCustomValidity('Please enter a valid email address.')" oninput="setCustomValidity('')">
                     </div>
                 </form>
                 <div class="mb-3 d-flex justify-content-end">
@@ -47,30 +47,43 @@
             const form = document.getElementById('password-reset-form');
 
             continueButton.addEventListener('click', function() {
-                const formData = new FormData(form);
-                fetch('send_reset_link.php', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            Swal.fire({
-                                position: 'center',
-                                icon: 'success',
-                                title: 'Reset link has been sent to your email.',
-                                showConfirmButton: false,
-                                timer: 1500
-                            }).then(() => {
-                                window.location.href = 'index.php'; // Redirect to login page after notification
-                            });
-                        } else {
-                            Swal.fire('', data.message, 'error');
-                        }
-                    })
-                    .catch(error => {
-                        Swal.fire('', 'An error occurred. Please try again.', 'error');
-                    });
+                // Check if the form is valid
+                if (form.checkValidity()) {
+                    const formData = new FormData(form);
+                    fetch('send_reset_link.php', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'success',
+                                    title: 'Reset link has been sent to your email.',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then(() => {
+                                    window.location.href = 'index.php'; // Redirect to login page after notification
+                                });
+                            } else {
+                                // Auto-close alert after 2 seconds if no account found
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: data.message,
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            Swal.fire('', 'An error occurred. Please try again.', 'error');
+                        });
+                } else {
+                    // Trigger the built-in HTML5 validation
+                    form.reportValidity();
+                }
             });
         });
     </script>
