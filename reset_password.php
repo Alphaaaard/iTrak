@@ -47,11 +47,11 @@ if (isset($_GET['token'])) {
               <input type="hidden" name="email" value="<?php echo htmlspecialchars($user['email']); ?>">
               <div class="mb-4">
                 <input type="password" id="password" name="password" class="form-textbox" placeholder="New password" required>
-                <i id="togglePassword" class="bi bi-eye-slash" onclick="togglePassword('password')"></i>
+                <i id="togglepassword" class="bi bi-eye-slash" onclick="togglePassword('password')"></i>
               </div>
               <div class="mb-4">
                 <input type="password" id="confirm_password" name="confirm_password" class="form-textbox" placeholder="Confirm new password" required>
-                <i id="toggleConfirmPassword" class="bi bi-eye-slash" onclick="togglePassword('confirm_password')"></i>
+                <i id="toggleconfirm_password" class="bi bi-eye-slash" onclick="togglePassword('confirm_password')"></i>
               </div>
               <div class="mb-3 d-flex justify-content-end">
                 <button type="submit" id="reset-button" class="custom-button btn">Reset Password</button>
@@ -81,6 +81,7 @@ if (isset($_GET['token'])) {
             toggleIcon.classList.add("bi-eye-slash");
           }
         }
+
 
         function validatePassword() {
           var password = document.getElementById("password").value;
