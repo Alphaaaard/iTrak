@@ -42,8 +42,7 @@ if (isset($_GET['token'])) {
               <h1 style="font-weight: bold;">Reset your password</h1>
               <h5>Create a new password for your account.</h5>
             </div>
-            <form action="update_password.php" method="post" enctype="multipart/form-data" onsubmit="return validatePassword()">
-              <!-- Your existing input fields -->
+            <form action="update_password.php" method="post" enctype="multipart/form-data" onsubmit="return validatePassword()"> <!-- Your existing input fields -->
               <input type="hidden" name="email" value="<?php echo htmlspecialchars($user['email']); ?>">
               <div class="mb-4">
                 <input type="password" id="password" name="password" class="form-textbox" placeholder="New password" required>
@@ -86,13 +85,6 @@ if (isset($_GET['token'])) {
           var password = document.getElementById("password").value;
           var confirmPassword = document.getElementById("confirm_password").value;
 
-          // Check if the password is at least 8 characters long
-          if (password.length < 8) {
-            // Display an error message directly on the form instead of using SweetAlert
-            alert('The password must be at least 8 characters long.');
-            return false; // Prevent form submission
-          }
-
           if (password !== confirmPassword) {
             Swal.fire({
               icon: 'error',
@@ -104,6 +96,48 @@ if (isset($_GET['token'])) {
           }
           return true; // Allow form submission
         }
+      </script>
+
+      <script>
+        function validatePassword() {
+          var password = document.getElementById("password");
+          var confirmPassword = document.getElementById("confirm_password");
+
+          if (password.value.length < 8) {
+            password.setCustomValidity('Password must be at least 8 characters long.');
+            password.reportValidity();
+            return false;
+          } else {
+            password.setCustomValidity('');
+          }
+
+          if (confirmPassword.value.length < 8) {
+            confirmPassword.setCustomValidity('Confirm Password must be at least 8 characters long.');
+            confirmPassword.reportValidity();
+            return false;
+          } else {
+            confirmPassword.setCustomValidity('');
+          }
+
+          if (password.value !== confirmPassword.value) {
+            confirmPassword.setCustomValidity('Passwords do not match.');
+            confirmPassword.reportValidity();
+            return false;
+          } else {
+            confirmPassword.setCustomValidity('');
+          }
+
+          return true; // Allow form submission
+        }
+
+        // Event listeners to clear custom validity when user starts typing
+        document.getElementById("password").addEventListener('input', function() {
+          this.setCustomValidity('');
+        });
+
+        document.getElementById("confirm_password").addEventListener('input', function() {
+          this.setCustomValidity('');
+        });
       </script>
     </body>
 
