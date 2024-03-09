@@ -766,65 +766,51 @@ $(document).ready(function() {
     var managerContent = document.getElementById('pills-manager');
     var personnelContent = document.getElementById('pills-personnel');
 
-    function toggleActiveClass(activePill, inactivePill) {
-        activePill.classList.add('active');
-        inactivePill.classList.remove('active');
-    }
+    function activateTab(pill, content, role) {
+        managerPill.classList.remove('active');
+        personnelPill.classList.remove('active');
+        managerContent.classList.remove('show', 'active');
+        personnelContent.classList.remove('show', 'active');
 
-    function toggleContent(activeContent, inactiveContent) {
-        activeContent.classList.add('show', 'active');
-        inactiveContent.classList.remove('show', 'active');
+        pill.classList.add('active');
+        content.classList.add('show', 'active');
+
+        sessionStorage.setItem('lastPill', role);
+        filterTable(role); // Adjusted to pass the active role
     }
 
     managerPill.addEventListener('click', function(e) {
         e.preventDefault();
-        toggleActiveClass(managerPill, personnelPill);
-        toggleContent(managerContent, personnelContent);
-        sessionStorage.setItem('lastPill', 'manager');
-        filterTable(); // Ensure to call filterTable when a tab is clicked
+        activateTab(managerPill, managerContent, 'manager');
     });
 
     personnelPill.addEventListener('click', function(e) {
         e.preventDefault();
-        toggleActiveClass(personnelPill, managerPill);
-        toggleContent(personnelContent, managerContent);
-        sessionStorage.setItem('lastPill', 'personnel');
-        filterTable(); // Ensure to call filterTable when a tab is clicked
+        activateTab(personnelPill, personnelContent, 'personnel');
     });
 
-    // Function to check sessionStorage for the last selected pill and show content accordingly
-    function checkAndShowActivePill() {
-        let lastPill = sessionStorage.getItem('lastPill');
-        if (lastPill === 'personnel') {
-            toggleActiveClass(personnelPill, managerPill);
-            toggleContent(personnelContent, managerContent);
-        } else { // Default to manager if no last pill is found or it's set to 'manager'
-            toggleActiveClass(managerPill, personnelPill);
-            toggleContent(managerContent, personnelContent);
-        }
-        filterTable(); // Call filterTable here to ensure the table is filtered according to the active tab upon page load
+    // Directly check and activate the tab from session storage on page load
+    var lastPill = sessionStorage.getItem('lastPill') || 'manager';
+    if (lastPill === 'personnel') {
+        activateTab(personnelPill, personnelContent, 'personnel');
+    } else {
+        activateTab(managerPill, managerContent, 'manager');
     }
-
-    checkAndShowActivePill(); // Call this function to set the correct tab and content when the page loads
 });
 
-// Include the filterTable function here or ensure it's accessible in this script context
-function filterTable() {
-    var query = $("#search-box").val().toLowerCase();
-    var activeRole = $('#manager-pill').hasClass('active') ? 'Maintenance Manager' : 'Maintenance Personnel';
+// Optimized filterTable function
+function filterTable(activeRole) {
+    var query = document.getElementById('search-box').value.toLowerCase();
+    var rows = document.querySelectorAll('.table-container tbody tr');
 
-    $(".table-container tbody tr").each(function() {
-        var row = $(this);
-        var roleCell = row.find("td").last().text().toLowerCase(); // Adjust the index as necessary
-
-        if (roleCell === activeRole.toLowerCase()) {
-            var rowText = row.text().toLowerCase();
-            row.toggle(rowText.includes(query)); // Show or hide the row based on the query match
-        } else {
-            row.hide(); // Hide rows that don't match the active role
-        }
+    rows.forEach(function(row) {
+        var roleCell = row.querySelector("td:last-child").textContent.toLowerCase(); // Using :last-child pseudo-class
+        var isRoleMatch = (activeRole === 'manager' && roleCell.includes('maintenance manager')) || (activeRole === 'personnel' && roleCell.includes('maintenance personnel'));
+        var isQueryMatch = row.textContent.toLowerCase().includes(query);
+        row.style.display = (isRoleMatch && isQueryMatch) ? '' : 'none';
     });
 }
+
 
             </script>
 
