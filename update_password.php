@@ -36,6 +36,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                     text: 'Your password has been updated successfully.',
                     icon: 'success',
                     timer: 1500,
+                    showConfirmButton: false, // This hides the confirm button
                     willClose: () => {
                         window.location.href = 'index.php';
                     }
