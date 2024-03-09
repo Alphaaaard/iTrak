@@ -202,6 +202,12 @@ input::-ms-reveal,
   }
   
     @media (max-width: 600px) {
+
+      body {
+        height: 100%!important;
+        overflow-y: hidden;
+     }
+
       .container-of-box .box2 {
         display: none;
       }
