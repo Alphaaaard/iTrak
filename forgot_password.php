@@ -45,6 +45,15 @@
         document.addEventListener('DOMContentLoaded', () => {
             const continueButton = document.getElementById('continue-button');
             const form = document.getElementById('password-reset-form');
+            const emailInput = document.getElementById('email');
+
+            // Prevent form submit on Enter key
+            emailInput.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    continueButton.click(); // Simulate click on continue button
+                }
+            });
 
             continueButton.addEventListener('click', function() {
                 // Check if the form is valid
@@ -61,7 +70,7 @@
                                     position: 'center',
                                     icon: 'success',
                                     title: 'Reset link has been sent to your email.',
-                                    // showConfirmButton: false,
+                                    showConfirmButton: false,
                                     timer: 1500
                                 }).then(() => {
                                     window.location.href = 'index.php'; // Redirect to login page after notification
