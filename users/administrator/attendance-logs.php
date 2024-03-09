@@ -352,7 +352,7 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                     <!--PILL TABS-->
                     <!-- Maintenance Manager -->
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane" id="pills-manager" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="tab-pane fade show active" id="pills-manager" role="tabpanel" aria-labelledby="home-tab">
                             <div class="table-content">
                                 <div class="table-header">
                                     <table>
