@@ -14,8 +14,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         exit;
     }
 
-
-
     // for notif below
     // Update the SQL to join with the account and asset tables to get the admin's name and asset information
     $loggedInUserFirstName = $_SESSION['firstName'];
