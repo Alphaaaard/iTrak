@@ -2,8 +2,9 @@
 session_start();
 include_once("../../config/connection.php");
 $conn = connection();
-date_default_timezone_set('Asia/Manila');
+
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
+
     // For personnel page, check if userLevel is 3
     if ($_SESSION['userLevel'] != 3) {
         // If not personnel, redirect to an error page or login
@@ -11,93 +12,48 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         exit;
     }
 
-    // Fetch Report activity logs
-    $loggedInUserFirstName = $_SESSION['firstName']; // or the name field you have in session that you want to check against
-    $loggedInUsermiddleName = $_SESSION['middleName']; // assuming you also have the last name in the session
-    $loggedInUserLastName = $_SESSION['lastName']; //kung ano ung naka declare dito eto lang ung magiging data 
-    // Concatenate first name and last name for the action field check
-    $loggedInFullName = $loggedInUserFirstName . " " . $loggedInUsermiddleName . " " . $loggedInUserLastName; //kung ano ung naka declare dito eto lang ung magiging data 
-
-    // Adjust the SQL to check the 'action' field for the logged-in user's name
-    $sqlReport = "SELECT ac.*, a.firstName, a.middleName, a.lastName
-FROM activitylogs AS ac
-LEFT JOIN account AS a ON ac.accountID = a.accountID
-WHERE ac.tab='Report' AND ac.action LIKE ?
-ORDER BY ac.date DESC";
-
-    // Prepare the SQL statement
-    $stmt = $conn->prepare($sqlReport);
-
-    // Create a wildcard search term for the name
-    $searchTerm = "%" . $loggedInFullName . "%";
-
-    // Bind the parameter and execute
-    $stmt->bind_param("s", $searchTerm);
-    $stmt->execute();
-    $resultReport = $stmt->get_result();
 
 
-   // for notif below
+    // for notif below
     // Update the SQL to join with the account and asset tables to get the admin's name and asset information
-    $loggedInUserFirstName = $_SESSION['firstName']; 
+    $loggedInUserFirstName = $_SESSION['firstName'];
     $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
     $loggedInUserLastName = $_SESSION['lastName'];
-    
+
     // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
-   
-   $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
-   $loggedInAccountId = $_SESSION['accountId'];
-   // SQL query to fetch notifications related to report activities
-   $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
-                   FROM activitylogs AS al
-                  JOIN account AS acc ON al.accountID = acc.accountID
-                  WHERE al.tab='Report' AND al.p_seen = '0' AND al.accountID != ? AND action NOT LIKE 'Changed status of asset ID%'
-                  ORDER BY al.date DESC 
-                  LIMIT 5"; // Set limit to 5
-   
-   // Prepare the SQL statement
-   $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
-   
-   // Bind the parameter to exclude the current user's account ID
-   $stmtLatestLogs->bind_param("i", $loggedInAccountId);
-   
-   // Execute the query
-   $stmtLatestLogs->execute();
-   $resultLatestLogs = $stmtLatestLogs->get_result();
-   
-   $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
-   WHERE p_seen = '0' AND accountID != ? AND action NOT LIKE 'Changed status of asset ID%'";
-   $stmt = $conn->prepare($unseenCountQuery);
-   $stmt->bind_param("i", $loggedInAccountId);
-   $stmt->execute();
-   $stmt->bind_result($unseenCount);
-   $stmt->fetch();
-   $stmt->close();
+
+    $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
+    $loggedInAccountId = $_SESSION['accountId'];
+    // SQL query to fetch notifications related to report activities
+    $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
+                FROM activitylogs AS al
+               JOIN account AS acc ON al.accountID = acc.accountID
+               WHERE al.tab='Report' AND al.seen = '0' AND al.accountID != ?
+               ORDER BY al.date DESC 
+               LIMIT 5"; // Set limit to 5
+
+    // Prepare the SQL statement
+    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+
+    // Bind the parameter to exclude the current user's account ID
+    $stmtLatestLogs->bind_param("i", $loggedInAccountId);
+
+    // Execute the query
+    $stmtLatestLogs->execute();
+    $resultLatestLogs = $stmtLatestLogs->get_result();
 
 
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
+    $stmt = $conn->prepare($unseenCountQuery);
+    $stmt->bind_param("i", $loggedInAccountId);
+    $stmt->execute();
+    $stmt->bind_result($unseenCount);
+    $stmt->fetch();
+    $stmt->close();
 
-
-
-    if (isset($_SESSION['accountId'])) {
-        $accountId = $_SESSION['accountId'];
-        $todayDate = date("Y-m-d");
-
-        // Check if there's a timeout value for this user for today
-        $timeoutQuery = "SELECT timeout FROM attendancelogs WHERE accountId = '$accountId' AND date = '$todayDate'";
-        $timeoutResult = $conn->query($timeoutQuery);
-        $timeoutRow = $timeoutResult->fetch_assoc();
-
-        if ($timeoutRow && $timeoutRow['timeout'] !== null) {
-            // User has a timeout value, force logout
-            session_destroy(); // Destroy all session data
-            header("Location: ../../index.php?logout=timeout"); // Redirect to the login page with a timeout flag
-            exit;
-        }
-    }
 ?>
 
     <!DOCTYPE html>
-
     <html lang="en">
 
     <head>
@@ -109,28 +65,23 @@ ORDER BY ac.date DESC";
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/map.css" />
-        <style>
-            #map {
-                display: none;
-            }
-        </style>
-        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
     </head>
     <style>
-.notification-indicator {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: red;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-</style>
+        .notification-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: red;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+
     <body>
         <!-- NAVBAR -->
         <div id="navbar" class="">
@@ -143,63 +94,61 @@ ORDER BY ac.date DESC";
                 </div>
                 <div class="content-nav">
                     <div class="notification-dropdown">
-
-
-                    <a href="#" class="notification" id="notification-button">
-    <i class="fa fa-bell" aria-hidden="true"></i>
-    <!-- Notification Indicator Dot -->
-    <?php if ($unseenCount > 0): ?>
-    <span class="notification-indicator"></span>
-    <?php endif; ?>
-</a>
+                        <a href="#" class="notification" id="notification-button">
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+                            <!-- Notification Indicator Dot -->
+                            <?php if ($unseenCount > 0) : ?>
+                                <span class="notification-indicator"></span>
+                            <?php endif; ?>
+                        </a>
 
 
 
 
-<div class="dropdown-content" id="notification-dropdown-content">
-    <h6 class="dropdown-header">Alerts Center</h6>
-    <!-- PHP code to display notifications will go here -->
-    <?php
-if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
-    while ($row = $resultLatestLogs->fetch_assoc()) {
-        $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
-        $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
-        $actionText = $row["action"];
-    
-        // Initialize the notification text as empty
-        $notificationText = "";
-        if (strpos($actionText, $adminRole) === false) {
-            // Role is not in the action text, so prepend it to the admin name
-            $adminName = "$adminRole $adminName";
-        }
-        // Check for 'Assigned maintenance personnel' action
-        if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
-            $assignedName = $matches[1];
-            $assetId = $matches[2];
-            $notificationText = "assigned $assignedName to asset ID $assetId";
-        }
-        // Check for 'Changed status of asset ID' action
-        elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
-            $assetId = $matches[1];
-            $newStatus = $matches[2];
-            $notificationText = "changed status of asset ID $assetId to $newStatus";
-        }
+                        <div class="dropdown-content" id="notification-dropdown-content">
+                            <h6 class="dropdown-header">Alerts Center</h6>
+                            <!-- PHP code to display notifications will go here -->
+                            <?php
+                            if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
+                                while ($row = $resultLatestLogs->fetch_assoc()) {
+                                    $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+                                    $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
+                                    $actionText = $row["action"];
 
-        // If notification text is set, echo the notification
-        if (!empty($notificationText)) {
-            // HTML for notification item
-            echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
-        }
-    }
-} else {
-    // No notifications found
-    echo '<a href="#">No new notifications</a>';
-}
-?>
-<a href="activity-logs.php" class="view-all">View All</a>
+                                    // Initialize the notification text as empty
+                                    $notificationText = "";
+                                    if (strpos($actionText, $adminRole) === false) {
+                                        // Role is not in the action text, so prepend it to the admin name
+                                        $adminName = "$adminRole $adminName";
+                                    }
+                                    // Check for 'Assigned maintenance personnel' action
+                                    if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
+                                        $assignedName = $matches[1];
+                                        $assetId = $matches[2];
+                                        $notificationText = "assigned $assignedName to asset ID $assetId";
+                                    }
+                                    // Check for 'Changed status of asset ID' action
+                                    elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
+                                        $assetId = $matches[1];
+                                        $newStatus = $matches[2];
+                                        $notificationText = "changed status of asset ID $assetId to $newStatus";
+                                    }
 
-</div>
-</div>
+                                    // If notification text is set, echo the notification
+                                    if (!empty($notificationText)) {
+                                        // HTML for notification item
+                                        echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
+                                    }
+                                }
+                            } else {
+                                // No notifications found
+                                echo '<a href="#">No new notifications</a>';
+                            }
+                            ?>
+                            <a href="activity-logs.php" class="view-all">View All</a>
+
+                        </div>
+                    </div>
 
                     <a href="#" class="settings profile">
                         <div class="profile-container" title="settings">
@@ -313,7 +262,6 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
 
             <main>
                 <div class="content-container" id="content-container">
-                    <div id="map"></div>
 
                     <!-- <header>
                         <div class="cont-header">
@@ -327,15 +275,14 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                     <div class="buildings" id="buildings" style="visibility:hidden">
                         <div class="building building1" style="display: none;">Floor</div>
                         <div class="building building2">TechVoc</div>
-                        <div class="building building3">Yellow</div>
+                        <div class="building building3">Old Academic</div>
                         <div class="building building4">Belmonte</div>
-                        <div class="building building5">Metalcasting</div>
-                        <div class="building building6">KORPHIL</div>
+                        <div class="building building5">KORPHIL</div>
+                        <div class="building building6">Ballroom</div>
                         <div class="building building7">Multipurpose</div>
                         <div class="building building8">Admin</div>
                         <div class="building building9">Bautista</div>
                         <div class="building building10">Academic</div>
-                        <div class="building building11">Ballroom</div>
                     </div>
 
                     <!-- MODAL 1 -->
@@ -350,17 +297,18 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                     <!-- MODAL 2 -->
                     <div id="myModal2" class="modal">
                         <div class="modal-content">
-                            <span class="close" id="closeModal2"><i class="bi bi-x-lg"></i></span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>TECHVOC</h3>
-                                <div class="nav-container">
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="techvoc-floor1-tab" href="../building-personnel/TEB/TEBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="techvoc-floor2-tab" href="../building-personnel/TEB/TEBF2.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
-                                    </li>
-                                </div>
+                            <div class="modal-header"> <span class="close" id="closeModal2"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>TechVoc Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="techvoc-floor1-tab" href="../building/TEB/TEBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="techvoc-floor2-tab" href="../building/TEB/TEBF2.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
+                                </li>
+                            </div>
                             </ul>
                         </div>
                     </div>
@@ -368,17 +316,18 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                     <!-- MODAL 3 -->
                     <div id="myModal3" class="modal">
                         <div class="modal-content">
-                            <span class="close" id="closeModal3"><i class="bi bi-x-lg"></i></span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>YELLOW BUILDING</h3>
-                                <div class="nav-container">
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="old-floor1-tab" href="../building-personnel/OLB/OLBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="old-floor2-tab" href="../building-personnel/OLB/OLBF1.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
-                                    </li>
-                                </div>
+                            <div class="modal-header"> <span class="close" id="closeModal3"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>Old Academic Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="old-floor1-tab" href="../building/OLB/OLBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="old-floor2-tab" href="../building/OLB/OLBF1.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
+                                </li>
+                            </div>
                             </ul>
                         </div>
                     </div>
@@ -386,23 +335,24 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                     <!-- MODAL 4 -->
                     <div id="myModal4" class="modal">
                         <div class="modal-content">
-                            <span class="close" id="closeModal4"><i class="bi bi-x-lg"></i></span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>BELMONTE BUILDING</h3>
-                                <div class="nav-container">
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="belmonte-floor1-tab" href="../building-personnel/BEB/BEBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="belmonte-floor2-tab" href="../building-personnel/BEB/BEBF2.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="belmonte-floor3-tab" href="../building-personnel/BEB/BEBF3.php" role="tab" aria-controls="floor3" aria-selected="false">Floor3</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="belmonte-floor4-tab" href="../building-personnel/BEB/BEBF4.php" role="tab" aria-controls="floor4" aria-selected="false">Floor4</a>
-                                    </li>
-                                </div>
+                            <div class="modal-header"> <span class="close" id="closeModal4"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>Belmonte Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="belmonte-floor1-tab" href="../building/BEB/BEBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="belmonte-floor2-tab" href="../building/BEB/BEBF2.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="belmonte-floor3-tab" href="../building/BEB/BEBF3.php" role="tab" aria-controls="floor3" aria-selected="false">3</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="belmonte-floor4-tab" href="../building/BEB/BEBF4.php" role="tab" aria-controls="floor4" aria-selected="false">4</a>
+                                </li>
+                            </div>
                             </ul>
                         </div>
                     </div>
@@ -410,23 +360,21 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                     <!-- MODAL 5 -->
                     <div id="myModal5" class="modal">
                         <div class="modal-content">
-                            <span class="close" id="closeModal5"><i class="bi bi-x-lg"></i></span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>KORPHIL CASTING BUILDING</h3>
-                                <div class="nav-container">
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="korphil-floor1-tab" href="../building-personnel/KOB/KOBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="korphil-floor2-tab" href="../building-personnel/KOB/KOBF2.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="korphil-floor3-tab" href="../building-personnel/KOB/KOBF3.php" role="tab" aria-controls="floor3" aria-selected="false">Floor3</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="korphil-floor4-tab" href="../building-personnel/KOB/KOBF4.php" role="tab" aria-controls="floor4" aria-selected="false">Floor4</a>
-                                    </li>
-                                </div>
+                            <div class="modal-header"> <span class="close" id="closeModal5"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>KorPhil Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="korphil-floor1-tab" href="../building/KOB/KOBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="korphil-floor2-tab" href="../building/KOB/KOBF2.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="korphil-floor3-tab" href="../building/KOB/KOBF3.php" role="tab" aria-controls="floor3" aria-selected="false">3</a>
+                                </li>
+                            </div>
                             </ul>
                         </div>
                     </div>
@@ -434,23 +382,15 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                     <!-- MODAL 6 -->
                     <div id="myModal6" class="modal">
                         <div class="modal-content">
-                            <span class="close" id="closeModal6"><i class="bi bi-x-lg"></i></span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>BALLROOM BUILDING</h3>
-                                <div class="nav-container">
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="ballroom-floor1-tab" href="../building-personnel/CHB/CHBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="ballroom-floor2-tab" href="../building-personnel/CHB/CHBF2.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="ballroom-floor3-tab" href="../building-personnel/CHB/CHBF3.php" role="tab" aria-controls="floor3" aria-selected="false">Floor3</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="ballroom-floor4-tab" href="../building-personnel/CHB/CHBF4.php" role="tab" aria-controls="floor4" aria-selected="false">Floor4</a>
-                                    </li>
-                                </div>
+                            <div class="modal-header"> <span class="close" id="closeModal6"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>Ballroom Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="ballroom-floor1-tab" href="../building/CHB/CHBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
+                                </li>
+                            </div>
                             </ul>
                         </div>
                     </div>
@@ -458,23 +398,15 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                     <!-- MODAL 7 -->
                     <div id="myModal7" class="modal">
                         <div class="modal-content">
-                            <span class="close" id="closeModal7"><i class="bi bi-x-lg"></i></span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>MULTIPURPOSE CASTING BUILDING</h3>
-                                <div class="nav-container">
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="multipurpose-floor1-tab" href="../building-personnel/MUB/MUBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="multipurpose-floor2-tab" href="../building-personnel/MUB/MUBF1.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="multipurpose-floor3-tab" href="../building-personnel/MUB/MUBF1.php" role="tab" aria-controls="floor3" aria-selected="false">Floor3</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="multipurpose-floor4-tab" href="../building-personnel/MUB/MUBF1.php" role="tab" aria-controls="floor4" aria-selected="false">Floor4</a>
-                                    </li>
-                                </div>
+                            <div class="modal-header"> <span class="close" id="closeModal7"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>Multipurpose Building </h3>
+                            </div>
+                            <div class="nav-container">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="multipurpose-floor1-tab" href="../building/MUB/MUBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
+                                </li>
+                            </div>
                             </ul>
                         </div>
                     </div>
@@ -482,26 +414,24 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                     <!-- MODAL 8 -->
                     <div id="myModal8" class="modal">
                         <div class="modal-content">
-                            <span class="close" id="closeModal8"><i class="bi bi-x-lg"></i></span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>ADMIN BUILDING</h3>
-                                <div class="nav-container">
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="admin-floor1-tab" href="../building-personnel/ADB/ADBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="admin-floor2-tab" href="../building-personnel/ADB/ADBF2.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="admin-floor3-tab" href="../building-personnel/ADB/ADBF3.php" role="tab" aria-controls="floor3" aria-selected="false">Floor3</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="admin-floor4-tab" href="../building-personnel/ADB/ADBF4.php" role="tab" aria-controls="floor4" aria-selected="false">Floor4</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="admin-floor5-tab" href="../building-personnel/ADB/ADBF5.php" role="tab" aria-controls="floor4" aria-selected="false">Floor5</a>
-                                    </li>
-                                </div>
+                            <div class="modal-header"> <span class="close" id="closeModal8"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>Admin Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="admin-floor1-tab" href="../building/ADB/ADBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="admin-floor2-tab" href="../building/ADB/ADBF2.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="admin-floor3-tab" href="../building/ADB/ADBF3.php" role="tab" aria-controls="floor3" aria-selected="false">3</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="admin-floor4-tab" href="../building/ADB/ADBF4.php" role="tab" aria-controls="floor4" aria-selected="false">4</a>
+                                </li>
+                            </div>
                             </ul>
                         </div>
                     </div>
@@ -509,23 +439,36 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                     <!-- MODAL 9 -->
                     <div id="myModal9" class="modal">
                         <div class="modal-content">
-                            <span class="close" id="closeModal9"><i class="bi bi-x-lg"></i></span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>BAUTISTA BUILDING</h3>
-                                <div class="nav-container">
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="bautista-floor1-tab" href="../building-personnel/BAB/BABF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="bautista-floor2-tab" href="../building-personnel/BAB/BABF2.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="bautista-floor3-tab" href="../building-personnel/BAB/BABF3.php" role="tab" aria-controls="floor3" aria-selected="false">Floor3</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="bautista-floor4-tab" href="../building-personnel/BAB/BABF4.php" role="tab" aria-controls="floor4" aria-selected="false">Floor4</a>
-                                    </li>
-                                </div>
+                            <div class="modal-header"> <span class="close" id="closeModal9"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>Bautista Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="bautista-floor1-tab" href="../building/BAB/BABF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class=" nav-link" id="bautista-floor2-tab" href="../building/BAB/BABF2.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="bautista-floor3-tab" href="../building/BAB/BABF3.php" role="tab" aria-controls="floor3" aria-selected="false">3</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="bautista-floor4-tab" href="../building/BAB/BABF4.php" role="tab" aria-controls="floor4" aria-selected="false">4</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="bautista-floor5-tab" href="../building/BAB/BABF5.php" role="tab" aria-controls="floor5" aria-selected="false">5</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="bautista-floor6-tab" href="../building/BAB/BABF6.php" role="tab" aria-controls="floor6" aria-selected="false">6</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="bautista-floor7-tab" href="../building/BAB/BABF7.php" role="tab" aria-controls="floor7" aria-selected="false">7</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="bautista-floor8-tab" href="../building/BAB/BABF8.php" role="tab" aria-controls="floor8" aria-selected="false">8</a>
+                                </li>
+                            </div>
                             </ul>
                         </div>
                     </div>
@@ -533,32 +476,33 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                     <!-- MODAL 10 -->
                     <div id="myModal10" class="modal">
                         <div class="modal-content">
-                            <span class="close" id="closeModal10"><i class="bi bi-x-lg"></i></span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>ACADEMIC BUILDING</h3>
-                                <div class="nav-container">
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="academic-floor1-tab" href="../building-personnel/NEB/NEWBF1.php" role="tab" aria-controls="floor1" aria-selected="true">Floor1</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="academic-floor2-tab" href="../building-personnel/NEB/NEWBF2.php" role="tab" aria-controls="floor2" aria-selected="false">Floor2</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="academic-floor3-tab" href="../building-personnel/NEB/NEWBF3.php" role="tab" aria-controls="floor3" aria-selected="false">Floor3</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="academic-floor4-tab" href="../building-personnel/NEB/NEWBF4.php" role="tab" aria-controls="floor4" aria-selected="false">Floor4</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="academic-floor5-tab" href="../building-personnel/NEB/NEWBF5.php" role="tab" aria-controls="floor4" aria-selected="false">Floor5</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="academic-floor6-tab" href="../building-personnel/NEB/NEWBF6.php" role="tab" aria-controls="floor4" aria-selected="false">Floor6</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="academic-floor7-tab" href="../building-personnel/NEB/NEWBF7.php" role="tab" aria-controls="floor4" aria-selected="false">Floor7</a>
-                                    </li>
-                                </div>
+                            <div class="modal-header"> <span class="close" id="closeModal10"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>Academic Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="academic-floor1-tab" href="../building/NEB/NEWBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="academic-floor2-tab" href="../building/NEB/NEWBF2.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="academic-floor3-tab" href="../building/NEB/NEWBF3.php" role="tab" aria-controls="floor3" aria-selected="false">3</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="academic-floor4-tab" href="../building/NEB/NEWBF4.php" role="tab" aria-controls="floor4" aria-selected="false">4</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="academic-floor5-tab" href="../building/NEB/NEWBF5.php" role="tab" aria-controls="floor4" aria-selected="false">5</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="academic-floor6-tab" href="../building/NEB/NEWBF6.php" role="tab" aria-controls="floor4" aria-selected="false">6</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="academic-floor7-tab" href="../building/NEB/NEWBF7.php" role="tab" aria-controls="floor4" aria-selected="false">7</a>
+                                </li>
+                            </div>
                             </ul>
                         </div>
                     </div>
@@ -617,10 +561,6 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
             </main>
         </section>
 
-
-
-
-
         <!-- MODALS -->
         <!-- commented some code in map.css (related to modals, it affects profile modal) -->
         <?php include_once 'modals/modal_layout.php'; ?>
@@ -640,23 +580,14 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
             </div>
         </div>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+        <script src="../../src/js/main.js"></script>
+        <script type="module" src="../../src/js/map.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="../../src/js/profileModalController.js"></script>
 
-        <script src="../../src/js/locationTracker.js"></script>
 
-
-        <script>
-            setInterval(function() {
-                // Call a script to check if the user has timed out
-                fetch('../../check_timeout.php')
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.timeout) {
-                            alert('You have been logged out due to timeout.');
-                            window.location.href = '../index.php?logout=timeout'; // Redirect to login page
-                        }
-                    });
-            }, 60000); // Checks every minute, you can adjust the interval
-        </script>
         <script>
             $(document).ready(function() {
                 $('.notification-item').on('click', function(e) {
@@ -694,13 +625,6 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
         </script>
 
 
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-        <script src="../../src/js/main.js"></script>
-        <script type="module" src="../../src/js/map-personnel.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-        <script src="../../src/js/profileModalController.js"></script>
     </body>
 
     </html>

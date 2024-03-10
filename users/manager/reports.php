@@ -1,4 +1,12 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+
+require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
+
 session_start();
 include_once("../../config/connection.php");
 $conn = connection();
@@ -13,7 +21,13 @@ function logActivity($conn, $accountId, $actionDescription, $tabValue)
     $stmt->close();
 }
 
-if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
+if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
+    // For personnel page, check if userLevel is 3
+    if ($_SESSION['userLevel'] != 2) {
+        // If not personnel, redirect to an error page or login
+        header("Location:error.php");
+        exit;
+    }
 
     $sql = "SELECT * FROM asset WHERE status = 'Working'";
     $result = $conn->query($sql) or die($conn->error);
@@ -54,17 +68,92 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
     }
 
 
+    // for notif below
+    // Update the SQL to join with the account and asset tables to get the admin's name and asset information
+    $loggedInUserFirstName = $_SESSION['firstName'];
+    $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
+    $loggedInUserLastName = $_SESSION['lastName'];
+
+    // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
+
+    $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
+    $loggedInAccountId = $_SESSION['accountId'];
+    // SQL query to fetch notifications related to report activities
+    $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
+                FROM activitylogs AS al
+               JOIN account AS acc ON al.accountID = acc.accountID
+               WHERE al.tab='Report' AND al.seen = '0' AND al.accountID != ?
+               ORDER BY al.date DESC 
+               LIMIT 5"; // Set limit to 5
+
+    // Prepare the SQL statement
+    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+
+    // Bind the parameter to exclude the current user's account ID
+    $stmtLatestLogs->bind_param("i", $loggedInAccountId);
+
+    // Execute the query
+    $stmtLatestLogs->execute();
+    $resultLatestLogs = $stmtLatestLogs->get_result();
+
+
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
+    $stmt = $conn->prepare($unseenCountQuery);
+    $stmt->bind_param("i", $loggedInAccountId);
+    $stmt->execute();
+    $stmt->bind_result($unseenCount);
+    $stmt->fetch();
+    $stmt->close();
 
     if (isset($_POST['assignMaintenance'])) {
         $assetId = $_POST['assetId'];
         $assignedName = $_POST['assignedName'];
         $assignSql = "UPDATE `asset` SET `assignedName`='$assignedName' WHERE `assetId`='$assetId'";
-        // Define the SQL statement for assigning maintenance personnel
-
 
         // Perform the query only if $assignSql is not empty
         if (!empty($assignSql) && $conn->query($assignSql) === TRUE) {
             logActivity($conn, $_SESSION['accountId'], "Assigned maintenance personnel $assignedName to asset ID $assetId.", 'Report');
+
+            // Fetch the email of the assigned personnel
+            $emailQuery = "SELECT email FROM account WHERE CONCAT(firstName, ' ', middleName, ' ', lastName) = ?";
+            $stmt = $conn->prepare($emailQuery);
+            $stmt->bind_param("s", $assignedName);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $toEmail = $row['email'];
+
+                // Set up PHPMailer
+                $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
+
+                try {
+                    //Server settings
+                    $mail->isSMTP();
+                    $mail->Host       = 'smtp.gmail.com'; // Specify main and backup SMTP servers
+                    $mail->SMTPAuth   = true;
+                    $mail->Username   = 'qcu.upkeep@gmail.com'; // SMTP username
+                    $mail->Password   = 'qvpx bbcm bgmy hcvf'; // SMTP password
+                    $mail->SMTPSecure = 'tls';
+                    $mail->Port       = 587;
+
+                    //Recipients
+                    $mail->setFrom('qcu.upkeep@gmail.com', 'UpKeep');
+                    $mail->addAddress($toEmail); // Add a recipient
+
+                    // Content
+                    $mail->isHTML(true); // Set email format to HTML
+                    $mail->Subject = 'Task Assignment Notification';
+                    $mail->Body    = 'The Admin assigned you to a new task. Please check the system for details.';
+
+                    $mail->send();
+                    // You can add additional echo or logging here if needed
+                } catch (Exception $e) {
+                    // Handle errors with mail sending here
+                    // You can add additional echo or logging here if needed
+                }
+            }
         } else {
             echo "Error assigning maintenance personnel: " . $conn->error;
         }
@@ -86,13 +175,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/reports.css" />
+        <script src="../../src/js/reports.js"></script>
+        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
+
 
 
         <!--JS for the fcking tabs-->
         <script>
             $(document).ready(function() {
-
-                let tabLastSelected = sessionStorage.getItem("lastTabReport");
+                // this is for staying at the same pill when reloading.
+                let tabLastSelected = sessionStorage.getItem("lastTab");
 
                 if (!tabLastSelected) {
                     // if no last tab was selected, use the pills-manager for default
@@ -103,6 +195,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
 
                 } else {
 
+                    //* checks the last tab that was selected
                     switch (tabLastSelected) {
                         case 'pills-manager':
                             $("#pills-manager").addClass("show active");
@@ -132,13 +225,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
 
                 // $("#pills-manager").addClass("show active");
                 // $("#pills-profile").removeClass("show active");
-                // $(".nav-link[data-bs-target='pills-manager']").addClass("active");
-                // $(".nav-link[data-bs-target='pills-profile']").removeClass("active");
 
                 $(".nav-link").click(function() {
                     const targetId = $(this).data("bs-target");
 
-                    sessionStorage.setItem("lastTabReport", targetId); //* sets the targetId to the sessionStorage lastTab item
+                    sessionStorage.setItem("lastTab", targetId); //* sets the targetId to the sessionStorage lastTab item
 
                     $(".tab-pane").removeClass("show active");
                     $(`#${targetId}`).addClass("show active");
@@ -148,6 +239,18 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
             });
         </script>
     </head>
+    <style>
+        .notification-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: red;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
 
     <body>
         <div id="navbar" class="">
@@ -155,24 +258,68 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                 <div class="hamburger">
                     <i class="bi bi-list"></i>
                     <a href="#" class="brand" title="logo">
+                        <!-- <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i> -->
                     </a>
                 </div>
                 <div class="content-nav">
                     <div class="notification-dropdown">
+
                         <a href="#" class="notification" id="notification-button">
-                            <i class="bi bi-bell"></i>
-                            <!-- <i class="bx bxs-bell"></i> -->
-                            <span class="num"></span>
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+                            <!-- Notification Indicator Dot -->
+                            <?php if ($unseenCount > 0) : ?>
+                                <span class="notification-indicator"></span>
+                            <?php endif; ?>
                         </a>
+
+
+
+
                         <div class="dropdown-content" id="notification-dropdown-content">
                             <h6 class="dropdown-header">Alerts Center</h6>
-                            <a href="#">May hindi nagbuhos sa Cr sa Belmonte building</a>
-                            <a href="#">Notification 2</a>
-                            <a href="#">Notification 3</a>
-                            <!-- Add more notification items here -->
-                            <a href="#" class="view-all">View All</a>
+                            <!-- PHP code to display notifications will go here -->
+                            <?php
+                            if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
+                                while ($row = $resultLatestLogs->fetch_assoc()) {
+                                    $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+                                    $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
+                                    $actionText = $row["action"];
+
+                                    // Initialize the notification text as empty
+                                    $notificationText = "";
+                                    if (strpos($actionText, $adminRole) === false) {
+                                        // Role is not in the action text, so prepend it to the admin name
+                                        $adminName = "$adminRole $adminName";
+                                    }
+                                    // Check for 'Assigned maintenance personnel' action
+                                    if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
+                                        $assignedName = $matches[1];
+                                        $assetId = $matches[2];
+                                        $notificationText = "assigned $assignedName to asset ID $assetId";
+                                    }
+                                    // Check for 'Changed status of asset ID' action
+                                    elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
+                                        $assetId = $matches[1];
+                                        $newStatus = $matches[2];
+                                        $notificationText = "changed status of asset ID $assetId to $newStatus";
+                                    }
+
+                                    // If notification text is set, echo the notification
+                                    if (!empty($notificationText)) {
+                                        // HTML for notification item
+                                        echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
+                                    }
+                                }
+                            } else {
+                                // No notifications found
+                                echo '<a href="#">No new notifications</a>';
+                            }
+                            ?>
+                            <a href="activity-logs.php" class="view-all">View All</a>
+
                         </div>
                     </div>
+
                     <a href="#" class="settings profile">
                         <div class="profile-container" title="settings">
                             <div class="profile-img">
@@ -210,13 +357,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                             </div>
                         </div>
                     </a>
+
                     <div id="settings-dropdown" class="dropdown-content1">
                         <div class="profile-name-container" id="mobile">
                             <div><a class="profile-name"><?php echo $_SESSION['firstName']; ?></a></div>
                             <div><a class="profile-role"><?php echo $_SESSION['role']; ?></a></div>
                             <hr>
                         </div>
-                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i class="bi bi-person profile-icons"></i>Profile</a>
+                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><img src="../../src/icons/Profile.svg" alt="" class="profile-icons">Profile</a>
                         <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
                     </div>
                 <?php
@@ -228,6 +376,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                 </div>
             </nav>
         </div>
+        <!-- SIDEBAR -->
         <section id="sidebar">
             <div href="#" class="brand" title="logo">
                 <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
@@ -274,6 +423,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                 </li>
             </ul>
         </section>
+        <!-- SIDEBAR -->
+
         <section id="content">
             <main>
                 <div class="content-container">
@@ -281,9 +432,30 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                         <div class="cont-header">
                             <!-- <h1 class="tab-name">Reports</h1> -->
                             <div class="tbl-filter">
-                                <form class="d-flex" role="search">
-                                    <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" onkeyup="searchTable()" />
+                                <select id="filter-criteria">
+                                    <option value="all">All</option> <!-- Added "All" option -->
+                                    <option value="reportId">Tracking ID</option>
+                                    <option value="date">Date</option>
+                                    <option value="category">Category</option>
+                                    <option value="location">Location</option>
+                                </select>
+
+                                <div class="col-4">
+                                    <select id="rows-display-dropdown" class="form-select dropdown-rows" aria-label="Default select example">
+                                        <option value="20" selected>Show 20 rows</option>
+                                        <option class="hidden"></option>
+                                        <option value="50">Show 50 rows</option>
+                                        <option value="100">Show 100 rows</option>
+                                        <option value="150">Show 150 rows</option>
+                                        <option value="200">Show 200 rows</option>
+                                    </select>
+                                </div>
+
+                                <!-- Search Box -->
+                                <form class="d-flex col-sm-5" role="search" id="searchForm">
+                                    <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" name="q" />
                                 </form>
+
 
                             </div>
                         </div>
@@ -295,7 +467,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                             <li><a href="#" class="nav-link" data-bs-target="pills-manager">Working</a></li>
                             <li><a href="#" class="nav-link" data-bs-target="pills-profile">Under Maintenance</a></li>
                             <li><a href="#" class="nav-link" data-bs-target="pills-replace">For Replacement</a></li>
-                            <li><a href="#" class="nav-link" data-bs-target="pills-repair">For Repair</a></li>
+                            <li><a href="#" class="nav-link" data-bs-target="pills-repair">Need Repair</a></li>
                         </ul>
                     </div>
 
@@ -498,417 +670,47 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                     </div>
                 </div>
             </main>
+            <div class="pagination-reports">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </section>
 
         <section>
             <!--Modal sections-->
-            <!--Modal for table 1-->
-            <div class="modal-parent">
-                <div class="modal modal-xl fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="header">
-                                <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
-                            </div>
-                            <div class="modal-body">
-                                <form method="post" class="row g-3" id="workingForm">
-                                    <h5>Report Modal for Working</h5>
-
-                                    <input type="hidden" name="edit">
-
-                                    <div class="col-4">
-                                        <label for="assetId" class="form-label">Tracking #:</label>
-                                        <input type="text" class="form-control" id="assetId" name="assetId" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="date" class="form-label">Date:</label>
-                                        <input type="text" class="form-control" id="date" name="date" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="category" class="form-label">Category:</label>
-                                        <input type="text" class="form-control" id="category" name="category" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="Building" class="form-label">Building:</label>
-                                        <input type="text" class="form-control" id="building" name="building" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="floor" class="form-label">Floor:</label>
-                                        <input type="text" class="form-control" id="floor" name="floor" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="room" class="form-label">Room:</label>
-                                        <input type="text" class="form-control" id="room" name="room" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="images" class="form-label">Images:</label>
-                                        <input type="text" class="form-control" id="" name="images" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="status" class="form-label">Status:</label>
-                                        <select class="form-select" id="status" name="status">
-                                            <option value="Working">Working</option>
-                                            <option value="Under Maintenance">Under Maintenance</option>
-                                            <option value="For Replacement">For Replacement</option>
-                                            <option value="Need Repair">Need Repair</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-4" style="display: none">
-                                        <label for="assignedName" class="form-label">Assigned Name:</label>
-                                        <input type="text" class="form-control" id="assignedName" name="assignedName" value="" readonly />
-                                    </div>
-
-                                    <div class="col-4" style="display: none">
-                                        <label for="assignedBy" class="form-label">Assigned By:</label>
-                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="" readonly />
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div class="footer">
-                                <button type="button" class="btn add-modal-btn">
-                                    Save
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!--Edit for table 1-->
-            <!-- <div class="modal" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-footer">
-                            Are you sure you want to save changes?
-                            <div class="modal-popups">
-                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                <button class="btn add-modal-btn" name="edit" data-bs-dismiss="modal">Yes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
-
-            <!--Modal for table 2-->
-            <div class="modal-parent">
-                <div class="modal modal-xl fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="header">
-                                <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
-                            </div>
-                            <div class="modal-body">
-                                <form method="post" class="row g-3" id="maintenanceForm">
-                                    <h5>Report Modal for Under Maintenance</h5>
-
-                                    <input type="hidden" name="edit">
-
-                                    <div class="col-4">
-                                        <label for="assetId" class="form-label">Tracking #:</label>
-                                        <input type="text" class="form-control" id="assetId" name="assetId" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="date" class="form-label">Date:</label>
-                                        <input type="text" class="form-control" id="date" name="date" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="category" class="form-label">Category:</label>
-                                        <input type="text" class="form-control" id="category" name="category" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="building" class="form-label">Building:</label>
-                                        <input type="text" class="form-control" id="building" name="building" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="floor" class="form-label">Floor:</label>
-                                        <input type="text" class="form-control" id="floor" name="floor" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="room" class="form-label">Room:</label>
-                                        <input type="text" class="form-control" id="room" name="room" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="images" class="form-label">Images:</label>
-                                        <input type="text" class="form-control" id="" name="images" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="status" class="form-label">Status:</label>
-                                        <select class="form-select" id="status" name="status">
-                                            <option value="Working">Working</option>
-                                            <option value="Under Maintenance">Under Maintenance</option>
-                                            <option value="For Replacement">For Replacement</option>
-                                            <option value="Need Repair">Need Repair</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-4" style="display: none">
-                                        <label for="assignedName" class="form-label">Assigned Name:</label>
-                                        <input type="text" class="form-control" id="assignedName" name="assignedName" value="" readonly />
-                                    </div>
-
-                                    <div class="col-4" style="display: none">
-                                        <label for="assignedBy" class="form-label">Assigned By:</label>
-                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="" readonly />
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div class="footer">
-                                <button type="button" class="btn add-modal-btn">
-                                    Save
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!--Edit for table 2-->
-            <!-- <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-footer">
-                            Are you sure you want to save changes?
-                            <div class="modal-popups">
-                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                <button class="btn add-modal-btn" name="edit" data-bs-dismiss="modal">Yes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
-
-
-            <!--Modal for table 3-->
-            <div class="modal-parent">
-                <div class="modal modal-xl fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="header">
-                                <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
-                            </div>
-                            <div class="modal-body">
-                                <form method="post" class="row g-3" id="replacementForm">
-                                    <h5>Report Modal for Replacement</h5>
-
-                                    <input type="hidden" name="edit">
-
-                                    <div class="col-4">
-                                        <label for="assetId" class="form-label">Tracking #:</label>
-                                        <input type="text" class="form-control" id="assetId" name="assetId" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="date" class="form-label">Date:</label>
-                                        <input type="text" class="form-control" id="date" name="date" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="category" class="form-label">Category:</label>
-                                        <input type="text" class="form-control" id="category" name="category" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="building" class="form-label">Building:</label>
-                                        <input type="text" class="form-control" id="building" name="building" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="floor" class="form-label">Floor:</label>
-                                        <input type="text" class="form-control" id="floor" name="floor" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="room" class="form-label">Room:</label>
-                                        <input type="text" class="form-control" id="room" name="room" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="images" class="form-label">Images:</label>
-                                        <input type="text" class="form-control" id="" name="images" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="status" class="form-label">Status:</label>
-                                        <select class="form-select" id="status" name="status">
-                                            <option value="Working">Working</option>
-                                            <option value="Under Maintenance">Under Maintenance</option>
-                                            <option value="For Replacement">For Replacement</option>
-                                            <option value="Need Repair">Need Repair</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-4" style="display: none">
-                                        <label for="assignedName" class="form-label">Assigned Name:</label>
-                                        <input type="text" class="form-control" id="assignedName" name="assignedName" value="" readonly />
-                                    </div>
-
-                                    <div class="col-4" style="display: none">
-                                        <label for="assignedBy" class="form-label">Assigned By:</label>
-                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="" readonly />
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div class="footer">
-                                <button type="button" class="btn add-modal-btn">
-                                    Save
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!--Edit for table 3-->
-            <!-- <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-footer">
-                            Are you sure you want to save changes?
-                            <div class="modal-popups">
-                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                <button class="btn add-modal-btn" name="edit" data-bs-dismiss="modal">Yes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
-
-
-            <!--Modal for table 4-->
-            <div class="modal-parent">
-                <div class="modal modal-xl fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="header">
-                                <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
-                            </div>
-                            <div class="modal-body">
-                                <form method="post" class="row g-3" id="repairForm">
-                                    <h5>Report Modal for Repair</h5>
-
-                                    <input type="hidden" name="edit">
-
-                                    <div class="col-4">
-                                        <label for="assetId" class="form-label">Tracking #:</label>
-                                        <input type="text" class="form-control" id="assetId" name="assetId" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="date" class="form-label">Date:</label>
-                                        <input type="text" class="form-control" id="date" name="date" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="category" class="form-label">Category:</label>
-                                        <input type="text" class="form-control" id="category" name="category" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="building" class="form-label">Building:</label>
-                                        <input type="text" class="form-control" id="building" name="building" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="floor" class="form-label">Floor:</label>
-                                        <input type="text" class="form-control" id="floor" name="floor" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="room" class="form-label">Room:</label>
-                                        <input type="text" class="form-control" id="room" name="room" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="images" class="form-label">Images:</label>
-                                        <input type="text" class="form-control" id="" name="images" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="status" class="form-label">Status:</label>
-                                        <select class="form-select" id="status" name="status">
-                                            <option value="Working">Working</option>
-                                            <option value="Under Maintenance">Under Maintenance</option>
-                                            <option value="For Replacement">For Replacement</option>
-                                            <option value="Need Repair">Need Repair</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="assignedName" class="form-label">Assigned Name:</label>
-                                        <input type="text" class="form-control" id="assignedName" name="assignedName" readonly />
-                                    </div>
-
-                                    <div class="col-4">
-                                        <label for="assignedBy" class="form-label">Assigned By:</label>
-                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy" readonly />
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div class="footer">
-                                <button type="button" class="btn add-modal-btn" onclick="confirmAlert('repair')">
-                                    Save
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!--Edit for table 4-->
-            <!-- <div class="modal fade" id="staticBackdrop4" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-footer">
-                            Are you sure you want to save changes?
-                            <div class="modal-popups">
-                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                <button class="btn add-modal-btn" name="edit" data-bs-dismiss="modal">Yes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
-
             <!--Assign Modal for table 4-->
             <div class="modal-parent">
                 <div class="modal modal-xl fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content assingee-container">
-                            <div class="assignee-header">
-                                <label for="assignedName" class="form-label assignee-tag">CHOOSE A MAINTENANCE PERSONNEL: </label>
-                            </div>
+
                             <div class="header">
                                 <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                             </div>
                             <div class="modal-body">
+                                <div class="assignee-header">
+                                    <label for="assignedName" class="form-label assignee-tag">CHOOSE A MAINTENANCE PERSONNEL: </label>
+                                </div>
                                 <form method="post" class="row g-3" id="assignPersonnelForm">
                                     <h5></h5>
-
                                     <input type="hidden" name="assignMaintenance">
-
                                     <div class="col-4" style="display:none">
                                         <label for="assetId" class="form-label">Tracking #:</label>
                                         <input type="text" class="form-control" id="assetId" name="assetId" readonly />
@@ -965,7 +767,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
 
                                             if ($personnelResult) {
                                                 while ($row = $personnelResult->fetch_assoc()) {
-                                                    $fullName = $row['firstName'] . ' ' . $row['middleName'] . ' ' . $row['lastName'];
+                                                    $fullName = $row['firstName'] . ' ' . $row['lastName'];
                                                     // Echo each option within the select
                                                     echo '<option value="' . htmlspecialchars($fullName) . '">' . htmlspecialchars($fullName) . '</option>';
                                                 }
@@ -976,14 +778,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                                             ?>
                                         </select>
                                     </div>
-
-                                    <div class="col-4" style="display:none">
-                                        <label for="assignedBy" class="form-label">Assigned By:</label>
-                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy" readonly />
-                                    </div>
                                 </form>
-                            </div>
 
+                                <div class="col-4" style="display:none">
+                                    <label for="assignedBy" class="form-label">Assigned By:</label>
+                                    <input type="text" class="form-control" id="assignedBy" name="assignedBy" readonly />
+                                </div>
+                            </div>
                             <div class="footer">
                                 <button type="button" class="btn add-modal-btn" onclick="assignPersonnel()">
                                     Save
@@ -994,8 +795,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                 </div>
             </div>
 
-            <!--Edit for table 4-->
-            <!-- <div class="modal fade" id="staticBackdrop5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <!-- Edit for table 4
+            <div class="modal fade" id="staticBackdrop5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-footer">
@@ -1007,7 +808,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
+            </form> -->
         </section>
 
         <!-- PROFILE MODALS -->
@@ -1041,7 +843,37 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
         <script>
+            //PARA MAGDIRECT KA SA PAGE 
+            function redirectToPage(building, floor, assetId) {
+                var newLocation = '';
+                if (building === 'New Academic' && floor === '1F') {
+                    newLocation = "../../users/building/NEB/NEWBF1.php";
+                } else if (building === 'Yellow' && floor === '1F') {
+                    newLocation = "../../users/building/OLB/OLBF1.php";
+                } else if (building === 'Korphil' && floor === '1F') {
+                    newLocation = "../../users/building/KOB/KOBF1.php";
+                } else if (building === 'Bautista' && floor === 'Basement') {
+                    newLocation = "../../users/building/BAB/BABF1.php";
+                } else if (building === 'Belmonte' && floor === '1F') {
+                    newLocation = "../../users/building/BEB/BEBF1.php";
+                }
+
+                // Append the assetId to the URL as a query parameter
+                window.location.href = newLocation + '?assetId=' + assetId;
+            }
+
+            $(document).on('click', 'table tr', function() {
+                var assetId = $(this).find('td:eq(0)').text(); // Assuming first TD is the assetId
+                var building = $(this).find('td:eq(3)').text().split(' / ')[0]; // Adjust the index as needed
+                var floor = $(this).find('td:eq(3)').text().split(' / ')[1]; // Adjust the index as needed
+                redirectToPage(building, floor, assetId);
+            });
+        </script>
+
+
+        <script>
             $(document).ready(function() {
+
                 // Function to populate the modal fields
                 function populateModal(row, modalId) {
                     $(modalId + " #assetId").val(row.find("td:eq(0)").text());
@@ -1159,6 +991,85 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
             });
         </script>
 
+        <script>
+            $(document).ready(function() {
+                function filterTable() {
+                    var searchQuery = $('#search-box').val().toLowerCase();
+                    var columnIndex = parseInt($('#search-filter').val());
+
+                    $('#data-table tbody tr').each(function() {
+                        var cellText = $(this).find('td').eq(columnIndex).text().toLowerCase();
+                        if (cellText.indexOf(searchQuery) !== -1) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                }
+
+                // Event listener for search input
+                $('#search-box').on('input', filterTable);
+
+                // Event listener for filter dropdown change
+                $('#search-filter').change(function() {
+                    $('#search-box').val(''); // Clear the search input
+                    filterTable(); // Filter table with new criteria
+                });
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                function searchTable() {
+                    var input, filter, table, tr, td, i;
+                    input = document.getElementById("search-box");
+                    filter = input.value.toUpperCase();
+                    table = document.getElementById("myTabContent"); // Use the ID of your table container
+                    tr = table.getElementsByTagName("tr");
+                    var selectedFilter = document.getElementById("filter-criteria").value;
+
+                    for (i = 1; i < tr.length; i++) { // Start with 1 to avoid the header
+                        td = tr[i].getElementsByTagName("td");
+                        if (td.length > 0) {
+                            var searchText = "";
+                            if (selectedFilter === "all") {
+                                // Concatenate all the text content from the cells for "All" search
+                                for (var j = 0; j < td.length; j++) {
+                                    searchText += td[j].textContent.toUpperCase();
+                                }
+                            } else {
+                                // Find the index for the selected filter
+                                var columnIndex = getColumnIndex(selectedFilter);
+                                searchText = td[columnIndex].textContent.toUpperCase();
+                            }
+
+                            // Show or hide the row based on whether the searchText contains the filter
+                            if (searchText.indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
+                }
+
+                // Utility function to get the column index based on the filter selected
+                function getColumnIndex(filter) {
+                    // Adjust these indices to match your table's structure
+                    var columns = {
+                        'reportId': 0,
+                        'date': 1,
+                        'category': 2,
+                        'location': 3, // Assuming 'location' is a single column that includes building/floor/room
+                        'status': 4
+                    };
+                    return columns[filter] || 0; // Default to the first column if the filter is not found
+                }
+
+                // Attach the search function to the keyup event of the search box
+                $("#search-box").keyup(searchTable);
+            });
+        </script>
 
     </body>
 

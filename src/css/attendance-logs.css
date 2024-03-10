@@ -93,7 +93,14 @@ table {
   margin-top: 0;
   padding: 0;
   border-top-right-radius: 15px;
+
 }
+
+.personnel-table-content{
+  border-top-left-radius: 15px;
+}
+
+
 
 /* .table-container table{
  border-spacing: 0 10px;

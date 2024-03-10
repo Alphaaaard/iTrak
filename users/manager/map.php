@@ -3,7 +3,53 @@ session_start();
 include_once("../../config/connection.php");
 $conn = connection();
 
-if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
+if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
+
+    // For personnel page, check if userLevel is 3
+    if ($_SESSION['userLevel'] != 2) {
+        // If not personnel, redirect to an error page or login
+        header("Location:error.php");
+        exit;
+    }
+
+
+
+    // for notif below
+    // Update the SQL to join with the account and asset tables to get the admin's name and asset information
+    $loggedInUserFirstName = $_SESSION['firstName'];
+    $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
+    $loggedInUserLastName = $_SESSION['lastName'];
+
+    // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
+
+    $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
+    $loggedInAccountId = $_SESSION['accountId'];
+    // SQL query to fetch notifications related to report activities
+    $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
+                FROM activitylogs AS al
+               JOIN account AS acc ON al.accountID = acc.accountID
+               WHERE al.tab='Report' AND al.seen = '0' AND al.accountID != ?
+               ORDER BY al.date DESC 
+               LIMIT 5"; // Set limit to 5
+
+    // Prepare the SQL statement
+    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+
+    // Bind the parameter to exclude the current user's account ID
+    $stmtLatestLogs->bind_param("i", $loggedInAccountId);
+
+    // Execute the query
+    $stmtLatestLogs->execute();
+    $resultLatestLogs = $stmtLatestLogs->get_result();
+
+
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
+    $stmt = $conn->prepare($unseenCountQuery);
+    $stmt->bind_param("i", $loggedInAccountId);
+    $stmt->execute();
+    $stmt->bind_result($unseenCount);
+    $stmt->fetch();
+    $stmt->close();
 
 ?>
 
@@ -14,16 +60,27 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Map</title>
-        <!-- BOOTSTRAP -->
         <link rel="icon" type="image/x-icon" href="../../src/img/tab-logo.png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/map.css" />
+        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
     </head>
+    <style>
+        .notification-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: red;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
 
     <body>
         <!-- NAVBAR -->
@@ -32,24 +89,67 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                 <div class="hamburger">
                     <i class="bi bi-list"></i>
                     <a href="#" class="brand" title="logo">
+                        <!-- <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i> -->
                     </a>
                 </div>
                 <div class="content-nav">
                     <div class="notification-dropdown">
                         <a href="#" class="notification" id="notification-button">
-                            <i class="bi bi-bell"></i>
-                            <!-- <i class="bx bxs-bell"></i> -->
-                            <span class="num"></span>
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+                            <!-- Notification Indicator Dot -->
+                            <?php if ($unseenCount > 0) : ?>
+                                <span class="notification-indicator"></span>
+                            <?php endif; ?>
                         </a>
+
+
+
+
                         <div class="dropdown-content" id="notification-dropdown-content">
                             <h6 class="dropdown-header">Alerts Center</h6>
-                            <a href="#">May hindi nagbuhos sa Cr sa Belmonte building</a>
-                            <a href="#">Notification 2</a>
-                            <a href="#">Notification 3</a>
-                            <!-- Add more notification items here -->
-                            <a href="#" class="view-all">View All</a>
+                            <!-- PHP code to display notifications will go here -->
+                            <?php
+                            if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
+                                while ($row = $resultLatestLogs->fetch_assoc()) {
+                                    $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+                                    $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
+                                    $actionText = $row["action"];
+
+                                    // Initialize the notification text as empty
+                                    $notificationText = "";
+                                    if (strpos($actionText, $adminRole) === false) {
+                                        // Role is not in the action text, so prepend it to the admin name
+                                        $adminName = "$adminRole $adminName";
+                                    }
+                                    // Check for 'Assigned maintenance personnel' action
+                                    if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
+                                        $assignedName = $matches[1];
+                                        $assetId = $matches[2];
+                                        $notificationText = "assigned $assignedName to asset ID $assetId";
+                                    }
+                                    // Check for 'Changed status of asset ID' action
+                                    elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
+                                        $assetId = $matches[1];
+                                        $newStatus = $matches[2];
+                                        $notificationText = "changed status of asset ID $assetId to $newStatus";
+                                    }
+
+                                    // If notification text is set, echo the notification
+                                    if (!empty($notificationText)) {
+                                        // HTML for notification item
+                                        echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
+                                    }
+                                }
+                            } else {
+                                // No notifications found
+                                echo '<a href="#">No new notifications</a>';
+                            }
+                            ?>
+                            <a href="activity-logs.php" class="view-all">View All</a>
+
                         </div>
                     </div>
+
                     <a href="#" class="settings profile">
                         <div class="profile-container" title="settings">
                             <div class="profile-img">
@@ -87,6 +187,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                             </div>
                         </div>
                     </a>
+
                     <div id="settings-dropdown" class="dropdown-content1">
                         <div class="profile-name-container" id="mobile">
                             <div><a class="profile-name"><?php echo $_SESSION['firstName']; ?></a></div>
@@ -154,6 +255,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
             </ul>
         </section>
         <!-- SIDEBAR -->
+
         <!-- CONTENT -->
         <section id="content">
             <!-- MAIN -->
@@ -161,11 +263,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
             <main>
                 <div class="content-container" id="content-container">
 
-                    <header>
+                    <!-- <header>
                         <div class="cont-header">
-                            <h1 class="tab-name-only">3D Map</h1>
+                            <h1 class="tab-name">3D Map</h1>
                         </div>
-                    </header>
+                    </header> -->
 
                     <div id="model-container" class="content"></div>
 
@@ -175,434 +277,237 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                         <div class="building building2">TechVoc</div>
                         <div class="building building3">Old Academic</div>
                         <div class="building building4">Belmonte</div>
-                        <div class="building building5">Metalcasting</div>
-                        <div class="building building6">KORPHIL</div>
+                        <div class="building building5">KORPHIL</div>
+                        <div class="building building6">Ballroom</div>
                         <div class="building building7">Multipurpose</div>
                         <div class="building building8">Admin</div>
                         <div class="building building9">Bautista</div>
                         <div class="building building10">Academic</div>
-                        <div class="building building11">Ballroom</div>
                     </div>
 
-                    <!-- FUCK THIS SHIT -->
+                    <!-- MODAL 1 -->
                     <div id="myModal1" class="modal">
-                        <div class=" modal-content">
+                        <div class="modal-content">
                             <div id="modalContent1">
                             </div>
-                            <span class="close" id="closeModal1">&times;</span>
+                            <span class="close" id="closeModal1"><i class="bi bi-x-lg"></i></span>
                         </div>
                     </div>
 
-                    <!-- TECHVOC-->
+                    <!-- MODAL 2 -->
                     <div id="myModal2" class="modal">
                         <div class="modal-content">
-                            <span class="close" id="closeModal2">&times;</span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>TECHVOC</h3>
-                                <div class="nav-container">
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="techvoc-floor1-tab" data-floor-target="#TECHVOC-F1" type="button" role="tab" aria-controls="floor1" aria-selected="true">Floor1</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="techvoc-floor2-tab" data-floor-target="#TECHVOC-F2" type="button" role="tab" aria-controls="floor2" aria-selected="false">Floor2</button>
-                                    </li>
-                                </div>
+                            <div class="modal-header"> <span class="close" id="closeModal2"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>TechVoc Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="techvoc-floor1-tab" href="../building/TEB/TEBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="techvoc-floor2-tab" href="../building/TEB/TEBF2.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
+                                </li>
+                            </div>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- TECHVOC FLOOR CONTENT-->
-                    <div id="TECHVOC-F1" class="content">
-                        <p>TECHVOC-F1</p>
-                    </div>
-
-                    <div id="TECHVOC-F2" class="content">
-                        <p>TECHVOC-F2</p>
-                    </div>
-
-                    <!-- OLD ACADEMIC BUILDING-->
+                    <!-- MODAL 3 -->
                     <div id="myModal3" class="modal">
                         <div class="modal-content">
-                            <span class="close" id="closeModal3">&times;</span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>OLD ACADEMIC BUILDING</h3>
-                                <div class="nav-container">
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="old-floor1-tab" data-floor-target="#old-F1" type="button" role="tab" aria-controls="floor1" aria-selected="true">Floor1</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="old-floor2-tab" data-floor-target="#old-F2" type="button" role="tab" aria-controls="floor2" aria-selected="false">Floor2</button>
-                                    </li>
-                                </div>
+                            <div class="modal-header"> <span class="close" id="closeModal3"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>Old Academic Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="old-floor1-tab" href="../building/OLB/OLBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="old-floor2-tab" href="../building/OLB/OLBF1.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
+                                </li>
+                            </div>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- OLD FLOOR CONTENT-->
-                    <div id="old-F1" class="content">
-                        <img src="../../src/floors/oldAcademicB/OAB1F.png" alt="" class="Floor-container">
-                    </div>
-
-                    <div id="old-F2" class="content">
-                        <img src="../../src/floors/oldAcademicB/OAB2F.png" alt="" class="Floor-container">
-                    </div>
-
-                    <!-- BELMONTE ACADEMIC BUILDING-->
+                    <!-- MODAL 4 -->
                     <div id="myModal4" class="modal">
                         <div class="modal-content">
-                            <span class="close" id="closeModal4">&times;</span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>BELMONTE BUILDING</h3>
-                                <div class="nav-container">
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="belmonte-floor1-tab" data-floor-target="#belmonte-F1" type="button" role="tab" aria-controls="floor1" aria-selected="true">Floor1</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="belmonte-floor2-tab" data-floor-target="#belmonte-F2" type="button" role="tab" aria-controls="floor2" aria-selected="false">Floor2</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="belmonte-floor3-tab" data-floor-target="#belmonte-F3" type="button" role="tab" aria-controls="floor3" aria-selected="false">Floor3</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="belmonte-floor4-tab" data-floor-target="#belmonte-F4" type="button" role="tab" aria-controls="floor4" aria-selected="false">Floor4</button>
-                                    </li>
-                                </div>
+                            <div class="modal-header"> <span class="close" id="closeModal4"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>Belmonte Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="belmonte-floor1-tab" href="../building/BEB/BEBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="belmonte-floor2-tab" href="../building/BEB/BEBF2.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="belmonte-floor3-tab" href="../building/BEB/BEBF3.php" role="tab" aria-controls="floor3" aria-selected="false">3</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="belmonte-floor4-tab" href="../building/BEB/BEBF4.php" role="tab" aria-controls="floor4" aria-selected="false">4</a>
+                                </li>
+                            </div>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- BELMONTE FLOOR CONTENT-->
-                    <div id="belmonte-F1" class="content">
-                        <img src="../../src/floors/belmonteB/BB1F.png" alt="" class="Floor-container">
-                    </div>
-
-                    <div id="belmonte-F2" class="content">
-                        <img src="../../src/floors/belmonteB/BB2F.png" alt="" class="Floor-container">
-                    </div>
-
-                    <div id="belmonte-F3" class="content">
-                        <img src="../../src/floors/belmonteB/BB3F.png" alt="" class="Floor-container">
-                    </div>
-
-                    <div id="belmonte-F4" class="content">
-                        <img src="../../src/floors/belmonteB/BB4F.png" alt="" class="Floor-container">
-                    </div>
-
-                    <!-- METALCASTING ACADEMIC BUILDING-->
+                    <!-- MODAL 5 -->
                     <div id="myModal5" class="modal">
                         <div class="modal-content">
-                            <span class="close" id="closeModal5">&times;</span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>METAL CASTING BUILDING</h3>
-                                <div class="nav-container">
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="metalcasting-floor1-tab" data-floor-target="#metalcasting-F1" type="button" role="tab" aria-controls="floor1" aria-selected="true">Floor1</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="metalcasting-floor2-tab" data-floor-target="#metalcasting-F2" type="button" role="tab" aria-controls="floor2" aria-selected="false">Floor2</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="metalcasting-floor3-tab" data-floor-target="#metalcasting-F3" type="button" role="tab" aria-controls="floor3" aria-selected="false">Floor3</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="metalcasting-floor4-tab" data-floor-target="#metalcasting-F4" type="button" role="tab" aria-controls="floor4" aria-selected="false">Floor4</button>
-                                    </li>
-                                </div>
+                            <div class="modal-header"> <span class="close" id="closeModal5"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>KorPhil Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="korphil-floor1-tab" href="../building/KOB/KOBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="korphil-floor2-tab" href="../building/KOB/KOBF2.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="korphil-floor3-tab" href="../building/KOB/KOBF3.php" role="tab" aria-controls="floor3" aria-selected="false">3</a>
+                                </li>
+                            </div>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- METALCASTING FLOOR CONTENT-->
-                    <div id="metalcasting-F1" class="content">
-                        <p>METALCASTING ACADEMIC BUILDING - F1</p>
-                    </div>
-
-                    <div id="metalcasting-F2" class="content">
-                        <p>METALCASTING ACADEMIC BUILDING - F2</p>
-                    </div>
-
-                    <div id="metalcasting-F3" class="content">
-                        <p>METALCASTING ACADEMIC BUILDING - F3</p>
-                    </div>
-
-                    <div id="metalcasting-F4" class="content">
-                        <p>METALCASTING ACADEMIC BUILDING - F4</p>
-                    </div>
-
-                    <!-- KORPHIL ACADEMIC BUILDING-->
+                    <!-- MODAL 6 -->
                     <div id="myModal6" class="modal">
                         <div class="modal-content">
-                            <span class="close" id="closeModal6">&times;</span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>KORPHIL CASTING BUILDING</h3>
-                                <div class="nav-container">
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="korphil-floor1-tab" data-floor-target="#korphil-F1" type="button" role="tab" aria-controls="floor1" aria-selected="true">Floor1</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="korphil-floor2-tab" data-floor-target="#korphil-F2" type="button" role="tab" aria-controls="floor2" aria-selected="false">Floor2</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="korphil-floor3-tab" data-floor-target="#korphil-F3" type="button" role="tab" aria-controls="floor3" aria-selected="false">Floor3</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="korphil-floor4-tab" data-floor-target="#korphil-F4" type="button" role="tab" aria-controls="floor4" aria-selected="false">Floor4</button>
-                                    </li>
-                                </div>
+                            <div class="modal-header"> <span class="close" id="closeModal6"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>Ballroom Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="ballroom-floor1-tab" href="../building/CHB/CHBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
+                                </li>
+                            </div>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- KORPHIL FLOOR CONTENT-->
-                    <div id="korphil-F1" class="content">
-                        <p>KORPHIL ACADEMIC BUILDING - F1</p>
-                    </div>
-
-                    <div id="korphil-F2" class="content">
-                        <p>KORPHIL ACADEMIC BUILDING - F2</p>
-                    </div>
-
-                    <div id="korphil-F3" class="content">
-                        <p>KORPHIL ACADEMIC BUILDING - F3</p>
-                    </div>
-
-                    <div id="korphil-F4" class="content">
-                        <p>KORPHIL ACADEMIC BUILDING - F4</p>
-                    </div>
-
-                    <!-- MULTIPURPOSE ACADEMIC BUILDING-->
+                    <!-- MODAL 7 -->
                     <div id="myModal7" class="modal">
                         <div class="modal-content">
-                            <span class="close" id="closeModal7">&times;</span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>MULTIPURPOSE CASTING BUILDING</h3>
-                                <div class="nav-container">
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="multipurpose-floor1-tab" data-floor-target="#multipurpose-F1" type="button" role="tab" aria-controls="floor1" aria-selected="true">Floor1</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="multipurpose-floor2-tab" data-floor-target="#multipurpose-F2" type="button" role="tab" aria-controls="floor2" aria-selected="false">Floor2</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="multipurpose-floor3-tab" data-floor-target="#multipurpose-F3" type="button" role="tab" aria-controls="floor3" aria-selected="false">Floor3</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="multipurpose-floor4-tab" data-floor-target="#multipurpose-F4" type="button" role="tab" aria-controls="floor4" aria-selected="false">Floor4</button>
-                                    </li>
-                                </div>
+                            <div class="modal-header"> <span class="close" id="closeModal7"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>Multipurpose Building </h3>
+                            </div>
+                            <div class="nav-container">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="multipurpose-floor1-tab" href="../building/MUB/MUBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
+                                </li>
+                            </div>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- MULTIPURPOSE FLOOR CONTENT-->
-                    <div id="multipurpose-F1" class="content">
-                        <p>MULTIPURPOSE ACADEMIC BUILDING - F1</p>
-                    </div>
-
-                    <div id="multipurpose-F2" class="content">
-                        <p>MULTIPURPOSE ACADEMIC BUILDING - F2</p>
-                    </div>
-
-                    <div id="multipurpose-F3" class="content">
-                        <p>MULTIPURPOSE ACADEMIC BUILDING - F3</p>
-                    </div>
-
-                    <div id="multipurpose-F4" class="content">
-                        <p>MULTIPURPOSE ACADEMIC BUILDING - F4</p>
-                    </div>
-
-                    <!-- ADMIN ACADEMIC BUILDING-->
+                    <!-- MODAL 8 -->
                     <div id="myModal8" class="modal">
                         <div class="modal-content">
-                            <span class="close" id="closeModal8">&times;</span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>ADMIN BUILDING</h3>
-                                <div class="nav-container">
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="admin-floor1-tab" data-floor-target="#admin-F1" type="button" role="tab" aria-controls="floor1" aria-selected="true">Floor1</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="admin-floor2-tab" data-floor-target="#admin-F2" type="button" role="tab" aria-controls="floor2" aria-selected="false">Floor2</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="admin-floor3-tab" data-floor-target="#admin-F3" type="button" role="tab" aria-controls="floor3" aria-selected="false">Floor3</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="admin-floor4-tab" data-floor-target="#admin-F4" type="button" role="tab" aria-controls="floor4" aria-selected="false">Floor4</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="admin-floor5-tab" data-floor-target="#admin-F5" type="button" role="tab" aria-controls="floor4" aria-selected="false">Floor4</button>
-                                    </li>
-                                </div>
+                            <div class="modal-header"> <span class="close" id="closeModal8"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>Admin Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="admin-floor1-tab" href="../building/ADB/ADBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="admin-floor2-tab" href="../building/ADB/ADBF2.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="admin-floor3-tab" href="../building/ADB/ADBF3.php" role="tab" aria-controls="floor3" aria-selected="false">3</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="admin-floor4-tab" href="../building/ADB/ADBF4.php" role="tab" aria-controls="floor4" aria-selected="false">4</a>
+                                </li>
+                            </div>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- ADMIN FLOOR CONTENT-->
-                    <div id="admin-F1" class="content">
-                        <img src="../../src/floors/adminB/AB1F.png" alt="" class="Floor-container">
-                    </div>
-
-                    <div id="admin-F2" class="content">
-                        <img src="../../src/floors/adminB/AB2F.png" alt="" class="Floor-container">
-                    </div>
-
-                    <div id="admin-F3" class="content">
-                        <img src="../../src/floors/adminB/AB3F.png" alt="" class="Floor-container">
-                    </div>
-
-                    <div id="admin-F4" class="content">
-                        <img src="../../src/floors/adminB/AB4F.png" alt="" class="Floor-container">
-                    </div>
-
-                    <div id="admin-F5" class="content">
-                        <img src="../../src/floors/adminB/AB5F.png" alt="" class="Floor-container">
-                    </div>
-
-                    <!-- BAUTISTA ACADEMIC BUILDING-->
+                    <!-- MODAL 9 -->
                     <div id="myModal9" class="modal">
                         <div class="modal-content">
-                            <span class="close" id="closeModal9">&times;</span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>BAUTISTA BUILDING</h3>
-                                <div class="nav-container">
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="bautista-floor1-tab" data-floor-target="#bautista-F1" type="button" role="tab" aria-controls="floor1" aria-selected="true">Floor1</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="bautista-floor2-tab" data-floor-target="#bautista-F2" type="button" role="tab" aria-controls="floor2" aria-selected="false">Floor2</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="bautista-floor3-tab" data-floor-target="#bautista-F3" type="button" role="tab" aria-controls="floor3" aria-selected="false">Floor3</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="bautista-floor4-tab" data-floor-target="#bautista-F4" type="button" role="tab" aria-controls="floor4" aria-selected="false">Floor4</button>
-                                    </li>
-                                </div>
+                            <div class="modal-header"> <span class="close" id="closeModal9"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>Bautista Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="bautista-floor1-tab" href="../building/BAB/BABF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class=" nav-link" id="bautista-floor2-tab" href="../building/BAB/BABF2.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="bautista-floor3-tab" href="../building/BAB/BABF3.php" role="tab" aria-controls="floor3" aria-selected="false">3</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="bautista-floor4-tab" href="../building/BAB/BABF4.php" role="tab" aria-controls="floor4" aria-selected="false">4</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="bautista-floor5-tab" href="../building/BAB/BABF5.php" role="tab" aria-controls="floor5" aria-selected="false">5</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="bautista-floor6-tab" href="../building/BAB/BABF6.php" role="tab" aria-controls="floor6" aria-selected="false">6</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="bautista-floor7-tab" href="../building/BAB/BABF7.php" role="tab" aria-controls="floor7" aria-selected="false">7</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="bautista-floor8-tab" href="../building/BAB/BABF8.php" role="tab" aria-controls="floor8" aria-selected="false">8</a>
+                                </li>
+                            </div>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- BAUTISTA FLOOR CONTENT-->
-                    <div id="bautista-F1" class="content">
-                        <img src="../../src/floors/bautistaB/BB0F.png" alt="" class="Floor-container">
-                    </div>
-
-                    <div id="bautista-F2" class="content">
-                        <img src="../../src/floors/bautistaB/BB1F.png" alt="" class="Floor-container">
-                    </div>
-
-                    <div id="bautista-F3" class="content">
-                        <img src="../../src/floors/bautistaB/BB2F.png" alt="" class="Floor-container">
-                    </div>
-
-                    <div id="bautista-F4" class="content">
-                        <img src="../../src/floors/bautistaB/BB3F.png" alt="" class="Floor-container">
-                    </div>
-
-                    <!-- ACADEMIC BUILDING-->
+                    <!-- MODAL 10 -->
                     <div id="myModal10" class="modal">
                         <div class="modal-content">
-                            <span class="close" id="closeModal10">&times;</span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>ACADEMIC BUILDING</h3>
-                                <div class="nav-container">
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="academic-floor1-tab" data-floor-target="#academic-F1" type="button" role="tab" aria-controls="floor1" aria-selected="true">Floor1</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="academic-floor2-tab" data-floor-target="#academic-F2" type="button" role="tab" aria-controls="floor2" aria-selected="false">Floor2</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="academic-floor3-tab" data-floor-target="#academic-F3" type="button" role="tab" aria-controls="floor3" aria-selected="false">Floor3</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="academic-floor4-tab" data-floor-target="#academic-F4" type="button" role="tab" aria-controls="floor4" aria-selected="false">Floor4</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="academic-floor5-tab" data-floor-target="#academic-F5" type="button" role="tab" aria-controls="floor4" aria-selected="false">Floor5</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="academic-floor6-tab" data-floor-target="#academic-F6" type="button" role="tab" aria-controls="floor4" aria-selected="false">Floor6</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="academic-floor7-tab" data-floor-target="#academic-F7" type="button" role="tab" aria-controls="floor4" aria-selected="false">Floor7</button>
-                                    </li>
-                                </div>
+                            <div class="modal-header"> <span class="close" id="closeModal10"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>Academic Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="academic-floor1-tab" href="../building/NEB/NEWBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="academic-floor2-tab" href="../building/NEB/NEWBF2.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="academic-floor3-tab" href="../building/NEB/NEWBF3.php" role="tab" aria-controls="floor3" aria-selected="false">3</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="academic-floor4-tab" href="../building/NEB/NEWBF4.php" role="tab" aria-controls="floor4" aria-selected="false">4</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="academic-floor5-tab" href="../building/NEB/NEWBF5.php" role="tab" aria-controls="floor4" aria-selected="false">5</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="academic-floor6-tab" href="../building/NEB/NEWBF6.php" role="tab" aria-controls="floor4" aria-selected="false">6</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="academic-floor7-tab" href="../building/NEB/NEWBF7.php" role="tab" aria-controls="floor4" aria-selected="false">7</a>
+                                </li>
+                            </div>
                             </ul>
                         </div>
                     </div>
 
-                    <!-- ACADEMIC FLOOR CONTENT-->
-                    <div id="academic-F1" class="content">
-                        <img src="../../src/floors/newAcademicB/NAB1F.png" alt="" class="Floor-container">
-                    </div>
-
-                    <div id="academic-F2" class="content">
-                        <img src="../../src/floors/newAcademicB/NAB2F.png" alt="" class="Floor-container">
-                    </div>
-
-                    <div id="academic-F3" class="content">
-                        <img src="../../src/floors/newAcademicB/NAB3F.png" alt="" class="Floor-container">
-                    </div>
-
-                    <div id="academic-F4" class="content">
-                        <img src="../../src/floors/newAcademicB/NAB4F.png" alt="" class="Floor-container">
-                    </div>
-
-                    <div id="academic-F5" class="content">
-                        <img src="../../src/floors/newAcademicB/NAB5F.png" alt="" class="Floor-container">
-                    </div>
-
-                    <div id="academic-F6" class="content">
-                        <img src="../../src/floors/newAcademicB/NAB6F.png" alt="" class="Floor-container">
-                    </div>
-
-                    <div id="academic-F7" class="content">
-                        <img src="../../src/floors/newAcademicB/NAB7F.png" alt="" class="Floor-container">
-                    </div>
-
-                    <!-- BALLROOM ACADEMIC BUILDING-->
-                    <div id="myModal11" class="modal">
-                        <div class="modal-content">
-                            <span class="close" id="closeModal11">&times;</span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>BALLROOM BUILDING</h3>
-                                <div class="nav-container">
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="ballroom-floor1-tab" data-floor-target="#ballroom-F1" type="button" role="tab" aria-controls="floor1" aria-selected="true">Floor1</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="ballroom-floor2-tab" data-floor-target="#ballroom-F2" type="button" role="tab" aria-controls="floor2" aria-selected="false">Floor2</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="ballroom-floor3-tab" data-floor-target="#ballroom-F3" type="button" role="tab" aria-controls="floor3" aria-selected="false">Floor3</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="ballroom-floor4-tab" data-floor-target="#ballroom-F4" type="button" role="tab" aria-controls="floor4" aria-selected="false">Floor4</button>
-                                    </li>
-                                </div>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- BALLROOM FLOOR CONTENT-->
-                    <div id="ballroom-F1" class="content">
-                        <p>BALLROOM ACADEMIC BUILDING - F1</p>
-                    </div>
-
-                    <div id="ballroom-F2" class="content">
-                        <p>BALLROOM ACADEMIC BUILDING - F2</p>
-                    </div>
-
-                    <div id="ballroom-F3" class="content">
-                        <p>BALLROOM ACADEMIC BUILDING - F3</p>
-                    </div>
-
-                    <div id="ballroom-F4" class="content">
-                        <p>BALLROOM ACADEMIC BUILDING - F4</p>
-                    </div>
-
+                    <!-- MODALS-->
                     <div id="modalTemplate1" style="display: none">
                         <h2 id="modalTitle1"></h2>
                         <p id="modalDescription1"></p>
@@ -652,16 +557,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                         <h2 id="modalTitle10"></h2>
                         <p id="modalDescription10"></p>
                     </div>
-
-                    <div id="modalTemplate11" style="display: none">
-                        <h2 id="modalTitle11"></h2>
-                        <p id="modalDescription11"></p>
-                    </div>
                 </div>
             </main>
         </section>
 
-        <!-- PROFILE MODALS -->
+        <!-- MODALS -->
+        <!-- commented some code in map.css (related to modals, it affects profile modal) -->
         <?php include_once 'modals/modal_layout.php'; ?>
 
         <!-- RFID MODAL -->
@@ -679,98 +580,51 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
             </div>
         </div>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+        <script src="../../src/js/main.js"></script>
+        <script type="module" src="../../src/js/map.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="../../src/js/profileModalController.js"></script>
+
 
         <script>
-            const tabButtons = document.querySelectorAll('.nav-link');
-            const contentSections = document.querySelectorAll('.content');
-            const modelContainer = document.getElementById('model-container');
-            const mobileModelContainer = document.getElementById('buildings');
-            const modalClose1 = document.getElementById('myModal1');
-            const modalClose2 = document.getElementById('myModal2');
-            const modalClose3 = document.getElementById('myModal3');
-            const modalClose4 = document.getElementById('myModal4');
-            const modalClose5 = document.getElementById('myModal5');
-            const modalClose6 = document.getElementById('myModal6');
-            const modalClose7 = document.getElementById('myModal7');
-            const modalClose8 = document.getElementById('myModal8');
-            const modalClose9 = document.getElementById('myModal9');
-            const modalClose10 = document.getElementById('myModal10');
-            const modalClose11 = document.getElementById('myModal11');
+            $(document).ready(function() {
+                $('.notification-item').on('click', function(e) {
+                    e.preventDefault();
+                    var activityId = $(this).data('activity-id');
+                    var notificationItem = $(this); // Store the clicked element
 
-            function handleTabClick(targetContentId) {
-                modelContainer.style.display = 'none';
-                mobileModelContainer.style.display = 'none';
-                modalClose1.style.display = 'none';
-                modalClose2.style.display = 'none';
-                modalClose3.style.display = 'none';
-                modalClose4.style.display = 'none';
-                modalClose5.style.display = 'none';
-                modalClose6.style.display = 'none';
-                modalClose7.style.display = 'none';
-                modalClose8.style.display = 'none';
-                modalClose9.style.display = 'none';
-                modalClose10.style.display = 'none';
-                modalClose11.style.display = 'none';
+                    $.ajax({
+                        type: "POST",
+                        url: "update_single_notification.php", // The URL to the PHP file
+                        data: {
+                            activityId: activityId
+                        },
+                        success: function(response) {
+                            if (response.trim() === "Notification updated successfully") {
+                                // If the notification is updated successfully, remove the clicked element
+                                notificationItem.remove();
 
-                contentSections.forEach(content => {
-                    content.classList.remove('active-content');
-                });
-
-                const targetContent = document.querySelector(targetContentId);
-                targetContent.classList.add('active-content');
-            }
-
-            tabButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const targetContentId = this.getAttribute('data-floor-target');
-                    handleTabClick(targetContentId);
-                });
-            });
-        </script>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const buildings = document.querySelectorAll('.building');
-                const modals = [
-                    document.getElementById('myModal1'),
-                    document.getElementById('myModal2'),
-                    document.getElementById('myModal3'),
-                    document.getElementById('myModal4'),
-                    document.getElementById('myModal5'),
-                    document.getElementById('myModal6'),
-                    document.getElementById('myModal7'),
-                    document.getElementById('myModal8'),
-                    document.getElementById('myModal9'),
-                    document.getElementById('myModal10'),
-                    document.getElementById('myModal11')
-                ];
-
-                buildings.forEach((building, index) => {
-                    building.addEventListener('click', () => {
-                        modals.forEach(modal => {
-                            if (modal) {
-                                modal.style.display = 'none';
+                                // Update the notification count
+                                var countElement = $('#noti_number');
+                                var count = parseInt(countElement.text()) || 0;
+                                countElement.text(count > 1 ? count - 1 : '');
+                            } else {
+                                // Handle error
+                                console.error("Failed to update notification:", response);
                             }
-                        });
-
-                        if (modals[index]) {
-                            modals[index].style.display = 'block';
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle AJAX error
+                            console.error("AJAX error:", status, error);
                         }
                     });
                 });
-
-                const closeButtons = document.querySelectorAll('.close');
-                closeButtons.forEach((closeButton, index) => {
-                    closeButton.addEventListener('click', () => {
-                        modals[index].style.display = 'none';
-                    });
-                });
             });
         </script>
-        <script src="../../src/js/main.js"></script>
-        <script type="module" src="../../src/js/map.js"></script>
-        <script src="../../src/js/profileModalController.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+
     </body>
 
     </html>

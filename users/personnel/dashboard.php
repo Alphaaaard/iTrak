@@ -115,40 +115,40 @@ ORDER BY ac.date DESC";
 
     // for notif below
     // Update the SQL to join with the account and asset tables to get the admin's name and asset information
-    $loggedInUserFirstName = $_SESSION['firstName']; 
+    $loggedInUserFirstName = $_SESSION['firstName'];
     $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
     $loggedInUserLastName = $_SESSION['lastName'];
-    
+
     // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
-   
-   $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
-   $loggedInAccountId = $_SESSION['accountId'];
-   // SQL query to fetch notifications related to report activities
-   $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
+
+    $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
+    $loggedInAccountId = $_SESSION['accountId'];
+    // SQL query to fetch notifications related to report activities
+    $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
                    FROM activitylogs AS al
                   JOIN account AS acc ON al.accountID = acc.accountID
                   WHERE al.tab='Report' AND al.p_seen = '0' AND al.accountID != ? AND action NOT LIKE 'Changed status of asset ID%'
                   ORDER BY al.date DESC 
                   LIMIT 5"; // Set limit to 5
-   
-   // Prepare the SQL statement
-   $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
-   
-   // Bind the parameter to exclude the current user's account ID
-   $stmtLatestLogs->bind_param("i", $loggedInAccountId);
-   
-   // Execute the query
-   $stmtLatestLogs->execute();
-   $resultLatestLogs = $stmtLatestLogs->get_result();
-   
-   $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
+
+    // Prepare the SQL statement
+    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+
+    // Bind the parameter to exclude the current user's account ID
+    $stmtLatestLogs->bind_param("i", $loggedInAccountId);
+
+    // Execute the query
+    $stmtLatestLogs->execute();
+    $resultLatestLogs = $stmtLatestLogs->get_result();
+
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
    WHERE p_seen = '0' AND accountID != ? AND action NOT LIKE 'Changed status of asset ID%'";
-   $stmt = $conn->prepare($unseenCountQuery);
-   $stmt->bind_param("i", $loggedInAccountId);
-   $stmt->execute();
-   $stmt->bind_result($unseenCount);
-   $stmt->fetch();
-   $stmt->close();
+    $stmt = $conn->prepare($unseenCountQuery);
+    $stmt->bind_param("i", $loggedInAccountId);
+    $stmt->execute();
+    $stmt->bind_result($unseenCount);
+    $stmt->fetch();
+    $stmt->close();
 
 
 
@@ -209,17 +209,18 @@ ORDER BY ac.date DESC";
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     </head>
     <style>
-.notification-indicator {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: red;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-</style>
+        .notification-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: red;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+
     <body>
         <!-- NAVBAR -->
         <div id="navbar" class="">
@@ -232,61 +233,61 @@ ORDER BY ac.date DESC";
                 </div>
                 <div class="content-nav">
                     <div class="notification-dropdown">
-                    <a href="#" class="notification" id="notification-button">
-    <i class="fa fa-bell" aria-hidden="true"></i>
-    <!-- Notification Indicator Dot -->
-    <?php if ($unseenCount > 0): ?>
-    <span class="notification-indicator"></span>
-    <?php endif; ?>
-</a>
+                        <a href="#" class="notification" id="notification-button">
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+                            <!-- Notification Indicator Dot -->
+                            <?php if ($unseenCount > 0) : ?>
+                                <span class="notification-indicator"></span>
+                            <?php endif; ?>
+                        </a>
 
 
 
 
-<div class="dropdown-content" id="notification-dropdown-content">
-    <h6 class="dropdown-header">Alerts Center</h6>
-    <!-- PHP code to display notifications will go here -->
-    <?php
-if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
-    while ($row = $resultLatestLogs->fetch_assoc()) {
-        $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
-        $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
-        $actionText = $row["action"];
-    
-        // Initialize the notification text as empty
-        $notificationText = "";
-        if (strpos($actionText, $adminRole) === false) {
-            // Role is not in the action text, so prepend it to the admin name
-            $adminName = "$adminRole $adminName";
-        }
-        // Check for 'Assigned maintenance personnel' action
-        if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
-            $assignedName = $matches[1];
-            $assetId = $matches[2];
-            $notificationText = "assigned $assignedName to asset ID $assetId";
-        }
-        // Check for 'Changed status of asset ID' action
-        elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
-            $assetId = $matches[1];
-            $newStatus = $matches[2];
-            $notificationText = "changed status of asset ID $assetId to $newStatus";
-        }
+                        <div class="dropdown-content" id="notification-dropdown-content">
+                            <h6 class="dropdown-header">Alerts Center</h6>
+                            <!-- PHP code to display notifications will go here -->
+                            <?php
+                            if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
+                                while ($row = $resultLatestLogs->fetch_assoc()) {
+                                    $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+                                    $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
+                                    $actionText = $row["action"];
 
-        // If notification text is set, echo the notification
-        if (!empty($notificationText)) {
-            // HTML for notification item
-            echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
-        }
-    }
-} else {
-    // No notifications found
-    echo '<a href="#">No new notifications</a>';
-}
-?>
-<a href="activity-logs.php" class="view-all">View All</a>
+                                    // Initialize the notification text as empty
+                                    $notificationText = "";
+                                    if (strpos($actionText, $adminRole) === false) {
+                                        // Role is not in the action text, so prepend it to the admin name
+                                        $adminName = "$adminRole $adminName";
+                                    }
+                                    // Check for 'Assigned maintenance personnel' action
+                                    if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
+                                        $assignedName = $matches[1];
+                                        $assetId = $matches[2];
+                                        $notificationText = "assigned $assignedName to asset ID $assetId";
+                                    }
+                                    // Check for 'Changed status of asset ID' action
+                                    elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
+                                        $assetId = $matches[1];
+                                        $newStatus = $matches[2];
+                                        $notificationText = "changed status of asset ID $assetId to $newStatus";
+                                    }
 
-</div>
-</div>
+                                    // If notification text is set, echo the notification
+                                    if (!empty($notificationText)) {
+                                        // HTML for notification item
+                                        echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
+                                    }
+                                }
+                            } else {
+                                // No notifications found
+                                echo '<a href="#">No new notifications</a>';
+                            }
+                            ?>
+                            <a href="activity-logs.php" class="view-all">View All</a>
+
+                        </div>
+                    </div>
                     <a href="#" class="settings profile">
                         <div class="profile-container" title="settings">
                             <div class="profile-img">
@@ -582,37 +583,37 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
 
 
                         </main>
-                    <!-- Bar Graph -->
-<div class="chart-container">
-            <div class="filter-container1 flex-container">
-                <h5 class="labelTC">Task Completion</h5>
-                <div class="bar-filter">
-                    <div class="filter-wrapper">
-                        <select id="monthFilter">
-                            <option value="">Select Month</option>
-                            <option value="1">January</option>
-                            <option value="2">February</option>
-                            <option value="3">March</option>
-                            <option value="4">April</option>
-                            <option value="5">May</option>
-                            <option value="6">June</option>
-                            <option value="7">July</option>
-                            <option value="8">August</option>
-                            <option value="9">September</option>
-                            <option value="10">October</option>
-                            <option value="11">November</option>
-                            <option value="12">December</option>
-                        </select>
-                    </div>
-                    <select id="employeeFilter">
-                        <option value="">Select Employee</option>
-                        <!-- Employee options will be populated dynamically via AJAX -->
-                    </select>
-                </div>
-            </div>
-            <canvas id="statusChart"></canvas>
-        </div>
-<!-- END OF BAR GRAPH -->                                                
+                        <!-- Bar Graph -->
+                        <div class="chart-container">
+                            <div class="filter-container1 flex-container">
+                                <h5 class="labelTC">Task Completion</h5>
+                                <div class="bar-filter">
+                                    <div class="filter-wrapper">
+                                        <select id="monthFilter">
+                                            <option value="">Select Month</option>
+                                            <option value="1">January</option>
+                                            <option value="2">February</option>
+                                            <option value="3">March</option>
+                                            <option value="4">April</option>
+                                            <option value="5">May</option>
+                                            <option value="6">June</option>
+                                            <option value="7">July</option>
+                                            <option value="8">August</option>
+                                            <option value="9">September</option>
+                                            <option value="10">October</option>
+                                            <option value="11">November</option>
+                                            <option value="12">December</option>
+                                        </select>
+                                    </div>
+                                    <select id="employeeFilter">
+                                        <option value="">Select Employee</option>
+                                        <!-- Employee options will be populated dynamically via AJAX -->
+                                    </select>
+                                </div>
+                            </div>
+                            <canvas id="statusChart"></canvas>
+                        </div>
+                        <!-- END OF BAR GRAPH -->
 
 
                     </section>
@@ -677,19 +678,20 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                         <div class="doughnut-chart-container">
                             <div class="statistics">
                                 <h5>Select a Building</h5>
+                                <div class="filter-container">
+                                    <select id="filter-select" onchange="updateChart()">
+                                        <option value="all">All Buildings</option>
+                                        <?php
+                                        $buildingQuery = "SELECT DISTINCT building FROM asset";
+                                        $buildings = $conn->query($buildingQuery);
+                                        while ($building = $buildings->fetch_assoc()) {
+                                            echo "<option value='" . $building['building'] . "'>" . $building['building'] . "</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="filter-container">
-                                <select id="filter-select" onchange="updateChart()">
-                                    <option value="">Choose a Building</option>
-                                    <?php
-                                    $buildingQuery = "SELECT DISTINCT building FROM asset";
-                                    $buildings = $conn->query($buildingQuery);
-                                    while ($building = $buildings->fetch_assoc()) {
-                                        echo "<option value='" . $building['building'] . "'>" . $building['building'] . "</option>";
-                                    }
-                                    ?>
-                                </select>
-                            </div>
+
                             <div id="chart-container">
                                 <canvas id="doughnutChart"></canvas>
                             </div>
@@ -760,10 +762,9 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
         <script>
             // Status to color mapping
             var statusColors = {
-                'Working': 'green',
-                'Under Maintenance': 'yellow',
-                'For Replacement': 'orange',
-                'Need to Repair': 'red'
+                'Working': '#91D694',
+                'Under Maintenance': '#FCFF80',
+                'For Replacement': '#6EB5FF',
             };
 
             // Initialize the chart with a gray segment
@@ -806,7 +807,7 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                             // Map the response to the chart data and colors
                             var newLabels = Object.keys(response);
                             var newValues = Object.values(response);
-                            var backgroundColors = newLabels.map(status => statusColors[status] || 'red');
+                            var backgroundColors = newLabels.map(status => statusColors[status] || '#FF5C5D');
 
                             // Update the chart with the new data and colors
                             doughnutChart.data.labels = newLabels;
@@ -827,7 +828,7 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
             });
         </script>
 
-<script>
+        <script>
             $(document).ready(function() {
                 // Define default month and week as January and Week 1
                 var defaultMonth = 3; // January

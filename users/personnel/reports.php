@@ -1,8 +1,16 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+
+require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
+
 session_start();
 include_once("../../config/connection.php");
 $conn = connection();
-date_default_timezone_set('Asia/Manila');
+
 function logActivity($conn, $accountId, $actionDescription, $tabValue)
 {
     $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, NOW(), ?, ?)");
@@ -13,76 +21,14 @@ function logActivity($conn, $accountId, $actionDescription, $tabValue)
     $stmt->close();
 }
 
-// Fetch Report activity logs
-$loggedInUserFirstName = $_SESSION['firstName']; // or the name field you have in session that you want to check against
-$loggedInUsermiddleName = $_SESSION['middleName']; // assuming you also have the last name in the session
-$loggedInUserLastName = $_SESSION['lastName']; //kung ano ung naka declare dito eto lang ung magiging data 
-// Concatenate first name and last name for the action field check
-$loggedInFullName = $loggedInUserFirstName . " " . $loggedInUsermiddleName . " " . $loggedInUserLastName; //kung ano ung naka declare dito eto lang ung magiging data 
-
-// Adjust the SQL to check the 'action' field for the logged-in user's name
-$sqlReport = "SELECT ac.*, a.firstName, a.middleName, a.lastName
-FROM activitylogs AS ac
-LEFT JOIN account AS a ON ac.accountID = a.accountID
-WHERE ac.tab='Report' AND ac.action LIKE ?
-ORDER BY ac.date DESC";
-
-// Prepare the SQL statement
-$stmt = $conn->prepare($sqlReport);
-
-// Create a wildcard search term for the name
-$searchTerm = "%" . $loggedInFullName . "%";
-
-// Bind the parameter and execute
-$stmt->bind_param("s", $searchTerm);
-$stmt->execute();
-$resultReport = $stmt->get_result();
-// for notif below
-// Update the SQL to join with the account and asset tables to get the admin's name and asset information
-$loggedInUserFirstName = $_SESSION['firstName'];
-$loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
-$loggedInUserLastName = $_SESSION['lastName'];
-
-// Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
-
-$loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
-$loggedInAccountId = $_SESSION['accountId'];
-// SQL query to fetch notifications related to report activities
-$sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
-                   FROM activitylogs AS al
-                  JOIN account AS acc ON al.accountID = acc.accountID
-                  WHERE al.tab='Report' AND al.p_seen = '0' AND al.accountID != ? AND action NOT LIKE 'Changed status of asset ID%'
-                  ORDER BY al.date DESC 
-                  LIMIT 5"; // Set limit to 5
-
-// Prepare the SQL statement
-$stmtLatestLogs = $conn->prepare($sqlLatestLogs);
-
-// Bind the parameter to exclude the current user's account ID
-$stmtLatestLogs->bind_param("i", $loggedInAccountId);
-
-// Execute the query
-$stmtLatestLogs->execute();
-$resultLatestLogs = $stmtLatestLogs->get_result();
-
-$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
-   WHERE p_seen = '0' AND accountID != ? AND action NOT LIKE 'Changed status of asset ID%'";
-$stmt = $conn->prepare($unseenCountQuery);
-$stmt->bind_param("i", $loggedInAccountId);
-$stmt->execute();
-$stmt->bind_result($unseenCount);
-$stmt->fetch();
-$stmt->close();
-
-
-
-if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['userLevel']) && isset($_SESSION['role'])) {
+if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
     // For personnel page, check if userLevel is 3
     if ($_SESSION['userLevel'] != 3) {
         // If not personnel, redirect to an error page or login
         header("Location:error.php");
         exit;
     }
+
     $sql = "SELECT * FROM asset WHERE status = 'Working'";
     $result = $conn->query($sql) or die($conn->error);
 
@@ -122,38 +68,98 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     }
 
 
+    // for notif below
+    // Update the SQL to join with the account and asset tables to get the admin's name and asset information
+    $loggedInUserFirstName = $_SESSION['firstName'];
+    $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
+    $loggedInUserLastName = $_SESSION['lastName'];
+
+    // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
+
+    $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
+    $loggedInAccountId = $_SESSION['accountId'];
+    // SQL query to fetch notifications related to report activities
+    $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
+                FROM activitylogs AS al
+               JOIN account AS acc ON al.accountID = acc.accountID
+               WHERE al.tab='Report' AND al.seen = '0' AND al.accountID != ?
+               ORDER BY al.date DESC 
+               LIMIT 5"; // Set limit to 5
+
+    // Prepare the SQL statement
+    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+
+    // Bind the parameter to exclude the current user's account ID
+    $stmtLatestLogs->bind_param("i", $loggedInAccountId);
+
+    // Execute the query
+    $stmtLatestLogs->execute();
+    $resultLatestLogs = $stmtLatestLogs->get_result();
+
+
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
+    $stmt = $conn->prepare($unseenCountQuery);
+    $stmt->bind_param("i", $loggedInAccountId);
+    $stmt->execute();
+    $stmt->bind_result($unseenCount);
+    $stmt->fetch();
+    $stmt->close();
 
     if (isset($_POST['assignMaintenance'])) {
         $assetId = $_POST['assetId'];
         $assignedName = $_POST['assignedName'];
         $assignSql = "UPDATE `asset` SET `assignedName`='$assignedName' WHERE `assetId`='$assetId'";
-        // Define the SQL statement for assigning maintenance personnel
-
 
         // Perform the query only if $assignSql is not empty
         if (!empty($assignSql) && $conn->query($assignSql) === TRUE) {
             logActivity($conn, $_SESSION['accountId'], "Assigned maintenance personnel $assignedName to asset ID $assetId.", 'Report');
+
+            // Fetch the email of the assigned personnel
+            $emailQuery = "SELECT email FROM account WHERE CONCAT(firstName, ' ', middleName, ' ', lastName) = ?";
+            $stmt = $conn->prepare($emailQuery);
+            $stmt->bind_param("s", $assignedName);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $toEmail = $row['email'];
+
+                // Set up PHPMailer
+                $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
+
+                try {
+                    //Server settings
+                    $mail->isSMTP();
+                    $mail->Host       = 'smtp.gmail.com'; // Specify main and backup SMTP servers
+                    $mail->SMTPAuth   = true;
+                    $mail->Username   = 'qcu.upkeep@gmail.com'; // SMTP username
+                    $mail->Password   = 'qvpx bbcm bgmy hcvf'; // SMTP password
+                    $mail->SMTPSecure = 'tls';
+                    $mail->Port       = 587;
+
+                    //Recipients
+                    $mail->setFrom('qcu.upkeep@gmail.com', 'UpKeep');
+                    $mail->addAddress($toEmail); // Add a recipient
+
+                    // Content
+                    $mail->isHTML(true); // Set email format to HTML
+                    $mail->Subject = 'Task Assignment Notification';
+                    $mail->Body    = 'The Admin assigned you to a new task. Please check the system for details.';
+
+                    $mail->send();
+                    // You can add additional echo or logging here if needed
+                } catch (Exception $e) {
+                    // Handle errors with mail sending here
+                    // You can add additional echo or logging here if needed
+                }
+            }
         } else {
             echo "Error assigning maintenance personnel: " . $conn->error;
         }
         header("Location: reports.php");
     }
-    if (isset($_SESSION['accountId'])) {
-        $accountId = $_SESSION['accountId'];
-        $todayDate = date("Y-m-d");
 
-        // Check if there's a timeout value for this user for today
-        $timeoutQuery = "SELECT timeout FROM attendancelogs WHERE accountId = '$accountId' AND date = '$todayDate'";
-        $timeoutResult = $conn->query($timeoutQuery);
-        $timeoutRow = $timeoutResult->fetch_assoc();
-
-        if ($timeoutRow && $timeoutRow['timeout'] !== null) {
-            // User has a timeout value, force logout
-            session_destroy(); // Destroy all session data
-            header("Location: ../../index.php?logout=timeout"); // Redirect to the login page with a timeout flag
-            exit;
-        }
-    }
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -166,40 +172,65 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
-        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/reports.css" />
-        <style>
-            #map {
-                display: none;
-            }
-        </style>
-        <style>
-            .notification-indicator {
-                display: inline-block;
-                width: 10px;
-                height: 10px;
-                border-radius: 50%;
-                background-color: red;
-                position: absolute;
-                top: 10px;
-                right: 10px;
-            }
-        </style>
-        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+        <script src="../../src/js/reports.js"></script>
+        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
+
+
 
         <!--JS for the fcking tabs-->
         <script>
             $(document).ready(function() {
-                $("#pills-manager").addClass("show active");
-                $("#pills-profile").removeClass("show active");
-                $(".nav-link[data-bs-target='pills-manager']").addClass("active");
-                $(".nav-link[data-bs-target='pills-profile']").removeClass("active");
+                // this is for staying at the same pill when reloading.
+                let tabLastSelected = sessionStorage.getItem("lastTab");
+
+                if (!tabLastSelected) {
+                    // if no last tab was selected, use the pills-manager for default
+                    $("#pills-manager").addClass("show active");
+                    // $("#pills-profile").removeClass("show active");
+                    $(".nav-link[data-bs-target='pills-manager']").addClass("active");
+                    // $(".nav-link[data-bs-target='pills-profile']").removeClass("active");
+
+                } else {
+
+                    //* checks the last tab that was selected
+                    switch (tabLastSelected) {
+                        case 'pills-manager':
+                            $("#pills-manager").addClass("show active");
+                            $(".nav-link[data-bs-target='pills-manager']").addClass("active");
+                            $(".nav-link[data-bs-target='pills-profile']").removeClass("active");
+                            break;
+                        case 'pills-profile':
+                            $("#pills-profile").addClass("show active");
+                            $("#pills-manager").removeClass("show active");
+                            $(".nav-link[data-bs-target='pills-profile']").addClass("active");
+                            $(".nav-link[data-bs-target='pills-manager']").removeClass("active");
+                            break;
+                        case 'pills-replace':
+                            $("#pills-replace").addClass("show active");
+                            $("#pills-manager").removeClass("show active");
+                            $(".nav-link[data-bs-target='pills-replace']").addClass("active");
+                            $(".nav-link[data-bs-target='pills-manager']").removeClass("active");
+                            break;
+                        case 'pills-repair':
+                            $("#pills-repair").addClass("show active");
+                            $("#pills-manager").removeClass("show active");
+                            $(".nav-link[data-bs-target='pills-repair']").addClass("active");
+                            $(".nav-link[data-bs-target='pills-manager']").removeClass("active");
+                            break;
+                    }
+                }
+
+                // $("#pills-manager").addClass("show active");
+                // $("#pills-profile").removeClass("show active");
 
                 $(".nav-link").click(function() {
                     const targetId = $(this).data("bs-target");
+
+                    sessionStorage.setItem("lastTab", targetId); //* sets the targetId to the sessionStorage lastTab item
+
                     $(".tab-pane").removeClass("show active");
                     $(`#${targetId}`).addClass("show active");
                     $(".nav-link").removeClass("active");
@@ -208,6 +239,18 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         </script>
     </head>
+    <style>
+        .notification-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: red;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
 
     <body>
         <div id="navbar" class="">
@@ -215,14 +258,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 <div class="hamburger">
                     <i class="bi bi-list"></i>
                     <a href="#" class="brand" title="logo">
+                        <!-- <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i> -->
                     </a>
                 </div>
                 <div class="content-nav">
                     <div class="notification-dropdown">
-
-
-
-
 
                         <a href="#" class="notification" id="notification-button">
                             <i class="fa fa-bell" aria-hidden="true"></i>
@@ -279,6 +319,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         </div>
                     </div>
+
                     <a href="#" class="settings profile">
                         <div class="profile-container" title="settings">
                             <div class="profile-img">
@@ -316,13 +357,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             </div>
                         </div>
                     </a>
+
                     <div id="settings-dropdown" class="dropdown-content1">
                         <div class="profile-name-container" id="mobile">
                             <div><a class="profile-name"><?php echo $_SESSION['firstName']; ?></a></div>
                             <div><a class="profile-role"><?php echo $_SESSION['role']; ?></a></div>
                             <hr>
                         </div>
-                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i class="bi bi-person profile-icons"></i>Profile</a>
+                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><img src="../../src/icons/Profile.svg" alt="" class="profile-icons">Profile</a>
                         <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
                     </div>
                 <?php
@@ -334,6 +376,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </nav>
         </div>
+        <!-- SIDEBAR -->
         <section id="sidebar">
             <div href="#" class="brand" title="logo">
                 <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
@@ -354,6 +397,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <span class="text">Attendance Logs</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="./map.php">
                         <i class="bi bi-map"></i>
@@ -380,10 +424,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </li>
             </ul>
         </section>
+        <!-- SIDEBAR -->
         <section id="content">
             <main>
                 <div class="content-container">
-                    <div id="map"></div>
                     <header>
                         <div class="cont-header">
                             <!-- <h1 class="tab-name">Reports</h1> -->
@@ -395,10 +439,24 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <option value="category">Category</option>
                                     <option value="location">Location</option>
                                 </select>
+
+                                <div class="col-4">
+                                    <select id="rows-display-dropdown" class="form-select dropdown-rows" aria-label="Default select example">
+                                        <option value="20" selected>Show 20 rows</option>
+                                        <option class="hidden"></option>
+                                        <option value="50">Show 50 rows</option>
+                                        <option value="100">Show 100 rows</option>
+                                        <option value="150">Show 150 rows</option>
+                                        <option value="200">Show 200 rows</option>
+                                    </select>
+                                </div>
+
                                 <!-- Search Box -->
-                                <form class="d-flex" role="search" id="searchForm">
+                                <form class="d-flex col-sm-5" role="search" id="searchForm">
                                     <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" name="q" />
                                 </form>
+
+
                             </div>
                         </div>
                     </header>
@@ -406,10 +464,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <!--Content start of tabs-->
                     <div class="new-nav">
                         <ul>
-                            <li><a href="#" class="nav-link box" data-bs-target="pills-manager">Working</a></li>
-                            <li><a href="#" class="nav-link" data-bs-target="pills-profile">Under <br>Maintenance</a></li>
-                            <li><a href="#" class="nav-link box" data-bs-target="pills-replace">For Replacement</a></li>
-                            <li><a href="#" class="nav-link box" data-bs-target="pills-repair">For Repair</a></li>
+                            <li><a href="#" class="nav-link" data-bs-target="pills-manager">Working</a></li>
+                            <li><a href="#" class="nav-link" data-bs-target="pills-profile">Under Maintenance</a></li>
+                            <li><a href="#" class="nav-link" data-bs-target="pills-replace">For Replacement</a></li>
+                            <li><a href="#" class="nav-link" data-bs-target="pills-repair">Need Repair</a></li>
                         </ul>
                     </div>
 
@@ -588,7 +646,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             echo '<td>';
                                             echo '<form method="post" action="">';
                                             echo '<input type="hidden" name="assetId" value="' . $row4['assetId'] . '">';
-
+                                            echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#exampleModal5">Assign</button>';
                                             echo '</form>';
                                             echo '</td>';
                                         } else {
@@ -609,171 +667,286 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 ?>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </main>
+            <div class="pagination-reports">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </section>
 
         <section>
+            <!--Modal sections-->
+            <!--Assign Modal for table 4-->
+            <div class="modal-parent">
+                <div class="modal modal-xl fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content assingee-container">
 
-            <!-- PROFILE MODALS -->
-            <?php include_once 'modals/modal_layout.php'; ?>
+                            <div class="header">
+                                <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="assignee-header">
+                                    <label for="assignedName" class="form-label assignee-tag">CHOOSE A MAINTENANCE PERSONNEL: </label>
+                                </div>
+                                <form method="post" class="row g-3" id="assignPersonnelForm">
+                                    <h5></h5>
+                                    <input type="hidden" name="assignMaintenance">
+                                    <div class="col-4" style="display:none">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="category" class="form-label">Category:</label>
+                                        <input type="text" class="form-control" id="category" name="category" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="building" class="form-label">Building:</label>
+                                        <input type="text" class="form-control" id="building" name="building" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="floor" class="form-label">Floor:</label>
+                                        <input type="text" class="form-control" id="floor" name="floor" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="room" class="form-label">Room:</label>
+                                        <input type="text" class="form-control" id="room" name="room" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="status" class="form-label">Status:</label>
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working">Working</option>
+                                            <option value="Under Maintenance">Under Maintenance</option>
+                                            <option value="For Replacement">For Replacement</option>
+                                            <option value="Need Repair">Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <select class="form-select assignedName" id="assignedName" name="assignedName" style="color: black;">
+                                            <?php
+                                            // Assuming you have a database connection established in $conn
+                                            // SQL to fetch personnel with the role of "Maintenance Personnel"
+                                            $assignSql = "SELECT firstName, middleName, lastName FROM account WHERE userlevel = '3'";
+                                            $personnelResult = $conn->query($assignSql);
 
 
-            <!-- RFID MODAL -->
-            <div class="modal" id="staticBackdrop112" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <img src="../../src/img/taprfid.jpg" width="100%" alt="" class="Scan" />
+                                            if ($personnelResult) {
+                                                while ($row = $personnelResult->fetch_assoc()) {
+                                                    $fullName = $row['firstName'] . ' ' . $row['lastName'];
+                                                    // Echo each option within the select
+                                                    echo '<option value="' . htmlspecialchars($fullName) . '">' . htmlspecialchars($fullName) . '</option>';
+                                                }
+                                            } else {
+                                                // Handle potential errors or no results
+                                                echo '<option value="No Maintenance Personnel Found">';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </form>
 
-                            <form id="rfidForm">
-                                <input type="text" id="rfid" name="rfid" value="">
-                            </form>
+                                <div class="col-4" style="display:none">
+                                    <label for="assignedBy" class="form-label">Assigned By:</label>
+                                    <input type="text" class="form-control" id="assignedBy" name="assignedBy" readonly />
+                                </div>
+                            </div>
+                            <div class="footer">
+                                <button type="button" class="btn add-modal-btn" onclick="assignPersonnel()">
+                                    Save
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Edit for table 4
+            <div class="modal fade" id="staticBackdrop5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-footer">
+                            Are you sure you want to save changes?
+                            <div class="modal-popups">
+                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                <button class="btn add-modal-btn" name="assignMaintenance" data-bs-dismiss="modal">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form> -->
+        </section>
 
-            <script src="../../src/js/main.js"></script>
-            <script src="../../src/js/archive.js"></script>
-            <script src="../../src/js/profileModalController.js"></script>
-            <!-- Add this script after your existing scripts -->
-            <!-- Add this script after your existing scripts -->
+        <!-- PROFILE MODALS -->
+        <?php include_once 'modals/modal_layout.php'; ?>
+
+
+        <!-- RFID MODAL -->
+        <div class="modal" id="staticBackdrop112" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img src="../../src/img/taprfid.jpg" width="100%" alt="" class="Scan" />
+
+                        <form id="rfidForm">
+                            <input type="text" id="rfid" name="rfid" value="">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="../../src/js/main.js"></script>
+        <script src="../../src/js/archive.js"></script>
+        <script src="../../src/js/profileModalController.js"></script>
+        <script src="../../src/js/reports.js"></script>
+        <!-- Add this script after your existing scripts -->
+        <!-- Add this script after your existing scripts -->
 
 
 
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-            <script src="../../src/js/locationTracker.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-            <script>
-                setInterval(function() {
-                    // Call a script to check if the user has timed out
-                    fetch('../../check_timeout.php')
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.timeout) {
-                                alert('You have been logged out due to timeout.');
-                                window.location.href = '../index.php?logout=timeout'; // Redirect to login page
-                            }
-                        });
-                }, 60000); // Checks every minute, you can adjust the interval
-            </script>
-            <script>
-                $(document).ready(function() {
-                    $('.notification-item').on('click', function(e) {
-                        e.preventDefault();
-                        var activityId = $(this).data('activity-id');
-                        var notificationItem = $(this); // Store the clicked element
+        <script>
+            //PARA MAGDIRECT KA SA PAGE 
+            function redirectToPage(building, floor, assetId) {
+                var newLocation = '';
+                if (building === 'New Academic' && floor === '1F') {
+                    newLocation = "../../users/building/NEB/NEWBF1.php";
+                } else if (building === 'Yellow' && floor === '1F') {
+                    newLocation = "../../users/building/OLB/OLBF1.php";
+                } else if (building === 'Korphil' && floor === '1F') {
+                    newLocation = "../../users/building/KOB/KOBF1.php";
+                } else if (building === 'Bautista' && floor === 'Basement') {
+                    newLocation = "../../users/building/BAB/BABF1.php";
+                } else if (building === 'Belmonte' && floor === '1F') {
+                    newLocation = "../../users/building/BEB/BEBF1.php";
+                }
 
-                        $.ajax({
-                            type: "POST",
-                            url: "update_single_notification.php", // The URL to the PHP file
-                            data: {
-                                activityId: activityId
-                            },
-                            success: function(response) {
-                                if (response.trim() === "Notification updated successfully") {
-                                    // If the notification is updated successfully, remove the clicked element
-                                    notificationItem.remove();
+                // Append the assetId to the URL as a query parameter
+                window.location.href = newLocation + '?assetId=' + assetId;
+            }
 
-                                    // Update the notification count
-                                    var countElement = $('#noti_number');
-                                    var count = parseInt(countElement.text()) || 0;
-                                    countElement.text(count > 1 ? count - 1 : '');
-                                } else {
-                                    // Handle error
-                                    console.error("Failed to update notification:", response);
-                                }
-                            },
-                            error: function(xhr, status, error) {
-                                // Handle AJAX error
-                                console.error("AJAX error:", status, error);
-                            }
-                        });
-                    });
+            $(document).on('click', 'table tr', function() {
+                var assetId = $(this).find('td:eq(0)').text(); // Assuming first TD is the assetId
+                var building = $(this).find('td:eq(3)').text().split(' / ')[0]; // Adjust the index as needed
+                var floor = $(this).find('td:eq(3)').text().split(' / ')[1]; // Adjust the index as needed
+                redirectToPage(building, floor, assetId);
+            });
+        </script>
+
+
+        <script>
+            $(document).ready(function() {
+
+                // Function to populate the modal fields
+                function populateModal(row, modalId) {
+                    $(modalId + " #assetId").val(row.find("td:eq(0)").text());
+                    $(modalId + " #date").val(row.find("td:eq(1)").text());
+                    $(modalId + " #category").val(row.find("td:eq(2)").text());
+                    $(modalId + " #building").val(row.find("td:eq(4)").text());
+                    $(modalId + " #floor").val(row.find("td:eq(5)").text());
+                    $(modalId + " #room").val(row.find("td:eq(6)").text());
+                    $(modalId + " #images").val(row.find("td:eq(7)").text());
+                    $(modalId + " #status").val(row.find("td:eq(8)").text());
+                    $(modalId + " #assignedBy").val(row.find("td:eq(9)").text());
+                    $(modalId + " #assignedName").val(row.find("td:eq(10)").text());
+                }
+
+                // Event delegation for dynamically loaded content
+                // For "Working" tab table rows
+                $(document).on("click", "#pills-manager .table-container table tbody tr", function() {
+                    var row = $(this);
+                    populateModal(row, "#exampleModal");
+                    $("#exampleModal").modal("show");
                 });
-            </script>
 
-
-            <script>
-                $(document).ready(function() {
-                    // Function to populate the modal fields
-                    function populateModal(row, modalId) {
-                        $(modalId + " #assetId").val(row.find("td:eq(0)").text());
-                        $(modalId + " #date").val(row.find("td:eq(1)").text());
-                        $(modalId + " #category").val(row.find("td:eq(2)").text());
-                        $(modalId + " #building").val(row.find("td:eq(4)").text());
-                        $(modalId + " #floor").val(row.find("td:eq(5)").text());
-                        $(modalId + " #room").val(row.find("td:eq(6)").text());
-                        $(modalId + " #images").val(row.find("td:eq(7)").text());
-                        $(modalId + " #status").val(row.find("td:eq(8)").text());
-                        $(modalId + " #assignedBy").val(row.find("td:eq(9)").text());
-                        $(modalId + " #assignedName").val(row.find("td:eq(10)").text());
-                    }
-
-                    // Event delegation for dynamically loaded content
-                    // For "Working" tab table rows
-                    $(document).on("click", "#pills-manager .table-container table tbody tr", function() {
-                        var row = $(this);
-                        populateModal(row, "#exampleModal");
-                        $("#exampleModal").modal("show");
-                    });
-
-                    // For "Under Maintenance" tab table rows
-                    $(document).on("click", "#pills-profile .table-container table tbody tr", function() {
-                        var row = $(this);
-                        populateModal(row, "#exampleModal2");
-                        $("#exampleModal2").modal("show");
-                    });
-
-                    $(document).on("click", "#pills-replace .table-container table tbody tr", function() {
-                        var row = $(this);
-                        populateModal(row, "#exampleModal3");
-                        $("#exampleModal3").modal("show");
-                    });
-
-                    $(document).on("click", "#pills-repair .table-container table tbody tr", function() {
-                        var row = $(this);
-                        populateModal(row, "#exampleModal4");
-                        $("#exampleModal4").modal("show");
-                    });
-
-                    //PARA TO SA PAGASSIGN MODAL
-                    $(document).on("click", "#pills-repair .view-btn", function(event) {
-                        event.stopPropagation(); // Prevent the click from reaching the parent <tr>
-
-                        // Get the closest parent row of the clicked button
-                        var row = $(this).closest("tr");
-
-                        // Populate the modal with data from the row
-                        $("#exampleModal5 #assetId").val(row.find("td:eq(0)").text());
-                        $("#exampleModal5 #date").val(row.find("td:eq(1)").text());
-                        $("#exampleModal5 #category").val(row.find("td:eq(2)").text());
-                        $("#exampleModal5 #building").val(row.find("td:eq(4)").text());
-                        $("#exampleModal5 #floor").val(row.find("td:eq(5)").text());
-                        $("#exampleModal5 #room").val(row.find("td:eq(6)").text());
-                        $("#exampleModal5 #images").val(row.find("td:eq(7)").text());
-                        $("#exampleModal5 #status").val(row.find("td:eq(8)").text()).change();
-                        $("#exampleModal5 #assignedBy").val(row.find("td:eq(9)").text());
-                        $("#exampleModal5 #assignedName").val(row.find("td:eq(10)").text());
-
-                        // Finally, show the modal
-                        $("#exampleModal5").modal("show");
-                    });
+                // For "Under Maintenance" tab table rows
+                $(document).on("click", "#pills-profile .table-container table tbody tr", function() {
+                    var row = $(this);
+                    populateModal(row, "#exampleModal2");
+                    $("#exampleModal2").modal("show");
                 });
-            </script>
 
-<script>
+                $(document).on("click", "#pills-replace .table-container table tbody tr", function() {
+                    var row = $(this);
+                    populateModal(row, "#exampleModal3");
+                    $("#exampleModal3").modal("show");
+                });
+
+                $(document).on("click", "#pills-repair .table-container table tbody tr", function() {
+                    var row = $(this);
+                    populateModal(row, "#exampleModal4");
+                    $("#exampleModal4").modal("show");
+                });
+
+                //PARA TO SA PAGASSIGN MODAL
+                $(document).on("click", "#pills-repair .view-btn", function(event) {
+                    event.stopPropagation(); // Prevent the click from reaching the parent <tr>
+
+                    // Get the closest parent row of the clicked button
+                    var row = $(this).closest("tr");
+
+                    // Populate the modal with data from the row
+                    $("#exampleModal5 #assetId").val(row.find("td:eq(0)").text());
+                    $("#exampleModal5 #date").val(row.find("td:eq(1)").text());
+                    $("#exampleModal5 #category").val(row.find("td:eq(2)").text());
+                    $("#exampleModal5 #building").val(row.find("td:eq(4)").text());
+                    $("#exampleModal5 #floor").val(row.find("td:eq(5)").text());
+                    $("#exampleModal5 #room").val(row.find("td:eq(6)").text());
+                    $("#exampleModal5 #images").val(row.find("td:eq(7)").text());
+                    $("#exampleModal5 #status").val(row.find("td:eq(8)").text()).change();
+                    $("#exampleModal5 #assignedBy").val(row.find("td:eq(9)").text());
+                    $("#exampleModal5 #assignedName").val(row.find("td:eq(10)").text());
+
+                    // Finally, show the modal
+                    $("#exampleModal5").modal("show");
+                });
+            });
+        </script>
+
+        <script>
             $(document).ready(function() {
                 // Bind the filter function to the input field
                 $("#search-box").on("input", function() {
                     var query = $(this).val().toLowerCase();
                     filterTable(query);
                 });
-
 
                 function filterTable(query) {
                     $(".table-container tbody tr").each(function() {
@@ -897,7 +1070,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 $("#search-box").keyup(searchTable);
             });
         </script>
-
 
     </body>
 
