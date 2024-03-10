@@ -2,10 +2,61 @@
 session_start();
 
 include_once("../../config/connection.php");
+
 $conn = connection();
 date_default_timezone_set('Asia/Manila'); //need ata to sa lahat ng page para sa security hahah 
 
-if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
+
+if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
+
+
+    // For personnel page, check if userLevel is 3
+    if ($_SESSION['userLevel'] != 2) {
+        // If not personnel, redirect to an error page or login
+        header("Location:error.php");
+        exit;
+    }
+
+
+
+
+    // for notif below
+    // Update the SQL to join with the account and asset tables to get the admin's name and asset information
+    $loggedInUserFirstName = $_SESSION['firstName'];
+    $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
+    $loggedInUserLastName = $_SESSION['lastName'];
+
+    // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
+
+    $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
+    $loggedInAccountId = $_SESSION['accountId'];
+    // SQL query to fetch notifications related to report activities
+    $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
+                FROM activitylogs AS al
+               JOIN account AS acc ON al.accountID = acc.accountID
+               WHERE al.tab='Report' AND al.seen = '0' AND al.accountID != ?
+               ORDER BY al.date DESC 
+               LIMIT 5"; // Set limit to 5
+
+    // Prepare the SQL statement
+    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+
+    // Bind the parameter to exclude the current user's account ID
+    $stmtLatestLogs->bind_param("i", $loggedInAccountId);
+
+    // Execute the query
+    $stmtLatestLogs->execute();
+    $resultLatestLogs = $stmtLatestLogs->get_result();
+
+
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
+    $stmt = $conn->prepare($unseenCountQuery);
+    $stmt->bind_param("i", $loggedInAccountId);
+    $stmt->execute();
+    $stmt->bind_result($unseenCount);
+    $stmt->fetch();
+    $stmt->close();
+
 
 ?>
 
@@ -20,15 +71,28 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
         <link rel="icon" type="image/x-icon" href="../../src/img/tab-logo.png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- LEAFLET -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
         <!-- CSS -->
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/gps.css" />
     </head>
+    <style>
+        .notification-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: red;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
 
     <body>
         <!-- NAVBAR -->
@@ -37,24 +101,68 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                 <div class="hamburger">
                     <i class="bi bi-list"></i>
                     <a href="#" class="brand" title="logo">
+                        <!-- <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i> -->
                     </a>
                 </div>
                 <div class="content-nav">
                     <div class="notification-dropdown">
+
                         <a href="#" class="notification" id="notification-button">
-                            <i class="bi bi-bell"></i>
-                            <!-- <i class="bx bxs-bell"></i> -->
-                            <span class="num"></span>
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+                            <!-- Notification Indicator Dot -->
+                            <?php if ($unseenCount > 0) : ?>
+                                <span class="notification-indicator"></span>
+                            <?php endif; ?>
                         </a>
+
+
+
+
                         <div class="dropdown-content" id="notification-dropdown-content">
                             <h6 class="dropdown-header">Alerts Center</h6>
-                            <a href="#">May hindi nagbuhos sa Cr sa Belmonte building</a>
-                            <a href="#">Notification 2</a>
-                            <a href="#">Notification 3</a>
-                            <!-- Add more notification items here -->
-                            <a href="#" class="view-all">View All</a>
+                            <!-- PHP code to display notifications will go here -->
+                            <?php
+                            if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
+                                while ($row = $resultLatestLogs->fetch_assoc()) {
+                                    $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+                                    $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
+                                    $actionText = $row["action"];
+
+                                    // Initialize the notification text as empty
+                                    $notificationText = "";
+                                    if (strpos($actionText, $adminRole) === false) {
+                                        // Role is not in the action text, so prepend it to the admin name
+                                        $adminName = "$adminRole $adminName";
+                                    }
+                                    // Check for 'Assigned maintenance personnel' action
+                                    if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
+                                        $assignedName = $matches[1];
+                                        $assetId = $matches[2];
+                                        $notificationText = "assigned $assignedName to asset ID $assetId";
+                                    }
+                                    // Check for 'Changed status of asset ID' action
+                                    elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
+                                        $assetId = $matches[1];
+                                        $newStatus = $matches[2];
+                                        $notificationText = "changed status of asset ID $assetId to $newStatus";
+                                    }
+
+                                    // If notification text is set, echo the notification
+                                    if (!empty($notificationText)) {
+                                        // HTML for notification item
+                                        echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
+                                    }
+                                }
+                            } else {
+                                // No notifications found
+                                echo '<a href="#">No new notifications</a>';
+                            }
+                            ?>
+                            <a href="activity-logs.php" class="view-all">View All</a>
+
                         </div>
                     </div>
+
                     <a href="#" class="settings profile">
                         <div class="profile-container" title="settings">
                             <div class="profile-img">
@@ -92,6 +200,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                             </div>
                         </div>
                     </a>
+
                     <div id="settings-dropdown" class="dropdown-content1">
                         <div class="profile-name-container" id="mobile">
                             <div><a class="profile-name"><?php echo $_SESSION['firstName']; ?></a></div>
@@ -159,13 +268,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
             </ul>
         </section>
         <!-- SIDEBAR -->
+
         <!-- CONTENT -->
         <section id="content">
             <!-- MAIN -->
             <main>
                 <header>
                     <div class="cont-header">
-                        <h1 class="tab-name-only">GPS</h1>
+                        <!-- <h1 class="tab-name-only">GPS</h1> -->
                         <div id="LocBurger" onclick="showLocation()"><i class="bi bi-list"></i></div>
                     </div>
                 </header>
@@ -181,15 +291,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
 
                         $currentDate = date('Y-m-d');
 
-
-
                         $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp, a.color, a.picture
                         FROM attendancelogs AS al
                         LEFT JOIN account AS a ON al.accountID = a.accountID
                         WHERE date = '$currentDate' AND (al.timeOut IS NULL OR al.timeOut = '')";
-
-
-
 
                         $result = $conn->query($sql);
 
@@ -197,7 +302,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                         if ($result->num_rows > 0) {
                             echo "<div class='accordion'id='accordionGPS'>";
                             echo "<div class='fake-header'>";
-                            echo "<p>Name</p>";
+                            echo "<p>NAME</p>";
                             // echo "<p>Location</p>";
                             echo "</div>";
 
@@ -211,11 +316,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                                 // Accordion item
                                 echo "<div class='accordion-item'>";
                                 echo "<h2 class='accordion-header' id='" . $headerId . "'>";
-
-
                                 echo "<button class='accordion-btn gps-info' type='button' data-bs-toggle='collapse' data-bs-target='#" . $collapseId . "' aria-expanded='false' aria-controls='" . $collapseId . "' data-firstName='" . $firstName . "'>";
-
-
                                 echo "<img src='data:image/jpeg;base64," . base64_encode($row["picture"]) . "' alt='Profile Picture' class='rounded-img'/>";
                                 echo "<span style='color: " . $row["color"] . ";'><i class='bi bi-circle-fill'></i></span>";
                                 echo htmlspecialchars($firstName . " " . $lastName);
@@ -230,23 +331,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                                 echo "</div>"; // End of accordion collapse
                                 echo "</div>"; // End of accordion item
                             }
-
-
                             echo "</div>"; // Close the main container for the accordion
-
-
-
-
-
-
                         } else {
                             echo "No users found.";
                         }
-
-                        // $conn->close();
                         ?>
-
-
                     </div>
                     <div id="map">
                         <!-- User Table Section -->
@@ -386,6 +475,41 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                             };
                         </script>
 
+                        <script>
+                            $(document).ready(function() {
+                                $('.notification-item').on('click', function(e) {
+                                    e.preventDefault();
+                                    var activityId = $(this).data('activity-id');
+                                    var notificationItem = $(this); // Store the clicked element
+
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "update_single_notification.php", // The URL to the PHP file
+                                        data: {
+                                            activityId: activityId
+                                        },
+                                        success: function(response) {
+                                            if (response.trim() === "Notification updated successfully") {
+                                                // If the notification is updated successfully, remove the clicked element
+                                                notificationItem.remove();
+
+                                                // Update the notification count
+                                                var countElement = $('#noti_number');
+                                                var count = parseInt(countElement.text()) || 0;
+                                                countElement.text(count > 1 ? count - 1 : '');
+                                            } else {
+                                                // Handle error
+                                                console.error("Failed to update notification:", response);
+                                            }
+                                        },
+                                        error: function(xhr, status, error) {
+                                            // Handle AJAX error
+                                            console.error("AJAX error:", status, error);
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
                         <style>
                             .custom-marker {
                                 width: 20px;
@@ -400,9 +524,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
         </section>
 
 
-        <!-- PROFILE MODALS -->
+        <!-- MODALS -->
         <?php include_once 'modals/modal_layout.php'; ?>
-
 
         <!-- RFID MODAL -->
         <div class="modal" id="staticBackdrop112" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
@@ -424,6 +547,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
         <script src="../../src/js/main.js"></script>
         <script src="../../src/js/gps.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
+
         <script>
             // Assuming showMarker is defined elsewhere to handle the map logic
             document.querySelectorAll('.gps-info').forEach(function(button) {
@@ -449,7 +573,5 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
         <!-- BOOTSTRAP -->
         <!-- SCRIPTS -->
     </body>
-
-
 
     </html>

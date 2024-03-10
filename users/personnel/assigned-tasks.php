@@ -13,7 +13,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         exit;
     }
 
-   
+
     if (isset($_SESSION['accountId'])) {
         $accountId = $_SESSION['accountId'];
         $todayDate = date("Y-m-d");
@@ -55,42 +55,42 @@ ORDER BY ac.date DESC";
     $stmt->bind_param("s", $searchTerm);
     $stmt->execute();
     $resultReport = $stmt->get_result();
- // for notif below
+    // for notif below
     // Update the SQL to join with the account and asset tables to get the admin's name and asset information
-    $loggedInUserFirstName = $_SESSION['firstName']; 
+    $loggedInUserFirstName = $_SESSION['firstName'];
     $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
     $loggedInUserLastName = $_SESSION['lastName'];
-    
+
     // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
-   
-   $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
-   $loggedInAccountId = $_SESSION['accountId'];
-   // SQL query to fetch notifications related to report activities
-   $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
+
+    $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
+    $loggedInAccountId = $_SESSION['accountId'];
+    // SQL query to fetch notifications related to report activities
+    $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
                    FROM activitylogs AS al
                   JOIN account AS acc ON al.accountID = acc.accountID
                   WHERE al.tab='Report' AND al.p_seen = '0' AND al.accountID != ? AND action NOT LIKE 'Changed status of asset ID%'
                   ORDER BY al.date DESC 
                   LIMIT 5"; // Set limit to 5
-   
-   // Prepare the SQL statement
-   $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
-   
-   // Bind the parameter to exclude the current user's account ID
-   $stmtLatestLogs->bind_param("i", $loggedInAccountId);
-   
-   // Execute the query
-   $stmtLatestLogs->execute();
-   $resultLatestLogs = $stmtLatestLogs->get_result();
-   
-   $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
+
+    // Prepare the SQL statement
+    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+
+    // Bind the parameter to exclude the current user's account ID
+    $stmtLatestLogs->bind_param("i", $loggedInAccountId);
+
+    // Execute the query
+    $stmtLatestLogs->execute();
+    $resultLatestLogs = $stmtLatestLogs->get_result();
+
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
    WHERE p_seen = '0' AND accountID != ? AND action NOT LIKE 'Changed status of asset ID%'";
-   $stmt = $conn->prepare($unseenCountQuery);
-   $stmt->bind_param("i", $loggedInAccountId);
-   $stmt->execute();
-   $stmt->bind_result($unseenCount);
-   $stmt->fetch();
-   $stmt->close();
+    $stmt = $conn->prepare($unseenCountQuery);
+    $stmt->bind_param("i", $loggedInAccountId);
+    $stmt->execute();
+    $stmt->bind_result($unseenCount);
+    $stmt->fetch();
+    $stmt->close();
 
 
     $stmt = $conn->prepare("SELECT picture FROM account WHERE accountId = ?");
@@ -124,16 +124,16 @@ ORDER BY ac.date DESC";
         $date = $_POST['date'];
 
 
- function logActivity($conn, $accountId, $actionDescription, $tabValue)
+        function logActivity($conn, $accountId, $actionDescription, $tabValue)
 
-    {
-        $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, NOW(), ?, ?)");
-        $stmt->bind_param("iss", $accountId, $actionDescription, $tabValue);
-        if (!$stmt->execute()) {
-            echo "Error logging activity: " . $stmt->error;
+        {
+            $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, NOW(), ?, ?)");
+            $stmt->bind_param("iss", $accountId, $actionDescription, $tabValue);
+            if (!$stmt->execute()) {
+                echo "Error logging activity: " . $stmt->error;
+            }
+            $stmt->close();
         }
-        $stmt->close();
-    }
 
         $updateSql = "UPDATE `asset` SET `category`='$category', `building`='$building', `floor`='$floor', `room`='$room', `status`='$status', `assignedName`='$assignedName', `assignedBy`='$assignedBy', `date`='$date' WHERE `assetId`='$assetId'";
         if ($conn->query($updateSql) === TRUE) {
@@ -179,17 +179,18 @@ ORDER BY ac.date DESC";
 
     </head>
     <style>
-.notification-indicator {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: red;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-</style>
+        .notification-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: red;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+
     <body>
         <!-- NAVBAR -->
         <div id="navbar" class="">
@@ -204,61 +205,61 @@ ORDER BY ac.date DESC";
 
 
 
-                    <a href="#" class="notification" id="notification-button">
-    <i class="fa fa-bell" aria-hidden="true"></i>
-    <!-- Notification Indicator Dot -->
-    <?php if ($unseenCount > 0): ?>
-    <span class="notification-indicator"></span>
-    <?php endif; ?>
-</a>
+                        <a href="#" class="notification" id="notification-button">
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+                            <!-- Notification Indicator Dot -->
+                            <?php if ($unseenCount > 0) : ?>
+                                <span class="notification-indicator"></span>
+                            <?php endif; ?>
+                        </a>
 
 
 
 
-<div class="dropdown-content" id="notification-dropdown-content">
-    <h6 class="dropdown-header">Alerts Center</h6>
-    <!-- PHP code to display notifications will go here -->
-    <?php
-if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
-    while ($row = $resultLatestLogs->fetch_assoc()) {
-        $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
-        $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
-        $actionText = $row["action"];
-    
-        // Initialize the notification text as empty
-        $notificationText = "";
-        if (strpos($actionText, $adminRole) === false) {
-            // Role is not in the action text, so prepend it to the admin name
-            $adminName = "$adminRole $adminName";
-        }
-        // Check for 'Assigned maintenance personnel' action
-        if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
-            $assignedName = $matches[1];
-            $assetId = $matches[2];
-            $notificationText = "assigned $assignedName to asset ID $assetId";
-        }
-        // Check for 'Changed status of asset ID' action
-        elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
-            $assetId = $matches[1];
-            $newStatus = $matches[2];
-            $notificationText = "changed status of asset ID $assetId to $newStatus";
-        }
+                        <div class="dropdown-content" id="notification-dropdown-content">
+                            <h6 class="dropdown-header">Alerts Center</h6>
+                            <!-- PHP code to display notifications will go here -->
+                            <?php
+                            if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
+                                while ($row = $resultLatestLogs->fetch_assoc()) {
+                                    $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+                                    $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
+                                    $actionText = $row["action"];
 
-        // If notification text is set, echo the notification
-        if (!empty($notificationText)) {
-            // HTML for notification item
-            echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
-        }
-    }
-} else {
-    // No notifications found
-    echo '<a href="#">No new notifications</a>';
-}
-?>
-<a href="activity-logs.php" class="view-all">View All</a>
+                                    // Initialize the notification text as empty
+                                    $notificationText = "";
+                                    if (strpos($actionText, $adminRole) === false) {
+                                        // Role is not in the action text, so prepend it to the admin name
+                                        $adminName = "$adminRole $adminName";
+                                    }
+                                    // Check for 'Assigned maintenance personnel' action
+                                    if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
+                                        $assignedName = $matches[1];
+                                        $assetId = $matches[2];
+                                        $notificationText = "assigned $assignedName to asset ID $assetId";
+                                    }
+                                    // Check for 'Changed status of asset ID' action
+                                    elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
+                                        $assetId = $matches[1];
+                                        $newStatus = $matches[2];
+                                        $notificationText = "changed status of asset ID $assetId to $newStatus";
+                                    }
 
-</div>
-</div>
+                                    // If notification text is set, echo the notification
+                                    if (!empty($notificationText)) {
+                                        // HTML for notification item
+                                        echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
+                                    }
+                                }
+                            } else {
+                                // No notifications found
+                                echo '<a href="#">No new notifications</a>';
+                            }
+                            ?>
+                            <a href="activity-logs.php" class="view-all">View All</a>
+
+                        </div>
+                    </div>
 
                     <a href="#" class="settings profile">
                         <div class="profile-container" title="settings">
@@ -375,82 +376,82 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                     <div class="cont-header">
                         <!-- <h1 class="tab-name">Activity Logs</h1> -->
                         <div class="tbl-filter">
-                                <select id="filter-criteria">
-                                    <option value="all">All</option> <!-- Added "All" option -->
-                                    <option value="reportId">Tracking ID</option>
-                                    <option value="date">Date</option>
-                                    <option value="category">Category</option>
-                                    <option value="location">Location</option>
-                                </select>
-                                <!-- Search Box -->
-                                <form class="d-flex" role="search" id="searchForm">
-                                    <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" name="q" />
-                                </form>
-                            </div>
+                            <select id="filter-criteria">
+                                <option value="all">All</option> <!-- Added "All" option -->
+                                <option value="reportId">Tracking ID</option>
+                                <option value="date">Date</option>
+                                <option value="category">Category</option>
+                                <option value="location">Location</option>
+                            </select>
+                            <!-- Search Box -->
+                            <form class="d-flex" role="search" id="searchForm">
+                                <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" name="q" />
+                            </form>
+                        </div>
                     </div>
                 </header>
                 <!--Tab for table 4 - Repair -->
-            <div class="tab-content pt" id="myTabContent">
-                <div class="tab-pane fade show active" id="pills-repair" role="tabpanel" aria-labelledby="repair-tab">
-                    <div class="table-content">
-                        <div class='table-header'>
-                            <table>
-                                <tr>
-                                    <th>TRACKING #</th>
-                                    <th>DATE & TIME</th>
-                                    <th>CATEGORY</th>
-                                    <th>LOCATION</th>
-                                    <th>STATUS</th>
-                                    <th>ASSIGNEE</th>
-                                </tr>
-                            </table>
-                        </div>
-                        <!--Content of table 4-->
-                        <?php
-                        if ($result->num_rows > 0) {
-                            echo "<div class='table-container'>";
-                            while ($row = $result->fetch_assoc()) {
-                                echo "<table>";
-                                echo '<tr>';
-                                echo '<td>' . $row['assetId'] . '</td>';
-                                echo '<td>' . $row['date'] . '</td>';
-                                echo '<td>' . $row['category'] . '</td>';
-                                echo '<td>' . $row['building'] . " / " . $row['floor'] . " / " . $row['room'] . '</td>';
-                                echo '<td style="display: none;">' . $row['building'] . '</td>';
-                                echo '<td style="display: none;">' . $row['floor'] . '</td>';
-                                echo '<td style="display: none;">' . $row['room'] . '</td>';
-                                echo '<td style="display: none;">' . $row['images'] . '</td>';
-                                echo '<td >' . $row['status'] . '</td>';
-                                echo '<td style="display: none;">' . $row['assignedBy'] . '</td>';
-                                if (empty($row['assignedName'])) {
-                                    // Pagwalang data eto ilalabas
-                                    echo '<td>';
-                                    echo '<form method="post" action="">';
-                                    echo '<input type="hidden" name="assetId" value="' . $row['assetId'] . '">';
-                                    echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#exampleModal5">Assign</button>';
-                                    echo '</form>';
-                                    echo '</td>';
-                                } else {
-                                    // Pagmeron data eto ilalabas
-                                    echo '<td>' . $row['assignedName'] . '</td>';
+                <div class="tab-content pt" id="myTabContent">
+                    <div class="tab-pane fade show active" id="pills-repair" role="tabpanel" aria-labelledby="repair-tab">
+                        <div class="table-content">
+                            <div class='table-header personnel-table-header'>
+                                <table>
+                                    <tr>
+                                        <th>TRACKING #</th>
+                                        <th>DATE & TIME</th>
+                                        <th>CATEGORY</th>
+                                        <th>LOCATION</th>
+                                        <th>STATUS</th>
+                                        <th>ASSIGNEE</th>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!--Content of table 4-->
+                            <?php
+                            if ($result->num_rows > 0) {
+                                echo "<div class='table-container'>";
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<table>";
+                                    echo '<tr>';
+                                    echo '<td>' . $row['assetId'] . '</td>';
+                                    echo '<td>' . $row['date'] . '</td>';
+                                    echo '<td>' . $row['category'] . '</td>';
+                                    echo '<td>' . $row['building'] . " / " . $row['floor'] . " / " . $row['room'] . '</td>';
+                                    echo '<td style="display: none;">' . $row['building'] . '</td>';
+                                    echo '<td style="display: none;">' . $row['floor'] . '</td>';
+                                    echo '<td style="display: none;">' . $row['room'] . '</td>';
+                                    echo '<td style="display: none;">' . $row['images'] . '</td>';
+                                    echo '<td >' . $row['status'] . '</td>';
+                                    echo '<td style="display: none;">' . $row['assignedBy'] . '</td>';
+                                    if (empty($row['assignedName'])) {
+                                        // Pagwalang data eto ilalabas
+                                        echo '<td>';
+                                        echo '<form method="post" action="">';
+                                        echo '<input type="hidden" name="assetId" value="' . $row['assetId'] . '">';
+                                        echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#exampleModal5">Assign</button>';
+                                        echo '</form>';
+                                        echo '</td>';
+                                    } else {
+                                        // Pagmeron data eto ilalabas
+                                        echo '<td>' . $row['assignedName'] . '</td>';
+                                    }
+                                    echo '</tr>';
                                 }
-                                echo '</tr>';
+                                echo "</table>";
+                                echo "</div>";
+                            } else {
+                                echo '<table>';
+                                echo "<div class=noDataImgH>";
+                                echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
+                                echo "</div>";
+                                echo '</table>';
                             }
-                            echo "</table>";
-                            echo "</div>";
-                        } else {
-                            echo '<table>';
-                            echo "<div class=noDataImgH>";
-                            echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
-                            echo "</div>";
-                            echo '</table>';
-                        }
-                        ?>
+                            ?>
+                        </div>
                     </div>
                 </div>
                 </div>
                 </div>
-                    </div>
             </main>
         </section>
 

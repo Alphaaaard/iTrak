@@ -142,7 +142,7 @@ p {
   border: 1px solid;
   margin-top: 10px;
   border-color: #d3d3d3;
-  min-height: 449px;
+  /* min-height: 449px; */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -177,7 +177,7 @@ p {
 }
 
 .personnel-building {
-  width: 47%;
+  width: 100%;
   min-height: 150px;
   margin: 10px;
   overflow: hidden;

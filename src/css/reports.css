@@ -33,6 +33,10 @@ table {
   background-color: #3d518c;
 }
 
+.personnel-table-header{
+  border-top-left-radius: 15px;
+}
+
 .table-content {
   margin-top: 0;
   padding: 0;
