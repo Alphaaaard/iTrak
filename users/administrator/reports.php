@@ -866,6 +866,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     newLocation = "../../users/building/BAB/BABF1.php";
                 } else if (building === 'Belmonte' && floor === '1F') {
                     newLocation = "../../users/building/BEB/BEBF1.php";
+                } else if (building === 'Techvoc' && floor === '1F') {
+                    newLocation = "../../users/building/TEB/TEBF1.php";
                 }
 
                 // Append the assetId to the URL as a query parameter
