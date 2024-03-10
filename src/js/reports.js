@@ -62,7 +62,7 @@ function assignPersonnel() {
 
   Swal.fire({
     icon: "info",
-    title: "Assigned this personnel?",
+    title: "Assign this personnel?",
     confirmButtonText: "Yes",
     showCancelButton: true,
     cancelButtonText: "No",
@@ -80,7 +80,7 @@ function assignPersonnel() {
         contentType: false,
         success: function (res) {
           Swal.fire({
-            title: "Maintenance Personnel has been assigned",
+            title: `${assignedName} has been assigned`,
             icon: "success",
             timer: 1000, //timer (in ms) for the success alertbox before closing
             showConfirmButton: false,
