@@ -471,11 +471,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     echo "</table>";
                                     echo "</div>";
                                 } else {
-                                    echo '<table>';
-                                    echo "<div class=noDataImgH>";
-                                    echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
-                                    echo "</div>";
-                                    echo '</table>';
+                                    echo '<tr><td colspan="7">No data available</td></tr>';
                                 }
                                 $stmt->close();
                                 ?>
@@ -565,85 +561,44 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             <input type="hidden" name="archiveAccId" id="archiveAccId">
                         </form>
 
-                        <!-- RFID MODAL ADMIN -->
-                        <div class="modal fade" id="staticBackdrop112" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-body" onclick="saveRFIDToValue(event, 'add')">
-                                        <img src="../../src/img/taprfid.jpg" width="100%" alt="" class="Scan" />
-
-                                        <form id="rfidForm">
-                                            <input type="text" id="rfid" name="rfid" value="12345">
-                                        </form>
-                                    </div>
-
-                                    <label class="btn btn-close-modal-emp close-modal-btn" data-bs-toggle="modal" data-bs-target="#updateSelfModal"><i class="bi bi-x-lg"></i></label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- RFID MODAL STAFF -->
-                        <div class="modal" id="staffRFIDModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+                        <!-- RFID MODAL -->
+                        <div class="modal" id="staticBackdrop112" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-body">
                                         <img src="../../src/img/taprfid.jpg" width="100%" alt="" class="Scan" />
 
                                         <form id="rfidForm">
-                                            <input type="text" id="rfid" name="rfid" value="12345">
+                                            <input type="text" id="rfid" name="rfid" value="">
                                         </form>
-                                    </div>
-
-                                    <label class="btn btn-close-modal-emp close-modal-btn" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="bi bi-x-lg"></i></label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- RFID MODAL FOR ADD -->
-                        <div class="modal" id="addRFIDModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        <img src="../../src/img/taprfid.jpg" width="100%" alt="" class="Scan" />
-
-                                        <form id="rfidForm">
-                                            <input type="text" id="rfid" name="rfid" value="12345">
-                                        </form>
-                                    </div>
-
-                                    <label class="btn btn-close-modal-emp close-modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal1"><i class="bi bi-x-lg"></i></label>
+                                    </div> <label class="btn btn-close-modal-emp close-modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal1"><i class="bi bi-x-lg"></i></label>
                                 </div>
                             </div>
                         </div>
 
                         <script>
-                            function saveRFIDToValue(event, action) {
+                            function saveRFIDToValue(event) {
+                                console.log('SUBMIT??')
                                 event.preventDefault();
-
-                                setAction(action);
 
                                 // Get value from the RFID input
                                 var rfidValue = document.getElementById('rfid').value;
                                 document.getElementById('rfidFieldAdd').value = rfidValue;
 
-                                $('#rfid').val("");
-
-                                if (action === 'add') {
-                                    $("#exampleModal1").modal("show");
-                                    checkRole(); //refer to staff.js
-                                } else {
-                                    $("#updateModal").modal("show");
-                                    $("#rfidFieldEdit").val(rfidValue)
-                                }
-
-                                $("#staticBackdrop112").modal("hide");
-
 
                                 // Check if the RFID value is not empty
-                                // if (rfidValue.trim() !== "") {
-                                //     console.log("meron ba");
+                                if (rfidValue.trim() !== "") {
+                                    console.log("meron ba")
 
-                                // }
+                                    $('#rfid').val("")
+                                    if (action === 'add') {
+                                        $("#exampleModal1").modal("show");
+                                    } else {
+                                        $("#updateModal").modal("show");
+                                        $("#rfidFieldEdit").val(rfidValue)
+                                    }
+                                    $("#staticBackdrop112").modal("hide");
+                                }
                             }
 
                             document.getElementById('rfidForm').addEventListener('submit', saveRFIDToValue);
@@ -661,29 +616,30 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5>Add Maintenance Staff</h5>
+
                                             <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                                         </div>
                                         <div class="modal-body">
                                             <form method="post" enctype="multipart/form-data" class="row g-3" id="addForm">
 
                                                 <div class="col-4">
-                                                    <label for="firstName" class="form-label label">First Name <span class="d-none text-danger error">*</span></label>
+                                                    <label for="firstName" class="form-label label">First name <span class="d-none text-danger error">*</span></label>
                                                     <input type="text" class="form-control" id="firstNameField" name="firstName" placeholder="First Name" required />
                                                 </div>
 
                                                 <div class="col-4">
-                                                    <label for="middleName" class="form-label label">Middle Name <span class="d-none text-danger error">*</span></label>
+                                                    <label for="middleName" class="form-label label">Middle name <span class="d-none text-danger error">*</span></label>
                                                     <input type="text" class="form-control" id="middleNameField" name="middleName" placeholder="Middle Name" />
                                                 </div>
 
                                                 <div class="col-4">
-                                                    <label for="lastName" class="form-label">Last Name <span class="d-none text-danger error">*</span></label>
+                                                    <label for="lastName" class="form-label">Last name <span class="d-none text-danger error">*</span></label>
                                                     <input type="text" class="form-control" id="lastNameField" name="lastName" placeholder="Last Name" required />
                                                 </div>
 
                                                 <div class="col-4">
                                                     <label for="contactField" class="form-label">Contact Number <span class="d-none text-danger error">*</span></label>
-                                                    <input type="tel" class="form-control contactEdit" id="contactField" name="contact" required pattern="\d{10,11}" value="09" title="Contact number must be 10 to 11 digits long" />
+                                                    <input type="tel" class="form-control" id="contactField" name="contact" required pattern="\d{10,11}" maxlength="11" value="09" title="Contact number must be 10 to 11 digits long" />
                                                 </div>
 
                                                 <div class="col-4">
@@ -693,15 +649,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                                 <div class="col-4">
                                                     <label for="password" class="form-label">Password <span class="d-none text-danger error">*</span></label>
-                                                    <div class="input-group">
-                                                        <input type="password" class="form-control passwordEdit" id="passwordField" name="password" placeholder="Password" required />
-                                                        <i class="bi-eye-slash" id="togglePassword" onclick="togglePassword()"></i>
-                                                    </div>
+                                                    <input type="password" class="form-control" id="passwordField" name="password" placeholder="Password" required />
                                                 </div>
 
                                                 <div class="col-4">
                                                     <label for="birthday" class="form-label">Birthday <span class="d-none text-danger error">*</span></label>
-                                                    <input type="date" class="form-control" id="birthdayField" name="birthday" max="2006-01-01" placeholder="Birthday" required />
+                                                    <input type="date" class="form-control" id="birthdayField" name="birthday" placeholder="Birthday" required />
                                                 </div>
 
                                                 <div class="col-4">
@@ -711,8 +664,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                                 <div class="col-4">
                                                     <label for="user_pass" class="form-label">Register RFID <span class="d-none text-danger error">*</span></label>
-                                                    <button type="button" class="form-control btn-custom" data-bs-toggle="modal" data-bs-target="#addRFIDModal" onclick="setAction('add');" value="123456789">SCAN</button>
-                                                    <input type="password" name="rfidNumber" id="rfidFieldAdd" title="" value="" required />
+                                                    <button type="button" class="form-control btn-custom" data-bs-toggle="modal" data-bs-target="#staticBackdrop112" onclick="setAction('add');" value="123456789">SCAN</button>
+                                                    <input type="password" name="rfidNumber" id="rfidFieldAdd" title="" value="1234567" required />
                                                 </div>
 
                                                 <div class="col-5">
@@ -734,6 +687,66 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             </button>
                                         </div>
                                     </div>
+
+                                    <!--Modal for editing personnel-->
+                                    <!-- <div class="modal fade" id="exampleModal1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-footer">
+                                            Are you sure you want to save changes?
+
+                                            <div class="modal-popups">
+                                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                                <button type="button" data-bs-target="#exampleModalToggle3" data-bs-toggle="modal" class="btn add-modal-btn">Yes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+
+
+                                    <!-- UPDATE SUCCESS MODAL
+                            <div class="modal fade" id="updateSuccessModal" aria-hidden="true" aria-labelledby="updateSuccessModalLabel" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-footer">
+                                            <div class="save-check">
+                                                <div class="check-cont">
+                                                    <img src="../assets/img/Check.png" alt="check" class="check-img">
+                                                </div>
+
+                                                Saved changes successfully!
+                                            </div>
+
+                                            <button type="submit" name="edit" class="btn add-modal-btn">Close</button>
+                                            <button type="submit" name="submit" class="btn add-modal-btn">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+
+
+
+                                    <!-- ARCHIVE -->
+                                    <!-- <div class=" modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-footer">
+                                                Are you sure you want to archive this manager?
+                                                <div class="modal-popups">
+                                                    <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                                    <form method="post" action="">
+                                                        <input type="hidden" name="user_id" value="<?php //echo $row['user_id']; 
+                                                                                                    ?>">
+                                                        <button type="submit" name="accept" class="btn accept-popups">Yes</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
                                 </div>
                             </div>
                         </div>
@@ -784,7 +797,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                                 <div class="col-4">
                                                     <label for="birthday" class="form-label">Birthday</label>
-                                                    <input type="date" class="form-control" id="birthdayEdit" max="2006-01-01" name="birthday" />
+                                                    <input type="date" class="form-control" id="birthdayEdit" name="birthday" />
                                                 </div>
 
                                                 <div class="col-4">
@@ -794,7 +807,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                                 <div class="col-4">
                                                     <label for="user_pass" class="form-label">Register RFID</label>
-                                                    <button type="button" class="form-control btn-custom" data-bs-toggle="modal" data-bs-target="#staffRFIDModal" onclick="setAction('edit')">RFID</button>
+                                                    <button type="button" class="form-control btn-custom" data-bs-toggle="modal" data-bs-target="#staticBackdrop112" onclick="setAction('edit')">RFID</button>
 
                                                     <input type="password" id="rfidFieldEdit" name="rfid">
                                                 </div>
@@ -821,7 +834,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </section>
 
         <?php include_once 'modals/modal_layout.php'; ?>
-
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
