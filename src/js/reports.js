@@ -96,91 +96,202 @@ function confirmAlert(reportType) {
   }
   
   document.addEventListener("DOMContentLoaded", function () {
-    // Function to update displayed data and pagination based on user selection
-    function updateDataAndPagination() {
+    var currentPage = 1;
+    var currentRangeStart = 1;
+    var pagesPerRange = 10;
+
+    function initializePaginationForTab(activeTabContent) {
+      currentPage = 1;
+      currentRangeStart = 1;
+      updateDataAndPagination(activeTabContent);
+    }
+
+    function updateDataAndPagination(activeTabContent) {
+      var activeTabContent = document.querySelector(
+        ".tab-pane.active .table-container"
+      );
+      if (!activeTabContent) return;
+
       var selectedValue = parseInt(
         document.getElementById("rows-display-dropdown").value
-      ); // Get the selected value from the dropdown
-      var rows = document.querySelectorAll(".table-container table tr"); // Select all table rows
-      var totalItems = rows.length; // Total number of items (rows)
-      var totalPages = Math.ceil(totalItems / selectedValue); // Calculate total pages
-  
-      // Update pagination
+      );
+      var rows = activeTabContent.querySelectorAll("table tr");
+      var totalItems = rows.length;
+      var totalPages = Math.ceil(totalItems / selectedValue);
       var pagination = document.querySelector(".pagination");
-      pagination.innerHTML = ""; // Clear existing pagination
-  
-      // Previous button
-      var prevLi = document.createElement("li");
-      prevLi.className = "page-item";
-      var prevLink = document.createElement("a");
-      prevLink.className = "page-link";
-      prevLink.href = "#";
-      prevLink.setAttribute("aria-label", "Previous");
-      prevLink.innerHTML =
-        '<span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span>';
-      prevLi.appendChild(prevLink);
-      pagination.appendChild(prevLi);
-  
-      // Page numbers
-      for (var i = 1; i <= totalPages; i++) {
+      pagination.innerHTML = "";
+
+      appendPaginationButtons(pagination, totalPages, selectedValue);
+      showPage(currentPage, selectedValue, activeTabContent);
+    }
+
+    // Function to reset and initialize pagination when tab is switched
+    function resetAndInitializePaginationForTab(tabId) {
+      var activeTabContent = document.querySelector(
+        tabId + " .table-container"
+      );
+      if (activeTabContent) {
+        initializePaginationForTab(activeTabContent);
+      }
+    }
+
+    // Function to create and append pagination buttons
+    function appendPaginationButtons(pagination, totalPages, selectedValue) {
+      appendButton(
+        pagination,
+        "Previous",
+        "&laquo;",
+        Math.max(1, currentPage - 1)
+      );
+
+      var endRange = Math.min(
+        currentRangeStart + pagesPerRange - 1,
+        totalPages
+      );
+      for (var i = currentRangeStart; i <= endRange; i++) {
         var li = document.createElement("li");
-        li.className = "page-item";
+        li.className = "page-item " + (i === currentPage ? "active" : "");
         var link = document.createElement("a");
         link.className = "page-link";
         link.href = "#";
         link.textContent = i;
-        li.appendChild(link);
-        pagination.appendChild(li);
-  
-        // Pagination click event
         (function (pageNum) {
           link.addEventListener("click", function (e) {
             e.preventDefault();
-            showPage(pageNum, selectedValue);
+            currentPage = pageNum;
+            if (pageNum === endRange && pageNum < totalPages) {
+              currentRangeStart = endRange + 1;
+            } else if (pageNum === currentRangeStart && pageNum > 1) {
+              currentRangeStart = Math.max(
+                1,
+                currentRangeStart - pagesPerRange
+              );
+            }
+            updateDataAndPagination();
           });
         })(i);
+        li.appendChild(link);
+        pagination.appendChild(li);
       }
-  
-      // Next button
-      var nextLi = document.createElement("li");
-      nextLi.className = "page-item";
-      var nextLink = document.createElement("a");
-      nextLink.className = "page-link";
-      nextLink.href = "#";
-      nextLink.setAttribute("aria-label", "Next");
-      nextLink.innerHTML =
-        '<span aria-hidden="true">&raquo;</span><span class="sr-only">Next</span>';
-      nextLi.appendChild(nextLink);
-      pagination.appendChild(nextLi);
-  
-      showPage(1, selectedValue); // Show first page initially
+
+      appendButton(
+        pagination,
+        "Next",
+        "&raquo;",
+        Math.min(totalPages, currentPage + 1)
+      );
     }
-  
+
+    function appendButton(pagination, ariaLabel, symbol, page) {
+      var li = document.createElement("li");
+      li.className = "page-item " + (page === currentPage ? "disabled" : "");
+      var link = document.createElement("a");
+      link.className = "page-link";
+      link.href = "#";
+      link.setAttribute("aria-label", ariaLabel);
+      link.innerHTML = symbol;
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (page !== currentPage) {
+          currentPage = page;
+          updateDataAndPagination();
+        }
+      });
+      li.appendChild(link);
+      pagination.appendChild(li);
+    }
+
     // Function to show a specific page
-    function showPage(pageNum, rowsPerPage) {
+    function showPage(pageNum, rowsPerPage, activeTabContent) {
       var start = (pageNum - 1) * rowsPerPage;
       var end = start + rowsPerPage;
-      var rows = document.querySelectorAll(".table-container table tr");
-  
-      // Hide all rows, then show the specific slice
+      var rows = activeTabContent.querySelectorAll("table tr");
       rows.forEach(function (row, index) {
         row.style.display = "none";
         if (index >= start && index < end) {
           row.style.display = "";
         }
       });
+
+      // Update the active class for pagination
+      var paginationLinks = document.querySelectorAll(
+        ".pagination .page-item a"
+      );
+      paginationLinks.forEach(function (link) {
+        var parentLi = link.parentElement;
+        parentLi.classList.remove("active");
+        if (link.textContent == pageNum.toString()) {
+          parentLi.classList.add("active");
+          link.style.backgroundColor = "your-color-here"; // Apply your desired color
+        } else {
+          link.style.backgroundColor = ""; // Reset other buttons' color
+        }
+      });
+
+      // Disable Previous button if on the first page
+      var prevButton = document.querySelector(
+        '.pagination .page-item.dynamic-button a[aria-label="Previous"]'
+      );
+      if (prevButton) {
+        if (pageNum === 1) {
+          prevButton.parentElement.classList.add("disabled");
+        } else {
+          prevButton.parentElement.classList.remove("disabled");
+        }
+      }
+
+      // Disable Next button if on the last page
+      var nextButton = document.querySelector(
+        '.pagination .page-item.dynamic-button a[aria-label="Next"]'
+      );
+      if (nextButton) {
+        if (pageNum === totalPages) {
+          nextButton.parentElement.classList.add("disabled");
+        } else {
+          nextButton.parentElement.classList.remove("disabled");
+        }
+      }
     }
-  
+
     // Event listener for dropdown change
     document
       .getElementById("rows-display-dropdown")
       .addEventListener("change", updateDataAndPagination);
+
+    //Auto-click on the dropdown to initialize the display
+    setTimeout(function () {
+      document
+        .getElementById("rows-display-dropdown")
+        .dispatchEvent(new Event("change"));
+    }, 100);
+
+    // Listen for tab changes and update content accordingly
+    var tabs = document.querySelectorAll(".nav-link");
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        var tabId = "#" + this.getAttribute("aria-controls"); // Modify to match the correct tab ID
+
+        // Reset the pagination for the newly activated tab
+        resetAndInitializePaginationForTab(tabId);
+
+        // Change dropdown to "dummy" option and revert to default value after a short delay
+        var rowsDropdown = document.getElementById("rows-display-dropdown");
+        rowsDropdown.value = ""; // Dummy option to trigger the change event
+
+        setTimeout(function () {
+          rowsDropdown.value = "20"; // Default value or last selected value
+          rowsDropdown.dispatchEvent(new Event("change")); // Trigger the change event manually
+        }, 100); // Adjust the timeout as needed
+      });
+    });
+
+    // This function will be triggered when a new tab is clicked.
+    function resetAndInitializePaginationForTab(tabId) {
+      var activeTabContent = document.querySelector(
+        tabId + " .table-container"
+      );
+      currentPage = 1;
+      currentRangeStart = 1;
+      updateDataAndPagination(activeTabContent); // You need to pass the correct tab content to your existing update function
+    }
   });
-  
-  //Auto-click sa 20 sa dropdown
-  setTimeout(function () {
-    document
-      .getElementById("rows-display-dropdown")
-      .dispatchEvent(new Event("change"));
-  }, 100); // Adjust the delay as needed
-  
