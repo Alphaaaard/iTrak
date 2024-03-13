@@ -917,7 +917,7 @@ td {
   color: red;
   right: 10px;
   position: absolute;
-  top: 10px;
+  top: 5px;
   font-size: 1em;
   font-weight: bold;
 }
@@ -1054,7 +1054,7 @@ color: #3D3B40;
 
 .modal-content {
   font-size: larger;
-  width: 32em;
+  width: 70%;
   margin: 0 auto;
   border: #3d3b40 2px solid;
 }

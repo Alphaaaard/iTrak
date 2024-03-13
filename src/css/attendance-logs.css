@@ -96,11 +96,26 @@ table {
 
 }
 
-.personnel-table-content{
-  border-top-left-radius: 15px;
+.attendanceModal.modal.fade.show{
+  overflow: hidden;
 }
 
+.modal{
+  overflow: hidden;
+}
 
+/* Make modal content scrollable */
+
+/* Optional: Adjust modal header and footer styles */
+.modal-header,
+.modal-footer {
+  padding: 15px 20px;
+}
+
+/* Optional: Adjust modal body padding */
+.modal-body {
+  padding: 20px;
+}
 
 /* .table-container table{
  border-spacing: 0 10px;
@@ -233,6 +248,8 @@ td:last-child {
 .modal-content .modal-content-th{
   padding: 5px;
   margin: 0;
+  max-height: 300px;  
+  overflow-y: auto;
 }
 
 

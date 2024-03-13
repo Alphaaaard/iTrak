@@ -36,6 +36,11 @@ table {
   cursor: default;
 }
 
+.gps-container{
+  /* min-height: 250px; */
+  overflow-y:auto;
+}
+
 td {
   border: solid 1px #000;
   border-style: solid none;
@@ -136,6 +141,8 @@ td {
   border-radius: 15px;
   background-color: white;
   border: solid 1px #3D3B40;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 .accordion-button{
