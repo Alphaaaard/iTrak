@@ -311,12 +311,11 @@ WHERE p_seen = '0' AND accountID != ? AND action NOT LIKE 'Changed status of ass
                         <span class="text">Reports</span>
                     </a>
                 </li>
-
-                <a href="./activity-logs.php">
-                    <li class="active">
+                <li class="active">
+                    <a href="./activity-logs.php">
                         <i class="bi bi-arrow-counterclockwise"></i>
                         <span class="text">Activity Logs</span>
-                </a>
+                    </a>
                 </li>
             </ul>
         </section>
@@ -344,8 +343,8 @@ WHERE p_seen = '0' AND accountID != ? AND action NOT LIKE 'Changed status of ass
                     </header>
                     <div class="new-nav">
                         <ul>
+                            <li><a href="#" class="nav-link" data-bs-target="pills-general">General History</a></li>
                             <li><a href="#" class="nav-link" data-bs-target="pills-report">Report History</a></li>
-                            <li><a href="#" class="nav-link" data-bs-target="pills-general">Report History</a></li>
                         </ul>
                     </div>
                     <div class="tab-content pt" id="myTabContent">

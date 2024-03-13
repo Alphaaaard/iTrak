@@ -5,10 +5,7 @@ $conn = connection();
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
 
-
-    // For personnel page, check if userLevel is 3
     if ($_SESSION['userLevel'] != 1) {
-        // If not personnel, redirect to an error page or login
         header("Location:error.php");
         exit;
     }
@@ -25,27 +22,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt->execute()) {
             $result = $stmt->get_result();
-
-            // if ($result && $result->num_rows > 0) {
-            //     $row = $result->fetch_assoc();
-
-            //     // Archive
-            //     $insert_query = "INSERT INTO archiveacc (user_id, user_pass, user_email, per_fname, per_mname, per_lname, per_role, per_expertise, per_attachment, per_contact, user_level) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            //     $stmt = $conn->prepare($insert_query);
-            //     $stmt->bind_param("sssssssssss", $row['user_id'], $row['user_pass'], $row['user_email'], $row['per_fname'], $row['per_mname'], $row['per_lname'], $row['per_role'], $row['per_expertise'], $row['per_attachment'], $row['per_contact'], $row['user_level']);
-
-            //     if ($stmt->execute()) {
-            //         // Delete the row from 'account'
-            //         $delete_query = "DELETE FROM account WHERE user_id = ?";
-            //         $stmt = $conn->prepare($delete_query);
-            //         $stmt->bind_param("i", $user_id);
-
-            //         if ($stmt->execute()) {
-            //         }
-            //     }
-            // }
         }
-        // header("Location: staff.php");
     }
 
     // Edit
@@ -66,19 +43,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt->bind_param("ssssssssssi", $firstName, $middleName, $lastName, $email, $password, $contact, $birthday, $role, $picture, $userLevel, $accountId);
 
         if ($stmt->execute()) {
-            // header("Location: staff.php");
             exit;
         } else {
             echo "Error: " . $stmt->error;
         }
     }
-
-    // ARCHIVE CODE
-    // Archive
-
-
-
-
 
     // for notif below
     // Update the SQL to join with the account and asset tables to get the admin's name and asset information
@@ -108,7 +77,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmtLatestLogs->execute();
     $resultLatestLogs = $stmtLatestLogs->get_result();
 
-
     $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
     $stmt = $conn->prepare($unseenCountQuery);
     $stmt->bind_param("i", $loggedInAccountId);
@@ -116,10 +84,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->bind_result($unseenCount);
     $stmt->fetch();
     $stmt->close();
-
-
-
-
 ?>
 
     <!DOCTYPE html>
@@ -144,14 +108,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 let tabLastSelected = sessionStorage.getItem("lastPillStaff");
 
                 if (!tabLastSelected) {
-                    // if no last tab was selected, use the pills-manager for default
                     $("#pills-manager").addClass("show active");
-                    // $("#pills-profile").removeClass("show active");
                     $(".nav-link[data-bs-target='pills-manager']").addClass("active");
-                    // $(".nav-link[data-bs-target='pills-profile']").removeClass("active");
                 } else {
 
-                    //* checks the last tab that was selected
                     switch (tabLastSelected) {
                         case 'pills-manager':
                             $("#pills-manager").addClass("show active");
@@ -462,7 +422,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         echo '<td><img src="data:image/jpeg;base64,' . base64_encode($row['picture']) . '" alt="Profile Image" class="rounded-img" style="width: 50px; height: 50px;" ></td>'; // Image cell
                                         echo '<td>' . $row['firstname'] . ' ' . $row['lastname'] . '</td>';
                                         echo '<td>' . $row['role'] . '</td>';
-                                        // echo '<td> <button class="edit-button archive-btn" data-bs-toggle="modal" data-bs-target="#updateModal" onclick="getUser(' . $row['accountid'] . ')">EDIT</button>'; // Edit button
                                         echo '<td>
                                                 <button type="button" class="btn archive-button archive-btn arch" onclick="archive(' . $row['accountid'] . ', `' . $row['firstname'] . '`, `' . $row['lastname'] . '`, event)">ARCHIVE</button>
                                             </td>';
@@ -532,7 +491,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         echo '<td><img src="data:image/jpeg;base64,' . base64_encode($row['picture']) . '" alt="Profile Image" class="rounded-img" style="width: 50px; height: 50px;"></td>';
                                         echo '<td>' . $row['firstname'] . ' ' . $row['lastname'] . '</td>';
                                         echo '<td>' . $row['role'] . '</td>';
-                                        // echo '<td> <button class="edit-button archive-btn" data-bs-toggle="modal" data-bs-target="#updateModal" onclick="getUser(' . $row['accountid'] . ')">EDIT</button></td>';
                                         echo '<td>
                                                 <button type="button" class="btn archive-button archive-btn arch" onclick="archive(' . $row['accountid'] . ', `' . $row['firstname'] . '`, `' . $row['lastname'] . '`, event)">ARCHIVE</button>
                                             </td>';
@@ -567,7 +525,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <div class="modal-content">
                                     <div class="modal-body">
                                         <img src="../../src/img/taprfid.jpg" width="100%" alt="" class="Scan" />
-
                                         <form id="rfidForm">
                                             <input type="text" id="rfid" name="rfid" value="">
                                         </form>
@@ -584,7 +541,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 // Get value from the RFID input
                                 var rfidValue = document.getElementById('rfid').value;
                                 document.getElementById('rfidFieldAdd').value = rfidValue;
-
 
                                 // Check if the RFID value is not empty
                                 if (rfidValue.trim() !== "") {
@@ -687,66 +643,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             </button>
                                         </div>
                                     </div>
-
-                                    <!--Modal for editing personnel-->
-                                    <!-- <div class="modal fade" id="exampleModal1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-footer">
-                                            Are you sure you want to save changes?
-
-                                            <div class="modal-popups">
-                                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                                <button type="button" data-bs-target="#exampleModalToggle3" data-bs-toggle="modal" class="btn add-modal-btn">Yes</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-
-
-
-                                    <!-- UPDATE SUCCESS MODAL
-                            <div class="modal fade" id="updateSuccessModal" aria-hidden="true" aria-labelledby="updateSuccessModalLabel" tabindex="-1">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-footer">
-                                            <div class="save-check">
-                                                <div class="check-cont">
-                                                    <img src="../assets/img/Check.png" alt="check" class="check-img">
-                                                </div>
-
-                                                Saved changes successfully!
-                                            </div>
-
-                                            <button type="submit" name="edit" class="btn add-modal-btn">Close</button>
-                                            <button type="submit" name="submit" class="btn add-modal-btn">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-
-
-
-
-                                    <!-- ARCHIVE -->
-                                    <!-- <div class=" modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-footer">
-                                                Are you sure you want to archive this manager?
-                                                <div class="modal-popups">
-                                                    <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                                    <form method="post" action="">
-                                                        <input type="hidden" name="user_id" value="<?php //echo $row['user_id']; 
-                                                                                                    ?>">
-                                                        <button type="submit" name="accept" class="btn accept-popups">Yes</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
                                 </div>
                             </div>
                         </div>
@@ -783,7 +679,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                     <label for="contact" class="form-label">Contact Number</label>
                                                     <input type="text" class="form-control contactEdit" id="contactEdit" maxlength="11" name="contact" />
                                                 </div>
-
 
                                                 <div class="col-4">
                                                     <label for="email" class="form-label">Email</label>

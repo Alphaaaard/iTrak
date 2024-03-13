@@ -599,7 +599,7 @@ form i {
 }
 
 .modal-body label.form-label{
-  font-size: 1rem;
+  font-size: .75rem;
 }
 
 .col-4 img{
@@ -1479,7 +1479,12 @@ h5 {
   }
 
   .d-flex{
-    width: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: unset;
+    right: 0;
+    width: unset;
   }
 
   .icon{
@@ -1502,7 +1507,7 @@ h5 {
 
   .modal-body label.form-label{
     font-size: .75rem;
-  }
+  } 
 
   .modal-footer{
     padding: 0 .2em!important;
