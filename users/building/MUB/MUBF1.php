@@ -5,37 +5,6 @@ $conn = connection();
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role'])) {
 
-    //FOR ID 1
-    $sql = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date FROM asset WHERE assetId = 1";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    $assetId = $row['assetId'];
-    $category = $row['category'];
-    $date = $row['date'];
-    $building = $row['building'];
-    $floor = $row['floor'];
-    $room = $row['room'];
-    $status = $row['status'];
-    $assignedName = $row['assignedName'];
-    $assignedBy = $row['assignedBy'];
-
-    //FOR ID 2
-    $sql2 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date FROM asset WHERE assetId = 2";
-    $stmt2 = $conn->prepare($sql2);
-    $stmt2->execute();
-    $result2 = $stmt2->get_result();
-    $row2 = $result2->fetch_assoc();
-    $assetId2 = $row2['assetId'];
-    $category2 = $row['category'];
-    $date2 = $row2['date'];
-    $building2 = $row2['building'];
-    $floor2 = $row2['floor'];
-    $room2 = $row2['room'];
-    $status2 = $row2['status'];
-    $assignedName2 = $row2['assignedName'];
-    $assignedBy2 = $row2['assignedBy'];
 ?>
 
     <!DOCTYPE html>
@@ -194,10 +163,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <div id="belmonte-F1" class="content">
                         <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-arrow-left"></i></a>
                         <!-- ASSETS -->
-                        <img src='../image.php?id=1' style='width:100px; cursor:pointer;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal1' onclick='fetchAssetData(1);'>
-                        <img src='../image.php?id=2' style='width:100px; cursor:pointer;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal2' onclick='fetchAssetData(2);'>
-                        <!-- FLOOR PLAN -->
-                        <img src="../../../src/floors/belmonteB/BB1F.png" alt="" class="Floor-container">
+                           <!-- FLOOR PLAN -->
+                           <img src="../../../src/floors/multipurpose/Multipurpose1F.png" alt="" class="Floor-container">
+                      
+                     
                     </div>
                     <!-- Modal structure for id 1 -->
                     <div class='modal fade' id='imageModal1' tabindex='-1' aria-labelledby='imageModalLabel1' aria-hidden='true'>
