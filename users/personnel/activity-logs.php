@@ -336,12 +336,11 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         <span class="text">Reports</span>
                     </a>
                 </li>
-
-                <a href="./activity-logs.php">
-                    <li class="active">
+                <li class="active">
+                    <a href="./activity-logs.php">
                         <i class="bi bi-arrow-counterclockwise"></i>
                         <span class="text">Activity Logs</span>
-                </a>
+                    </a>
                 </li>
             </ul>
         </section>

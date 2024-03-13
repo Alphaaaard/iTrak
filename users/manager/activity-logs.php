@@ -306,12 +306,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </a>
                 </li>
                 <li>
-                    <a href="./staff.php">
-                        <i class="bi bi-person"></i>
-                        <span class="text">Staff</span>
-                    </a>
-                </li>
-                <li>
                     <a href="./gps.php">
                         <i class="bi bi-geo-alt"></i>
                         <span class="text">GPS</span>
@@ -327,12 +321,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <a href="./reports.php">
                         <i class="bi bi-clipboard"></i>
                         <span class="text">Reports</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="./archive.php">
-                        <i class="bi bi-archive"></i>
-                        <span class="text">Archive</span>
                     </a>
                 </li>
                 <li class="active">
