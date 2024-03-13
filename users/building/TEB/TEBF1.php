@@ -5,6 +5,21 @@ $conn = connection();
 date_default_timezone_set('Asia/Manila'); //need ata to sa lahat ng page para sa security hahah 
 
 
+
+
+// ******************************************BASAHIN NYO MUNA TO**********************************************
+
+// SQL = 910
+// SQL2 = 911
+// SQL3 = 912
+// SQL4 = 913
+// SQL5 = 914
+// SQL6 = 915
+// SQL7 = 916
+
+
+// ******************************************BASAHIN NYO MUNA TO**********************************************
+
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
     // For personnel page, check if userLevel is 3
     if ($_SESSION['userLevel'] != 1) {
@@ -64,7 +79,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
-    //FOR ID 910 SOFA
+    //FOR ID 910 LIGHTS
     $sql = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date, upload_img, description FROM asset WHERE assetId = 910";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
@@ -82,8 +97,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $upload_img = $row['upload_img'];
     $description = $row['description'];
 
-    //FOR ID 2 SOFA
-    $sql2 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date, upload_img, description FROM asset WHERE assetId = 2";
+    //FOR ID 911 LIGHTS
+    $sql2 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date, upload_img, description FROM asset WHERE assetId = 911";
     $stmt2 = $conn->prepare($sql2);
     $stmt2->execute();
     $result2 = $stmt2->get_result();
@@ -100,8 +115,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $upload_img2 = $row2['upload_img'];
     $description2 = $row2['description'];
 
-    //FOR ID 3 SOFA
-    $sql3 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 3";
+     //FOR ID 912 LIGHTS
+    $sql3 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 912";
     $stmt3 = $conn->prepare($sql3);
     $stmt3->execute();
     $result3 = $stmt3->get_result();
@@ -119,8 +134,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $description3 = $row3['description'];
 
 
-    //FOR ID 4 BED
-    $sql4 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 4";
+   //FOR ID 913 LIGHTS
+    $sql4 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 913";
     $stmt4 = $conn->prepare($sql4);
     $stmt4->execute();
     $result4 = $stmt4->get_result();
@@ -138,8 +153,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $description4 = $row4['description'];
 
 
-    //FOR ID 5 BED
-    $sql5 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5";
+ //FOR ID 914 LIGHTS
+    $sql5 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 914";
     $stmt5 = $conn->prepare($sql5);
     $stmt5->execute();
     $result5 = $stmt5->get_result();
@@ -156,8 +171,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $upload_img5 = $row5['upload_img'];
     $description5 = $row5['description'];
 
-    //FOR ID 6 BED
-    $sql6 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6";
+  //FOR ID 915 LIGHTS
+    $sql6 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 915";
     $stmt6 = $conn->prepare($sql6);
     $stmt6->execute();
     $result6 = $stmt6->get_result();
@@ -175,8 +190,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $description6 = $row6['description'];
 
 
-    //FOR ID 7 BED
-    $sql7 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7";
+ //FOR ID 916 LIGHTS
+    $sql7 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 916";
     $stmt7 = $conn->prepare($sql7);
     $stmt7->execute();
     $result7 = $stmt7->get_result();
@@ -1013,91 +1028,55 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-arrow-left"></i></a>
                         <!-- FLOOR PLAN -->
                         <img class="Floor-container-1" src="../../../src/floors/techvocB/TV1F.png" alt="">
-                        <!-- ASSETS -->
+                        <!-- assetss -->
 
-                        <!-- ASSET 1 -->
+                        <!-- ASSET 910 -->
                         <img src="../image.php?id=910" style="width:15px; cursor:pointer; position:absolute; top:85px; left:610px; " alt="Asset Image" data-bs-toggle="modal" data-bs-target="#imageModal910" onclick="fetchAssetData(910);">
 
                         <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status); ?>; 
                         position:absolute; top:85px; left:620px;'>
                         </div>
 
-                        <!-- ASSET 2 -->
-                        <img src='../image.php?id=2' style='width:40px; cursor:pointer; position:absolute; top:245px; left:400px; transform: rotate(-90deg);' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal2' onclick='fetchAssetData(2);'>
+                          <!-- ASSET 911 -->
+                          <img src="../image.php?id=911" style="width:15px; cursor:pointer; position:absolute; top:115px; left:610px; " alt="Asset Image" data-bs-toggle="modal" data-bs-target="#imageModal911" onclick="fetchAssetData(911);">
+
                         <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2); ?>; 
-                        position:absolute; top:230px; left:410px;'>
+                        position:absolute; top:115px; left:620px;'>
                         </div>
 
-                        <!-- ASSET 3 -->
-                        <img src='../image.php?id=3' style='width:40px; cursor:pointer; position:absolute; top:270px; left:435px; transform: rotate(-180deg);' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal3' onclick='fetchAssetData(3);'>
+                        <!-- ASSET 912 -->
+                          <img src="../image.php?id=912" style="width:15px; cursor:pointer; position:absolute; top:107px; left:720px; " alt="Asset Image" data-bs-toggle="modal" data-bs-target="#imageModal912" onclick="fetchAssetData(912);">
+
                         <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status3); ?>; 
-                        position:absolute; top:270px; left:470px;'>
+                        position:absolute; top:107px; left:730px;'>
                         </div>
 
-                        <!-- ASSET 4 -->
-                        <img src='../image.php?id=4' style='width:22px; cursor:pointer; position:absolute; top:260px; left:742px; ' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal4' onclick='fetchAssetData(4);'>
+                          <!-- ASSET 913 -->
+                          <img src="../image.php?id=913" style="width:15px; cursor:pointer; position:absolute; top:85px; left:810px; " alt="Asset Image" data-bs-toggle="modal" data-bs-target="#imageModal913" onclick="fetchAssetData(913);">
+
                         <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status4); ?>; 
-                        position:absolute; top:295px; left:740px;'>
+                        position:absolute; top:85px; left:820px;'>
                         </div>
 
-                        <!-- ASSET 5 -->
-                        <img src='../image.php?id=5' style='width:18px; cursor:pointer; position:absolute; top:275px; left:955px; ' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5' onclick='fetchAssetData(5);'>
+                        <!-- ASSET 914 -->
+                        <img src="../image.php?id=914" style="width:15px; cursor:pointer; position:absolute; top:135px; left:810px; " alt="Asset Image" data-bs-toggle="modal" data-bs-target="#imageModal914" onclick="fetchAssetData(914);">
+
                         <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5); ?>; 
-                        position:absolute; top:305px; left:953px;'>
+                        position:absolute; top:135px; left:820px;'>
                         </div>
 
-                        <!-- ASSET 6 -->
-                        <img src='../image.php?id=6' style='width:18px; cursor:pointer; position:absolute; top:283px; left:1020px; transform: rotate(-90deg);' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6' onclick='fetchAssetData(6);'>
+                        <!-- ASSET 915 -->
+                        <img src="../image.php?id=915" style="width:15px; cursor:pointer; position:absolute; top:160px; left:640px; " alt="Asset Image" data-bs-toggle="modal" data-bs-target="#imageModal915" onclick="fetchAssetData(915);">
+
                         <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6); ?>; 
-                        position:absolute; top:302px; left:1040px;'>
+                        position:absolute; top:160px; left:650px;'>
                         </div>
 
-                        <!-- ASSET 7 -->
-                        <img src='../image.php?id=7' style='width:18px; cursor:pointer; position:absolute; top:255px; left:1020px; transform: rotate(-90deg);' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7' onclick='fetchAssetData(7);'>
+                        <!-- ASSET 916 -->
+                        <img src="../image.php?id=916" style="width:15px; cursor:pointer; position:absolute; top:157px; left:767px; " alt="Asset Image" data-bs-toggle="modal" data-bs-target="#imageModal916" onclick="fetchAssetData(916);">
+
                         <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7); ?>; 
-                        position:absolute; top:274px; left:1040px;'>
-                        </div>
-
-
-                        <!-- ASSET 8 -->
-                        <img src='../image.php?id=8' style='width:18px; cursor:pointer; position:absolute; top:225px; left:1020px; transform: rotate(-90deg);' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal8' onclick='fetchAssetData(8);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status8); ?>; 
-                        position:absolute; top:245px; left:1040px;'>
-                        </div>
-
-
-                        <!-- ASSET 9 -->
-                        <img src='../image.php?id=9' style='width:18px; cursor:pointer; position:absolute; top:225px; left:1020px; transform: rotate(-90deg);' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal9' onclick='fetchAssetData(9);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status9); ?>; 
-                        position:absolute; top:245px; left:1040px;'>
-                        </div>
-
-
-                        <!-- ASSET 10 -->
-                        <img src='../image.php?id=10' style='width:15px; cursor:pointer; position:absolute; top:68px; left:467px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal10' onclick='fetchAssetData(10);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status10); ?>; 
-                        position:absolute; top:68px; left:463px;'>
-                        </div>
-
-
-                        <!-- ASSET 11 -->
-                        <img src='../image.php?id=11' style='width:15px; cursor:pointer; position:absolute; top:68px; left:495px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal11' onclick='fetchAssetData(11);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status11); ?>; 
-                        position:absolute; top:68px; left:495px;'>
-                        </div>
-
-
-                        <!-- ASSET 12 -->
-                        <img src='../image.php?id=12' style='width:12px; cursor:pointer; position:absolute; top:200px; left:530px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal12' onclick='fetchAssetData(12);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status12); ?>; 
-                        position:absolute; top:200px; left:530px;'>
-                        </div>
-
-
-                        <!-- ASSET 6866 -->
-                        <img src='../image.php?id=6866' style='width:35px; cursor:pointer; position:absolute; top:200px; left:530px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6866' onclick='fetchAssetData(6866);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6866); ?>; 
-                        position:absolute; top:200px; left:530px;'>
+                        position:absolute; top:157px; left:777px;'>
                         </div>
 
 
@@ -1244,8 +1223,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
-                <!-- Modal structure for id 2-->
-                <div class='modal fade' id='imageModal2' tabindex='-1' aria-labelledby='imageModalLabel2' aria-hidden='true'>
+                <!-- Modal structure for id 911-->
+                <div class='modal fade' id='imageModal911' tabindex='-1' aria-labelledby='imageModalLabel911' aria-hidden='true'>
                     <div class='modal-dialog modal-xl modal-dialog-centered'>
                         <div class='modal-content'>
                             <!-- Modal header -->
@@ -1382,8 +1361,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </form>
 
 
-                <!-- Modal structure for id 3-->
-                <div class='modal fade' id='imageModal3' tabindex='-1' aria-labelledby='imageModalLabel3' aria-hidden='true'>
+                <!-- Modal structure for id 912-->
+                <div class='modal fade' id='imageModal912' tabindex='-1' aria-labelledby='imageModalLabel912' aria-hidden='true'>
                     <div class='modal-dialog modal-xl modal-dialog-centered'>
                         <div class='modal-content'>
                             <!-- Modal header -->
@@ -1521,8 +1500,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
-                <!-- Modal structure for id 4-->
-                <div class='modal fade' id='imageModal4' tabindex='-1' aria-labelledby='imageModalLabel4' aria-hidden='true'>
+                <!-- Modal structure for id 913-->
+                <div class='modal fade' id='imageModal913' tabindex='-1' aria-labelledby='imageModalLabel913' aria-hidden='true'>
                     <div class='modal-dialog modal-xl modal-dialog-centered'>
                         <div class='modal-content'>
                             <!-- Modal header -->
@@ -1660,8 +1639,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </form>
 
 
-                <!-- Modal structure for id 5-->
-                <div class='modal fade' id='imageModal5' tabindex='-1' aria-labelledby='imageModalLabel5' aria-hidden='true'>
+                <!-- Modal structure for id 914-->
+                <div class='modal fade' id='imageModal914' tabindex='-1' aria-labelledby='imageModalLabel914' aria-hidden='true'>
                     <div class='modal-dialog modal-xl modal-dialog-centered'>
                         <div class='modal-content'>
                             <!-- Modal header -->
@@ -1798,8 +1777,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </form>
 
 
-                <!-- Modal structure for id 6-->
-                <div class='modal fade' id='imageModal6' tabindex='-1' aria-labelledby='imageModalLabel6' aria-hidden='true'>
+                <!-- Modal structure for id 915-->
+                <div class='modal fade' id='imageModal915' tabindex='-1' aria-labelledby='imageModalLabel915' aria-hidden='true'>
                     <div class='modal-dialog modal-xl modal-dialog-centered'>
                         <div class='modal-content'>
                             <!-- Modal header -->
@@ -1935,8 +1914,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
                 </form>
 
-                <!-- Modal structure for id 7-->
-                <div class='modal fade' id='imageModal7' tabindex='-1' aria-labelledby='imageModalLabel7' aria-hidden='true'>
+                <!-- Modal structure for id 916-->
+                <div class='modal fade' id='imageModal916' tabindex='-1' aria-labelledby='imageModalLabel916' aria-hidden='true'>
                     <div class='modal-dialog modal-xl modal-dialog-centered'>
                         <div class='modal-content'>
                             <!-- Modal header -->
