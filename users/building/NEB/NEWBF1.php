@@ -286,24 +286,26 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $upload_img12 = $row12['upload_img'];
     $description12 = $row12['description'];
 
+    //FOR ID 6866 TOILET SEAT
+    $sql6866 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6866";
+    $stmt6866 = $conn->prepare($sql6866);
+    $stmt6866->execute();
+    $result6866 = $stmt6866->get_result();
+    $row6866 = $result6866->fetch_assoc();
+    $assetId6866 = $row6866['assetId'];
+    $category6866 = $row6866['category'];
+    $date6866 = $row6866['date'];
+    $building6866 = $row6866['building'];
+    $floor6866 = $row6866['floor'];
+    $room6866 = $row6866['room'];
+    $status6866 = $row6866['status'];
+    $assignedName6866 = $row6866['assignedName'];
+    $assignedBy6866 = $row6866['assignedBy'];
+    $upload_img6866 = $row6866['upload_img'];
+    $description6866 = $row6866['description'];
 
-    //FOR ID 6866 TABLE
-    // $sql6866 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6866";
-    // $stmt6866 = $conn->prepare($sql6866);
-    // $stmt6866->execute();
-    // $result6866 = $stmt6866->get_result();
-    // $row6866 = $result6866->fetch_assoc();
-    // $assetId6866 = $row6866['assetId'];
-    // $category6866 = $row6866['category'];
-    // $date6866 = $row6866['date'];
-    // $building6866 = $row6866['building'];
-    // $floor6866 = $row6866['floor'];
-    // $room6866 = $row6866['room'];
-    // $status6866 = $row6866['status'];
-    // $assignedName6866 = $row6866['assignedName'];
-    // $assignedBy6866 = $row6866['assignedBy'];
-    // $upload_img6866 = $row6866['upload_img'];
-    // $description6866 = $row6866['description'];
+
+   
 
 
     //FOR ID 1
@@ -637,7 +639,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt12->close();
     }
 
-
     //FOR ID 6866
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6866'])) {
         // Get form data
@@ -664,6 +665,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         }
         $stmt6866->close();
     }
+
 
 
 
@@ -1094,7 +1096,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
                         <!-- ASSET 6866 -->
-                        <img src='../image.php?id=6866' style='width:35px; cursor:pointer; position:absolute; top:200px; left:530px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6866' onclick='fetchAssetData(6866);'>
+                        <img src='../image.php?id=6866' style='width:35px; cursor:pointer; position:absolute; top:200px; left:800px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6866' onclick='fetchAssetData(6866);'>
                         <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6866); ?>; 
                         position:absolute; top:200px; left:530px;'>
                         </div>

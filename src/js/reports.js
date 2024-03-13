@@ -115,12 +115,21 @@ document.addEventListener("DOMContentLoaded", function () {
     var selectedValue = parseInt(
       document.getElementById("rows-display-dropdown").value
     );
-    var rows = activeTabContent.querySelectorAll("table tr");
-    var totalItems = rows.length;
+    var rows = activeTabContent.querySelectorAll("table tr:not(.table-header)"); // Exclude header row if present
+    var totalItems = rows.length - 1; // Adjust if there's a header row
     var totalPages = Math.ceil(totalItems / selectedValue);
+
+    // Ensure the currentPage does not exceed the number of available pages
+    if (currentPage > totalPages) {
+      currentPage = totalPages || 1; // Ensure currentPage is not 0 when totalPages is 0
+      currentRangeStart = Math.max(
+        1,
+        (Math.ceil(currentPage / pagesPerRange) - 1) * pagesPerRange + 1
+      );
+    }
+
     var pagination = document.querySelector(".pagination");
     pagination.innerHTML = "";
-
     appendPaginationButtons(pagination, totalPages, selectedValue);
     showPage(currentPage, selectedValue, activeTabContent);
   }
@@ -244,9 +253,17 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Event listener for dropdown change
+
   document
     .getElementById("rows-display-dropdown")
-    .addEventListener("change", updateDataAndPagination);
+    .addEventListener("change", function () {
+      // Reset to the first page
+      currentPage = 1;
+      currentRangeStart = 1;
+      updateDataAndPagination(
+        document.querySelector(".tab-pane.active .table-container")
+      );
+    });
 
   //Auto-click on the dropdown to initialize the display
   setTimeout(function () {

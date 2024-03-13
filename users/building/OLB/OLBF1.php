@@ -191,14 +191,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <section id="content">
             <main>
                 <div class="content-container" id="content-container">
-                    <div id="belmonte-F1" class="content">
+                <div id="belmonte-F1" class="content">
                         <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-arrow-left"></i></a>
-                        <!-- ASSETS -->
-                        <img src='../image.php?id=1' style='width:100px; cursor:pointer;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal1' onclick='fetchAssetData(1);'>
-                        <img src='../image.php?id=2' style='width:100px; cursor:pointer;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal2' onclick='fetchAssetData(2);'>
                         <!-- FLOOR PLAN -->
-                        <img src="../../../src/floors/belmonteB/BB1F.png" alt="" class="Floor-container">
+                        <img class="Floor-container-1" src="../../../src/floors/OLBF1/OAB1F.png" alt="">
+
+                        <!-- ASSETS -->
+
+                       
                     </div>
+
                     <!-- Modal structure for id 1 -->
                     <div class='modal fade' id='imageModal1' tabindex='-1' aria-labelledby='imageModalLabel1' aria-hidden='true'>
                         <div class='modal-dialog modal-xl modal-dialog-centered'>
@@ -357,6 +359,17 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </main>
         </section>
+        <script>
+            $(document).ready(function() {
+                var urlParams = new URLSearchParams(window.location.search);
+                var assetId = urlParams.get('assetId'); // Get the assetId from the URL
+
+                if (assetId) {
+                    var modalId = '#imageModal' + assetId;
+                    $(modalId).modal('show'); // Open the modal with the corresponding ID
+                }
+            });
+        </script>
 
         <script src="../../../src/js/main.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
