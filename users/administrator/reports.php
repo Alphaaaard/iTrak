@@ -852,6 +852,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
+
         <script>
             //PARA MAGDIRECT KA SA PAGE 
             function redirectToPage(building, floor, assetId) {
@@ -866,16 +867,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     newLocation = "../../users/building/BAB/BABF1.php";
                 } else if (building === 'Belmonte' && floor === '1F') {
                     newLocation = "../../users/building/BEB/BEBF1.php";
-                } else if (building === 'Techvoc' && floor === '1F') {
-                    newLocation = "../../users/building/TEB/TEBF1.php";
                 } else if (building === 'Admin' && floor === '1F') {
                     newLocation = "../../users/building/ADB/ADBF1.php";
+                } else if (building === 'Techvoc' && floor === '1F') {
+                    newLocation = "../../users/building/TEB/TEBF1.php";
                 }
-          
 
                 // Append the assetId to the URL as a query parameter
                 window.location.href = newLocation + '?assetId=' + assetId;
-            
+            }
 
             $(document).on('click', 'table tr', function() {
                 var assetId = $(this).find('td:eq(0)').text(); // Assuming first TD is the assetId
@@ -884,7 +884,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 redirectToPage(building, floor, assetId);
             });
         </script>
-
+ 
+    
 
         <script>
             $(document).ready(function() {
