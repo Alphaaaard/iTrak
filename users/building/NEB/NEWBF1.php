@@ -383,6 +383,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt3->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId3 to $status3.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: NEWBF1.php");
         } else {
@@ -411,6 +412,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt4->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId4 to $status4.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: NEWBF1.php");
         } else {
@@ -438,6 +440,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt5->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5 to $status5.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: NEWBF1.php");
         } else {
@@ -465,6 +468,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt6->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId6 to $status6.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: NEWBF1.php");
         } else {
@@ -493,6 +497,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt7->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId7 to $status7.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: NEWBF1.php");
         } else {
@@ -520,6 +525,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt8->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId8 to $status8.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: NEWBF1.php");
         } else {
@@ -548,6 +554,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt9->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId9 to $status9.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: NEWBF1.php");
         } else {
@@ -576,6 +583,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt10->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId10 to $status10.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: NEWBF1.php");
         } else {
@@ -603,6 +611,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt11->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId11 to $status11.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: NEWBF1.php");
         } else {
@@ -630,6 +639,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt12->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId12 to $status12.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: NEWBF1.php");
         } else {
@@ -657,6 +667,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt6866->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId6866 to $status6866.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: NEWBF1.php");
         } else {

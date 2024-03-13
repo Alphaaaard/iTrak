@@ -125,30 +125,33 @@ ORDER BY ac.date DESC";
     $loggedInAccountId = $_SESSION['accountId'];
     // SQL query to fetch notifications related to report activities
     $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
-                   FROM activitylogs AS al
-                  JOIN account AS acc ON al.accountID = acc.accountID
-                  WHERE al.tab='Report' AND al.p_seen = '0' AND al.accountID != ? AND action NOT LIKE 'Changed status of asset ID%'
-                  ORDER BY al.date DESC 
-                  LIMIT 5"; // Set limit to 5
+    FROM activitylogs AS al
+   JOIN account AS acc ON al.accountID = acc.accountID
+   WHERE al.tab = 'General' AND al.p_seen = '0' AND al.action LIKE 'Assigned maintenance personnel%' AND al.action LIKE ? AND al.accountID != ?
+   ORDER BY al.date DESC 
+   LIMIT 5"; // Set limit to 5
 
-    // Prepare the SQL statement
-    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+// Prepare the SQL statement
+$stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+$pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
 
-    // Bind the parameter to exclude the current user's account ID
-    $stmtLatestLogs->bind_param("i", $loggedInAccountId);
+// Bind the parameter to exclude the current user's account ID
+$stmtLatestLogs->bind_param("si",  $pattern, $loggedInAccountId);
 
-    // Execute the query
-    $stmtLatestLogs->execute();
-    $resultLatestLogs = $stmtLatestLogs->get_result();
+// Execute the query
+$stmtLatestLogs->execute();
+$resultLatestLogs = $stmtLatestLogs->get_result(); 
 
-    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
-   WHERE p_seen = '0' AND accountID != ? AND action NOT LIKE 'Changed status of asset ID%'";
-    $stmt = $conn->prepare($unseenCountQuery);
-    $stmt->bind_param("i", $loggedInAccountId);
-    $stmt->execute();
-    $stmt->bind_result($unseenCount);
-    $stmt->fetch();
-    $stmt->close();
+$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
+WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance personnel%' AND action LIKE ?";
+$pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
+
+$stmt = $conn->prepare($unseenCountQuery);
+$stmt->bind_param("is", $loggedInAccountId, $pattern );
+$stmt->execute();
+$stmt->bind_result($unseenCount);
+$stmt->fetch();
+$stmt->close();
 
 
 

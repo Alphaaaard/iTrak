@@ -31,21 +31,43 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     // Concatenate first name and last name for the action field check
     $loggedInFullName = $loggedInUserFirstName . " " . $loggedInUsermiddleName . " " . $loggedInUserLastName; //kung ano ung naka declare dito eto lang ung magiging data 
 
+
+
+    $sqlGeneral = "SELECT ac.*, a.firstName, a.middleName, a.lastName
+    FROM activitylogs AS ac
+    LEFT JOIN account AS a ON ac.accountID = a.accountID
+    WHERE (ac.tab = 'General' AND ac.action LIKE 'Assigned maintenance personnel%' AND ac.action LIKE ?)
+    ORDER BY ac.date DESC";
+
+// Prepare the SQL statement
+$stmtg = $conn->prepare($sqlGeneral);
+
+// Bind the parameter and execute
+$pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
+$stmtg->bind_param("s", $pattern);
+$stmtg->execute();
+$resultGeneral = $stmtg->get_result();
+
+
+
     // Adjust the SQL to check the 'action' field for the logged-in user's name
-    // Adjust the SQL to fetch logs for the logged-in user's accountID
     $sqlReport = "SELECT ac.*, a.firstName, a.middleName, a.lastName
-FROM activitylogs AS ac
-LEFT JOIN account AS a ON ac.accountID = a.accountID
-WHERE ac.tab='Report' AND ac.accountID = ?
-ORDER BY ac.date DESC";
+    FROM activitylogs AS ac
+    LEFT JOIN account AS a ON ac.accountID = a.accountID
+    WHERE (ac.tab = 'Report' AND ac.accountID = ?)
 
-    // Prepare the SQL statement
-    $stmt = $conn->prepare($sqlReport);
+    ORDER BY ac.date DESC";
 
-    // Bind the parameter and execute
-    $stmt->bind_param("i", $accountId);
-    $stmt->execute();
-    $resultReport = $stmt->get_result();
+// Prepare the SQL statement
+$stmt = $conn->prepare($sqlReport);
+
+// Bind the parameter and execute
+
+$stmt->bind_param("i", $accountId);
+$stmt->execute();
+$resultReport = $stmt->get_result();
+
+
 
     // for notif below
     // Update the SQL to join with the account and asset tables to get the admin's name and asset information
@@ -61,24 +83,27 @@ ORDER BY ac.date DESC";
     $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
                 FROM activitylogs AS al
                JOIN account AS acc ON al.accountID = acc.accountID
-               WHERE al.tab='Report' AND al.p_seen = '0' AND al.accountID != ? AND action NOT LIKE 'Changed status of asset ID%'
+               WHERE al.tab = 'General' AND al.p_seen = '0' AND al.action LIKE 'Assigned maintenance personnel%' AND al.action LIKE ? AND al.accountID != ?
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
 
     // Prepare the SQL statement
     $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
-
+    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
+  
     // Bind the parameter to exclude the current user's account ID
-    $stmtLatestLogs->bind_param("i", $loggedInAccountId);
+    $stmtLatestLogs->bind_param("si",  $pattern, $loggedInAccountId);
 
     // Execute the query
     $stmtLatestLogs->execute();
-    $resultLatestLogs = $stmtLatestLogs->get_result();
+    $resultLatestLogs = $stmtLatestLogs->get_result(); 
 
     $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
-WHERE p_seen = '0' AND accountID != ? AND action NOT LIKE 'Changed status of asset ID%'";
-    $stmt = $conn->prepare($unseenCountQuery);
-    $stmt->bind_param("i", $loggedInAccountId);
+WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance personnel%' AND action LIKE ?";
+    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
+   
+   $stmt = $conn->prepare($unseenCountQuery);
+    $stmt->bind_param("is", $loggedInAccountId, $pattern );
     $stmt->execute();
     $stmt->bind_result($unseenCount);
     $stmt->fetch();
@@ -202,7 +227,7 @@ WHERE p_seen = '0' AND accountID != ? AND action NOT LIKE 'Changed status of ass
                                     // If notification text is set, echo the notification
                                     if (!empty($notificationText)) {
                                         // HTML for notification item
-                                        echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
+                                        echo '<a href="dashboard.php" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
                                     }
                                 }
                             } else {
@@ -344,12 +369,55 @@ WHERE p_seen = '0' AND accountID != ? AND action NOT LIKE 'Changed status of ass
                     </header>
                     <div class="new-nav">
                         <ul>
+                        <li><a href="#" class="nav-link active" data-bs-target="pills-general">General History</a></li>
                             <li><a href="#" class="nav-link" data-bs-target="pills-report">Report History</a></li>
-                            <li><a href="#" class="nav-link" data-bs-target="pills-general">Report History</a></li>
                         </ul>
                     </div>
                     <div class="tab-content pt" id="myTabContent">
+                    <div class="tab-pane fade show active" id="pills-general" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="table-content">
+                                <div class='table-header'>
+                                    <table>
+                                        <tr>
+                                            <th>NAME</th>
+                                            <th>DATE</th>
+                                            <th>ACTION</th>
+                                        </tr>
+                                    </table>
+                                </div>
 
+
+                                <!-- General History Tab Content -->
+                                <?php
+                                if ($resultGeneral->num_rows > 0) {
+                                    echo "<div class='table-container'>";
+                                    echo "<table>";
+                                    echo "<tbody>";
+                                    while ($row = $resultGeneral->fetch_assoc()) {
+                                        echo '<tr>';
+                                        echo '<td>' . $row['firstName'] . " " . $row['lastName'] . '</td>';
+                                        echo '<td style="display:none">' . $row['activityId'] . '</td>';
+                                        echo '<td style="display:none">' . $row['firstName'] . '</td>';
+                                        echo '<td style="display:none">' . $row['middleName'] . '</td>';
+                                        echo '<td style="display:none">' . $row['lastName'] . '</td>';
+                                        echo '<td>' . $row['date'] . '</td>';
+                                        echo '<td>' . $row['action'] . '</td>';
+                                        echo '</tr>';
+                                    }
+                                    echo "</tbody>";
+                                    echo "</table>";
+                                    echo "</div>";
+                                } else {
+                                    echo '<table>';
+                                    echo "<div class=noDataImgH>";
+                                    echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
+                                    echo "</tbody>";
+                                    echo "</table>";
+                                    echo "</div>";
+                                }
+                                ?>
+                            </div>
+                            <div id="pagination-container-general" class="pagination-container"></div>
                     </div>
                     <!-- Report History Tab Content -->
                     <div class="tab-pane fade show active" id="pills-report" role="tabpanel" aria-labelledby="profile-tab">
@@ -534,12 +602,80 @@ WHERE p_seen = '0' AND accountID != ? AND action NOT LIKE 'Changed status of ass
     </script>
 
 
+<script>
+            $(document).ready(function() {
+                $("#pills-general").addClass("show active");
+                $("#pills-report").removeClass("show active");
+                $(".nav-link[data-bs-target='pills-general']").addClass("active");
+                $(".nav-link[data-bs-target='pills-report']").removeClass("active");
 
+                $(".nav-link").click(function() {
+                    const targetId = $(this).data("bs-target");
+                    $(".tab-pane").removeClass("show active");
+                    $(`#${targetId}`).addClass("show active");
+                    $(".nav-link").removeClass("active");
+                    $(this).addClass("active");
+                });
+            });
+        </script>
+
+<script>
+            $(document).ready(function() {
+                // Bind the filter function to the search input field
+                $("#search-box").on("input", function() {
+                    var query = $(this).val().toLowerCase();
+                    filterTable(query);
+
+                    // Recalculate and reset pagination for each tab after filtering
+                    resetPaginationForFilteredResults('#pills-general .table-container tbody', 'pagination-container-general', 5);
+                    resetPaginationForFilteredResults('#pills-report .table-container tbody', 'pagination-container-report', 5);
+                });
+
+                // Updated filterTable function
+                function filterTable(query) {
+                    $(".table-container tbody tr").each(function() {
+                        var row = $(this);
+                        var text = row.text().toLowerCase();
+                        var isMatch = text.includes(query);
+                        row.toggle(isMatch); // Show or hide the row based on the search match
+                    });
+                }
+
+                // Show or hide the row based on the result
+                if (showRow) {
+                    row.show();
+                } else {
+                    row.hide();
+                }
+            });
+        </script>
+        <script>
+            function filterDate(order) {
+                var activeTabContainer = document.querySelector('.tab-pane.fade.active .table-container'); // Select only the active tab's table container
+                var rows = Array.from(activeTabContainer.querySelectorAll('table tbody tr')); // Select only rows within tbody of the active tab's table
+
+
+                // Sort rows based on the date
+                var sortedRows = rows.sort(function(a, b) {
+                    var dateA = new Date(a.cells[5].textContent); // Adjust to 5th cell for the date
+                    var dateB = new Date(b.cells[5].textContent);
+
+                    return (order === 'newest') ? dateB - dateA : dateA - dateB;
+                });
+
+                // Re-append rows to the table in sorted order
+                var tableBody = activeTabContainer.querySelector('tbody'); // Select the tbody of the active tab's table
+                sortedRows.forEach(row => {
+                    tableBody.appendChild(row);
+                });
+            }
+        </script>
+    </body>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Initial setup for pagination on page load for both tabs
-
+            setupPagination('#pills-general .table-container tbody', 'pagination-container-general', 25);
             setupPagination('#pills-report .table-container tbody', 'pagination-container-report', 25);
 
             // Tab click event listeners for dynamic pagination setup on tab switch
@@ -548,7 +684,7 @@ WHERE p_seen = '0' AND accountID != ? AND action NOT LIKE 'Changed status of ass
                     const targetId = this.getAttribute('data-bs-target');
 
                     // Clear existing pagination from all tabs
-
+                    document.getElementById('pagination-container-general').innerHTML = '';
                     document.getElementById('pagination-container-report').innerHTML = '';
 
                     // Use setTimeout to delay the setupPagination call, ensuring tab content is fully visible
@@ -588,32 +724,48 @@ WHERE p_seen = '0' AND accountID != ? AND action NOT LIKE 'Changed status of ass
                     const ul = document.createElement('ul');
                     ul.className = 'pagination';
 
-                    // Create Previous Button
-                    createPageButton('Previous', () => currentPage - 1);
+                    // Calculate the range of pages to display
+                    const maxPagesToShow = 3;
+                    let startPage = currentPage - Math.floor(maxPagesToShow / 2);
+                    startPage = Math.max(startPage, 1);
+                    let endPage = startPage + maxPagesToShow - 1;
+                    endPage = Math.min(endPage, pageCount);
 
-                    // Create page number buttons
-                    for (let i = 1; i <= pageCount; i++) {
-                        createPageButton(i, () => i);
+                    if (endPage - startPage < maxPagesToShow - 1) {
+                        startPage = endPage - maxPagesToShow + 1;
+                        startPage = Math.max(startPage, 1); // Ensure startPage does not go below 1
+                    }
+
+                    // Create Previous Button
+                    createPageButton('<<', () => Math.max(currentPage - 1, 1), currentPage === 1);
+
+                    // Create page number buttons within the range
+                    for (let i = startPage; i <= endPage; i++) {
+                        createPageButton(i, () => i, i === currentPage);
                     }
 
                     // Create Next Button
-                    createPageButton('Next', () => currentPage + 1);
+                    createPageButton('>>', () => Math.min(currentPage + 1, pageCount), currentPage === pageCount);
 
                     paginationContainer.appendChild(ul);
 
-                    function createPageButton(text, pageResolver) {
+                    function createPageButton(text, pageResolver, isDisabled) {
                         const li = document.createElement('li');
                         li.className = 'page-item';
+                        if (isDisabled) {
+                            li.classList.add('disabled');
+                        }
                         const a = document.createElement('a');
                         a.className = 'page-link';
                         a.href = '#';
                         a.textContent = text;
                         a.addEventListener('click', (e) => {
                             e.preventDefault();
-                            const newPage = pageResolver();
-                            if (newPage >= 1 && newPage <= pageCount) {
+                            if (!isDisabled) {
+                                const newPage = pageResolver();
                                 currentPage = newPage;
                                 showPage(currentPage);
+                                createPaginationControls(); // Recreate the pagination controls to reflect the new current page
                             }
                         });
                         li.appendChild(a);
@@ -626,6 +778,7 @@ WHERE p_seen = '0' AND accountID != ? AND action NOT LIKE 'Changed status of ass
             }
         });
     </script>
+
 
 
     </html>
