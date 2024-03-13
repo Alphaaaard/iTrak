@@ -345,6 +345,7 @@ WHERE p_seen = '0' AND accountID != ? AND action NOT LIKE 'Changed status of ass
                     <div class="new-nav">
                         <ul>
                             <li><a href="#" class="nav-link" data-bs-target="pills-report">Report History</a></li>
+                            <li><a href="#" class="nav-link" data-bs-target="pills-general">Report History</a></li>
                         </ul>
                     </div>
                     <div class="tab-content pt" id="myTabContent">
