@@ -105,8 +105,11 @@
   display: inline-block;
   position: absolute;
 }
+.map-legend{
+  display: flex;
+}
 
-.working {
+.legend-color-green {
   background-color: green;
 }
 .maintenance {
@@ -117,6 +120,10 @@
 }
 .replacement {
   background-color: red;
+}
+
+.button-submit-container{
+  margin-top: 1em !important;
 }
 .form-control {
   border: none !important;
@@ -133,6 +140,10 @@
   z-index: 1;
 }
 
+.modal-backdrop.show{
+  z-index: 1;
+}
+
 #model-container {
   z-index: 0;
   height: 100vh;
@@ -145,7 +156,53 @@
 }
 .Floor-container-1 {
   width: 1200px;
-  height: 600px;
+  height: 550px;
+}
+
+.map-nav{
+  display: flex;
+  justify-content: space-around;
+}
+
+.map-legend{
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  margin: 1em;
+}
+
+.map-legend p{
+  margin: 0;
+}
+
+.legend-color-green{
+  padding: .5em;
+  background-color: green;
+  align-self: center;
+  border-radius: 25px;
+}
+
+.legend-color-under-maintenance{
+  padding: .5em;
+  background-color: yellow;
+  align-self: center;
+  border-radius: 25px;
+
+}
+
+.legend-color-need-repair{
+  padding: .5em;
+  background-color: blue;
+  align-self: center;
+  border-radius: 25px;
+
+}
+
+.legend-color-for-replacement{
+  padding: .5em;
+  background-color: red;
+  align-self: center;
+  border-radius: 25px;
 }
 
 .sample {
@@ -261,6 +318,7 @@ h3 {
     overflow: hidden;
     border: #3d518c 0.25em solid;
     outline: #3d3b40 2px solid;
+    position: relative;
   }
 }
 
@@ -279,20 +337,47 @@ h3 {
     overflow: auto;
   }
 
+  #room{
+    font-size: .7em;
+  }
+
+  #floor{
+    font-size: .7em;
+  }
+
+  #category{
+    font-size: .8em;
+  }
+
+  #status{
+    font-size: .7em!important;
+  }
+
+  #description{
+    font-size: .7em;
+  }
+
+  #upload_img{
+    font-size: .7em;
+
+  }
+
   .buildings {
     visibility: visible !important;
     display: flex;
   }
 
   .content-container {
-    overflow: hidden;
+    overflow-x:visible;
     border: unset;
     outline: unset;
+    position: relative;
+
   }
   .modal-content {
     top: 2px;
     height: 95%;
-    width: 100%;
+    width: 100%!important;
     right: 0;
   }
 
