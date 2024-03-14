@@ -42,7 +42,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt2249->execute()) {
             // Update success
-            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2249 to $status2249.", 'Report');
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2249 to $status2249.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: KOBF1.php");
         } else {
@@ -90,7 +90,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
             if ($stmt->execute()) {
                 echo "<script>alert('Asset and image updated successfully!');</script>";
-                header("Location: NEWBF1.php");
+                header("Location: KOBF1.php");
             } else {
                 echo "<script>alert('Failed to update asset and image. Error: " . $stmt->error . "');</script>";
             }
@@ -258,14 +258,25 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 <div class="content-container" id="content-container">
                     <div id="belmonte-F1" class="content">
 
-                        <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-arrow-left"></i></a>
-
                         <!-- FLOOR PLAN -->
-                        <img class="Floor-container-1" src="../../../src/floors/korPhil/Korphil1F.png" alt="">
+                        <img class="Floor-container-1 .NEWBF1" src="../../../src/floors/korPhil/Korphil1F.png" alt="">
+                        <div class="map-nav">
+                            <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
+                            <div class="map-legend">
+                                <div class="legend-color-green"></div>
+                                <p>Working</p>
+                                <div class="legend-color-under-maintenance"></div>
+                                <p>Under maintenance</p>
+                                <div class="legend-color-need-repair"></div>
+                                <p>Need repair</p>
+                                <div class="legend-color-for-replacement"></div>
+                                <p>For replacement</p>
+                            </div>
+                        </div>
 
                         <!-- ASSETS -->
                         <!-- ASSET 2249 -->
-                        <img src='../image.php?id=2249' style='width:35px; cursor:pointer; position:absolute; top:200px; left:800px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal2249' onclick='fetchAssetData(2249);'>
+                        <img src='../image.php?id=2249' style='width:35px; cursor:pointer; position:absolute; top:170px; left:130px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal2249' onclick='fetchAssetData(2249);'>
                         <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2249); ?>; 
                         position:absolute; top:200px; left:530px;'>
                         </div>
@@ -405,9 +416,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             </div>
                         </div>
                     </div>
-                    </form>
-
                 </div>
+                </form>
+
+
             </main>
         </section>
         <script>

@@ -191,14 +191,26 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <section id="content">
             <main>
                 <div class="content-container" id="content-container">
-                <div id="belmonte-F1" class="content">
-                        <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-arrow-left"></i></a>
+                    <div id="belmonte-F1" class="content">
                         <!-- FLOOR PLAN -->
                         <img class="Floor-container-1" src="../../../src/floors/OLBF1/OAB1F.png" alt="">
+                        <div class="map-nav">
+                            <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
+                            <div class="map-legend">
+                                <div class="legend-color-green"></div>
+                                <p>Working</p>
+                                <div class="legend-color-under-maintenance"></div>
+                                <p>Under maintenance</p>
+                                <div class="legend-color-need-repair"></div>
+                                <p>Need repair</p>
+                                <div class="legend-color-for-replacement"></div>
+                                <p>For replacement</p>
+                            </div>
+                        </div>
 
                         <!-- ASSETS -->
 
-                       
+
                     </div>
 
                     <!-- Modal structure for id 1 -->
