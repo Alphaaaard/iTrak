@@ -344,7 +344,7 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
 
                     <div class="new-nav">
                         <ul>
-                            <li><a href="#" class="nav-link" id="manager-pill" data-bs-target="pills-manager">Manager</a></li>
+                            <li><a href="#" class="nav-link active" id="manager-pill" data-bs-target="pills-manager">Manager</a></li>
                             <li><a href="#" class="nav-link" id="personnel-pill" data-bs-target="pills-personnel">Personnel</a></li>
                         </ul>
                     </div>
