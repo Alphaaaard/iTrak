@@ -305,7 +305,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $description6866 = $row6866['description'];
 
 
-   
+
 
 
     //FOR ID 1
@@ -1253,8 +1253,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                 </div>
                 </form>
-
-
 
                 <!-- Modal structure for id 2-->
                 <div class='modal fade' id='imageModal2' tabindex='-1' aria-labelledby='imageModalLabel2' aria-hidden='true'>
