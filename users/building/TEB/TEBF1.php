@@ -16,9 +16,16 @@ date_default_timezone_set('Asia/Manila'); //need ata to sa lahat ng page para sa
 // SQL5 = 914
 // SQL6 = 915
 // SQL7 = 916
+// SQL8 = 917
+// SQL9 = 9
+// SQL10 = 9
+// SQL11 = 9
+// SQL12 = 9
+// SQL6886 = 9
 
 
 // ******************************************BASAHIN NYO MUNA TO**********************************************
+
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
     // For personnel page, check if userLevel is 3
@@ -38,7 +45,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     }
 
 
-    // for notif below
+     // for notif below
     // Update the SQL to join with the account and asset tables to get the admin's name and asset information
     $loggedInUserFirstName = $_SESSION['firstName'];
     $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
@@ -74,7 +81,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->bind_result($unseenCount);
     $stmt->fetch();
     $stmt->close();
-
 
 
 
@@ -209,8 +215,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $description7 = $row7['description'];
 
 
-    //FOR ID 8 BED
-    $sql8 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 8";
+    //FOR ID 917 BED
+    $sql8 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 917";
     $stmt8 = $conn->prepare($sql8);
     $stmt8->execute();
     $result8 = $stmt8->get_result();
@@ -396,6 +402,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt3->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId3 to $status3.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: TEBF1.php");
         } else {
@@ -424,6 +431,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt4->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId4 to $status4.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: TEBF1.php");
         } else {
@@ -451,6 +459,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt5->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5 to $status5.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: TEBF1.php");
         } else {
@@ -478,6 +487,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt6->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId6 to $status6.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: TEBF1.php");
         } else {
@@ -506,6 +516,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt7->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId7 to $status7.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: TEBF1.php");
         } else {
@@ -533,6 +544,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt8->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId8 to $status8.", 'Report');
+      
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: TEBF1.php");
         } else {
@@ -561,6 +574,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt9->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId9 to $status9.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: TEBF1.php");
         } else {
@@ -589,6 +603,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt10->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId10 to $status10.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: TEBF1.php");
         } else {
@@ -616,6 +631,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt11->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId11 to $status11.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: TEBF1.php");
         } else {
@@ -643,6 +659,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt12->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId12 to $status12.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: TEBF1.php");
         } else {
@@ -671,6 +688,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt6866->execute()) {
             // Update success
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId6866 to $status6866.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: TEBF1.php");
         } else {
@@ -817,42 +835,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
-                        <a href="#" class="notification" id="notification-button">
-
-
-
-
-
-
+                    <a href="#" class="notification" id="notification-button">
                             <i class="fa fa-bell" aria-hidden="true"></i>
-                            <span id="noti_number"><?php echo $unseenCount; ?></span>
-
-                            </td>
-                            </tr>
-                            </table>
-                            <script type="text/javascript">
-                                function loadDoc() {
-
-
-                                    setInterval(function() {
-
-                                        var xhttp = new XMLHttpRequest();
-                                        xhttp.onreadystatechange = function() {
-                                            if (this.readyState == 4 && this.status == 200) {
-                                                document.getElementById("noti_number").innerHTML = this.responseText;
-                                            }
-                                        };
-                                        xhttp.open("GET", "../../administrator/update_single_notification.php", true);
-                                        xhttp.send();
-
-                                    }, 10);
-
-
-                                }
-                                loadDoc();
-                            </script>
-
+                            <!-- Notification Indicator Dot -->
+                            <?php if ($unseenCount > 0) : ?>
+                                <span class="notification-indicator"></span>
+                            <?php endif; ?>
                         </a>
+
 
 
 
@@ -863,28 +853,32 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                 while ($row = $resultLatestLogs->fetch_assoc()) {
                                     $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+                                    $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
                                     $actionText = $row["action"];
 
                                     // Initialize the notification text as empty
                                     $notificationText = "";
-
+                                    if (strpos($actionText, $adminRole) === false) {
+                                        // Role is not in the action text, so prepend it to the admin name
+                                        $adminName = "$adminRole $adminName";
+                                    }
                                     // Check for 'Assigned maintenance personnel' action
                                     if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
                                         $assignedName = $matches[1];
                                         $assetId = $matches[2];
-                                        $notificationText = "Admin $adminName assigned $assignedName to asset ID $assetId";
+                                        $notificationText = "assigned $assignedName to asset ID $assetId";
                                     }
                                     // Check for 'Changed status of asset ID' action
                                     elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
                                         $assetId = $matches[1];
                                         $newStatus = $matches[2];
-                                        $notificationText = "Admin $adminName changed status of asset ID $assetId to $newStatus";
+                                        $notificationText = "changed status of asset ID $assetId to $newStatus";
                                     }
 
                                     // If notification text is set, echo the notification
                                     if (!empty($notificationText)) {
                                         // HTML for notification item
-                                        echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars($notificationText) . '</a>';
+                                        echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
                                     }
                                 }
                             } else {
@@ -1065,6 +1059,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         position:absolute; top:135px; left:820px;'>
                         </div>
 
+
+
                         <!-- ASSET 915 -->
                         <img src="../image.php?id=915" style="width:15px; cursor:pointer; position:absolute; top:160px; left:640px; " alt="Asset Image" data-bs-toggle="modal" data-bs-target="#imageModal915" onclick="fetchAssetData(915);">
 
@@ -1079,7 +1075,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         position:absolute; top:157px; left:777px;'>
                         </div>
 
+                        <!-- ASSET 917 -->
+                        <img src="../image.php?id=917" style="width:35px; cursor:pointer; position:absolute; top:95px; left:650px; " alt="Asset Image" data-bs-toggle="modal" data-bs-target="#imageModal917" onclick="fetchAssetData(917);">
 
+                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status8); ?>; 
+                        position:absolute; top:95px; left:672px;'>
+                        </div>
                     </div>
 
 
@@ -2052,8 +2053,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </form>
 
 
-                <!-- Modal structure for id 8-->
-                <div class='modal fade' id='imageModal8' tabindex='-1' aria-labelledby='imageModalLabel8' aria-hidden='true'>
+                <!-- Modal structure for id 917-->
+                <div class='modal fade' id='imageModal917' tabindex='-1' aria-labelledby='imageModalLabel917' aria-hidden='true'>
                     <div class='modal-dialog modal-xl modal-dialog-centered'>
                         <div class='modal-content'>
                             <!-- Modal header -->

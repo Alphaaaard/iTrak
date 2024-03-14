@@ -37,7 +37,7 @@
 } */
 
 /* .modal {
-  display: none;
+  display: none;.
   position: fixed;
   z-index: 100;
   left: 60.7%;
@@ -144,8 +144,8 @@
   height: 78vh;
 }
 .Floor-container-1 {
-  width: 100%;
-  height: 78vh;
+  width: 1200px;
+  height: 600px;
 }
 
 .sample {
