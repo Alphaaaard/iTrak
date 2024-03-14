@@ -344,7 +344,7 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
 
                     <div class="new-nav">
                         <ul>
-                            <li><a href="#" class="nav-link active" id="manager-pill" data-bs-target="pills-manager">Manager</a></li>
+                            <li><a href="#" class="nav-link" id="manager-pill" data-bs-target="pills-manager">Manager</a></li>
                             <li><a href="#" class="nav-link" id="personnel-pill" data-bs-target="pills-personnel">Personnel</a></li>
                         </ul>
                     </div>
@@ -639,6 +639,8 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                                 $timeOut = strtotime($attendanceRow['timeOut']);
                                                 $timeDifference = $timeOut - $timeIn;
                                                 $hours = floor($timeDifference / 3600);
+                                                // Deduct 1 hour from $hours
+                                                $hours -= 1;
                                                 $totalHoursFormatted = $hours;
                                                 $timeOutFormatted = date('h:i A', $timeOut);
                                             } else {
@@ -759,63 +761,9 @@ $(document).ready(function() {
 });
 
 </script>
-        <!-- <script>
- document.addEventListener('DOMContentLoaded', function() {
-    var managerPill = document.getElementById('manager-pill');
-    var personnelPill = document.getElementById('personnel-pill');
-    var managerContent = document.getElementById('pills-manager');
-    var personnelContent = document.getElementById('pills-personnel');
-
-    function activateTab(pill, content, role) {
-        managerPill.classList.remove('active');
-        personnelPill.classList.remove('active');
-        managerContent.classList.remove('show', 'active');
-        personnelContent.classList.remove('show', 'active');
-
-        pill.classList.add('active');
-        content.classList.add('show', 'active');
-
-        sessionStorage.setItem('lastPill', role);
-        filterTable(role); // Adjusted to pass the active role
-    }
-
-    managerPill.addEventListener('click', function(e) {
-        e.preventDefault();
-        activateTab(managerPill, managerContent, 'manager');
-    });
-
-    personnelPill.addEventListener('click', function(e) {
-        e.preventDefault();
-        activateTab(personnelPill, personnelContent, 'personnel');
-    });
-
-    // Directly check and activate the tab from session storage on page load
-    var lastPill = sessionStorage.getItem('lastPill') || 'manager';
-    if (lastPill === 'personnel') {
-        activateTab(personnelPill, personnelContent, 'personnel');
-    } else {
-        activateTab(managerPill, managerContent, 'manager');
-    }
-});
-
-// Optimized filterTable function
-function filterTable(activeRole) {
-    var query = document.getElementById('search-box').value.toLowerCase();
-    var rows = document.querySelectorAll('.table-container tbody tr');
-
-    rows.forEach(function(row) {
-        var roleCell = row.querySelector("td:last-child").textContent.toLowerCase(); // Using :last-child pseudo-class
-        var isRoleMatch = (activeRole === 'manager' && roleCell.includes('maintenance manager')) || (activeRole === 'personnel' && roleCell.includes('maintenance personnel'));
-        var isQueryMatch = row.textContent.toLowerCase().includes(query);
-        row.style.display = (isRoleMatch && isQueryMatch) ? '' : 'none';
-    });
-}
-
-
-            </script> -->
 
 <script>
-    var managerPill = document.getElementById('manager-pill');
+var managerPill = document.getElementById('manager-pill');
 var personnelPill = document.getElementById('personnel-pill');
 var managerContent = document.getElementById('pills-manager');
 var personnelContent = document.getElementById('pills-personnel');
