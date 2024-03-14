@@ -769,16 +769,19 @@ var managerContent = document.getElementById('pills-manager');
 var personnelContent = document.getElementById('pills-personnel');
 
 function activateTab(pill, content, role) {
-    managerPill.classList.remove('active');
-    personnelPill.classList.remove('active');
-    managerContent.classList.remove('show', 'active');
-    personnelContent.classList.remove('show', 'active');
+    // Remove active class from all tabs and contents
+    $('.nav-link').removeClass('active');
+    $('.tab-pane').removeClass('show active');
 
-    pill.classList.add('active');
-    content.classList.add('show', 'active');
+    // Add active class to the clicked tab and its content
+    pill.addClass('active');
+    content.addClass('show active');
 
+    // Store the last active pill in session storage
     sessionStorage.setItem('lastPill', role);
-    filterTable(role); // Adjusted to pass the active role
+
+    // Call the filterTable function with the active role
+    filterTable(role);
 }
 
 managerPill.addEventListener('click', function(e) {
@@ -991,9 +994,10 @@ $(window).on('load', function() {
     // Bind the input event to the search box for dynamic filtering
     $("#search-box").on("input", filterTable);
 
-    // Activate the correct tab based on sessionStorage or default
+    // Check if the last active tab was personnel, and activate it immediately upon page load
     activateLastPill();
 });
+
 
         </script>
 
