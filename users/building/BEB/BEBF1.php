@@ -5503,7 +5503,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <!-- FLOOR PLAN -->
                          <img class="Floor-container-1" src="../../../src/floors/belmonteB/BB1f.png" alt="">
-                         <img src="../../../src/floors/chinesebB/ChineseB1F.png" alt="" class="Floor-container">
                         <div class="map-nav">
                             <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
                             <div class="map-legend">
