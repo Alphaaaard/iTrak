@@ -17,7 +17,7 @@ date_default_timezone_set('Asia/Manila'); //need ata to sa lahat ng page para sa
 // SQL6 = 915
 // SQL7 = 916
 // SQL8 = 917
-// SQL9 = 9
+// SQL9 = 918
 // SQL10 = 9
 // SQL11 = 9
 // SQL12 = 9
@@ -234,8 +234,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $description8 = $row8['description'];
 
 
-    //FOR ID 9 BED
-    $sql9 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 9";
+    //FOR ID 918 BED
+    $sql9 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 918";
     $stmt9 = $conn->prepare($sql9);
     $stmt9->execute();
     $result9 = $stmt9->get_result();
@@ -1081,6 +1081,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status8); ?>; 
                         position:absolute; top:95px; left:672px;'>
                         </div>
+
+                           <!-- ASSET 918 -->
+                        <img src="../image.php?id=918" style="width:35px; cursor:pointer; position:absolute; top:95px; left:770px; " alt="Asset Image" data-bs-toggle="modal" data-bs-target="#imageModal918" onclick="fetchAssetData(918);">
+
+                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status9); ?>; 
+                        position:absolute; top:95px; left:792px;'>
+                        </div>
+
                     </div>
 
 
@@ -2191,8 +2199,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </form>
 
 
-                <!-- Modal structure for id 9-->
-                <div class='modal fade' id='imageModal9' tabindex='-1' aria-labelledby='imageModalLabel9' aria-hidden='true'>
+                <!-- Modal structure for id 918-->
+                <div class='modal fade' id='imageModal918' tabindex='-1' aria-labelledby='imageModalLabel918' aria-hidden='true'>
                     <div class='modal-dialog modal-xl modal-dialog-centered'>
                         <div class='modal-content'>
                             <!-- Modal header -->
