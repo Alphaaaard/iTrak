@@ -45,7 +45,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     }
 
 
-     // for notif below
+    // for notif below
     // Update the SQL to join with the account and asset tables to get the admin's name and asset information
     $loggedInUserFirstName = $_SESSION['firstName'];
     $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
@@ -121,7 +121,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $upload_img2 = $row2['upload_img'];
     $description2 = $row2['description'];
 
-     //FOR ID 912 LIGHTS
+    //FOR ID 912 LIGHTS
     $sql3 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 912";
     $stmt3 = $conn->prepare($sql3);
     $stmt3->execute();
@@ -140,7 +140,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $description3 = $row3['description'];
 
 
-   //FOR ID 913 LIGHTS
+    //FOR ID 913 LIGHTS
     $sql4 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 913";
     $stmt4 = $conn->prepare($sql4);
     $stmt4->execute();
@@ -159,7 +159,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $description4 = $row4['description'];
 
 
- //FOR ID 914 LIGHTS
+    //FOR ID 914 LIGHTS
     $sql5 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 914";
     $stmt5 = $conn->prepare($sql5);
     $stmt5->execute();
@@ -177,7 +177,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $upload_img5 = $row5['upload_img'];
     $description5 = $row5['description'];
 
-  //FOR ID 915 LIGHTS
+    //FOR ID 915 LIGHTS
     $sql6 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 915";
     $stmt6 = $conn->prepare($sql6);
     $stmt6->execute();
@@ -196,7 +196,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $description6 = $row6['description'];
 
 
- //FOR ID 916 LIGHTS
+    //FOR ID 916 LIGHTS
     $sql7 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 916";
     $stmt7 = $conn->prepare($sql7);
     $stmt7->execute();
@@ -545,7 +545,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         if ($stmt8->execute()) {
             // Update success
             logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId8 to $status8.", 'Report');
-      
+
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: TEBF1.php");
         } else {
@@ -835,7 +835,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
-                    <a href="#" class="notification" id="notification-button">
+                        <a href="#" class="notification" id="notification-button">
                             <i class="fa fa-bell" aria-hidden="true"></i>
                             <!-- Notification Indicator Dot -->
                             <?php if ($unseenCount > 0) : ?>
@@ -1019,9 +1019,21 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             <main>
                 <div class="content-container" id="content-container">
                     <div id="belmonte-F1" class="content">
-                        <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-arrow-left"></i></a>
                         <!-- FLOOR PLAN -->
                         <img class="Floor-container-1" src="../../../src/floors/techvocB/TV1F.png" alt="">
+                        <div class="map-nav">
+                            <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
+                            <div class="map-legend">
+                                <div class="legend-color-green"></div>
+                                <p>Working</p>
+                                <div class="legend-color-under-maintenance"></div>
+                                <p>Under maintenance</p>
+                                <div class="legend-color-need-repair"></div>
+                                <p>Need repair</p>
+                                <div class="legend-color-for-replacement"></div>
+                                <p>For replacement</p>
+                            </div>
+                        </div>
                         <!-- assetss -->
 
                         <!-- ASSET 910 -->
@@ -1031,22 +1043,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         position:absolute; top:85px; left:620px;'>
                         </div>
 
-                          <!-- ASSET 911 -->
-                          <img src="../image.php?id=911" style="width:15px; cursor:pointer; position:absolute; top:115px; left:610px; " alt="Asset Image" data-bs-toggle="modal" data-bs-target="#imageModal911" onclick="fetchAssetData(911);">
+                        <!-- ASSET 911 -->
+                        <img src="../image.php?id=911" style="width:15px; cursor:pointer; position:absolute; top:115px; left:610px; " alt="Asset Image" data-bs-toggle="modal" data-bs-target="#imageModal911" onclick="fetchAssetData(911);">
 
                         <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2); ?>; 
                         position:absolute; top:115px; left:620px;'>
                         </div>
 
                         <!-- ASSET 912 -->
-                          <img src="../image.php?id=912" style="width:15px; cursor:pointer; position:absolute; top:107px; left:720px; " alt="Asset Image" data-bs-toggle="modal" data-bs-target="#imageModal912" onclick="fetchAssetData(912);">
+                        <img src="../image.php?id=912" style="width:15px; cursor:pointer; position:absolute; top:107px; left:720px; " alt="Asset Image" data-bs-toggle="modal" data-bs-target="#imageModal912" onclick="fetchAssetData(912);">
 
                         <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status3); ?>; 
                         position:absolute; top:107px; left:730px;'>
                         </div>
 
-                          <!-- ASSET 913 -->
-                          <img src="../image.php?id=913" style="width:15px; cursor:pointer; position:absolute; top:85px; left:810px; " alt="Asset Image" data-bs-toggle="modal" data-bs-target="#imageModal913" onclick="fetchAssetData(913);">
+                        <!-- ASSET 913 -->
+                        <img src="../image.php?id=913" style="width:15px; cursor:pointer; position:absolute; top:85px; left:810px; " alt="Asset Image" data-bs-toggle="modal" data-bs-target="#imageModal913" onclick="fetchAssetData(913);">
 
                         <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status4); ?>; 
                         position:absolute; top:85px; left:820px;'>

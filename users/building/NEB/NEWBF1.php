@@ -1194,7 +1194,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <div id="belmonte-F1" class="content">
                         <!-- FLOOR PLAN -->
                         <img class="Floor-container-1" src="../../../src/floors/newAcademicB/NAB1F.png" alt="">
-                        <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-arrow-left"></i></a>
                         <div class="map-nav">
                             <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
                             <div class="map-legend">
