@@ -327,6 +327,20 @@ h3 {
     padding-bottom: 1em;
 } */
 
+.Floor-container-1{
+  width: 1200px;
+    height: 586px;
+    margin-left: 1em;
+}
+
+.Floor-container {
+  width: 1200px;
+    height: 586px;
+    margin-left: 1em;
+}
+
+
+
   .modal {
     display: none;
     position: fixed;
