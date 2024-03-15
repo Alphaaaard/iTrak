@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Manila');
 session_start();
 include_once("../../config/connection.php");
 $conn = connection();
@@ -625,16 +626,17 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                     while ($attendanceRow = $attendanceResult->fetch_assoc()) {
                                         // Get the day of the week
                                         $dayOfWeek = date('l', strtotime($attendanceRow['date']));
-
+                                    
                                         // Format timeIn and timeOut to show only the time with AM or PM
+                                        // Set the timezone here to ensure it's applied before any time conversions
+                                        date_default_timezone_set('Asia/Manila');
                                         $timeInFormatted = date('h:i A', strtotime($attendanceRow['timeIn']));
-
-                                        date_default_timezone_set('Asia/Manila'); // Set the correct time zone, e.g., 'America/New_York'
-
+                                    
+                                        // Timezone adjustment and time calculation logic
                                         if (isset($attendanceRow['timeIn'])) {
                                             $timeIn = strtotime($attendanceRow['timeIn']);
                                             $currentTime = time(); // Current timestamp
-
+                                    
                                             if (isset($attendanceRow['timeOut'])) {
                                                 $timeOut = strtotime($attendanceRow['timeOut']);
                                                 $timeDifference = $timeOut - $timeIn;
@@ -644,21 +646,24 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                                 $totalHoursFormatted = $hours;
                                                 $timeOutFormatted = date('h:i A', $timeOut);
                                             } else {
-                                                $timeSinceIn = $currentTime - $timeIn;
-
-                                                if ($timeSinceIn > (8 * 3600)) {
+                                                // Get the current hour
+                                                $currentHour = date('H', $currentTime);
+                                    
+                                                // If it's past 12 AM, show 4 hours and 'Not Timed Out'
+                                                if ($currentHour >= 0 && $currentHour < 8) {
                                                     $totalHoursFormatted = "4";
                                                     $timeOutFormatted = 'Not Timed Out';
                                                 } else {
-                                                    $totalHoursFormatted = ''; // Set totalHours to empty if 8 hours have NOT been exceeded
-                                                    $timeOutFormatted = ''; // Set timeOut to empty if 8 hours have NOT been exceeded
+                                                    $totalHoursFormatted = ''; // Set totalHours to empty if 12 AM has not been exceeded
+                                                    $timeOutFormatted = ''; // Set timeOut to empty if 12 AM has not been exceeded
                                                 }
                                             }
                                         } else {
                                             $totalHoursFormatted = "No TimeIn Recorded"; // In case the user hasn't timed in yet
                                             $timeOutFormatted = ''; // Default value for timeOut in this case
                                         }
-
+                                    
+                                        // Output the formatted data
                                         echo '<tr data-day="' . $dayOfWeek . '">';
                                         echo '<td>' . $dayOfWeek . '</td>';
                                         echo '<td>' . $attendanceRow['date'] . '</td>';
@@ -667,18 +672,12 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                         echo '<td>' . $totalHoursFormatted . '</td>';
                                         echo '</tr>';
                                     }
-
+                                    
                                     echo '</table>';
                                     echo "</div>";
                                     echo "</div>";
-                                } else {
-                                    echo '<table>';
-                                    echo "<div class='noDataImgH'>";
-                                    echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
-                                    echo "</div>";
-                                    echo '</table>';
-                                }
-
+                                    
+                                    
                                 // Close the attendance log statement
                                 $attendanceStmt->close();
 
@@ -689,6 +688,7 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                 echo '</div>';
                                 echo '</div>';
                                 echo '</div>';
+                            }
                             }
                         }
                         ?>
