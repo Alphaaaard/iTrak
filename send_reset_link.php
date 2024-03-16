@@ -23,6 +23,9 @@ if (isset($_POST['email'])) {
     $result = $conn->query($query);
 
     if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $firstName = $row['firstName'];  // Extract the last name 
+        $lastName = $row['lastName'];  // Extract the last name 
         $token = bin2hex(random_bytes(50)); // generate unique token
         $resetLink = "https://itrak.website/reset_password.php?token=$token";
 
@@ -57,13 +60,14 @@ if (isset($_POST['email'])) {
 
             // Create the src attribute using the Base64 data
             $base64ImageSrc = 'data:image/png;base64,' . $imageData;
-            $mail->Body    = 'Dear ' . $userName . ',<br><br>'
+
+            $mail->Body    = 'Dear ' . $firstName + $lastName . ',<br><br>'
             . 'We have received a request to reset the password associated with your account. To proceed with resetting your password, please click the following link below:<br><br>'
             . '<a href="' . $resetLink . '">Password Reset Link</a><br><br>'
             . 'If you did not request this password reset or believe it to be an error, please ignore this email. Your account security is important to us, and no action is required if you did not initiate this request.<br><br>'
             . 'Thank you,<br>iTrak<br>'
-            . '<img src="' . $base64Image . '" alt="iTrak Logo">';
-            $mail->AltBody = 'Dear ' . $userName . ",\n\n"
+            . '<img src="' . $base64ImageSrc . '" alt="iTrak Logo">';
+            $mail->AltBody = 'Dear ' . $firstName + $lastName . ",\n\n"
             . "We have received a request to reset the password associated with your account. To proceed with resetting your password, please click the following link below:\n\n"
             . $resetLink . "\n\n"
             . "If you did not request this password reset or believe it to be an error, please ignore this email. Your account security is important to us, and no action is required if you did not initiate this request.\n\n"
