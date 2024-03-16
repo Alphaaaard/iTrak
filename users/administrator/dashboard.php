@@ -2281,7 +2281,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </select>
                     </div>
                     <select id="employeeFilter">
-                        <option value="">Select Employee</option>
+                        <option value="">Choose Personnel</option>
                         <!-- Employee options will be populated dynamically via AJAX -->
                     </select>
                 </div>
