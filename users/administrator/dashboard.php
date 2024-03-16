@@ -2607,7 +2607,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     type: 'GET',
                     dataType: 'json',
                     success: function(employeeNames) {
-                        $('#employeeFilter').empty().append($('<option>').text('Select Employee').attr('value', ''));
+                        $('#employeeFilter').empty().append($('<option>').text('Choose Personnel').attr('value', ''));
                         employeeNames.forEach(function(name) {
                             $('#employeeFilter').append($('<option>').text(name).attr('value', name));
                         });
