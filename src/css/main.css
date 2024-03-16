@@ -1557,7 +1557,7 @@ h5 {
 #sidebar.hide .brand img.logo {
   transition: 0.3s ease;
   width: 100%;
-  padding: 1em 3em;
+  padding: 0em 4em;
 }
 /* #sidebar.hide .brand img.logo {
   padding: 0;
