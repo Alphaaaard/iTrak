@@ -43,7 +43,7 @@ if (isset($_POST['email'])) {
             $mail->Port = 465;
 
             //Recipients
-            $mail->setFrom('qcu.upkeep@gmail.com', 'UpKeep');
+            $mail->setFrom('qcu.upkeep@gmail.com', 'iTrak');
             $mail->addAddress($email); // Add a recipient
 
             // Content
