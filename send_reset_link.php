@@ -49,8 +49,17 @@ if (isset($_POST['email'])) {
             // Content
             $mail->isHTML(true);
             $mail->Subject = 'Password Reset Link';
-            $mail->Body    = 'Click on this link to reset your password: <a href="' . $resetLink . '">' . $resetLink . '</a>';
-            $mail->AltBody = 'Click on this link to reset your password: ' . $resetLink;
+            $mail->Body    = 'Dear ' . $userName . ',<br><br>'
+            . 'We have received a request to reset the password associated with your account. To proceed with resetting your password, please click the following link below:<br><br>'
+            . '<a href="' . $resetLink . '">Password Reset Link</a><br><br>'
+            . 'If you did not request this password reset or believe it to be an error, please ignore this email. Your account security is important to us, and no action is required if you did not initiate this request.<br><br>'
+            . 'Thank you,<br>iTrak<br>'
+            . '<img src="' . $logoUrl . '" alt="iTrak Logo">';
+            $mail->AltBody = 'Dear ' . $userName . ",\n\n"
+            . "We have received a request to reset the password associated with your account. To proceed with resetting your password, please click the following link below:\n\n"
+            . $resetLink . "\n\n"
+            . "If you did not request this password reset or believe it to be an error, please ignore this email. Your account security is important to us, and no action is required if you did not initiate this request.\n\n"
+            . "Thank you,\niTrak". $resetLink;
 
             $mail->send();
             $response = ['success' => true, 'message' => 'Password reset link sent! Please check your email.'];
