@@ -23,7 +23,6 @@ if (isset($_POST['email'])) {
     $result = $conn->query($query);
 
     if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
         $firstName = $row['firstName'];  // Extract the last name 
         $lastName = $row['lastName'];  // Extract the last name 
         $token = bin2hex(random_bytes(50)); // generate unique token
