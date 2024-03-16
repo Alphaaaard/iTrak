@@ -54,7 +54,7 @@ if (isset($_POST['email'])) {
             . '<a href="' . $resetLink . '">Password Reset Link</a><br><br>'
             . 'If you did not request this password reset or believe it to be an error, please ignore this email. Your account security is important to us, and no action is required if you did not initiate this request.<br><br>'
             . 'Thank you,<br>iTrak<br>'
-            . '<img src="' . $logoUrl . '" alt="iTrak Logo">';
+            . '<img src="https://imgur.com/a/hSbNPhC" alt="iTrak Logo">';
             $mail->AltBody = 'Dear ' . $userName . ",\n\n"
             . "We have received a request to reset the password associated with your account. To proceed with resetting your password, please click the following link below:\n\n"
             . $resetLink . "\n\n"
