@@ -3,9 +3,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
- require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+//  require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 
-// require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
+require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
@@ -440,7 +440,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <section id="content">
             <main>
                 <div class="content-container">
-                <header>
+                    <header>
                         <div class="cont-header">
                             <!-- <h1 class="tab-name">Reports</h1> -->
                             <div class="tbl-filter">
