@@ -596,7 +596,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                                 <div class="col-4">
                                                     <label for="contactField" class="form-label">Contact Number <span class="d-none text-danger error">*</span></label>
-                                                    <input type="tel" class="form-control" id="contactField" name="contact" required pattern="\d{10,11}" maxlength="11" value="09" title="Contact number must be 10 to 11 digits long" />
+                                                    <input type="tel" class="form-control" id="contactField" name="contact" required maxlength="11" value="09" title="Contact number must start with '09' and be 10 to 11 digits long" oninput="this.value = this.value.replace(/\D/g, '').substring(0, 11)" />
+
                                                 </div>
 
                                                 <div class="col-4">
