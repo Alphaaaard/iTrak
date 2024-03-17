@@ -23,7 +23,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     }
 
 
-    // for notif below
+   // for notif below
     // Update the SQL to join with the account and asset tables to get the admin's name and asset information
     $loggedInUserFirstName = $_SESSION['firstName'];
     $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
@@ -37,24 +37,27 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
                 FROM activitylogs AS al
                JOIN account AS acc ON al.accountID = acc.accountID
-               WHERE al.tab='Report' AND al.seen = '0' AND al.accountID != ?
+               WHERE al.tab = 'General' AND al.p_seen = '0' AND al.action LIKE 'Assigned maintenance personnel%' AND al.action LIKE ? AND al.accountID != ?
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
 
     // Prepare the SQL statement
     $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
-
+    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
+  
     // Bind the parameter to exclude the current user's account ID
-    $stmtLatestLogs->bind_param("i", $loggedInAccountId);
+    $stmtLatestLogs->bind_param("si",  $pattern, $loggedInAccountId);
 
     // Execute the query
     $stmtLatestLogs->execute();
-    $resultLatestLogs = $stmtLatestLogs->get_result();
+    $resultLatestLogs = $stmtLatestLogs->get_result(); 
 
-
-    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
-    $stmt = $conn->prepare($unseenCountQuery);
-    $stmt->bind_param("i", $loggedInAccountId);
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
+WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance personnel%' AND action LIKE ?";
+    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
+   
+   $stmt = $conn->prepare($unseenCountQuery);
+    $stmt->bind_param("is", $loggedInAccountId, $pattern );
     $stmt->execute();
     $stmt->bind_result($unseenCount);
     $stmt->fetch();
@@ -6374,6 +6377,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         }
     </style>
 
+
     <body>
         <div id="navbar" class="">
             <nav>
@@ -6387,45 +6391,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
-
-                        <a href="#" class="notification" id="notification-button">
-
-
-
-
-
-
+                         <!--NOTIF NI PABS-->
+                         <a href="#" class="notification" id="notification-button">
                             <i class="fa fa-bell" aria-hidden="true"></i>
-                            <span id="noti_number"><?php echo $unseenCount; ?></span>
-
-                            </td>
-                            </tr>
-                            </table>
-                            <script type="text/javascript">
-                                function loadDoc() {
-
-
-                                    setInterval(function() {
-
-                                        var xhttp = new XMLHttpRequest();
-                                        xhttp.onreadystatechange = function() {
-                                            if (this.readyState == 4 && this.status == 200) {
-                                                document.getElementById("noti_number").innerHTML = this.responseText;
-                                            }
-                                        };
-                                        xhttp.open("GET", "../../administrator/update_single_notification.php", true);
-                                        xhttp.send();
-
-                                    }, 10);
-
-
-                                }
-                                loadDoc();
-                            </script>
-
+                            <!-- Notification Indicator Dot -->
+                            <?php if ($unseenCount > 0) : ?>
+                                <span class="notification-indicator"></span>
+                            <?php endif; ?>
                         </a>
-
-
 
                         <div class="dropdown-content" id="notification-dropdown-content">
                             <h6 class="dropdown-header">Alerts Center</h6>
@@ -6434,28 +6407,32 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                 while ($row = $resultLatestLogs->fetch_assoc()) {
                                     $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+                                    $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
                                     $actionText = $row["action"];
 
                                     // Initialize the notification text as empty
                                     $notificationText = "";
-
+                                    if (strpos($actionText, $adminRole) === false) {
+                                        // Role is not in the action text, so prepend it to the admin name
+                                        $adminName = "$adminRole $adminName";
+                                    }
                                     // Check for 'Assigned maintenance personnel' action
                                     if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
                                         $assignedName = $matches[1];
                                         $assetId = $matches[2];
-                                        $notificationText = "Admin $adminName assigned $assignedName to asset ID $assetId";
+                                        $notificationText = "assigned $assignedName to asset ID $assetId";
                                     }
                                     // Check for 'Changed status of asset ID' action
                                     elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
                                         $assetId = $matches[1];
                                         $newStatus = $matches[2];
-                                        $notificationText = "Admin $adminName changed status of asset ID $assetId to $newStatus";
+                                        $notificationText = "changed status of asset ID $assetId to $newStatus";
                                     }
 
                                     // If notification text is set, echo the notification
                                     if (!empty($notificationText)) {
                                         // HTML for notification item
-                                        echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars($notificationText) . '</a>';
+                                        echo '<a href="dashboard.php" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
                                     }
                                 }
                             } else {
@@ -6466,12 +6443,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             <a href="activity-logs.php" class="view-all">View All</a>
 
                         </div>
-                    </div>
-
-
-
-
-
+                        </div>
+                    <!--END NG  NOTIF NI PABS-->
 
                     <a href="#" class="settings profile">
                         <div class="profile-container" title="settings">
