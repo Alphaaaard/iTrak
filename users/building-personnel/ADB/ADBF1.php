@@ -3,9 +3,9 @@ session_start();
 include_once("../../../config/connection.php");
 $conn = connection();
 
-if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
-    // For personnel page, check if userLevel is 3
-    if ($_SESSION['userLevel'] != 3) {
+if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role'])) {
+     // For personnel page, check if userLevel is 3
+     if ($_SESSION['userLevel'] != 3) {
         // If not personnel, redirect to an error page or login
         header("Location:error.php");
         exit;
@@ -39,27 +39,27 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
    ORDER BY al.date DESC 
    LIMIT 5"; // Set limit to 5
 
-    // Prepare the SQL statement
-    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
-    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
+// Prepare the SQL statement
+$stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+$pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
 
-    // Bind the parameter to exclude the current user's account ID
-    $stmtLatestLogs->bind_param("si",  $pattern, $loggedInAccountId);
+// Bind the parameter to exclude the current user's account ID
+$stmtLatestLogs->bind_param("si",  $pattern, $loggedInAccountId);
 
-    // Execute the query
-    $stmtLatestLogs->execute();
-    $resultLatestLogs = $stmtLatestLogs->get_result();
+// Execute the query
+$stmtLatestLogs->execute();
+$resultLatestLogs = $stmtLatestLogs->get_result(); 
 
-    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
+$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
 WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance personnel%' AND action LIKE ?";
-    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
+$pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
 
-    $stmt = $conn->prepare($unseenCountQuery);
-    $stmt->bind_param("is", $loggedInAccountId, $pattern);
-    $stmt->execute();
-    $stmt->bind_result($unseenCount);
-    $stmt->fetch();
-    $stmt->close();
+$stmt = $conn->prepare($unseenCountQuery);
+$stmt->bind_param("is", $loggedInAccountId, $pattern );
+$stmt->execute();
+$stmt->bind_result($unseenCount);
+$stmt->fetch();
+$stmt->close();
 
 
 
@@ -1448,9 +1448,6 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         $stmt5791->close();
     }
 
-
-
-
     function getStatusColor($status)
     {
         switch ($status) {
@@ -1492,7 +1489,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 header("Location: ADBF1.php");
             } else {
                 echo "<script>alert('Failed to update asset and image. Error: " . $stmt->error . "');</script>";
-            }ra
+            }
             $stmt->close();
         } else {
             echo "<script>alert('Failed to upload image. Error: " . $_FILES['upload_img']['error'] . "');</script>";
@@ -1659,14 +1656,14 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         </div>
         <section id="sidebar">
             <div href="#" class="brand" title="logo">
-            <i><img src="../../../src/img/UpKeep.png" alt="" class="logo" /></i>
+                <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
                 <div class="mobile-sidebar-close">
                     <i class="bi bi-arrow-left-circle"></i>
                 </div>
             </div>
             <ul class="side-menu top">
-                <li>
-                    <a href="../../personnel/dashboard.php">
+            <li >
+            <a href="../../personnel/dashboard.php">
                         <i class="bi bi-grid"></i>
                         <span class="text">Dashboard</span>
                     </a>
@@ -1677,7 +1674,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         <span class="text">Attendance Logs</span>
                     </a>
                 </li>
-
+             
                 <li class="active">
                     <a href="../../personnel/map.php">
                         <i class="bi bi-map"></i>
@@ -1691,7 +1688,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     </a>
                 </li>
                 <li>
-                    <a href="../../personnel/reports.php">
+                        <a href="../../personnel/reports.php">
                         <i class="bi bi-clipboard"></i>
                         <span class="text">Reports</span>
                     </a>
@@ -1712,7 +1709,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         <!-- FLOOR PLAN -->
                         <img src="../../../src/floors/adminB/AB1F.png" alt="" class="Floor-container">
                         <div class="map-nav">
-                            <a href="../../personnel/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
+                            <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
                             <div class="map-legend">
                                 <div class="legend-color-green"></div>
                                 <p>Working</p>
@@ -1726,7 +1723,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         </div>
                     </div>
 
-                    
+                    <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-arrow-left"></i></a>
 
                     <!-- ASSET 5762 -->
                     <img src='../image.php?id=5762' style='width:25px; cursor:pointer; position:absolute; top:60px; left:850px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5762' onclick='fetchAssetData(5762);'>
@@ -5963,14 +5960,43 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     </div>
                 </div>
                 </form>
-
-
-
-
-
-
             </main>
         </section>
+        <script>
+            $(document).ready(function() {
+                $('.notification-item').on('click', function(e) {
+                    e.preventDefault();
+                    var activityId = $(this).data('activity-id');
+                    var notificationItem = $(this); // Store the clicked element
+
+                    $.ajax({
+                        type: "POST",
+                        url: "../../administrator/update_single_notification.php", // The URL to the PHP file
+                        data: {
+                            activityId: activityId
+                        },
+                        success: function(response) {
+                            if (response.trim() === "Notification updated successfully") {
+                                // If the notification is updated successfully, remove the clicked element
+                                notificationItem.remove();
+
+                                // Update the notification count
+                                var countElement = $('#noti_number');
+                                var count = parseInt(countElement.text()) || 0;
+                                countElement.text(count > 1 ? count - 1 : '');
+                            } else {
+                                // Handle error
+                                console.error("Failed to update notification:", response);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle AJAX error
+                            console.error("AJAX error:", status, error);
+                        }
+                    });
+                });
+            });
+        </script>
 
         <script>
             $(document).ready(function() {
