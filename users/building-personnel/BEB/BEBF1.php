@@ -12904,7 +12904,7 @@ $stmt->close();
                     <div id="belmonte-F1" class="content">
 
                         <!-- FLOOR PLAN -->
-                        <img class="Floor-container-1 .NEWBF1" src="../../../src/floors/belmonteB/BB1f.png" alt="">
+                        <img class="Floor-container-1 .NEWBF1" src="../../../src/floors/belmonteB/BB1F.png" alt="">
                         <div class="map-nav">
                             <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
                             <div class="map-legend">
