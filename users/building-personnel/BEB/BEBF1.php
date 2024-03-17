@@ -7,7 +7,7 @@ $conn = connection();
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
     // For personnel page, check if userLevel is 3
-    if ($_SESSION['userLevel'] != 1) {
+    if ($_SESSION['userLevel'] != 3) {
         // If not personnel, redirect to an error page or login
         header("Location:error.php");
         exit;
