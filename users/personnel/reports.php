@@ -3,9 +3,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 
-require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
+// require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
@@ -320,7 +320,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                 echo '<a href="#">No new notifications</a>';
                             }
                             ?>
-                            <a href="activity-logs.php" class="view-all">View All</a>
+                            <a href="assigned-tasks.php" class="view-all">View All</a>
 
                         </div>
                     </div>

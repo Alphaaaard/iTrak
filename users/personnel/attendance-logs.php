@@ -261,7 +261,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                 echo '<a href="#">No new notifications</a>';
                             }
                             ?>
-                            <a href="activity-logs.php" class="view-all">View All</a>
+                            <a href="assigned-tasks.php" class="view-all">View All</a>
 
                         </div>
                     </div>
