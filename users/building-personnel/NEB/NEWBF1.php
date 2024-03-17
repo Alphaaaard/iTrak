@@ -6305,45 +6305,6 @@ $stmt->close();
             echo "<script>alert('Failed to upload image. Error: " . $_FILES['upload_img']['error'] . "');</script>";
         }
     }
-// for notif below
-    // Update the SQL to join with the account and asset tables to get the admin's name and asset information
-    $loggedInUserFirstName = $_SESSION['firstName'];
-    $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
-    $loggedInUserLastName = $_SESSION['lastName'];
-
-    // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
-
-    $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
-    $loggedInAccountId = $_SESSION['accountId'];
-    // SQL query to fetch notifications related to report activities
-    $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
-                FROM activitylogs AS al
-               JOIN account AS acc ON al.accountID = acc.accountID
-               WHERE al.tab = 'General' AND al.p_seen = '0' AND al.action LIKE 'Assigned maintenance personnel%' AND al.action LIKE ? AND al.accountID != ?
-               ORDER BY al.date DESC 
-               LIMIT 5"; // Set limit to 5
-
-    // Prepare the SQL statement
-    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
-    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
-  
-    // Bind the parameter to exclude the current user's account ID
-    $stmtLatestLogs->bind_param("si",  $pattern, $loggedInAccountId);
-
-    // Execute the query
-    $stmtLatestLogs->execute();
-    $resultLatestLogs = $stmtLatestLogs->get_result(); 
-
-    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
-WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance personnel%' AND action LIKE ?";
-    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
-   
-   $stmt = $conn->prepare($unseenCountQuery);
-    $stmt->bind_param("is", $loggedInAccountId, $pattern );
-    $stmt->execute();
-    $stmt->bind_result($unseenCount);
-    $stmt->fetch();
-    $stmt->close();
 
 ?>
 
@@ -6362,7 +6323,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <link rel="stylesheet" href="../../../src/css/main.css" />
         <link rel="stylesheet" href="../../buildingCSS/NEB/NEWBF1.css" />
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
-
+        <script src="../../src/js/locationTracker.js"></script>
         <link rel="stylesheet" href="../../../src/css/map.css" />
     </head>
     <style>
