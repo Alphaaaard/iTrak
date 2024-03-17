@@ -71,9 +71,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/map.css" />
-        <script src="../../src/js/locationTracker.js"></script>
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
-        <script src="../../src/js/locationTracker.js"></script>
     </head>
     <style>
         .notification-indicator {
@@ -86,7 +84,13 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             top: 10px;
             right: 10px;
         }
+
+        #map {
+            display: none;
+        }
     </style>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
 
     <body>
         <!-- NAVBAR -->
@@ -264,6 +268,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <!-- SIDEBAR -->
         <!-- CONTENT -->
         <section id="content">
+            <div id="map"></div>
+
             <!-- MAIN -->
 
             <main>
@@ -585,6 +591,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 </div>
             </div>
         </div>
+        <script src="../../src/js/locationTracker.js"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>

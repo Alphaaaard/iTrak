@@ -357,7 +357,6 @@ button {
   display: flex;
   justify-content: center;
   color: #163172;
-  font-size: 12px;
   padding: 0 1em;
 }
 .building-body input {
@@ -1004,6 +1003,10 @@ select {
 /* Responsive styles */
 
 @media (max-width: 768px) {
+
+  .building-body{
+    font-size: 12px;
+  }
   .chart-container {
     padding: 10px;
     margin-top: 10px;
