@@ -11,7 +11,7 @@ session_start();
 include_once("../../config/connection.php");
 $conn = connection();
 date_default_timezone_set('Asia/Manila');
-echo date_default_timezone_get();
+
 
 function logActivity($conn, $accountId, $actionDescription, $tabValue)
 {
