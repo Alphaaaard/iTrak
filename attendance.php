@@ -1,3 +1,8 @@
+<?php
+
+date_default_timezone_set('Asia/Manila'); //need ata to sa lahat ng page para sa security hahah 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
