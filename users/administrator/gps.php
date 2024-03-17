@@ -305,7 +305,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp, a.color, a.picture
                         FROM attendancelogs AS al
                         LEFT JOIN account AS a ON al.accountID = a.accountID
-                        WHERE date = '$currentDate' AND (al.timeOut IS NULL OR al.timeOut = '')";
+                        WHERE date = '$currentDate' AND (al.timeOut IS NULL OR al.timeOut = '') AND a.role = 'Maintenance Personnel'";
+
 
                         $result = $conn->query($sql);
 
