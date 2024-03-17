@@ -634,35 +634,45 @@ $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
                                     $timeInFormatted = date('h:i A', strtotime($attendanceRow['timeIn']));
 
                                     // Timezone adjustment and time calculation logic
-                                    if (isset($attendanceRow['timeIn'])) {
-                                        $timeIn = strtotime($attendanceRow['timeIn']);
-                                        $currentTime = time(); // Current timestamp
+if (isset($attendanceRow['timeIn'])) {
+    $timeIn = strtotime($attendanceRow['timeIn']);
+    $currentTime = time(); // Current timestamp
 
-                                        if (isset($attendanceRow['timeOut'])) {
-                                            $timeOut = strtotime($attendanceRow['timeOut']);
-                                            $timeDifference = $timeOut - $timeIn;
-                                            $hours = floor($timeDifference / 3600);
-                                            // Deduct 1 hour from $hours
-                                            $hours -= 1;
-                                            $totalHoursFormatted = $hours;
-                                            $timeOutFormatted = date('h:i A', $timeOut);
-                                        } else {
-                                            // Get the current hour
-                                            $currentHour = date('H', $currentTime);
+    // Extract the date part from timeIn to compare with the current date
+    $dataDate = date('Y-m-d', $timeIn);
+    $currentDate = date('Y-m-d', $currentTime);
 
-                                            // If it's past 12 AM, show 4 hours and 'Not Timed Out'
-                                            if ($currentHour >= 0 && $currentHour < 8) {
-                                                $totalHoursFormatted = "4";
-                                                $timeOutFormatted = 'Not Timed Out';
-                                            } else {
-                                                $totalHoursFormatted = ''; // Set totalHours to empty if 12 AM has not been exceeded
-                                                $timeOutFormatted = ''; // Set timeOut to empty if 12 AM has not been exceeded
-                                            }
-                                        }
-                                    } else {
-                                        $totalHoursFormatted = "No TimeIn Recorded"; // In case the user hasn't timed in yet
-                                        $timeOutFormatted = ''; // Default value for timeOut in this case
-                                    }
+    if (isset($attendanceRow['timeOut'])) {
+        $timeOut = strtotime($attendanceRow['timeOut']);
+        $timeDifference = $timeOut - $timeIn;
+        $hours = floor($timeDifference / 3600);
+        // Deduct 1 hour from $hours
+        $hours -= 1;
+        $totalHoursFormatted = $hours;
+        $timeOutFormatted = date('h:i A', $timeOut);
+    } else {
+        // Get the current hour
+        $currentHour = date('H', $currentTime);
+
+        if ($dataDate < $currentDate) {
+            // If the data's date is before the current date, it's automatically not timed out.
+            $totalHoursFormatted = '';
+            $timeOutFormatted = 'Not Timed Out';
+        } elseif ($currentHour >= 0 && $currentHour < 8) {
+            // If it's past 12 AM, but before 8 AM, show 4 hours and 'Not Timed Out'
+            $totalHoursFormatted = "4";
+            $timeOutFormatted = 'Not Timed Out';
+        } else {
+            // For the current date but after 8 AM, or if the timeOut is explicitly recorded
+            $totalHoursFormatted = ''; // Set totalHours to empty
+            $timeOutFormatted = ''; // Set timeOut to empty
+        }
+    }
+} else {
+    $totalHoursFormatted = "No TimeIn Recorded"; // In case the user hasn't timed in yet
+    $timeOutFormatted = ''; // Default value for timeOut in this case
+}
+
 
                                     // Output the formatted data
                                     echo '<tr data-day="' . $dayOfWeek . '">';
@@ -842,7 +852,7 @@ $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
                     tableHeader.style.marginTop = '50px'; // Adjust the space as needed
                 }
 
-                // Check if the export content exists
+                // Ensure the export content exists
                 if (!exportContent) {
                     Swal.fire({
                         title: 'Failed!',
