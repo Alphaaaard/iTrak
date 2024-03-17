@@ -3,9 +3,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 
-require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
+// require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
@@ -851,23 +851,23 @@ $stmt->close();
             function redirectToPage(building, floor, assetId) {
                 var newLocation = '';
                 if (building === 'New Academic' && floor === '1F') {
-                    newLocation = "../../users/building/NEB/NEWBF1.php";
+                    newLocation = "../../users/building-personnel/NEB/NEWBF1.php";
                 } else if (building === 'Yellow' && floor === '1F') {
-                    newLocation = "../../users/building/OLB/OLBF1.php";
+                    newLocation = "../../users/building-personnel/OLB/OLBF1.php";
                 } else if (building === 'Korphil' && floor === '1F') {
-                    newLocation = "../../users/building/KOB/KOBF1.php";
+                    newLocation = "../../users/building-personnel/KOB/KOBF1.php";
                 } else if (building === 'Bautista' && floor === 'Basement') {
-                    newLocation = "../../users/building/BAB/BABF1.php";
+                    newLocation = "../../users/building-personnel/BAB/BABF1.php";
                 } else if (building === 'Belmonte' && floor === '1F') {
-                    newLocation = "../../users/building/BEB/BEBF1.php";
+                    newLocation = "../../users/building-personnel/BEB/BEBF1.php";
                 } else if (building === 'Admin' && floor === '1F') {
-                    newLocation = "../../users/building/ADB/ADBF1.php";
+                    newLocation = "../../users/building-personnel/ADB/ADBF1.php";
                 } else if (building === 'Techvoc' && floor === '1F') {
-                    newLocation = "../../users/building/TEB/TEBF1.php";
+                    newLocation = "../../users/building-personnel/TEB/TEBF1.php";
                 } else if (building === 'Chinese B' && floor === '1F') {
-                    newLocation = "../../users/building/CHB/CHBF1.php";
+                    newLocation = "../../users/building-personnel/CHB/CHBF1.php";
                 } else if (building === 'Multipurpose' && floor === '1F') {
-                    newLocation = "../../users/building/MUB/MUBF1.php";
+                    newLocation = "../../users/building-personnel/MUB/MUBF1.php";
                 }
 
                 // Append the assetId to the URL as a query parameter
