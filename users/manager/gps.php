@@ -66,7 +66,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>GPS</title>
+        <title>iTrak | GPS</title>
         <!-- BOOTSTRAP -->
         <link rel="icon" type="image/x-icon" href="../../src/img/tab-logo.png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
@@ -294,7 +294,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp, a.color, a.picture
                         FROM attendancelogs AS al
                         LEFT JOIN account AS a ON al.accountID = a.accountID
-                        WHERE date = '$currentDate' AND (al.timeOut IS NULL OR al.timeOut = '')";
+                        WHERE date = '$currentDate' AND (al.timeOut IS NULL OR al.timeOut = '') AND a.role = 'Maintenance Personnel'";
+
 
                         $result = $conn->query($sql);
 
@@ -302,18 +303,25 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         if ($result->num_rows > 0) {
                             echo "<div class='accordion'id='accordionGPS'>";
                             echo "<div class='fake-header'>";
+
                             echo "<p>NAME</p>";
+
                             // echo "<p>Location</p>";
+
                             echo "</div>";
 
                             while ($row = $result->fetch_assoc()) {
+
                                 $accountId = $row["accountId"];
                                 $firstName = $row["firstName"];
                                 $lastName = $row["lastName"];
                                 $collapseId = "collapse" . $accountId;
                                 $headerId = "heading" . $accountId;
 
+
                                 // Accordion item
+                                echo "<div class='gps-container'>";
+
                                 echo "<div class='accordion-item'>";
                                 echo "<h2 class='accordion-header' id='" . $headerId . "'>";
                                 echo "<button class='accordion-btn gps-info' type='button' data-bs-toggle='collapse' data-bs-target='#" . $collapseId . "' aria-expanded='false' aria-controls='" . $collapseId . "' data-firstName='" . $firstName . "'>";
@@ -329,6 +337,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 echo "Timestamp: " . $row["timestamp"];
                                 echo "</div>"; // End of accordion body
                                 echo "</div>"; // End of accordion collapse
+                                echo "</div>"; // End of accordion item
                                 echo "</div>"; // End of accordion item
                             }
                             echo "</div>"; // Close the main container for the accordion

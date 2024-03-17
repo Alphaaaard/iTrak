@@ -131,27 +131,27 @@ ORDER BY ac.date DESC";
    ORDER BY al.date DESC 
    LIMIT 5"; // Set limit to 5
 
-// Prepare the SQL statement
-$stmtLatestLogs = $conn->prepare($sqlLatestLogs);
-$pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
+    // Prepare the SQL statement
+    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
 
-// Bind the parameter to exclude the current user's account ID
-$stmtLatestLogs->bind_param("si",  $pattern, $loggedInAccountId);
+    // Bind the parameter to exclude the current user's account ID
+    $stmtLatestLogs->bind_param("si",  $pattern, $loggedInAccountId);
 
-// Execute the query
-$stmtLatestLogs->execute();
-$resultLatestLogs = $stmtLatestLogs->get_result(); 
+    // Execute the query
+    $stmtLatestLogs->execute();
+    $resultLatestLogs = $stmtLatestLogs->get_result();
 
-$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
 WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance personnel%' AND action LIKE ?";
-$pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
+    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
 
-$stmt = $conn->prepare($unseenCountQuery);
-$stmt->bind_param("is", $loggedInAccountId, $pattern );
-$stmt->execute();
-$stmt->bind_result($unseenCount);
-$stmt->fetch();
-$stmt->close();
+    $stmt = $conn->prepare($unseenCountQuery);
+    $stmt->bind_param("is", $loggedInAccountId, $pattern);
+    $stmt->execute();
+    $stmt->bind_result($unseenCount);
+    $stmt->fetch();
+    $stmt->close();
 
 
 
@@ -183,7 +183,7 @@ $stmt->close();
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Dashboard</title>
+        <title>iTrak | Dashboard</title>
         <!-- BOOTSTRAP -->
         <link rel="icon" type="image/x-icon" href="../../src/img/tab-logo.png">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">

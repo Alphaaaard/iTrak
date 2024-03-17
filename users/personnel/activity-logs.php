@@ -39,14 +39,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     WHERE (ac.tab = 'General' AND ac.action LIKE 'Assigned maintenance personnel%' AND ac.action LIKE ?)
     ORDER BY ac.date DESC";
 
-// Prepare the SQL statement
-$stmtg = $conn->prepare($sqlGeneral);
+    // Prepare the SQL statement
+    $stmtg = $conn->prepare($sqlGeneral);
 
-// Bind the parameter and execute
-$pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
-$stmtg->bind_param("s", $pattern);
-$stmtg->execute();
-$resultGeneral = $stmtg->get_result();
+    // Bind the parameter and execute
+    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
+    $stmtg->bind_param("s", $pattern);
+    $stmtg->execute();
+    $resultGeneral = $stmtg->get_result();
 
 
 
@@ -58,14 +58,14 @@ $resultGeneral = $stmtg->get_result();
 
     ORDER BY ac.date DESC";
 
-// Prepare the SQL statement
-$stmt = $conn->prepare($sqlReport);
+    // Prepare the SQL statement
+    $stmt = $conn->prepare($sqlReport);
 
-// Bind the parameter and execute
+    // Bind the parameter and execute
 
-$stmt->bind_param("i", $accountId);
-$stmt->execute();
-$resultReport = $stmt->get_result();
+    $stmt->bind_param("i", $accountId);
+    $stmt->execute();
+    $resultReport = $stmt->get_result();
 
 
 
@@ -90,20 +90,20 @@ $resultReport = $stmt->get_result();
     // Prepare the SQL statement
     $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
     $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
-  
+
     // Bind the parameter to exclude the current user's account ID
     $stmtLatestLogs->bind_param("si",  $pattern, $loggedInAccountId);
 
     // Execute the query
     $stmtLatestLogs->execute();
-    $resultLatestLogs = $stmtLatestLogs->get_result(); 
+    $resultLatestLogs = $stmtLatestLogs->get_result();
 
     $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
 WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance personnel%' AND action LIKE ?";
     $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
-   
-   $stmt = $conn->prepare($unseenCountQuery);
-    $stmt->bind_param("is", $loggedInAccountId, $pattern );
+
+    $stmt = $conn->prepare($unseenCountQuery);
+    $stmt->bind_param("is", $loggedInAccountId, $pattern);
     $stmt->execute();
     $stmt->bind_result($unseenCount);
     $stmt->fetch();
@@ -141,7 +141,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Activity Logs</title>
+        <title>iTrak | Activity Logs</title>
         <!-- BOOTSTRAP -->
         <link rel="icon" type="image/x-icon" href="../../src/img/tab-logo.png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
@@ -368,12 +368,12 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     </header>
                     <div class="new-nav">
                         <ul>
-                        <li><a href="#" class="nav-link active" data-bs-target="pills-general">General History</a></li>
+                            <li><a href="#" class="nav-link active" data-bs-target="pills-general">General History</a></li>
                             <li><a href="#" class="nav-link" data-bs-target="pills-report">Report History</a></li>
                         </ul>
                     </div>
                     <div class="tab-content pt" id="myTabContent">
-                    <div class="tab-pane fade show active" id="pills-general" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="tab-pane fade show active" id="pills-general" role="tabpanel" aria-labelledby="home-tab">
                             <div class="table-content">
                                 <div class='table-header'>
                                     <table>
@@ -417,53 +417,53 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                 ?>
                             </div>
                             <div id="pagination-container-general" class="pagination-container"></div>
-                    </div>
-                    <!-- Report History Tab Content -->
-                    <div class="tab-pane fade show active" id="pills-report" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="table-content">
-                            <div class='table-header'>
-                                <table>
-                                    <tr>
-                                        <th>NAME</th>
-                                        <th>DATE</th>
-                                        <th>ACTION</th>
-                                    </tr>
-                                </table>
-                            </div>
-                            <?php
-                            if ($resultReport->num_rows > 0) {
-                                echo "<div class='table-container'>";
-                                echo "<table>";
-                                echo "<tbody>";
-                                while ($row = $resultReport->fetch_assoc()) {
-                                    echo '<tr>';
-                                    echo '<td>' . $row['firstName'] . " " . $row['lastName'] . '</td>';
-                                    echo '<td style="display:none">' . $row['activityId'] . '</td>';
-                                    echo '<td style="display:none">' . $row['firstName'] . '</td>';
-                                    echo '<td style="display:none">' . $row['middleName'] . '</td>';
-                                    echo '<td style="display:none">' . $row['lastName'] . '</td>';
-                                    echo '<td>' . $row['date'] . '</td>';
-                                    echo '<td>' . $row['action'] . '</td>';
-                                    echo '</tr>';
-                                }
-                                echo "</tbody>";
-                                echo "</table>";
-                                echo "</div>";
-                            } else {
-                                echo '<table>';
-                                echo "<div class=noDataImgH>";
-                                echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
-                                echo "</tbody>";
-                                echo "</table>";
-                                echo "</div>";
-                            }
-                            ?>
                         </div>
-                        <div id="pagination-container-report" class="pagination-container"></div>
-                    </div>
-                    <!--EMPLOYEE INFORMATION MODALS-->
+                        <!-- Report History Tab Content -->
+                        <div class="tab-pane fade show active" id="pills-report" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="table-content">
+                                <div class='table-header'>
+                                    <table>
+                                        <tr>
+                                            <th>NAME</th>
+                                            <th>DATE</th>
+                                            <th>ACTION</th>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <?php
+                                if ($resultReport->num_rows > 0) {
+                                    echo "<div class='table-container'>";
+                                    echo "<table>";
+                                    echo "<tbody>";
+                                    while ($row = $resultReport->fetch_assoc()) {
+                                        echo '<tr>';
+                                        echo '<td>' . $row['firstName'] . " " . $row['lastName'] . '</td>';
+                                        echo '<td style="display:none">' . $row['activityId'] . '</td>';
+                                        echo '<td style="display:none">' . $row['firstName'] . '</td>';
+                                        echo '<td style="display:none">' . $row['middleName'] . '</td>';
+                                        echo '<td style="display:none">' . $row['lastName'] . '</td>';
+                                        echo '<td>' . $row['date'] . '</td>';
+                                        echo '<td>' . $row['action'] . '</td>';
+                                        echo '</tr>';
+                                    }
+                                    echo "</tbody>";
+                                    echo "</table>";
+                                    echo "</div>";
+                                } else {
+                                    echo '<table>';
+                                    echo "<div class=noDataImgH>";
+                                    echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
+                                    echo "</tbody>";
+                                    echo "</table>";
+                                    echo "</div>";
+                                }
+                                ?>
+                            </div>
+                            <div id="pagination-container-report" class="pagination-container"></div>
+                        </div>
+                        <!--EMPLOYEE INFORMATION MODALS-->
 
-                </div>
+                    </div>
                 </div>
             </main>
             <!-- MAIN -->
@@ -601,74 +601,74 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
     </script>
 
 
-<script>
-            $(document).ready(function() {
-                $("#pills-general").addClass("show active");
-                $("#pills-report").removeClass("show active");
-                $(".nav-link[data-bs-target='pills-general']").addClass("active");
-                $(".nav-link[data-bs-target='pills-report']").removeClass("active");
+    <script>
+        $(document).ready(function() {
+            $("#pills-general").addClass("show active");
+            $("#pills-report").removeClass("show active");
+            $(".nav-link[data-bs-target='pills-general']").addClass("active");
+            $(".nav-link[data-bs-target='pills-report']").removeClass("active");
 
-                $(".nav-link").click(function() {
-                    const targetId = $(this).data("bs-target");
-                    $(".tab-pane").removeClass("show active");
-                    $(`#${targetId}`).addClass("show active");
-                    $(".nav-link").removeClass("active");
-                    $(this).addClass("active");
-                });
+            $(".nav-link").click(function() {
+                const targetId = $(this).data("bs-target");
+                $(".tab-pane").removeClass("show active");
+                $(`#${targetId}`).addClass("show active");
+                $(".nav-link").removeClass("active");
+                $(this).addClass("active");
             });
-        </script>
+        });
+    </script>
 
-<script>
-            $(document).ready(function() {
-                // Bind the filter function to the search input field
-                $("#search-box").on("input", function() {
-                    var query = $(this).val().toLowerCase();
-                    filterTable(query);
+    <script>
+        $(document).ready(function() {
+            // Bind the filter function to the search input field
+            $("#search-box").on("input", function() {
+                var query = $(this).val().toLowerCase();
+                filterTable(query);
 
-                    // Recalculate and reset pagination for each tab after filtering
-                    resetPaginationForFilteredResults('#pills-general .table-container tbody', 'pagination-container-general', 5);
-                    resetPaginationForFilteredResults('#pills-report .table-container tbody', 'pagination-container-report', 5);
-                });
-
-                // Updated filterTable function
-                function filterTable(query) {
-                    $(".table-container tbody tr").each(function() {
-                        var row = $(this);
-                        var text = row.text().toLowerCase();
-                        var isMatch = text.includes(query);
-                        row.toggle(isMatch); // Show or hide the row based on the search match
-                    });
-                }
-
-                // Show or hide the row based on the result
-                if (showRow) {
-                    row.show();
-                } else {
-                    row.hide();
-                }
+                // Recalculate and reset pagination for each tab after filtering
+                resetPaginationForFilteredResults('#pills-general .table-container tbody', 'pagination-container-general', 5);
+                resetPaginationForFilteredResults('#pills-report .table-container tbody', 'pagination-container-report', 5);
             });
-        </script>
-        <script>
-            function filterDate(order) {
-                var activeTabContainer = document.querySelector('.tab-pane.fade.active .table-container'); // Select only the active tab's table container
-                var rows = Array.from(activeTabContainer.querySelectorAll('table tbody tr')); // Select only rows within tbody of the active tab's table
 
-
-                // Sort rows based on the date
-                var sortedRows = rows.sort(function(a, b) {
-                    var dateA = new Date(a.cells[5].textContent); // Adjust to 5th cell for the date
-                    var dateB = new Date(b.cells[5].textContent);
-
-                    return (order === 'newest') ? dateB - dateA : dateA - dateB;
-                });
-
-                // Re-append rows to the table in sorted order
-                var tableBody = activeTabContainer.querySelector('tbody'); // Select the tbody of the active tab's table
-                sortedRows.forEach(row => {
-                    tableBody.appendChild(row);
+            // Updated filterTable function
+            function filterTable(query) {
+                $(".table-container tbody tr").each(function() {
+                    var row = $(this);
+                    var text = row.text().toLowerCase();
+                    var isMatch = text.includes(query);
+                    row.toggle(isMatch); // Show or hide the row based on the search match
                 });
             }
-        </script>
+
+            // Show or hide the row based on the result
+            if (showRow) {
+                row.show();
+            } else {
+                row.hide();
+            }
+        });
+    </script>
+    <script>
+        function filterDate(order) {
+            var activeTabContainer = document.querySelector('.tab-pane.fade.active .table-container'); // Select only the active tab's table container
+            var rows = Array.from(activeTabContainer.querySelectorAll('table tbody tr')); // Select only rows within tbody of the active tab's table
+
+
+            // Sort rows based on the date
+            var sortedRows = rows.sort(function(a, b) {
+                var dateA = new Date(a.cells[5].textContent); // Adjust to 5th cell for the date
+                var dateB = new Date(b.cells[5].textContent);
+
+                return (order === 'newest') ? dateB - dateA : dateA - dateB;
+            });
+
+            // Re-append rows to the table in sorted order
+            var tableBody = activeTabContainer.querySelector('tbody'); // Select the tbody of the active tab's table
+            sortedRows.forEach(row => {
+                tableBody.appendChild(row);
+            });
+        }
+    </script>
     </body>
 
     <script>

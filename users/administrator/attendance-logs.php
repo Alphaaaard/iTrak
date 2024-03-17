@@ -8,7 +8,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
     // For personnel page, check if userLevel is 3
-    if($_SESSION['userLevel'] != 1) {
+    if ($_SESSION['userLevel'] != 1) {
         // If not personnel, redirect to an error page or login
         header("Location:error.php");
         exit;
@@ -60,44 +60,44 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
-    
- 
- // for notif below
- // Update the SQL to join with the account and asset tables to get the admin's name and asset information
- $loggedInUserFirstName = $_SESSION['firstName']; 
- $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
- $loggedInUserLastName = $_SESSION['lastName'];
- 
- // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
 
-$loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
-$loggedInAccountId = $_SESSION['accountId'];
-// SQL query to fetch notifications related to report activities
-$sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
+
+    // for notif below
+    // Update the SQL to join with the account and asset tables to get the admin's name and asset information
+    $loggedInUserFirstName = $_SESSION['firstName'];
+    $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
+    $loggedInUserLastName = $_SESSION['lastName'];
+
+    // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
+
+    $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
+    $loggedInAccountId = $_SESSION['accountId'];
+    // SQL query to fetch notifications related to report activities
+    $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
                 FROM activitylogs AS al
                JOIN account AS acc ON al.accountID = acc.accountID
                WHERE al.tab='Report' AND al.seen = '0' AND al.accountID != ?
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
 
-// Prepare the SQL statement
-$stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+    // Prepare the SQL statement
+    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
 
-// Bind the parameter to exclude the current user's account ID
-$stmtLatestLogs->bind_param("i", $loggedInAccountId);
+    // Bind the parameter to exclude the current user's account ID
+    $stmtLatestLogs->bind_param("i", $loggedInAccountId);
 
-// Execute the query
-$stmtLatestLogs->execute();
-$resultLatestLogs = $stmtLatestLogs->get_result();
+    // Execute the query
+    $stmtLatestLogs->execute();
+    $resultLatestLogs = $stmtLatestLogs->get_result();
 
 
-$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
-$stmt = $conn->prepare($unseenCountQuery);
-$stmt->bind_param("i", $loggedInAccountId);
-$stmt->execute();
-$stmt->bind_result($unseenCount);
-$stmt->fetch();
-$stmt->close();
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
+    $stmt = $conn->prepare($unseenCountQuery);
+    $stmt->bind_param("i", $loggedInAccountId);
+    $stmt->execute();
+    $stmt->bind_result($unseenCount);
+    $stmt->fetch();
+    $stmt->close();
 ?>
 
     <!DOCTYPE html>
@@ -106,7 +106,7 @@ $stmt->close();
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Attendance Logs</title>
+        <title>iTrak | Attendance Logs</title>
         <link rel="icon" type="image/x-icon" href="../../src/img/tab-logo.png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
@@ -119,19 +119,20 @@ $stmt->close();
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
-        </head>
+    </head>
     <style>
-.notification-indicator {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: red;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-</style>
+        .notification-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: red;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+
     <body>
         <!-- NAVBAR -->
         <div id="navbar" class="">
@@ -144,61 +145,61 @@ $stmt->close();
                 </div>
                 <div class="content-nav">
                     <div class="notification-dropdown">
-                    <a href="#" class="notification" id="notification-button">
-    <i class="fa fa-bell" aria-hidden="true"></i>
-    <!-- Notification Indicator Dot -->
-    <?php if ($unseenCount > 0): ?>
-    <span class="notification-indicator"></span>
-    <?php endif; ?>
-</a>
+                        <a href="#" class="notification" id="notification-button">
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+                            <!-- Notification Indicator Dot -->
+                            <?php if ($unseenCount > 0) : ?>
+                                <span class="notification-indicator"></span>
+                            <?php endif; ?>
+                        </a>
 
 
 
 
-<div class="dropdown-content" id="notification-dropdown-content">
-    <h6 class="dropdown-header">Alerts Center</h6>
-    <!-- PHP code to display notifications will go here -->
-    <?php
-if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
-    while ($row = $resultLatestLogs->fetch_assoc()) {
-        $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
-        $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
-        $actionText = $row["action"];
-    
-        // Initialize the notification text as empty
-        $notificationText = "";
-        if (strpos($actionText, $adminRole) === false) {
-            // Role is not in the action text, so prepend it to the admin name
-            $adminName = "$adminRole $adminName";
-        }
-        // Check for 'Assigned maintenance personnel' action
-        if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
-            $assignedName = $matches[1];
-            $assetId = $matches[2];
-            $notificationText = "assigned $assignedName to asset ID $assetId";
-        }
-        // Check for 'Changed status of asset ID' action
-        elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
-            $assetId = $matches[1];
-            $newStatus = $matches[2];
-            $notificationText = "changed status of asset ID $assetId to $newStatus";
-        }
+                        <div class="dropdown-content" id="notification-dropdown-content">
+                            <h6 class="dropdown-header">Alerts Center</h6>
+                            <!-- PHP code to display notifications will go here -->
+                            <?php
+                            if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
+                                while ($row = $resultLatestLogs->fetch_assoc()) {
+                                    $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+                                    $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
+                                    $actionText = $row["action"];
 
-        // If notification text is set, echo the notification
-        if (!empty($notificationText)) {
-            // HTML for notification item
-            echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
-        }
-    }
-} else {
-    // No notifications found
-    echo '<a href="#">No new notifications</a>';
-}
-?>
-<a href="activity-logs.php" class="view-all">View All</a>
+                                    // Initialize the notification text as empty
+                                    $notificationText = "";
+                                    if (strpos($actionText, $adminRole) === false) {
+                                        // Role is not in the action text, so prepend it to the admin name
+                                        $adminName = "$adminRole $adminName";
+                                    }
+                                    // Check for 'Assigned maintenance personnel' action
+                                    if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
+                                        $assignedName = $matches[1];
+                                        $assetId = $matches[2];
+                                        $notificationText = "assigned $assignedName to asset ID $assetId";
+                                    }
+                                    // Check for 'Changed status of asset ID' action
+                                    elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
+                                        $assetId = $matches[1];
+                                        $newStatus = $matches[2];
+                                        $notificationText = "changed status of asset ID $assetId to $newStatus";
+                                    }
 
-</div>
-</div>
+                                    // If notification text is set, echo the notification
+                                    if (!empty($notificationText)) {
+                                        // HTML for notification item
+                                        echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
+                                    }
+                                }
+                            } else {
+                                // No notifications found
+                                echo '<a href="#">No new notifications</a>';
+                            }
+                            ?>
+                            <a href="activity-logs.php" class="view-all">View All</a>
+
+                        </div>
+                    </div>
                     <a href="#" class="settings profile">
                         <div class="profile-container" title="settings">
                             <div class="profile-img">
@@ -392,135 +393,135 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                 ?>
                             </div>
                         </div>
-                            </div>
+                    </div>
 
-                         <!-- Modal -->
-                         <?php
-                        // Fetch and display attendance log data within modals
-                        if ($result->num_rows > 0) {
-                            $result->data_seek(0); // Reset result pointer to the beginning
+                    <!-- Modal -->
+                    <?php
+                    // Fetch and display attendance log data within modals
+                    if ($result->num_rows > 0) {
+                        $result->data_seek(0); // Reset result pointer to the beginning
 
-                            while ($row = $result->fetch_assoc()) {
-                                echo '<div class="modal fade" id="attendanceModal' . $row['accountId'] . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
-                                echo '<div class="modal-dialog modal-lg modal-dialog-centered">';
-                                echo '<div class="modal-content">';
-                                echo '<div class="modal-header">';
-                                echo '<div class="modal-close">';
-                                echo '<button class="btn btn-close-modal-emp close-modal-btn" id="closeAddModal" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>';
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<div class="modal fade" id="attendanceModal' . $row['accountId'] . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+                            echo '<div class="modal-dialog modal-lg modal-dialog-centered">';
+                            echo '<div class="modal-content">';
+                            echo '<div class="modal-header">';
+                            echo '<div class="modal-close">';
+                            echo '<button class="btn btn-close-modal-emp close-modal-btn" id="closeAddModal" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '<div class="modal-footer">';
+
+                            echo '<div class="modal-content-header">';
+                            echo '<p class="h5-like">' . $row['firstname'] . ' ' . $row['lastname'] . '</p>';
+                            echo '<form class="filterType">';
+                            echo '<select name="filterType" id="filterType' . $row['accountId'] . '" onchange="filterAttendanceData(' . $row['accountId'] . ')" class="custom-select">';
+                            echo '<option value="all">All</option>';
+                            echo '<option value="week">This Week</option>';
+                            echo '<option value="month">This Month</option>';
+                            echo '<option value="year">This Year</option>';
+                            echo '</select>';
+                            echo '</form>';
+                            echo '</div>';
+
+                            $attendanceQuery = "SELECT date, timeIn, timeOut FROM attendancelogs WHERE accountId = ? ORDER BY date ASC";
+                            $attendanceStmt = $conn->prepare($attendanceQuery);
+                            $attendanceStmt->bind_param('i', $row['accountId']);
+                            $attendanceStmt->execute();
+                            $attendanceResult = $attendanceStmt->get_result();
+
+                            if ($attendanceResult->num_rows > 0) {
+
+                                // Table header
+                                echo '<div class="table-whole-content1" id="exportContent' . $row['accountId'] . '">';
+                                echo '<p class="h5-like visually-hidden" id="nameHeader' . $row['accountId'] . '">' . $row['firstname'] . ' ' . $row['lastname'] . '</p>';
+                                echo '<div class="table-header1">';
+                                echo '<table>';
+                                echo '<tr>';
+                                echo '<th>Day</th>';
+                                echo '<th>Date</th>';
+                                echo '<th>Time In</th>';
+                                echo '<th>Time Out</th>';
+                                echo '<th>Total Hours</th>';
+                                echo '</tr>';
+                                echo '</table>';
                                 echo '</div>';
-                                echo '</div>';
-                                echo '<div class="modal-footer">';
 
-                                echo '<div class="modal-content-header">';
-                                echo '<p class="h5-like">' . $row['firstname'] . ' ' . $row['lastname'] . '</p>';
-                                echo '<form class="filterType">';
-                                echo '<select name="filterType" id="filterType' . $row['accountId'] . '" onchange="filterAttendanceData(' . $row['accountId'] . ')" class="custom-select">';
-                                echo '<option value="all">All</option>';
-                                echo '<option value="week">This Week</option>';
-                                echo '<option value="month">This Month</option>';
-                                echo '<option value="year">This Year</option>';
-                                echo '</select>';
-                                echo '</form>';
-                                echo '</div>';
+                                echo '<div class="modal-content-th">';
+                                // Start the table and use a unique ID
+                                echo '<table id="attendanceTable' . $row['accountId'] . '">';
+                                // Table body
+                                while ($attendanceRow = $attendanceResult->fetch_assoc()) {
+                                    // Get the day of the week
+                                    $dayOfWeek = date('l', strtotime($attendanceRow['date']));
 
-                                $attendanceQuery = "SELECT date, timeIn, timeOut FROM attendancelogs WHERE accountId = ? ORDER BY date ASC";
-                                $attendanceStmt = $conn->prepare($attendanceQuery);
-                                $attendanceStmt->bind_param('i', $row['accountId']);
-                                $attendanceStmt->execute();
-                                $attendanceResult = $attendanceStmt->get_result();
+                                    // Format timeIn and timeOut to show only the time with AM or PM
+                                    $timeInFormatted = date('h:i A', strtotime($attendanceRow['timeIn']));
 
-                                if ($attendanceResult->num_rows > 0) {
+                                    date_default_timezone_set('Asia/Manila'); // Set the correct time zone, e.g., 'America/New_York'
 
-                                    // Table header
-                                    echo '<div class="table-whole-content1" id="exportContent' . $row['accountId'] . '">';
-                                    echo '<p class="h5-like visually-hidden" id="nameHeader' . $row['accountId'] . '">' . $row['firstname'] . ' ' . $row['lastname'] . '</p>';
-                                    echo '<div class="table-header1">';
-                                    echo '<table>';
-                                    echo '<tr>';
-                                    echo '<th>Day</th>';
-                                    echo '<th>Date</th>';
-                                    echo '<th>Time In</th>';
-                                    echo '<th>Time Out</th>';
-                                    echo '<th>Total Hours</th>';
-                                    echo '</tr>';
-                                    echo '</table>';
-                                    echo '</div>';
+                                    if (isset($attendanceRow['timeIn'])) {
+                                        $timeIn = strtotime($attendanceRow['timeIn']);
+                                        $currentTime = time(); // Current timestamp
 
-                                    echo '<div class="modal-content-th">';
-                                    // Start the table and use a unique ID
-                                    echo '<table id="attendanceTable' . $row['accountId'] . '">';
-                                    // Table body
-                                    while ($attendanceRow = $attendanceResult->fetch_assoc()) {
-                                        // Get the day of the week
-                                        $dayOfWeek = date('l', strtotime($attendanceRow['date']));
-
-                                        // Format timeIn and timeOut to show only the time with AM or PM
-                                        $timeInFormatted = date('h:i A', strtotime($attendanceRow['timeIn']));
-
-                                        date_default_timezone_set('Asia/Manila'); // Set the correct time zone, e.g., 'America/New_York'
-
-                                        if (isset($attendanceRow['timeIn'])) {
-                                            $timeIn = strtotime($attendanceRow['timeIn']);
-                                            $currentTime = time(); // Current timestamp
-
-                                            if (isset($attendanceRow['timeOut'])) {
-                                                $timeOut = strtotime($attendanceRow['timeOut']);
-                                                $timeDifference = $timeOut - $timeIn;
-                                                $hours = floor($timeDifference / 3600);
-                                                $totalHoursFormatted = $hours;
-                                                $timeOutFormatted = date('h:i A', $timeOut);
-                                            } else {
-                                                $timeSinceIn = $currentTime - $timeIn;
-
-                                                if ($timeSinceIn > (8 * 3600)) {
-                                                    $totalHoursFormatted = "4";
-                                                    $timeOutFormatted = 'Not Timed Out';
-                                                } else {
-                                                    $totalHoursFormatted = ''; // Set totalHours to empty if 8 hours have NOT been exceeded
-                                                    $timeOutFormatted = ''; // Set timeOut to empty if 8 hours have NOT been exceeded
-                                                }
-                                            }
+                                        if (isset($attendanceRow['timeOut'])) {
+                                            $timeOut = strtotime($attendanceRow['timeOut']);
+                                            $timeDifference = $timeOut - $timeIn;
+                                            $hours = floor($timeDifference / 3600);
+                                            $totalHoursFormatted = $hours;
+                                            $timeOutFormatted = date('h:i A', $timeOut);
                                         } else {
-                                            $totalHoursFormatted = "No TimeIn Recorded"; // In case the user hasn't timed in yet
-                                            $timeOutFormatted = ''; // Default value for timeOut in this case
-                                        }
+                                            $timeSinceIn = $currentTime - $timeIn;
 
-                                        echo '<tr data-day="' . $dayOfWeek . '">';
-                                        echo '<td>' . $dayOfWeek . '</td>';
-                                        echo '<td>' . $attendanceRow['date'] . '</td>';
-                                        echo '<td>' . $timeInFormatted . '</td>';
-                                        echo '<td>' . $timeOutFormatted . '</td>';
-                                        echo '<td>' . $totalHoursFormatted . '</td>';
-                                        echo '</tr>';
+                                            if ($timeSinceIn > (8 * 3600)) {
+                                                $totalHoursFormatted = "4";
+                                                $timeOutFormatted = 'Not Timed Out';
+                                            } else {
+                                                $totalHoursFormatted = ''; // Set totalHours to empty if 8 hours have NOT been exceeded
+                                                $timeOutFormatted = ''; // Set timeOut to empty if 8 hours have NOT been exceeded
+                                            }
+                                        }
+                                    } else {
+                                        $totalHoursFormatted = "No TimeIn Recorded"; // In case the user hasn't timed in yet
+                                        $timeOutFormatted = ''; // Default value for timeOut in this case
                                     }
 
-                                    echo '</table>';
-                                    echo "</div>";
-                                    echo "</div>";
-                                } else {
-                                    echo '<table>';
-                                    echo "<div class='noDataImgH'>";
-                                    echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
-                                    echo "</div>";
-                                    echo '</table>';
+                                    echo '<tr data-day="' . $dayOfWeek . '">';
+                                    echo '<td>' . $dayOfWeek . '</td>';
+                                    echo '<td>' . $attendanceRow['date'] . '</td>';
+                                    echo '<td>' . $timeInFormatted . '</td>';
+                                    echo '<td>' . $timeOutFormatted . '</td>';
+                                    echo '<td>' . $totalHoursFormatted . '</td>';
+                                    echo '</tr>';
                                 }
 
-                                // Close the attendance log statement
-                                $attendanceStmt->close();
-
-                                echo '<button type="button" class="btn export-btn" onclick="exportTableToPDF(\'exportContent' . $row['accountId'] . '\', \'' . $row['firstname'] . '_' . $row['lastname'] . '.pdf\', \'' . addslashes($row['firstname']) . ' ' . addslashes($row['lastname']) . '\')">EXPORT PDF</button>';
-
-
-                                echo '</div>';
-                                echo '</div>';
-                                echo '</div>';
-                                echo '</div>';
+                                echo '</table>';
+                                echo "</div>";
+                                echo "</div>";
+                            } else {
+                                echo '<table>';
+                                echo "<div class='noDataImgH'>";
+                                echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
+                                echo "</div>";
+                                echo '</table>';
                             }
-                        }
-                        ?>
-                        <!-- Modal -->
 
-                        <!-- Maintenance Personnel -->
+                            // Close the attendance log statement
+                            $attendanceStmt->close();
+
+                            echo '<button type="button" class="btn export-btn" onclick="exportTableToPDF(\'exportContent' . $row['accountId'] . '\', \'' . $row['firstname'] . '_' . $row['lastname'] . '.pdf\', \'' . addslashes($row['firstname']) . ' ' . addslashes($row['lastname']) . '\')">EXPORT PDF</button>';
+
+
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+                        }
+                    }
+                    ?>
+                    <!-- Modal -->
+
+                    <!-- Maintenance Personnel -->
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane" id="pills-personnel" role="tabpanel" aria-labelledby="personnel-tab">
                             <div class="table-content">
@@ -561,123 +562,123 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                 ?>
                             </div>
                         </div>
-                            </div>
+                    </div>
 
 
 
 
 
-                        <!-- Modal -->
-                        <?php
-                        // Fetch and display attendance log data within modals
-                        if ($result->num_rows > 0) {
-                            $result->data_seek(0); // Reset result pointer to the beginning
+                    <!-- Modal -->
+                    <?php
+                    // Fetch and display attendance log data within modals
+                    if ($result->num_rows > 0) {
+                        $result->data_seek(0); // Reset result pointer to the beginning
 
-                            while ($row = $result->fetch_assoc()) {
-                                echo '<div class="modal fade" id="attendanceModal' . $row['accountId'] . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
-                                echo '<div class="modal-dialog modal-lg modal-dialog-centered">';
-                                echo '<div class="modal-content">';
-                                echo '<div class="modal-header">';
-                                echo '<div class="modal-close">';
-                                echo '<button class="btn btn-close-modal-emp close-modal-btn" id="closeAddModal" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>';
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<div class="modal fade" id="attendanceModal' . $row['accountId'] . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+                            echo '<div class="modal-dialog modal-lg modal-dialog-centered">';
+                            echo '<div class="modal-content">';
+                            echo '<div class="modal-header">';
+                            echo '<div class="modal-close">';
+                            echo '<button class="btn btn-close-modal-emp close-modal-btn" id="closeAddModal" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '<div class="modal-footer">';
+
+                            echo '<div class="modal-content-header">';
+                            echo '<p class="h5-like">' . $row['firstname'] . ' ' . $row['lastname'] . '</p>';
+                            echo '<form class="filterType">';
+                            echo '<select name="filterType" id="filterType' . $row['accountId'] . '" onchange="filterAttendanceData(' . $row['accountId'] . ')" class="custom-select">';
+                            echo '<option value="all">All</option>';
+                            echo '<option value="week">This Week</option>';
+                            echo '<option value="month">This Month</option>';
+                            echo '<option value="year">This Year</option>';
+                            echo '</select>';
+                            echo '</form>';
+                            echo '</div>';
+
+                            $attendanceQuery = "SELECT date, timeIn, timeOut FROM attendancelogs WHERE accountId = ? ORDER BY date ASC";
+                            $attendanceStmt = $conn->prepare($attendanceQuery);
+                            $attendanceStmt->bind_param('i', $row['accountId']);
+                            $attendanceStmt->execute();
+                            $attendanceResult = $attendanceStmt->get_result();
+
+                            if ($attendanceResult->num_rows > 0) {
+
+                                // Table header
+                                echo '<div class="table-whole-content1" id="exportContent' . $row['accountId'] . '">';
+                                echo '<p class="h5-like visually-hidden" id="nameHeader' . $row['accountId'] . '">' . $row['firstname'] . ' ' . $row['lastname'] . '</p>';
+                                echo '<div class="table-header1">';
+                                echo '<table>';
+                                echo '<tr>';
+                                echo '<th>Day</th>';
+                                echo '<th>Date</th>';
+                                echo '<th>Time In</th>';
+                                echo '<th>Time Out</th>';
+                                echo '<th>Total Hours</th>';
+                                echo '</tr>';
+                                echo '</table>';
                                 echo '</div>';
-                                echo '</div>';
-                                echo '<div class="modal-footer">';
 
-                                echo '<div class="modal-content-header">';
-                                echo '<p class="h5-like">' . $row['firstname'] . ' ' . $row['lastname'] . '</p>';
-                                echo '<form class="filterType">';
-                                echo '<select name="filterType" id="filterType' . $row['accountId'] . '" onchange="filterAttendanceData(' . $row['accountId'] . ')" class="custom-select">';
-                                echo '<option value="all">All</option>';
-                                echo '<option value="week">This Week</option>';
-                                echo '<option value="month">This Month</option>';
-                                echo '<option value="year">This Year</option>';
-                                echo '</select>';
-                                echo '</form>';
-                                echo '</div>';
+                                echo '<div class="modal-content-th">';
+                                // Start the table and use a unique ID
+                                echo '<table id="attendanceTable' . $row['accountId'] . '">';
+                                // Table body
+                                while ($attendanceRow = $attendanceResult->fetch_assoc()) {
+                                    // Get the day of the week
+                                    $dayOfWeek = date('l', strtotime($attendanceRow['date']));
 
-                                $attendanceQuery = "SELECT date, timeIn, timeOut FROM attendancelogs WHERE accountId = ? ORDER BY date ASC";
-                                $attendanceStmt = $conn->prepare($attendanceQuery);
-                                $attendanceStmt->bind_param('i', $row['accountId']);
-                                $attendanceStmt->execute();
-                                $attendanceResult = $attendanceStmt->get_result();
+                                    // Format timeIn and timeOut to show only the time with AM or PM
+                                    // Set the timezone here to ensure it's applied before any time conversions
+                                    date_default_timezone_set('Asia/Manila');
+                                    $timeInFormatted = date('h:i A', strtotime($attendanceRow['timeIn']));
 
-                                if ($attendanceResult->num_rows > 0) {
+                                    // Timezone adjustment and time calculation logic
+                                    if (isset($attendanceRow['timeIn'])) {
+                                        $timeIn = strtotime($attendanceRow['timeIn']);
+                                        $currentTime = time(); // Current timestamp
 
-                                    // Table header
-                                    echo '<div class="table-whole-content1" id="exportContent' . $row['accountId'] . '">';
-                                    echo '<p class="h5-like visually-hidden" id="nameHeader' . $row['accountId'] . '">' . $row['firstname'] . ' ' . $row['lastname'] . '</p>';
-                                    echo '<div class="table-header1">';
-                                    echo '<table>';
-                                    echo '<tr>';
-                                    echo '<th>Day</th>';
-                                    echo '<th>Date</th>';
-                                    echo '<th>Time In</th>';
-                                    echo '<th>Time Out</th>';
-                                    echo '<th>Total Hours</th>';
-                                    echo '</tr>';
-                                    echo '</table>';
-                                    echo '</div>';
-
-                                    echo '<div class="modal-content-th">';
-                                    // Start the table and use a unique ID
-                                    echo '<table id="attendanceTable' . $row['accountId'] . '">';
-                                    // Table body
-                                    while ($attendanceRow = $attendanceResult->fetch_assoc()) {
-                                        // Get the day of the week
-                                        $dayOfWeek = date('l', strtotime($attendanceRow['date']));
-                                    
-                                        // Format timeIn and timeOut to show only the time with AM or PM
-                                        // Set the timezone here to ensure it's applied before any time conversions
-                                        date_default_timezone_set('Asia/Manila');
-                                        $timeInFormatted = date('h:i A', strtotime($attendanceRow['timeIn']));
-                                    
-                                        // Timezone adjustment and time calculation logic
-                                        if (isset($attendanceRow['timeIn'])) {
-                                            $timeIn = strtotime($attendanceRow['timeIn']);
-                                            $currentTime = time(); // Current timestamp
-                                    
-                                            if (isset($attendanceRow['timeOut'])) {
-                                                $timeOut = strtotime($attendanceRow['timeOut']);
-                                                $timeDifference = $timeOut - $timeIn;
-                                                $hours = floor($timeDifference / 3600);
-                                                // Deduct 1 hour from $hours
-                                                $hours -= 1;
-                                                $totalHoursFormatted = $hours;
-                                                $timeOutFormatted = date('h:i A', $timeOut);
-                                            } else {
-                                                // Get the current hour
-                                                $currentHour = date('H', $currentTime);
-                                    
-                                                // If it's past 12 AM, show 4 hours and 'Not Timed Out'
-                                                if ($currentHour >= 0 && $currentHour < 8) {
-                                                    $totalHoursFormatted = "4";
-                                                    $timeOutFormatted = 'Not Timed Out';
-                                                } else {
-                                                    $totalHoursFormatted = ''; // Set totalHours to empty if 12 AM has not been exceeded
-                                                    $timeOutFormatted = ''; // Set timeOut to empty if 12 AM has not been exceeded
-                                                }
-                                            }
+                                        if (isset($attendanceRow['timeOut'])) {
+                                            $timeOut = strtotime($attendanceRow['timeOut']);
+                                            $timeDifference = $timeOut - $timeIn;
+                                            $hours = floor($timeDifference / 3600);
+                                            // Deduct 1 hour from $hours
+                                            $hours -= 1;
+                                            $totalHoursFormatted = $hours;
+                                            $timeOutFormatted = date('h:i A', $timeOut);
                                         } else {
-                                            $totalHoursFormatted = "No TimeIn Recorded"; // In case the user hasn't timed in yet
-                                            $timeOutFormatted = ''; // Default value for timeOut in this case
+                                            // Get the current hour
+                                            $currentHour = date('H', $currentTime);
+
+                                            // If it's past 12 AM, show 4 hours and 'Not Timed Out'
+                                            if ($currentHour >= 0 && $currentHour < 8) {
+                                                $totalHoursFormatted = "4";
+                                                $timeOutFormatted = 'Not Timed Out';
+                                            } else {
+                                                $totalHoursFormatted = ''; // Set totalHours to empty if 12 AM has not been exceeded
+                                                $timeOutFormatted = ''; // Set timeOut to empty if 12 AM has not been exceeded
+                                            }
                                         }
-                                    
-                                        // Output the formatted data
-                                        echo '<tr data-day="' . $dayOfWeek . '">';
-                                        echo '<td>' . $dayOfWeek . '</td>';
-                                        echo '<td>' . $attendanceRow['date'] . '</td>';
-                                        echo '<td>' . $timeInFormatted . '</td>';
-                                        echo '<td>' . $timeOutFormatted . '</td>';
-                                        echo '<td>' . $totalHoursFormatted . '</td>';
-                                        echo '</tr>';
+                                    } else {
+                                        $totalHoursFormatted = "No TimeIn Recorded"; // In case the user hasn't timed in yet
+                                        $timeOutFormatted = ''; // Default value for timeOut in this case
                                     }
-                                    
-                                    echo '</table>';
-                                    echo "</div>";
-                                    echo "</div>";
-                                    
-                                    
+
+                                    // Output the formatted data
+                                    echo '<tr data-day="' . $dayOfWeek . '">';
+                                    echo '<td>' . $dayOfWeek . '</td>';
+                                    echo '<td>' . $attendanceRow['date'] . '</td>';
+                                    echo '<td>' . $timeInFormatted . '</td>';
+                                    echo '<td>' . $timeOutFormatted . '</td>';
+                                    echo '<td>' . $totalHoursFormatted . '</td>';
+                                    echo '</tr>';
+                                }
+
+                                echo '</table>';
+                                echo "</div>";
+                                echo "</div>";
+
+
                                 // Close the attendance log statement
                                 $attendanceStmt->close();
 
@@ -689,11 +690,11 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                 echo '</div>';
                                 echo '</div>';
                             }
-                            }
                         }
-                        ?>
-                        <!-- Modal -->
-                    </div>
+                    }
+                    ?>
+                    <!-- Modal -->
+                </div>
                 </div>
             </main>
         </section>
@@ -728,187 +729,188 @@ if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
         <script src="../../src/js/profileModalController.js"></script>
 
         <script>
-$(document).ready(function() {
-    $('.notification-item').on('click', function(e) {
-        e.preventDefault();
-        var activityId = $(this).data('activity-id');
-        var notificationItem = $(this); // Store the clicked element
+            $(document).ready(function() {
+                $('.notification-item').on('click', function(e) {
+                    e.preventDefault();
+                    var activityId = $(this).data('activity-id');
+                    var notificationItem = $(this); // Store the clicked element
 
-        $.ajax({
-            type: "POST",
-            url: "update_single_notification.php", // The URL to the PHP file
-            data: { activityId: activityId },
-            success: function(response) {
-                if (response.trim() === "Notification updated successfully") {
-                    // If the notification is updated successfully, remove the clicked element
-                    notificationItem.remove();
+                    $.ajax({
+                        type: "POST",
+                        url: "update_single_notification.php", // The URL to the PHP file
+                        data: {
+                            activityId: activityId
+                        },
+                        success: function(response) {
+                            if (response.trim() === "Notification updated successfully") {
+                                // If the notification is updated successfully, remove the clicked element
+                                notificationItem.remove();
 
-                    // Update the notification count
-                    var countElement = $('#noti_number');
-                    var count = parseInt(countElement.text()) || 0;
-                    countElement.text(count > 1 ? count - 1 : '');
-                } else {
-                    // Handle error
-                    console.error("Failed to update notification:", response);
+                                // Update the notification count
+                                var countElement = $('#noti_number');
+                                var count = parseInt(countElement.text()) || 0;
+                                countElement.text(count > 1 ? count - 1 : '');
+                            } else {
+                                // Handle error
+                                console.error("Failed to update notification:", response);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle AJAX error
+                            console.error("AJAX error:", status, error);
+                        }
+                    });
+                });
+            });
+        </script>
+
+        <script>
+            var managerPill = document.getElementById('manager-pill');
+            var personnelPill = document.getElementById('personnel-pill');
+            var managerContent = document.getElementById('pills-manager');
+            var personnelContent = document.getElementById('pills-personnel');
+
+            function activateTab(pill, content, role) {
+                // Remove active class from all tabs and contents
+                $('.nav-link').removeClass('active');
+                $('.tab-pane').removeClass('show active');
+
+                // Add active class to the clicked tab and its content
+                pill.addClass('active');
+                content.addClass('show active');
+
+                // Store the last active pill in session storage
+                sessionStorage.setItem('lastPill', role);
+
+                // Call the filterTable function with the active role
+                filterTable(role);
+            }
+
+            managerPill.addEventListener('click', function(e) {
+                e.preventDefault();
+                activateTab(managerPill, managerContent, 'manager');
+            });
+
+            personnelPill.addEventListener('click', function(e) {
+                e.preventDefault();
+                activateTab(personnelPill, personnelContent, 'personnel');
+            });
+
+            // Directly check and activate the tab from session storage on page load
+            var lastPill = sessionStorage.getItem('lastPill') || 'manager';
+            if (lastPill === 'personnel') {
+                activateTab(personnelPill, personnelContent, 'personnel');
+            } else {
+                activateTab(managerPill, managerContent, 'manager');
+            }
+
+            function filterTable(activeRole) {
+                var query = document.getElementById('search-box').value.toLowerCase();
+                var rows = document.querySelectorAll('.table-container tbody tr');
+
+                rows.forEach(function(row) {
+                    var roleCell = row.querySelector("td:last-child").textContent.toLowerCase(); // Using :last-child pseudo-class
+                    var isRoleMatch = (activeRole === 'manager' && roleCell.includes('maintenance manager')) || (activeRole === 'personnel' && roleCell.includes('maintenance personnel'));
+                    var isQueryMatch = row.textContent.toLowerCase().includes(query);
+                    row.style.display = (isRoleMatch && isQueryMatch) ? '' : 'none';
+                });
+            }
+        </script>
+
+
+        <script>
+            function exportTableToPDF(exportContentId, filename, name) {
+                const exportContent = document.getElementById(exportContentId);
+
+                // Find the visually hidden name header within the export content
+                const nameHeader = exportContent.querySelector('.h5-like.visually-hidden');
+                // Find the table header and increase its top margin to make space for the name
+                const tableHeader = exportContent.querySelector('.table-header1');
+
+                // Temporarily update the style to make it visible for the screenshot
+                if (nameHeader) {
+                    nameHeader.style.position = 'relative'; // Make it affect layout
+                    nameHeader.style.visibility = 'visible'; // Make it visible
+                    nameHeader.style.fontFamily = 'Poppins, sans-serif'; // Set font family to Poppins
+                    nameHeader.style.fontSize = '20px'; // Increase font size
+                    nameHeader.style.fontWeight = 'bold'; // Make font-weight bold
+                    nameHeader.style.marginBottom = '10px'; // Add some space below the name
                 }
-            },
-            error: function(xhr, status, error) {
-                // Handle AJAX error
-                console.error("AJAX error:", status, error);
+
+                // Increase the top margin of the table header
+                if (tableHeader) {
+                    tableHeader.style.marginTop = '50px'; // Adjust the space as needed
+                }
+
+                // Check if the export content exists
+                if (!exportContent) {
+                    Swal.fire({
+                        title: 'Failed!',
+                        text: 'No data available to export.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                    return; // Exit the function if no content is found
+                }
+
+                Swal.fire({
+                    title: 'Preparing your PDF...',
+                    text: 'Please wait...',
+                    icon: 'info',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    willOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+
+                html2canvas(exportContent, {
+                    useCORS: true // This is important if you have images from other domains
+                }).then(canvas => {
+                    const imgData = canvas.toDataURL('image/png');
+                    const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+                    pdf.addImage(imgData, 'PNG', 0, 0);
+
+                    // Add the name text directly on the PDF
+                    pdf.setFontSize(13); // Set font size
+                    pdf.text(name, 10, 10); // Adjust coordinates as needed
+                    pdf.save(filename); // Save the PDF after adding the text
+
+                    Swal.close();
+                    Swal.fire({
+                        title: 'Done!',
+                        text: 'Your PDF has been downloaded.',
+                        icon: 'success',
+                        timer: 1000,
+                        showConfirmButton: false
+                    }).then((result) => {
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            window.location.reload();
+                        }
+                    });
+                }).catch(error => {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'There was a problem generating the PDF.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                    console.error('Error generating PDF: ', error);
+                }).finally(() => {
+                    // Revert the name header style to its original state
+                    if (nameHeader) {
+                        nameHeader.style.position = '';
+                        nameHeader.style.visibility = '';
+                        nameHeader.style.fontSize = '';
+                        nameHeader.style.marginBottom = '';
+                    }
+                    // Revert the table header style to its original state
+                    if (tableHeader) {
+                        tableHeader.style.marginTop = ''; // Remove the added margin
+                    }
+                });
             }
-        });
-    });
-});
-
-</script>
-
-<script>
-var managerPill = document.getElementById('manager-pill');
-var personnelPill = document.getElementById('personnel-pill');
-var managerContent = document.getElementById('pills-manager');
-var personnelContent = document.getElementById('pills-personnel');
-
-function activateTab(pill, content, role) {
-    // Remove active class from all tabs and contents
-    $('.nav-link').removeClass('active');
-    $('.tab-pane').removeClass('show active');
-
-    // Add active class to the clicked tab and its content
-    pill.addClass('active');
-    content.addClass('show active');
-
-    // Store the last active pill in session storage
-    sessionStorage.setItem('lastPill', role);
-
-    // Call the filterTable function with the active role
-    filterTable(role);
-}
-
-managerPill.addEventListener('click', function(e) {
-    e.preventDefault();
-    activateTab(managerPill, managerContent, 'manager');
-});
-
-personnelPill.addEventListener('click', function(e) {
-    e.preventDefault();
-    activateTab(personnelPill, personnelContent, 'personnel');
-});
-
-// Directly check and activate the tab from session storage on page load
-var lastPill = sessionStorage.getItem('lastPill') || 'manager';
-if (lastPill === 'personnel') {
-    activateTab(personnelPill, personnelContent, 'personnel');
-} else {
-    activateTab(managerPill, managerContent, 'manager');
-}
-
-function filterTable(activeRole) {
-    var query = document.getElementById('search-box').value.toLowerCase();
-    var rows = document.querySelectorAll('.table-container tbody tr');
-
-    rows.forEach(function(row) {
-        var roleCell = row.querySelector("td:last-child").textContent.toLowerCase(); // Using :last-child pseudo-class
-        var isRoleMatch = (activeRole === 'manager' && roleCell.includes('maintenance manager')) || (activeRole === 'personnel' && roleCell.includes('maintenance personnel'));
-        var isQueryMatch = row.textContent.toLowerCase().includes(query);
-        row.style.display = (isRoleMatch && isQueryMatch) ? '' : 'none';
-    });
-}
-</script>
-
-
-<script>
-function exportTableToPDF(exportContentId, filename, name) {
-    const exportContent = document.getElementById(exportContentId);
-
-    // Find the visually hidden name header within the export content
-    const nameHeader = exportContent.querySelector('.h5-like.visually-hidden');
-    // Find the table header and increase its top margin to make space for the name
-    const tableHeader = exportContent.querySelector('.table-header1');
-
-    // Temporarily update the style to make it visible for the screenshot
-    if (nameHeader) {
-        nameHeader.style.position = 'relative'; // Make it affect layout
-        nameHeader.style.visibility = 'visible'; // Make it visible
-        nameHeader.style.fontFamily = 'Poppins, sans-serif'; // Set font family to Poppins
-        nameHeader.style.fontSize = '20px'; // Increase font size
-        nameHeader.style.fontWeight = 'bold'; // Make font-weight bold
-        nameHeader.style.marginBottom = '10px'; // Add some space below the name
-    }
-
-    // Increase the top margin of the table header
-    if (tableHeader) {
-        tableHeader.style.marginTop = '50px'; // Adjust the space as needed
-    }
-
-    // Check if the export content exists
-    if (!exportContent) {
-        Swal.fire({
-            title: 'Failed!',
-            text: 'No data available to export.',
-            icon: 'error',
-            confirmButtonText: 'OK'
-        });
-        return; // Exit the function if no content is found
-    }
-
-    Swal.fire({
-        title: 'Preparing your PDF...',
-        text: 'Please wait...',
-        icon: 'info',
-        showConfirmButton: false,
-        allowOutsideClick: false,
-        willOpen: () => {
-            Swal.showLoading();
-        }
-    });
-
-    html2canvas(exportContent, {
-        useCORS: true // This is important if you have images from other domains
-    }).then(canvas => {
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
-        pdf.addImage(imgData, 'PNG', 0, 0);
-
-        // Add the name text directly on the PDF
-        pdf.setFontSize(13); // Set font size
-        pdf.text(name, 10, 10); // Adjust coordinates as needed
-        pdf.save(filename); // Save the PDF after adding the text
-
-        Swal.close();
-        Swal.fire({
-            title: 'Done!',
-            text: 'Your PDF has been downloaded.',
-            icon: 'success',
-            timer: 1000,
-            showConfirmButton: false
-        }).then((result) => {
-            if (result.dismiss === Swal.DismissReason.timer) {
-                window.location.reload();
-            }
-        });
-    }).catch(error => {
-        Swal.fire({
-            title: 'Error!',
-            text: 'There was a problem generating the PDF.',
-            icon: 'error',
-            confirmButtonText: 'OK'
-        });
-        console.error('Error generating PDF: ', error);
-    }).finally(() => {
-        // Revert the name header style to its original state
-        if (nameHeader) {
-            nameHeader.style.position = '';
-            nameHeader.style.visibility = '';
-            nameHeader.style.fontSize = '';
-            nameHeader.style.marginBottom = '';
-        }
-        // Revert the table header style to its original state
-        if (tableHeader) {
-            tableHeader.style.marginTop = ''; // Remove the added margin
-        }
-    });
-}
-</script>
+        </script>
 
         <script>
             function filterAttendanceData(accountId) {
@@ -937,71 +939,69 @@ function exportTableToPDF(exportContentId, filename, name) {
                 }
             }
         </script>
-        
+
         <script>
-$(window).on('load', function() {
-    var managerPill = $('#manager-pill');
-    var personnelPill = $('#personnel-pill');
-    var managerContent = $('#pills-manager');
-    var personnelContent = $('#pills-personnel');
+            $(window).on('load', function() {
+                var managerPill = $('#manager-pill');
+                var personnelPill = $('#personnel-pill');
+                var managerContent = $('#pills-manager');
+                var personnelContent = $('#pills-personnel');
 
-    // Function to explicitly set the active tab based on the lastPill value
-    function activateLastPill() {
-        var lastPill = sessionStorage.getItem('lastPill') || 'manager';
+                // Function to explicitly set the active tab based on the lastPill value
+                function activateLastPill() {
+                    var lastPill = sessionStorage.getItem('lastPill') || 'manager';
 
-        // Reset active states
-        $('.nav-link').removeClass('active');
-        $('.tab-pane').removeClass('show active');
+                    // Reset active states
+                    $('.nav-link').removeClass('active');
+                    $('.tab-pane').removeClass('show active');
 
-        if (lastPill === 'personnel') {
-            personnelPill.addClass('active');
-            personnelContent.addClass('show active');
-        } else {
-            managerPill.addClass('active');
-            managerContent.addClass('show active');
-        }
-    }
+                    if (lastPill === 'personnel') {
+                        personnelPill.addClass('active');
+                        personnelContent.addClass('show active');
+                    } else {
+                        managerPill.addClass('active');
+                        managerContent.addClass('show active');
+                    }
+                }
 
-    // Event listeners for tab clicks
-    managerPill.on('click', function(e) {
-        e.preventDefault();
-        sessionStorage.setItem('lastPill', 'manager');
-        activateLastPill();
-    });
+                // Event listeners for tab clicks
+                managerPill.on('click', function(e) {
+                    e.preventDefault();
+                    sessionStorage.setItem('lastPill', 'manager');
+                    activateLastPill();
+                });
 
-    personnelPill.on('click', function(e) {
-        e.preventDefault();
-        sessionStorage.setItem('lastPill', 'personnel');
-        activateLastPill();
-    });
+                personnelPill.on('click', function(e) {
+                    e.preventDefault();
+                    sessionStorage.setItem('lastPill', 'personnel');
+                    activateLastPill();
+                });
 
-    function filterTable() {
-        var query = $("#search-box").val().toLowerCase();
-        var activeRole = managerPill.hasClass('active') ? 'Maintenance Manager' : 'Maintenance Personnel';
+                function filterTable() {
+                    var query = $("#search-box").val().toLowerCase();
+                    var activeRole = managerPill.hasClass('active') ? 'Maintenance Manager' : 'Maintenance Personnel';
 
-        $(".table-container tbody tr").each(function() {
-            var row = $(this);
-            var roleCell = row.find("td").last().text().toLowerCase();
+                    $(".table-container tbody tr").each(function() {
+                        var row = $(this);
+                        var roleCell = row.find("td").last().text().toLowerCase();
 
-            if (roleCell === activeRole.toLowerCase() && row.text().toLowerCase().includes(query)) {
-                row.show();
-            } else {
-                row.hide();
-            }
-        });
-    }
+                        if (roleCell === activeRole.toLowerCase() && row.text().toLowerCase().includes(query)) {
+                            row.show();
+                        } else {
+                            row.hide();
+                        }
+                    });
+                }
 
-    // Bind the input event to the search box for dynamic filtering
-    $("#search-box").on("input", filterTable);
+                // Bind the input event to the search box for dynamic filtering
+                $("#search-box").on("input", filterTable);
 
-    // Check if the last active tab was personnel, and activate it immediately upon page load
-    activateLastPill();
-});
-
-
+                // Check if the last active tab was personnel, and activate it immediately upon page load
+                activateLastPill();
+            });
         </script>
 
-<script>
+        <script>
             function filterAttendanceData(accountId) {
                 var selectedValue = document.getElementById('filterType' + accountId).value;
                 var tableRows = document.querySelectorAll('#attendanceTable' + accountId + ' tbody tr');
