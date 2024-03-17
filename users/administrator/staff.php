@@ -67,6 +67,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
 
+
     // Prepare the SQL statement
     $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
 
@@ -92,7 +93,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>iTrak | Staff</title>
+        <title>Staff</title>
         <link rel="icon" type="image/x-icon" href="../../src/img/tab-logo.png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
@@ -430,11 +431,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     echo "</table>";
                                     echo "</div>";
                                 } else {
-                                    echo '<table>';
-                                    echo "<div class=noDataImgH>";
-                                    echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
-                                    echo "</div>";
-                                    echo '</table>';
+                                    echo '<tr><td colspan="7">No data available</td></tr>';
                                 }
                                 $stmt->close();
                                 ?>
@@ -503,11 +500,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     echo "</table>";
                                     echo "</div>";
                                 } else {
-                                    echo '<table>';
-                                    echo "<div class=noDataImgH>";
-                                    echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
-                                    echo "</div>";
-                                    echo '</table>';
+                                    echo '<tr><td colspan="7">No data available</td></tr>';
                                 }
 
                                 $stmt->close();
@@ -536,26 +529,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         <form id="rfidForm">
                                             <input type="text" id="rfid" name="rfid" value="">
                                         </form>
-                                    </div>
-
-                                    <label class="btn btn-close-modal-emp close-modal-btn" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="bi bi-x-lg"></i></label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- RFID MODAL FOR ADD -->
-                        <div class="modal" id="addRFIDModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        <img src="../../src/img/taprfid.jpg" width="100%" alt="" class="Scan" />
-
-                                        <form id="rfidForm">
-                                            <input type="text"  id="rfid" name="rfid" value="12345">
-                                        </form>
-                                    </div>
-
-                                    <label class="btn btn-close-modal-emp close-modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal1"><i class="bi bi-x-lg"></i></label>
+                                    </div> <label class="btn btn-close-modal-emp close-modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal1"><i class="bi bi-x-lg"></i></label>
                                 </div>
                             </div>
                         </div>
@@ -622,7 +596,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                                 <div class="col-4">
                                                     <label for="contactField" class="form-label">Contact Number <span class="d-none text-danger error">*</span></label>
-                                                    <input type="tel" class="form-control contactEdit" id="contactField" name="contact" required pattern="\d{10,11}" value="" title="Contact number must be 10 to 11 digits long" />
+                                                    <input type="tel" class="form-control" id="contactField" name="contact" required pattern="\d{10,11}" maxlength="11" value="09" title="Contact number must be 10 to 11 digits long" />
                                                 </div>
 
                                                 <div class="col-4">
@@ -647,7 +621,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                                 <div class="col-4">
                                                     <label for="user_pass" class="form-label">Register RFID <span class="d-none text-danger error">*</span></label>
-                                                    <button type="button" class="form-control btn-custom" data-bs-toggle="modal" data-bs-target="#addRFIDModal" onclick="setAction('add');" value="">SCAN</button>
+                                                    <button type="button" class="form-control btn-custom" data-bs-toggle="modal" data-bs-target="#staticBackdrop112" onclick="setAction('add');" value="123456789">SCAN</button>
                                                     <input type="password" name="rfidNumber" id="rfidFieldAdd" title="" value="1234567" required />
                                                 </div>
 
