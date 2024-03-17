@@ -3,9 +3,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 
-// require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
+require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
@@ -860,6 +860,14 @@ $stmt->close();
                     newLocation = "../../users/building/BAB/BABF1.php";
                 } else if (building === 'Belmonte' && floor === '1F') {
                     newLocation = "../../users/building/BEB/BEBF1.php";
+                } else if (building === 'Admin' && floor === '1F') {
+                    newLocation = "../../users/building/ADB/ADBF1.php";
+                } else if (building === 'Techvoc' && floor === '1F') {
+                    newLocation = "../../users/building/TEB/TEBF1.php";
+                } else if (building === 'Chinese B' && floor === '1F') {
+                    newLocation = "../../users/building/CHB/CHBF1.php";
+                } else if (building === 'Multipurpose' && floor === '1F') {
+                    newLocation = "../../users/building/MUB/MUBF1.php";
                 }
 
                 // Append the assetId to the URL as a query parameter
@@ -873,6 +881,7 @@ $stmt->close();
                 redirectToPage(building, floor, assetId);
             });
         </script>
+
 
 
         <script>
