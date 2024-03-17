@@ -3,9 +3,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 
-require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
+// require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
@@ -82,7 +82,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
                 FROM activitylogs AS al
                JOIN account AS acc ON al.accountID = acc.accountID
-               WHERE al.tab='Report' AND al.seen = '0' AND al.accountID != ?
+               WHERE  al.seen = '0' AND al.accountID != ?
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
 

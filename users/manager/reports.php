@@ -3,9 +3,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 
-require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
+// require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
@@ -82,7 +82,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
                 FROM activitylogs AS al
                JOIN account AS acc ON al.accountID = acc.accountID
-               WHERE al.tab='Report' AND al.seen = '0' AND al.accountID != ?
+               WHERE al.m_seen= '0' AND al.accountID != ?  AND action NOT LIKE '%logged in'
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
 
@@ -97,13 +97,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $resultLatestLogs = $stmtLatestLogs->get_result();
 
 
-    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE m_seen= '0' AND action NOT LIKE '%logged in' AND accountID != ?";
     $stmt = $conn->prepare($unseenCountQuery);
     $stmt->bind_param("i", $loggedInAccountId);
     $stmt->execute();
     $stmt->bind_result($unseenCount);
     $stmt->fetch();
     $stmt->close();
+
 
     if (isset($_POST['assignMaintenance'])) {
         $assetId = $_POST['assetId'];
@@ -177,7 +178,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link rel="stylesheet" href="../../src/css/reports.css" />
         <script src="../../src/js/reports.js"></script>
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
-
+<script src="../../src/js/locationTracker.js"></script>
 
 
         <!--JS for the fcking tabs-->

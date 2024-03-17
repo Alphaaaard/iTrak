@@ -2,7 +2,7 @@
 session_start();
 include_once("../../config/connection.php");
 $conn = connection();
-
+date_default_timezone_set('Asia/Manila');
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
 
 
@@ -13,52 +13,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         exit;
     }
 
-    $filterRole = isset($_GET['filterRole']) ? $_GET['filterRole'] : 'all';
-
-    $conditions = [];
-    $params = [];
-    $types = '';
-
-    // Modify the conditions to exclude "Administrator" role
-    if ($filterRole !== 'all') {
-        $conditions[] = "role = ?";
-        $params[] = $filterRole;
-        $types .= 's';
-    } else {
-        $conditions[] = "LOWER(role) != 'Administrator'";
+    if ($conn->connect_error) {
+        die('Connect Error (' . $conn->connect_errno . ') ' . $conn->connect_error);
     }
 
-    // Construct the SQL query based on conditions
-    $query = "SELECT accountId, picture, firstname, lastname, role FROM account WHERE LOWER(role) != 'Administrator' AND UserLevel != 1";
-    $sql = "SELECT accountId, picture, firstname, lastname, role FROM account WHERE = 'Maintenance Manager' AND UserLevel != 2";
-    $conditions = [];
-    $params = [];
-    $types = '';
-
-    if ($filterRole !== 'all') {
-        $conditions[] = "role = ?";
-        $params[] = $filterRole;
-        $types .= 's';
-    }
-
-    if (!empty($conditions)) {
-        $query .= " AND " . implode(' AND ', $conditions);
-    }
-
-    $stmt = $conn->prepare($query);
-
-    if (!empty($params)) {
-        $stmt->bind_param($types, ...$params);
-    }
-
-    if (!$stmt->execute()) {
-        die('Error executing the query: ' . $stmt->error);
-    }
-
-    $result = $stmt->get_result();
-
-
-
+   
 
 
     // for notif below
@@ -73,30 +32,96 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $loggedInAccountId = $_SESSION['accountId'];
     // SQL query to fetch notifications related to report activities
     $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
-                FROM activitylogs AS al
-               JOIN account AS acc ON al.accountID = acc.accountID
-               WHERE al.tab='Report' AND al.seen = '0' AND al.accountID != ?
-               ORDER BY al.date DESC 
-               LIMIT 5"; // Set limit to 5
+    FROM activitylogs AS al
+   JOIN account AS acc ON al.accountID = acc.accountID
+   WHERE al.m_seen= '0' AND al.accountID != ?  AND action NOT LIKE '%logged in'
+   ORDER BY al.date DESC 
+   LIMIT 5"; // Set limit to 5
 
-    // Prepare the SQL statement
-    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+// Prepare the SQL statement
+$stmtLatestLogs = $conn->prepare($sqlLatestLogs);
 
-    // Bind the parameter to exclude the current user's account ID
-    $stmtLatestLogs->bind_param("i", $loggedInAccountId);
+// Bind the parameter to exclude the current user's account ID
+$stmtLatestLogs->bind_param("i", $loggedInAccountId);
 
-    // Execute the query
-    $stmtLatestLogs->execute();
-    $resultLatestLogs = $stmtLatestLogs->get_result();
+// Execute the query
+$stmtLatestLogs->execute();
+$resultLatestLogs = $stmtLatestLogs->get_result();
 
 
-    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
-    $stmt = $conn->prepare($unseenCountQuery);
-    $stmt->bind_param("i", $loggedInAccountId);
-    $stmt->execute();
-    $stmt->bind_result($unseenCount);
-    $stmt->fetch();
-    $stmt->close();
+$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE m_seen= '0' AND action NOT LIKE '%logged in' AND accountID != ?";
+$stmt = $conn->prepare($unseenCountQuery);
+$stmt->bind_param("i", $loggedInAccountId);
+$stmt->execute();
+$stmt->bind_result($unseenCount);
+$stmt->fetch();
+$stmt->close();
+
+
+$filterDate = isset($_GET['filterDate']) ? $_GET['filterDate'] : 'all';
+
+$userAccountId = $_SESSION['accountId']; // User's account ID
+
+$query = "SELECT attendanceId, accountId, date, timeIn, timeOut FROM attendancelogs WHERE accountId = ?";
+
+$params = [$userAccountId];
+$types = 'i';
+
+if ($filterDate !== 'all') {
+    $conditions = [];
+
+    if ($filterDate === 'this_day') {
+        $conditions[] = "DATE(date) = CURDATE()";
+    } elseif ($filterDate === 'this_week') {
+        $conditions[] = "YEARWEEK(date) = YEARWEEK(NOW())";
+    } elseif ($filterDate === 'this_month') {
+        $conditions[] = "YEAR(date) = YEAR(NOW()) AND MONTH(date) = MONTH(NOW())";
+    } elseif ($filterDate === 'this_year') {
+        $conditions[] = "YEAR(date) = YEAR(NOW())";
+    }
+
+    if (!empty($conditions)) {
+        $query .= " AND (" . implode(' OR ', $conditions) . ")";
+    }
+}
+
+$stmt = $conn->prepare($query);
+
+if (!$stmt) {
+    die('Error preparing the query: ' . $conn->error);
+}
+
+if (!empty($params)) {
+    $stmt->bind_param($types, ...$params);
+}
+
+if (!$stmt->execute()) {
+    die('Error executing the query: ' . $stmt->error);
+}
+
+$result = $stmt->get_result();
+
+$stmt->close();
+
+if (isset($_SESSION['accountId'])) {
+    $accountId = $_SESSION['accountId'];
+    $todayDate = date("Y-m-d");
+
+    // Check if there's a timeout value for this user for today
+    $timeoutQuery = "SELECT timeout FROM attendancelogs WHERE accountId = '$accountId' AND date = '$todayDate'";
+    $timeoutResult = $conn->query($timeoutQuery);
+    $timeoutRow = $timeoutResult->fetch_assoc();
+
+    if ($timeoutRow && $timeoutRow['timeout'] !== null) {
+        // User has a timeout value, force logout
+        session_destroy(); // Destroy all session data
+        header("Location: ../../index.php?logout=timeout"); // Redirect to the login page with a timeout flag
+        exit;
+    }
+}
+
+
+
 ?>
 
     <!DOCTYPE html>
@@ -118,6 +143,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
+        <script src="../../src/js/locationTracker.js"></script>
     </head>
     <style>
         .notification-indicator {
@@ -310,65 +336,98 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             <!-- MAIN -->
             <main>
                 <div class="content-container">
+                    <div id="map"></div>
+
                     <header>
                         <div class="cont-header">
                             <h1 class="tab-name"></h1>
                             <div class="form-wrapper">
                                 <div class="tbl-filter">
                                     <!-- Wrap the form in a div with the class 'form-container' -->
-                                    <!-- <form action="attendance-logs.php" method="get">
-                                        <select name="filterRole" id="filterRole" onchange="this.form.submit()">
-                                            <option value="all">All Roles</option>
-                                            <option value="Maintenance Manager" <?php echo (isset($_GET['filterRole']) && $_GET['filterRole'] === "Maintenance Manager") ? 'selected' : ''; ?>>Manager</option>
-                                            <option value="Maintenance Personnel" <?php echo (isset($_GET['filterRole']) && $_GET['filterRole'] === "Maintenance Personnel") ? 'selected' : ''; ?>>Personnel</option>
+                                    <!-- <form class="filterType">
+                                        <select name="filterType" id="filterType<?= $row['accountId'] ?>" onchange="filterAttendanceData(<?= $row['accountId'] ?>)">
+                                            <option value="all">All Days</option>
+                                            <option value="week">This Week</option>
+                                            <option value="month">This Month</option>
+                                            <option value="year">This Year</option>
                                         </select>
                                     </form> -->
 
-                                    <form class="d-flex" role="search">
-                                        <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" onkeyup="searchTable()" />
+                                    <form action="attendance-logs.php" method="get">
+                                        <select name="filterDate" id="filterDate" onchange="this.form.submit()">
+                                            <option value="all">All</option>
+                                            <option value="this_day" <?php echo ($filterDate === "this_day") ? 'selected' : ''; ?>>This Day</option>
+                                            <option value="this_week" <?php echo ($filterDate === "this_week") ? 'selected' : ''; ?>>This Week</option>
+                                            <option value="this_month" <?php echo ($filterDate === "this_month") ? 'selected' : ''; ?>>This Month</option>
+                                            <option value="this_year" <?php echo ($filterDate === "this_year") ? 'selected' : ''; ?>>This Year</option>
+                                        </select>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </header>
 
-                    <div class="new-nav">
-                        <ul>
-                            <li><a href="#" class="nav-link active" id="manager-pill" data-bs-target="pills-manager">Manager</a></li>
-                            <li><a href="#" class="nav-link" id="personnel-pill" data-bs-target="pills-personnel">Personnel</a></li>
-                        </ul>
-                    </div>
-
                     <!--PILL TABS-->
-                    <!-- Maintenance Manager -->
+                    <!-- Pills Tabs -->
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="pills-manager" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="table-content">
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="table-content personnel-table-content">
                                 <div class="table-header">
-                                    <table>
+                                    <table id="attendanceTable<?= $row['accountId'] ?>">
                                         <tr>
-                                            <th></th>
-                                            <th></th>
-                                            <th>NAME</th>
-                                            <th>ROLE</th>
+                                            <th>Day</th>
+                                            <th>Date</th>
+                                            <th>Time In</th>
+                                            <th>Time Out</th>
+                                            <th>Total Hours</th>
                                         </tr>
                                     </table>
                                 </div>
                                 <?php
-                                // Modify your SQL query to fetch only the subset of results
-                                $result = $conn->query("SELECT accountId, picture, firstname, lastname, role FROM account WHERE role = 'Maintenance Manager'");
                                 if ($result->num_rows > 0) {
                                     echo "<div class='table-container'>";
                                     echo "<table>";
                                     while ($row = $result->fetch_assoc()) {
-                                        // Output account information in each row
-                                        echo '<tr class="clickable-row" data-bs-toggle="modal" data-bs-target="#attendanceModal' . $row['accountId'] . '" data-account-id="' . $row['accountId'] . '">';
-                                        echo '<td>' . $row['accountId'] . '</td>';
-                                        echo '<td><img src="data:image/jpeg;base64,' . base64_encode($row['picture']) . '" class="rounded-img" alt="Profile Image" style="width: 50px; height: 50px; "></td>';
-                                        echo '<td>' . $row['firstname'] . ' ' . $row['lastname'] . '</td>';
-                                        echo '<td style="display:none">' . $row['firstname'] . '</td>';
-                                        echo '<td style="display:none">' . $row['lastname'] . '</td>';
-                                        echo '<td>' . $row['role'] . '</td>';
+                                        $dayOfWeek = date('l', strtotime($row['date']));
+                                        $timeInFormatted = date('h:i A', strtotime($row['timeIn']));
+                                        $timeOutFormatted = '';
+
+                                        date_default_timezone_set('Asia/Manila'); // Set the correct time zone, e.g., 'America/New_York'
+
+                                        if (isset($row['timeIn'])) {
+                                            $timeIn = strtotime($row['timeIn']);
+                                            $currentTime = time(); // Current timestamp
+
+                                            if (isset($row['timeOut'])) {
+                                                $timeOut = strtotime($row['timeOut']);
+                                                $timeDifference = $timeOut - $timeIn;
+                                                $hours = floor($timeDifference / 3600);
+                                                $totalHoursFormatted = $hours;
+                                                $timeOutFormatted = date('h:i A', $timeOut);
+                                            } else {
+                                                $timeSinceIn = $currentTime - $timeIn;
+
+                                                $currentHourAndMinute = date('H:i'); // Get the current hour and minute
+
+                                                if ($timeSinceIn > (8 * 3600) || $currentHourAndMinute == '00:00') {
+                                                    $totalHoursFormatted = "4";
+                                                    $timeOutFormatted = 'Not Timed Out';
+                                                } else {
+                                                    $totalHoursFormatted = ''; // Set totalHours to empty if 8 hours have NOT been exceeded and it's not midnight
+                                                    $timeOutFormatted = ''; // Set timeOut to empty if 8 hours have NOT been exceeded and it's not midnight
+                                                }
+                                            }
+                                        } else {
+                                            $totalHoursFormatted = "No TimeIn Recorded"; // In case the user hasn't timed in yet
+                                            $timeOutFormatted = ''; // Default value for timeOut in this case
+                                        }
+
+                                        echo '<tr data-day="' . htmlspecialchars($dayOfWeek) . '">';
+                                        echo '<td>' . htmlspecialchars($dayOfWeek) . '</td>';
+                                        echo '<td>' . htmlspecialchars($row['date']) . '</td>';
+                                        echo '<td>' . htmlspecialchars($timeInFormatted) . '</td>';
+                                        echo '<td>' . htmlspecialchars($timeOutFormatted) . '</td>';
+                                        echo '<td>' . htmlspecialchars($totalHoursFormatted) . '</td>';
                                         echo '</tr>';
                                     }
                                     echo "</table>";
@@ -382,309 +441,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             </div>
                         </div>
                     </div>
-
-                    <!-- Modal -->
-                    <?php
-                    // Fetch and display attendance log data within modals
-                    if ($result->num_rows > 0) {
-                        $result->data_seek(0); // Reset result pointer to the beginning
-
-                        while ($row = $result->fetch_assoc()) {
-                            echo '<div class="modal fade" id="attendanceModal' . $row['accountId'] . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
-                            echo '<div class="modal-dialog modal-lg modal-dialog-centered">';
-                            echo '<div class="modal-content">';
-                            echo '<div class="modal-header">';
-                            echo '<div class="modal-close">';
-                            echo '<button class="btn btn-close-modal-emp close-modal-btn" id="closeAddModal" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>';
-                            echo '</div>';
-                            echo '</div>';
-                            echo '<div class="modal-footer">';
-
-                            echo '<div class="modal-content-header">';
-                            echo '<p class="h5-like">' . $row['firstname'] . ' ' . $row['lastname'] . '</p>';
-                            echo '<form class="filterType">';
-                            echo '<select name="filterType" id="filterType' . $row['accountId'] . '" onchange="filterAttendanceData(' . $row['accountId'] . ')" class="custom-select">';
-                            echo '<option value="all">All</option>';
-                            echo '<option value="week">This Week</option>';
-                            echo '<option value="month">This Month</option>';
-                            echo '<option value="year">This Year</option>';
-                            echo '</select>';
-                            echo '</form>';
-                            echo '</div>';
-
-                            $attendanceQuery = "SELECT date, timeIn, timeOut FROM attendancelogs WHERE accountId = ? ORDER BY date ASC";
-                            $attendanceStmt = $conn->prepare($attendanceQuery);
-                            $attendanceStmt->bind_param('i', $row['accountId']);
-                            $attendanceStmt->execute();
-                            $attendanceResult = $attendanceStmt->get_result();
-
-                            if ($attendanceResult->num_rows > 0) {
-
-                                // Table header
-                                echo '<div class="table-whole-content1" id="exportContent' . $row['accountId'] . '">';
-                                echo '<p class="h5-like visually-hidden" id="nameHeader' . $row['accountId'] . '">' . $row['firstname'] . ' ' . $row['lastname'] . '</p>';
-                                echo '<div class="table-header1">';
-                                echo '<table>';
-                                echo '<tr>';
-                                echo '<th>Day</th>';
-                                echo '<th>Date</th>';
-                                echo '<th>Time In</th>';
-                                echo '<th>Time Out</th>';
-                                echo '<th>Total Hours</th>';
-                                echo '</tr>';
-                                echo '</table>';
-                                echo '</div>';
-
-                                echo '<div class="modal-content-th">';
-                                // Start the table and use a unique ID
-                                echo '<table id="attendanceTable' . $row['accountId'] . '">';
-                                // Table body
-                                while ($attendanceRow = $attendanceResult->fetch_assoc()) {
-                                    // Get the day of the week
-                                    $dayOfWeek = date('l', strtotime($attendanceRow['date']));
-
-                                    // Format timeIn and timeOut to show only the time with AM or PM
-                                    $timeInFormatted = date('h:i A', strtotime($attendanceRow['timeIn']));
-
-                                    date_default_timezone_set('Asia/Manila'); // Set the correct time zone, e.g., 'America/New_York'
-
-                                    if (isset($attendanceRow['timeIn'])) {
-                                        $timeIn = strtotime($attendanceRow['timeIn']);
-                                        $currentTime = time(); // Current timestamp
-
-                                        if (isset($attendanceRow['timeOut'])) {
-                                            $timeOut = strtotime($attendanceRow['timeOut']);
-                                            $timeDifference = $timeOut - $timeIn;
-                                            $hours = floor($timeDifference / 3600);
-                                            $totalHoursFormatted = $hours;
-                                            $timeOutFormatted = date('h:i A', $timeOut);
-                                        } else {
-                                            $timeSinceIn = $currentTime - $timeIn;
-
-                                            if ($timeSinceIn > (8 * 3600)) {
-                                                $totalHoursFormatted = "4";
-                                                $timeOutFormatted = 'Not Timed Out';
-                                            } else {
-                                                $totalHoursFormatted = ''; // Set totalHours to empty if 8 hours have NOT been exceeded
-                                                $timeOutFormatted = ''; // Set timeOut to empty if 8 hours have NOT been exceeded
-                                            }
-                                        }
-                                    } else {
-                                        $totalHoursFormatted = "No TimeIn Recorded"; // In case the user hasn't timed in yet
-                                        $timeOutFormatted = ''; // Default value for timeOut in this case
-                                    }
-
-                                    echo '<tr data-day="' . $dayOfWeek . '">';
-                                    echo '<td>' . $dayOfWeek . '</td>';
-                                    echo '<td>' . $attendanceRow['date'] . '</td>';
-                                    echo '<td>' . $timeInFormatted . '</td>';
-                                    echo '<td>' . $timeOutFormatted . '</td>';
-                                    echo '<td>' . $totalHoursFormatted . '</td>';
-                                    echo '</tr>';
-                                }
-
-                                echo '</table>';
-                                echo "</div>";
-                                echo "</div>";
-                            } else {
-                                echo '<table>';
-                                echo "<div class='noDataImgH'>";
-                                echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
-                                echo "</div>";
-                                echo '</table>';
-                            }
-
-                            // Close the attendance log statement
-                            $attendanceStmt->close();
-
-                            echo '<button type="button" class="btn export-btn" onclick="exportTableToPDF(\'exportContent' . $row['accountId'] . '\', \'' . $row['firstname'] . '_' . $row['lastname'] . '.pdf\', \'' . addslashes($row['firstname']) . ' ' . addslashes($row['lastname']) . '\')">EXPORT PDF</button>';
-
-
-                            echo '</div>';
-                            echo '</div>';
-                            echo '</div>';
-                            echo '</div>';
-                        }
-                    }
-                    ?>
-                    <!-- Modal -->
-
-                    <!-- Maintenance Personnel -->
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane" id="pills-personnel" role="tabpanel" aria-labelledby="personnel-tab">
-                            <div class="table-content">
-                                <div class="table-header">
-                                    <table>
-                                        <tr>
-                                            <th></th>
-                                            <th></th>
-                                            <th>NAME</th>
-                                            <th>ROLE</th>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <?php
-                                // Modify your SQL query to fetch only the subset of results
-                                $result = $conn->query("SELECT accountId, picture, firstname, lastname, role FROM account WHERE role = 'Maintenance Personnel'");
-                                if ($result->num_rows > 0) {
-                                    echo "<div class='table-container'>";
-                                    echo "<table>";
-                                    while ($row = $result->fetch_assoc()) {
-                                        // Output account information in each row
-                                        echo '<tr class="clickable-row" data-bs-toggle="modal" data-bs-target="#attendanceModal' . $row['accountId'] . '" data-account-id="' . $row['accountId'] . '">';
-                                        echo '<td>' . $row['accountId'] . '</td>';
-                                        echo '<td><img src="data:image/jpeg;base64,' . base64_encode($row['picture']) . '" class="rounded-img" alt="Profile Image" style="width: 50px; height: 50px; "></td>';
-                                        echo '<td>' . $row['firstname'] . ' ' . $row['lastname'] . '</td>';
-                                        echo '<td style="display:none">' . $row['firstname'] . '</td>';
-                                        echo '<td style="display:none">' . $row['lastname'] . '</td>';
-                                        echo '<td>' . $row['role'] . '</td>';
-                                        echo '</tr>';
-                                    }
-                                    echo "</table>";
-                                    echo "</div>";
-                                } else {
-                                    echo "<div class='noDataImgH'>";
-                                    echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
-                                    echo "</div>";
-                                }
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-                    <!-- Modal -->
-                    <?php
-                    // Fetch and display attendance log data within modals
-                    if ($result->num_rows > 0) {
-                        $result->data_seek(0); // Reset result pointer to the beginning
-
-                        while ($row = $result->fetch_assoc()) {
-                            echo '<div class="modal fade" id="attendanceModal' . $row['accountId'] . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
-                            echo '<div class="modal-dialog modal-lg modal-dialog-centered">';
-                            echo '<div class="modal-content">';
-                            echo '<div class="modal-header">';
-                            echo '<div class="modal-close">';
-                            echo '<button class="btn btn-close-modal-emp close-modal-btn" id="closeAddModal" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>';
-                            echo '</div>';
-                            echo '</div>';
-                            echo '<div class="modal-footer">';
-
-                            echo '<div class="modal-content-header">';
-                            echo '<p class="h5-like">' . $row['firstname'] . ' ' . $row['lastname'] . '</p>';
-                            echo '<form class="filterType">';
-                            echo '<select name="filterType" id="filterType' . $row['accountId'] . '" onchange="filterAttendanceData(' . $row['accountId'] . ')" class="custom-select">';
-                            echo '<option value="all">All</option>';
-                            echo '<option value="week">This Week</option>';
-                            echo '<option value="month">This Month</option>';
-                            echo '<option value="year">This Year</option>';
-                            echo '</select>';
-                            echo '</form>';
-                            echo '</div>';
-
-                            $attendanceQuery = "SELECT date, timeIn, timeOut FROM attendancelogs WHERE accountId = ? ORDER BY date ASC";
-                            $attendanceStmt = $conn->prepare($attendanceQuery);
-                            $attendanceStmt->bind_param('i', $row['accountId']);
-                            $attendanceStmt->execute();
-                            $attendanceResult = $attendanceStmt->get_result();
-
-                            if ($attendanceResult->num_rows > 0) {
-
-                                // Table header
-                                echo '<div class="table-whole-content1" id="exportContent' . $row['accountId'] . '">';
-                                echo '<p class="h5-like visually-hidden" id="nameHeader' . $row['accountId'] . '">' . $row['firstname'] . ' ' . $row['lastname'] . '</p>';
-                                echo '<div class="table-header1">';
-                                echo '<table>';
-                                echo '<tr>';
-                                echo '<th>Day</th>';
-                                echo '<th>Date</th>';
-                                echo '<th>Time In</th>';
-                                echo '<th>Time Out</th>';
-                                echo '<th>Total Hours</th>';
-                                echo '</tr>';
-                                echo '</table>';
-                                echo '</div>';
-
-                                echo '<div class="modal-content-th">';
-                                // Start the table and use a unique ID
-                                echo '<table id="attendanceTable' . $row['accountId'] . '">';
-                                // Table body
-                                while ($attendanceRow = $attendanceResult->fetch_assoc()) {
-                                    // Get the day of the week
-                                    $dayOfWeek = date('l', strtotime($attendanceRow['date']));
-
-                                    // Format timeIn and timeOut to show only the time with AM or PM
-                                    $timeInFormatted = date('h:i A', strtotime($attendanceRow['timeIn']));
-
-                                    date_default_timezone_set('Asia/Manila'); // Set the correct time zone, e.g., 'America/New_York'
-
-                                    if (isset($attendanceRow['timeIn'])) {
-                                        $timeIn = strtotime($attendanceRow['timeIn']);
-                                        $currentTime = time(); // Current timestamp
-
-                                        if (isset($attendanceRow['timeOut'])) {
-                                            $timeOut = strtotime($attendanceRow['timeOut']);
-                                            $timeDifference = $timeOut - $timeIn;
-                                            $hours = floor($timeDifference / 3600);
-                                            $totalHoursFormatted = $hours;
-                                            $timeOutFormatted = date('h:i A', $timeOut);
-                                        } else {
-                                            $timeSinceIn = $currentTime - $timeIn;
-
-                                            if ($timeSinceIn > (8 * 3600)) {
-                                                $totalHoursFormatted = "4";
-                                                $timeOutFormatted = 'Not Timed Out';
-                                            } else {
-                                                $totalHoursFormatted = ''; // Set totalHours to empty if 8 hours have NOT been exceeded
-                                                $timeOutFormatted = ''; // Set timeOut to empty if 8 hours have NOT been exceeded
-                                            }
-                                        }
-                                    } else {
-                                        $totalHoursFormatted = "No TimeIn Recorded"; // In case the user hasn't timed in yet
-                                        $timeOutFormatted = ''; // Default value for timeOut in this case
-                                    }
-
-                                    echo '<tr data-day="' . $dayOfWeek . '">';
-                                    echo '<td>' . $dayOfWeek . '</td>';
-                                    echo '<td>' . $attendanceRow['date'] . '</td>';
-                                    echo '<td>' . $timeInFormatted . '</td>';
-                                    echo '<td>' . $timeOutFormatted . '</td>';
-                                    echo '<td>' . $totalHoursFormatted . '</td>';
-                                    echo '</tr>';
-                                }
-
-                                echo '</table>';
-                                echo "</div>";
-                                echo "</div>";
-                            } else {
-                                echo '<table>';
-                                echo "<div class='noDataImgH'>";
-                                echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
-                                echo "</div>";
-                                echo '</table>';
-                            }
-
-                            // Close the attendance log statement
-                            $attendanceStmt->close();
-
-                            echo '<button type="button" class="btn export-btn" onclick="exportTableToPDF(\'exportContent' . $row['accountId'] . '\', \'' . $row['firstname'] . '_' . $row['lastname'] . '.pdf\', \'' . addslashes($row['firstname']) . ' ' . addslashes($row['lastname']) . '\')">EXPORT PDF</button>';
-
-
-                            echo '</div>';
-                            echo '</div>';
-                            echo '</div>';
-                            echo '</div>';
-                        }
-                    }
-                    ?>
-                    <!-- Modal -->
-                </div>
                 </div>
             </main>
         </section>
+
 
         <!-- MODALS -->
         <?php include_once 'modals/modal_layout.php'; ?>
@@ -978,66 +738,7 @@ function filterTable(activeRole) {
             }
         </script>
 
-        <script>
-            $(window).on('load', function() {
-                var managerPill = $('#manager-pill');
-                var personnelPill = $('#personnel-pill');
-                var managerContent = $('#pills-manager');
-                var personnelContent = $('#pills-personnel');
-
-                // Function to explicitly set the active tab based on the lastPill value
-                function activateLastPill() {
-                    var lastPill = sessionStorage.getItem('lastPill') || 'manager';
-
-                    // Reset active states
-                    $('.nav-link').removeClass('active');
-                    $('.tab-pane').removeClass('show active');
-
-                    if (lastPill === 'personnel') {
-                        personnelPill.addClass('active');
-                        personnelContent.addClass('show active');
-                    } else {
-                        managerPill.addClass('active');
-                        managerContent.addClass('show active');
-                    }
-                }
-
-                // Event listeners for tab clicks
-                managerPill.on('click', function(e) {
-                    e.preventDefault();
-                    sessionStorage.setItem('lastPill', 'manager');
-                    activateLastPill();
-                });
-
-                personnelPill.on('click', function(e) {
-                    e.preventDefault();
-                    sessionStorage.setItem('lastPill', 'personnel');
-                    activateLastPill();
-                });
-
-                function filterTable() {
-                    var query = $("#search-box").val().toLowerCase();
-                    var activeRole = managerPill.hasClass('active') ? 'Maintenance Manager' : 'Maintenance Personnel';
-
-                    $(".table-container tbody tr").each(function() {
-                        var row = $(this);
-                        var roleCell = row.find("td").last().text().toLowerCase();
-
-                        if (roleCell === activeRole.toLowerCase() && row.text().toLowerCase().includes(query)) {
-                            row.show();
-                        } else {
-                            row.hide();
-                        }
-                    });
-                }
-
-                // Bind the input event to the search box for dynamic filtering
-                $("#search-box").on("input", filterTable);
-
-                // Activate the correct tab based on sessionStorage or default
-                activateLastPill();
-            });
-        </script>
+    
 
         <script>
             function filterAttendanceData(accountId) {

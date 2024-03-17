@@ -32,31 +32,30 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $loggedInAccountId = $_SESSION['accountId'];
     // SQL query to fetch notifications related to report activities
     $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
-                FROM activitylogs AS al
-               JOIN account AS acc ON al.accountID = acc.accountID
-               WHERE al.tab='Report' AND al.seen = '0' AND al.accountID != ?
-               ORDER BY al.date DESC 
-               LIMIT 5"; // Set limit to 5
+    FROM activitylogs AS al
+   JOIN account AS acc ON al.accountID = acc.accountID
+   WHERE al.m_seen= '0' AND al.accountID != ?  AND action NOT LIKE '%logged in'
+   ORDER BY al.date DESC 
+   LIMIT 5"; // Set limit to 5
 
-    // Prepare the SQL statement
-    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+// Prepare the SQL statement
+$stmtLatestLogs = $conn->prepare($sqlLatestLogs);
 
-    // Bind the parameter to exclude the current user's account ID
-    $stmtLatestLogs->bind_param("i", $loggedInAccountId);
+// Bind the parameter to exclude the current user's account ID
+$stmtLatestLogs->bind_param("i", $loggedInAccountId);
 
-    // Execute the query
-    $stmtLatestLogs->execute();
-    $resultLatestLogs = $stmtLatestLogs->get_result();
+// Execute the query
+$stmtLatestLogs->execute();
+$resultLatestLogs = $stmtLatestLogs->get_result();
 
 
-    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
-    $stmt = $conn->prepare($unseenCountQuery);
-    $stmt->bind_param("i", $loggedInAccountId);
-    $stmt->execute();
-    $stmt->bind_result($unseenCount);
-    $stmt->fetch();
-    $stmt->close();
-
+$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE m_seen= '0' AND action NOT LIKE '%logged in' AND accountID != ?";
+$stmt = $conn->prepare($unseenCountQuery);
+$stmt->bind_param("i", $loggedInAccountId);
+$stmt->execute();
+$stmt->bind_result($unseenCount);
+$stmt->fetch();
+$stmt->close();
 
 ?>
 
@@ -80,6 +79,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <!-- CSS -->
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/gps.css" />
+     
     </head>
     <style>
         .notification-indicator {
@@ -268,7 +268,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             </ul>
         </section>
         <!-- SIDEBAR -->
-
+    
         <!-- CONTENT -->
         <section id="content">
             <!-- MAIN -->
@@ -535,7 +535,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <!-- MODALS -->
         <?php include_once 'modals/modal_layout.php'; ?>
-
+    
         <!-- RFID MODAL -->
         <div class="modal" id="staticBackdrop112" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -556,6 +556,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/main.js"></script>
         <script src="../../src/js/gps.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
+    
 
         <script>
             // Assuming showMarker is defined elsewhere to handle the map logic
@@ -578,6 +579,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </script>
 
         <!-- BOOTSTRAP -->
+        <script src="../../src/js/locationTracker.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <!-- BOOTSTRAP -->
         <!-- SCRIPTS -->

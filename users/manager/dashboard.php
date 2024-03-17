@@ -30,7 +30,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
                 FROM activitylogs AS al
                JOIN account AS acc ON al.accountID = acc.accountID
-               WHERE al.tab='Report' AND al.seen = '0' AND al.accountID != ?
+               WHERE al.m_seen= '0' AND al.accountID != ?  AND action NOT LIKE '%logged in'
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
 
@@ -45,7 +45,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $resultLatestLogs = $stmtLatestLogs->get_result();
 
 
-    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE m_seen= '0' AND action NOT LIKE '%logged in' AND accountID != ?";
     $stmt = $conn->prepare($unseenCountQuery);
     $stmt->bind_param("i", $loggedInAccountId);
     $stmt->execute();
@@ -320,7 +320,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
 
-
+     
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/dashboard.css" />
     </head>
@@ -2280,7 +2280,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         </section>
         <!--End of Section content1-->
-
+        <script src="../../src/js/locationTracker.js"></script>
 
         <section class="content2">
             <!--start of attendance report chart-->
@@ -2388,7 +2388,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+    
 
 
 
@@ -2427,6 +2427,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 });
             });
         </script>
+
         <script>
             // Status to color mapping
             var statusColors = {
