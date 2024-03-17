@@ -294,8 +294,7 @@ $stmt->close();
                         $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp, a.color, a.picture
                         FROM attendancelogs AS al
                         LEFT JOIN account AS a ON al.accountID = a.accountID
-                        WHERE date = '$currentDate' AND (al.timeOut IS NULL OR al.timeOut = '') AND a.role = 'Maintenance Personnel'";
-
+                        WHERE date = '$currentDate' AND (al.timeOut IS NULL OR al.timeOut = '')";
 
                         $result = $conn->query($sql);
 
@@ -303,25 +302,18 @@ $stmt->close();
                         if ($result->num_rows > 0) {
                             echo "<div class='accordion'id='accordionGPS'>";
                             echo "<div class='fake-header'>";
-
                             echo "<p>NAME</p>";
-
                             // echo "<p>Location</p>";
-
                             echo "</div>";
 
                             while ($row = $result->fetch_assoc()) {
-
                                 $accountId = $row["accountId"];
                                 $firstName = $row["firstName"];
                                 $lastName = $row["lastName"];
                                 $collapseId = "collapse" . $accountId;
                                 $headerId = "heading" . $accountId;
 
-
                                 // Accordion item
-                                echo "<div class='gps-container'>";
-
                                 echo "<div class='accordion-item'>";
                                 echo "<h2 class='accordion-header' id='" . $headerId . "'>";
                                 echo "<button class='accordion-btn gps-info' type='button' data-bs-toggle='collapse' data-bs-target='#" . $collapseId . "' aria-expanded='false' aria-controls='" . $collapseId . "' data-firstName='" . $firstName . "'>";
@@ -337,7 +329,6 @@ $stmt->close();
                                 echo "Timestamp: " . $row["timestamp"];
                                 echo "</div>"; // End of accordion body
                                 echo "</div>"; // End of accordion collapse
-                                echo "</div>"; // End of accordion item
                                 echo "</div>"; // End of accordion item
                             }
                             echo "</div>"; // Close the main container for the accordion
