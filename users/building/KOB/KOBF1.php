@@ -6159,8 +6159,8 @@ $stmt->close();
                         <div style='width:10px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2371); ?>; position:absolute; top:369px; left:803px;'></div>
                         
                         <!-- ASSET 2372 -->
-                        <img src='../image.php?id=2372' style='width: 20px; cursor:pointer; position:absolute; top:150px; left:1150px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal2372' onclick='fetchAssetData(2372);'>
-                        <div style='width:10px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2372); ?>; position:absolute; top:150px; left:1185px;'></div>
+                        <!-- <img src='../image.php?id=2372' style='width: 20px; cursor:pointer; position:absolute; top:150px; left:1150px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal2372' onclick='fetchAssetData(2372);'>
+                        <div style='width:10px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2372); ?>; position:absolute; top:150px; left:1185px;'></div> -->
 
                         <!-- BULB -->
 

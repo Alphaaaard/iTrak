@@ -213,7 +213,7 @@
 
 .legend-color-need-repair{
   padding: .5em;
-  background-color: blue;
+  background-color: red;
   align-self: center;
   border-radius: 25px;
 
@@ -221,7 +221,7 @@
 
 .legend-color-for-replacement{
   padding: .5em;
-  background-color: red;
+  background-color: blue;
   align-self: center;
   border-radius: 25px;
 }
