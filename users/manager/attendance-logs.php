@@ -17,7 +17,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         die('Connect Error (' . $conn->connect_errno . ') ' . $conn->connect_error);
     }
 
-   
+
 
 
     // for notif below
@@ -38,87 +38,87 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
    ORDER BY al.date DESC 
    LIMIT 5"; // Set limit to 5
 
-// Prepare the SQL statement
-$stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+    // Prepare the SQL statement
+    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
 
-// Bind the parameter to exclude the current user's account ID
-$stmtLatestLogs->bind_param("i", $loggedInAccountId);
+    // Bind the parameter to exclude the current user's account ID
+    $stmtLatestLogs->bind_param("i", $loggedInAccountId);
 
-// Execute the query
-$stmtLatestLogs->execute();
-$resultLatestLogs = $stmtLatestLogs->get_result();
-
-
-$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE m_seen= '0' AND action NOT LIKE '%logged in' AND accountID != ?";
-$stmt = $conn->prepare($unseenCountQuery);
-$stmt->bind_param("i", $loggedInAccountId);
-$stmt->execute();
-$stmt->bind_result($unseenCount);
-$stmt->fetch();
-$stmt->close();
+    // Execute the query
+    $stmtLatestLogs->execute();
+    $resultLatestLogs = $stmtLatestLogs->get_result();
 
 
-$filterDate = isset($_GET['filterDate']) ? $_GET['filterDate'] : 'all';
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE m_seen= '0' AND action NOT LIKE '%logged in' AND accountID != ?";
+    $stmt = $conn->prepare($unseenCountQuery);
+    $stmt->bind_param("i", $loggedInAccountId);
+    $stmt->execute();
+    $stmt->bind_result($unseenCount);
+    $stmt->fetch();
+    $stmt->close();
 
-$userAccountId = $_SESSION['accountId']; // User's account ID
 
-$query = "SELECT attendanceId, accountId, date, timeIn, timeOut FROM attendancelogs WHERE accountId = ?";
+    $filterDate = isset($_GET['filterDate']) ? $_GET['filterDate'] : 'all';
 
-$params = [$userAccountId];
-$types = 'i';
+    $userAccountId = $_SESSION['accountId']; // User's account ID
 
-if ($filterDate !== 'all') {
-    $conditions = [];
+    $query = "SELECT attendanceId, accountId, date, timeIn, timeOut FROM attendancelogs WHERE accountId = ?";
 
-    if ($filterDate === 'this_day') {
-        $conditions[] = "DATE(date) = CURDATE()";
-    } elseif ($filterDate === 'this_week') {
-        $conditions[] = "YEARWEEK(date) = YEARWEEK(NOW())";
-    } elseif ($filterDate === 'this_month') {
-        $conditions[] = "YEAR(date) = YEAR(NOW()) AND MONTH(date) = MONTH(NOW())";
-    } elseif ($filterDate === 'this_year') {
-        $conditions[] = "YEAR(date) = YEAR(NOW())";
+    $params = [$userAccountId];
+    $types = 'i';
+
+    if ($filterDate !== 'all') {
+        $conditions = [];
+
+        if ($filterDate === 'this_day') {
+            $conditions[] = "DATE(date) = CURDATE()";
+        } elseif ($filterDate === 'this_week') {
+            $conditions[] = "YEARWEEK(date) = YEARWEEK(NOW())";
+        } elseif ($filterDate === 'this_month') {
+            $conditions[] = "YEAR(date) = YEAR(NOW()) AND MONTH(date) = MONTH(NOW())";
+        } elseif ($filterDate === 'this_year') {
+            $conditions[] = "YEAR(date) = YEAR(NOW())";
+        }
+
+        if (!empty($conditions)) {
+            $query .= " AND (" . implode(' OR ', $conditions) . ")";
+        }
     }
 
-    if (!empty($conditions)) {
-        $query .= " AND (" . implode(' OR ', $conditions) . ")";
+    $stmt = $conn->prepare($query);
+
+    if (!$stmt) {
+        die('Error preparing the query: ' . $conn->error);
     }
-}
 
-$stmt = $conn->prepare($query);
-
-if (!$stmt) {
-    die('Error preparing the query: ' . $conn->error);
-}
-
-if (!empty($params)) {
-    $stmt->bind_param($types, ...$params);
-}
-
-if (!$stmt->execute()) {
-    die('Error executing the query: ' . $stmt->error);
-}
-
-$result = $stmt->get_result();
-
-$stmt->close();
-
-if (isset($_SESSION['accountId'])) {
-    $accountId = $_SESSION['accountId'];
-    $todayDate = date("Y-m-d");
-
-    // Check if there's a timeout value for this user for today
-    $timeoutQuery = "SELECT timeout FROM attendancelogs WHERE accountId = '$accountId' AND date = '$todayDate'";
-    $timeoutResult = $conn->query($timeoutQuery);
-    $timeoutRow = $timeoutResult->fetch_assoc();
-
-    if ($timeoutRow && $timeoutRow['timeout'] !== null) {
-        // User has a timeout value, force logout
-        session_destroy(); // Destroy all session data
-        header("Location: ../../index.php?logout=timeout"); // Redirect to the login page with a timeout flag
-        exit;
+    if (!empty($params)) {
+        $stmt->bind_param($types, ...$params);
     }
-}
+
+    if (!$stmt->execute()) {
+        die('Error executing the query: ' . $stmt->error);
+    }
+
+    $result = $stmt->get_result();
+
+    $stmt->close();
+
+    if (isset($_SESSION['accountId'])) {
+        $accountId = $_SESSION['accountId'];
+        $todayDate = date("Y-m-d");
+
+        // Check if there's a timeout value for this user for today
+        $timeoutQuery = "SELECT timeout FROM attendancelogs WHERE accountId = '$accountId' AND date = '$todayDate'";
+        $timeoutResult = $conn->query($timeoutQuery);
+        $timeoutRow = $timeoutResult->fetch_assoc();
+
+        if ($timeoutRow && $timeoutRow['timeout'] !== null) {
+            // User has a timeout value, force logout
+            session_destroy(); // Destroy all session data
+            header("Location: ../../index.php?logout=timeout"); // Redirect to the login page with a timeout flag
+            exit;
+        }
+    }
 
 
 
@@ -139,11 +139,12 @@ if (isset($_SESSION['accountId'])) {
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <link rel="stylesheet" href="../../src/css/main.css">
         <link rel="stylesheet" href="../../src/css/attendance-logs.css">
+        <link rel="stylesheet" href="../../src/css/MP-attendance-logs.css">
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
-     
+
     </head>
     <style>
         .notification-indicator {
@@ -373,15 +374,17 @@ if (isset($_SESSION['accountId'])) {
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="home-tab">
                             <div class="table-content personnel-table-content">
                                 <div class="table-header">
-                                    <table id="attendanceTable<?= $row['accountId'] ?>">
-                                        <tr>
-                                            <th>Day</th>
-                                            <th>Date</th>
-                                            <th>Time In</th>
-                                            <th>Time Out</th>
-                                            <th>Total Hours</th>
-                                        </tr>
-                                    </table>
+                                    <div class="Manager-Attendance">
+                                        <table id="attendanceTable<?= $row['accountId'] ?>">
+                                            <tr>
+                                                <th>Day</th>
+                                                <th>Date</th>
+                                                <th>Time In</th>
+                                                <th>Time Out</th>
+                                                <th>Total Hours</th>
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </div>
                                 <?php
                                 if ($result->num_rows > 0) {
@@ -738,7 +741,7 @@ function filterTable(activeRole) {
             }
         </script>
 
-    
+
 
         <script>
             function filterAttendanceData(accountId) {

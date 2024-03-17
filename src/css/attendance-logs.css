@@ -12,6 +12,10 @@
 
 /* MY CSS */
 
+.Manager-Attendance{
+  border-radius: 50px;
+}
+
 .table-container {
   background-color: #fcfcfc;
   border: 1px solid whitesmoke;
