@@ -80,8 +80,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
 
-    // Prepare the SQL statement
-    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+// Prepare the SQL statement
+$stmtLatestLogs = $conn->prepare($sqlLatestLogs);
 
     // Bind the parameter to exclude the current user's account ID
     $stmtLatestLogs->bind_param("i", $loggedInAccountId);

@@ -5782,7 +5782,7 @@ $stmt->close();
                     $stmt2372->close();
                 }
 
-    function getStatusColor($status)
+                function getStatusColor($status)
     {
         switch ($status) {
             case 'Working':
@@ -5790,9 +5790,9 @@ $stmt->close();
             case 'Under Maintenance':
                 return 'yellow';
             case 'Need Repair':
-                return 'blue';
-            case 'For Replacement':
                 return 'red';
+            case 'For Replacement':
+                return 'blue';
             default:
                 return 'grey'; // Default color
         }

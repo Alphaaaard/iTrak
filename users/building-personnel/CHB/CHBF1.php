@@ -575,9 +575,9 @@ $stmt->close();
             case 'Under Maintenance':
                 return 'yellow';
             case 'Need Repair':
-                return 'blue';
-            case 'For Replacement':
                 return 'red';
+            case 'For Replacement':
+                return 'blue';
             default:
                 return 'grey'; // Default color
         }
@@ -835,7 +835,7 @@ exit();
                         <!-- FLOOR PLAN -->
                         <img src="../../../src/floors/chinesebB/ChineseB1F.png" alt="" class="Floor-container">
                         <div class="map-nav">
-                            <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
+                            <a href="../../personnel/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
                             <div class="map-legend">
                                 <div class="legend-color-green"></div>
                                 <p>Working</p>

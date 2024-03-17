@@ -1446,9 +1446,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt5791->close();
     }
 
-
-
-
     function getStatusColor($status)
     {
         switch ($status) {
@@ -1457,9 +1454,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             case 'Under Maintenance':
                 return 'yellow';
             case 'Need Repair':
-                return 'blue';
-            case 'For Replacement':
                 return 'red';
+            case 'For Replacement':
+                return 'blue';
             default:
                 return 'grey'; // Default color
         }

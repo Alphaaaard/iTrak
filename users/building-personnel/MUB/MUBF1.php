@@ -897,9 +897,9 @@ $stmt->close();
             case 'Under Maintenance':
                 return 'yellow';
             case 'Need Repair':
-                return 'blue';
-            case 'For Replacement':
                 return 'red';
+            case 'For Replacement':
+                return 'blue';
             default:
                 return 'grey'; // Default color
         }

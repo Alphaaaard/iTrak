@@ -5784,21 +5784,21 @@ $stmt->close();
                     $stmt2372->close();
                 }
 
-    function getStatusColor($status)
-    {
-        switch ($status) {
-            case 'Working':
-                return 'green';
-            case 'Under Maintenance':
-                return 'yellow';
-            case 'Need Repair':
-                return 'blue';
-            case 'For Replacement':
-                return 'red';
-            default:
-                return 'grey'; // Default color
-        }
-    }
+                function getStatusColor($status)
+                {
+                    switch ($status) {
+                        case 'Working':
+                            return 'green';
+                        case 'Under Maintenance':
+                            return 'yellow';
+                        case 'Need Repair':
+                            return 'red';
+                        case 'For Replacement':
+                            return 'blue';
+                        default:
+                            return 'grey'; // Default color
+                    }
+                }
 
     //FOR IMAGE UPLOAD BASED ON ASSET ID
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['upload_img']) && isset($_POST['assetId'])) {

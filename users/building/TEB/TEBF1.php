@@ -2608,7 +2608,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit937'])) {
 
 
 
-    function getStatusColor($status)
+function getStatusColor($status)
     {
         switch ($status) {
             case 'Working':
@@ -2616,9 +2616,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit937'])) {
             case 'Under Maintenance':
                 return 'yellow';
             case 'Need Repair':
-                return 'blue';
-            case 'For Replacement':
                 return 'red';
+            case 'For Replacement':
+                return 'blue';
             default:
                 return 'grey'; // Default color
         }
