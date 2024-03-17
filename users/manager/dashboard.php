@@ -2280,7 +2280,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         </section>
         <!--End of Section content1-->
-        <script src="../../src/js/locationTracker.js"></script>
+   
 
         <section class="content2">
             <!--start of attendance report chart-->

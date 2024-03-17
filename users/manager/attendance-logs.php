@@ -143,7 +143,7 @@ if (isset($_SESSION['accountId'])) {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
-        <script src="../../src/js/locationTracker.js"></script>
+     
     </head>
     <style>
         .notification-indicator {

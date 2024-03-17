@@ -455,7 +455,7 @@ $stmt->close();
                 </div>
             </div>
         </div>
-        <script src="../../src/js/locationTracker.js"></script>
+     
         <!-- CONTENT -->
         <!-- SCRIPTS -->
         <script src="../../src/js/main.js"></script>
