@@ -23,45 +23,100 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     }
 
 
-   // for notif below
-    // Update the SQL to join with the account and asset tables to get the admin's name and asset information
-    $loggedInUserFirstName = $_SESSION['firstName'];
-    $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
-    $loggedInUserLastName = $_SESSION['lastName'];
+  // Prepare a statement to count unseen notifications
+  $stmt = $conn->prepare("SELECT COUNT(*) AS unseenCount FROM activitylogs WHERE p_seen = '0' AND accountID = ?");
+  $stmt->bind_param("i", $accountId);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $row = $result->fetch_assoc();
 
-    // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
+  // Now you can echo the count where needed
+  $unseenCount = $row['unseenCount'];
 
-    $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
-    $loggedInAccountId = $_SESSION['accountId'];
-    // SQL query to fetch notifications related to report activities
-    $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
-                FROM activitylogs AS al
-               JOIN account AS acc ON al.accountID = acc.accountID
-               WHERE al.tab = 'General' AND al.p_seen = '0' AND al.action LIKE 'Assigned maintenance personnel%' AND al.action LIKE ? AND al.accountID != ?
-               ORDER BY al.date DESC 
-               LIMIT 5"; // Set limit to 5
+  // Fetch Report activity logs
+  $loggedInUserFirstName = $_SESSION['firstName']; // or the name field you have in session that you want to check against
+  $loggedInUsermiddleName = $_SESSION['middleName']; // assuming you also have the last name in the session
+  $loggedInUserLastName = $_SESSION['lastName']; //kung ano ung naka declare dito eto lang ung magiging data 
+  // Concatenate first name and last name for the action field check
+  $loggedInFullName = $loggedInUserFirstName . " " . $loggedInUsermiddleName . " " . $loggedInUserLastName; //kung ano ung naka declare dito eto lang ung magiging data 
 
-    // Prepare the SQL statement
-    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
-    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
-  
-    // Bind the parameter to exclude the current user's account ID
-    $stmtLatestLogs->bind_param("si",  $pattern, $loggedInAccountId);
 
-    // Execute the query
-    $stmtLatestLogs->execute();
-    $resultLatestLogs = $stmtLatestLogs->get_result(); 
 
-    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
+  $sqlGeneral = "SELECT ac.*, a.firstName, a.middleName, a.lastName
+  FROM activitylogs AS ac
+  LEFT JOIN account AS a ON ac.accountID = a.accountID
+  WHERE (ac.tab = 'General' AND ac.action LIKE 'Assigned maintenance personnel%' AND ac.action LIKE ?)
+  ORDER BY ac.date DESC";
+
+// Prepare the SQL statement
+$stmtg = $conn->prepare($sqlGeneral);
+
+// Bind the parameter and execute
+$pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
+$stmtg->bind_param("s", $pattern);
+$stmtg->execute();
+$resultGeneral = $stmtg->get_result();
+
+
+
+  // Adjust the SQL to check the 'action' field for the logged-in user's name
+  $sqlReport = "SELECT ac.*, a.firstName, a.middleName, a.lastName
+  FROM activitylogs AS ac
+  LEFT JOIN account AS a ON ac.accountID = a.accountID
+  WHERE (ac.tab = 'Report' AND ac.accountID = ?)
+
+  ORDER BY ac.date DESC";
+
+// Prepare the SQL statement
+$stmt = $conn->prepare($sqlReport);
+
+// Bind the parameter and execute
+
+$stmt->bind_param("i", $accountId);
+$stmt->execute();
+$resultReport = $stmt->get_result();
+
+
+
+  // for notif below
+  // Update the SQL to join with the account and asset tables to get the admin's name and asset information
+  $loggedInUserFirstName = $_SESSION['firstName'];
+  $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
+  $loggedInUserLastName = $_SESSION['lastName'];
+
+  // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
+
+  $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
+  $loggedInAccountId = $_SESSION['accountId'];
+  // SQL query to fetch notifications related to report activities
+  $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
+              FROM activitylogs AS al
+             JOIN account AS acc ON al.accountID = acc.accountID
+             WHERE al.tab = 'General' AND al.p_seen = '0' AND al.action LIKE 'Assigned maintenance personnel%' AND al.action LIKE ? AND al.accountID != ?
+             ORDER BY al.date DESC 
+             LIMIT 5"; // Set limit to 5
+
+  // Prepare the SQL statement
+  $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+  $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
+
+  // Bind the parameter to exclude the current user's account ID
+  $stmtLatestLogs->bind_param("si",  $pattern, $loggedInAccountId);
+
+  // Execute the query
+  $stmtLatestLogs->execute();
+  $resultLatestLogs = $stmtLatestLogs->get_result(); 
+
+  $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
 WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance personnel%' AND action LIKE ?";
-    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
-   
-   $stmt = $conn->prepare($unseenCountQuery);
-    $stmt->bind_param("is", $loggedInAccountId, $pattern );
-    $stmt->execute();
-    $stmt->bind_result($unseenCount);
-    $stmt->fetch();
-    $stmt->close();
+  $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
+ 
+ $stmt = $conn->prepare($unseenCountQuery);
+  $stmt->bind_param("is", $loggedInAccountId, $pattern );
+  $stmt->execute();
+  $stmt->bind_result($unseenCount);
+  $stmt->fetch();
+  $stmt->close();
 
 
     //FOR ID 1 SOFA
@@ -6400,6 +6455,9 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                             <?php endif; ?>
                         </a>
 
+
+
+
                         <div class="dropdown-content" id="notification-dropdown-content">
                             <h6 class="dropdown-header">Alerts Center</h6>
                             <!-- PHP code to display notifications will go here -->
@@ -6443,7 +6501,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                             <a href="activity-logs.php" class="view-all">View All</a>
 
                         </div>
-                        </div>
+                    </div>
                     <!--END NG  NOTIF NI PABS-->
 
                     <a href="#" class="settings profile">
