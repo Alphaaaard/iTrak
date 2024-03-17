@@ -2870,64 +2870,45 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         </div>
         <section id="sidebar">
             <div href="#" class="brand" title="logo">
-                <i><img src="../../../src/img/UpKeep.png" alt="" class="logo" /></i>
+                <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
                 <div class="mobile-sidebar-close">
                     <i class="bi bi-arrow-left-circle"></i>
                 </div>
             </div>
             <ul class="side-menu top">
-                <li>
-                    <a href="../../personnel/dashboard.php">
-                <li>
-                    <a href="../../administrator/dashboard.php">
+            <li >
+            <a href="../../personnel/dashboard.php">
                         <i class="bi bi-grid"></i>
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../../administrator/attendance-logs.php">
+                    <a href="../../personnel/attendance-logs.php">
                         <i class="bi bi-calendar-week"></i>
                         <span class="text">Attendance Logs</span>
                     </a>
                 </li>
-
+             
                 <li class="active">
                     <a href="../../personnel/map.php">
                         <i class="bi bi-map"></i>
                         <span class="text">Map</span>
-                <li>
-                    <a href="../../administrator/staff.php">
-                        <i class="bi bi-person"></i>
-                        <span class="text">Staff</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../../administrator/gps.php">
+                    <a href="../../personnel/assigned-tasks.php">
                         <i class="bi bi-geo-alt"></i>
-                        <span class="text">GPS</span>
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="../../administrator/map.php">
-                        <i class="bi bi-map"></i>
-                        <span class="text">Map</span>
+                        <span class="text">Assigned Tasks</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../../personnel/reports.php">
-                        <a href="../../administrator/reports.php">
-                            <i class="bi bi-clipboard"></i>
-                            <span class="text">Reports</span>
-                        </a>
-                </li>
-                <li>
-                    <a href="../../administrator/archive.php">
-                        <i class="bi bi-archive"></i>
-                        <span class="text">Archive</span>
+                        <a href="../../personnel/reports.php">
+                        <i class="bi bi-clipboard"></i>
+                        <span class="text">Reports</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../../administrator/activity-logs.php">
+                    <a href="../../personnel/activity-logs.php">
                         <i class="bi bi-arrow-counterclockwise"></i>
                         <span class="text">Activity Logs</span>
                     </a>
