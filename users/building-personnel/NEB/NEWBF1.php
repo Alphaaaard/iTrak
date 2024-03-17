@@ -23,7 +23,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     }
 
 
-// for notif below
+    // for notif below
     // Update the SQL to join with the account and asset tables to get the admin's name and asset information
     $loggedInUserFirstName = $_SESSION['firstName'];
     $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
@@ -35,34 +35,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $loggedInAccountId = $_SESSION['accountId'];
     // SQL query to fetch notifications related to report activities
     $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
-                FROM activitylogs AS al
-               JOIN account AS acc ON al.accountID = acc.accountID
-               WHERE al.tab = 'General' AND al.p_seen = '0' AND al.action LIKE 'Assigned maintenance personnel%' AND al.action LIKE ? AND al.accountID != ?
-               ORDER BY al.date DESC 
-               LIMIT 5"; // Set limit to 5
+    FROM activitylogs AS al
+   JOIN account AS acc ON al.accountID = acc.accountID
+   WHERE al.tab = 'General' AND al.p_seen = '0' AND al.action LIKE 'Assigned maintenance personnel%' AND al.action LIKE ? AND al.accountID != ?
+   ORDER BY al.date DESC 
+   LIMIT 5"; // Set limit to 5
 
-    // Prepare the SQL statement
-    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
-    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
-  
-    // Bind the parameter to exclude the current user's account ID
-    $stmtLatestLogs->bind_param("si",  $pattern, $loggedInAccountId);
+// Prepare the SQL statement
+$stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+$pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
 
-    // Execute the query
-    $stmtLatestLogs->execute();
-    $resultLatestLogs = $stmtLatestLogs->get_result(); 
+// Bind the parameter to exclude the current user's account ID
+$stmtLatestLogs->bind_param("si",  $pattern, $loggedInAccountId);
 
-    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
+// Execute the query
+$stmtLatestLogs->execute();
+$resultLatestLogs = $stmtLatestLogs->get_result(); 
+
+$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
 WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance personnel%' AND action LIKE ?";
-    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
-   
-   $stmt = $conn->prepare($unseenCountQuery);
-    $stmt->bind_param("is", $loggedInAccountId, $pattern );
-    $stmt->execute();
-    $stmt->bind_result($unseenCount);
-    $stmt->fetch();
-    $stmt->close();
+$pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
 
+$stmt = $conn->prepare($unseenCountQuery);
+$stmt->bind_param("is", $loggedInAccountId, $pattern );
+$stmt->execute();
+$stmt->bind_result($unseenCount);
+$stmt->fetch();
+$stmt->close();
 
     //FOR ID 1 SOFA
     $sql1 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date, upload_img, description FROM asset WHERE assetId = 1";
@@ -6435,7 +6434,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                     // If notification text is set, echo the notification
                                     if (!empty($notificationText)) {
                                         // HTML for notification item
-                                        echo '<a href="dashboard.php" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
+                                        echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
                                     }
                                 }
                             } else {
@@ -25847,41 +25846,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 </div>
             </main>
         </section>
-        <script>
-            $(document).ready(function() {
-                $('.notification-item').on('click', function(e) {
-                    e.preventDefault();
-                    var activityId = $(this).data('activity-id');
-                    var notificationItem = $(this); // Store the clicked element
-
-                    $.ajax({
-                        type: "POST",
-                        url: "../../administrator/update_single_notification.php", // The URL to the PHP file
-                        data: {
-                            activityId: activityId
-                        },
-                        success: function(response) {
-                            if (response.trim() === "Notification updated successfully") {
-                                // If the notification is updated successfully, remove the clicked element
-                                notificationItem.remove();
-
-                                // Update the notification count
-                                var countElement = $('#noti_number');
-                                var count = parseInt(countElement.text()) || 0;
-                                countElement.text(count > 1 ? count - 1 : '');
-                            } else {
-                                // Handle error
-                                console.error("Failed to update notification:", response);
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            // Handle AJAX error
-                            console.error("AJAX error:", status, error);
-                        }
-                    });
-                });
-            });
-        </script>
+       
         <script>
             $(document).ready(function() {
                 var urlParams = new URLSearchParams(window.location.search);
