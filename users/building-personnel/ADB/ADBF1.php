@@ -1492,7 +1492,7 @@ $stmt->close();
                 header("Location: ADBF1.php");
             } else {
                 echo "<script>alert('Failed to update asset and image. Error: " . $stmt->error . "');</script>";
-            }
+            }ra
             $stmt->close();
         } else {
             echo "<script>alert('Failed to upload image. Error: " . $_FILES['upload_img']['error'] . "');</script>";
@@ -1660,7 +1660,7 @@ exit();
 </div>
           <section id="sidebar">
             <div href="#" class="brand" title="logo">
-                <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
+            <i><img src="../../../src/img/UpKeep.png" alt="" class="logo" /></i>
                 <div class="mobile-sidebar-close">
                     <i class="bi bi-arrow-left-circle"></i>
                 </div>
@@ -1727,7 +1727,7 @@ exit();
                         </div>
                     </div>
 
-                    <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-arrow-left"></i></a>
+                    
 
                     <!-- ASSET 5762 -->
                     <img src='../image.php?id=5762' style='width:25px; cursor:pointer; position:absolute; top:60px; left:850px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5762' onclick='fetchAssetData(5762);'>
