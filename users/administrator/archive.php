@@ -708,7 +708,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         fullname = rowData.firstName + ' ' + rowData.lastName;
 
                         Swal.fire({
-                            title: `Are you sure you want to restore<span style="font-weight: bold;">${rowData.firstName}</span>, <span style="font-weight: bold;">${rowData.lastName}</span>?`,
+                            title: `Are you sure you want to restore<span style="font-weight: bold;">${rowData.firstName}</span> <span style="font-weight: bold;">${rowData.lastName}</span>?`,
                             showCancelButton: true,
                             allowOutsideClick: false,
                             confirmButtonText: "Yes",
