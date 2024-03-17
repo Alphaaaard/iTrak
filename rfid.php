@@ -2,6 +2,9 @@
 require_once("./config/connection1.php");
 header("Content-Type: application/json");
 
+
+date_default_timezone_set('Asia/Manila'); //need ata to sa lahat ng page para sa security hahah 
+
 function message($status, $message)
 {
     $msg = array(
