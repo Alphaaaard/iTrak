@@ -3,9 +3,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+ require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 
-require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
+// require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
@@ -87,6 +87,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
 
+
     // Prepare the SQL statement
     $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
 
@@ -106,6 +107,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->fetch();
     $stmt->close();
 
+
     if (isset($_POST['assignMaintenance'])) {
         $assetId = $_POST['assetId'];
         $assignedName = $_POST['assignedName'];
@@ -113,10 +115,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         // Perform the query only if $assignSql is not empty
         if (!empty($assignSql) && $conn->query($assignSql) === TRUE) {
-            logActivity($conn, $_SESSION['accountId'], "Assigned maintenance personnel $assignedName to asset ID $assetId.", 'General');
+            logActivity($conn, $_SESSION['accountId'], "Assigned maintenance personnel $assignedName to asset ID $assetId.", 'Report');
 
             // Fetch the email of the assigned personnel
-            $emailQuery = "SELECT email FROM account WHERE CONCAT(firstName, ' ', middleName, ' ', lastName) = ?";
+            $emailQuery = "SELECT email FROM account WHERE CONCAT(firstName, ' ', lastName) = ?";
             $stmt = $conn->prepare($emailQuery);
             $stmt->bind_param("s", $assignedName);
             $stmt->execute();
@@ -140,7 +142,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     $mail->Port       = 587;
 
                     //Recipients
-                    $mail->setFrom('qcu.upkeep@gmail.com', 'UpKeep');
+                    $mail->setFrom('qcu.upkeep@gmail.com', 'iTrak');
                     $mail->addAddress($toEmail); // Add a recipient
 
                     // Content
@@ -438,7 +440,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <section id="content">
             <main>
                 <div class="content-container">
-                    <header>
+                <header>
                         <div class="cont-header">
                             <!-- <h1 class="tab-name">Reports</h1> -->
                             <div class="tbl-filter">
@@ -469,6 +471,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             </div>
                         </div>
                     </header>
+
 
                     <!--Content start of tabs-->
                     <div class="new-nav">
@@ -709,14 +712,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 <div class="modal modal-xl fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content assingee-container">
-
+                            <div class="assignee-header">
+                                <label for="assignedName" class="form-label assignee-tag">CHOOSE A MAINTENANCE PERSONNEL: </label>
+                            </div>
                             <div class="header">
                                 <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                             </div>
                             <div class="modal-body">
-                                <div class="assignee-header">
-                                    <label for="assignedName" class="form-label assignee-tag">CHOOSE A MAINTENANCE PERSONNEL: </label>
-                                </div>
                                 <form method="post" class="row g-3" id="assignPersonnelForm">
                                     <h5></h5>
                                     <input type="hidden" name="assignMaintenance">
@@ -851,7 +853,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-
         <script>
             //PARA MAGDIRECT KA SA PAGE 
             function redirectToPage(building, floor, assetId) {
@@ -887,7 +888,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 redirectToPage(building, floor, assetId);
             });
         </script>
-
 
 
         <script>

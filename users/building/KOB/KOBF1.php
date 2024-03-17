@@ -4,6 +4,61 @@ include_once("../../../config/connection.php");
 $conn = connection();
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role'])) {
+// For personnel page, check if userLevel is 3
+if ($_SESSION['userLevel'] != 1) {
+    // If not personnel, redirect to an error page or login
+    header("Location:error.php");
+    exit;
+}
+function logActivity($conn, $accountId, $actionDescription, $tabValue)
+{
+    $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, NOW(), ?, ?)");
+    $stmt->bind_param("iss", $accountId, $actionDescription, $tabValue);
+    if (!$stmt->execute()) {
+        echo "Error logging activity: " . $stmt->error;
+    }
+    $stmt->close();
+}
+
+
+// for notif below
+// Update the SQL to join with the account and asset tables to get the admin's name and asset information
+$loggedInUserFirstName = $_SESSION['firstName'];
+$loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
+$loggedInUserLastName = $_SESSION['lastName'];
+
+// Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
+
+$loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
+$loggedInAccountId = $_SESSION['accountId'];
+// SQL query to fetch notifications related to report activities
+$sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
+            FROM activitylogs AS al
+           JOIN account AS acc ON al.accountID = acc.accountID
+           WHERE  al.seen = '0' AND al.accountID != ?
+           ORDER BY al.date DESC 
+           LIMIT 5"; // Set limit to 5
+
+
+// Prepare the SQL statement
+$stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+
+// Bind the parameter to exclude the current user's account ID
+$stmtLatestLogs->bind_param("i", $loggedInAccountId);
+
+// Execute the query
+$stmtLatestLogs->execute();
+$resultLatestLogs = $stmtLatestLogs->get_result();
+
+
+$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
+$stmt = $conn->prepare($unseenCountQuery);
+$stmt->bind_param("i", $loggedInAccountId);
+$stmt->execute();
+$stmt->bind_result($unseenCount);
+$stmt->fetch();
+$stmt->close();
+
 
     //FOR ID 2249
     $sql2249 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 2249";
@@ -5789,9 +5844,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="../../../src/css/main.css" />
         <link rel="stylesheet" href="../../buildingCSS/KOB/KOBF1.css" />
         <link rel="stylesheet" href="../../../src/css/map.css" />
+        <script src="../../src/js/locationTracker.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
 
@@ -23497,7 +23554,41 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             </main>
         </section>
 
+        <script>
+            $(document).ready(function() {
+                $('.notification-item').on('click', function(e) {
+                    e.preventDefault();
+                    var activityId = $(this).data('activity-id');
+                    var notificationItem = $(this); // Store the clicked element
 
+                    $.ajax({
+                        type: "POST",
+                        url: "../../administrator/update_single_notification.php", // The URL to the PHP file
+                        data: {
+                            activityId: activityId
+                        },
+                        success: function(response) {
+                            if (response.trim() === "Notification updated successfully") {
+                                // If the notification is updated successfully, remove the clicked element
+                                notificationItem.remove();
+
+                                // Update the notification count
+                                var countElement = $('#noti_number');
+                                var count = parseInt(countElement.text()) || 0;
+                                countElement.text(count > 1 ? count - 1 : '');
+                            } else {
+                                // Handle error
+                                console.error("Failed to update notification:", response);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle AJAX error
+                            console.error("AJAX error:", status, error);
+                        }
+                    });
+                });
+            });
+        </script>
         <script>
             $(document).ready(function() {
                 var urlParams = new URLSearchParams(window.location.search);

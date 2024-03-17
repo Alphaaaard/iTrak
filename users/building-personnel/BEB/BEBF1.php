@@ -12720,6 +12720,7 @@ $stmt->close();
         <link rel="stylesheet" href="../../../src/css/map.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="../../src/js/locationTracker.js"></script>
+        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
     </head>
     <style>
         .notification-indicator {
@@ -12743,8 +12744,12 @@ $stmt->close();
                     </a>
                 </div>
                 <div class="content-nav">
-                    <div class="notification-dropdown">
-                    <a href="#" class="notification" id="notification-button">
+                  <div class="notification-dropdown">
+
+
+
+                         <!--NOTIF NI PABS-->
+                         <a href="#" class="notification" id="notification-button">
                             <i class="fa fa-bell" aria-hidden="true"></i>
                             <!-- Notification Indicator Dot -->
                             <?php if ($unseenCount > 0) : ?>
@@ -12799,6 +12804,8 @@ $stmt->close();
 
                         </div>
                     </div>
+                    <!--END NG  NOTIF NI PABS-->
+
                     <a href="#" class="settings profile">
                         <div class="profile-container" title="settings">
                             <div class="profile-img">
@@ -12827,8 +12834,12 @@ $stmt->close();
                                 ?>
                             </div>
                             <div class="profile-name-container " id="desktop">
-                                <div><a class="profile-name"><?php echo $_SESSION['firstName']; ?></a></div>
-                                <div><a class="profile-role"><?php echo $_SESSION['role']; ?></a></div>
+                                <div><a class="profile-name">
+                                        <?php echo $_SESSION['firstName']; ?>
+                                    </a></div>
+                                <div><a class="profile-role">
+                                        <?php echo $_SESSION['role']; ?>
+                                    </a></div>
                             </div>
                         </div>
                     </a>
@@ -12906,7 +12917,7 @@ $stmt->close();
                         <!-- FLOOR PLAN -->
                         <img class="Floor-container-1 .NEWBF1" src="../../../src/floors/belmonteB/BB1F.png" alt="">
                         <div class="map-nav">
-                            <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
+                            <a href="../../personnel/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
                             <div class="map-legend">
                                 <div class="legend-color-green"></div>
                                 <p>Working</p>

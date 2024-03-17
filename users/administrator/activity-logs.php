@@ -13,7 +13,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         exit;
     }
 
-
     // Fetch Report activity logs
     $loggedInUserFirstName = $_SESSION['firstName']; // or the name field you have in session that you want to check against
     $loggedInUsermiddleName = $_SESSION['middleName']; // assuming you also have the last name in the session
@@ -23,10 +22,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
     // Adjust the SQL to check the 'action' field for the logged-in user's name
     $sqlReport = "SELECT ac.*, a.firstName, a.middleName, a.lastName
- FROM activitylogs AS ac
- LEFT JOIN account AS a ON ac.accountID = a.accountID
- WHERE ac.tab='Report' AND ac.action LIKE ?
- ORDER BY ac.date DESC";
+    FROM activitylogs AS ac
+    LEFT JOIN account AS a ON ac.accountID = a.accountID
+    WHERE ac.tab='Report' AND ac.action LIKE ?
+    ORDER BY ac.date DESC";
 
     // Prepare the SQL statement
     $stmt = $conn->prepare($sqlReport);
@@ -52,11 +51,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $loggedInAccountId = $_SESSION['accountId'];
     // SQL query to fetch notifications related to report activities
     $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
-                FROM activitylogs AS al
-               JOIN account AS acc ON al.accountID = acc.accountID
-               WHERE  al.seen = '0' AND al.accountID != ?
-               ORDER BY al.date DESC 
-               LIMIT 5"; // Set limit to 5
+    FROM activitylogs AS al
+   JOIN account AS acc ON al.accountID = acc.accountID
+   WHERE  al.seen = '0' AND al.accountID != ?
+   ORDER BY al.date DESC 
+   LIMIT 5"; // Set limit to 5
+
 
     // Prepare the SQL statement
     $stmtLatestLogs = $conn->prepare($sqlLatestLogs);

@@ -6351,8 +6351,6 @@ $stmt->close();
                 <div class="content-nav">
                     <div class="notification-dropdown">
 
-
-
                          <!--NOTIF NI PABS-->
                          <a href="#" class="notification" id="notification-button">
                             <i class="fa fa-bell" aria-hidden="true"></i>
@@ -6361,9 +6359,6 @@ $stmt->close();
                                 <span class="notification-indicator"></span>
                             <?php endif; ?>
                         </a>
-
-
-
 
                         <div class="dropdown-content" id="notification-dropdown-content">
                             <h6 class="dropdown-header">Alerts Center</h6>
@@ -6447,6 +6442,7 @@ $stmt->close();
                                     </a></div>
                             </div>
                         </div>
+                        
                     </a>
 
                     <div id="settings-dropdown" class="dropdown-content1">
@@ -6527,7 +6523,7 @@ $stmt->close();
                         <img class="Floor-container-1" src="../../../src/floors/newAcademicB/NAB1F.png" alt="">
                         <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-arrow-left"></i></a>
                         <div class="map-nav">
-                            <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
+                        <a href="../../personnel/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
                             <div class="map-legend">
                                 <div class="legend-color-green"></div>
                                 <p>Working</p>

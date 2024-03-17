@@ -23,11 +23,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
     // Fetch Report activity logs
     $loggedInUserFirstName = $_SESSION['firstName']; // or the name field you have in session that you want to check against
-    $loggedInUsermiddleName = $_SESSION['middleName']; // assuming you also have the last name in the session
+
     $loggedInUserLastName = $_SESSION['lastName']; //kung ano ung naka declare dito eto lang ung magiging data 
 
     // Concatenate first name and last name for the action field check
-    $loggedInFullName = $loggedInUserFirstName . " " . $loggedInUsermiddleName . " " . $loggedInUserLastName; //kung ano ung naka declare dito eto lang ung magiging data 
+    $loggedInFullName = $loggedInUserFirstName . " " . $loggedInUserLastName; //kung ano ung naka declare dito eto lang ung magiging data 
 
     // Adjust the SQL to check the 'action' field for the logged-in user's name
     $sqlReport = "SELECT * FROM asset WHERE status = 'Need Repair' AND assignedName LIKE ?";
