@@ -692,7 +692,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             },
                             success: (response) => {
                                 console.log(response);
-                                this.showAlert("", fullname + " have successfully restored!", "success");
+                                this.showAlert("", fullname + " has been restored successfully!", "success");
                                 setTimeout(() => {
                                     location.reload();
                                 }, 1000);
