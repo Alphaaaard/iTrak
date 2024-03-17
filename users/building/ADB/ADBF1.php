@@ -5852,12 +5852,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                 </div>
                 </form>
-
-
-
-
-
-
             </main>
         </section>
 
