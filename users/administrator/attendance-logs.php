@@ -942,63 +942,67 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <script>
             $(window).on('load', function() {
-                var managerPill = $('#manager-pill');
-                var personnelPill = $('#personnel-pill');
-                var managerContent = $('#pills-manager');
-                var personnelContent = $('#pills-personnel');
+    var managerPill = $('#manager-pill');
+    var personnelPill = $('#personnel-pill');
+    var managerContent = $('#pills-manager');
+    var personnelContent = $('#pills-personnel');
+    var searchBox = $("#search-box");
 
-                // Function to explicitly set the active tab based on the lastPill value
-                function activateLastPill() {
-                    var lastPill = sessionStorage.getItem('lastPill') || 'manager';
+    // Function to explicitly set the active tab based on the lastPill value and reapply the filter
+    function activateLastPill() {
+        var lastPill = sessionStorage.getItem('lastPill') || 'manager';
 
-                    // Reset active states
-                    $('.nav-link').removeClass('active');
-                    $('.tab-pane').removeClass('show active');
+        // Reset active states
+        $('.nav-link').removeClass('active');
+        $('.tab-pane').removeClass('show active');
 
-                    if (lastPill === 'personnel') {
-                        personnelPill.addClass('active');
-                        personnelContent.addClass('show active');
-                    } else {
-                        managerPill.addClass('active');
-                        managerContent.addClass('show active');
-                    }
-                }
+        if (lastPill === 'personnel') {
+            personnelPill.addClass('active');
+            personnelContent.addClass('show active');
+        } else {
+            managerPill.addClass('active');
+            managerContent.addClass('show active');
+        }
 
-                // Event listeners for tab clicks
-                managerPill.on('click', function(e) {
-                    e.preventDefault();
-                    sessionStorage.setItem('lastPill', 'manager');
-                    activateLastPill();
-                });
+        filterTable(); // Reapply the filter whenever a tab is activated
+    }
 
-                personnelPill.on('click', function(e) {
-                    e.preventDefault();
-                    sessionStorage.setItem('lastPill', 'personnel');
-                    activateLastPill();
-                });
+    // Event listeners for tab clicks, including reapplying the filter
+    managerPill.on('click', function(e) {
+        e.preventDefault();
+        sessionStorage.setItem('lastPill', 'manager');
+        activateLastPill();
+    });
 
-                function filterTable() {
-                    var query = $("#search-box").val().toLowerCase();
-                    var activeRole = managerPill.hasClass('active') ? 'Maintenance Manager' : 'Maintenance Personnel';
+    personnelPill.on('click', function(e) {
+        e.preventDefault();
+        sessionStorage.setItem('lastPill', 'personnel');
+        activateLastPill();
+    });
 
-                    $(".table-container tbody tr").each(function() {
-                        var row = $(this);
-                        var roleCell = row.find("td").last().text().toLowerCase();
+    function filterTable() {
+        var query = searchBox.val().toLowerCase();
+        var activeRole = managerPill.hasClass('active') ? 'Maintenance Manager' : 'Maintenance Personnel';
 
-                        if (roleCell === activeRole.toLowerCase() && row.text().toLowerCase().includes(query)) {
-                            row.show();
-                        } else {
-                            row.hide();
-                        }
-                    });
-                }
+        $(".table-container tbody tr").each(function() {
+            var row = $(this);
+            var roleCell = row.find("td").last().text().toLowerCase();
 
-                // Bind the input event to the search box for dynamic filtering
-                $("#search-box").on("input", filterTable);
+            if (roleCell === activeRole.toLowerCase() && row.text().toLowerCase().includes(query)) {
+                row.show();
+            } else {
+                row.hide();
+            }
+        });
+    }
 
-                // Check if the last active tab was personnel, and activate it immediately upon page load
-                activateLastPill();
-            });
+    // Bind the input event to the search box for dynamic filtering
+    searchBox.on("input", filterTable);
+
+    // Check if the last active tab was personnel, and activate it immediately upon page load
+    activateLastPill();
+});
+
         </script>
 
         <script>
