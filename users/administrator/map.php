@@ -456,10 +456,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             </div>
                             <div class="nav-container">
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="bautista-floorB-tab" href="../building/BAB/BABFB.php" role="tab" aria-controls="floor1" aria-selected="true">B</a>
+                                    <a class="nav-link" id="bautista-floorB-tab" href="../building/BAB/BABFB.php" role="tab" aria-controls="floorb" aria-selected="true">B</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="bautista-floor1-tab" href="../building/BAB/BABF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
+                                    <a class="nav-link" id="bautista-floor1-tab" href="../building/BAB/BABF1.php" role="tab" aria-controls="floor1" aria-selected="false">1</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <a class=" nav-link" id="bautista-floor2-tab" href="../building/BAB/BABF2.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>

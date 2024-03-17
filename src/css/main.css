@@ -1003,6 +1003,11 @@ color: #3D3B40;
   justify-content: center;
 }
 
+#passwordDisplay{
+  border: none;
+  text-align: center;
+}
+
 .emp-header {
   display: flex;
   align-items: center;
@@ -1212,6 +1217,10 @@ h5 {
     transition: 0.3s ease;
   }
 
+  .content-container{
+    margin-top: 2em;
+  }
+
   .profile-container{
     display: flex;
     padding: 0;
@@ -1220,6 +1229,10 @@ h5 {
     gap: .5em;
     align-items: center;
     cursor: pointer;
+  }
+
+  .col-12 .profile-img{
+    width: 50%;
   }
 
   .modal-content{
@@ -1485,6 +1498,7 @@ h5 {
     margin: unset;
     right: 0;
     width: unset;
+    padding: 1em;
   }
 
   .icon{
@@ -1499,6 +1513,7 @@ h5 {
 
   .tbl-filter select{
     font-size: .8em;
+    margin-top: 1em;
   }
 
   .cont-header{
@@ -1545,6 +1560,8 @@ h5 {
 #navbar.hide nav .hamburger .brand .logo{
   width: 0;
 }
+
+
 
 /* #sidebar .brand .img.logo{
 

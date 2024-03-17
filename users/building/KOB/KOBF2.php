@@ -1805,25 +1805,25 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $upload_img2348 = $row2348['upload_img'];
     $description2348 = $row2348['description'];
 
-        //FOR ID 2349
-        $sql2349 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 2349";
-        $stmt2349 = $conn->prepare($sql2349);
-        $stmt2349->execute();
-        $result2349 = $stmt2349->get_result();
-        $row2349 = $result2349->fetch_assoc();
-        $assetId2349 = $row2349['assetId'];
-        $category2349 = $row2349['category'];
-        $date2349 = $row2349['date'];
-        $building2349 = $row2349['building'];
-        $floor2349 = $row2349['floor'];
-        $room2349 = $row2349['room'];
-        $status2349 = $row2349['status'];
-        $assignedName2349 = $row2349['assignedName'];
-        $assignedBy2349 = $row2349['assignedBy'];
-        $upload_img2349 = $row2349['upload_img'];
-        $description2349 = $row2349['description'];
+    //FOR ID 2349
+    $sql2349 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 2349";
+    $stmt2349 = $conn->prepare($sql2349);
+    $stmt2349->execute();
+    $result2349 = $stmt2349->get_result();
+    $row2349 = $result2349->fetch_assoc();
+    $assetId2349 = $row2349['assetId'];
+    $category2349 = $row2349['category'];
+    $date2349 = $row2349['date'];
+    $building2349 = $row2349['building'];
+    $floor2349 = $row2349['floor'];
+    $room2349 = $row2349['room'];
+    $status2349 = $row2349['status'];
+    $assignedName2349 = $row2349['assignedName'];
+    $assignedBy2349 = $row2349['assignedBy'];
+    $upload_img2349 = $row2349['upload_img'];
+    $description2349 = $row2349['description'];
 
-            //FOR ID 2350
+    //FOR ID 2350
     $sql2350 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 2350";
     $stmt2350 = $conn->prepare($sql2350);
     $stmt2350->execute();
@@ -1841,25 +1841,25 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $upload_img2350 = $row2350['upload_img'];
     $description2350 = $row2350['description'];
 
-            //FOR ID 2351
-        $sql2351 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 2351";
-        $stmt2351 = $conn->prepare($sql2351);
-        $stmt2351->execute();
-        $result2351 = $stmt2351->get_result();
-        $row2351 = $result2351->fetch_assoc();
-        $assetId2351 = $row2351['assetId'];
-        $category2351 = $row2351['category'];
-        $date2351 = $row2351['date'];
-        $building2351 = $row2351['building'];
-        $floor2351 = $row2351['floor'];
-        $room2351 = $row2351['room'];
-        $status2351 = $row2351['status'];
-        $assignedName2351 = $row2351['assignedName'];
-        $assignedBy2351 = $row2351['assignedBy'];
-        $upload_img2351 = $row2351['upload_img'];
-        $description2351 = $row2351['description'];
+    //FOR ID 2351
+    $sql2351 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 2351";
+    $stmt2351 = $conn->prepare($sql2351);
+    $stmt2351->execute();
+    $result2351 = $stmt2351->get_result();
+    $row2351 = $result2351->fetch_assoc();
+    $assetId2351 = $row2351['assetId'];
+    $category2351 = $row2351['category'];
+    $date2351 = $row2351['date'];
+    $building2351 = $row2351['building'];
+    $floor2351 = $row2351['floor'];
+    $room2351 = $row2351['room'];
+    $status2351 = $row2351['status'];
+    $assignedName2351 = $row2351['assignedName'];
+    $assignedBy2351 = $row2351['assignedBy'];
+    $upload_img2351 = $row2351['upload_img'];
+    $description2351 = $row2351['description'];
 
-            //FOR ID 2352
+    //FOR ID 2352
     $sql2352 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 2352";
     $stmt2352 = $conn->prepare($sql2352);
     $stmt2352->execute();
@@ -4692,32 +4692,32 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     }
 
     //FOR ID 2336
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2336'])) {
-            // Get form data
-            $assetId2336 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-            $status2336 = $_POST['status']; // Get the status from the form
-            $description2336 = $_POST['description']; // Get the description from the form
-            $room2336 = $_POST['room']; // Get the room from the form
-            $assignedBy2336 = $_POST['assignedBy'];
-            // Check if status is "Need Repair" and set "Assigned Name" to none
-            $assignedName2336 = $status2336 === 'Need Repair' ? '' : $assignedName2336;
-    
-            // Prepare SQL query to update the asset
-            $sql2336 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-            $stmt2336 = $conn->prepare($sql2336);
-            $stmt2336->bind_param('sssssi', $status2336, $assignedName2336, $assignedBy2336, $description2336, $room2336, $assetId2336);
-    
-            if ($stmt2336->execute()) {
-                // Update success
-                // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2336 to $status2336.", 'Report');
-                echo "<script>alert('Asset updated successfully!');</script>";
-                header("Location: KOBF1.php");
-            } else {
-                // Update failed
-                echo "<script>alert('Failed to update asset.');</script>";
-            }
-            $stmt2336->close();
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2336'])) {
+        // Get form data
+        $assetId2336 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2336 = $_POST['status']; // Get the status from the form
+        $description2336 = $_POST['description']; // Get the description from the form
+        $room2336 = $_POST['room']; // Get the room from the form
+        $assignedBy2336 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2336 = $status2336 === 'Need Repair' ? '' : $assignedName2336;
+
+        // Prepare SQL query to update the asset
+        $sql2336 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2336 = $conn->prepare($sql2336);
+        $stmt2336->bind_param('sssssi', $status2336, $assignedName2336, $assignedBy2336, $description2336, $room2336, $assetId2336);
+
+        if ($stmt2336->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2336 to $status2336.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
         }
+        $stmt2336->close();
+    }
 
     //FOR ID 2337
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2337'])) {
@@ -4747,35 +4747,35 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt2337->close();
     }
 
-        //FOR ID 2338
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2338'])) {
-            // Get form data
-            $assetId2338 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-            $status2338 = $_POST['status']; // Get the status from the form
-            $description2338 = $_POST['description']; // Get the description from the form
-            $room2338 = $_POST['room']; // Get the room from the form
-            $assignedBy2338 = $_POST['assignedBy'];
-            // Check if status is "Need Repair" and set "Assigned Name" to none
-            $assignedName2338 = $status2338 === 'Need Repair' ? '' : $assignedName2338;
-    
-            // Prepare SQL query to update the asset
-            $sql2338 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-            $stmt2338 = $conn->prepare($sql2338);
-            $stmt2338->bind_param('sssssi', $status2338, $assignedName2338, $assignedBy2338, $description2338, $room2338, $assetId2338);
-    
-            if ($stmt2338->execute()) {
-                // Update success
-                // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2338 to $status2338.", 'Report');
-                echo "<script>alert('Asset updated successfully!');</script>";
-                header("Location: KOBF1.php");
-            } else {
-                // Update failed
-                echo "<script>alert('Failed to update asset.');</script>";
-            }
-            $stmt2338->close();
-        }
+    //FOR ID 2338
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2338'])) {
+        // Get form data
+        $assetId2338 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2338 = $_POST['status']; // Get the status from the form
+        $description2338 = $_POST['description']; // Get the description from the form
+        $room2338 = $_POST['room']; // Get the room from the form
+        $assignedBy2338 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2338 = $status2338 === 'Need Repair' ? '' : $assignedName2338;
 
-            //FOR ID 2339
+        // Prepare SQL query to update the asset
+        $sql2338 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2338 = $conn->prepare($sql2338);
+        $stmt2338->bind_param('sssssi', $status2338, $assignedName2338, $assignedBy2338, $description2338, $room2338, $assetId2338);
+
+        if ($stmt2338->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2338 to $status2338.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2338->close();
+    }
+
+    //FOR ID 2339
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2339'])) {
         // Get form data
         $assetId2339 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4803,35 +4803,35 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt2339->close();
     }
 
-        //FOR ID 2340
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2340'])) {
-            // Get form data
-            $assetId2340 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-            $status2340 = $_POST['status']; // Get the status from the form
-            $description2340 = $_POST['description']; // Get the description from the form
-            $room2340 = $_POST['room']; // Get the room from the form
-            $assignedBy2340 = $_POST['assignedBy'];
-            // Check if status is "Need Repair" and set "Assigned Name" to none
-            $assignedName2340 = $status2340 === 'Need Repair' ? '' : $assignedName2340;
-    
-            // Prepare SQL query to update the asset
-            $sql2340 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-            $stmt2340 = $conn->prepare($sql2340);
-            $stmt2340->bind_param('sssssi', $status2340, $assignedName2340, $assignedBy2340, $description2340, $room2340, $assetId2340);
-    
-            if ($stmt2340->execute()) {
-                // Update success
-                // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2340 to $status2340.", 'Report');
-                echo "<script>alert('Asset updated successfully!');</script>";
-                header("Location: KOBF1.php");
-            } else {
-                // Update failed
-                echo "<script>alert('Failed to update asset.');</script>";
-            }
-            $stmt2340->close();
-        }
+    //FOR ID 2340
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2340'])) {
+        // Get form data
+        $assetId2340 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2340 = $_POST['status']; // Get the status from the form
+        $description2340 = $_POST['description']; // Get the description from the form
+        $room2340 = $_POST['room']; // Get the room from the form
+        $assignedBy2340 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2340 = $status2340 === 'Need Repair' ? '' : $assignedName2340;
 
-            //FOR ID 2341
+        // Prepare SQL query to update the asset
+        $sql2340 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2340 = $conn->prepare($sql2340);
+        $stmt2340->bind_param('sssssi', $status2340, $assignedName2340, $assignedBy2340, $description2340, $room2340, $assetId2340);
+
+        if ($stmt2340->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2340 to $status2340.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2340->close();
+    }
+
+    //FOR ID 2341
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2341'])) {
         // Get form data
         $assetId2341 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4859,35 +4859,35 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt2341->close();
     }
 
-                //FOR ID 2342
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2342'])) {
-                    // Get form data
-                    $assetId2342 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2342 = $_POST['status']; // Get the status from the form
-                    $description2342 = $_POST['description']; // Get the description from the form
-                    $room2342 = $_POST['room']; // Get the room from the form
-                    $assignedBy2342 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2342 = $status2342 === 'Need Repair' ? '' : $assignedName2342;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2342 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2342 = $conn->prepare($sql2342);
-                    $stmt2342->bind_param('sssssi', $status2342, $assignedName2342, $assignedBy2342, $description2342, $room2342, $assetId2342);
-            
-                    if ($stmt2342->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2342 to $status2342.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2342->close();
-                }
+    //FOR ID 2342
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2342'])) {
+        // Get form data
+        $assetId2342 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2342 = $_POST['status']; // Get the status from the form
+        $description2342 = $_POST['description']; // Get the description from the form
+        $room2342 = $_POST['room']; // Get the room from the form
+        $assignedBy2342 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2342 = $status2342 === 'Need Repair' ? '' : $assignedName2342;
 
-                            //FOR ID 2343
+        // Prepare SQL query to update the asset
+        $sql2342 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2342 = $conn->prepare($sql2342);
+        $stmt2342->bind_param('sssssi', $status2342, $assignedName2342, $assignedBy2342, $description2342, $room2342, $assetId2342);
+
+        if ($stmt2342->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2342 to $status2342.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2342->close();
+    }
+
+    //FOR ID 2343
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2343'])) {
         // Get form data
         $assetId2343 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4915,817 +4915,817 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt2343->close();
     }
 
-                //FOR ID 2344
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2344'])) {
-                    // Get form data
-                    $assetId2344 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2344 = $_POST['status']; // Get the status from the form
-                    $description2344 = $_POST['description']; // Get the description from the form
-                    $room2344 = $_POST['room']; // Get the room from the form
-                    $assignedBy2344 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2344 = $status2344 === 'Need Repair' ? '' : $assignedName2344;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2344 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2344 = $conn->prepare($sql2344);
-                    $stmt2344->bind_param('sssssi', $status2344, $assignedName2344, $assignedBy2344, $description2344, $room2344, $assetId2344);
-            
-                    if ($stmt2344->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2344 to $status2344.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2344->close();
-                }
+    //FOR ID 2344
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2344'])) {
+        // Get form data
+        $assetId2344 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2344 = $_POST['status']; // Get the status from the form
+        $description2344 = $_POST['description']; // Get the description from the form
+        $room2344 = $_POST['room']; // Get the room from the form
+        $assignedBy2344 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2344 = $status2344 === 'Need Repair' ? '' : $assignedName2344;
 
-                                //FOR ID 2345
-                                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2345'])) {
-                                    // Get form data
-                                    $assetId2345 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                                    $status2345 = $_POST['status']; // Get the status from the form
-                                    $description2345 = $_POST['description']; // Get the description from the form
-                                    $room2345 = $_POST['room']; // Get the room from the form
-                                    $assignedBy2345 = $_POST['assignedBy'];
-                                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                                    $assignedName2345 = $status2345 === 'Need Repair' ? '' : $assignedName2345;
-                            
-                                    // Prepare SQL query to update the asset
-                                    $sql2345 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                                    $stmt2345 = $conn->prepare($sql2345);
-                                    $stmt2345->bind_param('sssssi', $status2345, $assignedName2345, $assignedBy2345, $description2345, $room2345, $assetId2345);
-                            
-                                    if ($stmt2345->execute()) {
-                                        // Update success
-                                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2345 to $status2345.", 'Report');
-                                        echo "<script>alert('Asset updated successfully!');</script>";
-                                        header("Location: KOBF1.php");
-                                    } else {
-                                        // Update failed
-                                        echo "<script>alert('Failed to update asset.');</script>";
-                                    }
-                                    $stmt2345->close();
-                                }
+        // Prepare SQL query to update the asset
+        $sql2344 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2344 = $conn->prepare($sql2344);
+        $stmt2344->bind_param('sssssi', $status2344, $assignedName2344, $assignedBy2344, $description2344, $room2344, $assetId2344);
 
-                                                //FOR ID 2346
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2346'])) {
-                    // Get form data
-                    $assetId2346 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2346 = $_POST['status']; // Get the status from the form
-                    $description2346 = $_POST['description']; // Get the description from the form
-                    $room2346 = $_POST['room']; // Get the room from the form
-                    $assignedBy2346 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2346 = $status2346 === 'Need Repair' ? '' : $assignedName2346;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2346 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2346 = $conn->prepare($sql2346);
-                    $stmt2346->bind_param('sssssi', $status2346, $assignedName2346, $assignedBy2346, $description2346, $room2346, $assetId2346);
-            
-                    if ($stmt2346->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2346 to $status2346.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2346->close();
-                }
+        if ($stmt2344->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2344 to $status2344.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2344->close();
+    }
 
-                                                                //FOR ID 2347
-                                                                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2347'])) {
-                                                                    // Get form data
-                                                                    $assetId2347 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                                                                    $status2347 = $_POST['status']; // Get the status from the form
-                                                                    $description2347 = $_POST['description']; // Get the description from the form
-                                                                    $room2347 = $_POST['room']; // Get the room from the form
-                                                                    $assignedBy2347 = $_POST['assignedBy'];
-                                                                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                                                                    $assignedName2347 = $status2347 === 'Need Repair' ? '' : $assignedName2347;
-                                                            
-                                                                    // Prepare SQL query to update the asset
-                                                                    $sql2347 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                                                                    $stmt2347 = $conn->prepare($sql2347);
-                                                                    $stmt2347->bind_param('sssssi', $status2347, $assignedName2347, $assignedBy2347, $description2347, $room2347, $assetId2347);
-                                                            
-                                                                    if ($stmt2347->execute()) {
-                                                                        // Update success
-                                                                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2347 to $status2347.", 'Report');
-                                                                        echo "<script>alert('Asset updated successfully!');</script>";
-                                                                        header("Location: KOBF1.php");
-                                                                    } else {
-                                                                        // Update failed
-                                                                        echo "<script>alert('Failed to update asset.');</script>";
-                                                                    }
-                                                                    $stmt2347->close();
-                                                                }
+    //FOR ID 2345
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2345'])) {
+        // Get form data
+        $assetId2345 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2345 = $_POST['status']; // Get the status from the form
+        $description2345 = $_POST['description']; // Get the description from the form
+        $room2345 = $_POST['room']; // Get the room from the form
+        $assignedBy2345 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2345 = $status2345 === 'Need Repair' ? '' : $assignedName2345;
 
-                //FOR ID 2348
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2348'])) {
-                    // Get form data
-                    $assetId2348 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2348 = $_POST['status']; // Get the status from the form
-                    $description2348 = $_POST['description']; // Get the description from the form
-                    $room2348 = $_POST['room']; // Get the room from the form
-                    $assignedBy2348 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2348 = $status2348 === 'Need Repair' ? '' : $assignedName2348;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2348 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2348 = $conn->prepare($sql2348);
-                    $stmt2348->bind_param('sssssi', $status2348, $assignedName2348, $assignedBy2348, $description2348, $room2348, $assetId2348);
-            
-                    if ($stmt2348->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2348 to $status2348.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2348->close();
-                }
+        // Prepare SQL query to update the asset
+        $sql2345 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2345 = $conn->prepare($sql2345);
+        $stmt2345->bind_param('sssssi', $status2345, $assignedName2345, $assignedBy2345, $description2345, $room2345, $assetId2345);
 
-                //FOR ID 2349
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2349'])) {
-                    // Get form data
-                    $assetId2349 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2349 = $_POST['status']; // Get the status from the form
-                    $description2349 = $_POST['description']; // Get the description from the form
-                    $room2349 = $_POST['room']; // Get the room from the form
-                    $assignedBy2349 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2349 = $status2349 === 'Need Repair' ? '' : $assignedName2349;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2349 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2349 = $conn->prepare($sql2349);
-                    $stmt2349->bind_param('sssssi', $status2349, $assignedName2349, $assignedBy2349, $description2349, $room2349, $assetId2349);
-            
-                    if ($stmt2349->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2349 to $status2349.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2349->close();
-                }
+        if ($stmt2345->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2345 to $status2345.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2345->close();
+    }
 
-                //FOR ID 2350
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2350'])) {
-                    // Get form data
-                    $assetId2350 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2350 = $_POST['status']; // Get the status from the form
-                    $description2350 = $_POST['description']; // Get the description from the form
-                    $room2350 = $_POST['room']; // Get the room from the form
-                    $assignedBy2350 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2350 = $status2350 === 'Need Repair' ? '' : $assignedName2350;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2350 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2350 = $conn->prepare($sql2350);
-                    $stmt2350->bind_param('sssssi', $status2350, $assignedName2350, $assignedBy2350, $description2350, $room2350, $assetId2350);
-            
-                    if ($stmt2350->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2350 to $status2350.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2350->close();
-                }
+    //FOR ID 2346
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2346'])) {
+        // Get form data
+        $assetId2346 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2346 = $_POST['status']; // Get the status from the form
+        $description2346 = $_POST['description']; // Get the description from the form
+        $room2346 = $_POST['room']; // Get the room from the form
+        $assignedBy2346 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2346 = $status2346 === 'Need Repair' ? '' : $assignedName2346;
 
-                //FOR ID 2351
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2351'])) {
-                    // Get form data
-                    $assetId2351 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2351 = $_POST['status']; // Get the status from the form
-                    $description2351 = $_POST['description']; // Get the description from the form
-                    $room2351 = $_POST['room']; // Get the room from the form
-                    $assignedBy2351 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2351 = $status2351 === 'Need Repair' ? '' : $assignedName2351;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2351 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2351 = $conn->prepare($sql2351);
-                    $stmt2351->bind_param('sssssi', $status2351, $assignedName2351, $assignedBy2351, $description2351, $room2351, $assetId2351);
-            
-                    if ($stmt2351->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2351 to $status2351.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2351->close();
-                }
+        // Prepare SQL query to update the asset
+        $sql2346 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2346 = $conn->prepare($sql2346);
+        $stmt2346->bind_param('sssssi', $status2346, $assignedName2346, $assignedBy2346, $description2346, $room2346, $assetId2346);
 
-                //FOR ID 2352
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2352'])) {
-                    // Get form data
-                    $assetId2352 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2352 = $_POST['status']; // Get the status from the form
-                    $description2352 = $_POST['description']; // Get the description from the form
-                    $room2352 = $_POST['room']; // Get the room from the form
-                    $assignedBy2352 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2352 = $status2352 === 'Need Repair' ? '' : $assignedName2352;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2352 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2352 = $conn->prepare($sql2352);
-                    $stmt2352->bind_param('sssssi', $status2352, $assignedName2352, $assignedBy2352, $description2352, $room2352, $assetId2352);
-            
-                    if ($stmt2352->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2352 to $status2352.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2352->close();
-                }
+        if ($stmt2346->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2346 to $status2346.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2346->close();
+    }
 
-                //FOR ID 2353
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2353'])) {
-                    // Get form data
-                    $assetId2353 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2353 = $_POST['status']; // Get the status from the form
-                    $description2353 = $_POST['description']; // Get the description from the form
-                    $room2353 = $_POST['room']; // Get the room from the form
-                    $assignedBy2353 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2353 = $status2353 === 'Need Repair' ? '' : $assignedName2353;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2353 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2353 = $conn->prepare($sql2353);
-                    $stmt2353->bind_param('sssssi', $status2353, $assignedName2353, $assignedBy2353, $description2353, $room2353, $assetId2353);
-            
-                    if ($stmt2353->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2353 to $status2353.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2353->close();
-                }
+    //FOR ID 2347
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2347'])) {
+        // Get form data
+        $assetId2347 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2347 = $_POST['status']; // Get the status from the form
+        $description2347 = $_POST['description']; // Get the description from the form
+        $room2347 = $_POST['room']; // Get the room from the form
+        $assignedBy2347 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2347 = $status2347 === 'Need Repair' ? '' : $assignedName2347;
 
-                //FOR ID 2354
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2354'])) {
-                    // Get form data
-                    $assetId2354 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2354 = $_POST['status']; // Get the status from the form
-                    $description2354 = $_POST['description']; // Get the description from the form
-                    $room2354 = $_POST['room']; // Get the room from the form
-                    $assignedBy2354 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2354 = $status2354 === 'Need Repair' ? '' : $assignedName2354;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2354 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2354 = $conn->prepare($sql2354);
-                    $stmt2354->bind_param('sssssi', $status2354, $assignedName2354, $assignedBy2354, $description2354, $room2354, $assetId2354);
-            
-                    if ($stmt2354->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2354 to $status2354.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2354->close();
-                }
+        // Prepare SQL query to update the asset
+        $sql2347 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2347 = $conn->prepare($sql2347);
+        $stmt2347->bind_param('sssssi', $status2347, $assignedName2347, $assignedBy2347, $description2347, $room2347, $assetId2347);
 
-                //FOR ID 2355
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2355'])) {
-                    // Get form data
-                    $assetId2355 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2355 = $_POST['status']; // Get the status from the form
-                    $description2355 = $_POST['description']; // Get the description from the form
-                    $room2355 = $_POST['room']; // Get the room from the form
-                    $assignedBy2355 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2355 = $status2355 === 'Need Repair' ? '' : $assignedName2355;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2355 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2355 = $conn->prepare($sql2355);
-                    $stmt2355->bind_param('sssssi', $status2355, $assignedName2355, $assignedBy2355, $description2355, $room2355, $assetId2355);
-            
-                    if ($stmt2355->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2355 to $status2355.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2355->close();
-                }
+        if ($stmt2347->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2347 to $status2347.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2347->close();
+    }
 
-                //FOR ID 2356
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2356'])) {
-                    // Get form data
-                    $assetId2356 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2356 = $_POST['status']; // Get the status from the form
-                    $description2356 = $_POST['description']; // Get the description from the form
-                    $room2356 = $_POST['room']; // Get the room from the form
-                    $assignedBy2356 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2356 = $status2356 === 'Need Repair' ? '' : $assignedName2356;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2356 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2356 = $conn->prepare($sql2356);
-                    $stmt2356->bind_param('sssssi', $status2356, $assignedName2356, $assignedBy2356, $description2356, $room2356, $assetId2356);
-            
-                    if ($stmt2356->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2356 to $status2356.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2356->close();
-                }
+    //FOR ID 2348
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2348'])) {
+        // Get form data
+        $assetId2348 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2348 = $_POST['status']; // Get the status from the form
+        $description2348 = $_POST['description']; // Get the description from the form
+        $room2348 = $_POST['room']; // Get the room from the form
+        $assignedBy2348 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2348 = $status2348 === 'Need Repair' ? '' : $assignedName2348;
 
-                //FOR ID 2357
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2357'])) {
-                    // Get form data
-                    $assetId2357 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2357 = $_POST['status']; // Get the status from the form
-                    $description2357 = $_POST['description']; // Get the description from the form
-                    $room2357 = $_POST['room']; // Get the room from the form
-                    $assignedBy2357 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2357 = $status2357 === 'Need Repair' ? '' : $assignedName2357;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2357 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2357 = $conn->prepare($sql2357);
-                    $stmt2357->bind_param('sssssi', $status2357, $assignedName2357, $assignedBy2357, $description2357, $room2357, $assetId2357);
-            
-                    if ($stmt2357->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2357 to $status2357.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2357->close();
-                }
+        // Prepare SQL query to update the asset
+        $sql2348 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2348 = $conn->prepare($sql2348);
+        $stmt2348->bind_param('sssssi', $status2348, $assignedName2348, $assignedBy2348, $description2348, $room2348, $assetId2348);
 
-                //FOR ID 2358
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2358'])) {
-                    // Get form data
-                    $assetId2358 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2358 = $_POST['status']; // Get the status from the form
-                    $description2358 = $_POST['description']; // Get the description from the form
-                    $room2358 = $_POST['room']; // Get the room from the form
-                    $assignedBy2358 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2358 = $status2358 === 'Need Repair' ? '' : $assignedName2358;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2358 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2358 = $conn->prepare($sql2358);
-                    $stmt2358->bind_param('sssssi', $status2358, $assignedName2358, $assignedBy2358, $description2358, $room2358, $assetId2358);
-            
-                    if ($stmt2358->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2358 to $status2358.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2358->close();
-                }
+        if ($stmt2348->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2348 to $status2348.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2348->close();
+    }
 
-                //FOR ID 2359
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2359'])) {
-                    // Get form data
-                    $assetId2359 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2359 = $_POST['status']; // Get the status from the form
-                    $description2359 = $_POST['description']; // Get the description from the form
-                    $room2359 = $_POST['room']; // Get the room from the form
-                    $assignedBy2359 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2359 = $status2359 === 'Need Repair' ? '' : $assignedName2359;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2359 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2359 = $conn->prepare($sql2359);
-                    $stmt2359->bind_param('sssssi', $status2359, $assignedName2359, $assignedBy2359, $description2359, $room2359, $assetId2359);
-            
-                    if ($stmt2359->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2359 to $status2359.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2359->close();
-                }
+    //FOR ID 2349
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2349'])) {
+        // Get form data
+        $assetId2349 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2349 = $_POST['status']; // Get the status from the form
+        $description2349 = $_POST['description']; // Get the description from the form
+        $room2349 = $_POST['room']; // Get the room from the form
+        $assignedBy2349 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2349 = $status2349 === 'Need Repair' ? '' : $assignedName2349;
 
-                //FOR ID 2360
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2360'])) {
-                    // Get form data
-                    $assetId2360 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2360 = $_POST['status']; // Get the status from the form
-                    $description2360 = $_POST['description']; // Get the description from the form
-                    $room2360 = $_POST['room']; // Get the room from the form
-                    $assignedBy2360 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2360 = $status2360 === 'Need Repair' ? '' : $assignedName2360;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2360 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2360 = $conn->prepare($sql2360);
-                    $stmt2360->bind_param('sssssi', $status2360, $assignedName2360, $assignedBy2360, $description2360, $room2360, $assetId2360);
-            
-                    if ($stmt2360->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2360 to $status2360.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2360->close();
-                }
+        // Prepare SQL query to update the asset
+        $sql2349 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2349 = $conn->prepare($sql2349);
+        $stmt2349->bind_param('sssssi', $status2349, $assignedName2349, $assignedBy2349, $description2349, $room2349, $assetId2349);
 
-                //FOR ID 2361
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2361'])) {
-                    // Get form data
-                    $assetId2361 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2361 = $_POST['status']; // Get the status from the form
-                    $description2361 = $_POST['description']; // Get the description from the form
-                    $room2361 = $_POST['room']; // Get the room from the form
-                    $assignedBy2361 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2361 = $status2361 === 'Need Repair' ? '' : $assignedName2361;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2361 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2361 = $conn->prepare($sql2361);
-                    $stmt2361->bind_param('sssssi', $status2361, $assignedName2361, $assignedBy2361, $description2361, $room2361, $assetId2361);
-            
-                    if ($stmt2361->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2361 to $status2361.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2361->close();
-                }
+        if ($stmt2349->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2349 to $status2349.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2349->close();
+    }
 
-                //FOR ID 2362
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2362'])) {
-                    // Get form data
-                    $assetId2362 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2362 = $_POST['status']; // Get the status from the form
-                    $description2362 = $_POST['description']; // Get the description from the form
-                    $room2362 = $_POST['room']; // Get the room from the form
-                    $assignedBy2362 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2362 = $status2362 === 'Need Repair' ? '' : $assignedName2362;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2362 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2362 = $conn->prepare($sql2362);
-                    $stmt2362->bind_param('sssssi', $status2362, $assignedName2362, $assignedBy2362, $description2362, $room2362, $assetId2362);
-            
-                    if ($stmt2362->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2362 to $status2362.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2362->close();
-                }
+    //FOR ID 2350
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2350'])) {
+        // Get form data
+        $assetId2350 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2350 = $_POST['status']; // Get the status from the form
+        $description2350 = $_POST['description']; // Get the description from the form
+        $room2350 = $_POST['room']; // Get the room from the form
+        $assignedBy2350 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2350 = $status2350 === 'Need Repair' ? '' : $assignedName2350;
 
-                //FOR ID 2363
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2363'])) {
-                    // Get form data
-                    $assetId2363 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2363 = $_POST['status']; // Get the status from the form
-                    $description2363 = $_POST['description']; // Get the description from the form
-                    $room2363 = $_POST['room']; // Get the room from the form
-                    $assignedBy2363 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2363 = $status2363 === 'Need Repair' ? '' : $assignedName2363;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2363 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2363 = $conn->prepare($sql2363);
-                    $stmt2363->bind_param('sssssi', $status2363, $assignedName2363, $assignedBy2363, $description2363, $room2363, $assetId2363);
-            
-                    if ($stmt2363->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2363 to $status2363.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2363->close();
-                }
+        // Prepare SQL query to update the asset
+        $sql2350 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2350 = $conn->prepare($sql2350);
+        $stmt2350->bind_param('sssssi', $status2350, $assignedName2350, $assignedBy2350, $description2350, $room2350, $assetId2350);
 
-                //FOR ID 2364
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2364'])) {
-                    // Get form data
-                    $assetId2364 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2364 = $_POST['status']; // Get the status from the form
-                    $description2364 = $_POST['description']; // Get the description from the form
-                    $room2364 = $_POST['room']; // Get the room from the form
-                    $assignedBy2364 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2364 = $status2364 === 'Need Repair' ? '' : $assignedName2364;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2364 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2364 = $conn->prepare($sql2364);
-                    $stmt2364->bind_param('sssssi', $status2364, $assignedName2364, $assignedBy2364, $description2364, $room2364, $assetId2364);
-            
-                    if ($stmt2364->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2364 to $status2364.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2364->close();
-                }
+        if ($stmt2350->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2350 to $status2350.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2350->close();
+    }
 
-                //FOR ID 2365
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2365'])) {
-                    // Get form data
-                    $assetId2365 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2365 = $_POST['status']; // Get the status from the form
-                    $description2365 = $_POST['description']; // Get the description from the form
-                    $room2365 = $_POST['room']; // Get the room from the form
-                    $assignedBy2365 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2365 = $status2365 === 'Need Repair' ? '' : $assignedName2365;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2365 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2365 = $conn->prepare($sql2365);
-                    $stmt2365->bind_param('sssssi', $status2365, $assignedName2365, $assignedBy2365, $description2365, $room2365, $assetId2365);
-            
-                    if ($stmt2365->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2365 to $status2365.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2365->close();
-                }
+    //FOR ID 2351
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2351'])) {
+        // Get form data
+        $assetId2351 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2351 = $_POST['status']; // Get the status from the form
+        $description2351 = $_POST['description']; // Get the description from the form
+        $room2351 = $_POST['room']; // Get the room from the form
+        $assignedBy2351 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2351 = $status2351 === 'Need Repair' ? '' : $assignedName2351;
 
-                //FOR ID 2366
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2366'])) {
-                    // Get form data
-                    $assetId2366 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2366 = $_POST['status']; // Get the status from the form
-                    $description2366 = $_POST['description']; // Get the description from the form
-                    $room2366 = $_POST['room']; // Get the room from the form
-                    $assignedBy2366 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2366 = $status2366 === 'Need Repair' ? '' : $assignedName2366;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2366 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2366 = $conn->prepare($sql2366);
-                    $stmt2366->bind_param('sssssi', $status2366, $assignedName2366, $assignedBy2366, $description2366, $room2366, $assetId2366);
-            
-                    if ($stmt2366->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2366 to $status2366.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2366->close();
-                }
+        // Prepare SQL query to update the asset
+        $sql2351 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2351 = $conn->prepare($sql2351);
+        $stmt2351->bind_param('sssssi', $status2351, $assignedName2351, $assignedBy2351, $description2351, $room2351, $assetId2351);
 
-                //FOR ID 2367
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2367'])) {
-                    // Get form data
-                    $assetId2367 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2367 = $_POST['status']; // Get the status from the form
-                    $description2367 = $_POST['description']; // Get the description from the form
-                    $room2367 = $_POST['room']; // Get the room from the form
-                    $assignedBy2367 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2367 = $status2367 === 'Need Repair' ? '' : $assignedName2367;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2367 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2367 = $conn->prepare($sql2367);
-                    $stmt2367->bind_param('sssssi', $status2367, $assignedName2367, $assignedBy2367, $description2367, $room2367, $assetId2367);
-            
-                    if ($stmt2367->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2367 to $status2367.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2367->close();
-                }
+        if ($stmt2351->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2351 to $status2351.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2351->close();
+    }
 
-                //FOR ID 2368
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2368'])) {
-                    // Get form data
-                    $assetId2368 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2368 = $_POST['status']; // Get the status from the form
-                    $description2368 = $_POST['description']; // Get the description from the form
-                    $room2368 = $_POST['room']; // Get the room from the form
-                    $assignedBy2368 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2368 = $status2368 === 'Need Repair' ? '' : $assignedName2368;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2368 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2368 = $conn->prepare($sql2368);
-                    $stmt2368->bind_param('sssssi', $status2368, $assignedName2368, $assignedBy2368, $description2368, $room2368, $assetId2368);
-            
-                    if ($stmt2368->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2368 to $status2368.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2368->close();
-                }
+    //FOR ID 2352
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2352'])) {
+        // Get form data
+        $assetId2352 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2352 = $_POST['status']; // Get the status from the form
+        $description2352 = $_POST['description']; // Get the description from the form
+        $room2352 = $_POST['room']; // Get the room from the form
+        $assignedBy2352 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2352 = $status2352 === 'Need Repair' ? '' : $assignedName2352;
 
-                //FOR ID 2369
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2369'])) {
-                    // Get form data
-                    $assetId2369 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2369 = $_POST['status']; // Get the status from the form
-                    $description2369 = $_POST['description']; // Get the description from the form
-                    $room2369 = $_POST['room']; // Get the room from the form
-                    $assignedBy2369 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2369 = $status2369 === 'Need Repair' ? '' : $assignedName2369;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2369 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2369 = $conn->prepare($sql2369);
-                    $stmt2369->bind_param('sssssi', $status2369, $assignedName2369, $assignedBy2369, $description2369, $room2369, $assetId2369);
-            
-                    if ($stmt2369->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2369 to $status2369.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2369->close();
-                }
+        // Prepare SQL query to update the asset
+        $sql2352 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2352 = $conn->prepare($sql2352);
+        $stmt2352->bind_param('sssssi', $status2352, $assignedName2352, $assignedBy2352, $description2352, $room2352, $assetId2352);
 
-                //FOR ID 2370
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2370'])) {
-                    // Get form data
-                    $assetId2370 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2370 = $_POST['status']; // Get the status from the form
-                    $description2370 = $_POST['description']; // Get the description from the form
-                    $room2370 = $_POST['room']; // Get the room from the form
-                    $assignedBy2370 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2370 = $status2370 === 'Need Repair' ? '' : $assignedName2370;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2370 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2370 = $conn->prepare($sql2370);
-                    $stmt2370->bind_param('sssssi', $status2370, $assignedName2370, $assignedBy2370, $description2370, $room2370, $assetId2370);
-            
-                    if ($stmt2370->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2370 to $status2370.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2370->close();
-                }
+        if ($stmt2352->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2352 to $status2352.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2352->close();
+    }
 
-                //FOR ID 2371
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2371'])) {
-                    // Get form data
-                    $assetId2371 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2371 = $_POST['status']; // Get the status from the form
-                    $description2371 = $_POST['description']; // Get the description from the form
-                    $room2371 = $_POST['room']; // Get the room from the form
-                    $assignedBy2371 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2371 = $status2371 === 'Need Repair' ? '' : $assignedName2371;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2371 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2371 = $conn->prepare($sql2371);
-                    $stmt2371->bind_param('sssssi', $status2371, $assignedName2371, $assignedBy2371, $description2371, $room2371, $assetId2371);
-            
-                    if ($stmt2371->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2371 to $status2371.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2371->close();
-                }
+    //FOR ID 2353
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2353'])) {
+        // Get form data
+        $assetId2353 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2353 = $_POST['status']; // Get the status from the form
+        $description2353 = $_POST['description']; // Get the description from the form
+        $room2353 = $_POST['room']; // Get the room from the form
+        $assignedBy2353 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2353 = $status2353 === 'Need Repair' ? '' : $assignedName2353;
 
-                //FOR ID 2372
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2372'])) {
-                    // Get form data
-                    $assetId2372 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-                    $status2372 = $_POST['status']; // Get the status from the form
-                    $description2372 = $_POST['description']; // Get the description from the form
-                    $room2372 = $_POST['room']; // Get the room from the form
-                    $assignedBy2372 = $_POST['assignedBy'];
-                    // Check if status is "Need Repair" and set "Assigned Name" to none
-                    $assignedName2372 = $status2372 === 'Need Repair' ? '' : $assignedName2372;
-            
-                    // Prepare SQL query to update the asset
-                    $sql2372 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-                    $stmt2372 = $conn->prepare($sql2372);
-                    $stmt2372->bind_param('sssssi', $status2372, $assignedName2372, $assignedBy2372, $description2372, $room2372, $assetId2372);
-            
-                    if ($stmt2372->execute()) {
-                        // Update success
-                        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2372 to $status2372.", 'Report');
-                        echo "<script>alert('Asset updated successfully!');</script>";
-                        header("Location: KOBF1.php");
-                    } else {
-                        // Update failed
-                        echo "<script>alert('Failed to update asset.');</script>";
-                    }
-                    $stmt2372->close();
-                }
+        // Prepare SQL query to update the asset
+        $sql2353 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2353 = $conn->prepare($sql2353);
+        $stmt2353->bind_param('sssssi', $status2353, $assignedName2353, $assignedBy2353, $description2353, $room2353, $assetId2353);
+
+        if ($stmt2353->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2353 to $status2353.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2353->close();
+    }
+
+    //FOR ID 2354
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2354'])) {
+        // Get form data
+        $assetId2354 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2354 = $_POST['status']; // Get the status from the form
+        $description2354 = $_POST['description']; // Get the description from the form
+        $room2354 = $_POST['room']; // Get the room from the form
+        $assignedBy2354 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2354 = $status2354 === 'Need Repair' ? '' : $assignedName2354;
+
+        // Prepare SQL query to update the asset
+        $sql2354 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2354 = $conn->prepare($sql2354);
+        $stmt2354->bind_param('sssssi', $status2354, $assignedName2354, $assignedBy2354, $description2354, $room2354, $assetId2354);
+
+        if ($stmt2354->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2354 to $status2354.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2354->close();
+    }
+
+    //FOR ID 2355
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2355'])) {
+        // Get form data
+        $assetId2355 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2355 = $_POST['status']; // Get the status from the form
+        $description2355 = $_POST['description']; // Get the description from the form
+        $room2355 = $_POST['room']; // Get the room from the form
+        $assignedBy2355 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2355 = $status2355 === 'Need Repair' ? '' : $assignedName2355;
+
+        // Prepare SQL query to update the asset
+        $sql2355 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2355 = $conn->prepare($sql2355);
+        $stmt2355->bind_param('sssssi', $status2355, $assignedName2355, $assignedBy2355, $description2355, $room2355, $assetId2355);
+
+        if ($stmt2355->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2355 to $status2355.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2355->close();
+    }
+
+    //FOR ID 2356
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2356'])) {
+        // Get form data
+        $assetId2356 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2356 = $_POST['status']; // Get the status from the form
+        $description2356 = $_POST['description']; // Get the description from the form
+        $room2356 = $_POST['room']; // Get the room from the form
+        $assignedBy2356 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2356 = $status2356 === 'Need Repair' ? '' : $assignedName2356;
+
+        // Prepare SQL query to update the asset
+        $sql2356 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2356 = $conn->prepare($sql2356);
+        $stmt2356->bind_param('sssssi', $status2356, $assignedName2356, $assignedBy2356, $description2356, $room2356, $assetId2356);
+
+        if ($stmt2356->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2356 to $status2356.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2356->close();
+    }
+
+    //FOR ID 2357
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2357'])) {
+        // Get form data
+        $assetId2357 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2357 = $_POST['status']; // Get the status from the form
+        $description2357 = $_POST['description']; // Get the description from the form
+        $room2357 = $_POST['room']; // Get the room from the form
+        $assignedBy2357 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2357 = $status2357 === 'Need Repair' ? '' : $assignedName2357;
+
+        // Prepare SQL query to update the asset
+        $sql2357 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2357 = $conn->prepare($sql2357);
+        $stmt2357->bind_param('sssssi', $status2357, $assignedName2357, $assignedBy2357, $description2357, $room2357, $assetId2357);
+
+        if ($stmt2357->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2357 to $status2357.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2357->close();
+    }
+
+    //FOR ID 2358
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2358'])) {
+        // Get form data
+        $assetId2358 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2358 = $_POST['status']; // Get the status from the form
+        $description2358 = $_POST['description']; // Get the description from the form
+        $room2358 = $_POST['room']; // Get the room from the form
+        $assignedBy2358 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2358 = $status2358 === 'Need Repair' ? '' : $assignedName2358;
+
+        // Prepare SQL query to update the asset
+        $sql2358 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2358 = $conn->prepare($sql2358);
+        $stmt2358->bind_param('sssssi', $status2358, $assignedName2358, $assignedBy2358, $description2358, $room2358, $assetId2358);
+
+        if ($stmt2358->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2358 to $status2358.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2358->close();
+    }
+
+    //FOR ID 2359
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2359'])) {
+        // Get form data
+        $assetId2359 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2359 = $_POST['status']; // Get the status from the form
+        $description2359 = $_POST['description']; // Get the description from the form
+        $room2359 = $_POST['room']; // Get the room from the form
+        $assignedBy2359 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2359 = $status2359 === 'Need Repair' ? '' : $assignedName2359;
+
+        // Prepare SQL query to update the asset
+        $sql2359 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2359 = $conn->prepare($sql2359);
+        $stmt2359->bind_param('sssssi', $status2359, $assignedName2359, $assignedBy2359, $description2359, $room2359, $assetId2359);
+
+        if ($stmt2359->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2359 to $status2359.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2359->close();
+    }
+
+    //FOR ID 2360
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2360'])) {
+        // Get form data
+        $assetId2360 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2360 = $_POST['status']; // Get the status from the form
+        $description2360 = $_POST['description']; // Get the description from the form
+        $room2360 = $_POST['room']; // Get the room from the form
+        $assignedBy2360 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2360 = $status2360 === 'Need Repair' ? '' : $assignedName2360;
+
+        // Prepare SQL query to update the asset
+        $sql2360 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2360 = $conn->prepare($sql2360);
+        $stmt2360->bind_param('sssssi', $status2360, $assignedName2360, $assignedBy2360, $description2360, $room2360, $assetId2360);
+
+        if ($stmt2360->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2360 to $status2360.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2360->close();
+    }
+
+    //FOR ID 2361
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2361'])) {
+        // Get form data
+        $assetId2361 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2361 = $_POST['status']; // Get the status from the form
+        $description2361 = $_POST['description']; // Get the description from the form
+        $room2361 = $_POST['room']; // Get the room from the form
+        $assignedBy2361 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2361 = $status2361 === 'Need Repair' ? '' : $assignedName2361;
+
+        // Prepare SQL query to update the asset
+        $sql2361 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2361 = $conn->prepare($sql2361);
+        $stmt2361->bind_param('sssssi', $status2361, $assignedName2361, $assignedBy2361, $description2361, $room2361, $assetId2361);
+
+        if ($stmt2361->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2361 to $status2361.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2361->close();
+    }
+
+    //FOR ID 2362
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2362'])) {
+        // Get form data
+        $assetId2362 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2362 = $_POST['status']; // Get the status from the form
+        $description2362 = $_POST['description']; // Get the description from the form
+        $room2362 = $_POST['room']; // Get the room from the form
+        $assignedBy2362 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2362 = $status2362 === 'Need Repair' ? '' : $assignedName2362;
+
+        // Prepare SQL query to update the asset
+        $sql2362 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2362 = $conn->prepare($sql2362);
+        $stmt2362->bind_param('sssssi', $status2362, $assignedName2362, $assignedBy2362, $description2362, $room2362, $assetId2362);
+
+        if ($stmt2362->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2362 to $status2362.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2362->close();
+    }
+
+    //FOR ID 2363
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2363'])) {
+        // Get form data
+        $assetId2363 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2363 = $_POST['status']; // Get the status from the form
+        $description2363 = $_POST['description']; // Get the description from the form
+        $room2363 = $_POST['room']; // Get the room from the form
+        $assignedBy2363 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2363 = $status2363 === 'Need Repair' ? '' : $assignedName2363;
+
+        // Prepare SQL query to update the asset
+        $sql2363 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2363 = $conn->prepare($sql2363);
+        $stmt2363->bind_param('sssssi', $status2363, $assignedName2363, $assignedBy2363, $description2363, $room2363, $assetId2363);
+
+        if ($stmt2363->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2363 to $status2363.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2363->close();
+    }
+
+    //FOR ID 2364
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2364'])) {
+        // Get form data
+        $assetId2364 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2364 = $_POST['status']; // Get the status from the form
+        $description2364 = $_POST['description']; // Get the description from the form
+        $room2364 = $_POST['room']; // Get the room from the form
+        $assignedBy2364 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2364 = $status2364 === 'Need Repair' ? '' : $assignedName2364;
+
+        // Prepare SQL query to update the asset
+        $sql2364 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2364 = $conn->prepare($sql2364);
+        $stmt2364->bind_param('sssssi', $status2364, $assignedName2364, $assignedBy2364, $description2364, $room2364, $assetId2364);
+
+        if ($stmt2364->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2364 to $status2364.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2364->close();
+    }
+
+    //FOR ID 2365
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2365'])) {
+        // Get form data
+        $assetId2365 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2365 = $_POST['status']; // Get the status from the form
+        $description2365 = $_POST['description']; // Get the description from the form
+        $room2365 = $_POST['room']; // Get the room from the form
+        $assignedBy2365 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2365 = $status2365 === 'Need Repair' ? '' : $assignedName2365;
+
+        // Prepare SQL query to update the asset
+        $sql2365 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2365 = $conn->prepare($sql2365);
+        $stmt2365->bind_param('sssssi', $status2365, $assignedName2365, $assignedBy2365, $description2365, $room2365, $assetId2365);
+
+        if ($stmt2365->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2365 to $status2365.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2365->close();
+    }
+
+    //FOR ID 2366
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2366'])) {
+        // Get form data
+        $assetId2366 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2366 = $_POST['status']; // Get the status from the form
+        $description2366 = $_POST['description']; // Get the description from the form
+        $room2366 = $_POST['room']; // Get the room from the form
+        $assignedBy2366 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2366 = $status2366 === 'Need Repair' ? '' : $assignedName2366;
+
+        // Prepare SQL query to update the asset
+        $sql2366 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2366 = $conn->prepare($sql2366);
+        $stmt2366->bind_param('sssssi', $status2366, $assignedName2366, $assignedBy2366, $description2366, $room2366, $assetId2366);
+
+        if ($stmt2366->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2366 to $status2366.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2366->close();
+    }
+
+    //FOR ID 2367
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2367'])) {
+        // Get form data
+        $assetId2367 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2367 = $_POST['status']; // Get the status from the form
+        $description2367 = $_POST['description']; // Get the description from the form
+        $room2367 = $_POST['room']; // Get the room from the form
+        $assignedBy2367 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2367 = $status2367 === 'Need Repair' ? '' : $assignedName2367;
+
+        // Prepare SQL query to update the asset
+        $sql2367 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2367 = $conn->prepare($sql2367);
+        $stmt2367->bind_param('sssssi', $status2367, $assignedName2367, $assignedBy2367, $description2367, $room2367, $assetId2367);
+
+        if ($stmt2367->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2367 to $status2367.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2367->close();
+    }
+
+    //FOR ID 2368
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2368'])) {
+        // Get form data
+        $assetId2368 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2368 = $_POST['status']; // Get the status from the form
+        $description2368 = $_POST['description']; // Get the description from the form
+        $room2368 = $_POST['room']; // Get the room from the form
+        $assignedBy2368 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2368 = $status2368 === 'Need Repair' ? '' : $assignedName2368;
+
+        // Prepare SQL query to update the asset
+        $sql2368 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2368 = $conn->prepare($sql2368);
+        $stmt2368->bind_param('sssssi', $status2368, $assignedName2368, $assignedBy2368, $description2368, $room2368, $assetId2368);
+
+        if ($stmt2368->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2368 to $status2368.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2368->close();
+    }
+
+    //FOR ID 2369
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2369'])) {
+        // Get form data
+        $assetId2369 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2369 = $_POST['status']; // Get the status from the form
+        $description2369 = $_POST['description']; // Get the description from the form
+        $room2369 = $_POST['room']; // Get the room from the form
+        $assignedBy2369 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2369 = $status2369 === 'Need Repair' ? '' : $assignedName2369;
+
+        // Prepare SQL query to update the asset
+        $sql2369 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2369 = $conn->prepare($sql2369);
+        $stmt2369->bind_param('sssssi', $status2369, $assignedName2369, $assignedBy2369, $description2369, $room2369, $assetId2369);
+
+        if ($stmt2369->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2369 to $status2369.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2369->close();
+    }
+
+    //FOR ID 2370
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2370'])) {
+        // Get form data
+        $assetId2370 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2370 = $_POST['status']; // Get the status from the form
+        $description2370 = $_POST['description']; // Get the description from the form
+        $room2370 = $_POST['room']; // Get the room from the form
+        $assignedBy2370 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2370 = $status2370 === 'Need Repair' ? '' : $assignedName2370;
+
+        // Prepare SQL query to update the asset
+        $sql2370 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2370 = $conn->prepare($sql2370);
+        $stmt2370->bind_param('sssssi', $status2370, $assignedName2370, $assignedBy2370, $description2370, $room2370, $assetId2370);
+
+        if ($stmt2370->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2370 to $status2370.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2370->close();
+    }
+
+    //FOR ID 2371
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2371'])) {
+        // Get form data
+        $assetId2371 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2371 = $_POST['status']; // Get the status from the form
+        $description2371 = $_POST['description']; // Get the description from the form
+        $room2371 = $_POST['room']; // Get the room from the form
+        $assignedBy2371 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2371 = $status2371 === 'Need Repair' ? '' : $assignedName2371;
+
+        // Prepare SQL query to update the asset
+        $sql2371 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2371 = $conn->prepare($sql2371);
+        $stmt2371->bind_param('sssssi', $status2371, $assignedName2371, $assignedBy2371, $description2371, $room2371, $assetId2371);
+
+        if ($stmt2371->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2371 to $status2371.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2371->close();
+    }
+
+    //FOR ID 2372
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit2372'])) {
+        // Get form data
+        $assetId2372 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status2372 = $_POST['status']; // Get the status from the form
+        $description2372 = $_POST['description']; // Get the description from the form
+        $room2372 = $_POST['room']; // Get the room from the form
+        $assignedBy2372 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName2372 = $status2372 === 'Need Repair' ? '' : $assignedName2372;
+
+        // Prepare SQL query to update the asset
+        $sql2372 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt2372 = $conn->prepare($sql2372);
+        $stmt2372->bind_param('sssssi', $status2372, $assignedName2372, $assignedBy2372, $description2372, $room2372, $assetId2372);
+
+        if ($stmt2372->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId2372 to $status2372.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt2372->close();
+    }
 
     function getStatusColor($status)
     {
@@ -6092,7 +6092,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- ASSET 2369 -->
                         <img src='../image.php?id=2369' style='width: 20px; cursor:pointer; position:absolute; top:369px; left:570px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal2369' onclick='fetchAssetData(2369);'>
                         <div style='width:10px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2369); ?>; position:absolute; top:369px; left:570px;'></div>
-                        
+
                         <!-- ASSET 2370 -->
                         <img src='../image.php?id=2370' style='width: 20px; cursor:pointer; position:absolute; top:369px; left:722px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal2370' onclick='fetchAssetData(2370);'>
                         <div style='width:10px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2370); ?>; position:absolute; top:369px; left:722px;'></div>
@@ -6100,7 +6100,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- ASSET 2371 -->
                         <img src='../image.php?id=2371' style='width: 20px; cursor:pointer; position:absolute; top:369px; left:803px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal2371' onclick='fetchAssetData(2371);'>
                         <div style='width:10px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2371); ?>; position:absolute; top:369px; left:803px;'></div>
-                        
+
                         <!-- ASSET 2372 -->
                         <img src='../image.php?id=2372' style='width: 20px; cursor:pointer; position:absolute; top:150px; left:1150px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal2372' onclick='fetchAssetData(2372);'>
                         <div style='width:10px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2372); ?>; position:absolute; top:150px; left:1185px;'></div>
@@ -19006,8 +19006,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                     </form>
 
-                                        <!-- Modal structure for id 2340-->
-                                        <div class='modal fade' id='imageModal2340' tabindex='-1' aria-labelledby='imageModalLabel2340' aria-hidden='true'>
+                    <!-- Modal structure for id 2340-->
+                    <div class='modal fade' id='imageModal2340' tabindex='-1' aria-labelledby='imageModalLabel2340' aria-hidden='true'>
                         <div class='modal-dialog modal-xl modal-dialog-centered'>
                             <div class='modal-content'>
                                 <!-- Modal header -->
@@ -23496,8 +23496,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </main>
         </section>
-
-
         <script>
             $(document).ready(function() {
                 var urlParams = new URLSearchParams(window.location.search);
@@ -23513,7 +23511,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
     </body>
 
     </html>

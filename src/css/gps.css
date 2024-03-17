@@ -273,5 +273,6 @@ td {
   #content .content-container {
     height: 79vh;
     transition: 0.3s ease;
+    margin-top: unset;
   }
 }

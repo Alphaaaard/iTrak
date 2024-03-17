@@ -747,6 +747,7 @@ button {
 @media (max-width: 1000px) {
   .content-container {
     display: block;
+    margin-top: unset;
   }
 
   .content1 {

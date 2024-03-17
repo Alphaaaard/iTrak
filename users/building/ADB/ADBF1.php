@@ -114,443 +114,443 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $upload_img5767 = $row5767['upload_img'];
     $description5767 = $row5767['description'];
 
-     //FOR ID 5768 BULB
-     $sql5768 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5768";
-     $stmt5768 = $conn->prepare($sql5768);
-     $stmt5768->execute();
-     $result5768 = $stmt5768->get_result();
-     $row5768 = $result5768->fetch_assoc();
-     $assetId5768 = $row5768['assetId'];
-     $category5768 = $row5768['category'];
-     $date5768 = $row5768['date'];
-     $building5768 = $row5768['building'];
-     $floor5768 = $row5768['floor'];
-     $room5768 = $row5768['room'];
-     $status5768 = $row5768['status'];
-     $assignedName5768 = $row5768['assignedName'];
-     $assignedBy5768 = $row5768['assignedBy'];
-     $upload_img5768 = $row5768['upload_img'];
-     $description5768 = $row5768['description'];
+    //FOR ID 5768 BULB
+    $sql5768 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5768";
+    $stmt5768 = $conn->prepare($sql5768);
+    $stmt5768->execute();
+    $result5768 = $stmt5768->get_result();
+    $row5768 = $result5768->fetch_assoc();
+    $assetId5768 = $row5768['assetId'];
+    $category5768 = $row5768['category'];
+    $date5768 = $row5768['date'];
+    $building5768 = $row5768['building'];
+    $floor5768 = $row5768['floor'];
+    $room5768 = $row5768['room'];
+    $status5768 = $row5768['status'];
+    $assignedName5768 = $row5768['assignedName'];
+    $assignedBy5768 = $row5768['assignedBy'];
+    $upload_img5768 = $row5768['upload_img'];
+    $description5768 = $row5768['description'];
 
-     //FOR ID 5769 BULB
-     $sql5769 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5769";
-     $stmt5769 = $conn->prepare($sql5769);
-     $stmt5769->execute();
-     $result5769 = $stmt5769->get_result();
-     $row5769 = $result5769->fetch_assoc();
-     $assetId5769 = $row5769['assetId'];
-     $category5769 = $row5769['category'];
-     $date5769 = $row5769['date'];
-     $building5769 = $row5769['building'];
-     $floor5769 = $row5769['floor'];
-     $room5769 = $row5769['room'];
-     $status5769 = $row5769['status'];
-     $assignedName5769 = $row5769['assignedName'];
-     $assignedBy5769 = $row5769['assignedBy'];
-     $upload_img5769 = $row5769['upload_img'];
-     $description5769 = $row5769['description'];
+    //FOR ID 5769 BULB
+    $sql5769 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5769";
+    $stmt5769 = $conn->prepare($sql5769);
+    $stmt5769->execute();
+    $result5769 = $stmt5769->get_result();
+    $row5769 = $result5769->fetch_assoc();
+    $assetId5769 = $row5769['assetId'];
+    $category5769 = $row5769['category'];
+    $date5769 = $row5769['date'];
+    $building5769 = $row5769['building'];
+    $floor5769 = $row5769['floor'];
+    $room5769 = $row5769['room'];
+    $status5769 = $row5769['status'];
+    $assignedName5769 = $row5769['assignedName'];
+    $assignedBy5769 = $row5769['assignedBy'];
+    $upload_img5769 = $row5769['upload_img'];
+    $description5769 = $row5769['description'];
 
-     //FOR ID 5770 BULB
-     $sql5770 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5770";
-     $stmt5770 = $conn->prepare($sql5770);
-     $stmt5770->execute();
-     $result5770 = $stmt5770->get_result();
-     $row5770 = $result5770->fetch_assoc();
-     $assetId5770 = $row5770['assetId'];
-     $category5770 = $row5770['category'];
-     $date5770 = $row5770['date'];
-     $building5770 = $row5770['building'];
-     $floor5770 = $row5770['floor'];
-     $room5770 = $row5770['room'];
-     $status5770 = $row5770['status'];
-     $assignedName5770 = $row5770['assignedName'];
-     $assignedBy5770 = $row5770['assignedBy'];
-     $upload_img5770 = $row5770['upload_img'];
-     $description5770 = $row5770['description'];
+    //FOR ID 5770 BULB
+    $sql5770 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5770";
+    $stmt5770 = $conn->prepare($sql5770);
+    $stmt5770->execute();
+    $result5770 = $stmt5770->get_result();
+    $row5770 = $result5770->fetch_assoc();
+    $assetId5770 = $row5770['assetId'];
+    $category5770 = $row5770['category'];
+    $date5770 = $row5770['date'];
+    $building5770 = $row5770['building'];
+    $floor5770 = $row5770['floor'];
+    $room5770 = $row5770['room'];
+    $status5770 = $row5770['status'];
+    $assignedName5770 = $row5770['assignedName'];
+    $assignedBy5770 = $row5770['assignedBy'];
+    $upload_img5770 = $row5770['upload_img'];
+    $description5770 = $row5770['description'];
 
-     //FOR ID 5771 BULB
-     $sql5771 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5771";
-     $stmt5771 = $conn->prepare($sql5771);
-     $stmt5771->execute();
-     $result5771 = $stmt5771->get_result();
-     $row5771 = $result5771->fetch_assoc();
-     $assetId5771 = $row5771['assetId'];
-     $category5771 = $row5771['category'];
-     $date5771 = $row5771['date'];
-     $building5771 = $row5771['building'];
-     $floor5771 = $row5771['floor'];
-     $room5771 = $row5771['room'];
-     $status5771 = $row5771['status'];
-     $assignedName5771 = $row5771['assignedName'];
-     $assignedBy5771 = $row5771['assignedBy'];
-     $upload_img5771 = $row5771['upload_img'];
-     $description5771 = $row5771['description'];
+    //FOR ID 5771 BULB
+    $sql5771 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5771";
+    $stmt5771 = $conn->prepare($sql5771);
+    $stmt5771->execute();
+    $result5771 = $stmt5771->get_result();
+    $row5771 = $result5771->fetch_assoc();
+    $assetId5771 = $row5771['assetId'];
+    $category5771 = $row5771['category'];
+    $date5771 = $row5771['date'];
+    $building5771 = $row5771['building'];
+    $floor5771 = $row5771['floor'];
+    $room5771 = $row5771['room'];
+    $status5771 = $row5771['status'];
+    $assignedName5771 = $row5771['assignedName'];
+    $assignedBy5771 = $row5771['assignedBy'];
+    $upload_img5771 = $row5771['upload_img'];
+    $description5771 = $row5771['description'];
 
-     //FOR ID 5772 BULB
-     $sql5772 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5772";
-     $stmt5772 = $conn->prepare($sql5772);
-     $stmt5772->execute();
-     $result5772 = $stmt5772->get_result();
-     $row5772 = $result5772->fetch_assoc();
-     $assetId5772 = $row5772['assetId'];
-     $category5772 = $row5772['category'];
-     $date5772 = $row5772['date'];
-     $building5772 = $row5772['building'];
-     $floor5772 = $row5772['floor'];
-     $room5772 = $row5772['room'];
-     $status5772 = $row5772['status'];
-     $assignedName5772 = $row5772['assignedName'];
-     $assignedBy5772 = $row5772['assignedBy'];
-     $upload_img5772 = $row5772['upload_img'];
-     $description5772 = $row5772['description'];
+    //FOR ID 5772 BULB
+    $sql5772 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5772";
+    $stmt5772 = $conn->prepare($sql5772);
+    $stmt5772->execute();
+    $result5772 = $stmt5772->get_result();
+    $row5772 = $result5772->fetch_assoc();
+    $assetId5772 = $row5772['assetId'];
+    $category5772 = $row5772['category'];
+    $date5772 = $row5772['date'];
+    $building5772 = $row5772['building'];
+    $floor5772 = $row5772['floor'];
+    $room5772 = $row5772['room'];
+    $status5772 = $row5772['status'];
+    $assignedName5772 = $row5772['assignedName'];
+    $assignedBy5772 = $row5772['assignedBy'];
+    $upload_img5772 = $row5772['upload_img'];
+    $description5772 = $row5772['description'];
 
-     //FOR ID 5773 BULB
-     $sql5773 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5773";
-     $stmt5773 = $conn->prepare($sql5773);
-     $stmt5773->execute();
-     $result5773 = $stmt5773->get_result();
-     $row5773 = $result5773->fetch_assoc();
-     $assetId5773 = $row5773['assetId'];
-     $category5773 = $row5773['category'];
-     $date5773 = $row5773['date'];
-     $building5773 = $row5773['building'];
-     $floor5773 = $row5773['floor'];
-     $room5773 = $row5773['room'];
-     $status5773 = $row5773['status'];
-     $assignedName5773 = $row5773['assignedName'];
-     $assignedBy5773 = $row5773['assignedBy'];
-     $upload_img5773 = $row5773['upload_img'];
-     $description5773 = $row5773['description'];
+    //FOR ID 5773 BULB
+    $sql5773 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5773";
+    $stmt5773 = $conn->prepare($sql5773);
+    $stmt5773->execute();
+    $result5773 = $stmt5773->get_result();
+    $row5773 = $result5773->fetch_assoc();
+    $assetId5773 = $row5773['assetId'];
+    $category5773 = $row5773['category'];
+    $date5773 = $row5773['date'];
+    $building5773 = $row5773['building'];
+    $floor5773 = $row5773['floor'];
+    $room5773 = $row5773['room'];
+    $status5773 = $row5773['status'];
+    $assignedName5773 = $row5773['assignedName'];
+    $assignedBy5773 = $row5773['assignedBy'];
+    $upload_img5773 = $row5773['upload_img'];
+    $description5773 = $row5773['description'];
 
-     //FOR ID 5774 BULB
-     $sql5774 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5774";
-     $stmt5774 = $conn->prepare($sql5774);
-     $stmt5774->execute();
-     $result5774 = $stmt5774->get_result();
-     $row5774 = $result5774->fetch_assoc();
-     $assetId5774 = $row5774['assetId'];
-     $category5774 = $row5774['category'];
-     $date5774 = $row5774['date'];
-     $building5774 = $row5774['building'];
-     $floor5774 = $row5774['floor'];
-     $room5774 = $row5774['room'];
-     $status5774 = $row5774['status'];
-     $assignedName5774 = $row5774['assignedName'];
-     $assignedBy5774 = $row5774['assignedBy'];
-     $upload_img5774 = $row5774['upload_img'];
-     $description5774 = $row5774['description'];
+    //FOR ID 5774 BULB
+    $sql5774 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5774";
+    $stmt5774 = $conn->prepare($sql5774);
+    $stmt5774->execute();
+    $result5774 = $stmt5774->get_result();
+    $row5774 = $result5774->fetch_assoc();
+    $assetId5774 = $row5774['assetId'];
+    $category5774 = $row5774['category'];
+    $date5774 = $row5774['date'];
+    $building5774 = $row5774['building'];
+    $floor5774 = $row5774['floor'];
+    $room5774 = $row5774['room'];
+    $status5774 = $row5774['status'];
+    $assignedName5774 = $row5774['assignedName'];
+    $assignedBy5774 = $row5774['assignedBy'];
+    $upload_img5774 = $row5774['upload_img'];
+    $description5774 = $row5774['description'];
 
-     //FOR ID 5775 BULB
-     $sql5775 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5775";
-     $stmt5775 = $conn->prepare($sql5775);
-     $stmt5775->execute();
-     $result5775 = $stmt5775->get_result();
-     $row5775 = $result5775->fetch_assoc();
-     $assetId5775 = $row5775['assetId'];
-     $category5775 = $row5775['category'];
-     $date5775 = $row5775['date'];
-     $building5775 = $row5775['building'];
-     $floor5775 = $row5775['floor'];
-     $room5775 = $row5775['room'];
-     $status5775 = $row5775['status'];
-     $assignedName5775 = $row5775['assignedName'];
-     $assignedBy5775 = $row5775['assignedBy'];
-     $upload_img5775 = $row5775['upload_img'];
-     $description5775 = $row5775['description'];
+    //FOR ID 5775 BULB
+    $sql5775 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5775";
+    $stmt5775 = $conn->prepare($sql5775);
+    $stmt5775->execute();
+    $result5775 = $stmt5775->get_result();
+    $row5775 = $result5775->fetch_assoc();
+    $assetId5775 = $row5775['assetId'];
+    $category5775 = $row5775['category'];
+    $date5775 = $row5775['date'];
+    $building5775 = $row5775['building'];
+    $floor5775 = $row5775['floor'];
+    $room5775 = $row5775['room'];
+    $status5775 = $row5775['status'];
+    $assignedName5775 = $row5775['assignedName'];
+    $assignedBy5775 = $row5775['assignedBy'];
+    $upload_img5775 = $row5775['upload_img'];
+    $description5775 = $row5775['description'];
 
-     //FOR ID 5776 BULB
-     $sql5776 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5776";
-     $stmt5776 = $conn->prepare($sql5776);
-     $stmt5776->execute();
-     $result5776 = $stmt5776->get_result();
-     $row5776 = $result5776->fetch_assoc();
-     $assetId5776 = $row5776['assetId'];
-     $category5776 = $row5776['category'];
-     $date5776 = $row5776['date'];
-     $building5776 = $row5776['building'];
-     $floor5776 = $row5776['floor'];
-     $room5776 = $row5776['room'];
-     $status5776 = $row5776['status'];
-     $assignedName5776 = $row5776['assignedName'];
-     $assignedBy5776 = $row5776['assignedBy'];
-     $upload_img5776 = $row5776['upload_img'];
-     $description5776 = $row5776['description'];
+    //FOR ID 5776 BULB
+    $sql5776 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5776";
+    $stmt5776 = $conn->prepare($sql5776);
+    $stmt5776->execute();
+    $result5776 = $stmt5776->get_result();
+    $row5776 = $result5776->fetch_assoc();
+    $assetId5776 = $row5776['assetId'];
+    $category5776 = $row5776['category'];
+    $date5776 = $row5776['date'];
+    $building5776 = $row5776['building'];
+    $floor5776 = $row5776['floor'];
+    $room5776 = $row5776['room'];
+    $status5776 = $row5776['status'];
+    $assignedName5776 = $row5776['assignedName'];
+    $assignedBy5776 = $row5776['assignedBy'];
+    $upload_img5776 = $row5776['upload_img'];
+    $description5776 = $row5776['description'];
 
-     //FOR ID 5777 BULB
-     $sql5777 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5777";
-     $stmt5777 = $conn->prepare($sql5777);
-     $stmt5777->execute();
-     $result5777 = $stmt5777->get_result();
-     $row5777 = $result5777->fetch_assoc();
-     $assetId5777 = $row5777['assetId'];
-     $category5777 = $row5777['category'];
-     $date5777 = $row5777['date'];
-     $building5777 = $row5777['building'];
-     $floor5777 = $row5777['floor'];
-     $room5777 = $row5777['room'];
-     $status5777 = $row5777['status'];
-     $assignedName5777 = $row5777['assignedName'];
-     $assignedBy5777 = $row5777['assignedBy'];
-     $upload_img5777 = $row5777['upload_img'];
-     $description5777 = $row5777['description'];
+    //FOR ID 5777 BULB
+    $sql5777 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5777";
+    $stmt5777 = $conn->prepare($sql5777);
+    $stmt5777->execute();
+    $result5777 = $stmt5777->get_result();
+    $row5777 = $result5777->fetch_assoc();
+    $assetId5777 = $row5777['assetId'];
+    $category5777 = $row5777['category'];
+    $date5777 = $row5777['date'];
+    $building5777 = $row5777['building'];
+    $floor5777 = $row5777['floor'];
+    $room5777 = $row5777['room'];
+    $status5777 = $row5777['status'];
+    $assignedName5777 = $row5777['assignedName'];
+    $assignedBy5777 = $row5777['assignedBy'];
+    $upload_img5777 = $row5777['upload_img'];
+    $description5777 = $row5777['description'];
 
-     //FOR ID 5778 BULB
-     $sql5778 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5778";
-     $stmt5778 = $conn->prepare($sql5778);
-     $stmt5778->execute();
-     $result5778 = $stmt5778->get_result();
-     $row5778 = $result5778->fetch_assoc();
-     $assetId5778 = $row5778['assetId'];
-     $category5778 = $row5778['category'];
-     $date5778 = $row5778['date'];
-     $building5778 = $row5778['building'];
-     $floor5778 = $row5778['floor'];
-     $room5778 = $row5778['room'];
-     $status5778 = $row5778['status'];
-     $assignedName5778 = $row5778['assignedName'];
-     $assignedBy5778 = $row5778['assignedBy'];
-     $upload_img5778 = $row5778['upload_img'];
-     $description5778 = $row5778['description'];
+    //FOR ID 5778 BULB
+    $sql5778 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5778";
+    $stmt5778 = $conn->prepare($sql5778);
+    $stmt5778->execute();
+    $result5778 = $stmt5778->get_result();
+    $row5778 = $result5778->fetch_assoc();
+    $assetId5778 = $row5778['assetId'];
+    $category5778 = $row5778['category'];
+    $date5778 = $row5778['date'];
+    $building5778 = $row5778['building'];
+    $floor5778 = $row5778['floor'];
+    $room5778 = $row5778['room'];
+    $status5778 = $row5778['status'];
+    $assignedName5778 = $row5778['assignedName'];
+    $assignedBy5778 = $row5778['assignedBy'];
+    $upload_img5778 = $row5778['upload_img'];
+    $description5778 = $row5778['description'];
 
-     //FOR ID 5779 BULB
-     $sql5779 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5779";
-     $stmt5779 = $conn->prepare($sql5779);
-     $stmt5779->execute();
-     $result5779 = $stmt5779->get_result();
-     $row5779 = $result5779->fetch_assoc();
-     $assetId5779 = $row5779['assetId'];
-     $category5779 = $row5779['category'];
-     $date5779 = $row5779['date'];
-     $building5779 = $row5779['building'];
-     $floor5779 = $row5779['floor'];
-     $room5779 = $row5779['room'];
-     $status5779 = $row5779['status'];
-     $assignedName5779 = $row5779['assignedName'];
-     $assignedBy5779 = $row5779['assignedBy'];
-     $upload_img5779 = $row5779['upload_img'];
-     $description5779 = $row5779['description'];
+    //FOR ID 5779 BULB
+    $sql5779 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5779";
+    $stmt5779 = $conn->prepare($sql5779);
+    $stmt5779->execute();
+    $result5779 = $stmt5779->get_result();
+    $row5779 = $result5779->fetch_assoc();
+    $assetId5779 = $row5779['assetId'];
+    $category5779 = $row5779['category'];
+    $date5779 = $row5779['date'];
+    $building5779 = $row5779['building'];
+    $floor5779 = $row5779['floor'];
+    $room5779 = $row5779['room'];
+    $status5779 = $row5779['status'];
+    $assignedName5779 = $row5779['assignedName'];
+    $assignedBy5779 = $row5779['assignedBy'];
+    $upload_img5779 = $row5779['upload_img'];
+    $description5779 = $row5779['description'];
 
-     //FOR ID 5780 BULB
-     $sql5780 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5780";
-     $stmt5780 = $conn->prepare($sql5780);
-     $stmt5780->execute();
-     $result5780 = $stmt5780->get_result();
-     $row5780 = $result5780->fetch_assoc();
-     $assetId5780 = $row5780['assetId'];
-     $category5780 = $row5780['category'];
-     $date5780 = $row5780['date'];
-     $building5780 = $row5780['building'];
-     $floor5780 = $row5780['floor'];
-     $room5780 = $row5780['room'];
-     $status5780 = $row5780['status'];
-     $assignedName5780 = $row5780['assignedName'];
-     $assignedBy5780 = $row5780['assignedBy'];
-     $upload_img5780 = $row5780['upload_img'];
-     $description5780 = $row5780['description'];
+    //FOR ID 5780 BULB
+    $sql5780 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5780";
+    $stmt5780 = $conn->prepare($sql5780);
+    $stmt5780->execute();
+    $result5780 = $stmt5780->get_result();
+    $row5780 = $result5780->fetch_assoc();
+    $assetId5780 = $row5780['assetId'];
+    $category5780 = $row5780['category'];
+    $date5780 = $row5780['date'];
+    $building5780 = $row5780['building'];
+    $floor5780 = $row5780['floor'];
+    $room5780 = $row5780['room'];
+    $status5780 = $row5780['status'];
+    $assignedName5780 = $row5780['assignedName'];
+    $assignedBy5780 = $row5780['assignedBy'];
+    $upload_img5780 = $row5780['upload_img'];
+    $description5780 = $row5780['description'];
 
-     //FOR ID 5781 BULB
-     $sql5781 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5781";
-     $stmt5781 = $conn->prepare($sql5781);
-     $stmt5781->execute();
-     $result5781 = $stmt5781->get_result();
-     $row5781 = $result5781->fetch_assoc();
-     $assetId5781 = $row5781['assetId'];
-     $category5781 = $row5781['category'];
-     $date5781 = $row5781['date'];
-     $building5781 = $row5781['building'];
-     $floor5781 = $row5781['floor'];
-     $room5781 = $row5781['room'];
-     $status5781 = $row5781['status'];
-     $assignedName5781 = $row5781['assignedName'];
-     $assignedBy5781 = $row5781['assignedBy'];
-     $upload_img5781 = $row5781['upload_img'];
-     $description5781 = $row5781['description'];
+    //FOR ID 5781 BULB
+    $sql5781 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5781";
+    $stmt5781 = $conn->prepare($sql5781);
+    $stmt5781->execute();
+    $result5781 = $stmt5781->get_result();
+    $row5781 = $result5781->fetch_assoc();
+    $assetId5781 = $row5781['assetId'];
+    $category5781 = $row5781['category'];
+    $date5781 = $row5781['date'];
+    $building5781 = $row5781['building'];
+    $floor5781 = $row5781['floor'];
+    $room5781 = $row5781['room'];
+    $status5781 = $row5781['status'];
+    $assignedName5781 = $row5781['assignedName'];
+    $assignedBy5781 = $row5781['assignedBy'];
+    $upload_img5781 = $row5781['upload_img'];
+    $description5781 = $row5781['description'];
 
-     //FOR ID 5782 BULB
-     $sql5782 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5782";
-     $stmt5782 = $conn->prepare($sql5782);
-     $stmt5782->execute();
-     $result5782 = $stmt5782->get_result();
-     $row5782 = $result5782->fetch_assoc();
-     $assetId5782 = $row5782['assetId'];
-     $category5782 = $row5782['category'];
-     $date5782 = $row5782['date'];
-     $building5782 = $row5782['building'];
-     $floor5782 = $row5782['floor'];
-     $room5782 = $row5782['room'];
-     $status5782 = $row5782['status'];
-     $assignedName5782 = $row5782['assignedName'];
-     $assignedBy5782 = $row5782['assignedBy'];
-     $upload_img5782 = $row5782['upload_img'];
-     $description5782 = $row5782['description'];
+    //FOR ID 5782 BULB
+    $sql5782 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5782";
+    $stmt5782 = $conn->prepare($sql5782);
+    $stmt5782->execute();
+    $result5782 = $stmt5782->get_result();
+    $row5782 = $result5782->fetch_assoc();
+    $assetId5782 = $row5782['assetId'];
+    $category5782 = $row5782['category'];
+    $date5782 = $row5782['date'];
+    $building5782 = $row5782['building'];
+    $floor5782 = $row5782['floor'];
+    $room5782 = $row5782['room'];
+    $status5782 = $row5782['status'];
+    $assignedName5782 = $row5782['assignedName'];
+    $assignedBy5782 = $row5782['assignedBy'];
+    $upload_img5782 = $row5782['upload_img'];
+    $description5782 = $row5782['description'];
 
-     //FOR ID 5783 BULB
-     $sql5783 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5783";
-     $stmt5783 = $conn->prepare($sql5783);
-     $stmt5783->execute();
-     $result5783 = $stmt5783->get_result();
-     $row5783 = $result5783->fetch_assoc();
-     $assetId5783 = $row5783['assetId'];
-     $category5783 = $row5783['category'];
-     $date5783 = $row5783['date'];
-     $building5783 = $row5783['building'];
-     $floor5783 = $row5783['floor'];
-     $room5783 = $row5783['room'];
-     $status5783 = $row5783['status'];
-     $assignedName5783 = $row5783['assignedName'];
-     $assignedBy5783 = $row5783['assignedBy'];
-     $upload_img5783 = $row5783['upload_img'];
-     $description5783 = $row5783['description'];
+    //FOR ID 5783 BULB
+    $sql5783 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5783";
+    $stmt5783 = $conn->prepare($sql5783);
+    $stmt5783->execute();
+    $result5783 = $stmt5783->get_result();
+    $row5783 = $result5783->fetch_assoc();
+    $assetId5783 = $row5783['assetId'];
+    $category5783 = $row5783['category'];
+    $date5783 = $row5783['date'];
+    $building5783 = $row5783['building'];
+    $floor5783 = $row5783['floor'];
+    $room5783 = $row5783['room'];
+    $status5783 = $row5783['status'];
+    $assignedName5783 = $row5783['assignedName'];
+    $assignedBy5783 = $row5783['assignedBy'];
+    $upload_img5783 = $row5783['upload_img'];
+    $description5783 = $row5783['description'];
 
-     //FOR ID 5784 BULB
-     $sql5784 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5784";
-     $stmt5784 = $conn->prepare($sql5784);
-     $stmt5784->execute();
-     $result5784 = $stmt5784->get_result();
-     $row5784 = $result5784->fetch_assoc();
-     $assetId5784 = $row5784['assetId'];
-     $category5784 = $row5784['category'];
-     $date5784 = $row5784['date'];
-     $building5784 = $row5784['building'];
-     $floor5784 = $row5784['floor'];
-     $room5784 = $row5784['room'];
-     $status5784 = $row5784['status'];
-     $assignedName5784 = $row5784['assignedName'];
-     $assignedBy5784 = $row5784['assignedBy'];
-     $upload_img5784 = $row5784['upload_img'];
-     $description5784 = $row5784['description'];
+    //FOR ID 5784 BULB
+    $sql5784 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5784";
+    $stmt5784 = $conn->prepare($sql5784);
+    $stmt5784->execute();
+    $result5784 = $stmt5784->get_result();
+    $row5784 = $result5784->fetch_assoc();
+    $assetId5784 = $row5784['assetId'];
+    $category5784 = $row5784['category'];
+    $date5784 = $row5784['date'];
+    $building5784 = $row5784['building'];
+    $floor5784 = $row5784['floor'];
+    $room5784 = $row5784['room'];
+    $status5784 = $row5784['status'];
+    $assignedName5784 = $row5784['assignedName'];
+    $assignedBy5784 = $row5784['assignedBy'];
+    $upload_img5784 = $row5784['upload_img'];
+    $description5784 = $row5784['description'];
 
-     //FOR ID 5785 BULB
-     $sql5785 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5785";
-     $stmt5785 = $conn->prepare($sql5785);
-     $stmt5785->execute();
-     $result5785 = $stmt5785->get_result();
-     $row5785 = $result5785->fetch_assoc();
-     $assetId5785 = $row5785['assetId'];
-     $category5785 = $row5785['category'];
-     $date5785 = $row5785['date'];
-     $building5785 = $row5785['building'];
-     $floor5785 = $row5785['floor'];
-     $room5785 = $row5785['room'];
-     $status5785 = $row5785['status'];
-     $assignedName5785 = $row5785['assignedName'];
-     $assignedBy5785 = $row5785['assignedBy'];
-     $upload_img5785 = $row5785['upload_img'];
-     $description5785 = $row5785['description'];
+    //FOR ID 5785 BULB
+    $sql5785 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5785";
+    $stmt5785 = $conn->prepare($sql5785);
+    $stmt5785->execute();
+    $result5785 = $stmt5785->get_result();
+    $row5785 = $result5785->fetch_assoc();
+    $assetId5785 = $row5785['assetId'];
+    $category5785 = $row5785['category'];
+    $date5785 = $row5785['date'];
+    $building5785 = $row5785['building'];
+    $floor5785 = $row5785['floor'];
+    $room5785 = $row5785['room'];
+    $status5785 = $row5785['status'];
+    $assignedName5785 = $row5785['assignedName'];
+    $assignedBy5785 = $row5785['assignedBy'];
+    $upload_img5785 = $row5785['upload_img'];
+    $description5785 = $row5785['description'];
 
-     //FOR ID 5786 BULB
-     $sql5786 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5786";
-     $stmt5786 = $conn->prepare($sql5786);
-     $stmt5786->execute();
-     $result5786 = $stmt5786->get_result();
-     $row5786 = $result5786->fetch_assoc();
-     $assetId5786 = $row5786['assetId'];
-     $category5786 = $row5786['category'];
-     $date5786 = $row5786['date'];
-     $building5786 = $row5786['building'];
-     $floor5786 = $row5786['floor'];
-     $room5786 = $row5786['room'];
-     $status5786 = $row5786['status'];
-     $assignedName5786 = $row5786['assignedName'];
-     $assignedBy5786 = $row5786['assignedBy'];
-     $upload_img5786 = $row5786['upload_img'];
-     $description5786 = $row5786['description'];
+    //FOR ID 5786 BULB
+    $sql5786 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5786";
+    $stmt5786 = $conn->prepare($sql5786);
+    $stmt5786->execute();
+    $result5786 = $stmt5786->get_result();
+    $row5786 = $result5786->fetch_assoc();
+    $assetId5786 = $row5786['assetId'];
+    $category5786 = $row5786['category'];
+    $date5786 = $row5786['date'];
+    $building5786 = $row5786['building'];
+    $floor5786 = $row5786['floor'];
+    $room5786 = $row5786['room'];
+    $status5786 = $row5786['status'];
+    $assignedName5786 = $row5786['assignedName'];
+    $assignedBy5786 = $row5786['assignedBy'];
+    $upload_img5786 = $row5786['upload_img'];
+    $description5786 = $row5786['description'];
 
-      //FOR ID 5787 BULB
-      $sql5787 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5787";
-      $stmt5787 = $conn->prepare($sql5787);
-      $stmt5787->execute();
-      $result5787 = $stmt5787->get_result();
-      $row5787 = $result5787->fetch_assoc();
-      $assetId5787 = $row5787['assetId'];
-      $category5787 = $row5787['category'];
-      $date5787 = $row5787['date'];
-      $building5787 = $row5787['building'];
-      $floor5787 = $row5787['floor'];
-      $room5787 = $row5787['room'];
-      $status5787 = $row5787['status'];
-      $assignedName5787 = $row5787['assignedName'];
-      $assignedBy5787 = $row5787['assignedBy'];
-      $upload_img5787 = $row5787['upload_img'];
-      $description5787 = $row5787['description'];
+    //FOR ID 5787 BULB
+    $sql5787 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5787";
+    $stmt5787 = $conn->prepare($sql5787);
+    $stmt5787->execute();
+    $result5787 = $stmt5787->get_result();
+    $row5787 = $result5787->fetch_assoc();
+    $assetId5787 = $row5787['assetId'];
+    $category5787 = $row5787['category'];
+    $date5787 = $row5787['date'];
+    $building5787 = $row5787['building'];
+    $floor5787 = $row5787['floor'];
+    $room5787 = $row5787['room'];
+    $status5787 = $row5787['status'];
+    $assignedName5787 = $row5787['assignedName'];
+    $assignedBy5787 = $row5787['assignedBy'];
+    $upload_img5787 = $row5787['upload_img'];
+    $description5787 = $row5787['description'];
 
-      //FOR ID 5788 BULB
-      $sql5788 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5788";
-      $stmt5788 = $conn->prepare($sql5788);
-      $stmt5788->execute();
-      $result5788 = $stmt5788->get_result();
-      $row5788 = $result5788->fetch_assoc();
-      $assetId5788 = $row5788['assetId'];
-      $category5788 = $row5788['category'];
-      $date5788 = $row5788['date'];
-      $building5788 = $row5788['building'];
-      $floor5788 = $row5788['floor'];
-      $room5788 = $row5788['room'];
-      $status5788 = $row5788['status'];
-      $assignedName5788 = $row5788['assignedName'];
-      $assignedBy5788 = $row5788['assignedBy'];
-      $upload_img5788 = $row5788['upload_img'];
-      $description5788 = $row5788['description'];
+    //FOR ID 5788 BULB
+    $sql5788 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5788";
+    $stmt5788 = $conn->prepare($sql5788);
+    $stmt5788->execute();
+    $result5788 = $stmt5788->get_result();
+    $row5788 = $result5788->fetch_assoc();
+    $assetId5788 = $row5788['assetId'];
+    $category5788 = $row5788['category'];
+    $date5788 = $row5788['date'];
+    $building5788 = $row5788['building'];
+    $floor5788 = $row5788['floor'];
+    $room5788 = $row5788['room'];
+    $status5788 = $row5788['status'];
+    $assignedName5788 = $row5788['assignedName'];
+    $assignedBy5788 = $row5788['assignedBy'];
+    $upload_img5788 = $row5788['upload_img'];
+    $description5788 = $row5788['description'];
 
-      //FOR ID 5789 BULB
-      $sql5789 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5789";
-      $stmt5789 = $conn->prepare($sql5789);
-      $stmt5789->execute();
-      $result5789 = $stmt5789->get_result();
-      $row5789 = $result5789->fetch_assoc();
-      $assetId5789 = $row5789['assetId'];
-      $category5789 = $row5789['category'];
-      $date5789 = $row5789['date'];
-      $building5789 = $row5789['building'];
-      $floor5789 = $row5789['floor'];
-      $room5789 = $row5789['room'];
-      $status5789 = $row5789['status'];
-      $assignedName5789 = $row5789['assignedName'];
-      $assignedBy5789 = $row5789['assignedBy'];
-      $upload_img5789 = $row5789['upload_img'];
-      $description5789 = $row5789['description'];
+    //FOR ID 5789 BULB
+    $sql5789 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5789";
+    $stmt5789 = $conn->prepare($sql5789);
+    $stmt5789->execute();
+    $result5789 = $stmt5789->get_result();
+    $row5789 = $result5789->fetch_assoc();
+    $assetId5789 = $row5789['assetId'];
+    $category5789 = $row5789['category'];
+    $date5789 = $row5789['date'];
+    $building5789 = $row5789['building'];
+    $floor5789 = $row5789['floor'];
+    $room5789 = $row5789['room'];
+    $status5789 = $row5789['status'];
+    $assignedName5789 = $row5789['assignedName'];
+    $assignedBy5789 = $row5789['assignedBy'];
+    $upload_img5789 = $row5789['upload_img'];
+    $description5789 = $row5789['description'];
 
-      //FOR ID 5790 BULB
-      $sql5790 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5790";
-      $stmt5790 = $conn->prepare($sql5790);
-      $stmt5790->execute();
-      $result5790 = $stmt5790->get_result();
-      $row5790 = $result5790->fetch_assoc();
-      $assetId5790 = $row5790['assetId'];
-      $category5790 = $row5790['category'];
-      $date5790 = $row5790['date'];
-      $building5790 = $row5790['building'];
-      $floor5790 = $row5790['floor'];
-      $room5790 = $row5790['room'];
-      $status5790 = $row5790['status'];
-      $assignedName5790 = $row5790['assignedName'];
-      $assignedBy5790 = $row5790['assignedBy'];
-      $upload_img5790 = $row5790['upload_img'];
-      $description5790 = $row5790['description'];
+    //FOR ID 5790 BULB
+    $sql5790 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5790";
+    $stmt5790 = $conn->prepare($sql5790);
+    $stmt5790->execute();
+    $result5790 = $stmt5790->get_result();
+    $row5790 = $result5790->fetch_assoc();
+    $assetId5790 = $row5790['assetId'];
+    $category5790 = $row5790['category'];
+    $date5790 = $row5790['date'];
+    $building5790 = $row5790['building'];
+    $floor5790 = $row5790['floor'];
+    $room5790 = $row5790['room'];
+    $status5790 = $row5790['status'];
+    $assignedName5790 = $row5790['assignedName'];
+    $assignedBy5790 = $row5790['assignedBy'];
+    $upload_img5790 = $row5790['upload_img'];
+    $description5790 = $row5790['description'];
 
-      //FOR ID 5791 BULB
-      $sql5791 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5791";
-      $stmt5791 = $conn->prepare($sql5791);
-      $stmt5791->execute();
-      $result5791 = $stmt5791->get_result();
-      $row5791 = $result5791->fetch_assoc();
-      $assetId5791 = $row5791['assetId'];
-      $category5791 = $row5791['category'];
-      $date5791 = $row5791['date'];
-      $building5791 = $row5791['building'];
-      $floor5791 = $row5791['floor'];
-      $room5791 = $row5791['room'];
-      $status5791 = $row5791['status'];
-      $assignedName5791 = $row5791['assignedName'];
-      $assignedBy5791 = $row5791['assignedBy'];
-      $upload_img5791 = $row5791['upload_img'];
-      $description5791 = $row5791['description'];
-
-
-     
+    //FOR ID 5791 BULB
+    $sql5791 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5791";
+    $stmt5791 = $conn->prepare($sql5791);
+    $stmt5791->execute();
+    $result5791 = $stmt5791->get_result();
+    $row5791 = $result5791->fetch_assoc();
+    $assetId5791 = $row5791['assetId'];
+    $category5791 = $row5791['category'];
+    $date5791 = $row5791['date'];
+    $building5791 = $row5791['building'];
+    $floor5791 = $row5791['floor'];
+    $room5791 = $row5791['room'];
+    $status5791 = $row5791['status'];
+    $assignedName5791 = $row5791['assignedName'];
+    $assignedBy5791 = $row5791['assignedBy'];
+    $upload_img5791 = $row5791['upload_img'];
+    $description5791 = $row5791['description'];
 
 
-    
+
+
+
+
     //FOR ID 5762
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5762'])) {
         // Get form data
@@ -635,8 +635,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt5764->close();
     }
 
-     //FOR ID 5765
-     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5765'])) {
+    //FOR ID 5765
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5765'])) {
         // Get form data
         $assetId5765 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
         $status5765 = $_POST['status']; // Get the status from the form
@@ -663,8 +663,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt5765->close();
     }
 
-     //FOR ID 5766
-     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5766'])) {
+    //FOR ID 5766
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5766'])) {
         // Get form data
         $assetId5766 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
         $status5766 = $_POST['status']; // Get the status from the form
@@ -719,8 +719,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt5767->close();
     }
 
-     //FOR ID 5768
-     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5768'])) {
+    //FOR ID 5768
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5768'])) {
         // Get form data
         $assetId5768 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
         $status5768 = $_POST['status']; // Get the status from the form
@@ -747,8 +747,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt5768->close();
     }
 
-     //FOR ID 5769
-     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5769'])) {
+    //FOR ID 5769
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5769'])) {
         // Get form data
         $assetId5769 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
         $status5769 = $_POST['status']; // Get the status from the form
@@ -859,8 +859,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt5772->close();
     }
 
-     //FOR ID 5773
-     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5773'])) {
+    //FOR ID 5773
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5773'])) {
         // Get form data
         $assetId5773 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
         $status5773 = $_POST['status']; // Get the status from the form
@@ -915,8 +915,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt5774->close();
     }
 
-     //FOR ID 5775
-     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5775'])) {
+    //FOR ID 5775
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5775'])) {
         // Get form data
         $assetId5775 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
         $status5775 = $_POST['status']; // Get the status from the form
@@ -943,8 +943,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt5775->close();
     }
 
-     //FOR ID 5776
-     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5776'])) {
+    //FOR ID 5776
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5776'])) {
         // Get form data
         $assetId5776 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
         $status5776 = $_POST['status']; // Get the status from the form
@@ -1027,8 +1027,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt5778->close();
     }
 
-     //FOR ID 5779
-     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5779'])) {
+    //FOR ID 5779
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5779'])) {
         // Get form data
         $assetId5779 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
         $status5779 = $_POST['status']; // Get the status from the form
@@ -1111,8 +1111,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt5781->close();
     }
 
-     //FOR ID 5782
-     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5782'])) {
+    //FOR ID 5782
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5782'])) {
         // Get form data
         $assetId5782 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
         $status5782 = $_POST['status']; // Get the status from the form
@@ -1139,8 +1139,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt5782->close();
     }
 
-     //FOR ID 5783
-     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5783'])) {
+    //FOR ID 5783
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5783'])) {
         // Get form data
         $assetId5783 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
         $status5783 = $_POST['status']; // Get the status from the form
@@ -1195,8 +1195,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt5784->close();
     }
 
-     //FOR ID 5785
-     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5785'])) {
+    //FOR ID 5785
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit5785'])) {
         // Get form data
         $assetId5785 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
         $status5785 = $_POST['status']; // Get the status from the form
@@ -1393,7 +1393,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
-  
+
     function getStatusColor($status)
     {
         switch ($status) {
@@ -1482,6 +1482,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             <a href="#" class="view-all">View All</a>
                         </div>
                     </div>
+
                     <a href="#" class="settings profile">
                         <div class="profile-container" title="settings">
                             <div class="profile-img">
@@ -1522,9 +1523,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             <div><a class="profile-role"><?php echo $_SESSION['role']; ?></a></div>
                             <hr>
                         </div>
-                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><img src="../../../src/icons/Profile.svg" alt="" class="profile-icons">Profile</a>
-                        <a class="profile-hover" href="#"><img src="../../../src/icons/Logout.svg" alt="" class="profile-icons">Settings</a>
-                        <a class="profile-hover" href="#" id="logoutBtn"><img src="../../../src/icons/Settings.svg" alt="" class="profile-icons">Logout</a>
+                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i class="bi bi-person profile-icons"></i>Profile</a>
+                        <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
                     </div>
                 <?php
             } else {
@@ -1612,197 +1612,197 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <div class="legend-color-for-replacement"></div>
                                 <p>For replacement</p>
                             </div>
-                        </div>  
+                        </div>
                     </div>
 
-                        <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-arrow-left"></i></a>
-                           
-                        <!-- ASSET 5762 -->
-                        <img src='../image.php?id=5762' style='width:25px; cursor:pointer; position:absolute; top:60px; left:850px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5762' onclick='fetchAssetData(5762);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5762); ?>; 
+                    <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-arrow-left"></i></a>
+
+                    <!-- ASSET 5762 -->
+                    <img src='../image.php?id=5762' style='width:25px; cursor:pointer; position:absolute; top:60px; left:850px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5762' onclick='fetchAssetData(5762);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5762); ?>; 
                         position:absolute; top:60px; left:875px;'>
-                        </div>
+                    </div>
 
-                        <!-- ASSET 5763 -->
-                        <img src='../image.php?id=5763' style='width:25px; cursor:pointer; position:absolute; top:155px; left:110px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5763' onclick='fetchAssetData(5763);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5763); ?>; 
+                    <!-- ASSET 5763 -->
+                    <img src='../image.php?id=5763' style='width:25px; cursor:pointer; position:absolute; top:155px; left:110px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5763' onclick='fetchAssetData(5763);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5763); ?>; 
                         position:absolute; top:155px; left:135px;'>
-                        </div>
+                    </div>
 
-                         <!-- ASSET 5764 -->
-                         <img src='../image.php?id=5764' style='width:25px; cursor:pointer; position:absolute; top:155px; left:280px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5764' onclick='fetchAssetData(5764);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5764); ?>; 
+                    <!-- ASSET 5764 -->
+                    <img src='../image.php?id=5764' style='width:25px; cursor:pointer; position:absolute; top:155px; left:280px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5764' onclick='fetchAssetData(5764);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5764); ?>; 
                         position:absolute; top:155px; left:305px;'>
-                        </div>
+                    </div>
 
-                        <!-- ASSET 5765 -->
-                        <img src='../image.php?id=5765' style='width:25px; cursor:pointer; position:absolute; top:155px; left:440px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5765' onclick='fetchAssetData(5765);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5765); ?>; 
+                    <!-- ASSET 5765 -->
+                    <img src='../image.php?id=5765' style='width:25px; cursor:pointer; position:absolute; top:155px; left:440px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5765' onclick='fetchAssetData(5765);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5765); ?>; 
                         position:absolute; top:155px; left:465px;'>
-                        </div>
+                    </div>
 
-                        <!-- ASSET 5766 -->
-                        <img src='../image.php?id=5766' style='width:25px; cursor:pointer; position:absolute; top:155px; left:780px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5766' onclick='fetchAssetData(5766);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5766); ?>; 
+                    <!-- ASSET 5766 -->
+                    <img src='../image.php?id=5766' style='width:25px; cursor:pointer; position:absolute; top:155px; left:780px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5766' onclick='fetchAssetData(5766);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5766); ?>; 
                         position:absolute; top:155px; left:805px;'>
-                        </div>
+                    </div>
 
-                         <!-- ASSET 5767 -->
-                         <img src='../image.php?id=5767' style='width:25px; cursor:pointer; position:absolute; top:155px; left:920px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5767' onclick='fetchAssetData(5767);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5767); ?>; 
+                    <!-- ASSET 5767 -->
+                    <img src='../image.php?id=5767' style='width:25px; cursor:pointer; position:absolute; top:155px; left:920px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5767' onclick='fetchAssetData(5767);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5767); ?>; 
                         position:absolute; top:155px; left:945px;'>
-                        </div>
+                    </div>
 
-                        <!-- ASSET 5768 -->
-                        <img src='../image.php?id=5768' style='width:25px; cursor:pointer; position:absolute; top:155px; left:1050px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5768' onclick='fetchAssetData(5768);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5768); ?>; 
+                    <!-- ASSET 5768 -->
+                    <img src='../image.php?id=5768' style='width:25px; cursor:pointer; position:absolute; top:155px; left:1050px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5768' onclick='fetchAssetData(5768);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5768); ?>; 
                         position:absolute; top:155px; left:1075px;'>
-                        </div>
+                    </div>
 
-                        <!-- ASSET 5769 -->
-                        <img src='../image.php?id=5769' style='width:25px; cursor:pointer; position:absolute; top:255px; left:110px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5769' onclick='fetchAssetData(5769);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5769); ?>; 
+                    <!-- ASSET 5769 -->
+                    <img src='../image.php?id=5769' style='width:25px; cursor:pointer; position:absolute; top:255px; left:110px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5769' onclick='fetchAssetData(5769);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5769); ?>; 
                         position:absolute; top:255px; left:135px;'>
-                        </div>
+                    </div>
 
-                        <!-- ASSET 5770 -->
-                        <img src='../image.php?id=5770' style='width:25px; cursor:pointer; position:absolute; top:255px; left:280px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5770' onclick='fetchAssetData(5770);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5770); ?>; 
+                    <!-- ASSET 5770 -->
+                    <img src='../image.php?id=5770' style='width:25px; cursor:pointer; position:absolute; top:255px; left:280px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5770' onclick='fetchAssetData(5770);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5770); ?>; 
                         position:absolute; top:255px; left:305px;'>
-                        </div>
+                    </div>
 
-                        <!-- ASSET 5771 -->
-                        <img src='../image.php?id=5771' style='width:25px; cursor:pointer; position:absolute; top:255px; left:440px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5771' onclick='fetchAssetData(5771);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5771); ?>; 
+                    <!-- ASSET 5771 -->
+                    <img src='../image.php?id=5771' style='width:25px; cursor:pointer; position:absolute; top:255px; left:440px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5771' onclick='fetchAssetData(5771);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5771); ?>; 
                         position:absolute; top:255px; left:465px;'>
-                        </div>
+                    </div>
 
-                         <!-- ASSET 5772 -->
-                         <img src='../image.php?id=5772' style='width:25px; cursor:pointer; position:absolute; top:255px; left:600px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5772' onclick='fetchAssetData(5772);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5772); ?>; 
+                    <!-- ASSET 5772 -->
+                    <img src='../image.php?id=5772' style='width:25px; cursor:pointer; position:absolute; top:255px; left:600px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5772' onclick='fetchAssetData(5772);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5772); ?>; 
                         position:absolute; top:255px; left:625px;'>
-                        </div>
+                    </div>
 
-                         <!-- ASSET 5773 -->
-                         <img src='../image.php?id=5773' style='width:25px; cursor:pointer; position:absolute; top:255px; left:780px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5773' onclick='fetchAssetData(5773);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5773); ?>; 
+                    <!-- ASSET 5773 -->
+                    <img src='../image.php?id=5773' style='width:25px; cursor:pointer; position:absolute; top:255px; left:780px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5773' onclick='fetchAssetData(5773);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5773); ?>; 
                         position:absolute; top:255px; left:805px;'>
-                        </div>
+                    </div>
 
-                        <!-- ASSET 5774 -->
-                        <img src='../image.php?id=5774' style='width:25px; cursor:pointer; position:absolute; top:255px; left:935px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5774' onclick='fetchAssetData(5774);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5774); ?>; 
+                    <!-- ASSET 5774 -->
+                    <img src='../image.php?id=5774' style='width:25px; cursor:pointer; position:absolute; top:255px; left:935px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5774' onclick='fetchAssetData(5774);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5774); ?>; 
                         position:absolute; top:255px; left:960px;'>
-                        </div>
+                    </div>
 
-                         <!-- ASSET 5775 -->
-                         <img src='../image.php?id=5775' style='width:25px; cursor:pointer; position:absolute; top:255px; left:1080px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5775' onclick='fetchAssetData(5775);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5775); ?>; 
+                    <!-- ASSET 5775 -->
+                    <img src='../image.php?id=5775' style='width:25px; cursor:pointer; position:absolute; top:255px; left:1080px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5775' onclick='fetchAssetData(5775);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5775); ?>; 
                         position:absolute; top:255px; left:1105px;'>
-                        </div>
+                    </div>
 
-                         <!-- ASSET 5776 -->
-                         <img src='../image.php?id=5776' style='width:25px; cursor:pointer; position:absolute; top:335px; left:110px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5776' onclick='fetchAssetData(5776);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5776); ?>; 
+                    <!-- ASSET 5776 -->
+                    <img src='../image.php?id=5776' style='width:25px; cursor:pointer; position:absolute; top:335px; left:110px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5776' onclick='fetchAssetData(5776);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5776); ?>; 
                         position:absolute; top:335px; left:135px;'>
-                        </div>
+                    </div>
 
-                         <!-- ASSET 5777 -->
-                         <img src='../image.php?id=5777' style='width:25px; cursor:pointer; position:absolute; top:335px; left:220px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5777' onclick='fetchAssetData(5777);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5777); ?>; 
+                    <!-- ASSET 5777 -->
+                    <img src='../image.php?id=5777' style='width:25px; cursor:pointer; position:absolute; top:335px; left:220px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5777' onclick='fetchAssetData(5777);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5777); ?>; 
                         position:absolute; top:335px; left:245px;'>
-                        </div>
+                    </div>
 
-                        <!-- ASSET 5778 -->
-                        <img src='../image.php?id=5778' style='width:25px; cursor:pointer; position:absolute; top:370px; left:275px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5778' onclick='fetchAssetData(5778);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5778); ?>; 
+                    <!-- ASSET 5778 -->
+                    <img src='../image.php?id=5778' style='width:25px; cursor:pointer; position:absolute; top:370px; left:275px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5778' onclick='fetchAssetData(5778);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5778); ?>; 
                         position:absolute; top:370px; left:300px;'>
-                        </div>
+                    </div>
 
-                        <!-- ASSET 5779 -->
-                        <img src='../image.php?id=5779' style='width:25px; cursor:pointer; position:absolute; top:370px; left:430px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5779' onclick='fetchAssetData(5779);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5779); ?>; 
+                    <!-- ASSET 5779 -->
+                    <img src='../image.php?id=5779' style='width:25px; cursor:pointer; position:absolute; top:370px; left:430px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5779' onclick='fetchAssetData(5779);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5779); ?>; 
                         position:absolute; top:370px; left:455px;'>
-                        </div>
+                    </div>
 
-                         <!-- ASSET 5780 -->
-                         <img src='../image.php?id=5780' style='width:25px; cursor:pointer; position:absolute; top:410px; left:330px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5780' onclick='fetchAssetData(5780);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5780); ?>; 
+                    <!-- ASSET 5780 -->
+                    <img src='../image.php?id=5780' style='width:25px; cursor:pointer; position:absolute; top:410px; left:330px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5780' onclick='fetchAssetData(5780);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5780); ?>; 
                         position:absolute; top:410px; left:355px;'>
-                        </div>
+                    </div>
 
-                        <!-- ASSET 5781 -->
-                        <img src='../image.php?id=5781' style='width:25px; cursor:pointer; position:absolute; top:410px; left:370px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5781' onclick='fetchAssetData(5781);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5781); ?>; 
+                    <!-- ASSET 5781 -->
+                    <img src='../image.php?id=5781' style='width:25px; cursor:pointer; position:absolute; top:410px; left:370px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5781' onclick='fetchAssetData(5781);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5781); ?>; 
                         position:absolute; top:410px; left:395px;'>
-                        </div>
+                    </div>
 
-                        <!-- ASSET 5782 -->
-                        <img src='../image.php?id=5782' style='width:25px; cursor:pointer; position:absolute; top:450px; left:275px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5782' onclick='fetchAssetData(5782);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5782); ?>; 
+                    <!-- ASSET 5782 -->
+                    <img src='../image.php?id=5782' style='width:25px; cursor:pointer; position:absolute; top:450px; left:275px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5782' onclick='fetchAssetData(5782);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5782); ?>; 
                         position:absolute; top:450px; left:300px;'>
-                        </div>
+                    </div>
 
-                        <!-- ASSET 5783 -->
-                        <img src='../image.php?id=5783' style='width:25px; cursor:pointer; position:absolute; top:450px; left:430px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5783' onclick='fetchAssetData(5783);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5783); ?>; 
+                    <!-- ASSET 5783 -->
+                    <img src='../image.php?id=5783' style='width:25px; cursor:pointer; position:absolute; top:450px; left:430px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5783' onclick='fetchAssetData(5783);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5783); ?>; 
                         position:absolute; top:450px; left:455px;'>
-                        </div>
+                    </div>
 
-                        <!-- ASSET 5784 -->
-                        <img src='../image.php?id=5784' style='width:25px; cursor:pointer; position:absolute; top:350px; left:570px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5784' onclick='fetchAssetData(5784);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5784); ?>; 
+                    <!-- ASSET 5784 -->
+                    <img src='../image.php?id=5784' style='width:25px; cursor:pointer; position:absolute; top:350px; left:570px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5784' onclick='fetchAssetData(5784);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5784); ?>; 
                         position:absolute; top:350px; left:595px;'>
-                        </div>
+                    </div>
 
-                         <!-- ASSET 5785 -->
-                         <img src='../image.php?id=5785' style='width:25px; cursor:pointer; position:absolute; top:350px; left:640px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5785' onclick='fetchAssetData(5785);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5785); ?>; 
+                    <!-- ASSET 5785 -->
+                    <img src='../image.php?id=5785' style='width:25px; cursor:pointer; position:absolute; top:350px; left:640px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5785' onclick='fetchAssetData(5785);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5785); ?>; 
                         position:absolute; top:350px; left:665px;'>
-                        </div>
+                    </div>
 
-                         <!-- ASSET 5786 -->
-                         <img src='../image.php?id=5786' style='width:25px; cursor:pointer; position:absolute; top:370px; left:770px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5786' onclick='fetchAssetData(5786);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5786); ?>; 
+                    <!-- ASSET 5786 -->
+                    <img src='../image.php?id=5786' style='width:25px; cursor:pointer; position:absolute; top:370px; left:770px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5786' onclick='fetchAssetData(5786);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5786); ?>; 
                         position:absolute; top:370px; left:795px;'>
-                        </div>
+                    </div>
 
-                        <!-- ASSET 5787 -->
-                        <img src='../image.php?id=5787' style='width:25px; cursor:pointer; position:absolute; top:370px; left:920px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5787' onclick='fetchAssetData(5787);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5787); ?>; 
+                    <!-- ASSET 5787 -->
+                    <img src='../image.php?id=5787' style='width:25px; cursor:pointer; position:absolute; top:370px; left:920px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5787' onclick='fetchAssetData(5787);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5787); ?>; 
                         position:absolute; top:370px; left: 945px;px;'>
-                        </div>
+                    </div>
 
-                        <!-- ASSET 5788 -->
-                        <img src='../image.php?id=5788' style='width:25px; cursor:pointer; position:absolute; top:410px; left:820px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5788' onclick='fetchAssetData(5788);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5788); ?>; 
+                    <!-- ASSET 5788 -->
+                    <img src='../image.php?id=5788' style='width:25px; cursor:pointer; position:absolute; top:410px; left:820px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5788' onclick='fetchAssetData(5788);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5788); ?>; 
                         position:absolute; top:410px; left: 845px;px;'>
-                        </div>
+                    </div>
 
-                        <!-- ASSET 5789 -->
-                        <img src='../image.php?id=5789' style='width:25px; cursor:pointer; position:absolute; top:410px; left:860px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5789' onclick='fetchAssetData(5789);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5789); ?>; 
+                    <!-- ASSET 5789 -->
+                    <img src='../image.php?id=5789' style='width:25px; cursor:pointer; position:absolute; top:410px; left:860px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5789' onclick='fetchAssetData(5789);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5789); ?>; 
                         position:absolute; top:410px; left: 885px;px;'>
-                        </div>
+                    </div>
 
-                        <!-- ASSET 5790 -->
-                        <img src='../image.php?id=5790' style='width:25px; cursor:pointer; position:absolute; top:450px; left:770px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5790' onclick='fetchAssetData(5790);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5790); ?>; 
+                    <!-- ASSET 5790 -->
+                    <img src='../image.php?id=5790' style='width:25px; cursor:pointer; position:absolute; top:450px; left:770px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5790' onclick='fetchAssetData(5790);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5790); ?>; 
                         position:absolute; top:450px; left: 795px;px;'>
-                        </div>
+                    </div>
 
-                         <!-- ASSET 5791 -->
-                         <img src='../image.php?id=5791' style='width:25px; cursor:pointer; position:absolute; top:450px; left:920px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5791' onclick='fetchAssetData(5791);'>
-                        <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5791); ?>; 
+                    <!-- ASSET 5791 -->
+                    <img src='../image.php?id=5791' style='width:25px; cursor:pointer; position:absolute; top:450px; left:920px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5791' onclick='fetchAssetData(5791);'>
+                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5791); ?>; 
                         position:absolute; top:450px; left: 945px;px;'>
-                        </div>
+                    </div>
 
 
-                        
-                    
+
+
                 </div>
-                 <!-- Modal structure for id 5762-->
-                 <div class='modal fade' id='imageModal5762' tabindex='-1' aria-labelledby='imageModalLabel5762' aria-hidden='true'>
+                <!-- Modal structure for id 5762-->
+                <div class='modal fade' id='imageModal5762' tabindex='-1' aria-labelledby='imageModalLabel5762' aria-hidden='true'>
                     <div class='modal-dialog modal-xl modal-dialog-centered'>
                         <div class='modal-content'>
                             <!-- Modal header -->
@@ -1936,6 +1936,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                 </div>
                 </form>
+
                 <!-- Modal structure for id 5763-->
                 <div class='modal fade' id='imageModal5763' tabindex='-1' aria-labelledby='imageModalLabel5763' aria-hidden='true'>
                     <div class='modal-dialog modal-xl modal-dialog-centered'>
@@ -2206,8 +2207,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                 </div>
                 </form>
-                 <!-- Modal structure for id 5765-->
-                 <div class='modal fade' id='imageModal5765' tabindex='-1' aria-labelledby='imageModalLabel5765' aria-hidden='true'>
+                <!-- Modal structure for id 5765-->
+                <div class='modal fade' id='imageModal5765' tabindex='-1' aria-labelledby='imageModalLabel5765' aria-hidden='true'>
                     <div class='modal-dialog modal-xl modal-dialog-centered'>
                         <div class='modal-content'>
                             <!-- Modal header -->
@@ -2881,8 +2882,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                 </div>
                 </form>
-                 <!-- Modal structure for id 5770-->
-                 <div class='modal fade' id='imageModal5770' tabindex='-1' aria-labelledby='imageModalLabel5771' aria-hidden='true'>
+                <!-- Modal structure for id 5770-->
+                <div class='modal fade' id='imageModal5770' tabindex='-1' aria-labelledby='imageModalLabel5771' aria-hidden='true'>
                     <div class='modal-dialog modal-xl modal-dialog-centered'>
                         <div class='modal-content'>
                             <!-- Modal header -->
@@ -3286,8 +3287,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                 </div>
                 </form>
-                 <!-- Modal structure for id 5773-->
-                 <div class='modal fade' id='imageModal5773' tabindex='-1' aria-labelledby='imageModalLabel5773' aria-hidden='true'>
+                <!-- Modal structure for id 5773-->
+                <div class='modal fade' id='imageModal5773' tabindex='-1' aria-labelledby='imageModalLabel5773' aria-hidden='true'>
                     <div class='modal-dialog modal-xl modal-dialog-centered'>
                         <div class='modal-content'>
                             <!-- Modal header -->
@@ -3556,8 +3557,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                 </div>
                 </form>
-                 <!-- Modal structure for id 5775-->
-                 <div class='modal fade' id='imageModal5775' tabindex='-1' aria-labelledby='imageModalLabel5775' aria-hidden='true'>
+                <!-- Modal structure for id 5775-->
+                <div class='modal fade' id='imageModal5775' tabindex='-1' aria-labelledby='imageModalLabel5775' aria-hidden='true'>
                     <div class='modal-dialog modal-xl modal-dialog-centered'>
                         <div class='modal-content'>
                             <!-- Modal header -->
@@ -3826,8 +3827,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                 </div>
                 </form>
-                 <!-- Modal structure for id 5777-->
-                 <div class='modal fade' id='imageModal5777' tabindex='-1' aria-labelledby='imageModalLabel5777' aria-hidden='true'>
+                <!-- Modal structure for id 5777-->
+                <div class='modal fade' id='imageModal5777' tabindex='-1' aria-labelledby='imageModalLabel5777' aria-hidden='true'>
                     <div class='modal-dialog modal-xl modal-dialog-centered'>
                         <div class='modal-content'>
                             <!-- Modal header -->
@@ -4366,8 +4367,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                 </div>
                 </form>
-                 <!-- Modal structure for id 5781-->
-                 <div class='modal fade' id='imageModal5781' tabindex='-1' aria-labelledby='imageModalLabel5781' aria-hidden='true'>
+                <!-- Modal structure for id 5781-->
+                <div class='modal fade' id='imageModal5781' tabindex='-1' aria-labelledby='imageModalLabel5781' aria-hidden='true'>
                     <div class='modal-dialog modal-xl modal-dialog-centered'>
                         <div class='modal-content'>
                             <!-- Modal header -->
@@ -4771,8 +4772,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                 </div>
                 </form>
-                 <!-- Modal structure for id 5784-->
-                 <div class='modal fade' id='imageModal5784' tabindex='-1' aria-labelledby='imageModalLabel5784' aria-hidden='true'>
+                <!-- Modal structure for id 5784-->
+                <div class='modal fade' id='imageModal5784' tabindex='-1' aria-labelledby='imageModalLabel5784' aria-hidden='true'>
                     <div class='modal-dialog modal-xl modal-dialog-centered'>
                         <div class='modal-content'>
                             <!-- Modal header -->
@@ -5853,7 +5854,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </form>
 
 
-                
+
 
 
 
