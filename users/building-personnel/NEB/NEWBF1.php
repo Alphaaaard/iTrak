@@ -6305,8 +6305,7 @@ $stmt->close();
             echo "<script>alert('Failed to upload image. Error: " . $_FILES['upload_img']['error'] . "');</script>";
         }
     }
-
-    // for notif below
+// for notif below
     // Update the SQL to join with the account and asset tables to get the admin's name and asset information
     $loggedInUserFirstName = $_SESSION['firstName'];
     $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
@@ -6320,24 +6319,27 @@ $stmt->close();
     $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
                 FROM activitylogs AS al
                JOIN account AS acc ON al.accountID = acc.accountID
-               WHERE al.tab='Report' AND al.seen = '0' AND al.accountID != ?
+               WHERE al.tab = 'General' AND al.p_seen = '0' AND al.action LIKE 'Assigned maintenance personnel%' AND al.action LIKE ? AND al.accountID != ?
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
 
     // Prepare the SQL statement
     $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
-
+    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
+  
     // Bind the parameter to exclude the current user's account ID
-    $stmtLatestLogs->bind_param("i", $loggedInAccountId);
+    $stmtLatestLogs->bind_param("si",  $pattern, $loggedInAccountId);
 
     // Execute the query
     $stmtLatestLogs->execute();
-    $resultLatestLogs = $stmtLatestLogs->get_result();
+    $resultLatestLogs = $stmtLatestLogs->get_result(); 
 
-
-    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
-    $stmt = $conn->prepare($unseenCountQuery);
-    $stmt->bind_param("i", $loggedInAccountId);
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
+WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance personnel%' AND action LIKE ?";
+    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
+   
+   $stmt = $conn->prepare($unseenCountQuery);
+    $stmt->bind_param("is", $loggedInAccountId, $pattern );
     $stmt->execute();
     $stmt->bind_result($unseenCount);
     $stmt->fetch();
@@ -25846,7 +25848,41 @@ $stmt->close();
                 </div>
             </main>
         </section>
-       
+        <script>
+            $(document).ready(function() {
+                $('.notification-item').on('click', function(e) {
+                    e.preventDefault();
+                    var activityId = $(this).data('activity-id');
+                    var notificationItem = $(this); // Store the clicked element
+
+                    $.ajax({
+                        type: "POST",
+                        url: "../../administrator/update_single_notification.php", // The URL to the PHP file
+                        data: {
+                            activityId: activityId
+                        },
+                        success: function(response) {
+                            if (response.trim() === "Notification updated successfully") {
+                                // If the notification is updated successfully, remove the clicked element
+                                notificationItem.remove();
+
+                                // Update the notification count
+                                var countElement = $('#noti_number');
+                                var count = parseInt(countElement.text()) || 0;
+                                countElement.text(count > 1 ? count - 1 : '');
+                            } else {
+                                // Handle error
+                                console.error("Failed to update notification:", response);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle AJAX error
+                            console.error("AJAX error:", status, error);
+                        }
+                    });
+                });
+            });
+        </script>
         <script>
             $(document).ready(function() {
                 var urlParams = new URLSearchParams(window.location.search);
