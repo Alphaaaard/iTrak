@@ -528,7 +528,26 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         <form id="rfidForm">
                                             <input type="text" id="rfid" name="rfid" value="">
                                         </form>
-                                    </div> <label class="btn btn-close-modal-emp close-modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal1"><i class="bi bi-x-lg"></i></label>
+                                    </div>
+
+                                    <label class="btn btn-close-modal-emp close-modal-btn" data-bs-toggle="modal" data-bs-target="#updateModal"><i class="bi bi-x-lg"></i></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- RFID MODAL FOR ADD -->
+                        <div class="modal" id="addRFIDModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <img src="../../src/img/taprfid.jpg" width="100%" alt="" class="Scan" />
+
+                                        <form id="rfidForm">
+                                            <input type="text"  id="rfid" name="rfid" value="12345">
+                                        </form>
+                                    </div>
+
+                                    <label class="btn btn-close-modal-emp close-modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal1"><i class="bi bi-x-lg"></i></label>
                                 </div>
                             </div>
                         </div>
@@ -595,7 +614,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                                 <div class="col-4">
                                                     <label for="contactField" class="form-label">Contact Number <span class="d-none text-danger error">*</span></label>
-                                                    <input type="tel" class="form-control" id="contactField" name="contact" required pattern="\d{10,11}" maxlength="11" value="09" title="Contact number must be 10 to 11 digits long" />
+                                                    <input type="tel" class="form-control contactEdit" id="contactField" name="contact" required pattern="\d{10,11}" value="" title="Contact number must be 10 to 11 digits long" />
                                                 </div>
 
                                                 <div class="col-4">
@@ -620,7 +639,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                                 <div class="col-4">
                                                     <label for="user_pass" class="form-label">Register RFID <span class="d-none text-danger error">*</span></label>
-                                                    <button type="button" class="form-control btn-custom" data-bs-toggle="modal" data-bs-target="#staticBackdrop112" onclick="setAction('add');" value="123456789">SCAN</button>
+                                                    <button type="button" class="form-control btn-custom" data-bs-toggle="modal" data-bs-target="#addRFIDModal" onclick="setAction('add');" value="">SCAN</button>
                                                     <input type="password" name="rfidNumber" id="rfidFieldAdd" title="" value="1234567" required />
                                                 </div>
 
