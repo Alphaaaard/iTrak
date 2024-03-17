@@ -117,9 +117,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             <div><a class="profile-role"><?php echo $_SESSION['role']; ?></a></div>
                             <hr>
                         </div>
-                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><img src="../../../src/icons/Profile.svg" alt="" class="profile-icons">Profile</a>
-                        <a class="profile-hover" href="#"><img src="../../../src/icons/Logout.svg" alt="" class="profile-icons">Settings</a>
-                        <a class="profile-hover" href="#" id="logoutBtn"><img src="../../../src/icons/Settings.svg" alt="" class="profile-icons">Logout</a>
+                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i class="bi bi-person profile-icons"></i>Profile</a>
+                        <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
                     </div>
                 <?php
             } else {
@@ -138,8 +137,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
             <ul class="side-menu top">
-            <li >
-            <a href="../../personnel/dashboard.php">
+                <li>
+                    <a href="../../personnel/dashboard.php">
                         <i class="bi bi-grid"></i>
                         <span class="text">Dashboard</span>
                     </a>
@@ -150,7 +149,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <span class="text">Attendance Logs</span>
                     </a>
                 </li>
-             
+
                 <li class="active">
                     <a href="../../personnel/map.php">
                         <i class="bi bi-map"></i>
@@ -164,7 +163,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </a>
                 </li>
                 <li>
-                        <a href="../../personnel/reports.php">
+                    <a href="../../personnel/reports.php">
                         <i class="bi bi-clipboard"></i>
                         <span class="text">Reports</span>
                     </a>

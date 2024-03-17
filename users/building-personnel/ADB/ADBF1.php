@@ -39,27 +39,27 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
    ORDER BY al.date DESC 
    LIMIT 5"; // Set limit to 5
 
-// Prepare the SQL statement
-$stmtLatestLogs = $conn->prepare($sqlLatestLogs);
-$pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
+    // Prepare the SQL statement
+    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
 
-// Bind the parameter to exclude the current user's account ID
-$stmtLatestLogs->bind_param("si",  $pattern, $loggedInAccountId);
+    // Bind the parameter to exclude the current user's account ID
+    $stmtLatestLogs->bind_param("si",  $pattern, $loggedInAccountId);
 
-// Execute the query
-$stmtLatestLogs->execute();
-$resultLatestLogs = $stmtLatestLogs->get_result(); 
+    // Execute the query
+    $stmtLatestLogs->execute();
+    $resultLatestLogs = $stmtLatestLogs->get_result();
 
-$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
 WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance personnel%' AND action LIKE ?";
-$pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
+    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
 
-$stmt = $conn->prepare($unseenCountQuery);
-$stmt->bind_param("is", $loggedInAccountId, $pattern );
-$stmt->execute();
-$stmt->bind_result($unseenCount);
-$stmt->fetch();
-$stmt->close();
+    $stmt = $conn->prepare($unseenCountQuery);
+    $stmt->bind_param("is", $loggedInAccountId, $pattern);
+    $stmt->execute();
+    $stmt->bind_result($unseenCount);
+    $stmt->fetch();
+    $stmt->close();
 
 
 
@@ -1539,126 +1539,125 @@ $stmt->close();
                     </a>
                 </div>
                 <div class="content-nav">
-                <div class="notification-dropdown">
+                    <div class="notification-dropdown">
 
-<!--NOTIF NI PABS-->
-<a href="#" class="notification" id="notification-button">
-   <i class="fa fa-bell" aria-hidden="true"></i>
-   <!-- Notification Indicator Dot -->
-   <?php if ($unseenCount > 0) : ?>
-       <span class="notification-indicator"></span>
-   <?php endif; ?>
-</a>
+                        <!--NOTIF NI PABS-->
+                        <a href="#" class="notification" id="notification-button">
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+                            <!-- Notification Indicator Dot -->
+                            <?php if ($unseenCount > 0) : ?>
+                                <span class="notification-indicator"></span>
+                            <?php endif; ?>
+                        </a>
 
-<div class="dropdown-content" id="notification-dropdown-content">
-   <h6 class="dropdown-header">Alerts Center</h6>
-   <!-- PHP code to display notifications will go here -->
-   <?php
-   if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
-       while ($row = $resultLatestLogs->fetch_assoc()) {
-           $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
-           $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
-           $actionText = $row["action"];
+                        <div class="dropdown-content" id="notification-dropdown-content">
+                            <h6 class="dropdown-header">Alerts Center</h6>
+                            <!-- PHP code to display notifications will go here -->
+                            <?php
+                            if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
+                                while ($row = $resultLatestLogs->fetch_assoc()) {
+                                    $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+                                    $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
+                                    $actionText = $row["action"];
 
-           // Initialize the notification text as empty
-           $notificationText = "";
-           if (strpos($actionText, $adminRole) === false) {
-               // Role is not in the action text, so prepend it to the admin name
-               $adminName = "$adminRole $adminName";
-           }
-           // Check for 'Assigned maintenance personnel' action
-           if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
-               $assignedName = $matches[1];
-               $assetId = $matches[2];
-               $notificationText = "assigned $assignedName to asset ID $assetId";
-           }
-           // Check for 'Changed status of asset ID' action
-           elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
-               $assetId = $matches[1];
-               $newStatus = $matches[2];
-               $notificationText = "changed status of asset ID $assetId to $newStatus";
-           }
+                                    // Initialize the notification text as empty
+                                    $notificationText = "";
+                                    if (strpos($actionText, $adminRole) === false) {
+                                        // Role is not in the action text, so prepend it to the admin name
+                                        $adminName = "$adminRole $adminName";
+                                    }
+                                    // Check for 'Assigned maintenance personnel' action
+                                    if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
+                                        $assignedName = $matches[1];
+                                        $assetId = $matches[2];
+                                        $notificationText = "assigned $assignedName to asset ID $assetId";
+                                    }
+                                    // Check for 'Changed status of asset ID' action
+                                    elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
+                                        $assetId = $matches[1];
+                                        $newStatus = $matches[2];
+                                        $notificationText = "changed status of asset ID $assetId to $newStatus";
+                                    }
 
-           // If notification text is set, echo the notification
-           if (!empty($notificationText)) {
-               // HTML for notification item
-               echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
-           }
-       }
-   } else {
-       // No notifications found
-       echo '<a href="#">No new notifications</a>';
-   }
-   ?>
-   <a href="activity-logs.php" class="view-all">View All</a>
+                                    // If notification text is set, echo the notification
+                                    if (!empty($notificationText)) {
+                                        // HTML for notification item
+                                        echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
+                                    }
+                                }
+                            } else {
+                                // No notifications found
+                                echo '<a href="#">No new notifications</a>';
+                            }
+                            ?>
+                            <a href="activity-logs.php" class="view-all">View All</a>
 
-</div>
-</div>
-<!--END NG  NOTIF NI PABS-->
+                        </div>
+                    </div>
+                    <!--END NG  NOTIF NI PABS-->
 
-<a href="#" class="settings profile">
-<div class="profile-container" title="settings">
-   <div class="profile-img">
-       <?php
-       if ($conn->connect_error) {
-           die('Connect Error (' . $conn->connect_errno . ') ' . $conn->connect_error);
-       }
+                    <a href="#" class="settings profile">
+                        <div class="profile-container" title="settings">
+                            <div class="profile-img">
+                                <?php
+                                if ($conn->connect_error) {
+                                    die('Connect Error (' . $conn->connect_errno . ') ' . $conn->connect_error);
+                                }
 
-       $userId = $_SESSION['accountId'];
-       $query = "SELECT picture FROM account WHERE accountId = ?";
-       $stmt = $conn->prepare($query);
-       $stmt->bind_param('i', $userId);
-       $stmt->execute();
-       $stmt->store_result();
+                                $userId = $_SESSION['accountId'];
+                                $query = "SELECT picture FROM account WHERE accountId = ?";
+                                $stmt = $conn->prepare($query);
+                                $stmt->bind_param('i', $userId);
+                                $stmt->execute();
+                                $stmt->store_result();
 
-       if ($stmt->num_rows > 0) {
-           $stmt->bind_result($userPicture);
-           $stmt->fetch();
+                                if ($stmt->num_rows > 0) {
+                                    $stmt->bind_result($userPicture);
+                                    $stmt->fetch();
 
-           echo "<img src='data:image/jpeg;base64," . base64_encode($userPicture) . "' title='profile-picture' />";
-       } else {
-           echo $_SESSION['firstName'];
-       }
+                                    echo "<img src='data:image/jpeg;base64," . base64_encode($userPicture) . "' title='profile-picture' />";
+                                } else {
+                                    echo $_SESSION['firstName'];
+                                }
 
-       $stmt->close();
-       ?>
-   </div>
-   <div class="profile-name-container " id="desktop">
-       <div><a class="profile-name">
-               <?php echo $_SESSION['firstName']; ?>
-           </a></div>
-       <div><a class="profile-role">
-               <?php echo $_SESSION['role']; ?>
-           </a></div>
-   </div>
-</div>
+                                $stmt->close();
+                                ?>
+                            </div>
+                            <div class="profile-name-container " id="desktop">
+                                <div><a class="profile-name">
+                                        <?php echo $_SESSION['firstName']; ?>
+                                    </a></div>
+                                <div><a class="profile-role">
+                                        <?php echo $_SESSION['role']; ?>
+                                    </a></div>
+                            </div>
+                        </div>
 
-</a>
+                    </a>
 
-<div id="settings-dropdown" class="dropdown-content1">
-<div class="profile-name-container" id="mobile">
-   <div><a class="profile-name">
-           <?php echo $_SESSION['firstName']; ?>
-       </a></div>
-   <div><a class="profile-role">
-           <?php echo $_SESSION['role']; ?>
-       </a></div>
-   <hr>
-</div>
-<a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><img src="../../../src/icons/Profile.svg" alt="" class="profile-icons">Profile</a>
-<a class="profile-hover" href="#"><img src="../../../src/icons/Logout.svg" alt="" class="profile-icons">Settings</a>
-<a class="profile-hover" href="#" id="logoutBtn"><img src="../../../src/icons/Settings.svg" alt="" class="profile-icons">Logout</a>
-</div>
-<?php
-} else {
-header("Location:../../index.php");
-exit();
-}
-?>
-</div>
-</nav>
-</div>
-          <section id="sidebar">
+                    <div id="settings-dropdown" class="dropdown-content1">
+                        <div class="profile-name-container" id="mobile">
+                            <div><a class="profile-name">
+                                    <?php echo $_SESSION['firstName']; ?>
+                                </a></div>
+                            <div><a class="profile-role">
+                                    <?php echo $_SESSION['role']; ?>
+                                </a></div>
+                            <hr>
+                        </div>
+                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i class="bi bi-person profile-icons"></i>Profile</a>
+                        <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
+                    </div>
+                <?php
+            } else {
+                header("Location:../../index.php");
+                exit();
+            }
+                ?>
+                </div>
+            </nav>
+        </div>
+        <section id="sidebar">
             <div href="#" class="brand" title="logo">
             <i><img src="../../../src/img/UpKeep.png" alt="" class="logo" /></i>
                 <div class="mobile-sidebar-close">
@@ -1666,8 +1665,8 @@ exit();
                 </div>
             </div>
             <ul class="side-menu top">
-            <li >
-            <a href="../../personnel/dashboard.php">
+                <li>
+                    <a href="../../personnel/dashboard.php">
                         <i class="bi bi-grid"></i>
                         <span class="text">Dashboard</span>
                     </a>
@@ -1678,7 +1677,7 @@ exit();
                         <span class="text">Attendance Logs</span>
                     </a>
                 </li>
-             
+
                 <li class="active">
                     <a href="../../personnel/map.php">
                         <i class="bi bi-map"></i>
@@ -1692,7 +1691,7 @@ exit();
                     </a>
                 </li>
                 <li>
-                        <a href="../../personnel/reports.php">
+                    <a href="../../personnel/reports.php">
                         <i class="bi bi-clipboard"></i>
                         <span class="text">Reports</span>
                     </a>
@@ -1713,7 +1712,7 @@ exit();
                         <!-- FLOOR PLAN -->
                         <img src="../../../src/floors/adminB/AB1F.png" alt="" class="Floor-container">
                         <div class="map-nav">
-                        <a href="../../personnel/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
+                            <a href="../../personnel/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
                             <div class="map-legend">
                                 <div class="legend-color-green"></div>
                                 <p>Working</p>
