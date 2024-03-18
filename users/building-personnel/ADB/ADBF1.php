@@ -1510,6 +1510,8 @@ $stmt->close();
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="../../src/js/locationTracker.js"></script>
+        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="../../../src/css/main.css" />
         <link rel="stylesheet" href="../../buildingCSS/BEB/BEBF1.css" />
         <link rel="stylesheet" href="../../../src/css/map.css" />

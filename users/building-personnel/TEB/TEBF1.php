@@ -2714,6 +2714,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <link rel="stylesheet" href="../../../src/css/main.css" />
         <link rel="stylesheet" href="../../buildingCSS/NEB/NEWBF1.css" />
+        <script src="../../src/js/locationTracker.js"></script>
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
 
         <link rel="stylesheet" href="../../../src/css/map.css" />

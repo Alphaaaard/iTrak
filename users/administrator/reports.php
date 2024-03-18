@@ -113,49 +113,74 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $assetId = $_POST['assetId'];
         $assignedName = $_POST['assignedName'];
         $assignSql = "UPDATE `asset` SET `assignedName`='$assignedName' WHERE `assetId`='$assetId'";
-
-        // Perform the query only if $assignSql is not empty
+    
         if (!empty($assignSql) && $conn->query($assignSql) === TRUE) {
             logActivity($conn, $_SESSION['accountId'], "Assigned maintenance personnel $assignedName to asset ID $assetId.", 'Report');
-
-            // Fetch the email of the assigned personnel
-            $emailQuery = "SELECT email FROM account WHERE CONCAT(firstName, ' ', lastName) = ?";
-            $stmt = $conn->prepare($emailQuery);
-            $stmt->bind_param("s", $assignedName);
+    
+            // Fetch the asset details
+            $assetDetailsQuery = "SELECT `category`, `building`, `floor`, `room` FROM `asset` WHERE `assetId` = ?";
+            $stmt = $conn->prepare($assetDetailsQuery);
+            $stmt->bind_param("i", $assetId);
             $stmt->execute();
-            $result = $stmt->get_result();
+            $assetDetailsResult = $stmt->get_result();
+    
+            if ($assetDetailsResult->num_rows > 0) {
+                $assetDetails = $assetDetailsResult->fetch_assoc();
+    
+                // Fetch the email of the assigned personnel
+                $emailQuery = "SELECT email FROM account WHERE CONCAT(firstName, ' ', lastName) = ?";
+                $stmt = $conn->prepare($emailQuery);
+                $stmt->bind_param("s", $assignedName);
+                $stmt->execute();
+                $emailResult = $stmt->get_result();
+    
+                if ($emailResult->num_rows > 0) {
+                    $row = $emailResult->fetch_assoc();
+                    $toEmail = $row['email'];
+    
+                    // Set up PHPMailer
+                    $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
+    
+                    try {
+                        //Server settings
+                        $mail->isSMTP();
+                        $mail->Host = 'smtp.gmail.com';
+                        $mail->SMTPAuth = true;
+                        $mail->Username = 'qcu.upkeep@gmail.com';
+                        $mail->Password = 'qvpx bbcm bgmy hcvf';
+                        $mail->SMTPSecure = 'tls';
+                        $mail->Port = 587;
+    
+                        //Recipients
+                        $mail->setFrom('qcu.upkeep@gmail.com', 'iTrak');
+                        $mail->addAddress($toEmail);
+    
+                        // Content
+                        $mail->isHTML(true);
+                        $mail->Subject = 'Task Assignment Notification';
+                        $mail->Body = 'Dear ' . $assignedName . ',<br><br>
 
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                $toEmail = $row['email'];
+                        I hope this message finds you well.<br><br>
 
-                // Set up PHPMailer
-                $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
+                        The administrator has assigned you to address the issues with the following details:<br>
+                        + Tracking Number: ' . $assetId . '<br>
+                        + Category: ' . $assetDetails['category'] . '<br> 
+                        + Location: ' . $assetDetails['building'] . ' ' . $assetDetails['floor'] . ' ' . $assetDetails['room'] . '<br><br>
 
-                try {
-                    //Server settings
-                    $mail->isSMTP();
-                    $mail->Host       = 'smtp.gmail.com'; // Specify main and backup SMTP servers
-                    $mail->SMTPAuth   = true;
-                    $mail->Username   = 'qcu.upkeep@gmail.com'; // SMTP username
-                    $mail->Password   = 'qvpx bbcm bgmy hcvf'; // SMTP password
-                    $mail->SMTPSecure = 'tls';
-                    $mail->Port       = 587;
+                        Please check the system for further details regarding this assignment.<br><br>
 
-                    //Recipients
-                    $mail->setFrom('qcu.upkeep@gmail.com', 'iTrak');
-                    $mail->addAddress($toEmail); // Add a recipient
+                        Best regards,<br><br>
 
-                    // Content
-                    $mail->isHTML(true); // Set email format to HTML
-                    $mail->Subject = 'Task Assignment Notification';
-                    $mail->Body    = 'The Admin assigned you to a new task. Please check the system for details.';
+                        Allyssa Bea Marie Cabal<br>
 
-                    $mail->send();
-                    // You can add additional echo or logging here if needed
-                } catch (Exception $e) {
-                    // Handle errors with mail sending here
-                    // You can add additional echo or logging here if needed
+                        Administrator<br>
+
+                        iTrak';
+    
+                        $mail->send();
+                    } catch (Exception $e) {
+                        // Handle errors with mail sending here
+                    }
                 }
             }
         } else {
@@ -163,6 +188,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         }
         header("Location: reports.php");
     }
+    
 
 ?>
     <!DOCTYPE html>
