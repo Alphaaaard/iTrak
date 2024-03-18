@@ -172,6 +172,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <link rel="stylesheet" href="../../src/css/main.css">
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="../../src/css/attendance-logs.css">
+        <link rel="stylesheet" href="../../src/css/MP-attendance-logs.css">
         <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> -->
         <style>
             #map {
