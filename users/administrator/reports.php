@@ -8,10 +8,11 @@ use PHPMailer\PHPMailer\Exception;
 // require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
 
 session_start();
-include_once("../../config/connection.php");
-date_default_timezone_set('Asia/Manila');
-$conn = connection();
 
+include_once("../../config/connection.php");
+
+$conn = connection();
+date_default_timezone_set('Asia/Manila');
 
 
 function logActivity($conn, $accountId, $actionDescription, $tabValue)
