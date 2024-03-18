@@ -103,6 +103,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $assignedBy = $row['assignedBy'];
     $upload_img = $row['upload_img'];
     $description = $row['description'];
+    $todayDate = date("Y-m-d");
+    
 
     //FOR ID 911 LIGHTS
     $sql2 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date, upload_img, description FROM asset WHERE assetId = 911";
@@ -3364,7 +3366,7 @@ position:absolute; top:205px; left:297px;'>
 
                                         <div class="col-4" style="display:none">
                                             <label for="date" class="form-label">Date:</label>
-                                            <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($date); ?>" readonly />
+                                            <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($todayDate); ?>" readonly />
                                         </div>
 
                                         <!--Second Row-->
