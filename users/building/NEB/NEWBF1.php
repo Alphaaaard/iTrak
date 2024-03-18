@@ -61,10 +61,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->bind_result($unseenCount);
     $stmt->fetch();
     $stmt->close();
-
+    $todayDate = date("Y-m-d"); // Today's date
 
     //FOR ID 1 SOFA
-    $sql1 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date, upload_img, description FROM asset WHERE assetId = 1";
+    $sql1 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, AND date = '$todayDate', upload_img, description FROM asset WHERE assetId = 1";
     $stmt1 = $conn->prepare($sql1);
     $stmt1->execute();
     $result1 = $stmt1->get_result();
