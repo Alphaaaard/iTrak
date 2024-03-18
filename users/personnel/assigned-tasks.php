@@ -459,7 +459,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         </section>
 
 
-       
+        
+
 
 
 
@@ -474,41 +475,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-        <script>
-            //PARA MAGDIRECT KA SA PAGE 
-            function redirectToPage(building, floor, assetId) {
-                var newLocation = '';
-                if (building === 'New Academic' && floor === '1F') {
-                    newLocation = "../../users/building-personnel/NEB/NEWBF1.php";
-                } else if (building === 'Yellow' && floor === '1F') {
-                    newLocation = "../../users/building-personnel/OLB/OLBF1.php";
-                } else if (building === 'Korphil' && floor === '1F') {
-                    newLocation = "../../users/building-personnel/KOB/KOBF1.php";
-                } else if (building === 'Bautista' && floor === 'Basement') {
-                    newLocation = "../../users/building-personnel/BAB/BABF1.php";
-                } else if (building === 'Belmonte' && floor === '1F') {
-                    newLocation = "../../users/building-personnel/BEB/BEBF1.php";
-                } else if (building === 'Admin' && floor === '1F') {
-                    newLocation = "../../users/building-personnel/ADB/ADBF1.php";
-                } else if (building === 'Techvoc' && floor === '1F') {
-                    newLocation = "../../users/building-personnel/TEB/TEBF1.php";
-                } else if (building === 'Chinese B' && floor === '1F') {
-                    newLocation = "../../users/building-personnel/CHB/CHBF1.php";
-                } else if (building === 'Multipurpose' && floor === '1F') {
-                    newLocation = "../../users/building-personnel/MUB/MUBF1.php";
-                }
 
-                // Append the assetId to the URL as a query parameter
-                window.location.href = newLocation + '?assetId=' + assetId;
-            }
-
-            $(document).on('click', 'table tr', function() {
-                var assetId = $(this).find('td:eq(0)').text(); // Assuming first TD is the assetId
-                var building = $(this).find('td:eq(3)').text().split(' / ')[0]; // Adjust the index as needed
-                var floor = $(this).find('td:eq(3)').text().split(' / ')[1]; // Adjust the index as needed
-                redirectToPage(building, floor, assetId);
-            });
-        </script>
 
         <script>
             $(document).ready(function() {
@@ -665,6 +632,41 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     $('#search-box').val(''); // Clear the search input
                     filterTable(); // Filter table with new criteria
                 });
+            });
+        </script>
+         <script>
+            //PARA MAGDIRECT KA SA PAGE 
+            function redirectToPage(building, floor, assetId) {
+                var newLocation = '';
+                if (building === 'New Academic' && floor === '1F') {
+                    newLocation = "../../users/building-personnel/NEB/NEWBF1.php";
+                } else if (building === 'Yellow' && floor === '1F') {
+                    newLocation = "../../users/building-personnel/OLB/OLBF1.php";
+                } else if (building === 'Korphil' && floor === '1F') {
+                    newLocation = "../../users/building-personnel/KOB/KOBF1.php";
+                } else if (building === 'Bautista' && floor === 'Basement') {
+                    newLocation = "../../users/building-personnel/BAB/BABF1.php";
+                } else if (building === 'Belmonte' && floor === '1F') {
+                    newLocation = "../../users/building-personnel/BEB/BEBF1.php";
+                } else if (building === 'Admin' && floor === '1F') {
+                    newLocation = "../../users/building-personnel/ADB/ADBF1.php";
+                } else if (building === 'Techvoc' && floor === '1F') {
+                    newLocation = "../../users/building-personnel/TEB/TEBF1.php";
+                } else if (building === 'Chinese B' && floor === '1F') {
+                    newLocation = "../../users/building-personnel/CHB/CHBF1.php";
+                } else if (building === 'Multipurpose' && floor === '1F') {
+                    newLocation = "../../users/building-personnel/MUB/MUBF1.php";
+                }
+
+                // Append the assetId to the URL as a query parameter
+                window.location.href = newLocation + '?assetId=' + assetId;
+            }
+
+            $(document).on('click', 'table tr', function() {
+                var assetId = $(this).find('td:eq(0)').text(); // Assuming first TD is the assetId
+                var building = $(this).find('td:eq(3)').text().split(' / ')[0]; // Adjust the index as needed
+                var floor = $(this).find('td:eq(3)').text().split(' / ')[1]; // Adjust the index as needed
+                redirectToPage(building, floor, assetId);
             });
         </script>
 
