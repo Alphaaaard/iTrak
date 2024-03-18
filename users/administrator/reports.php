@@ -116,7 +116,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $assignSql = "UPDATE `asset` SET `assignedName`='$assignedName' WHERE `assetId`='$assetId'";
     
         if (!empty($assignSql) && $conn->query($assignSql) === TRUE) {
-            logActivity($conn, $_SESSION['accountId'], "Assigned maintenance personnel $assignedName to asset ID $assetId.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Assigned maintenance personnel $assignedName to asset ID $assetId.", 'General');
     
             // Fetch the asset details
             $assetDetailsQuery = "SELECT `category`, `building`, `floor`, `room` FROM `asset` WHERE `assetId` = ?";

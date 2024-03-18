@@ -1,0 +1,49 @@
+.chart-container {
+    width: 50%; /* Smaller width */
+    max-width: 600px; /* Adjusted maximum size for better layout */
+    min-width: 300px; /* Adjusted minimum size for better layout */
+    margin: auto; /* Center the container */
+    padding: 20px; /* Adjusted padding for better layout */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow for depth */
+    background-color: #f9f9f9; /* Optional: Light background color */
+}
+
+.flex-container {
+    display: flex;
+    align-items: center; /* Centers items vertically in the flex container */
+    justify-content: start; /* Aligns items to the start of the container */
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 40px;
+}
+
+.flex-container h2 {
+    margin: 0; /* Reset default margins */
+    padding-right: 20px; /* Add padding if needed for spacing */
+    flex-grow: 0; /* Ensures that the h2 doesn't grow to fill the container */
+    flex-shrink: 0; /* Ensures that the h2 doesn't shrink */
+    font-family: 'Poppins', sans-serif;
+    color: #1e56a0;
+    /* Align self is used to override the container's align-items for individual items */
+    align-self: center; /* This will vertically center the h2 if it's not aligning properly */
+}
+
+#monthFilter, #employeeFilter {
+    border-radius: 10px;
+    padding: 5px;
+    min-width: 150px;
+}
+
+#monthFilter {
+    margin-right: 10px; /* Adjusted space between the filters */
+}
+
+#employeeFilter {
+    margin-right: 0;
+}
+
+/* Additional style to ensure selects are aligned with the h2 */
+select {
+    align-self: center;
+}

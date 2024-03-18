@@ -569,7 +569,7 @@ $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
 
 
 
-                    <!-- Modal -->
+ <!-- Modal -->
                     <?php
                     // Fetch and display attendance log data within modals
                     if ($result->num_rows > 0) {
@@ -630,52 +630,45 @@ $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
                                     $dayOfWeek = date('l', strtotime($attendanceRow['date']));
 
                                     // Format timeIn and timeOut to show only the time with AM or PM
-                                    // Set the timezone here to ensure it's applied before any time conversions
-                                    date_default_timezone_set('Asia/Manila');
-                                    $timeInFormatted = date('h:i A', strtotime($attendanceRow['timeIn']));
+                                    if (isset($attendanceRow['timeIn'])) {
+                                    $timeIn = strtotime($attendanceRow['timeIn']);
+                                    $currentTime = time(); // Current timestamp
 
-                                    // Timezone adjustment and time calculation logic
-if (isset($attendanceRow['timeIn'])) {
-    $timeIn = strtotime($attendanceRow['timeIn']);
-    $currentTime = time(); // Current timestamp
+                                    // Extract the date part from timeIn to compare with the current date
+                                    $dataDate = date('Y-m-d', $timeIn);
+                                    $currentDate = date('Y-m-d', $currentTime);
 
-    // Extract the date part from timeIn to compare with the current date
-    $dataDate = date('Y-m-d', $timeIn);
-    $currentDate = date('Y-m-d', $currentTime);
+                                if (isset($attendanceRow['timeOut'])) {
+                                    $timeOut = strtotime($attendanceRow['timeOut']);
+                                    $timeDifference = $timeOut - $timeIn;
+                                    $hours = floor($timeDifference / 3600);
+                                    // Deduct 1 hour from $hours
+                                    $hours -= 1;
+                                    $totalHoursFormatted = $hours;
+                                    $timeOutFormatted = date('h:i A', $timeOut);
+                                } else {
+                                    // Get the current hour
+                                    $currentHour = date('H', $currentTime);
 
-    if (isset($attendanceRow['timeOut'])) {
-        $timeOut = strtotime($attendanceRow['timeOut']);
-        $timeDifference = $timeOut - $timeIn;
-        $hours = floor($timeDifference / 3600);
-        // Deduct 1 hour from $hours
-        $hours -= 1;
-        $totalHoursFormatted = $hours;
-        $timeOutFormatted = date('h:i A', $timeOut);
-    } else {
-        // Get the current hour
-        $currentHour = date('H', $currentTime);
+                                if ($dataDate < $currentDate) {
+                                // If the data's date is before the current date, it's automatically not timed out.
+                                    $totalHoursFormatted = '';
+                                    $timeOutFormatted = 'Not Timed Out';
+                                } elseif ($currentHour >= 0 && $currentHour < 8) {
+                                // If it's past 12 AM, but before 8 AM, show 4 hours and 'Not Timed Out'
+                                    $totalHoursFormatted = "4";
+                                    $timeOutFormatted = 'Not Timed Out';
+                                } else {
+                                // For the current date but after 8 AM, or if the timeOut is explicitly recorded
+                                    $totalHoursFormatted = ''; // Set totalHours to empty
+                                    $timeOutFormatted = ''; // Set timeOut to empty
+                                }
+                                }
+                                } else {
+                                    $totalHoursFormatted = "No TimeIn Recorded"; // In case the user hasn't timed in yet
+                                    $timeOutFormatted = ''; // Default value for timeOut in this case
+                            }
 
-        if ($dataDate < $currentDate) {
-            // If the data's date is before the current date, it's automatically not timed out.
-            $totalHoursFormatted = '';
-            $timeOutFormatted = 'Not Timed Out';
-        } elseif ($currentHour >= 0 && $currentHour < 8) {
-            // If it's past 12 AM, but before 8 AM, show 4 hours and 'Not Timed Out'
-            $totalHoursFormatted = "4";
-            $timeOutFormatted = 'Not Timed Out';
-        } else {
-            // For the current date but after 8 AM, or if the timeOut is explicitly recorded
-            $totalHoursFormatted = ''; // Set totalHours to empty
-            $timeOutFormatted = ''; // Set timeOut to empty
-        }
-    }
-} else {
-    $totalHoursFormatted = "No TimeIn Recorded"; // In case the user hasn't timed in yet
-    $timeOutFormatted = ''; // Default value for timeOut in this case
-}
-
-
-                                    // Output the formatted data
                                     echo '<tr data-day="' . $dayOfWeek . '">';
                                     echo '<td>' . $dayOfWeek . '</td>';
                                     echo '<td>' . $attendanceRow['date'] . '</td>';
@@ -688,19 +681,24 @@ if (isset($attendanceRow['timeIn'])) {
                                 echo '</table>';
                                 echo "</div>";
                                 echo "</div>";
-
-
-                                // Close the attendance log statement
-                                $attendanceStmt->close();
-
-                                echo '<button type="button" class="btn export-btn" onclick="exportTableToPDF(\'exportContent' . $row['accountId'] . '\', \'' . $row['firstname'] . '_' . $row['lastname'] . '.pdf\', \'' . addslashes($row['firstname']) . ' ' . addslashes($row['lastname']) . '\')">EXPORT PDF</button>';
-
-
-                                echo '</div>';
-                                echo '</div>';
-                                echo '</div>';
-                                echo '</div>';
+                            } else {
+                                echo '<table>';
+                                echo "<div class='noDataImgH'>";
+                                echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
+                                echo "</div>";
+                                echo '</table>';
                             }
+
+                            // Close the attendance log statement
+                            $attendanceStmt->close();
+
+                            echo '<button type="button" class="btn export-btn" onclick="exportTableToPDF(\'exportContent' . $row['accountId'] . '\', \'' . $row['firstname'] . '_' . $row['lastname'] . '.pdf\', \'' . addslashes($row['firstname']) . ' ' . addslashes($row['lastname']) . '\')">EXPORT PDF</button>';
+
+
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</div>';
                         }
                     }
                     ?>
@@ -876,37 +874,64 @@ if (isset($attendanceRow['timeIn'])) {
                 });
 
                 html2canvas(exportContent, {
-                    useCORS: true // This is important if you have images from other domains
-                }).then(canvas => {
-                    const imgData = canvas.toDataURL('image/png');
-                    const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
-                    pdf.addImage(imgData, 'PNG', 0, 0);
+    useCORS: true // This is important if you have images from other domains
+}).then(canvas => {
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jspdf.jsPDF({
+        orientation: 'landscape', // Set orientation to landscape
+        unit: 'mm',
+        format: 'a4'
+    });
 
-                    // Add the name text directly on the PDF
-                    pdf.setFontSize(13); // Set font size
-                    pdf.text(name, 10, 10); // Adjust coordinates as needed
-                    pdf.save(filename); // Save the PDF after adding the text
+    // Calculate the width and height of the image in the PDF, maintaining the aspect ratio
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+    const canvasAspectRatio = canvas.width / canvas.height;
+    const pdfAspectRatio = pdfWidth / pdfHeight;
+    let imgWidth, imgHeight;
 
-                    Swal.close();
-                    Swal.fire({
-                        title: 'Done!',
-                        text: 'Your PDF has been downloaded.',
-                        icon: 'success',
-                        timer: 1000,
-                        showConfirmButton: false
-                    }).then((result) => {
-                        if (result.dismiss === Swal.DismissReason.timer) {
-                            window.location.reload();
-                        }
-                    });
-                }).catch(error => {
-                    Swal.fire({
-                        title: 'Error!',
-                        text: 'There was a problem generating the PDF.',
-                        icon: 'error',
-                        confirmButtonText: 'OK'
-                    });
-                    console.error('Error generating PDF: ', error);
+    // Scale the image to fit the longer dimension of the PDF page size
+    if (canvasAspectRatio > pdfAspectRatio) {
+        // If the canvas is wider than the PDF page
+        imgWidth = pdfWidth;
+        imgHeight = imgWidth / canvasAspectRatio;
+    } else {
+        // If the canvas is taller than the PDF page
+        imgHeight = pdfHeight;
+        imgWidth = imgHeight * canvasAspectRatio;
+    }
+
+    // Set the top margin for the name text and adjust the image position
+    const nameMarginTop = 10; // Margin top for the name text
+    const nameFontSize = 13; // Font size for the name text
+    pdf.setFontSize(nameFontSize);
+    pdf.text(name, 10, nameMarginTop); // Add the name text at the top
+
+    // The image starts below the name text
+    pdf.addImage(imgData, 'PNG', 0, nameMarginTop + 5, imgWidth, imgHeight);
+
+    pdf.save(filename); // Save the PDF after adding the image and text
+
+    Swal.close();
+    Swal.fire({
+        title: 'Done!',
+        text: 'Your PDF has been downloaded.',
+        icon: 'success',
+        timer: 1000,
+        showConfirmButton: false
+    }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+            window.location.reload();
+        }
+    });
+}).catch(error => {
+    Swal.fire({
+        title: 'Error!',
+        text: 'There was a problem generating the PDF.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+    });
+    console.error('Error generating PDF: ', error);
                 }).finally(() => {
                     // Revert the name header style to its original state
                     if (nameHeader) {
