@@ -1103,13 +1103,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $description = $_POST['description']; // Get the description from the form
         $room = $_POST['room']; // Get the room from the form
         $assignedBy = $_POST['assignedBy'];
+        $todayDate = $_POST['date'];
         // Check if status is "Need Repair" and set "Assigned Name" to none
         $assignedName = $status === 'Need Repair' ? '' : $assignedName;
 
         // Prepare SQL query to update the asset
         $sql = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('sssssi', $status, $assignedName, $assignedBy, $description, $room, $assetId);
+        $stmt->bind_param('sssssi', $status, $assignedName, $assignedBy, $description, $todayDate ,$room, $assetId);
 
         if ($stmt->execute()) {
             // Update success
