@@ -1,8 +1,9 @@
 <?php
 session_start();
 include_once("../../../config/connection.php");
+date_default_timezone_set('Asia/Manila');
 $conn = connection();
-date_default_timezone_set('Asia/Manila'); //need ata to sa lahat ng page para sa security hahah 
+ //need ata to sa lahat ng page para sa security hahah 
 
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
