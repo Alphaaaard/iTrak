@@ -3,9 +3,9 @@ session_start();
 
 include_once("../../config/connection.php");
 
-$conn = connection();
 date_default_timezone_set('Asia/Manila'); //need ata to sa lahat ng page para sa security hahah 
 
+$conn = connection();
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
 

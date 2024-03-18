@@ -1,8 +1,9 @@
 <?php
 session_start();
 include_once("../../config/connection.php");
-$conn = connection();
 date_default_timezone_set('Asia/Manila');
+$conn = connection();
+
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
 
@@ -33,8 +34,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                WHERE  al.seen = '0' AND al.accountID != ?
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
-
-
 
     // Prepare the SQL statement
     $stmtLatestLogs = $conn->prepare($sqlLatestLogs);

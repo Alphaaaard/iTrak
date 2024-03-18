@@ -6,11 +6,11 @@ use PHPMailer\PHPMailer\Exception;
 //  require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 
 require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
-
+date_default_timezone_set('Asia/Manila');
 session_start();
 include_once("../../config/connection.php");
 $conn = connection();
-date_default_timezone_set('Asia/Manila');
+
 
 
 function logActivity($conn, $accountId, $actionDescription, $tabValue)

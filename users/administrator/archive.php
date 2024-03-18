@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once("../../config/connection.php");
+date_default_timezone_set('Asia/Manila');
 $conn = connection();
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
 
