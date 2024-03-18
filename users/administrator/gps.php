@@ -361,7 +361,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <script>
                             var map;
                             var markers = [];
-                            var initialCoordinates = [14.70040, 121.03362];
+                            var initialCoordinates = [14.70040, 121.03199];
                             var zoomLevel = 18.2;
                             var dragTimeout;
 
