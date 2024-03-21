@@ -644,7 +644,7 @@ $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
                                         // Check if timeOut is set and not null
                                         if (isset($attendanceRow['timeOut']) && !empty($attendanceRow['timeOut'])) {
                                             // Convert timeOut string to timestamp and add 8 hours only if timeOut has data and is not null
-                                            $timeOut = strtotime($attendanceRow['timeOut']) + (7 * 3600); // Adding 8 hours
+                                            $timeOut = strtotime($attendanceRow['timeOut']) + 
                                             $timeDifference = $timeOut - $timeIn;
                                             $hours = floor($timeDifference / 3600);
                                             $hours -= 1; // Adjust according to your logic, if necessary
