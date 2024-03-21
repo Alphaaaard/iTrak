@@ -566,8 +566,8 @@ $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
                     </div>
 
 
-                    <!-- Modal -->
-                    <?php
+<!-- Modal -->
+<?php
                     // Fetch and display attendance log data within modals
                     if ($result->num_rows > 0) {
                         $result->data_seek(0); // Reset result pointer to the beginning
@@ -627,46 +627,35 @@ $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
                                     $dayOfWeek = date('l', strtotime($attendanceRow['date']));
 
                                     // Format timeIn and timeOut to show only the time with AM or PM
-                                    // Convert timeIn string to timestamp
+                                    $timeInFormatted = date('h:i A', strtotime($attendanceRow['timeIn']));
+
+                                    date_default_timezone_set('Asia/Manila'); // Set the correct time zone, e.g., 'America/New_York'
+
                                     if (isset($attendanceRow['timeIn'])) {
                                         $timeIn = strtotime($attendanceRow['timeIn']);
-                                        $timeInFormatted = date('h:i A', $timeIn); // Formatting time with AM or PM
-                                    
                                         $currentTime = time(); // Current timestamp
-                                    
-                                        // Extract the date part from timeIn to compare with the current date
-                                        $dataDate = date('Y-m-d', $timeIn);
-                                        $currentDate = date('Y-m-d', $currentTime);
-                                    
-                                        // Determine the current hour in the server's timezone
-                                        $currentHour = date('H', $currentTime);
-                                    
-                                        // Check if timeOut is set and not null
-                                        if (isset($attendanceRow['timeOut']) && !empty($attendanceRow['timeOut'])) {
-                                            // Convert timeOut string to timestamp and add 8 hours only if timeOut has data and is not null
-                                            $timeOut = strtotime($attendanceRow['timeOut']) + 
+
+                                        if (isset($attendanceRow['timeOut'])) {
+                                            $timeOut = strtotime($attendanceRow['timeOut']);
                                             $timeDifference = $timeOut - $timeIn;
                                             $hours = floor($timeDifference / 3600);
-                                            $hours -= 1; // Adjust according to your logic, if necessary
                                             $totalHoursFormatted = $hours;
-                                            $timeOutFormatted = date('h:i A', $timeOut); // Formatting time with AM or PM
+                                            $timeOutFormatted = date('h:i A', $timeOut);
                                         } else {
-                                            // For past dates or current date between 12 AM to 8 AM, display 'Not Timed Out'
-                                            if ($dataDate < $currentDate || ($dataDate === $currentDate && $currentHour >= 0 && $currentHour < 8)) {
-                                                $totalHoursFormatted = ''; // Set to empty or handle as per your logic
-                                                $timeOutFormatted = 'Not Timed Out'; // Display 'Not Timed Out' for past dates or times between 12 AM to 8 AM
+                                            $timeSinceIn = $currentTime - $timeIn;
+
+                                            if ($timeSinceIn > (8 * 3600)) {
+                                                $totalHoursFormatted = "4";
+                                                $timeOutFormatted = 'Not Timed Out';
                                             } else {
-                                                $totalHoursFormatted = ''; // Adjust as needed for other cases
-                                                $timeOutFormatted = ''; // You might want to set a different default message or leave it empty
+                                                $totalHoursFormatted = ''; // Set totalHours to empty if 8 hours have NOT been exceeded
+                                                $timeOutFormatted = ''; // Set timeOut to empty if 8 hours have NOT been exceeded
                                             }
                                         }
                                     } else {
-                                        // Handle cases where timeIn is not set
-                                        $totalHoursFormatted = "No TimeIn Recorded";
-                                        $timeOutFormatted = '';
+                                        $totalHoursFormatted = "No TimeIn Recorded"; // In case the user hasn't timed in yet
+                                        $timeOutFormatted = ''; // Default value for timeOut in this case
                                     }
-                                    
-                            
 
                                     echo '<tr data-day="' . $dayOfWeek . '">';
                                     echo '<td>' . $dayOfWeek . '</td>';
