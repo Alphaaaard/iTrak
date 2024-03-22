@@ -853,6 +853,14 @@ function exportTableToPDF(exportContentId, filename, employeeName) {
         return;
     }
 
+    // Store original styles
+    const modalContent = document.querySelector('.modal-content-th');
+    const originalMaxHeight = modalContent.style.maxHeight;
+
+    // Temporarily change the style for export
+    modalContent.style.overflow = 'visible';
+    modalContent.style.maxHeight = 'none';
+
     Swal.fire({
         title: 'Preparing your PDF...',
         text: 'Please wait...',
@@ -866,17 +874,21 @@ function exportTableToPDF(exportContentId, filename, employeeName) {
 
     html2canvas(exportContent, {
         useCORS: true,
-        scale: 1,
-        windowHeight: exportContent.scrollHeight
+        scale: 2, // You might want to reduce the scale if the image is too large.
+        windowHeight: exportContent.scrollHeight, // This ensures the height includes all scrollable content.
+        onclone: function (clonedDocument) {
+            // Explicitly set the height of the cloned element to its scrollHeight.
+            const clonedElement = clonedDocument.getElementById(exportContentId);
+            clonedElement.style.height = `${exportContent.scrollHeight}px`;
+        }
     }).then(canvas => {
         const pdf = new jspdf.jsPDF({
             orientation: 'portrait', // Change to landscape if required
             unit: 'mm',
-            format: [215.9, 355.6] // Legal dimensions in mm
+            format: [215.9, 655.6] // Legal dimensions in mm
         });
-
         const addHeader = () => {
-            pdf.setFontSize(20); // Increased font size for header
+            pdf.setFontSize(15); // Increased font size for header
             pdf.text('Employee - ' + employeeName, 10, 10); // Adjusted y position for larger header
         };
 
@@ -905,6 +917,9 @@ function exportTableToPDF(exportContentId, filename, employeeName) {
 
         pdf.save(filename); // Save the PDF
 
+        // After saving the PDF, restore the original styles
+        modalContent.style.maxHeight = originalMaxHeight;
+
         Swal.close();
         Swal.fire({
             title: 'Done!',
@@ -914,6 +929,9 @@ function exportTableToPDF(exportContentId, filename, employeeName) {
             showConfirmButton: false
         });
     }).catch(error => {
+        // In case of an error, also restore the original styles
+        modalContent.style.maxHeight = originalMaxHeight;
+
         Swal.fire({
             title: 'Error!',
             text: 'There was a problem generating the PDF.',
@@ -923,7 +941,6 @@ function exportTableToPDF(exportContentId, filename, employeeName) {
         console.error('Error generating PDF: ', error);
     });
 }
-
 
         </script>
 
