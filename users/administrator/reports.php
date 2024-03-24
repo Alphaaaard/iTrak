@@ -516,15 +516,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="tab-pane fade show active" id="pills-manager" role="tabpanel" aria-labelledby="home-tab">
                             <div class="table-content">
                                 <div class='table-header'>
-                                    <table>
-                                        <tr>
-                                            <th>TRACKING #</th>
-                                            <th>DATE & TIME</th>
-                                            <th>CATEGORY</th>
-                                            <th>LOCATION</th>
-                                            <th>STATUS</th>
-                                        </tr>
-                                    </table>
+                                    <div class='headerskie'>
+                                        <span>TRACKING #</span>
+                                        <span>DATE & TIME</span>
+                                        <span>CATEGORY</span>
+                                        <span>LOCATION</span>
+                                        <span>STATUS</span>
+                                    </div>
                                 </div>
                                 <?php
                                 if ($result->num_rows > 0) {
@@ -562,16 +560,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="table-content">
                                 <div class='table-header'>
-                                    <table>
-                                        <tr>
-                                            <th>TRACKING #</th>
-                                            <th>DATE & TIME</th>
-                                            <th>CATEGORY</th>
-                                            <th>LOCATION</th>
-                                            <th>STATUS</th>
-                                        </tr>
-
-                                    </table>
+                                <div class='headerskie'>
+                                        <span>TRACKING #</span>
+                                        <span>DATE & TIME</span>
+                                        <span>CATEGORY</span>
+                                        <span>LOCATION</span>
+                                        <span>STATUS</span>
+                                    </div>
                                 </div>
                                 <!--Content of table 2-->
                                 <?php
@@ -608,15 +603,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="tab-pane fade" id="pills-replace" role="tabpanel" aria-labelledby="replace-tab">
                             <div class="table-content">
                                 <div class='table-header'>
-                                    <table>
-                                        <tr>
-                                            <th>TRACKING #</th>
-                                            <th>DATE & TIME</th>
-                                            <th>CATEGORY</th>
-                                            <th>LOCATION</th>
-                                            <th>STATUS</th>
-                                        </tr>
-                                    </table>
+                                <div class='headerskie'>
+                                        <span>TRACKING #</span>
+                                        <span>DATE & TIME</span>
+                                        <span>CATEGORY</span>
+                                        <span>LOCATION</span>
+                                        <span>STATUS</span>
+                                    </div>
                                 </div>
                                 <!--Content of table 3-->
                                 <?php
@@ -653,16 +646,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="tab-pane fade" id="pills-repair" role="tabpanel" aria-labelledby="repair-tab">
                             <div class="table-content">
                                 <div class='table-header'>
-                                    <table>
-                                        <tr>
-                                            <th>TRACKING #</th>
-                                            <th>DATE & TIME</th>
-                                            <th>CATEGORY</th>
-                                            <th>LOCATION</th>
-                                            <th>STATUS</th>
-                                            <th>ASSIGNEE</th>
-                                        </tr>
-                                    </table>
+                                <div class='headerskie4'>
+                                        <span class="tab4">TRACKING #</span>
+                                        <span class="tab4">DATE & TIME</span>
+                                        <span class="tab4">CATEGORY</span>
+                                        <span class="tab4">LOCATION</span>
+                                        <span class="tab4">STATUS</span>
+                                        <span class="tab4">ASSIGNED NAME</span>
+                                    </div>
                                 </div>
                                 <!--Content of table 4-->
                                 <?php
