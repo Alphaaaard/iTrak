@@ -208,6 +208,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link rel="stylesheet" href="../../src/css/reports.css" />
         <script src="../../src/js/reports.js"></script>
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
+
 
 
 
@@ -508,13 +511,17 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             <li><a href="#" class="nav-link" data-bs-target="pills-profile">Under Maintenance</a></li>
                             <li><a href="#" class="nav-link" data-bs-target="pills-replace">For Replacement</a></li>
                             <li><a href="#" class="nav-link" data-bs-target="pills-repair">Need Repair</a></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <button type="button" id="exportPdfButton" class="btn export-btn">EXPORT PDF</button>
                         </ul>
                     </div>
 
                     <!--Tab for table 1-->
                     <div class="tab-content pt" id="myTabContent">
                         <div class="tab-pane fade show active" id="pills-manager" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="table-content">
+                            <div class="table-content" id="exportContentWorking">
                                 <div class='table-header'>
                                     <div class='headerskie'>
                                         <span>TRACKING #</span>
@@ -558,7 +565,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <!--Tab for table 2-->
                         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="table-content">
+                            <div class="table-content" id="exportContentUnderMaintenance">
                                 <div class='table-header'>
                                 <div class='headerskie'>
                                         <span>TRACKING #</span>
@@ -601,7 +608,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <!--Tab for table 3 - Replacement -->
                         <div class="tab-pane fade" id="pills-replace" role="tabpanel" aria-labelledby="replace-tab">
-                            <div class="table-content">
+                            <div class="table-content" id="exportContentReplacement">
                                 <div class='table-header'>
                                 <div class='headerskie'>
                                         <span>TRACKING #</span>
@@ -644,7 +651,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <!--Tab for table 4 - Repair -->
                         <div class="tab-pane fade" id="pills-repair" role="tabpanel" aria-labelledby="repair-tab">
-                            <div class="table-content">
+                            <div class="table-content" id="exportContentNeedforRepair">
                                 <div class='table-header'>
                                 <div class='headerskie4'>
                                         <span class="tab4">TRACKING #</span>
@@ -1108,6 +1115,127 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 $("#search-box").keyup(searchTable);
             });
         </script>
+
+<script>
+function exportTableToPDF(exportContentId, filename, tableName) {
+    const exportContent = document.getElementById(exportContentId);
+
+    if (!exportContent) {
+        Swal.fire({
+            title: 'Failed!',
+            text: 'No data available to export.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+        return;
+    }
+
+    Swal.fire({
+        title: 'Preparing your PDF...',
+        text: 'Please wait...',
+        icon: 'info',
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        willOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    html2canvas(exportContent, {
+        useCORS: true,
+        scale: 2,
+        windowHeight: exportContent.scrollHeight,
+        onclone: function (clonedDocument) {
+            const clonedElement = clonedDocument.getElementById(exportContentId);
+            clonedElement.style.height = `${exportContent.scrollHeight}px`;
+        }
+    }).then(canvas => {
+        const pdf = new jspdf.jsPDF({
+            orientation: 'landscape', // Consider 'landscape' if tables are wide
+            unit: 'mm',
+            format: 'a4'
+        });
+
+        const imgData = canvas.toDataURL('image/png');
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
+        const imgWidth = pdfWidth;
+        const imgHeight = canvas.height * imgWidth / canvas.width;
+        let heightLeft = imgHeight;
+
+        pdf.setFontSize(12); // Set the title font size
+        pdf.text(tableName, 10, 10); // Add the dynamic table name as the title
+
+        let position = 20; // Adjust position to account for title
+
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pdfHeight - position; // Adjust for the initial position offset
+
+        while (heightLeft >= 0) {
+            position = (heightLeft - imgHeight) < 0 ? heightLeft : heightLeft - imgHeight;
+            pdf.addPage();
+            pdf.text(tableName, 10, 10); // Add the table name as the title on new pages as well
+            pdf.addImage(imgData, 'PNG', 0, position - pdfHeight + 20, imgWidth, imgHeight);
+            heightLeft -= pdfHeight;
+        }
+
+        pdf.save(filename);
+        
+        Swal.close();
+        Swal.fire({
+            title: 'Done!',
+            text: 'Your PDF has been downloaded.',
+            icon: 'success',
+            timer: 1000,
+            showConfirmButton: false
+        });
+    }).catch(error => {
+        Swal.fire({
+            title: 'Error!',
+            text: 'There was a problem generating the PDF.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+        console.error('Error generating PDF: ', error);
+    });
+}
+</script>
+
+<script>
+// Function to update the button's export parameters
+function updateExportButton(exportContentId, filename, tableName) {
+    const exportButton = document.getElementById('exportPdfButton');
+    exportButton.setAttribute('onclick', `exportTableToPDF('${exportContentId}', '${filename}.pdf', '${tableName}')`);
+}
+
+// Add event listeners to the nav links
+document.addEventListener('DOMContentLoaded', () => {
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            const target = link.getAttribute('data-bs-target');
+            switch (target) {
+                case 'pills-manager':
+                    updateExportButton('exportContentWorking', 'Working', 'Working');
+                    break;
+                case 'pills-profile':
+                    updateExportButton('exportContentUnderMaintenance', 'Under-Maintenance', 'Under-Maintenance');
+                    break;
+                case 'pills-replace':
+                    updateExportButton('exportContentReplacement', 'For-Replacement', 'For-Replacement');
+                    break;
+                case 'pills-repair':
+                    updateExportButton('exportContentNeedforRepair', 'Need-for-Repair', 'Need-for-Repair');
+                    break;
+                default:
+                    console.log('Unknown tab');
+            }
+        });
+    });
+});
+</script>
+
+
 
     </body>
 
