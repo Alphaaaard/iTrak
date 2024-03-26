@@ -1,6 +1,7 @@
 <?php
 
 date_default_timezone_set('Asia/Manila'); //need ata to sa lahat ng page para sa security hahah 
+$current_timestamp = date("Y-m-d H:i:s");
 ?>
 
 <!DOCTYPE html>
