@@ -514,7 +514,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             <li></li>
                             <li></li>
                             <li></li>
-                            <button type="button" id="exportPdfButton" class="btn export-btn">EXPORT PDF</button>
+                            <button type="button" class="btn export-btn" onclick="exportTableToPDF('exportContentWorking', 'Working.pdf', 'Working')">EXPORT PDF</button>
                         </ul>
                     </div>
 
