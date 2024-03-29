@@ -874,7 +874,7 @@ function exportTableToPDF(exportContentId, filename, employeeName) {
 
     html2canvas(exportContent, {
         useCORS: true,
-        scale: 2, // You might want to reduce the scale if the image is too large.
+        scale: 1, // You might want to reduce the scale if the image is too large.
         windowHeight: exportContent.scrollHeight, // This ensures the height includes all scrollable content.
         onclone: function (clonedDocument) {
             // Explicitly set the height of the cloned element to its scrollHeight.

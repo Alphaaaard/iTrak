@@ -1143,7 +1143,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                 html2canvas(exportContent, {
                     useCORS: true,
-                    scale: 2,
+                    scale: 1,
                     windowHeight: exportContent.scrollHeight,
                     onclone: function(clonedDocument) {
                         const clonedElement = clonedDocument.getElementById(exportContentId);
