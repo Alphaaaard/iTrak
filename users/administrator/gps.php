@@ -3,49 +3,30 @@ session_start();
 
 include_once("../../config/connection.php");
 
-date_default_timezone_set('Asia/Manila'); //need ata to sa lahat ng page para sa security hahah 
-
+date_default_timezone_set('Asia/Manila');
 $conn = connection();
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
-
-
-    // For personnel page, check if userLevel is 3
     if ($_SESSION['userLevel'] != 1) {
-        // If not personnel, redirect to an error page or login
         header("Location:error.php");
         exit;
     }
 
-    // for notif below
-    // Update the SQL to join with the account and asset tables to get the admin's name and asset information
     $loggedInUserFirstName = $_SESSION['firstName'];
-    $loggedInUserMiddleName = $_SESSION['middleName']; // Get the middle name from the session
+    $loggedInUserMiddleName = $_SESSION['middleName'];
     $loggedInUserLastName = $_SESSION['lastName'];
-
-    // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
-
-    $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
     $loggedInAccountId = $_SESSION['accountId'];
-    // SQL query to fetch notifications related to report activities
+
     $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
-                FROM activitylogs AS al
-               JOIN account AS acc ON al.accountID = acc.accountID
-               WHERE  al.seen = '0' AND al.accountID != ?
-               ORDER BY al.date DESC 
-               LIMIT 5"; // Set limit to 5
-
-
-    // Prepare the SQL statement
+                      FROM activitylogs AS al
+                      JOIN account AS acc ON al.accountID = acc.accountID
+                      WHERE al.seen = '0' AND al.accountID != ?
+                      ORDER BY al.date DESC
+                      LIMIT 5";
     $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
-
-    // Bind the parameter to exclude the current user's account ID
     $stmtLatestLogs->bind_param("i", $loggedInAccountId);
-
-    // Execute the query
     $stmtLatestLogs->execute();
     $resultLatestLogs = $stmtLatestLogs->get_result();
-
 
     $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
     $stmt = $conn->prepare($unseenCountQuery);
@@ -56,6 +37,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->close();
 
 
+     
 ?>
 
     <!DOCTYPE html>
@@ -277,6 +259,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </li>
             </ul>
         </section>
+
+       
         <!-- SIDEBAR -->
         <!-- CONTENT -->
         <section id="content">
@@ -300,7 +284,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         $currentDate = date('Y-m-d');
 
-                        $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp, a.color, a.picture
+                        $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp,a.qculocation, a.color, a.picture
                         FROM attendancelogs AS al
                         LEFT JOIN account AS a ON al.accountID = a.accountID
                         WHERE date = '$currentDate' AND (al.timeOut IS NULL OR al.timeOut = '') AND a.role = 'Maintenance Personnel'";
@@ -333,17 +317,19 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 echo "<div class='accordion-item'>";
                                 echo "<h2 class='accordion-header' id='" . $headerId . "'>";
-                                echo "<button class='accordion-btn gps-info' type='button' data-bs-toggle='collapse' data-bs-target='#" . $collapseId . "' aria-expanded='false' aria-controls='" . $collapseId . "' data-firstName='" . $firstName . "'>";
+                                echo "<button class='accordion-btn gps-info' type='button' data-bs-toggle='collapse' data-bs-target='#" . $collapseId . "' aria-expanded='false' aria-controls='" . $collapseId . "' data-firstName='" . $firstName . "' data-accountId='" . $accountId . "'>";
                                 echo "<img src='data:image/jpeg;base64," . base64_encode($row["picture"]) . "' alt='Profile Picture' class='rounded-img'/>";
                                 echo "<span style='color: " . $row["color"] . ";'><i class='bi bi-circle-fill'></i></span>";
                                 echo htmlspecialchars($firstName . " " . $lastName);
                                 echo "</button>";
+                                
                                 echo "</h2>";
                                 echo "<div id='" . $collapseId . "' class='accordion-collapse collapse' aria-labelledby='" . $headerId . "' data-bs-parent='#accordionGPS'>"; // Ensure this points to the main container ID
                                 echo "<div class='accordion-body'>";
                                 echo "Latitude: " . $row["latitude"] . "<br>";
                                 echo "Longitude: " . $row["longitude"] . "<br>";
-                                echo "Timestamp: " . $row["timestamp"];
+                                echo "Timestamp: " . $row["timestamp"]. "<br>";
+                                echo "Location: " . $row["qculocation"];
                                 echo "</div>"; // End of accordion body
                                 echo "</div>"; // End of accordion collapse
                                 echo "</div>"; // End of accordion item
@@ -411,6 +397,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     var latitude = location.latitude;
                                     var longitude = location.longitude;
                                     var firstName = location.firstName;
+                                    var qculocation = location.qculocation;
                                     var color = location.color || "black";
 
                                     var locationName;
@@ -423,6 +410,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         // If the marker exists, update its position and popup
                                         existingMarker.setLatLng([latitude, longitude]);
                                         existingMarker.bindPopup("Personnel: " + firstName);
+                                       
                                     } else {
                                         // If the marker doesn't exist, create a new one
                                         var newMarker = L.marker([latitude, longitude], {
@@ -437,10 +425,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     var locationCell = document.getElementById('location_' + firstName);
                                     if (locationCell) {
                                         locationCell.innerHTML = locationName;
+                                        
                                     }
                                 });
                             }
 
+
+              
+       
+ 
+                            
                             function showMarker(firstName) {
                                 console.log("Clicked on:", firstName);
 
@@ -490,7 +484,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 getLocationFromDatabase();
                                 // Refresh location every 1 minute
                                 setInterval(getLocationFromDatabase, 1000); // 1 seconds
-                            };
+                            }
+                            ;
                         </script>
 
                         <script>
@@ -526,7 +521,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         }
                                     });
                                 });
-                            });
+                            })
+                            
+                            ;
                         </script>
                         <style>
                             .custom-marker {
@@ -575,6 +572,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         </script>
 
+
+
+
+
+
         <script>
             var accordionButtons = document.querySelectorAll('.gps-info');
             accordionButtons.forEach(function(button) {
@@ -584,7 +586,36 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 });
             });
         </script>
+<script>
+   document.querySelectorAll('.gps-info').forEach(function(button) {
+    button.addEventListener('click', function() {
+        var accountId = this.getAttribute('data-accountId');
+        
+        // AJAX call to fetch personnel location
+        $.ajax({
+            type: "POST",
+            url: "fetch_personnel_location.php",
+            data: { accountId: accountId },
+            success: function(response) {
+                var locationData = JSON.parse(response);
+                if (locationData.status === "inside") {
+                
+                    // Update map with new location
+                } else if (locationData.status === "outside") {
+                   
+                } else {
+                    alert(locationData.error);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("Error: ", status, error);
+            }
+        });
+    });
+});
 
+
+</script>
         <!-- BOOTSTRAP -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <!-- BOOTSTRAP -->

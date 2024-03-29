@@ -16,7 +16,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.lastName AS adminLastName
                   FROM activitylogs AS al
                   JOIN account AS acc ON al.accountId = acc.accountId
-                  WHERE al.tab='Report' 
+                  WHERE al.tab='General' 
                   AND al.action LIKE 'Assigned maintenance personnel%'
                   ORDER BY al.date DESC 
                   LIMIT 5";
