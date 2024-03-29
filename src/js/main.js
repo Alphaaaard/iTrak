@@ -311,5 +311,21 @@ function togglePassword() {
   }
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+  const button = document.getElementById("legendButton");
+  const legendBody = document.getElementById("legendBody");
+
+  // Hide legendBody by default
+  legendBody.style.display = "none";
+
+  button.addEventListener("click", function() {
+      // Toggle the visibility of the legend body
+      legendBody.style.display = legendBody.style.display === "none" ? "block" : "none";
+  });
+});
+
+
+
+
 
 

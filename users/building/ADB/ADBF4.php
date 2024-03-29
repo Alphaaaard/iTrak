@@ -192,10 +192,36 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 <div class="content-container" id="content-container">
                     <div id="belmonte-F1" class="content">
                         <!-- ASSETS -->
-                        <img src='../image.php?id=1' style='width:100px; cursor:pointer;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal1' onclick='fetchAssetData(1);'>
-                        <img src='../image.php?id=2' style='width:100px; cursor:pointer;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal2' onclick='fetchAssetData(2);'>
                         <!-- FLOOR PLAN -->
-                        <img src="../../../src/floors/belmonteB/BB1F.png" alt="" class="Floor-container">
+                        <img src="../../../src/floors/adminB/AB4F.png" alt="" class="Floor-container">
+
+                        <div class="legend-button" id="legendButton">
+                            <i class="bi bi-info-circle"></i>
+                        </div>
+
+                        <div class="legend-body" id="legendBody">
+                            <!-- Your legend body content goes here -->
+                            <div class="legend-item"><img src="../../../src/legend/AC.jpg" alt="" class="legend-img">
+                                <p>AIRCON</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/BULB.jpg" alt="" class="legend-img">
+                                <p>BULB</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/CASSETTE-AC.jpg" alt="" class="legend-img">
+                                <p>CASSETTE AC</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/DOOR.jpg" alt="" class="legend-img">
+                                <p>DOOR</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/SWING-DOOR.jpg" alt="" class="legend-img">
+                                <p>SWING DOOR</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/TOILET-SEAT.jpg" alt="" class="legend-img">
+                                <p>TOILET SEAT</p>
+                            </div>
+                        </div>
+
+
                         <div class="map-nav">
                             <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
                             <div class="map-legend">

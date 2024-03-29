@@ -975,121 +975,121 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </a>
                 </div>
                 <div class="content-nav">
-                <div class="notification-dropdown">
+                    <div class="notification-dropdown">
 
-<a href="#" class="notification" id="notification-button">
-        <i class="fa fa-bell" aria-hidden="true"></i>
-        <!-- Notification Indicator Dot -->
-        <?php if ($unseenCount > 0) : ?>
-            <span class="notification-indicator"></span>
-        <?php endif; ?>
-    </a>
+                        <a href="#" class="notification" id="notification-button">
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+                            <!-- Notification Indicator Dot -->
+                            <?php if ($unseenCount > 0) : ?>
+                                <span class="notification-indicator"></span>
+                            <?php endif; ?>
+                        </a>
 
-    <div class="dropdown-content" id="notification-dropdown-content">
-        <h6 class="dropdown-header">Alerts Center</h6>
-        <!-- PHP code to display notifications will go here -->
-        <?php
-        if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
-            while ($row = $resultLatestLogs->fetch_assoc()) {
-                $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
-                $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
-                $actionText = $row["action"];
+                        <div class="dropdown-content" id="notification-dropdown-content">
+                            <h6 class="dropdown-header">Alerts Center</h6>
+                            <!-- PHP code to display notifications will go here -->
+                            <?php
+                            if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
+                                while ($row = $resultLatestLogs->fetch_assoc()) {
+                                    $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+                                    $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
+                                    $actionText = $row["action"];
 
-                // Initialize the notification text as empty
-                $notificationText = "";
-                if (strpos($actionText, $adminRole) === false) {
-                    // Role is not in the action text, so prepend it to the admin name
-                    $adminName = "$adminRole $adminName";
-                }
-                // Check for 'Assigned maintenance personnel' action
-                if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
-                    $assignedName = $matches[1];
-                    $assetId = $matches[2];
-                    $notificationText = "assigned $assignedName to asset ID $assetId";
-                }
-                // Check for 'Changed status of asset ID' action
-                elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
-                    $assetId = $matches[1];
-                    $newStatus = $matches[2];
-                    $notificationText = "changed status of asset ID $assetId to $newStatus";
-                }
+                                    // Initialize the notification text as empty
+                                    $notificationText = "";
+                                    if (strpos($actionText, $adminRole) === false) {
+                                        // Role is not in the action text, so prepend it to the admin name
+                                        $adminName = "$adminRole $adminName";
+                                    }
+                                    // Check for 'Assigned maintenance personnel' action
+                                    if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
+                                        $assignedName = $matches[1];
+                                        $assetId = $matches[2];
+                                        $notificationText = "assigned $assignedName to asset ID $assetId";
+                                    }
+                                    // Check for 'Changed status of asset ID' action
+                                    elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
+                                        $assetId = $matches[1];
+                                        $newStatus = $matches[2];
+                                        $notificationText = "changed status of asset ID $assetId to $newStatus";
+                                    }
 
-                // If notification text is set, echo the notification
-                if (!empty($notificationText)) {
-                    // HTML for notification item
-                    echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
-                }
-            }
-        } else {
-            // No notifications found
-            echo '<a href="#">No new notifications</a>';
-        }
-        ?>
-        <a href="activity-logs.php" class="view-all">View All</a>
+                                    // If notification text is set, echo the notification
+                                    if (!empty($notificationText)) {
+                                        // HTML for notification item
+                                        echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
+                                    }
+                                }
+                            } else {
+                                // No notifications found
+                                echo '<a href="#">No new notifications</a>';
+                            }
+                            ?>
+                            <a href="activity-logs.php" class="view-all">View All</a>
 
-    </div>
-</div>
+                        </div>
+                    </div>
 
-<a href="#" class="settings profile">
-    <div class="profile-container" title="settings">
-        <div class="profile-img">
-            <?php
-            if ($conn->connect_error) {
-                die('Connect Error (' . $conn->connect_errno . ') ' . $conn->connect_error);
-            }
+                    <a href="#" class="settings profile">
+                        <div class="profile-container" title="settings">
+                            <div class="profile-img">
+                                <?php
+                                if ($conn->connect_error) {
+                                    die('Connect Error (' . $conn->connect_errno . ') ' . $conn->connect_error);
+                                }
 
-            $userId = $_SESSION['accountId'];
-            $query = "SELECT picture FROM account WHERE accountId = ?";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param('i', $userId);
-            $stmt->execute();
-            $stmt->store_result();
+                                $userId = $_SESSION['accountId'];
+                                $query = "SELECT picture FROM account WHERE accountId = ?";
+                                $stmt = $conn->prepare($query);
+                                $stmt->bind_param('i', $userId);
+                                $stmt->execute();
+                                $stmt->store_result();
 
-            if ($stmt->num_rows > 0) {
-                $stmt->bind_result($userPicture);
-                $stmt->fetch();
+                                if ($stmt->num_rows > 0) {
+                                    $stmt->bind_result($userPicture);
+                                    $stmt->fetch();
 
-                echo "<img src='data:image/jpeg;base64," . base64_encode($userPicture) . "' title='profile-picture' />";
+                                    echo "<img src='data:image/jpeg;base64," . base64_encode($userPicture) . "' title='profile-picture' />";
+                                } else {
+                                    echo $_SESSION['firstName'];
+                                }
+
+                                $stmt->close();
+                                ?>
+                            </div>
+                            <div class="profile-name-container " id="desktop">
+                                <div><a class="profile-name">
+                                        <?php echo $_SESSION['firstName']; ?>
+                                    </a></div>
+                                <div><a class="profile-role">
+                                        <?php echo $_SESSION['role']; ?>
+                                    </a></div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <div id="settings-dropdown" class="dropdown-content1">
+                        <div class="profile-name-container" id="mobile">
+                            <div><a class="profile-name">
+                                    <?php echo $_SESSION['firstName']; ?>
+                                </a></div>
+                            <div><a class="profile-role">
+                                    <?php echo $_SESSION['role']; ?>
+                                </a></div>
+                            <hr>
+                        </div>
+                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i class="bi bi-person profile-icons"></i>Profile</a>
+                        <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
+                    </div>
+                <?php
             } else {
-                echo $_SESSION['firstName'];
+                header("Location:../../index.php");
+                exit();
             }
-
-            $stmt->close();
-            ?>
+                ?>
+                </div>
+            </nav>
         </div>
-        <div class="profile-name-container " id="desktop">
-            <div><a class="profile-name">
-                    <?php echo $_SESSION['firstName']; ?>
-                </a></div>
-            <div><a class="profile-role">
-                    <?php echo $_SESSION['role']; ?>
-                </a></div>
-        </div>
-    </div>
-</a>
-
-<div id="settings-dropdown" class="dropdown-content1">
-    <div class="profile-name-container" id="mobile">
-        <div><a class="profile-name">
-                <?php echo $_SESSION['firstName']; ?>
-            </a></div>
-        <div><a class="profile-role">
-                <?php echo $_SESSION['role']; ?>
-            </a></div>
-        <hr>
-    </div>
-    <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i class="bi bi-person profile-icons"></i>Profile</a>
-    <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
-</div>
-<?php
-} else {
-header("Location:../../index.php");
-exit();
-}
-?>
-</div>
-</nav>
-</div>
         <section id="sidebar">
             <div href="#" class="brand" title="logo">
                 <i><img src="../../../src/img/UpKeep.png" alt="" class="logo" /></i>
@@ -1154,6 +1154,31 @@ exit();
                     <div id="belmonte-F1" class="content">
                         <!-- FLOOR PLAN -->
                         <img src="../../../src/floors/multipurpose/Multipurpose1F.png" alt="" class="Floor-container">
+
+                        <div class="legend-button" id="legendButton">
+                            <i class="bi bi-info-circle"></i>
+                        </div>
+
+                        <div class="legend-body" id="legendBody">
+                            <!-- Your legend body content goes here -->
+                            <div class="legend-item"><img src="../../../src/legend/AC.jpg" alt="" class="legend-img">
+                                <p>AIRCON</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/BULB.jpg" alt="" class="legend-img">
+                                <p>BULB</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/CHAIR.jpg" alt="" class="legend-img">
+                                <p>CHAIR</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/B-TABLE.jpg" alt="" class="legend-img">
+                                <p>TABLE</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/TOILET-SEAT.jpg" alt="" class="legend-img">
+                                <p>TOILET-SEAT</p>
+                            </div>
+                        </div>
+
+
                         <div class="map-nav">
                             <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
                             <div class="map-legend">
@@ -1180,7 +1205,7 @@ exit();
                         <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7087); ?>; 
                         position:absolute; top:145px; left:355px;'>
                         </div>
-                        
+
                         <!-- ASSET 7088 -->
                         <img src='../image.php?id=7088' style='width:60PX; cursor:pointer; position:absolute; top:380px; left:230px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7088' onclick='fetchAssetData(7088);'>
                         <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7088); ?>; 
@@ -1204,79 +1229,79 @@ exit();
                         <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7091); ?>; 
                         position:absolute; top:145px; left:680px;'>
 
-                        <!-- ASSET 7092 -->
-                        <img src='../image.php?id=7092' style='width:60px; cursor:pointer; position:absolute; top:235px; left:-125px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7092' onclick='fetchAssetData(7092);'>
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7092); ?>; 
+                            <!-- ASSET 7092 -->
+                            <img src='../image.php?id=7092' style='width:60px; cursor:pointer; position:absolute; top:235px; left:-125px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7092' onclick='fetchAssetData(7092);'>
+                            <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7092); ?>; 
                         position:absolute; top:235px; left:-125px;'>
-                        </div>
+                            </div>
 
-                        <!-- ASSET 7093 -->
-                        <img src='../image.php?id=7093' style='width:60px; cursor:pointer; position:absolute; top:235px; left:0px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7093' onclick='fetchAssetData(7093);'>
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7093); ?>; 
+                            <!-- ASSET 7093 -->
+                            <img src='../image.php?id=7093' style='width:60px; cursor:pointer; position:absolute; top:235px; left:0px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7093' onclick='fetchAssetData(7093);'>
+                            <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7093); ?>; 
                         position:absolute; top:235px; left:0px;'>
-                        </div>
+                            </div>
 
-                        <!-- ASSET 7094 -->
-                        <img src='../image.php?id=7094' style='width:60px; cursor:pointer; position:absolute; top:0px; left:200px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7094' onclick='fetchAssetData(7094);'>
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7094); ?>; 
+                            <!-- ASSET 7094 -->
+                            <img src='../image.php?id=7094' style='width:60px; cursor:pointer; position:absolute; top:0px; left:200px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7094' onclick='fetchAssetData(7094);'>
+                            <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7094); ?>; 
                         position:absolute; top:0px; left:200px;'>
-                        </div>
+                            </div>
 
-                        <!-- ASSET 7095 -->
-                        <img src='../image.php?id=7095' style='width:60px; cursor:pointer; position:absolute; top:0px; left:325px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7095' onclick='fetchAssetData(7095);'>
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7095); ?>; 
+                            <!-- ASSET 7095 -->
+                            <img src='../image.php?id=7095' style='width:60px; cursor:pointer; position:absolute; top:0px; left:325px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7095' onclick='fetchAssetData(7095);'>
+                            <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7095); ?>; 
                         position:absolute; top:0px; left:325px;'>
-                        </div>
+                            </div>
 
-                        <!-- ASSET 7096 -->
-                        <img src='../image.php?id=7096' style='width:60px; cursor:pointer; position:absolute; top:235px; left:200px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7096' onclick='fetchAssetData(7096);'>
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7096); ?>; 
+                            <!-- ASSET 7096 -->
+                            <img src='../image.php?id=7096' style='width:60px; cursor:pointer; position:absolute; top:235px; left:200px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7096' onclick='fetchAssetData(7096);'>
+                            <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7096); ?>; 
                         position:absolute; top:235px; left:200px;'>
-                        </div>
+                            </div>
 
-                        <!-- ASSET 7097 -->
-                        <img src='../image.php?id=7097' style='width:60px; cursor:pointer; position:absolute; top:235px; left:325px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7097' onclick='fetchAssetData(7097);'>
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7097); ?>; 
+                            <!-- ASSET 7097 -->
+                            <img src='../image.php?id=7097' style='width:60px; cursor:pointer; position:absolute; top:235px; left:325px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7097' onclick='fetchAssetData(7097);'>
+                            <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7097); ?>; 
                         position:absolute; top:235px; left:325px;'>
-                        </div>
+                            </div>
 
-                        <!-- ASSET 7080 -->
-                        <img src='../image.php?id=7080' style='width:65px; cursor:pointer; position:absolute; top:60px; left:-390px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7080' onclick='fetchAssetData(7080);'>
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7080); ?>; 
+                            <!-- ASSET 7080 -->
+                            <img src='../image.php?id=7080' style='width:65px; cursor:pointer; position:absolute; top:60px; left:-390px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7080' onclick='fetchAssetData(7080);'>
+                            <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7080); ?>; 
                         position:absolute; top:60px; left:-390px;'>
-                        </div>
+                            </div>
 
-                        <!-- ASSET 7081 -->
-                        <img src='../image.php?id=7081' style='width:65px; cursor:pointer; position:absolute; top:60px; left:-65px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7081' onclick='fetchAssetData(7081);'>
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7081); ?>; 
+                            <!-- ASSET 7081 -->
+                            <img src='../image.php?id=7081' style='width:65px; cursor:pointer; position:absolute; top:60px; left:-65px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7081' onclick='fetchAssetData(7081);'>
+                            <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7081); ?>; 
                         position:absolute; top:60px; left:-65px;'>
-                        </div>
+                            </div>
 
-                        <!-- ASSET 7082 -->
-                        <img src='../image.php?id=7082' style='width:65px; cursor:pointer; position:absolute; top:60px; left:260px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7082' onclick='fetchAssetData(7082);'>
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7082); ?>; 
+                            <!-- ASSET 7082 -->
+                            <img src='../image.php?id=7082' style='width:65px; cursor:pointer; position:absolute; top:60px; left:260px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7082' onclick='fetchAssetData(7082);'>
+                            <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7082); ?>; 
                         position:absolute; top:60px; left:260px;'>
-                        </div>
+                            </div>
 
-                        <!-- ASSET 7083 -->
-                        <img src='../image.php?id=7083' style='width:65px; cursor:pointer; position:absolute; top:160px; left:-390px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7083' onclick='fetchAssetData(7083);'>
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7083); ?>; 
+                            <!-- ASSET 7083 -->
+                            <img src='../image.php?id=7083' style='width:65px; cursor:pointer; position:absolute; top:160px; left:-390px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7083' onclick='fetchAssetData(7083);'>
+                            <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7083); ?>; 
                         position:absolute; top:160px; left:-390px;'>
-                        </div>
+                            </div>
 
-                        <!-- ASSET 7084 -->
-                        <img src='../image.php?id=7084' style='width:65px; cursor:pointer; position:absolute; top:160px; left:-65px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7084' onclick='fetchAssetData(7084);'>
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7084); ?>; 
+                            <!-- ASSET 7084 -->
+                            <img src='../image.php?id=7084' style='width:65px; cursor:pointer; position:absolute; top:160px; left:-65px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7084' onclick='fetchAssetData(7084);'>
+                            <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7084); ?>; 
                         position:absolute; top:160px; left:-65px;'>
-                        </div>
-                        
-                        <!-- ASSET 7085 -->
-                        <img src='../image.php?id=7085' style='width:65px; cursor:pointer; position:absolute; top:160px; left:260px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7085' onclick='fetchAssetData(7085);'>
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7085); ?>; 
-                        position:absolute; top:160px; left:260px;'>
-                        </div>
+                            </div>
 
-                    </div>
+                            <!-- ASSET 7085 -->
+                            <img src='../image.php?id=7085' style='width:65px; cursor:pointer; position:absolute; top:160px; left:260px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7085' onclick='fetchAssetData(7085);'>
+                            <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7085); ?>; 
+                        position:absolute; top:160px; left:260px;'>
+                            </div>
+
+                        </div>
                         <!-- Modal structure for id 7086-->
                         <div class='modal fade' id='imageModal7086' tabindex='-1' aria-labelledby='imageModalLabel7086' aria-hidden='true'>
                             <div class='modal-dialog modal-xl modal-dialog-centered'>
@@ -3724,8 +3749,8 @@ exit();
                             </div>
                         </div>
                         </form>
-                        
-                </div>
+
+                    </div>
             </main>
         </section>
         <script>

@@ -13,10 +13,11 @@ function getAllLocationsFromDatabase()
 
     try {
 
-        $sql = "SELECT account.firstName, account.latitude, account.longitude, account.timestamp, account.color, attendancelogs.attendanceId
-                FROM attendancelogs
-                LEFT JOIN account ON account.accountId = attendancelogs.accountId
-                ORDER BY account.timestamp DESC";
+        $sql = "SELECT a.firstName, a.latitude, a.longitude, lh.*, a.color
+        FROM locationhistory AS lh
+        LEFT JOIN account AS a ON a.accountId = lh.accountId
+        ORDER BY lh.timestamp DESC";
+
         $result = $conn->query($sql);
 
         $locations = array();

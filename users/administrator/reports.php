@@ -3,9 +3,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-//  require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 
-require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
+// require '/home/u226014500/domains/itrak.website/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
@@ -114,34 +114,34 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $assetId = $_POST['assetId'];
         $assignedName = $_POST['assignedName'];
         $assignSql = "UPDATE `asset` SET `assignedName`='$assignedName' WHERE `assetId`='$assetId'";
-    
+
         if (!empty($assignSql) && $conn->query($assignSql) === TRUE) {
             logActivity($conn, $_SESSION['accountId'], "Assigned maintenance personnel $assignedName to asset ID $assetId.", 'General');
-    
+
             // Fetch the asset details
             $assetDetailsQuery = "SELECT `category`, `building`, `floor`, `room` FROM `asset` WHERE `assetId` = ?";
             $stmt = $conn->prepare($assetDetailsQuery);
             $stmt->bind_param("i", $assetId);
             $stmt->execute();
             $assetDetailsResult = $stmt->get_result();
-    
+
             if ($assetDetailsResult->num_rows > 0) {
                 $assetDetails = $assetDetailsResult->fetch_assoc();
-    
+
                 // Fetch the email of the assigned personnel
                 $emailQuery = "SELECT email FROM account WHERE CONCAT(firstName, ' ', lastName) = ?";
                 $stmt = $conn->prepare($emailQuery);
                 $stmt->bind_param("s", $assignedName);
                 $stmt->execute();
                 $emailResult = $stmt->get_result();
-    
+
                 if ($emailResult->num_rows > 0) {
                     $row = $emailResult->fetch_assoc();
                     $toEmail = $row['email'];
-    
+
                     // Set up PHPMailer
                     $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
-    
+
                     try {
                         //Server settings
                         $mail->isSMTP();
@@ -151,11 +151,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         $mail->Password = 'qvpx bbcm bgmy hcvf';
                         $mail->SMTPSecure = 'tls';
                         $mail->Port = 587;
-    
+
                         //Recipients
                         $mail->setFrom('qcu.upkeep@gmail.com', 'iTrak');
                         $mail->addAddress($toEmail);
-    
+
                         // Content
                         $mail->isHTML(true);
                         $mail->Subject = 'Task Assignment Notification';
@@ -177,7 +177,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         Administrator<br>
 
                         iTrak';
-    
+
                         $mail->send();
                     } catch (Exception $e) {
                         // Handle errors with mail sending here
@@ -189,7 +189,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         }
         header("Location: reports.php");
     }
-    
+
 
 ?>
     <!DOCTYPE html>
@@ -567,7 +567,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="table-content" id="exportContentUnderMaintenance">
                                 <div class='table-header'>
-                                <div class='headerskie'>
+                                    <div class='headerskie'>
                                         <span>TRACKING #</span>
                                         <span>DATE & TIME</span>
                                         <span>CATEGORY</span>
@@ -610,7 +610,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="tab-pane fade" id="pills-replace" role="tabpanel" aria-labelledby="replace-tab">
                             <div class="table-content" id="exportContentReplacement">
                                 <div class='table-header'>
-                                <div class='headerskie'>
+                                    <div class='headerskie'>
                                         <span>TRACKING #</span>
                                         <span>DATE & TIME</span>
                                         <span>CATEGORY</span>
@@ -653,7 +653,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="tab-pane fade" id="pills-repair" role="tabpanel" aria-labelledby="repair-tab">
                             <div class="table-content" id="exportContentNeedforRepair">
                                 <div class='table-header'>
-                                <div class='headerskie4'>
+                                    <div class='headerskie4'>
                                         <span class="tab4">TRACKING #</span>
                                         <span class="tab4">DATE & TIME</span>
                                         <span class="tab4">CATEGORY</span>
@@ -1116,124 +1116,124 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         </script>
 
-<script>
-function exportTableToPDF(exportContentId, filename, tableName) {
-    const exportContent = document.getElementById(exportContentId);
+        <script>
+            function exportTableToPDF(exportContentId, filename, tableName) {
+                const exportContent = document.getElementById(exportContentId);
 
-    if (!exportContent) {
-        Swal.fire({
-            title: 'Failed!',
-            text: 'No data available to export.',
-            icon: 'error',
-            confirmButtonText: 'OK'
-        });
-        return;
-    }
+                if (!exportContent) {
+                    Swal.fire({
+                        title: 'Failed!',
+                        text: 'No data available to export.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                    return;
+                }
 
-    Swal.fire({
-        title: 'Preparing your PDF...',
-        text: 'Please wait...',
-        icon: 'info',
-        showConfirmButton: false,
-        allowOutsideClick: false,
-        willOpen: () => {
-            Swal.showLoading();
-        }
-    });
+                Swal.fire({
+                    title: 'Preparing your PDF...',
+                    text: 'Please wait...',
+                    icon: 'info',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    willOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
 
-    html2canvas(exportContent, {
-        useCORS: true,
-        scale: 2,
-        windowHeight: exportContent.scrollHeight,
-        onclone: function (clonedDocument) {
-            const clonedElement = clonedDocument.getElementById(exportContentId);
-            clonedElement.style.height = `${exportContent.scrollHeight}px`;
-        }
-    }).then(canvas => {
-        const pdf = new jspdf.jsPDF({
-            orientation: 'landscape', // Consider 'landscape' if tables are wide
-            unit: 'mm',
-            format: 'a4'
-        });
+                html2canvas(exportContent, {
+                    useCORS: true,
+                    scale: 2,
+                    windowHeight: exportContent.scrollHeight,
+                    onclone: function(clonedDocument) {
+                        const clonedElement = clonedDocument.getElementById(exportContentId);
+                        clonedElement.style.height = `${exportContent.scrollHeight}px`;
+                    }
+                }).then(canvas => {
+                    const pdf = new jspdf.jsPDF({
+                        orientation: 'landscape', // Consider 'landscape' if tables are wide
+                        unit: 'mm',
+                        format: 'a4'
+                    });
 
-        const imgData = canvas.toDataURL('image/png');
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = pdf.internal.pageSize.getHeight();
-        const imgWidth = pdfWidth;
-        const imgHeight = canvas.height * imgWidth / canvas.width;
-        let heightLeft = imgHeight;
+                    const imgData = canvas.toDataURL('image/png');
+                    const pdfWidth = pdf.internal.pageSize.getWidth();
+                    const pdfHeight = pdf.internal.pageSize.getHeight();
+                    const imgWidth = pdfWidth;
+                    const imgHeight = canvas.height * imgWidth / canvas.width;
+                    let heightLeft = imgHeight;
 
-        pdf.setFontSize(12); // Set the title font size
-        pdf.text(tableName, 10, 10); // Add the dynamic table name as the title
+                    pdf.setFontSize(12); // Set the title font size
+                    pdf.text(tableName, 10, 10); // Add the dynamic table name as the title
 
-        let position = 20; // Adjust position to account for title
+                    let position = 20; // Adjust position to account for title
 
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pdfHeight - position; // Adjust for the initial position offset
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pdfHeight - position; // Adjust for the initial position offset
 
-        while (heightLeft >= 0) {
-            position = (heightLeft - imgHeight) < 0 ? heightLeft : heightLeft - imgHeight;
-            pdf.addPage();
-            pdf.text(tableName, 10, 10); // Add the table name as the title on new pages as well
-            pdf.addImage(imgData, 'PNG', 0, position - pdfHeight + 20, imgWidth, imgHeight);
-            heightLeft -= pdfHeight;
-        }
+                    while (heightLeft >= 0) {
+                        position = (heightLeft - imgHeight) < 0 ? heightLeft : heightLeft - imgHeight;
+                        pdf.addPage();
+                        pdf.text(tableName, 10, 10); // Add the table name as the title on new pages as well
+                        pdf.addImage(imgData, 'PNG', 0, position - pdfHeight + 20, imgWidth, imgHeight);
+                        heightLeft -= pdfHeight;
+                    }
 
-        pdf.save(filename);
-        
-        Swal.close();
-        Swal.fire({
-            title: 'Done!',
-            text: 'Your PDF has been downloaded.',
-            icon: 'success',
-            timer: 1000,
-            showConfirmButton: false
-        });
-    }).catch(error => {
-        Swal.fire({
-            title: 'Error!',
-            text: 'There was a problem generating the PDF.',
-            icon: 'error',
-            confirmButtonText: 'OK'
-        });
-        console.error('Error generating PDF: ', error);
-    });
-}
-</script>
+                    pdf.save(filename);
 
-<script>
-// Function to update the button's export parameters
-function updateExportButton(exportContentId, filename, tableName) {
-    const exportButton = document.getElementById('exportPdfButton');
-    exportButton.setAttribute('onclick', `exportTableToPDF('${exportContentId}', '${filename}.pdf', '${tableName}')`);
-}
-
-// Add event listeners to the nav links
-document.addEventListener('DOMContentLoaded', () => {
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            const target = link.getAttribute('data-bs-target');
-            switch (target) {
-                case 'pills-manager':
-                    updateExportButton('exportContentWorking', 'Working', 'Working');
-                    break;
-                case 'pills-profile':
-                    updateExportButton('exportContentUnderMaintenance', 'Under-Maintenance', 'Under-Maintenance');
-                    break;
-                case 'pills-replace':
-                    updateExportButton('exportContentReplacement', 'For-Replacement', 'For-Replacement');
-                    break;
-                case 'pills-repair':
-                    updateExportButton('exportContentNeedforRepair', 'Need-for-Repair', 'Need-for-Repair');
-                    break;
-                default:
-                    console.log('Unknown tab');
+                    Swal.close();
+                    Swal.fire({
+                        title: 'Done!',
+                        text: 'Your PDF has been downloaded.',
+                        icon: 'success',
+                        timer: 1000,
+                        showConfirmButton: false
+                    });
+                }).catch(error => {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'There was a problem generating the PDF.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                    console.error('Error generating PDF: ', error);
+                });
             }
-        });
-    });
-});
-</script>
+        </script>
+
+        <script>
+            // Function to update the button's export parameters
+            function updateExportButton(exportContentId, filename, tableName) {
+                const exportButton = document.getElementById('exportPdfButton');
+                exportButton.setAttribute('onclick', `exportTableToPDF('${exportContentId}', '${filename}.pdf', '${tableName}')`);
+            }
+
+            // Add event listeners to the nav links
+            document.addEventListener('DOMContentLoaded', () => {
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        const target = link.getAttribute('data-bs-target');
+                        switch (target) {
+                            case 'pills-manager':
+                                updateExportButton('exportContentWorking', 'Working', 'Working');
+                                break;
+                            case 'pills-profile':
+                                updateExportButton('exportContentUnderMaintenance', 'Under-Maintenance', 'Under-Maintenance');
+                                break;
+                            case 'pills-replace':
+                                updateExportButton('exportContentReplacement', 'For-Replacement', 'For-Replacement');
+                                break;
+                            case 'pills-repair':
+                                updateExportButton('exportContentNeedforRepair', 'Need-for-Repair', 'Need-for-Repair');
+                                break;
+                            default:
+                                console.log('Unknown tab');
+                        }
+                    });
+                });
+            });
+        </script>
 
 
 

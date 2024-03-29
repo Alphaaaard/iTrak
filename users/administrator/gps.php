@@ -37,7 +37,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->close();
 
 
-     
 ?>
 
     <!DOCTYPE html>
@@ -234,6 +233,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </a>
                 </li>
                 <li>
+                    <a href="./gps_history.php">
+                        <i class="bi bi-geo-alt"></i>
+                        <span class="text">GPS History</span>
+                    </a>
+                </li>
+                <li>
                     <a href="./map.php">
                         <i class="bi bi-map"></i>
                         <span class="text">Map</span>
@@ -259,8 +264,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </li>
             </ul>
         </section>
-
-       
         <!-- SIDEBAR -->
         <!-- CONTENT -->
         <section id="content">
@@ -284,11 +287,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         $currentDate = date('Y-m-d');
 
-                        $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp,a.qculocation, a.color, a.picture
-                        FROM attendancelogs AS al
-                        LEFT JOIN account AS a ON al.accountID = a.accountID
-                        WHERE date = '$currentDate' AND (al.timeOut IS NULL OR al.timeOut = '') AND a.role = 'Maintenance Personnel'";
-
+                        $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp, a.color, a.picture
+                                FROM attendancelogs AS al
+                                LEFT JOIN account AS a ON al.accountID = a.accountID
+                                WHERE date = '$currentDate' AND (al.timeOut IS NULL OR al.timeOut = '') AND a.role = 'Maintenance Personnel'";
 
                         $result = $conn->query($sql);
 
@@ -296,50 +298,44 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         if ($result->num_rows > 0) {
                             echo "<div class='accordion'id='accordionGPS'>";
                             echo "<div class='fake-header'>";
-
                             echo "<p>NAME</p>";
-
-                            // echo "<p>Location</p>";
-
                             echo "</div>";
 
                             while ($row = $result->fetch_assoc()) {
-
                                 $accountId = $row["accountId"];
                                 $firstName = $row["firstName"];
                                 $lastName = $row["lastName"];
                                 $collapseId = "collapse" . $accountId;
                                 $headerId = "heading" . $accountId;
 
-
                                 // Accordion item
                                 echo "<div class='gps-container'>";
-
                                 echo "<div class='accordion-item'>";
                                 echo "<h2 class='accordion-header' id='" . $headerId . "'>";
                                 echo "<button class='accordion-btn gps-info' type='button' data-bs-toggle='collapse' data-bs-target='#" . $collapseId . "' aria-expanded='false' aria-controls='" . $collapseId . "' data-firstName='" . $firstName . "' data-accountId='" . $accountId . "'>";
                                 echo "<img src='data:image/jpeg;base64," . base64_encode($row["picture"]) . "' alt='Profile Picture' class='rounded-img'/>";
                                 echo "<span style='color: " . $row["color"] . ";'><i class='bi bi-circle-fill'></i></span>";
                                 echo htmlspecialchars($firstName . " " . $lastName);
+                                echo "<a><i class='bi bi-arrow-counterclockwise'></i></a>";
+
                                 echo "</button>";
-                                
                                 echo "</h2>";
                                 echo "<div id='" . $collapseId . "' class='accordion-collapse collapse' aria-labelledby='" . $headerId . "' data-bs-parent='#accordionGPS'>"; // Ensure this points to the main container ID
                                 echo "<div class='accordion-body'>";
                                 echo "Latitude: " . $row["latitude"] . "<br>";
                                 echo "Longitude: " . $row["longitude"] . "<br>";
-                                echo "Timestamp: " . $row["timestamp"]. "<br>";
-                                echo "Location: " . $row["qculocation"];
+                                echo "Timestamp: " . $row["timestamp"];
                                 echo "</div>"; // End of accordion body
                                 echo "</div>"; // End of accordion collapse
                                 echo "</div>"; // End of accordion item
-                                echo "</div>"; // End of accordion item
+                                echo "</div>"; // End of gps-container
                             }
                             echo "</div>"; // Close the main container for the accordion
                         } else {
                             echo "No users found.";
                         }
                         ?>
+
                     </div>
                     <div id="map">
                         <!-- User Table Section -->
@@ -363,6 +359,96 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
                                 }).addTo(map);
 
+                                // Add custom text overlay for the Bautista Building directly to the map
+                                var bautistaBuildingText = L.marker([14.70065, 121.03241], {
+                                    icon: L.divIcon({
+                                        className: 'custom-text-overlay',
+                                        html: '<div>Bautista Building</div>'
+                                    })
+                                }).addTo(map);
+
+                                var AdminBuildingText = L.marker([14.70048, 121.03285], {
+                                    icon: L.divIcon({
+                                        className: 'custom-text-overlay',
+                                        html: '<div>Admin Building</div>'
+                                    })
+                                }).addTo(map);
+
+                                var OldAcademicBuildingText = L.marker([14.70059, 121.03327], {
+                                    icon: L.divIcon({
+                                        className: 'custom-text-overlay',
+                                        html: '<div>Old Academic Building</div>'
+                                    })
+                                }).addTo(map);
+
+                                var BelmonteBuildingText = L.marker([14.70090, 121.03305], {
+                                    icon: L.divIcon({
+                                        className: 'custom-text-overlay',
+                                        html: '<div>Belmonte Building</div>'
+                                    })
+                                }).addTo(map);
+
+                                var TechVocBuildingText = L.marker([14.70025, 121.03363], {
+                                    icon: L.divIcon({
+                                        className: 'custom-text-overlay',
+                                        html: '<div>TechVoc Building</div>'
+                                    })
+                                }).addTo(map);
+
+                                var BallroomBuildingText = L.marker([14.70057, 121.03379], {
+                                    icon: L.divIcon({
+                                        className: 'custom-text-overlay',
+                                        html: '<div>Ballroom Building</div>'
+                                    })
+                                }).addTo(map);
+
+                                var MultiBuildingText = L.marker([14.70047, 121.03396], {
+                                    icon: L.divIcon({
+                                        className: 'custom-text-overlay',
+                                        html: '<div>Multipurpose Building</div>'
+                                    })
+                                }).addTo(map);
+
+                                var NewAcadBuildingText = L.marker([14.70112, 121.03265], {
+                                    icon: L.divIcon({
+                                        className: 'custom-text-overlay',
+                                        html: '<div>New Academic Building</div>'
+                                    })
+                                }).addTo(map);
+
+                                // Define the coordinates for the rectangle vertices
+                                var rectangleVertices = [
+                                    [14.70104 - 0.00007, 121.03274 - 0.0002], // Lower left corner
+                                    [14.70104 - 0.00007, 121.03274 + 0.0002], // Upper left corner
+                                    [14.70104 + 0.00007, 121.03274 + 0.0002], // Upper right corner
+                                    [14.70104 + 0.00007, 121.03274 - 0.0002] // Lower right corner
+                                ];
+
+                                // Define the rotation angle in degrees
+                                var rotationAngleDegrees = 20;
+
+                                // Convert the rotation angle to radians
+                                var rotationAngleRadians = rotationAngleDegrees * (Math.PI / 180);
+
+                                // Rotate each vertex by the specified angle around the center of the rectangle
+                                var center = [(rectangleVertices[0][0] + rectangleVertices[2][0]) / 2, (rectangleVertices[0][1] + rectangleVertices[2][1]) / 2];
+                                var rotatedVertices = rectangleVertices.map(function(vertex) {
+                                    var dx = vertex[0] - center[0];
+                                    var dy = vertex[1] - center[1];
+                                    var newX = center[0] + dx * Math.cos(rotationAngleRadians) - dy * Math.sin(rotationAngleRadians);
+                                    var newY = center[1] + dx * Math.sin(rotationAngleRadians) + dy * Math.cos(rotationAngleRadians);
+                                    return [newX, newY];
+                                });
+
+
+                                // Create a polygon using the rotated vertices
+                                var rotatedRectangle = L.polygon(rotatedVertices, {
+                                    color: "#d9d0c9",
+                                    fillColor: "#d9d0c9", // Set the fill color
+                                    fillOpacity: 1 // Optionally set the fill opacity
+                                }).addTo(map);
+
+
                                 // Reset view to initial coordinates after delay during drag
                                 map.on('dragstart', function() {
                                     clearTimeout(dragTimeout);
@@ -385,7 +471,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 return L.divIcon({
                                     className: 'custom-marker',
                                     iconSize: [20, 20],
-                                    html: '<div style="background-color: ' + color + '; width: 20px; height: 20px; border-radius: 50%;"></div>',
+                                    html: '<div style="background-color: ' + color + '; width: 15px; height: 15px; border-radius: 50%; border: 2px solid white;"></div>',
                                 });
                             }
 
@@ -410,7 +496,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         // If the marker exists, update its position and popup
                                         existingMarker.setLatLng([latitude, longitude]);
                                         existingMarker.bindPopup("Personnel: " + firstName);
-                                       
                                     } else {
                                         // If the marker doesn't exist, create a new one
                                         var newMarker = L.marker([latitude, longitude], {
@@ -425,16 +510,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     var locationCell = document.getElementById('location_' + firstName);
                                     if (locationCell) {
                                         locationCell.innerHTML = locationName;
-                                        
                                     }
                                 });
                             }
 
-
-              
-       
- 
-                            
                             function showMarker(firstName) {
                                 console.log("Clicked on:", firstName);
 
@@ -484,8 +563,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 getLocationFromDatabase();
                                 // Refresh location every 1 minute
                                 setInterval(getLocationFromDatabase, 1000); // 1 seconds
-                            }
-                            ;
+                            };
                         </script>
 
                         <script>
@@ -521,9 +599,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         }
                                     });
                                 });
-                            })
-                            
-                            ;
+                            });
                         </script>
                         <style>
                             .custom-marker {
@@ -586,36 +662,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 });
             });
         </script>
-<script>
-   document.querySelectorAll('.gps-info').forEach(function(button) {
-    button.addEventListener('click', function() {
-        var accountId = this.getAttribute('data-accountId');
-        
-        // AJAX call to fetch personnel location
-        $.ajax({
-            type: "POST",
-            url: "fetch_personnel_location.php",
-            data: { accountId: accountId },
-            success: function(response) {
-                var locationData = JSON.parse(response);
-                if (locationData.status === "inside") {
-                
-                    // Update map with new location
-                } else if (locationData.status === "outside") {
-                   
-                } else {
-                    alert(locationData.error);
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error("Error: ", status, error);
-            }
-        });
-    });
-});
 
-
-</script>
         <!-- BOOTSTRAP -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <!-- BOOTSTRAP -->

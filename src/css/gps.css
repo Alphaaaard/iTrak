@@ -7,6 +7,12 @@
   padding: 0;
 }
 
+.custom-text-overlay{
+  cursor:default;
+  font-size: 8px;
+}
+
+
 .content {
   display: block;
 }

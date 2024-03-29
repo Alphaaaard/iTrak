@@ -2315,21 +2315,17 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
             <!--End of div for attendance report chart-->
+
             <div class="calendar-container">
                 <div class="calendar">
-
                     <div class="month-indicator">
-
                         <span class="today-btn">Today</span>
-
                         <input type="text" id="datepicker" style="display: none;">
-
                         <div class="date-selector">
                             <span class="month clickMe span-label">January</span>
                             <span class="year clickMe span-label-2">2024</span>
                         </div>
                     </div>
-
                     <div class="calendar-ulit">
                         <div class="day-of-week">
                             <div>SUN</div>
@@ -2340,16 +2336,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             <div>FRI</div>
                             <div>SAT</div>
                         </div>
-
                         <div class="date-grid">
                             <!-- Dynamically generated dates will go here -->
                         </div>
                     </div>
-
                 </div>
-
             </div>
             <!--End of div for calendar-container-->
+
             <!-- Building Filter and Chart Container -->
             <div class="doughnut-chart-container">
                 <div class="statistics">

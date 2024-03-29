@@ -25,6 +25,7 @@
 
 .content {
   display: none; /* Hide all content initially */
+  background-color: white;
 }
 
 .active-content {
@@ -299,7 +300,7 @@
 .closeFloor {
   position: absolute;
   left: 50px;
-  bottom: 40px;
+  top: 40px;
   font-size: 1.5em;
 }
 
@@ -404,6 +405,47 @@ h3 {
   border: unset !important;
 }
 
+.legend-button {
+  display: inline-block;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  position: fixed;
+  top: 13%;
+  right: 3%;
+  font-size: 1.1em;
+}
+
+.legend-body {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 16.5%;
+  right: 60px;
+  background-color: white;
+  /* height: 250px; */
+  width: 200px;
+  z-index: 2;
+  border-radius: 5px;
+  padding: 15px;
+  border: 1px solid black;
+}
+
+.legend-item{
+  display: flex;
+  gap: 1em;
+}
+
+.legend-img{
+  height: 20px;
+  width: 20px;
+}
+
+
+/* .legend-button:hover {
+  background-color: #0056b3;
+} */
+
+
 @media (max-width: 992px) {
   .content-container {
     overflow: hidden;
@@ -491,5 +533,21 @@ h3 {
   .nav-container {
     height: 60vh;
     margin: auto 1em;
+  }
+
+  .closeFloor {
+    position: fixed;
+    left: 6%;
+    top: 14%;
+    font-size: 1.1em !important;
+  }
+
+  .legend-button {
+    top: 12.6%;
+    right: 5%;
+  }
+
+  .legend-body {
+    top: 17%;
   }
 }
