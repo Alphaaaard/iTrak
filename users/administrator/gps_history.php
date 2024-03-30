@@ -382,6 +382,95 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
                                 }).addTo(map);
 
+                                // Add custom text overlay for the Bautista Building directly to the map
+                                var bautistaBuildingText = L.marker([14.70065, 121.03241], {
+                                    icon: L.divIcon({
+                                        className: 'custom-text-overlay',
+                                        html: '<div>Bautista Building</div>'
+                                    })
+                                }).addTo(map);
+
+                                var AdminBuildingText = L.marker([14.70048, 121.03285], {
+                                    icon: L.divIcon({
+                                        className: 'custom-text-overlay',
+                                        html: '<div>Admin Building</div>'
+                                    })
+                                }).addTo(map);
+
+                                var OldAcademicBuildingText = L.marker([14.70059, 121.03327], {
+                                    icon: L.divIcon({
+                                        className: 'custom-text-overlay',
+                                        html: '<div>Old Academic Building</div>'
+                                    })
+                                }).addTo(map);
+
+                                var BelmonteBuildingText = L.marker([14.70090, 121.03305], {
+                                    icon: L.divIcon({
+                                        className: 'custom-text-overlay',
+                                        html: '<div>Belmonte Building</div>'
+                                    })
+                                }).addTo(map);
+
+                                var TechVocBuildingText = L.marker([14.70025, 121.03363], {
+                                    icon: L.divIcon({
+                                        className: 'custom-text-overlay',
+                                        html: '<div>TechVoc Building</div>'
+                                    })
+                                }).addTo(map);
+
+                                var BallroomBuildingText = L.marker([14.70057, 121.03379], {
+                                    icon: L.divIcon({
+                                        className: 'custom-text-overlay',
+                                        html: '<div>Ballroom Building</div>'
+                                    })
+                                }).addTo(map);
+
+                                var MultiBuildingText = L.marker([14.70047, 121.03396], {
+                                    icon: L.divIcon({
+                                        className: 'custom-text-overlay',
+                                        html: '<div>Multipurpose Building</div>'
+                                    })
+                                }).addTo(map);
+
+                                var NewAcadBuildingText = L.marker([14.70112, 121.03265], {
+                                    icon: L.divIcon({
+                                        className: 'custom-text-overlay',
+                                        html: '<div>New Academic Building</div>'
+                                    })
+                                }).addTo(map);
+
+                                // Define the coordinates for the rectangle vertices
+                                var rectangleVertices = [
+                                    [14.70104 - 0.00007, 121.03274 - 0.0002], // Lower left corner
+                                    [14.70104 - 0.00007, 121.03274 + 0.0002], // Upper left corner
+                                    [14.70104 + 0.00007, 121.03274 + 0.0002], // Upper right corner
+                                    [14.70104 + 0.00007, 121.03274 - 0.0002] // Lower right corner
+                                ];
+
+                                // Define the rotation angle in degrees
+                                var rotationAngleDegrees = 20;
+
+                                // Convert the rotation angle to radians
+                                var rotationAngleRadians = rotationAngleDegrees * (Math.PI / 180);
+
+                                // Rotate each vertex by the specified angle around the center of the rectangle
+                                var center = [(rectangleVertices[0][0] + rectangleVertices[2][0]) / 2, (rectangleVertices[0][1] + rectangleVertices[2][1]) / 2];
+                                var rotatedVertices = rectangleVertices.map(function(vertex) {
+                                    var dx = vertex[0] - center[0];
+                                    var dy = vertex[1] - center[1];
+                                    var newX = center[0] + dx * Math.cos(rotationAngleRadians) - dy * Math.sin(rotationAngleRadians);
+                                    var newY = center[1] + dx * Math.sin(rotationAngleRadians) + dy * Math.cos(rotationAngleRadians);
+                                    return [newX, newY];
+                                });
+
+
+                                // Create a polygon using the rotated vertices
+                                var rotatedRectangle = L.polygon(rotatedVertices, {
+                                    color: "#d9d0c9",
+                                    fillColor: "#d9d0c9", // Set the fill color
+                                    fillOpacity: 1 // Optionally set the fill opacity
+                                }).addTo(map);
+
                                 // Reset view to initial coordinates after delay during drag
                                 map.on('dragstart', function() {
                                     clearTimeout(dragTimeout);
@@ -404,7 +493,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 return L.divIcon({
                                     className: 'custom-marker',
                                     iconSize: [20, 20],
-                                    html: '<div style="background-color: ' + color + '; width: 20px; height: 20px; border-radius: 50%;"></div>',
+                                    html: '<div style="background-color: ' + color + '; width: 15px; height: 15px; border-radius: 50%; border: 2px solid white;"></div>',
                                 });
                             }
 
@@ -434,6 +523,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     var latitude = location.latitude;
                                     var longitude = location.longitude;
                                     var firstName = location.firstName;
+                                    var qculocation = location.qculocation;
                                     var timestamp = location.timestamp; // Add timestamp
                                     var color = location.color || "black";
 
@@ -443,7 +533,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     }).addTo(map);
 
                                     // Construct the popup content with first name and timestamp
-                                    var popupContent = "Personnel: " + firstName + "<br>Timestamp: " + new Date(timestamp).toLocaleString();
+                                    var popupContent = "Personnel: " + firstName + "<br>" + "Location: " + qculocation + "<br> Timestamp: " + new Date(timestamp).toLocaleString();
 
                                     marker.bindPopup(popupContent);
 
@@ -469,12 +559,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     color: 'blue'
                                 }).addTo(map);
                             }
-
-
-
-
-
-
 
                             function showMarker(firstName) {
                                 console.log("Clicked on:", firstName);

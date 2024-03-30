@@ -485,10 +485,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     var longitude = location.longitude;
                                     var firstName = location.firstName;
                                     var qculocation = location.qculocation;
+                                    var timestamp = location.timestamp; // Added timestamp
                                     var color = location.color || "black";
 
-                                    // Combine first name and location for marker
-                                    var locationInfo = "Firstname: " + firstName + "<br>" + "Location: " + qculocation;
+                                    // Combine first name, location, and timestamp for marker
+                                    var locationInfo = "Firstname: " + firstName + "<br>" + "Location: " + qculocation + "<br>" + "Timestamp: " + timestamp;
 
                                     // Check if a marker with this firstName already exists
                                     var existingMarker = markersByFirstName[firstName];
@@ -516,6 +517,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     }
                                 });
                             }
+
 
 
 
