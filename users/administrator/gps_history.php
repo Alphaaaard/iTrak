@@ -598,7 +598,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     }
                                 };
 
-                                xmlhttp.open("GET", "get_location.php", true);
+                                xmlhttp.open("GET", "get_location_history.php", true);
                                 xmlhttp.send();
                             }
 

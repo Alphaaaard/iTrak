@@ -2,8 +2,8 @@
 
 include_once("../../config/connection.php");
 
-// Function to get locations for a specific account from the database
-function getLocationsForAccount($accountId)
+// Function to get all locations from the database
+function getAllLocationsFromDatabase()
 {
     $conn = connection();
 
@@ -12,20 +12,13 @@ function getLocationsForAccount($accountId)
     }
 
     try {
-        $sql = "SELECT lh.id, lh.accountid, lh.latitude, lh.longitude, lh.timestamp, a.firstName, a.lastName
-                FROM locationhistory AS lh
-                INNER JOIN account AS a ON lh.accountid = a.accountId
-                WHERE lh.accountid = ?
-                ORDER BY lh.timestamp DESC";
 
-        $stmt = $conn->prepare($sql);
+        $sql = "SELECT a.firstName, a.latitude, a.longitude, lh.*, a.color
+        FROM locationhistory AS lh
+        LEFT JOIN account AS a ON a.accountId = lh.accountId
+        ORDER BY lh.timestamp DESC";
 
-        // Bind the accountId parameter
-        $stmt->bind_param("i", $accountId);
-
-        $stmt->execute();
-
-        $result = $stmt->get_result();
+        $result = $conn->query($sql);
 
         $locations = array();
 
@@ -37,30 +30,12 @@ function getLocationsForAccount($accountId)
     } catch (Exception $e) {
         return array('error' => $e->getMessage());
     } finally {
-        $stmt->close(); // Close the prepared statement
-        $conn->close(); // Close the database connection
+        $conn->close();
     }
 }
 
-// Check if accountId is set in the URL
-if (isset($_GET['accountId'])) {
-    $accountId = $_GET['accountId'];
-    $locations = getLocationsForAccount($accountId);
-} else {
-    // Handle case where accountId is not provided
-    $locations = array('error' => 'No accountId provided');
-}
+// Get all locations from the database
+$locations = getAllLocationsFromDatabase();
 
-// Display the location history data
-if (!empty($locations)) {
-    // Output location history data as per your requirements
-    // For example, you could iterate over $locations and display each location
-    foreach ($locations as $location) {
-        echo "Latitude: " . $location['latitude'] . "<br>";
-        echo "Longitude: " . $location['longitude'] . "<br>";
-        echo "Timestamp: " . $location['timestamp'] . "<br>";
-        // Add more fields as needed
-    }
-} else {
-    echo "No location history found.";
-}
+// Send response back to the JavaScript code
+echo json_encode($locations);
