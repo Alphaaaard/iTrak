@@ -13,7 +13,7 @@ function getAllLocationsFromDatabase()
 
     try {
 
-        $sql = "SELECT a.firstName, a.latitude, a.longitude, lh.*, a.color
+        $sql = "SELECT a.firstName, a.latitude, a.longitude, a.qculocation, lh.*, a.color
         FROM locationhistory AS lh
         LEFT JOIN account AS a ON a.accountId = lh.accountId
         ORDER BY lh.timestamp DESC";
