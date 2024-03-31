@@ -338,7 +338,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 echo "<div class='accordion-item'>";
                                 echo "<h2 class='accordion-header' id='" . $headerId . "'>";
-                                echo "<button class='accordion-btn gps-info' type='button' data-bs-toggle='collapse' data-bs-target='#" . $collapseId . "' aria-expanded='false' aria-controls='" . $collapseId . "' data-firstName='" . $firstName . "'>";
+                                echo "<button class='accordion-btn gps-info' type='button' data-bs-toggle='collapse' data-bs-target='#" . $collapseId . "' aria-expanded='false' aria-controls='" . $collapseId . "' data-firstName='" . $firstName . "' data-accountId='" . $accountId . "'>";
+
                                 echo "<img src='data:image/jpeg;base64," . base64_encode($row["picture"]) . "' alt='Profile Picture' class='rounded-img'/>";
 
                                 echo "</button>";
@@ -578,7 +579,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
-                            function getLocationFromDatabase() {
+                            function getLocationFromDatabase(accountId) {
+    // Clear the map
+    clearMap();
                                 // Fetch the locations from the server
                                 var xmlhttp = new XMLHttpRequest();
                                 xmlhttp.onreadystatechange = function() {
@@ -598,7 +601,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     }
                                 };
 
-                                xmlhttp.open("GET", "get_location_history.php", true);
+                                xmlhttp.open("GET", "get_location_history.php?accountId=" + encodeURIComponent(accountId), true);
+
+                            
                                 xmlhttp.send();
                             }
 
@@ -607,8 +612,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             window.onload = function() {
                                 initMap();
                                 getLocationFromDatabase();
-                                // Refresh location every 1 minute
-                                setInterval(getLocationFromDatabase, 1000); // 1 seconds
+                               
+
+
+                         
                             };
                         </script>
 
@@ -647,6 +654,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 });
                             });
                         </script>
+
+      
                         <style>
                             .custom-marker {
                                 width: 20px;
@@ -685,24 +694,38 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/profileModalController.js"></script>
 
         <script>
-            // Assuming showMarker is defined elsewhere to handle the map logic
-            document.querySelectorAll('.gps-info').forEach(function(button) {
-                button.addEventListener('click', function() {
-                    var firstName = this.getAttribute('data-firstName');
-                    showMarker(firstName); // Call the showMarker function with the clicked person's first name
-                });
-            });
-        </script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.body.addEventListener('click', function(e) {
+        if (e.target && e.target.classList.contains('gps-info')) {
+            var accountId = e.target.getAttribute('data-accountId');
+            console.log('Account ID:', accountId);
 
-        <script>
-            var accordionButtons = document.querySelectorAll('.gps-info');
-            accordionButtons.forEach(function(button) {
-                button.addEventListener('click', function() {
-                    var firstName = this.getAttribute('data-firstName');
-                    showMarker(firstName); // Call the showMarker function with the clicked person's first name
-                });
-            });
-        </script>
+            // Check if data is already loaded for this account ID
+            if (!markersByFirstName.hasOwnProperty(accountId)) {
+                getLocationFromDatabase(accountId);
+            }
+        }
+    });
+});
+
+
+
+
+    function clearMap() {
+        // Assuming 'markers' is an array holding your marker instances
+        markers.forEach(marker => map.removeLayer(marker));
+        markers = []; // Clear the array
+
+        // If you have a polyline, remove it as well
+        if (polyline) {
+            map.removeLayer(polyline);
+
+            polyline = null; // Clear the polyline reference
+        }
+    }
+</script>
+
+       
 
         <!-- BOOTSTRAP -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
