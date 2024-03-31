@@ -1,9 +1,9 @@
 <?php
 session_start();
-include_once("../../../config/connection.php");
+include_once ("../../../config/connection.php");
 date_default_timezone_set('Asia/Manila');
 $conn = connection();
- //need ata to sa lahat ng page para sa security hahah 
+//need ata to sa lahat ng page para sa security hahah 
 
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
@@ -2174,7 +2174,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $assignedBy7248 = $row7248['assignedBy'];
     $upload_img7248 = $row7248['upload_img'];
     $description7248 = $row7248['description'];
-    
+
     //FOR ID 7249 BULB
     $sql7249 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7249";
     $stmt7249 = $conn->prepare($sql7249);
@@ -2408,7 +2408,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $assignedBy7261 = $row7261['assignedBy'];
     $upload_img7261 = $row7261['upload_img'];
     $description7261 = $row7261['description'];
-    
+
 
 
     //FOR ID 7262 DESK
@@ -2600,7 +2600,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         // Prepare SQL query to update the asset
         $sql4 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt4 = $conn->prepare($sql4);
-        $stmt4->bind_param('sssssi', $status4, $assignedName4,  $assignedBy4, $description4, $room4, $assetId4);
+        $stmt4->bind_param('sssssi', $status4, $assignedName4, $assignedBy4, $description4, $room4, $assetId4);
 
         if ($stmt4->execute()) {
             // Update success
@@ -2628,7 +2628,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         // Prepare SQL query to update the asset
         $sql5 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
         $stmt5 = $conn->prepare($sql5);
-        $stmt5->bind_param('sssssi', $status5, $assignedName5,   $assignedBy5, $description5, $room5, $assetId5);
+        $stmt5->bind_param('sssssi', $status5, $assignedName5, $assignedBy5, $description5, $room5, $assetId5);
 
         if ($stmt5->execute()) {
             // Update success
@@ -6343,63 +6343,63 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->fetch();
     $stmt->close();
 
-?>
+    ?>
 
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>iTrak | Map</title>
-    <link rel="icon" type="image/x-icon" href="../../../src/img/tab-logo.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="../../../src/css/main.css" />
-    <link rel="stylesheet" href="../../buildingCSS/NEB/NEWBF1.css" />
-    <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>iTrak | Map</title>
+        <link rel="icon" type="image/x-icon" href="../../../src/img/tab-logo.png">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <link rel="stylesheet" href="../../../src/css/main.css" />
+        <link rel="stylesheet" href="../../buildingCSS/NEB/NEWBF1.css" />
+        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="../../../src/css/map.css" />
-</head>
-<style>
-    .notification-indicator {
-        display: inline-block;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: red;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-    }
-</style>
+        <link rel="stylesheet" href="../../../src/css/map.css" />
+    </head>
+    <style>
+        .notification-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: red;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
 
-<body>
-    <div id="navbar" class="">
-        <nav>
-            <div class="hamburger">
-                <i class="bi bi-list"></i>
-                <a href="#" class="brand" title="logo">
-                </a>
-            </div>
-            <div class="content-nav">
-                <div class="notification-dropdown">
-
-                    <a href="#" class="notification" id="notification-button">
-                        <i class="fa fa-bell" aria-hidden="true"></i>
-                        <!-- Notification Indicator Dot -->
-                        <?php if ($unseenCount > 0) : ?>
-                        <span class="notification-indicator"></span>
-                        <?php endif; ?>
+    <body>
+        <div id="navbar" class="">
+            <nav>
+                <div class="hamburger">
+                    <i class="bi bi-list"></i>
+                    <a href="#" class="brand" title="logo">
                     </a>
+                </div>
+                <div class="content-nav">
+                    <div class="notification-dropdown">
 
-                    <div class="dropdown-content" id="notification-dropdown-content">
-                        <h6 class="dropdown-header">Alerts Center</h6>
-                        <!-- PHP code to display notifications will go here -->
-                        <?php
+                        <a href="#" class="notification" id="notification-button">
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+                            <!-- Notification Indicator Dot -->
+                            <?php if ($unseenCount > 0): ?>
+                                <span class="notification-indicator"></span>
+                            <?php endif; ?>
+                        </a>
+
+                        <div class="dropdown-content" id="notification-dropdown-content">
+                            <h6 class="dropdown-header">Alerts Center</h6>
+                            <!-- PHP code to display notifications will go here -->
+                            <?php
                             if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
                                 while ($row = $resultLatestLogs->fetch_assoc()) {
                                     $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
@@ -6436,15 +6436,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 echo '<a href="#">No new notifications</a>';
                             }
                             ?>
-                        <a href="activity-logs.php" class="view-all">View All</a>
+                            <a href="activity-logs.php" class="view-all">View All</a>
 
+                        </div>
                     </div>
-                </div>
 
-                <a href="#" class="settings profile">
-                    <div class="profile-container" title="settings">
-                        <div class="profile-img">
-                            <?php
+                    <a href="#" class="settings profile">
+                        <div class="profile-container" title="settings">
+                            <div class="profile-img">
+                                <?php
                                 if ($conn->connect_error) {
                                     die('Connect Error (' . $conn->connect_errno . ') ' . $conn->connect_error);
                                 }
@@ -6467,38 +6467,38 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 $stmt->close();
                                 ?>
+                            </div>
+                            <div class="profile-name-container " id="desktop">
+                                <div><a class="profile-name">
+                                        <?php echo $_SESSION['firstName']; ?>
+                                    </a></div>
+                                <div><a class="profile-role">
+                                        <?php echo $_SESSION['role']; ?>
+                                    </a></div>
+                            </div>
                         </div>
-                        <div class="profile-name-container " id="desktop">
+                    </a>
+
+                    <div id="settings-dropdown" class="dropdown-content1">
+                        <div class="profile-name-container" id="mobile">
                             <div><a class="profile-name">
                                     <?php echo $_SESSION['firstName']; ?>
                                 </a></div>
                             <div><a class="profile-role">
                                     <?php echo $_SESSION['role']; ?>
                                 </a></div>
+                            <hr>
                         </div>
+                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i
+                                class="bi bi-person profile-icons"></i>Profile</a>
+                        <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
                     </div>
-                </a>
-
-                <div id="settings-dropdown" class="dropdown-content1">
-                    <div class="profile-name-container" id="mobile">
-                        <div><a class="profile-name">
-                                <?php echo $_SESSION['firstName']; ?>
-                            </a></div>
-                        <div><a class="profile-role">
-                                <?php echo $_SESSION['role']; ?>
-                            </a></div>
-                        <hr>
-                    </div>
-                    <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i
-                            class="bi bi-person profile-icons"></i>Profile</a>
-                    <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
-                </div>
-                <?php
-            } else {
-                header("Location:../../index.php");
-                exit();
-            }
-                ?>
+                    <?php
+} else {
+    header("Location:../../index.php");
+    exit();
+}
+?>
             </div>
         </nav>
     </div>
@@ -6567,33 +6567,34 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <!-- FLOOR PLAN -->
                     <img class="Floor-container-1" src="../../../src/floors/newAcademicB/NAB1F.png" alt="">
                     <div class="legend-button" id="legendButton">
-                            <i class="bi bi-info-circle"></i>
-                        </div>
+                        <i class="bi bi-info-circle"></i>
+                    </div>
 
-                        <div class="legend-body" id="legendBody">
-                            <!-- Your legend body content goes here -->
-                            <div class="legend-item"><img src="../../../src/legend/BED.jpg" alt="" class="legend-img">
-                                <p>BED</p>
-                            </div>
-                            <div class="legend-item"><img src="../../../src/legend/BULB.jpg" alt="" class="legend-img">
-                                <p>BULB</p>
-                            </div>
-                            <div class="legend-item"><img src="../../../src/legend/CHAIR.jpg" alt="" class="legend-img">
-                                <p>CHAIR</p>
-                            </div>
-                            <div class="legend-item"><img src="../../../src/legend/DESK.jpg" alt="" class="legend-img">
-                                <p>DESK</p>
-                            </div>
-                            <div class="legend-item"><img src="../../../src/legend/SOFA.jpg" alt="" class="legend-img">
-                                <p>SOFA</p>
-                            </div>
-                            <div class="legend-item"><img src="../../../src/legend/TABLE.jpg" alt="" class="legend-img">
-                                <p>TABLE</p>
-                            </div>
-                            <div class="legend-item"><img src="../../../src/legend/TOILET-SEAT.jpg" alt="" class="legend-img">
-                                <p>TOILET SEAT</p>
-                            </div>
+                    <div class="legend-body" id="legendBody">
+                        <!-- Your legend body content goes here -->
+                        <div class="legend-item"><img src="../../../src/legend/BED.jpg" alt="" class="legend-img">
+                            <p>BED</p>
                         </div>
+                        <div class="legend-item"><img src="../../../src/legend/BULB.jpg" alt="" class="legend-img">
+                            <p>BULB</p>
+                        </div>
+                        <div class="legend-item"><img src="../../../src/legend/CHAIR.jpg" alt="" class="legend-img">
+                            <p>CHAIR</p>
+                        </div>
+                        <div class="legend-item"><img src="../../../src/legend/DESK.jpg" alt="" class="legend-img">
+                            <p>DESK</p>
+                        </div>
+                        <div class="legend-item"><img src="../../../src/legend/SOFA.jpg" alt="" class="legend-img">
+                            <p>SOFA</p>
+                        </div>
+                        <div class="legend-item"><img src="../../../src/legend/TABLE.jpg" alt="" class="legend-img">
+                            <p>TABLE</p>
+                        </div>
+                        <div class="legend-item"><img src="../../../src/legend/TOILET-SEAT.jpg" alt=""
+                                class="legend-img">
+                            <p>TOILET SEAT</p>
+                        </div>
+                    </div>
 
                     <div class="map-nav">
                         <a href="../../administrator/map.php" class="closeFloor"><i
@@ -8485,14 +8486,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status1=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status1=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status1=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status1=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status1 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status1 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status1 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status1 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -8635,14 +8636,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status2=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status2=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status2=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status2=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status2 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status2 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status2 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status2 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -8785,14 +8786,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status3=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status3=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status3=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status3=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status3 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status3 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status3 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status3 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -8935,14 +8936,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status4=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status4=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status4=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status4=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status4 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status4 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status4 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status4 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -9086,14 +9087,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status5=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status5=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status5=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status5=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status5 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status5 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status5 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status5 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -9236,14 +9237,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status6=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status6=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status6=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status6=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status6 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status6 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status6 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status6 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -9386,14 +9387,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -9536,14 +9537,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status8=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status8=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status8=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status8=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status8 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status8 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status8 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status8 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -9686,14 +9687,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status9=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status9=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status9=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status9=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status9 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status9 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status9 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status9 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -9836,14 +9837,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status10=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status10=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status10=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status10=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status10 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status10 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status10 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status10 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -9986,14 +9987,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status11=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status11=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status11=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status11=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status11 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status11 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status11 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status11 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -10136,14 +10137,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status12=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status12=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status12=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status12=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status12 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status12 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status12 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status12 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -10286,14 +10287,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status13=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status13=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status13=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status13=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status13 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status13 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status13 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status13 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -10436,14 +10437,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status14=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status14=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status14=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status14=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status14 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status14 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status14 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status14 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -10586,14 +10587,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status15=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status15=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status15=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status15=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status15 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status15 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status15 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status15 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -10736,14 +10737,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status16=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status16=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status16=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status16=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status16 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status16 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status16 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status16 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -10886,14 +10887,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status17=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status17=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status17=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status17=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status17 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status17 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status17 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status17 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -11036,14 +11037,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status18=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status18=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status18=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status18=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status18 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status18 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status18 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status18 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -11186,14 +11187,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status19=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status19=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status19=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status19=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status19 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status19 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status19 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status19 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -11336,14 +11337,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status20=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status20=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status20=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status20=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status20 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status20 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status20 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status20 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -11486,14 +11487,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status21=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status21=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status21=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status21=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status21 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status21 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status21 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status21 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -11636,14 +11637,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status22=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status22=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status22=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status22=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status22 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status22 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status22 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status22 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -11786,14 +11787,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status23=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status23=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status23=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status23=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status23 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status23 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status23 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status23 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -11939,14 +11940,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status1368=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status1368=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status1368=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status1368=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status1368 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status1368 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status1368 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status1368 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -12090,14 +12091,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status25=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status25=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status25=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status25=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status25 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status25 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status25 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status25 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -12240,14 +12241,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status26=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status26=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status26=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status26=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status26 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status26 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status26 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status26 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -12390,14 +12391,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status27=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status27=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status27=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status27=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status27 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status27 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status27 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status27 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -12540,14 +12541,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status28=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status28=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status28=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status28=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status28 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status28 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status28 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status28 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -12690,14 +12691,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status29=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status29=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status29=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status29=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status29 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status29 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status29 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status29 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -12840,14 +12841,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status30=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status30=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status30=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status30=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status30 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status30 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status30 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status30 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -12990,14 +12991,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status31=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status31=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status31=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status31=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status31 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status31 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status31 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status31 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -13140,14 +13141,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status32=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status32=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status32=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status32=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status32 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status32 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status32 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status32 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -13290,14 +13291,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status33=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status33=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status33=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status33=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status33 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status33 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status33 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status33 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -13440,14 +13441,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status34=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status34=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status34=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status34=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status34 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status34 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status34 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status34 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -13590,14 +13591,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status35=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status35=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status35=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status35=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status35 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status35 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status35 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status35 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -13740,14 +13741,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status36=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status36=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status36=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status36=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status36 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status36 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status36 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status36 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -13890,14 +13891,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status37=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status37=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status37=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status37=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status37 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status37 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status37 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status37 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -14040,14 +14041,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status38=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status38=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status38=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status38=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status38 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status38 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status38 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status38 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -14190,14 +14191,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status39=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status39=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status39=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status39=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status39 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status39 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status39 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status39 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -14340,14 +14341,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status40=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status40=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status40=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status40=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status40 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status40 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status40 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status40 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -14493,14 +14494,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status1374=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status1374=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status1374=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status1374=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status1374 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status1374 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status1374 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status1374 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -14646,14 +14647,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status898=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status898=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status898=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status898=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status898 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status898 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status898 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status898 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -14798,14 +14799,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status899=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status899=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status899=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status899=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status899 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status899 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status899 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status899 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -14950,14 +14951,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status901=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status901=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status901=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status901=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status901 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status901 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status901 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status901 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -15102,14 +15103,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status902=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status902=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status902=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status902=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status902 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status902 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status902 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status902 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -15254,14 +15255,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status6866=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status6866=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status6866=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status6866=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status6866 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status6866 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status6866 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status6866 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -15406,14 +15407,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7262=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7262=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7262=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7262=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7262 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7262 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7262 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7262 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -15558,14 +15559,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7263=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7263=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7263=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7263=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7263 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7263 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7263 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7263 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -15710,14 +15711,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7264=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7264=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7264=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7264=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7264 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7264 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7264 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7264 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -15862,14 +15863,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7265=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7265=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7265=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7265=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7265 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7265 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7265 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7265 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -16014,14 +16015,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7266=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7266=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7266=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7266=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7266 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7266 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7266 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7266 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -16166,14 +16167,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7138=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7138=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7138=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7138=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7138 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7138 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7138 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7138 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -16318,14 +16319,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7139=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7139=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7139=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7139=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7139 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7139 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7139 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7139 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -16470,14 +16471,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7140=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7140=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7140=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7140=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7140 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7140 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7140 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7140 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -16622,14 +16623,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7141=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7141=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7141=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7141=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7141 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7141 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7141 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7141 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -16774,14 +16775,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7142=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7142=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7142=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7142=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7142 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7142 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7142 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7142 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -16926,14 +16927,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7143=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7143=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7143=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7143=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7143 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7143 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7143 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7143 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -17078,14 +17079,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7144=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7144=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7144=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7144=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7144 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7144 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7144 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7144 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -17230,14 +17231,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7145=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7145=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7145=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7145=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7145 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7145 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7145 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7145 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -17382,14 +17383,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7146=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7146=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7146=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7146=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7146 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7146 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7146 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7146 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -17534,14 +17535,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7147=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7147=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7147=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7147=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7147 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7147 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7147 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7147 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -17686,14 +17687,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7148=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7148=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7148=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7148=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7148 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7148 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7148 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7148 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -17838,14 +17839,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7149=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7149=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7149=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7149=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7149 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7149 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7149 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7149 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -17990,14 +17991,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7150=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7150=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7150=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7150=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7150 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7150 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7150 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7150 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -18142,14 +18143,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7151=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7151=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7151=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7151=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7151 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7151 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7151 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7151 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -18294,14 +18295,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7152=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7152=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7152=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7152=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7152 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7152 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7152 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7152 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -18446,14 +18447,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7153=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7153=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7153=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7153=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7153 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7153 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7153 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7153 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -18598,14 +18599,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7154=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7154=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7154=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7154=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7154 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7154 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7154 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7154 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -18750,14 +18751,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7155=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7155=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7155=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7155=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7155 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7155 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7155 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7155 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -18902,14 +18903,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7156=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7156=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7156=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7156=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7156 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7156 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7156 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7156 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -19054,14 +19055,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7157=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7157=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7157=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7157=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7157 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7157 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7157 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7157 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -19206,14 +19207,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7158=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7158=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7158=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7158=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7158 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7158 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7158 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7158 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -19358,14 +19359,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7159=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7159=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7159=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7159=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7159 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7159 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7159 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7159 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -19510,14 +19511,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7160=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7160=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7160=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7160=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7160 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7160 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7160 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7160 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -19662,14 +19663,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7161=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7161=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7161=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7161=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7161 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7161 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7161 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7161 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -19814,14 +19815,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7162=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7162=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7162=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7162=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7162 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7162 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7162 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7162 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -19966,14 +19967,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7163=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7163=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7163=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7163=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7163 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7163 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7163 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7163 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -20118,14 +20119,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7164=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7164=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7164=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7164=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7164 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7164 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7164 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7164 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -20270,14 +20271,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7165=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7165=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7165=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7165=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7165 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7165 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7165 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7165 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -20422,14 +20423,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7166=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7166=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7166=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7166=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7166 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7166 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7166 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7166 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -20574,14 +20575,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7167=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7167=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7167=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7167=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7167 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7167 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7167 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7167 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -20726,14 +20727,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7168=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7168=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7168=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7168=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7168 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7168 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7168 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7168 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -20878,14 +20879,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7169=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7169=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7169=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7169=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7169 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7169 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7169 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7169 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -21030,14 +21031,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7170=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7170=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7170=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7170=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7170 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7170 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7170 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7170 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -21182,14 +21183,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7171=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7171=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7171=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7171=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7171 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7171 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7171 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7171 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -21334,14 +21335,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7172=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7172=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7172=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7172=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7172 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7172 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7172 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7172 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -21486,14 +21487,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7173=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7173=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7173=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7173=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7173 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7173 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7173 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7173 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -21638,14 +21639,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7174=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7174=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7174=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7174=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7174 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7174 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7174 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7174 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -21790,14 +21791,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7175=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7175=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7175=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7175=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7175 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7175 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7175 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7175 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -21942,14 +21943,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7176=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7176=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7176=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7176=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7176 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7176 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7176 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7176 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -22094,14 +22095,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7177=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7177=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7177=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7177=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7177 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7177 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7177 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7177 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -22246,14 +22247,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7178=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7178=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7178=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7178=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7178 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7178 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7178 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7178 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -22398,14 +22399,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7179=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7179=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7179=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7179=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7179 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7179 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7179 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7179 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -22550,14 +22551,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7180=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7180=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7180=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7180=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7180 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7180 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7180 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7180 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -22702,14 +22703,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7181=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7181=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7181=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7181=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7181 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7181 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7181 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7181 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -22854,14 +22855,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7182=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7182=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7182=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7182=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7182 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7182 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7182 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7182 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -23006,14 +23007,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7183=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7183=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7183=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7183=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7183 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7183 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7183 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7183 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -23158,14 +23159,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7245=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7245=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7245=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7245=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7245 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7245 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7245 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7245 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -23310,14 +23311,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7246=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7246=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7246=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7246=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7246 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7246 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7246 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7246 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -23462,14 +23463,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7247=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7247=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7247=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7247=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7247 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7247 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7247 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7247 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -23614,14 +23615,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7248=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7248=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7248=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7248=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7248 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7248 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7248 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7248 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -23766,14 +23767,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7249=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7249=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7249=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7249=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7249 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7249 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7249 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7249 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -23918,14 +23919,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7250=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7250=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7250=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7250=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7250 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7250 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7250 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7250 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -24070,14 +24071,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7251=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7251=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7251=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7251=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7251 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7251 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7251 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7251 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -24222,14 +24223,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7252=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7252=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7252=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7252=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7252 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7252 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7252 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7252 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -24374,14 +24375,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7253=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7253=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7253=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7253=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7253 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7253 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7253 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7253 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -24526,14 +24527,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7254=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7254=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7254=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7254=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7254 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7254 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7254 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7254 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -24678,14 +24679,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7255=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7255=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7255=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7255=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7255 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7255 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7255 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7255 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -24830,14 +24831,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7256=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7256=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7256=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7256=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7256 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7256 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7256 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7256 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -24982,14 +24983,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7257=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7257=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7257=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7257=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7257 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7257 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7257 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7257 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -25134,14 +25135,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7258=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7258=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7258=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7258=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7258 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7258 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7258 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7258 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -25286,14 +25287,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7259=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7259=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7259=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7259=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7259 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7259 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7259 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7259 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -25438,14 +25439,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7260=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7260=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7260=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7260=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7260 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7260 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7260 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7260 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -25590,14 +25591,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7261=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7261=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7261=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7261=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7261 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7261 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7261 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7261 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -25742,14 +25743,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7184=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7184=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7184=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7184=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7184 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7184 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7184 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7184 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -25894,14 +25895,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7185=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7185=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7185=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7185=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7185 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7185 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7185 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7185 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -26046,14 +26047,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7186=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7186=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7186=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7186=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7186 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7186 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7186 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7186 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -26198,14 +26199,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7187=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7187=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7187=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7187=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7187 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7187 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7187 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7187 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -26350,14 +26351,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7188=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7188=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7188=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7188=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7188 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7188 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7188 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7188 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -26502,14 +26503,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7189=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7189=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7189=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7189=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7189 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7189 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7189 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7189 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -26654,14 +26655,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7190=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7190=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7190=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7190=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7190 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7190 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7190 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7190 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -26806,14 +26807,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7191=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7191=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7191=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7191=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7191 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7191 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7191 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7191 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -26958,14 +26959,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7192=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7192=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7192=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7192=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7192 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7192 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7192 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7192 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -27110,14 +27111,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7193=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7193=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7193=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7193=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7193 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7193 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7193 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7193 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -27262,14 +27263,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7194=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7194=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7194=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7194=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7194 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7194 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7194 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7194 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -27414,14 +27415,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7195=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7195=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7195=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7195=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7195 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7195 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7195 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7195 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -27566,14 +27567,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7196=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7196=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7196=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7196=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7196 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7196 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7196 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7196 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -27718,14 +27719,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7197=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7197=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7197=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7197=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7197 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7197 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7197 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7197 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -27870,14 +27871,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7198=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7198=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7198=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7198=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7198 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7198 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7198 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7198 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -28022,14 +28023,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7199=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7199=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7199=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7199=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7199 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7199 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7199 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7199 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -28174,14 +28175,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7200=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7200=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7200=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7200=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7200 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7200 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7200 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7200 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -28326,14 +28327,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7201=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7201=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7201=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7201=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7201 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7201 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7201 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7201 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -28478,14 +28479,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7202=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7202=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7202=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7202=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7202 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7202 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7202 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7202 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -28630,14 +28631,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7203=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7203=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7203=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7203=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7203 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7203 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7203 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7203 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
@@ -28782,14 +28783,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-6">
                                     <select class="form-select" id="status" name="status">
-                                        <option value="Working" <?php echo ($status7204=='Working' )
-                                            ? 'selected="selected"' : '' ; ?>>Working</option>
-                                        <option value="Under Maintenance" <?php echo ($status7204=='Under Maintenance' )
-                                            ? 'selected="selected"' : '' ; ?>>Under Maintenance</option>
-                                        <option value="For Replacement" <?php echo ($status7204=='For Replacement' )
-                                            ? 'selected="selected"' : '' ; ?>>For Replacement</option>
-                                        <option value="Need Repair" <?php echo ($status7204=='Need Repair' )
-                                            ? 'selected="selected"' : '' ; ?>>Need Repair</option>
+                                        <option value="Working" <?php echo ($status7204 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status7204 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status7204 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status7204 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                     </select>
                                 </div>
 
