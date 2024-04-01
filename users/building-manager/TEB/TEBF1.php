@@ -3432,7 +3432,7 @@ position:absolute; top:205px; left:297px;'>
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                         </div>
                                         <!--End of Sixth Row-->
 
@@ -3571,7 +3571,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-8">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -3709,7 +3709,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-8">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -3848,7 +3848,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-8">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -3987,7 +3987,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-8">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -4125,7 +4125,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-8">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -4262,7 +4262,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-8">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -4400,7 +4400,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-8">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -4538,7 +4538,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -4677,7 +4677,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -4816,7 +4816,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -4953,7 +4953,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -5091,7 +5091,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -5229,7 +5229,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -5371,7 +5371,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -5513,7 +5513,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -5652,7 +5652,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -5791,7 +5791,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -5933,7 +5933,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -6069,7 +6069,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -6207,7 +6207,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -6344,7 +6344,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -6482,7 +6482,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -6618,7 +6618,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -6755,7 +6755,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -6892,7 +6892,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -7030,7 +7030,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -7167,7 +7167,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -7305,7 +7305,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -7444,7 +7444,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -7582,7 +7582,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -7720,7 +7720,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -7859,7 +7859,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -7997,7 +7997,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -8135,7 +8135,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -8274,7 +8274,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -8412,7 +8412,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -8550,7 +8550,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -8688,7 +8688,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -8826,7 +8826,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -8964,7 +8964,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -9102,7 +9102,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -9240,7 +9240,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -9378,7 +9378,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -9515,7 +9515,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -9653,7 +9653,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -9789,7 +9789,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -9925,7 +9925,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -10062,7 +10062,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -10198,7 +10198,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -10335,7 +10335,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -10472,7 +10472,7 @@ position:absolute; top:205px; left:297px;'>
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 

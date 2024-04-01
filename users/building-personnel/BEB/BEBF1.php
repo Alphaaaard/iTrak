@@ -14834,8 +14834,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -14968,8 +14967,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -15102,8 +15100,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -15236,8 +15233,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -15371,8 +15367,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -15506,8 +15501,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -15641,8 +15635,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -15776,8 +15769,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -15911,8 +15903,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -16046,8 +16037,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -16181,8 +16171,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -16316,8 +16305,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -16451,8 +16439,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -16586,8 +16573,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -16721,8 +16707,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -16856,8 +16841,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -16991,8 +16975,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -17126,8 +17109,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -17261,8 +17243,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -17396,8 +17377,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -17531,8 +17511,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -17666,8 +17645,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -17801,8 +17779,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -17936,8 +17913,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -18071,8 +18047,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -18206,8 +18181,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -18341,8 +18315,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -18476,8 +18449,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -18611,8 +18583,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -18746,8 +18717,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -18881,8 +18851,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -19016,8 +18985,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -19151,8 +19119,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -19286,8 +19253,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -19421,8 +19387,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -19556,8 +19521,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -19691,8 +19655,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -19826,8 +19789,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -19961,8 +19923,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -20096,8 +20057,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -20231,8 +20191,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -20366,8 +20325,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -20501,8 +20459,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -20636,8 +20593,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -20771,8 +20727,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -20906,8 +20861,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -21041,8 +20995,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -21176,8 +21129,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -21311,8 +21263,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -21446,8 +21397,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -21581,8 +21531,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -21716,8 +21665,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -21851,8 +21799,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -21986,8 +21933,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -22121,8 +22067,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -22256,8 +22201,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -22391,8 +22335,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -22526,8 +22469,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -22661,8 +22603,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -22796,8 +22737,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -22931,8 +22871,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -23066,8 +23005,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -23201,8 +23139,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -23336,8 +23273,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -23471,8 +23407,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -23606,8 +23541,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -23741,8 +23675,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -23876,8 +23809,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -24011,8 +23943,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -24146,8 +24077,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -24281,8 +24211,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -24416,8 +24345,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -24551,8 +24479,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -24686,8 +24613,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -24821,8 +24747,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -24956,8 +24881,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -25091,8 +25015,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -25226,8 +25149,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -25361,8 +25283,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -25496,8 +25417,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -25631,8 +25551,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -25766,8 +25685,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -25901,8 +25819,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -26036,8 +25953,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -26171,8 +26087,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -26306,8 +26221,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -26441,8 +26355,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -26576,8 +26489,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -26711,8 +26623,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -26846,8 +26757,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -26981,8 +26891,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -27116,8 +27025,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -27251,8 +27159,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -27386,8 +27293,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -27521,8 +27427,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -27656,8 +27561,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -27791,8 +27695,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -27926,8 +27829,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -28061,8 +27963,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -28196,8 +28097,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -28331,8 +28231,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -28466,8 +28365,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -28601,8 +28499,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -28736,8 +28633,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -28871,8 +28767,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -29006,8 +28901,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -29141,8 +29035,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -29276,8 +29169,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -29411,8 +29303,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -29546,8 +29437,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -29681,8 +29571,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -29816,8 +29705,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -29951,8 +29839,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -30086,8 +29973,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -30221,8 +30107,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -30356,8 +30241,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -30491,8 +30375,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -30626,8 +30509,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -30761,8 +30643,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -30896,8 +30777,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -31031,8 +30911,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -31166,8 +31045,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -31301,8 +31179,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -31436,8 +31313,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -31571,8 +31447,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -31706,8 +31581,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -31841,8 +31715,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -31976,8 +31849,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -32111,8 +31983,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -32246,8 +32117,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -32381,8 +32251,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -32516,8 +32385,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -32651,8 +32519,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -32786,8 +32653,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -32921,8 +32787,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -33056,8 +32921,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -33191,8 +33055,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -33326,8 +33189,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -33461,8 +33323,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -33596,8 +33457,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -33731,8 +33591,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -33866,8 +33725,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -34001,8 +33859,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -34136,8 +33993,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -34271,8 +34127,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -34406,8 +34261,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -34541,8 +34395,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -34676,8 +34529,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -34811,8 +34663,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -34946,8 +34797,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -35081,8 +34931,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -35216,8 +35065,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -35351,8 +35199,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -35486,8 +35333,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -35621,8 +35467,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -35756,8 +35601,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -35891,8 +35735,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -36026,8 +35869,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -36161,8 +36003,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -36296,8 +36137,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -36431,8 +36271,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -36566,8 +36405,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -36701,8 +36539,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -36836,8 +36673,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -36971,8 +36807,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -37106,8 +36941,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -37241,8 +37075,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -37376,8 +37209,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -37511,8 +37343,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -37646,8 +37477,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -37781,8 +37611,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -37916,8 +37745,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -38051,8 +37879,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -38186,8 +38013,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -38321,8 +38147,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -38456,8 +38281,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -38591,8 +38415,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -38726,8 +38549,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -38861,8 +38683,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -38996,8 +38817,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -39131,8 +38951,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -39266,8 +39085,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -39401,8 +39219,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -39536,8 +39353,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -39671,8 +39487,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -39806,8 +39621,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -39941,8 +39755,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -40076,8 +39889,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -40211,8 +40023,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -40346,8 +40157,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -40481,8 +40291,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -40616,8 +40425,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -40751,8 +40559,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -40886,8 +40693,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -41021,8 +40827,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -41156,8 +40961,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -41291,8 +41095,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -41426,8 +41229,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -41561,8 +41363,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -41696,8 +41497,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -41831,8 +41631,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -41966,8 +41765,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -42101,8 +41899,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -42236,8 +42033,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -42371,8 +42167,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -42506,8 +42301,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -42641,8 +42435,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -42776,8 +42569,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -42911,8 +42703,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -43046,8 +42837,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -43181,8 +42971,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -43316,8 +43105,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -43451,8 +43239,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -43586,8 +43373,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -43721,8 +43507,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -43856,8 +43641,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -43991,8 +43775,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -44126,8 +43909,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -44261,8 +44043,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -44396,8 +44177,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -44531,8 +44311,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -44666,8 +44445,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -44801,8 +44579,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -44936,8 +44713,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -45071,8 +44847,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -45206,8 +44981,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -45341,8 +45115,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -45476,8 +45249,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -45611,8 +45383,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -45746,8 +45517,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -45881,8 +45651,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -46016,8 +45785,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -46151,8 +45919,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -46286,8 +46053,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -46421,8 +46187,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -46556,8 +46321,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -46691,8 +46455,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -46826,8 +46589,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -46961,8 +46723,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -47096,8 +46857,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -47231,8 +46991,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -47366,8 +47125,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -47501,8 +47259,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -47636,8 +47393,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -47771,8 +47527,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -47906,8 +47661,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -48041,8 +47795,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -48176,8 +47929,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -48311,8 +48063,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -48446,8 +48197,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -48581,8 +48331,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -48716,8 +48465,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -48851,8 +48599,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -48986,8 +48733,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -49121,8 +48867,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -49256,8 +49001,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -49391,8 +49135,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -49526,8 +49269,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -49661,8 +49403,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -49796,8 +49537,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -49931,8 +49671,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -50066,8 +49805,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -50201,8 +49939,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -50336,8 +50073,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -50471,8 +50207,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -50606,8 +50341,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -50741,8 +50475,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -50876,8 +50609,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -51011,8 +50743,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -51146,8 +50877,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -51281,8 +51011,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -51416,8 +51145,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -51551,8 +51279,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -51686,8 +51413,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -51821,8 +51547,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -51956,8 +51681,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -52091,8 +51815,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -52226,8 +51949,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -52361,8 +52083,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -52496,8 +52217,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -52631,8 +52351,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">
@@ -52766,8 +52485,7 @@ $stmt->close();
                                             <label for="upload_img" class="form-label">Upload:</label>
                                         </div>
                                         <div class="col-10">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                        </div>
+                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                        </div>
                                         <!--End of Sixth Row-->
                                         <!-- Modal footer -->
                                         <div class="button-submit-container">

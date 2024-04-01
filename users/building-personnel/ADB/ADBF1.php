@@ -2015,7 +2015,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -2151,7 +2151,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -2286,7 +2286,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -2421,7 +2421,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -2556,7 +2556,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -2691,7 +2691,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -2826,7 +2826,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -2961,7 +2961,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -3096,7 +3096,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -3231,7 +3231,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -3366,7 +3366,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -3501,7 +3501,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -3636,7 +3636,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -3771,7 +3771,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -3906,7 +3906,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -4041,7 +4041,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -4176,7 +4176,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -4311,7 +4311,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -4446,7 +4446,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -4581,7 +4581,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -4716,7 +4716,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -4851,7 +4851,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -4986,7 +4986,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -5121,7 +5121,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -5256,7 +5256,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -5391,7 +5391,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -5526,7 +5526,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -5661,7 +5661,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -5796,7 +5796,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
@@ -5931,7 +5931,7 @@ $stmt->close();
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
                                     </div>
                                     <!--End of Sixth Row-->
 
