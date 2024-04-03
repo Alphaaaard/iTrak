@@ -23,6 +23,10 @@
   cursor: auto !important;
 }
 
+.Upload{
+  display: flex;
+}
+
 .content {
   display: none; /* Hide all content initially */
   background-color: white;
