@@ -10406,1212 +10406,2807 @@ exit();
                                 <p>For replacement</p>
                             </div>
                         </div>
-                        <!-- ASSETS -->
-
-                        <!-- ASSET 7272 -->
-                        <img src='../image.php?id=7272' style='width:20px; cursor:pointer; position:absolute; top:80px; left:485px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7272' onclick='fetchAssetData(7272);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7272); ?>; 
-                        position:absolute; top:77px; left:500px;'>
-                        </div>
-                        <!-- ASSET 7273 -->
-                        <img src='../image.php?id=7273' style='width:20px; cursor:pointer; position:absolute; top:80px; left:520px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7273' onclick='fetchAssetData(7273);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7273); ?>; 
-                        position:absolute; top:77px; left:535px;'>
-                        </div>
-                        <!-- ASSET 7274 -->
-                        <img src='../image.php?id=7274' style='width:20px; cursor:pointer; position:absolute; top:140px; left:485px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7274' onclick='fetchAssetData(7274);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7274); ?>; 
-                        position:absolute; top:137px; left:500px;'>
-                        </div>
-                        <!-- ASSET 7275 -->
-                        <img src='../image.php?id=7275' style='width:20px; cursor:pointer; position:absolute; top:140px; left:520px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7275' onclick='fetchAssetData(7275);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7275); ?>; 
-                        position:absolute; top:137px; left:535px;'>
-                        </div>
-                        <!-- ASSET 6947 -->
-                        <img src='../image.php?id=6947' style='width:20px; cursor:pointer; position:absolute; top:322px; left:859px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6947' onclick='fetchAssetData(6947);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6947); ?>; 
-                        position:absolute; top:322px; left:874px;'>
-                        </div>
-                        <!-- ASSET 6946 -->
-                        <img src='../image.php?id=6946' style='width:20px; cursor:pointer; position:absolute; top:252px; left:859px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6946' onclick='fetchAssetData(6946);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6946); ?>; 
-                        position:absolute; top:252px; left:874px;'>
-                        </div>
-                        <!-- ASSET 6945 -->
-                        <img src='../image.php?id=6945' style='width:20px; cursor:pointer; position:absolute; top:182px; left:859px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6945' onclick='fetchAssetData(6945);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6945); ?>; 
-                        position:absolute; top:182px; left:874px;'>
-                        </div>
-                        <!-- ASSET 6944 -->
-                        <img src='../image.php?id=6944' style='width:20px; cursor:pointer; position:absolute; top:322px; left:759px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6944' onclick='fetchAssetData(6944);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6944); ?>; 
-                        position:absolute; top:322px; left:774px;'>
-                        </div>
-                        <!-- ASSET 6943 -->
-                        <img src='../image.php?id=6943' style='width:20px; cursor:pointer; position:absolute; top:252px; left:759px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6943' onclick='fetchAssetData(6943);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6943); ?>; 
-                        position:absolute; top:252px; left:774px;'>
-                        </div>
-                        <!-- ASSET 6942 -->
-                        <img src='../image.php?id=6942' style='width:20px; cursor:pointer; position:absolute; top:182px; left:759px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6942' onclick='fetchAssetData(6942);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6942); ?>; 
-                        position:absolute; top:182px; left:774px;'>
-                        </div>
-                        <!-- ASSET 6941 -->
-                        <img src='../image.php?id=6941' style='width:20px; cursor:pointer; position:absolute; top:322px; left:659px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6941' onclick='fetchAssetData(6941);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6941); ?>; 
-                        position:absolute; top:322px; left:674px;'>
-                        </div>
-                        <!-- ASSET 6940 -->
-                        <img src='../image.php?id=6940' style='width:20px; cursor:pointer; position:absolute; top:252px; left:659px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6940' onclick='fetchAssetData(6940);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6940); ?>; 
-                        position:absolute; top:252px; left:674px;'>
-                        </div>
-                        <!-- ASSET 6939 -->
-                        <img src='../image.php?id=6939' style='width:20px; cursor:pointer; position:absolute; top:182px; left:659px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6939' onclick='fetchAssetData(6939);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6939); ?>; 
-                        position:absolute; top:182px; left:674px;'>
-                        </div>
-                        <!-- ASSET 6938 -->
-                        <img src='../image.php?id=6938' style='width:20px; cursor:pointer; position:absolute; top:182px; left:799px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6938' onclick='fetchAssetData(6938);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6938); ?>; 
-                        position:absolute; top:182px; left:795px;'>
-                        </div>
-                        <!-- ASSET 6937 -->
-                        <img src='../image.php?id=6937' style='width:20px; cursor:pointer; position:absolute; top:252px; left:799px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6937' onclick='fetchAssetData(6937);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6937); ?>; 
-                        position:absolute; top:252px; left:795px;'>
-                        </div>
-                        <!-- ASSET 6936 -->
-                        <img src='../image.php?id=6936' style='width:20px; cursor:pointer; position:absolute; top:322px; left:799px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6936' onclick='fetchAssetData(6936);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6936); ?>; 
-                        position:absolute; top:322px; left:795px;'>
-                        </div>
-                        <!-- ASSET 6935 -->
-                        <img src='../image.php?id=6935' style='width:20px; cursor:pointer; position:absolute; top:182px; left:699px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6935' onclick='fetchAssetData(6935);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6935); ?>; 
-                        position:absolute; top:182px; left:695px;'>
-                        </div>
-                        <!-- ASSET 6934 -->
-                        <img src='../image.php?id=6934' style='width:20px; cursor:pointer; position:absolute; top:252px; left:699px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6934' onclick='fetchAssetData(6934);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6934); ?>; 
-                        position:absolute; top:252px; left:695px;'>
-                        </div>
-                        <!-- ASSET 6933 -->
-                        <img src='../image.php?id=6933' style='width:20px; cursor:pointer; position:absolute; top:322px; left:699px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6933' onclick='fetchAssetData(6933);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6933); ?>; 
-                        position:absolute; top:322px; left:695px;'>
-                        </div>
-                        <!-- ASSET 6932 -->
-                        <img src='../image.php?id=6932' style='width:20px; cursor:pointer; position:absolute; top:182px; left:599px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6932' onclick='fetchAssetData(6932);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6932); ?>; 
-                        position:absolute; top:182px; left:595px;'>
-                        </div>
-                        <!-- ASSET 6931 -->
-                        <img src='../image.php?id=6931' style='width:20px; cursor:pointer; position:absolute; top:252px; left:599px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6931' onclick='fetchAssetData(6931);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6931); ?>; 
-                        position:absolute; top:252px; left:595px;'>
-                        </div>
-                        <!-- ASSET 6930 -->
-                        <img src='../image.php?id=6930' style='width:20px; cursor:pointer; position:absolute; top:322px; left:599px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6930' onclick='fetchAssetData(6930);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6930); ?>; 
-                        position:absolute; top:322px; left:595px;'>
-                        </div>
-                        <!-- ASSET 6929 -->
-                        <img src='../image.php?id=6929' style='width:16px; cursor:pointer; position:absolute; top:347px; left:850px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6929' onclick='fetchAssetData(6929);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6929); ?>; 
-                        position:absolute; top:347px; left:860px;'>
-                        </div>
-                        <!-- ASSET 6928 -->
-                        <img src='../image.php?id=6928' style='width:16px; cursor:pointer; position:absolute; top:347px; left:835px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6928' onclick='fetchAssetData(6928);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6928); ?>; 
-                        position:absolute; top:347px; left:845px;'>
-                        </div>
-                        <!-- ASSET 6927 -->
-                        <img src='../image.php?id=6927' style='width:16px; cursor:pointer; position:absolute; top:347px; left:820px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6927' onclick='fetchAssetData(6927);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6927); ?>; 
-                        position:absolute; top:347px; left:830px;'>
-                        </div>
-                        <!-- ASSET 6926 -->
-                        <img src='../image.php?id=6926' style='width:16px; cursor:pointer; position:absolute; top:347px; left:750px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6926' onclick='fetchAssetData(6926);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6926); ?>; 
-                        position:absolute; top:347px; left:760px;'>
-                        </div>
-                        <!-- ASSET 6925 -->
-                        <img src='../image.php?id=6925' style='width:16px; cursor:pointer; position:absolute; top:347px; left:735px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6925' onclick='fetchAssetData(6925);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6925); ?>; 
-                        position:absolute; top:347px; left:745px;'>
-                        </div>
-                        <!-- ASSET 6924 -->
-                        <img src='../image.php?id=6924' style='width:16px; cursor:pointer; position:absolute; top:347px; left:720px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6924' onclick='fetchAssetData(6924);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6924); ?>; 
-                        position:absolute; top:347px; left:730px;'>
-                        </div>
-                        <!-- ASSET 6923 -->
-                        <img src='../image.php?id=6923' style='width:16px; cursor:pointer; position:absolute; top:347px; left:650px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6923' onclick='fetchAssetData(6923);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6923); ?>; 
-                        position:absolute; top:347px; left:660px;'>
-                        </div>
-                        <!-- ASSET 6922 -->
-                        <img src='../image.php?id=6922' style='width:16px; cursor:pointer; position:absolute; top:347px; left:635px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6922' onclick='fetchAssetData(6922);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6922); ?>; 
-                        position:absolute; top:347px; left:645px;'>
-                        </div>
-                        <!-- ASSET 6921 -->
-                        <img src='../image.php?id=6921' style='width:16px; cursor:pointer; position:absolute; top:347px; left:620px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6921' onclick='fetchAssetData(6921);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6921); ?>; 
-                        position:absolute; top:347px; left:630px;'>
-                        </div>
-                        <!-- ASSET 6920 -->
-                        <img src='../image.php?id=6920' style='width:16px; cursor:pointer; position:absolute; top:277px; left:850px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6920' onclick='fetchAssetData(6920);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6920); ?>; 
-                        position:absolute; top:277px; left:860px;'>
-                        </div>
-                        <!-- ASSET 6919 -->
-                        <img src='../image.php?id=6919' style='width:16px; cursor:pointer; position:absolute; top:277px; left:835px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6919' onclick='fetchAssetData(6919);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6919); ?>; 
-                        position:absolute; top:277px; left:845px;'>
-                        </div>
-                        <!-- ASSET 6918 -->
-                        <img src='../image.php?id=6918' style='width:16px; cursor:pointer; position:absolute; top:277px; left:820px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6918' onclick='fetchAssetData(6918);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6918); ?>; 
-                        position:absolute; top:277px; left:830px;'>
-                        </div>
-                        <!-- ASSET 6917 -->
-                        <img src='../image.php?id=6917' style='width:16px; cursor:pointer; position:absolute; top:277px; left:750px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6917' onclick='fetchAssetData(6917);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6917); ?>; 
-                        position:absolute; top:277px; left:760px;'>
-                        </div>
-                        <!-- ASSET 6916 -->
-                        <img src='../image.php?id=6916' style='width:16px; cursor:pointer; position:absolute; top:277px; left:735px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6916' onclick='fetchAssetData(6916);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6916); ?>; 
-                        position:absolute; top:277px; left:745px;'>
-                        </div>
-                        <!-- ASSET 6915 -->
-                        <img src='../image.php?id=6915' style='width:16px; cursor:pointer; position:absolute; top:277px; left:720px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6915' onclick='fetchAssetData(6915);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6915); ?>; 
-                        position:absolute; top:277px; left:730px;'>
-                        </div>
-                        <!-- ASSET 6914 -->
-                        <img src='../image.php?id=6914' style='width:16px; cursor:pointer; position:absolute; top:277px; left:650px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6914' onclick='fetchAssetData(6914);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6914); ?>; 
-                        position:absolute; top:277px; left:660px;'>
-                        </div>
-                        <!-- ASSET 6913 -->
-                        <img src='../image.php?id=6913' style='width:16px; cursor:pointer; position:absolute; top:277px; left:635px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6913' onclick='fetchAssetData(6913);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6913); ?>; 
-                        position:absolute; top:277px; left:645px;'>
-                        </div>
-                        <!-- ASSET 6912 -->
-                        <img src='../image.php?id=6912' style='width:16px; cursor:pointer; position:absolute; top:277px; left:620px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6912' onclick='fetchAssetData(6912);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6912); ?>; 
-                        position:absolute; top:277px; left:630px;'>
-                        </div>
-                        <!-- ASSET 6911 -->
-                        <img src='../image.php?id=6911' style='width:16px; cursor:pointer; position:absolute; top:207px; left:850px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6911' onclick='fetchAssetData(6911);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6911); ?>; 
-                        position:absolute; top:207px; left:860px;'>
-                        </div>
-                        <!-- ASSET 6910 -->
-                        <img src='../image.php?id=6910' style='width:16px; cursor:pointer; position:absolute; top:207px; left:835px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6910' onclick='fetchAssetData(6910);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6910); ?>; 
-                        position:absolute; top:207px; left:845px;'>
-                        </div>
-                        <!-- ASSET 6909 -->
-                        <img src='../image.php?id=6909' style='width:16px; cursor:pointer; position:absolute; top:207px; left:820px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6909' onclick='fetchAssetData(6909);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6909); ?>; 
-                        position:absolute; top:207px; left:830px;'>
-                        </div>
-                        <!-- ASSET 6908 -->
-                        <img src='../image.php?id=6908' style='width:16px; cursor:pointer; position:absolute; top:207px; left:750px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6908' onclick='fetchAssetData(6908);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6908); ?>; 
-                        position:absolute; top:207px; left:760px;'>
-                        </div>
-                        <!-- ASSET 6907 -->
-                        <img src='../image.php?id=6907' style='width:16px; cursor:pointer; position:absolute; top:207px; left:735px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6907' onclick='fetchAssetData(6907);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6907); ?>; 
-                        position:absolute; top:207px; left:745px;'>
-                        </div>
-                        <!-- ASSET 6906 -->
-                        <img src='../image.php?id=6906' style='width:16px; cursor:pointer; position:absolute; top:207px; left:720px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6906' onclick='fetchAssetData(6906);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6906); ?>; 
-                        position:absolute; top:207px; left:730px;'>
-                        </div>
-                        <!-- ASSET 6905 -->
-                        <img src='../image.php?id=6905' style='width:16px; cursor:pointer; position:absolute; top:207px; left:650px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6905' onclick='fetchAssetData(6905);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6905); ?>; 
-                        position:absolute; top:207px; left:660px;'>
-                        </div>
-                        <!-- ASSET 6904 -->
-                        <img src='../image.php?id=6904' style='width:16px; cursor:pointer; position:absolute; top:207px; left:635px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6904' onclick='fetchAssetData(6904);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6904); ?>; 
-                        position:absolute; top:207px; left:645px;'>
-                        </div>
-                        <!-- ASSET 6903 -->
-                        <img src='../image.php?id=6903' style='width:16px; cursor:pointer; position:absolute; top:207px; left:620px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6903' onclick='fetchAssetData(6903);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6903); ?>; 
-                        position:absolute; top:207px; left:630px;'>
-                        </div>
-                        <!-- ASSET 6902 -->
-                        <img src='../image.php?id=6902' style='width:20px; cursor:pointer; position:absolute; top:300px; left:850px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6902' onclick='fetchAssetData(6902);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6902); ?>; 
-                        position:absolute; top:297px; left:865px;'>
-                        </div>
-                        <!-- ASSET 6901 -->
-                        <img src='../image.php?id=6901' style='width:20px; cursor:pointer; position:absolute; top:300px; left:830px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6901' onclick='fetchAssetData(6901);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6901); ?>; 
-                        position:absolute; top:297px; left:845px;'>
-                        </div>
-                        <!-- ASSET 6900 -->
-                        <img src='../image.php?id=6900' style='width:20px; cursor:pointer; position:absolute; top:300px; left:810px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6900' onclick='fetchAssetData(6900);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6900); ?>; 
-                        position:absolute; top:297px; left:825px;'>
-                        </div>
-                        <!-- ASSET 6899 -->
-                        <img src='../image.php?id=6899' style='width:20px; cursor:pointer; position:absolute; top:300px; left:750px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6899' onclick='fetchAssetData(6899);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6899); ?>; 
-                        position:absolute; top:297px; left:765px;'>
-                        </div>
-                        <!-- ASSET 6898 -->
-                        <img src='../image.php?id=6898' style='width:20px; cursor:pointer; position:absolute; top:300px; left:730px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6898' onclick='fetchAssetData(6898);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6898); ?>; 
-                        position:absolute; top:297px; left:745px;'>
-                        </div>
-                        <!-- ASSET 6897 -->
-                        <img src='../image.php?id=6897' style='width:20px; cursor:pointer; position:absolute; top:300px; left:710px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6897' onclick='fetchAssetData(6897);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6897); ?>; 
-                        position:absolute; top:297px; left:725px;'>
-                        </div>
-                        <!-- ASSET 6896 -->
-                        <img src='../image.php?id=6896' style='width:20px; cursor:pointer; position:absolute; top:300px; left:650px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6896' onclick='fetchAssetData(6896);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6896); ?>; 
-                        position:absolute; top:297px; left:665px;'>
-                        </div>
-                        <!-- ASSET 6895 -->
-                        <img src='../image.php?id=6895' style='width:20px; cursor:pointer; position:absolute; top:300px; left:630px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6895' onclick='fetchAssetData(6895);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6895); ?>; 
-                        position:absolute; top:297px; left:645px;'>
-                        </div>
-                        <!-- ASSET 6894 -->
-                        <img src='../image.php?id=6894' style='width:20px; cursor:pointer; position:absolute; top:300px; left:610px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6894' onclick='fetchAssetData(6894);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6894); ?>; 
-                        position:absolute; top:297px; left:625px;'>
-                        </div>
-                        <!-- ASSET 6893 -->
-                        <img src='../image.php?id=6893' style='width:20px; cursor:pointer; position:absolute; top:230px; left:850px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6893' onclick='fetchAssetData(6893);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6893); ?>; 
-                        position:absolute; top:227px; left:865px;'>
-                        </div>
-                        <!-- ASSET 6892 -->
-                        <img src='../image.php?id=6892' style='width:20px; cursor:pointer; position:absolute; top:230px; left:830px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6892' onclick='fetchAssetData(6892);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6892); ?>; 
-                        position:absolute; top:227px; left:845px;'>
-                        </div>
-                        <!-- ASSET 6891 -->
-                        <img src='../image.php?id=6891' style='width:20px; cursor:pointer; position:absolute; top:230px; left:810px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6891' onclick='fetchAssetData(6891);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6891); ?>; 
-                        position:absolute; top:227px; left:825px;'>
-                        </div>
-                        <!-- ASSET 6890 -->
-                        <img src='../image.php?id=6890' style='width:20px; cursor:pointer; position:absolute; top:230px; left:750px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6890' onclick='fetchAssetData(6890);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6890); ?>; 
-                        position:absolute; top:227px; left:765px;'>
-                        </div>
-                        <!-- ASSET 6889 -->
-                        <img src='../image.php?id=6889' style='width:20px; cursor:pointer; position:absolute; top:230px; left:730px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6889' onclick='fetchAssetData(6889);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6889); ?>; 
-                        position:absolute; top:227px; left:745px;'>
-                        </div>
-                        <!-- ASSET 6888 -->
-                        <img src='../image.php?id=6888' style='width:20px; cursor:pointer; position:absolute; top:230px; left:710px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6888' onclick='fetchAssetData(6888);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6888); ?>; 
-                        position:absolute; top:227px; left:725px;'>
-                        </div>
-                        <!-- ASSET 6887 -->
-                        <img src='../image.php?id=6887' style='width:20px; cursor:pointer; position:absolute; top:230px; left:650px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6887' onclick='fetchAssetData(6887);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6887); ?>; 
-                        position:absolute; top:227px; left:665px;'>
-                        </div>
-                        <!-- ASSET 6886 -->
-                        <img src='../image.php?id=6886' style='width:20px; cursor:pointer; position:absolute; top:230px; left:630px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6886' onclick='fetchAssetData(6886);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6886); ?>; 
-                        position:absolute; top:227px; left:645px;'>
-                        </div>
-                        <!-- ASSET 6885 -->
-                        <img src='../image.php?id=6885' style='width:20px; cursor:pointer; position:absolute; top:230px; left:610px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6885' onclick='fetchAssetData(6885);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6885); ?>; 
-                        position:absolute; top:227px; left:625px;'>
-                        </div>
-                        <!-- ASSET 6884 -->
-                        <img src='../image.php?id=6884' style='width:20px; cursor:pointer; position:absolute; top:160px; left:850px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6884' onclick='fetchAssetData(6884);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6884); ?>; 
-                        position:absolute; top:157px; left:865px;'>
-                        </div>
-                        <!-- ASSET 6883 -->
-                        <img src='../image.php?id=6883' style='width:20px; cursor:pointer; position:absolute; top:160px; left:830px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6883' onclick='fetchAssetData(6883);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6883); ?>; 
-                        position:absolute; top:157px; left:845px;'>
-                        </div>
-                        <!-- ASSET 6882 -->
-                        <img src='../image.php?id=6882' style='width:20px; cursor:pointer; position:absolute; top:160px; left:810px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6882' onclick='fetchAssetData(6882);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6882); ?>; 
-                        position:absolute; top:157px; left:825px;'>
-                        </div>
-                        <!-- ASSET 6881 -->
-                        <img src='../image.php?id=6881' style='width:20px; cursor:pointer; position:absolute; top:160px; left:750px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6881' onclick='fetchAssetData(6881);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6881); ?>; 
-                        position:absolute; top:157px; left:765px;'>
-                        </div>
-                        <!-- ASSET 6880 -->
-                        <img src='../image.php?id=6880' style='width:20px; cursor:pointer; position:absolute; top:160px; left:730px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6880' onclick='fetchAssetData(6880);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6880); ?>; 
-                        position:absolute; top:157px; left:745px;'>
-                        </div>
-                        <!-- ASSET 6879 -->
-                        <img src='../image.php?id=6879' style='width:20px; cursor:pointer; position:absolute; top:160px; left:710px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6879' onclick='fetchAssetData(6879);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6879); ?>; 
-                        position:absolute; top:157px; left:725px;'>
-                        </div>
-
-                        <!-- ASSET 6878 -->
-                        <img src='../image.php?id=6878' style='width:20px; cursor:pointer; position:absolute; top:160px; left:650px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6878' onclick='fetchAssetData(6878);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6878); ?>; 
-                        position:absolute; top:157px; left:665px;'>
-                        </div>
-                        <!-- ASSET 6877 -->
-                        <img src='../image.php?id=6877' style='width:20px; cursor:pointer; position:absolute; top:160px; left:630px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6877' onclick='fetchAssetData(6877);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6877); ?>; 
-                        position:absolute; top:157px; left:645px;'>
-                        </div>
-                        <!-- ASSET 6876 -->
-                        <img src='../image.php?id=6876' style='width:20px; cursor:pointer; position:absolute; top:160px; left:610px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6876' onclick='fetchAssetData(6876);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6876); ?>; 
-                        position:absolute; top:157px; left:625px;'>
-                        </div>
-                        <!-- ASSET 6875 -->
-                        <img src='../image.php?id=6875' style='width:50px; cursor:pointer; position:absolute; top:315px; left:815px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6875' onclick='fetchAssetData(6875);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6875); ?>; 
-                        position:absolute; top:312px; left:865px;'>
-                        </div>
-                        <!-- ASSET 6874 -->
-                        <img src='../image.php?id=6874' style='width:50px; cursor:pointer; position:absolute; top:315px; left:715px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6874' onclick='fetchAssetData(6874);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6874); ?>; 
-                        position:absolute; top:312px; left:765px;'>
-                        </div>
-                        <!-- ASSET 6873 -->
-                        <img src='../image.php?id=6873' style='width:50px; cursor:pointer; position:absolute; top:315px; left:615px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6873' onclick='fetchAssetData(6873);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6873); ?>; 
-                        position:absolute; top:312px; left:665px;'>
-                        </div>
-                        <!-- ASSET 6872 -->
-                        <img src='../image.php?id=6872' style='width:50px; cursor:pointer; position:absolute; top:245px; left:815px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6872' onclick='fetchAssetData(6872);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6872); ?>; 
-                        position:absolute; top:242px; left:865px;'>
-                        </div>
-
-                        <!-- ASSET 6871 -->
-                        <img src='../image.php?id=6871' style='width:50px; cursor:pointer; position:absolute; top:245px; left:715px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6871' onclick='fetchAssetData(6871);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6871); ?>; 
-                        position:absolute; top:242px; left:765px;'>
-                        </div>
-
-                        <!-- ASSET 6870 -->
-                        <img src='../image.php?id=6870' style='width:50px; cursor:pointer; position:absolute; top:245px; left:615px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6870' onclick='fetchAssetData(6870);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6870); ?>; 
-                        position:absolute; top:242px; left:665px;'>
-                        </div>
-                        <!-- ASSET 6869 -->
-                        <img src='../image.php?id=6869' style='width:50px; cursor:pointer; position:absolute; top:175px; left:815px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6869' onclick='fetchAssetData(6869);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6869); ?>; 
-                        position:absolute; top:172px; left:865px;'>
-                        </div>
-                        <!-- ASSET 6868 -->
-                        <img src='../image.php?id=6868' style='width:50px; cursor:pointer; position:absolute; top:175px; left:715px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6868' onclick='fetchAssetData(6868);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6868); ?>; 
-                        position:absolute; top:172px; left:765px;'>
-                        </div>
-                        <!-- ASSET 6867 -->
-                        <img src='../image.php?id=6867' style='width:50px; cursor:pointer; position:absolute; top:175px; left:615px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6867' onclick='fetchAssetData(6867);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6867); ?>; 
-                        position:absolute; top:172px; left:665px;'>
-                        </div>
-                        <!-- ASSET 7269 -->
-                        <img src='../image.php?id=7269' style='width:20px; cursor:pointer; position:absolute; top:275px; left:140px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7269' onclick='fetchAssetData(7269);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7269); ?>; 
-                        position:absolute; top:272px; left:155px;'>
-                        </div>
-                        <!-- ASSET 7268 -->
-                        <img src='../image.php?id=7268' style='width:20px; cursor:pointer; position:absolute; top:180px; left:380px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7268' onclick='fetchAssetData(7268);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7268); ?>; 
-                        position:absolute; top:177px; left:395px;'>
-                        </div>
-                      <!-- ASSET 7267 -->
-                      <img src='../image.php?id=7267' style='width:20px; cursor:pointer; position:absolute; top:180px; left:310px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7267' onclick='fetchAssetData(7267);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7267); ?>; 
-                        position:absolute; top:177px; left:325px;'>
-                        </div>
-                        <!-- ASSET 6948 -->
-                        <img src='../image.php?id=6948' style='width:20px; cursor:pointer; position:absolute; top:290px; left:380px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6948' onclick='fetchAssetData(6948);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6948); ?>; 
-                        position:absolute; top:287px; left:395px;'>
-                        </div>
-
-                        <!-- ASSET 6949 -->
-                        <img src='../image.php?id=6949' style='width:20px; cursor:pointer; position:absolute; top:290px; left:310px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6949' onclick='fetchAssetData(6949);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6949); ?>; 
-                        position:absolute; top:287px; left:325px;'>
-                        </div>
-
-                        <!-- ASSET 6950 -->
-                        <img src='../image.php?id=6950' style='width:20px; cursor:pointer; position:absolute; top:280px; left:90px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6950' onclick='fetchAssetData(6950);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6950); ?>; 
-                        position:absolute; top:277px; left:105px;'>
-                        </div>
-                        <!-- ASSET 6951 -->
-                        <img src='../image.php?id=6951' style='width:20px; cursor:pointer; position:absolute; top:320px; left:160px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6951' onclick='fetchAssetData(6951);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6951); ?>; 
-                        position:absolute; top:317px; left:175px;'>
-                        </div>
-
-                        <!-- ASSET 6952 -->
-                        <img src='../image.php?id=6952' style='width:20px; cursor:pointer; position:absolute; top:320px; left:230px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6952' onclick='fetchAssetData(6952);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6952); ?>; 
-                        position:absolute; top:317px; left:245px;'>
-                        </div>
-
-                        <!-- ASSET 6953 -->
-                        <img src='../image.php?id=6953' style='width:20px; cursor:pointer; position:absolute; top:320px; left:290px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6953' onclick='fetchAssetData(6953);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6953); ?>; 
-                        position:absolute; top:317px; left:305px;'>
-                        </div>
-
-                        <!-- ASSET 6954 -->
-                        <img src='../image.php?id=6954' style='width:20px; cursor:pointer; position:absolute; top:360px; left:90px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6954' onclick='fetchAssetData(6954);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6954); ?>; 
-                        position:absolute; top:357px; left:105px;'>
-                        </div>
-
-                        <!-- ASSET 6955 -->
-                        <img src='../image.php?id=6955' style='width:20px; cursor:pointer; position:absolute; top:360px; left:160px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6955' onclick='fetchAssetData(6955);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6955); ?>; 
-                        position:absolute; top:357px; left:175px;'>
-                        </div>
-                        
-                        <!-- ASSET 6956 -->
-                        <img src='../image.php?id=6956' style='width:20px; cursor:pointer; position:absolute; top:360px; left:230px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6956' onclick='fetchAssetData(6956);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6956); ?>; 
-                        position:absolute; top:357px; left:245px;'>
-                        </div>
-
-                        <!-- ASSET 6957 -->
-                        <img src='../image.php?id=6957' style='width:20px; cursor:pointer; position:absolute; top:360px; left:290px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6957' onclick='fetchAssetData(6957);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6957); ?>; 
-                        position:absolute; top:357px; left:305px;'>
-                        </div>
-                        <!-- ASSET 6958 -->
-                        <img src='../image.php?id=6958' style='width:20px; cursor:pointer; position:absolute; top:380px; left:310px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6958' onclick='fetchAssetData(6958);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6958); ?>; 
-                        position:absolute; top:377px; left:325px;'>
-                        </div>
-
-                        <!-- ASSET 6959 -->
-                        <img src='../image.php?id=6959' style='width:20px; cursor:pointer; position:absolute; top:380px; left:380px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6959' onclick='fetchAssetData(6959);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6959); ?>; 
-                        position:absolute; top:377px; left:395px;'>
-                        </div>
-
-                        <!-- ASSET 6960 -->
-                        <img src='../image.php?id=6960' style='width:20px; cursor:pointer; position:absolute; top:470px; left:310px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6960' onclick='fetchAssetData(6960);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6960); ?>; 
-                        position:absolute; top:467px; left:325px;'>
-                        </div>
-                       
-                        <!-- ASSET 6961 -->
-                        <img src='../image.php?id=6961' style='width:20px; cursor:pointer; position:absolute; top:470px; left:380px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6961' onclick='fetchAssetData(6961);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6961); ?>; 
-                        position:absolute; top:467px; left:395px;'>
-                        </div>
-
-                        <!-- ASSET 6962 -->
-                        <img src='../image.php?id=6962' style='width:20px; cursor:pointer; position:absolute; top:360px; left:390px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6962' onclick='fetchAssetData(6962);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6962); ?>; 
-                        position:absolute; top:357px; left:405px;'>
-                        </div>
-                        <!-- ASSET 6963 -->
-                        <img src='../image.php?id=6963' style='width:20px; cursor:pointer; position:absolute; top:360px; left:460px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6963' onclick='fetchAssetData(6963);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6963); ?>; 
-                        position:absolute; top:357px; left:475px;'>
-                        </div>
-                        <!-- ASSET 6964 -->
-                        <img src='../image.php?id=6964' style='width:20px; cursor:pointer; position:absolute; top:360px; left:530px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6964' onclick='fetchAssetData(6964);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6964); ?>; 
-                        position:absolute; top:357px; left:545px;'>
-                        </div>
-
-                        <!-- ASSET 6965 -->
-                        <img src='../image.php?id=6965' style='width:20px; cursor:pointer; position:absolute; top:360px; left:600px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6965' onclick='fetchAssetData(6965);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6965); ?>; 
-                        position:absolute; top:357px; left:615px;'>
-                        </div>
-
-                        <!-- ASSET 6966 -->
-                        <img src='../image.php?id=6966' style='width:20px; cursor:pointer; position:absolute; top:360px; left:670px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6966' onclick='fetchAssetData(6966);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6966); ?>; 
-                        position:absolute; top:357px; left:685px;'>
-                        </div>
-
-                        <!-- ASSET 6967 -->
-                        <img src='../image.php?id=6967' style='width:20px; cursor:pointer; position:absolute; top:360px; left:740px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6967' onclick='fetchAssetData(6967);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6967); ?>; 
-                        position:absolute; top:357px; left:755px;'>
-                        </div>
-
-                        <!-- ASSET 6968 -->
-                        <img src='../image.php?id=6968' style='width:20px; cursor:pointer; position:absolute; top:360px; left:810px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6968' onclick='fetchAssetData(6968);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6968); ?>; 
-                        position:absolute; top:357px; left:825px;'>
-                        </div>
-
-                        <!-- ASSET 6969 -->
-                        <img src='../image.php?id=6969' style='width:20px; cursor:pointer; position:absolute; top:360px; left:880px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6969' onclick='fetchAssetData(6969);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6969); ?>; 
-                        position:absolute; top:357px; left:895px;'>
-                        </div>
-                        <!-- ASSET 6970 -->
-                        <img src='../image.php?id=6970' style='width:20px; cursor:pointer; position:absolute; top:360px; left:950px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6970' onclick='fetchAssetData(6970);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6970); ?>; 
-                        position:absolute; top:357px; left:965px;'>
-                        </div>
-
-                        <!-- ASSET 6971 -->
-                        <img src='../image.php?id=6971' style='width:20px; cursor:pointer; position:absolute; top:295px; left:580px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6971' onclick='fetchAssetData(6971);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6971); ?>; 
-                        position:absolute; top:292px; left:595px;'>
-                        </div>
-
-                        <!-- ASSET 6972 -->
-                        <img src='../image.php?id=6972' style='width:20px; cursor:pointer; position:absolute; top:295px; left:680px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6972' onclick='fetchAssetData(6972);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6972); ?>; 
-                        position:absolute; top:292px; left:695px;'>
-                        </div>
-
-                        <!-- ASSET 6973 -->
-                        <img src='../image.php?id=6973' style='width:20px; cursor:pointer; position:absolute; top:295px; left:770px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6973' onclick='fetchAssetData(6973);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6973); ?>; 
-                        position:absolute; top:292px; left:785px;'>
-                        </div>
-
-                        <!-- ASSET 6974 -->
-                        <img src='../image.php?id=6974' style='width:20px; cursor:pointer; position:absolute; top:295px; left:790px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6974' onclick='fetchAssetData(6974);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6974); ?>; 
-                        position:absolute; top:292px; left:805px;'>
-                        </div>
-                        <!-- ASSET 6975 -->
-                        <img src='../image.php?id=6975' style='width:20px; cursor:pointer; position:absolute; top:295px; left:880px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6975' onclick='fetchAssetData(6975);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6975); ?>; 
-                        position:absolute; top:292px; left:895px;'>
-                        </div>
-
-                        <!-- ASSET 6976 -->
-                        <img src='../image.php?id=6976' style='width:20px; cursor:pointer; position:absolute; top:295px; left:950px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6976' onclick='fetchAssetData(6976);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6976); ?>; 
-                        position:absolute; top:292px; left:965px;'>
-                        </div>
-
-                        <!-- ASSET 6977 -->
-                        <img src='../image.php?id=6977' style='width:20px; cursor:pointer; position:absolute; top:225px; left:420px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6977' onclick='fetchAssetData(6977);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6977); ?>; 
-                        position:absolute; top:222px; left:435px;'>
-                        </div>
-
-                        <!-- ASSET 6978 -->
-                        <img src='../image.php?id=6978' style='width:20px; cursor:pointer; position:absolute; top:225px; left:480px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6978' onclick='fetchAssetData(6978);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6978); ?>; 
-                        position:absolute; top:222px; left:495px;'>
-                        </div>
-
-                        <!-- ASSET 6979 -->
-                        <img src='../image.php?id=6979' style='width:20px; cursor:pointer; position:absolute; top:225px; left:540px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6979' onclick='fetchAssetData(6979);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6979); ?>; 
-                        position:absolute; top:222px; left:555px;'>
-                        </div>
-                        <!-- ASSET 6980 -->
-                        <img src='../image.php?id=6980' style='width:20px; cursor:pointer; position:absolute; top:225px; left:580px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6980' onclick='fetchAssetData(6980);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6980); ?>; 
-                        position:absolute; top:222px; left:595px;'>
-                        </div>
-
-                        <!-- ASSET 6981 -->
-                        <img src='../image.php?id=6981' style='width:20px; cursor:pointer; position:absolute; top:225px; left:680px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6981' onclick='fetchAssetData(6981);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6981); ?>; 
-                        position:absolute; top:222px; left:695px;'>
-                        </div>
-
-                        <!-- ASSET 6982 -->
-                        <img src='../image.php?id=6982' style='width:20px; cursor:pointer; position:absolute; top:225px; left:770px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6982' onclick='fetchAssetData(6982);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6982); ?>; 
-                        position:absolute; top:222px; left:785px;'>
-                        </div>
-                        <!-- ASSET 6983 -->
-                        <img src='../image.php?id=6983' style='width:20px; cursor:pointer; position:absolute; top:225px; left:795px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6983' onclick='fetchAssetData(6983);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6983); ?>; 
-                        position:absolute; top:222px; left:810px;'>
-                        </div>
-                        <!-- ASSET 6984 -->
-                        <img src='../image.php?id=6984' style='width:20px; cursor:pointer; position:absolute; top:225px; left:880px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6984' onclick='fetchAssetData(6984);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6984); ?>; 
-                        position:absolute; top:222px; left:895px;'>
-                        </div>
-
-                        <!-- ASSET 6985 -->
-                        <img src='../image.php?id=6985' style='width:20px; cursor:pointer; position:absolute; top:225px; left:950px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6985' onclick='fetchAssetData(6985);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6985); ?>; 
-                        position:absolute; top:222px; left:965px;'>
-                        </div>
-
-                        <!-- ASSET 6986 -->
-                        <img src='../image.php?id=6986' style='width:20px; cursor:pointer; position:absolute; top:225px; left:1020px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6986' onclick='fetchAssetData(6986);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6986); ?>; 
-                        position:absolute; top:222px; left:1035px;'>
-                        </div>
-
-                       <!-- ASSET 6987 -->
-                       <img src='../image.php?id=6987' style='width:20px; cursor:pointer; position:absolute; top:155px; left:580px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6987' onclick='fetchAssetData(6987);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6987); ?>; 
-                        position:absolute; top:152px; left:595px;'>
-                        </div>
-
-                        <!-- ASSET 6988 -->
-                        <img src='../image.php?id=6988' style='width:20px; cursor:pointer; position:absolute; top:155px; left:680px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6988' onclick='fetchAssetData(6988);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6988); ?>; 
-                        position:absolute; top:152px; left:695px;'>
-                        </div>
-
-                        <!-- ASSET 6989 -->
-                        <img src='../image.php?id=6989' style='width:20px; cursor:pointer; position:absolute; top:135px; left:740px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6989' onclick='fetchAssetData(6989);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6989); ?>; 
-                        position:absolute; top:132px; left:755px;'>
-                        </div>
-
-                        <!-- ASSET 6990 -->
-                        <img src='../image.php?id=6990' style='width:20px; cursor:pointer; position:absolute; top:135px; left:810px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6990' onclick='fetchAssetData(6990);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6990); ?>; 
-                        position:absolute; top:132px; left:825px;'>
-                        </div>
-
-                        <!-- ASSET 6991 -->
-                        <img src='../image.php?id=6991' style='width:20px; cursor:pointer; position:absolute; top:155px; left:880px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6991' onclick='fetchAssetData(6991);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6991); ?>; 
-                        position:absolute; top:152px; left:895px;'>
-                        </div>
-
-                        <!-- ASSET 6992 -->
-                        <img src='../image.php?id=6992' style='width:20px; cursor:pointer; position:absolute; top:155px; left:950px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6992' onclick='fetchAssetData(6992);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6992); ?>; 
-                        position:absolute; top:152px; left:965px;'>
-                        </div>
-                        <!-- ASSET 6993 -->
-                        <img src='../image.php?id=6993' style='width:20px; cursor:pointer; position:absolute; top:155px; left:1020px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6993' onclick='fetchAssetData(6993);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6993); ?>; 
-                        position:absolute; top:152px; left:1035px;'>
-                        </div>
-
-                        <!-- ASSET 6994 -->
-                        <img src='../image.php?id=6994' style='width:20px; cursor:pointer; position:absolute; top:85px; left:600px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6994' onclick='fetchAssetData(6994);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6994); ?>; 
-                        position:absolute; top:82px; left:615px;'>
-                        </div>
-
-                        <!-- ASSET 6995 -->
-                        <img src='../image.php?id=6995' style='width:20px; cursor:pointer; position:absolute; top:85px; left:670px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6995' onclick='fetchAssetData(6995);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6995); ?>; 
-                        position:absolute; top:82px; left:685px;'>
-                        </div>
-
-                        <!-- ASSET 6996 -->
-                        <img src='../image.php?id=6996' style='width:20px; cursor:pointer; position:absolute; top:85px; left:740px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6996' onclick='fetchAssetData(6996);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6996); ?>; 
-                        position:absolute; top:82px; left:755px;'>
-                        </div>
-
-                        <!-- ASSET 6997 -->
-                        <img src='../image.php?id=6997' style='width:20px; cursor:pointer; position:absolute; top:85px; left:810px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6997' onclick='fetchAssetData(6997);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6997); ?>; 
-                        position:absolute; top:82px; left:825px;'>
-                        </div>
-
-                        <!-- ASSET 6998 -->
-                        <img src='../image.php?id=6998' style='width:20px; cursor:pointer; position:absolute; top:85px; left:880px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6998' onclick='fetchAssetData(6998);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6998); ?>; 
-                        position:absolute; top:82px; left:895px;'>
-                        </div>
-
-                        <!-- ASSET 6999 -->
-                        <img src='../image.php?id=6999' style='width:20px; cursor:pointer; position:absolute; top:85px; left:950px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6999' onclick='fetchAssetData(6999);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6999); ?>; 
-                        position:absolute; top:82px; left:965px;'>
-                        </div>
-                        <!-- ASSET 7000 -->
-                        <img src='../image.php?id=7000' style='width:20px; cursor:pointer; position:absolute; top:85px; left:1020px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7000' onclick='fetchAssetData(7000);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7000); ?>; 
-                        position:absolute; top:82px; left:1035px;'>
-                        </div>
-                        <!-- ASSET 7001 -->
-                        <img src='../image.php?id=7001' style='width:20px; cursor:pointer; position:absolute; top:150px; left:450px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7001' onclick='fetchAssetData(7001);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7001); ?>; 
-                        position:absolute; top:147px; left:465px;'>
-                        </div>
-
-                        <!-- ASSET 7002 -->
-                        <img src='../image.php?id=7002' style='width:20px; cursor:pointer; position:absolute; top:150px; left:410px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7002' onclick='fetchAssetData(7002);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7002); ?>; 
-                        position:absolute; top:147px; left:425px;'>
-                        </div>
-
-                        <!-- ASSET 7003 -->
-                        <img src='../image.php?id=7003' style='width:20px; cursor:pointer; position:absolute; top:150px; left:370px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7003' onclick='fetchAssetData(7003);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7003); ?>; 
-                        position:absolute; top:147px; left:385px;'>
-                        </div>
-                        <!-- ASSET 7004 -->
-                        <img src='../image.php?id=7004' style='width:20px; cursor:pointer; position:absolute; top:120px; left:410px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7004' onclick='fetchAssetData(7004);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7004); ?>; 
-                        position:absolute; top:117px; left:425px;'>
-                        </div>
-                        <!-- ASSET 7005 -->
-                        <img src='../image.php?id=7005' style='width:20px; cursor:pointer; position:absolute; top:80px; left:450px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7005' onclick='fetchAssetData(7005);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7005); ?>; 
-                        position:absolute; top:77px; left:465px;'>
-                        </div>
-
-                        <!-- ASSET 7006 -->
-                        <img src='../image.php?id=7006' style='width:20px; cursor:pointer; position:absolute; top:80px; left:410px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7006' onclick='fetchAssetData(7006);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7006); ?>; 
-                        position:absolute; top:77px; left:425px;'>
-                        </div>
-
-                        <!-- ASSET 7007 -->
-                        <img src='../image.php?id=7007' style='width:20px; cursor:pointer; position:absolute; top:80px; left:370px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7007' onclick='fetchAssetData(7007);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7007); ?>; 
-                        position:absolute; top:77px; left:385px;'>
-                        </div>
-
-                        <!-- ASSET 7008 -->
-                        <img src='../image.php?id=7008' style='width:20px; cursor:pointer; position:absolute; top:165px; left:250px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7008' onclick='fetchAssetData(7008);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7008); ?>; 
-                        position:absolute; top:162px; left:265px;'>
-                        </div>
-                        <!-- ASSET 7009 -->
-                        <img src='../image.php?id=7009' style='width:20px; cursor:pointer; position:absolute; top:200px; left:250px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7009' onclick='fetchAssetData(7009);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7009); ?>; 
-                        position:absolute; top:197px; left:265px;'>
-                        </div>
-
-                        <!-- ASSET 7010 -->
-                        <img src='../image.php?id=7010' style='width:20px; cursor:pointer; position:absolute; top:235px; left:250px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7010' onclick='fetchAssetData(7010);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7010); ?>; 
-                        position:absolute; top:232px; left:265px;'>
-                        </div>
-
-                        <!-- ASSET 7011 -->
-                        <img src='../image.php?id=7011' style='width:20px; cursor:pointer; position:absolute; top:165px; left:220px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7011' onclick='fetchAssetData(7011);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7011); ?>; 
-                        position:absolute; top:162px; left:235px;'>
-                        </div>
-
-                        <!-- ASSET 7012 -->
-                        <img src='../image.php?id=7012' style='width:20px; cursor:pointer; position:absolute; top:200px; left:220px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7012' onclick='fetchAssetData(7012);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7012); ?>; 
-                        position:absolute; top:197px; left:235px;'>
-                        </div>
-
-                        <!-- ASSET 7013 -->
-                        <img src='../image.php?id=7013' style='width:20px; cursor:pointer; position:absolute; top:235px; left:220px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7013' onclick='fetchAssetData(7013);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7013); ?>; 
-                        position:absolute; top:232px; left:235px;'>
-                        </div>
-
-                        <!-- ASSET 7014 -->
-                        <img src='../image.php?id=7014' style='width:20px; cursor:pointer; position:absolute; top:165px; left:140px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7014' onclick='fetchAssetData(7014);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7014); ?>; 
-                        position:absolute; top:162px; left:155px;'>
-                        </div>
-
-                        <!-- ASSET 7015 -->
-                        <img src='../image.php?id=7015' style='width:20px; cursor:pointer; position:absolute; top:200px; left:140px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7015' onclick='fetchAssetData(7015);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7015); ?>; 
-                        position:absolute; top:197px; left:155px;'>
-                        </div>
-                        <!-- ASSET 7016 -->
-                        <img src='../image.php?id=7016' style='width:20px; cursor:pointer; position:absolute; top:235px; left:140px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7016' onclick='fetchAssetData(7016);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7016); ?>; 
-                        position:absolute; top:232px; left:155px;'>
-                        </div>
-
-                        <!-- ASSET 7017 -->
-                        <img src='../image.php?id=7017' style='width:20px; cursor:pointer; position:absolute; top:165px; left:100px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7017' onclick='fetchAssetData(7017);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7017); ?>; 
-                        position:absolute; top:162px; left:115px;'>
-                        </div>
-
-                        <!-- ASSET 7018 -->
-                        <img src='../image.php?id=7018' style='width:20px; cursor:pointer; position:absolute; top:200px; left:100px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7018' onclick='fetchAssetData(7018);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7018); ?>; 
-                        position:absolute; top:197px; left:115px;'>
-                        </div>
-
-                        <!-- ASSET 7019 -->
-                        <img src='../image.php?id=7019' style='width:20px; cursor:pointer; position:absolute; top:235px; left:100px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7019' onclick='fetchAssetData(7019);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7019); ?>; 
-                        position:absolute; top:232px; left:115px;'>
-                        </div>
-
-                        <!-- ASSET 7020 -->
-                        <img src='../image.php?id=7020' style='width:20px; cursor:pointer; position:absolute; top:170px; left:183px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7020' onclick='fetchAssetData(7020);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7020); ?>; 
-                        position:absolute; top:167px; left:198px;'>
-                        </div>
-
-                        <!-- ASSET 7021 -->
-                        <img src='../image.php?id=7021' style='width:20px; cursor:pointer; position:absolute; top:230px; left:183px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7021' onclick='fetchAssetData(7021);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7021); ?>; 
-                        position:absolute; top:227px; left:198px;'>
-                        </div>
-
-                        <!-- ASSET 7022 -->
-                        <img src='../image.php?id=7022' style='width:20px; cursor:pointer; position:absolute; top:273px; left:200px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7022' onclick='fetchAssetData(7022);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7022); ?>; 
-                        position:absolute; top:270px; left:215px;'>
-                        </div>
-
-                        <!-- ASSET 7023 -->
-                        <img src='../image.php?id=7023' style='width:20px; cursor:pointer; position:absolute; top:85px; left:1150px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7023' onclick='fetchAssetData(7023);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7023); ?>; 
-                        position:absolute; top:82px; left:1165px;'>
-                        </div>
-
-                        <!-- ASSET 7024 -->
-                        <img src='../image.php?id=7024' style='width:20px; cursor:pointer; position:absolute; top:85px; left:1105px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7024' onclick='fetchAssetData(7024);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7024); ?>; 
-                        position:absolute; top:82px; left:1120px;'>
-                        </div>
-
-                        <!-- ASSET 7025 -->
-                        <img src='../image.php?id=7025' style='width:20px; cursor:pointer; position:absolute; top:85px; left:1055px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7025' onclick='fetchAssetData(7025);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7025); ?>; 
-                        position:absolute; top:82px; left:1070px;'>
-                        </div>
-
-                        <!-- ASSET 7026 -->
-                        <img src='../image.php?id=7026' style='width:20px; cursor:pointer; position:absolute; top:140px; left:1150px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7026' onclick='fetchAssetData(7026);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7026); ?>; 
-                        position:absolute; top:137px; left:1165px;'>
-                        </div>
-
-                        <!-- ASSET 7027 -->
-                        <img src='../image.php?id=7027' style='width:20px; cursor:pointer; position:absolute; top:140px; left:1055px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7027' onclick='fetchAssetData(7027);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7027); ?>; 
-                        position:absolute; top:137px; left:1070px;'>
-                        </div>
-                        <!-- ASSET 7028 -->
-                        <img src='../image.php?id=7028' style='width:20px; cursor:pointer; position:absolute; top:180px; left:1105px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7028' onclick='fetchAssetData(7028);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7028); ?>; 
-                        position:absolute; top:177px; left:1120px;'>
-                        </div>
-
-                        <!-- ASSET 7029 -->
-                        <img src='../image.php?id=7029' style='width:20px; cursor:pointer; position:absolute; top:220px; left:1150px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7029' onclick='fetchAssetData(7029);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7029); ?>; 
-                        position:absolute; top:217px; left:1165px;'>
-                        </div>
-
-                        <!-- ASSET 7030 -->
-                        <img src='../image.php?id=7030' style='width:20px; cursor:pointer; position:absolute; top:220px; left:1055px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7030' onclick='fetchAssetData(7030);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7030); ?>; 
-                        position:absolute; top:217px; left:1070px;'>
-                        </div>
-
-                        <!-- ASSET 7031 -->
-                        <img src='../image.php?id=7031' style='width:20px; cursor:pointer; position:absolute; top:280px; left:1150px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7031' onclick='fetchAssetData(7031);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7031); ?>; 
-                        position:absolute; top:277px; left:1165px;'>
-                        </div>
-
-                        <!-- ASSET 7032 -->
-                        <img src='../image.php?id=7032' style='width:20px; cursor:pointer; position:absolute; top:280px; left:1105px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7032' onclick='fetchAssetData(7032);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7032); ?>; 
-                        position:absolute; top:277px; left:1120px;'>
-                        </div>
-
-                        <!-- ASSET 7033 -->
-                        <img src='../image.php?id=7033' style='width:20px; cursor:pointer; position:absolute; top:280px; left:1055px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7033' onclick='fetchAssetData(7033);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7033); ?>; 
-                        position:absolute; top:277px; left:1070px;'>
-                        </div>
-
-                        <!-- ASSET 7034 -->
-                        <img src='../image.php?id=7034' style='width:20px; cursor:pointer; position:absolute; top:263px; left:1020px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7034' onclick='fetchAssetData(7034);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7034); ?>; 
-                        position:absolute; top:260px; left:1035px;'>
-                        </div>
-                        <!-- ASSET 7035 -->
-                        <img src='../image.php?id=7035' style='width:20px; cursor:pointer; position:absolute; top:263px; left:985px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7035' onclick='fetchAssetData(7035);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7035); ?>; 
-                        position:absolute; top:260px; left:1000px;'>
-                        </div>
-
-                        <!-- ASSET 7036 -->
-                        <img src='../image.php?id=7036' style='width:20px; cursor:pointer; position:absolute; top:293px; left:1020px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7036' onclick='fetchAssetData(7036);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7036); ?>; 
-                        position:absolute; top:290px; left:1035px;'>
-                        </div>
-
-                        <!-- ASSET 7037 -->
-                        <img src='../image.php?id=7037' style='width:20px; cursor:pointer; position:absolute; top:293px; left:985px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7037' onclick='fetchAssetData(7037);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7037); ?>; 
-                        position:absolute; top:290px; left:1000px;'>
-                        </div>
-
-                        <!-- ASSET 7038 -->
-                        <img src='../image.php?id=7038' style='width:20px; cursor:pointer; position:absolute; top:328px; left:1020px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7038' onclick='fetchAssetData(7038);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7038); ?>; 
-                        position:absolute; top:325px; left:1035px;'>
-                        </div>
-
-                        <!-- ASSET 7039 -->
-                        <img src='../image.php?id=7039' style='width:20px; cursor:pointer; position:absolute; top:328px; left:985px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7039' onclick='fetchAssetData(7039);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7039); ?>; 
-                        position:absolute; top:325px; left:1000px;'>
-                        </div>
-
-                        <!-- ASSET 7040 -->
-                        <img src='../image.php?id=7040' style='width:20px; cursor:pointer; position:absolute; top:358px; left:1020px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7040' onclick='fetchAssetData(7040);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7040); ?>; 
-                        position:absolute; top:355px; left:1035px;'>
-                        </div>
-
-                        <!-- ASSET 7041 -->
-                        <img src='../image.php?id=7041' style='width:20px; cursor:pointer; position:absolute; top:358px; left:985px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7041' onclick='fetchAssetData(7041);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7041); ?>; 
-                        position:absolute; top:355px; left:1000px;'>
-                        </div>
-                        <!-- ASSET 7042 -->
-                        <img src='../image.php?id=7042' style='width:20px; cursor:pointer; position:absolute; top:438px; left:1015px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7042' onclick='fetchAssetData(7042);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7042); ?>; 
-                        position:absolute; top:435px; left:1030px;'>
-                        </div>
-
-                        <!-- ASSET 7043 -->
-                        <img src='../image.php?id=7043' style='width:20px; cursor:pointer; position:absolute; top:393px; left:1015px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7043' onclick='fetchAssetData(7043);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7043); ?>; 
-                        position:absolute; top:390px; left:1030px;'>
-                        </div>
-
-                        <!-- ASSET 7044 -->
-                        <img src='../image.php?id=7044' style='width:20px; cursor:pointer; position:absolute; top:438px; left:975px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7044' onclick='fetchAssetData(7044);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7044); ?>; 
-                        position:absolute; top:435px; left:990px;'>
-                        </div>
-
-                        <!-- ASSET 7045 -->
-                        <img src='../image.php?id=7045' style='width:20px; cursor:pointer; position:absolute; top:393px; left:975px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7045' onclick='fetchAssetData(7045);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7045); ?>; 
-                        position:absolute; top:390px; left:990px;'>
-                        </div>
-                        <!-- ASSET 7046 -->
-                        <img src='../image.php?id=7046' style='width:20px; cursor:pointer; position:absolute; top:438px; left:935px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7046' onclick='fetchAssetData(7046);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7046); ?>; 
-                        position:absolute; top:435px; left:950px;'>
-                        </div>
-
-                        <!-- ASSET 7047 -->
-                        <img src='../image.php?id=7047' style='width:20px; cursor:pointer; position:absolute; top:393px; left:935px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7047' onclick='fetchAssetData(7047);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7047); ?>; 
-                        position:absolute; top:390px; left:950px;'>
-                        </div>
-
-                        <!-- ASSET 7048 -->
-                        <img src='../image.php?id=7048' style='width:20px; cursor:pointer; position:absolute; top:438px; left:880px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7048' onclick='fetchAssetData(7048);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7048); ?>; 
-                        position:absolute; top:435px; left:895px;'>
-                        </div>
-
-                        <!-- ASSET 7049 -->
-                        <img src='../image.php?id=7049' style='width:20px; cursor:pointer; position:absolute; top:393px; left:880px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7049' onclick='fetchAssetData(7049);'>
-                        <div style='width:7px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7049); ?>; 
-                        position:absolute; top:390px; left:895px;'>
-                        </div>
-                        <!-- ASSET 7050 -->
-                        <img src='../image.php?id=7050' style='width:20px; cursor:pointer; position:absolute; top:438px; left:845px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7050' onclick='fetchAssetData(7050);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7050); ?>; 
-                        position:absolute; top:435px; left:860px;'>
-                        </div>
-
-                        <!-- ASSET 7051 -->
-                        <img src='../image.php?id=7051' style='width:20px; cursor:pointer; position:absolute; top:393px; left:845px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7051' onclick='fetchAssetData(7051);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7051); ?>; 
-                        position:absolute; top:390px; left:860px;'>
-                        </div>
-                        
-                        <!-- ASSET 7052 -->
-                        <img src='../image.php?id=7052' style='width:20px; cursor:pointer; position:absolute; top:438px; left:810px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7052' onclick='fetchAssetData(7052);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7052); ?>; 
-                        position:absolute; top:435px; left:825px;'>
-                        </div>
-
-                        <!-- ASSET 7053 -->
-                        <img src='../image.php?id=7053' style='width:20px; cursor:pointer; position:absolute; top:393px; left:810px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7053' onclick='fetchAssetData(7053);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7053); ?>; 
-                        position:absolute; top:390px; left:825px;'>
-                        </div>
-                        <!-- ASSET 7054 -->
-                        <img src='../image.php?id=7054' style='width:20px; cursor:pointer; position:absolute; top:438px; left:775px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7054' onclick='fetchAssetData(7054);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7054); ?>; 
-                        position:absolute; top:435px; left:790px;'>
-                        </div>
-
-                        <!-- ASSET 7055 -->
-                        <img src='../image.php?id=7055' style='width:20px; cursor:pointer; position:absolute; top:393px; left:775px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7055' onclick='fetchAssetData(7055);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7055); ?>; 
-                        position:absolute; top:390px; left:790px;'>
-                        </div>
-
-                        <!-- ASSET 7056 -->
-                        <img src='../image.php?id=7056' style='width:20px; cursor:pointer; position:absolute; top:438px; left:740px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7056' onclick='fetchAssetData(7056);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7056); ?>; 
-                        position:absolute; top:435px; left:755px;'>
-                        </div>
-                        <!-- ASSET 7057 -->
-                        <img src='../image.php?id=7057' style='width:20px; cursor:pointer; position:absolute; top:393px; left:740px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7057' onclick='fetchAssetData(7057);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7057); ?>; 
-                        position:absolute; top:390px; left:755px;'>
-                        </div>
-                        <!-- ASSET 7058 -->
-                        <img src='../image.php?id=7058' style='width:20px; cursor:pointer; position:absolute; top:438px; left:700px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7058' onclick='fetchAssetData(7058);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7058); ?>; 
-                        position:absolute; top:435px; left:715px;'>
-                        </div>
-                        <!-- ASSET 7059 -->
-                        <img src='../image.php?id=7059' style='width:20px; cursor:pointer; position:absolute; top:393px; left:700px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7059' onclick='fetchAssetData(7059);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7059); ?>; 
-                        position:absolute; top:390px; left:715px;'>
-                        </div>
-                        <!-- ASSET 7060 -->
-                        <img src='../image.php?id=7060' style='width:20px; cursor:pointer; position:absolute; top:438px; left:665px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7060' onclick='fetchAssetData(7060);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7060); ?>; 
-                        position:absolute; top:435px; left:680px;'>
-                        </div>
-
-                        <!-- ASSET 7061 -->
-                        <img src='../image.php?id=7061' style='width:20px; cursor:pointer; position:absolute; top:393px; left:665px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7061' onclick='fetchAssetData(7061);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7061); ?>; 
-                        position:absolute; top:390px; left:680px;'>
-                        </div>
-
-                        <!-- ASSET 7062 -->
-                        <img src='../image.php?id=7062' style='width:20px; cursor:pointer; position:absolute; top:438px; left:630px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7062' onclick='fetchAssetData(7062);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7062); ?>; 
-                        position:absolute; top:435px; left:645px;'>
-                        </div>
-
-                        <!-- ASSET 7063 -->
-                        <img src='../image.php?id=7063' style='width:20px; cursor:pointer; position:absolute; top:393px; left:630px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7063' onclick='fetchAssetData(7063);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7063); ?>; 
-                        position:absolute; top:390px; left:645px;'>
-                        </div>
-
-                        <!-- ASSET 7064 -->
-                        <img src='../image.php?id=7064' style='width:20px; cursor:pointer; position:absolute; top:438px; left:595px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7064' onclick='fetchAssetData(7064);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7064); ?>; 
-                        position:absolute; top:435px; left:610px;'>
-                        </div>
-
-                        <!-- ASSET 7065 -->
-                        <img src='../image.php?id=7065' style='width:20px; cursor:pointer; position:absolute; top:393px; left:595px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7065' onclick='fetchAssetData(7065);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7065); ?>; 
-                        position:absolute; top:390px; left:610px;'>
-                        </div>
-
-                        <!-- ASSET 7066 -->
-                        <img src='../image.php?id=7066' style='width:20px; cursor:pointer; position:absolute; top:438px; left:560px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7066' onclick='fetchAssetData(7066);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7066); ?>; 
-                        position:absolute; top:435px; left:575px;'>
-                        </div>
-
-                        <!-- ASSET 7067 -->
-                        <img src='../image.php?id=7067' style='width:20px; cursor:pointer; position:absolute; top:393px; left:560px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7067' onclick='fetchAssetData(7067);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7067); ?>; 
-                        position:absolute; top:390px; left:575px;'>
-                        </div>
-
-                        <!-- ASSET 7068 -->
-                        <img src='../image.php?id=7068' style='width:20px; cursor:pointer; position:absolute; top:393px; left:410px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7068' onclick='fetchAssetData(7068);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7068); ?>; 
-                        position:absolute; top:390px; left:427px;'>
-                        </div>
-
-                         <!-- ASSET 7069 -->
-                         <img src='../image.php?id=7069' style='width:20px; cursor:pointer; position:absolute; top:465px; left:410px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7069' onclick='fetchAssetData(7069);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7069); ?>; 
-                        position:absolute; top:463px; left:427px;'>
-                        </div>
-
-                        <!-- ASSET 7070 -->
-                        <img src='../image.php?id=7070' style='width:20px; cursor:pointer; position:absolute; top:393px; left:520px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7070' onclick='fetchAssetData(7070);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7070); ?>; 
-                        position:absolute; top:390px; left:537px;'>
-                        </div>
-
-                        <!-- ASSET 7071 -->
-                        <img src='../image.php?id=7071' style='width:20px; cursor:pointer; position:absolute; top:465px; left:520px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7071' onclick='fetchAssetData(7071);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7071); ?>; 
-                        position:absolute; top:463px; left:537px;'>
-                        </div>
-
-                        <!-- ASSET 7072 -->
-                        <img src='../image.php?id=7072' style='width:17px; cursor:pointer; position:absolute; top:420px; left:525px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7072' onclick='fetchAssetData(7072);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7072); ?>; 
-                        position:absolute; top:418px; left:538px;'>
-                        </div>
-
-                        <!-- ASSET 7073 -->
-                        <img src='../image.php?id=7073' style='width:20px; cursor:pointer; position:absolute; top:400px; left:80px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7073' onclick='fetchAssetData(7073);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7073); ?>; 
-                        position:absolute; top:397px; left:97px;'>
-                        </div>
-
-                         <!-- ASSET 7074 -->
-                         <img src='../image.php?id=7074' style='width:20px; cursor:pointer; position:absolute; top:465px; left:80px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7074' onclick='fetchAssetData(7074);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7074); ?>; 
-                        position:absolute; top:462px; left:97px;'>
-                        </div>
-
-                         <!-- ASSET 7075 -->
-                         <img src='../image.php?id=7075' style='width:20px; cursor:pointer; position:absolute; top:400px; left:170px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7075' onclick='fetchAssetData(7075);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7075); ?>; 
-                        position:absolute; top:397px; left:187px;'>
-                        </div>
-                          <!-- ASSET 7076 -->
-                          <img src='../image.php?id=7076' style='width:20px; cursor:pointer; position:absolute; top:465px; left:170px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7076' onclick='fetchAssetData(7076);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7076); ?>; 
-                        position:absolute; top:462px; left:187px;'>
-                        </div>
-                        <!-- ASSET 7077 -->
-                        <img src='../image.php?id=7077' style='width:20px; cursor:pointer; position:absolute; top:400px; left:250px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7077' onclick='fetchAssetData(7077);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7077); ?>; 
-                        position:absolute; top:397px; left:267px;'>
-                        </div>
-                        <!-- ASSET 7078 -->
-                        <img src='../image.php?id=7078' style='width:20px; cursor:pointer; position:absolute; top:465px; left:250px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7078' onclick='fetchAssetData(7078);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7078); ?>; 
-                        position:absolute; top:462px; left:267px;'>
-                        </div>
-                        <!-- ASSET 7079 -->
-                        <img src='../image.php?id=7079' style='width:17px; cursor:pointer; position:absolute; top:428px; left:80px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7079' onclick='fetchAssetData(7079);'>
-                        <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7079); ?>; 
-                        position:absolute; top:425px; left:95px;'>
-                        </div>
+                       <!-- ASSETS -->
+
+                    <!-- ASSET 7272 -->
+                    <img src='../image.php?id=7272'
+                        style='width:20px; cursor:pointer; position:absolute; top:80px; left:485px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7272' onclick='fetchAssetData(7272);'
+                        class="asset-image" data-id="<?php echo $assetId7272; ?>"
+                        data-room="<?php echo htmlspecialchars($room7272); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7272); ?>"
+                        data-image="<?php echo base64_encode($upload_img7272); ?>"
+                        data-category="<?php echo htmlspecialchars($category7272); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7272); ?>; 
+    position:absolute; top:77px; left:500px;'>
+                    </div>
+
+                    <!-- ASSET 7273 -->
+                    <img src='../image.php?id=7273'
+                        style='width:20px; cursor:pointer; position:absolute; top:80px; left:520px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7273' onclick='fetchAssetData(7273);'
+                        class="asset-image" data-id="<?php echo $assetId7273; ?>"
+                        data-room="<?php echo htmlspecialchars($room7273); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7273); ?>"
+                        data-image="<?php echo base64_encode($upload_img7273); ?>"
+                        data-category="<?php echo htmlspecialchars($category7273); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7273); ?>; 
+    position:absolute; top:77px; left:535px;'>
+                    </div>
+
+                    <!-- ASSET 7274 -->
+                    <img src='../image.php?id=7274'
+                        style='width:20px; cursor:pointer; position:absolute; top:140px; left:485px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7274' onclick='fetchAssetData(7274);'
+                        class="asset-image" data-id="<?php echo $assetId7274; ?>"
+                        data-room="<?php echo htmlspecialchars($room7274); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7274); ?>"
+                        data-image="<?php echo base64_encode($upload_img7274); ?>"
+                        data-category="<?php echo htmlspecialchars($category7274); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7274); ?>; 
+    position:absolute; top:137px; left:500px;'>
+                    </div>
+
+                    <!-- ASSET 7275 -->
+                    <img src='../image.php?id=7275'
+                        style='width:20px; cursor:pointer; position:absolute; top:140px; left:520px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7275' onclick='fetchAssetData(7275);'
+                        class="asset-image" data-id="<?php echo $assetId7275; ?>"
+                        data-room="<?php echo htmlspecialchars($room7275); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7275); ?>"
+                        data-image="<?php echo base64_encode($upload_img7275); ?>"
+                        data-category="<?php echo htmlspecialchars($category7275); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7275); ?>; 
+    position:absolute; top:137px; left:535px;'>
+                    </div>
+
+                    <!-- ASSET 6947 -->
+                    <img src='../image.php?id=6947'
+                        style='width:20px; cursor:pointer; position:absolute; top:322px; left:859px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6947' onclick='fetchAssetData(6947);'
+                        class="asset-image" data-id="<?php echo $assetId6947; ?>"
+                        data-room="<?php echo htmlspecialchars($room6947); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6947); ?>"
+                        data-image="<?php echo base64_encode($upload_img6947); ?>"
+                        data-category="<?php echo htmlspecialchars($category6947); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6947); ?>; 
+    position:absolute; top:322px; left:874px;'>
+                    </div>
+
+                    <!-- ASSET 6946 -->
+                    <img src='../image.php?id=6946'
+                        style='width:20px; cursor:pointer; position:absolute; top:252px; left:859px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6946' onclick='fetchAssetData(6946);'
+                        class="asset-image" data-id="<?php echo $assetId6946; ?>"
+                        data-room="<?php echo htmlspecialchars($room6946); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6946); ?>"
+                        data-image="<?php echo base64_encode($upload_img6946); ?>"
+                        data-category="<?php echo htmlspecialchars($category6946); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6946); ?>; 
+    position:absolute; top:252px; left:874px;'>
+                    </div>
+
+                    <!-- ASSET 6945 -->
+                    <img src='../image.php?id=6945'
+                        style='width:20px; cursor:pointer; position:absolute; top:182px; left:859px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6945' onclick='fetchAssetData(6945);'
+                        class="asset-image" data-id="<?php echo $assetId6945; ?>"
+                        data-room="<?php echo htmlspecialchars($room6945); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6945); ?>"
+                        data-image="<?php echo base64_encode($upload_img6945); ?>"
+                        data-category="<?php echo htmlspecialchars($category6945); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6945); ?>; 
+    position:absolute; top:182px; left:874px;'>
+                    </div>
+
+                    <!-- ASSET 6944 -->
+                    <img src='../image.php?id=6944'
+                        style='width:20px; cursor:pointer; position:absolute; top:322px; left:759px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6944' onclick='fetchAssetData(6944);'
+                        class="asset-image" data-id="<?php echo $assetId6944; ?>"
+                        data-room="<?php echo htmlspecialchars($room6944); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6944); ?>"
+                        data-image="<?php echo base64_encode($upload_img6944); ?>"
+                        data-category="<?php echo htmlspecialchars($category6944); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6944); ?>; 
+    position:absolute; top:322px; left:774px;'>
+                    </div>
+
+                    <!-- ASSET 6943 -->
+                    <img src='../image.php?id=6943'
+                        style='width:20px; cursor:pointer; position:absolute; top:252px; left:759px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6943' onclick='fetchAssetData(6943);'
+                        class="asset-image" data-id="<?php echo $assetId6943; ?>"
+                        data-room="<?php echo htmlspecialchars($room6943); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6943); ?>"
+                        data-image="<?php echo base64_encode($upload_img6943); ?>"
+                        data-category="<?php echo htmlspecialchars($category6943); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6943); ?>; 
+    position:absolute; top:252px; left:774px;'>
+                    </div>
+
+
+                    <!-- ASSET 6942 -->
+                    <img src='../image.php?id=6942'
+                        style='width:20px; cursor:pointer; position:absolute; top:182px; left:759px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6942' onclick='fetchAssetData(6942);'
+                        class="asset-image" data-id="<?php echo $assetId6942; ?>"
+                        data-room="<?php echo htmlspecialchars($room6942); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6942); ?>"
+                        data-image="<?php echo base64_encode($upload_img6942); ?>"
+                        data-category="<?php echo htmlspecialchars($category6942); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6942); ?>; 
+    position:absolute; top:182px; left:774px;'>
+                    </div>
+
+                    <!-- ASSET 6941 -->
+                    <img src='../image.php?id=6941'
+                        style='width:20px; cursor:pointer; position:absolute; top:322px; left:659px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6941' onclick='fetchAssetData(6941);'
+                        class="asset-image" data-id="<?php echo $assetId6941; ?>"
+                        data-room="<?php echo htmlspecialchars($room6941); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6941); ?>"
+                        data-image="<?php echo base64_encode($upload_img6941); ?>"
+                        data-category="<?php echo htmlspecialchars($category6941); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6941); ?>; 
+    position:absolute; top:322px; left:674px;'>
+                    </div>
+
+                    <!-- ASSET 6940 -->
+                    <img src='../image.php?id=6940'
+                        style='width:20px; cursor:pointer; position:absolute; top:252px; left:659px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6940' onclick='fetchAssetData(6940);'
+                        class="asset-image" data-id="<?php echo $assetId6940; ?>"
+                        data-room="<?php echo htmlspecialchars($room6940); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6940); ?>"
+                        data-image="<?php echo base64_encode($upload_img6940); ?>"
+                        data-category="<?php echo htmlspecialchars($category6940); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6940); ?>; 
+    position:absolute; top:252px; left:674px;'>
+                    </div>
+
+                    <!-- ASSET 6939 -->
+                    <img src='../image.php?id=6939'
+                        style='width:20px; cursor:pointer; position:absolute; top:182px; left:659px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6939' onclick='fetchAssetData(6939);'
+                        class="asset-image" data-id="<?php echo $assetId6939; ?>"
+                        data-room="<?php echo htmlspecialchars($room6939); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6939); ?>"
+                        data-image="<?php echo base64_encode($upload_img6939); ?>"
+                        data-category="<?php echo htmlspecialchars($category6939); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6939); ?>; 
+    position:absolute; top:182px; left:674px;'>
+                    </div>
+
+                    <!-- ASSET 6938 -->
+                    <img src='../image.php?id=6938'
+                        style='width:20px; cursor:pointer; position:absolute; top:182px; left:799px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6938' onclick='fetchAssetData(6938);'
+                        class="asset-image" data-id="<?php echo $assetId6938; ?>"
+                        data-room="<?php echo htmlspecialchars($room6938); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6938); ?>"
+                        data-image="<?php echo base64_encode($upload_img6938); ?>"
+                        data-category="<?php echo htmlspecialchars($category6938); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6938); ?>; 
+    position:absolute; top:182px; left:814px;'>
+                    </div>
+
+                    <!-- ASSET 6937 -->
+                    <img src='../image.php?id=6937'
+                        style='width:20px; cursor:pointer; position:absolute; top:252px; left:799px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6937' onclick='fetchAssetData(6937);'
+                        class="asset-image" data-id="<?php echo $assetId6937; ?>"
+                        data-room="<?php echo htmlspecialchars($room6937); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6937); ?>"
+                        data-image="<?php echo base64_encode($upload_img6937); ?>"
+                        data-category="<?php echo htmlspecialchars($category6937); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6937); ?>; 
+    position:absolute; top:252px; left:814px;'>
+                    </div>
+
+                    <!-- ASSET 6936 -->
+                    <img src='../image.php?id=6936'
+                        style='width:20px; cursor:pointer; position:absolute; top:322px; left:799px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6936' onclick='fetchAssetData(6936);'
+                        class="asset-image" data-id="<?php echo $assetId6936; ?>"
+                        data-room="<?php echo htmlspecialchars($room6936); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6936); ?>"
+                        data-image="<?php echo base64_encode($upload_img6936); ?>"
+                        data-category="<?php echo htmlspecialchars($category6936); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6936); ?>; 
+    position:absolute; top:322px; left:814px;'>
+                    </div>
+
+                    <!-- ASSET 6935 -->
+                    <img src='../image.php?id=6935'
+                        style='width:20px; cursor:pointer; position:absolute; top:182px; left:699px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6935' onclick='fetchAssetData(6935);'
+                        class="asset-image" data-id="<?php echo $assetId6935; ?>"
+                        data-room="<?php echo htmlspecialchars($room6935); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6935); ?>"
+                        data-image="<?php echo base64_encode($upload_img6935); ?>"
+                        data-category="<?php echo htmlspecialchars($category6935); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6935); ?>; 
+    position:absolute; top:182px; left:714px;'>
+                    </div>
+                    <!-- ASSET 6934 -->
+                    <img src='../image.php?id=6934'
+                        style='width:20px; cursor:pointer; position:absolute; top:252px; left:699px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6934' onclick='fetchAssetData(6934);'
+                        class="asset-image" data-id="<?php echo $assetId6934; ?>"
+                        data-room="<?php echo htmlspecialchars($room6934); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6934); ?>"
+                        data-image="<?php echo base64_encode($upload_img6934); ?>"
+                        data-category="<?php echo htmlspecialchars($category6934); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6934); ?>; 
+    position:absolute; top:252px; left:714px;'>
+                    </div>
+
+                    <!-- ASSET 6933 -->
+                    <img src='../image.php?id=6933'
+                        style='width:20px; cursor:pointer; position:absolute; top:322px; left:699px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6933' onclick='fetchAssetData(6933);'
+                        class="asset-image" data-id="<?php echo $assetId6933; ?>"
+                        data-room="<?php echo htmlspecialchars($room6933); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6933); ?>"
+                        data-image="<?php echo base64_encode($upload_img6933); ?>"
+                        data-category="<?php echo htmlspecialchars($category6933); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6933); ?>; 
+    position:absolute; top:322px; left:714px;'>
+                    </div>
+
+                    <!-- ASSET 6932 -->
+                    <img src='../image.php?id=6932'
+                        style='width:20px; cursor:pointer; position:absolute; top:182px; left:599px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6932' onclick='fetchAssetData(6932);'
+                        class="asset-image" data-id="<?php echo $assetId6932; ?>"
+                        data-room="<?php echo htmlspecialchars($room6932); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6932); ?>"
+                        data-image="<?php echo base64_encode($upload_img6932); ?>"
+                        data-category="<?php echo htmlspecialchars($category6932); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6932); ?>; 
+    position:absolute; top:182px; left:614px;'>
+                    </div>
+
+                    <!-- ASSET 6931 -->
+                    <img src='../image.php?id=6931'
+                        style='width:20px; cursor:pointer; position:absolute; top:252px; left:599px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6931' onclick='fetchAssetData(6931);'
+                        class="asset-image" data-id="<?php echo $assetId6931; ?>"
+                        data-room="<?php echo htmlspecialchars($room6931); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6931); ?>"
+                        data-image="<?php echo base64_encode($upload_img6931); ?>"
+                        data-category="<?php echo htmlspecialchars($category6931); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6931); ?>; 
+    position:absolute; top:252px; left:614px;'>
+                    </div>
+
+                    <!-- ASSET 6930 -->
+                    <img src='../image.php?id=6930'
+                        style='width:20px; cursor:pointer; position:absolute; top:322px; left:599px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6930' onclick='fetchAssetData(6930);'
+                        class="asset-image" data-id="<?php echo $assetId6930; ?>"
+                        data-room="<?php echo htmlspecialchars($room6930); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6930); ?>"
+                        data-image="<?php echo base64_encode($upload_img6930); ?>"
+                        data-category="<?php echo htmlspecialchars($category6930); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6930); ?>; 
+    position:absolute; top:322px; left:614px;'>
+                    </div>
+
+                    <!-- ASSET 6929 -->
+                    <img src='../image.php?id=6929'
+                        style='width:16px; cursor:pointer; position:absolute; top:347px; left:850px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6929' onclick='fetchAssetData(6929);'
+                        class="asset-image" data-id="<?php echo $assetId6929; ?>"
+                        data-room="<?php echo htmlspecialchars($room6929); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6929); ?>"
+                        data-image="<?php echo base64_encode($upload_img6929); ?>"
+                        data-category="<?php echo htmlspecialchars($category6929); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6929); ?>; 
+    position:absolute; top:347px; left:860px;'>
+                    </div>
+
+                    <!-- ASSET 6928 -->
+                    <img src='../image.php?id=6928'
+                        style='width:16px; cursor:pointer; position:absolute; top:347px; left:835px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6928' onclick='fetchAssetData(6928);'
+                        class="asset-image" data-id="<?php echo $assetId6928; ?>"
+                        data-room="<?php echo htmlspecialchars($room6928); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6928); ?>"
+                        data-image="<?php echo base64_encode($upload_img6928); ?>"
+                        data-category="<?php echo htmlspecialchars($category6928); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6928); ?>; 
+    position:absolute; top:347px; left:845px;'>
+                    </div>
+
+                    <!-- ASSET 6927 -->
+                    <img src='../image.php?id=6927'
+                        style='width:16px; cursor:pointer; position:absolute; top:347px; left:820px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6927' onclick='fetchAssetData(6927);'
+                        class="asset-image" data-id="<?php echo $assetId6927; ?>"
+                        data-room="<?php echo htmlspecialchars($room6927); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6927); ?>"
+                        data-image="<?php echo base64_encode($upload_img6927); ?>"
+                        data-category="<?php echo htmlspecialchars($category6927); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6927); ?>; 
+    position:absolute; top:347px; left:830px;'>
+                    </div>
+
+                    <!-- ASSET 6926 -->
+                    <img src='../image.php?id=6926'
+                        style='width:16px; cursor:pointer; position:absolute; top:347px; left:750px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6926' onclick='fetchAssetData(6926);'
+                        class="asset-image" data-id="<?php echo $assetId6926; ?>"
+                        data-room="<?php echo htmlspecialchars($room6926); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6926); ?>"
+                        data-image="<?php echo base64_encode($upload_img6926); ?>"
+                        data-category="<?php echo htmlspecialchars($category6926); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6926); ?>; 
+    position:absolute; top:347px; left:760px;'>
+                    </div>
+                    <!-- ASSET 6925 -->
+                    <img src='../image.php?id=6925'
+                        style='width:16px; cursor:pointer; position:absolute; top:347px; left:735px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6925' onclick='fetchAssetData(6925);'
+                        class="asset-image" data-id="<?php echo $assetId6925; ?>"
+                        data-room="<?php echo htmlspecialchars($room6925); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6925); ?>"
+                        data-image="<?php echo base64_encode($upload_img6925); ?>"
+                        data-category="<?php echo htmlspecialchars($category6925); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6925); ?>; 
+    position:absolute; top:347px; left:745px;'>
+                    </div>
+
+                    <!-- ASSET 6924 -->
+                    <img src='../image.php?id=6924'
+                        style='width:16px; cursor:pointer; position:absolute; top:347px; left:720px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6924' onclick='fetchAssetData(6924);'
+                        class="asset-image" data-id="<?php echo $assetId6924; ?>"
+                        data-room="<?php echo htmlspecialchars($room6924); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6924); ?>"
+                        data-image="<?php echo base64_encode($upload_img6924); ?>"
+                        data-category="<?php echo htmlspecialchars($category6924); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6924); ?>; 
+    position:absolute; top:347px; left:730px;'>
+                    </div>
+
+                    <!-- ASSET 6923 -->
+                    <img src='../image.php?id=6923'
+                        style='width:16px; cursor:pointer; position:absolute; top:347px; left:650px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6923' onclick='fetchAssetData(6923);'
+                        class="asset-image" data-id="<?php echo $assetId6923; ?>"
+                        data-room="<?php echo htmlspecialchars($room6923); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6923); ?>"
+                        data-image="<?php echo base64_encode($upload_img6923); ?>"
+                        data-category="<?php echo htmlspecialchars($category6923); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6923); ?>; 
+    position:absolute; top:347px; left:660px;'>
+                    </div>
+
+                    <!-- ASSET 6922 -->
+                    <img src='../image.php?id=6922'
+                        style='width:16px; cursor:pointer; position:absolute; top:347px; left:635px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6922' onclick='fetchAssetData(6922);'
+                        class="asset-image" data-id="<?php echo $assetId6922; ?>"
+                        data-room="<?php echo htmlspecialchars($room6922); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6922); ?>"
+                        data-image="<?php echo base64_encode($upload_img6922); ?>"
+                        data-category="<?php echo htmlspecialchars($category6922); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6922); ?>; 
+    position:absolute; top:347px; left:645px;'>
+                    </div>
+
+                    <!-- ASSET 6921 -->
+                    <img src='../image.php?id=6921'
+                        style='width:16px; cursor:pointer; position:absolute; top:347px; left:620px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6921' onclick='fetchAssetData(6921);'
+                        class="asset-image" data-id="<?php echo $assetId6921; ?>"
+                        data-room="<?php echo htmlspecialchars($room6921); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6921); ?>"
+                        data-image="<?php echo base64_encode($upload_img6921); ?>"
+                        data-category="<?php echo htmlspecialchars($category6921); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6921); ?>; 
+    position:absolute; top:347px; left:630px;'>
+                    </div>
+
+                    <!-- ASSET 6920 -->
+                    <img src='../image.php?id=6920'
+                        style='width:16px; cursor:pointer; position:absolute; top:277px; left:850px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6920' onclick='fetchAssetData(6920);'
+                        class="asset-image" data-id="<?php echo $assetId6920; ?>"
+                        data-room="<?php echo htmlspecialchars($room6920); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6920); ?>"
+                        data-image="<?php echo base64_encode($upload_img6920); ?>"
+                        data-category="<?php echo htmlspecialchars($category6920); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6920); ?>; 
+    position:absolute; top:277px; left:860px;'>
+                    </div>
+
+                    <!-- ASSET 6919 -->
+                    <img src='../image.php?id=6919'
+                        style='width:16px; cursor:pointer; position:absolute; top:277px; left:835px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6919' onclick='fetchAssetData(6919);'
+                        class="asset-image" data-id="<?php echo $assetId6919; ?>"
+                        data-room="<?php echo htmlspecialchars($room6919); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6919); ?>"
+                        data-image="<?php echo base64_encode($upload_img6919); ?>"
+                        data-category="<?php echo htmlspecialchars($category6919); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6919); ?>; 
+    position:absolute; top:277px; left:845px;'>
+                    </div>
+
+                    <!-- ASSET 6918 -->
+                    <img src='../image.php?id=6918'
+                        style='width:16px; cursor:pointer; position:absolute; top:277px; left:820px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6918' onclick='fetchAssetData(6918);'
+                        class="asset-image" data-id="<?php echo $assetId6918; ?>"
+                        data-room="<?php echo htmlspecialchars($room6918); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6918); ?>"
+                        data-image="<?php echo base64_encode($upload_img6918); ?>"
+                        data-category="<?php echo htmlspecialchars($category6918); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6918); ?>; 
+    position:absolute; top:277px; left:830px;'>
+                    </div>
+
+                    <!-- ASSET 6917 -->
+                    <img src='../image.php?id=6917'
+                        style='width:16px; cursor:pointer; position:absolute; top:277px; left:750px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6917' onclick='fetchAssetData(6917);'
+                        class="asset-image" data-id="<?php echo $assetId6917; ?>"
+                        data-room="<?php echo htmlspecialchars($room6917); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6917); ?>"
+                        data-image="<?php echo base64_encode($upload_img6917); ?>"
+                        data-category="<?php echo htmlspecialchars($category6917); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6917); ?>; 
+    position:absolute; top:277px; left:760px;'>
+                    </div>
+                    <!-- ASSET 6916 -->
+                    <img src='../image.php?id=6916'
+                        style='width:16px; cursor:pointer; position:absolute; top:277px; left:735px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6916' onclick='fetchAssetData(6916);'
+                        class="asset-image" data-id="<?php echo $assetId6916; ?>"
+                        data-room="<?php echo htmlspecialchars($room6916); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6916); ?>"
+                        data-image="<?php echo base64_encode($upload_img6916); ?>"
+                        data-category="<?php echo htmlspecialchars($category6916); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6916); ?>; 
+    position:absolute; top:277px; left:745px;'>
+                    </div>
+
+                    <!-- ASSET 6915 -->
+                    <img src='../image.php?id=6915'
+                        style='width:16px; cursor:pointer; position:absolute; top:277px; left:720px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6915' onclick='fetchAssetData(6915);'
+                        class="asset-image" data-id="<?php echo $assetId6915; ?>"
+                        data-room="<?php echo htmlspecialchars($room6915); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6915); ?>"
+                        data-image="<?php echo base64_encode($upload_img6915); ?>"
+                        data-category="<?php echo htmlspecialchars($category6915); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6915); ?>; 
+    position:absolute; top:277px; left:730px;'>
+                    </div>
+
+                    <!-- ASSET 6914 -->
+                    <img src='../image.php?id=6914'
+                        style='width:16px; cursor:pointer; position:absolute; top:277px; left:650px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6914' onclick='fetchAssetData(6914);'
+                        class="asset-image" data-id="<?php echo $assetId6914; ?>"
+                        data-room="<?php echo htmlspecialchars($room6914); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6914); ?>"
+                        data-image="<?php echo base64_encode($upload_img6914); ?>"
+                        data-category="<?php echo htmlspecialchars($category6914); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6914); ?>; 
+    position:absolute; top:277px; left:660px;'>
+                    </div>
+
+                    <!-- ASSET 6913 -->
+                    <img src='../image.php?id=6913'
+                        style='width:16px; cursor:pointer; position:absolute; top:277px; left:635px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6913' onclick='fetchAssetData(6913);'
+                        class="asset-image" data-id="<?php echo $assetId6913; ?>"
+                        data-room="<?php echo htmlspecialchars($room6913); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6913); ?>"
+                        data-image="<?php echo base64_encode($upload_img6913); ?>"
+                        data-category="<?php echo htmlspecialchars($category6913); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6913); ?>; 
+    position:absolute; top:277px; left:645px;'>
+                    </div>
+
+                    <!-- ASSET 6912 -->
+                    <img src='../image.php?id=6912'
+                        style='width:16px; cursor:pointer; position:absolute; top:277px; left:620px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6912' onclick='fetchAssetData(6912);'
+                        class="asset-image" data-id="<?php echo $assetId6912; ?>"
+                        data-room="<?php echo htmlspecialchars($room6912); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6912); ?>"
+                        data-image="<?php echo base64_encode($upload_img6912); ?>"
+                        data-category="<?php echo htmlspecialchars($category6912); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6912); ?>; 
+    position:absolute; top:277px; left:630px;'>
+                    </div>
+                    <!-- ASSET 6911 -->
+                    <img src='../image.php?id=6911'
+                        style='width:16px; cursor:pointer; position:absolute; top:207px; left:850px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6911' onclick='fetchAssetData(6911);'
+                        class="asset-image" data-id="<?php echo $assetId6911; ?>"
+                        data-room="<?php echo htmlspecialchars($room6911); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6911); ?>"
+                        data-image="<?php echo base64_encode($upload_img6911); ?>"
+                        data-category="<?php echo htmlspecialchars($category6911); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6911); ?>; 
+    position:absolute; top:207px; left:860px;'>
+                    </div>
+
+                    <!-- ASSET 6910 -->
+                    <img src='../image.php?id=6910'
+                        style='width:16px; cursor:pointer; position:absolute; top:207px; left:835px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6910' onclick='fetchAssetData(6910);'
+                        class="asset-image" data-id="<?php echo $assetId6910; ?>"
+                        data-room="<?php echo htmlspecialchars($room6910); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6910); ?>"
+                        data-image="<?php echo base64_encode($upload_img6910); ?>"
+                        data-category="<?php echo htmlspecialchars($category6910); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6910); ?>; 
+    position:absolute; top:207px; left:845px;'>
+                    </div>
+                    <!-- ASSET 6909 -->
+                    <img src='../image.php?id=6909'
+                        style='width:16px; cursor:pointer; position:absolute; top:207px; left:820px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6909' onclick='fetchAssetData(6909);'
+                        class="asset-image" data-id="<?php echo $assetId6909; ?>"
+                        data-room="<?php echo htmlspecialchars($room6909); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6909); ?>"
+                        data-image="<?php echo base64_encode($upload_img6909); ?>"
+                        data-category="<?php echo htmlspecialchars($category6909); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6909); ?>; 
+    position:absolute; top:207px; left:830px;'>
+                    </div>
+
+                    <!-- ASSET 6908 -->
+                    <img src='../image.php?id=6908'
+                        style='width:16px; cursor:pointer; position:absolute; top:207px; left:750px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6908' onclick='fetchAssetData(6908);'
+                        class="asset-image" data-id="<?php echo $assetId6908; ?>"
+                        data-room="<?php echo htmlspecialchars($room6908); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6908); ?>"
+                        data-image="<?php echo base64_encode($upload_img6908); ?>"
+                        data-category="<?php echo htmlspecialchars($category6908); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6908); ?>; 
+    position:absolute; top:207px; left:760px;'>
+                    </div>
+
+                    <!-- ASSET 6907 -->
+                    <img src='../image.php?id=6907'
+                        style='width:16px; cursor:pointer; position:absolute; top:207px; left:735px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6907' onclick='fetchAssetData(6907);'
+                        class="asset-image" data-id="<?php echo $assetId6907; ?>"
+                        data-room="<?php echo htmlspecialchars($room6907); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6907); ?>"
+                        data-image="<?php echo base64_encode($upload_img6907); ?>"
+                        data-category="<?php echo htmlspecialchars($category6907); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6907); ?>; 
+    position:absolute; top:207px; left:745px;'>
+                    </div>
+
+                    <!-- ASSET 6906 -->
+                    <img src='../image.php?id=6906'
+                        style='width:16px; cursor:pointer; position:absolute; top:207px; left:720px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6906' onclick='fetchAssetData(6906);'
+                        class="asset-image" data-id="<?php echo $assetId6906; ?>"
+                        data-room="<?php echo htmlspecialchars($room6906); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6906); ?>"
+                        data-image="<?php echo base64_encode($upload_img6906); ?>"
+                        data-category="<?php echo htmlspecialchars($category6906); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6906); ?>; 
+    position:absolute; top:207px; left:730px;'>
+                    </div>
+
+                    <!-- ASSET 6905 -->
+                    <img src='../image.php?id=6905'
+                        style='width:16px; cursor:pointer; position:absolute; top:207px; left:650px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6905' onclick='fetchAssetData(6905);'
+                        class="asset-image" data-id="<?php echo $assetId6905; ?>"
+                        data-room="<?php echo htmlspecialchars($room6905); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6905); ?>"
+                        data-image="<?php echo base64_encode($upload_img6905); ?>"
+                        data-category="<?php echo htmlspecialchars($category6905); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6905); ?>; 
+    position:absolute; top:207px; left:660px;'>
+                    </div>
+
+                    <!-- ASSET 6904 -->
+                    <img src='../image.php?id=6904'
+                        style='width:16px; cursor:pointer; position:absolute; top:207px; left:635px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6904' onclick='fetchAssetData(6904);'
+                        class="asset-image" data-id="<?php echo $assetId6904; ?>"
+                        data-room="<?php echo htmlspecialchars($room6904); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6904); ?>"
+                        data-image="<?php echo base64_encode($upload_img6904); ?>"
+                        data-category="<?php echo htmlspecialchars($category6904); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6904); ?>; 
+    position:absolute; top:207px; left:645px;'>
+                    </div>
+
+                    <!-- ASSET 6903 -->
+                    <img src='../image.php?id=6903'
+                        style='width:16px; cursor:pointer; position:absolute; top:207px; left:620px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6903' onclick='fetchAssetData(6903);'
+                        class="asset-image" data-id="<?php echo $assetId6903; ?>"
+                        data-room="<?php echo htmlspecialchars($room6903); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6903); ?>"
+                        data-image="<?php echo base64_encode($upload_img6903); ?>"
+                        data-category="<?php echo htmlspecialchars($category6903); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6903); ?>; 
+    position:absolute; top:207px; left:630px;'>
+                    </div>
+                    <!-- ASSET 6902 -->
+                    <img src='../image.php?id=6902'
+                        style='width:20px; cursor:pointer; position:absolute; top:300px; left:850px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6902' onclick='fetchAssetData(6902);'
+                        class="asset-image" data-id="<?php echo $assetId6902; ?>"
+                        data-room="<?php echo htmlspecialchars($room6902); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6902); ?>"
+                        data-image="<?php echo base64_encode($upload_img6902); ?>"
+                        data-category="<?php echo htmlspecialchars($category6902); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6902); ?>; 
+    position:absolute; top:297px; left:865px;'>
+                    </div>
+
+                    <!-- ASSET 6901 -->
+                    <img src='../image.php?id=6901'
+                        style='width:20px; cursor:pointer; position:absolute; top:300px; left:830px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6901' onclick='fetchAssetData(6901);'
+                        class="asset-image" data-id="<?php echo $assetId6901; ?>"
+                        data-room="<?php echo htmlspecialchars($room6901); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6901); ?>"
+                        data-image="<?php echo base64_encode($upload_img6901); ?>"
+                        data-category="<?php echo htmlspecialchars($category6901); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6901); ?>; 
+    position:absolute; top:297px; left:845px;'>
+                    </div>
+
+                    <!-- ASSET 6900 -->
+                    <img src='../image.php?id=6900'
+                        style='width:20px; cursor:pointer; position:absolute; top:300px; left:810px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6900' onclick='fetchAssetData(6900);'
+                        class="asset-image" data-id="<?php echo $assetId6900; ?>"
+                        data-room="<?php echo htmlspecialchars($room6900); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6900); ?>"
+                        data-image="<?php echo base64_encode($upload_img6900); ?>"
+                        data-category="<?php echo htmlspecialchars($category6900); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6900); ?>; 
+    position:absolute; top:297px; left:825px;'>
+                    </div>
+
+                    <!-- ASSET 6899 -->
+                    <img src='../image.php?id=6899'
+                        style='width:20px; cursor:pointer; position:absolute; top:300px; left:750px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6899' onclick='fetchAssetData(6899);'
+                        class="asset-image" data-id="<?php echo $assetId6899; ?>"
+                        data-room="<?php echo htmlspecialchars($room6899); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6899); ?>"
+                        data-image="<?php echo base64_encode($upload_img6899); ?>"
+                        data-category="<?php echo htmlspecialchars($category6899); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6899); ?>; 
+    position:absolute; top:297px; left:765px;'>
+                    </div>
+
+                    <!-- ASSET 6898 -->
+                    <img src='../image.php?id=6898'
+                        style='width:20px; cursor:pointer; position:absolute; top:300px; left:730px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6898' onclick='fetchAssetData(6898);'
+                        class="asset-image" data-id="<?php echo $assetId6898; ?>"
+                        data-room="<?php echo htmlspecialchars($room6898); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6898); ?>"
+                        data-image="<?php echo base64_encode($upload_img6898); ?>"
+                        data-category="<?php echo htmlspecialchars($category6898); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6898); ?>; 
+    position:absolute; top:297px; left:745px;'>
+                    </div>
+
+
+                    <!-- ASSET 6892 -->
+                    <img src='../image.php?id=6892'
+                        style='width:20px; cursor:pointer; position:absolute; top:230px; left:830px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6892' onclick='fetchAssetData(6892);'
+                        class="asset-image" data-id="<?php echo $assetId6892; ?>"
+                        data-room="<?php echo htmlspecialchars($room6892); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6892); ?>"
+                        data-image="<?php echo base64_encode($upload_img6892); ?>"
+                        data-category="<?php echo htmlspecialchars($category6892); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6892); ?>; 
+    position:absolute; top:227px; left:845px;'>
+                    </div>
+
+                    <!-- ASSET 6891 -->
+                    <img src='../image.php?id=6891'
+                        style='width:20px; cursor:pointer; position:absolute; top:230px; left:810px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6891' onclick='fetchAssetData(6891);'
+                        class="asset-image" data-id="<?php echo $assetId6891; ?>"
+                        data-room="<?php echo htmlspecialchars($room6891); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6891); ?>"
+                        data-image="<?php echo base64_encode($upload_img6891); ?>"
+                        data-category="<?php echo htmlspecialchars($category6891); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6891); ?>; 
+    position:absolute; top:227px; left:825px;'>
+                    </div>
+
+                    <!-- ASSET 6890 -->
+                    <img src='../image.php?id=6890'
+                        style='width:20px; cursor:pointer; position:absolute; top:230px; left:750px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6890' onclick='fetchAssetData(6890);'
+                        class="asset-image" data-id="<?php echo $assetId6890; ?>"
+                        data-room="<?php echo htmlspecialchars($room6890); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6890); ?>"
+                        data-image="<?php echo base64_encode($upload_img6890); ?>"
+                        data-category="<?php echo htmlspecialchars($category6890); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6890); ?>; 
+    position:absolute; top:227px; left:765px;'>
+                    </div>
+
+                    <!-- ASSET 6889 -->
+                    <img src='../image.php?id=6889'
+                        style='width:20px; cursor:pointer; position:absolute; top:230px; left:730px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6889' onclick='fetchAssetData(6889);'
+                        class="asset-image" data-id="<?php echo $assetId6889; ?>"
+                        data-room="<?php echo htmlspecialchars($room6889); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6889); ?>"
+                        data-image="<?php echo base64_encode($upload_img6889); ?>"
+                        data-category="<?php echo htmlspecialchars($category6889); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6889); ?>; 
+    position:absolute; top:227px; left:745px;'>
+                    </div>
+
+                    <!-- ASSET 6888 -->
+                    <img src='../image.php?id=6888'
+                        style='width:20px; cursor:pointer; position:absolute; top:230px; left:710px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6888' onclick='fetchAssetData(6888);'
+                        class="asset-image" data-id="<?php echo $assetId6888; ?>"
+                        data-room="<?php echo htmlspecialchars($room6888); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6888); ?>"
+                        data-image="<?php echo base64_encode($upload_img6888); ?>"
+                        data-category="<?php echo htmlspecialchars($category6888); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6888); ?>; 
+    position:absolute; top:227px; left:725px;'>
+                    </div>
+                    <!-- ASSET 6887 -->
+                    <img src='../image.php?id=6887'
+                        style='width:20px; cursor:pointer; position:absolute; top:230px; left:650px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6887' onclick='fetchAssetData(6887);'
+                        class="asset-image" data-id="<?php echo $assetId6887; ?>"
+                        data-room="<?php echo htmlspecialchars($room6887); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6887); ?>"
+                        data-image="<?php echo base64_encode($upload_img6887); ?>"
+                        data-category="<?php echo htmlspecialchars($category6887); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6887); ?>; 
+    position:absolute; top:227px; left:665px;'>
+                    </div>
+
+                    <!-- ASSET 6886 -->
+                    <img src='../image.php?id=6886'
+                        style='width:20px; cursor:pointer; position:absolute; top:230px; left:630px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6886' onclick='fetchAssetData(6886);'
+                        class="asset-image" data-id="<?php echo $assetId6886; ?>"
+                        data-room="<?php echo htmlspecialchars($room6886); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6886); ?>"
+                        data-image="<?php echo base64_encode($upload_img6886); ?>"
+                        data-category="<?php echo htmlspecialchars($category6886); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6886); ?>; 
+    position:absolute; top:227px; left:645px;'>
+                    </div>
+
+                    <!-- ASSET 6885 -->
+                    <img src='../image.php?id=6885'
+                        style='width:20px; cursor:pointer; position:absolute; top:230px; left:610px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6885' onclick='fetchAssetData(6885);'
+                        class="asset-image" data-id="<?php echo $assetId6885; ?>"
+                        data-room="<?php echo htmlspecialchars($room6885); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6885); ?>"
+                        data-image="<?php echo base64_encode($upload_img6885); ?>"
+                        data-category="<?php echo htmlspecialchars($category6885); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6885); ?>; 
+    position:absolute; top:227px; left:625px;'>
+                    </div>
+
+                    <!-- ASSET 6884 -->
+                    <img src='../image.php?id=6884'
+                        style='width:20px; cursor:pointer; position:absolute; top:160px; left:850px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6884' onclick='fetchAssetData(6884);'
+                        class="asset-image" data-id="<?php echo $assetId6884; ?>"
+                        data-room="<?php echo htmlspecialchars($room6884); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6884); ?>"
+                        data-image="<?php echo base64_encode($upload_img6884); ?>"
+                        data-category="<?php echo htmlspecialchars($category6884); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6884); ?>; 
+    position:absolute; top:157px; left:865px;'>
+                    </div>
+
+                    <!-- ASSET 6883 -->
+                    <img src='../image.php?id=6883'
+                        style='width:20px; cursor:pointer; position:absolute; top:160px; left:830px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6883' onclick='fetchAssetData(6883);'
+                        class="asset-image" data-id="<?php echo $assetId6883; ?>"
+                        data-room="<?php echo htmlspecialchars($room6883); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6883); ?>"
+                        data-image="<?php echo base64_encode($upload_img6883); ?>"
+                        data-category="<?php echo htmlspecialchars($category6883); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6883); ?>; 
+    position:absolute; top:157px; left:845px;'>
+                    </div>
+                    <!-- ASSET 6882 -->
+                    <img src='../image.php?id=6882'
+                        style='width:20px; cursor:pointer; position:absolute; top:160px; left:810px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6882' onclick='fetchAssetData(6882);'
+                        class="asset-image" data-id="<?php echo $assetId6882; ?>"
+                        data-room="<?php echo htmlspecialchars($room6882); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6882); ?>"
+                        data-image="<?php echo base64_encode($upload_img6882); ?>"
+                        data-category="<?php echo htmlspecialchars($category6882); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6882); ?>; 
+    position:absolute; top:157px; left:825px;'>
+                    </div>
+
+                    <!-- ASSET 6881 -->
+                    <img src='../image.php?id=6881'
+                        style='width:20px; cursor:pointer; position:absolute; top:160px; left:750px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6881' onclick='fetchAssetData(6881);'
+                        class="asset-image" data-id="<?php echo $assetId6881; ?>"
+                        data-room="<?php echo htmlspecialchars($room6881); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6881); ?>"
+                        data-image="<?php echo base64_encode($upload_img6881); ?>"
+                        data-category="<?php echo htmlspecialchars($category6881); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6881); ?>; 
+    position:absolute; top:157px; left:765px;'>
+                    </div>
+
+                    <!-- ASSET 6880 -->
+                    <img src='../image.php?id=6880'
+                        style='width:20px; cursor:pointer; position:absolute; top:160px; left:730px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6880' onclick='fetchAssetData(6880);'
+                        class="asset-image" data-id="<?php echo $assetId6880; ?>"
+                        data-room="<?php echo htmlspecialchars($room6880); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6880); ?>"
+                        data-image="<?php echo base64_encode($upload_img6880); ?>"
+                        data-category="<?php echo htmlspecialchars($category6880); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6880); ?>; 
+    position:absolute; top:157px; left:745px;'>
+                    </div>
+
+                    <!-- ASSET 6879 -->
+                    <img src='../image.php?id=6879'
+                        style='width:20px; cursor:pointer; position:absolute; top:160px; left:710px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6879' onclick='fetchAssetData(6879);'
+                        class="asset-image" data-id="<?php echo $assetId6879; ?>"
+                        data-room="<?php echo htmlspecialchars($room6879); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6879); ?>"
+                        data-image="<?php echo base64_encode($upload_img6879); ?>"
+                        data-category="<?php echo htmlspecialchars($category6879); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6879); ?>; 
+    position:absolute; top:157px; left:725px;'>
+                    </div>
+
+                    <!-- ASSET 6878 -->
+                    <img src='../image.php?id=6878'
+                        style='width:20px; cursor:pointer; position:absolute; top:160px; left:650px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6878' onclick='fetchAssetData(6878);'
+                        class="asset-image" data-id="<?php echo $assetId6878; ?>"
+                        data-room="<?php echo htmlspecialchars($room6878); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6878); ?>"
+                        data-image="<?php echo base64_encode($upload_img6878); ?>"
+                        data-category="<?php echo htmlspecialchars($category6878); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6878); ?>; 
+    position:absolute; top:157px; left:665px;'>
+                    </div>
+                    <!-- ASSET 6877 -->
+                    <img src='../image.php?id=6877'
+                        style='width:20px; cursor:pointer; position:absolute; top:160px; left:630px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6877' onclick='fetchAssetData(6877);'
+                        class="asset-image" data-id="<?php echo $assetId6877; ?>"
+                        data-room="<?php echo htmlspecialchars($room6877); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6877); ?>"
+                        data-image="<?php echo base64_encode($upload_img6877); ?>"
+                        data-category="<?php echo htmlspecialchars($category6877); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6877); ?>; 
+    position:absolute; top:157px; left:645px;'>
+                    </div>
+
+                    <!-- ASSET 6876 -->
+                    <img src='../image.php?id=6876'
+                        style='width:20px; cursor:pointer; position:absolute; top:160px; left:610px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6876' onclick='fetchAssetData(6876);'
+                        class="asset-image" data-id="<?php echo $assetId6876; ?>"
+                        data-room="<?php echo htmlspecialchars($room6876); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6876); ?>"
+                        data-image="<?php echo base64_encode($upload_img6876); ?>"
+                        data-category="<?php echo htmlspecialchars($category6876); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6876); ?>; 
+    position:absolute; top:157px; left:625px;'>
+                    </div>
+
+                    <!-- ASSET 6875 -->
+                    <img src='../image.php?id=6875'
+                        style='width:50px; cursor:pointer; position:absolute; top:315px; left:815px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6875' onclick='fetchAssetData(6875);'
+                        class="asset-image" data-id="<?php echo $assetId6875; ?>"
+                        data-room="<?php echo htmlspecialchars($room6875); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6875); ?>"
+                        data-image="<?php echo base64_encode($upload_img6875); ?>"
+                        data-category="<?php echo htmlspecialchars($category6875); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6875); ?>; 
+    position:absolute; top:312px; left:865px;'>
+                    </div>
+
+                    <!-- ASSET 6874 -->
+                    <img src='../image.php?id=6874'
+                        style='width:50px; cursor:pointer; position:absolute; top:315px; left:715px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6874' onclick='fetchAssetData(6874);'
+                        class="asset-image" data-id="<?php echo $assetId6874; ?>"
+                        data-room="<?php echo htmlspecialchars($room6874); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6874); ?>"
+                        data-image="<?php echo base64_encode($upload_img6874); ?>"
+                        data-category="<?php echo htmlspecialchars($category6874); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6874); ?>; 
+    position:absolute; top:312px; left:765px;'>
+                    </div>
+
+                    <!-- ASSET 6873 -->
+                    <img src='../image.php?id=6873'
+                        style='width:50px; cursor:pointer; position:absolute; top:315px; left:615px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6873' onclick='fetchAssetData(6873);'
+                        class="asset-image" data-id="<?php echo $assetId6873; ?>"
+                        data-room="<?php echo htmlspecialchars($room6873); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6873); ?>"
+                        data-image="<?php echo base64_encode($upload_img6873); ?>"
+                        data-category="<?php echo htmlspecialchars($category6873); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6873); ?>; 
+    position:absolute; top:312px; left:665px;'>
+                    </div>
+                    <!-- ASSET 6872 -->
+                    <img src='../image.php?id=6872'
+                        style='width:50px; cursor:pointer; position:absolute; top:245px; left:815px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6872' onclick='fetchAssetData(6872);'
+                        class="asset-image" data-id="<?php echo $assetId6872; ?>"
+                        data-room="<?php echo htmlspecialchars($room6872); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6872); ?>"
+                        data-image="<?php echo base64_encode($upload_img6872); ?>"
+                        data-category="<?php echo htmlspecialchars($category6872); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6872); ?>; 
+    position:absolute; top:242px; left:865px;'>
+                    </div>
+
+                    <!-- ASSET 6871 -->
+                    <img src='../image.php?id=6871'
+                        style='width:50px; cursor:pointer; position:absolute; top:245px; left:715px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6871' onclick='fetchAssetData(6871);'
+                        class="asset-image" data-id="<?php echo $assetId6871; ?>"
+                        data-room="<?php echo htmlspecialchars($room6871); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6871); ?>"
+                        data-image="<?php echo base64_encode($upload_img6871); ?>"
+                        data-category="<?php echo htmlspecialchars($category6871); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6871); ?>; 
+    position:absolute; top:242px; left:765px;'>
+                    </div>
+
+                    <!-- ASSET 6870 -->
+                    <img src='../image.php?id=6870'
+                        style='width:50px; cursor:pointer; position:absolute; top:245px; left:615px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6870' onclick='fetchAssetData(6870);'
+                        class="asset-image" data-id="<?php echo $assetId6870; ?>"
+                        data-room="<?php echo htmlspecialchars($room6870); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6870); ?>"
+                        data-image="<?php echo base64_encode($upload_img6870); ?>"
+                        data-category="<?php echo htmlspecialchars($category6870); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6870); ?>; 
+    position:absolute; top:242px; left:665px;'>
+                    </div>
+
+                    <!-- ASSET 6869 -->
+                    <img src='../image.php?id=6869'
+                        style='width:50px; cursor:pointer; position:absolute; top:175px; left:815px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6869' onclick='fetchAssetData(6869);'
+                        class="asset-image" data-id="<?php echo $assetId6869; ?>"
+                        data-room="<?php echo htmlspecialchars($room6869); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6869); ?>"
+                        data-image="<?php echo base64_encode($upload_img6869); ?>"
+                        data-category="<?php echo htmlspecialchars($category6869); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6869); ?>; 
+    position:absolute; top:172px; left:865px;'>
+                    </div>
+
+                    <!-- ASSET 6868 -->
+                    <img src='../image.php?id=6868'
+                        style='width:50px; cursor:pointer; position:absolute; top:175px; left:715px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6868' onclick='fetchAssetData(6868);'
+                        class="asset-image" data-id="<?php echo $assetId6868; ?>"
+                        data-room="<?php echo htmlspecialchars($room6868); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6868); ?>"
+                        data-image="<?php echo base64_encode($upload_img6868); ?>"
+                        data-category="<?php echo htmlspecialchars($category6868); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6868); ?>; 
+    position:absolute; top:172px; left:765px;'>
+                    </div>
+                    <!-- ASSET 6867 -->
+                    <img src='../image.php?id=6867'
+                        style='width:50px; cursor:pointer; position:absolute; top:175px; left:615px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6867' onclick='fetchAssetData(6867);'
+                        class="asset-image" data-id="<?php echo $assetId6867; ?>"
+                        data-room="<?php echo htmlspecialchars($room6867); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6867); ?>"
+                        data-image="<?php echo base64_encode($upload_img6867); ?>"
+                        data-category="<?php echo htmlspecialchars($category6867); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6867); ?>; 
+    position:absolute; top:172px; left:665px;'>
+                    </div>
+
+                    <!-- ASSET 7269 -->
+                    <img src='../image.php?id=7269'
+                        style='width:20px; cursor:pointer; position:absolute; top:275px; left:140px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7269' onclick='fetchAssetData(7269);'
+                        class="asset-image" data-id="<?php echo $assetId7269; ?>"
+                        data-room="<?php echo htmlspecialchars($room7269); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7269); ?>"
+                        data-image="<?php echo base64_encode($upload_img7269); ?>"
+                        data-category="<?php echo htmlspecialchars($category7269); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7269); ?>; 
+    position:absolute; top:272px; left:155px;'>
+                    </div>
+
+                    <!-- ASSET 7268 -->
+                    <img src='../image.php?id=7268'
+                        style='width:20px; cursor:pointer; position:absolute; top:180px; left:380px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7268' onclick='fetchAssetData(7268);'
+                        class="asset-image" data-id="<?php echo $assetId7268; ?>"
+                        data-room="<?php echo htmlspecialchars($room7268); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7268); ?>"
+                        data-image="<?php echo base64_encode($upload_img7268); ?>"
+                        data-category="<?php echo htmlspecialchars($category7268); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7268); ?>; 
+    position:absolute; top:177px; left:395px;'>
+                    </div>
+
+                    <!-- ASSET 7267 -->
+                    <img src='../image.php?id=7267'
+                        style='width:20px; cursor:pointer; position:absolute; top:180px; left:310px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7267' onclick='fetchAssetData(7267);'
+                        class="asset-image" data-id="<?php echo $assetId7267; ?>"
+                        data-room="<?php echo htmlspecialchars($room7267); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7267); ?>"
+                        data-image="<?php echo base64_encode($upload_img7267); ?>"
+                        data-category="<?php echo htmlspecialchars($category7267); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7267); ?>; 
+    position:absolute; top:177px; left:325px;'>
+                    </div>
+
+                    <!-- ASSET 6948 -->
+                    <img src='../image.php?id=6948'
+                        style='width:20px; cursor:pointer; position:absolute; top:290px; left:380px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6948' onclick='fetchAssetData(6948);'
+                        class="asset-image" data-id="<?php echo $assetId6948; ?>"
+                        data-room="<?php echo htmlspecialchars($room6948); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6948); ?>"
+                        data-image="<?php echo base64_encode($upload_img6948); ?>"
+                        data-category="<?php echo htmlspecialchars($category6948); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6948); ?>; 
+    position:absolute; top:287px; left:395px;'>
+                    </div>
+
+                    <!-- ASSET 6949 -->
+                    <img src='../image.php?id=6949'
+                        style='width:20px; cursor:pointer; position:absolute; top:290px; left:310px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6949' onclick='fetchAssetData(6949);'
+                        class="asset-image" data-id="<?php echo $assetId6949; ?>"
+                        data-room="<?php echo htmlspecialchars($room6949); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6949); ?>"
+                        data-image="<?php echo base64_encode($upload_img6949); ?>"
+                        data-category="<?php echo htmlspecialchars($category6949); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6949); ?>; 
+    position:absolute; top:287px; left:325px;'>
+                    </div>
+
+                    <!-- ASSET 6950 -->
+                    <img src='../image.php?id=6950'
+                        style='width:20px; cursor:pointer; position:absolute; top:280px; left:90px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6950' onclick='fetchAssetData(6950);'
+                        class="asset-image" data-id="<?php echo $assetId6950; ?>"
+                        data-room="<?php echo htmlspecialchars($room6950); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6950); ?>"
+                        data-image="<?php echo base64_encode($upload_img6950); ?>"
+                        data-category="<?php echo htmlspecialchars($category6950); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6950); ?>; 
+    position:absolute; top:277px; left:105px;'>
+                    </div>
+
+                    <!-- ASSET 6951 -->
+                    <img src='../image.php?id=6951'
+                        style='width:20px; cursor:pointer; position:absolute; top:320px; left:160px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6951' onclick='fetchAssetData(6951);'
+                        class="asset-image" data-id="<?php echo $assetId6951; ?>"
+                        data-room="<?php echo htmlspecialchars($room6951); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6951); ?>"
+                        data-image="<?php echo base64_encode($upload_img6951); ?>"
+                        data-category="<?php echo htmlspecialchars($category6951); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6951); ?>; 
+    position:absolute; top:317px; left:175px;'>
+                    </div>
+
+                    <!-- ASSET 6952 -->
+                    <img src='../image.php?id=6952'
+                        style='width:20px; cursor:pointer; position:absolute; top:320px; left:230px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6952' onclick='fetchAssetData(6952);'
+                        class="asset-image" data-id="<?php echo $assetId6952; ?>"
+                        data-room="<?php echo htmlspecialchars($room6952); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6952); ?>"
+                        data-image="<?php echo base64_encode($upload_img6952); ?>"
+                        data-category="<?php echo htmlspecialchars($category6952); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6952); ?>; 
+    position:absolute; top:317px; left:245px;'>
+                    </div>
+
+                    <!-- ASSET 6953 -->
+                    <img src='../image.php?id=6953'
+                        style='width:20px; cursor:pointer; position:absolute; top:320px; left:290px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6953' onclick='fetchAssetData(6953);'
+                        class="asset-image" data-id="<?php echo $assetId6953; ?>"
+                        data-room="<?php echo htmlspecialchars($room6953); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6953); ?>"
+                        data-image="<?php echo base64_encode($upload_img6953); ?>"
+                        data-category="<?php echo htmlspecialchars($category6953); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6953); ?>; 
+    position:absolute; top:317px; left:305px;'>
+                    </div>
+
+                    <!-- ASSET 6954 -->
+                    <img src='../image.php?id=6954'
+                        style='width:20px; cursor:pointer; position:absolute; top:360px; left:90px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6954' onclick='fetchAssetData(6954);'
+                        class="asset-image" data-id="<?php echo $assetId6954; ?>"
+                        data-room="<?php echo htmlspecialchars($room6954); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6954); ?>"
+                        data-image="<?php echo base64_encode($upload_img6954); ?>"
+                        data-category="<?php echo htmlspecialchars($category6954); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6954); ?>; 
+    position:absolute; top:357px; left:105px;'>
+                    </div>
+
+                    <!-- ASSET 6955 -->
+                    <img src='../image.php?id=6955'
+                        style='width:20px; cursor:pointer; position:absolute; top:360px; left:160px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6955' onclick='fetchAssetData(6955);'
+                        class="asset-image" data-id="<?php echo $assetId6955; ?>"
+                        data-room="<?php echo htmlspecialchars($room6955); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6955); ?>"
+                        data-image="<?php echo base64_encode($upload_img6955); ?>"
+                        data-category="<?php echo htmlspecialchars($category6955); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6955); ?>; 
+    position:absolute; top:357px; left:175px;'>
+                    </div>
+
+                    <!-- ASSET 6956 -->
+                    <img src='../image.php?id=6956'
+                        style='width:20px; cursor:pointer; position:absolute; top:360px; left:230px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6956' onclick='fetchAssetData(6956);'
+                        class="asset-image" data-id="<?php echo $assetId6956; ?>"
+                        data-room="<?php echo htmlspecialchars($room6956); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6956); ?>"
+                        data-image="<?php echo base64_encode($upload_img6956); ?>"
+                        data-category="<?php echo htmlspecialchars($category6956); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6956); ?>; 
+    position:absolute; top:357px; left:245px;'>
+                    </div>
+
+                    <!-- ASSET 6957 -->
+                    <img src='../image.php?id=6957'
+                        style='width:20px; cursor:pointer; position:absolute; top:360px; left:290px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6957' onclick='fetchAssetData(6957);'
+                        class="asset-image" data-id="<?php echo $assetId6957; ?>"
+                        data-room="<?php echo htmlspecialchars($room6957); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6957); ?>"
+                        data-image="<?php echo base64_encode($upload_img6957); ?>"
+                        data-category="<?php echo htmlspecialchars($category6957); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6957); ?>; 
+    position:absolute; top:357px; left:305px;'>
+                    </div>
+
+                    <!-- ASSET 6958 -->
+                    <img src='../image.php?id=6958'
+                        style='width:20px; cursor:pointer; position:absolute; top:380px; left:310px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6958' onclick='fetchAssetData(6958);'
+                        class="asset-image" data-id="<?php echo $assetId6958; ?>"
+                        data-room="<?php echo htmlspecialchars($room6958); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6958); ?>"
+                        data-image="<?php echo base64_encode($upload_img6958); ?>"
+                        data-category="<?php echo htmlspecialchars($category6958); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6958); ?>; 
+    position:absolute; top:377px; left:325px;'>
+                    </div>
+
+                    <!-- ASSET 6959 -->
+                    <img src='../image.php?id=6959'
+                        style='width:20px; cursor:pointer; position:absolute; top:380px; left:380px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6959' onclick='fetchAssetData(6959);'
+                        class="asset-image" data-id="<?php echo $assetId6959; ?>"
+                        data-room="<?php echo htmlspecialchars($room6959); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6959); ?>"
+                        data-image="<?php echo base64_encode($upload_img6959); ?>"
+                        data-category="<?php echo htmlspecialchars($category6959); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6959); ?>; 
+    position:absolute; top:377px; left:395px;'>
+                    </div>
+
+                    <!-- ASSET 6960 -->
+                    <img src='../image.php?id=6960'
+                        style='width:20px; cursor:pointer; position:absolute; top:470px; left:310px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6960' onclick='fetchAssetData(6960);'
+                        class="asset-image" data-id="<?php echo $assetId6960; ?>"
+                        data-room="<?php echo htmlspecialchars($room6960); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6960); ?>"
+                        data-image="<?php echo base64_encode($upload_img6960); ?>"
+                        data-category="<?php echo htmlspecialchars($category6960); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6960); ?>; 
+    position:absolute; top:467px; left:325px;'>
+                    </div>
+
+                    <!-- ASSET 6961 -->
+                    <img src='../image.php?id=6961'
+                        style='width:20px; cursor:pointer; position:absolute; top:470px; left:380px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6961' onclick='fetchAssetData(6961);'
+                        class="asset-image" data-id="<?php echo $assetId6961; ?>"
+                        data-room="<?php echo htmlspecialchars($room6961); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6961); ?>"
+                        data-image="<?php echo base64_encode($upload_img6961); ?>"
+                        data-category="<?php echo htmlspecialchars($category6961); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6961); ?>; 
+    position:absolute; top:467px; left:395px;'>
+                    </div>
+
+                    <!-- ASSET 6962 -->
+                    <img src='../image.php?id=6962'
+                        style='width:20px; cursor:pointer; position:absolute; top:360px; left:390px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6962' onclick='fetchAssetData(6962);'
+                        class="asset-image" data-id="<?php echo $assetId6962; ?>"
+                        data-room="<?php echo htmlspecialchars($room6962); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6962); ?>"
+                        data-image="<?php echo base64_encode($upload_img6962); ?>"
+                        data-category="<?php echo htmlspecialchars($category6962); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6962); ?>; 
+    position:absolute; top:357px; left:405px;'>
+                    </div>
+
+                    <!-- ASSET 6963 -->
+                    <img src='../image.php?id=6963'
+                        style='width:20px; cursor:pointer; position:absolute; top:360px; left:460px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6963' onclick='fetchAssetData(6963);'
+                        class="asset-image" data-id="<?php echo $assetId6963; ?>"
+                        data-room="<?php echo htmlspecialchars($room6963); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6963); ?>"
+                        data-image="<?php echo base64_encode($upload_img6963); ?>"
+                        data-category="<?php echo htmlspecialchars($category6963); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6963); ?>; 
+    position:absolute; top:357px; left:475px;'>
+                    </div>
+                    <!-- ASSET 6964 -->
+                    <img src='../image.php?id=6964'
+                        style='width:20px; cursor:pointer; position:absolute; top:360px; left:530px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6964' onclick='fetchAssetData(6964);'
+                        class="asset-image" data-id="<?php echo $assetId6964; ?>"
+                        data-room="<?php echo htmlspecialchars($room6964); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6964); ?>"
+                        data-image="<?php echo base64_encode($upload_img6964); ?>"
+                        data-category="<?php echo htmlspecialchars($category6964); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6964); ?>; 
+    position:absolute; top:357px; left:545px;'>
+                    </div>
+
+                    <!-- ASSET 6965 -->
+                    <img src='../image.php?id=6965'
+                        style='width:20px; cursor:pointer; position:absolute; top:360px; left:600px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6965' onclick='fetchAssetData(6965);'
+                        class="asset-image" data-id="<?php echo $assetId6965; ?>"
+                        data-room="<?php echo htmlspecialchars($room6965); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6965); ?>"
+                        data-image="<?php echo base64_encode($upload_img6965); ?>"
+                        data-category="<?php echo htmlspecialchars($category6965); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6965); ?>; 
+    position:absolute; top:357px; left:615px;'>
+                    </div>
+
+                    <!-- ASSET 6966 -->
+                    <img src='../image.php?id=6966'
+                        style='width:20px; cursor:pointer; position:absolute; top:360px; left:670px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6966' onclick='fetchAssetData(6966);'
+                        class="asset-image" data-id="<?php echo $assetId6966; ?>"
+                        data-room="<?php echo htmlspecialchars($room6966); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6966); ?>"
+                        data-image="<?php echo base64_encode($upload_img6966); ?>"
+                        data-category="<?php echo htmlspecialchars($category6966); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6966); ?>; 
+    position:absolute; top:357px; left:685px;'>
+                    </div>
+
+                    <!-- ASSET 6967 -->
+                    <img src='../image.php?id=6967'
+                        style='width:20px; cursor:pointer; position:absolute; top:360px; left:740px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6967' onclick='fetchAssetData(6967);'
+                        class="asset-image" data-id="<?php echo $assetId6967; ?>"
+                        data-room="<?php echo htmlspecialchars($room6967); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6967); ?>"
+                        data-image="<?php echo base64_encode($upload_img6967); ?>"
+                        data-category="<?php echo htmlspecialchars($category6967); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6967); ?>; 
+    position:absolute; top:357px; left:755px;'>
+                    </div>
+
+                    <!-- ASSET 6968 -->
+                    <img src='../image.php?id=6968'
+                        style='width:20px; cursor:pointer; position:absolute; top:360px; left:810px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6968' onclick='fetchAssetData(6968);'
+                        class="asset-image" data-id="<?php echo $assetId6968; ?>"
+                        data-room="<?php echo htmlspecialchars($room6968); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6968); ?>"
+                        data-image="<?php echo base64_encode($upload_img6968); ?>"
+                        data-category="<?php echo htmlspecialchars($category6968); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6968); ?>; 
+    position:absolute; top:357px; left:825px;'>
+                    </div>
+
+                    <!-- ASSET 6969 -->
+                    <img src='../image.php?id=6969'
+                        style='width:20px; cursor:pointer; position:absolute; top:360px; left:880px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6969' onclick='fetchAssetData(6969);'
+                        class="asset-image" data-id="<?php echo $assetId6969; ?>"
+                        data-room="<?php echo htmlspecialchars($room6969); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6969); ?>"
+                        data-image="<?php echo base64_encode($upload_img6969); ?>"
+                        data-category="<?php echo htmlspecialchars($category6969); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6969); ?>; 
+    position:absolute; top:357px; left:895px;'>
+                    </div>
+
+                    <!-- ASSET 6970 -->
+                    <img src='../image.php?id=6970'
+                        style='width:20px; cursor:pointer; position:absolute; top:360px; left:950px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6970' onclick='fetchAssetData(6970);'
+                        class="asset-image" data-id="<?php echo $assetId6970; ?>"
+                        data-room="<?php echo htmlspecialchars($room6970); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6970); ?>"
+                        data-image="<?php echo base64_encode($upload_img6970); ?>"
+                        data-category="<?php echo htmlspecialchars($category6970); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6970); ?>; 
+    position:absolute; top:357px; left:965px;'>
+                    </div>
+
+                    <!-- ASSET 6971 -->
+                    <img src='../image.php?id=6971'
+                        style='width:20px; cursor:pointer; position:absolute; top:295px; left:580px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6971' onclick='fetchAssetData(6971);'
+                        class="asset-image" data-id="<?php echo $assetId6971; ?>"
+                        data-room="<?php echo htmlspecialchars($room6971); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6971); ?>"
+                        data-image="<?php echo base64_encode($upload_img6971); ?>"
+                        data-category="<?php echo htmlspecialchars($category6971); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6971); ?>; 
+    position:absolute; top:292px; left:595px;'>
+                    </div>
+
+                    <!-- ASSET 6972 -->
+                    <img src='../image.php?id=6972'
+                        style='width:20px; cursor:pointer; position:absolute; top:295px; left:680px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6972' onclick='fetchAssetData(6972);'
+                        class="asset-image" data-id="<?php echo $assetId6972; ?>"
+                        data-room="<?php echo htmlspecialchars($room6972); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6972); ?>"
+                        data-image="<?php echo base64_encode($upload_img6972); ?>"
+                        data-category="<?php echo htmlspecialchars($category6972); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6972); ?>; 
+    position:absolute; top:292px; left:695px;'>
+                    </div>
+
+                    <!-- ASSET 6973 -->
+                    <img src='../image.php?id=6973'
+                        style='width:20px; cursor:pointer; position:absolute; top:295px; left:770px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6973' onclick='fetchAssetData(6973);'
+                        class="asset-image" data-id="<?php echo $assetId6973; ?>"
+                        data-room="<?php echo htmlspecialchars($room6973); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6973); ?>"
+                        data-image="<?php echo base64_encode($upload_img6973); ?>"
+                        data-category="<?php echo htmlspecialchars($category6973); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6973); ?>; 
+    position:absolute; top:292px; left:785px;'>
+                    </div>
+
+                    <!-- ASSET 6974 -->
+                    <img src='../image.php?id=6974'
+                        style='width:20px; cursor:pointer; position:absolute; top:295px; left:790px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6974' onclick='fetchAssetData(6974);'
+                        class="asset-image" data-id="<?php echo $assetId6974; ?>"
+                        data-room="<?php echo htmlspecialchars($room6974); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6974); ?>"
+                        data-image="<?php echo base64_encode($upload_img6974); ?>"
+                        data-category="<?php echo htmlspecialchars($category6974); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6974); ?>; 
+    position:absolute; top:292px; left:805px;'>
+                    </div>
+
+                    <!-- ASSET 6975 -->
+                    <img src='../image.php?id=6975'
+                        style='width:20px; cursor:pointer; position:absolute; top:295px; left:880px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6975' onclick='fetchAssetData(6975);'
+                        class="asset-image" data-id="<?php echo $assetId6975; ?>"
+                        data-room="<?php echo htmlspecialchars($room6975); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6975); ?>"
+                        data-image="<?php echo base64_encode($upload_img6975); ?>"
+                        data-category="<?php echo htmlspecialchars($category6975); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6975); ?>; 
+    position:absolute; top:292px; left:895px;'>
+                    </div>
+
+                    <!-- ASSET 6976 -->
+                    <img src='../image.php?id=6976'
+                        style='width:20px; cursor:pointer; position:absolute; top:295px; left:950px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6976' onclick='fetchAssetData(6976);'
+                        class="asset-image" data-id="<?php echo $assetId6976; ?>"
+                        data-room="<?php echo htmlspecialchars($room6976); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6976); ?>"
+                        data-image="<?php echo base64_encode($upload_img6976); ?>"
+                        data-category="<?php echo htmlspecialchars($category6976); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6976); ?>; 
+    position:absolute; top:292px; left:965px;'>
+                    </div>
+
+                    <!-- ASSET 6977 -->
+                    <img src='../image.php?id=6977'
+                        style='width:20px; cursor:pointer; position:absolute; top:225px; left:420px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6977' onclick='fetchAssetData(6977);'
+                        class="asset-image" data-id="<?php echo $assetId6977; ?>"
+                        data-room="<?php echo htmlspecialchars($room6977); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6977); ?>"
+                        data-image="<?php echo base64_encode($upload_img6977); ?>"
+                        data-category="<?php echo htmlspecialchars($category6977); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6977); ?>; 
+    position:absolute; top:222px; left:435px;'>
+                    </div>
+
+                    <!-- ASSET 6978 -->
+                    <img src='../image.php?id=6978'
+                        style='width:20px; cursor:pointer; position:absolute; top:225px; left:480px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6978' onclick='fetchAssetData(6978);'
+                        class="asset-image" data-id="<?php echo $assetId6978; ?>"
+                        data-room="<?php echo htmlspecialchars($room6978); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6978); ?>"
+                        data-image="<?php echo base64_encode($upload_img6978); ?>"
+                        data-category="<?php echo htmlspecialchars($category6978); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6978); ?>; 
+    position:absolute; top:222px; left:495px;'>
+                    </div>
+
+                    <!-- ASSET 6979 -->
+                    <img src='../image.php?id=6979'
+                        style='width:20px; cursor:pointer; position:absolute; top:225px; left:540px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6979' onclick='fetchAssetData(6979);'
+                        class="asset-image" data-id="<?php echo $assetId6979; ?>"
+                        data-room="<?php echo htmlspecialchars($room6979); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6979); ?>"
+                        data-image="<?php echo base64_encode($upload_img6979); ?>"
+                        data-category="<?php echo htmlspecialchars($category6979); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6979); ?>; 
+    position:absolute; top:222px; left:555px;'>
+                    </div>
+
+                    <!-- ASSET 6980 -->
+                    <img src='../image.php?id=6980'
+                        style='width:20px; cursor:pointer; position:absolute; top:225px; left:580px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6980' onclick='fetchAssetData(6980);'
+                        class="asset-image" data-id="<?php echo $assetId6980; ?>"
+                        data-room="<?php echo htmlspecialchars($room6980); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6980); ?>"
+                        data-image="<?php echo base64_encode($upload_img6980); ?>"
+                        data-category="<?php echo htmlspecialchars($category6980); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6980); ?>; 
+    position:absolute; top:222px; left:595px;'>
+                    </div>
+
+                    <!-- ASSET 6981 -->
+                    <img src='../image.php?id=6981'
+                        style='width:20px; cursor:pointer; position:absolute; top:225px; left:680px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6981' onclick='fetchAssetData(6981);'
+                        class="asset-image" data-id="<?php echo $assetId6981; ?>"
+                        data-room="<?php echo htmlspecialchars($room6981); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6981); ?>"
+                        data-image="<?php echo base64_encode($upload_img6981); ?>"
+                        data-category="<?php echo htmlspecialchars($category6981); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6981); ?>; 
+    position:absolute; top:222px; left:695px;'>
+                    </div>
+
+                    <!-- ASSET 6982 -->
+                    <img src='../image.php?id=6982'
+                        style='width:20px; cursor:pointer; position:absolute; top:225px; left:770px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6982' onclick='fetchAssetData(6982);'
+                        class="asset-image" data-id="<?php echo $assetId6982; ?>"
+                        data-room="<?php echo htmlspecialchars($room6982); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6982); ?>"
+                        data-image="<?php echo base64_encode($upload_img6982); ?>"
+                        data-category="<?php echo htmlspecialchars($category6982); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6982); ?>; 
+    position:absolute; top:222px; left:785px;'>
+                    </div>
+
+                    <!-- ASSET 6983 -->
+                    <img src='../image.php?id=6983'
+                        style='width:20px; cursor:pointer; position:absolute; top:225px; left:795px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6983' onclick='fetchAssetData(6983);'
+                        class="asset-image" data-id="<?php echo $assetId6983; ?>"
+                        data-room="<?php echo htmlspecialchars($room6983); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6983); ?>"
+                        data-image="<?php echo base64_encode($upload_img6983); ?>"
+                        data-category="<?php echo htmlspecialchars($category6983); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6983); ?>; 
+    position:absolute; top:222px; left:810px;'>
+                    </div>
+                    <!-- ASSET 6984 -->
+                    <img src='../image.php?id=6984'
+                        style='width:20px; cursor:pointer; position:absolute; top:225px; left:880px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6984' onclick='fetchAssetData(6984);'
+                        class="asset-image" data-id="<?php echo $assetId6984; ?>"
+                        data-room="<?php echo htmlspecialchars($room6984); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6984); ?>"
+                        data-image="<?php echo base64_encode($upload_img6984); ?>"
+                        data-category="<?php echo htmlspecialchars($category6984); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6984); ?>; 
+    position:absolute; top:222px; left:895px;'>
+                    </div>
+
+                    <!-- ASSET 6985 -->
+                    <img src='../image.php?id=6985'
+                        style='width:20px; cursor:pointer; position:absolute; top:225px; left:950px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6985' onclick='fetchAssetData(6985);'
+                        class="asset-image" data-id="<?php echo $assetId6985; ?>"
+                        data-room="<?php echo htmlspecialchars($room6985); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6985); ?>"
+                        data-image="<?php echo base64_encode($upload_img6985); ?>"
+                        data-category="<?php echo htmlspecialchars($category6985); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6985); ?>; 
+    position:absolute; top:222px; left:965px;'>
+                    </div>
+
+                    <!-- ASSET 6986 -->
+                    <img src='../image.php?id=6986'
+                        style='width:20px; cursor:pointer; position:absolute; top:225px; left:1020px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6986' onclick='fetchAssetData(6986);'
+                        class="asset-image" data-id="<?php echo $assetId6986; ?>"
+                        data-room="<?php echo htmlspecialchars($room6986); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6986); ?>"
+                        data-image="<?php echo base64_encode($upload_img6986); ?>"
+                        data-category="<?php echo htmlspecialchars($category6986); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6986); ?>; 
+    position:absolute; top:222px; left:1035px;'>
+                    </div>
+
+                    <!-- ASSET 6987 -->
+                    <img src='../image.php?id=6987'
+                        style='width:20px; cursor:pointer; position:absolute; top:155px; left:580px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6987' onclick='fetchAssetData(6987);'
+                        class="asset-image" data-id="<?php echo $assetId6987; ?>"
+                        data-room="<?php echo htmlspecialchars($room6987); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6987); ?>"
+                        data-image="<?php echo base64_encode($upload_img6987); ?>"
+                        data-category="<?php echo htmlspecialchars($category6987); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6987); ?>; 
+    position:absolute; top:152px; left:595px;'>
+                    </div>
+
+                    <!-- ASSET 6988 -->
+                    <img src='../image.php?id=6988'
+                        style='width:20px; cursor:pointer; position:absolute; top:155px; left:680px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6988' onclick='fetchAssetData(6988);'
+                        class="asset-image" data-id="<?php echo $assetId6988; ?>"
+                        data-room="<?php echo htmlspecialchars($room6988); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6988); ?>"
+                        data-image="<?php echo base64_encode($upload_img6988); ?>"
+                        data-category="<?php echo htmlspecialchars($category6988); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6988); ?>; 
+    position:absolute; top:152px; left:695px;'>
+                    </div>
+
+
+                    <!-- ASSET 6989 -->
+                    <img src='../image.php?id=6989'
+                        style='width:20px; cursor:pointer; position:absolute; top:135px; left:740px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6989' onclick='fetchAssetData(6989);'
+                        class="asset-image" data-id="<?php echo $assetId6989; ?>"
+                        data-room="<?php echo htmlspecialchars($room6989); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6989); ?>"
+                        data-image="<?php echo base64_encode($upload_img6989); ?>"
+                        data-category="<?php echo htmlspecialchars($category6989); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6989); ?>; 
+    position:absolute; top:132px; left:755px;'>
+                    </div>
+
+                    <!-- ASSET 6990 -->
+                    <img src='../image.php?id=6990'
+                        style='width:20px; cursor:pointer; position:absolute; top:135px; left:810px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6990' onclick='fetchAssetData(6990);'
+                        class="asset-image" data-id="<?php echo $assetId6990; ?>"
+                        data-room="<?php echo htmlspecialchars($room6990); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6990); ?>"
+                        data-image="<?php echo base64_encode($upload_img6990); ?>"
+                        data-category="<?php echo htmlspecialchars($category6990); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6990); ?>; 
+    position:absolute; top:132px; left:825px;'>
+                    </div>
+
+                    <!-- ASSET 6991 -->
+                    <img src='../image.php?id=6991'
+                        style='width:20px; cursor:pointer; position:absolute; top:155px; left:880px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6991' onclick='fetchAssetData(6991);'
+                        class="asset-image" data-id="<?php echo $assetId6991; ?>"
+                        data-room="<?php echo htmlspecialchars($room6991); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6991); ?>"
+                        data-image="<?php echo base64_encode($upload_img6991); ?>"
+                        data-category="<?php echo htmlspecialchars($category6991); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6991); ?>; 
+    position:absolute; top:152px; left:895px;'>
+                    </div>
+
+                    <!-- ASSET 6992 -->
+                    <img src='../image.php?id=6992'
+                        style='width:20px; cursor:pointer; position:absolute; top:155px; left:950px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6992' onclick='fetchAssetData(6992);'
+                        class="asset-image" data-id="<?php echo $assetId6992; ?>"
+                        data-room="<?php echo htmlspecialchars($room6992); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6992); ?>"
+                        data-image="<?php echo base64_encode($upload_img6992); ?>"
+                        data-category="<?php echo htmlspecialchars($category6992); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6992); ?>; 
+    position:absolute; top:152px; left:965px;'>
+                    </div>
+
+                    <!-- ASSET 6993 -->
+                    <img src='../image.php?id=6993'
+                        style='width:20px; cursor:pointer; position:absolute; top:155px; left:1020px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6993' onclick='fetchAssetData(6993);'
+                        class="asset-image" data-id="<?php echo $assetId6993; ?>"
+                        data-room="<?php echo htmlspecialchars($room6993); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6993); ?>"
+                        data-image="<?php echo base64_encode($upload_img6993); ?>"
+                        data-category="<?php echo htmlspecialchars($category6993); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6993); ?>; 
+    position:absolute; top:152px; left:1035px;'>
+                    </div>
+
+
+                    <!-- ASSET 6994 -->
+                    <img src='../image.php?id=6994'
+                        style='width:20px; cursor:pointer; position:absolute; top:85px; left:600px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6994' onclick='fetchAssetData(6994);'
+                        class="asset-image" data-id="<?php echo $assetId6994; ?>"
+                        data-room="<?php echo htmlspecialchars($room6994); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6994); ?>"
+                        data-image="<?php echo base64_encode($upload_img6994); ?>"
+                        data-category="<?php echo htmlspecialchars($category6994); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6994); ?>; 
+    position:absolute; top:82px; left:615px;'>
+                    </div>
+
+                    <!-- ASSET 6995 -->
+                    <img src='../image.php?id=6995'
+                        style='width:20px; cursor:pointer; position:absolute; top:85px; left:670px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6995' onclick='fetchAssetData(6995);'
+                        class="asset-image" data-id="<?php echo $assetId6995; ?>"
+                        data-room="<?php echo htmlspecialchars($room6995); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6995); ?>"
+                        data-image="<?php echo base64_encode($upload_img6995); ?>"
+                        data-category="<?php echo htmlspecialchars($category6995); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6995); ?>; 
+    position:absolute; top:82px; left:685px;'>
+                    </div>
+
+                    <!-- ASSET 6996 -->
+                    <img src='../image.php?id=6996'
+                        style='width:20px; cursor:pointer; position:absolute; top:85px; left:740px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6996' onclick='fetchAssetData(6996);'
+                        class="asset-image" data-id="<?php echo $assetId6996; ?>"
+                        data-room="<?php echo htmlspecialchars($room6996); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6996); ?>"
+                        data-image="<?php echo base64_encode($upload_img6996); ?>"
+                        data-category="<?php echo htmlspecialchars($category6996); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6996); ?>; 
+    position:absolute; top:82px; left:755px;'>
+                    </div>
+
+                    <!-- ASSET 6997 -->
+                    <img src='../image.php?id=6997'
+                        style='width:20px; cursor:pointer; position:absolute; top:85px; left:810px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6997' onclick='fetchAssetData(6997);'
+                        class="asset-image" data-id="<?php echo $assetId6997; ?>"
+                        data-room="<?php echo htmlspecialchars($room6997); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6997); ?>"
+                        data-image="<?php echo base64_encode($upload_img6997); ?>"
+                        data-category="<?php echo htmlspecialchars($category6997); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6997); ?>; 
+    position:absolute; top:82px; left:825px;'>
+                    </div>
+
+                    <!-- ASSET 6998 -->
+                    <img src='../image.php?id=6998'
+                        style='width:20px; cursor:pointer; position:absolute; top:85px; left:880px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6998' onclick='fetchAssetData(6998);'
+                        class="asset-image" data-id="<?php echo $assetId6998; ?>"
+                        data-room="<?php echo htmlspecialchars($room6998); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6998); ?>"
+                        data-image="<?php echo base64_encode($upload_img6998); ?>"
+                        data-category="<?php echo htmlspecialchars($category6998); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6998); ?>; 
+    position:absolute; top:82px; left:895px;'>
+                    </div>
+
+                    <!-- ASSET 6999 -->
+                    <img src='../image.php?id=6999'
+                        style='width:20px; cursor:pointer; position:absolute; top:85px; left:950px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal6999' onclick='fetchAssetData(6999);'
+                        class="asset-image" data-id="<?php echo $assetId6999; ?>"
+                        data-room="<?php echo htmlspecialchars($room6999); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor6999); ?>"
+                        data-image="<?php echo base64_encode($upload_img6999); ?>"
+                        data-category="<?php echo htmlspecialchars($category6999); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status6999); ?>; 
+    position:absolute; top:82px; left:965px;'>
+                    </div>
+
+                    <!-- ASSET 7000 -->
+                    <img src='../image.php?id=7000'
+                        style='width:20px; cursor:pointer; position:absolute; top:85px; left:1020px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7000' onclick='fetchAssetData(7000);'
+                        class="asset-image" data-id="<?php echo $assetId7000; ?>"
+                        data-room="<?php echo htmlspecialchars($room7000); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7000); ?>"
+                        data-image="<?php echo base64_encode($upload_img7000); ?>"
+                        data-category="<?php echo htmlspecialchars($category7000); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7000); ?>; 
+    position:absolute; top:82px; left:1035px;'>
+                    </div>
+
+                    <!-- ASSET 7001 -->
+                    <img src='../image.php?id=7001'
+                        style='width:20px; cursor:pointer; position:absolute; top:150px; left:450px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7001' onclick='fetchAssetData(7001);'
+                        class="asset-image" data-id="<?php echo $assetId7001; ?>"
+                        data-room="<?php echo htmlspecialchars($room7001); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7001); ?>"
+                        data-image="<?php echo base64_encode($upload_img7001); ?>"
+                        data-category="<?php echo htmlspecialchars($category7001); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7001); ?>; 
+    position:absolute; top:147px; left:465px;'>
+                    </div>
+
+                    <!-- ASSET 7002 -->
+                    <img src='../image.php?id=7002'
+                        style='width:20px; cursor:pointer; position:absolute; top:150px; left:410px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7002' onclick='fetchAssetData(7002);'
+                        class="asset-image" data-id="<?php echo $assetId7002; ?>"
+                        data-room="<?php echo htmlspecialchars($room7002); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7002); ?>"
+                        data-image="<?php echo base64_encode($upload_img7002); ?>"
+                        data-category="<?php echo htmlspecialchars($category7002); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7002); ?>; 
+    position:absolute; top:147px; left:425px;'>
+                    </div>
+
+                    <!-- ASSET 7003 -->
+                    <img src='../image.php?id=7003'
+                        style='width:20px; cursor:pointer; position:absolute; top:150px; left:370px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7003' onclick='fetchAssetData(7003);'
+                        class="asset-image" data-id="<?php echo $assetId7003; ?>"
+                        data-room="<?php echo htmlspecialchars($room7003); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7003); ?>"
+                        data-image="<?php echo base64_encode($upload_img7003); ?>"
+                        data-category="<?php echo htmlspecialchars($category7003); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7003); ?>; 
+    position:absolute; top:147px; left:385px;'>
+                    </div>
+                    <!-- ASSET 7004 -->
+                    <img src='../image.php?id=7004'
+                        style='width:20px; cursor:pointer; position:absolute; top:120px; left:410px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7004' onclick='fetchAssetData(7004);'
+                        class="asset-image" data-id="<?php echo $assetId7004; ?>"
+                        data-room="<?php echo htmlspecialchars($room7004); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7004); ?>"
+                        data-image="<?php echo base64_encode($upload_img7004); ?>"
+                        data-category="<?php echo htmlspecialchars($category7004); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7004); ?>; 
+    position:absolute; top:117px; left:425px;'>
+                    </div>
+
+                    <!-- ASSET 7005 -->
+                    <img src='../image.php?id=7005'
+                        style='width:20px; cursor:pointer; position:absolute; top:80px; left:450px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7005' onclick='fetchAssetData(7005);'
+                        class="asset-image" data-id="<?php echo $assetId7005; ?>"
+                        data-room="<?php echo htmlspecialchars($room7005); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7005); ?>"
+                        data-image="<?php echo base64_encode($upload_img7005); ?>"
+                        data-category="<?php echo htmlspecialchars($category7005); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7005); ?>; 
+    position:absolute; top:77px; left:465px;'>
+                    </div>
+
+                    <!-- ASSET 7006 -->
+                    <img src='../image.php?id=7006'
+                        style='width:20px; cursor:pointer; position:absolute; top:80px; left:410px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7006' onclick='fetchAssetData(7006);'
+                        class="asset-image" data-id="<?php echo $assetId7006; ?>"
+                        data-room="<?php echo htmlspecialchars($room7006); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7006); ?>"
+                        data-image="<?php echo base64_encode($upload_img7006); ?>"
+                        data-category="<?php echo htmlspecialchars($category7006); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7006); ?>; 
+    position:absolute; top:77px; left:425px;'>
+                    </div>
+
+                    <!-- ASSET 7007 -->
+                    <img src='../image.php?id=7007'
+                        style='width:20px; cursor:pointer; position:absolute; top:80px; left:370px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7007' onclick='fetchAssetData(7007);'
+                        class="asset-image" data-id="<?php echo $assetId7007; ?>"
+                        data-room="<?php echo htmlspecialchars($room7007); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7007); ?>"
+                        data-image="<?php echo base64_encode($upload_img7007); ?>"
+                        data-category="<?php echo htmlspecialchars($category7007); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7007); ?>; 
+    position:absolute; top:77px; left:385px;'>
+                    </div>
+
+                    <!-- ASSET 7008 -->
+                    <img src='../image.php?id=7008'
+                        style='width:20px; cursor:pointer; position:absolute; top:165px; left:250px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7008' onclick='fetchAssetData(7008);'
+                        class="asset-image" data-id="<?php echo $assetId7008; ?>"
+                        data-room="<?php echo htmlspecialchars($room7008); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7008); ?>"
+                        data-image="<?php echo base64_encode($upload_img7008); ?>"
+                        data-category="<?php echo htmlspecialchars($category7008); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7008); ?>; 
+    position:absolute; top:162px; left:265px;'>
+                    </div>
+
+                    <!-- ASSET 7009 -->
+                    <img src='../image.php?id=7009'
+                        style='width:20px; cursor:pointer; position:absolute; top:200px; left:250px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7009' onclick='fetchAssetData(7009);'
+                        class="asset-image" data-id="<?php echo $assetId7009; ?>"
+                        data-room="<?php echo htmlspecialchars($room7009); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7009); ?>"
+                        data-image="<?php echo base64_encode($upload_img7009); ?>"
+                        data-category="<?php echo htmlspecialchars($category7009); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7009); ?>; 
+    position:absolute; top:197px; left:265px;'>
+                    </div>
+
+                    <!-- ASSET 7010 -->
+                    <img src='../image.php?id=7010'
+                        style='width:20px; cursor:pointer; position:absolute; top:235px; left:250px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7010' onclick='fetchAssetData(7010);'
+                        class="asset-image" data-id="<?php echo $assetId7010; ?>"
+                        data-room="<?php echo htmlspecialchars($room7010); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7010); ?>"
+                        data-image="<?php echo base64_encode($upload_img7010); ?>"
+                        data-category="<?php echo htmlspecialchars($category7010); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7010); ?>; 
+    position:absolute; top:232px; left:265px;'>
+                    </div>
+
+                    <!-- ASSET 7011 -->
+                    <img src='../image.php?id=7011'
+                        style='width:20px; cursor:pointer; position:absolute; top:165px; left:220px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7011' onclick='fetchAssetData(7011);'
+                        class="asset-image" data-id="<?php echo $assetId7011; ?>"
+                        data-room="<?php echo htmlspecialchars($room7011); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7011); ?>"
+                        data-image="<?php echo base64_encode($upload_img7011); ?>"
+                        data-category="<?php echo htmlspecialchars($category7011); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7011); ?>; 
+    position:absolute; top:162px; left:235px;'>
+                    </div>
+
+                    <!-- ASSET 7012 -->
+                    <img src='../image.php?id=7012'
+                        style='width:20px; cursor:pointer; position:absolute; top:200px; left:220px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7012' onclick='fetchAssetData(7012);'
+                        class="asset-image" data-id="<?php echo $assetId7012; ?>"
+                        data-room="<?php echo htmlspecialchars($room7012); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7012); ?>"
+                        data-image="<?php echo base64_encode($upload_img7012); ?>"
+                        data-category="<?php echo htmlspecialchars($category7012); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7012); ?>; 
+    position:absolute; top:197px; left:235px;'>
+                    </div>
+
+                    <!-- ASSET 7013 -->
+                    <img src='../image.php?id=7013'
+                        style='width:20px; cursor:pointer; position:absolute; top:235px; left:220px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7013' onclick='fetchAssetData(7013);'
+                        class="asset-image" data-id="<?php echo $assetId7013; ?>"
+                        data-room="<?php echo htmlspecialchars($room7013); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7013); ?>"
+                        data-image="<?php echo base64_encode($upload_img7013); ?>"
+                        data-category="<?php echo htmlspecialchars($category7013); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7013); ?>; 
+    position:absolute; top:232px; left:235px;'>
+                    </div>
+
+
+                    <!-- ASSET 7014 -->
+                    <img src='../image.php?id=7014'
+                        style='width:20px; cursor:pointer; position:absolute; top:165px; left:140px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7014' onclick='fetchAssetData(7014);'
+                        class="asset-image" data-id="<?php echo $assetId7014; ?>"
+                        data-room="<?php echo htmlspecialchars($room7014); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7014); ?>"
+                        data-image="<?php echo base64_encode($upload_img7014); ?>"
+                        data-category="<?php echo htmlspecialchars($category7014); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7014); ?>; 
+    position:absolute; top:162px; left:155px;'>
+                    </div>
+
+                    <!-- ASSET 7015 -->
+                    <img src='../image.php?id=7015'
+                        style='width:20px; cursor:pointer; position:absolute; top:200px; left:140px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7015' onclick='fetchAssetData(7015);'
+                        class="asset-image" data-id="<?php echo $assetId7015; ?>"
+                        data-room="<?php echo htmlspecialchars($room7015); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7015); ?>"
+                        data-image="<?php echo base64_encode($upload_img7015); ?>"
+                        data-category="<?php echo htmlspecialchars($category7015); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7015); ?>; 
+    position:absolute; top:197px; left:155px;'>
+                    </div>
+
+                    <!-- ASSET 7016 -->
+                    <img src='../image.php?id=7016'
+                        style='width:20px; cursor:pointer; position:absolute; top:235px; left:140px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7016' onclick='fetchAssetData(7016);'
+                        class="asset-image" data-id="<?php echo $assetId7016; ?>"
+                        data-room="<?php echo htmlspecialchars($room7016); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7016); ?>"
+                        data-image="<?php echo base64_encode($upload_img7016); ?>"
+                        data-category="<?php echo htmlspecialchars($category7016); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7016); ?>; 
+    position:absolute; top:232px; left:155px;'>
+                    </div>
+
+                    <!-- ASSET 7017 -->
+                    <img src='../image.php?id=7017'
+                        style='width:20px; cursor:pointer; position:absolute; top:165px; left:100px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7017' onclick='fetchAssetData(7017);'
+                        class="asset-image" data-id="<?php echo $assetId7017; ?>"
+                        data-room="<?php echo htmlspecialchars($room7017); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7017); ?>"
+                        data-image="<?php echo base64_encode($upload_img7017); ?>"
+                        data-category="<?php echo htmlspecialchars($category7017); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7017); ?>; 
+    position:absolute; top:162px; left:115px;'>
+                    </div>
+
+                    <!-- ASSET 7018 -->
+                    <img src='../image.php?id=7018'
+                        style='width:20px; cursor:pointer; position:absolute; top:200px; left:100px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7018' onclick='fetchAssetData(7018);'
+                        class="asset-image" data-id="<?php echo $assetId7018; ?>"
+                        data-room="<?php echo htmlspecialchars($room7018); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7018); ?>"
+                        data-image="<?php echo base64_encode($upload_img7018); ?>"
+                        data-category="<?php echo htmlspecialchars($category7018); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7018); ?>; 
+    position:absolute; top:197px; left:115px;'>
+                    </div>
+
+
+                    <!-- ASSET 7019 -->
+                    <img src='../image.php?id=7019'
+                        style='width:20px; cursor:pointer; position:absolute; top:235px; left:100px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7019' onclick='fetchAssetData(7019);'
+                        class="asset-image" data-id="<?php echo $assetId7019; ?>"
+                        data-room="<?php echo htmlspecialchars($room7019); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7019); ?>"
+                        data-image="<?php echo base64_encode($upload_img7019); ?>"
+                        data-category="<?php echo htmlspecialchars($category7019); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7019); ?>; 
+    position:absolute; top:232px; left:115px;'>
+                    </div>
+
+                    <!-- ASSET 7020 -->
+                    <img src='../image.php?id=7020'
+                        style='width:20px; cursor:pointer; position:absolute; top:170px; left:183px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7020' onclick='fetchAssetData(7020);'
+                        class="asset-image" data-id="<?php echo $assetId7020; ?>"
+                        data-room="<?php echo htmlspecialchars($room7020); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7020); ?>"
+                        data-image="<?php echo base64_encode($upload_img7020); ?>"
+                        data-category="<?php echo htmlspecialchars($category7020); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7020); ?>; 
+    position:absolute; top:167px; left:198px;'>
+                    </div>
+
+                    <!-- ASSET 7021 -->
+                    <img src='../image.php?id=7021'
+                        style='width:20px; cursor:pointer; position:absolute; top:230px; left:183px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7021' onclick='fetchAssetData(7021);'
+                        class="asset-image" data-id="<?php echo $assetId7021; ?>"
+                        data-room="<?php echo htmlspecialchars($room7021); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7021); ?>"
+                        data-image="<?php echo base64_encode($upload_img7021); ?>"
+                        data-category="<?php echo htmlspecialchars($category7021); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7021); ?>; 
+    position:absolute; top:227px; left:198px;'>
+                    </div>
+
+                    <!-- ASSET 7022 -->
+                    <img src='../image.php?id=7022'
+                        style='width:20px; cursor:pointer; position:absolute; top:273px; left:200px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7022' onclick='fetchAssetData(7022);'
+                        class="asset-image" data-id="<?php echo $assetId7022; ?>"
+                        data-room="<?php echo htmlspecialchars($room7022); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7022); ?>"
+                        data-image="<?php echo base64_encode($upload_img7022); ?>"
+                        data-category="<?php echo htmlspecialchars($category7022); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7022); ?>; 
+    position:absolute; top:270px; left:215px;'>
+                    </div>
+
+                    <!-- ASSET 7023 -->
+                    <img src='../image.php?id=7023'
+                        style='width:20px; cursor:pointer; position:absolute; top:85px; left:1150px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7023' onclick='fetchAssetData(7023);'
+                        class="asset-image" data-id="<?php echo $assetId7023; ?>"
+                        data-room="<?php echo htmlspecialchars($room7023); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7023); ?>"
+                        data-image="<?php echo base64_encode($upload_img7023); ?>"
+                        data-category="<?php echo htmlspecialchars($category7023); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7023); ?>; 
+    position:absolute; top:82px; left:1165px;'>
+                    </div>
+
+                    <!-- ASSET 7024 -->
+                    <img src='../image.php?id=7024'
+                        style='width:20px; cursor:pointer; position:absolute; top:85px; left:1105px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7024' onclick='fetchAssetData(7024);'
+                        class="asset-image" data-id="<?php echo $assetId7024; ?>"
+                        data-room="<?php echo htmlspecialchars($room7024); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7024); ?>"
+                        data-image="<?php echo base64_encode($upload_img7024); ?>"
+                        data-category="<?php echo htmlspecialchars($category7024); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7024); ?>; 
+    position:absolute; top:82px; left:1120px;'>
+                    </div>
+
+                    <!-- ASSET 7025 -->
+                    <img src='../image.php?id=7025'
+                        style='width:20px; cursor:pointer; position:absolute; top:85px; left:1055px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7025' onclick='fetchAssetData(7025);'
+                        class="asset-image" data-id="<?php echo $assetId7025; ?>"
+                        data-room="<?php echo htmlspecialchars($room7025); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7025); ?>"
+                        data-image="<?php echo base64_encode($upload_img7025); ?>"
+                        data-category="<?php echo htmlspecialchars($category7025); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7025); ?>; 
+    position:absolute; top:82px; left:1070px;'>
+                    </div>
+
+                    <!-- ASSET 7026 -->
+                    <img src='../image.php?id=7026'
+                        style='width:20px; cursor:pointer; position:absolute; top:140px; left:1150px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7026' onclick='fetchAssetData(7026);'
+                        class="asset-image" data-id="<?php echo $assetId7026; ?>"
+                        data-room="<?php echo htmlspecialchars($room7026); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7026); ?>"
+                        data-image="<?php echo base64_encode($upload_img7026); ?>"
+                        data-category="<?php echo htmlspecialchars($category7026); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7026); ?>; 
+    position:absolute; top:137px; left:1165px;'>
+                    </div>
+
+                    <!-- ASSET 7027 -->
+                    <img src='../image.php?id=7027'
+                        style='width:20px; cursor:pointer; position:absolute; top:140px; left:1055px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7027' onclick='fetchAssetData(7027);'
+                        class="asset-image" data-id="<?php echo $assetId7027; ?>"
+                        data-room="<?php echo htmlspecialchars($room7027); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7027); ?>"
+                        data-image="<?php echo base64_encode($upload_img7027); ?>"
+                        data-category="<?php echo htmlspecialchars($category7027); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7027); ?>; 
+    position:absolute; top:137px; left:1070px;'>
+                    </div>
+
+                    <!-- ASSET 7028 -->
+                    <img src='../image.php?id=7028'
+                        style='width:20px; cursor:pointer; position:absolute; top:180px; left:1105px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7028' onclick='fetchAssetData(7028);'
+                        class="asset-image" data-id="<?php echo $assetId7028; ?>"
+                        data-room="<?php echo htmlspecialchars($room7028); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7028); ?>"
+                        data-image="<?php echo base64_encode($upload_img7028); ?>"
+                        data-category="<?php echo htmlspecialchars($category7028); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7028); ?>; 
+    position:absolute; top:177px; left:1120px;'>
+                    </div>
+
+
+                    <!-- ASSET 7029 -->
+                    <img src='../image.php?id=7029'
+                        style='width:20px; cursor:pointer; position:absolute; top:220px; left:1150px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7029' onclick='fetchAssetData(7029);'
+                        class="asset-image" data-id="<?php echo $assetId7029; ?>"
+                        data-room="<?php echo htmlspecialchars($room7029); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7029); ?>"
+                        data-image="<?php echo base64_encode($upload_img7029); ?>"
+                        data-category="<?php echo htmlspecialchars($category7029); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7029); ?>; 
+    position:absolute; top:217px; left:1165px;'>
+                    </div>
+
+                    <!-- ASSET 7030 -->
+                    <img src='../image.php?id=7030'
+                        style='width:20px; cursor:pointer; position:absolute; top:220px; left:1055px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7030' onclick='fetchAssetData(7030);'
+                        class="asset-image" data-id="<?php echo $assetId7030; ?>"
+                        data-room="<?php echo htmlspecialchars($room7030); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7030); ?>"
+                        data-image="<?php echo base64_encode($upload_img7030); ?>"
+                        data-category="<?php echo htmlspecialchars($category7030); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7030); ?>; 
+    position:absolute; top:217px; left:1070px;'>
+                    </div>
+
+                    <!-- ASSET 7031 -->
+                    <img src='../image.php?id=7031'
+                        style='width:20px; cursor:pointer; position:absolute; top:280px; left:1150px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7031' onclick='fetchAssetData(7031);'
+                        class="asset-image" data-id="<?php echo $assetId7031; ?>"
+                        data-room="<?php echo htmlspecialchars($room7031); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7031); ?>"
+                        data-image="<?php echo base64_encode($upload_img7031); ?>"
+                        data-category="<?php echo htmlspecialchars($category7031); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7031); ?>; 
+    position:absolute; top:277px; left:1165px;'>
+                    </div>
+
+                    <!-- ASSET 7032 -->
+                    <img src='../image.php?id=7032'
+                        style='width:20px; cursor:pointer; position:absolute; top:280px; left:1105px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7032' onclick='fetchAssetData(7032);'
+                        class="asset-image" data-id="<?php echo $assetId7032; ?>"
+                        data-room="<?php echo htmlspecialchars($room7032); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7032); ?>"
+                        data-image="<?php echo base64_encode($upload_img7032); ?>"
+                        data-category="<?php echo htmlspecialchars($category7032); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7032); ?>; 
+    position:absolute; top:277px; left:1120px;'>
+                    </div>
+
+                    <!-- ASSET 7033 -->
+                    <img src='../image.php?id=7033'
+                        style='width:20px; cursor:pointer; position:absolute; top:280px; left:1055px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7033' onclick='fetchAssetData(7033);'
+                        class="asset-image" data-id="<?php echo $assetId7033; ?>"
+                        data-room="<?php echo htmlspecialchars($room7033); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7033); ?>"
+                        data-image="<?php echo base64_encode($upload_img7033); ?>"
+                        data-category="<?php echo htmlspecialchars($category7033); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7033); ?>; 
+    position:absolute; top:277px; left:1070px;'>
+                    </div>
+
+
+                    <!-- ASSET 7034 -->
+                    <img src='../image.php?id=7034'
+                        style='width:20px; cursor:pointer; position:absolute; top:263px; left:1020px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7034' onclick='fetchAssetData(7034);'
+                        class="asset-image" data-id="<?php echo $assetId7034; ?>"
+                        data-room="<?php echo htmlspecialchars($room7034); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7034); ?>"
+                        data-image="<?php echo base64_encode($upload_img7034); ?>"
+                        data-category="<?php echo htmlspecialchars($category7034); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7034); ?>; 
+    position:absolute; top:260px; left:1035px;'>
+                    </div>
+
+                    <!-- ASSET 7035 -->
+                    <img src='../image.php?id=7035'
+                        style='width:20px; cursor:pointer; position:absolute; top:263px; left:985px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7035' onclick='fetchAssetData(7035);'
+                        class="asset-image" data-id="<?php echo $assetId7035; ?>"
+                        data-room="<?php echo htmlspecialchars($room7035); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7035); ?>"
+                        data-image="<?php echo base64_encode($upload_img7035); ?>"
+                        data-category="<?php echo htmlspecialchars($category7035); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7035); ?>; 
+    position:absolute; top:260px; left:1000px;'>
+                    </div>
+
+                    <!-- ASSET 7036 -->
+                    <img src='../image.php?id=7036'
+                        style='width:20px; cursor:pointer; position:absolute; top:293px; left:1020px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7036' onclick='fetchAssetData(7036);'
+                        class="asset-image" data-id="<?php echo $assetId7036; ?>"
+                        data-room="<?php echo htmlspecialchars($room7036); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7036); ?>"
+                        data-image="<?php echo base64_encode($upload_img7036); ?>"
+                        data-category="<?php echo htmlspecialchars($category7036); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7036); ?>; 
+    position:absolute; top:290px; left:1035px;'>
+                    </div>
+
+                    <!-- ASSET 7037 -->
+                    <img src='../image.php?id=7037'
+                        style='width:20px; cursor:pointer; position:absolute; top:293px; left:985px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7037' onclick='fetchAssetData(7037);'
+                        class="asset-image" data-id="<?php echo $assetId7037; ?>"
+                        data-room="<?php echo htmlspecialchars($room7037); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7037); ?>"
+                        data-image="<?php echo base64_encode($upload_img7037); ?>"
+                        data-category="<?php echo htmlspecialchars($category7037); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7037); ?>; 
+    position:absolute; top:290px; left:1000px;'>
+                    </div>
+
+                    <!-- ASSET 7038 -->
+                    <img src='../image.php?id=7038'
+                        style='width:20px; cursor:pointer; position:absolute; top:328px; left:1020px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7038' onclick='fetchAssetData(7038);'
+                        class="asset-image" data-id="<?php echo $assetId7038; ?>"
+                        data-room="<?php echo htmlspecialchars($room7038); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7038); ?>"
+                        data-image="<?php echo base64_encode($upload_img7038); ?>"
+                        data-category="<?php echo htmlspecialchars($category7038); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7038); ?>; 
+    position:absolute; top:325px; left:1035px;'>
+                    </div>
+
+
+                    <!-- ASSET 7039 -->
+                    <img src='../image.php?id=7039'
+                        style='width:20px; cursor:pointer; position:absolute; top:328px; left:985px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7039' onclick='fetchAssetData(7039);'
+                        class="asset-image" data-id="<?php echo $assetId7039; ?>"
+                        data-room="<?php echo htmlspecialchars($room7039); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7039); ?>"
+                        data-image="<?php echo base64_encode($upload_img7039); ?>"
+                        data-category="<?php echo htmlspecialchars($category7039); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7039); ?>; 
+    position:absolute; top:325px; left:1000px;'>
+                    </div>
+
+                    <!-- ASSET 7040 -->
+                    <img src='../image.php?id=7040'
+                        style='width:20px; cursor:pointer; position:absolute; top:358px; left:1020px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7040' onclick='fetchAssetData(7040);'
+                        class="asset-image" data-id="<?php echo $assetId7040; ?>"
+                        data-room="<?php echo htmlspecialchars($room7040); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7040); ?>"
+                        data-image="<?php echo base64_encode($upload_img7040); ?>"
+                        data-category="<?php echo htmlspecialchars($category7040); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7040); ?>; 
+    position:absolute; top:355px; left:1035px;'>
+                    </div>
+
+                    <!-- ASSET 7041 -->
+                    <img src='../image.php?id=7041'
+                        style='width:20px; cursor:pointer; position:absolute; top:358px; left:985px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7041' onclick='fetchAssetData(7041);'
+                        class="asset-image" data-id="<?php echo $assetId7041; ?>"
+                        data-room="<?php echo htmlspecialchars($room7041); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7041); ?>"
+                        data-image="<?php echo base64_encode($upload_img7041); ?>"
+                        data-category="<?php echo htmlspecialchars($category7041); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7041); ?>; 
+    position:absolute; top:355px; left:1000px;'>
+                    </div>
+
+                    <!-- ASSET 7042 -->
+                    <img src='../image.php?id=7042'
+                        style='width:20px; cursor:pointer; position:absolute; top:438px; left:1015px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7042' onclick='fetchAssetData(7042);'
+                        class="asset-image" data-id="<?php echo $assetId7042; ?>"
+                        data-room="<?php echo htmlspecialchars($room7042); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7042); ?>"
+                        data-image="<?php echo base64_encode($upload_img7042); ?>"
+                        data-category="<?php echo htmlspecialchars($category7042); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7042); ?>; 
+    position:absolute; top:435px; left:1030px;'>
+                    </div>
+
+                    <!-- ASSET 7043 -->
+                    <img src='../image.php?id=7043'
+                        style='width:20px; cursor:pointer; position:absolute; top:393px; left:1015px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7043' onclick='fetchAssetData(7043);'
+                        class="asset-image" data-id="<?php echo $assetId7043; ?>"
+                        data-room="<?php echo htmlspecialchars($room7043); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7043); ?>"
+                        data-image="<?php echo base64_encode($upload_img7043); ?>"
+                        data-category="<?php echo htmlspecialchars($category7043); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7043); ?>; 
+    position:absolute; top:390px; left:1030px;'>
+                    </div>
+
+
+                    <!-- ASSET 7044 -->
+                    <img src='../image.php?id=7044'
+                        style='width:20px; cursor:pointer; position:absolute; top:438px; left:975px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7044' onclick='fetchAssetData(7044);'
+                        class="asset-image" data-id="<?php echo $assetId7044; ?>"
+                        data-room="<?php echo htmlspecialchars($room7044); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7044); ?>"
+                        data-image="<?php echo base64_encode($upload_img7044); ?>"
+                        data-category="<?php echo htmlspecialchars($category7044); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7044); ?>; 
+    position:absolute; top:435px; left:990px;'>
+                    </div>
+
+                    <!-- ASSET 7045 -->
+                    <img src='../image.php?id=7045'
+                        style='width:20px; cursor:pointer; position:absolute; top:393px; left:975px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7045' onclick='fetchAssetData(7045);'
+                        class="asset-image" data-id="<?php echo $assetId7045; ?>"
+                        data-room="<?php echo htmlspecialchars($room7045); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7045); ?>"
+                        data-image="<?php echo base64_encode($upload_img7045); ?>"
+                        data-category="<?php echo htmlspecialchars($category7045); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7045); ?>; 
+    position:absolute; top:390px; left:990px;'>
+                    </div>
+
+                    <!-- ASSET 7046 -->
+                    <img src='../image.php?id=7046'
+                        style='width:20px; cursor:pointer; position:absolute; top:438px; left:935px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7046' onclick='fetchAssetData(7046);'
+                        class="asset-image" data-id="<?php echo $assetId7046; ?>"
+                        data-room="<?php echo htmlspecialchars($room7046); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7046); ?>"
+                        data-image="<?php echo base64_encode($upload_img7046); ?>"
+                        data-category="<?php echo htmlspecialchars($category7046); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7046); ?>; 
+    position:absolute; top:435px; left:950px;'>
+                    </div>
+
+                    <!-- ASSET 7047 -->
+                    <img src='../image.php?id=7047'
+                        style='width:20px; cursor:pointer; position:absolute; top:393px; left:935px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7047' onclick='fetchAssetData(7047);'
+                        class="asset-image" data-id="<?php echo $assetId7047; ?>"
+                        data-room="<?php echo htmlspecialchars($room7047); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7047); ?>"
+                        data-image="<?php echo base64_encode($upload_img7047); ?>"
+                        data-category="<?php echo htmlspecialchars($category7047); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7047); ?>; 
+    position:absolute; top:390px; left:950px;'>
+                    </div>
+
+                    <!-- ASSET 7048 -->
+                    <img src='../image.php?id=7048'
+                        style='width:20px; cursor:pointer; position:absolute; top:438px; left:880px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7048' onclick='fetchAssetData(7048);'
+                        class="asset-image" data-id="<?php echo $assetId7048; ?>"
+                        data-room="<?php echo htmlspecialchars($room7048); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7048); ?>"
+                        data-image="<?php echo base64_encode($upload_img7048); ?>"
+                        data-category="<?php echo htmlspecialchars($category7048); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7048); ?>; 
+    position:absolute; top:435px; left:895px;'>
+                    </div>
+
+
+                    <!-- ASSET 7049 -->
+                    <img src='../image.php?id=7049'
+                        style='width:20px; cursor:pointer; position:absolute; top:393px; left:880px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7049' onclick='fetchAssetData(7049);'
+                        class="asset-image" data-id="<?php echo $assetId7049; ?>"
+                        data-room="<?php echo htmlspecialchars($room7049); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7049); ?>"
+                        data-image="<?php echo base64_encode($upload_img7049); ?>"
+                        data-category="<?php echo htmlspecialchars($category7049); ?>">
+                    <div style='width:7px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7049); ?>; 
+    position:absolute; top:390px; left:895px;'>
+                    </div>
+
+                    <!-- ASSET 7050 -->
+                    <img src='../image.php?id=7050'
+                        style='width:20px; cursor:pointer; position:absolute; top:438px; left:845px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7050' onclick='fetchAssetData(7050);'
+                        class="asset-image" data-id="<?php echo $assetId7050; ?>"
+                        data-room="<?php echo htmlspecialchars($room7050); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7050); ?>"
+                        data-image="<?php echo base64_encode($upload_img7050); ?>"
+                        data-category="<?php echo htmlspecialchars($category7050); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7050); ?>; 
+    position:absolute; top:435px; left:860px;'>
+                    </div>
+
+                    <!-- ASSET 7051 -->
+                    <img src='../image.php?id=7051'
+                        style='width:20px; cursor:pointer; position:absolute; top:393px; left:845px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7051' onclick='fetchAssetData(7051);'
+                        class="asset-image" data-id="<?php echo $assetId7051; ?>"
+                        data-room="<?php echo htmlspecialchars($room7051); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7051); ?>"
+                        data-image="<?php echo base64_encode($upload_img7051); ?>"
+                        data-category="<?php echo htmlspecialchars($category7051); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7051); ?>; 
+    position:absolute; top:390px; left:860px;'>
+                    </div>
+
+                    <!-- ASSET 7052 -->
+                    <img src='../image.php?id=7052'
+                        style='width:20px; cursor:pointer; position:absolute; top:438px; left:810px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7052' onclick='fetchAssetData(7052);'
+                        class="asset-image" data-id="<?php echo $assetId7052; ?>"
+                        data-room="<?php echo htmlspecialchars($room7052); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7052); ?>"
+                        data-image="<?php echo base64_encode($upload_img7052); ?>"
+                        data-category="<?php echo htmlspecialchars($category7052); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7052); ?>; 
+    position:absolute; top:435px; left:825px;'>
+                    </div>
+
+                    <!-- ASSET 7053 -->
+                    <img src='../image.php?id=7053'
+                        style='width:20px; cursor:pointer; position:absolute; top:393px; left:810px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7053' onclick='fetchAssetData(7053);'
+                        class="asset-image" data-id="<?php echo $assetId7053; ?>"
+                        data-room="<?php echo htmlspecialchars($room7053); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7053); ?>"
+                        data-image="<?php echo base64_encode($upload_img7053); ?>"
+                        data-category="<?php echo htmlspecialchars($category7053); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7053); ?>; 
+    position:absolute; top:390px; left:825px;'>
+                    </div>
+
+                    <!-- ASSET 7054 -->
+                    <img src='../image.php?id=7054'
+                        style='width:20px; cursor:pointer; position:absolute; top:438px; left:775px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7054' onclick='fetchAssetData(7054);'
+                        class="asset-image" data-id="<?php echo $assetId7054; ?>"
+                        data-room="<?php echo htmlspecialchars($room7054); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7054); ?>"
+                        data-image="<?php echo base64_encode($upload_img7054); ?>"
+                        data-category="<?php echo htmlspecialchars($category7054); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7054); ?>; 
+    position:absolute; top:435px; left:790px;'>
+                    </div>
+
+                    <!-- ASSET 7055 -->
+                    <img src='../image.php?id=7055'
+                        style='width:20px; cursor:pointer; position:absolute; top:393px; left:775px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7055' onclick='fetchAssetData(7055);'
+                        class="asset-image" data-id="<?php echo $assetId7055; ?>"
+                        data-room="<?php echo htmlspecialchars($room7055); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7055); ?>"
+                        data-image="<?php echo base64_encode($upload_img7055); ?>"
+                        data-category="<?php echo htmlspecialchars($category7055); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7055); ?>; 
+    position:absolute; top:390px; left:790px;'>
+                    </div>
+
+                    <!-- ASSET 7056 -->
+                    <img src='../image.php?id=7056'
+                        style='width:20px; cursor:pointer; position:absolute; top:438px; left:740px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7056' onclick='fetchAssetData(7056);'
+                        class="asset-image" data-id="<?php echo $assetId7056; ?>"
+                        data-room="<?php echo htmlspecialchars($room7056); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7056); ?>"
+                        data-image="<?php echo base64_encode($upload_img7056); ?>"
+                        data-category="<?php echo htmlspecialchars($category7056); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7056); ?>; 
+    position:absolute; top:435px; left:755px;'>
+                    </div>
+
+                    <!-- ASSET 7057 -->
+                    <img src='../image.php?id=7057'
+                        style='width:20px; cursor:pointer; position:absolute; top:393px; left:740px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7057' onclick='fetchAssetData(7057);'
+                        class="asset-image" data-id="<?php echo $assetId7057; ?>"
+                        data-room="<?php echo htmlspecialchars($room7057); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7057); ?>"
+                        data-image="<?php echo base64_encode($upload_img7057); ?>"
+                        data-category="<?php echo htmlspecialchars($category7057); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7057); ?>; 
+    position:absolute; top:390px; left:755px;'>
+                    </div>
+
+                    <!-- ASSET 7058 -->
+                    <img src='../image.php?id=7058'
+                        style='width:20px; cursor:pointer; position:absolute; top:438px; left:700px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7058' onclick='fetchAssetData(7058);'
+                        class="asset-image" data-id="<?php echo $assetId7058; ?>"
+                        data-room="<?php echo htmlspecialchars($room7058); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7058); ?>"
+                        data-image="<?php echo base64_encode($upload_img7058); ?>"
+                        data-category="<?php echo htmlspecialchars($category7058); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7058); ?>; 
+    position:absolute; top:435px; left:715px;'>
+                    </div>
+
+                    <!-- ASSET 7059 -->
+                    <img src='../image.php?id=7059'
+                        style='width:20px; cursor:pointer; position:absolute; top:393px; left:700px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7059' onclick='fetchAssetData(7059);'
+                        class="asset-image" data-id="<?php echo $assetId7059; ?>"
+                        data-room="<?php echo htmlspecialchars($room7059); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7059); ?>"
+                        data-image="<?php echo base64_encode($upload_img7059); ?>"
+                        data-category="<?php echo htmlspecialchars($category7059); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7059); ?>; 
+    position:absolute; top:390px; left:715px;'>
+                    </div>
+
+                    <!-- ASSET 7060 -->
+                    <img src='../image.php?id=7060'
+                        style='width:20px; cursor:pointer; position:absolute; top:438px; left:665px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7060' onclick='fetchAssetData(7060);'
+                        class="asset-image" data-id="<?php echo $assetId7060; ?>"
+                        data-room="<?php echo htmlspecialchars($room7060); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7060); ?>"
+                        data-image="<?php echo base64_encode($upload_img7060); ?>"
+                        data-category="<?php echo htmlspecialchars($category7060); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7060); ?>; 
+    position:absolute; top:435px; left:680px;'>
+                    </div>
+
+                    <!-- ASSET 7061 -->
+                    <img src='../image.php?id=7061'
+                        style='width:20px; cursor:pointer; position:absolute; top:393px; left:665px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7061' onclick='fetchAssetData(7061);'
+                        class="asset-image" data-id="<?php echo $assetId7061; ?>"
+                        data-room="<?php echo htmlspecialchars($room7061); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7061); ?>"
+                        data-image="<?php echo base64_encode($upload_img7061); ?>"
+                        data-category="<?php echo htmlspecialchars($category7061); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7061); ?>; 
+    position:absolute; top:390px; left:680px;'>
+                    </div>
+
+                    <!-- ASSET 7062 -->
+                    <img src='../image.php?id=7062'
+                        style='width:20px; cursor:pointer; position:absolute; top:438px; left:630px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7062' onclick='fetchAssetData(7062);'
+                        class="asset-image" data-id="<?php echo $assetId7062; ?>"
+                        data-room="<?php echo htmlspecialchars($room7062); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7062); ?>"
+                        data-image="<?php echo base64_encode($upload_img7062); ?>"
+                        data-category="<?php echo htmlspecialchars($category7062); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7062); ?>; 
+    position:absolute; top:435px; left:645px;'>
+                    </div>
+
+                    <!-- ASSET 7063 -->
+                    <img src='../image.php?id=7063'
+                        style='width:20px; cursor:pointer; position:absolute; top:393px; left:630px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7063' onclick='fetchAssetData(7063);'
+                        class="asset-image" data-id="<?php echo $assetId7063; ?>"
+                        data-room="<?php echo htmlspecialchars($room7063); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7063); ?>"
+                        data-image="<?php echo base64_encode($upload_img7063); ?>"
+                        data-category="<?php echo htmlspecialchars($category7063); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7063); ?>; 
+    position:absolute; top:390px; left:645px;'>
+                    </div>
+
+
+                    <!-- ASSET 7064 -->
+                    <img src='../image.php?id=7064'
+                        style='width:20px; cursor:pointer; position:absolute; top:438px; left:595px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7064' onclick='fetchAssetData(7064);'
+                        class="asset-image" data-id="<?php echo $assetId7064; ?>"
+                        data-room="<?php echo htmlspecialchars($room7064); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7064); ?>"
+                        data-image="<?php echo base64_encode($upload_img7064); ?>"
+                        data-category="<?php echo htmlspecialchars($category7064); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7064); ?>; 
+    position:absolute; top:435px; left:610px;'>
+                    </div>
+
+                    <!-- ASSET 7065 -->
+                    <img src='../image.php?id=7065'
+                        style='width:20px; cursor:pointer; position:absolute; top:393px; left:595px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7065' onclick='fetchAssetData(7065);'
+                        class="asset-image" data-id="<?php echo $assetId7065; ?>"
+                        data-room="<?php echo htmlspecialchars($room7065); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7065); ?>"
+                        data-image="<?php echo base64_encode($upload_img7065); ?>"
+                        data-category="<?php echo htmlspecialchars($category7065); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7065); ?>; 
+    position:absolute; top:390px; left:610px;'>
+                    </div>
+
+                    <!-- ASSET 7066 -->
+                    <img src='../image.php?id=7066'
+                        style='width:20px; cursor:pointer; position:absolute; top:438px; left:560px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7066' onclick='fetchAssetData(7066);'
+                        class="asset-image" data-id="<?php echo $assetId7066; ?>"
+                        data-room="<?php echo htmlspecialchars($room7066); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7066); ?>"
+                        data-image="<?php echo base64_encode($upload_img7066); ?>"
+                        data-category="<?php echo htmlspecialchars($category7066); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7066); ?>; 
+    position:absolute; top:435px; left:575px;'>
+                    </div>
+
+                    <!-- ASSET 7067 -->
+                    <img src='../image.php?id=7067'
+                        style='width:20px; cursor:pointer; position:absolute; top:393px; left:560px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7067' onclick='fetchAssetData(7067);'
+                        class="asset-image" data-id="<?php echo $assetId7067; ?>"
+                        data-room="<?php echo htmlspecialchars($room7067); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7067); ?>"
+                        data-image="<?php echo base64_encode($upload_img7067); ?>"
+                        data-category="<?php echo htmlspecialchars($category7067); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7067); ?>; 
+    position:absolute; top:390px; left:575px;'>
+                    </div>
+
+                    <!-- ASSET 7068 -->
+                    <img src='../image.php?id=7068'
+                        style='width:20px; cursor:pointer; position:absolute; top:393px; left:410px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7068' onclick='fetchAssetData(7068);'
+                        class="asset-image" data-id="<?php echo $assetId7068; ?>"
+                        data-room="<?php echo htmlspecialchars($room7068); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7068); ?>"
+                        data-image="<?php echo base64_encode($upload_img7068); ?>"
+                        data-category="<?php echo htmlspecialchars($category7068); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7068); ?>; 
+    position:absolute; top:390px; left:427px;'>
+                    </div>
+
+
+                    <!-- ASSET 7069 -->
+                    <img src='../image.php?id=7069'
+                        style='width:20px; cursor:pointer; position:absolute; top:465px; left:410px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7069' onclick='fetchAssetData(7069);'
+                        class="asset-image" data-id="<?php echo $assetId7069; ?>"
+                        data-room="<?php echo htmlspecialchars($room7069); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7069); ?>"
+                        data-image="<?php echo base64_encode($upload_img7069); ?>"
+                        data-category="<?php echo htmlspecialchars($category7069); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7069); ?>; 
+    position:absolute; top:463px; left:427px;'>
+                    </div>
+
+                    <!-- ASSET 7070 -->
+                    <img src='../image.php?id=7070'
+                        style='width:20px; cursor:pointer; position:absolute; top:393px; left:520px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7070' onclick='fetchAssetData(7070);'
+                        class="asset-image" data-id="<?php echo $assetId7070; ?>"
+                        data-room="<?php echo htmlspecialchars($room7070); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7070); ?>"
+                        data-image="<?php echo base64_encode($upload_img7070); ?>"
+                        data-category="<?php echo htmlspecialchars($category7070); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7070); ?>; 
+    position:absolute; top:390px; left:537px;'>
+                    </div>
+
+                    <!-- ASSET 7071 -->
+                    <img src='../image.php?id=7071'
+                        style='width:20px; cursor:pointer; position:absolute; top:465px; left:520px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7071' onclick='fetchAssetData(7071);'
+                        class="asset-image" data-id="<?php echo $assetId7071; ?>"
+                        data-room="<?php echo htmlspecialchars($room7071); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7071); ?>"
+                        data-image="<?php echo base64_encode($upload_img7071); ?>"
+                        data-category="<?php echo htmlspecialchars($category7071); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7071); ?>; 
+    position:absolute; top:463px; left:537px;'>
+                    </div>
+
+                    <!-- ASSET 7072 -->
+                    <img src='../image.php?id=7072'
+                        style='width:17px; cursor:pointer; position:absolute; top:420px; left:525px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7072' onclick='fetchAssetData(7072);'
+                        class="asset-image" data-id="<?php echo $assetId7072; ?>"
+                        data-room="<?php echo htmlspecialchars($room7072); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7072); ?>"
+                        data-image="<?php echo base64_encode($upload_img7072); ?>"
+                        data-category="<?php echo htmlspecialchars($category7072); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7072); ?>; 
+    position:absolute; top:418px; left:538px;'>
+                    </div>
+
+                    <!-- ASSET 7073 -->
+                    <img src='../image.php?id=7073'
+                        style='width:20px; cursor:pointer; position:absolute; top:400px; left:80px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7073' onclick='fetchAssetData(7073);'
+                        class="asset-image" data-id="<?php echo $assetId7073; ?>"
+                        data-room="<?php echo htmlspecialchars($room7073); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7073); ?>"
+                        data-image="<?php echo base64_encode($upload_img7073); ?>"
+                        data-category="<?php echo htmlspecialchars($category7073); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7073); ?>; 
+    position:absolute; top:397px; left:97px;'>
+                    </div>
+
+                    <!-- ASSET 7074 -->
+                    <img src='../image.php?id=7074'
+                        style='width:20px; cursor:pointer; position:absolute; top:465px; left:80px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7074' onclick='fetchAssetData(7074);'
+                        class="asset-image" data-id="<?php echo $assetId7074; ?>"
+                        data-room="<?php echo htmlspecialchars($room7074); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7074); ?>"
+                        data-image="<?php echo base64_encode($upload_img7074); ?>"
+                        data-category="<?php echo htmlspecialchars($category7074); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7074); ?>; 
+    position:absolute; top:462px; left:97px;'>
+                    </div>
+
+                    <!-- ASSET 7075 -->
+                    <img src='../image.php?id=7075'
+                        style='width:20px; cursor:pointer; position:absolute; top:400px; left:170px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7075' onclick='fetchAssetData(7075);'
+                        class="asset-image" data-id="<?php echo $assetId7075; ?>"
+                        data-room="<?php echo htmlspecialchars($room7075); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7075); ?>"
+                        data-image="<?php echo base64_encode($upload_img7075); ?>"
+                        data-category="<?php echo htmlspecialchars($category7075); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7075); ?>; 
+    position:absolute; top:397px; left:187px;'>
+                    </div>
+
+                    <!-- ASSET 7076 -->
+                    <img src='../image.php?id=7076'
+                        style='width:20px; cursor:pointer; position:absolute; top:465px; left:170px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7076' onclick='fetchAssetData(7076);'
+                        class="asset-image" data-id="<?php echo $assetId7076; ?>"
+                        data-room="<?php echo htmlspecialchars($room7076); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7076); ?>"
+                        data-image="<?php echo base64_encode($upload_img7076); ?>"
+                        data-category="<?php echo htmlspecialchars($category7076); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7076); ?>; 
+    position:absolute; top:462px; left:187px;'>
+                    </div>
+
+                    <!-- ASSET 7077 -->
+                    <img src='../image.php?id=7077'
+                        style='width:20px; cursor:pointer; position:absolute; top:400px; left:250px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7077' onclick='fetchAssetData(7077);'
+                        class="asset-image" data-id="<?php echo $assetId7077; ?>"
+                        data-room="<?php echo htmlspecialchars($room7077); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7077); ?>"
+                        data-image="<?php echo base64_encode($upload_img7077); ?>"
+                        data-category="<?php echo htmlspecialchars($category7077); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7077); ?>; 
+    position:absolute; top:397px; left:267px;'>
+                    </div>
+
+                    <!-- ASSET 7078 -->
+                    <img src='../image.php?id=7078'
+                        style='width:20px; cursor:pointer; position:absolute; top:465px; left:250px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7078' onclick='fetchAssetData(7078);'
+                        class="asset-image" data-id="<?php echo $assetId7078; ?>"
+                        data-room="<?php echo htmlspecialchars($room7078); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7078); ?>"
+                        data-image="<?php echo base64_encode($upload_img7078); ?>"
+                        data-category="<?php echo htmlspecialchars($category7078); ?>">
+                    <div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7078); ?>; 
+    position:absolute; top:462px; left:267px;'>
+                    </div>
+
+                    <!-- ASSET 7079 -->
+                    <img src='../image.php?id=7079'
+                        style='width:17px; cursor:pointer; position:absolute; top:428px; left:80px;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7079' onclick='fetchAssetData(7079);'
+                        class="asset-image" data-id="<?php echo $assetId7079; ?>"
+    data-room="<?php echo htmlspecialchars($room7079); ?>"
+    data-floor="<?php echo htmlspecialchars($floor7079); ?>"
+    data-image="<?php echo base64_encode($upload_img7079); ?>"
+    data-category="<?php echo htmlspecialchars($category7079); ?>">
+<div style='width:7px; height:7px; border-radius:50%; background-color: <?php echo getStatusColor($status7079); ?>; 
+    position:absolute; top:425px; left:95px;'>
+</div>
+
+
+                    <!--Start of hover-->
+                    <div id="hover-asset" class="hover-asset" style="display: none;">
+                        <!-- Content will be added dynamically -->
+                    </div>
                          
                     </div>
 
@@ -41607,6 +43202,59 @@ exit();
                 });
             });
         </script>
+
+        <!--Start of JS Hover-->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const assetImages = document.querySelectorAll('.asset-image');
+            const hoverElement = document.getElementById('hover-asset');
+
+            assetImages.forEach(image => {
+                image.addEventListener('mouseenter', function () {
+                    const id = this.dataset.id;
+                    const room = this.dataset.room;
+                    const floor = this.dataset.floor;
+                    const base64Data = this.dataset.image;
+                    const category = this.dataset.category; // Get the category from the data attribute
+
+                    let imageHTML = '';
+                    if (base64Data && base64Data.trim() !== '') {
+                        const imageSrc = "data:image/jpeg;base64," + base64Data;
+                        imageHTML = `<img src="${imageSrc}" alt="Asset Image">`;
+                    } else {
+                        imageHTML = '<p class="NoImage">No Image uploaded</p>';
+                    }
+
+                    // Update hover element's content
+                    hoverElement.innerHTML = `
+                <div class="center-content-hover">
+                    ${imageHTML}
+                </div>
+                <div>
+                    <label for="assetIdHover${id}" class="form-label TrackingHover">Tracking #:</label>
+                    <input type="text" class="form-control hover-input" id="assetId" value="${id}" readonly />
+                </div>
+                <div class="hover-location">
+                    <input type="text" class="form-control input-hover" id="category-hover" value="${category}" readonly />
+                    <input type="text" class="form-control input-hover" id="room" value="${room}" readonly />
+                    <input type="text" class="form-control input-hover" id="floor" value="${floor}" readonly />
+                </div>
+            `;
+
+                    // Show hover element
+                    hoverElement.style.display = 'block';
+                });
+
+                image.addEventListener('mouseleave', function () {
+                    // Hide hover element
+                    hoverElement.style.display = 'none';
+                });
+            });
+        });
+
+
+    </script>
+
 
         <script>
             $(document).ready(function() {
