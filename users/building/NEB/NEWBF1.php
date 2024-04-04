@@ -28899,6 +28899,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         });
     </script>
+    <!--Start of JS Hover-->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const assetImages = document.querySelectorAll('.asset-image');
@@ -28909,20 +28910,28 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     const id = this.dataset.id;
                     const room = this.dataset.room;
                     const floor = this.dataset.floor;
-                    const imageSrc = "data:image/jpeg;base64," + this.dataset.image;
+                    const base64Data = this.dataset.image;
                     const category = this.dataset.category; // Get the category from the data attribute
+
+                    let imageHTML = '';
+                    if (base64Data && base64Data.trim() !== '') {
+                        const imageSrc = "data:image/jpeg;base64," + base64Data;
+                        imageHTML = `<img src="${imageSrc}" alt="Asset Image">`;
+                    } else {
+                        imageHTML = '<p class="NoImage">No Image uploaded</p>';
+                    }
 
                     // Update hover element's content
                     hoverElement.innerHTML = `
                 <div class="center-content-hover">
-                    <img src="${imageSrc}" alt="No Image">
+                    ${imageHTML}
                 </div>
                 <div>
-                    <label for="assetIdHover${id}" class="form-label">Tracking #:</label>
+                    <label for="assetIdHover${id}" class="form-label TrackingHover">Tracking #:</label>
                     <input type="text" class="form-control hover-input" id="assetId" value="${id}" readonly />
                 </div>
                 <div class="hover-location">
-                <input type="text" class="form-control input-hover" id="category-hover" value="${category}" readonly />
+                    <input type="text" class="form-control input-hover" id="category-hover" value="${category}" readonly />
                     <input type="text" class="form-control input-hover" id="room" value="${room}" readonly />
                     <input type="text" class="form-control input-hover" id="floor" value="${floor}" readonly />
                 </div>
@@ -28938,6 +28947,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 });
             });
         });
+
 
     </script>
 

@@ -2314,425 +2314,507 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <div class="modal-popups">
                                     <button type="submit" class="btn add-modal-btn" name="edit5762">Yes</button>
                                     <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-            <ul class="side-menu top">
-                <li>
-                    <a href="../../administrator/dashboard.php">
-                        <i class="bi bi-grid"></i>
-                        <span class="text">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../../administrator/attendance-logs.php">
-                        <i class="bi bi-calendar-week"></i>
-                        <span class="text">Attendance Logs</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../../administrator/staff.php">
-                        <i class="bi bi-person"></i>
-                        <span class="text">Staff</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../../administrator/gps.php">
-                        <i class="bi bi-geo-alt"></i>
-                        <span class="text">GPS</span>
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="../../administrator/map.php">
-                        <i class="bi bi-map"></i>
-                        <span class="text">Map</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../../administrator/reports.php">
-                        <i class="bi bi-clipboard"></i>
-                        <span class="text">Reports</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../../administrator/archive.php">
-                        <i class="bi bi-archive"></i>
-                        <span class="text">Archive</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../../administrator/activity-logs.php">
-                        <i class="bi bi-arrow-counterclockwise"></i>
-                        <span class="text">Activity Logs</span>
-                    </a>
-                </li>
-            </ul>
-        </section>
-        <section id="content">
-            <main>
-                <div class="content-container" id="content-container">
-                    <div id="belmonte-F1" class="content">
+                                    <ul class="side-menu top">
+                                        <li>
+                                            <a href="../../administrator/dashboard.php">
+                                                <i class="bi bi-grid"></i>
+                                                <span class="text">Dashboard</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="../../administrator/attendance-logs.php">
+                                                <i class="bi bi-calendar-week"></i>
+                                                <span class="text">Attendance Logs</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="../../administrator/staff.php">
+                                                <i class="bi bi-person"></i>
+                                                <span class="text">Staff</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="../../administrator/gps.php">
+                                                <i class="bi bi-geo-alt"></i>
+                                                <span class="text">GPS</span>
+                                            </a>
+                                        </li>
+                                        <li class="active">
+                                            <a href="../../administrator/map.php">
+                                                <i class="bi bi-map"></i>
+                                                <span class="text">Map</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="../../administrator/reports.php">
+                                                <i class="bi bi-clipboard"></i>
+                                                <span class="text">Reports</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="../../administrator/archive.php">
+                                                <i class="bi bi-archive"></i>
+                                                <span class="text">Archive</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="../../administrator/activity-logs.php">
+                                                <i class="bi bi-arrow-counterclockwise"></i>
+                                                <span class="text">Activity Logs</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+    </section>
+    <section id="content">
+        <main>
+            <div class="content-container" id="content-container">
+                <div id="belmonte-F1" class="content">
 
-                        <!-- FLOOR PLAN -->
-                        <img src="../../../src/floors/adminB/AB1F.png" alt="" class="Floor-container">
+                    <!-- FLOOR PLAN -->
+                    <img src="../../../src/floors/adminB/AB1F.png" alt="" class="Floor-container">
 
-                        <div class="legend-button" id="legendButton">
-                            <i class="bi bi-info-circle"></i>
+                    <div class="legend-button" id="legendButton">
+                        <i class="bi bi-info-circle"></i>
+                    </div>
+
+                    <div class="legend-body" id="legendBody">
+                        <!-- Your legend body content goes here -->
+                        <div class="legend-item"><img src="../../../src/legend/AC.jpg" alt="" class="legend-img">
+                            <p>AIRCON</p>
                         </div>
-
-                        <div class="legend-body" id="legendBody">
-                            <!-- Your legend body content goes here -->
-                            <div class="legend-item"><img src="../../../src/legend/AC.jpg" alt="" class="legend-img">
-                                <p>AIRCON</p>
-                            </div>
-                            <div class="legend-item"><img src="../../../src/legend/BULB.jpg" alt="" class="legend-img">
-                                <p>BULB</p>
-                            </div>
-                            <div class="legend-item"><img src="../../../src/legend/CASSETTE-AC.jpg" alt="" class="legend-img">
-                                <p>CASSETTE AC</p>
-                            </div>
-                            <div class="legend-item"><img src="../../../src/legend/DOOR.jpg" alt="" class="legend-img">
-                                <p>DOOR</p>
-                            </div>
-                            <div class="legend-item"><img src="../../../src/legend/SWING-DOOR.jpg" alt="" class="legend-img">
-                                <p>SWING DOOR</p>
-                            </div>
-                            <div class="legend-item"><img src="../../../src/legend/TOILET-SEAT.jpg" alt="" class="legend-img">
-                                <p>TOILET SEAT</p>
-                            </div>
+                        <div class="legend-item"><img src="../../../src/legend/BULB.jpg" alt="" class="legend-img">
+                            <p>BULB</p>
                         </div>
-
-                        <div class="map-nav">
-                            <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
-                            <div class="map-legend">
-                                <div class="legend-color-green"></div>
-                                <p>Working</p>
-                                <div class="legend-color-under-maintenance"></div>
-                                <p>Under maintenance</p>
-                                <div class="legend-color-need-repair"></div>
-                                <p>Need repair</p>
-                                <div class="legend-color-for-replacement"></div>
-                                <p>For replacement</p>
-                            </div>
+                        <div class="legend-item"><img src="../../../src/legend/CASSETTE-AC.jpg" alt=""
+                                class="legend-img">
+                            <p>CASSETTE AC</p>
+                        </div>
+                        <div class="legend-item"><img src="../../../src/legend/DOOR.jpg" alt="" class="legend-img">
+                            <p>DOOR</p>
+                        </div>
+                        <div class="legend-item"><img src="../../../src/legend/SWING-DOOR.jpg" alt=""
+                                class="legend-img">
+                            <p>SWING DOOR</p>
+                        </div>
+                        <div class="legend-item"><img src="../../../src/legend/TOILET-SEAT.jpg" alt=""
+                                class="legend-img">
+                            <p>TOILET SEAT</p>
                         </div>
                     </div>
 
-                    <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-arrow-left"></i></a>
-
-                    <!-- ASSET 5762 -->
-                    <img src='../image.php?id=5762' style='width:25px; cursor:pointer; position:absolute; top:60px; left:850px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5762' onclick='fetchAssetData(5762);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5762); ?>; 
-                        position:absolute; top:60px; left:875px;'>
+                    <div class="map-nav">
+                        <a href="../../administrator/map.php" class="closeFloor"><i
+                                class="bi bi-box-arrow-left"></i></i></a>
+                        <div class="map-legend">
+                            <div class="legend-color-green"></div>
+                            <p>Working</p>
+                            <div class="legend-color-under-maintenance"></div>
+                            <p>Under maintenance</p>
+                            <div class="legend-color-need-repair"></div>
+                            <p>Need repair</p>
+                            <div class="legend-color-for-replacement"></div>
+                            <p>For replacement</p>
+                        </div>
                     </div>
-
-                    <!-- ASSET 5763 -->
-                    <img src='../image.php?id=5763' style='width:25px; cursor:pointer; position:absolute; top:155px; left:110px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5763' onclick='fetchAssetData(5763);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5763); ?>; 
-                        position:absolute; top:155px; left:135px;'>
-                    </div>
-
-                    <!-- ASSET 5764 -->
-                    <img src='../image.php?id=5764' style='width:25px; cursor:pointer; position:absolute; top:155px; left:280px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5764' onclick='fetchAssetData(5764);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5764); ?>; 
-                        position:absolute; top:155px; left:305px;'>
-                    </div>
-
-                    <!-- ASSET 5765 -->
-                    <img src='../image.php?id=5765' style='width:25px; cursor:pointer; position:absolute; top:155px; left:440px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5765' onclick='fetchAssetData(5765);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5765); ?>; 
-                        position:absolute; top:155px; left:465px;'>
-                    </div>
-
-                    <!-- ASSET 5766 -->
-                    <img src='../image.php?id=5766' style='width:25px; cursor:pointer; position:absolute; top:155px; left:780px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5766' onclick='fetchAssetData(5766);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5766); ?>; 
-                        position:absolute; top:155px; left:805px;'>
-                    </div>
-
-                    <!-- ASSET 5767 -->
-                    <img src='../image.php?id=5767' style='width:25px; cursor:pointer; position:absolute; top:155px; left:920px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5767' onclick='fetchAssetData(5767);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5767); ?>; 
-                        position:absolute; top:155px; left:945px;'>
-                    </div>
-
-                    <!-- ASSET 5768 -->
-                    <img src='../image.php?id=5768' style='width:25px; cursor:pointer; position:absolute; top:155px; left:1050px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5768' onclick='fetchAssetData(5768);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5768); ?>; 
-                        position:absolute; top:155px; left:1075px;'>
-                    </div>
-
-                    <!-- ASSET 5769 -->
-                    <img src='../image.php?id=5769' style='width:25px; cursor:pointer; position:absolute; top:255px; left:110px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5769' onclick='fetchAssetData(5769);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5769); ?>; 
-                        position:absolute; top:255px; left:135px;'>
-                    </div>
-
-                    <!-- ASSET 5770 -->
-                    <img src='../image.php?id=5770' style='width:25px; cursor:pointer; position:absolute; top:255px; left:280px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5770' onclick='fetchAssetData(5770);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5770); ?>; 
-                        position:absolute; top:255px; left:305px;'>
-                    </div>
-
-                    <!-- ASSET 5771 -->
-                    <img src='../image.php?id=5771' style='width:25px; cursor:pointer; position:absolute; top:255px; left:440px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5771' onclick='fetchAssetData(5771);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5771); ?>; 
-                        position:absolute; top:255px; left:465px;'>
-                    </div>
-
-                    <!-- ASSET 5772 -->
-                    <img src='../image.php?id=5772' style='width:25px; cursor:pointer; position:absolute; top:255px; left:600px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5772' onclick='fetchAssetData(5772);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5772); ?>; 
-                        position:absolute; top:255px; left:625px;'>
-                    </div>
-
-                    <!-- ASSET 5773 -->
-                    <img src='../image.php?id=5773' style='width:25px; cursor:pointer; position:absolute; top:255px; left:780px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5773' onclick='fetchAssetData(5773);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5773); ?>; 
-                        position:absolute; top:255px; left:805px;'>
-                    </div>
-
-                    <!-- ASSET 5774 -->
-                    <img src='../image.php?id=5774' style='width:25px; cursor:pointer; position:absolute; top:255px; left:935px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5774' onclick='fetchAssetData(5774);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5774); ?>; 
-                        position:absolute; top:255px; left:960px;'>
-                    </div>
-
-                    <!-- ASSET 5775 -->
-                    <img src='../image.php?id=5775' style='width:25px; cursor:pointer; position:absolute; top:255px; left:1080px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5775' onclick='fetchAssetData(5775);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5775); ?>; 
-                        position:absolute; top:255px; left:1105px;'>
-                    </div>
-
-                    <!-- ASSET 5776 -->
-                    <img src='../image.php?id=5776' style='width:25px; cursor:pointer; position:absolute; top:335px; left:110px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5776' onclick='fetchAssetData(5776);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5776); ?>; 
-                        position:absolute; top:335px; left:135px;'>
-                    </div>
-
-                    <!-- ASSET 5777 -->
-                    <img src='../image.php?id=5777' style='width:25px; cursor:pointer; position:absolute; top:335px; left:220px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5777' onclick='fetchAssetData(5777);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5777); ?>; 
-                        position:absolute; top:335px; left:245px;'>
-                    </div>
-
-                    <!-- ASSET 5778 -->
-                    <img src='../image.php?id=5778' style='width:25px; cursor:pointer; position:absolute; top:370px; left:275px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5778' onclick='fetchAssetData(5778);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5778); ?>; 
-                        position:absolute; top:370px; left:300px;'>
-                    </div>
-
-                    <!-- ASSET 5779 -->
-                    <img src='../image.php?id=5779' style='width:25px; cursor:pointer; position:absolute; top:370px; left:430px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5779' onclick='fetchAssetData(5779);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5779); ?>; 
-                        position:absolute; top:370px; left:455px;'>
-                    </div>
-
-                    <!-- ASSET 5780 -->
-                    <img src='../image.php?id=5780' style='width:25px; cursor:pointer; position:absolute; top:410px; left:330px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5780' onclick='fetchAssetData(5780);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5780); ?>; 
-                        position:absolute; top:410px; left:355px;'>
-                    </div>
-
-                    <!-- ASSET 5781 -->
-                    <img src='../image.php?id=5781' style='width:25px; cursor:pointer; position:absolute; top:410px; left:370px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5781' onclick='fetchAssetData(5781);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5781); ?>; 
-                        position:absolute; top:410px; left:395px;'>
-                    </div>
-
-                    <!-- ASSET 5782 -->
-                    <img src='../image.php?id=5782' style='width:25px; cursor:pointer; position:absolute; top:450px; left:275px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5782' onclick='fetchAssetData(5782);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5782); ?>; 
-                        position:absolute; top:450px; left:300px;'>
-                    </div>
-
-                    <!-- ASSET 5783 -->
-                    <img src='../image.php?id=5783' style='width:25px; cursor:pointer; position:absolute; top:450px; left:430px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5783' onclick='fetchAssetData(5783);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5783); ?>; 
-                        position:absolute; top:450px; left:455px;'>
-                    </div>
-
-                    <!-- ASSET 5784 -->
-                    <img src='../image.php?id=5784' style='width:25px; cursor:pointer; position:absolute; top:350px; left:570px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5784' onclick='fetchAssetData(5784);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5784); ?>; 
-                        position:absolute; top:350px; left:595px;'>
-                    </div>
-
-                    <!-- ASSET 5785 -->
-                    <img src='../image.php?id=5785' style='width:25px; cursor:pointer; position:absolute; top:350px; left:640px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5785' onclick='fetchAssetData(5785);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5785); ?>; 
-                        position:absolute; top:350px; left:665px;'>
-                    </div>
-
-                    <!-- ASSET 5786 -->
-                    <img src='../image.php?id=5786' style='width:25px; cursor:pointer; position:absolute; top:370px; left:770px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5786' onclick='fetchAssetData(5786);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5786); ?>; 
-                        position:absolute; top:370px; left:795px;'>
-                    </div>
-
-                    <!-- ASSET 5787 -->
-                    <img src='../image.php?id=5787' style='width:25px; cursor:pointer; position:absolute; top:370px; left:920px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5787' onclick='fetchAssetData(5787);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5787); ?>; 
-                        position:absolute; top:370px; left: 945px;px;'>
-                    </div>
-
-                    <!-- ASSET 5788 -->
-                    <img src='../image.php?id=5788' style='width:25px; cursor:pointer; position:absolute; top:410px; left:820px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5788' onclick='fetchAssetData(5788);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5788); ?>; 
-                        position:absolute; top:410px; left: 845px;px;'>
-                    </div>
-
-                    <!-- ASSET 5789 -->
-                    <img src='../image.php?id=5789' style='width:25px; cursor:pointer; position:absolute; top:410px; left:860px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5789' onclick='fetchAssetData(5789);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5789); ?>; 
-                        position:absolute; top:410px; left: 885px;px;'>
-                    </div>
-
-                    <!-- ASSET 5790 -->
-                    <img src='../image.php?id=5790' style='width:25px; cursor:pointer; position:absolute; top:450px; left:770px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5790' onclick='fetchAssetData(5790);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5790); ?>; 
-                        position:absolute; top:450px; left: 795px;px;'>
-                    </div>
-
-                    <!-- ASSET 5791 -->
-                    <img src='../image.php?id=5791' style='width:25px; cursor:pointer; position:absolute; top:450px; left:920px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal5791' onclick='fetchAssetData(5791);'>
-                    <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5791); ?>; 
-                        position:absolute; top:450px; left: 945px;px;'>
-                    </div>
-
-
-
-
                 </div>
-                <!-- Modal structure for id 5762-->
-                <div class='modal fade' id='imageModal5762' tabindex='-1' aria-labelledby='imageModalLabel5762' aria-hidden='true'>
-                    <div class='modal-dialog modal-xl modal-dialog-centered'>
-                        <div class='modal-content'>
-                            <!-- Modal header -->
-                            <div class='modal-header'>
-                                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                            </div>
 
-                            <!-- Modal body -->
-                            <div class='modal-body'>
-                                <form method="post" class="row g-3" enctype="multipart/form-data">
-                                    <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId5762); ?>">
-                                    <!--START DIV FOR IMAGE -->
+                <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-arrow-left"></i></a>
 
-                                    <!--First Row-->
-                                    <!--IMAGE HERE-->
-                                    <div class="col-12 center-content">
-                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img5762); ?>" alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
-                                    </div>
-                                    <!--END DIV FOR IMAGE -->
+                <!-- ASSET 5762 -->
+                <img src='../image.php?id=5762'
+                    style='width:25px; cursor:pointer; position:absolute; top:60px; left:850px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5762' onclick='fetchAssetData(5762);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5762); ?>; 
+                        position:absolute; top:60px; left:875px;'>
+                </div>
 
-                                    <div class="col-4" style="display:none">
-                                        <label for="assetId" class="form-label">Tracking #:</label>
-                                        <input type="text" class="form-control" id="assetId" name="assetId" value="<?php echo htmlspecialchars($assetId5762); ?>" readonly />
-                                    </div>
+                <!-- ASSET 5763 -->
+                <img src='../image.php?id=5763'
+                    style='width:25px; cursor:pointer; position:absolute; top:155px; left:110px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5763' onclick='fetchAssetData(5763);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5763); ?>; 
+                        position:absolute; top:155px; left:135px;'>
+                </div>
 
-                                    <div class="col-4" style="display:none">
-                                        <label for="date" class="form-label">Date:</label>
-                                        <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($date5762); ?>" readonly />
-                                    </div>
+                <!-- ASSET 5764 -->
+                <img src='../image.php?id=5764'
+                    style='width:25px; cursor:pointer; position:absolute; top:155px; left:280px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5764' onclick='fetchAssetData(5764);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5764); ?>; 
+                        position:absolute; top:155px; left:305px;'>
+                </div>
 
-                                    <!--Second Row-->
-                                    <div class="col-6">
-                                        <input type="text" class="form-control" id="room" name="room" value="<?php echo htmlspecialchars($room5762); ?>" readonly />
-                                    </div>
+                <!-- ASSET 5765 -->
+                <img src='../image.php?id=5765'
+                    style='width:25px; cursor:pointer; position:absolute; top:155px; left:440px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5765' onclick='fetchAssetData(5765);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5765); ?>; 
+                        position:absolute; top:155px; left:465px;'>
+                </div>
+
+                <!-- ASSET 5766 -->
+                <img src='../image.php?id=5766'
+                    style='width:25px; cursor:pointer; position:absolute; top:155px; left:780px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5766' onclick='fetchAssetData(5766);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5766); ?>; 
+                        position:absolute; top:155px; left:805px;'>
+                </div>
+
+                <!-- ASSET 5767 -->
+                <img src='../image.php?id=5767'
+                    style='width:25px; cursor:pointer; position:absolute; top:155px; left:920px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5767' onclick='fetchAssetData(5767);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5767); ?>; 
+                        position:absolute; top:155px; left:945px;'>
+                </div>
+
+                <!-- ASSET 5768 -->
+                <img src='../image.php?id=5768'
+                    style='width:25px; cursor:pointer; position:absolute; top:155px; left:1050px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5768' onclick='fetchAssetData(5768);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5768); ?>; 
+                        position:absolute; top:155px; left:1075px;'>
+                </div>
+
+                <!-- ASSET 5769 -->
+                <img src='../image.php?id=5769'
+                    style='width:25px; cursor:pointer; position:absolute; top:255px; left:110px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5769' onclick='fetchAssetData(5769);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5769); ?>; 
+                        position:absolute; top:255px; left:135px;'>
+                </div>
+
+                <!-- ASSET 5770 -->
+                <img src='../image.php?id=5770'
+                    style='width:25px; cursor:pointer; position:absolute; top:255px; left:280px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5770' onclick='fetchAssetData(5770);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5770); ?>; 
+                        position:absolute; top:255px; left:305px;'>
+                </div>
+
+                <!-- ASSET 5771 -->
+                <img src='../image.php?id=5771'
+                    style='width:25px; cursor:pointer; position:absolute; top:255px; left:440px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5771' onclick='fetchAssetData(5771);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5771); ?>; 
+                        position:absolute; top:255px; left:465px;'>
+                </div>
+
+                <!-- ASSET 5772 -->
+                <img src='../image.php?id=5772'
+                    style='width:25px; cursor:pointer; position:absolute; top:255px; left:600px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5772' onclick='fetchAssetData(5772);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5772); ?>; 
+                        position:absolute; top:255px; left:625px;'>
+                </div>
+
+                <!-- ASSET 5773 -->
+                <img src='../image.php?id=5773'
+                    style='width:25px; cursor:pointer; position:absolute; top:255px; left:780px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5773' onclick='fetchAssetData(5773);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5773); ?>; 
+                        position:absolute; top:255px; left:805px;'>
+                </div>
+
+                <!-- ASSET 5774 -->
+                <img src='../image.php?id=5774'
+                    style='width:25px; cursor:pointer; position:absolute; top:255px; left:935px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5774' onclick='fetchAssetData(5774);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5774); ?>; 
+                        position:absolute; top:255px; left:960px;'>
+                </div>
+
+                <!-- ASSET 5775 -->
+                <img src='../image.php?id=5775'
+                    style='width:25px; cursor:pointer; position:absolute; top:255px; left:1080px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5775' onclick='fetchAssetData(5775);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5775); ?>; 
+                        position:absolute; top:255px; left:1105px;'>
+                </div>
+
+                <!-- ASSET 5776 -->
+                <img src='../image.php?id=5776'
+                    style='width:25px; cursor:pointer; position:absolute; top:335px; left:110px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5776' onclick='fetchAssetData(5776);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5776); ?>; 
+                        position:absolute; top:335px; left:135px;'>
+                </div>
+
+                <!-- ASSET 5777 -->
+                <img src='../image.php?id=5777'
+                    style='width:25px; cursor:pointer; position:absolute; top:335px; left:220px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5777' onclick='fetchAssetData(5777);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5777); ?>; 
+                        position:absolute; top:335px; left:245px;'>
+                </div>
+
+                <!-- ASSET 5778 -->
+                <img src='../image.php?id=5778'
+                    style='width:25px; cursor:pointer; position:absolute; top:370px; left:275px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5778' onclick='fetchAssetData(5778);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5778); ?>; 
+                        position:absolute; top:370px; left:300px;'>
+                </div>
+
+                <!-- ASSET 5779 -->
+                <img src='../image.php?id=5779'
+                    style='width:25px; cursor:pointer; position:absolute; top:370px; left:430px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5779' onclick='fetchAssetData(5779);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5779); ?>; 
+                        position:absolute; top:370px; left:455px;'>
+                </div>
+
+                <!-- ASSET 5780 -->
+                <img src='../image.php?id=5780'
+                    style='width:25px; cursor:pointer; position:absolute; top:410px; left:330px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5780' onclick='fetchAssetData(5780);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5780); ?>; 
+                        position:absolute; top:410px; left:355px;'>
+                </div>
+
+                <!-- ASSET 5781 -->
+                <img src='../image.php?id=5781'
+                    style='width:25px; cursor:pointer; position:absolute; top:410px; left:370px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5781' onclick='fetchAssetData(5781);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5781); ?>; 
+                        position:absolute; top:410px; left:395px;'>
+                </div>
+
+                <!-- ASSET 5782 -->
+                <img src='../image.php?id=5782'
+                    style='width:25px; cursor:pointer; position:absolute; top:450px; left:275px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5782' onclick='fetchAssetData(5782);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5782); ?>; 
+                        position:absolute; top:450px; left:300px;'>
+                </div>
+
+                <!-- ASSET 5783 -->
+                <img src='../image.php?id=5783'
+                    style='width:25px; cursor:pointer; position:absolute; top:450px; left:430px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5783' onclick='fetchAssetData(5783);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5783); ?>; 
+                        position:absolute; top:450px; left:455px;'>
+                </div>
+
+                <!-- ASSET 5784 -->
+                <img src='../image.php?id=5784'
+                    style='width:25px; cursor:pointer; position:absolute; top:350px; left:570px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5784' onclick='fetchAssetData(5784);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5784); ?>; 
+                        position:absolute; top:350px; left:595px;'>
+                </div>
+
+                <!-- ASSET 5785 -->
+                <img src='../image.php?id=5785'
+                    style='width:25px; cursor:pointer; position:absolute; top:350px; left:640px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5785' onclick='fetchAssetData(5785);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5785); ?>; 
+                        position:absolute; top:350px; left:665px;'>
+                </div>
+
+                <!-- ASSET 5786 -->
+                <img src='../image.php?id=5786'
+                    style='width:25px; cursor:pointer; position:absolute; top:370px; left:770px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5786' onclick='fetchAssetData(5786);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5786); ?>; 
+                        position:absolute; top:370px; left:795px;'>
+                </div>
+
+                <!-- ASSET 5787 -->
+                <img src='../image.php?id=5787'
+                    style='width:25px; cursor:pointer; position:absolute; top:370px; left:920px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5787' onclick='fetchAssetData(5787);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5787); ?>; 
+                        position:absolute; top:370px; left: 945px;px;'>
+                </div>
+
+                <!-- ASSET 5788 -->
+                <img src='../image.php?id=5788'
+                    style='width:25px; cursor:pointer; position:absolute; top:410px; left:820px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5788' onclick='fetchAssetData(5788);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5788); ?>; 
+                        position:absolute; top:410px; left: 845px;px;'>
+                </div>
+
+                <!-- ASSET 5789 -->
+                <img src='../image.php?id=5789'
+                    style='width:25px; cursor:pointer; position:absolute; top:410px; left:860px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5789' onclick='fetchAssetData(5789);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5789); ?>; 
+                        position:absolute; top:410px; left: 885px;px;'>
+                </div>
+
+                <!-- ASSET 5790 -->
+                <img src='../image.php?id=5790'
+                    style='width:25px; cursor:pointer; position:absolute; top:450px; left:770px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5790' onclick='fetchAssetData(5790);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5790); ?>; 
+                        position:absolute; top:450px; left: 795px;px;'>
+                </div>
+
+                <!-- ASSET 5791 -->
+                <img src='../image.php?id=5791'
+                    style='width:25px; cursor:pointer; position:absolute; top:450px; left:920px;' alt='Asset Image'
+                    data-bs-toggle='modal' data-bs-target='#imageModal5791' onclick='fetchAssetData(5791);'>
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5791); ?>; 
+                        position:absolute; top:450px; left: 945px;px;'>
+                </div>
 
 
-                                    <div class="col-6" style="display:none">
-                                        <input type="text" class="form-control  center-content" id="building" name="building" value="<?php echo htmlspecialchars($building5762); ?>" readonly />
-                                    </div>
 
-                                    <!--End of Second Row-->
 
-                                    <!--Third Row-->
-                                    <div class="col-6">
-                                        <input type="text" class="form-control" id="floor" name="floor" value="<?php echo htmlspecialchars($floor5762); ?>" readonly />
-                                    </div>
+            </div>
+            <!-- Modal structure for id 5762-->
+            <div class='modal fade' id='imageModal5762' tabindex='-1' aria-labelledby='imageModalLabel5762'
+                aria-hidden='true'>
+                <div class='modal-dialog modal-xl modal-dialog-centered'>
+                    <div class='modal-content'>
+                        <!-- Modal header -->
+                        <div class='modal-header'>
+                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                        </div>
 
-                                    <div class="col-12 center-content">
-                                        <input type="text" class="form-control  center-content" id="category" name="category" value="<?php echo htmlspecialchars($category5762); ?>" readonly />
-                                    </div>
+                        <!-- Modal body -->
+                        <div class='modal-body'>
+                            <form method="post" class="row g-3" enctype="multipart/form-data">
+                                <input type="hidden" name="assetId"
+                                    value="<?php echo htmlspecialchars($assetId5762); ?>">
+                                <!--START DIV FOR IMAGE -->
 
-                                    <div class="col-4" style="display:none">
-                                        <label for="images" class="form-label">Images:</label>
-                                        <input type="text" class="form-control" id="" name="images" readonly />
-                                    </div>
+                                <!--First Row-->
+                                <!--IMAGE HERE-->
+                                <div class="col-12 center-content">
+                                    <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img5762); ?>"
+                                        alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
+                                </div>
+                                <!--END DIV FOR IMAGE -->
 
-                                    <!--End of Third Row-->
+                                <div class="col-4" style="display:none">
+                                    <label for="assetId" class="form-label">Tracking #:</label>
+                                    <input type="text" class="form-control" id="assetId" name="assetId"
+                                        value="<?php echo htmlspecialchars($assetId5762); ?>" readonly />
+                                </div>
 
-                                    <!--Fourth Row-->
-                                    <div class="col-2">
-                                        <label for="status" class="form-label">Status:</label>
-                                    </div>
+                                <div class="col-4" style="display:none">
+                                    <label for="date" class="form-label">Date:</label>
+                                    <input type="text" class="form-control" id="date" name="date"
+                                        value="<?php echo htmlspecialchars($date5762); ?>" readonly />
+                                </div>
 
-                                    <div class="col-6">
-                                        <select class="form-select" id="status" name="status">
-                                            <option value="Working" <?php echo ($status5762 == 'Working')
-                                                                        ? 'selected="selected"' : ''; ?>>Working</option>
-                                            <option value="Under Maintenance" <?php echo ($status5762 == 'Under Maintenance')
-                                                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                            <option value="For Replacement" <?php echo ($status5762 == 'For Replacement')
-                                                                                ? 'selected="selected"' : ''; ?>>For Replacement</option>
-                                            <option value="Need Repair" <?php echo ($status5762 == 'Need Repair')
-                                                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
-                                        </select>
-                                    </div>
+                                <!--Second Row-->
+                                <div class="col-6">
+                                    <input type="text" class="form-control" id="room" name="room"
+                                        value="<?php echo htmlspecialchars($room5762); ?>" readonly />
+                                </div>
 
-                                    <div class="col-4" style="display:none">
-                                        <label for="assignedName" class="form-label">Assigned Name:</label>
-                                        <input type="text" class="form-control" id="assignedName" name="assignedName" value="<?php echo htmlspecialchars($assignedName5762); ?>" readonly />
-                                    </div>
 
-                                    <div class="col-4" style="display:none">
-                                        <label for="assignedBy" class="form-label">Assigned By:</label>
-                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="<?php echo htmlspecialchars($assignedBy5762); ?>" readonly />
-                                    </div>
+                                <div class="col-6" style="display:none">
+                                    <input type="text" class="form-control  center-content" id="building"
+                                        name="building" value="<?php echo htmlspecialchars($building5762); ?>"
+                                        readonly />
+                                </div>
 
-                                    <!--End of Fourth Row-->
+                                <!--End of Second Row-->
 
-                                    <!--Fifth Row-->
-                                    <!-- <div class="col-3">
+                                <!--Third Row-->
+                                <div class="col-6">
+                                    <input type="text" class="form-control" id="floor" name="floor"
+                                        value="<?php echo htmlspecialchars($floor5762); ?>" readonly />
+                                </div>
+
+                                <div class="col-12 center-content">
+                                    <input type="text" class="form-control  center-content" id="category"
+                                        name="category" value="<?php echo htmlspecialchars($category5762); ?>"
+                                        readonly />
+                                </div>
+
+                                <div class="col-4" style="display:none">
+                                    <label for="images" class="form-label">Images:</label>
+                                    <input type="text" class="form-control" id="" name="images" readonly />
+                                </div>
+
+                                <!--End of Third Row-->
+
+                                <!--Fourth Row-->
+                                <div class="col-2">
+                                    <label for="status" class="form-label">Status:</label>
+                                </div>
+
+                                <div class="col-6">
+                                    <select class="form-select" id="status" name="status">
+                                        <option value="Working" <?php echo ($status5762 == 'Working')
+                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                        <option value="Under Maintenance" <?php echo ($status5762 == 'Under Maintenance')
+                                            ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                        <option value="For Replacement" <?php echo ($status5762 == 'For Replacement')
+                                            ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                        <option value="Need Repair" <?php echo ($status5762 == 'Need Repair')
+                                            ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-4" style="display:none">
+                                    <label for="assignedName" class="form-label">Assigned Name:</label>
+                                    <input type="text" class="form-control" id="assignedName" name="assignedName"
+                                        value="<?php echo htmlspecialchars($assignedName5762); ?>" readonly />
+                                </div>
+
+                                <div class="col-4" style="display:none">
+                                    <label for="assignedBy" class="form-label">Assigned By:</label>
+                                    <input type="text" class="form-control" id="assignedBy" name="assignedBy"
+                                        value="<?php echo htmlspecialchars($assignedBy5762); ?>" readonly />
+                                </div>
+
+                                <!--End of Fourth Row-->
+
+                                <!--Fifth Row-->
+                                <!-- <div class="col-3">
                                         <label for="description" class="form-label">Description:</label>
                                     </div> -->
-                                    <div class="col-12">
-                                        <input type="text" class="form-control" id="description" name="description" value="<?php echo htmlspecialchars($description5762); ?>" />
-                                    </div>
-                                    <!--End of Fifth Row-->
+                                <div class="col-12">
+                                    <input type="text" class="form-control" id="description" name="description"
+                                        value="<?php echo htmlspecialchars($description5762); ?>" />
+                                </div>
+                                <!--End of Fifth Row-->
 
-                                    <!--Sixth Row-->
-                                    <div class="col-2">
-                                        <label for="upload_img" class="form-label">Upload:</label>
-                                    </div>
-                                    <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
-                                    <!--End of Sixth Row-->
+                                <!--Sixth Row-->
+                                <div class="col-2">
+                                    <label for="upload_img" class="form-label">Upload:</label>
+                                </div>
+                                <div class="col-9">
+                                    <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                        accept="image/*" capture="user" />
+                                </div>
+                                <!--End of Sixth Row-->
 
-                                    <!-- Modal footer -->
-                                    <div class="button-submit-container">
-                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop5762">
-                                            Save
-                                        </button>
-                                    </div>
-                            </div>
+                                <!-- Modal footer -->
+                                <div class="button-submit-container">
+                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                        data-bs-target="#staticBackdrop5762">
+                                        Save
+                                    </button>
+                                </div>
                         </div>
                     </div>
                 </div>
-                <!--Edit for table 5762-->
-                <div class="map-alert">
-                    <div class="modal fade" id="staticBackdrop5762" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-footer">
-                                    <p>Are you sure you want to save changes?</p>
-                                    <div class="modal-popups">
-                                        <button type="submit" class="btn add-modal-btn" name="edit5762">Yes</button>
-                                        <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                    </div>
+            </div>
+            <!--Edit for table 5762-->
+            <div class="map-alert">
+                <div class="modal fade" id="staticBackdrop5762" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-footer">
+                                <p>Are you sure you want to save changes?</p>
+                                <div class="modal-popups">
+                                    <button type="submit" class="btn add-modal-btn" name="edit5762">Yes</button>
+                                    <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
             </form>
 
@@ -2849,32 +2931,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5763">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5763">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -3010,32 +3093,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5764">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5764">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -3171,32 +3255,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5765">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5765">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -3332,32 +3417,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5766">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5766">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -3493,32 +3579,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5767">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5767">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -3654,32 +3741,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5768">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5768">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -3815,32 +3903,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5769">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5769">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -3976,32 +4065,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5770">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5770">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -4137,32 +4227,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5771">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5771">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -4298,32 +4389,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5772">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5772">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -4459,32 +4551,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5773">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5773">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -4620,32 +4713,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5774">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5774">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -4781,32 +4875,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5775">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5775">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -4942,32 +5037,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5776">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5776">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -5103,32 +5199,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5777">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5777">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -5264,32 +5361,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5778">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5778">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -5425,32 +5523,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5779">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5779">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -5586,32 +5685,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5780">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5780">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -5747,32 +5847,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5781">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5781">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -5908,32 +6009,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5782">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5782">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -6069,32 +6171,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5783">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5783">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -6230,32 +6333,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5784">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5784">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -6391,32 +6495,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5785">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5785">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -6552,32 +6657,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5786">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5786">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -6713,32 +6819,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5787">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5787">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -6874,32 +6981,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5788">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5788">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -7035,32 +7143,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5789">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5789">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -7196,32 +7305,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
+                                <<<<<<< Updated upstream <!--Sixth Row-->
                                     <div class="col-2">
                                         <label for="upload_img" class="form-label">Upload:</label>
                                     </div>
                                     <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
                                     <!--End of Sixth Row-->
-=======
-                                <!--Sixth Row-->
-                                <div class="col-2 Upload">
-                                    <label for="upload_img" class="form-label">Upload:</label>
-                                </div>
-                                <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                                </div>
-                                <!--End of Sixth Row-->
->>>>>>> Stashed changes
+                                    =======
+                                    <!--Sixth Row-->
+                                    <div class="col-2 Upload">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+                                    >>>>>>> Stashed changes
 
-                                <!-- Modal footer -->
-                                <div class="button-submit-container">
-                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop5790">
-                                        Save
-                                    </button>
-                                </div>
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop5790">
+                                            Save
+                                        </button>
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -7357,24 +7467,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--End of Fifth Row-->
 
-<<<<<<< Updated upstream
-                                    <!--Sixth Row-->
-                                    <div class="col-2">
-                                        <label for="upload_img" class="form-label">Upload:</label>
-                                    </div>
-                                    <div class="col-9">
-                                        <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />                                    </div>
-                                    <!--End of Sixth Row-->
-=======
                                 <!--Sixth Row-->
-                                <div class="col-2 Upload">
+                                <div class="col-2">
                                     <label for="upload_img" class="form-label">Upload:</label>
                                 </div>
                                 <div class="col-9">
-                                    <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                    <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                        accept="image/*" capture="user" />
                                 </div>
                                 <!--End of Sixth Row-->
->>>>>>> Stashed changes
 
                                 <!-- Modal footer -->
                                 <div class="button-submit-container">
@@ -7454,6 +7555,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             }
         });
     </script>
+    <!--Start of JS Hover-->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const assetImages = document.querySelectorAll('.asset-image');
@@ -7464,20 +7566,28 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     const id = this.dataset.id;
                     const room = this.dataset.room;
                     const floor = this.dataset.floor;
-                    const imageSrc = "data:image/jpeg;base64," + this.dataset.image;
+                    const base64Data = this.dataset.image;
                     const category = this.dataset.category; // Get the category from the data attribute
+
+                    let imageHTML = '';
+                    if (base64Data && base64Data.trim() !== '') {
+                        const imageSrc = "data:image/jpeg;base64," + base64Data;
+                        imageHTML = `<img src="${imageSrc}" alt="Asset Image">`;
+                    } else {
+                        imageHTML = '<p class="NoImage">No Image uploaded</p>';
+                    }
 
                     // Update hover element's content
                     hoverElement.innerHTML = `
                 <div class="center-content-hover">
-                    <img src="${imageSrc}" alt="No Image">
+                    ${imageHTML}
                 </div>
                 <div>
-                    <label for="assetIdHover${id}" class="form-label">Tracking #:</label>
+                    <label for="assetIdHover${id}" class="form-label TrackingHover">Tracking #:</label>
                     <input type="text" class="form-control hover-input" id="assetId" value="${id}" readonly />
                 </div>
                 <div class="hover-location">
-                <input type="text" class="form-control input-hover" id="category-hover" value="${category}" readonly />
+                    <input type="text" class="form-control input-hover" id="category-hover" value="${category}" readonly />
                     <input type="text" class="form-control input-hover" id="room" value="${room}" readonly />
                     <input type="text" class="form-control input-hover" id="floor" value="${floor}" readonly />
                 </div>
@@ -7494,7 +7604,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         });
 
+
     </script>
+
     <script src="../../../src/js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>

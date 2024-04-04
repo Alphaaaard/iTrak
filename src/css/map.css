@@ -393,7 +393,18 @@ h3 {
   font-size: 1em;
   margin-bottom: unset;
 }
-
+.NoImage{
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0 10px 0;
+}
+.TrackingHover{
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
 #room {
   background-color: unset !important;
   border: unset !important;
