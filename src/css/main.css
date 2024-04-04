@@ -713,11 +713,20 @@ input#roleField.form-control {
 
 .export-btn {
   background-color: #1e56a0;
-  border-radius: 10px;
-  color: white;
+  border: #1e56a0 1px solid;
+  border-radius: 20px;
+  padding: 0.5em 3em;
+  font-size: 0.7em;
   font-weight: 500;
-  font-size: 0.5em;
-  padding: 0.75em 3.5em;
+  color: white;
+  transition: 0.3s ease;
+  margin: 0.3em 0;
+}
+
+.export-btn:hover {
+  background-color: white;
+  color: #163172;
+  border: #163172 1px solid;
 }
 
 .archive-btn {

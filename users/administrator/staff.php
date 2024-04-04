@@ -579,7 +579,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         </div>
                                         <div class="modal-body">
                                             <form method="post" enctype="multipart/form-data" class="row g-3" id="addForm">
-
                                                 <div class="col-4">
                                                     <label for="firstName" class="form-label label">First name <span class="d-none text-danger error">*</span></label>
                                                     <input type="text" class="form-control" id="firstNameField" name="firstName" placeholder="First Name" required />

@@ -126,6 +126,11 @@ table {
     background-color: white;
   } */
 
+.new-nav-container {
+  display: flex;
+  justify-content: space-between;
+}
+
 .new-nav {
   padding: 0.5em 0.5em 0 0.5em;
   background-color: #3d518c;
