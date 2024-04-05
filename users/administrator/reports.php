@@ -502,7 +502,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
                     </header>
 
-
+                    <div class="new-nav-container">
                     <!--Content start of tabs-->
                     <div class="new-nav">
                         <ul>
@@ -512,15 +512,18 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             <li><a href="#" class="nav-link" data-bs-target="pills-repair">Need Repair</a></li>
                             <li></li>
                             <li></li>
-                            <li></li>
-                            <form method="post" class="mb-2" id="exportForm">
-    <input type="hidden" name="status" id="statusField" value="For Replacement">
-    <button type="button" id="exportBtn" class="btn btn-outline-danger">Export Data</button>
-</form>
-
-
                         </ul>
                     </div>
+
+                    <!-- Export button -->
+                    <div class="export">
+                        <form method="post" id="exportForm">
+                            <input type="hidden" name="status" id="statusField" value="For Replacement">
+                            <button type="button" id="exportBtn" class="btn btn-outline-danger">Export Data</button>
+                        </form>
+                    </div>
+                 </div>
+
 
                     <!--Tab for table 1-->
                     <div class="tab-content pt" id="myTabContent">

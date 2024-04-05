@@ -430,3 +430,15 @@ img.icon.staff {
     font-size: 0.8em !important;
   }
 }
+
+.export {
+  margin-bottom: 1em; /* Adjust as necessary */
+}
+
+/* New style for export button */
+#exportBtn {
+  padding: 0.5em 1em; /* Adjust padding to match the nav links, if needed */
+  background-color: #f8f9fa; /* Adjust background color to match your design */
+  border: 1px solid #ddd; /* Adjust border as needed */
+  /* Add any other button styling you have */
+}
