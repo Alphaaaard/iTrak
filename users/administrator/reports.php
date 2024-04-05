@@ -513,7 +513,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             <li></li>
                             <li></li>
                             <li></li>
-                            <button type="button" class="btn export-btn" onclick="exportTableToPDF('exportContentWorking', 'Working.pdf', 'Working')">EXPORT PDF</button>
+                            <form method="post" class="mb-2" id="exportForm">
+    <input type="hidden" name="status" id="statusField" value="For Replacement">
+    <button type="button" id="exportBtn" class="btn btn-outline-danger">Export Data</button>
+</form>
+
+
                         </ul>
                     </div>
 
@@ -1201,38 +1206,131 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </script>
 
         <script>
-            // Function to update the button's export parameters
-            function updateExportButton(exportContentId, filename, tableName) {
-                const exportButton = document.getElementById('exportPdfButton');
-                exportButton.setAttribute('onclick', `exportTableToPDF('${exportContentId}', '${filename}.pdf', '${tableName}')`);
-            }
+$(document).ready(function() {
+    // Function to update hidden input with the active status
+    function updateStatusInput(tab) {
+        let status;
+        switch (tab) {
+            case 'pills-manager':
+                status = 'Working';
+                break;
+            case 'pills-profile':
+                status = 'Under Maintenance';
+                break;
+            case 'pills-replace':
+                status = 'For Replacement';
+                break;
+            case 'pills-repair':
+                status = 'Need Repair';
+                break;
+            default:
+                status = 'Unknown';
+        }
+        $('input[name="status"]').val(status); // Update the hidden input's value
+    }
 
-            // Add event listeners to the nav links
-            document.addEventListener('DOMContentLoaded', () => {
-                const navLinks = document.querySelectorAll('.nav-link');
-                navLinks.forEach(link => {
-                    link.addEventListener('click', () => {
-                        const target = link.getAttribute('data-bs-target');
-                        switch (target) {
-                            case 'pills-manager':
-                                updateExportButton('exportContentWorking', 'Working', 'Working');
-                                break;
-                            case 'pills-profile':
-                                updateExportButton('exportContentUnderMaintenance', 'Under-Maintenance', 'Under-Maintenance');
-                                break;
-                            case 'pills-replace':
-                                updateExportButton('exportContentReplacement', 'For-Replacement', 'For-Replacement');
-                                break;
-                            case 'pills-repair':
-                                updateExportButton('exportContentNeedforRepair', 'Need-for-Repair', 'Need-for-Repair');
-                                break;
-                            default:
-                                console.log('Unknown tab');
-                        }
-                    });
+    // Initial tab selection handling
+    let tabLastSelected = sessionStorage.getItem("lastTab");
+    if (!tabLastSelected) {
+        $("#pills-manager").addClass("show active");
+        $(".nav-link[data-bs-target='pills-manager']").addClass("active");
+        updateStatusInput('pills-manager'); // Set default status
+    } else {
+        $(`#${tabLastSelected}`).addClass("show active");
+        $(`.nav-link[data-bs-target='${tabLastSelected}']`).addClass("active");
+        updateStatusInput(tabLastSelected); // Update status based on sessionStorage
+    }
+
+    // Tab click event handling
+    $(".nav-link").click(function() {
+        const targetId = $(this).data("bs-target");
+        sessionStorage.setItem("lastTab", targetId); // Update lastTab in sessionStorage
+        $(".tab-pane").removeClass("show active");
+        $(`#${targetId}`).addClass("show active");
+        $(".nav-link").removeClass("active");
+        $(this).addClass("active");
+        updateStatusInput(targetId); // Update the hidden input with the new status
+    });
+});
+
+        </script>
+
+<script>
+document.getElementById('exportBtn').addEventListener('click', function() {
+    Swal.fire({
+        title: 'Choose the file format',
+        showDenyButton: true,
+        confirmButtonText: 'PDF',
+        denyButtonText: `Excel`,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var formData = new FormData(document.getElementById('exportForm'));
+            formData.append('submit', 'Export to PDF');
+
+            // Show a loading message
+            Swal.fire({
+                title: 'Exporting...',
+                html: 'Please wait while the PDF is being generated.',
+                allowOutsideClick: false,
+                onBeforeOpen: () => {
+                    Swal.showLoading();
+                },
+            });
+
+            fetch('export-pdf.php', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                const tabIdentifier = sessionStorage.getItem("lastTab") || 'pills-manager';
+                const tabNameMap = {
+                    'pills-manager': 'Working Assets',
+                    'pills-profile': 'Under-Maintenance Assets',
+                    'pills-replace': 'For-Replacement Assets',
+                    'pills-repair': 'Need Repair Assets',
+                };
+                const activeTabName = tabNameMap[tabIdentifier] || 'Exported-Data';
+
+                const pdfUrl = window.URL.createObjectURL(blob);
+                const downloadLink = document.createElement('a');
+                downloadLink.href = pdfUrl;
+                downloadLink.download = `${activeTabName}.pdf`;
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+
+                window.URL.revokeObjectURL(pdfUrl);
+                document.body.removeChild(downloadLink);
+
+                // Show a success message
+                Swal.fire({
+                    title: 'Exporting Done',
+                    text: 'Your file has been successfully generated.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            })
+            .catch(error => {
+                // Show an error message
+                Swal.fire({
+                    title: 'Error',
+                    text: 'There was an issue generating the PDF.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
                 });
             });
-        </script>
+        } else if (result.isDenied) {
+            Swal.fire('Excel export not implemented yet', '', 'info');
+        }
+    });
+});
+
+</script>
 
 
 
