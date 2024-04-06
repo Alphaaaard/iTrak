@@ -6493,7 +6493,7 @@ $stmt->close();
                         <span class="text">GPS</span>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                 <a href="../../manager/map.php">
                         <i class="bi bi-map"></i>
                         <span class="text">Map</span>
@@ -6505,7 +6505,7 @@ $stmt->close();
                         <span class="text">Reports</span>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                 <a href="../../manager/activity-logs.php">
                         <i class="bi bi-arrow-counterclockwise"></i>
                         <span class="text">Activity Logs</span>

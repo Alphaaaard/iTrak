@@ -1,11 +1,11 @@
 <?php
 session_start();
-include_once("../../../config/connection.php");
+include_once ("../../../config/connection.php");
 $conn = connection();
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role'])) {
-     // For personnel page, check if userLevel is 3
-     if ($_SESSION['userLevel'] != 2) {
+    // For personnel page, check if userLevel is 3
+    if ($_SESSION['userLevel'] != 2) {
         // If not personnel, redirect to an error page or login
         header("Location:error.php");
         exit;
@@ -39,27 +39,27 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
    ORDER BY al.date DESC 
    LIMIT 5"; // Set limit to 5
 
-// Prepare the SQL statement
-$stmtLatestLogs = $conn->prepare($sqlLatestLogs);
-$pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
+    // Prepare the SQL statement
+    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
 
-// Bind the parameter to exclude the current user's account ID
-$stmtLatestLogs->bind_param("si",  $pattern, $loggedInAccountId);
+    // Bind the parameter to exclude the current user's account ID
+    $stmtLatestLogs->bind_param("si", $pattern, $loggedInAccountId);
 
-// Execute the query
-$stmtLatestLogs->execute();
-$resultLatestLogs = $stmtLatestLogs->get_result(); 
+    // Execute the query
+    $stmtLatestLogs->execute();
+    $resultLatestLogs = $stmtLatestLogs->get_result();
 
-$unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
 WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance personnel%' AND action LIKE ?";
-$pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
+    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
 
-$stmt = $conn->prepare($unseenCountQuery);
-$stmt->bind_param("is", $loggedInAccountId, $pattern );
-$stmt->execute();
-$stmt->bind_result($unseenCount);
-$stmt->fetch();
-$stmt->close();
+    $stmt = $conn->prepare($unseenCountQuery);
+    $stmt->bind_param("is", $loggedInAccountId, $pattern);
+    $stmt->execute();
+    $stmt->bind_result($unseenCount);
+    $stmt->fetch();
+    $stmt->close();
 
     //FOR ID 7275
     $sql7275 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7275";
@@ -129,3861 +129,3861 @@ $stmt->close();
     $assignedBy7272 = $row7272['assignedBy'];
     $upload_img7272 = $row7272['upload_img'];
     $description7272 = $row7272['description'];
-        //FOR ID 6947
-        $sql6947 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6947";
-        $stmt6947 = $conn->prepare($sql6947);
-        $stmt6947->execute();
-        $result6947 = $stmt6947->get_result();
-        $row6947 = $result6947->fetch_assoc();
-        $assetId6947 = $row6947['assetId'];
-        $category6947 = $row6947['category'];
-        $date6947 = $row6947['date'];
-        $building6947 = $row6947['building'];
-        $floor6947 = $row6947['floor'];
-        $room6947 = $row6947['room'];
-        $status6947 = $row6947['status'];
-        $assignedName6947 = $row6947['assignedName'];
-        $assignedBy6947 = $row6947['assignedBy'];
-        $upload_img6947 = $row6947['upload_img'];
-        $description6947 = $row6947['description'];
-        //FOR ID 6946
-        $sql6946 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6946";
-        $stmt6946 = $conn->prepare($sql6946);
-        $stmt6946->execute();
-        $result6946 = $stmt6946->get_result();
-        $row6946 = $result6946->fetch_assoc();
-        $assetId6946 = $row6946['assetId'];
-        $category6946 = $row6946['category'];
-        $date6946 = $row6946['date'];
-        $building6946 = $row6946['building'];
-        $floor6946 = $row6946['floor'];
-        $room6946 = $row6946['room'];
-        $status6946 = $row6946['status'];
-        $assignedName6946 = $row6946['assignedName'];
-        $assignedBy6946 = $row6946['assignedBy'];
-        $upload_img6946 = $row6946['upload_img'];
-        $description6946 = $row6946['description'];
-        //FOR ID 6945
-        $sql6945 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6945";
-        $stmt6945 = $conn->prepare($sql6945);
-        $stmt6945->execute();
-        $result6945 = $stmt6945->get_result();
-        $row6945 = $result6945->fetch_assoc();
-        $assetId6945 = $row6945['assetId'];
-        $category6945 = $row6945['category'];
-        $date6945 = $row6945['date'];
-        $building6945 = $row6945['building'];
-        $floor6945 = $row6945['floor'];
-        $room6945 = $row6945['room'];
-        $status6945 = $row6945['status'];
-        $assignedName6945 = $row6945['assignedName'];
-        $assignedBy6945 = $row6945['assignedBy'];
-        $upload_img6945 = $row6945['upload_img'];
-        $description6945 = $row6945['description'];
-        //FOR ID 6944
-        $sql6944 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6944";
-        $stmt6944 = $conn->prepare($sql6944);
-        $stmt6944->execute();
-        $result6944 = $stmt6944->get_result();
-        $row6944 = $result6944->fetch_assoc();
-        $assetId6944 = $row6944['assetId'];
-        $category6944 = $row6944['category'];
-        $date6944 = $row6944['date'];
-        $building6944 = $row6944['building'];
-        $floor6944 = $row6944['floor'];
-        $room6944 = $row6944['room'];
-        $status6944 = $row6944['status'];
-        $assignedName6944 = $row6944['assignedName'];
-        $assignedBy6944 = $row6944['assignedBy'];
-        $upload_img6944 = $row6944['upload_img'];
-        $description6944 = $row6944['description'];
-        //FOR ID 6943
-        $sql6943 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6943";
-        $stmt6943 = $conn->prepare($sql6943);
-        $stmt6943->execute();
-        $result6943 = $stmt6943->get_result();
-        $row6943 = $result6943->fetch_assoc();
-        $assetId6943 = $row6943['assetId'];
-        $category6943 = $row6943['category'];
-        $date6943 = $row6943['date'];
-        $building6943 = $row6943['building'];
-        $floor6943 = $row6943['floor'];
-        $room6943 = $row6943['room'];
-        $status6943 = $row6943['status'];
-        $assignedName6943 = $row6943['assignedName'];
-        $assignedBy6943 = $row6943['assignedBy'];
-        $upload_img6943 = $row6943['upload_img'];
-        $description6943 = $row6943['description'];
-        //FOR ID 6942
-        $sql6942 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6942";
-        $stmt6942 = $conn->prepare($sql6942);
-        $stmt6942->execute();
-        $result6942 = $stmt6942->get_result();
-        $row6942 = $result6942->fetch_assoc();
-        $assetId6942 = $row6942['assetId'];
-        $category6942 = $row6942['category'];
-        $date6942 = $row6942['date'];
-        $building6942 = $row6942['building'];
-        $floor6942 = $row6942['floor'];
-        $room6942 = $row6942['room'];
-        $status6942 = $row6942['status'];
-        $assignedName6942 = $row6942['assignedName'];
-        $assignedBy6942 = $row6942['assignedBy'];
-        $upload_img6942 = $row6942['upload_img'];
-        $description6942 = $row6942['description'];
-        //FOR ID 6941
-        $sql6941 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6941";
-        $stmt6941 = $conn->prepare($sql6941);
-        $stmt6941->execute();
-        $result6941 = $stmt6941->get_result();
-        $row6941 = $result6941->fetch_assoc();
-        $assetId6941 = $row6941['assetId'];
-        $category6941 = $row6941['category'];
-        $date6941 = $row6941['date'];
-        $building6941 = $row6941['building'];
-        $floor6941 = $row6941['floor'];
-        $room6941 = $row6941['room'];
-        $status6941 = $row6941['status'];
-        $assignedName6941 = $row6941['assignedName'];
-        $assignedBy6941 = $row6941['assignedBy'];
-        $upload_img6941 = $row6941['upload_img'];
-        $description6941 = $row6941['description'];
-        //FOR ID 6940
-        $sql6940 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6940";
-        $stmt6940 = $conn->prepare($sql6940);
-        $stmt6940->execute();
-        $result6940 = $stmt6940->get_result();
-        $row6940 = $result6940->fetch_assoc();
-        $assetId6940 = $row6940['assetId'];
-        $category6940 = $row6940['category'];
-        $date6940 = $row6940['date'];
-        $building6940 = $row6940['building'];
-        $floor6940 = $row6940['floor'];
-        $room6940 = $row6940['room'];
-        $status6940 = $row6940['status'];
-        $assignedName6940 = $row6940['assignedName'];
-        $assignedBy6940 = $row6940['assignedBy'];
-        $upload_img6940 = $row6940['upload_img'];
-        $description6940 = $row6940['description'];
-        //FOR ID 6939
-        $sql6939 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6939";
-        $stmt6939 = $conn->prepare($sql6939);
-        $stmt6939->execute();
-        $result6939 = $stmt6939->get_result();
-        $row6939 = $result6939->fetch_assoc();
-        $assetId6939 = $row6939['assetId'];
-        $category6939 = $row6939['category'];
-        $date6939 = $row6939['date'];
-        $building6939 = $row6939['building'];
-        $floor6939 = $row6939['floor'];
-        $room6939 = $row6939['room'];
-        $status6939 = $row6939['status'];
-        $assignedName6939 = $row6939['assignedName'];
-        $assignedBy6939 = $row6939['assignedBy'];
-        $upload_img6939 = $row6939['upload_img'];
-        $description6939 = $row6939['description'];
-        //FOR ID 6938
-        $sql6938 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6938";
-        $stmt6938 = $conn->prepare($sql6938);
-        $stmt6938->execute();
-        $result6938 = $stmt6938->get_result();
-        $row6938 = $result6938->fetch_assoc();
-        $assetId6938 = $row6938['assetId'];
-        $category6938 = $row6938['category'];
-        $date6938 = $row6938['date'];
-        $building6938 = $row6938['building'];
-        $floor6938 = $row6938['floor'];
-        $room6938 = $row6938['room'];
-        $status6938 = $row6938['status'];
-        $assignedName6938 = $row6938['assignedName'];
-        $assignedBy6938 = $row6938['assignedBy'];
-        $upload_img6938 = $row6938['upload_img'];
-        $description6938 = $row6938['description'];
-        //FOR ID 6937
-        $sql6937 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6937";
-        $stmt6937 = $conn->prepare($sql6937);
-        $stmt6937->execute();
-        $result6937 = $stmt6937->get_result();
-        $row6937 = $result6937->fetch_assoc();
-        $assetId6937 = $row6937['assetId'];
-        $category6937 = $row6937['category'];
-        $date6937 = $row6937['date'];
-        $building6937 = $row6937['building'];
-        $floor6937 = $row6937['floor'];
-        $room6937 = $row6937['room'];
-        $status6937 = $row6937['status'];
-        $assignedName6937 = $row6937['assignedName'];
-        $assignedBy6937 = $row6937['assignedBy'];
-        $upload_img6937 = $row6937['upload_img'];
-        $description6937 = $row6937['description'];
-        //FOR ID 6936
-        $sql6936 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6936";
-        $stmt6936 = $conn->prepare($sql6936);
-        $stmt6936->execute();
-        $result6936 = $stmt6936->get_result();
-        $row6936 = $result6936->fetch_assoc();
-        $assetId6936 = $row6936['assetId'];
-        $category6936 = $row6936['category'];
-        $date6936 = $row6936['date'];
-        $building6936 = $row6936['building'];
-        $floor6936 = $row6936['floor'];
-        $room6936 = $row6936['room'];
-        $status6936 = $row6936['status'];
-        $assignedName6936 = $row6936['assignedName'];
-        $assignedBy6936 = $row6936['assignedBy'];
-        $upload_img6936 = $row6936['upload_img'];
-        $description6936 = $row6936['description'];
-        //FOR ID 6935
-        $sql6935 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6935";
-        $stmt6935 = $conn->prepare($sql6935);
-        $stmt6935->execute();
-        $result6935 = $stmt6935->get_result();
-        $row6935 = $result6935->fetch_assoc();
-        $assetId6935 = $row6935['assetId'];
-        $category6935 = $row6935['category'];
-        $date6935 = $row6935['date'];
-        $building6935 = $row6935['building'];
-        $floor6935 = $row6935['floor'];
-        $room6935 = $row6935['room'];
-        $status6935 = $row6935['status'];
-        $assignedName6935 = $row6935['assignedName'];
-        $assignedBy6935 = $row6935['assignedBy'];
-        $upload_img6935 = $row6935['upload_img'];
-        $description6935 = $row6935['description'];
-        //FOR ID 6934
-        $sql6934 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6934";
-        $stmt6934 = $conn->prepare($sql6934);
-        $stmt6934->execute();
-        $result6934 = $stmt6934->get_result();
-        $row6934 = $result6934->fetch_assoc();
-        $assetId6934 = $row6934['assetId'];
-        $category6934 = $row6934['category'];
-        $date6934 = $row6934['date'];
-        $building6934 = $row6934['building'];
-        $floor6934 = $row6934['floor'];
-        $room6934 = $row6934['room'];
-        $status6934 = $row6934['status'];
-        $assignedName6934 = $row6934['assignedName'];
-        $assignedBy6934 = $row6934['assignedBy'];
-        $upload_img6934 = $row6934['upload_img'];
-        $description6934 = $row6934['description'];
-        //FOR ID 6933
-        $sql6933 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6933";
-        $stmt6933 = $conn->prepare($sql6933);
-        $stmt6933->execute();
-        $result6933 = $stmt6933->get_result();
-        $row6933 = $result6933->fetch_assoc();
-        $assetId6933 = $row6933['assetId'];
-        $category6933 = $row6933['category'];
-        $date6933 = $row6933['date'];
-        $building6933 = $row6933['building'];
-        $floor6933 = $row6933['floor'];
-        $room6933 = $row6933['room'];
-        $status6933 = $row6933['status'];
-        $assignedName6933 = $row6933['assignedName'];
-        $assignedBy6933 = $row6933['assignedBy'];
-        $upload_img6933 = $row6933['upload_img'];
-        $description6933 = $row6933['description'];
-        //FOR ID 6932
-        $sql6932 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6932";
-        $stmt6932 = $conn->prepare($sql6932);
-        $stmt6932->execute();
-        $result6932 = $stmt6932->get_result();
-        $row6932 = $result6932->fetch_assoc();
-        $assetId6932 = $row6932['assetId'];
-        $category6932 = $row6932['category'];
-        $date6932 = $row6932['date'];
-        $building6932 = $row6932['building'];
-        $floor6932 = $row6932['floor'];
-        $room6932 = $row6932['room'];
-        $status6932 = $row6932['status'];
-        $assignedName6932 = $row6932['assignedName'];
-        $assignedBy6932 = $row6932['assignedBy'];
-        $upload_img6932 = $row6932['upload_img'];
-        $description6932 = $row6932['description'];
-        //FOR ID 6931
-        $sql6931 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6931";
-        $stmt6931 = $conn->prepare($sql6931);
-        $stmt6931->execute();
-        $result6931 = $stmt6931->get_result();
-        $row6931 = $result6931->fetch_assoc();
-        $assetId6931 = $row6931['assetId'];
-        $category6931 = $row6931['category'];
-        $date6931 = $row6931['date'];
-        $building6931 = $row6931['building'];
-        $floor6931 = $row6931['floor'];
-        $room6931 = $row6931['room'];
-        $status6931 = $row6931['status'];
-        $assignedName6931 = $row6931['assignedName'];
-        $assignedBy6931 = $row6931['assignedBy'];
-        $upload_img6931 = $row6931['upload_img'];
-        $description6931 = $row6931['description'];
-        //FOR ID 6930
-        $sql6930 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6930";
-        $stmt6930 = $conn->prepare($sql6930);
-        $stmt6930->execute();
-        $result6930 = $stmt6930->get_result();
-        $row6930 = $result6930->fetch_assoc();
-        $assetId6930 = $row6930['assetId'];
-        $category6930 = $row6930['category'];
-        $date6930 = $row6930['date'];
-        $building6930 = $row6930['building'];
-        $floor6930 = $row6930['floor'];
-        $room6930 = $row6930['room'];
-        $status6930 = $row6930['status'];
-        $assignedName6930 = $row6930['assignedName'];
-        $assignedBy6930 = $row6930['assignedBy'];
-        $upload_img6930 = $row6930['upload_img'];
-        $description6930 = $row6930['description'];
-        //FOR ID 6929
-        $sql6929 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6929";
-        $stmt6929 = $conn->prepare($sql6929);
-        $stmt6929->execute();
-        $result6929 = $stmt6929->get_result();
-        $row6929 = $result6929->fetch_assoc();
-        $assetId6929 = $row6929['assetId'];
-        $category6929 = $row6929['category'];
-        $date6929 = $row6929['date'];
-        $building6929 = $row6929['building'];
-        $floor6929 = $row6929['floor'];
-        $room6929 = $row6929['room'];
-        $status6929 = $row6929['status'];
-        $assignedName6929 = $row6929['assignedName'];
-        $assignedBy6929 = $row6929['assignedBy'];
-        $upload_img6929 = $row6929['upload_img'];
-        $description6929 = $row6929['description'];
-        //FOR ID 6928
-        $sql6928 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6928";
-        $stmt6928 = $conn->prepare($sql6928);
-        $stmt6928->execute();
-        $result6928 = $stmt6928->get_result();
-        $row6928 = $result6928->fetch_assoc();
-        $assetId6928 = $row6928['assetId'];
-        $category6928 = $row6928['category'];
-        $date6928 = $row6928['date'];
-        $building6928 = $row6928['building'];
-        $floor6928 = $row6928['floor'];
-        $room6928 = $row6928['room'];
-        $status6928 = $row6928['status'];
-        $assignedName6928 = $row6928['assignedName'];
-        $assignedBy6928 = $row6928['assignedBy'];
-        $upload_img6928 = $row6928['upload_img'];
-        $description6928 = $row6928['description'];
-        //FOR ID 6927
-        $sql6927 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6927";
-        $stmt6927 = $conn->prepare($sql6927);
-        $stmt6927->execute();
-        $result6927 = $stmt6927->get_result();
-        $row6927 = $result6927->fetch_assoc();
-        $assetId6927 = $row6927['assetId'];
-        $category6927 = $row6927['category'];
-        $date6927 = $row6927['date'];
-        $building6927 = $row6927['building'];
-        $floor6927 = $row6927['floor'];
-        $room6927 = $row6927['room'];
-        $status6927 = $row6927['status'];
-        $assignedName6927 = $row6927['assignedName'];
-        $assignedBy6927 = $row6927['assignedBy'];
-        $upload_img6927 = $row6927['upload_img'];
-        $description6927 = $row6927['description'];
-        //FOR ID 6926
-        $sql6926 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6926";
-        $stmt6926 = $conn->prepare($sql6926);
-        $stmt6926->execute();
-        $result6926 = $stmt6926->get_result();
-        $row6926 = $result6926->fetch_assoc();
-        $assetId6926 = $row6926['assetId'];
-        $category6926 = $row6926['category'];
-        $date6926 = $row6926['date'];
-        $building6926 = $row6926['building'];
-        $floor6926 = $row6926['floor'];
-        $room6926 = $row6926['room'];
-        $status6926 = $row6926['status'];
-        $assignedName6926 = $row6926['assignedName'];
-        $assignedBy6926 = $row6926['assignedBy'];
-        $upload_img6926 = $row6926['upload_img'];
-        $description6926 = $row6926['description'];
-        //FOR ID 6925
-        $sql6925 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6925";
-        $stmt6925 = $conn->prepare($sql6925);
-        $stmt6925->execute();
-        $result6925 = $stmt6925->get_result();
-        $row6925 = $result6925->fetch_assoc();
-        $assetId6925 = $row6925['assetId'];
-        $category6925 = $row6925['category'];
-        $date6925 = $row6925['date'];
-        $building6925 = $row6925['building'];
-        $floor6925 = $row6925['floor'];
-        $room6925 = $row6925['room'];
-        $status6925 = $row6925['status'];
-        $assignedName6925 = $row6925['assignedName'];
-        $assignedBy6925 = $row6925['assignedBy'];
-        $upload_img6925 = $row6925['upload_img'];
-        $description6925 = $row6925['description'];
-        //FOR ID 6924
-        $sql6924 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6924";
-        $stmt6924 = $conn->prepare($sql6924);
-        $stmt6924->execute();
-        $result6924 = $stmt6924->get_result();
-        $row6924 = $result6924->fetch_assoc();
-        $assetId6924 = $row6924['assetId'];
-        $category6924 = $row6924['category'];
-        $date6924 = $row6924['date'];
-        $building6924 = $row6924['building'];
-        $floor6924 = $row6924['floor'];
-        $room6924 = $row6924['room'];
-        $status6924 = $row6924['status'];
-        $assignedName6924 = $row6924['assignedName'];
-        $assignedBy6924 = $row6924['assignedBy'];
-        $upload_img6924 = $row6924['upload_img'];
-        $description6924 = $row6924['description'];
-        //FOR ID 6923
-        $sql6923 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6923";
-        $stmt6923 = $conn->prepare($sql6923);
-        $stmt6923->execute();
-        $result6923 = $stmt6923->get_result();
-        $row6923 = $result6923->fetch_assoc();
-        $assetId6923 = $row6923['assetId'];
-        $category6923 = $row6923['category'];
-        $date6923 = $row6923['date'];
-        $building6923 = $row6923['building'];
-        $floor6923 = $row6923['floor'];
-        $room6923 = $row6923['room'];
-        $status6923 = $row6923['status'];
-        $assignedName6923 = $row6923['assignedName'];
-        $assignedBy6923 = $row6923['assignedBy'];
-        $upload_img6923 = $row6923['upload_img'];
-        $description6923 = $row6923['description'];
-        //FOR ID 6922
-        $sql6922 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6922";
-        $stmt6922 = $conn->prepare($sql6922);
-        $stmt6922->execute();
-        $result6922 = $stmt6922->get_result();
-        $row6922 = $result6922->fetch_assoc();
-        $assetId6922 = $row6922['assetId'];
-        $category6922 = $row6922['category'];
-        $date6922 = $row6922['date'];
-        $building6922 = $row6922['building'];
-        $floor6922 = $row6922['floor'];
-        $room6922 = $row6922['room'];
-        $status6922 = $row6922['status'];
-        $assignedName6922 = $row6922['assignedName'];
-        $assignedBy6922 = $row6922['assignedBy'];
-        $upload_img6922 = $row6922['upload_img'];
-        $description6922 = $row6922['description'];
-        //FOR ID 6921
-        $sql6921 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6921";
-        $stmt6921 = $conn->prepare($sql6921);
-        $stmt6921->execute();
-        $result6921 = $stmt6921->get_result();
-        $row6921 = $result6921->fetch_assoc();
-        $assetId6921 = $row6921['assetId'];
-        $category6921 = $row6921['category'];
-        $date6921 = $row6921['date'];
-        $building6921 = $row6921['building'];
-        $floor6921 = $row6921['floor'];
-        $room6921 = $row6921['room'];
-        $status6921 = $row6921['status'];
-        $assignedName6921 = $row6921['assignedName'];
-        $assignedBy6921 = $row6921['assignedBy'];
-        $upload_img6921 = $row6921['upload_img'];
-        $description6921 = $row6921['description'];
-        //FOR ID 6920
-        $sql6920 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6920";
-        $stmt6920 = $conn->prepare($sql6920);
-        $stmt6920->execute();
-        $result6920 = $stmt6920->get_result();
-        $row6920 = $result6920->fetch_assoc();
-        $assetId6920 = $row6920['assetId'];
-        $category6920 = $row6920['category'];
-        $date6920 = $row6920['date'];
-        $building6920 = $row6920['building'];
-        $floor6920 = $row6920['floor'];
-        $room6920 = $row6920['room'];
-        $status6920 = $row6920['status'];
-        $assignedName6920 = $row6920['assignedName'];
-        $assignedBy6920 = $row6920['assignedBy'];
-        $upload_img6920 = $row6920['upload_img'];
-        $description6920 = $row6920['description'];
-        //FOR ID 6919
-        $sql6919 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6919";
-        $stmt6919 = $conn->prepare($sql6919);
-        $stmt6919->execute();
-        $result6919 = $stmt6919->get_result();
-        $row6919 = $result6919->fetch_assoc();
-        $assetId6919 = $row6919['assetId'];
-        $category6919 = $row6919['category'];
-        $date6919 = $row6919['date'];
-        $building6919 = $row6919['building'];
-        $floor6919 = $row6919['floor'];
-        $room6919 = $row6919['room'];
-        $status6919 = $row6919['status'];
-        $assignedName6919 = $row6919['assignedName'];
-        $assignedBy6919 = $row6919['assignedBy'];
-        $upload_img6919 = $row6919['upload_img'];
-        $description6919 = $row6919['description'];
-        //FOR ID 6918
-        $sql6918 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6918";
-        $stmt6918 = $conn->prepare($sql6918);
-        $stmt6918->execute();
-        $result6918 = $stmt6918->get_result();
-        $row6918 = $result6918->fetch_assoc();
-        $assetId6918 = $row6918['assetId'];
-        $category6918 = $row6918['category'];
-        $date6918 = $row6918['date'];
-        $building6918 = $row6918['building'];
-        $floor6918 = $row6918['floor'];
-        $room6918 = $row6918['room'];
-        $status6918 = $row6918['status'];
-        $assignedName6918 = $row6918['assignedName'];
-        $assignedBy6918 = $row6918['assignedBy'];
-        $upload_img6918 = $row6918['upload_img'];
-        $description6918 = $row6918['description'];
-        //FOR ID 6917
-        $sql6917 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6917";
-        $stmt6917 = $conn->prepare($sql6917);
-        $stmt6917->execute();
-        $result6917 = $stmt6917->get_result();
-        $row6917 = $result6917->fetch_assoc();
-        $assetId6917 = $row6917['assetId'];
-        $category6917 = $row6917['category'];
-        $date6917 = $row6917['date'];
-        $building6917 = $row6917['building'];
-        $floor6917 = $row6917['floor'];
-        $room6917 = $row6917['room'];
-        $status6917 = $row6917['status'];
-        $assignedName6917 = $row6917['assignedName'];
-        $assignedBy6917 = $row6917['assignedBy'];
-        $upload_img6917 = $row6917['upload_img'];
-        $description6917 = $row6917['description'];
-        //FOR ID 6916
-        $sql6916 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6916";
-        $stmt6916 = $conn->prepare($sql6916);
-        $stmt6916->execute();
-        $result6916 = $stmt6916->get_result();
-        $row6916 = $result6916->fetch_assoc();
-        $assetId6916 = $row6916['assetId'];
-        $category6916 = $row6916['category'];
-        $date6916 = $row6916['date'];
-        $building6916 = $row6916['building'];
-        $floor6916 = $row6916['floor'];
-        $room6916 = $row6916['room'];
-        $status6916 = $row6916['status'];
-        $assignedName6916 = $row6916['assignedName'];
-        $assignedBy6916 = $row6916['assignedBy'];
-        $upload_img6916 = $row6916['upload_img'];
-        $description6916 = $row6916['description'];
-        //FOR ID 6915
-        $sql6915 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6915";
-        $stmt6915 = $conn->prepare($sql6915);
-        $stmt6915->execute();
-        $result6915 = $stmt6915->get_result();
-        $row6915 = $result6915->fetch_assoc();
-        $assetId6915 = $row6915['assetId'];
-        $category6915 = $row6915['category'];
-        $date6915 = $row6915['date'];
-        $building6915 = $row6915['building'];
-        $floor6915 = $row6915['floor'];
-        $room6915 = $row6915['room'];
-        $status6915 = $row6915['status'];
-        $assignedName6915 = $row6915['assignedName'];
-        $assignedBy6915 = $row6915['assignedBy'];
-        $upload_img6915 = $row6915['upload_img'];
-        $description6915 = $row6915['description'];
-        //FOR ID 6914
-        $sql6914 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6914";
-        $stmt6914 = $conn->prepare($sql6914);
-        $stmt6914->execute();
-        $result6914 = $stmt6914->get_result();
-        $row6914 = $result6914->fetch_assoc();
-        $assetId6914 = $row6914['assetId'];
-        $category6914 = $row6914['category'];
-        $date6914 = $row6914['date'];
-        $building6914 = $row6914['building'];
-        $floor6914 = $row6914['floor'];
-        $room6914 = $row6914['room'];
-        $status6914 = $row6914['status'];
-        $assignedName6914 = $row6914['assignedName'];
-        $assignedBy6914 = $row6914['assignedBy'];
-        $upload_img6914 = $row6914['upload_img'];
-        $description6914 = $row6914['description'];
-        //FOR ID 6913
-        $sql6913 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6913";
-        $stmt6913 = $conn->prepare($sql6913);
-        $stmt6913->execute();
-        $result6913 = $stmt6913->get_result();
-        $row6913 = $result6913->fetch_assoc();
-        $assetId6913 = $row6913['assetId'];
-        $category6913 = $row6913['category'];
-        $date6913 = $row6913['date'];
-        $building6913 = $row6913['building'];
-        $floor6913 = $row6913['floor'];
-        $room6913 = $row6913['room'];
-        $status6913 = $row6913['status'];
-        $assignedName6913 = $row6913['assignedName'];
-        $assignedBy6913 = $row6913['assignedBy'];
-        $upload_img6913 = $row6913['upload_img'];
-        $description6913 = $row6913['description'];
-        //FOR ID 6912
-        $sql6912 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6912";
-        $stmt6912 = $conn->prepare($sql6912);
-        $stmt6912->execute();
-        $result6912 = $stmt6912->get_result();
-        $row6912 = $result6912->fetch_assoc();
-        $assetId6912 = $row6912['assetId'];
-        $category6912 = $row6912['category'];
-        $date6912 = $row6912['date'];
-        $building6912 = $row6912['building'];
-        $floor6912 = $row6912['floor'];
-        $room6912 = $row6912['room'];
-        $status6912 = $row6912['status'];
-        $assignedName6912 = $row6912['assignedName'];
-        $assignedBy6912 = $row6912['assignedBy'];
-        $upload_img6912 = $row6912['upload_img'];
-        $description6912 = $row6912['description'];
-        //FOR ID 6911
-        $sql6911 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6911";
-        $stmt6911 = $conn->prepare($sql6911);
-        $stmt6911->execute();
-        $result6911 = $stmt6911->get_result();
-        $row6911 = $result6911->fetch_assoc();
-        $assetId6911 = $row6911['assetId'];
-        $category6911 = $row6911['category'];
-        $date6911 = $row6911['date'];
-        $building6911 = $row6911['building'];
-        $floor6911 = $row6911['floor'];
-        $room6911 = $row6911['room'];
-        $status6911 = $row6911['status'];
-        $assignedName6911 = $row6911['assignedName'];
-        $assignedBy6911 = $row6911['assignedBy'];
-        $upload_img6911 = $row6911['upload_img'];
-        $description6911 = $row6911['description'];
-        //FOR ID 6910
-        $sql6910 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6910";
-        $stmt6910 = $conn->prepare($sql6910);
-        $stmt6910->execute();
-        $result6910 = $stmt6910->get_result();
-        $row6910 = $result6910->fetch_assoc();
-        $assetId6910 = $row6910['assetId'];
-        $category6910 = $row6910['category'];
-        $date6910 = $row6910['date'];
-        $building6910 = $row6910['building'];
-        $floor6910 = $row6910['floor'];
-        $room6910 = $row6910['room'];
-        $status6910 = $row6910['status'];
-        $assignedName6910 = $row6910['assignedName'];
-        $assignedBy6910 = $row6910['assignedBy'];
-        $upload_img6910 = $row6910['upload_img'];
-        $description6910 = $row6910['description'];
-        //FOR ID 6909
-        $sql6909 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6909";
-        $stmt6909 = $conn->prepare($sql6909);
-        $stmt6909->execute();
-        $result6909 = $stmt6909->get_result();
-        $row6909 = $result6909->fetch_assoc();
-        $assetId6909 = $row6909['assetId'];
-        $category6909 = $row6909['category'];
-        $date6909 = $row6909['date'];
-        $building6909 = $row6909['building'];
-        $floor6909 = $row6909['floor'];
-        $room6909 = $row6909['room'];
-        $status6909 = $row6909['status'];
-        $assignedName6909 = $row6909['assignedName'];
-        $assignedBy6909 = $row6909['assignedBy'];
-        $upload_img6909 = $row6909['upload_img'];
-        $description6909 = $row6909['description'];
-        //FOR ID 6908
-        $sql6908 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6908";
-        $stmt6908 = $conn->prepare($sql6908);
-        $stmt6908->execute();
-        $result6908 = $stmt6908->get_result();
-        $row6908 = $result6908->fetch_assoc();
-        $assetId6908 = $row6908['assetId'];
-        $category6908 = $row6908['category'];
-        $date6908 = $row6908['date'];
-        $building6908 = $row6908['building'];
-        $floor6908 = $row6908['floor'];
-        $room6908 = $row6908['room'];
-        $status6908 = $row6908['status'];
-        $assignedName6908 = $row6908['assignedName'];
-        $assignedBy6908 = $row6908['assignedBy'];
-        $upload_img6908 = $row6908['upload_img'];
-        $description6908 = $row6908['description'];
-        //FOR ID 6907
-        $sql6907 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6907";
-        $stmt6907 = $conn->prepare($sql6907);
-        $stmt6907->execute();
-        $result6907 = $stmt6907->get_result();
-        $row6907 = $result6907->fetch_assoc();
-        $assetId6907 = $row6907['assetId'];
-        $category6907 = $row6907['category'];
-        $date6907 = $row6907['date'];
-        $building6907 = $row6907['building'];
-        $floor6907 = $row6907['floor'];
-        $room6907 = $row6907['room'];
-        $status6907 = $row6907['status'];
-        $assignedName6907 = $row6907['assignedName'];
-        $assignedBy6907 = $row6907['assignedBy'];
-        $upload_img6907 = $row6907['upload_img'];
-        $description6907 = $row6907['description'];
-        //FOR ID 6906
-        $sql6906 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6906";
-        $stmt6906 = $conn->prepare($sql6906);
-        $stmt6906->execute();
-        $result6906 = $stmt6906->get_result();
-        $row6906 = $result6906->fetch_assoc();
-        $assetId6906 = $row6906['assetId'];
-        $category6906 = $row6906['category'];
-        $date6906 = $row6906['date'];
-        $building6906 = $row6906['building'];
-        $floor6906 = $row6906['floor'];
-        $room6906 = $row6906['room'];
-        $status6906 = $row6906['status'];
-        $assignedName6906 = $row6906['assignedName'];
-        $assignedBy6906 = $row6906['assignedBy'];
-        $upload_img6906 = $row6906['upload_img'];
-        $description6906 = $row6906['description'];
-        //FOR ID 6905
-        $sql6905 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6905";
-        $stmt6905 = $conn->prepare($sql6905);
-        $stmt6905->execute();
-        $result6905 = $stmt6905->get_result();
-        $row6905 = $result6905->fetch_assoc();
-        $assetId6905 = $row6905['assetId'];
-        $category6905 = $row6905['category'];
-        $date6905 = $row6905['date'];
-        $building6905 = $row6905['building'];
-        $floor6905 = $row6905['floor'];
-        $room6905 = $row6905['room'];
-        $status6905 = $row6905['status'];
-        $assignedName6905 = $row6905['assignedName'];
-        $assignedBy6905 = $row6905['assignedBy'];
-        $upload_img6905 = $row6905['upload_img'];
-        $description6905 = $row6905['description'];
-        //FOR ID 6904
-        $sql6904 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6904";
-        $stmt6904 = $conn->prepare($sql6904);
-        $stmt6904->execute();
-        $result6904 = $stmt6904->get_result();
-        $row6904 = $result6904->fetch_assoc();
-        $assetId6904 = $row6904['assetId'];
-        $category6904 = $row6904['category'];
-        $date6904 = $row6904['date'];
-        $building6904 = $row6904['building'];
-        $floor6904 = $row6904['floor'];
-        $room6904 = $row6904['room'];
-        $status6904 = $row6904['status'];
-        $assignedName6904 = $row6904['assignedName'];
-        $assignedBy6904 = $row6904['assignedBy'];
-        $upload_img6904 = $row6904['upload_img'];
-        $description6904 = $row6904['description'];
-        //FOR ID 6903
-        $sql6903 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6903";
-        $stmt6903 = $conn->prepare($sql6903);
-        $stmt6903->execute();
-        $result6903 = $stmt6903->get_result();
-        $row6903 = $result6903->fetch_assoc();
-        $assetId6903 = $row6903['assetId'];
-        $category6903 = $row6903['category'];
-        $date6903 = $row6903['date'];
-        $building6903 = $row6903['building'];
-        $floor6903 = $row6903['floor'];
-        $room6903 = $row6903['room'];
-        $status6903 = $row6903['status'];
-        $assignedName6903 = $row6903['assignedName'];
-        $assignedBy6903 = $row6903['assignedBy'];
-        $upload_img6903 = $row6903['upload_img'];
-        $description6903 = $row6903['description'];
-        //FOR ID 6902
-        $sql6902 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6902";
-        $stmt6902 = $conn->prepare($sql6902);
-        $stmt6902->execute();
-        $result6902 = $stmt6902->get_result();
-        $row6902 = $result6902->fetch_assoc();
-        $assetId6902 = $row6902['assetId'];
-        $category6902 = $row6902['category'];
-        $date6902 = $row6902['date'];
-        $building6902 = $row6902['building'];
-        $floor6902 = $row6902['floor'];
-        $room6902 = $row6902['room'];
-        $status6902 = $row6902['status'];
-        $assignedName6902 = $row6902['assignedName'];
-        $assignedBy6902 = $row6902['assignedBy'];
-        $upload_img6902 = $row6902['upload_img'];
-        $description6902 = $row6902['description'];
-        //FOR ID 6901
-        $sql6901 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6901";
-        $stmt6901 = $conn->prepare($sql6901);
-        $stmt6901->execute();
-        $result6901 = $stmt6901->get_result();
-        $row6901 = $result6901->fetch_assoc();
-        $assetId6901 = $row6901['assetId'];
-        $category6901 = $row6901['category'];
-        $date6901 = $row6901['date'];
-        $building6901 = $row6901['building'];
-        $floor6901 = $row6901['floor'];
-        $room6901 = $row6901['room'];
-        $status6901 = $row6901['status'];
-        $assignedName6901 = $row6901['assignedName'];
-        $assignedBy6901 = $row6901['assignedBy'];
-        $upload_img6901 = $row6901['upload_img'];
-        $description6901 = $row6901['description'];
-        //FOR ID 6900
-        $sql6900 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6900";
-        $stmt6900 = $conn->prepare($sql6900);
-        $stmt6900->execute();
-        $result6900 = $stmt6900->get_result();
-        $row6900 = $result6900->fetch_assoc();
-        $assetId6900 = $row6900['assetId'];
-        $category6900 = $row6900['category'];
-        $date6900 = $row6900['date'];
-        $building6900 = $row6900['building'];
-        $floor6900 = $row6900['floor'];
-        $room6900 = $row6900['room'];
-        $status6900 = $row6900['status'];
-        $assignedName6900 = $row6900['assignedName'];
-        $assignedBy6900 = $row6900['assignedBy'];
-        $upload_img6900 = $row6900['upload_img'];
-        $description6900 = $row6900['description'];
-        //FOR ID 6899
-        $sql6899 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6899";
-        $stmt6899 = $conn->prepare($sql6899);
-        $stmt6899->execute();
-        $result6899 = $stmt6899->get_result();
-        $row6899 = $result6899->fetch_assoc();
-        $assetId6899 = $row6899['assetId'];
-        $category6899 = $row6899['category'];
-        $date6899 = $row6899['date'];
-        $building6899 = $row6899['building'];
-        $floor6899 = $row6899['floor'];
-        $room6899 = $row6899['room'];
-        $status6899 = $row6899['status'];
-        $assignedName6899 = $row6899['assignedName'];
-        $assignedBy6899 = $row6899['assignedBy'];
-        $upload_img6899 = $row6899['upload_img'];
-        $description6899 = $row6899['description'];
-
-        //FOR ID 6898
-        $sql6898 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6898";
-        $stmt6898 = $conn->prepare($sql6898);
-        $stmt6898->execute();
-        $result6898 = $stmt6898->get_result();
-        $row6898 = $result6898->fetch_assoc();
-        $assetId6898 = $row6898['assetId'];
-        $category6898 = $row6898['category'];
-        $date6898 = $row6898['date'];
-        $building6898 = $row6898['building'];
-        $floor6898 = $row6898['floor'];
-        $room6898 = $row6898['room'];
-        $status6898 = $row6898['status'];
-        $assignedName6898 = $row6898['assignedName'];
-        $assignedBy6898 = $row6898['assignedBy'];
-        $upload_img6898 = $row6898['upload_img'];
-        $description6898 = $row6898['description'];
-
-        //FOR ID 6897
-        $sql6897 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6897";
-        $stmt6897 = $conn->prepare($sql6897);
-        $stmt6897->execute();
-        $result6897 = $stmt6897->get_result();
-        $row6897 = $result6897->fetch_assoc();
-        $assetId6897 = $row6897['assetId'];
-        $category6897 = $row6897['category'];
-        $date6897 = $row6897['date'];
-        $building6897 = $row6897['building'];
-        $floor6897 = $row6897['floor'];
-        $room6897 = $row6897['room'];
-        $status6897 = $row6897['status'];
-        $assignedName6897 = $row6897['assignedName'];
-        $assignedBy6897 = $row6897['assignedBy'];
-        $upload_img6897 = $row6897['upload_img'];
-        $description6897 = $row6897['description'];
-
-        //FOR ID 6896
-        $sql6896 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6896";
-        $stmt6896 = $conn->prepare($sql6896);
-        $stmt6896->execute();
-        $result6896 = $stmt6896->get_result();
-        $row6896 = $result6896->fetch_assoc();
-        $assetId6896 = $row6896['assetId'];
-        $category6896 = $row6896['category'];
-        $date6896 = $row6896['date'];
-        $building6896 = $row6896['building'];
-        $floor6896 = $row6896['floor'];
-        $room6896 = $row6896['room'];
-        $status6896 = $row6896['status'];
-        $assignedName6896 = $row6896['assignedName'];
-        $assignedBy6896 = $row6896['assignedBy'];
-        $upload_img6896 = $row6896['upload_img'];
-        $description6896 = $row6896['description'];
-
-        //FOR ID 6895
-        $sql6895 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6895";
-        $stmt6895 = $conn->prepare($sql6895);
-        $stmt6895->execute();
-        $result6895 = $stmt6895->get_result();
-        $row6895 = $result6895->fetch_assoc();
-        $assetId6895 = $row6895['assetId'];
-        $category6895 = $row6895['category'];
-        $date6895 = $row6895['date'];
-        $building6895 = $row6895['building'];
-        $floor6895 = $row6895['floor'];
-        $room6895 = $row6895['room'];
-        $status6895 = $row6895['status'];
-        $assignedName6895 = $row6895['assignedName'];
-        $assignedBy6895 = $row6895['assignedBy'];
-        $upload_img6895 = $row6895['upload_img'];
-        $description6895 = $row6895['description'];
-
-        //FOR ID 6894
-        $sql6894 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6894";
-        $stmt6894 = $conn->prepare($sql6894);
-        $stmt6894->execute();
-        $result6894 = $stmt6894->get_result();
-        $row6894 = $result6894->fetch_assoc();
-        $assetId6894 = $row6894['assetId'];
-        $category6894 = $row6894['category'];
-        $date6894 = $row6894['date'];
-        $building6894 = $row6894['building'];
-        $floor6894 = $row6894['floor'];
-        $room6894 = $row6894['room'];
-        $status6894 = $row6894['status'];
-        $assignedName6894 = $row6894['assignedName'];
-        $assignedBy6894 = $row6894['assignedBy'];
-        $upload_img6894 = $row6894['upload_img'];
-        $description6894 = $row6894['description'];
-
-        //FOR ID 6893
-        $sql6893 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6893";
-        $stmt6893 = $conn->prepare($sql6893);
-        $stmt6893->execute();
-        $result6893 = $stmt6893->get_result();
-        $row6893 = $result6893->fetch_assoc();
-        $assetId6893 = $row6893['assetId'];
-        $category6893 = $row6893['category'];
-        $date6893 = $row6893['date'];
-        $building6893 = $row6893['building'];
-        $floor6893 = $row6893['floor'];
-        $room6893 = $row6893['room'];
-        $status6893 = $row6893['status'];
-        $assignedName6893 = $row6893['assignedName'];
-        $assignedBy6893 = $row6893['assignedBy'];
-        $upload_img6893 = $row6893['upload_img'];
-        $description6893 = $row6893['description'];
-
-        //FOR ID 6892
-        $sql6892 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6892";
-        $stmt6892 = $conn->prepare($sql6892);
-        $stmt6892->execute();
-        $result6892 = $stmt6892->get_result();
-        $row6892 = $result6892->fetch_assoc();
-        $assetId6892 = $row6892['assetId'];
-        $category6892 = $row6892['category'];
-        $date6892 = $row6892['date'];
-        $building6892 = $row6892['building'];
-        $floor6892 = $row6892['floor'];
-        $room6892 = $row6892['room'];
-        $status6892 = $row6892['status'];
-        $assignedName6892 = $row6892['assignedName'];
-        $assignedBy6892 = $row6892['assignedBy'];
-        $upload_img6892 = $row6892['upload_img'];
-        $description6892 = $row6892['description'];
-
-        //FOR ID 6891
-        $sql6891 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6891";
-        $stmt6891 = $conn->prepare($sql6891);
-        $stmt6891->execute();
-        $result6891 = $stmt6891->get_result();
-        $row6891 = $result6891->fetch_assoc();
-        $assetId6891 = $row6891['assetId'];
-        $category6891 = $row6891['category'];
-        $date6891 = $row6891['date'];
-        $building6891 = $row6891['building'];
-        $floor6891 = $row6891['floor'];
-        $room6891 = $row6891['room'];
-        $status6891 = $row6891['status'];
-        $assignedName6891 = $row6891['assignedName'];
-        $assignedBy6891 = $row6891['assignedBy'];
-        $upload_img6891 = $row6891['upload_img'];
-        $description6891 = $row6891['description'];
-
-        //FOR ID 6890
-        $sql6890 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6890";
-        $stmt6890 = $conn->prepare($sql6890);
-        $stmt6890->execute();
-        $result6890 = $stmt6890->get_result();
-        $row6890 = $result6890->fetch_assoc();
-        $assetId6890 = $row6890['assetId'];
-        $category6890 = $row6890['category'];
-        $date6890 = $row6890['date'];
-        $building6890 = $row6890['building'];
-        $floor6890 = $row6890['floor'];
-        $room6890 = $row6890['room'];
-        $status6890 = $row6890['status'];
-        $assignedName6890 = $row6890['assignedName'];
-        $assignedBy6890 = $row6890['assignedBy'];
-        $upload_img6890 = $row6890['upload_img'];
-        $description6890 = $row6890['description'];
-
-        //FOR ID 6889
-        $sql6889 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6889";
-        $stmt6889 = $conn->prepare($sql6889);
-        $stmt6889->execute();
-        $result6889 = $stmt6889->get_result();
-        $row6889 = $result6889->fetch_assoc();
-        $assetId6889 = $row6889['assetId'];
-        $category6889 = $row6889['category'];
-        $date6889 = $row6889['date'];
-        $building6889 = $row6889['building'];
-        $floor6889 = $row6889['floor'];
-        $room6889 = $row6889['room'];
-        $status6889 = $row6889['status'];
-        $assignedName6889 = $row6889['assignedName'];
-        $assignedBy6889 = $row6889['assignedBy'];
-        $upload_img6889 = $row6889['upload_img'];
-        $description6889 = $row6889['description'];
-
-        //FOR ID 6888
-        $sql6888 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6888";
-        $stmt6888 = $conn->prepare($sql6888);
-        $stmt6888->execute();
-        $result6888 = $stmt6888->get_result();
-        $row6888 = $result6888->fetch_assoc();
-        $assetId6888 = $row6888['assetId'];
-        $category6888 = $row6888['category'];
-        $date6888 = $row6888['date'];
-        $building6888 = $row6888['building'];
-        $floor6888 = $row6888['floor'];
-        $room6888 = $row6888['room'];
-        $status6888 = $row6888['status'];
-        $assignedName6888 = $row6888['assignedName'];
-        $assignedBy6888 = $row6888['assignedBy'];
-        $upload_img6888 = $row6888['upload_img'];
-        $description6888 = $row6888['description'];
-
-        //FOR ID 6887
-        $sql6887 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6887";
-        $stmt6887 = $conn->prepare($sql6887);
-        $stmt6887->execute();
-        $result6887 = $stmt6887->get_result();
-        $row6887 = $result6887->fetch_assoc();
-        $assetId6887 = $row6887['assetId'];
-        $category6887 = $row6887['category'];
-        $date6887 = $row6887['date'];
-        $building6887 = $row6887['building'];
-        $floor6887 = $row6887['floor'];
-        $room6887 = $row6887['room'];
-        $status6887 = $row6887['status'];
-        $assignedName6887 = $row6887['assignedName'];
-        $assignedBy6887 = $row6887['assignedBy'];
-        $upload_img6887 = $row6887['upload_img'];
-        $description6887 = $row6887['description'];
-        //FOR ID 6886
-        $sql6886 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6886";
-        $stmt6886 = $conn->prepare($sql6886);
-        $stmt6886->execute();
-        $result6886 = $stmt6886->get_result();
-        $row6886 = $result6886->fetch_assoc();
-        $assetId6886 = $row6886['assetId'];
-        $category6886 = $row6886['category'];
-        $date6886 = $row6886['date'];
-        $building6886 = $row6886['building'];
-        $floor6886 = $row6886['floor'];
-        $room6886 = $row6886['room'];
-        $status6886 = $row6886['status'];
-        $assignedName6886 = $row6886['assignedName'];
-        $assignedBy6886 = $row6886['assignedBy'];
-        $upload_img6886 = $row6886['upload_img'];
-        $description6886 = $row6886['description'];
-        //FOR ID 6885
-        $sql6885 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6885";
-        $stmt6885 = $conn->prepare($sql6885);
-        $stmt6885->execute();
-        $result6885 = $stmt6885->get_result();
-        $row6885 = $result6885->fetch_assoc();
-        $assetId6885 = $row6885['assetId'];
-        $category6885 = $row6885['category'];
-        $date6885 = $row6885['date'];
-        $building6885 = $row6885['building'];
-        $floor6885 = $row6885['floor'];
-        $room6885 = $row6885['room'];
-        $status6885 = $row6885['status'];
-        $assignedName6885 = $row6885['assignedName'];
-        $assignedBy6885 = $row6885['assignedBy'];
-        $upload_img6885 = $row6885['upload_img'];
-        $description6885 = $row6885['description'];
-        //FOR ID 6884
-        $sql6884 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6884";
-        $stmt6884 = $conn->prepare($sql6884);
-        $stmt6884->execute();
-        $result6884 = $stmt6884->get_result();
-        $row6884 = $result6884->fetch_assoc();
-        $assetId6884 = $row6884['assetId'];
-        $category6884 = $row6884['category'];
-        $date6884 = $row6884['date'];
-        $building6884 = $row6884['building'];
-        $floor6884 = $row6884['floor'];
-        $room6884 = $row6884['room'];
-        $status6884 = $row6884['status'];
-        $assignedName6884 = $row6884['assignedName'];
-        $assignedBy6884 = $row6884['assignedBy'];
-        $upload_img6884 = $row6884['upload_img'];
-        $description6884 = $row6884['description'];
-
-        //FOR ID 6883
-        $sql6883 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6883";
-        $stmt6883 = $conn->prepare($sql6883);
-        $stmt6883->execute();
-        $result6883 = $stmt6883->get_result();
-        $row6883 = $result6883->fetch_assoc();
-        $assetId6883 = $row6883['assetId'];
-        $category6883 = $row6883['category'];
-        $date6883 = $row6883['date'];
-        $building6883 = $row6883['building'];
-        $floor6883 = $row6883['floor'];
-        $room6883 = $row6883['room'];
-        $status6883 = $row6883['status'];
-        $assignedName6883 = $row6883['assignedName'];
-        $assignedBy6883 = $row6883['assignedBy'];
-        $upload_img6883 = $row6883['upload_img'];
-        $description6883 = $row6883['description'];
-
-        //FOR ID 6882
-        $sql6882 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6882";
-        $stmt6882 = $conn->prepare($sql6882);
-        $stmt6882->execute();
-        $result6882 = $stmt6882->get_result();
-        $row6882 = $result6882->fetch_assoc();
-        $assetId6882 = $row6882['assetId'];
-        $category6882 = $row6882['category'];
-        $date6882 = $row6882['date'];
-        $building6882 = $row6882['building'];
-        $floor6882 = $row6882['floor'];
-        $room6882 = $row6882['room'];
-        $status6882 = $row6882['status'];
-        $assignedName6882 = $row6882['assignedName'];
-        $assignedBy6882 = $row6882['assignedBy'];
-        $upload_img6882 = $row6882['upload_img'];
-        $description6882 = $row6882['description'];
-
-        //FOR ID 6881
-        $sql6881 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6881";
-        $stmt6881 = $conn->prepare($sql6881);
-        $stmt6881->execute();
-        $result6881 = $stmt6881->get_result();
-        $row6881 = $result6881->fetch_assoc();
-        $assetId6881 = $row6881['assetId'];
-        $category6881 = $row6881['category'];
-        $date6881 = $row6881['date'];
-        $building6881 = $row6881['building'];
-        $floor6881 = $row6881['floor'];
-        $room6881 = $row6881['room'];
-        $status6881 = $row6881['status'];
-        $assignedName6881 = $row6881['assignedName'];
-        $assignedBy6881 = $row6881['assignedBy'];
-        $upload_img6881 = $row6881['upload_img'];
-        $description6881 = $row6881['description'];
-        //FOR ID 6880
-        $sql6880 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6880";
-        $stmt6880 = $conn->prepare($sql6880);
-        $stmt6880->execute();
-        $result6880 = $stmt6880->get_result();
-        $row6880 = $result6880->fetch_assoc();
-        $assetId6880 = $row6880['assetId'];
-        $category6880 = $row6880['category'];
-        $date6880 = $row6880['date'];
-        $building6880 = $row6880['building'];
-        $floor6880 = $row6880['floor'];
-        $room6880 = $row6880['room'];
-        $status6880 = $row6880['status'];
-        $assignedName6880 = $row6880['assignedName'];
-        $assignedBy6880 = $row6880['assignedBy'];
-        $upload_img6880 = $row6880['upload_img'];
-        $description6880 = $row6880['description'];
-
-        //FOR ID 6879
-        $sql6879 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6879";
-        $stmt6879 = $conn->prepare($sql6879);
-        $stmt6879->execute();
-        $result6879 = $stmt6879->get_result();
-        $row6879 = $result6879->fetch_assoc();
-        $assetId6879 = $row6879['assetId'];
-        $category6879 = $row6879['category'];
-        $date6879 = $row6879['date'];
-        $building6879 = $row6879['building'];
-        $floor6879 = $row6879['floor'];
-        $room6879 = $row6879['room'];
-        $status6879 = $row6879['status'];
-        $assignedName6879 = $row6879['assignedName'];
-        $assignedBy6879 = $row6879['assignedBy'];
-        $upload_img6879 = $row6879['upload_img'];
-        $description6879 = $row6879['description'];
-
-        //FOR ID 6878
-        $sql6878 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6878";
-        $stmt6878 = $conn->prepare($sql6878);
-        $stmt6878->execute();
-        $result6878 = $stmt6878->get_result();
-        $row6878 = $result6878->fetch_assoc();
-        $assetId6878 = $row6878['assetId'];
-        $category6878 = $row6878['category'];
-        $date6878 = $row6878['date'];
-        $building6878 = $row6878['building'];
-        $floor6878 = $row6878['floor'];
-        $room6878 = $row6878['room'];
-        $status6878 = $row6878['status'];
-        $assignedName6878 = $row6878['assignedName'];
-        $assignedBy6878 = $row6878['assignedBy'];
-        $upload_img6878 = $row6878['upload_img'];
-        $description6878 = $row6878['description'];
-
-        //FOR ID 6877
-        $sql6877 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6877";
-        $stmt6877 = $conn->prepare($sql6877);
-        $stmt6877->execute();
-        $result6877 = $stmt6877->get_result();
-        $row6877 = $result6877->fetch_assoc();
-        $assetId6877 = $row6877['assetId'];
-        $category6877 = $row6877['category'];
-        $date6877 = $row6877['date'];
-        $building6877 = $row6877['building'];
-        $floor6877 = $row6877['floor'];
-        $room6877 = $row6877['room'];
-        $status6877 = $row6877['status'];
-        $assignedName6877 = $row6877['assignedName'];
-        $assignedBy6877 = $row6877['assignedBy'];
-        $upload_img6877 = $row6877['upload_img'];
-        $description6877 = $row6877['description'];
-
-        //FOR ID 6876
-        $sql6876 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6876";
-        $stmt6876 = $conn->prepare($sql6876);
-        $stmt6876->execute();
-        $result6876 = $stmt6876->get_result();
-        $row6876 = $result6876->fetch_assoc();
-        $assetId6876 = $row6876['assetId'];
-        $category6876 = $row6876['category'];
-        $date6876 = $row6876['date'];
-        $building6876 = $row6876['building'];
-        $floor6876 = $row6876['floor'];
-        $room6876 = $row6876['room'];
-        $status6876 = $row6876['status'];
-        $assignedName6876 = $row6876['assignedName'];
-        $assignedBy6876 = $row6876['assignedBy'];
-        $upload_img6876 = $row6876['upload_img'];
-        $description6876 = $row6876['description'];
-
-        //FOR ID 6875
-        $sql6875 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6875";
-        $stmt6875 = $conn->prepare($sql6875);
-        $stmt6875->execute();
-        $result6875 = $stmt6875->get_result();
-        $row6875 = $result6875->fetch_assoc();
-        $assetId6875 = $row6875['assetId'];
-        $category6875 = $row6875['category'];
-        $date6875 = $row6875['date'];
-        $building6875 = $row6875['building'];
-        $floor6875 = $row6875['floor'];
-        $room6875 = $row6875['room'];
-        $status6875 = $row6875['status'];
-        $assignedName6875 = $row6875['assignedName'];
-        $assignedBy6875 = $row6875['assignedBy'];
-        $upload_img6875 = $row6875['upload_img'];
-        $description6875 = $row6875['description'];
-
-        //FOR ID 6874
-        $sql6874 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6874";
-        $stmt6874 = $conn->prepare($sql6874);
-        $stmt6874->execute();
-        $result6874 = $stmt6874->get_result();
-        $row6874 = $result6874->fetch_assoc();
-        $assetId6874 = $row6874['assetId'];
-        $category6874 = $row6874['category'];
-        $date6874 = $row6874['date'];
-        $building6874 = $row6874['building'];
-        $floor6874 = $row6874['floor'];
-        $room6874 = $row6874['room'];
-        $status6874 = $row6874['status'];
-        $assignedName6874 = $row6874['assignedName'];
-        $assignedBy6874 = $row6874['assignedBy'];
-        $upload_img6874 = $row6874['upload_img'];
-        $description6874 = $row6874['description'];
-
-        //FOR ID 6873
-        $sql6873 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6873";
-        $stmt6873 = $conn->prepare($sql6873);
-        $stmt6873->execute();
-        $result6873 = $stmt6873->get_result();
-        $row6873 = $result6873->fetch_assoc();
-        $assetId6873 = $row6873['assetId'];
-        $category6873 = $row6873['category'];
-        $date6873 = $row6873['date'];
-        $building6873 = $row6873['building'];
-        $floor6873 = $row6873['floor'];
-        $room6873 = $row6873['room'];
-        $status6873 = $row6873['status'];
-        $assignedName6873 = $row6873['assignedName'];
-        $assignedBy6873 = $row6873['assignedBy'];
-        $upload_img6873 = $row6873['upload_img'];
-        $description6873 = $row6873['description'];
-
-        //FOR ID 6872
-        $sql6872 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6872";
-        $stmt6872 = $conn->prepare($sql6872);
-        $stmt6872->execute();
-        $result6872 = $stmt6872->get_result();
-        $row6872 = $result6872->fetch_assoc();
-        $assetId6872 = $row6872['assetId'];
-        $category6872 = $row6872['category'];
-        $date6872 = $row6872['date'];
-        $building6872 = $row6872['building'];
-        $floor6872 = $row6872['floor'];
-        $room6872 = $row6872['room'];
-        $status6872 = $row6872['status'];
-        $assignedName6872 = $row6872['assignedName'];
-        $assignedBy6872 = $row6872['assignedBy'];
-        $upload_img6872 = $row6872['upload_img'];
-        $description6872 = $row6872['description'];
-
-        //FOR ID 6871
-        $sql6871 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6871";
-        $stmt6871 = $conn->prepare($sql6871);
-        $stmt6871->execute();
-        $result6871 = $stmt6871->get_result();
-        $row6871 = $result6871->fetch_assoc();
-        $assetId6871 = $row6871['assetId'];
-        $category6871 = $row6871['category'];
-        $date6871 = $row6871['date'];
-        $building6871 = $row6871['building'];
-        $floor6871 = $row6871['floor'];
-        $room6871 = $row6871['room'];
-        $status6871 = $row6871['status'];
-        $assignedName6871 = $row6871['assignedName'];
-        $assignedBy6871 = $row6871['assignedBy'];
-        $upload_img6871 = $row6871['upload_img'];
-        $description6871 = $row6871['description'];
-
-        //FOR ID 6870
-        $sql6870 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6870";
-        $stmt6870 = $conn->prepare($sql6870);
-        $stmt6870->execute();
-        $result6870 = $stmt6870->get_result();
-        $row6870 = $result6870->fetch_assoc();
-        $assetId6870 = $row6870['assetId'];
-        $category6870 = $row6870['category'];
-        $date6870 = $row6870['date'];
-        $building6870 = $row6870['building'];
-        $floor6870 = $row6870['floor'];
-        $room6870 = $row6870['room'];
-        $status6870 = $row6870['status'];
-        $assignedName6870 = $row6870['assignedName'];
-        $assignedBy6870 = $row6870['assignedBy'];
-        $upload_img6870 = $row6870['upload_img'];
-        $description6870 = $row6870['description'];
-
-        //FOR ID 6869
-        $sql6869 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6869";
-        $stmt6869 = $conn->prepare($sql6869);
-        $stmt6869->execute();
-        $result6869 = $stmt6869->get_result();
-        $row6869 = $result6869->fetch_assoc();
-        $assetId6869 = $row6869['assetId'];
-        $category6869 = $row6869['category'];
-        $date6869 = $row6869['date'];
-        $building6869 = $row6869['building'];
-        $floor6869 = $row6869['floor'];
-        $room6869 = $row6869['room'];
-        $status6869 = $row6869['status'];
-        $assignedName6869 = $row6869['assignedName'];
-        $assignedBy6869 = $row6869['assignedBy'];
-        $upload_img6869 = $row6869['upload_img'];
-        $description6869 = $row6869['description'];
-
-        //FOR ID 6868
-        $sql6868 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6868";
-        $stmt6868 = $conn->prepare($sql6868);
-        $stmt6868->execute();
-        $result6868 = $stmt6868->get_result();
-        $row6868 = $result6868->fetch_assoc();
-        $assetId6868 = $row6868['assetId'];
-        $category6868 = $row6868['category'];
-        $date6868 = $row6868['date'];
-        $building6868 = $row6868['building'];
-        $floor6868 = $row6868['floor'];
-        $room6868 = $row6868['room'];
-        $status6868 = $row6868['status'];
-        $assignedName6868 = $row6868['assignedName'];
-        $assignedBy6868 = $row6868['assignedBy'];
-        $upload_img6868 = $row6868['upload_img'];
-        $description6868 = $row6868['description'];
-
-        //FOR ID 6867
-        $sql6867 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6867";
-        $stmt6867 = $conn->prepare($sql6867);
-        $stmt6867->execute();
-        $result6867 = $stmt6867->get_result();
-        $row6867 = $result6867->fetch_assoc();
-        $assetId6867 = $row6867['assetId'];
-        $category6867 = $row6867['category'];
-        $date6867 = $row6867['date'];
-        $building6867 = $row6867['building'];
-        $floor6867 = $row6867['floor'];
-        $room6867 = $row6867['room'];
-        $status6867 = $row6867['status'];
-        $assignedName6867 = $row6867['assignedName'];
-        $assignedBy6867 = $row6867['assignedBy'];
-        $upload_img6867 = $row6867['upload_img'];
-        $description6867 = $row6867['description'];
-
-        //FOR ID 7269
-        $sql7269 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7269";
-        $stmt7269 = $conn->prepare($sql7269);
-        $stmt7269->execute();
-        $result7269 = $stmt7269->get_result();
-        $row7269 = $result7269->fetch_assoc();
-        $assetId7269 = $row7269['assetId'];
-        $category7269 = $row7269['category'];
-        $date7269 = $row7269['date'];
-        $building7269 = $row7269['building'];
-        $floor7269 = $row7269['floor'];
-        $room7269 = $row7269['room'];
-        $status7269 = $row7269['status'];
-        $assignedName7269 = $row7269['assignedName'];
-        $assignedBy7269 = $row7269['assignedBy'];
-        $upload_img7269 = $row7269['upload_img'];
-        $description7269 = $row7269['description'];
-
-        //FOR ID 7268
-        $sql7268 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7268";
-        $stmt7268 = $conn->prepare($sql7268);
-        $stmt7268->execute();
-        $result7268 = $stmt7268->get_result();
-        $row7268 = $result7268->fetch_assoc();
-        $assetId7268 = $row7268['assetId'];
-        $category7268 = $row7268['category'];
-        $date7268 = $row7268['date'];
-        $building7268 = $row7268['building'];
-        $floor7268 = $row7268['floor'];
-        $room7268 = $row7268['room'];
-        $status7268 = $row7268['status'];
-        $assignedName7268 = $row7268['assignedName'];
-        $assignedBy7268 = $row7268['assignedBy'];
-        $upload_img7268 = $row7268['upload_img'];
-        $description7268 = $row7268['description'];
-
-        //FOR ID 7267
-        $sql7267 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7267";
-        $stmt7267 = $conn->prepare($sql7267);
-        $stmt7267->execute();
-        $result7267 = $stmt7267->get_result();
-        $row7267 = $result7267->fetch_assoc();
-        $assetId7267 = $row7267['assetId'];
-        $category7267 = $row7267['category'];
-        $date7267 = $row7267['date'];
-        $building7267 = $row7267['building'];
-        $floor7267 = $row7267['floor'];
-        $room7267 = $row7267['room'];
-        $status7267 = $row7267['status'];
-        $assignedName7267 = $row7267['assignedName'];
-        $assignedBy7267 = $row7267['assignedBy'];
-        $upload_img7267 = $row7267['upload_img'];
-        $description7267 = $row7267['description'];
-
-        //FOR ID 6948
-        $sql6948 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6948";
-        $stmt6948 = $conn->prepare($sql6948);
-        $stmt6948->execute();
-        $result6948 = $stmt6948->get_result();
-        $row6948 = $result6948->fetch_assoc();
-        $assetId6948 = $row6948['assetId'];
-        $category6948 = $row6948['category'];
-        $date6948 = $row6948['date'];
-        $building6948 = $row6948['building'];
-        $floor6948 = $row6948['floor'];
-        $room6948 = $row6948['room'];
-        $status6948 = $row6948['status'];
-        $assignedName6948 = $row6948['assignedName'];
-        $assignedBy6948 = $row6948['assignedBy'];
-        $upload_img6948 = $row6948['upload_img'];
-        $description6948 = $row6948['description'];
-
-        //FOR ID 6949
-        $sql6949 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6949";
-        $stmt6949 = $conn->prepare($sql6949);
-        $stmt6949->execute();
-        $result6949 = $stmt6949->get_result();
-        $row6949 = $result6949->fetch_assoc();
-        $assetId6949 = $row6949['assetId'];
-        $category6949 = $row6949['category'];
-        $date6949 = $row6949['date'];
-        $building6949 = $row6949['building'];
-        $floor6949 = $row6949['floor'];
-        $room6949 = $row6949['room'];
-        $status6949 = $row6949['status'];
-        $assignedName6949 = $row6949['assignedName'];
-        $assignedBy6949 = $row6949['assignedBy'];
-        $upload_img6949 = $row6949['upload_img'];
-        $description6949 = $row6949['description'];
-        
-        //FOR ID 6950
-        $sql6950 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6950";
-        $stmt6950 = $conn->prepare($sql6950);
-        $stmt6950->execute();
-        $result6950 = $stmt6950->get_result();
-        $row6950 = $result6950->fetch_assoc();
-        $assetId6950 = $row6950['assetId'];
-        $category6950 = $row6950['category'];
-        $date6950 = $row6950['date'];
-        $building6950 = $row6950['building'];
-        $floor6950 = $row6950['floor'];
-        $room6950 = $row6950['room'];
-        $status6950 = $row6950['status'];
-        $assignedName6950 = $row6950['assignedName'];
-        $assignedBy6950 = $row6950['assignedBy'];
-        $upload_img6950 = $row6950['upload_img'];
-        $description6950 = $row6950['description'];
-
-        //FOR ID 6951
-        $sql6951 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6951";
-        $stmt6951 = $conn->prepare($sql6951);
-        $stmt6951->execute();
-        $result6951 = $stmt6951->get_result();
-        $row6951 = $result6951->fetch_assoc();
-        $assetId6951 = $row6951['assetId'];
-        $category6951 = $row6951['category'];
-        $date6951 = $row6951['date'];
-        $building6951 = $row6951['building'];
-        $floor6951 = $row6951['floor'];
-        $room6951 = $row6951['room'];
-        $status6951 = $row6951['status'];
-        $assignedName6951 = $row6951['assignedName'];
-        $assignedBy6951 = $row6951['assignedBy'];
-        $upload_img6951 = $row6951['upload_img'];
-        $description6951 = $row6951['description'];
-        
-        //FOR ID 6952
-        $sql6952 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6952";
-        $stmt6952 = $conn->prepare($sql6952);
-        $stmt6952->execute();
-        $result6952 = $stmt6952->get_result();
-        $row6952 = $result6952->fetch_assoc();
-        $assetId6952 = $row6952['assetId'];
-        $category6952 = $row6952['category'];
-        $date6952 = $row6952['date'];
-        $building6952 = $row6952['building'];
-        $floor6952 = $row6952['floor'];
-        $room6952 = $row6952['room'];
-        $status6952 = $row6952['status'];
-        $assignedName6952 = $row6952['assignedName'];
-        $assignedBy6952 = $row6952['assignedBy'];
-        $upload_img6952 = $row6952['upload_img'];
-        $description6952 = $row6952['description'];
-
-        //FOR ID 6953
-        $sql6953 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6953";
-        $stmt6953 = $conn->prepare($sql6953);
-        $stmt6953->execute();
-        $result6953 = $stmt6953->get_result();
-        $row6953 = $result6953->fetch_assoc();
-        $assetId6953 = $row6953['assetId'];
-        $category6953 = $row6953['category'];
-        $date6953 = $row6953['date'];
-        $building6953 = $row6953['building'];
-        $floor6953 = $row6953['floor'];
-        $room6953 = $row6953['room'];
-        $status6953 = $row6953['status'];
-        $assignedName6953 = $row6953['assignedName'];
-        $assignedBy6953 = $row6953['assignedBy'];
-        $upload_img6953 = $row6953['upload_img'];
-        $description6953 = $row6953['description'];
-
-        //FOR ID 6954
-        $sql6954 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6954";
-        $stmt6954 = $conn->prepare($sql6954);
-        $stmt6954->execute();
-        $result6954 = $stmt6954->get_result();
-        $row6954 = $result6954->fetch_assoc();
-        $assetId6954 = $row6954['assetId'];
-        $category6954 = $row6954['category'];
-        $date6954 = $row6954['date'];
-        $building6954 = $row6954['building'];
-        $floor6954 = $row6954['floor'];
-        $room6954 = $row6954['room'];
-        $status6954 = $row6954['status'];
-        $assignedName6954 = $row6954['assignedName'];
-        $assignedBy6954 = $row6954['assignedBy'];
-        $upload_img6954 = $row6954['upload_img'];
-        $description6954 = $row6954['description'];
-
-        //FOR ID 6955
-        $sql6955 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6955";
-        $stmt6955 = $conn->prepare($sql6955);
-        $stmt6955->execute();
-        $result6955 = $stmt6955->get_result();
-        $row6955 = $result6955->fetch_assoc();
-        $assetId6955 = $row6955['assetId'];
-        $category6955 = $row6955['category'];
-        $date6955 = $row6955['date'];
-        $building6955 = $row6955['building'];
-        $floor6955 = $row6955['floor'];
-        $room6955 = $row6955['room'];
-        $status6955 = $row6955['status'];
-        $assignedName6955 = $row6955['assignedName'];
-        $assignedBy6955 = $row6955['assignedBy'];
-        $upload_img6955 = $row6955['upload_img'];
-        $description6955 = $row6955['description'];
-
-        //FOR ID 6956
-        $sql6956 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6956";
-        $stmt6956 = $conn->prepare($sql6956);
-        $stmt6956->execute();
-        $result6956 = $stmt6956->get_result();
-        $row6956 = $result6956->fetch_assoc();
-        $assetId6956 = $row6956['assetId'];
-        $category6956 = $row6956['category'];
-        $date6956 = $row6956['date'];
-        $building6956 = $row6956['building'];
-        $floor6956 = $row6956['floor'];
-        $room6956 = $row6956['room'];
-        $status6956 = $row6956['status'];
-        $assignedName6956 = $row6956['assignedName'];
-        $assignedBy6956 = $row6956['assignedBy'];
-        $upload_img6956 = $row6956['upload_img'];
-        $description6956 = $row6956['description'];
-
-        //FOR ID 6957
-        $sql6957 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6957";
-        $stmt6957 = $conn->prepare($sql6957);
-        $stmt6957->execute();
-        $result6957 = $stmt6957->get_result();
-        $row6957 = $result6957->fetch_assoc();
-        $assetId6957 = $row6957['assetId'];
-        $category6957 = $row6957['category'];
-        $date6957 = $row6957['date'];
-        $building6957 = $row6957['building'];
-        $floor6957 = $row6957['floor'];
-        $room6957 = $row6957['room'];
-        $status6957 = $row6957['status'];
-        $assignedName6957 = $row6957['assignedName'];
-        $assignedBy6957 = $row6957['assignedBy'];
-        $upload_img6957 = $row6957['upload_img'];
-        $description6957 = $row6957['description'];
-
-        //FOR ID 6958
-        $sql6958 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6958";
-        $stmt6958 = $conn->prepare($sql6958);
-        $stmt6958->execute();
-        $result6958 = $stmt6958->get_result();
-        $row6958 = $result6958->fetch_assoc();
-        $assetId6958 = $row6958['assetId'];
-        $category6958 = $row6958['category'];
-        $date6958 = $row6958['date'];
-        $building6958 = $row6958['building'];
-        $floor6958 = $row6958['floor'];
-        $room6958 = $row6958['room'];
-        $status6958 = $row6958['status'];
-        $assignedName6958 = $row6958['assignedName'];
-        $assignedBy6958 = $row6958['assignedBy'];
-        $upload_img6958 = $row6958['upload_img'];
-        $description6958 = $row6958['description'];
-
-        //FOR ID 6959
-        $sql6959 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6959";
-        $stmt6959 = $conn->prepare($sql6959);
-        $stmt6959->execute();
-        $result6959 = $stmt6959->get_result();
-        $row6959 = $result6959->fetch_assoc();
-        $assetId6959 = $row6959['assetId'];
-        $category6959 = $row6959['category'];
-        $date6959 = $row6959['date'];
-        $building6959 = $row6959['building'];
-        $floor6959 = $row6959['floor'];
-        $room6959 = $row6959['room'];
-        $status6959 = $row6959['status'];
-        $assignedName6959 = $row6959['assignedName'];
-        $assignedBy6959 = $row6959['assignedBy'];
-        $upload_img6959 = $row6959['upload_img'];
-        $description6959 = $row6959['description'];
-
-        //FOR ID 6960
-        $sql6960 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6960";
-        $stmt6960 = $conn->prepare($sql6960);
-        $stmt6960->execute();
-        $result6960 = $stmt6960->get_result();
-        $row6960 = $result6960->fetch_assoc();
-        $assetId6960 = $row6960['assetId'];
-        $category6960 = $row6960['category'];
-        $date6960 = $row6960['date'];
-        $building6960 = $row6960['building'];
-        $floor6960 = $row6960['floor'];
-        $room6960 = $row6960['room'];
-        $status6960 = $row6960['status'];
-        $assignedName6960 = $row6960['assignedName'];
-        $assignedBy6960 = $row6960['assignedBy'];
-        $upload_img6960 = $row6960['upload_img'];
-        $description6960 = $row6960['description'];
-
-        //FOR ID 6961
-        $sql6961 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6961";
-        $stmt6961 = $conn->prepare($sql6961);
-        $stmt6961->execute();
-        $result6961 = $stmt6961->get_result();
-        $row6961 = $result6961->fetch_assoc();
-        $assetId6961 = $row6961['assetId'];
-        $category6961 = $row6961['category'];
-        $date6961 = $row6961['date'];
-        $building6961 = $row6961['building'];
-        $floor6961 = $row6961['floor'];
-        $room6961 = $row6961['room'];
-        $status6961 = $row6961['status'];
-        $assignedName6961 = $row6961['assignedName'];
-        $assignedBy6961 = $row6961['assignedBy'];
-        $upload_img6961 = $row6961['upload_img'];
-        $description6961 = $row6961['description'];
-
-
-        //FOR ID 6962
-        $sql6962 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6962";
-        $stmt6962 = $conn->prepare($sql6962);
-        $stmt6962->execute();
-        $result6962 = $stmt6962->get_result();
-        $row6962 = $result6962->fetch_assoc();
-        $assetId6962 = $row6962['assetId'];
-        $category6962 = $row6962['category'];
-        $date6962 = $row6962['date'];
-        $building6962 = $row6962['building'];
-        $floor6962 = $row6962['floor'];
-        $room6962 = $row6962['room'];
-        $status6962 = $row6962['status'];
-        $assignedName6962 = $row6962['assignedName'];
-        $assignedBy6962 = $row6962['assignedBy'];
-        $upload_img6962 = $row6962['upload_img'];
-        $description6962 = $row6962['description'];
-
-        //FOR ID 6963
-        $sql6963 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6963";
-        $stmt6963 = $conn->prepare($sql6963);
-        $stmt6963->execute();
-        $result6963 = $stmt6963->get_result();
-        $row6963 = $result6963->fetch_assoc();
-        $assetId6963 = $row6963['assetId'];
-        $category6963 = $row6963['category'];
-        $date6963 = $row6963['date'];
-        $building6963 = $row6963['building'];
-        $floor6963 = $row6963['floor'];
-        $room6963 = $row6963['room'];
-        $status6963 = $row6963['status'];
-        $assignedName6963 = $row6963['assignedName'];
-        $assignedBy6963 = $row6963['assignedBy'];
-        $upload_img6963 = $row6963['upload_img'];
-        $description6963 = $row6963['description'];
-
-        //FOR ID 6964
-        $sql6964 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6964";
-        $stmt6964 = $conn->prepare($sql6964);
-        $stmt6964->execute();
-        $result6964 = $stmt6964->get_result();
-        $row6964 = $result6964->fetch_assoc();
-        $assetId6964 = $row6964['assetId'];
-        $category6964 = $row6964['category'];
-        $date6964 = $row6964['date'];
-        $building6964 = $row6964['building'];
-        $floor6964 = $row6964['floor'];
-        $room6964 = $row6964['room'];
-        $status6964 = $row6964['status'];
-        $assignedName6964 = $row6964['assignedName'];
-        $assignedBy6964 = $row6964['assignedBy'];
-        $upload_img6964 = $row6964['upload_img'];
-        $description6964 = $row6964['description'];
-
-        //FOR ID 6965
-        $sql6965 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6965";
-        $stmt6965 = $conn->prepare($sql6965);
-        $stmt6965->execute();
-        $result6965 = $stmt6965->get_result();
-        $row6965 = $result6965->fetch_assoc();
-        $assetId6965 = $row6965['assetId'];
-        $category6965 = $row6965['category'];
-        $date6965 = $row6965['date'];
-        $building6965 = $row6965['building'];
-        $floor6965 = $row6965['floor'];
-        $room6965 = $row6965['room'];
-        $status6965 = $row6965['status'];
-        $assignedName6965 = $row6965['assignedName'];
-        $assignedBy6965 = $row6965['assignedBy'];
-        $upload_img6965 = $row6965['upload_img'];
-        $description6965 = $row6965['description'];
-
-        //FOR ID 6966
-        $sql6966 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6966";
-        $stmt6966 = $conn->prepare($sql6966);
-        $stmt6966->execute();
-        $result6966 = $stmt6966->get_result();
-        $row6966 = $result6966->fetch_assoc();
-        $assetId6966 = $row6966['assetId'];
-        $category6966 = $row6966['category'];
-        $date6966 = $row6966['date'];
-        $building6966 = $row6966['building'];
-        $floor6966 = $row6966['floor'];
-        $room6966 = $row6966['room'];
-        $status6966 = $row6966['status'];
-        $assignedName6966 = $row6966['assignedName'];
-        $assignedBy6966 = $row6966['assignedBy'];
-        $upload_img6966 = $row6966['upload_img'];
-        $description6966 = $row6966['description'];
-
-        //FOR ID 6967
-        $sql6967 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6967";
-        $stmt6967 = $conn->prepare($sql6967);
-        $stmt6967->execute();
-        $result6967 = $stmt6967->get_result();
-        $row6967 = $result6967->fetch_assoc();
-        $assetId6967 = $row6967['assetId'];
-        $category6967 = $row6967['category'];
-        $date6967 = $row6967['date'];
-        $building6967 = $row6967['building'];
-        $floor6967 = $row6967['floor'];
-        $room6967 = $row6967['room'];
-        $status6967 = $row6967['status'];
-        $assignedName6967 = $row6967['assignedName'];
-        $assignedBy6967 = $row6967['assignedBy'];
-        $upload_img6967 = $row6967['upload_img'];
-        $description6967 = $row6967['description'];
-
-        //FOR ID 6968
-        $sql6968 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6968";
-        $stmt6968 = $conn->prepare($sql6968);
-        $stmt6968->execute();
-        $result6968 = $stmt6968->get_result();
-        $row6968 = $result6968->fetch_assoc();
-        $assetId6968 = $row6968['assetId'];
-        $category6968 = $row6968['category'];
-        $date6968 = $row6968['date'];
-        $building6968 = $row6968['building'];
-        $floor6968 = $row6968['floor'];
-        $room6968 = $row6968['room'];
-        $status6968 = $row6968['status'];
-        $assignedName6968 = $row6968['assignedName'];
-        $assignedBy6968 = $row6968['assignedBy'];
-        $upload_img6968 = $row6968['upload_img'];
-        $description6968 = $row6968['description'];
-
-        //FOR ID 6969
-        $sql6969 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6969";
-        $stmt6969 = $conn->prepare($sql6969);
-        $stmt6969->execute();
-        $result6969 = $stmt6969->get_result();
-        $row6969 = $result6969->fetch_assoc();
-        $assetId6969 = $row6969['assetId'];
-        $category6969 = $row6969['category'];
-        $date6969 = $row6969['date'];
-        $building6969 = $row6969['building'];
-        $floor6969 = $row6969['floor'];
-        $room6969 = $row6969['room'];
-        $status6969 = $row6969['status'];
-        $assignedName6969 = $row6969['assignedName'];
-        $assignedBy6969 = $row6969['assignedBy'];
-        $upload_img6969 = $row6969['upload_img'];
-        $description6969 = $row6969['description'];
-
-        //FOR ID 6970
-        $sql6970 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6970";
-        $stmt6970 = $conn->prepare($sql6970);
-        $stmt6970->execute();
-        $result6970 = $stmt6970->get_result();
-        $row6970 = $result6970->fetch_assoc();
-        $assetId6970 = $row6970['assetId'];
-        $category6970 = $row6970['category'];
-        $date6970 = $row6970['date'];
-        $building6970 = $row6970['building'];
-        $floor6970 = $row6970['floor'];
-        $room6970 = $row6970['room'];
-        $status6970 = $row6970['status'];
-        $assignedName6970 = $row6970['assignedName'];
-        $assignedBy6970 = $row6970['assignedBy'];
-        $upload_img6970 = $row6970['upload_img'];
-        $description6970 = $row6970['description'];
-
-        //FOR ID 6971
-        $sql6971 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6971";
-        $stmt6971 = $conn->prepare($sql6971);
-        $stmt6971->execute();
-        $result6971 = $stmt6971->get_result();
-        $row6971 = $result6971->fetch_assoc();
-        $assetId6971 = $row6971['assetId'];
-        $category6971 = $row6971['category'];
-        $date6971 = $row6971['date'];
-        $building6971 = $row6971['building'];
-        $floor6971 = $row6971['floor'];
-        $room6971 = $row6971['room'];
-        $status6971 = $row6971['status'];
-        $assignedName6971 = $row6971['assignedName'];
-        $assignedBy6971 = $row6971['assignedBy'];
-        $upload_img6971 = $row6971['upload_img'];
-        $description6971 = $row6971['description'];
-
-        //FOR ID 6972
-        $sql6972 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6972";
-        $stmt6972 = $conn->prepare($sql6972);
-        $stmt6972->execute();
-        $result6972 = $stmt6972->get_result();
-        $row6972 = $result6972->fetch_assoc();
-        $assetId6972 = $row6972['assetId'];
-        $category6972 = $row6972['category'];
-        $date6972 = $row6972['date'];
-        $building6972 = $row6972['building'];
-        $floor6972 = $row6972['floor'];
-        $room6972 = $row6972['room'];
-        $status6972 = $row6972['status'];
-        $assignedName6972 = $row6972['assignedName'];
-        $assignedBy6972 = $row6972['assignedBy'];
-        $upload_img6972 = $row6972['upload_img'];
-        $description6972 = $row6972['description'];
-
-        //FOR ID 6973
-        $sql6973 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6973";
-        $stmt6973 = $conn->prepare($sql6973);
-        $stmt6973->execute();
-        $result6973 = $stmt6973->get_result();
-        $row6973 = $result6973->fetch_assoc();
-        $assetId6973 = $row6973['assetId'];
-        $category6973 = $row6973['category'];
-        $date6973 = $row6973['date'];
-        $building6973 = $row6973['building'];
-        $floor6973 = $row6973['floor'];
-        $room6973 = $row6973['room'];
-        $status6973 = $row6973['status'];
-        $assignedName6973 = $row6973['assignedName'];
-        $assignedBy6973 = $row6973['assignedBy'];
-        $upload_img6973 = $row6973['upload_img'];
-        $description6973 = $row6973['description'];
-        
-        //FOR ID 6974
-        $sql6974 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6974";
-        $stmt6974 = $conn->prepare($sql6974);
-        $stmt6974->execute();
-        $result6974 = $stmt6974->get_result();
-        $row6974 = $result6974->fetch_assoc();
-        $assetId6974 = $row6974['assetId'];
-        $category6974 = $row6974['category'];
-        $date6974 = $row6974['date'];
-        $building6974 = $row6974['building'];
-        $floor6974 = $row6974['floor'];
-        $room6974 = $row6974['room'];
-        $status6974 = $row6974['status'];
-        $assignedName6974 = $row6974['assignedName'];
-        $assignedBy6974 = $row6974['assignedBy'];
-        $upload_img6974 = $row6974['upload_img'];
-        $description6974 = $row6974['description'];
-
-        //FOR ID 6975
-        $sql6975 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6975";
-        $stmt6975 = $conn->prepare($sql6975);
-        $stmt6975->execute();
-        $result6975 = $stmt6975->get_result();
-        $row6975 = $result6975->fetch_assoc();
-        $assetId6975 = $row6975['assetId'];
-        $category6975 = $row6975['category'];
-        $date6975 = $row6975['date'];
-        $building6975 = $row6975['building'];
-        $floor6975 = $row6975['floor'];
-        $room6975 = $row6975['room'];
-        $status6975 = $row6975['status'];
-        $assignedName6975 = $row6975['assignedName'];
-        $assignedBy6975 = $row6975['assignedBy'];
-        $upload_img6975 = $row6975['upload_img'];
-        $description6975 = $row6975['description'];
-
-        //FOR ID 6976
-        $sql6976 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6976";
-        $stmt6976 = $conn->prepare($sql6976);
-        $stmt6976->execute();
-        $result6976 = $stmt6976->get_result();
-        $row6976 = $result6976->fetch_assoc();
-        $assetId6976 = $row6976['assetId'];
-        $category6976 = $row6976['category'];
-        $date6976 = $row6976['date'];
-        $building6976 = $row6976['building'];
-        $floor6976 = $row6976['floor'];
-        $room6976 = $row6976['room'];
-        $status6976 = $row6976['status'];
-        $assignedName6976 = $row6976['assignedName'];
-        $assignedBy6976 = $row6976['assignedBy'];
-        $upload_img6976 = $row6976['upload_img'];
-        $description6976 = $row6976['description'];
-
-        //FOR ID 6977
-        $sql6977 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6977";
-        $stmt6977 = $conn->prepare($sql6977);
-        $stmt6977->execute();
-        $result6977 = $stmt6977->get_result();
-        $row6977 = $result6977->fetch_assoc();
-        $assetId6977 = $row6977['assetId'];
-        $category6977 = $row6977['category'];
-        $date6977 = $row6977['date'];
-        $building6977 = $row6977['building'];
-        $floor6977 = $row6977['floor'];
-        $room6977 = $row6977['room'];
-        $status6977 = $row6977['status'];
-        $assignedName6977 = $row6977['assignedName'];
-        $assignedBy6977 = $row6977['assignedBy'];
-        $upload_img6977 = $row6977['upload_img'];
-        $description6977 = $row6977['description'];
-
-        //FOR ID 6978
-        $sql6978 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6978";
-        $stmt6978 = $conn->prepare($sql6978);
-        $stmt6978->execute();
-        $result6978 = $stmt6978->get_result();
-        $row6978 = $result6978->fetch_assoc();
-        $assetId6978 = $row6978['assetId'];
-        $category6978 = $row6978['category'];
-        $date6978 = $row6978['date'];
-        $building6978 = $row6978['building'];
-        $floor6978 = $row6978['floor'];
-        $room6978 = $row6978['room'];
-        $status6978 = $row6978['status'];
-        $assignedName6978 = $row6978['assignedName'];
-        $assignedBy6978 = $row6978['assignedBy'];
-        $upload_img6978 = $row6978['upload_img'];
-        $description6978 = $row6978['description'];
-
-        //FOR ID 6979
-        $sql6979 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6979";
-        $stmt6979 = $conn->prepare($sql6979);
-        $stmt6979->execute();
-        $result6979 = $stmt6979->get_result();
-        $row6979 = $result6979->fetch_assoc();
-        $assetId6979 = $row6979['assetId'];
-        $category6979 = $row6979['category'];
-        $date6979 = $row6979['date'];
-        $building6979 = $row6979['building'];
-        $floor6979 = $row6979['floor'];
-        $room6979 = $row6979['room'];
-        $status6979 = $row6979['status'];
-        $assignedName6979 = $row6979['assignedName'];
-        $assignedBy6979 = $row6979['assignedBy'];
-        $upload_img6979 = $row6979['upload_img'];
-        $description6979 = $row6979['description'];
-
-        //FOR ID 6980
-        $sql6980 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6980";
-        $stmt6980 = $conn->prepare($sql6980);
-        $stmt6980->execute();
-        $result6980 = $stmt6980->get_result();
-        $row6980 = $result6980->fetch_assoc();
-        $assetId6980 = $row6980['assetId'];
-        $category6980 = $row6980['category'];
-        $date6980 = $row6980['date'];
-        $building6980 = $row6980['building'];
-        $floor6980 = $row6980['floor'];
-        $room6980 = $row6980['room'];
-        $status6980 = $row6980['status'];
-        $assignedName6980 = $row6980['assignedName'];
-        $assignedBy6980 = $row6980['assignedBy'];
-        $upload_img6980 = $row6980['upload_img'];
-        $description6980 = $row6980['description'];
-        
-        //FOR ID 6981
-        $sql6981 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6981";
-        $stmt6981 = $conn->prepare($sql6981);
-        $stmt6981->execute();
-        $result6981 = $stmt6981->get_result();
-        $row6981 = $result6981->fetch_assoc();
-        $assetId6981 = $row6981['assetId'];
-        $category6981 = $row6981['category'];
-        $date6981 = $row6981['date'];
-        $building6981 = $row6981['building'];
-        $floor6981 = $row6981['floor'];
-        $room6981 = $row6981['room'];
-        $status6981 = $row6981['status'];
-        $assignedName6981 = $row6981['assignedName'];
-        $assignedBy6981 = $row6981['assignedBy'];
-        $upload_img6981 = $row6981['upload_img'];
-        $description6981 = $row6981['description'];
-
-        //FOR ID 6982
-        $sql6982 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6982";
-        $stmt6982 = $conn->prepare($sql6982);
-        $stmt6982->execute();
-        $result6982 = $stmt6982->get_result();
-        $row6982 = $result6982->fetch_assoc();
-        $assetId6982 = $row6982['assetId'];
-        $category6982 = $row6982['category'];
-        $date6982 = $row6982['date'];
-        $building6982 = $row6982['building'];
-        $floor6982 = $row6982['floor'];
-        $room6982 = $row6982['room'];
-        $status6982 = $row6982['status'];
-        $assignedName6982 = $row6982['assignedName'];
-        $assignedBy6982 = $row6982['assignedBy'];
-        $upload_img6982 = $row6982['upload_img'];
-        $description6982 = $row6982['description'];
-
-        //FOR ID 6983
-        $sql6983 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6983";
-        $stmt6983 = $conn->prepare($sql6983);
-        $stmt6983->execute();
-        $result6983 = $stmt6983->get_result();
-        $row6983 = $result6983->fetch_assoc();
-        $assetId6983 = $row6983['assetId'];
-        $category6983 = $row6983['category'];
-        $date6983 = $row6983['date'];
-        $building6983 = $row6983['building'];
-        $floor6983 = $row6983['floor'];
-        $room6983 = $row6983['room'];
-        $status6983 = $row6983['status'];
-        $assignedName6983 = $row6983['assignedName'];
-        $assignedBy6983 = $row6983['assignedBy'];
-        $upload_img6983 = $row6983['upload_img'];
-        $description6983 = $row6983['description'];
-
-        //FOR ID 6984
-        $sql6984 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6984";
-        $stmt6984 = $conn->prepare($sql6984);
-        $stmt6984->execute();
-        $result6984 = $stmt6984->get_result();
-        $row6984 = $result6984->fetch_assoc();
-        $assetId6984 = $row6984['assetId'];
-        $category6984 = $row6984['category'];
-        $date6984 = $row6984['date'];
-        $building6984 = $row6984['building'];
-        $floor6984 = $row6984['floor'];
-        $room6984 = $row6984['room'];
-        $status6984 = $row6984['status'];
-        $assignedName6984 = $row6984['assignedName'];
-        $assignedBy6984 = $row6984['assignedBy'];
-        $upload_img6984 = $row6984['upload_img'];
-        $description6984 = $row6984['description'];
-
-        //FOR ID 6985
-        $sql6985 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6985";
-        $stmt6985 = $conn->prepare($sql6985);
-        $stmt6985->execute();
-        $result6985 = $stmt6985->get_result();
-        $row6985 = $result6985->fetch_assoc();
-        $assetId6985 = $row6985['assetId'];
-        $category6985 = $row6985['category'];
-        $date6985 = $row6985['date'];
-        $building6985 = $row6985['building'];
-        $floor6985 = $row6985['floor'];
-        $room6985 = $row6985['room'];
-        $status6985 = $row6985['status'];
-        $assignedName6985 = $row6985['assignedName'];
-        $assignedBy6985 = $row6985['assignedBy'];
-        $upload_img6985 = $row6985['upload_img'];
-        $description6985 = $row6985['description'];
-
-        //FOR ID 6986
-        $sql6986 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6986";
-        $stmt6986 = $conn->prepare($sql6986);
-        $stmt6986->execute();
-        $result6986 = $stmt6986->get_result();
-        $row6986 = $result6986->fetch_assoc();
-        $assetId6986 = $row6986['assetId'];
-        $category6986 = $row6986['category'];
-        $date6986 = $row6986['date'];
-        $building6986 = $row6986['building'];
-        $floor6986 = $row6986['floor'];
-        $room6986 = $row6986['room'];
-        $status6986 = $row6986['status'];
-        $assignedName6986 = $row6986['assignedName'];
-        $assignedBy6986 = $row6986['assignedBy'];
-        $upload_img6986 = $row6986['upload_img'];
-        $description6986 = $row6986['description'];
-
-        //FOR ID 6987
-        $sql6987 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6987";
-        $stmt6987 = $conn->prepare($sql6987);
-        $stmt6987->execute();
-        $result6987 = $stmt6987->get_result();
-        $row6987 = $result6987->fetch_assoc();
-        $assetId6987 = $row6987['assetId'];
-        $category6987 = $row6987['category'];
-        $date6987 = $row6987['date'];
-        $building6987 = $row6987['building'];
-        $floor6987 = $row6987['floor'];
-        $room6987 = $row6987['room'];
-        $status6987 = $row6987['status'];
-        $assignedName6987 = $row6987['assignedName'];
-        $assignedBy6987 = $row6987['assignedBy'];
-        $upload_img6987 = $row6987['upload_img'];
-        $description6987 = $row6987['description'];
-
-        //FOR ID 6988
-        $sql6988 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6988";
-        $stmt6988 = $conn->prepare($sql6988);
-        $stmt6988->execute();
-        $result6988 = $stmt6988->get_result();
-        $row6988 = $result6988->fetch_assoc();
-        $assetId6988 = $row6988['assetId'];
-        $category6988 = $row6988['category'];
-        $date6988 = $row6988['date'];
-        $building6988 = $row6988['building'];
-        $floor6988 = $row6988['floor'];
-        $room6988 = $row6988['room'];
-        $status6988 = $row6988['status'];
-        $assignedName6988 = $row6988['assignedName'];
-        $assignedBy6988 = $row6988['assignedBy'];
-        $upload_img6988 = $row6988['upload_img'];
-        $description6988 = $row6988['description'];
-
-        //FOR ID 6989
-        $sql6989 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6989";
-        $stmt6989 = $conn->prepare($sql6989);
-        $stmt6989->execute();
-        $result6989 = $stmt6989->get_result();
-        $row6989 = $result6989->fetch_assoc();
-        $assetId6989 = $row6989['assetId'];
-        $category6989 = $row6989['category'];
-        $date6989 = $row6989['date'];
-        $building6989 = $row6989['building'];
-        $floor6989 = $row6989['floor'];
-        $room6989 = $row6989['room'];
-        $status6989 = $row6989['status'];
-        $assignedName6989 = $row6989['assignedName'];
-        $assignedBy6989 = $row6989['assignedBy'];
-        $upload_img6989 = $row6989['upload_img'];
-        $description6989 = $row6989['description'];
-
-        //FOR ID 6990
-        $sql6990 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6990";
-        $stmt6990 = $conn->prepare($sql6990);
-        $stmt6990->execute();
-        $result6990 = $stmt6990->get_result();
-        $row6990 = $result6990->fetch_assoc();
-        $assetId6990 = $row6990['assetId'];
-        $category6990 = $row6990['category'];
-        $date6990 = $row6990['date'];
-        $building6990 = $row6990['building'];
-        $floor6990 = $row6990['floor'];
-        $room6990 = $row6990['room'];
-        $status6990 = $row6990['status'];
-        $assignedName6990 = $row6990['assignedName'];
-        $assignedBy6990 = $row6990['assignedBy'];
-        $upload_img6990 = $row6990['upload_img'];
-        $description6990 = $row6990['description'];
-
-        //FOR ID 6991
-        $sql6991 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6991";
-        $stmt6991 = $conn->prepare($sql6991);
-        $stmt6991->execute();
-        $result6991 = $stmt6991->get_result();
-        $row6991 = $result6991->fetch_assoc();
-        $assetId6991 = $row6991['assetId'];
-        $category6991 = $row6991['category'];
-        $date6991 = $row6991['date'];
-        $building6991 = $row6991['building'];
-        $floor6991 = $row6991['floor'];
-        $room6991 = $row6991['room'];
-        $status6991 = $row6991['status'];
-        $assignedName6991 = $row6991['assignedName'];
-        $assignedBy6991 = $row6991['assignedBy'];
-        $upload_img6991 = $row6991['upload_img'];
-        $description6991 = $row6991['description'];
-
-        //FOR ID 6992
-        $sql6992 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6992";
-        $stmt6992 = $conn->prepare($sql6992);
-        $stmt6992->execute();
-        $result6992 = $stmt6992->get_result();
-        $row6992 = $result6992->fetch_assoc();
-        $assetId6992 = $row6992['assetId'];
-        $category6992 = $row6992['category'];
-        $date6992 = $row6992['date'];
-        $building6992 = $row6992['building'];
-        $floor6992 = $row6992['floor'];
-        $room6992 = $row6992['room'];
-        $status6992 = $row6992['status'];
-        $assignedName6992 = $row6992['assignedName'];
-        $assignedBy6992 = $row6992['assignedBy'];
-        $upload_img6992 = $row6992['upload_img'];
-        $description6992 = $row6992['description'];
-
-        //FOR ID 6993
-        $sql6993 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6993";
-        $stmt6993 = $conn->prepare($sql6993);
-        $stmt6993->execute();
-        $result6993 = $stmt6993->get_result();
-        $row6993 = $result6993->fetch_assoc();
-        $assetId6993 = $row6993['assetId'];
-        $category6993 = $row6993['category'];
-        $date6993 = $row6993['date'];
-        $building6993 = $row6993['building'];
-        $floor6993 = $row6993['floor'];
-        $room6993 = $row6993['room'];
-        $status6993 = $row6993['status'];
-        $assignedName6993 = $row6993['assignedName'];
-        $assignedBy6993 = $row6993['assignedBy'];
-        $upload_img6993 = $row6993['upload_img'];
-        $description6993 = $row6993['description'];
-
-        //FOR ID 6994
-        $sql6994 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6994";
-        $stmt6994 = $conn->prepare($sql6994);
-        $stmt6994->execute();
-        $result6994 = $stmt6994->get_result();
-        $row6994 = $result6994->fetch_assoc();
-        $assetId6994 = $row6994['assetId'];
-        $category6994 = $row6994['category'];
-        $date6994 = $row6994['date'];
-        $building6994 = $row6994['building'];
-        $floor6994 = $row6994['floor'];
-        $room6994 = $row6994['room'];
-        $status6994 = $row6994['status'];
-        $assignedName6994 = $row6994['assignedName'];
-        $assignedBy6994 = $row6994['assignedBy'];
-        $upload_img6994 = $row6994['upload_img'];
-        $description6994 = $row6994['description'];
-
-        //FOR ID 6995
-        $sql6995 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6995";
-        $stmt6995 = $conn->prepare($sql6995);
-        $stmt6995->execute();
-        $result6995 = $stmt6995->get_result();
-        $row6995 = $result6995->fetch_assoc();
-        $assetId6995 = $row6995['assetId'];
-        $category6995 = $row6995['category'];
-        $date6995 = $row6995['date'];
-        $building6995 = $row6995['building'];
-        $floor6995 = $row6995['floor'];
-        $room6995 = $row6995['room'];
-        $status6995 = $row6995['status'];
-        $assignedName6995 = $row6995['assignedName'];
-        $assignedBy6995 = $row6995['assignedBy'];
-        $upload_img6995 = $row6995['upload_img'];
-        $description6995 = $row6995['description'];
-
-        //FOR ID 6996
-        $sql6996 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6996";
-        $stmt6996 = $conn->prepare($sql6996);
-        $stmt6996->execute();
-        $result6996 = $stmt6996->get_result();
-        $row6996 = $result6996->fetch_assoc();
-        $assetId6996 = $row6996['assetId'];
-        $category6996 = $row6996['category'];
-        $date6996 = $row6996['date'];
-        $building6996 = $row6996['building'];
-        $floor6996 = $row6996['floor'];
-        $room6996 = $row6996['room'];
-        $status6996 = $row6996['status'];
-        $assignedName6996 = $row6996['assignedName'];
-        $assignedBy6996 = $row6996['assignedBy'];
-        $upload_img6996 = $row6996['upload_img'];
-        $description6996 = $row6996['description'];
-
-        //FOR ID 6997
-        $sql6997 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6997";
-        $stmt6997 = $conn->prepare($sql6997);
-        $stmt6997->execute();
-        $result6997 = $stmt6997->get_result();
-        $row6997 = $result6997->fetch_assoc();
-        $assetId6997 = $row6997['assetId'];
-        $category6997 = $row6997['category'];
-        $date6997 = $row6997['date'];
-        $building6997 = $row6997['building'];
-        $floor6997 = $row6997['floor'];
-        $room6997 = $row6997['room'];
-        $status6997 = $row6997['status'];
-        $assignedName6997 = $row6997['assignedName'];
-        $assignedBy6997 = $row6997['assignedBy'];
-        $upload_img6997 = $row6997['upload_img'];
-        $description6997 = $row6997['description'];
-
-        //FOR ID 6998
-        $sql6998 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6998";
-        $stmt6998 = $conn->prepare($sql6998);
-        $stmt6998->execute();
-        $result6998 = $stmt6998->get_result();
-        $row6998 = $result6998->fetch_assoc();
-        $assetId6998 = $row6998['assetId'];
-        $category6998 = $row6998['category'];
-        $date6998 = $row6998['date'];
-        $building6998 = $row6998['building'];
-        $floor6998 = $row6998['floor'];
-        $room6998 = $row6998['room'];
-        $status6998 = $row6998['status'];
-        $assignedName6998 = $row6998['assignedName'];
-        $assignedBy6998 = $row6998['assignedBy'];
-        $upload_img6998 = $row6998['upload_img'];
-        $description6998 = $row6998['description'];
-
-        //FOR ID 6999
-        $sql6999 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6999";
-        $stmt6999 = $conn->prepare($sql6999);
-        $stmt6999->execute();
-        $result6999 = $stmt6999->get_result();
-        $row6999 = $result6999->fetch_assoc();
-        $assetId6999 = $row6999['assetId'];
-        $category6999 = $row6999['category'];
-        $date6999 = $row6999['date'];
-        $building6999 = $row6999['building'];
-        $floor6999 = $row6999['floor'];
-        $room6999 = $row6999['room'];
-        $status6999 = $row6999['status'];
-        $assignedName6999 = $row6999['assignedName'];
-        $assignedBy6999 = $row6999['assignedBy'];
-        $upload_img6999 = $row6999['upload_img'];
-        $description6999 = $row6999['description'];
-
-        //FOR ID 7000
-        $sql7000 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7000";
-        $stmt7000 = $conn->prepare($sql7000);
-        $stmt7000->execute();
-        $result7000 = $stmt7000->get_result();
-        $row7000 = $result7000->fetch_assoc();
-        $assetId7000 = $row7000['assetId'];
-        $category7000 = $row7000['category'];
-        $date7000 = $row7000['date'];
-        $building7000 = $row7000['building'];
-        $floor7000 = $row7000['floor'];
-        $room7000 = $row7000['room'];
-        $status7000 = $row7000['status'];
-        $assignedName7000 = $row7000['assignedName'];
-        $assignedBy7000 = $row7000['assignedBy'];
-        $upload_img7000 = $row7000['upload_img'];
-        $description7000 = $row7000['description'];
-
-        //FOR ID 7001
-        $sql7001 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7001";
-        $stmt7001 = $conn->prepare($sql7001);
-        $stmt7001->execute();
-        $result7001 = $stmt7001->get_result();
-        $row7001 = $result7001->fetch_assoc();
-        $assetId7001 = $row7001['assetId'];
-        $category7001 = $row7001['category'];
-        $date7001 = $row7001['date'];
-        $building7001 = $row7001['building'];
-        $floor7001 = $row7001['floor'];
-        $room7001 = $row7001['room'];
-        $status7001 = $row7001['status'];
-        $assignedName7001 = $row7001['assignedName'];
-        $assignedBy7001 = $row7001['assignedBy'];
-        $upload_img7001 = $row7001['upload_img'];
-        $description7001 = $row7001['description'];
-
-        //FOR ID 7002
-        $sql7002 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7002";
-        $stmt7002 = $conn->prepare($sql7002);
-        $stmt7002->execute();
-        $result7002 = $stmt7002->get_result();
-        $row7002 = $result7002->fetch_assoc();
-        $assetId7002 = $row7002['assetId'];
-        $category7002 = $row7002['category'];
-        $date7002 = $row7002['date'];
-        $building7002 = $row7002['building'];
-        $floor7002 = $row7002['floor'];
-        $room7002 = $row7002['room'];
-        $status7002 = $row7002['status'];
-        $assignedName7002 = $row7002['assignedName'];
-        $assignedBy7002 = $row7002['assignedBy'];
-        $upload_img7002 = $row7002['upload_img'];
-        $description7002 = $row7002['description'];
-
-        //FOR ID 7003
-        $sql7003 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7003";
-        $stmt7003 = $conn->prepare($sql7003);
-        $stmt7003->execute();
-        $result7003 = $stmt7003->get_result();
-        $row7003 = $result7003->fetch_assoc();
-        $assetId7003 = $row7003['assetId'];
-        $category7003 = $row7003['category'];
-        $date7003 = $row7003['date'];
-        $building7003 = $row7003['building'];
-        $floor7003 = $row7003['floor'];
-        $room7003 = $row7003['room'];
-        $status7003 = $row7003['status'];
-        $assignedName7003 = $row7003['assignedName'];
-        $assignedBy7003 = $row7003['assignedBy'];
-        $upload_img7003 = $row7003['upload_img'];
-        $description7003 = $row7003['description'];
-
-        //FOR ID 7004
-        $sql7004 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7004";
-        $stmt7004 = $conn->prepare($sql7004);
-        $stmt7004->execute();
-        $result7004 = $stmt7004->get_result();
-        $row7004 = $result7004->fetch_assoc();
-        $assetId7004 = $row7004['assetId'];
-        $category7004 = $row7004['category'];
-        $date7004 = $row7004['date'];
-        $building7004 = $row7004['building'];
-        $floor7004 = $row7004['floor'];
-        $room7004 = $row7004['room'];
-        $status7004 = $row7004['status'];
-        $assignedName7004 = $row7004['assignedName'];
-        $assignedBy7004 = $row7004['assignedBy'];
-        $upload_img7004 = $row7004['upload_img'];
-        $description7004 = $row7004['description'];
-
-        //FOR ID 7005
-        $sql7005 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7005";
-        $stmt7005 = $conn->prepare($sql7005);
-        $stmt7005->execute();
-        $result7005 = $stmt7005->get_result();
-        $row7005 = $result7005->fetch_assoc();
-        $assetId7005 = $row7005['assetId'];
-        $category7005 = $row7005['category'];
-        $date7005 = $row7005['date'];
-        $building7005 = $row7005['building'];
-        $floor7005 = $row7005['floor'];
-        $room7005 = $row7005['room'];
-        $status7005 = $row7005['status'];
-        $assignedName7005 = $row7005['assignedName'];
-        $assignedBy7005 = $row7005['assignedBy'];
-        $upload_img7005 = $row7005['upload_img'];
-        $description7005 = $row7005['description'];
-
-        //FOR ID 7006
-        $sql7006 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7006";
-        $stmt7006 = $conn->prepare($sql7006);
-        $stmt7006->execute();
-        $result7006 = $stmt7006->get_result();
-        $row7006 = $result7006->fetch_assoc();
-        $assetId7006 = $row7006['assetId'];
-        $category7006 = $row7006['category'];
-        $date7006 = $row7006['date'];
-        $building7006 = $row7006['building'];
-        $floor7006 = $row7006['floor'];
-        $room7006 = $row7006['room'];
-        $status7006 = $row7006['status'];
-        $assignedName7006 = $row7006['assignedName'];
-        $assignedBy7006 = $row7006['assignedBy'];
-        $upload_img7006 = $row7006['upload_img'];
-        $description7006 = $row7006['description'];
-
-        //FOR ID 7007
-        $sql7007 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7007";
-        $stmt7007 = $conn->prepare($sql7007);
-        $stmt7007->execute();
-        $result7007 = $stmt7007->get_result();
-        $row7007 = $result7007->fetch_assoc();
-        $assetId7007 = $row7007['assetId'];
-        $category7007 = $row7007['category'];
-        $date7007 = $row7007['date'];
-        $building7007 = $row7007['building'];
-        $floor7007 = $row7007['floor'];
-        $room7007 = $row7007['room'];
-        $status7007 = $row7007['status'];
-        $assignedName7007 = $row7007['assignedName'];
-        $assignedBy7007 = $row7007['assignedBy'];
-        $upload_img7007 = $row7007['upload_img'];
-        $description7007 = $row7007['description'];
-
-        //FOR ID 7008
-        $sql7008 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7008";
-        $stmt7008 = $conn->prepare($sql7008);
-        $stmt7008->execute();
-        $result7008 = $stmt7008->get_result();
-        $row7008 = $result7008->fetch_assoc();
-        $assetId7008 = $row7008['assetId'];
-        $category7008 = $row7008['category'];
-        $date7008 = $row7008['date'];
-        $building7008 = $row7008['building'];
-        $floor7008 = $row7008['floor'];
-        $room7008 = $row7008['room'];
-        $status7008 = $row7008['status'];
-        $assignedName7008 = $row7008['assignedName'];
-        $assignedBy7008 = $row7008['assignedBy'];
-        $upload_img7008 = $row7008['upload_img'];
-        $description7008 = $row7008['description'];
-
-        //FOR ID 7009
-        $sql7009 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7009";
-        $stmt7009 = $conn->prepare($sql7009);
-        $stmt7009->execute();
-        $result7009 = $stmt7009->get_result();
-        $row7009 = $result7009->fetch_assoc();
-        $assetId7009 = $row7009['assetId'];
-        $category7009 = $row7009['category'];
-        $date7009 = $row7009['date'];
-        $building7009 = $row7009['building'];
-        $floor7009 = $row7009['floor'];
-        $room7009 = $row7009['room'];
-        $status7009 = $row7009['status'];
-        $assignedName7009 = $row7009['assignedName'];
-        $assignedBy7009 = $row7009['assignedBy'];
-        $upload_img7009 = $row7009['upload_img'];
-        $description7009 = $row7009['description'];
-
-        //FOR ID 7010
-        $sql7010 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7010";
-        $stmt7010 = $conn->prepare($sql7010);
-        $stmt7010->execute();
-        $result7010 = $stmt7010->get_result();
-        $row7010 = $result7010->fetch_assoc();
-        $assetId7010 = $row7010['assetId'];
-        $category7010 = $row7010['category'];
-        $date7010 = $row7010['date'];
-        $building7010 = $row7010['building'];
-        $floor7010 = $row7010['floor'];
-        $room7010 = $row7010['room'];
-        $status7010 = $row7010['status'];
-        $assignedName7010 = $row7010['assignedName'];
-        $assignedBy7010 = $row7010['assignedBy'];
-        $upload_img7010 = $row7010['upload_img'];
-        $description7010 = $row7010['description'];
-        //FOR ID 7011
-        $sql7011 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7011";
-        $stmt7011 = $conn->prepare($sql7011);
-        $stmt7011->execute();
-        $result7011 = $stmt7011->get_result();
-        $row7011 = $result7011->fetch_assoc();
-        $assetId7011 = $row7011['assetId'];
-        $category7011 = $row7011['category'];
-        $date7011 = $row7011['date'];
-        $building7011 = $row7011['building'];
-        $floor7011 = $row7011['floor'];
-        $room7011 = $row7011['room'];
-        $status7011 = $row7011['status'];
-        $assignedName7011 = $row7011['assignedName'];
-        $assignedBy7011 = $row7011['assignedBy'];
-        $upload_img7011 = $row7011['upload_img'];
-        $description7011 = $row7011['description'];
-
-        //FOR ID 7012
-        $sql7012 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7012";
-        $stmt7012 = $conn->prepare($sql7012);
-        $stmt7012->execute();
-        $result7012 = $stmt7012->get_result();
-        $row7012 = $result7012->fetch_assoc();
-        $assetId7012 = $row7012['assetId'];
-        $category7012 = $row7012['category'];
-        $date7012 = $row7012['date'];
-        $building7012 = $row7012['building'];
-        $floor7012 = $row7012['floor'];
-        $room7012 = $row7012['room'];
-        $status7012 = $row7012['status'];
-        $assignedName7012 = $row7012['assignedName'];
-        $assignedBy7012 = $row7012['assignedBy'];
-        $upload_img7012 = $row7012['upload_img'];
-        $description7012 = $row7012['description'];
-
-        //FOR ID 7013
-        $sql7013 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7013";
-        $stmt7013 = $conn->prepare($sql7013);
-        $stmt7013->execute();
-        $result7013 = $stmt7013->get_result();
-        $row7013 = $result7013->fetch_assoc();
-        $assetId7013 = $row7013['assetId'];
-        $category7013 = $row7013['category'];
-        $date7013 = $row7013['date'];
-        $building7013 = $row7013['building'];
-        $floor7013 = $row7013['floor'];
-        $room7013 = $row7013['room'];
-        $status7013 = $row7013['status'];
-        $assignedName7013 = $row7013['assignedName'];
-        $assignedBy7013 = $row7013['assignedBy'];
-        $upload_img7013 = $row7013['upload_img'];
-        $description7013 = $row7013['description'];
-
-        //FOR ID 7014
-        $sql7014 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7014";
-        $stmt7014 = $conn->prepare($sql7014);
-        $stmt7014->execute();
-        $result7014 = $stmt7014->get_result();
-        $row7014 = $result7014->fetch_assoc();
-        $assetId7014 = $row7014['assetId'];
-        $category7014 = $row7014['category'];
-        $date7014 = $row7014['date'];
-        $building7014 = $row7014['building'];
-        $floor7014 = $row7014['floor'];
-        $room7014 = $row7014['room'];
-        $status7014 = $row7014['status'];
-        $assignedName7014 = $row7014['assignedName'];
-        $assignedBy7014 = $row7014['assignedBy'];
-        $upload_img7014 = $row7014['upload_img'];
-        $description7014 = $row7014['description'];
-
-        //FOR ID 7015
-        $sql7015 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7015";
-        $stmt7015 = $conn->prepare($sql7015);
-        $stmt7015->execute();
-        $result7015 = $stmt7015->get_result();
-        $row7015 = $result7015->fetch_assoc();
-        $assetId7015 = $row7015['assetId'];
-        $category7015 = $row7015['category'];
-        $date7015 = $row7015['date'];
-        $building7015 = $row7015['building'];
-        $floor7015 = $row7015['floor'];
-        $room7015 = $row7015['room'];
-        $status7015 = $row7015['status'];
-        $assignedName7015 = $row7015['assignedName'];
-        $assignedBy7015 = $row7015['assignedBy'];
-        $upload_img7015 = $row7015['upload_img'];
-        $description7015 = $row7015['description'];
-
-        //FOR ID 7016
-        $sql7016 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7016";
-        $stmt7016 = $conn->prepare($sql7016);
-        $stmt7016->execute();
-        $result7016 = $stmt7016->get_result();
-        $row7016 = $result7016->fetch_assoc();
-        $assetId7016 = $row7016['assetId'];
-        $category7016 = $row7016['category'];
-        $date7016 = $row7016['date'];
-        $building7016 = $row7016['building'];
-        $floor7016 = $row7016['floor'];
-        $room7016 = $row7016['room'];
-        $status7016 = $row7016['status'];
-        $assignedName7016 = $row7016['assignedName'];
-        $assignedBy7016 = $row7016['assignedBy'];
-        $upload_img7016 = $row7016['upload_img'];
-        $description7016 = $row7016['description'];
-
-        //FOR ID 7016
-        $sql7016 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7016";
-        $stmt7016 = $conn->prepare($sql7016);
-        $stmt7016->execute();
-        $result7016 = $stmt7016->get_result();
-        $row7016 = $result7016->fetch_assoc();
-        $assetId7016 = $row7016['assetId'];
-        $category7016 = $row7016['category'];
-        $date7016 = $row7016['date'];
-        $building7016 = $row7016['building'];
-        $floor7016 = $row7016['floor'];
-        $room7016 = $row7016['room'];
-        $status7016 = $row7016['status'];
-        $assignedName7016 = $row7016['assignedName'];
-        $assignedBy7016 = $row7016['assignedBy'];
-        $upload_img7016 = $row7016['upload_img'];
-        $description7016 = $row7016['description'];
-
-        //FOR ID 7017
-        $sql7017 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7017";
-        $stmt7017 = $conn->prepare($sql7017);
-        $stmt7017->execute();
-        $result7017 = $stmt7017->get_result();
-        $row7017 = $result7017->fetch_assoc();
-        $assetId7017 = $row7017['assetId'];
-        $category7017 = $row7017['category'];
-        $date7017 = $row7017['date'];
-        $building7017 = $row7017['building'];
-        $floor7017 = $row7017['floor'];
-        $room7017 = $row7017['room'];
-        $status7017 = $row7017['status'];
-        $assignedName7017 = $row7017['assignedName'];
-        $assignedBy7017 = $row7017['assignedBy'];
-        $upload_img7017 = $row7017['upload_img'];
-        $description7017 = $row7017['description'];
-
-        //FOR ID 7018
-        $sql7018 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7018";
-        $stmt7018 = $conn->prepare($sql7018);
-        $stmt7018->execute();
-        $result7018 = $stmt7018->get_result();
-        $row7018 = $result7018->fetch_assoc();
-        $assetId7018 = $row7018['assetId'];
-        $category7018 = $row7018['category'];
-        $date7018 = $row7018['date'];
-        $building7018 = $row7018['building'];
-        $floor7018 = $row7018['floor'];
-        $room7018 = $row7018['room'];
-        $status7018 = $row7018['status'];
-        $assignedName7018 = $row7018['assignedName'];
-        $assignedBy7018 = $row7018['assignedBy'];
-        $upload_img7018 = $row7018['upload_img'];
-        $description7018 = $row7018['description'];
-
-        //FOR ID 7019
-        $sql7019 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7019";
-        $stmt7019 = $conn->prepare($sql7019);
-        $stmt7019->execute();
-        $result7019 = $stmt7019->get_result();
-        $row7019 = $result7019->fetch_assoc();
-        $assetId7019 = $row7019['assetId'];
-        $category7019 = $row7019['category'];
-        $date7019 = $row7019['date'];
-        $building7019 = $row7019['building'];
-        $floor7019 = $row7019['floor'];
-        $room7019 = $row7019['room'];
-        $status7019 = $row7019['status'];
-        $assignedName7019 = $row7019['assignedName'];
-        $assignedBy7019 = $row7019['assignedBy'];
-        $upload_img7019 = $row7019['upload_img'];
-        $description7019 = $row7019['description'];
-
-        //FOR ID 7020
-        $sql7020 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7020";
-        $stmt7020 = $conn->prepare($sql7020);
-        $stmt7020->execute();
-        $result7020 = $stmt7020->get_result();
-        $row7020 = $result7020->fetch_assoc();
-        $assetId7020 = $row7020['assetId'];
-        $category7020 = $row7020['category'];
-        $date7020 = $row7020['date'];
-        $building7020 = $row7020['building'];
-        $floor7020 = $row7020['floor'];
-        $room7020 = $row7020['room'];
-        $status7020 = $row7020['status'];
-        $assignedName7020 = $row7020['assignedName'];
-        $assignedBy7020 = $row7020['assignedBy'];
-        $upload_img7020 = $row7020['upload_img'];
-        $description7020 = $row7020['description'];
-
-        //FOR ID 7021
-        $sql7021 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7021";
-        $stmt7021 = $conn->prepare($sql7021);
-        $stmt7021->execute();
-        $result7021 = $stmt7021->get_result();
-        $row7021 = $result7021->fetch_assoc();
-        $assetId7021 = $row7021['assetId'];
-        $category7021 = $row7021['category'];
-        $date7021 = $row7021['date'];
-        $building7021 = $row7021['building'];
-        $floor7021 = $row7021['floor'];
-        $room7021 = $row7021['room'];
-        $status7021 = $row7021['status'];
-        $assignedName7021 = $row7021['assignedName'];
-        $assignedBy7021 = $row7021['assignedBy'];
-        $upload_img7021 = $row7021['upload_img'];
-        $description7021 = $row7021['description'];
-
-        //FOR ID 7022
-        $sql7022 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7022";
-        $stmt7022 = $conn->prepare($sql7022);
-        $stmt7022->execute();
-        $result7022 = $stmt7022->get_result();
-        $row7022 = $result7022->fetch_assoc();
-        $assetId7022 = $row7022['assetId'];
-        $category7022 = $row7022['category'];
-        $date7022 = $row7022['date'];
-        $building7022 = $row7022['building'];
-        $floor7022 = $row7022['floor'];
-        $room7022 = $row7022['room'];
-        $status7022 = $row7022['status'];
-        $assignedName7022 = $row7022['assignedName'];
-        $assignedBy7022 = $row7022['assignedBy'];
-        $upload_img7022 = $row7022['upload_img'];
-        $description7022 = $row7022['description'];
-
-        //FOR ID 7023
-        $sql7023 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7023";
-        $stmt7023 = $conn->prepare($sql7023);
-        $stmt7023->execute();
-        $result7023 = $stmt7023->get_result();
-        $row7023 = $result7023->fetch_assoc();
-        $assetId7023 = $row7023['assetId'];
-        $category7023 = $row7023['category'];
-        $date7023 = $row7023['date'];
-        $building7023 = $row7023['building'];
-        $floor7023 = $row7023['floor'];
-        $room7023 = $row7023['room'];
-        $status7023 = $row7023['status'];
-        $assignedName7023 = $row7023['assignedName'];
-        $assignedBy7023 = $row7023['assignedBy'];
-        $upload_img7023 = $row7023['upload_img'];
-        $description7023 = $row7023['description'];
-
-        //FOR ID 7024
-        $sql7024 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7024";
-        $stmt7024 = $conn->prepare($sql7024);
-        $stmt7024->execute();
-        $result7024 = $stmt7024->get_result();
-        $row7024 = $result7024->fetch_assoc();
-        $assetId7024 = $row7024['assetId'];
-        $category7024 = $row7024['category'];
-        $date7024 = $row7024['date'];
-        $building7024 = $row7024['building'];
-        $floor7024 = $row7024['floor'];
-        $room7024 = $row7024['room'];
-        $status7024 = $row7024['status'];
-        $assignedName7024 = $row7024['assignedName'];
-        $assignedBy7024 = $row7024['assignedBy'];
-        $upload_img7024 = $row7024['upload_img'];
-        $description7024 = $row7024['description'];
-
-        //FOR ID 7025
-        $sql7025 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7025";
-        $stmt7025 = $conn->prepare($sql7025);
-        $stmt7025->execute();
-        $result7025 = $stmt7025->get_result();
-        $row7025 = $result7025->fetch_assoc();
-        $assetId7025 = $row7025['assetId'];
-        $category7025 = $row7025['category'];
-        $date7025 = $row7025['date'];
-        $building7025 = $row7025['building'];
-        $floor7025 = $row7025['floor'];
-        $room7025 = $row7025['room'];
-        $status7025 = $row7025['status'];
-        $assignedName7025 = $row7025['assignedName'];
-        $assignedBy7025 = $row7025['assignedBy'];
-        $upload_img7025 = $row7025['upload_img'];
-        $description7025 = $row7025['description'];
-
-        //FOR ID 7026
-        $sql7026 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7026";
-        $stmt7026 = $conn->prepare($sql7026);
-        $stmt7026->execute();
-        $result7026 = $stmt7026->get_result();
-        $row7026 = $result7026->fetch_assoc();
-        $assetId7026 = $row7026['assetId'];
-        $category7026 = $row7026['category'];
-        $date7026 = $row7026['date'];
-        $building7026 = $row7026['building'];
-        $floor7026 = $row7026['floor'];
-        $room7026 = $row7026['room'];
-        $status7026 = $row7026['status'];
-        $assignedName7026 = $row7026['assignedName'];
-        $assignedBy7026 = $row7026['assignedBy'];
-        $upload_img7026 = $row7026['upload_img'];
-        $description7026 = $row7026['description'];
-
-        //FOR ID 7027
-        $sql7027 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7027";
-        $stmt7027 = $conn->prepare($sql7027);
-        $stmt7027->execute();
-        $result7027 = $stmt7027->get_result();
-        $row7027 = $result7027->fetch_assoc();
-        $assetId7027 = $row7027['assetId'];
-        $category7027 = $row7027['category'];
-        $date7027 = $row7027['date'];
-        $building7027 = $row7027['building'];
-        $floor7027 = $row7027['floor'];
-        $room7027 = $row7027['room'];
-        $status7027 = $row7027['status'];
-        $assignedName7027 = $row7027['assignedName'];
-        $assignedBy7027 = $row7027['assignedBy'];
-        $upload_img7027 = $row7027['upload_img'];
-        $description7027 = $row7027['description'];
-
-        //FOR ID 7028
-        $sql7028 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7028";
-        $stmt7028 = $conn->prepare($sql7028);
-        $stmt7028->execute();
-        $result7028 = $stmt7028->get_result();
-        $row7028 = $result7028->fetch_assoc();
-        $assetId7028 = $row7028['assetId'];
-        $category7028 = $row7028['category'];
-        $date7028 = $row7028['date'];
-        $building7028 = $row7028['building'];
-        $floor7028 = $row7028['floor'];
-        $room7028 = $row7028['room'];
-        $status7028 = $row7028['status'];
-        $assignedName7028 = $row7028['assignedName'];
-        $assignedBy7028 = $row7028['assignedBy'];
-        $upload_img7028 = $row7028['upload_img'];
-        $description7028 = $row7028['description'];
-
-        //FOR ID 7029
-        $sql7029 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7029";
-        $stmt7029 = $conn->prepare($sql7029);
-        $stmt7029->execute();
-        $result7029 = $stmt7029->get_result();
-        $row7029 = $result7029->fetch_assoc();
-        $assetId7029 = $row7029['assetId'];
-        $category7029 = $row7029['category'];
-        $date7029 = $row7029['date'];
-        $building7029 = $row7029['building'];
-        $floor7029 = $row7029['floor'];
-        $room7029 = $row7029['room'];
-        $status7029 = $row7029['status'];
-        $assignedName7029 = $row7029['assignedName'];
-        $assignedBy7029 = $row7029['assignedBy'];
-        $upload_img7029 = $row7029['upload_img'];
-        $description7029 = $row7029['description'];
-
-        //FOR ID 7030
-        $sql7030 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7030";
-        $stmt7030 = $conn->prepare($sql7030);
-        $stmt7030->execute();
-        $result7030 = $stmt7030->get_result();
-        $row7030 = $result7030->fetch_assoc();
-        $assetId7030 = $row7030['assetId'];
-        $category7030 = $row7030['category'];
-        $date7030 = $row7030['date'];
-        $building7030 = $row7030['building'];
-        $floor7030 = $row7030['floor'];
-        $room7030 = $row7030['room'];
-        $status7030 = $row7030['status'];
-        $assignedName7030 = $row7030['assignedName'];
-        $assignedBy7030 = $row7030['assignedBy'];
-        $upload_img7030 = $row7030['upload_img'];
-        $description7030 = $row7030['description'];
-
-        //FOR ID 7031
-        $sql7031 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7031";
-        $stmt7031 = $conn->prepare($sql7031);
-        $stmt7031->execute();
-        $result7031 = $stmt7031->get_result();
-        $row7031 = $result7031->fetch_assoc();
-        $assetId7031 = $row7031['assetId'];
-        $category7031 = $row7031['category'];
-        $date7031 = $row7031['date'];
-        $building7031 = $row7031['building'];
-        $floor7031 = $row7031['floor'];
-        $room7031 = $row7031['room'];
-        $status7031 = $row7031['status'];
-        $assignedName7031 = $row7031['assignedName'];
-        $assignedBy7031 = $row7031['assignedBy'];
-        $upload_img7031 = $row7031['upload_img'];
-        $description7031 = $row7031['description'];
-
-        //FOR ID 7032
-        $sql7032 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7032";
-        $stmt7032 = $conn->prepare($sql7032);
-        $stmt7032->execute();
-        $result7032 = $stmt7032->get_result();
-        $row7032 = $result7032->fetch_assoc();
-        $assetId7032 = $row7032['assetId'];
-        $category7032 = $row7032['category'];
-        $date7032 = $row7032['date'];
-        $building7032 = $row7032['building'];
-        $floor7032 = $row7032['floor'];
-        $room7032 = $row7032['room'];
-        $status7032 = $row7032['status'];
-        $assignedName7032 = $row7032['assignedName'];
-        $assignedBy7032 = $row7032['assignedBy'];
-        $upload_img7032 = $row7032['upload_img'];
-        $description7032 = $row7032['description'];
-
-        //FOR ID 7033
-        $sql7033 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7033";
-        $stmt7033 = $conn->prepare($sql7033);
-        $stmt7033->execute();
-        $result7033 = $stmt7033->get_result();
-        $row7033 = $result7033->fetch_assoc();
-        $assetId7033 = $row7033['assetId'];
-        $category7033 = $row7033['category'];
-        $date7033 = $row7033['date'];
-        $building7033 = $row7033['building'];
-        $floor7033 = $row7033['floor'];
-        $room7033 = $row7033['room'];
-        $status7033 = $row7033['status'];
-        $assignedName7033 = $row7033['assignedName'];
-        $assignedBy7033 = $row7033['assignedBy'];
-        $upload_img7033 = $row7033['upload_img'];
-        $description7033 = $row7033['description'];
-
-        //FOR ID 7034
-        $sql7034 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7034";
-        $stmt7034 = $conn->prepare($sql7034);
-        $stmt7034->execute();
-        $result7034 = $stmt7034->get_result();
-        $row7034 = $result7034->fetch_assoc();
-        $assetId7034 = $row7034['assetId'];
-        $category7034 = $row7034['category'];
-        $date7034 = $row7034['date'];
-        $building7034 = $row7034['building'];
-        $floor7034 = $row7034['floor'];
-        $room7034 = $row7034['room'];
-        $status7034 = $row7034['status'];
-        $assignedName7034 = $row7034['assignedName'];
-        $assignedBy7034 = $row7034['assignedBy'];
-        $upload_img7034 = $row7034['upload_img'];
-        $description7034 = $row7034['description'];
-
-        //FOR ID 7035
-        $sql7035 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7035";
-        $stmt7035 = $conn->prepare($sql7035);
-        $stmt7035->execute();
-        $result7035 = $stmt7035->get_result();
-        $row7035 = $result7035->fetch_assoc();
-        $assetId7035 = $row7035['assetId'];
-        $category7035 = $row7035['category'];
-        $date7035 = $row7035['date'];
-        $building7035 = $row7035['building'];
-        $floor7035 = $row7035['floor'];
-        $room7035 = $row7035['room'];
-        $status7035 = $row7035['status'];
-        $assignedName7035 = $row7035['assignedName'];
-        $assignedBy7035 = $row7035['assignedBy'];
-        $upload_img7035 = $row7035['upload_img'];
-        $description7035 = $row7035['description'];
-
-        //FOR ID 7036
-        $sql7036 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7036";
-        $stmt7036 = $conn->prepare($sql7036);
-        $stmt7036->execute();
-        $result7036 = $stmt7036->get_result();
-        $row7036 = $result7036->fetch_assoc();
-        $assetId7036 = $row7036['assetId'];
-        $category7036 = $row7036['category'];
-        $date7036 = $row7036['date'];
-        $building7036 = $row7036['building'];
-        $floor7036 = $row7036['floor'];
-        $room7036 = $row7036['room'];
-        $status7036 = $row7036['status'];
-        $assignedName7036 = $row7036['assignedName'];
-        $assignedBy7036 = $row7036['assignedBy'];
-        $upload_img7036 = $row7036['upload_img'];
-        $description7036 = $row7036['description'];
-
-        //FOR ID 7037
-        $sql7037 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7037";
-        $stmt7037 = $conn->prepare($sql7037);
-        $stmt7037->execute();
-        $result7037 = $stmt7037->get_result();
-        $row7037 = $result7037->fetch_assoc();
-        $assetId7037 = $row7037['assetId'];
-        $category7037 = $row7037['category'];
-        $date7037 = $row7037['date'];
-        $building7037 = $row7037['building'];
-        $floor7037 = $row7037['floor'];
-        $room7037 = $row7037['room'];
-        $status7037 = $row7037['status'];
-        $assignedName7037 = $row7037['assignedName'];
-        $assignedBy7037 = $row7037['assignedBy'];
-        $upload_img7037 = $row7037['upload_img'];
-        $description7037 = $row7037['description'];
-
-        //FOR ID 7038
-        $sql7038 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7038";
-        $stmt7038 = $conn->prepare($sql7038);
-        $stmt7038->execute();
-        $result7038 = $stmt7038->get_result();
-        $row7038 = $result7038->fetch_assoc();
-        $assetId7038 = $row7038['assetId'];
-        $category7038 = $row7038['category'];
-        $date7038 = $row7038['date'];
-        $building7038 = $row7038['building'];
-        $floor7038 = $row7038['floor'];
-        $room7038 = $row7038['room'];
-        $status7038 = $row7038['status'];
-        $assignedName7038 = $row7038['assignedName'];
-        $assignedBy7038 = $row7038['assignedBy'];
-        $upload_img7038 = $row7038['upload_img'];
-        $description7038 = $row7038['description'];
-
-        //FOR ID 7039
-        $sql7039 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7039";
-        $stmt7039 = $conn->prepare($sql7039);
-        $stmt7039->execute();
-        $result7039 = $stmt7039->get_result();
-        $row7039 = $result7039->fetch_assoc();
-        $assetId7039 = $row7039['assetId'];
-        $category7039 = $row7039['category'];
-        $date7039 = $row7039['date'];
-        $building7039 = $row7039['building'];
-        $floor7039 = $row7039['floor'];
-        $room7039 = $row7039['room'];
-        $status7039 = $row7039['status'];
-        $assignedName7039 = $row7039['assignedName'];
-        $assignedBy7039 = $row7039['assignedBy'];
-        $upload_img7039 = $row7039['upload_img'];
-        $description7039 = $row7039['description'];
-
-        //FOR ID 7040
-        $sql7040 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7040";
-        $stmt7040 = $conn->prepare($sql7040);
-        $stmt7040->execute();
-        $result7040 = $stmt7040->get_result();
-        $row7040 = $result7040->fetch_assoc();
-        $assetId7040 = $row7040['assetId'];
-        $category7040 = $row7040['category'];
-        $date7040 = $row7040['date'];
-        $building7040 = $row7040['building'];
-        $floor7040 = $row7040['floor'];
-        $room7040 = $row7040['room'];
-        $status7040 = $row7040['status'];
-        $assignedName7040 = $row7040['assignedName'];
-        $assignedBy7040 = $row7040['assignedBy'];
-        $upload_img7040 = $row7040['upload_img'];
-        $description7040 = $row7040['description'];
-
-        //FOR ID 7041
-        $sql7041 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7041";
-        $stmt7041 = $conn->prepare($sql7041);
-        $stmt7041->execute();
-        $result7041 = $stmt7041->get_result();
-        $row7041 = $result7041->fetch_assoc();
-        $assetId7041 = $row7041['assetId'];
-        $category7041 = $row7041['category'];
-        $date7041 = $row7041['date'];
-        $building7041 = $row7041['building'];
-        $floor7041 = $row7041['floor'];
-        $room7041 = $row7041['room'];
-        $status7041 = $row7041['status'];
-        $assignedName7041 = $row7041['assignedName'];
-        $assignedBy7041 = $row7041['assignedBy'];
-        $upload_img7041 = $row7041['upload_img'];
-        $description7041 = $row7041['description'];
-
-        //FOR ID 7042
-        $sql7042 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7042";
-        $stmt7042 = $conn->prepare($sql7042);
-        $stmt7042->execute();
-        $result7042 = $stmt7042->get_result();
-        $row7042 = $result7042->fetch_assoc();
-        $assetId7042 = $row7042['assetId'];
-        $category7042 = $row7042['category'];
-        $date7042 = $row7042['date'];
-        $building7042 = $row7042['building'];
-        $floor7042 = $row7042['floor'];
-        $room7042 = $row7042['room'];
-        $status7042 = $row7042['status'];
-        $assignedName7042 = $row7042['assignedName'];
-        $assignedBy7042 = $row7042['assignedBy'];
-        $upload_img7042 = $row7042['upload_img'];
-        $description7042 = $row7042['description'];
-
-        //FOR ID 7043
-        $sql7043 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7043";
-        $stmt7043 = $conn->prepare($sql7043);
-        $stmt7043->execute();
-        $result7043 = $stmt7043->get_result();
-        $row7043 = $result7043->fetch_assoc();
-        $assetId7043 = $row7043['assetId'];
-        $category7043 = $row7043['category'];
-        $date7043 = $row7043['date'];
-        $building7043 = $row7043['building'];
-        $floor7043 = $row7043['floor'];
-        $room7043 = $row7043['room'];
-        $status7043 = $row7043['status'];
-        $assignedName7043 = $row7043['assignedName'];
-        $assignedBy7043 = $row7043['assignedBy'];
-        $upload_img7043 = $row7043['upload_img'];
-        $description7043 = $row7043['description'];
-
-        //FOR ID 7044
-        $sql7044 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7044";
-        $stmt7044 = $conn->prepare($sql7044);
-        $stmt7044->execute();
-        $result7044 = $stmt7044->get_result();
-        $row7044 = $result7044->fetch_assoc();
-        $assetId7044 = $row7044['assetId'];
-        $category7044 = $row7044['category'];
-        $date7044 = $row7044['date'];
-        $building7044 = $row7044['building'];
-        $floor7044 = $row7044['floor'];
-        $room7044 = $row7044['room'];
-        $status7044 = $row7044['status'];
-        $assignedName7044 = $row7044['assignedName'];
-        $assignedBy7044 = $row7044['assignedBy'];
-        $upload_img7044 = $row7044['upload_img'];
-        $description7044 = $row7044['description'];
-
-        //FOR ID 7045
-        $sql7045 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7045";
-        $stmt7045 = $conn->prepare($sql7045);
-        $stmt7045->execute();
-        $result7045 = $stmt7045->get_result();
-        $row7045 = $result7045->fetch_assoc();
-        $assetId7045 = $row7045['assetId'];
-        $category7045 = $row7045['category'];
-        $date7045 = $row7045['date'];
-        $building7045 = $row7045['building'];
-        $floor7045 = $row7045['floor'];
-        $room7045 = $row7045['room'];
-        $status7045 = $row7045['status'];
-        $assignedName7045 = $row7045['assignedName'];
-        $assignedBy7045 = $row7045['assignedBy'];
-        $upload_img7045 = $row7045['upload_img'];
-        $description7045 = $row7045['description'];
-
-        //FOR ID 7046
-        $sql7046 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7046";
-        $stmt7046 = $conn->prepare($sql7046);
-        $stmt7046->execute();
-        $result7046 = $stmt7046->get_result();
-        $row7046 = $result7046->fetch_assoc();
-        $assetId7046 = $row7046['assetId'];
-        $category7046 = $row7046['category'];
-        $date7046 = $row7046['date'];
-        $building7046 = $row7046['building'];
-        $floor7046 = $row7046['floor'];
-        $room7046 = $row7046['room'];
-        $status7046 = $row7046['status'];
-        $assignedName7046 = $row7046['assignedName'];
-        $assignedBy7046 = $row7046['assignedBy'];
-        $upload_img7046 = $row7046['upload_img'];
-        $description7046 = $row7046['description'];
-
-        //FOR ID 7047
-        $sql7047 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7047";
-        $stmt7047 = $conn->prepare($sql7047);
-        $stmt7047->execute();
-        $result7047 = $stmt7047->get_result();
-        $row7047 = $result7047->fetch_assoc();
-        $assetId7047 = $row7047['assetId'];
-        $category7047 = $row7047['category'];
-        $date7047 = $row7047['date'];
-        $building7047 = $row7047['building'];
-        $floor7047 = $row7047['floor'];
-        $room7047 = $row7047['room'];
-        $status7047 = $row7047['status'];
-        $assignedName7047 = $row7047['assignedName'];
-        $assignedBy7047 = $row7047['assignedBy'];
-        $upload_img7047 = $row7047['upload_img'];
-        $description7047 = $row7047['description'];
-
-        //FOR ID 7048
-        $sql7048 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7048";
-        $stmt7048 = $conn->prepare($sql7048);
-        $stmt7048->execute();
-        $result7048 = $stmt7048->get_result();
-        $row7048 = $result7048->fetch_assoc();
-        $assetId7048 = $row7048['assetId'];
-        $category7048 = $row7048['category'];
-        $date7048 = $row7048['date'];
-        $building7048 = $row7048['building'];
-        $floor7048 = $row7048['floor'];
-        $room7048 = $row7048['room'];
-        $status7048 = $row7048['status'];
-        $assignedName7048 = $row7048['assignedName'];
-        $assignedBy7048 = $row7048['assignedBy'];
-        $upload_img7048 = $row7048['upload_img'];
-        $description7048 = $row7048['description'];
-
-        //FOR ID 7049
-        $sql7049 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7049";
-        $stmt7049 = $conn->prepare($sql7049);
-        $stmt7049->execute();
-        $result7049 = $stmt7049->get_result();
-        $row7049 = $result7049->fetch_assoc();
-        $assetId7049 = $row7049['assetId'];
-        $category7049 = $row7049['category'];
-        $date7049 = $row7049['date'];
-        $building7049 = $row7049['building'];
-        $floor7049 = $row7049['floor'];
-        $room7049 = $row7049['room'];
-        $status7049 = $row7049['status'];
-        $assignedName7049 = $row7049['assignedName'];
-        $assignedBy7049 = $row7049['assignedBy'];
-        $upload_img7049 = $row7049['upload_img'];
-        $description7049 = $row7049['description'];
-
-        //FOR ID 7050
-        $sql7050 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7050";
-        $stmt7050 = $conn->prepare($sql7050);
-        $stmt7050->execute();
-        $result7050 = $stmt7050->get_result();
-        $row7050 = $result7050->fetch_assoc();
-        $assetId7050 = $row7050['assetId'];
-        $category7050 = $row7050['category'];
-        $date7050 = $row7050['date'];
-        $building7050 = $row7050['building'];
-        $floor7050 = $row7050['floor'];
-        $room7050 = $row7050['room'];
-        $status7050 = $row7050['status'];
-        $assignedName7050 = $row7050['assignedName'];
-        $assignedBy7050 = $row7050['assignedBy'];
-        $upload_img7050 = $row7050['upload_img'];
-        $description7050 = $row7050['description'];
-
-        //FOR ID 7051
-        $sql7051 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7051";
-        $stmt7051 = $conn->prepare($sql7051);
-        $stmt7051->execute();
-        $result7051 = $stmt7051->get_result();
-        $row7051 = $result7051->fetch_assoc();
-        $assetId7051 = $row7051['assetId'];
-        $category7051 = $row7051['category'];
-        $date7051 = $row7051['date'];
-        $building7051 = $row7051['building'];
-        $floor7051 = $row7051['floor'];
-        $room7051 = $row7051['room'];
-        $status7051 = $row7051['status'];
-        $assignedName7051 = $row7051['assignedName'];
-        $assignedBy7051 = $row7051['assignedBy'];
-        $upload_img7051 = $row7051['upload_img'];
-        $description7051 = $row7051['description'];
-
-        //FOR ID 7052
-        $sql7052 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7052";
-        $stmt7052 = $conn->prepare($sql7052);
-        $stmt7052->execute();
-        $result7052 = $stmt7052->get_result();
-        $row7052 = $result7052->fetch_assoc();
-        $assetId7052 = $row7052['assetId'];
-        $category7052 = $row7052['category'];
-        $date7052 = $row7052['date'];
-        $building7052 = $row7052['building'];
-        $floor7052 = $row7052['floor'];
-        $room7052 = $row7052['room'];
-        $status7052 = $row7052['status'];
-        $assignedName7052 = $row7052['assignedName'];
-        $assignedBy7052 = $row7052['assignedBy'];
-        $upload_img7052 = $row7052['upload_img'];
-        $description7052 = $row7052['description'];
-
-        //FOR ID 7053
-        $sql7053 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7053";
-        $stmt7053 = $conn->prepare($sql7053);
-        $stmt7053->execute();
-        $result7053 = $stmt7053->get_result();
-        $row7053 = $result7053->fetch_assoc();
-        $assetId7053 = $row7053['assetId'];
-        $category7053 = $row7053['category'];
-        $date7053 = $row7053['date'];
-        $building7053 = $row7053['building'];
-        $floor7053 = $row7053['floor'];
-        $room7053 = $row7053['room'];
-        $status7053 = $row7053['status'];
-        $assignedName7053 = $row7053['assignedName'];
-        $assignedBy7053 = $row7053['assignedBy'];
-        $upload_img7053 = $row7053['upload_img'];
-        $description7053 = $row7053['description'];
-
-        //FOR ID 7054
-        $sql7054 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7054";
-        $stmt7054 = $conn->prepare($sql7054);
-        $stmt7054->execute();
-        $result7054 = $stmt7054->get_result();
-        $row7054 = $result7054->fetch_assoc();
-        $assetId7054 = $row7054['assetId'];
-        $category7054 = $row7054['category'];
-        $date7054 = $row7054['date'];
-        $building7054 = $row7054['building'];
-        $floor7054 = $row7054['floor'];
-        $room7054 = $row7054['room'];
-        $status7054 = $row7054['status'];
-        $assignedName7054 = $row7054['assignedName'];
-        $assignedBy7054 = $row7054['assignedBy'];
-        $upload_img7054 = $row7054['upload_img'];
-        $description7054 = $row7054['description'];
-
-        //FOR ID 7055
-        $sql7055 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7055";
-        $stmt7055 = $conn->prepare($sql7055);
-        $stmt7055->execute();
-        $result7055 = $stmt7055->get_result();
-        $row7055 = $result7055->fetch_assoc();
-        $assetId7055 = $row7055['assetId'];
-        $category7055 = $row7055['category'];
-        $date7055 = $row7055['date'];
-        $building7055 = $row7055['building'];
-        $floor7055 = $row7055['floor'];
-        $room7055 = $row7055['room'];
-        $status7055 = $row7055['status'];
-        $assignedName7055 = $row7055['assignedName'];
-        $assignedBy7055 = $row7055['assignedBy'];
-        $upload_img7055 = $row7055['upload_img'];
-        $description7055 = $row7055['description'];
-
-        //FOR ID 7056
-        $sql7056 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7056";
-        $stmt7056 = $conn->prepare($sql7056);
-        $stmt7056->execute();
-        $result7056 = $stmt7056->get_result();
-        $row7056 = $result7056->fetch_assoc();
-        $assetId7056 = $row7056['assetId'];
-        $category7056 = $row7056['category'];
-        $date7056 = $row7056['date'];
-        $building7056 = $row7056['building'];
-        $floor7056 = $row7056['floor'];
-        $room7056 = $row7056['room'];
-        $status7056 = $row7056['status'];
-        $assignedName7056 = $row7056['assignedName'];
-        $assignedBy7056 = $row7056['assignedBy'];
-        $upload_img7056 = $row7056['upload_img'];
-        $description7056 = $row7056['description'];
-
-        //FOR ID 7057
-        $sql7057 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7057";
-        $stmt7057 = $conn->prepare($sql7057);
-        $stmt7057->execute();
-        $result7057 = $stmt7057->get_result();
-        $row7057 = $result7057->fetch_assoc();
-        $assetId7057 = $row7057['assetId'];
-        $category7057 = $row7057['category'];
-        $date7057 = $row7057['date'];
-        $building7057 = $row7057['building'];
-        $floor7057 = $row7057['floor'];
-        $room7057 = $row7057['room'];
-        $status7057 = $row7057['status'];
-        $assignedName7057 = $row7057['assignedName'];
-        $assignedBy7057 = $row7057['assignedBy'];
-        $upload_img7057 = $row7057['upload_img'];
-        $description7057 = $row7057['description'];
-
-        //FOR ID 7058
-        $sql7058 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7058";
-        $stmt7058 = $conn->prepare($sql7058);
-        $stmt7058->execute();
-        $result7058 = $stmt7058->get_result();
-        $row7058 = $result7058->fetch_assoc();
-        $assetId7058 = $row7058['assetId'];
-        $category7058 = $row7058['category'];
-        $date7058 = $row7058['date'];
-        $building7058 = $row7058['building'];
-        $floor7058 = $row7058['floor'];
-        $room7058 = $row7058['room'];
-        $status7058 = $row7058['status'];
-        $assignedName7058 = $row7058['assignedName'];
-        $assignedBy7058 = $row7058['assignedBy'];
-        $upload_img7058 = $row7058['upload_img'];
-        $description7058 = $row7058['description'];
-      
-        //FOR ID 7059
-        $sql7059 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7059";
-        $stmt7059 = $conn->prepare($sql7059);
-        $stmt7059->execute();
-        $result7059 = $stmt7059->get_result();
-        $row7059 = $result7059->fetch_assoc();
-        $assetId7059 = $row7059['assetId'];
-        $category7059 = $row7059['category'];
-        $date7059 = $row7059['date'];
-        $building7059 = $row7059['building'];
-        $floor7059 = $row7059['floor'];
-        $room7059 = $row7059['room'];
-        $status7059 = $row7059['status'];
-        $assignedName7059 = $row7059['assignedName'];
-        $assignedBy7059 = $row7059['assignedBy'];
-        $upload_img7059 = $row7059['upload_img'];
-        $description7059 = $row7059['description'];
-
-        //FOR ID 7060
-        $sql7060 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7060";
-        $stmt7060 = $conn->prepare($sql7060);
-        $stmt7060->execute();
-        $result7060 = $stmt7060->get_result();
-        $row7060 = $result7060->fetch_assoc();
-        $assetId7060 = $row7060['assetId'];
-        $category7060 = $row7060['category'];
-        $date7060 = $row7060['date'];
-        $building7060 = $row7060['building'];
-        $floor7060 = $row7060['floor'];
-        $room7060 = $row7060['room'];
-        $status7060 = $row7060['status'];
-        $assignedName7060 = $row7060['assignedName'];
-        $assignedBy7060 = $row7060['assignedBy'];
-        $upload_img7060 = $row7060['upload_img'];
-        $description7060 = $row7060['description'];
-
-        //FOR ID 7061
-        $sql7061 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7061";
-        $stmt7061 = $conn->prepare($sql7061);
-        $stmt7061->execute();
-        $result7061 = $stmt7061->get_result();
-        $row7061 = $result7061->fetch_assoc();
-        $assetId7061 = $row7061['assetId'];
-        $category7061 = $row7061['category'];
-        $date7061 = $row7061['date'];
-        $building7061 = $row7061['building'];
-        $floor7061 = $row7061['floor'];
-        $room7061 = $row7061['room'];
-        $status7061 = $row7061['status'];
-        $assignedName7061 = $row7061['assignedName'];
-        $assignedBy7061 = $row7061['assignedBy'];
-        $upload_img7061 = $row7061['upload_img'];
-        $description7061 = $row7061['description'];
-
-        //FOR ID 7062
-        $sql7062 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7062";
-        $stmt7062 = $conn->prepare($sql7062);
-        $stmt7062->execute();
-        $result7062 = $stmt7062->get_result();
-        $row7062 = $result7062->fetch_assoc();
-        $assetId7062 = $row7062['assetId'];
-        $category7062 = $row7062['category'];
-        $date7062 = $row7062['date'];
-        $building7062 = $row7062['building'];
-        $floor7062 = $row7062['floor'];
-        $room7062 = $row7062['room'];
-        $status7062 = $row7062['status'];
-        $assignedName7062 = $row7062['assignedName'];
-        $assignedBy7062 = $row7062['assignedBy'];
-        $upload_img7062 = $row7062['upload_img'];
-        $description7062 = $row7062['description'];
-
-        //FOR ID 7063
-        $sql7063 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7063";
-        $stmt7063 = $conn->prepare($sql7063);
-        $stmt7063->execute();
-        $result7063 = $stmt7063->get_result();
-        $row7063 = $result7063->fetch_assoc();
-        $assetId7063 = $row7063['assetId'];
-        $category7063 = $row7063['category'];
-        $date7063 = $row7063['date'];
-        $building7063 = $row7063['building'];
-        $floor7063 = $row7063['floor'];
-        $room7063 = $row7063['room'];
-        $status7063 = $row7063['status'];
-        $assignedName7063 = $row7063['assignedName'];
-        $assignedBy7063 = $row7063['assignedBy'];
-        $upload_img7063 = $row7063['upload_img'];
-        $description7063 = $row7063['description'];
-
-        //FOR ID 7064
-        $sql7064 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7064";
-        $stmt7064 = $conn->prepare($sql7064);
-        $stmt7064->execute();
-        $result7064 = $stmt7064->get_result();
-        $row7064 = $result7064->fetch_assoc();
-        $assetId7064 = $row7064['assetId'];
-        $category7064 = $row7064['category'];
-        $date7064 = $row7064['date'];
-        $building7064 = $row7064['building'];
-        $floor7064 = $row7064['floor'];
-        $room7064 = $row7064['room'];
-        $status7064 = $row7064['status'];
-        $assignedName7064 = $row7064['assignedName'];
-        $assignedBy7064 = $row7064['assignedBy'];
-        $upload_img7064 = $row7064['upload_img'];
-        $description7064 = $row7064['description'];
-
-        //FOR ID 7065
-        $sql7065 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7065";
-        $stmt7065 = $conn->prepare($sql7065);
-        $stmt7065->execute();
-        $result7065 = $stmt7065->get_result();
-        $row7065 = $result7065->fetch_assoc();
-        $assetId7065 = $row7065['assetId'];
-        $category7065 = $row7065['category'];
-        $date7065 = $row7065['date'];
-        $building7065 = $row7065['building'];
-        $floor7065 = $row7065['floor'];
-        $room7065 = $row7065['room'];
-        $status7065 = $row7065['status'];
-        $assignedName7065 = $row7065['assignedName'];
-        $assignedBy7065 = $row7065['assignedBy'];
-        $upload_img7065 = $row7065['upload_img'];
-        $description7065 = $row7065['description'];
-
-        //FOR ID 7066
-        $sql7066 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7066";
-        $stmt7066 = $conn->prepare($sql7066);
-        $stmt7066->execute();
-        $result7066 = $stmt7066->get_result();
-        $row7066 = $result7066->fetch_assoc();
-        $assetId7066 = $row7066['assetId'];
-        $category7066 = $row7066['category'];
-        $date7066 = $row7066['date'];
-        $building7066 = $row7066['building'];
-        $floor7066 = $row7066['floor'];
-        $room7066 = $row7066['room'];
-        $status7066 = $row7066['status'];
-        $assignedName7066 = $row7066['assignedName'];
-        $assignedBy7066 = $row7066['assignedBy'];
-        $upload_img7066 = $row7066['upload_img'];
-        $description7066 = $row7066['description'];
-
-        //FOR ID 7067
-        $sql7067 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7067";
-        $stmt7067 = $conn->prepare($sql7067);
-        $stmt7067->execute();
-        $result7067 = $stmt7067->get_result();
-        $row7067 = $result7067->fetch_assoc();
-        $assetId7067 = $row7067['assetId'];
-        $category7067 = $row7067['category'];
-        $date7067 = $row7067['date'];
-        $building7067 = $row7067['building'];
-        $floor7067 = $row7067['floor'];
-        $room7067 = $row7067['room'];
-        $status7067 = $row7067['status'];
-        $assignedName7067 = $row7067['assignedName'];
-        $assignedBy7067 = $row7067['assignedBy'];
-        $upload_img7067 = $row7067['upload_img'];
-        $description7067 = $row7067['description'];
-    
-        //FOR ID 7068
-        $sql7068 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7068";
-        $stmt7068 = $conn->prepare($sql7068);
-        $stmt7068->execute();
-        $result7068 = $stmt7068->get_result();
-        $row7068 = $result7068->fetch_assoc();
-        $assetId7068 = $row7068['assetId'];
-        $category7068 = $row7068['category'];
-        $date7068 = $row7068['date'];
-        $building7068 = $row7068['building'];
-        $floor7068 = $row7068['floor'];
-        $room7068 = $row7068['room'];
-        $status7068 = $row7068['status'];
-        $assignedName7068 = $row7068['assignedName'];
-        $assignedBy7068 = $row7068['assignedBy'];
-        $upload_img7068 = $row7068['upload_img'];
-        $description7068 = $row7068['description'];
-
-        //FOR ID 7069
-        $sql7069 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7069";
-        $stmt7069 = $conn->prepare($sql7069);
-        $stmt7069->execute();
-        $result7069 = $stmt7069->get_result();
-        $row7069 = $result7069->fetch_assoc();
-        $assetId7069 = $row7069['assetId'];
-        $category7069 = $row7069['category'];
-        $date7069 = $row7069['date'];
-        $building7069 = $row7069['building'];
-        $floor7069 = $row7069['floor'];
-        $room7069 = $row7069['room'];
-        $status7069 = $row7069['status'];
-        $assignedName7069 = $row7069['assignedName'];
-        $assignedBy7069 = $row7069['assignedBy'];
-        $upload_img7069 = $row7069['upload_img'];
-        $description7069 = $row7069['description'];
-
-        //FOR ID 7070
-        $sql7070 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7070";
-        $stmt7070 = $conn->prepare($sql7070);
-        $stmt7070->execute();
-        $result7070 = $stmt7070->get_result();
-        $row7070 = $result7070->fetch_assoc();
-        $assetId7070 = $row7070['assetId'];
-        $category7070 = $row7070['category'];
-        $date7070 = $row7070['date'];
-        $building7070 = $row7070['building'];
-        $floor7070 = $row7070['floor'];
-        $room7070 = $row7070['room'];
-        $status7070 = $row7070['status'];
-        $assignedName7070 = $row7070['assignedName'];
-        $assignedBy7070 = $row7070['assignedBy'];
-        $upload_img7070 = $row7070['upload_img'];
-        $description7070 = $row7070['description'];
-
-        //FOR ID 7071
-        $sql7071 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7071";
-        $stmt7071 = $conn->prepare($sql7071);
-        $stmt7071->execute();
-        $result7071 = $stmt7071->get_result();
-        $row7071 = $result7071->fetch_assoc();
-        $assetId7071 = $row7071['assetId'];
-        $category7071 = $row7071['category'];
-        $date7071 = $row7071['date'];
-        $building7071 = $row7071['building'];
-        $floor7071 = $row7071['floor'];
-        $room7071 = $row7071['room'];
-        $status7071 = $row7071['status'];
-        $assignedName7071 = $row7071['assignedName'];
-        $assignedBy7071 = $row7071['assignedBy'];
-        $upload_img7071 = $row7071['upload_img'];
-        $description7071 = $row7071['description'];
-    
-        //FOR ID 7072
-        $sql7072 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7072";
-        $stmt7072 = $conn->prepare($sql7072);
-        $stmt7072->execute();
-        $result7072 = $stmt7072->get_result();
-        $row7072 = $result7072->fetch_assoc();
-        $assetId7072 = $row7072['assetId'];
-        $category7072 = $row7072['category'];
-        $date7072 = $row7072['date'];
-        $building7072 = $row7072['building'];
-        $floor7072 = $row7072['floor'];
-        $room7072 = $row7072['room'];
-        $status7072 = $row7072['status'];
-        $assignedName7072 = $row7072['assignedName'];
-        $assignedBy7072 = $row7072['assignedBy'];
-        $upload_img7072 = $row7072['upload_img'];
-        $description7072 = $row7072['description'];
-
-        //FOR ID 7073
-        $sql7073 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7073";
-        $stmt7073 = $conn->prepare($sql7073);
-        $stmt7073->execute();
-        $result7073 = $stmt7073->get_result();
-        $row7073 = $result7073->fetch_assoc();
-        $assetId7073 = $row7073['assetId'];
-        $category7073 = $row7073['category'];
-        $date7073 = $row7073['date'];
-        $building7073 = $row7073['building'];
-        $floor7073 = $row7073['floor'];
-        $room7073 = $row7073['room'];
-        $status7073 = $row7073['status'];
-        $assignedName7073 = $row7073['assignedName'];
-        $assignedBy7073 = $row7073['assignedBy'];
-        $upload_img7073 = $row7073['upload_img'];
-        $description7073 = $row7073['description'];
-
-        //FOR ID 7074
-        $sql7074 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7074";
-        $stmt7074 = $conn->prepare($sql7074);
-        $stmt7074->execute();
-        $result7074 = $stmt7074->get_result();
-        $row7074 = $result7074->fetch_assoc();
-        $assetId7074 = $row7074['assetId'];
-        $category7074 = $row7074['category'];
-        $date7074 = $row7074['date'];
-        $building7074 = $row7074['building'];
-        $floor7074 = $row7074['floor'];
-        $room7074 = $row7074['room'];
-        $status7074 = $row7074['status'];
-        $assignedName7074 = $row7074['assignedName'];
-        $assignedBy7074 = $row7074['assignedBy'];
-        $upload_img7074 = $row7074['upload_img'];
-        $description7074 = $row7074['description'];
-
-        //FOR ID 7075
-        $sql7075 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7075";
-        $stmt7075 = $conn->prepare($sql7075);
-        $stmt7075->execute();
-        $result7075 = $stmt7075->get_result();
-        $row7075 = $result7075->fetch_assoc();
-        $assetId7075 = $row7075['assetId'];
-        $category7075 = $row7075['category'];
-        $date7075 = $row7075['date'];
-        $building7075 = $row7075['building'];
-        $floor7075 = $row7075['floor'];
-        $room7075 = $row7075['room'];
-        $status7075 = $row7075['status'];
-        $assignedName7075 = $row7075['assignedName'];
-        $assignedBy7075 = $row7075['assignedBy'];
-        $upload_img7075 = $row7075['upload_img'];
-        $description7075 = $row7075['description'];  
-
-        //FOR ID 7076
-        $sql7076 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7076";
-        $stmt7076 = $conn->prepare($sql7076);
-        $stmt7076->execute();
-        $result7076 = $stmt7076->get_result();
-        $row7076 = $result7076->fetch_assoc();
-        $assetId7076 = $row7076['assetId'];
-        $category7076 = $row7076['category'];
-        $date7076 = $row7076['date'];
-        $building7076 = $row7076['building'];
-        $floor7076 = $row7076['floor'];
-        $room7076 = $row7076['room'];
-        $status7076 = $row7076['status'];
-        $assignedName7076 = $row7076['assignedName'];
-        $assignedBy7076 = $row7076['assignedBy'];
-        $upload_img7076 = $row7076['upload_img'];
-        $description7076 = $row7076['description'];
-
-        //FOR ID 7077
-        $sql7077 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7077";
-        $stmt7077 = $conn->prepare($sql7077);
-        $stmt7077->execute();
-        $result7077 = $stmt7077->get_result();
-        $row7077 = $result7077->fetch_assoc();
-        $assetId7077 = $row7077['assetId'];
-        $category7077 = $row7077['category'];
-        $date7077 = $row7077['date'];
-        $building7077 = $row7077['building'];
-        $floor7077 = $row7077['floor'];
-        $room7077 = $row7077['room'];
-        $status7077 = $row7077['status'];
-        $assignedName7077 = $row7077['assignedName'];
-        $assignedBy7077 = $row7077['assignedBy'];
-        $upload_img7077 = $row7077['upload_img'];
-        $description7077 = $row7077['description'];
-
-        //FOR ID 7078
-        $sql7078 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7078";
-        $stmt7078 = $conn->prepare($sql7078);
-        $stmt7078->execute();
-        $result7078 = $stmt7078->get_result();
-        $row7078 = $result7078->fetch_assoc();
-        $assetId7078 = $row7078['assetId'];
-        $category7078 = $row7078['category'];
-        $date7078 = $row7078['date'];
-        $building7078 = $row7078['building'];
-        $floor7078 = $row7078['floor'];
-        $room7078 = $row7078['room'];
-        $status7078 = $row7078['status'];
-        $assignedName7078 = $row7078['assignedName'];
-        $assignedBy7078 = $row7078['assignedBy'];
-        $upload_img7078 = $row7078['upload_img'];
-        $description7078 = $row7078['description'];
-
-        //FOR ID 7079
-        $sql7079 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7079";
-        $stmt7079 = $conn->prepare($sql7079);
-        $stmt7079->execute();
-        $result7079 = $stmt7079->get_result();
-        $row7079 = $result7079->fetch_assoc();
-        $assetId7079 = $row7079['assetId'];
-        $category7079 = $row7079['category'];
-        $date7079 = $row7079['date'];
-        $building7079 = $row7079['building'];
-        $floor7079 = $row7079['floor'];
-        $room7079 = $row7079['room'];
-        $status7079 = $row7079['status'];
-        $assignedName7079 = $row7079['assignedName'];
-        $assignedBy7079 = $row7079['assignedBy'];
-        $upload_img7079 = $row7079['upload_img'];
-        $description7079 = $row7079['description'];
-
-        //FOR ID 7275
+    //FOR ID 6947
+    $sql6947 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6947";
+    $stmt6947 = $conn->prepare($sql6947);
+    $stmt6947->execute();
+    $result6947 = $stmt6947->get_result();
+    $row6947 = $result6947->fetch_assoc();
+    $assetId6947 = $row6947['assetId'];
+    $category6947 = $row6947['category'];
+    $date6947 = $row6947['date'];
+    $building6947 = $row6947['building'];
+    $floor6947 = $row6947['floor'];
+    $room6947 = $row6947['room'];
+    $status6947 = $row6947['status'];
+    $assignedName6947 = $row6947['assignedName'];
+    $assignedBy6947 = $row6947['assignedBy'];
+    $upload_img6947 = $row6947['upload_img'];
+    $description6947 = $row6947['description'];
+    //FOR ID 6946
+    $sql6946 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6946";
+    $stmt6946 = $conn->prepare($sql6946);
+    $stmt6946->execute();
+    $result6946 = $stmt6946->get_result();
+    $row6946 = $result6946->fetch_assoc();
+    $assetId6946 = $row6946['assetId'];
+    $category6946 = $row6946['category'];
+    $date6946 = $row6946['date'];
+    $building6946 = $row6946['building'];
+    $floor6946 = $row6946['floor'];
+    $room6946 = $row6946['room'];
+    $status6946 = $row6946['status'];
+    $assignedName6946 = $row6946['assignedName'];
+    $assignedBy6946 = $row6946['assignedBy'];
+    $upload_img6946 = $row6946['upload_img'];
+    $description6946 = $row6946['description'];
+    //FOR ID 6945
+    $sql6945 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6945";
+    $stmt6945 = $conn->prepare($sql6945);
+    $stmt6945->execute();
+    $result6945 = $stmt6945->get_result();
+    $row6945 = $result6945->fetch_assoc();
+    $assetId6945 = $row6945['assetId'];
+    $category6945 = $row6945['category'];
+    $date6945 = $row6945['date'];
+    $building6945 = $row6945['building'];
+    $floor6945 = $row6945['floor'];
+    $room6945 = $row6945['room'];
+    $status6945 = $row6945['status'];
+    $assignedName6945 = $row6945['assignedName'];
+    $assignedBy6945 = $row6945['assignedBy'];
+    $upload_img6945 = $row6945['upload_img'];
+    $description6945 = $row6945['description'];
+    //FOR ID 6944
+    $sql6944 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6944";
+    $stmt6944 = $conn->prepare($sql6944);
+    $stmt6944->execute();
+    $result6944 = $stmt6944->get_result();
+    $row6944 = $result6944->fetch_assoc();
+    $assetId6944 = $row6944['assetId'];
+    $category6944 = $row6944['category'];
+    $date6944 = $row6944['date'];
+    $building6944 = $row6944['building'];
+    $floor6944 = $row6944['floor'];
+    $room6944 = $row6944['room'];
+    $status6944 = $row6944['status'];
+    $assignedName6944 = $row6944['assignedName'];
+    $assignedBy6944 = $row6944['assignedBy'];
+    $upload_img6944 = $row6944['upload_img'];
+    $description6944 = $row6944['description'];
+    //FOR ID 6943
+    $sql6943 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6943";
+    $stmt6943 = $conn->prepare($sql6943);
+    $stmt6943->execute();
+    $result6943 = $stmt6943->get_result();
+    $row6943 = $result6943->fetch_assoc();
+    $assetId6943 = $row6943['assetId'];
+    $category6943 = $row6943['category'];
+    $date6943 = $row6943['date'];
+    $building6943 = $row6943['building'];
+    $floor6943 = $row6943['floor'];
+    $room6943 = $row6943['room'];
+    $status6943 = $row6943['status'];
+    $assignedName6943 = $row6943['assignedName'];
+    $assignedBy6943 = $row6943['assignedBy'];
+    $upload_img6943 = $row6943['upload_img'];
+    $description6943 = $row6943['description'];
+    //FOR ID 6942
+    $sql6942 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6942";
+    $stmt6942 = $conn->prepare($sql6942);
+    $stmt6942->execute();
+    $result6942 = $stmt6942->get_result();
+    $row6942 = $result6942->fetch_assoc();
+    $assetId6942 = $row6942['assetId'];
+    $category6942 = $row6942['category'];
+    $date6942 = $row6942['date'];
+    $building6942 = $row6942['building'];
+    $floor6942 = $row6942['floor'];
+    $room6942 = $row6942['room'];
+    $status6942 = $row6942['status'];
+    $assignedName6942 = $row6942['assignedName'];
+    $assignedBy6942 = $row6942['assignedBy'];
+    $upload_img6942 = $row6942['upload_img'];
+    $description6942 = $row6942['description'];
+    //FOR ID 6941
+    $sql6941 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6941";
+    $stmt6941 = $conn->prepare($sql6941);
+    $stmt6941->execute();
+    $result6941 = $stmt6941->get_result();
+    $row6941 = $result6941->fetch_assoc();
+    $assetId6941 = $row6941['assetId'];
+    $category6941 = $row6941['category'];
+    $date6941 = $row6941['date'];
+    $building6941 = $row6941['building'];
+    $floor6941 = $row6941['floor'];
+    $room6941 = $row6941['room'];
+    $status6941 = $row6941['status'];
+    $assignedName6941 = $row6941['assignedName'];
+    $assignedBy6941 = $row6941['assignedBy'];
+    $upload_img6941 = $row6941['upload_img'];
+    $description6941 = $row6941['description'];
+    //FOR ID 6940
+    $sql6940 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6940";
+    $stmt6940 = $conn->prepare($sql6940);
+    $stmt6940->execute();
+    $result6940 = $stmt6940->get_result();
+    $row6940 = $result6940->fetch_assoc();
+    $assetId6940 = $row6940['assetId'];
+    $category6940 = $row6940['category'];
+    $date6940 = $row6940['date'];
+    $building6940 = $row6940['building'];
+    $floor6940 = $row6940['floor'];
+    $room6940 = $row6940['room'];
+    $status6940 = $row6940['status'];
+    $assignedName6940 = $row6940['assignedName'];
+    $assignedBy6940 = $row6940['assignedBy'];
+    $upload_img6940 = $row6940['upload_img'];
+    $description6940 = $row6940['description'];
+    //FOR ID 6939
+    $sql6939 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6939";
+    $stmt6939 = $conn->prepare($sql6939);
+    $stmt6939->execute();
+    $result6939 = $stmt6939->get_result();
+    $row6939 = $result6939->fetch_assoc();
+    $assetId6939 = $row6939['assetId'];
+    $category6939 = $row6939['category'];
+    $date6939 = $row6939['date'];
+    $building6939 = $row6939['building'];
+    $floor6939 = $row6939['floor'];
+    $room6939 = $row6939['room'];
+    $status6939 = $row6939['status'];
+    $assignedName6939 = $row6939['assignedName'];
+    $assignedBy6939 = $row6939['assignedBy'];
+    $upload_img6939 = $row6939['upload_img'];
+    $description6939 = $row6939['description'];
+    //FOR ID 6938
+    $sql6938 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6938";
+    $stmt6938 = $conn->prepare($sql6938);
+    $stmt6938->execute();
+    $result6938 = $stmt6938->get_result();
+    $row6938 = $result6938->fetch_assoc();
+    $assetId6938 = $row6938['assetId'];
+    $category6938 = $row6938['category'];
+    $date6938 = $row6938['date'];
+    $building6938 = $row6938['building'];
+    $floor6938 = $row6938['floor'];
+    $room6938 = $row6938['room'];
+    $status6938 = $row6938['status'];
+    $assignedName6938 = $row6938['assignedName'];
+    $assignedBy6938 = $row6938['assignedBy'];
+    $upload_img6938 = $row6938['upload_img'];
+    $description6938 = $row6938['description'];
+    //FOR ID 6937
+    $sql6937 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6937";
+    $stmt6937 = $conn->prepare($sql6937);
+    $stmt6937->execute();
+    $result6937 = $stmt6937->get_result();
+    $row6937 = $result6937->fetch_assoc();
+    $assetId6937 = $row6937['assetId'];
+    $category6937 = $row6937['category'];
+    $date6937 = $row6937['date'];
+    $building6937 = $row6937['building'];
+    $floor6937 = $row6937['floor'];
+    $room6937 = $row6937['room'];
+    $status6937 = $row6937['status'];
+    $assignedName6937 = $row6937['assignedName'];
+    $assignedBy6937 = $row6937['assignedBy'];
+    $upload_img6937 = $row6937['upload_img'];
+    $description6937 = $row6937['description'];
+    //FOR ID 6936
+    $sql6936 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6936";
+    $stmt6936 = $conn->prepare($sql6936);
+    $stmt6936->execute();
+    $result6936 = $stmt6936->get_result();
+    $row6936 = $result6936->fetch_assoc();
+    $assetId6936 = $row6936['assetId'];
+    $category6936 = $row6936['category'];
+    $date6936 = $row6936['date'];
+    $building6936 = $row6936['building'];
+    $floor6936 = $row6936['floor'];
+    $room6936 = $row6936['room'];
+    $status6936 = $row6936['status'];
+    $assignedName6936 = $row6936['assignedName'];
+    $assignedBy6936 = $row6936['assignedBy'];
+    $upload_img6936 = $row6936['upload_img'];
+    $description6936 = $row6936['description'];
+    //FOR ID 6935
+    $sql6935 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6935";
+    $stmt6935 = $conn->prepare($sql6935);
+    $stmt6935->execute();
+    $result6935 = $stmt6935->get_result();
+    $row6935 = $result6935->fetch_assoc();
+    $assetId6935 = $row6935['assetId'];
+    $category6935 = $row6935['category'];
+    $date6935 = $row6935['date'];
+    $building6935 = $row6935['building'];
+    $floor6935 = $row6935['floor'];
+    $room6935 = $row6935['room'];
+    $status6935 = $row6935['status'];
+    $assignedName6935 = $row6935['assignedName'];
+    $assignedBy6935 = $row6935['assignedBy'];
+    $upload_img6935 = $row6935['upload_img'];
+    $description6935 = $row6935['description'];
+    //FOR ID 6934
+    $sql6934 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6934";
+    $stmt6934 = $conn->prepare($sql6934);
+    $stmt6934->execute();
+    $result6934 = $stmt6934->get_result();
+    $row6934 = $result6934->fetch_assoc();
+    $assetId6934 = $row6934['assetId'];
+    $category6934 = $row6934['category'];
+    $date6934 = $row6934['date'];
+    $building6934 = $row6934['building'];
+    $floor6934 = $row6934['floor'];
+    $room6934 = $row6934['room'];
+    $status6934 = $row6934['status'];
+    $assignedName6934 = $row6934['assignedName'];
+    $assignedBy6934 = $row6934['assignedBy'];
+    $upload_img6934 = $row6934['upload_img'];
+    $description6934 = $row6934['description'];
+    //FOR ID 6933
+    $sql6933 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6933";
+    $stmt6933 = $conn->prepare($sql6933);
+    $stmt6933->execute();
+    $result6933 = $stmt6933->get_result();
+    $row6933 = $result6933->fetch_assoc();
+    $assetId6933 = $row6933['assetId'];
+    $category6933 = $row6933['category'];
+    $date6933 = $row6933['date'];
+    $building6933 = $row6933['building'];
+    $floor6933 = $row6933['floor'];
+    $room6933 = $row6933['room'];
+    $status6933 = $row6933['status'];
+    $assignedName6933 = $row6933['assignedName'];
+    $assignedBy6933 = $row6933['assignedBy'];
+    $upload_img6933 = $row6933['upload_img'];
+    $description6933 = $row6933['description'];
+    //FOR ID 6932
+    $sql6932 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6932";
+    $stmt6932 = $conn->prepare($sql6932);
+    $stmt6932->execute();
+    $result6932 = $stmt6932->get_result();
+    $row6932 = $result6932->fetch_assoc();
+    $assetId6932 = $row6932['assetId'];
+    $category6932 = $row6932['category'];
+    $date6932 = $row6932['date'];
+    $building6932 = $row6932['building'];
+    $floor6932 = $row6932['floor'];
+    $room6932 = $row6932['room'];
+    $status6932 = $row6932['status'];
+    $assignedName6932 = $row6932['assignedName'];
+    $assignedBy6932 = $row6932['assignedBy'];
+    $upload_img6932 = $row6932['upload_img'];
+    $description6932 = $row6932['description'];
+    //FOR ID 6931
+    $sql6931 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6931";
+    $stmt6931 = $conn->prepare($sql6931);
+    $stmt6931->execute();
+    $result6931 = $stmt6931->get_result();
+    $row6931 = $result6931->fetch_assoc();
+    $assetId6931 = $row6931['assetId'];
+    $category6931 = $row6931['category'];
+    $date6931 = $row6931['date'];
+    $building6931 = $row6931['building'];
+    $floor6931 = $row6931['floor'];
+    $room6931 = $row6931['room'];
+    $status6931 = $row6931['status'];
+    $assignedName6931 = $row6931['assignedName'];
+    $assignedBy6931 = $row6931['assignedBy'];
+    $upload_img6931 = $row6931['upload_img'];
+    $description6931 = $row6931['description'];
+    //FOR ID 6930
+    $sql6930 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6930";
+    $stmt6930 = $conn->prepare($sql6930);
+    $stmt6930->execute();
+    $result6930 = $stmt6930->get_result();
+    $row6930 = $result6930->fetch_assoc();
+    $assetId6930 = $row6930['assetId'];
+    $category6930 = $row6930['category'];
+    $date6930 = $row6930['date'];
+    $building6930 = $row6930['building'];
+    $floor6930 = $row6930['floor'];
+    $room6930 = $row6930['room'];
+    $status6930 = $row6930['status'];
+    $assignedName6930 = $row6930['assignedName'];
+    $assignedBy6930 = $row6930['assignedBy'];
+    $upload_img6930 = $row6930['upload_img'];
+    $description6930 = $row6930['description'];
+    //FOR ID 6929
+    $sql6929 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6929";
+    $stmt6929 = $conn->prepare($sql6929);
+    $stmt6929->execute();
+    $result6929 = $stmt6929->get_result();
+    $row6929 = $result6929->fetch_assoc();
+    $assetId6929 = $row6929['assetId'];
+    $category6929 = $row6929['category'];
+    $date6929 = $row6929['date'];
+    $building6929 = $row6929['building'];
+    $floor6929 = $row6929['floor'];
+    $room6929 = $row6929['room'];
+    $status6929 = $row6929['status'];
+    $assignedName6929 = $row6929['assignedName'];
+    $assignedBy6929 = $row6929['assignedBy'];
+    $upload_img6929 = $row6929['upload_img'];
+    $description6929 = $row6929['description'];
+    //FOR ID 6928
+    $sql6928 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6928";
+    $stmt6928 = $conn->prepare($sql6928);
+    $stmt6928->execute();
+    $result6928 = $stmt6928->get_result();
+    $row6928 = $result6928->fetch_assoc();
+    $assetId6928 = $row6928['assetId'];
+    $category6928 = $row6928['category'];
+    $date6928 = $row6928['date'];
+    $building6928 = $row6928['building'];
+    $floor6928 = $row6928['floor'];
+    $room6928 = $row6928['room'];
+    $status6928 = $row6928['status'];
+    $assignedName6928 = $row6928['assignedName'];
+    $assignedBy6928 = $row6928['assignedBy'];
+    $upload_img6928 = $row6928['upload_img'];
+    $description6928 = $row6928['description'];
+    //FOR ID 6927
+    $sql6927 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6927";
+    $stmt6927 = $conn->prepare($sql6927);
+    $stmt6927->execute();
+    $result6927 = $stmt6927->get_result();
+    $row6927 = $result6927->fetch_assoc();
+    $assetId6927 = $row6927['assetId'];
+    $category6927 = $row6927['category'];
+    $date6927 = $row6927['date'];
+    $building6927 = $row6927['building'];
+    $floor6927 = $row6927['floor'];
+    $room6927 = $row6927['room'];
+    $status6927 = $row6927['status'];
+    $assignedName6927 = $row6927['assignedName'];
+    $assignedBy6927 = $row6927['assignedBy'];
+    $upload_img6927 = $row6927['upload_img'];
+    $description6927 = $row6927['description'];
+    //FOR ID 6926
+    $sql6926 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6926";
+    $stmt6926 = $conn->prepare($sql6926);
+    $stmt6926->execute();
+    $result6926 = $stmt6926->get_result();
+    $row6926 = $result6926->fetch_assoc();
+    $assetId6926 = $row6926['assetId'];
+    $category6926 = $row6926['category'];
+    $date6926 = $row6926['date'];
+    $building6926 = $row6926['building'];
+    $floor6926 = $row6926['floor'];
+    $room6926 = $row6926['room'];
+    $status6926 = $row6926['status'];
+    $assignedName6926 = $row6926['assignedName'];
+    $assignedBy6926 = $row6926['assignedBy'];
+    $upload_img6926 = $row6926['upload_img'];
+    $description6926 = $row6926['description'];
+    //FOR ID 6925
+    $sql6925 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6925";
+    $stmt6925 = $conn->prepare($sql6925);
+    $stmt6925->execute();
+    $result6925 = $stmt6925->get_result();
+    $row6925 = $result6925->fetch_assoc();
+    $assetId6925 = $row6925['assetId'];
+    $category6925 = $row6925['category'];
+    $date6925 = $row6925['date'];
+    $building6925 = $row6925['building'];
+    $floor6925 = $row6925['floor'];
+    $room6925 = $row6925['room'];
+    $status6925 = $row6925['status'];
+    $assignedName6925 = $row6925['assignedName'];
+    $assignedBy6925 = $row6925['assignedBy'];
+    $upload_img6925 = $row6925['upload_img'];
+    $description6925 = $row6925['description'];
+    //FOR ID 6924
+    $sql6924 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6924";
+    $stmt6924 = $conn->prepare($sql6924);
+    $stmt6924->execute();
+    $result6924 = $stmt6924->get_result();
+    $row6924 = $result6924->fetch_assoc();
+    $assetId6924 = $row6924['assetId'];
+    $category6924 = $row6924['category'];
+    $date6924 = $row6924['date'];
+    $building6924 = $row6924['building'];
+    $floor6924 = $row6924['floor'];
+    $room6924 = $row6924['room'];
+    $status6924 = $row6924['status'];
+    $assignedName6924 = $row6924['assignedName'];
+    $assignedBy6924 = $row6924['assignedBy'];
+    $upload_img6924 = $row6924['upload_img'];
+    $description6924 = $row6924['description'];
+    //FOR ID 6923
+    $sql6923 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6923";
+    $stmt6923 = $conn->prepare($sql6923);
+    $stmt6923->execute();
+    $result6923 = $stmt6923->get_result();
+    $row6923 = $result6923->fetch_assoc();
+    $assetId6923 = $row6923['assetId'];
+    $category6923 = $row6923['category'];
+    $date6923 = $row6923['date'];
+    $building6923 = $row6923['building'];
+    $floor6923 = $row6923['floor'];
+    $room6923 = $row6923['room'];
+    $status6923 = $row6923['status'];
+    $assignedName6923 = $row6923['assignedName'];
+    $assignedBy6923 = $row6923['assignedBy'];
+    $upload_img6923 = $row6923['upload_img'];
+    $description6923 = $row6923['description'];
+    //FOR ID 6922
+    $sql6922 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6922";
+    $stmt6922 = $conn->prepare($sql6922);
+    $stmt6922->execute();
+    $result6922 = $stmt6922->get_result();
+    $row6922 = $result6922->fetch_assoc();
+    $assetId6922 = $row6922['assetId'];
+    $category6922 = $row6922['category'];
+    $date6922 = $row6922['date'];
+    $building6922 = $row6922['building'];
+    $floor6922 = $row6922['floor'];
+    $room6922 = $row6922['room'];
+    $status6922 = $row6922['status'];
+    $assignedName6922 = $row6922['assignedName'];
+    $assignedBy6922 = $row6922['assignedBy'];
+    $upload_img6922 = $row6922['upload_img'];
+    $description6922 = $row6922['description'];
+    //FOR ID 6921
+    $sql6921 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6921";
+    $stmt6921 = $conn->prepare($sql6921);
+    $stmt6921->execute();
+    $result6921 = $stmt6921->get_result();
+    $row6921 = $result6921->fetch_assoc();
+    $assetId6921 = $row6921['assetId'];
+    $category6921 = $row6921['category'];
+    $date6921 = $row6921['date'];
+    $building6921 = $row6921['building'];
+    $floor6921 = $row6921['floor'];
+    $room6921 = $row6921['room'];
+    $status6921 = $row6921['status'];
+    $assignedName6921 = $row6921['assignedName'];
+    $assignedBy6921 = $row6921['assignedBy'];
+    $upload_img6921 = $row6921['upload_img'];
+    $description6921 = $row6921['description'];
+    //FOR ID 6920
+    $sql6920 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6920";
+    $stmt6920 = $conn->prepare($sql6920);
+    $stmt6920->execute();
+    $result6920 = $stmt6920->get_result();
+    $row6920 = $result6920->fetch_assoc();
+    $assetId6920 = $row6920['assetId'];
+    $category6920 = $row6920['category'];
+    $date6920 = $row6920['date'];
+    $building6920 = $row6920['building'];
+    $floor6920 = $row6920['floor'];
+    $room6920 = $row6920['room'];
+    $status6920 = $row6920['status'];
+    $assignedName6920 = $row6920['assignedName'];
+    $assignedBy6920 = $row6920['assignedBy'];
+    $upload_img6920 = $row6920['upload_img'];
+    $description6920 = $row6920['description'];
+    //FOR ID 6919
+    $sql6919 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6919";
+    $stmt6919 = $conn->prepare($sql6919);
+    $stmt6919->execute();
+    $result6919 = $stmt6919->get_result();
+    $row6919 = $result6919->fetch_assoc();
+    $assetId6919 = $row6919['assetId'];
+    $category6919 = $row6919['category'];
+    $date6919 = $row6919['date'];
+    $building6919 = $row6919['building'];
+    $floor6919 = $row6919['floor'];
+    $room6919 = $row6919['room'];
+    $status6919 = $row6919['status'];
+    $assignedName6919 = $row6919['assignedName'];
+    $assignedBy6919 = $row6919['assignedBy'];
+    $upload_img6919 = $row6919['upload_img'];
+    $description6919 = $row6919['description'];
+    //FOR ID 6918
+    $sql6918 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6918";
+    $stmt6918 = $conn->prepare($sql6918);
+    $stmt6918->execute();
+    $result6918 = $stmt6918->get_result();
+    $row6918 = $result6918->fetch_assoc();
+    $assetId6918 = $row6918['assetId'];
+    $category6918 = $row6918['category'];
+    $date6918 = $row6918['date'];
+    $building6918 = $row6918['building'];
+    $floor6918 = $row6918['floor'];
+    $room6918 = $row6918['room'];
+    $status6918 = $row6918['status'];
+    $assignedName6918 = $row6918['assignedName'];
+    $assignedBy6918 = $row6918['assignedBy'];
+    $upload_img6918 = $row6918['upload_img'];
+    $description6918 = $row6918['description'];
+    //FOR ID 6917
+    $sql6917 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6917";
+    $stmt6917 = $conn->prepare($sql6917);
+    $stmt6917->execute();
+    $result6917 = $stmt6917->get_result();
+    $row6917 = $result6917->fetch_assoc();
+    $assetId6917 = $row6917['assetId'];
+    $category6917 = $row6917['category'];
+    $date6917 = $row6917['date'];
+    $building6917 = $row6917['building'];
+    $floor6917 = $row6917['floor'];
+    $room6917 = $row6917['room'];
+    $status6917 = $row6917['status'];
+    $assignedName6917 = $row6917['assignedName'];
+    $assignedBy6917 = $row6917['assignedBy'];
+    $upload_img6917 = $row6917['upload_img'];
+    $description6917 = $row6917['description'];
+    //FOR ID 6916
+    $sql6916 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6916";
+    $stmt6916 = $conn->prepare($sql6916);
+    $stmt6916->execute();
+    $result6916 = $stmt6916->get_result();
+    $row6916 = $result6916->fetch_assoc();
+    $assetId6916 = $row6916['assetId'];
+    $category6916 = $row6916['category'];
+    $date6916 = $row6916['date'];
+    $building6916 = $row6916['building'];
+    $floor6916 = $row6916['floor'];
+    $room6916 = $row6916['room'];
+    $status6916 = $row6916['status'];
+    $assignedName6916 = $row6916['assignedName'];
+    $assignedBy6916 = $row6916['assignedBy'];
+    $upload_img6916 = $row6916['upload_img'];
+    $description6916 = $row6916['description'];
+    //FOR ID 6915
+    $sql6915 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6915";
+    $stmt6915 = $conn->prepare($sql6915);
+    $stmt6915->execute();
+    $result6915 = $stmt6915->get_result();
+    $row6915 = $result6915->fetch_assoc();
+    $assetId6915 = $row6915['assetId'];
+    $category6915 = $row6915['category'];
+    $date6915 = $row6915['date'];
+    $building6915 = $row6915['building'];
+    $floor6915 = $row6915['floor'];
+    $room6915 = $row6915['room'];
+    $status6915 = $row6915['status'];
+    $assignedName6915 = $row6915['assignedName'];
+    $assignedBy6915 = $row6915['assignedBy'];
+    $upload_img6915 = $row6915['upload_img'];
+    $description6915 = $row6915['description'];
+    //FOR ID 6914
+    $sql6914 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6914";
+    $stmt6914 = $conn->prepare($sql6914);
+    $stmt6914->execute();
+    $result6914 = $stmt6914->get_result();
+    $row6914 = $result6914->fetch_assoc();
+    $assetId6914 = $row6914['assetId'];
+    $category6914 = $row6914['category'];
+    $date6914 = $row6914['date'];
+    $building6914 = $row6914['building'];
+    $floor6914 = $row6914['floor'];
+    $room6914 = $row6914['room'];
+    $status6914 = $row6914['status'];
+    $assignedName6914 = $row6914['assignedName'];
+    $assignedBy6914 = $row6914['assignedBy'];
+    $upload_img6914 = $row6914['upload_img'];
+    $description6914 = $row6914['description'];
+    //FOR ID 6913
+    $sql6913 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6913";
+    $stmt6913 = $conn->prepare($sql6913);
+    $stmt6913->execute();
+    $result6913 = $stmt6913->get_result();
+    $row6913 = $result6913->fetch_assoc();
+    $assetId6913 = $row6913['assetId'];
+    $category6913 = $row6913['category'];
+    $date6913 = $row6913['date'];
+    $building6913 = $row6913['building'];
+    $floor6913 = $row6913['floor'];
+    $room6913 = $row6913['room'];
+    $status6913 = $row6913['status'];
+    $assignedName6913 = $row6913['assignedName'];
+    $assignedBy6913 = $row6913['assignedBy'];
+    $upload_img6913 = $row6913['upload_img'];
+    $description6913 = $row6913['description'];
+    //FOR ID 6912
+    $sql6912 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6912";
+    $stmt6912 = $conn->prepare($sql6912);
+    $stmt6912->execute();
+    $result6912 = $stmt6912->get_result();
+    $row6912 = $result6912->fetch_assoc();
+    $assetId6912 = $row6912['assetId'];
+    $category6912 = $row6912['category'];
+    $date6912 = $row6912['date'];
+    $building6912 = $row6912['building'];
+    $floor6912 = $row6912['floor'];
+    $room6912 = $row6912['room'];
+    $status6912 = $row6912['status'];
+    $assignedName6912 = $row6912['assignedName'];
+    $assignedBy6912 = $row6912['assignedBy'];
+    $upload_img6912 = $row6912['upload_img'];
+    $description6912 = $row6912['description'];
+    //FOR ID 6911
+    $sql6911 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6911";
+    $stmt6911 = $conn->prepare($sql6911);
+    $stmt6911->execute();
+    $result6911 = $stmt6911->get_result();
+    $row6911 = $result6911->fetch_assoc();
+    $assetId6911 = $row6911['assetId'];
+    $category6911 = $row6911['category'];
+    $date6911 = $row6911['date'];
+    $building6911 = $row6911['building'];
+    $floor6911 = $row6911['floor'];
+    $room6911 = $row6911['room'];
+    $status6911 = $row6911['status'];
+    $assignedName6911 = $row6911['assignedName'];
+    $assignedBy6911 = $row6911['assignedBy'];
+    $upload_img6911 = $row6911['upload_img'];
+    $description6911 = $row6911['description'];
+    //FOR ID 6910
+    $sql6910 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6910";
+    $stmt6910 = $conn->prepare($sql6910);
+    $stmt6910->execute();
+    $result6910 = $stmt6910->get_result();
+    $row6910 = $result6910->fetch_assoc();
+    $assetId6910 = $row6910['assetId'];
+    $category6910 = $row6910['category'];
+    $date6910 = $row6910['date'];
+    $building6910 = $row6910['building'];
+    $floor6910 = $row6910['floor'];
+    $room6910 = $row6910['room'];
+    $status6910 = $row6910['status'];
+    $assignedName6910 = $row6910['assignedName'];
+    $assignedBy6910 = $row6910['assignedBy'];
+    $upload_img6910 = $row6910['upload_img'];
+    $description6910 = $row6910['description'];
+    //FOR ID 6909
+    $sql6909 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6909";
+    $stmt6909 = $conn->prepare($sql6909);
+    $stmt6909->execute();
+    $result6909 = $stmt6909->get_result();
+    $row6909 = $result6909->fetch_assoc();
+    $assetId6909 = $row6909['assetId'];
+    $category6909 = $row6909['category'];
+    $date6909 = $row6909['date'];
+    $building6909 = $row6909['building'];
+    $floor6909 = $row6909['floor'];
+    $room6909 = $row6909['room'];
+    $status6909 = $row6909['status'];
+    $assignedName6909 = $row6909['assignedName'];
+    $assignedBy6909 = $row6909['assignedBy'];
+    $upload_img6909 = $row6909['upload_img'];
+    $description6909 = $row6909['description'];
+    //FOR ID 6908
+    $sql6908 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6908";
+    $stmt6908 = $conn->prepare($sql6908);
+    $stmt6908->execute();
+    $result6908 = $stmt6908->get_result();
+    $row6908 = $result6908->fetch_assoc();
+    $assetId6908 = $row6908['assetId'];
+    $category6908 = $row6908['category'];
+    $date6908 = $row6908['date'];
+    $building6908 = $row6908['building'];
+    $floor6908 = $row6908['floor'];
+    $room6908 = $row6908['room'];
+    $status6908 = $row6908['status'];
+    $assignedName6908 = $row6908['assignedName'];
+    $assignedBy6908 = $row6908['assignedBy'];
+    $upload_img6908 = $row6908['upload_img'];
+    $description6908 = $row6908['description'];
+    //FOR ID 6907
+    $sql6907 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6907";
+    $stmt6907 = $conn->prepare($sql6907);
+    $stmt6907->execute();
+    $result6907 = $stmt6907->get_result();
+    $row6907 = $result6907->fetch_assoc();
+    $assetId6907 = $row6907['assetId'];
+    $category6907 = $row6907['category'];
+    $date6907 = $row6907['date'];
+    $building6907 = $row6907['building'];
+    $floor6907 = $row6907['floor'];
+    $room6907 = $row6907['room'];
+    $status6907 = $row6907['status'];
+    $assignedName6907 = $row6907['assignedName'];
+    $assignedBy6907 = $row6907['assignedBy'];
+    $upload_img6907 = $row6907['upload_img'];
+    $description6907 = $row6907['description'];
+    //FOR ID 6906
+    $sql6906 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6906";
+    $stmt6906 = $conn->prepare($sql6906);
+    $stmt6906->execute();
+    $result6906 = $stmt6906->get_result();
+    $row6906 = $result6906->fetch_assoc();
+    $assetId6906 = $row6906['assetId'];
+    $category6906 = $row6906['category'];
+    $date6906 = $row6906['date'];
+    $building6906 = $row6906['building'];
+    $floor6906 = $row6906['floor'];
+    $room6906 = $row6906['room'];
+    $status6906 = $row6906['status'];
+    $assignedName6906 = $row6906['assignedName'];
+    $assignedBy6906 = $row6906['assignedBy'];
+    $upload_img6906 = $row6906['upload_img'];
+    $description6906 = $row6906['description'];
+    //FOR ID 6905
+    $sql6905 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6905";
+    $stmt6905 = $conn->prepare($sql6905);
+    $stmt6905->execute();
+    $result6905 = $stmt6905->get_result();
+    $row6905 = $result6905->fetch_assoc();
+    $assetId6905 = $row6905['assetId'];
+    $category6905 = $row6905['category'];
+    $date6905 = $row6905['date'];
+    $building6905 = $row6905['building'];
+    $floor6905 = $row6905['floor'];
+    $room6905 = $row6905['room'];
+    $status6905 = $row6905['status'];
+    $assignedName6905 = $row6905['assignedName'];
+    $assignedBy6905 = $row6905['assignedBy'];
+    $upload_img6905 = $row6905['upload_img'];
+    $description6905 = $row6905['description'];
+    //FOR ID 6904
+    $sql6904 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6904";
+    $stmt6904 = $conn->prepare($sql6904);
+    $stmt6904->execute();
+    $result6904 = $stmt6904->get_result();
+    $row6904 = $result6904->fetch_assoc();
+    $assetId6904 = $row6904['assetId'];
+    $category6904 = $row6904['category'];
+    $date6904 = $row6904['date'];
+    $building6904 = $row6904['building'];
+    $floor6904 = $row6904['floor'];
+    $room6904 = $row6904['room'];
+    $status6904 = $row6904['status'];
+    $assignedName6904 = $row6904['assignedName'];
+    $assignedBy6904 = $row6904['assignedBy'];
+    $upload_img6904 = $row6904['upload_img'];
+    $description6904 = $row6904['description'];
+    //FOR ID 6903
+    $sql6903 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6903";
+    $stmt6903 = $conn->prepare($sql6903);
+    $stmt6903->execute();
+    $result6903 = $stmt6903->get_result();
+    $row6903 = $result6903->fetch_assoc();
+    $assetId6903 = $row6903['assetId'];
+    $category6903 = $row6903['category'];
+    $date6903 = $row6903['date'];
+    $building6903 = $row6903['building'];
+    $floor6903 = $row6903['floor'];
+    $room6903 = $row6903['room'];
+    $status6903 = $row6903['status'];
+    $assignedName6903 = $row6903['assignedName'];
+    $assignedBy6903 = $row6903['assignedBy'];
+    $upload_img6903 = $row6903['upload_img'];
+    $description6903 = $row6903['description'];
+    //FOR ID 6902
+    $sql6902 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6902";
+    $stmt6902 = $conn->prepare($sql6902);
+    $stmt6902->execute();
+    $result6902 = $stmt6902->get_result();
+    $row6902 = $result6902->fetch_assoc();
+    $assetId6902 = $row6902['assetId'];
+    $category6902 = $row6902['category'];
+    $date6902 = $row6902['date'];
+    $building6902 = $row6902['building'];
+    $floor6902 = $row6902['floor'];
+    $room6902 = $row6902['room'];
+    $status6902 = $row6902['status'];
+    $assignedName6902 = $row6902['assignedName'];
+    $assignedBy6902 = $row6902['assignedBy'];
+    $upload_img6902 = $row6902['upload_img'];
+    $description6902 = $row6902['description'];
+    //FOR ID 6901
+    $sql6901 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6901";
+    $stmt6901 = $conn->prepare($sql6901);
+    $stmt6901->execute();
+    $result6901 = $stmt6901->get_result();
+    $row6901 = $result6901->fetch_assoc();
+    $assetId6901 = $row6901['assetId'];
+    $category6901 = $row6901['category'];
+    $date6901 = $row6901['date'];
+    $building6901 = $row6901['building'];
+    $floor6901 = $row6901['floor'];
+    $room6901 = $row6901['room'];
+    $status6901 = $row6901['status'];
+    $assignedName6901 = $row6901['assignedName'];
+    $assignedBy6901 = $row6901['assignedBy'];
+    $upload_img6901 = $row6901['upload_img'];
+    $description6901 = $row6901['description'];
+    //FOR ID 6900
+    $sql6900 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6900";
+    $stmt6900 = $conn->prepare($sql6900);
+    $stmt6900->execute();
+    $result6900 = $stmt6900->get_result();
+    $row6900 = $result6900->fetch_assoc();
+    $assetId6900 = $row6900['assetId'];
+    $category6900 = $row6900['category'];
+    $date6900 = $row6900['date'];
+    $building6900 = $row6900['building'];
+    $floor6900 = $row6900['floor'];
+    $room6900 = $row6900['room'];
+    $status6900 = $row6900['status'];
+    $assignedName6900 = $row6900['assignedName'];
+    $assignedBy6900 = $row6900['assignedBy'];
+    $upload_img6900 = $row6900['upload_img'];
+    $description6900 = $row6900['description'];
+    //FOR ID 6899
+    $sql6899 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6899";
+    $stmt6899 = $conn->prepare($sql6899);
+    $stmt6899->execute();
+    $result6899 = $stmt6899->get_result();
+    $row6899 = $result6899->fetch_assoc();
+    $assetId6899 = $row6899['assetId'];
+    $category6899 = $row6899['category'];
+    $date6899 = $row6899['date'];
+    $building6899 = $row6899['building'];
+    $floor6899 = $row6899['floor'];
+    $room6899 = $row6899['room'];
+    $status6899 = $row6899['status'];
+    $assignedName6899 = $row6899['assignedName'];
+    $assignedBy6899 = $row6899['assignedBy'];
+    $upload_img6899 = $row6899['upload_img'];
+    $description6899 = $row6899['description'];
+
+    //FOR ID 6898
+    $sql6898 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6898";
+    $stmt6898 = $conn->prepare($sql6898);
+    $stmt6898->execute();
+    $result6898 = $stmt6898->get_result();
+    $row6898 = $result6898->fetch_assoc();
+    $assetId6898 = $row6898['assetId'];
+    $category6898 = $row6898['category'];
+    $date6898 = $row6898['date'];
+    $building6898 = $row6898['building'];
+    $floor6898 = $row6898['floor'];
+    $room6898 = $row6898['room'];
+    $status6898 = $row6898['status'];
+    $assignedName6898 = $row6898['assignedName'];
+    $assignedBy6898 = $row6898['assignedBy'];
+    $upload_img6898 = $row6898['upload_img'];
+    $description6898 = $row6898['description'];
+
+    //FOR ID 6897
+    $sql6897 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6897";
+    $stmt6897 = $conn->prepare($sql6897);
+    $stmt6897->execute();
+    $result6897 = $stmt6897->get_result();
+    $row6897 = $result6897->fetch_assoc();
+    $assetId6897 = $row6897['assetId'];
+    $category6897 = $row6897['category'];
+    $date6897 = $row6897['date'];
+    $building6897 = $row6897['building'];
+    $floor6897 = $row6897['floor'];
+    $room6897 = $row6897['room'];
+    $status6897 = $row6897['status'];
+    $assignedName6897 = $row6897['assignedName'];
+    $assignedBy6897 = $row6897['assignedBy'];
+    $upload_img6897 = $row6897['upload_img'];
+    $description6897 = $row6897['description'];
+
+    //FOR ID 6896
+    $sql6896 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6896";
+    $stmt6896 = $conn->prepare($sql6896);
+    $stmt6896->execute();
+    $result6896 = $stmt6896->get_result();
+    $row6896 = $result6896->fetch_assoc();
+    $assetId6896 = $row6896['assetId'];
+    $category6896 = $row6896['category'];
+    $date6896 = $row6896['date'];
+    $building6896 = $row6896['building'];
+    $floor6896 = $row6896['floor'];
+    $room6896 = $row6896['room'];
+    $status6896 = $row6896['status'];
+    $assignedName6896 = $row6896['assignedName'];
+    $assignedBy6896 = $row6896['assignedBy'];
+    $upload_img6896 = $row6896['upload_img'];
+    $description6896 = $row6896['description'];
+
+    //FOR ID 6895
+    $sql6895 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6895";
+    $stmt6895 = $conn->prepare($sql6895);
+    $stmt6895->execute();
+    $result6895 = $stmt6895->get_result();
+    $row6895 = $result6895->fetch_assoc();
+    $assetId6895 = $row6895['assetId'];
+    $category6895 = $row6895['category'];
+    $date6895 = $row6895['date'];
+    $building6895 = $row6895['building'];
+    $floor6895 = $row6895['floor'];
+    $room6895 = $row6895['room'];
+    $status6895 = $row6895['status'];
+    $assignedName6895 = $row6895['assignedName'];
+    $assignedBy6895 = $row6895['assignedBy'];
+    $upload_img6895 = $row6895['upload_img'];
+    $description6895 = $row6895['description'];
+
+    //FOR ID 6894
+    $sql6894 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6894";
+    $stmt6894 = $conn->prepare($sql6894);
+    $stmt6894->execute();
+    $result6894 = $stmt6894->get_result();
+    $row6894 = $result6894->fetch_assoc();
+    $assetId6894 = $row6894['assetId'];
+    $category6894 = $row6894['category'];
+    $date6894 = $row6894['date'];
+    $building6894 = $row6894['building'];
+    $floor6894 = $row6894['floor'];
+    $room6894 = $row6894['room'];
+    $status6894 = $row6894['status'];
+    $assignedName6894 = $row6894['assignedName'];
+    $assignedBy6894 = $row6894['assignedBy'];
+    $upload_img6894 = $row6894['upload_img'];
+    $description6894 = $row6894['description'];
+
+    //FOR ID 6893
+    $sql6893 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6893";
+    $stmt6893 = $conn->prepare($sql6893);
+    $stmt6893->execute();
+    $result6893 = $stmt6893->get_result();
+    $row6893 = $result6893->fetch_assoc();
+    $assetId6893 = $row6893['assetId'];
+    $category6893 = $row6893['category'];
+    $date6893 = $row6893['date'];
+    $building6893 = $row6893['building'];
+    $floor6893 = $row6893['floor'];
+    $room6893 = $row6893['room'];
+    $status6893 = $row6893['status'];
+    $assignedName6893 = $row6893['assignedName'];
+    $assignedBy6893 = $row6893['assignedBy'];
+    $upload_img6893 = $row6893['upload_img'];
+    $description6893 = $row6893['description'];
+
+    //FOR ID 6892
+    $sql6892 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6892";
+    $stmt6892 = $conn->prepare($sql6892);
+    $stmt6892->execute();
+    $result6892 = $stmt6892->get_result();
+    $row6892 = $result6892->fetch_assoc();
+    $assetId6892 = $row6892['assetId'];
+    $category6892 = $row6892['category'];
+    $date6892 = $row6892['date'];
+    $building6892 = $row6892['building'];
+    $floor6892 = $row6892['floor'];
+    $room6892 = $row6892['room'];
+    $status6892 = $row6892['status'];
+    $assignedName6892 = $row6892['assignedName'];
+    $assignedBy6892 = $row6892['assignedBy'];
+    $upload_img6892 = $row6892['upload_img'];
+    $description6892 = $row6892['description'];
+
+    //FOR ID 6891
+    $sql6891 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6891";
+    $stmt6891 = $conn->prepare($sql6891);
+    $stmt6891->execute();
+    $result6891 = $stmt6891->get_result();
+    $row6891 = $result6891->fetch_assoc();
+    $assetId6891 = $row6891['assetId'];
+    $category6891 = $row6891['category'];
+    $date6891 = $row6891['date'];
+    $building6891 = $row6891['building'];
+    $floor6891 = $row6891['floor'];
+    $room6891 = $row6891['room'];
+    $status6891 = $row6891['status'];
+    $assignedName6891 = $row6891['assignedName'];
+    $assignedBy6891 = $row6891['assignedBy'];
+    $upload_img6891 = $row6891['upload_img'];
+    $description6891 = $row6891['description'];
+
+    //FOR ID 6890
+    $sql6890 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6890";
+    $stmt6890 = $conn->prepare($sql6890);
+    $stmt6890->execute();
+    $result6890 = $stmt6890->get_result();
+    $row6890 = $result6890->fetch_assoc();
+    $assetId6890 = $row6890['assetId'];
+    $category6890 = $row6890['category'];
+    $date6890 = $row6890['date'];
+    $building6890 = $row6890['building'];
+    $floor6890 = $row6890['floor'];
+    $room6890 = $row6890['room'];
+    $status6890 = $row6890['status'];
+    $assignedName6890 = $row6890['assignedName'];
+    $assignedBy6890 = $row6890['assignedBy'];
+    $upload_img6890 = $row6890['upload_img'];
+    $description6890 = $row6890['description'];
+
+    //FOR ID 6889
+    $sql6889 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6889";
+    $stmt6889 = $conn->prepare($sql6889);
+    $stmt6889->execute();
+    $result6889 = $stmt6889->get_result();
+    $row6889 = $result6889->fetch_assoc();
+    $assetId6889 = $row6889['assetId'];
+    $category6889 = $row6889['category'];
+    $date6889 = $row6889['date'];
+    $building6889 = $row6889['building'];
+    $floor6889 = $row6889['floor'];
+    $room6889 = $row6889['room'];
+    $status6889 = $row6889['status'];
+    $assignedName6889 = $row6889['assignedName'];
+    $assignedBy6889 = $row6889['assignedBy'];
+    $upload_img6889 = $row6889['upload_img'];
+    $description6889 = $row6889['description'];
+
+    //FOR ID 6888
+    $sql6888 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6888";
+    $stmt6888 = $conn->prepare($sql6888);
+    $stmt6888->execute();
+    $result6888 = $stmt6888->get_result();
+    $row6888 = $result6888->fetch_assoc();
+    $assetId6888 = $row6888['assetId'];
+    $category6888 = $row6888['category'];
+    $date6888 = $row6888['date'];
+    $building6888 = $row6888['building'];
+    $floor6888 = $row6888['floor'];
+    $room6888 = $row6888['room'];
+    $status6888 = $row6888['status'];
+    $assignedName6888 = $row6888['assignedName'];
+    $assignedBy6888 = $row6888['assignedBy'];
+    $upload_img6888 = $row6888['upload_img'];
+    $description6888 = $row6888['description'];
+
+    //FOR ID 6887
+    $sql6887 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6887";
+    $stmt6887 = $conn->prepare($sql6887);
+    $stmt6887->execute();
+    $result6887 = $stmt6887->get_result();
+    $row6887 = $result6887->fetch_assoc();
+    $assetId6887 = $row6887['assetId'];
+    $category6887 = $row6887['category'];
+    $date6887 = $row6887['date'];
+    $building6887 = $row6887['building'];
+    $floor6887 = $row6887['floor'];
+    $room6887 = $row6887['room'];
+    $status6887 = $row6887['status'];
+    $assignedName6887 = $row6887['assignedName'];
+    $assignedBy6887 = $row6887['assignedBy'];
+    $upload_img6887 = $row6887['upload_img'];
+    $description6887 = $row6887['description'];
+    //FOR ID 6886
+    $sql6886 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6886";
+    $stmt6886 = $conn->prepare($sql6886);
+    $stmt6886->execute();
+    $result6886 = $stmt6886->get_result();
+    $row6886 = $result6886->fetch_assoc();
+    $assetId6886 = $row6886['assetId'];
+    $category6886 = $row6886['category'];
+    $date6886 = $row6886['date'];
+    $building6886 = $row6886['building'];
+    $floor6886 = $row6886['floor'];
+    $room6886 = $row6886['room'];
+    $status6886 = $row6886['status'];
+    $assignedName6886 = $row6886['assignedName'];
+    $assignedBy6886 = $row6886['assignedBy'];
+    $upload_img6886 = $row6886['upload_img'];
+    $description6886 = $row6886['description'];
+    //FOR ID 6885
+    $sql6885 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6885";
+    $stmt6885 = $conn->prepare($sql6885);
+    $stmt6885->execute();
+    $result6885 = $stmt6885->get_result();
+    $row6885 = $result6885->fetch_assoc();
+    $assetId6885 = $row6885['assetId'];
+    $category6885 = $row6885['category'];
+    $date6885 = $row6885['date'];
+    $building6885 = $row6885['building'];
+    $floor6885 = $row6885['floor'];
+    $room6885 = $row6885['room'];
+    $status6885 = $row6885['status'];
+    $assignedName6885 = $row6885['assignedName'];
+    $assignedBy6885 = $row6885['assignedBy'];
+    $upload_img6885 = $row6885['upload_img'];
+    $description6885 = $row6885['description'];
+    //FOR ID 6884
+    $sql6884 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6884";
+    $stmt6884 = $conn->prepare($sql6884);
+    $stmt6884->execute();
+    $result6884 = $stmt6884->get_result();
+    $row6884 = $result6884->fetch_assoc();
+    $assetId6884 = $row6884['assetId'];
+    $category6884 = $row6884['category'];
+    $date6884 = $row6884['date'];
+    $building6884 = $row6884['building'];
+    $floor6884 = $row6884['floor'];
+    $room6884 = $row6884['room'];
+    $status6884 = $row6884['status'];
+    $assignedName6884 = $row6884['assignedName'];
+    $assignedBy6884 = $row6884['assignedBy'];
+    $upload_img6884 = $row6884['upload_img'];
+    $description6884 = $row6884['description'];
+
+    //FOR ID 6883
+    $sql6883 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6883";
+    $stmt6883 = $conn->prepare($sql6883);
+    $stmt6883->execute();
+    $result6883 = $stmt6883->get_result();
+    $row6883 = $result6883->fetch_assoc();
+    $assetId6883 = $row6883['assetId'];
+    $category6883 = $row6883['category'];
+    $date6883 = $row6883['date'];
+    $building6883 = $row6883['building'];
+    $floor6883 = $row6883['floor'];
+    $room6883 = $row6883['room'];
+    $status6883 = $row6883['status'];
+    $assignedName6883 = $row6883['assignedName'];
+    $assignedBy6883 = $row6883['assignedBy'];
+    $upload_img6883 = $row6883['upload_img'];
+    $description6883 = $row6883['description'];
+
+    //FOR ID 6882
+    $sql6882 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6882";
+    $stmt6882 = $conn->prepare($sql6882);
+    $stmt6882->execute();
+    $result6882 = $stmt6882->get_result();
+    $row6882 = $result6882->fetch_assoc();
+    $assetId6882 = $row6882['assetId'];
+    $category6882 = $row6882['category'];
+    $date6882 = $row6882['date'];
+    $building6882 = $row6882['building'];
+    $floor6882 = $row6882['floor'];
+    $room6882 = $row6882['room'];
+    $status6882 = $row6882['status'];
+    $assignedName6882 = $row6882['assignedName'];
+    $assignedBy6882 = $row6882['assignedBy'];
+    $upload_img6882 = $row6882['upload_img'];
+    $description6882 = $row6882['description'];
+
+    //FOR ID 6881
+    $sql6881 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6881";
+    $stmt6881 = $conn->prepare($sql6881);
+    $stmt6881->execute();
+    $result6881 = $stmt6881->get_result();
+    $row6881 = $result6881->fetch_assoc();
+    $assetId6881 = $row6881['assetId'];
+    $category6881 = $row6881['category'];
+    $date6881 = $row6881['date'];
+    $building6881 = $row6881['building'];
+    $floor6881 = $row6881['floor'];
+    $room6881 = $row6881['room'];
+    $status6881 = $row6881['status'];
+    $assignedName6881 = $row6881['assignedName'];
+    $assignedBy6881 = $row6881['assignedBy'];
+    $upload_img6881 = $row6881['upload_img'];
+    $description6881 = $row6881['description'];
+    //FOR ID 6880
+    $sql6880 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6880";
+    $stmt6880 = $conn->prepare($sql6880);
+    $stmt6880->execute();
+    $result6880 = $stmt6880->get_result();
+    $row6880 = $result6880->fetch_assoc();
+    $assetId6880 = $row6880['assetId'];
+    $category6880 = $row6880['category'];
+    $date6880 = $row6880['date'];
+    $building6880 = $row6880['building'];
+    $floor6880 = $row6880['floor'];
+    $room6880 = $row6880['room'];
+    $status6880 = $row6880['status'];
+    $assignedName6880 = $row6880['assignedName'];
+    $assignedBy6880 = $row6880['assignedBy'];
+    $upload_img6880 = $row6880['upload_img'];
+    $description6880 = $row6880['description'];
+
+    //FOR ID 6879
+    $sql6879 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6879";
+    $stmt6879 = $conn->prepare($sql6879);
+    $stmt6879->execute();
+    $result6879 = $stmt6879->get_result();
+    $row6879 = $result6879->fetch_assoc();
+    $assetId6879 = $row6879['assetId'];
+    $category6879 = $row6879['category'];
+    $date6879 = $row6879['date'];
+    $building6879 = $row6879['building'];
+    $floor6879 = $row6879['floor'];
+    $room6879 = $row6879['room'];
+    $status6879 = $row6879['status'];
+    $assignedName6879 = $row6879['assignedName'];
+    $assignedBy6879 = $row6879['assignedBy'];
+    $upload_img6879 = $row6879['upload_img'];
+    $description6879 = $row6879['description'];
+
+    //FOR ID 6878
+    $sql6878 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6878";
+    $stmt6878 = $conn->prepare($sql6878);
+    $stmt6878->execute();
+    $result6878 = $stmt6878->get_result();
+    $row6878 = $result6878->fetch_assoc();
+    $assetId6878 = $row6878['assetId'];
+    $category6878 = $row6878['category'];
+    $date6878 = $row6878['date'];
+    $building6878 = $row6878['building'];
+    $floor6878 = $row6878['floor'];
+    $room6878 = $row6878['room'];
+    $status6878 = $row6878['status'];
+    $assignedName6878 = $row6878['assignedName'];
+    $assignedBy6878 = $row6878['assignedBy'];
+    $upload_img6878 = $row6878['upload_img'];
+    $description6878 = $row6878['description'];
+
+    //FOR ID 6877
+    $sql6877 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6877";
+    $stmt6877 = $conn->prepare($sql6877);
+    $stmt6877->execute();
+    $result6877 = $stmt6877->get_result();
+    $row6877 = $result6877->fetch_assoc();
+    $assetId6877 = $row6877['assetId'];
+    $category6877 = $row6877['category'];
+    $date6877 = $row6877['date'];
+    $building6877 = $row6877['building'];
+    $floor6877 = $row6877['floor'];
+    $room6877 = $row6877['room'];
+    $status6877 = $row6877['status'];
+    $assignedName6877 = $row6877['assignedName'];
+    $assignedBy6877 = $row6877['assignedBy'];
+    $upload_img6877 = $row6877['upload_img'];
+    $description6877 = $row6877['description'];
+
+    //FOR ID 6876
+    $sql6876 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6876";
+    $stmt6876 = $conn->prepare($sql6876);
+    $stmt6876->execute();
+    $result6876 = $stmt6876->get_result();
+    $row6876 = $result6876->fetch_assoc();
+    $assetId6876 = $row6876['assetId'];
+    $category6876 = $row6876['category'];
+    $date6876 = $row6876['date'];
+    $building6876 = $row6876['building'];
+    $floor6876 = $row6876['floor'];
+    $room6876 = $row6876['room'];
+    $status6876 = $row6876['status'];
+    $assignedName6876 = $row6876['assignedName'];
+    $assignedBy6876 = $row6876['assignedBy'];
+    $upload_img6876 = $row6876['upload_img'];
+    $description6876 = $row6876['description'];
+
+    //FOR ID 6875
+    $sql6875 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6875";
+    $stmt6875 = $conn->prepare($sql6875);
+    $stmt6875->execute();
+    $result6875 = $stmt6875->get_result();
+    $row6875 = $result6875->fetch_assoc();
+    $assetId6875 = $row6875['assetId'];
+    $category6875 = $row6875['category'];
+    $date6875 = $row6875['date'];
+    $building6875 = $row6875['building'];
+    $floor6875 = $row6875['floor'];
+    $room6875 = $row6875['room'];
+    $status6875 = $row6875['status'];
+    $assignedName6875 = $row6875['assignedName'];
+    $assignedBy6875 = $row6875['assignedBy'];
+    $upload_img6875 = $row6875['upload_img'];
+    $description6875 = $row6875['description'];
+
+    //FOR ID 6874
+    $sql6874 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6874";
+    $stmt6874 = $conn->prepare($sql6874);
+    $stmt6874->execute();
+    $result6874 = $stmt6874->get_result();
+    $row6874 = $result6874->fetch_assoc();
+    $assetId6874 = $row6874['assetId'];
+    $category6874 = $row6874['category'];
+    $date6874 = $row6874['date'];
+    $building6874 = $row6874['building'];
+    $floor6874 = $row6874['floor'];
+    $room6874 = $row6874['room'];
+    $status6874 = $row6874['status'];
+    $assignedName6874 = $row6874['assignedName'];
+    $assignedBy6874 = $row6874['assignedBy'];
+    $upload_img6874 = $row6874['upload_img'];
+    $description6874 = $row6874['description'];
+
+    //FOR ID 6873
+    $sql6873 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6873";
+    $stmt6873 = $conn->prepare($sql6873);
+    $stmt6873->execute();
+    $result6873 = $stmt6873->get_result();
+    $row6873 = $result6873->fetch_assoc();
+    $assetId6873 = $row6873['assetId'];
+    $category6873 = $row6873['category'];
+    $date6873 = $row6873['date'];
+    $building6873 = $row6873['building'];
+    $floor6873 = $row6873['floor'];
+    $room6873 = $row6873['room'];
+    $status6873 = $row6873['status'];
+    $assignedName6873 = $row6873['assignedName'];
+    $assignedBy6873 = $row6873['assignedBy'];
+    $upload_img6873 = $row6873['upload_img'];
+    $description6873 = $row6873['description'];
+
+    //FOR ID 6872
+    $sql6872 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6872";
+    $stmt6872 = $conn->prepare($sql6872);
+    $stmt6872->execute();
+    $result6872 = $stmt6872->get_result();
+    $row6872 = $result6872->fetch_assoc();
+    $assetId6872 = $row6872['assetId'];
+    $category6872 = $row6872['category'];
+    $date6872 = $row6872['date'];
+    $building6872 = $row6872['building'];
+    $floor6872 = $row6872['floor'];
+    $room6872 = $row6872['room'];
+    $status6872 = $row6872['status'];
+    $assignedName6872 = $row6872['assignedName'];
+    $assignedBy6872 = $row6872['assignedBy'];
+    $upload_img6872 = $row6872['upload_img'];
+    $description6872 = $row6872['description'];
+
+    //FOR ID 6871
+    $sql6871 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6871";
+    $stmt6871 = $conn->prepare($sql6871);
+    $stmt6871->execute();
+    $result6871 = $stmt6871->get_result();
+    $row6871 = $result6871->fetch_assoc();
+    $assetId6871 = $row6871['assetId'];
+    $category6871 = $row6871['category'];
+    $date6871 = $row6871['date'];
+    $building6871 = $row6871['building'];
+    $floor6871 = $row6871['floor'];
+    $room6871 = $row6871['room'];
+    $status6871 = $row6871['status'];
+    $assignedName6871 = $row6871['assignedName'];
+    $assignedBy6871 = $row6871['assignedBy'];
+    $upload_img6871 = $row6871['upload_img'];
+    $description6871 = $row6871['description'];
+
+    //FOR ID 6870
+    $sql6870 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6870";
+    $stmt6870 = $conn->prepare($sql6870);
+    $stmt6870->execute();
+    $result6870 = $stmt6870->get_result();
+    $row6870 = $result6870->fetch_assoc();
+    $assetId6870 = $row6870['assetId'];
+    $category6870 = $row6870['category'];
+    $date6870 = $row6870['date'];
+    $building6870 = $row6870['building'];
+    $floor6870 = $row6870['floor'];
+    $room6870 = $row6870['room'];
+    $status6870 = $row6870['status'];
+    $assignedName6870 = $row6870['assignedName'];
+    $assignedBy6870 = $row6870['assignedBy'];
+    $upload_img6870 = $row6870['upload_img'];
+    $description6870 = $row6870['description'];
+
+    //FOR ID 6869
+    $sql6869 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6869";
+    $stmt6869 = $conn->prepare($sql6869);
+    $stmt6869->execute();
+    $result6869 = $stmt6869->get_result();
+    $row6869 = $result6869->fetch_assoc();
+    $assetId6869 = $row6869['assetId'];
+    $category6869 = $row6869['category'];
+    $date6869 = $row6869['date'];
+    $building6869 = $row6869['building'];
+    $floor6869 = $row6869['floor'];
+    $room6869 = $row6869['room'];
+    $status6869 = $row6869['status'];
+    $assignedName6869 = $row6869['assignedName'];
+    $assignedBy6869 = $row6869['assignedBy'];
+    $upload_img6869 = $row6869['upload_img'];
+    $description6869 = $row6869['description'];
+
+    //FOR ID 6868
+    $sql6868 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6868";
+    $stmt6868 = $conn->prepare($sql6868);
+    $stmt6868->execute();
+    $result6868 = $stmt6868->get_result();
+    $row6868 = $result6868->fetch_assoc();
+    $assetId6868 = $row6868['assetId'];
+    $category6868 = $row6868['category'];
+    $date6868 = $row6868['date'];
+    $building6868 = $row6868['building'];
+    $floor6868 = $row6868['floor'];
+    $room6868 = $row6868['room'];
+    $status6868 = $row6868['status'];
+    $assignedName6868 = $row6868['assignedName'];
+    $assignedBy6868 = $row6868['assignedBy'];
+    $upload_img6868 = $row6868['upload_img'];
+    $description6868 = $row6868['description'];
+
+    //FOR ID 6867
+    $sql6867 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6867";
+    $stmt6867 = $conn->prepare($sql6867);
+    $stmt6867->execute();
+    $result6867 = $stmt6867->get_result();
+    $row6867 = $result6867->fetch_assoc();
+    $assetId6867 = $row6867['assetId'];
+    $category6867 = $row6867['category'];
+    $date6867 = $row6867['date'];
+    $building6867 = $row6867['building'];
+    $floor6867 = $row6867['floor'];
+    $room6867 = $row6867['room'];
+    $status6867 = $row6867['status'];
+    $assignedName6867 = $row6867['assignedName'];
+    $assignedBy6867 = $row6867['assignedBy'];
+    $upload_img6867 = $row6867['upload_img'];
+    $description6867 = $row6867['description'];
+
+    //FOR ID 7269
+    $sql7269 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7269";
+    $stmt7269 = $conn->prepare($sql7269);
+    $stmt7269->execute();
+    $result7269 = $stmt7269->get_result();
+    $row7269 = $result7269->fetch_assoc();
+    $assetId7269 = $row7269['assetId'];
+    $category7269 = $row7269['category'];
+    $date7269 = $row7269['date'];
+    $building7269 = $row7269['building'];
+    $floor7269 = $row7269['floor'];
+    $room7269 = $row7269['room'];
+    $status7269 = $row7269['status'];
+    $assignedName7269 = $row7269['assignedName'];
+    $assignedBy7269 = $row7269['assignedBy'];
+    $upload_img7269 = $row7269['upload_img'];
+    $description7269 = $row7269['description'];
+
+    //FOR ID 7268
+    $sql7268 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7268";
+    $stmt7268 = $conn->prepare($sql7268);
+    $stmt7268->execute();
+    $result7268 = $stmt7268->get_result();
+    $row7268 = $result7268->fetch_assoc();
+    $assetId7268 = $row7268['assetId'];
+    $category7268 = $row7268['category'];
+    $date7268 = $row7268['date'];
+    $building7268 = $row7268['building'];
+    $floor7268 = $row7268['floor'];
+    $room7268 = $row7268['room'];
+    $status7268 = $row7268['status'];
+    $assignedName7268 = $row7268['assignedName'];
+    $assignedBy7268 = $row7268['assignedBy'];
+    $upload_img7268 = $row7268['upload_img'];
+    $description7268 = $row7268['description'];
+
+    //FOR ID 7267
+    $sql7267 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7267";
+    $stmt7267 = $conn->prepare($sql7267);
+    $stmt7267->execute();
+    $result7267 = $stmt7267->get_result();
+    $row7267 = $result7267->fetch_assoc();
+    $assetId7267 = $row7267['assetId'];
+    $category7267 = $row7267['category'];
+    $date7267 = $row7267['date'];
+    $building7267 = $row7267['building'];
+    $floor7267 = $row7267['floor'];
+    $room7267 = $row7267['room'];
+    $status7267 = $row7267['status'];
+    $assignedName7267 = $row7267['assignedName'];
+    $assignedBy7267 = $row7267['assignedBy'];
+    $upload_img7267 = $row7267['upload_img'];
+    $description7267 = $row7267['description'];
+
+    //FOR ID 6948
+    $sql6948 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6948";
+    $stmt6948 = $conn->prepare($sql6948);
+    $stmt6948->execute();
+    $result6948 = $stmt6948->get_result();
+    $row6948 = $result6948->fetch_assoc();
+    $assetId6948 = $row6948['assetId'];
+    $category6948 = $row6948['category'];
+    $date6948 = $row6948['date'];
+    $building6948 = $row6948['building'];
+    $floor6948 = $row6948['floor'];
+    $room6948 = $row6948['room'];
+    $status6948 = $row6948['status'];
+    $assignedName6948 = $row6948['assignedName'];
+    $assignedBy6948 = $row6948['assignedBy'];
+    $upload_img6948 = $row6948['upload_img'];
+    $description6948 = $row6948['description'];
+
+    //FOR ID 6949
+    $sql6949 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6949";
+    $stmt6949 = $conn->prepare($sql6949);
+    $stmt6949->execute();
+    $result6949 = $stmt6949->get_result();
+    $row6949 = $result6949->fetch_assoc();
+    $assetId6949 = $row6949['assetId'];
+    $category6949 = $row6949['category'];
+    $date6949 = $row6949['date'];
+    $building6949 = $row6949['building'];
+    $floor6949 = $row6949['floor'];
+    $room6949 = $row6949['room'];
+    $status6949 = $row6949['status'];
+    $assignedName6949 = $row6949['assignedName'];
+    $assignedBy6949 = $row6949['assignedBy'];
+    $upload_img6949 = $row6949['upload_img'];
+    $description6949 = $row6949['description'];
+
+    //FOR ID 6950
+    $sql6950 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6950";
+    $stmt6950 = $conn->prepare($sql6950);
+    $stmt6950->execute();
+    $result6950 = $stmt6950->get_result();
+    $row6950 = $result6950->fetch_assoc();
+    $assetId6950 = $row6950['assetId'];
+    $category6950 = $row6950['category'];
+    $date6950 = $row6950['date'];
+    $building6950 = $row6950['building'];
+    $floor6950 = $row6950['floor'];
+    $room6950 = $row6950['room'];
+    $status6950 = $row6950['status'];
+    $assignedName6950 = $row6950['assignedName'];
+    $assignedBy6950 = $row6950['assignedBy'];
+    $upload_img6950 = $row6950['upload_img'];
+    $description6950 = $row6950['description'];
+
+    //FOR ID 6951
+    $sql6951 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6951";
+    $stmt6951 = $conn->prepare($sql6951);
+    $stmt6951->execute();
+    $result6951 = $stmt6951->get_result();
+    $row6951 = $result6951->fetch_assoc();
+    $assetId6951 = $row6951['assetId'];
+    $category6951 = $row6951['category'];
+    $date6951 = $row6951['date'];
+    $building6951 = $row6951['building'];
+    $floor6951 = $row6951['floor'];
+    $room6951 = $row6951['room'];
+    $status6951 = $row6951['status'];
+    $assignedName6951 = $row6951['assignedName'];
+    $assignedBy6951 = $row6951['assignedBy'];
+    $upload_img6951 = $row6951['upload_img'];
+    $description6951 = $row6951['description'];
+
+    //FOR ID 6952
+    $sql6952 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6952";
+    $stmt6952 = $conn->prepare($sql6952);
+    $stmt6952->execute();
+    $result6952 = $stmt6952->get_result();
+    $row6952 = $result6952->fetch_assoc();
+    $assetId6952 = $row6952['assetId'];
+    $category6952 = $row6952['category'];
+    $date6952 = $row6952['date'];
+    $building6952 = $row6952['building'];
+    $floor6952 = $row6952['floor'];
+    $room6952 = $row6952['room'];
+    $status6952 = $row6952['status'];
+    $assignedName6952 = $row6952['assignedName'];
+    $assignedBy6952 = $row6952['assignedBy'];
+    $upload_img6952 = $row6952['upload_img'];
+    $description6952 = $row6952['description'];
+
+    //FOR ID 6953
+    $sql6953 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6953";
+    $stmt6953 = $conn->prepare($sql6953);
+    $stmt6953->execute();
+    $result6953 = $stmt6953->get_result();
+    $row6953 = $result6953->fetch_assoc();
+    $assetId6953 = $row6953['assetId'];
+    $category6953 = $row6953['category'];
+    $date6953 = $row6953['date'];
+    $building6953 = $row6953['building'];
+    $floor6953 = $row6953['floor'];
+    $room6953 = $row6953['room'];
+    $status6953 = $row6953['status'];
+    $assignedName6953 = $row6953['assignedName'];
+    $assignedBy6953 = $row6953['assignedBy'];
+    $upload_img6953 = $row6953['upload_img'];
+    $description6953 = $row6953['description'];
+
+    //FOR ID 6954
+    $sql6954 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6954";
+    $stmt6954 = $conn->prepare($sql6954);
+    $stmt6954->execute();
+    $result6954 = $stmt6954->get_result();
+    $row6954 = $result6954->fetch_assoc();
+    $assetId6954 = $row6954['assetId'];
+    $category6954 = $row6954['category'];
+    $date6954 = $row6954['date'];
+    $building6954 = $row6954['building'];
+    $floor6954 = $row6954['floor'];
+    $room6954 = $row6954['room'];
+    $status6954 = $row6954['status'];
+    $assignedName6954 = $row6954['assignedName'];
+    $assignedBy6954 = $row6954['assignedBy'];
+    $upload_img6954 = $row6954['upload_img'];
+    $description6954 = $row6954['description'];
+
+    //FOR ID 6955
+    $sql6955 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6955";
+    $stmt6955 = $conn->prepare($sql6955);
+    $stmt6955->execute();
+    $result6955 = $stmt6955->get_result();
+    $row6955 = $result6955->fetch_assoc();
+    $assetId6955 = $row6955['assetId'];
+    $category6955 = $row6955['category'];
+    $date6955 = $row6955['date'];
+    $building6955 = $row6955['building'];
+    $floor6955 = $row6955['floor'];
+    $room6955 = $row6955['room'];
+    $status6955 = $row6955['status'];
+    $assignedName6955 = $row6955['assignedName'];
+    $assignedBy6955 = $row6955['assignedBy'];
+    $upload_img6955 = $row6955['upload_img'];
+    $description6955 = $row6955['description'];
+
+    //FOR ID 6956
+    $sql6956 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6956";
+    $stmt6956 = $conn->prepare($sql6956);
+    $stmt6956->execute();
+    $result6956 = $stmt6956->get_result();
+    $row6956 = $result6956->fetch_assoc();
+    $assetId6956 = $row6956['assetId'];
+    $category6956 = $row6956['category'];
+    $date6956 = $row6956['date'];
+    $building6956 = $row6956['building'];
+    $floor6956 = $row6956['floor'];
+    $room6956 = $row6956['room'];
+    $status6956 = $row6956['status'];
+    $assignedName6956 = $row6956['assignedName'];
+    $assignedBy6956 = $row6956['assignedBy'];
+    $upload_img6956 = $row6956['upload_img'];
+    $description6956 = $row6956['description'];
+
+    //FOR ID 6957
+    $sql6957 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6957";
+    $stmt6957 = $conn->prepare($sql6957);
+    $stmt6957->execute();
+    $result6957 = $stmt6957->get_result();
+    $row6957 = $result6957->fetch_assoc();
+    $assetId6957 = $row6957['assetId'];
+    $category6957 = $row6957['category'];
+    $date6957 = $row6957['date'];
+    $building6957 = $row6957['building'];
+    $floor6957 = $row6957['floor'];
+    $room6957 = $row6957['room'];
+    $status6957 = $row6957['status'];
+    $assignedName6957 = $row6957['assignedName'];
+    $assignedBy6957 = $row6957['assignedBy'];
+    $upload_img6957 = $row6957['upload_img'];
+    $description6957 = $row6957['description'];
+
+    //FOR ID 6958
+    $sql6958 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6958";
+    $stmt6958 = $conn->prepare($sql6958);
+    $stmt6958->execute();
+    $result6958 = $stmt6958->get_result();
+    $row6958 = $result6958->fetch_assoc();
+    $assetId6958 = $row6958['assetId'];
+    $category6958 = $row6958['category'];
+    $date6958 = $row6958['date'];
+    $building6958 = $row6958['building'];
+    $floor6958 = $row6958['floor'];
+    $room6958 = $row6958['room'];
+    $status6958 = $row6958['status'];
+    $assignedName6958 = $row6958['assignedName'];
+    $assignedBy6958 = $row6958['assignedBy'];
+    $upload_img6958 = $row6958['upload_img'];
+    $description6958 = $row6958['description'];
+
+    //FOR ID 6959
+    $sql6959 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6959";
+    $stmt6959 = $conn->prepare($sql6959);
+    $stmt6959->execute();
+    $result6959 = $stmt6959->get_result();
+    $row6959 = $result6959->fetch_assoc();
+    $assetId6959 = $row6959['assetId'];
+    $category6959 = $row6959['category'];
+    $date6959 = $row6959['date'];
+    $building6959 = $row6959['building'];
+    $floor6959 = $row6959['floor'];
+    $room6959 = $row6959['room'];
+    $status6959 = $row6959['status'];
+    $assignedName6959 = $row6959['assignedName'];
+    $assignedBy6959 = $row6959['assignedBy'];
+    $upload_img6959 = $row6959['upload_img'];
+    $description6959 = $row6959['description'];
+
+    //FOR ID 6960
+    $sql6960 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6960";
+    $stmt6960 = $conn->prepare($sql6960);
+    $stmt6960->execute();
+    $result6960 = $stmt6960->get_result();
+    $row6960 = $result6960->fetch_assoc();
+    $assetId6960 = $row6960['assetId'];
+    $category6960 = $row6960['category'];
+    $date6960 = $row6960['date'];
+    $building6960 = $row6960['building'];
+    $floor6960 = $row6960['floor'];
+    $room6960 = $row6960['room'];
+    $status6960 = $row6960['status'];
+    $assignedName6960 = $row6960['assignedName'];
+    $assignedBy6960 = $row6960['assignedBy'];
+    $upload_img6960 = $row6960['upload_img'];
+    $description6960 = $row6960['description'];
+
+    //FOR ID 6961
+    $sql6961 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6961";
+    $stmt6961 = $conn->prepare($sql6961);
+    $stmt6961->execute();
+    $result6961 = $stmt6961->get_result();
+    $row6961 = $result6961->fetch_assoc();
+    $assetId6961 = $row6961['assetId'];
+    $category6961 = $row6961['category'];
+    $date6961 = $row6961['date'];
+    $building6961 = $row6961['building'];
+    $floor6961 = $row6961['floor'];
+    $room6961 = $row6961['room'];
+    $status6961 = $row6961['status'];
+    $assignedName6961 = $row6961['assignedName'];
+    $assignedBy6961 = $row6961['assignedBy'];
+    $upload_img6961 = $row6961['upload_img'];
+    $description6961 = $row6961['description'];
+
+
+    //FOR ID 6962
+    $sql6962 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6962";
+    $stmt6962 = $conn->prepare($sql6962);
+    $stmt6962->execute();
+    $result6962 = $stmt6962->get_result();
+    $row6962 = $result6962->fetch_assoc();
+    $assetId6962 = $row6962['assetId'];
+    $category6962 = $row6962['category'];
+    $date6962 = $row6962['date'];
+    $building6962 = $row6962['building'];
+    $floor6962 = $row6962['floor'];
+    $room6962 = $row6962['room'];
+    $status6962 = $row6962['status'];
+    $assignedName6962 = $row6962['assignedName'];
+    $assignedBy6962 = $row6962['assignedBy'];
+    $upload_img6962 = $row6962['upload_img'];
+    $description6962 = $row6962['description'];
+
+    //FOR ID 6963
+    $sql6963 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6963";
+    $stmt6963 = $conn->prepare($sql6963);
+    $stmt6963->execute();
+    $result6963 = $stmt6963->get_result();
+    $row6963 = $result6963->fetch_assoc();
+    $assetId6963 = $row6963['assetId'];
+    $category6963 = $row6963['category'];
+    $date6963 = $row6963['date'];
+    $building6963 = $row6963['building'];
+    $floor6963 = $row6963['floor'];
+    $room6963 = $row6963['room'];
+    $status6963 = $row6963['status'];
+    $assignedName6963 = $row6963['assignedName'];
+    $assignedBy6963 = $row6963['assignedBy'];
+    $upload_img6963 = $row6963['upload_img'];
+    $description6963 = $row6963['description'];
+
+    //FOR ID 6964
+    $sql6964 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6964";
+    $stmt6964 = $conn->prepare($sql6964);
+    $stmt6964->execute();
+    $result6964 = $stmt6964->get_result();
+    $row6964 = $result6964->fetch_assoc();
+    $assetId6964 = $row6964['assetId'];
+    $category6964 = $row6964['category'];
+    $date6964 = $row6964['date'];
+    $building6964 = $row6964['building'];
+    $floor6964 = $row6964['floor'];
+    $room6964 = $row6964['room'];
+    $status6964 = $row6964['status'];
+    $assignedName6964 = $row6964['assignedName'];
+    $assignedBy6964 = $row6964['assignedBy'];
+    $upload_img6964 = $row6964['upload_img'];
+    $description6964 = $row6964['description'];
+
+    //FOR ID 6965
+    $sql6965 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6965";
+    $stmt6965 = $conn->prepare($sql6965);
+    $stmt6965->execute();
+    $result6965 = $stmt6965->get_result();
+    $row6965 = $result6965->fetch_assoc();
+    $assetId6965 = $row6965['assetId'];
+    $category6965 = $row6965['category'];
+    $date6965 = $row6965['date'];
+    $building6965 = $row6965['building'];
+    $floor6965 = $row6965['floor'];
+    $room6965 = $row6965['room'];
+    $status6965 = $row6965['status'];
+    $assignedName6965 = $row6965['assignedName'];
+    $assignedBy6965 = $row6965['assignedBy'];
+    $upload_img6965 = $row6965['upload_img'];
+    $description6965 = $row6965['description'];
+
+    //FOR ID 6966
+    $sql6966 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6966";
+    $stmt6966 = $conn->prepare($sql6966);
+    $stmt6966->execute();
+    $result6966 = $stmt6966->get_result();
+    $row6966 = $result6966->fetch_assoc();
+    $assetId6966 = $row6966['assetId'];
+    $category6966 = $row6966['category'];
+    $date6966 = $row6966['date'];
+    $building6966 = $row6966['building'];
+    $floor6966 = $row6966['floor'];
+    $room6966 = $row6966['room'];
+    $status6966 = $row6966['status'];
+    $assignedName6966 = $row6966['assignedName'];
+    $assignedBy6966 = $row6966['assignedBy'];
+    $upload_img6966 = $row6966['upload_img'];
+    $description6966 = $row6966['description'];
+
+    //FOR ID 6967
+    $sql6967 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6967";
+    $stmt6967 = $conn->prepare($sql6967);
+    $stmt6967->execute();
+    $result6967 = $stmt6967->get_result();
+    $row6967 = $result6967->fetch_assoc();
+    $assetId6967 = $row6967['assetId'];
+    $category6967 = $row6967['category'];
+    $date6967 = $row6967['date'];
+    $building6967 = $row6967['building'];
+    $floor6967 = $row6967['floor'];
+    $room6967 = $row6967['room'];
+    $status6967 = $row6967['status'];
+    $assignedName6967 = $row6967['assignedName'];
+    $assignedBy6967 = $row6967['assignedBy'];
+    $upload_img6967 = $row6967['upload_img'];
+    $description6967 = $row6967['description'];
+
+    //FOR ID 6968
+    $sql6968 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6968";
+    $stmt6968 = $conn->prepare($sql6968);
+    $stmt6968->execute();
+    $result6968 = $stmt6968->get_result();
+    $row6968 = $result6968->fetch_assoc();
+    $assetId6968 = $row6968['assetId'];
+    $category6968 = $row6968['category'];
+    $date6968 = $row6968['date'];
+    $building6968 = $row6968['building'];
+    $floor6968 = $row6968['floor'];
+    $room6968 = $row6968['room'];
+    $status6968 = $row6968['status'];
+    $assignedName6968 = $row6968['assignedName'];
+    $assignedBy6968 = $row6968['assignedBy'];
+    $upload_img6968 = $row6968['upload_img'];
+    $description6968 = $row6968['description'];
+
+    //FOR ID 6969
+    $sql6969 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6969";
+    $stmt6969 = $conn->prepare($sql6969);
+    $stmt6969->execute();
+    $result6969 = $stmt6969->get_result();
+    $row6969 = $result6969->fetch_assoc();
+    $assetId6969 = $row6969['assetId'];
+    $category6969 = $row6969['category'];
+    $date6969 = $row6969['date'];
+    $building6969 = $row6969['building'];
+    $floor6969 = $row6969['floor'];
+    $room6969 = $row6969['room'];
+    $status6969 = $row6969['status'];
+    $assignedName6969 = $row6969['assignedName'];
+    $assignedBy6969 = $row6969['assignedBy'];
+    $upload_img6969 = $row6969['upload_img'];
+    $description6969 = $row6969['description'];
+
+    //FOR ID 6970
+    $sql6970 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6970";
+    $stmt6970 = $conn->prepare($sql6970);
+    $stmt6970->execute();
+    $result6970 = $stmt6970->get_result();
+    $row6970 = $result6970->fetch_assoc();
+    $assetId6970 = $row6970['assetId'];
+    $category6970 = $row6970['category'];
+    $date6970 = $row6970['date'];
+    $building6970 = $row6970['building'];
+    $floor6970 = $row6970['floor'];
+    $room6970 = $row6970['room'];
+    $status6970 = $row6970['status'];
+    $assignedName6970 = $row6970['assignedName'];
+    $assignedBy6970 = $row6970['assignedBy'];
+    $upload_img6970 = $row6970['upload_img'];
+    $description6970 = $row6970['description'];
+
+    //FOR ID 6971
+    $sql6971 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6971";
+    $stmt6971 = $conn->prepare($sql6971);
+    $stmt6971->execute();
+    $result6971 = $stmt6971->get_result();
+    $row6971 = $result6971->fetch_assoc();
+    $assetId6971 = $row6971['assetId'];
+    $category6971 = $row6971['category'];
+    $date6971 = $row6971['date'];
+    $building6971 = $row6971['building'];
+    $floor6971 = $row6971['floor'];
+    $room6971 = $row6971['room'];
+    $status6971 = $row6971['status'];
+    $assignedName6971 = $row6971['assignedName'];
+    $assignedBy6971 = $row6971['assignedBy'];
+    $upload_img6971 = $row6971['upload_img'];
+    $description6971 = $row6971['description'];
+
+    //FOR ID 6972
+    $sql6972 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6972";
+    $stmt6972 = $conn->prepare($sql6972);
+    $stmt6972->execute();
+    $result6972 = $stmt6972->get_result();
+    $row6972 = $result6972->fetch_assoc();
+    $assetId6972 = $row6972['assetId'];
+    $category6972 = $row6972['category'];
+    $date6972 = $row6972['date'];
+    $building6972 = $row6972['building'];
+    $floor6972 = $row6972['floor'];
+    $room6972 = $row6972['room'];
+    $status6972 = $row6972['status'];
+    $assignedName6972 = $row6972['assignedName'];
+    $assignedBy6972 = $row6972['assignedBy'];
+    $upload_img6972 = $row6972['upload_img'];
+    $description6972 = $row6972['description'];
+
+    //FOR ID 6973
+    $sql6973 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6973";
+    $stmt6973 = $conn->prepare($sql6973);
+    $stmt6973->execute();
+    $result6973 = $stmt6973->get_result();
+    $row6973 = $result6973->fetch_assoc();
+    $assetId6973 = $row6973['assetId'];
+    $category6973 = $row6973['category'];
+    $date6973 = $row6973['date'];
+    $building6973 = $row6973['building'];
+    $floor6973 = $row6973['floor'];
+    $room6973 = $row6973['room'];
+    $status6973 = $row6973['status'];
+    $assignedName6973 = $row6973['assignedName'];
+    $assignedBy6973 = $row6973['assignedBy'];
+    $upload_img6973 = $row6973['upload_img'];
+    $description6973 = $row6973['description'];
+
+    //FOR ID 6974
+    $sql6974 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6974";
+    $stmt6974 = $conn->prepare($sql6974);
+    $stmt6974->execute();
+    $result6974 = $stmt6974->get_result();
+    $row6974 = $result6974->fetch_assoc();
+    $assetId6974 = $row6974['assetId'];
+    $category6974 = $row6974['category'];
+    $date6974 = $row6974['date'];
+    $building6974 = $row6974['building'];
+    $floor6974 = $row6974['floor'];
+    $room6974 = $row6974['room'];
+    $status6974 = $row6974['status'];
+    $assignedName6974 = $row6974['assignedName'];
+    $assignedBy6974 = $row6974['assignedBy'];
+    $upload_img6974 = $row6974['upload_img'];
+    $description6974 = $row6974['description'];
+
+    //FOR ID 6975
+    $sql6975 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6975";
+    $stmt6975 = $conn->prepare($sql6975);
+    $stmt6975->execute();
+    $result6975 = $stmt6975->get_result();
+    $row6975 = $result6975->fetch_assoc();
+    $assetId6975 = $row6975['assetId'];
+    $category6975 = $row6975['category'];
+    $date6975 = $row6975['date'];
+    $building6975 = $row6975['building'];
+    $floor6975 = $row6975['floor'];
+    $room6975 = $row6975['room'];
+    $status6975 = $row6975['status'];
+    $assignedName6975 = $row6975['assignedName'];
+    $assignedBy6975 = $row6975['assignedBy'];
+    $upload_img6975 = $row6975['upload_img'];
+    $description6975 = $row6975['description'];
+
+    //FOR ID 6976
+    $sql6976 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6976";
+    $stmt6976 = $conn->prepare($sql6976);
+    $stmt6976->execute();
+    $result6976 = $stmt6976->get_result();
+    $row6976 = $result6976->fetch_assoc();
+    $assetId6976 = $row6976['assetId'];
+    $category6976 = $row6976['category'];
+    $date6976 = $row6976['date'];
+    $building6976 = $row6976['building'];
+    $floor6976 = $row6976['floor'];
+    $room6976 = $row6976['room'];
+    $status6976 = $row6976['status'];
+    $assignedName6976 = $row6976['assignedName'];
+    $assignedBy6976 = $row6976['assignedBy'];
+    $upload_img6976 = $row6976['upload_img'];
+    $description6976 = $row6976['description'];
+
+    //FOR ID 6977
+    $sql6977 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6977";
+    $stmt6977 = $conn->prepare($sql6977);
+    $stmt6977->execute();
+    $result6977 = $stmt6977->get_result();
+    $row6977 = $result6977->fetch_assoc();
+    $assetId6977 = $row6977['assetId'];
+    $category6977 = $row6977['category'];
+    $date6977 = $row6977['date'];
+    $building6977 = $row6977['building'];
+    $floor6977 = $row6977['floor'];
+    $room6977 = $row6977['room'];
+    $status6977 = $row6977['status'];
+    $assignedName6977 = $row6977['assignedName'];
+    $assignedBy6977 = $row6977['assignedBy'];
+    $upload_img6977 = $row6977['upload_img'];
+    $description6977 = $row6977['description'];
+
+    //FOR ID 6978
+    $sql6978 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6978";
+    $stmt6978 = $conn->prepare($sql6978);
+    $stmt6978->execute();
+    $result6978 = $stmt6978->get_result();
+    $row6978 = $result6978->fetch_assoc();
+    $assetId6978 = $row6978['assetId'];
+    $category6978 = $row6978['category'];
+    $date6978 = $row6978['date'];
+    $building6978 = $row6978['building'];
+    $floor6978 = $row6978['floor'];
+    $room6978 = $row6978['room'];
+    $status6978 = $row6978['status'];
+    $assignedName6978 = $row6978['assignedName'];
+    $assignedBy6978 = $row6978['assignedBy'];
+    $upload_img6978 = $row6978['upload_img'];
+    $description6978 = $row6978['description'];
+
+    //FOR ID 6979
+    $sql6979 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6979";
+    $stmt6979 = $conn->prepare($sql6979);
+    $stmt6979->execute();
+    $result6979 = $stmt6979->get_result();
+    $row6979 = $result6979->fetch_assoc();
+    $assetId6979 = $row6979['assetId'];
+    $category6979 = $row6979['category'];
+    $date6979 = $row6979['date'];
+    $building6979 = $row6979['building'];
+    $floor6979 = $row6979['floor'];
+    $room6979 = $row6979['room'];
+    $status6979 = $row6979['status'];
+    $assignedName6979 = $row6979['assignedName'];
+    $assignedBy6979 = $row6979['assignedBy'];
+    $upload_img6979 = $row6979['upload_img'];
+    $description6979 = $row6979['description'];
+
+    //FOR ID 6980
+    $sql6980 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6980";
+    $stmt6980 = $conn->prepare($sql6980);
+    $stmt6980->execute();
+    $result6980 = $stmt6980->get_result();
+    $row6980 = $result6980->fetch_assoc();
+    $assetId6980 = $row6980['assetId'];
+    $category6980 = $row6980['category'];
+    $date6980 = $row6980['date'];
+    $building6980 = $row6980['building'];
+    $floor6980 = $row6980['floor'];
+    $room6980 = $row6980['room'];
+    $status6980 = $row6980['status'];
+    $assignedName6980 = $row6980['assignedName'];
+    $assignedBy6980 = $row6980['assignedBy'];
+    $upload_img6980 = $row6980['upload_img'];
+    $description6980 = $row6980['description'];
+
+    //FOR ID 6981
+    $sql6981 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6981";
+    $stmt6981 = $conn->prepare($sql6981);
+    $stmt6981->execute();
+    $result6981 = $stmt6981->get_result();
+    $row6981 = $result6981->fetch_assoc();
+    $assetId6981 = $row6981['assetId'];
+    $category6981 = $row6981['category'];
+    $date6981 = $row6981['date'];
+    $building6981 = $row6981['building'];
+    $floor6981 = $row6981['floor'];
+    $room6981 = $row6981['room'];
+    $status6981 = $row6981['status'];
+    $assignedName6981 = $row6981['assignedName'];
+    $assignedBy6981 = $row6981['assignedBy'];
+    $upload_img6981 = $row6981['upload_img'];
+    $description6981 = $row6981['description'];
+
+    //FOR ID 6982
+    $sql6982 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6982";
+    $stmt6982 = $conn->prepare($sql6982);
+    $stmt6982->execute();
+    $result6982 = $stmt6982->get_result();
+    $row6982 = $result6982->fetch_assoc();
+    $assetId6982 = $row6982['assetId'];
+    $category6982 = $row6982['category'];
+    $date6982 = $row6982['date'];
+    $building6982 = $row6982['building'];
+    $floor6982 = $row6982['floor'];
+    $room6982 = $row6982['room'];
+    $status6982 = $row6982['status'];
+    $assignedName6982 = $row6982['assignedName'];
+    $assignedBy6982 = $row6982['assignedBy'];
+    $upload_img6982 = $row6982['upload_img'];
+    $description6982 = $row6982['description'];
+
+    //FOR ID 6983
+    $sql6983 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6983";
+    $stmt6983 = $conn->prepare($sql6983);
+    $stmt6983->execute();
+    $result6983 = $stmt6983->get_result();
+    $row6983 = $result6983->fetch_assoc();
+    $assetId6983 = $row6983['assetId'];
+    $category6983 = $row6983['category'];
+    $date6983 = $row6983['date'];
+    $building6983 = $row6983['building'];
+    $floor6983 = $row6983['floor'];
+    $room6983 = $row6983['room'];
+    $status6983 = $row6983['status'];
+    $assignedName6983 = $row6983['assignedName'];
+    $assignedBy6983 = $row6983['assignedBy'];
+    $upload_img6983 = $row6983['upload_img'];
+    $description6983 = $row6983['description'];
+
+    //FOR ID 6984
+    $sql6984 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6984";
+    $stmt6984 = $conn->prepare($sql6984);
+    $stmt6984->execute();
+    $result6984 = $stmt6984->get_result();
+    $row6984 = $result6984->fetch_assoc();
+    $assetId6984 = $row6984['assetId'];
+    $category6984 = $row6984['category'];
+    $date6984 = $row6984['date'];
+    $building6984 = $row6984['building'];
+    $floor6984 = $row6984['floor'];
+    $room6984 = $row6984['room'];
+    $status6984 = $row6984['status'];
+    $assignedName6984 = $row6984['assignedName'];
+    $assignedBy6984 = $row6984['assignedBy'];
+    $upload_img6984 = $row6984['upload_img'];
+    $description6984 = $row6984['description'];
+
+    //FOR ID 6985
+    $sql6985 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6985";
+    $stmt6985 = $conn->prepare($sql6985);
+    $stmt6985->execute();
+    $result6985 = $stmt6985->get_result();
+    $row6985 = $result6985->fetch_assoc();
+    $assetId6985 = $row6985['assetId'];
+    $category6985 = $row6985['category'];
+    $date6985 = $row6985['date'];
+    $building6985 = $row6985['building'];
+    $floor6985 = $row6985['floor'];
+    $room6985 = $row6985['room'];
+    $status6985 = $row6985['status'];
+    $assignedName6985 = $row6985['assignedName'];
+    $assignedBy6985 = $row6985['assignedBy'];
+    $upload_img6985 = $row6985['upload_img'];
+    $description6985 = $row6985['description'];
+
+    //FOR ID 6986
+    $sql6986 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6986";
+    $stmt6986 = $conn->prepare($sql6986);
+    $stmt6986->execute();
+    $result6986 = $stmt6986->get_result();
+    $row6986 = $result6986->fetch_assoc();
+    $assetId6986 = $row6986['assetId'];
+    $category6986 = $row6986['category'];
+    $date6986 = $row6986['date'];
+    $building6986 = $row6986['building'];
+    $floor6986 = $row6986['floor'];
+    $room6986 = $row6986['room'];
+    $status6986 = $row6986['status'];
+    $assignedName6986 = $row6986['assignedName'];
+    $assignedBy6986 = $row6986['assignedBy'];
+    $upload_img6986 = $row6986['upload_img'];
+    $description6986 = $row6986['description'];
+
+    //FOR ID 6987
+    $sql6987 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6987";
+    $stmt6987 = $conn->prepare($sql6987);
+    $stmt6987->execute();
+    $result6987 = $stmt6987->get_result();
+    $row6987 = $result6987->fetch_assoc();
+    $assetId6987 = $row6987['assetId'];
+    $category6987 = $row6987['category'];
+    $date6987 = $row6987['date'];
+    $building6987 = $row6987['building'];
+    $floor6987 = $row6987['floor'];
+    $room6987 = $row6987['room'];
+    $status6987 = $row6987['status'];
+    $assignedName6987 = $row6987['assignedName'];
+    $assignedBy6987 = $row6987['assignedBy'];
+    $upload_img6987 = $row6987['upload_img'];
+    $description6987 = $row6987['description'];
+
+    //FOR ID 6988
+    $sql6988 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6988";
+    $stmt6988 = $conn->prepare($sql6988);
+    $stmt6988->execute();
+    $result6988 = $stmt6988->get_result();
+    $row6988 = $result6988->fetch_assoc();
+    $assetId6988 = $row6988['assetId'];
+    $category6988 = $row6988['category'];
+    $date6988 = $row6988['date'];
+    $building6988 = $row6988['building'];
+    $floor6988 = $row6988['floor'];
+    $room6988 = $row6988['room'];
+    $status6988 = $row6988['status'];
+    $assignedName6988 = $row6988['assignedName'];
+    $assignedBy6988 = $row6988['assignedBy'];
+    $upload_img6988 = $row6988['upload_img'];
+    $description6988 = $row6988['description'];
+
+    //FOR ID 6989
+    $sql6989 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6989";
+    $stmt6989 = $conn->prepare($sql6989);
+    $stmt6989->execute();
+    $result6989 = $stmt6989->get_result();
+    $row6989 = $result6989->fetch_assoc();
+    $assetId6989 = $row6989['assetId'];
+    $category6989 = $row6989['category'];
+    $date6989 = $row6989['date'];
+    $building6989 = $row6989['building'];
+    $floor6989 = $row6989['floor'];
+    $room6989 = $row6989['room'];
+    $status6989 = $row6989['status'];
+    $assignedName6989 = $row6989['assignedName'];
+    $assignedBy6989 = $row6989['assignedBy'];
+    $upload_img6989 = $row6989['upload_img'];
+    $description6989 = $row6989['description'];
+
+    //FOR ID 6990
+    $sql6990 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6990";
+    $stmt6990 = $conn->prepare($sql6990);
+    $stmt6990->execute();
+    $result6990 = $stmt6990->get_result();
+    $row6990 = $result6990->fetch_assoc();
+    $assetId6990 = $row6990['assetId'];
+    $category6990 = $row6990['category'];
+    $date6990 = $row6990['date'];
+    $building6990 = $row6990['building'];
+    $floor6990 = $row6990['floor'];
+    $room6990 = $row6990['room'];
+    $status6990 = $row6990['status'];
+    $assignedName6990 = $row6990['assignedName'];
+    $assignedBy6990 = $row6990['assignedBy'];
+    $upload_img6990 = $row6990['upload_img'];
+    $description6990 = $row6990['description'];
+
+    //FOR ID 6991
+    $sql6991 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6991";
+    $stmt6991 = $conn->prepare($sql6991);
+    $stmt6991->execute();
+    $result6991 = $stmt6991->get_result();
+    $row6991 = $result6991->fetch_assoc();
+    $assetId6991 = $row6991['assetId'];
+    $category6991 = $row6991['category'];
+    $date6991 = $row6991['date'];
+    $building6991 = $row6991['building'];
+    $floor6991 = $row6991['floor'];
+    $room6991 = $row6991['room'];
+    $status6991 = $row6991['status'];
+    $assignedName6991 = $row6991['assignedName'];
+    $assignedBy6991 = $row6991['assignedBy'];
+    $upload_img6991 = $row6991['upload_img'];
+    $description6991 = $row6991['description'];
+
+    //FOR ID 6992
+    $sql6992 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6992";
+    $stmt6992 = $conn->prepare($sql6992);
+    $stmt6992->execute();
+    $result6992 = $stmt6992->get_result();
+    $row6992 = $result6992->fetch_assoc();
+    $assetId6992 = $row6992['assetId'];
+    $category6992 = $row6992['category'];
+    $date6992 = $row6992['date'];
+    $building6992 = $row6992['building'];
+    $floor6992 = $row6992['floor'];
+    $room6992 = $row6992['room'];
+    $status6992 = $row6992['status'];
+    $assignedName6992 = $row6992['assignedName'];
+    $assignedBy6992 = $row6992['assignedBy'];
+    $upload_img6992 = $row6992['upload_img'];
+    $description6992 = $row6992['description'];
+
+    //FOR ID 6993
+    $sql6993 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6993";
+    $stmt6993 = $conn->prepare($sql6993);
+    $stmt6993->execute();
+    $result6993 = $stmt6993->get_result();
+    $row6993 = $result6993->fetch_assoc();
+    $assetId6993 = $row6993['assetId'];
+    $category6993 = $row6993['category'];
+    $date6993 = $row6993['date'];
+    $building6993 = $row6993['building'];
+    $floor6993 = $row6993['floor'];
+    $room6993 = $row6993['room'];
+    $status6993 = $row6993['status'];
+    $assignedName6993 = $row6993['assignedName'];
+    $assignedBy6993 = $row6993['assignedBy'];
+    $upload_img6993 = $row6993['upload_img'];
+    $description6993 = $row6993['description'];
+
+    //FOR ID 6994
+    $sql6994 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6994";
+    $stmt6994 = $conn->prepare($sql6994);
+    $stmt6994->execute();
+    $result6994 = $stmt6994->get_result();
+    $row6994 = $result6994->fetch_assoc();
+    $assetId6994 = $row6994['assetId'];
+    $category6994 = $row6994['category'];
+    $date6994 = $row6994['date'];
+    $building6994 = $row6994['building'];
+    $floor6994 = $row6994['floor'];
+    $room6994 = $row6994['room'];
+    $status6994 = $row6994['status'];
+    $assignedName6994 = $row6994['assignedName'];
+    $assignedBy6994 = $row6994['assignedBy'];
+    $upload_img6994 = $row6994['upload_img'];
+    $description6994 = $row6994['description'];
+
+    //FOR ID 6995
+    $sql6995 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6995";
+    $stmt6995 = $conn->prepare($sql6995);
+    $stmt6995->execute();
+    $result6995 = $stmt6995->get_result();
+    $row6995 = $result6995->fetch_assoc();
+    $assetId6995 = $row6995['assetId'];
+    $category6995 = $row6995['category'];
+    $date6995 = $row6995['date'];
+    $building6995 = $row6995['building'];
+    $floor6995 = $row6995['floor'];
+    $room6995 = $row6995['room'];
+    $status6995 = $row6995['status'];
+    $assignedName6995 = $row6995['assignedName'];
+    $assignedBy6995 = $row6995['assignedBy'];
+    $upload_img6995 = $row6995['upload_img'];
+    $description6995 = $row6995['description'];
+
+    //FOR ID 6996
+    $sql6996 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6996";
+    $stmt6996 = $conn->prepare($sql6996);
+    $stmt6996->execute();
+    $result6996 = $stmt6996->get_result();
+    $row6996 = $result6996->fetch_assoc();
+    $assetId6996 = $row6996['assetId'];
+    $category6996 = $row6996['category'];
+    $date6996 = $row6996['date'];
+    $building6996 = $row6996['building'];
+    $floor6996 = $row6996['floor'];
+    $room6996 = $row6996['room'];
+    $status6996 = $row6996['status'];
+    $assignedName6996 = $row6996['assignedName'];
+    $assignedBy6996 = $row6996['assignedBy'];
+    $upload_img6996 = $row6996['upload_img'];
+    $description6996 = $row6996['description'];
+
+    //FOR ID 6997
+    $sql6997 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6997";
+    $stmt6997 = $conn->prepare($sql6997);
+    $stmt6997->execute();
+    $result6997 = $stmt6997->get_result();
+    $row6997 = $result6997->fetch_assoc();
+    $assetId6997 = $row6997['assetId'];
+    $category6997 = $row6997['category'];
+    $date6997 = $row6997['date'];
+    $building6997 = $row6997['building'];
+    $floor6997 = $row6997['floor'];
+    $room6997 = $row6997['room'];
+    $status6997 = $row6997['status'];
+    $assignedName6997 = $row6997['assignedName'];
+    $assignedBy6997 = $row6997['assignedBy'];
+    $upload_img6997 = $row6997['upload_img'];
+    $description6997 = $row6997['description'];
+
+    //FOR ID 6998
+    $sql6998 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6998";
+    $stmt6998 = $conn->prepare($sql6998);
+    $stmt6998->execute();
+    $result6998 = $stmt6998->get_result();
+    $row6998 = $result6998->fetch_assoc();
+    $assetId6998 = $row6998['assetId'];
+    $category6998 = $row6998['category'];
+    $date6998 = $row6998['date'];
+    $building6998 = $row6998['building'];
+    $floor6998 = $row6998['floor'];
+    $room6998 = $row6998['room'];
+    $status6998 = $row6998['status'];
+    $assignedName6998 = $row6998['assignedName'];
+    $assignedBy6998 = $row6998['assignedBy'];
+    $upload_img6998 = $row6998['upload_img'];
+    $description6998 = $row6998['description'];
+
+    //FOR ID 6999
+    $sql6999 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 6999";
+    $stmt6999 = $conn->prepare($sql6999);
+    $stmt6999->execute();
+    $result6999 = $stmt6999->get_result();
+    $row6999 = $result6999->fetch_assoc();
+    $assetId6999 = $row6999['assetId'];
+    $category6999 = $row6999['category'];
+    $date6999 = $row6999['date'];
+    $building6999 = $row6999['building'];
+    $floor6999 = $row6999['floor'];
+    $room6999 = $row6999['room'];
+    $status6999 = $row6999['status'];
+    $assignedName6999 = $row6999['assignedName'];
+    $assignedBy6999 = $row6999['assignedBy'];
+    $upload_img6999 = $row6999['upload_img'];
+    $description6999 = $row6999['description'];
+
+    //FOR ID 7000
+    $sql7000 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7000";
+    $stmt7000 = $conn->prepare($sql7000);
+    $stmt7000->execute();
+    $result7000 = $stmt7000->get_result();
+    $row7000 = $result7000->fetch_assoc();
+    $assetId7000 = $row7000['assetId'];
+    $category7000 = $row7000['category'];
+    $date7000 = $row7000['date'];
+    $building7000 = $row7000['building'];
+    $floor7000 = $row7000['floor'];
+    $room7000 = $row7000['room'];
+    $status7000 = $row7000['status'];
+    $assignedName7000 = $row7000['assignedName'];
+    $assignedBy7000 = $row7000['assignedBy'];
+    $upload_img7000 = $row7000['upload_img'];
+    $description7000 = $row7000['description'];
+
+    //FOR ID 7001
+    $sql7001 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7001";
+    $stmt7001 = $conn->prepare($sql7001);
+    $stmt7001->execute();
+    $result7001 = $stmt7001->get_result();
+    $row7001 = $result7001->fetch_assoc();
+    $assetId7001 = $row7001['assetId'];
+    $category7001 = $row7001['category'];
+    $date7001 = $row7001['date'];
+    $building7001 = $row7001['building'];
+    $floor7001 = $row7001['floor'];
+    $room7001 = $row7001['room'];
+    $status7001 = $row7001['status'];
+    $assignedName7001 = $row7001['assignedName'];
+    $assignedBy7001 = $row7001['assignedBy'];
+    $upload_img7001 = $row7001['upload_img'];
+    $description7001 = $row7001['description'];
+
+    //FOR ID 7002
+    $sql7002 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7002";
+    $stmt7002 = $conn->prepare($sql7002);
+    $stmt7002->execute();
+    $result7002 = $stmt7002->get_result();
+    $row7002 = $result7002->fetch_assoc();
+    $assetId7002 = $row7002['assetId'];
+    $category7002 = $row7002['category'];
+    $date7002 = $row7002['date'];
+    $building7002 = $row7002['building'];
+    $floor7002 = $row7002['floor'];
+    $room7002 = $row7002['room'];
+    $status7002 = $row7002['status'];
+    $assignedName7002 = $row7002['assignedName'];
+    $assignedBy7002 = $row7002['assignedBy'];
+    $upload_img7002 = $row7002['upload_img'];
+    $description7002 = $row7002['description'];
+
+    //FOR ID 7003
+    $sql7003 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7003";
+    $stmt7003 = $conn->prepare($sql7003);
+    $stmt7003->execute();
+    $result7003 = $stmt7003->get_result();
+    $row7003 = $result7003->fetch_assoc();
+    $assetId7003 = $row7003['assetId'];
+    $category7003 = $row7003['category'];
+    $date7003 = $row7003['date'];
+    $building7003 = $row7003['building'];
+    $floor7003 = $row7003['floor'];
+    $room7003 = $row7003['room'];
+    $status7003 = $row7003['status'];
+    $assignedName7003 = $row7003['assignedName'];
+    $assignedBy7003 = $row7003['assignedBy'];
+    $upload_img7003 = $row7003['upload_img'];
+    $description7003 = $row7003['description'];
+
+    //FOR ID 7004
+    $sql7004 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7004";
+    $stmt7004 = $conn->prepare($sql7004);
+    $stmt7004->execute();
+    $result7004 = $stmt7004->get_result();
+    $row7004 = $result7004->fetch_assoc();
+    $assetId7004 = $row7004['assetId'];
+    $category7004 = $row7004['category'];
+    $date7004 = $row7004['date'];
+    $building7004 = $row7004['building'];
+    $floor7004 = $row7004['floor'];
+    $room7004 = $row7004['room'];
+    $status7004 = $row7004['status'];
+    $assignedName7004 = $row7004['assignedName'];
+    $assignedBy7004 = $row7004['assignedBy'];
+    $upload_img7004 = $row7004['upload_img'];
+    $description7004 = $row7004['description'];
+
+    //FOR ID 7005
+    $sql7005 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7005";
+    $stmt7005 = $conn->prepare($sql7005);
+    $stmt7005->execute();
+    $result7005 = $stmt7005->get_result();
+    $row7005 = $result7005->fetch_assoc();
+    $assetId7005 = $row7005['assetId'];
+    $category7005 = $row7005['category'];
+    $date7005 = $row7005['date'];
+    $building7005 = $row7005['building'];
+    $floor7005 = $row7005['floor'];
+    $room7005 = $row7005['room'];
+    $status7005 = $row7005['status'];
+    $assignedName7005 = $row7005['assignedName'];
+    $assignedBy7005 = $row7005['assignedBy'];
+    $upload_img7005 = $row7005['upload_img'];
+    $description7005 = $row7005['description'];
+
+    //FOR ID 7006
+    $sql7006 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7006";
+    $stmt7006 = $conn->prepare($sql7006);
+    $stmt7006->execute();
+    $result7006 = $stmt7006->get_result();
+    $row7006 = $result7006->fetch_assoc();
+    $assetId7006 = $row7006['assetId'];
+    $category7006 = $row7006['category'];
+    $date7006 = $row7006['date'];
+    $building7006 = $row7006['building'];
+    $floor7006 = $row7006['floor'];
+    $room7006 = $row7006['room'];
+    $status7006 = $row7006['status'];
+    $assignedName7006 = $row7006['assignedName'];
+    $assignedBy7006 = $row7006['assignedBy'];
+    $upload_img7006 = $row7006['upload_img'];
+    $description7006 = $row7006['description'];
+
+    //FOR ID 7007
+    $sql7007 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7007";
+    $stmt7007 = $conn->prepare($sql7007);
+    $stmt7007->execute();
+    $result7007 = $stmt7007->get_result();
+    $row7007 = $result7007->fetch_assoc();
+    $assetId7007 = $row7007['assetId'];
+    $category7007 = $row7007['category'];
+    $date7007 = $row7007['date'];
+    $building7007 = $row7007['building'];
+    $floor7007 = $row7007['floor'];
+    $room7007 = $row7007['room'];
+    $status7007 = $row7007['status'];
+    $assignedName7007 = $row7007['assignedName'];
+    $assignedBy7007 = $row7007['assignedBy'];
+    $upload_img7007 = $row7007['upload_img'];
+    $description7007 = $row7007['description'];
+
+    //FOR ID 7008
+    $sql7008 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7008";
+    $stmt7008 = $conn->prepare($sql7008);
+    $stmt7008->execute();
+    $result7008 = $stmt7008->get_result();
+    $row7008 = $result7008->fetch_assoc();
+    $assetId7008 = $row7008['assetId'];
+    $category7008 = $row7008['category'];
+    $date7008 = $row7008['date'];
+    $building7008 = $row7008['building'];
+    $floor7008 = $row7008['floor'];
+    $room7008 = $row7008['room'];
+    $status7008 = $row7008['status'];
+    $assignedName7008 = $row7008['assignedName'];
+    $assignedBy7008 = $row7008['assignedBy'];
+    $upload_img7008 = $row7008['upload_img'];
+    $description7008 = $row7008['description'];
+
+    //FOR ID 7009
+    $sql7009 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7009";
+    $stmt7009 = $conn->prepare($sql7009);
+    $stmt7009->execute();
+    $result7009 = $stmt7009->get_result();
+    $row7009 = $result7009->fetch_assoc();
+    $assetId7009 = $row7009['assetId'];
+    $category7009 = $row7009['category'];
+    $date7009 = $row7009['date'];
+    $building7009 = $row7009['building'];
+    $floor7009 = $row7009['floor'];
+    $room7009 = $row7009['room'];
+    $status7009 = $row7009['status'];
+    $assignedName7009 = $row7009['assignedName'];
+    $assignedBy7009 = $row7009['assignedBy'];
+    $upload_img7009 = $row7009['upload_img'];
+    $description7009 = $row7009['description'];
+
+    //FOR ID 7010
+    $sql7010 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7010";
+    $stmt7010 = $conn->prepare($sql7010);
+    $stmt7010->execute();
+    $result7010 = $stmt7010->get_result();
+    $row7010 = $result7010->fetch_assoc();
+    $assetId7010 = $row7010['assetId'];
+    $category7010 = $row7010['category'];
+    $date7010 = $row7010['date'];
+    $building7010 = $row7010['building'];
+    $floor7010 = $row7010['floor'];
+    $room7010 = $row7010['room'];
+    $status7010 = $row7010['status'];
+    $assignedName7010 = $row7010['assignedName'];
+    $assignedBy7010 = $row7010['assignedBy'];
+    $upload_img7010 = $row7010['upload_img'];
+    $description7010 = $row7010['description'];
+    //FOR ID 7011
+    $sql7011 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7011";
+    $stmt7011 = $conn->prepare($sql7011);
+    $stmt7011->execute();
+    $result7011 = $stmt7011->get_result();
+    $row7011 = $result7011->fetch_assoc();
+    $assetId7011 = $row7011['assetId'];
+    $category7011 = $row7011['category'];
+    $date7011 = $row7011['date'];
+    $building7011 = $row7011['building'];
+    $floor7011 = $row7011['floor'];
+    $room7011 = $row7011['room'];
+    $status7011 = $row7011['status'];
+    $assignedName7011 = $row7011['assignedName'];
+    $assignedBy7011 = $row7011['assignedBy'];
+    $upload_img7011 = $row7011['upload_img'];
+    $description7011 = $row7011['description'];
+
+    //FOR ID 7012
+    $sql7012 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7012";
+    $stmt7012 = $conn->prepare($sql7012);
+    $stmt7012->execute();
+    $result7012 = $stmt7012->get_result();
+    $row7012 = $result7012->fetch_assoc();
+    $assetId7012 = $row7012['assetId'];
+    $category7012 = $row7012['category'];
+    $date7012 = $row7012['date'];
+    $building7012 = $row7012['building'];
+    $floor7012 = $row7012['floor'];
+    $room7012 = $row7012['room'];
+    $status7012 = $row7012['status'];
+    $assignedName7012 = $row7012['assignedName'];
+    $assignedBy7012 = $row7012['assignedBy'];
+    $upload_img7012 = $row7012['upload_img'];
+    $description7012 = $row7012['description'];
+
+    //FOR ID 7013
+    $sql7013 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7013";
+    $stmt7013 = $conn->prepare($sql7013);
+    $stmt7013->execute();
+    $result7013 = $stmt7013->get_result();
+    $row7013 = $result7013->fetch_assoc();
+    $assetId7013 = $row7013['assetId'];
+    $category7013 = $row7013['category'];
+    $date7013 = $row7013['date'];
+    $building7013 = $row7013['building'];
+    $floor7013 = $row7013['floor'];
+    $room7013 = $row7013['room'];
+    $status7013 = $row7013['status'];
+    $assignedName7013 = $row7013['assignedName'];
+    $assignedBy7013 = $row7013['assignedBy'];
+    $upload_img7013 = $row7013['upload_img'];
+    $description7013 = $row7013['description'];
+
+    //FOR ID 7014
+    $sql7014 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7014";
+    $stmt7014 = $conn->prepare($sql7014);
+    $stmt7014->execute();
+    $result7014 = $stmt7014->get_result();
+    $row7014 = $result7014->fetch_assoc();
+    $assetId7014 = $row7014['assetId'];
+    $category7014 = $row7014['category'];
+    $date7014 = $row7014['date'];
+    $building7014 = $row7014['building'];
+    $floor7014 = $row7014['floor'];
+    $room7014 = $row7014['room'];
+    $status7014 = $row7014['status'];
+    $assignedName7014 = $row7014['assignedName'];
+    $assignedBy7014 = $row7014['assignedBy'];
+    $upload_img7014 = $row7014['upload_img'];
+    $description7014 = $row7014['description'];
+
+    //FOR ID 7015
+    $sql7015 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7015";
+    $stmt7015 = $conn->prepare($sql7015);
+    $stmt7015->execute();
+    $result7015 = $stmt7015->get_result();
+    $row7015 = $result7015->fetch_assoc();
+    $assetId7015 = $row7015['assetId'];
+    $category7015 = $row7015['category'];
+    $date7015 = $row7015['date'];
+    $building7015 = $row7015['building'];
+    $floor7015 = $row7015['floor'];
+    $room7015 = $row7015['room'];
+    $status7015 = $row7015['status'];
+    $assignedName7015 = $row7015['assignedName'];
+    $assignedBy7015 = $row7015['assignedBy'];
+    $upload_img7015 = $row7015['upload_img'];
+    $description7015 = $row7015['description'];
+
+    //FOR ID 7016
+    $sql7016 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7016";
+    $stmt7016 = $conn->prepare($sql7016);
+    $stmt7016->execute();
+    $result7016 = $stmt7016->get_result();
+    $row7016 = $result7016->fetch_assoc();
+    $assetId7016 = $row7016['assetId'];
+    $category7016 = $row7016['category'];
+    $date7016 = $row7016['date'];
+    $building7016 = $row7016['building'];
+    $floor7016 = $row7016['floor'];
+    $room7016 = $row7016['room'];
+    $status7016 = $row7016['status'];
+    $assignedName7016 = $row7016['assignedName'];
+    $assignedBy7016 = $row7016['assignedBy'];
+    $upload_img7016 = $row7016['upload_img'];
+    $description7016 = $row7016['description'];
+
+    //FOR ID 7016
+    $sql7016 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7016";
+    $stmt7016 = $conn->prepare($sql7016);
+    $stmt7016->execute();
+    $result7016 = $stmt7016->get_result();
+    $row7016 = $result7016->fetch_assoc();
+    $assetId7016 = $row7016['assetId'];
+    $category7016 = $row7016['category'];
+    $date7016 = $row7016['date'];
+    $building7016 = $row7016['building'];
+    $floor7016 = $row7016['floor'];
+    $room7016 = $row7016['room'];
+    $status7016 = $row7016['status'];
+    $assignedName7016 = $row7016['assignedName'];
+    $assignedBy7016 = $row7016['assignedBy'];
+    $upload_img7016 = $row7016['upload_img'];
+    $description7016 = $row7016['description'];
+
+    //FOR ID 7017
+    $sql7017 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7017";
+    $stmt7017 = $conn->prepare($sql7017);
+    $stmt7017->execute();
+    $result7017 = $stmt7017->get_result();
+    $row7017 = $result7017->fetch_assoc();
+    $assetId7017 = $row7017['assetId'];
+    $category7017 = $row7017['category'];
+    $date7017 = $row7017['date'];
+    $building7017 = $row7017['building'];
+    $floor7017 = $row7017['floor'];
+    $room7017 = $row7017['room'];
+    $status7017 = $row7017['status'];
+    $assignedName7017 = $row7017['assignedName'];
+    $assignedBy7017 = $row7017['assignedBy'];
+    $upload_img7017 = $row7017['upload_img'];
+    $description7017 = $row7017['description'];
+
+    //FOR ID 7018
+    $sql7018 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7018";
+    $stmt7018 = $conn->prepare($sql7018);
+    $stmt7018->execute();
+    $result7018 = $stmt7018->get_result();
+    $row7018 = $result7018->fetch_assoc();
+    $assetId7018 = $row7018['assetId'];
+    $category7018 = $row7018['category'];
+    $date7018 = $row7018['date'];
+    $building7018 = $row7018['building'];
+    $floor7018 = $row7018['floor'];
+    $room7018 = $row7018['room'];
+    $status7018 = $row7018['status'];
+    $assignedName7018 = $row7018['assignedName'];
+    $assignedBy7018 = $row7018['assignedBy'];
+    $upload_img7018 = $row7018['upload_img'];
+    $description7018 = $row7018['description'];
+
+    //FOR ID 7019
+    $sql7019 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7019";
+    $stmt7019 = $conn->prepare($sql7019);
+    $stmt7019->execute();
+    $result7019 = $stmt7019->get_result();
+    $row7019 = $result7019->fetch_assoc();
+    $assetId7019 = $row7019['assetId'];
+    $category7019 = $row7019['category'];
+    $date7019 = $row7019['date'];
+    $building7019 = $row7019['building'];
+    $floor7019 = $row7019['floor'];
+    $room7019 = $row7019['room'];
+    $status7019 = $row7019['status'];
+    $assignedName7019 = $row7019['assignedName'];
+    $assignedBy7019 = $row7019['assignedBy'];
+    $upload_img7019 = $row7019['upload_img'];
+    $description7019 = $row7019['description'];
+
+    //FOR ID 7020
+    $sql7020 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7020";
+    $stmt7020 = $conn->prepare($sql7020);
+    $stmt7020->execute();
+    $result7020 = $stmt7020->get_result();
+    $row7020 = $result7020->fetch_assoc();
+    $assetId7020 = $row7020['assetId'];
+    $category7020 = $row7020['category'];
+    $date7020 = $row7020['date'];
+    $building7020 = $row7020['building'];
+    $floor7020 = $row7020['floor'];
+    $room7020 = $row7020['room'];
+    $status7020 = $row7020['status'];
+    $assignedName7020 = $row7020['assignedName'];
+    $assignedBy7020 = $row7020['assignedBy'];
+    $upload_img7020 = $row7020['upload_img'];
+    $description7020 = $row7020['description'];
+
+    //FOR ID 7021
+    $sql7021 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7021";
+    $stmt7021 = $conn->prepare($sql7021);
+    $stmt7021->execute();
+    $result7021 = $stmt7021->get_result();
+    $row7021 = $result7021->fetch_assoc();
+    $assetId7021 = $row7021['assetId'];
+    $category7021 = $row7021['category'];
+    $date7021 = $row7021['date'];
+    $building7021 = $row7021['building'];
+    $floor7021 = $row7021['floor'];
+    $room7021 = $row7021['room'];
+    $status7021 = $row7021['status'];
+    $assignedName7021 = $row7021['assignedName'];
+    $assignedBy7021 = $row7021['assignedBy'];
+    $upload_img7021 = $row7021['upload_img'];
+    $description7021 = $row7021['description'];
+
+    //FOR ID 7022
+    $sql7022 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7022";
+    $stmt7022 = $conn->prepare($sql7022);
+    $stmt7022->execute();
+    $result7022 = $stmt7022->get_result();
+    $row7022 = $result7022->fetch_assoc();
+    $assetId7022 = $row7022['assetId'];
+    $category7022 = $row7022['category'];
+    $date7022 = $row7022['date'];
+    $building7022 = $row7022['building'];
+    $floor7022 = $row7022['floor'];
+    $room7022 = $row7022['room'];
+    $status7022 = $row7022['status'];
+    $assignedName7022 = $row7022['assignedName'];
+    $assignedBy7022 = $row7022['assignedBy'];
+    $upload_img7022 = $row7022['upload_img'];
+    $description7022 = $row7022['description'];
+
+    //FOR ID 7023
+    $sql7023 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7023";
+    $stmt7023 = $conn->prepare($sql7023);
+    $stmt7023->execute();
+    $result7023 = $stmt7023->get_result();
+    $row7023 = $result7023->fetch_assoc();
+    $assetId7023 = $row7023['assetId'];
+    $category7023 = $row7023['category'];
+    $date7023 = $row7023['date'];
+    $building7023 = $row7023['building'];
+    $floor7023 = $row7023['floor'];
+    $room7023 = $row7023['room'];
+    $status7023 = $row7023['status'];
+    $assignedName7023 = $row7023['assignedName'];
+    $assignedBy7023 = $row7023['assignedBy'];
+    $upload_img7023 = $row7023['upload_img'];
+    $description7023 = $row7023['description'];
+
+    //FOR ID 7024
+    $sql7024 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7024";
+    $stmt7024 = $conn->prepare($sql7024);
+    $stmt7024->execute();
+    $result7024 = $stmt7024->get_result();
+    $row7024 = $result7024->fetch_assoc();
+    $assetId7024 = $row7024['assetId'];
+    $category7024 = $row7024['category'];
+    $date7024 = $row7024['date'];
+    $building7024 = $row7024['building'];
+    $floor7024 = $row7024['floor'];
+    $room7024 = $row7024['room'];
+    $status7024 = $row7024['status'];
+    $assignedName7024 = $row7024['assignedName'];
+    $assignedBy7024 = $row7024['assignedBy'];
+    $upload_img7024 = $row7024['upload_img'];
+    $description7024 = $row7024['description'];
+
+    //FOR ID 7025
+    $sql7025 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7025";
+    $stmt7025 = $conn->prepare($sql7025);
+    $stmt7025->execute();
+    $result7025 = $stmt7025->get_result();
+    $row7025 = $result7025->fetch_assoc();
+    $assetId7025 = $row7025['assetId'];
+    $category7025 = $row7025['category'];
+    $date7025 = $row7025['date'];
+    $building7025 = $row7025['building'];
+    $floor7025 = $row7025['floor'];
+    $room7025 = $row7025['room'];
+    $status7025 = $row7025['status'];
+    $assignedName7025 = $row7025['assignedName'];
+    $assignedBy7025 = $row7025['assignedBy'];
+    $upload_img7025 = $row7025['upload_img'];
+    $description7025 = $row7025['description'];
+
+    //FOR ID 7026
+    $sql7026 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7026";
+    $stmt7026 = $conn->prepare($sql7026);
+    $stmt7026->execute();
+    $result7026 = $stmt7026->get_result();
+    $row7026 = $result7026->fetch_assoc();
+    $assetId7026 = $row7026['assetId'];
+    $category7026 = $row7026['category'];
+    $date7026 = $row7026['date'];
+    $building7026 = $row7026['building'];
+    $floor7026 = $row7026['floor'];
+    $room7026 = $row7026['room'];
+    $status7026 = $row7026['status'];
+    $assignedName7026 = $row7026['assignedName'];
+    $assignedBy7026 = $row7026['assignedBy'];
+    $upload_img7026 = $row7026['upload_img'];
+    $description7026 = $row7026['description'];
+
+    //FOR ID 7027
+    $sql7027 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7027";
+    $stmt7027 = $conn->prepare($sql7027);
+    $stmt7027->execute();
+    $result7027 = $stmt7027->get_result();
+    $row7027 = $result7027->fetch_assoc();
+    $assetId7027 = $row7027['assetId'];
+    $category7027 = $row7027['category'];
+    $date7027 = $row7027['date'];
+    $building7027 = $row7027['building'];
+    $floor7027 = $row7027['floor'];
+    $room7027 = $row7027['room'];
+    $status7027 = $row7027['status'];
+    $assignedName7027 = $row7027['assignedName'];
+    $assignedBy7027 = $row7027['assignedBy'];
+    $upload_img7027 = $row7027['upload_img'];
+    $description7027 = $row7027['description'];
+
+    //FOR ID 7028
+    $sql7028 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7028";
+    $stmt7028 = $conn->prepare($sql7028);
+    $stmt7028->execute();
+    $result7028 = $stmt7028->get_result();
+    $row7028 = $result7028->fetch_assoc();
+    $assetId7028 = $row7028['assetId'];
+    $category7028 = $row7028['category'];
+    $date7028 = $row7028['date'];
+    $building7028 = $row7028['building'];
+    $floor7028 = $row7028['floor'];
+    $room7028 = $row7028['room'];
+    $status7028 = $row7028['status'];
+    $assignedName7028 = $row7028['assignedName'];
+    $assignedBy7028 = $row7028['assignedBy'];
+    $upload_img7028 = $row7028['upload_img'];
+    $description7028 = $row7028['description'];
+
+    //FOR ID 7029
+    $sql7029 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7029";
+    $stmt7029 = $conn->prepare($sql7029);
+    $stmt7029->execute();
+    $result7029 = $stmt7029->get_result();
+    $row7029 = $result7029->fetch_assoc();
+    $assetId7029 = $row7029['assetId'];
+    $category7029 = $row7029['category'];
+    $date7029 = $row7029['date'];
+    $building7029 = $row7029['building'];
+    $floor7029 = $row7029['floor'];
+    $room7029 = $row7029['room'];
+    $status7029 = $row7029['status'];
+    $assignedName7029 = $row7029['assignedName'];
+    $assignedBy7029 = $row7029['assignedBy'];
+    $upload_img7029 = $row7029['upload_img'];
+    $description7029 = $row7029['description'];
+
+    //FOR ID 7030
+    $sql7030 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7030";
+    $stmt7030 = $conn->prepare($sql7030);
+    $stmt7030->execute();
+    $result7030 = $stmt7030->get_result();
+    $row7030 = $result7030->fetch_assoc();
+    $assetId7030 = $row7030['assetId'];
+    $category7030 = $row7030['category'];
+    $date7030 = $row7030['date'];
+    $building7030 = $row7030['building'];
+    $floor7030 = $row7030['floor'];
+    $room7030 = $row7030['room'];
+    $status7030 = $row7030['status'];
+    $assignedName7030 = $row7030['assignedName'];
+    $assignedBy7030 = $row7030['assignedBy'];
+    $upload_img7030 = $row7030['upload_img'];
+    $description7030 = $row7030['description'];
+
+    //FOR ID 7031
+    $sql7031 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7031";
+    $stmt7031 = $conn->prepare($sql7031);
+    $stmt7031->execute();
+    $result7031 = $stmt7031->get_result();
+    $row7031 = $result7031->fetch_assoc();
+    $assetId7031 = $row7031['assetId'];
+    $category7031 = $row7031['category'];
+    $date7031 = $row7031['date'];
+    $building7031 = $row7031['building'];
+    $floor7031 = $row7031['floor'];
+    $room7031 = $row7031['room'];
+    $status7031 = $row7031['status'];
+    $assignedName7031 = $row7031['assignedName'];
+    $assignedBy7031 = $row7031['assignedBy'];
+    $upload_img7031 = $row7031['upload_img'];
+    $description7031 = $row7031['description'];
+
+    //FOR ID 7032
+    $sql7032 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7032";
+    $stmt7032 = $conn->prepare($sql7032);
+    $stmt7032->execute();
+    $result7032 = $stmt7032->get_result();
+    $row7032 = $result7032->fetch_assoc();
+    $assetId7032 = $row7032['assetId'];
+    $category7032 = $row7032['category'];
+    $date7032 = $row7032['date'];
+    $building7032 = $row7032['building'];
+    $floor7032 = $row7032['floor'];
+    $room7032 = $row7032['room'];
+    $status7032 = $row7032['status'];
+    $assignedName7032 = $row7032['assignedName'];
+    $assignedBy7032 = $row7032['assignedBy'];
+    $upload_img7032 = $row7032['upload_img'];
+    $description7032 = $row7032['description'];
+
+    //FOR ID 7033
+    $sql7033 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7033";
+    $stmt7033 = $conn->prepare($sql7033);
+    $stmt7033->execute();
+    $result7033 = $stmt7033->get_result();
+    $row7033 = $result7033->fetch_assoc();
+    $assetId7033 = $row7033['assetId'];
+    $category7033 = $row7033['category'];
+    $date7033 = $row7033['date'];
+    $building7033 = $row7033['building'];
+    $floor7033 = $row7033['floor'];
+    $room7033 = $row7033['room'];
+    $status7033 = $row7033['status'];
+    $assignedName7033 = $row7033['assignedName'];
+    $assignedBy7033 = $row7033['assignedBy'];
+    $upload_img7033 = $row7033['upload_img'];
+    $description7033 = $row7033['description'];
+
+    //FOR ID 7034
+    $sql7034 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7034";
+    $stmt7034 = $conn->prepare($sql7034);
+    $stmt7034->execute();
+    $result7034 = $stmt7034->get_result();
+    $row7034 = $result7034->fetch_assoc();
+    $assetId7034 = $row7034['assetId'];
+    $category7034 = $row7034['category'];
+    $date7034 = $row7034['date'];
+    $building7034 = $row7034['building'];
+    $floor7034 = $row7034['floor'];
+    $room7034 = $row7034['room'];
+    $status7034 = $row7034['status'];
+    $assignedName7034 = $row7034['assignedName'];
+    $assignedBy7034 = $row7034['assignedBy'];
+    $upload_img7034 = $row7034['upload_img'];
+    $description7034 = $row7034['description'];
+
+    //FOR ID 7035
+    $sql7035 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7035";
+    $stmt7035 = $conn->prepare($sql7035);
+    $stmt7035->execute();
+    $result7035 = $stmt7035->get_result();
+    $row7035 = $result7035->fetch_assoc();
+    $assetId7035 = $row7035['assetId'];
+    $category7035 = $row7035['category'];
+    $date7035 = $row7035['date'];
+    $building7035 = $row7035['building'];
+    $floor7035 = $row7035['floor'];
+    $room7035 = $row7035['room'];
+    $status7035 = $row7035['status'];
+    $assignedName7035 = $row7035['assignedName'];
+    $assignedBy7035 = $row7035['assignedBy'];
+    $upload_img7035 = $row7035['upload_img'];
+    $description7035 = $row7035['description'];
+
+    //FOR ID 7036
+    $sql7036 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7036";
+    $stmt7036 = $conn->prepare($sql7036);
+    $stmt7036->execute();
+    $result7036 = $stmt7036->get_result();
+    $row7036 = $result7036->fetch_assoc();
+    $assetId7036 = $row7036['assetId'];
+    $category7036 = $row7036['category'];
+    $date7036 = $row7036['date'];
+    $building7036 = $row7036['building'];
+    $floor7036 = $row7036['floor'];
+    $room7036 = $row7036['room'];
+    $status7036 = $row7036['status'];
+    $assignedName7036 = $row7036['assignedName'];
+    $assignedBy7036 = $row7036['assignedBy'];
+    $upload_img7036 = $row7036['upload_img'];
+    $description7036 = $row7036['description'];
+
+    //FOR ID 7037
+    $sql7037 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7037";
+    $stmt7037 = $conn->prepare($sql7037);
+    $stmt7037->execute();
+    $result7037 = $stmt7037->get_result();
+    $row7037 = $result7037->fetch_assoc();
+    $assetId7037 = $row7037['assetId'];
+    $category7037 = $row7037['category'];
+    $date7037 = $row7037['date'];
+    $building7037 = $row7037['building'];
+    $floor7037 = $row7037['floor'];
+    $room7037 = $row7037['room'];
+    $status7037 = $row7037['status'];
+    $assignedName7037 = $row7037['assignedName'];
+    $assignedBy7037 = $row7037['assignedBy'];
+    $upload_img7037 = $row7037['upload_img'];
+    $description7037 = $row7037['description'];
+
+    //FOR ID 7038
+    $sql7038 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7038";
+    $stmt7038 = $conn->prepare($sql7038);
+    $stmt7038->execute();
+    $result7038 = $stmt7038->get_result();
+    $row7038 = $result7038->fetch_assoc();
+    $assetId7038 = $row7038['assetId'];
+    $category7038 = $row7038['category'];
+    $date7038 = $row7038['date'];
+    $building7038 = $row7038['building'];
+    $floor7038 = $row7038['floor'];
+    $room7038 = $row7038['room'];
+    $status7038 = $row7038['status'];
+    $assignedName7038 = $row7038['assignedName'];
+    $assignedBy7038 = $row7038['assignedBy'];
+    $upload_img7038 = $row7038['upload_img'];
+    $description7038 = $row7038['description'];
+
+    //FOR ID 7039
+    $sql7039 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7039";
+    $stmt7039 = $conn->prepare($sql7039);
+    $stmt7039->execute();
+    $result7039 = $stmt7039->get_result();
+    $row7039 = $result7039->fetch_assoc();
+    $assetId7039 = $row7039['assetId'];
+    $category7039 = $row7039['category'];
+    $date7039 = $row7039['date'];
+    $building7039 = $row7039['building'];
+    $floor7039 = $row7039['floor'];
+    $room7039 = $row7039['room'];
+    $status7039 = $row7039['status'];
+    $assignedName7039 = $row7039['assignedName'];
+    $assignedBy7039 = $row7039['assignedBy'];
+    $upload_img7039 = $row7039['upload_img'];
+    $description7039 = $row7039['description'];
+
+    //FOR ID 7040
+    $sql7040 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7040";
+    $stmt7040 = $conn->prepare($sql7040);
+    $stmt7040->execute();
+    $result7040 = $stmt7040->get_result();
+    $row7040 = $result7040->fetch_assoc();
+    $assetId7040 = $row7040['assetId'];
+    $category7040 = $row7040['category'];
+    $date7040 = $row7040['date'];
+    $building7040 = $row7040['building'];
+    $floor7040 = $row7040['floor'];
+    $room7040 = $row7040['room'];
+    $status7040 = $row7040['status'];
+    $assignedName7040 = $row7040['assignedName'];
+    $assignedBy7040 = $row7040['assignedBy'];
+    $upload_img7040 = $row7040['upload_img'];
+    $description7040 = $row7040['description'];
+
+    //FOR ID 7041
+    $sql7041 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7041";
+    $stmt7041 = $conn->prepare($sql7041);
+    $stmt7041->execute();
+    $result7041 = $stmt7041->get_result();
+    $row7041 = $result7041->fetch_assoc();
+    $assetId7041 = $row7041['assetId'];
+    $category7041 = $row7041['category'];
+    $date7041 = $row7041['date'];
+    $building7041 = $row7041['building'];
+    $floor7041 = $row7041['floor'];
+    $room7041 = $row7041['room'];
+    $status7041 = $row7041['status'];
+    $assignedName7041 = $row7041['assignedName'];
+    $assignedBy7041 = $row7041['assignedBy'];
+    $upload_img7041 = $row7041['upload_img'];
+    $description7041 = $row7041['description'];
+
+    //FOR ID 7042
+    $sql7042 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7042";
+    $stmt7042 = $conn->prepare($sql7042);
+    $stmt7042->execute();
+    $result7042 = $stmt7042->get_result();
+    $row7042 = $result7042->fetch_assoc();
+    $assetId7042 = $row7042['assetId'];
+    $category7042 = $row7042['category'];
+    $date7042 = $row7042['date'];
+    $building7042 = $row7042['building'];
+    $floor7042 = $row7042['floor'];
+    $room7042 = $row7042['room'];
+    $status7042 = $row7042['status'];
+    $assignedName7042 = $row7042['assignedName'];
+    $assignedBy7042 = $row7042['assignedBy'];
+    $upload_img7042 = $row7042['upload_img'];
+    $description7042 = $row7042['description'];
+
+    //FOR ID 7043
+    $sql7043 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7043";
+    $stmt7043 = $conn->prepare($sql7043);
+    $stmt7043->execute();
+    $result7043 = $stmt7043->get_result();
+    $row7043 = $result7043->fetch_assoc();
+    $assetId7043 = $row7043['assetId'];
+    $category7043 = $row7043['category'];
+    $date7043 = $row7043['date'];
+    $building7043 = $row7043['building'];
+    $floor7043 = $row7043['floor'];
+    $room7043 = $row7043['room'];
+    $status7043 = $row7043['status'];
+    $assignedName7043 = $row7043['assignedName'];
+    $assignedBy7043 = $row7043['assignedBy'];
+    $upload_img7043 = $row7043['upload_img'];
+    $description7043 = $row7043['description'];
+
+    //FOR ID 7044
+    $sql7044 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7044";
+    $stmt7044 = $conn->prepare($sql7044);
+    $stmt7044->execute();
+    $result7044 = $stmt7044->get_result();
+    $row7044 = $result7044->fetch_assoc();
+    $assetId7044 = $row7044['assetId'];
+    $category7044 = $row7044['category'];
+    $date7044 = $row7044['date'];
+    $building7044 = $row7044['building'];
+    $floor7044 = $row7044['floor'];
+    $room7044 = $row7044['room'];
+    $status7044 = $row7044['status'];
+    $assignedName7044 = $row7044['assignedName'];
+    $assignedBy7044 = $row7044['assignedBy'];
+    $upload_img7044 = $row7044['upload_img'];
+    $description7044 = $row7044['description'];
+
+    //FOR ID 7045
+    $sql7045 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7045";
+    $stmt7045 = $conn->prepare($sql7045);
+    $stmt7045->execute();
+    $result7045 = $stmt7045->get_result();
+    $row7045 = $result7045->fetch_assoc();
+    $assetId7045 = $row7045['assetId'];
+    $category7045 = $row7045['category'];
+    $date7045 = $row7045['date'];
+    $building7045 = $row7045['building'];
+    $floor7045 = $row7045['floor'];
+    $room7045 = $row7045['room'];
+    $status7045 = $row7045['status'];
+    $assignedName7045 = $row7045['assignedName'];
+    $assignedBy7045 = $row7045['assignedBy'];
+    $upload_img7045 = $row7045['upload_img'];
+    $description7045 = $row7045['description'];
+
+    //FOR ID 7046
+    $sql7046 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7046";
+    $stmt7046 = $conn->prepare($sql7046);
+    $stmt7046->execute();
+    $result7046 = $stmt7046->get_result();
+    $row7046 = $result7046->fetch_assoc();
+    $assetId7046 = $row7046['assetId'];
+    $category7046 = $row7046['category'];
+    $date7046 = $row7046['date'];
+    $building7046 = $row7046['building'];
+    $floor7046 = $row7046['floor'];
+    $room7046 = $row7046['room'];
+    $status7046 = $row7046['status'];
+    $assignedName7046 = $row7046['assignedName'];
+    $assignedBy7046 = $row7046['assignedBy'];
+    $upload_img7046 = $row7046['upload_img'];
+    $description7046 = $row7046['description'];
+
+    //FOR ID 7047
+    $sql7047 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7047";
+    $stmt7047 = $conn->prepare($sql7047);
+    $stmt7047->execute();
+    $result7047 = $stmt7047->get_result();
+    $row7047 = $result7047->fetch_assoc();
+    $assetId7047 = $row7047['assetId'];
+    $category7047 = $row7047['category'];
+    $date7047 = $row7047['date'];
+    $building7047 = $row7047['building'];
+    $floor7047 = $row7047['floor'];
+    $room7047 = $row7047['room'];
+    $status7047 = $row7047['status'];
+    $assignedName7047 = $row7047['assignedName'];
+    $assignedBy7047 = $row7047['assignedBy'];
+    $upload_img7047 = $row7047['upload_img'];
+    $description7047 = $row7047['description'];
+
+    //FOR ID 7048
+    $sql7048 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7048";
+    $stmt7048 = $conn->prepare($sql7048);
+    $stmt7048->execute();
+    $result7048 = $stmt7048->get_result();
+    $row7048 = $result7048->fetch_assoc();
+    $assetId7048 = $row7048['assetId'];
+    $category7048 = $row7048['category'];
+    $date7048 = $row7048['date'];
+    $building7048 = $row7048['building'];
+    $floor7048 = $row7048['floor'];
+    $room7048 = $row7048['room'];
+    $status7048 = $row7048['status'];
+    $assignedName7048 = $row7048['assignedName'];
+    $assignedBy7048 = $row7048['assignedBy'];
+    $upload_img7048 = $row7048['upload_img'];
+    $description7048 = $row7048['description'];
+
+    //FOR ID 7049
+    $sql7049 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7049";
+    $stmt7049 = $conn->prepare($sql7049);
+    $stmt7049->execute();
+    $result7049 = $stmt7049->get_result();
+    $row7049 = $result7049->fetch_assoc();
+    $assetId7049 = $row7049['assetId'];
+    $category7049 = $row7049['category'];
+    $date7049 = $row7049['date'];
+    $building7049 = $row7049['building'];
+    $floor7049 = $row7049['floor'];
+    $room7049 = $row7049['room'];
+    $status7049 = $row7049['status'];
+    $assignedName7049 = $row7049['assignedName'];
+    $assignedBy7049 = $row7049['assignedBy'];
+    $upload_img7049 = $row7049['upload_img'];
+    $description7049 = $row7049['description'];
+
+    //FOR ID 7050
+    $sql7050 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7050";
+    $stmt7050 = $conn->prepare($sql7050);
+    $stmt7050->execute();
+    $result7050 = $stmt7050->get_result();
+    $row7050 = $result7050->fetch_assoc();
+    $assetId7050 = $row7050['assetId'];
+    $category7050 = $row7050['category'];
+    $date7050 = $row7050['date'];
+    $building7050 = $row7050['building'];
+    $floor7050 = $row7050['floor'];
+    $room7050 = $row7050['room'];
+    $status7050 = $row7050['status'];
+    $assignedName7050 = $row7050['assignedName'];
+    $assignedBy7050 = $row7050['assignedBy'];
+    $upload_img7050 = $row7050['upload_img'];
+    $description7050 = $row7050['description'];
+
+    //FOR ID 7051
+    $sql7051 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7051";
+    $stmt7051 = $conn->prepare($sql7051);
+    $stmt7051->execute();
+    $result7051 = $stmt7051->get_result();
+    $row7051 = $result7051->fetch_assoc();
+    $assetId7051 = $row7051['assetId'];
+    $category7051 = $row7051['category'];
+    $date7051 = $row7051['date'];
+    $building7051 = $row7051['building'];
+    $floor7051 = $row7051['floor'];
+    $room7051 = $row7051['room'];
+    $status7051 = $row7051['status'];
+    $assignedName7051 = $row7051['assignedName'];
+    $assignedBy7051 = $row7051['assignedBy'];
+    $upload_img7051 = $row7051['upload_img'];
+    $description7051 = $row7051['description'];
+
+    //FOR ID 7052
+    $sql7052 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7052";
+    $stmt7052 = $conn->prepare($sql7052);
+    $stmt7052->execute();
+    $result7052 = $stmt7052->get_result();
+    $row7052 = $result7052->fetch_assoc();
+    $assetId7052 = $row7052['assetId'];
+    $category7052 = $row7052['category'];
+    $date7052 = $row7052['date'];
+    $building7052 = $row7052['building'];
+    $floor7052 = $row7052['floor'];
+    $room7052 = $row7052['room'];
+    $status7052 = $row7052['status'];
+    $assignedName7052 = $row7052['assignedName'];
+    $assignedBy7052 = $row7052['assignedBy'];
+    $upload_img7052 = $row7052['upload_img'];
+    $description7052 = $row7052['description'];
+
+    //FOR ID 7053
+    $sql7053 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7053";
+    $stmt7053 = $conn->prepare($sql7053);
+    $stmt7053->execute();
+    $result7053 = $stmt7053->get_result();
+    $row7053 = $result7053->fetch_assoc();
+    $assetId7053 = $row7053['assetId'];
+    $category7053 = $row7053['category'];
+    $date7053 = $row7053['date'];
+    $building7053 = $row7053['building'];
+    $floor7053 = $row7053['floor'];
+    $room7053 = $row7053['room'];
+    $status7053 = $row7053['status'];
+    $assignedName7053 = $row7053['assignedName'];
+    $assignedBy7053 = $row7053['assignedBy'];
+    $upload_img7053 = $row7053['upload_img'];
+    $description7053 = $row7053['description'];
+
+    //FOR ID 7054
+    $sql7054 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7054";
+    $stmt7054 = $conn->prepare($sql7054);
+    $stmt7054->execute();
+    $result7054 = $stmt7054->get_result();
+    $row7054 = $result7054->fetch_assoc();
+    $assetId7054 = $row7054['assetId'];
+    $category7054 = $row7054['category'];
+    $date7054 = $row7054['date'];
+    $building7054 = $row7054['building'];
+    $floor7054 = $row7054['floor'];
+    $room7054 = $row7054['room'];
+    $status7054 = $row7054['status'];
+    $assignedName7054 = $row7054['assignedName'];
+    $assignedBy7054 = $row7054['assignedBy'];
+    $upload_img7054 = $row7054['upload_img'];
+    $description7054 = $row7054['description'];
+
+    //FOR ID 7055
+    $sql7055 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7055";
+    $stmt7055 = $conn->prepare($sql7055);
+    $stmt7055->execute();
+    $result7055 = $stmt7055->get_result();
+    $row7055 = $result7055->fetch_assoc();
+    $assetId7055 = $row7055['assetId'];
+    $category7055 = $row7055['category'];
+    $date7055 = $row7055['date'];
+    $building7055 = $row7055['building'];
+    $floor7055 = $row7055['floor'];
+    $room7055 = $row7055['room'];
+    $status7055 = $row7055['status'];
+    $assignedName7055 = $row7055['assignedName'];
+    $assignedBy7055 = $row7055['assignedBy'];
+    $upload_img7055 = $row7055['upload_img'];
+    $description7055 = $row7055['description'];
+
+    //FOR ID 7056
+    $sql7056 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7056";
+    $stmt7056 = $conn->prepare($sql7056);
+    $stmt7056->execute();
+    $result7056 = $stmt7056->get_result();
+    $row7056 = $result7056->fetch_assoc();
+    $assetId7056 = $row7056['assetId'];
+    $category7056 = $row7056['category'];
+    $date7056 = $row7056['date'];
+    $building7056 = $row7056['building'];
+    $floor7056 = $row7056['floor'];
+    $room7056 = $row7056['room'];
+    $status7056 = $row7056['status'];
+    $assignedName7056 = $row7056['assignedName'];
+    $assignedBy7056 = $row7056['assignedBy'];
+    $upload_img7056 = $row7056['upload_img'];
+    $description7056 = $row7056['description'];
+
+    //FOR ID 7057
+    $sql7057 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7057";
+    $stmt7057 = $conn->prepare($sql7057);
+    $stmt7057->execute();
+    $result7057 = $stmt7057->get_result();
+    $row7057 = $result7057->fetch_assoc();
+    $assetId7057 = $row7057['assetId'];
+    $category7057 = $row7057['category'];
+    $date7057 = $row7057['date'];
+    $building7057 = $row7057['building'];
+    $floor7057 = $row7057['floor'];
+    $room7057 = $row7057['room'];
+    $status7057 = $row7057['status'];
+    $assignedName7057 = $row7057['assignedName'];
+    $assignedBy7057 = $row7057['assignedBy'];
+    $upload_img7057 = $row7057['upload_img'];
+    $description7057 = $row7057['description'];
+
+    //FOR ID 7058
+    $sql7058 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7058";
+    $stmt7058 = $conn->prepare($sql7058);
+    $stmt7058->execute();
+    $result7058 = $stmt7058->get_result();
+    $row7058 = $result7058->fetch_assoc();
+    $assetId7058 = $row7058['assetId'];
+    $category7058 = $row7058['category'];
+    $date7058 = $row7058['date'];
+    $building7058 = $row7058['building'];
+    $floor7058 = $row7058['floor'];
+    $room7058 = $row7058['room'];
+    $status7058 = $row7058['status'];
+    $assignedName7058 = $row7058['assignedName'];
+    $assignedBy7058 = $row7058['assignedBy'];
+    $upload_img7058 = $row7058['upload_img'];
+    $description7058 = $row7058['description'];
+
+    //FOR ID 7059
+    $sql7059 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7059";
+    $stmt7059 = $conn->prepare($sql7059);
+    $stmt7059->execute();
+    $result7059 = $stmt7059->get_result();
+    $row7059 = $result7059->fetch_assoc();
+    $assetId7059 = $row7059['assetId'];
+    $category7059 = $row7059['category'];
+    $date7059 = $row7059['date'];
+    $building7059 = $row7059['building'];
+    $floor7059 = $row7059['floor'];
+    $room7059 = $row7059['room'];
+    $status7059 = $row7059['status'];
+    $assignedName7059 = $row7059['assignedName'];
+    $assignedBy7059 = $row7059['assignedBy'];
+    $upload_img7059 = $row7059['upload_img'];
+    $description7059 = $row7059['description'];
+
+    //FOR ID 7060
+    $sql7060 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7060";
+    $stmt7060 = $conn->prepare($sql7060);
+    $stmt7060->execute();
+    $result7060 = $stmt7060->get_result();
+    $row7060 = $result7060->fetch_assoc();
+    $assetId7060 = $row7060['assetId'];
+    $category7060 = $row7060['category'];
+    $date7060 = $row7060['date'];
+    $building7060 = $row7060['building'];
+    $floor7060 = $row7060['floor'];
+    $room7060 = $row7060['room'];
+    $status7060 = $row7060['status'];
+    $assignedName7060 = $row7060['assignedName'];
+    $assignedBy7060 = $row7060['assignedBy'];
+    $upload_img7060 = $row7060['upload_img'];
+    $description7060 = $row7060['description'];
+
+    //FOR ID 7061
+    $sql7061 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7061";
+    $stmt7061 = $conn->prepare($sql7061);
+    $stmt7061->execute();
+    $result7061 = $stmt7061->get_result();
+    $row7061 = $result7061->fetch_assoc();
+    $assetId7061 = $row7061['assetId'];
+    $category7061 = $row7061['category'];
+    $date7061 = $row7061['date'];
+    $building7061 = $row7061['building'];
+    $floor7061 = $row7061['floor'];
+    $room7061 = $row7061['room'];
+    $status7061 = $row7061['status'];
+    $assignedName7061 = $row7061['assignedName'];
+    $assignedBy7061 = $row7061['assignedBy'];
+    $upload_img7061 = $row7061['upload_img'];
+    $description7061 = $row7061['description'];
+
+    //FOR ID 7062
+    $sql7062 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7062";
+    $stmt7062 = $conn->prepare($sql7062);
+    $stmt7062->execute();
+    $result7062 = $stmt7062->get_result();
+    $row7062 = $result7062->fetch_assoc();
+    $assetId7062 = $row7062['assetId'];
+    $category7062 = $row7062['category'];
+    $date7062 = $row7062['date'];
+    $building7062 = $row7062['building'];
+    $floor7062 = $row7062['floor'];
+    $room7062 = $row7062['room'];
+    $status7062 = $row7062['status'];
+    $assignedName7062 = $row7062['assignedName'];
+    $assignedBy7062 = $row7062['assignedBy'];
+    $upload_img7062 = $row7062['upload_img'];
+    $description7062 = $row7062['description'];
+
+    //FOR ID 7063
+    $sql7063 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7063";
+    $stmt7063 = $conn->prepare($sql7063);
+    $stmt7063->execute();
+    $result7063 = $stmt7063->get_result();
+    $row7063 = $result7063->fetch_assoc();
+    $assetId7063 = $row7063['assetId'];
+    $category7063 = $row7063['category'];
+    $date7063 = $row7063['date'];
+    $building7063 = $row7063['building'];
+    $floor7063 = $row7063['floor'];
+    $room7063 = $row7063['room'];
+    $status7063 = $row7063['status'];
+    $assignedName7063 = $row7063['assignedName'];
+    $assignedBy7063 = $row7063['assignedBy'];
+    $upload_img7063 = $row7063['upload_img'];
+    $description7063 = $row7063['description'];
+
+    //FOR ID 7064
+    $sql7064 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7064";
+    $stmt7064 = $conn->prepare($sql7064);
+    $stmt7064->execute();
+    $result7064 = $stmt7064->get_result();
+    $row7064 = $result7064->fetch_assoc();
+    $assetId7064 = $row7064['assetId'];
+    $category7064 = $row7064['category'];
+    $date7064 = $row7064['date'];
+    $building7064 = $row7064['building'];
+    $floor7064 = $row7064['floor'];
+    $room7064 = $row7064['room'];
+    $status7064 = $row7064['status'];
+    $assignedName7064 = $row7064['assignedName'];
+    $assignedBy7064 = $row7064['assignedBy'];
+    $upload_img7064 = $row7064['upload_img'];
+    $description7064 = $row7064['description'];
+
+    //FOR ID 7065
+    $sql7065 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7065";
+    $stmt7065 = $conn->prepare($sql7065);
+    $stmt7065->execute();
+    $result7065 = $stmt7065->get_result();
+    $row7065 = $result7065->fetch_assoc();
+    $assetId7065 = $row7065['assetId'];
+    $category7065 = $row7065['category'];
+    $date7065 = $row7065['date'];
+    $building7065 = $row7065['building'];
+    $floor7065 = $row7065['floor'];
+    $room7065 = $row7065['room'];
+    $status7065 = $row7065['status'];
+    $assignedName7065 = $row7065['assignedName'];
+    $assignedBy7065 = $row7065['assignedBy'];
+    $upload_img7065 = $row7065['upload_img'];
+    $description7065 = $row7065['description'];
+
+    //FOR ID 7066
+    $sql7066 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7066";
+    $stmt7066 = $conn->prepare($sql7066);
+    $stmt7066->execute();
+    $result7066 = $stmt7066->get_result();
+    $row7066 = $result7066->fetch_assoc();
+    $assetId7066 = $row7066['assetId'];
+    $category7066 = $row7066['category'];
+    $date7066 = $row7066['date'];
+    $building7066 = $row7066['building'];
+    $floor7066 = $row7066['floor'];
+    $room7066 = $row7066['room'];
+    $status7066 = $row7066['status'];
+    $assignedName7066 = $row7066['assignedName'];
+    $assignedBy7066 = $row7066['assignedBy'];
+    $upload_img7066 = $row7066['upload_img'];
+    $description7066 = $row7066['description'];
+
+    //FOR ID 7067
+    $sql7067 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7067";
+    $stmt7067 = $conn->prepare($sql7067);
+    $stmt7067->execute();
+    $result7067 = $stmt7067->get_result();
+    $row7067 = $result7067->fetch_assoc();
+    $assetId7067 = $row7067['assetId'];
+    $category7067 = $row7067['category'];
+    $date7067 = $row7067['date'];
+    $building7067 = $row7067['building'];
+    $floor7067 = $row7067['floor'];
+    $room7067 = $row7067['room'];
+    $status7067 = $row7067['status'];
+    $assignedName7067 = $row7067['assignedName'];
+    $assignedBy7067 = $row7067['assignedBy'];
+    $upload_img7067 = $row7067['upload_img'];
+    $description7067 = $row7067['description'];
+
+    //FOR ID 7068
+    $sql7068 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7068";
+    $stmt7068 = $conn->prepare($sql7068);
+    $stmt7068->execute();
+    $result7068 = $stmt7068->get_result();
+    $row7068 = $result7068->fetch_assoc();
+    $assetId7068 = $row7068['assetId'];
+    $category7068 = $row7068['category'];
+    $date7068 = $row7068['date'];
+    $building7068 = $row7068['building'];
+    $floor7068 = $row7068['floor'];
+    $room7068 = $row7068['room'];
+    $status7068 = $row7068['status'];
+    $assignedName7068 = $row7068['assignedName'];
+    $assignedBy7068 = $row7068['assignedBy'];
+    $upload_img7068 = $row7068['upload_img'];
+    $description7068 = $row7068['description'];
+
+    //FOR ID 7069
+    $sql7069 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7069";
+    $stmt7069 = $conn->prepare($sql7069);
+    $stmt7069->execute();
+    $result7069 = $stmt7069->get_result();
+    $row7069 = $result7069->fetch_assoc();
+    $assetId7069 = $row7069['assetId'];
+    $category7069 = $row7069['category'];
+    $date7069 = $row7069['date'];
+    $building7069 = $row7069['building'];
+    $floor7069 = $row7069['floor'];
+    $room7069 = $row7069['room'];
+    $status7069 = $row7069['status'];
+    $assignedName7069 = $row7069['assignedName'];
+    $assignedBy7069 = $row7069['assignedBy'];
+    $upload_img7069 = $row7069['upload_img'];
+    $description7069 = $row7069['description'];
+
+    //FOR ID 7070
+    $sql7070 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7070";
+    $stmt7070 = $conn->prepare($sql7070);
+    $stmt7070->execute();
+    $result7070 = $stmt7070->get_result();
+    $row7070 = $result7070->fetch_assoc();
+    $assetId7070 = $row7070['assetId'];
+    $category7070 = $row7070['category'];
+    $date7070 = $row7070['date'];
+    $building7070 = $row7070['building'];
+    $floor7070 = $row7070['floor'];
+    $room7070 = $row7070['room'];
+    $status7070 = $row7070['status'];
+    $assignedName7070 = $row7070['assignedName'];
+    $assignedBy7070 = $row7070['assignedBy'];
+    $upload_img7070 = $row7070['upload_img'];
+    $description7070 = $row7070['description'];
+
+    //FOR ID 7071
+    $sql7071 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7071";
+    $stmt7071 = $conn->prepare($sql7071);
+    $stmt7071->execute();
+    $result7071 = $stmt7071->get_result();
+    $row7071 = $result7071->fetch_assoc();
+    $assetId7071 = $row7071['assetId'];
+    $category7071 = $row7071['category'];
+    $date7071 = $row7071['date'];
+    $building7071 = $row7071['building'];
+    $floor7071 = $row7071['floor'];
+    $room7071 = $row7071['room'];
+    $status7071 = $row7071['status'];
+    $assignedName7071 = $row7071['assignedName'];
+    $assignedBy7071 = $row7071['assignedBy'];
+    $upload_img7071 = $row7071['upload_img'];
+    $description7071 = $row7071['description'];
+
+    //FOR ID 7072
+    $sql7072 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7072";
+    $stmt7072 = $conn->prepare($sql7072);
+    $stmt7072->execute();
+    $result7072 = $stmt7072->get_result();
+    $row7072 = $result7072->fetch_assoc();
+    $assetId7072 = $row7072['assetId'];
+    $category7072 = $row7072['category'];
+    $date7072 = $row7072['date'];
+    $building7072 = $row7072['building'];
+    $floor7072 = $row7072['floor'];
+    $room7072 = $row7072['room'];
+    $status7072 = $row7072['status'];
+    $assignedName7072 = $row7072['assignedName'];
+    $assignedBy7072 = $row7072['assignedBy'];
+    $upload_img7072 = $row7072['upload_img'];
+    $description7072 = $row7072['description'];
+
+    //FOR ID 7073
+    $sql7073 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7073";
+    $stmt7073 = $conn->prepare($sql7073);
+    $stmt7073->execute();
+    $result7073 = $stmt7073->get_result();
+    $row7073 = $result7073->fetch_assoc();
+    $assetId7073 = $row7073['assetId'];
+    $category7073 = $row7073['category'];
+    $date7073 = $row7073['date'];
+    $building7073 = $row7073['building'];
+    $floor7073 = $row7073['floor'];
+    $room7073 = $row7073['room'];
+    $status7073 = $row7073['status'];
+    $assignedName7073 = $row7073['assignedName'];
+    $assignedBy7073 = $row7073['assignedBy'];
+    $upload_img7073 = $row7073['upload_img'];
+    $description7073 = $row7073['description'];
+
+    //FOR ID 7074
+    $sql7074 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7074";
+    $stmt7074 = $conn->prepare($sql7074);
+    $stmt7074->execute();
+    $result7074 = $stmt7074->get_result();
+    $row7074 = $result7074->fetch_assoc();
+    $assetId7074 = $row7074['assetId'];
+    $category7074 = $row7074['category'];
+    $date7074 = $row7074['date'];
+    $building7074 = $row7074['building'];
+    $floor7074 = $row7074['floor'];
+    $room7074 = $row7074['room'];
+    $status7074 = $row7074['status'];
+    $assignedName7074 = $row7074['assignedName'];
+    $assignedBy7074 = $row7074['assignedBy'];
+    $upload_img7074 = $row7074['upload_img'];
+    $description7074 = $row7074['description'];
+
+    //FOR ID 7075
+    $sql7075 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7075";
+    $stmt7075 = $conn->prepare($sql7075);
+    $stmt7075->execute();
+    $result7075 = $stmt7075->get_result();
+    $row7075 = $result7075->fetch_assoc();
+    $assetId7075 = $row7075['assetId'];
+    $category7075 = $row7075['category'];
+    $date7075 = $row7075['date'];
+    $building7075 = $row7075['building'];
+    $floor7075 = $row7075['floor'];
+    $room7075 = $row7075['room'];
+    $status7075 = $row7075['status'];
+    $assignedName7075 = $row7075['assignedName'];
+    $assignedBy7075 = $row7075['assignedBy'];
+    $upload_img7075 = $row7075['upload_img'];
+    $description7075 = $row7075['description'];
+
+    //FOR ID 7076
+    $sql7076 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7076";
+    $stmt7076 = $conn->prepare($sql7076);
+    $stmt7076->execute();
+    $result7076 = $stmt7076->get_result();
+    $row7076 = $result7076->fetch_assoc();
+    $assetId7076 = $row7076['assetId'];
+    $category7076 = $row7076['category'];
+    $date7076 = $row7076['date'];
+    $building7076 = $row7076['building'];
+    $floor7076 = $row7076['floor'];
+    $room7076 = $row7076['room'];
+    $status7076 = $row7076['status'];
+    $assignedName7076 = $row7076['assignedName'];
+    $assignedBy7076 = $row7076['assignedBy'];
+    $upload_img7076 = $row7076['upload_img'];
+    $description7076 = $row7076['description'];
+
+    //FOR ID 7077
+    $sql7077 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7077";
+    $stmt7077 = $conn->prepare($sql7077);
+    $stmt7077->execute();
+    $result7077 = $stmt7077->get_result();
+    $row7077 = $result7077->fetch_assoc();
+    $assetId7077 = $row7077['assetId'];
+    $category7077 = $row7077['category'];
+    $date7077 = $row7077['date'];
+    $building7077 = $row7077['building'];
+    $floor7077 = $row7077['floor'];
+    $room7077 = $row7077['room'];
+    $status7077 = $row7077['status'];
+    $assignedName7077 = $row7077['assignedName'];
+    $assignedBy7077 = $row7077['assignedBy'];
+    $upload_img7077 = $row7077['upload_img'];
+    $description7077 = $row7077['description'];
+
+    //FOR ID 7078
+    $sql7078 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7078";
+    $stmt7078 = $conn->prepare($sql7078);
+    $stmt7078->execute();
+    $result7078 = $stmt7078->get_result();
+    $row7078 = $result7078->fetch_assoc();
+    $assetId7078 = $row7078['assetId'];
+    $category7078 = $row7078['category'];
+    $date7078 = $row7078['date'];
+    $building7078 = $row7078['building'];
+    $floor7078 = $row7078['floor'];
+    $room7078 = $row7078['room'];
+    $status7078 = $row7078['status'];
+    $assignedName7078 = $row7078['assignedName'];
+    $assignedBy7078 = $row7078['assignedBy'];
+    $upload_img7078 = $row7078['upload_img'];
+    $description7078 = $row7078['description'];
+
+    //FOR ID 7079
+    $sql7079 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 7079";
+    $stmt7079 = $conn->prepare($sql7079);
+    $stmt7079->execute();
+    $result7079 = $stmt7079->get_result();
+    $row7079 = $result7079->fetch_assoc();
+    $assetId7079 = $row7079['assetId'];
+    $category7079 = $row7079['category'];
+    $date7079 = $row7079['date'];
+    $building7079 = $row7079['building'];
+    $floor7079 = $row7079['floor'];
+    $room7079 = $row7079['room'];
+    $status7079 = $row7079['status'];
+    $assignedName7079 = $row7079['assignedName'];
+    $assignedBy7079 = $row7079['assignedBy'];
+    $upload_img7079 = $row7079['upload_img'];
+    $description7079 = $row7079['description'];
+
+    //FOR ID 7275
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7275'])) {
         // Get form data
         $assetId7275 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4010,7 +4010,7 @@ $stmt->close();
         }
         $stmt7275->close();
     }
-        //FOR ID 7274
+    //FOR ID 7274
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7274'])) {
         // Get form data
         $assetId7274 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4037,7 +4037,7 @@ $stmt->close();
         }
         $stmt7274->close();
     }
-        //FOR ID 7273
+    //FOR ID 7273
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7273'])) {
         // Get form data
         $assetId7273 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4064,7 +4064,7 @@ $stmt->close();
         }
         $stmt7273->close();
     }
-        //FOR ID 7272
+    //FOR ID 7272
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7272'])) {
         // Get form data
         $assetId7272 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4091,7 +4091,7 @@ $stmt->close();
         }
         $stmt7272->close();
     }
-        //FOR ID 6947
+    //FOR ID 6947
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6947'])) {
         // Get form data
         $assetId6947 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4118,7 +4118,7 @@ $stmt->close();
         }
         $stmt6947->close();
     }
-        //FOR ID 6946
+    //FOR ID 6946
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6946'])) {
         // Get form data
         $assetId6946 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4145,7 +4145,7 @@ $stmt->close();
         }
         $stmt6946->close();
     }
-        //FOR ID 6945
+    //FOR ID 6945
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6945'])) {
         // Get form data
         $assetId6945 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4172,7 +4172,7 @@ $stmt->close();
         }
         $stmt6945->close();
     }
-        //FOR ID 6944
+    //FOR ID 6944
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6944'])) {
         // Get form data
         $assetId6944 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4199,7 +4199,7 @@ $stmt->close();
         }
         $stmt6944->close();
     }
-        //FOR ID 6943
+    //FOR ID 6943
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6943'])) {
         // Get form data
         $assetId6943 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4226,7 +4226,7 @@ $stmt->close();
         }
         $stmt6943->close();
     }
-        //FOR ID 6942
+    //FOR ID 6942
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6942'])) {
         // Get form data
         $assetId6942 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4253,7 +4253,7 @@ $stmt->close();
         }
         $stmt6942->close();
     }
-        //FOR ID 6941
+    //FOR ID 6941
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6941'])) {
         // Get form data
         $assetId6941 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4280,7 +4280,7 @@ $stmt->close();
         }
         $stmt6941->close();
     }
-        //FOR ID 6940
+    //FOR ID 6940
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6940'])) {
         // Get form data
         $assetId6940 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4307,7 +4307,7 @@ $stmt->close();
         }
         $stmt6940->close();
     }
-        //FOR ID 6939
+    //FOR ID 6939
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6939'])) {
         // Get form data
         $assetId6939 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4334,7 +4334,7 @@ $stmt->close();
         }
         $stmt6939->close();
     }
-        //FOR ID 6938
+    //FOR ID 6938
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6938'])) {
         // Get form data
         $assetId6938 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4361,7 +4361,7 @@ $stmt->close();
         }
         $stmt6938->close();
     }
-        //FOR ID 6937
+    //FOR ID 6937
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6937'])) {
         // Get form data
         $assetId6937 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4388,7 +4388,7 @@ $stmt->close();
         }
         $stmt6937->close();
     }
-        //FOR ID 6936
+    //FOR ID 6936
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6936'])) {
         // Get form data
         $assetId6936 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4415,7 +4415,7 @@ $stmt->close();
         }
         $stmt6936->close();
     }
-        //FOR ID 6935
+    //FOR ID 6935
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6935'])) {
         // Get form data
         $assetId6935 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4442,7 +4442,7 @@ $stmt->close();
         }
         $stmt6935->close();
     }
-        //FOR ID 6934
+    //FOR ID 6934
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6934'])) {
         // Get form data
         $assetId6934 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4469,7 +4469,7 @@ $stmt->close();
         }
         $stmt6934->close();
     }
-        //FOR ID 6933
+    //FOR ID 6933
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6933'])) {
         // Get form data
         $assetId6933 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4496,7 +4496,7 @@ $stmt->close();
         }
         $stmt6933->close();
     }
-        //FOR ID 6932
+    //FOR ID 6932
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6932'])) {
         // Get form data
         $assetId6932 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4523,7 +4523,7 @@ $stmt->close();
         }
         $stmt6932->close();
     }
-        //FOR ID 6931
+    //FOR ID 6931
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6931'])) {
         // Get form data
         $assetId6931 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4550,7 +4550,7 @@ $stmt->close();
         }
         $stmt6931->close();
     }
-        //FOR ID 6930
+    //FOR ID 6930
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6930'])) {
         // Get form data
         $assetId6930 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4577,7 +4577,7 @@ $stmt->close();
         }
         $stmt6930->close();
     }
-        //FOR ID 6929
+    //FOR ID 6929
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6929'])) {
         // Get form data
         $assetId6929 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4604,7 +4604,7 @@ $stmt->close();
         }
         $stmt6929->close();
     }
-        //FOR ID 6928
+    //FOR ID 6928
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6928'])) {
         // Get form data
         $assetId6928 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4631,7 +4631,7 @@ $stmt->close();
         }
         $stmt6928->close();
     }
-        //FOR ID 6927
+    //FOR ID 6927
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6927'])) {
         // Get form data
         $assetId6927 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4658,7 +4658,7 @@ $stmt->close();
         }
         $stmt6927->close();
     }
-        //FOR ID 6926
+    //FOR ID 6926
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6926'])) {
         // Get form data
         $assetId6926 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4685,7 +4685,7 @@ $stmt->close();
         }
         $stmt6926->close();
     }
-        //FOR ID 6925
+    //FOR ID 6925
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6925'])) {
         // Get form data
         $assetId6925 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4712,7 +4712,7 @@ $stmt->close();
         }
         $stmt6925->close();
     }
-        //FOR ID 6924
+    //FOR ID 6924
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6924'])) {
         // Get form data
         $assetId6924 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4739,7 +4739,7 @@ $stmt->close();
         }
         $stmt6924->close();
     }
-        //FOR ID 6923
+    //FOR ID 6923
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6923'])) {
         // Get form data
         $assetId6923 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4766,7 +4766,7 @@ $stmt->close();
         }
         $stmt6923->close();
     }
-        //FOR ID 6922
+    //FOR ID 6922
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6922'])) {
         // Get form data
         $assetId6922 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4793,7 +4793,7 @@ $stmt->close();
         }
         $stmt6922->close();
     }
-        //FOR ID 6921
+    //FOR ID 6921
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6921'])) {
         // Get form data
         $assetId6921 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4820,7 +4820,7 @@ $stmt->close();
         }
         $stmt6921->close();
     }
-        //FOR ID 6920
+    //FOR ID 6920
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6920'])) {
         // Get form data
         $assetId6920 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4847,7 +4847,7 @@ $stmt->close();
         }
         $stmt6920->close();
     }
-        //FOR ID 6919
+    //FOR ID 6919
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6919'])) {
         // Get form data
         $assetId6919 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4874,7 +4874,7 @@ $stmt->close();
         }
         $stmt6919->close();
     }
-        //FOR ID 6918
+    //FOR ID 6918
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6918'])) {
         // Get form data
         $assetId6918 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4901,7 +4901,7 @@ $stmt->close();
         }
         $stmt6918->close();
     }
-        //FOR ID 6917
+    //FOR ID 6917
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6917'])) {
         // Get form data
         $assetId6917 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4928,7 +4928,7 @@ $stmt->close();
         }
         $stmt6917->close();
     }
-        //FOR ID 6916
+    //FOR ID 6916
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6916'])) {
         // Get form data
         $assetId6916 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4955,7 +4955,7 @@ $stmt->close();
         }
         $stmt6916->close();
     }
-        //FOR ID 6915
+    //FOR ID 6915
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6915'])) {
         // Get form data
         $assetId6915 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -4982,7 +4982,7 @@ $stmt->close();
         }
         $stmt6915->close();
     }
-        //FOR ID 6914
+    //FOR ID 6914
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6914'])) {
         // Get form data
         $assetId6914 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5009,7 +5009,7 @@ $stmt->close();
         }
         $stmt6914->close();
     }
-        //FOR ID 6913
+    //FOR ID 6913
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6913'])) {
         // Get form data
         $assetId6913 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5036,7 +5036,7 @@ $stmt->close();
         }
         $stmt6913->close();
     }
-        //FOR ID 6912
+    //FOR ID 6912
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6912'])) {
         // Get form data
         $assetId6912 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5063,7 +5063,7 @@ $stmt->close();
         }
         $stmt6912->close();
     }
-        //FOR ID 6911
+    //FOR ID 6911
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6911'])) {
         // Get form data
         $assetId6911 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5090,7 +5090,7 @@ $stmt->close();
         }
         $stmt6911->close();
     }
-        //FOR ID 6910
+    //FOR ID 6910
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6910'])) {
         // Get form data
         $assetId6910 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5117,7 +5117,7 @@ $stmt->close();
         }
         $stmt6910->close();
     }
-        //FOR ID 6909
+    //FOR ID 6909
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6909'])) {
         // Get form data
         $assetId6909 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5144,7 +5144,7 @@ $stmt->close();
         }
         $stmt6909->close();
     }
-        //FOR ID 6908
+    //FOR ID 6908
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6908'])) {
         // Get form data
         $assetId6908 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5171,7 +5171,7 @@ $stmt->close();
         }
         $stmt6908->close();
     }
-        //FOR ID 6907
+    //FOR ID 6907
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6907'])) {
         // Get form data
         $assetId6907 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5198,7 +5198,7 @@ $stmt->close();
         }
         $stmt6907->close();
     }
-        //FOR ID 6906
+    //FOR ID 6906
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6906'])) {
         // Get form data
         $assetId6906 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5225,7 +5225,7 @@ $stmt->close();
         }
         $stmt6906->close();
     }
-        //FOR ID 6905
+    //FOR ID 6905
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6905'])) {
         // Get form data
         $assetId6905 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5252,7 +5252,7 @@ $stmt->close();
         }
         $stmt6905->close();
     }
-        //FOR ID 6904
+    //FOR ID 6904
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6904'])) {
         // Get form data
         $assetId6904 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5279,7 +5279,7 @@ $stmt->close();
         }
         $stmt6904->close();
     }
-        //FOR ID 6903
+    //FOR ID 6903
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6903'])) {
         // Get form data
         $assetId6903 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5306,7 +5306,7 @@ $stmt->close();
         }
         $stmt6903->close();
     }
-        //FOR ID 6902
+    //FOR ID 6902
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6902'])) {
         // Get form data
         $assetId6902 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5333,7 +5333,7 @@ $stmt->close();
         }
         $stmt6902->close();
     }
-        //FOR ID 6903
+    //FOR ID 6903
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6903'])) {
         // Get form data
         $assetId6903 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5360,7 +5360,7 @@ $stmt->close();
         }
         $stmt6903->close();
     }
-        //FOR ID 6902
+    //FOR ID 6902
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6902'])) {
         // Get form data
         $assetId6902 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5387,7 +5387,7 @@ $stmt->close();
         }
         $stmt6902->close();
     }
-        //FOR ID 6901
+    //FOR ID 6901
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6901'])) {
         // Get form data
         $assetId6901 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5414,7 +5414,7 @@ $stmt->close();
         }
         $stmt6901->close();
     }
-        //FOR ID 6900
+    //FOR ID 6900
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6900'])) {
         // Get form data
         $assetId6900 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5442,7 +5442,7 @@ $stmt->close();
         $stmt6900->close();
     }
 
-        //FOR ID 6899
+    //FOR ID 6899
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6899'])) {
         // Get form data
         $assetId6899 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5469,7 +5469,7 @@ $stmt->close();
         }
         $stmt6899->close();
     }
-        //FOR ID 6898
+    //FOR ID 6898
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6898'])) {
         // Get form data
         $assetId6898 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5496,7 +5496,7 @@ $stmt->close();
         }
         $stmt6898->close();
     }
-        //FOR ID 6897
+    //FOR ID 6897
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6897'])) {
         // Get form data
         $assetId6897 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5523,7 +5523,7 @@ $stmt->close();
         }
         $stmt6897->close();
     }
-        //FOR ID 6896
+    //FOR ID 6896
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6896'])) {
         // Get form data
         $assetId6896 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5550,7 +5550,7 @@ $stmt->close();
         }
         $stmt6896->close();
     }
-        //FOR ID 6895
+    //FOR ID 6895
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6895'])) {
         // Get form data
         $assetId6895 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5577,7 +5577,7 @@ $stmt->close();
         }
         $stmt6895->close();
     }
-        //FOR ID 6894
+    //FOR ID 6894
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6894'])) {
         // Get form data
         $assetId6894 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5604,7 +5604,7 @@ $stmt->close();
         }
         $stmt6894->close();
     }
-        //FOR ID 6893
+    //FOR ID 6893
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6893'])) {
         // Get form data
         $assetId6893 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5631,7 +5631,7 @@ $stmt->close();
         }
         $stmt6893->close();
     }
-        //FOR ID 6892
+    //FOR ID 6892
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6892'])) {
         // Get form data
         $assetId6892 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5659,7 +5659,7 @@ $stmt->close();
         $stmt6892->close();
     }
 
-        //FOR ID 6891
+    //FOR ID 6891
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6891'])) {
         // Get form data
         $assetId6891 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5686,7 +5686,7 @@ $stmt->close();
         }
         $stmt6891->close();
     }
-        //FOR ID 6890
+    //FOR ID 6890
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6890'])) {
         // Get form data
         $assetId6890 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5713,7 +5713,7 @@ $stmt->close();
         }
         $stmt6890->close();
     }
-        //FOR ID 6889
+    //FOR ID 6889
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6889'])) {
         // Get form data
         $assetId6889 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5740,7 +5740,7 @@ $stmt->close();
         }
         $stmt6889->close();
     }
-        //FOR ID 6888
+    //FOR ID 6888
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6888'])) {
         // Get form data
         $assetId6888 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5767,7 +5767,7 @@ $stmt->close();
         }
         $stmt6888->close();
     }
-        //FOR ID 6887
+    //FOR ID 6887
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6887'])) {
         // Get form data
         $assetId6887 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5794,7 +5794,7 @@ $stmt->close();
         }
         $stmt6887->close();
     }
-        //FOR ID 6886
+    //FOR ID 6886
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6886'])) {
         // Get form data
         $assetId6886 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5821,7 +5821,7 @@ $stmt->close();
         }
         $stmt6886->close();
     }
-        //FOR ID 6885
+    //FOR ID 6885
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6885'])) {
         // Get form data
         $assetId6885 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5848,7 +5848,7 @@ $stmt->close();
         }
         $stmt6885->close();
     }
-        //FOR ID 6884
+    //FOR ID 6884
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6884'])) {
         // Get form data
         $assetId6884 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5875,7 +5875,7 @@ $stmt->close();
         }
         $stmt6884->close();
     }
-        //FOR ID 6883
+    //FOR ID 6883
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6883'])) {
         // Get form data
         $assetId6883 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5902,7 +5902,7 @@ $stmt->close();
         }
         $stmt6883->close();
     }
-        //FOR ID 6882
+    //FOR ID 6882
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6882'])) {
         // Get form data
         $assetId6882 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5929,7 +5929,7 @@ $stmt->close();
         }
         $stmt6882->close();
     }
-        //FOR ID 6881
+    //FOR ID 6881
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6881'])) {
         // Get form data
         $assetId6881 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5956,7 +5956,7 @@ $stmt->close();
         }
         $stmt6881->close();
     }
-        //FOR ID 6880
+    //FOR ID 6880
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6880'])) {
         // Get form data
         $assetId6880 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -5983,7 +5983,7 @@ $stmt->close();
         }
         $stmt6880->close();
     }
-        //FOR ID 6879
+    //FOR ID 6879
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6879'])) {
         // Get form data
         $assetId6879 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6010,7 +6010,7 @@ $stmt->close();
         }
         $stmt6879->close();
     }
-        //FOR ID 6878
+    //FOR ID 6878
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6878'])) {
         // Get form data
         $assetId6878 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6037,7 +6037,7 @@ $stmt->close();
         }
         $stmt6878->close();
     }
-        //FOR ID 6877
+    //FOR ID 6877
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6877'])) {
         // Get form data
         $assetId6877 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6064,7 +6064,7 @@ $stmt->close();
         }
         $stmt6877->close();
     }
-        //FOR ID 6876
+    //FOR ID 6876
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6876'])) {
         // Get form data
         $assetId6876 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6091,7 +6091,7 @@ $stmt->close();
         }
         $stmt6876->close();
     }
-        //FOR ID 6875
+    //FOR ID 6875
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6875'])) {
         // Get form data
         $assetId6875 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6119,7 +6119,7 @@ $stmt->close();
         $stmt6875->close();
     }
 
-        //FOR ID 6874
+    //FOR ID 6874
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6874'])) {
         // Get form data
         $assetId6874 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6146,7 +6146,7 @@ $stmt->close();
         }
         $stmt6874->close();
     }
-        //FOR ID 6873
+    //FOR ID 6873
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6873'])) {
         // Get form data
         $assetId6873 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6173,7 +6173,7 @@ $stmt->close();
         }
         $stmt6873->close();
     }
-        //FOR ID 6872
+    //FOR ID 6872
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6872'])) {
         // Get form data
         $assetId6872 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6200,7 +6200,7 @@ $stmt->close();
         }
         $stmt6872->close();
     }
-        //FOR ID 6871
+    //FOR ID 6871
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6871'])) {
         // Get form data
         $assetId6871 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6227,7 +6227,7 @@ $stmt->close();
         }
         $stmt6871->close();
     }
-        //FOR ID 6870
+    //FOR ID 6870
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6870'])) {
         // Get form data
         $assetId6870 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6255,7 +6255,7 @@ $stmt->close();
         $stmt6870->close();
     }
 
-        //FOR ID 6869
+    //FOR ID 6869
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6869'])) {
         // Get form data
         $assetId6869 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6282,7 +6282,7 @@ $stmt->close();
         }
         $stmt6869->close();
     }
-        //FOR ID 6868
+    //FOR ID 6868
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6868'])) {
         // Get form data
         $assetId6868 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6309,7 +6309,7 @@ $stmt->close();
         }
         $stmt6868->close();
     }
-        //FOR ID 6867
+    //FOR ID 6867
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6867'])) {
         // Get form data
         $assetId6867 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6336,7 +6336,7 @@ $stmt->close();
         }
         $stmt6867->close();
     }
-        //FOR ID 7269
+    //FOR ID 7269
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7269'])) {
         // Get form data
         $assetId7269 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6364,7 +6364,7 @@ $stmt->close();
         $stmt7269->close();
     }
 
-        //FOR ID 7268
+    //FOR ID 7268
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7268'])) {
         // Get form data
         $assetId7268 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6391,7 +6391,7 @@ $stmt->close();
         }
         $stmt7268->close();
     }
-        //FOR ID 7267
+    //FOR ID 7267
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7267'])) {
         // Get form data
         $assetId7267 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6418,7 +6418,7 @@ $stmt->close();
         }
         $stmt7267->close();
     }
-        //FOR ID 6948
+    //FOR ID 6948
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6948'])) {
         // Get form data
         $assetId6948 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6445,7 +6445,7 @@ $stmt->close();
         }
         $stmt6948->close();
     }
-        //FOR ID 6949
+    //FOR ID 6949
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6949'])) {
         // Get form data
         $assetId6949 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6472,7 +6472,7 @@ $stmt->close();
         }
         $stmt6949->close();
     }
-        //FOR ID 6950
+    //FOR ID 6950
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6950'])) {
         // Get form data
         $assetId6950 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6500,7 +6500,7 @@ $stmt->close();
         $stmt6950->close();
     }
 
-        //FOR ID 6951
+    //FOR ID 6951
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6951'])) {
         // Get form data
         $assetId6951 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6528,7 +6528,7 @@ $stmt->close();
         $stmt6951->close();
     }
 
-        //FOR ID 6952
+    //FOR ID 6952
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6952'])) {
         // Get form data
         $assetId6952 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6556,7 +6556,7 @@ $stmt->close();
         $stmt6952->close();
     }
 
-        //FOR ID 6953
+    //FOR ID 6953
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6953'])) {
         // Get form data
         $assetId6953 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6584,7 +6584,7 @@ $stmt->close();
         $stmt6953->close();
     }
 
-        //FOR ID 6954
+    //FOR ID 6954
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6954'])) {
         // Get form data
         $assetId6954 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6612,7 +6612,7 @@ $stmt->close();
         $stmt6954->close();
     }
 
-        //FOR ID 6955
+    //FOR ID 6955
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6955'])) {
         // Get form data
         $assetId6955 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6640,7 +6640,7 @@ $stmt->close();
         $stmt6955->close();
     }
 
-        //FOR ID 6956
+    //FOR ID 6956
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6956'])) {
         // Get form data
         $assetId6956 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6668,7 +6668,7 @@ $stmt->close();
         $stmt6956->close();
     }
 
-        //FOR ID 6957
+    //FOR ID 6957
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6957'])) {
         // Get form data
         $assetId6957 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6696,7 +6696,7 @@ $stmt->close();
         $stmt6957->close();
     }
 
-        //FOR ID 6958
+    //FOR ID 6958
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6958'])) {
         // Get form data
         $assetId6958 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6724,7 +6724,7 @@ $stmt->close();
         $stmt6958->close();
     }
 
-        //FOR ID 6959
+    //FOR ID 6959
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6959'])) {
         // Get form data
         $assetId6959 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6752,7 +6752,7 @@ $stmt->close();
         $stmt6959->close();
     }
 
-        //FOR ID 6960
+    //FOR ID 6960
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6960'])) {
         // Get form data
         $assetId6960 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6780,7 +6780,7 @@ $stmt->close();
         $stmt6960->close();
     }
 
-       //FOR ID 6961
+    //FOR ID 6961
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6961'])) {
         // Get form data
         $assetId6961 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6808,7 +6808,7 @@ $stmt->close();
         $stmt6961->close();
     }
 
-        //FOR ID 6962
+    //FOR ID 6962
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6962'])) {
         // Get form data
         $assetId6962 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6836,7 +6836,7 @@ $stmt->close();
         $stmt6962->close();
     }
 
-        //FOR ID 6963
+    //FOR ID 6963
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6963'])) {
         // Get form data
         $assetId6963 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6864,7 +6864,7 @@ $stmt->close();
         $stmt6963->close();
     }
 
-        //FOR ID 6964
+    //FOR ID 6964
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6964'])) {
         // Get form data
         $assetId6964 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6892,7 +6892,7 @@ $stmt->close();
         $stmt6964->close();
     }
 
-        //FOR ID 6965
+    //FOR ID 6965
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6965'])) {
         // Get form data
         $assetId6965 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6920,7 +6920,7 @@ $stmt->close();
         $stmt6965->close();
     }
 
-        //FOR ID 6966
+    //FOR ID 6966
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6966'])) {
         // Get form data
         $assetId6966 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6948,7 +6948,7 @@ $stmt->close();
         $stmt6966->close();
     }
 
-        //FOR ID 6967
+    //FOR ID 6967
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6967'])) {
         // Get form data
         $assetId6967 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -6976,7 +6976,7 @@ $stmt->close();
         $stmt6967->close();
     }
 
-        //FOR ID 6968
+    //FOR ID 6968
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6968'])) {
         // Get form data
         $assetId6968 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7004,7 +7004,7 @@ $stmt->close();
         $stmt6968->close();
     }
 
-        //FOR ID 6969
+    //FOR ID 6969
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6969'])) {
         // Get form data
         $assetId6969 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7032,7 +7032,7 @@ $stmt->close();
         $stmt6969->close();
     }
 
-        //FOR ID 6970
+    //FOR ID 6970
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6970'])) {
         // Get form data
         $assetId6970 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7060,7 +7060,7 @@ $stmt->close();
         $stmt6970->close();
     }
 
-        //FOR ID 6971
+    //FOR ID 6971
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6971'])) {
         // Get form data
         $assetId6971 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7088,7 +7088,7 @@ $stmt->close();
         $stmt6971->close();
     }
 
-        //FOR ID 6972
+    //FOR ID 6972
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6972'])) {
         // Get form data
         $assetId6972 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7116,7 +7116,7 @@ $stmt->close();
         $stmt6972->close();
     }
 
-        //FOR ID 6973
+    //FOR ID 6973
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6973'])) {
         // Get form data
         $assetId6973 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7143,7 +7143,7 @@ $stmt->close();
         }
         $stmt6973->close();
     }
-        
+
     //FOR ID 6974
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6974'])) {
         // Get form data
@@ -7172,7 +7172,7 @@ $stmt->close();
         $stmt6974->close();
     }
 
-        //FOR ID 6975
+    //FOR ID 6975
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6975'])) {
         // Get form data
         $assetId6975 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7199,8 +7199,8 @@ $stmt->close();
         }
         $stmt6975->close();
     }
-    
-        //FOR ID 6976
+
+    //FOR ID 6976
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6976'])) {
         // Get form data
         $assetId6976 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7312,7 +7312,7 @@ $stmt->close();
         $stmt6979->close();
     }
 
-        //FOR ID 6980
+    //FOR ID 6980
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6980'])) {
         // Get form data
         $assetId6980 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7340,7 +7340,7 @@ $stmt->close();
         $stmt6980->close();
     }
 
-        //FOR ID 6981
+    //FOR ID 6981
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6981'])) {
         // Get form data
         $assetId6981 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7368,7 +7368,7 @@ $stmt->close();
         $stmt6981->close();
     }
 
-        //FOR ID 6982
+    //FOR ID 6982
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6982'])) {
         // Get form data
         $assetId6982 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7424,7 +7424,7 @@ $stmt->close();
         $stmt6983->close();
     }
 
-        //FOR ID 6984
+    //FOR ID 6984
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6984'])) {
         // Get form data
         $assetId6984 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7452,7 +7452,7 @@ $stmt->close();
         $stmt6984->close();
     }
 
-        //FOR ID 6985
+    //FOR ID 6985
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6985'])) {
         // Get form data
         $assetId6985 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7480,7 +7480,7 @@ $stmt->close();
         $stmt6985->close();
     }
 
-        //FOR ID 6986
+    //FOR ID 6986
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6986'])) {
         // Get form data
         $assetId6986 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7564,7 +7564,7 @@ $stmt->close();
         $stmt6988->close();
     }
 
-        //FOR ID 6989
+    //FOR ID 6989
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6989'])) {
         // Get form data
         $assetId6989 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7592,7 +7592,7 @@ $stmt->close();
         $stmt6989->close();
     }
 
-        //FOR ID 6990
+    //FOR ID 6990
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6990'])) {
         // Get form data
         $assetId6990 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7620,7 +7620,7 @@ $stmt->close();
         $stmt6990->close();
     }
 
-        //FOR ID 6991
+    //FOR ID 6991
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6991'])) {
         // Get form data
         $assetId6991 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7648,7 +7648,7 @@ $stmt->close();
         $stmt6991->close();
     }
 
-        //FOR ID 6992
+    //FOR ID 6992
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6992'])) {
         // Get form data
         $assetId6992 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7676,7 +7676,7 @@ $stmt->close();
         $stmt6992->close();
     }
 
-        //FOR ID 6993
+    //FOR ID 6993
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6993'])) {
         // Get form data
         $assetId6993 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7704,7 +7704,7 @@ $stmt->close();
         $stmt6993->close();
     }
 
-        //FOR ID 6994
+    //FOR ID 6994
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6994'])) {
         // Get form data
         $assetId6994 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7732,7 +7732,7 @@ $stmt->close();
         $stmt6994->close();
     }
 
-        //FOR ID 6995
+    //FOR ID 6995
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6995'])) {
         // Get form data
         $assetId6995 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7759,7 +7759,7 @@ $stmt->close();
         }
         $stmt6995->close();
     }
-        //FOR ID 6996
+    //FOR ID 6996
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6996'])) {
         // Get form data
         $assetId6996 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7787,7 +7787,7 @@ $stmt->close();
         $stmt6996->close();
     }
 
-        //FOR ID 6997
+    //FOR ID 6997
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6997'])) {
         // Get form data
         $assetId6997 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7815,7 +7815,7 @@ $stmt->close();
         $stmt6997->close();
     }
 
-        //FOR ID 6998
+    //FOR ID 6998
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6998'])) {
         // Get form data
         $assetId6998 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7843,7 +7843,7 @@ $stmt->close();
         $stmt6998->close();
     }
 
-        //FOR ID 6999
+    //FOR ID 6999
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit6999'])) {
         // Get form data
         $assetId6999 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7871,7 +7871,7 @@ $stmt->close();
         $stmt6999->close();
     }
 
-        //FOR ID 7000
+    //FOR ID 7000
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7000'])) {
         // Get form data
         $assetId7000 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7899,7 +7899,7 @@ $stmt->close();
         $stmt7000->close();
     }
 
-        //FOR ID 7001
+    //FOR ID 7001
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7001'])) {
         // Get form data
         $assetId7001 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7927,7 +7927,7 @@ $stmt->close();
         $stmt7001->close();
     }
 
-        //FOR ID 7002
+    //FOR ID 7002
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7002'])) {
         // Get form data
         $assetId7002 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7955,7 +7955,7 @@ $stmt->close();
         $stmt7002->close();
     }
 
-        //FOR ID 7003
+    //FOR ID 7003
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7003'])) {
         // Get form data
         $assetId7003 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -7983,7 +7983,7 @@ $stmt->close();
         $stmt7003->close();
     }
 
-        //FOR ID 7004
+    //FOR ID 7004
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7004'])) {
         // Get form data
         $assetId7004 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -8011,7 +8011,7 @@ $stmt->close();
         $stmt7004->close();
     }
 
-        //FOR ID 7005
+    //FOR ID 7005
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7005'])) {
         // Get form data
         $assetId7005 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -8039,7 +8039,7 @@ $stmt->close();
         $stmt7005->close();
     }
 
-        //FOR ID 7006
+    //FOR ID 7006
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7006'])) {
         // Get form data
         $assetId7006 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -8067,7 +8067,7 @@ $stmt->close();
         $stmt7006->close();
     }
 
-        //FOR ID 7007
+    //FOR ID 7007
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7007'])) {
         // Get form data
         $assetId7007 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -8095,7 +8095,7 @@ $stmt->close();
         $stmt7007->close();
     }
 
-        //FOR ID 7008
+    //FOR ID 7008
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7008'])) {
         // Get form data
         $assetId7008 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -8123,7 +8123,7 @@ $stmt->close();
         $stmt7008->close();
     }
 
-        //FOR ID 7009
+    //FOR ID 7009
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7009'])) {
         // Get form data
         $assetId7009 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -8150,7 +8150,7 @@ $stmt->close();
         }
         $stmt7009->close();
     }
-        //FOR ID 7010
+    //FOR ID 7010
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7010'])) {
         // Get form data
         $assetId7010 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -8178,7 +8178,7 @@ $stmt->close();
         $stmt7010->close();
     }
 
-        //FOR ID 7011
+    //FOR ID 7011
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7011'])) {
         // Get form data
         $assetId7011 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -8206,7 +8206,7 @@ $stmt->close();
         $stmt7011->close();
     }
 
-        //FOR ID 7012
+    //FOR ID 7012
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7012'])) {
         // Get form data
         $assetId7012 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -8234,7 +8234,7 @@ $stmt->close();
         $stmt7012->close();
     }
 
-        //FOR ID 7013
+    //FOR ID 7013
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7013'])) {
         // Get form data
         $assetId7013 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -8262,7 +8262,7 @@ $stmt->close();
         $stmt7013->close();
     }
 
-        //FOR ID 7014
+    //FOR ID 7014
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7014'])) {
         // Get form data
         $assetId7014 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -8290,7 +8290,7 @@ $stmt->close();
         $stmt7014->close();
     }
 
-        //FOR ID 7015
+    //FOR ID 7015
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7015'])) {
         // Get form data
         $assetId7015 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -8318,7 +8318,7 @@ $stmt->close();
         $stmt7015->close();
     }
 
-        //FOR ID 7016
+    //FOR ID 7016
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7016'])) {
         // Get form data
         $assetId7016 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -8346,7 +8346,7 @@ $stmt->close();
         $stmt7016->close();
     }
 
-        //FOR ID 7016
+    //FOR ID 7016
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7016'])) {
         // Get form data
         $assetId7016 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -8374,7 +8374,7 @@ $stmt->close();
         $stmt7016->close();
     }
 
-        //FOR ID 7017
+    //FOR ID 7017
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7017'])) {
         // Get form data
         $assetId7017 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -8458,7 +8458,7 @@ $stmt->close();
         $stmt7019->close();
     }
 
-        //FOR ID 7020
+    //FOR ID 7020
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7020'])) {
         // Get form data
         $assetId7020 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -8486,7 +8486,7 @@ $stmt->close();
         $stmt7020->close();
     }
 
-        //FOR ID 7021
+    //FOR ID 7021
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7021'])) {
         // Get form data
         $assetId7021 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -8905,8 +8905,8 @@ $stmt->close();
         $stmt7035->close();
     }
 
-     //FOR ID 7036
-     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7036'])) {
+    //FOR ID 7036
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7036'])) {
         // Get form data
         $assetId7036 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
         $status7036 = $_POST['status']; // Get the status from the form
@@ -9409,8 +9409,8 @@ $stmt->close();
         $stmt7054->close();
     }
 
-      //FOR ID 7053
-      if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7053'])) {
+    //FOR ID 7053
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7053'])) {
         // Get form data
         $assetId7053 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
         $status7053 = $_POST['status']; // Get the status from the form
@@ -9967,61 +9967,61 @@ $stmt->close();
         $stmt7073->close();
     }
 
-   //FOR ID 7074
-   if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7074'])) {
-       // Get form data
-       $assetId7074 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-       $status7074 = $_POST['status']; // Get the status from the form
-       $description7074 = $_POST['description']; // Get the description from the form
-       $room7074 = $_POST['room']; // Get the room from the form
-       $assignedBy7074 = $_POST['assignedBy'];
-       // Check if status is "Need Repair" and set "Assigned Name" to none
-       $assignedName7074 = $status7074 === 'Need Repair' ? '' : $assignedName7074;
+    //FOR ID 7074
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7074'])) {
+        // Get form data
+        $assetId7074 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status7074 = $_POST['status']; // Get the status from the form
+        $description7074 = $_POST['description']; // Get the description from the form
+        $room7074 = $_POST['room']; // Get the room from the form
+        $assignedBy7074 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName7074 = $status7074 === 'Need Repair' ? '' : $assignedName7074;
 
-       // Prepare SQL query to update the asset
-       $sql7074 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-       $stmt7074 = $conn->prepare($sql7074);
-       $stmt7074->bind_param('sssssi', $status7074, $assignedName7074, $assignedBy7074, $description7074, $room7074, $assetId7074);
+        // Prepare SQL query to update the asset
+        $sql7074 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt7074 = $conn->prepare($sql7074);
+        $stmt7074->bind_param('sssssi', $status7074, $assignedName7074, $assignedBy7074, $description7074, $room7074, $assetId7074);
 
-       if ($stmt7074->execute()) {
-           // Update success
-           // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId7074 to $status7074.", 'Report');
-           echo "<script>alert('Asset updated successfully!');</script>";
-           header("Location: BABFB.php");
-       } else {
-           // Update failed
-           echo "<script>alert('Failed to update asset.');</script>";
-       }
-       $stmt7074->close();
-   }
-
-   //FOR ID 7075
-   if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7075'])) {
-    // Get form data
-    $assetId7075 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
-    $status7075 = $_POST['status']; // Get the status from the form
-    $description7075 = $_POST['description']; // Get the description from the form
-    $room7075 = $_POST['room']; // Get the room from the form
-    $assignedBy7075 = $_POST['assignedBy'];
-    // Check if status is "Need Repair" and set "Assigned Name" to none
-    $assignedName7075 = $status7075 === 'Need Repair' ? '' : $assignedName7075;
-
-    // Prepare SQL query to update the asset
-    $sql7075 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
-    $stmt7075 = $conn->prepare($sql7075);
-    $stmt7075->bind_param('sssssi', $status7075, $assignedName7075, $assignedBy7075, $description7075, $room7075, $assetId7075);
-
-    if ($stmt7075->execute()) {
-        // Update success
-        // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId7075 to $status7075.", 'Report');
-        echo "<script>alert('Asset updated successfully!');</script>";
-        header("Location: KOBF1.php");
-    } else {
-        // Update failed
-        echo "<script>alert('Failed to update asset.');</script>";
+        if ($stmt7074->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId7074 to $status7074.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: BABFB.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt7074->close();
     }
-    $stmt7075->close();
-}
+
+    //FOR ID 7075
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7075'])) {
+        // Get form data
+        $assetId7075 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
+        $status7075 = $_POST['status']; // Get the status from the form
+        $description7075 = $_POST['description']; // Get the description from the form
+        $room7075 = $_POST['room']; // Get the room from the form
+        $assignedBy7075 = $_POST['assignedBy'];
+        // Check if status is "Need Repair" and set "Assigned Name" to none
+        $assignedName7075 = $status7075 === 'Need Repair' ? '' : $assignedName7075;
+
+        // Prepare SQL query to update the asset
+        $sql7075 = "UPDATE asset SET status = ?, assignedName = ?, assignedBy = ?, description = ?, room = ?, date = NOW() WHERE assetId = ?";
+        $stmt7075 = $conn->prepare($sql7075);
+        $stmt7075->bind_param('sssssi', $status7075, $assignedName7075, $assignedBy7075, $description7075, $room7075, $assetId7075);
+
+        if ($stmt7075->execute()) {
+            // Update success
+            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId7075 to $status7075.", 'Report');
+            echo "<script>alert('Asset updated successfully!');</script>";
+            header("Location: KOBF1.php");
+        } else {
+            // Update failed
+            echo "<script>alert('Failed to update asset.');</script>";
+        }
+        $stmt7075->close();
+    }
 
     //FOR ID 7076
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7076'])) {
@@ -10079,7 +10079,7 @@ $stmt->close();
         $stmt7077->close();
     }
 
- //FOR ID 7078
+    //FOR ID 7078
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7078'])) {
         // Get form data
         $assetId7078 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -10107,7 +10107,7 @@ $stmt->close();
         $stmt7078->close();
     }
 
-  //FOR ID 7079
+    //FOR ID 7079
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit7079'])) {
         // Get form data
         $assetId7079 = $_POST['assetId']; // Assuming assetId is passed as a hidden input in your form
@@ -10133,9 +10133,9 @@ $stmt->close();
             echo "<script>alert('Failed to update asset.');</script>";
         }
         $stmt7079->close();
-    }   
+    }
 
-    
+
     function getStatusColor($status)
     {
         switch ($status) {
@@ -10183,8 +10183,8 @@ $stmt->close();
             echo "<script>alert('Failed to upload image. Error: " . $_FILES['upload_img']['error'] . "');</script>";
         }
     }
-?>
-?>
+    ?>
+    ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -10194,7 +10194,8 @@ $stmt->close();
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Dashboard</title>
         <link rel="icon" type="image/x-icon" href="../../../src/img/tab-logo.png">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -10226,124 +10227,125 @@ $stmt->close();
                     </a>
                 </div>
                 <div class="content-nav">
-                <div class="notification-dropdown">
+                    <div class="notification-dropdown">
 
-<a href="#" class="notification" id="notification-button">
-        <i class="fa fa-bell" aria-hidden="true"></i>
-        <!-- Notification Indicator Dot -->
-        <?php if ($unseenCount > 0) : ?>
-            <span class="notification-indicator"></span>
-        <?php endif; ?>
-    </a>
+                        <a href="#" class="notification" id="notification-button">
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+                            <!-- Notification Indicator Dot -->
+                            <?php if ($unseenCount > 0): ?>
+                                <span class="notification-indicator"></span>
+                            <?php endif; ?>
+                        </a>
 
-    <div class="dropdown-content" id="notification-dropdown-content">
-        <h6 class="dropdown-header">Alerts Center</h6>
-        <!-- PHP code to display notifications will go here -->
-        <?php
-        if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
-            while ($row = $resultLatestLogs->fetch_assoc()) {
-                $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
-                $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
-                $actionText = $row["action"];
+                        <div class="dropdown-content" id="notification-dropdown-content">
+                            <h6 class="dropdown-header">Alerts Center</h6>
+                            <!-- PHP code to display notifications will go here -->
+                            <?php
+                            if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
+                                while ($row = $resultLatestLogs->fetch_assoc()) {
+                                    $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+                                    $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
+                                    $actionText = $row["action"];
 
-                // Initialize the notification text as empty
-                $notificationText = "";
-                if (strpos($actionText, $adminRole) === false) {
-                    // Role is not in the action text, so prepend it to the admin name
-                    $adminName = "$adminRole $adminName";
-                }
-                // Check for 'Assigned maintenance personnel' action
-                if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
-                    $assignedName = $matches[1];
-                    $assetId = $matches[2];
-                    $notificationText = "assigned $assignedName to asset ID $assetId";
-                }
-                // Check for 'Changed status of asset ID' action
-                elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
-                    $assetId = $matches[1];
-                    $newStatus = $matches[2];
-                    $notificationText = "changed status of asset ID $assetId to $newStatus";
-                }
+                                    // Initialize the notification text as empty
+                                    $notificationText = "";
+                                    if (strpos($actionText, $adminRole) === false) {
+                                        // Role is not in the action text, so prepend it to the admin name
+                                        $adminName = "$adminRole $adminName";
+                                    }
+                                    // Check for 'Assigned maintenance personnel' action
+                                    if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
+                                        $assignedName = $matches[1];
+                                        $assetId = $matches[2];
+                                        $notificationText = "assigned $assignedName to asset ID $assetId";
+                                    }
+                                    // Check for 'Changed status of asset ID' action
+                                    elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
+                                        $assetId = $matches[1];
+                                        $newStatus = $matches[2];
+                                        $notificationText = "changed status of asset ID $assetId to $newStatus";
+                                    }
 
-                // If notification text is set, echo the notification
-                if (!empty($notificationText)) {
-                    // HTML for notification item
-                    echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
-                }
-            }
-        } else {
-            // No notifications found
-            echo '<a href="#">No new notifications</a>';
-        }
-        ?>
-        <a href="activity-logs.php" class="view-all">View All</a>
+                                    // If notification text is set, echo the notification
+                                    if (!empty($notificationText)) {
+                                        // HTML for notification item
+                                        echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
+                                    }
+                                }
+                            } else {
+                                // No notifications found
+                                echo '<a href="#">No new notifications</a>';
+                            }
+                            ?>
+                            <a href="activity-logs.php" class="view-all">View All</a>
 
-    </div>
-</div>
+                        </div>
+                    </div>
 
-<a href="#" class="settings profile">
-    <div class="profile-container" title="settings">
-        <div class="profile-img">
-            <?php
-            if ($conn->connect_error) {
-                die('Connect Error (' . $conn->connect_errno . ') ' . $conn->connect_error);
-            }
+                    <a href="#" class="settings profile">
+                        <div class="profile-container" title="settings">
+                            <div class="profile-img">
+                                <?php
+                                if ($conn->connect_error) {
+                                    die('Connect Error (' . $conn->connect_errno . ') ' . $conn->connect_error);
+                                }
 
-            $userId = $_SESSION['accountId'];
-            $query = "SELECT picture FROM account WHERE accountId = ?";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param('i', $userId);
-            $stmt->execute();
-            $stmt->store_result();
+                                $userId = $_SESSION['accountId'];
+                                $query = "SELECT picture FROM account WHERE accountId = ?";
+                                $stmt = $conn->prepare($query);
+                                $stmt->bind_param('i', $userId);
+                                $stmt->execute();
+                                $stmt->store_result();
 
-            if ($stmt->num_rows > 0) {
-                $stmt->bind_result($userPicture);
-                $stmt->fetch();
+                                if ($stmt->num_rows > 0) {
+                                    $stmt->bind_result($userPicture);
+                                    $stmt->fetch();
 
-                echo "<img src='data:image/jpeg;base64," . base64_encode($userPicture) . "' title='profile-picture' />";
-            } else {
-                echo $_SESSION['firstName'];
-            }
+                                    echo "<img src='data:image/jpeg;base64," . base64_encode($userPicture) . "' title='profile-picture' />";
+                                } else {
+                                    echo $_SESSION['firstName'];
+                                }
 
-            $stmt->close();
-            ?>
-        </div>
-        <div class="profile-name-container " id="desktop">
-            <div><a class="profile-name">
-                    <?php echo $_SESSION['firstName']; ?>
-                </a></div>
-            <div><a class="profile-role">
-                    <?php echo $_SESSION['role']; ?>
-                </a></div>
-        </div>
-    </div>
-</a>
+                                $stmt->close();
+                                ?>
+                            </div>
+                            <div class="profile-name-container " id="desktop">
+                                <div><a class="profile-name">
+                                        <?php echo $_SESSION['firstName']; ?>
+                                    </a></div>
+                                <div><a class="profile-role">
+                                        <?php echo $_SESSION['role']; ?>
+                                    </a></div>
+                            </div>
+                        </div>
+                    </a>
 
-<div id="settings-dropdown" class="dropdown-content1">
-    <div class="profile-name-container" id="mobile">
-        <div><a class="profile-name">
-                <?php echo $_SESSION['firstName']; ?>
-            </a></div>
-        <div><a class="profile-role">
-                <?php echo $_SESSION['role']; ?>
-            </a></div>
-        <hr>
-    </div>
-    <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i class="bi bi-person profile-icons"></i>Profile</a>
-    <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
-</div>
-<?php
+                    <div id="settings-dropdown" class="dropdown-content1">
+                        <div class="profile-name-container" id="mobile">
+                            <div><a class="profile-name">
+                                    <?php echo $_SESSION['firstName']; ?>
+                                </a></div>
+                            <div><a class="profile-role">
+                                    <?php echo $_SESSION['role']; ?>
+                                </a></div>
+                            <hr>
+                        </div>
+                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i
+                                class="bi bi-person profile-icons"></i>Profile</a>
+                        <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
+                    </div>
+                    <?php
 } else {
-header("Location:../../index.php");
-exit();
+    header("Location:../../index.php");
+    exit();
 }
 ?>
-</div>
-</nav>
-</div>
-<section id="sidebar">
-            <div href="#" class="brand" title="logo">
-                <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
+            </div>
+        </nav>
+    </div>
+    <section id="sidebar">
+        <div href="#" class="brand" title="logo">
+            <i><img src="../../../src/img/UpKeep.png" alt="" class="logo" /></i>
                 <div class="mobile-sidebar-close">
                     <i class="bi bi-arrow-left-circle"></i>
                 </div>
@@ -10367,7 +10369,7 @@ exit();
                         <span class="text">GPS</span>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                 <a href="../../manager/map.php">
                         <i class="bi bi-map"></i>
                         <span class="text">Map</span>
@@ -10379,7 +10381,7 @@ exit();
                         <span class="text">Reports</span>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                 <a href="../../manager/activity-logs.php">
                         <i class="bi bi-arrow-counterclockwise"></i>
                         <span class="text">Activity Logs</span>
@@ -13278,13 +13280,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7275 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7275 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7275 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7275 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -13414,13 +13416,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7274 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7274 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7274 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7274 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -13550,13 +13552,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7273 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7273 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7273 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7273 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -13686,13 +13688,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7272 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7272 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7272 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7272 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -13822,13 +13824,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6947 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6947 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6947 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6947 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -13958,13 +13960,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6946 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6946 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6946 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6946 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -14094,13 +14096,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6945 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6945 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6945 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6945 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -14230,13 +14232,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6944 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6944 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6944 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6944 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -14366,13 +14368,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6943 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6943 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6943 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6943 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -14502,13 +14504,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6942 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6942 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6942 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6942 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -14638,13 +14640,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6941 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6941 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6941 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6941 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -14774,13 +14776,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6940 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6940 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6940 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6940 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -14910,13 +14912,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6939 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6939 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6939 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6939 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -15046,13 +15048,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6938 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6938 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6938 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6938 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -15182,13 +15184,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6937 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6937 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6937 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6937 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -15318,13 +15320,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6936 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6936 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6936 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6936 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -15454,13 +15456,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6935 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6935 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6935 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6935 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -15590,13 +15592,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6934 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6934 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6934 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6934 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -15726,13 +15728,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6933 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6933 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6933 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6933 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -15862,13 +15864,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6932 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6932 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6932 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6932 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -15998,13 +16000,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6931 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6931 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6931 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6931 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -16134,13 +16136,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6930 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6930 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6930 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6930 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -16270,13 +16272,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6929 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6929 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6929 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6929 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -16406,13 +16408,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6928 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6928 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6928 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6928 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -16542,13 +16544,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6927 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6927 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6927 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6927 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -16678,13 +16680,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6926 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6926 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6926 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6926 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -16814,13 +16816,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6925 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6925 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6925 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6925 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -16950,13 +16952,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6924 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6924 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6924 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6924 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -17086,13 +17088,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6923 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6923 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6923 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6923 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -17222,13 +17224,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6922 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6922 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6922 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6922 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -17358,13 +17360,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6921 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6921 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6921 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6921 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -17494,13 +17496,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6920 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6920 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6920 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6920 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -17630,13 +17632,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6919 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6919 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6919 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6919 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -17766,13 +17768,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6918 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6918 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6918 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6918 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -17902,13 +17904,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6917 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6917 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6917 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6917 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -18038,13 +18040,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6916 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6916 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6916 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6916 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -18174,13 +18176,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6915 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6915 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6915 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6915 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -18310,13 +18312,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6914 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6914 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6914 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6914 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -18446,13 +18448,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6913 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6913 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6913 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6913 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -18582,13 +18584,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6912 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6912 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6912 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6912 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -18718,13 +18720,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6911 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6911 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6911 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6911 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -18854,13 +18856,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6910 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6910 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6910 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6910 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -18990,13 +18992,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6909 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6909 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6909 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6909 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -19126,13 +19128,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6908 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6908 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6908 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6908 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -19262,13 +19264,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6907 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6907 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6907 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6907 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -19398,13 +19400,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6906 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6906 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6906 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6906 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -19534,13 +19536,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6905 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6905 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6905 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6905 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -19670,13 +19672,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6904 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6904 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6904 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6904 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -19806,13 +19808,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6903 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6903 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6903 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6903 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -19942,13 +19944,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6902 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6902 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6902 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6902 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -20078,13 +20080,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6901 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6901 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6901 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6901 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -20214,13 +20216,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6900 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6900 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6900 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6900 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -20350,13 +20352,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6899 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6899 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6899 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6899 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -20486,13 +20488,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6898 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6898 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6898 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6898 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -20622,13 +20624,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6897 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6897 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6897 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6897 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -20758,13 +20760,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6896 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6896 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6896 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6896 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -20894,13 +20896,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6895 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6895 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6895 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6895 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -21030,13 +21032,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6894 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6894 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6894 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6894 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -21166,13 +21168,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6893 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6893 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6893 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6893 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -21302,13 +21304,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6892 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6892 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6892 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6892 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -21438,13 +21440,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6891 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6891 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6891 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6891 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -21574,13 +21576,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6890 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6890 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6890 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6890 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -21710,13 +21712,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6889 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6889 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6889 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6889 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -21846,13 +21848,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6888 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6888 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6888 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6888 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -21982,13 +21984,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6887 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6887 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6887 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6887 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -22118,13 +22120,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6886 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6886 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6886 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6886 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -22254,13 +22256,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6885 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6885 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6885 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6885 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -22390,13 +22392,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6884 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6884 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6884 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6884 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -22526,13 +22528,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6883 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6883 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6883 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6883 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -22662,13 +22664,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6882 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6882 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6882 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6882 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -22798,13 +22800,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6881 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6881 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6881 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6881 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -22934,13 +22936,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6880 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6880 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6880 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6880 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -23070,13 +23072,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6879 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6879 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6879 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6879 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -23206,13 +23208,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6878 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6878 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6878 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6878 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -23342,13 +23344,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6877 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6877 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6877 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6877 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -23478,13 +23480,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6876 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6876 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6876 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6876 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -23614,13 +23616,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6875 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6875 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6875 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6875 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -23750,13 +23752,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6874 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6874 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6874 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6874 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -23886,13 +23888,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6873 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6873 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6873 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6873 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -24022,13 +24024,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6872 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6872 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6872 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6872 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -24158,13 +24160,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6871 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6871 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6871 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6871 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -24294,13 +24296,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6870 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6870 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6870 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6870 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -24430,13 +24432,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6869 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6869 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6869 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6869 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -24566,13 +24568,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6868 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6868 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6868 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6868 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -24702,13 +24704,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6867 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6867 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6867 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6867 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -24838,13 +24840,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7269 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7269 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7269 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7269 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -24974,13 +24976,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7268 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7268 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7268 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7268 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -25110,13 +25112,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7267 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7267 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7267 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7267 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -25246,13 +25248,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6948 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6948 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6948 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6948 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -25382,13 +25384,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6949 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6949 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6949 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6949 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -25518,13 +25520,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6950 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6950 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6950 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6950 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -25654,13 +25656,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6951 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6951 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6951 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6951 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -25790,13 +25792,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6952 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6952 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6952 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6952 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -25926,13 +25928,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6953 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6953 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6953 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6953 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -26062,13 +26064,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6954 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6954 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6954 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6954 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -26198,13 +26200,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6955 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6955 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6955 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6955 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -26334,13 +26336,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6956 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6956 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6956 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6956 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -26470,13 +26472,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6957 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6957 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6957 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6957 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -26606,13 +26608,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6958 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6958 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6958 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6958 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -26742,13 +26744,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6959 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6959 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6959 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6959 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -26878,13 +26880,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6960 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6960 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6960 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6960 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -27014,13 +27016,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6961 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6961 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6961 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6961 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -27150,13 +27152,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6962 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6962 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6962 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6962 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -27286,13 +27288,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6963 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6963 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6963 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6963 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -27422,13 +27424,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6964 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6964 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6964 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6964 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -27558,13 +27560,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6965 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6965 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6965 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6965 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -27694,13 +27696,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6966 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6966 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6966 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6966 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -27830,13 +27832,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6967 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6967 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6967 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6967 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -27966,13 +27968,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6968 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6968 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6968 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6968 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -28102,13 +28104,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6969 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6969 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6969 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6969 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -28237,13 +28239,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6970 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6970 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6970 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6970 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -28373,13 +28375,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6971 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6971 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6971 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6971 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -28509,13 +28511,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6972 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6972 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6972 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6972 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -28645,13 +28647,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6973 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6973 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6973 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6973 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -28781,13 +28783,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6974 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6974 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6974 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6974 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -28917,13 +28919,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6975 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6975 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6975 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6975 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -29053,13 +29055,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6976 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6976 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6976 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6976 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -29189,13 +29191,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6977 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6977 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6977 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6977 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -29325,13 +29327,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6978 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6978 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6978 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6978 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -29461,13 +29463,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6979 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6979 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6979 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6979 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -29597,13 +29599,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6980 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6980 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6980 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6980 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -29732,13 +29734,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6981 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6981 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6981 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6981 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -29868,13 +29870,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6982 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6982 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6982 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6982 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -30004,13 +30006,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6983 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6983 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6983 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6983 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -30140,13 +30142,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6984 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6984 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6984 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6984 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -30275,13 +30277,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6985 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6985 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6985 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6985 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -30411,13 +30413,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6986 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6986 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6986 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6986 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -30547,13 +30549,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6987 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6987 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6987 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6987 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -30683,13 +30685,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6988 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6988 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6988 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6988 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -30819,13 +30821,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6989 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6989 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6989 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6989 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -30955,13 +30957,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6990 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6990 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6990 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6990 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -31091,13 +31093,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6991 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6991 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6991 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6991 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -31227,13 +31229,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6992 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6992 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6992 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6992 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -31363,13 +31365,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6993 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6993 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6993 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6993 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -31499,13 +31501,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6994 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6994 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6994 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6994 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -31635,13 +31637,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6995 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6995 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6995 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6995 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -31771,13 +31773,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6996 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6996 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6996 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6996 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -31907,13 +31909,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6997 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6997 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6997 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6997 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -32043,13 +32045,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6998 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6998 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6998 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6998 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -32179,13 +32181,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status6999 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status6999 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status6999 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status6999 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -32315,13 +32317,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7000 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7000 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7000 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7000 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -32452,13 +32454,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7001 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7001 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7001 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7001 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -32588,13 +32590,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7002 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7002 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7002 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7002 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -32724,13 +32726,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7003 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7003 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7003 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7003 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -32860,13 +32862,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7004 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7004 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7004 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7004 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -32996,13 +32998,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7005 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7005 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7005 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7005 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -33132,13 +33134,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7006 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7006 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7006 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7006 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -33268,13 +33270,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7007 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7007 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7007 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7007 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -33404,13 +33406,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7008 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7008 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7008 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7008 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -33540,13 +33542,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7009 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7009 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7009 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7009 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -33676,13 +33678,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7010 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7010 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7010 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7010 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -33812,13 +33814,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7011 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7011 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7011 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7011 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -33948,13 +33950,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7012 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7012 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7012 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7012 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -34084,13 +34086,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7013 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7013 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7013 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7013 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -34219,13 +34221,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7014 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7014 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7014 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7014 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -34355,13 +34357,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7015 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7015 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7015 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7015 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -34491,13 +34493,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7016 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7016 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7016 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7016 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -34627,13 +34629,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7017 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7017 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7017 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7017 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -34763,13 +34765,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7018 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7018 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7018 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7018 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -34899,13 +34901,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7019 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7019 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7019 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7019 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -35035,13 +35037,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7020 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7020 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7020 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7020 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -35171,13 +35173,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7021 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7021 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7021 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7021 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -35307,13 +35309,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7022 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7022 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7022 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7022 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -35443,13 +35445,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7023 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7023 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7023 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7023 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -35579,13 +35581,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7024 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7024 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7024 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7024 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -35715,13 +35717,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7025 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7025 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7025 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7025 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -35851,13 +35853,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7026 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7026 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7026 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7026 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -35987,13 +35989,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7027 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7027 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7027 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7027 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -36123,13 +36125,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7028 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7028 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7028 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7028 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -36259,13 +36261,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7029 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7029 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7029 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7029 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -36395,13 +36397,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7030 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7030 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7030 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7030 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -36531,13 +36533,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7031 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7031 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7031 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7031 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -36667,13 +36669,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7032 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7032 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7032 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7032 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -36803,13 +36805,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7033 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7033 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7033 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7033 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -36939,13 +36941,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7034 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7034 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7034 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7034 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -37075,13 +37077,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7035 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7035 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7035 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7035 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -37211,13 +37213,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7036 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7036 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7036 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7036 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -37347,13 +37349,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7037 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7037 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7037 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7037 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -37483,13 +37485,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7038 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7038 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7038 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7038 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -37619,13 +37621,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7039 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7039 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7039 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7039 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -37755,13 +37757,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7040 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7040 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7040 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7040 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -37891,13 +37893,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7041 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7041 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7041 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7041 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -38027,13 +38029,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7042 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7042 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7042 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7042 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -38163,13 +38165,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7043 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7043 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7043 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7043 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -38299,13 +38301,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7044 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7044 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7044 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7044 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -38435,13 +38437,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7045 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7045 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7045 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7045 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -38571,13 +38573,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7046 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7046 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7046 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7046 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -38707,13 +38709,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7047 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7047 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7047 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7047 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -38843,13 +38845,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7048 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7048 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7048 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7048 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -38979,13 +38981,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7049 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7049 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7049 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7049 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -39115,13 +39117,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7050 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7050 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7050 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7050 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -39251,13 +39253,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7051 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7051 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7051 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7051 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -39387,13 +39389,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7052 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7052 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7052 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7052 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -39523,13 +39525,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7053 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7053 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7053 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7053 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -39659,13 +39661,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7054 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7054 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7054 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7054 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -39795,13 +39797,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7055 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7055 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7055 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7055 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -39931,13 +39933,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7056 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7056 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7056 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7056 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -40067,13 +40069,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7057 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7057 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7057 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7057 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -40203,13 +40205,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7058 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7058 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7058 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7058 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -40339,13 +40341,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7059 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7059 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7059 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7059 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -40474,13 +40476,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7060 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7060 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7060 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7060 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -40610,13 +40612,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7061 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7061 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7061 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7061 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -40746,13 +40748,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7062 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7062 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7062 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7062 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -40882,13 +40884,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7063 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7063 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7063 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7063 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -41018,13 +41020,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7064 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7064 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7064 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7064 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -41154,13 +41156,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7065 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7065 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7065 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7065 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -41290,13 +41292,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7066 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7066 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7066 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7066 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -41426,13 +41428,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7067 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7067 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7067 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7067 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -41562,13 +41564,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7068 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7068 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7068 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7068 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -41698,13 +41700,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7069 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7069 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7069 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7069 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -41834,13 +41836,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7070 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7070 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7070 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7070 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -41970,13 +41972,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7071 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7071 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7071 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7071 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -42106,13 +42108,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7072 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7072 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7072 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7072 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -42242,13 +42244,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7073 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7073 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7073 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7073 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -42378,13 +42380,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7074 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7074 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7074 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7074 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -42514,13 +42516,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7075 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7075 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7075 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7075 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -42650,13 +42652,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7076 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7076 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7076 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7076 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -42786,13 +42788,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7077 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7077 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7077 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7077 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -42922,13 +42924,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7078 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7078 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7078 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7078 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -43058,13 +43060,13 @@ exit();
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7079 == 'Working')
-                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7079 == 'Under Maintenance')
-                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
                                                 <option value="For Replacement" <?php echo ($status7079 == 'For Replacement')
-                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                                 <option value="Need Repair" <?php echo ($status7079 == 'Need Repair')
-                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 

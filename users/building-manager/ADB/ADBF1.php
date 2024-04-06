@@ -1660,7 +1660,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
     </div>
     <section id="sidebar">
         <div href="#" class="brand" title="logo">
-            <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
+            <i><img src="../../../src/img/UpKeep.png" alt="" class="logo" /></i>
             <div class="mobile-sidebar-close">
                 <i class="bi bi-arrow-left-circle"></i>
             </div>
@@ -1684,7 +1684,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     <span class="text">GPS</span>
                 </a>
             </li>
-            <li>
+            <li class="active">
                 <a href="../../manager/map.php">
                     <i class="bi bi-map"></i>
                     <span class="text">Map</span>
@@ -1696,7 +1696,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     <span class="text">Reports</span>
                 </a>
             </li>
-            <li class="active">
+            <li>
                 <a href="../../manager/activity-logs.php">
                     <i class="bi bi-arrow-counterclockwise"></i>
                     <span class="text">Activity Logs</span>
