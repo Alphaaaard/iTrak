@@ -1,11 +1,11 @@
 <?php
 function connection()
 {
-    //LOCAL
-    $host = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "upkeep";
+    // //LOCAL
+    // $host = "localhost";
+    // $username = "root";
+    // $password = "";
+    // $database = "upkeep";
 
     // HOSTED
     // $host = "localhost";
