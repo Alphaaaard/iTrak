@@ -413,12 +413,6 @@ hr {
   color: #163172;
 }
 
-#sidebar .side-menu li i {
-  color: #f6f6f6;
-  font-size: 20px;
-  opacity: 50%;
-}
-
 #sidebar .side-menu li.active i {
   color: #1e56a0;
   opacity: 100%;
@@ -433,6 +427,8 @@ hr {
   color: #f6f6f6;
   font-size: 20px;
   opacity: 50%;
+  display: flex;
+  align-items: center;
 }
 
 #sidebar .side-menu li span {

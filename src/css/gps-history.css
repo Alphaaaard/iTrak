@@ -6,6 +6,12 @@
   width: unset;
   padding: 1em;
   border: unset;
+  background-color: unset !important;
+  transition: 0.3s ease;
+}
+
+.gps-container {
+  padding: 0.5em 0;
 }
 
 .accordion-item {
@@ -24,4 +30,47 @@
 
 .accordion {
   border: unset;
+  background-color: unset !important;
+}
+
+.fake-header p {
+  display: none;
+}
+
+.accordion-item {
+  border: unset !important;
+  background-color: unset !important;
+}
+.gps-info:hover {
+}
+
+.locationTbl {
+  align-items: unset !important;
+  /* border-radius: 50px; */
+}
+
+.rounded-img {
+  height: 60px !important;
+  width: 60px !important ;
+}
+
+@media (max-width: 600px) {
+  #content {
+    padding: 10px 20px;
+  }
+  #locationTbl {
+    display: block !important;
+    border: #3d3b40 1px solid;
+    outline: #3d3b40 1px solid;
+    left: unset !important;
+    right: unset !important;
+    margin-left: unset !important;
+    margin-right: unset !important;
+    width: unset !important; /* Need a specific value to work */
+    border: unset;
+    outline: unset;
+    height: unset;
+    top: 20px;
+    color: #3d3b40;
+  }
 }

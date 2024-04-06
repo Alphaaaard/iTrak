@@ -232,7 +232,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <span class="text">GPS</span>
                     </a>
                 </li>
-                <li>
+                <li class="GPS-History">
                     <a href="./gps_history.php">
                         <i class="bi bi-geo-alt"></i>
                         <span class="text">GPS History</span>
@@ -740,6 +740,23 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     showMarker(firstName); // Call the showMarker function with the clicked person's first name
                 });
             });
+        </script>
+        <script>
+            // Assume this is a function that checks whether GPS is active or not
+            function isGPSActive() {
+                // Replace this with your logic to check if GPS is active
+                // For the sake of example, let's assume GPS is active
+                return true;
+            }
+
+            // Get the GPS History menu item
+            var gpsHistoryMenuItem = document.querySelector('.GPS-History');
+
+            // Check if GPS is active
+            if (!isGPSActive()) {
+                // If GPS is not active, hide the GPS History menu item
+                gpsHistoryMenuItem.style.display = 'none';
+            }
         </script>
 
         <!-- BOOTSTRAP -->

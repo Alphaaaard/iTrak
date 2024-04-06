@@ -7,6 +7,10 @@
   padding: 0;
 }
 
+.GPS-History {
+  padding-left: 2em !important;
+}
+
 .custom-text-overlay {
   cursor: default;
   font-size: 8px;

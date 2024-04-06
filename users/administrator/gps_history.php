@@ -252,7 +252,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <span class="text">GPS</span>
                     </a>
                 </li>
-                <li class="active">
+                <li class="GPS-History active">
                     <a href="./gps_history.php">
                         <i class="bi bi-geo-alt"></i>
                         <span class="text">GPS History</span>
@@ -292,7 +292,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 <header>
                     <div class="cont-header">
                         <!-- <h1 class="tab-name-only">GPS</h1> -->
-                        <div id="LocBurger" onclick="showLocation()"><i class="bi bi-list"></i></div>
+                        <!-- <div id="LocBurger" onclick="showLocation()"><i class="bi bi-list"></i></div> -->
                     </div>
                 </header>
                 <div class="content-container">
@@ -341,7 +341,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 echo "<h2 class='accordion-header' id='" . $headerId . "'>";
                                 echo "<button class='accordion-btn gps-info' type='button' data-bs-toggle='collapse' data-bs-target='#" . $collapseId . "' aria-expanded='false' aria-controls='" . $collapseId . "' data-firstName='" . $firstName . "' data-accountId='" . $accountId . "'>";
 
-                                echo "<img src='data:image/jpeg;base64," . base64_encode($row["picture"]) . "' alt='Profile Picture' class='rounded-img'/>";
+                                echo "<img src='data:image/jpeg;base64," . base64_encode($row["picture"]) . "' alt='Profile Picture' class='rounded-img' data-accountId='" . $accountId . "' />";
 
                                 echo "</button>";
                                 echo "</h2>";
@@ -739,7 +739,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script>
             document.addEventListener('DOMContentLoaded', (event) => {
                 document.body.addEventListener('click', function(e) {
-                    if (e.target && e.target.classList.contains('gps-info')) {
+                    if (e.target && e.target.classList.contains('rounded-img')) {
                         var accountId = e.target.getAttribute('data-accountId');
                         console.log('Account ID:', accountId);
 

@@ -4,14 +4,15 @@ include_once("../../config/connection.php");
 $conn = connection(); // Assuming you have a function called connection that sets up your DB connection
 
 // Function to check if a location is within a certain radius of a central point
-function isWithinBoundary($userLat, $userLong, $centerLat, $centerLong, $radius) {
+function isWithinBoundary($userLat, $userLong, $centerLat, $centerLong, $radius)
+{
     $earthRadius = 6371000; // in meters
     $dLat = deg2rad($centerLat - $userLat);
     $dLong = deg2rad($centerLong - $userLong);
-    $a = sin($dLat/2) * sin($dLat/2) +
-         cos(deg2rad($userLat)) * cos(deg2rad($centerLat)) *
-         sin($dLong/2) * sin($dLong/2);
-    $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+    $a = sin($dLat / 2) * sin($dLat / 2) +
+        cos(deg2rad($userLat)) * cos(deg2rad($centerLat)) *
+        sin($dLong / 2) * sin($dLong / 2);
+    $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
     $distance = $earthRadius * $c;
     return $distance <= $radius;
 }
@@ -23,7 +24,7 @@ $buildings = [
         ['lat' => 14.70084, 'long' => 121.03307, 'radius' => 12],
         ['lat' => 14.70079, 'long' => 121.03317, 'radius' => 12],
     ],
-    'admin Building' => [
+    'Admin Building' => [
         ['lat' => 14.70043, 'long' => 121.03287, 'radius' => 17],
     ],
     'TechVoc Building' => [
@@ -40,12 +41,12 @@ $buildings = [
     ],
     'Bautista Building' => [
         ['lat' => 14.70056, 'long' => 121.03241, 'radius' => 22]
-   
+
     ],
     'KorPhil Building' => [
         ['lat' => 14.69974, 'long' => 121.03169, 'radius' =>  38.45]
     ],
-    
+
     'Multipurpose Building' => [
         ['lat' => 14.70046, 'long' => 121.03401, 'radius' =>  16.68]
     ],
@@ -82,7 +83,7 @@ $buildings = [
         ['lat' => 14.70066, 'long' => 121.03323, 'radius' =>  8],
     ],
 
-// DAPAT HULI LAGI TO
+    // DAPAT HULI LAGI TO
     'Inside at QCU' => [
         ['lat' => 14.70044, 'long' => 121.03273, 'radius' =>  171.21]
     ],
@@ -99,41 +100,41 @@ if (isset($_POST['accountId'])) {
     $stmt->execute();
     $result = $stmt->get_result();
 
-   // ... (rest of your code)
+    // ... (rest of your code)
 
-if ($row = $result->fetch_assoc()) {
-    $userLat = floatval($row['latitude']);
-    $userLong = floatval($row['longitude']);
+    if ($row = $result->fetch_assoc()) {
+        $userLat = floatval($row['latitude']);
+        $userLong = floatval($row['longitude']);
 
-    $buildingFound = false; // Flag to check if building is found
-    foreach ($buildings as $buildingName => $areas) {
-        foreach ($areas as $area) {
-            if (isWithinBoundary($userLat, $userLong, $area['lat'], $area['long'], $area['radius'])) {
-                $buildingFound = true; // Building found
-                // The user is within this building's boundary
-                $locationUpdateQuery = "UPDATE account SET qculocation = ? WHERE accountId = ?";
-                $locationUpdateStmt = $conn->prepare($locationUpdateQuery);
-                $locationUpdateStmt->bind_param('si', $buildingName, $accountId);
-                $locationUpdateStmt->execute();
-                $locationUpdateStmt->close();
-                
-                echo json_encode(["status" => "inside", "building" => $buildingName, "latitude" => $userLat, "longitude" => $userLong]);
-                break 2; // Stop checking once we find the building they're in
+        $buildingFound = false; // Flag to check if building is found
+        foreach ($buildings as $buildingName => $areas) {
+            foreach ($areas as $area) {
+                if (isWithinBoundary($userLat, $userLong, $area['lat'], $area['long'], $area['radius'])) {
+                    $buildingFound = true; // Building found
+                    // The user is within this building's boundary
+                    $locationUpdateQuery = "UPDATE account SET qculocation = ? WHERE accountId = ?";
+                    $locationUpdateStmt = $conn->prepare($locationUpdateQuery);
+                    $locationUpdateStmt->bind_param('si', $buildingName, $accountId);
+                    $locationUpdateStmt->execute();
+                    $locationUpdateStmt->close();
+
+                    echo json_encode(["status" => "inside", "building" => $buildingName, "latitude" => $userLat, "longitude" => $userLong]);
+                    break 2; // Stop checking once we find the building they're in
+                }
             }
         }
+
+        if (!$buildingFound) {
+            // If no building contains the user, they're outside
+            $locationUpdateQuery = "UPDATE account SET qculocation = 'Outside of QCU' WHERE accountId = ?";
+            $locationUpdateStmt = $conn->prepare($locationUpdateQuery);
+            $locationUpdateStmt->bind_param('i', $accountId);
+            $locationUpdateStmt->execute();
+            $locationUpdateStmt->close();
+
+            echo json_encode(["status" => "outside", "latitude" => $userLat, "longitude" => $userLong]);
+        } else {
+            echo json_encode(["error" => "Location not found for the given personnel."]);
+        }
     }
-    
-    if (!$buildingFound) {
-        // If no building contains the user, they're outside
-        $locationUpdateQuery = "UPDATE account SET qculocation = 'Outside of QCU' WHERE accountId = ?";
-        $locationUpdateStmt = $conn->prepare($locationUpdateQuery);
-        $locationUpdateStmt->bind_param('i', $accountId);
-        $locationUpdateStmt->execute();
-        $locationUpdateStmt->close();
-
-echo json_encode(["status" => "outside", "latitude" => $userLat, "longitude" => $userLong]);
-
-} else {
-    echo json_encode(["error" => "Location not found for the given personnel."]);
-    }}}
-?> 
+}
