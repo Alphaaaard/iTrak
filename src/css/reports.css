@@ -437,8 +437,14 @@ img.icon.staff {
 
 /* New style for export button */
 #exportBtn {
+  color: black;
   padding: 0.5em 1em; /* Adjust padding to match the nav links, if needed */
   background-color: #f8f9fa; /* Adjust background color to match your design */
   border: 1px solid #ddd; /* Adjust border as needed */
   /* Add any other button styling you have */
+}
+
+#exportBtn:hover {
+  background-color: #94dba1; /* Darker shade on hover for contrast */
+  color: #333; /* Optionally, change the text color on hover for better visibility */
 }

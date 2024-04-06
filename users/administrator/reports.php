@@ -3,8 +3,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
@@ -1269,14 +1269,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         var formData = new FormData(document.getElementById('exportForm'));
                         formData.append('submit', 'Export to PDF');
 
-                        // Show a loading message
+                        // Show a loading message with loading animation
                         Swal.fire({
                             title: 'Exporting...',
                             html: 'Please wait while the PDF is being generated.',
                             allowOutsideClick: false,
-                            onBeforeOpen: () => {
-                                Swal.showLoading();
-                            },
+                            showConfirmButton: false, // Do not show the confirm button
+                            willOpen: () => {
+                        Swal.showLoading(); // Show loading animation
+                        },
                         });
 
                         fetch('export-pdf.php', {
