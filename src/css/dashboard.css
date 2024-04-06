@@ -7,8 +7,6 @@ p {
   color: #3d3b40;
 }
 
-
-
 .content1 {
   width: 70%;
 }
@@ -173,7 +171,6 @@ p {
   border: 1px solid;
   border-radius: 15px;
   background-color: #f6f6f6;
-
 }
 
 .personnel-building {
@@ -315,7 +312,7 @@ button {
   margin: 0 0 0 10px;
 }
 
-.statistics{
+.statistics {
   display: flex;
   justify-content: space-between;
 }
@@ -338,6 +335,7 @@ button {
     font-size: 0.875rem !important;
     border-radius: 5px;
     margin-bottom: 5px;
+    /* color: #3d3b40; */
   }
 }
 /*Input boxes sa buildings */
@@ -439,7 +437,7 @@ button {
   /* gap: 5px; */
 }
 
-.date-selector{
+.date-selector {
   display: flex;
   gap: 1em;
 }
@@ -509,7 +507,6 @@ button {
   font-size: 10px;
   font-weight: 500;
 }
-
 
 .button-1:hover + .hover-box,
 .hover-box:hover {
@@ -763,15 +760,15 @@ button {
     display: block;
   }
 
-  .report-container{
-    margin: 10px 0 0 0!important; /* Adjust as needed */
+  .report-container {
+    margin: 10px 0 0 0 !important; /* Adjust as needed */
   }
 
   .calendar-container {
     margin: 10px 0 10px 0;
   }
 
-  .doughnut-chart-container{
+  .doughnut-chart-container {
     margin: 0;
   }
 }
@@ -795,13 +792,13 @@ button {
   }
 
   .present-container {
-    margin-right: .5em;
+    margin-right: 0.5em;
     /* width: 100%;
     gap: 1em; */
   }
 
   .present-container-2 {
-    margin-left: .5em;
+    margin-left: 0.5em;
     /* width: 0;
     width: 100%;
     gap: 1em; */
@@ -856,17 +853,16 @@ button {
     top: 11.3em;
     left: 13.3em;
   }
-  .mini-header-border{
+  .mini-header-border {
     font-size: 12px;
-
   }
-  #doughnutChart{
-    height: 300px!important;
-      width: 300px!important;
+  #doughnutChart {
+    height: 300px !important;
+    width: 300px !important;
   }
 
-  .report-container{
-    margin: 10px 0 0 0!important; /* Adjust as needed */
+  .report-container {
+    margin: 10px 0 0 0 !important; /* Adjust as needed */
   }
 
   /* .today-btn{
@@ -883,9 +879,10 @@ button {
   position: relative;
   margin: 0 0 10px 10px; /* Adjust as needed */
   /* Add more padding if necessary */
+  height: 300px;
 }
 
-.report-header h5{
+.report-header h5 {
   font-weight: bold;
   font-size: 16px;
   text-align: left;
@@ -910,7 +907,6 @@ button {
   padding: 15px;
 } */
 
-
 .time-filter {
   position: absolute;
   top: 10px;
@@ -919,6 +915,7 @@ button {
   border-radius: 6px;
   /* padding: 5px 10px; */
   font-size: 14px;
+  color: #3d3b40;
 }
 
 /* .chart-legend {
@@ -931,7 +928,7 @@ button {
   font-weight: 700;
   color: #163172;
 }
-.title{
+.title {
   color: #1e56a0;
   font-weight: 800;
   line-height: 37.5px;
@@ -943,16 +940,24 @@ button {
 
 .chart-container {
   width: 100%;
-  max-width: 1000px;
+  /* max-width: 1000px; */
   margin: auto;
   margin-top: 10px;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0px 16px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
+  background-color: white;
 }
 
-.bar-filter{
+canvas#attendanceChart {
+  height: 200px !important;
+}
+
+canvas#statusChart {
+  height: 323px !important;
+}
+
+.bar-filter {
   display: flex;
   justify-content: space-between;
   gap: 1em;
@@ -972,14 +977,45 @@ button {
   padding-right: 20px;
   flex-grow: 0;
   flex-shrink: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #1e56a0;
   align-self: center;
   margin-right: auto;
   font-weight: bold;
 }
 
-#monthFilter, #employeeFilter {
+select#filter-select,
+select#timeFilter,
+select#monthFilter,
+select#employeeFilter {
+  color: #aaaaaa;
+  border: 1px bold #aaaaaa;
+  background-color: #f6f6f6;
+}
+/* Style for selected option */
+
+#monthFilter:focus {
+  outline: none;
+  color: #3d3b40;
+}
+
+#employeeFilter:focus {
+  outline: none;
+  color: #3d3b40;
+}
+
+#timeFilter:focus {
+  outline: none;
+  color: #3d3b40;
+}
+
+#filter-select:focus {
+  outline: none;
+  color: #3d3b40;
+}
+
+#monthFilter,
+#employeeFilter {
   border-radius: 5px;
   padding: 0px;
   width: 100%; /* Set width to 100% to fill the container */
@@ -1003,8 +1039,7 @@ select {
 /* Responsive styles */
 
 @media (max-width: 768px) {
-
-  .building-body{
+  .building-body {
     font-size: 12px;
   }
   .chart-container {
@@ -1012,7 +1047,7 @@ select {
     margin-top: 10px;
   }
 
-  .bar-filter{
+  .bar-filter {
     width: 100%;
     justify-content: space-around;
     gap: unset;
@@ -1022,12 +1057,11 @@ select {
     width: 100% !important;
     height: 25vh !important;
   }
-  
 
   .flex-container {
     justify-content: flex-end; /* Align items to the right */
     flex-wrap: wrap; /* Allow wrapping if necessary */
-    margin: unset!important;
+    margin: unset !important;
   }
 
   .labelTC {
@@ -1038,7 +1072,8 @@ select {
     text-align: left;
   }
 
-  #monthFilter, #employeeFilter {
+  #monthFilter,
+  #employeeFilter {
     font-size: 90%; /* Adjust font size if necessary */
     margin-bottom: 10px; /* Margin bottom for spacing */
   }
@@ -1062,7 +1097,8 @@ select {
     flex-direction: row; /* Ensures filters are in a row for larger mobile screens */
   }
 
-  #monthFilter, #employeeFilter {
+  #monthFilter,
+  #employeeFilter {
     width: auto; /* Allows filters to size according to their content */
     margin-right: 10px; /* Space between filters */
     margin-left: 0; /* Reset left margin */
@@ -1080,7 +1116,8 @@ select {
     align-items: flex-end; /* Aligns stacked filters to the right */
   }
 
-  #monthFilter, #employeeFilter {
+  #monthFilter,
+  #employeeFilter {
     width: 100%; /* Filters take full width to avoid text compression */
     margin-right: 0; /* Reset right margin for stacked layout */
   }
@@ -1089,4 +1126,3 @@ select {
     width: 100%; /* Ensures select elements take full width of filters in a stacked layout */
   }
 }
-

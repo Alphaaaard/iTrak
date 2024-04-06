@@ -2350,6 +2350,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <h5>Select a Building</h5>
                     <div class="filter-container">
                         <select id="filter-select" onchange="updateChart()">
+                            <option value="">Choose A Building</option>
                             <option value="all">All Buildings</option>
                             <?php
                             $buildingQuery = "SELECT DISTINCT building FROM asset";
