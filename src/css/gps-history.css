@@ -1,0 +1,27 @@
+.locationTbl {
+  min-width: unset;
+}
+
+.gps-info {
+  width: unset;
+  padding: 1em;
+  border: unset;
+}
+
+.accordion-item {
+  width: unset;
+  margin: unset;
+}
+
+.fake-header p {
+  padding: unset;
+}
+
+.accordion-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.accordion {
+  border: unset;
+}

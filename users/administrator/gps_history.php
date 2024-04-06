@@ -78,6 +78,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <!-- CSS -->
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/gps.css" />
+        <link rel="stylesheet" href="../../src/css/gps-history.css" />
     </head>
     <style>
         .notification-indicator {
@@ -490,11 +491,44 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 });
                             }
 
-                            function coloredIcon(color) {
+                            // Modify coloredIcon function to accept isFirst parameter
+                            function coloredIcon(color, isFirst) {
+                                let markerColor = color; // default color
+
+                                // If it's the first marker, set the color to white
+                                if (isFirst) {
+                                    markerColor = "Green";
+                                }
+
                                 return L.divIcon({
                                     className: 'custom-marker',
                                     iconSize: [20, 20],
-                                    html: '<div style="background-color: ' + color + '; width: 15px; height: 15px; border-radius: 50%; border: 2px solid white;"></div>',
+                                    html: '<div style="background-color: ' + markerColor + '; width: 15px; height: 15px; border-radius: 50%; border: 2px solid white;"></div>',
+                                });
+                            }
+
+                            // Function to convert base64 string to Blob object
+                            function base64ToBlob(base64String) {
+                                const byteCharacters = atob(base64String);
+                                const byteArray = new Uint8Array(byteCharacters.length);
+                                for (let i = 0; i < byteCharacters.length; i++) {
+                                    byteArray[i] = byteCharacters.charCodeAt(i);
+                                }
+                                return new Blob([byteArray], {
+                                    type: 'image/jpeg'
+                                }); // Adjust the type as per your image type
+                            }
+
+
+                            // Function to convert blob data to base64 string
+                            function blobToBase64(blob) {
+                                return new Promise((resolve, reject) => {
+                                    const reader = new FileReader();
+                                    reader.onloadend = () => {
+                                        resolve(reader.result);
+                                    };
+                                    reader.onerror = reject;
+                                    reader.readAsDataURL(blob);
                                 });
                             }
 
@@ -504,8 +538,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                             // Update the function responsible for updating markers to show all markers at once
                             // Update the function responsible for updating markers to show all markers at once
-                            function updateMarkers(locations) {
-                                // Clear existing markers and polyline
+                            // Update the function responsible for updating markers to show all markers at once
+                            async function updateMarkers(locations) {
                                 markers.forEach(marker => {
                                     map.removeLayer(marker);
                                 });
@@ -517,7 +551,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 // Sort locations array by timestamp
                                 locations.sort((a, b) => a.timestamp - b.timestamp);
 
-                                // Process the locations and create markers for each location
                                 var latLngs = [];
                                 for (var i = 0; i < locations.length; i++) {
                                     var location = locations[i];
@@ -525,41 +558,60 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     var longitude = location.longitude;
                                     var firstName = location.firstName;
                                     var qculocation = location.qculocation;
-                                    var timestamp = location.timestamp; // Add timestamp
-                                    var color = location.color || "black";
+                                    var timestamp = location.timestamp;
+                                    var picture = location.picture;
 
-                                    // Create a marker for each location
-                                    var marker = L.marker([latitude, longitude], {
-                                        icon: coloredIcon(color),
-                                    }).addTo(map);
+                                    var isLast = i === locations.length - 1;
 
-                                    // Construct the popup content with first name and timestamp
-                                    var popupContent = "Personnel: " + firstName + "<br>" + "Location: " + qculocation + "<br> Timestamp: " + new Date(timestamp).toLocaleString();
+                                    var marker;
+                                    if (isLast) {
+                                        const pictureBlob = base64ToBlob(picture);
+                                        const pictureBase64 = await blobToBase64(pictureBlob);
+
+                                        marker = L.marker([latitude, longitude], {
+                                            icon: L.divIcon({
+                                                className: 'custom-marker',
+                                                iconSize: [40, 20],
+                                                html: `<img src="${pictureBase64}" alt="Profile Picture" class="marker-img" />`
+                                            }),
+                                            location: qculocation
+                                        });
+                                    } else {
+                                        var color = location.color || "black";
+                                        marker = L.marker([latitude, longitude], {
+                                            icon: coloredIcon(color, i === 0), // Pass true if it's the first marker
+                                        });
+
+                                    }
+
+                                    var popupContent = "Personnel: " + firstName + "<br>Location: " + qculocation + "<br>Timestamp: " + new Date(timestamp).toLocaleString();
 
                                     marker.bindPopup(popupContent);
 
-                                    // Add the marker to the markers array
                                     markers.push(marker);
 
-                                    // Add latitude and longitude to latLngs array for polyline
                                     latLngs.push([latitude, longitude]);
 
-                                    // Bind popup to marker hover event
                                     marker.on('mouseover', function(e) {
                                         this.openPopup();
                                     });
 
-                                    // Close popup when mouse leaves marker
                                     marker.on('mouseout', function(e) {
                                         this.closePopup();
                                     });
+
+                                    marker.addTo(map);
                                 }
 
-                                // Create a polyline connecting all markers
                                 polyline = L.polyline(latLngs, {
                                     color: 'blue'
                                 }).addTo(map);
                             }
+
+
+
+
+
 
                             function showMarker(firstName) {
                                 console.log("Clicked on:", firstName);
@@ -577,11 +629,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 }
                             }
 
-
-
                             function getLocationFromDatabase(accountId) {
-    // Clear the map
-    clearMap();
+                                // Clear the map
+                                clearMap();
                                 // Fetch the locations from the server
                                 var xmlhttp = new XMLHttpRequest();
                                 xmlhttp.onreadystatechange = function() {
@@ -602,20 +652,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 };
 
                                 xmlhttp.open("GET", "get_location_history.php?accountId=" + encodeURIComponent(accountId), true);
-
-                            
                                 xmlhttp.send();
                             }
-
 
                             // Initialize the map when the page loads
                             window.onload = function() {
                                 initMap();
                                 getLocationFromDatabase();
-                               
-
-
-                         
                             };
                         </script>
 
@@ -655,7 +698,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             });
                         </script>
 
-      
+
                         <style>
                             .custom-marker {
                                 width: 20px;
@@ -694,38 +737,38 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/profileModalController.js"></script>
 
         <script>
-document.addEventListener('DOMContentLoaded', (event) => {
-    document.body.addEventListener('click', function(e) {
-        if (e.target && e.target.classList.contains('gps-info')) {
-            var accountId = e.target.getAttribute('data-accountId');
-            console.log('Account ID:', accountId);
+            document.addEventListener('DOMContentLoaded', (event) => {
+                document.body.addEventListener('click', function(e) {
+                    if (e.target && e.target.classList.contains('gps-info')) {
+                        var accountId = e.target.getAttribute('data-accountId');
+                        console.log('Account ID:', accountId);
 
-            // Check if data is already loaded for this account ID
-            if (!markersByFirstName.hasOwnProperty(accountId)) {
-                getLocationFromDatabase(accountId);
+                        // Check if data is already loaded for this account ID
+                        if (!markersByFirstName.hasOwnProperty(accountId)) {
+                            getLocationFromDatabase(accountId);
+                        }
+                    }
+                });
+            });
+
+
+
+
+            function clearMap() {
+                // Assuming 'markers' is an array holding your marker instances
+                markers.forEach(marker => map.removeLayer(marker));
+                markers = []; // Clear the array
+
+                // If you have a polyline, remove it as well
+                if (polyline) {
+                    map.removeLayer(polyline);
+
+                    polyline = null; // Clear the polyline reference
+                }
             }
-        }
-    });
-});
+        </script>
 
 
-
-
-    function clearMap() {
-        // Assuming 'markers' is an array holding your marker instances
-        markers.forEach(marker => map.removeLayer(marker));
-        markers = []; // Clear the array
-
-        // If you have a polyline, remove it as well
-        if (polyline) {
-            map.removeLayer(polyline);
-
-            polyline = null; // Clear the polyline reference
-        }
-    }
-</script>
-
-       
 
         <!-- BOOTSTRAP -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

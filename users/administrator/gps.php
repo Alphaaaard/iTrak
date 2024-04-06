@@ -478,48 +478,94 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                             var markersByFirstName = {};
 
-                            function updateMarkers(locations) {
-                                // Process the locations and update/create markers
-                                locations.forEach(function(location) {
-                                    var latitude = location.latitude;
-                                    var longitude = location.longitude;
-                                    var firstName = location.firstName;
-                                    var qculocation = location.qculocation;
-                                    var timestamp = location.timestamp; // Added timestamp
-                                    var color = location.color || "black";
+                            // Function to convert base64 string to Blob object
+                            // Function to convert base64 string to Blob object
+                            function base64ToBlob(base64String) {
+                                const byteCharacters = atob(base64String);
+                                const byteArray = new Uint8Array(byteCharacters.length);
+                                for (let i = 0; i < byteCharacters.length; i++) {
+                                    byteArray[i] = byteCharacters.charCodeAt(i);
+                                }
+                                return new Blob([byteArray], {
+                                    type: 'image/jpeg'
+                                }); // Adjust the type as per your image type
+                            }
+
+
+                            // Function to convert blob data to base64 string
+                            function blobToBase64(blob) {
+                                return new Promise((resolve, reject) => {
+                                    const reader = new FileReader();
+                                    reader.onloadend = () => {
+                                        resolve(reader.result);
+                                    };
+                                    reader.onerror = reject;
+                                    reader.readAsDataURL(blob);
+                                });
+                            }
+
+                            // Update the markers with user images
+                            // Update the markers with user images
+                            async function updateMarkers(locations) {
+                                for (const location of locations) {
+                                    const {
+                                        latitude,
+                                        longitude,
+                                        firstName,
+                                        qculocation,
+                                        timestamp,
+                                        picture
+                                    } = location;
+                                    const color = location.color || "black";
+
+                                    // Convert base64 string to Blob object
+                                    const pictureBlob = base64ToBlob(picture);
+
+                                    // Convert blob to base64
+                                    const pictureBase64 = await blobToBase64(pictureBlob);
 
                                     // Combine first name, location, and timestamp for marker
-                                    var locationInfo = "Firstname: " + firstName + "<br>" + "Location: " + qculocation + "<br>" + "Timestamp: " + timestamp;
+                                    const locationInfo = `Firstname: ${firstName}<br>Location: ${qculocation}<br>Timestamp: ${timestamp}`;
 
                                     // Check if a marker with this firstName already exists
-                                    var existingMarker = markersByFirstName[firstName];
+                                    let existingMarker = markersByFirstName[firstName];
 
                                     if (existingMarker) {
                                         // If the marker exists, update its position, popup, and location data
                                         existingMarker.setLatLng([latitude, longitude]);
-                                        existingMarker.bindPopup(locationInfo);
+                                        existingMarker.bindPopup(`${locationInfo}`);
                                         existingMarker.location = qculocation;
                                     } else {
                                         // If the marker doesn't exist, create a new one
-                                        var newMarker = L.marker([latitude, longitude], {
-                                            icon: coloredIcon(color),
+                                        const newMarker = L.marker([latitude, longitude], {
+                                            icon: L.divIcon({
+                                                className: 'custom-marker',
+                                                iconSize: [40, 20], // Adjust icon size as needed
+                                                html: `<img src="${pictureBase64}" alt="Profile Picture" class="marker-img" />`
+                                            }),
                                             location: qculocation // Store location data in marker
                                         }).addTo(map);
 
-                                        newMarker.bindPopup(locationInfo);
+                                        // Bind popup to marker on mouseover
+                                        newMarker.on('mouseover', function(e) {
+                                            this.bindPopup(`${locationInfo}`).openPopup();
+                                        });
+
+                                        // Unbind popup on mouseout
+                                        newMarker.on('mouseout', function(e) {
+                                            this.closePopup();
+                                        });
+
                                         markersByFirstName[firstName] = newMarker;
                                     }
 
                                     // Update the location in the user table
-                                    var locationCell = document.getElementById('location_' + firstName);
+                                    const locationCell = document.getElementById('location_' + firstName);
                                     if (locationCell) {
                                         locationCell.innerHTML = qculocation;
                                     }
-                                });
+                                }
                             }
-
-
-
 
                             function showMarker(firstName) {
                                 console.log("Clicked on:", firstName);
