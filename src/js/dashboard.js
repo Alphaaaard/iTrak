@@ -383,6 +383,7 @@ document
 //----------------------------------------------------------------------------------------------------------------------------------
 //JS PARA SA DELETE
 let assignedEmployees = [];
+let employeeNames = [];
 
 function removeAssigned(sbId) {
   $.ajax({
@@ -409,11 +410,28 @@ $(document).ready(function () {
     let sbId = $(this).data("sbid"); // Get sbId from the button's data attribute
     assignedEmployees.push(sbId);
 
+    // get name and push to employeNames[]
+    const name = $(this).closest("tr").text().replace(/\d+/g, '').trim();
+    employeeNames.push(name);
+
     // Hide the closest <tr> element
     $(this).closest("tr").hide();
 
     // Store the sbId in the confirmation button for later use if needed
     // $(".confirm-delete-btn").data("sbid", sbId);
+  });
+
+  //removes all temp assignEmp names
+  $(".schedmodal").on("hidden.bs.modal", function() {
+    for(let i=0; i<assignedEmployees.length; i++) {
+      assignedEmployees.pop();
+      employeeNames.pop();
+
+      
+    }
+
+    // unhide removed personnels when closing modal
+    $(".new-delete-btn").closest("tr").show();
   });
 
   // // Event binding for the confirmation button in the modal
@@ -641,7 +659,21 @@ function setBuilding(buildingName) {
   buildingSelected = buildingName;
 }
 
-function confirmAlert() {
+function confirmAlert(index) {
+
+  let personnel = $(".select-new:eq("+index+")").val();
+
+  if(!personnel && assignedEmployees.length == 0) {
+
+    Swal.fire({
+      icon: "error",
+      title: "Please assign a personnel",
+      timer: 1000
+    });
+
+    return;
+  } 
+
   Swal.fire({
     icon: "info",
     title: "Are you sure you want to save changes?",
@@ -651,12 +683,9 @@ function confirmAlert() {
     confirmButtonText: "Yes",
   }).then((result) => {
     if (result.isConfirmed) {
-      for (let i = 0; i < assignedEmployees.length; i++) {
-        removeAssigned(assignedEmployees[i]);
-      }
 
+      //*formdata for each building selected
       let formData;
-
       switch (buildingSelected) {
         case "techvoc":
           formData = new FormData(document.querySelector("#techVocForm"));
@@ -700,6 +729,70 @@ function confirmAlert() {
 
       const building = buildingSelected;
 
+
+      //* ignore if assignedEmployees length is 0
+      if(assignedEmployees.length > 0) {
+
+        for (let i = 0; i < assignedEmployees.length; i++) {
+          removeAssigned(assignedEmployees[i]);
+        }
+
+        //* if there is no personnel selected, show alertbox for 1s and reload page
+        //* if personnel selected present, show confirm button for 1st modal and 1s alertbox and reload page
+        if(!personnel) {
+          Swal.fire({
+            icon: "success",
+            title: `Maintenance Personnel <b>${employeeNames}</b> has been removed successfully`,
+            timer: 1000,
+            showConfirmButton: false
+          }).then((result) => {
+            
+            if (result.dismiss === Swal.DismissReason.timer) {
+              window.location.reload();
+            }
+
+          });
+
+          return;
+        }
+
+        Swal.fire({
+          icon: "success",
+          title: `Maintenance Personnel <b>${employeeNames}</b> has been removed successfully`,
+        }).then((result) => {
+          
+          if(result.isConfirmed) {
+
+            //* AJAX call for adding schedule
+            $.ajax({
+              url: "../../users/administrator/dashboard_add_schedule.php",
+              data: formData,
+              processData: false,
+              contentType: false,
+              type: "POST",
+              success: function (res) {
+                Swal.fire({
+                  // title: `Maintenance Personnel has been assigned to ${building}`,
+                  title: `Maintenance Personnel <b>${personnel}</b> has been assigned successfully`,
+                  icon: "success",
+                  timer: 1000, //timer (in ms) for the success alertbox before closing
+                  showConfirmButton: false,
+                }).then((result) => {
+                  if (result.dismiss === Swal.DismissReason.timer) {
+                    window.location.reload();
+                  }
+                });
+              },
+            });
+
+          }
+
+        });
+
+        return;
+      }
+
+      
       //* AJAX call for adding schedule
       $.ajax({
         url: "../../users/administrator/dashboard_add_schedule.php",
@@ -710,7 +803,7 @@ function confirmAlert() {
         success: function (res) {
           Swal.fire({
             // title: `Maintenance Personnel has been assigned to ${building}`,
-            title: `Maintenance Personnel has been assigned successfully`,
+            title: `Maintenance Personnel <b>${personnel}</b> has been assigned successfully`,
             icon: "success",
             timer: 1000, //timer (in ms) for the success alertbox before closing
             showConfirmButton: false,

@@ -115,6 +115,19 @@ function getInfoFromAdd() {
   document.querySelector("#rfidFieldAdd").value = rfid.value;
 }
 
+
+$('.contact').on('keydown', function(e) {
+
+  let key = e.key;
+
+  if($(this).val().length < 3 && key === "Backspace") {
+    e.preventDefault();
+
+    return;
+  }
+
+});
+
 function showErrorAlert(msg) {
   Swal.fire({
     icon: "error",
@@ -172,6 +185,12 @@ $("#addBtn").click(function (e) {
 
   if(contact.length != 11) {
     showErrorAlert("Contact must contain 11 numbers.");
+    isValid = false;
+    return;
+  }
+
+  if(contact.substring(0, 2) != '09') {
+    showErrorAlert("Contact must start with 09.");
     isValid = false;
     return;
   }
@@ -310,6 +329,13 @@ $(".updateBtn").click(function () {
     isValid = false;
     return;
   }
+
+  if(contact.substring(0, 2) != '09') {
+    showErrorAlert("Contact must start with 09.");
+    isValid = false;
+    return;
+  }
+
 
   // Validate Email
   if (!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {

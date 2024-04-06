@@ -887,8 +887,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             Commented old confirmation modals and changed into sweetalert modals.
                          -->
                             <!--Modal for Tech-Voc-->
-                            <div class="modal-parent ">
-                                <div class="modal modal-xl fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-parents">
+                                <div class="modal modal-xl fade schedmodal" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="header-modal">
@@ -985,7 +985,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                             <div class="footer">
                                                 <!-- <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#save3"> -->
-                                                <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                                                <button type="button" class="btn add-modal-btn" onclick="confirmAlert(0)">
                                                     Save
                                                 </button>
                                             </div>
@@ -1014,7 +1014,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                             <!--Modal for Old Acad-->
                             <div class="modal-parent">
-                                <div class="modal modal-xl fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal modal-xl fade schedmodal" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="header-modal">
@@ -1099,7 +1099,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             </div>
 
                                             <div class="footer">
-                                                <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                                                <button type="button" class="btn add-modal-btn" onclick="confirmAlert(1)">
                                                     Save
                                                 </button>
                                             </div>
@@ -1125,7 +1125,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                             <!--Modal for belmonte-->
                             <div class="modal-parent">
-                                <div class="modal modal-xl fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal modal-xl fade schedmodal" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="header-modal">
@@ -1213,7 +1213,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             </div>
 
                                             <div class="footer">
-                                                <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                                                <button type="button" class="btn add-modal-btn" onclick="confirmAlert(2)">
                                                     Save
                                                 </button>
 
@@ -1241,7 +1241,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                             <!--Modal for metalcasting-->
                             <div class="modal-parent">
-                                <div class="modal modal-xl fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal modal-xl fade schedmodal" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="header-modal">
@@ -1326,7 +1326,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
 
                 <div class="footer">
-                    <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                    <button type="button" class="btn add-modal-btn" onclick="confirmAlert(3)">
                         Save
                     </button>
 
@@ -1354,7 +1354,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                 <!--Modal for korphil-->
                 <div class="modal-parent">
-                    <div class="modal modal-xl fade" id="exampleModal7" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal modal-xl fade schedmodal" id="exampleModal7" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="header-modal">
@@ -1439,7 +1439,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </div>
 
         <div class="footer">
-            <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+            <button type="button" class="btn add-modal-btn" onclick="confirmAlert(4)">
                 Save
             </button>
 
@@ -1467,7 +1467,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <!--Modal for multipurpose-->
         <div class="modal-parent">
-            <div class="modal modal-xl fade" id="exampleModal8" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal modal-xl fade schedmodal" id="exampleModal8" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="header-modal">
@@ -1550,7 +1550,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
 
                         <div class="footer">
-                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert(5)">
                                 Save
                             </button>
                         </div>
@@ -1578,7 +1578,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <!--Modal for chineseA-->
         <div class="modal-parent">
-            <div class="modal modal-xl fade" id="exampleModal9" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal modal-xl fade schedmodal" id="exampleModal9" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="header-modal">
@@ -1665,7 +1665,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
 
                         <div class="footer">
-                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert(6)">
                                 Save
                             </button>
                         </div>
@@ -1693,7 +1693,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <!--Modal for chineseB-->
         <div class="modal-parent">
-            <div class="modal modal-xl fade" id="exampleModal10" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal modal-xl fade schedmodal" id="exampleModal10" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="header-modal">
@@ -1778,7 +1778,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
 
                         <div class="footer">
-                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert(7)">
                                 Save
                             </button>
 
@@ -1806,7 +1806,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <!--Modal for urbanFarming-->
         <div class="modal-parent">
-            <div class="modal modal-xl fade" id="exampleModal11" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal modal-xl fade schedmodal" id="exampleModal11" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="header-modal">
@@ -1891,7 +1891,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
 
                         <div class="footer">
-                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert(8)">
                                 Save
                             </button>
 
@@ -1919,7 +1919,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <!--Modal for administration-->
         <div class="modal-parent">
-            <div class="modal modal-xl fade" id="exampleModal12" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal modal-xl fade schedmodal" id="exampleModal12" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="header-modal">
@@ -2004,7 +2004,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
 
                         <div class="footer">
-                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert(9)">
                                 Save
                             </button>
 
@@ -2033,7 +2033,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <!--Modal for bautista-->
         <div class="modal-parent">
-            <div class="modal modal-xl fade" id="exampleModal13" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal modal-xl fade schedmodal" id="exampleModal13" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="header-modal">
@@ -2120,7 +2120,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
 
                         <div class="footer">
-                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert(10)">
                                 Save
                             </button>
 
@@ -2149,7 +2149,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <!--Modal for newAcad-->
         <div class="modal-parent">
-            <div class="modal modal-xl fade" id="exampleModal14" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal modal-xl fade schedmodal" id="exampleModal14" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="header-modal">
@@ -2234,7 +2234,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
 
                         <div class="footer">
-                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert()">
+                            <button type="button" class="btn add-modal-btn" onclick="confirmAlert(11)">
                                 Save
                             </button>
                         </div>
@@ -2589,7 +2589,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script>
             $(document).ready(function() {
                 // Define default month and week as January and Week 1
-                var defaultMonth = 4; // January
+                var defaultMonth = 3; // January
                 var defaultWeek = 1; // Week 1
 
                 // Set default selections for month and week filters

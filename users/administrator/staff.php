@@ -104,6 +104,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/staff.css" />
 
+        <style>
+            .contact {
+                user-select: none;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+            }
+        </style>
+
         <script>
             $(document).ready(function() {
 
@@ -579,24 +587,26 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         </div>
                                         <div class="modal-body">
                                             <form method="post" enctype="multipart/form-data" class="row g-3" id="addForm">
+
                                                 <div class="col-4">
                                                     <label for="firstName" class="form-label label">First name <span class="d-none text-danger error">*</span></label>
-                                                    <input type="text" class="form-control" id="firstNameField" name="firstName" placeholder="First Name" required />
+                                                    <input type="text" class="form-control" id="firstNameField" name="firstName" placeholder="First Name" oninput="this.value = this.value.replace(/\d/g, '')" required />
                                                 </div>
 
                                                 <div class="col-4">
                                                     <label for="middleName" class="form-label label">Middle name <span class="d-none text-danger error">*</span></label>
-                                                    <input type="text" class="form-control" id="middleNameField" name="middleName" placeholder="Middle Name" />
+                                                    <input type="text" class="form-control" id="middleNameField" name="middleName" placeholder="Middle Name" oninput="this.value = this.value.replace(/\d/g, '')" />
                                                 </div>
 
                                                 <div class="col-4">
                                                     <label for="lastName" class="form-label">Last name <span class="d-none text-danger error">*</span></label>
-                                                    <input type="text" class="form-control" id="lastNameField" name="lastName" placeholder="Last Name" required />
+                                                    <input type="text" class="form-control" id="lastNameField" name="lastName" placeholder="Last Name" required oninput="this.value = this.value.replace(/\d/g, '')" />
                                                 </div>
 
                                                 <div class="col-4">
                                                     <label for="contactField" class="form-label">Contact Number <span class="d-none text-danger error">*</span></label>
-                                                    <input type="tel" class="form-control" id="contactField" name="contact" required maxlength="11" value="09" title="Contact number must start with '09' and be 10 to 11 digits long" oninput="this.value = this.value.replace(/\D/g, '').substring(0, 11)" />
+
+                                                    <input type="tel" class="form-control contact" id="contactField" name="contact" required maxlength="11" value="09" title="Contact number must start with '09' and be 10 to 11 digits long" oninput="this.value = this.value.replace(/\D/g, '').substring(0, 11)"/>
 
                                                 </div>
 
@@ -612,7 +622,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                                 <div class="col-4">
                                                     <label for="birthday" class="form-label">Birthday <span class="d-none text-danger error">*</span></label>
-                                                    <input type="date" class="form-control" id="birthdayField" name="birthday" placeholder="Birthday" required />
+                                                    <input type="date" class="form-control" id="birthdayField" name="birthday" max="2005-01-01" placeholder="Birthday" required />
                                                 </div>
 
                                                 <div class="col-4">
@@ -664,22 +674,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                                 <div class="col-4">
                                                     <label for="firstname" class="form-label">First name</label>
-                                                    <input type="text" class="form-control" id="firstnameEdit" name="firstname" />
+                                                    <input type="text" class="form-control" id="firstnameEdit" name="firstname" oninput="this.value = this.value.replace(/\d/g, '')"/>
                                                 </div>
 
                                                 <div class="col-4">
                                                     <label for="middlename" class="form-label">Middle name</label>
-                                                    <input type="text" class="form-control" id="middlenameEdit" name="middlename" />
+                                                    <input type="text" class="form-control" id="middlenameEdit" name="middlename" oninput="this.value = this.value.replace(/\d/g, '')"/>
                                                 </div>
 
                                                 <div class="col-4">
                                                     <label for="lastname" class="form-label">Last name</label>
-                                                    <input type="text" class="form-control" id="lastnameEdit" name="lastname" />
+                                                    <input type="text" class="form-control" id="lastnameEdit" name="lastname" oninput="this.value = this.value.replace(/\d/g, '')" />
                                                 </div>
 
                                                 <div class="col-4">
                                                     <label for="contact" class="form-label">Contact Number</label>
-                                                    <input type="text" class="form-control contactEdit" id="contactEdit" maxlength="11" name="contact" />
+                                                    <input type="text" class="form-control contact contactEdit" id="contactEdit" maxlength="11" name="contact" />
                                                 </div>
 
                                                 <div class="col-4">
@@ -694,7 +704,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                                 <div class="col-4">
                                                     <label for="birthday" class="form-label">Birthday</label>
-                                                    <input type="date" class="form-control" id="birthdayEdit" name="birthday" />
+                                                    <input type="date" class="form-control" id="birthdayEdit" max="2005-01-01" name="birthday" />
                                                 </div>
 
                                                 <div class="col-4">
