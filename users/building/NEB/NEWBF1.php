@@ -6750,10 +6750,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         style='width:13px; cursor:pointer; position:absolute; top:140px; left:867px;' alt='Asset Image'
                         data-bs-toggle='modal' data-bs-target='#imageModal10' onclick='fetchAssetData(10);'
                         class="asset-image" data-id="<?php echo $assetId10; ?>"
-                    data-room="<?php echo htmlspecialchars($room10); ?>"
-                    data-floor=" <?php echo htmlspecialchars($floor10); ?>"
-                    data-image="<?php echo base64_encode($upload_img10); ?>"
-                    data-category=" <?php echo htmlspecialchars($category10); ?>">
+                        data-room="<?php echo htmlspecialchars($room10); ?>"
+                        data-floor=" <?php echo htmlspecialchars($floor10); ?>"
+                        data-image="<?php echo base64_encode($upload_img10); ?>"
+                        data-category=" <?php echo htmlspecialchars($category10); ?>">
                     position:absolute; top:140px; left:862px;'>
                 </div>
 
@@ -6762,10 +6762,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:13px; cursor:pointer; position:absolute; top:140px; left:896px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal11' onclick='fetchAssetData(11);'
                     class="asset-image" data-id="<?php echo $assetId11; ?>"
-                data-room="<?php echo htmlspecialchars($room11); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor11); ?>"
-                data-image="<?php echo base64_encode($upload_img11); ?>"
-                data-category=" <?php echo htmlspecialchars($category11); ?>">
+                    data-room="<?php echo htmlspecialchars($room11); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor11); ?>"
+                    data-image="<?php echo base64_encode($upload_img11); ?>"
+                    data-category=" <?php echo htmlspecialchars($category11); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status11); ?>; 
                         position:absolute; top:140px; left:891.5px;'>
                 </div>
@@ -6778,10 +6778,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:220px; left:818px; z-index:1;'
                     alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal12'
                     onclick=' fetchAssetData(12);' class="asset-image" data-id="<?php echo $assetId12; ?>"
-                data-room="<?php echo htmlspecialchars($room12); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor12); ?>"
-                data-image="<?php echo base64_encode($upload_img12); ?>"
-                data-category=" <?php echo htmlspecialchars($category12); ?>">
+                    data-room="<?php echo htmlspecialchars($room12); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor12); ?>"
+                    data-image="<?php echo base64_encode($upload_img12); ?>"
+                    data-category=" <?php echo htmlspecialchars($category12); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status12); ?>; 
                         position:absolute; top:228px; left:825px; z-index:2;'>
                 </div>
@@ -6791,10 +6791,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:248px; left:818px; z-index:1;'
                     alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal13'
                     onclick=' fetchAssetData(13);' class="asset-image" data-id="<?php echo $assetId13; ?>"
-                data-room="<?php echo htmlspecialchars($room13); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor13); ?>"
-                data-image="<?php echo base64_encode($upload_img13); ?>"
-                data-category=" <?php echo htmlspecialchars($category13); ?>">
+                    data-room="<?php echo htmlspecialchars($room13); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor13); ?>"
+                    data-image="<?php echo base64_encode($upload_img13); ?>"
+                    data-category=" <?php echo htmlspecialchars($category13); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status13); ?>; 
                         position:absolute; top:255px; left:825px; z-index:2;'>
                 </div>
@@ -6804,10 +6804,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:140px; left:775px; transform: rotate(-90deg); z-index:1;'
                     alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal14'
                     onclick=' fetchAssetData(14);' class="asset-image" data-id="<?php echo $assetId14; ?>"
-                data-room="<?php echo htmlspecialchars($room14); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor14); ?>"
-                data-image="<?php echo base64_encode($upload_img14); ?>"
-                data-category=" <?php echo htmlspecialchars($category14); ?>">
+                    data-room="<?php echo htmlspecialchars($room14); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor14); ?>"
+                    data-image="<?php echo base64_encode($upload_img14); ?>"
+                    data-category=" <?php echo htmlspecialchars($category14); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status14); ?>; 
                         position:absolute; top:140px; left:783px; z-index:2;'>
                 </div>
@@ -6817,10 +6817,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:140px; left:727px; transform: rotate(-90deg); z-index:1;'
                     alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal15'
                     onclick=' fetchAssetData(15);' class="asset-image" data-id="<?php echo $assetId15; ?>"
-                data-room="<?php echo htmlspecialchars($room15); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor15); ?>"
-                data-image="<?php echo base64_encode($upload_img15); ?>"
-                data-category=" <?php echo htmlspecialchars($category15); ?>">
+                    data-room="<?php echo htmlspecialchars($room15); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor15); ?>"
+                    data-image="<?php echo base64_encode($upload_img15); ?>"
+                    data-category=" <?php echo htmlspecialchars($category15); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status15); ?>; 
                         position:absolute; top:140px; left:735px; z-index:2;'>
                 </div>
@@ -6830,10 +6830,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:168px; left:715px; transform: rotate(-180deg); z-index:1;'
                     alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal16'
                     onclick=' fetchAssetData(16);' class="asset-image" data-id="<?php echo $assetId16; ?>"
-                data-room="<?php echo htmlspecialchars($room16); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor16); ?>"
-                data-image="<?php echo base64_encode($upload_img16); ?>"
-                data-category=" <?php echo htmlspecialchars($category16); ?>">
+                    data-room="<?php echo htmlspecialchars($room16); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor16); ?>"
+                    data-image="<?php echo base64_encode($upload_img16); ?>"
+                    data-category=" <?php echo htmlspecialchars($category16); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status16); ?>; 
                         position:absolute; top:177px; left:712px; z-index:2;'>
                 </div>
@@ -6843,10 +6843,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:168px; left:738px; transform: rotate(-360deg); z-index:1;'
                     alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal17'
                     onclick=' fetchAssetData(17);' class="asset-image" data-id="<?php echo $assetId17; ?>"
-                data-room="<?php echo htmlspecialchars($room17); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor17); ?>"
-                data-image="<?php echo base64_encode($upload_img17); ?>"
-                data-category=" <?php echo htmlspecialchars($category17); ?>">
+                    data-room="<?php echo htmlspecialchars($room17); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor17); ?>"
+                    data-image="<?php echo base64_encode($upload_img17); ?>"
+                    data-category=" <?php echo htmlspecialchars($category17); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status17); ?>; 
                         position:absolute; top:177px; left:746px; z-index:2;'>
                 </div>
@@ -6856,10 +6856,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:140px; left:677px; transform: rotate(-90deg); z-index:1;'
                     alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal18'
                     onclick=' fetchAssetData(18);' class="asset-image" data-id="<?php echo $assetId18; ?>"
-                data-room="<?php echo htmlspecialchars($room18); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor18); ?>"
-                data-image="<?php echo base64_encode($upload_img18); ?>"
-                data-category=" <?php echo htmlspecialchars($category18); ?>">
+                    data-room="<?php echo htmlspecialchars($room18); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor18); ?>"
+                    data-image="<?php echo base64_encode($upload_img18); ?>"
+                    data-category=" <?php echo htmlspecialchars($category18); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status18); ?>; 
                         position:absolute; top:140px; left:685px; z-index:2;'>
                 </div>
@@ -6869,10 +6869,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:168px; left:665px; transform: rotate(-180deg); z-index:1;'
                     alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal19'
                     onclick=' fetchAssetData(19);' class="asset-image" data-id="<?php echo $assetId19; ?>"
-                data-room="<?php echo htmlspecialchars($room19); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor19); ?>"
-                data-image="<?php echo base64_encode($upload_img19); ?>"
-                data-category=" <?php echo htmlspecialchars($category19); ?>">
+                    data-room="<?php echo htmlspecialchars($room19); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor19); ?>"
+                    data-image="<?php echo base64_encode($upload_img19); ?>"
+                    data-category=" <?php echo htmlspecialchars($category19); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status19); ?>; 
                         position:absolute; top:177px; left:660px; z-index:2;'>
                 </div>
@@ -6882,10 +6882,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:168px; left:690px; transform: rotate(-360deg); z-index:1;'
                     alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal20'
                     onclick=' fetchAssetData(20);' class="asset-image" data-id="<?php echo $assetId20; ?>"
-                data-room="<?php echo htmlspecialchars($room20); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor20); ?>"
-                data-image="<?php echo base64_encode($upload_img20); ?>"
-                data-category=" <?php echo htmlspecialchars($category20); ?>">
+                    data-room="<?php echo htmlspecialchars($room20); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor20); ?>"
+                    data-image="<?php echo base64_encode($upload_img20); ?>"
+                    data-category=" <?php echo htmlspecialchars($category20); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status20); ?>; 
                         position:absolute; top:177px; left:698px; z-index:2;'>
                 </div>
@@ -6895,10 +6895,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:247px; left:647px; transform: rotate(180deg); z-index:1;'
                     alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal21'
                     onclick=' fetchAssetData(21);' class="asset-image" data-id="<?php echo $assetId21; ?>"
-                data-room="<?php echo htmlspecialchars($room21); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor21); ?>"
-                data-image="<?php echo base64_encode($upload_img21); ?>"
-                data-category=" <?php echo htmlspecialchars($category21); ?>">
+                    data-room="<?php echo htmlspecialchars($room21); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor21); ?>"
+                    data-image="<?php echo base64_encode($upload_img21); ?>"
+                    data-category=" <?php echo htmlspecialchars($category21); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status21); ?>; 
                         position:absolute; top:257px; left:644px; z-index:2;'>
                 </div>
@@ -6908,10 +6908,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:203px; left:677px; transform: rotate(90deg); z-index:1;'
                     alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal22'
                     onclick=' fetchAssetData(22);' class="asset-image" data-id="<?php echo $assetId22; ?>"
-                data-room="<?php echo htmlspecialchars($room22); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor22); ?>"
-                data-image="<?php echo base64_encode($upload_img22); ?>"
-                data-category=" <?php echo htmlspecialchars($category22); ?>">
+                    data-room="<?php echo htmlspecialchars($room22); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor22); ?>"
+                    data-image="<?php echo base64_encode($upload_img22); ?>"
+                    data-category=" <?php echo htmlspecialchars($category22); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status22); ?>; 
                         position:absolute; top:212px; left:685px; z-index:2;'>
                 </div>
@@ -6921,10 +6921,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:203px; left:652px; transform: rotate(90deg); z-index:1;'
                     alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal23'
                     onclick=' fetchAssetData(23);' class="asset-image" data-id="<?php echo $assetId23; ?>"
-                data-room="<?php echo htmlspecialchars($room23); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor23); ?>"
-                data-image="<?php echo base64_encode($upload_img23); ?>"
-                data-category=" <?php echo htmlspecialchars($category23); ?>">
+                    data-room="<?php echo htmlspecialchars($room23); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor23); ?>"
+                    data-image="<?php echo base64_encode($upload_img23); ?>"
+                    data-category=" <?php echo htmlspecialchars($category23); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status23); ?>; 
                         position:absolute; top:212px; left:648px; z-index:2;'>
                 </div>
@@ -6934,10 +6934,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:150px; left:625px;  transform: rotate(-180deg); z-index:1;'
                     alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal1368'
                     onclick=' fetchAssetData(1368);' class="asset-image" data-id="<?php echo $assetId1368; ?>"
-                data-room="<?php echo htmlspecialchars($room1368); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor1368); ?>"
-                data-image="<?php echo base64_encode($upload_img1368); ?>"
-                data-category=" <?php echo htmlspecialchars($category1368); ?>">
+                    data-room="<?php echo htmlspecialchars($room1368); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor1368); ?>"
+                    data-image="<?php echo base64_encode($upload_img1368); ?>"
+                    data-category=" <?php echo htmlspecialchars($category1368); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status1368); ?>; 
                         position:absolute; top:160px; left:622px; z-index:2;'>
                 </div>
@@ -6950,10 +6950,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:190px; left:523px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal25' onclick='fetchAssetData(25);'
                     class="asset-image" data-id="<?php echo $assetId25; ?>"
-                data-room="<?php echo htmlspecialchars($room25); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor25); ?>"
-                data-image="<?php echo base64_encode($upload_img25); ?>"
-                data-category=" <?php echo htmlspecialchars($category25); ?>">
+                    data-room="<?php echo htmlspecialchars($room25); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor25); ?>"
+                    data-image="<?php echo base64_encode($upload_img25); ?>"
+                    data-category=" <?php echo htmlspecialchars($category25); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status25); ?>; 
                         position:absolute; top:199px; left:530px;'>
                 </div>
@@ -6963,10 +6963,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:174.6px; left:524px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal26' onclick='fetchAssetData(26);'
                     class="asset-image" data-id="<?php echo $assetId26; ?>"
-                data-room="<?php echo htmlspecialchars($room26); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor26); ?>"
-                data-image="<?php echo base64_encode($upload_img26); ?>"
-                data-category=" <?php echo htmlspecialchars($category26); ?>">
+                    data-room="<?php echo htmlspecialchars($room26); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor26); ?>"
+                    data-image="<?php echo base64_encode($upload_img26); ?>"
+                    data-category=" <?php echo htmlspecialchars($category26); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status26); ?>; 
                         position:absolute; top:183px; left:532px;'>
                 </div>
@@ -6976,10 +6976,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:160.5px; left:523px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal27' onclick='fetchAssetData(27);'
                     class="asset-image" data-id="<?php echo $assetId27; ?>"
-                data-room="<?php echo htmlspecialchars($room27); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor27); ?>"
-                data-image="<?php echo base64_encode($upload_img27); ?>"
-                data-category=" <?php echo htmlspecialchars($category27); ?>">
+                    data-room="<?php echo htmlspecialchars($room27); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor27); ?>"
+                    data-image="<?php echo base64_encode($upload_img27); ?>"
+                    data-category=" <?php echo htmlspecialchars($category27); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status27); ?>; 
                         position:absolute; top:167px; left:532px;'>
                 </div>
@@ -6989,10 +6989,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:143.9px; left:508px; transform: rotate(-90deg);'
                     alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal28'
                     onclick=' fetchAssetData(28);' class="asset-image" data-id="<?php echo $assetId28; ?>"
-                data-room="<?php echo htmlspecialchars($room28); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor28); ?>"
-                data-image="<?php echo base64_encode($upload_img28); ?>"
-                data-category=" <?php echo htmlspecialchars($category28); ?>">
+                    data-room="<?php echo htmlspecialchars($room28); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor28); ?>"
+                    data-image="<?php echo base64_encode($upload_img28); ?>"
+                    data-category=" <?php echo htmlspecialchars($category28); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status28); ?>; 
                         position:absolute; top:143.9px; left:515px;'>
                 </div>
@@ -7002,10 +7002,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:160px; left:494px; transform: rotate(-180deg);'
                     alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal29'
                     onclick=' fetchAssetData(29);' class="asset-image" data-id="<?php echo $assetId29; ?>"
-                data-room="<?php echo htmlspecialchars($room29); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor29); ?>"
-                data-image="<?php echo base64_encode($upload_img29); ?>"
-                data-category=" <?php echo htmlspecialchars($category29); ?>">
+                    data-room="<?php echo htmlspecialchars($room29); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor29); ?>"
+                    data-image="<?php echo base64_encode($upload_img29); ?>"
+                    data-category=" <?php echo htmlspecialchars($category29); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status29); ?>; 
                         position:absolute; top:167px; left:491px;'>
                 </div>
@@ -7015,10 +7015,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:174.6px; left:492px; transform: rotate(-180deg);'
                     alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal30'
                     onclick=' fetchAssetData(30);' class="asset-image" data-id="<?php echo $assetId30; ?>"
-                data-room="<?php echo htmlspecialchars($room30); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor30); ?>"
-                data-image="<?php echo base64_encode($upload_img30); ?>"
-                data-category=" <?php echo htmlspecialchars($category30); ?>">
+                    data-room="<?php echo htmlspecialchars($room30); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor30); ?>"
+                    data-image="<?php echo base64_encode($upload_img30); ?>"
+                    data-category=" <?php echo htmlspecialchars($category30); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status30); ?>; 
                         position:absolute; top:183px; left:491px;'>
                 </div>
@@ -7028,10 +7028,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:189.5px; left:493px; transform: rotate(-180deg);'
                     alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal31'
                     onclick=' fetchAssetData(31);' class="asset-image" data-id="<?php echo $assetId31; ?>"
-                data-room="<?php echo htmlspecialchars($room31); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor31); ?>"
-                data-image="<?php echo base64_encode($upload_img31); ?>"
-                data-category=" <?php echo htmlspecialchars($category31); ?>">
+                    data-room="<?php echo htmlspecialchars($room31); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor31); ?>"
+                    data-image="<?php echo base64_encode($upload_img31); ?>"
+                    data-category=" <?php echo htmlspecialchars($category31); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status31); ?>; 
                         position:absolute; top:199px; left:491px;'>
                 </div>
@@ -7039,10 +7039,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 <!-- ASSET 32 -->
                 <img src='../image.php?id=32' style='width:12px; cursor:pointer; position:absolute; top:205px; left:507.5px; 
                         transform: rotate(90deg);' alt='Asset Image' data-bs-toggle='modal'
-                    data-bs-target='#imageModal32' onclick='fetchAssetData(32);' class="asset-image" data-id="<?php echo $assetId32; ?>" data-room="<?php echo htmlspecialchars($room32); ?>"
-                data-floor="<?php echo htmlspecialchars($floor32); ?>"
-                data-image="<?php echo base64_encode($upload_img32); ?>"
-                data-category="<?php echo htmlspecialchars($category32); ?>">
+                    data-bs-target='#imageModal32' onclick='fetchAssetData(32);' class="asset-image"
+                    data-id="<?php echo $assetId32; ?>" data-room="<?php echo htmlspecialchars($room32); ?>"
+                    data-floor="<?php echo htmlspecialchars($floor32); ?>"
+                    data-image="<?php echo base64_encode($upload_img32); ?>"
+                    data-category="<?php echo htmlspecialchars($category32); ?>">
                 <div style=' width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status32); ?>;
                 position:absolute; top:214px; left:515px;'>
                 </div>
@@ -7054,10 +7055,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 <img src='../image.php?id=33' style='width:12px; cursor:pointer; position:absolute; top:42px; left:455px; 
                         ' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal33'
                     onclick='fetchAssetData(33);' class="asset-image" data-id="<?php echo $assetId33; ?>"
-                data-room="<?php echo htmlspecialchars($room33); ?>"
-                data-floor="<?php echo htmlspecialchars($floor33); ?>"
-                data-image="<?php echo base64_encode($upload_img33); ?>"
-                data-category="<?php echo htmlspecialchars($category33); ?>">
+                    data-room="<?php echo htmlspecialchars($room33); ?>"
+                    data-floor="<?php echo htmlspecialchars($floor33); ?>"
+                    data-image="<?php echo base64_encode($upload_img33); ?>"
+                    data-category="<?php echo htmlspecialchars($category33); ?>">
                 <div style=' width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status33); ?>;
             position:absolute; top:42px; left:450px;'>
                 </div>
@@ -7066,10 +7067,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 <img src='../image.php?id=34' style='width:12px; cursor:pointer; position:absolute; top:42px; left:483px; 
                         ' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal34'
                     onclick='fetchAssetData(34);' class="asset-image" data-id="<?php echo $assetId34; ?>"
-                data-room="<?php echo htmlspecialchars($room34); ?>"
-                data-floor="<?php echo htmlspecialchars($floor34); ?>"
-                data-image="<?php echo base64_encode($upload_img34); ?>"
-                data-category="<?php echo htmlspecialchars($category34); ?>">
+                    data-room="<?php echo htmlspecialchars($room34); ?>"
+                    data-floor="<?php echo htmlspecialchars($floor34); ?>"
+                    data-image="<?php echo base64_encode($upload_img34); ?>"
+                    data-category="<?php echo htmlspecialchars($category34); ?>">
                 <div style=' width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status34); ?>;
             position:absolute; top:42px; left:478px;'>
                 </div>
@@ -7078,10 +7079,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 <img src='../image.php?id=35' style='width:12px; cursor:pointer; position:absolute; top:42px; left:511px; 
                         ' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal35'
                     onclick='fetchAssetData(35);' class="asset-image" data-id="<?php echo $assetId35; ?>"
-                data-room="<?php echo htmlspecialchars($room35); ?>"
-                data-floor="<?php echo htmlspecialchars($floor35); ?>"
-                data-image="<?php echo base64_encode($upload_img35); ?>"
-                data-category="<?php echo htmlspecialchars($category35); ?>">
+                    data-room="<?php echo htmlspecialchars($room35); ?>"
+                    data-floor="<?php echo htmlspecialchars($floor35); ?>"
+                    data-image="<?php echo base64_encode($upload_img35); ?>"
+                    data-category="<?php echo htmlspecialchars($category35); ?>">
                 <div style=' width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status35); ?>;
             position:absolute; top:42px; left:506px;'>
                 </div>
@@ -7090,10 +7091,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 <img src='../image.php?id=36' style='width:12px; cursor:pointer; position:absolute; top:42px; left:539px; 
                         ' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal36'
                     onclick='fetchAssetData(36);' class="asset-image" data-id="<?php echo $assetId36; ?>"
-                data-room="<?php echo htmlspecialchars($room36); ?>"
-                data-floor="<?php echo htmlspecialchars($floor36); ?>"
-                data-image="<?php echo base64_encode($upload_img36); ?>"
-                data-category="<?php echo htmlspecialchars($category36); ?>">
+                    data-room="<?php echo htmlspecialchars($room36); ?>"
+                    data-floor="<?php echo htmlspecialchars($floor36); ?>"
+                    data-image="<?php echo base64_encode($upload_img36); ?>"
+                    data-category="<?php echo htmlspecialchars($category36); ?>">
                 <div style=' width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status36); ?>;
             position:absolute; top:42px; left:534px;'>
                 </div>
@@ -7102,10 +7103,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 <img src='../image.php?id=37' style='width:12px; cursor:pointer; position:absolute; top:98px; left:483px; 
                         ' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal37'
                     onclick='fetchAssetData(37);' class="asset-image" data-id="<?php echo $assetId37; ?>"
-                data-room="<?php echo htmlspecialchars($room37); ?>"
-                data-floor="<?php echo htmlspecialchars($floor37); ?>"
-                data-image="<?php echo base64_encode($upload_img37); ?>"
-                data-category="<?php echo htmlspecialchars($category37); ?>">
+                    data-room="<?php echo htmlspecialchars($room37); ?>"
+                    data-floor="<?php echo htmlspecialchars($floor37); ?>"
+                    data-image="<?php echo base64_encode($upload_img37); ?>"
+                    data-category="<?php echo htmlspecialchars($category37); ?>">
                 <div style=' width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status37); ?>;
             position:absolute; top:98px; left:478px;'>
                 </div>
@@ -7114,10 +7115,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 <img src='../image.php?id=38' style='width:12px; cursor:pointer; position:absolute; top:98px; left:511px; 
                         ' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal38'
                     onclick='fetchAssetData(38);' class="asset-image" data-id="<?php echo $assetId38; ?>"
-                data-room="<?php echo htmlspecialchars($room38); ?>"
-                data-floor="<?php echo htmlspecialchars($floor38); ?>"
-                data-image="<?php echo base64_encode($upload_img38); ?>"
-                data-category="<?php echo htmlspecialchars($category38); ?>">
+                    data-room="<?php echo htmlspecialchars($room38); ?>"
+                    data-floor="<?php echo htmlspecialchars($floor38); ?>"
+                    data-image="<?php echo base64_encode($upload_img38); ?>"
+                    data-category="<?php echo htmlspecialchars($category38); ?>">
                 <div style=' width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status38); ?>;
             position:absolute; top:98px; left:506px;'>
                 </div>
@@ -7126,10 +7127,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 <img src='../image.php?id=39' style='width:12px; cursor:pointer; position:absolute; top:98px; left:539px; 
                         ' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal39'
                     onclick='fetchAssetData(39);' class="asset-image" data-id="<?php echo $assetId39; ?>"
-                data-room="<?php echo htmlspecialchars($room39); ?>"
-                data-floor="<?php echo htmlspecialchars($floor39); ?>"
-                data-image="<?php echo base64_encode($upload_img39); ?>"
-                data-category="<?php echo htmlspecialchars($category39); ?>">
+                    data-room="<?php echo htmlspecialchars($room39); ?>"
+                    data-floor="<?php echo htmlspecialchars($floor39); ?>"
+                    data-image="<?php echo base64_encode($upload_img39); ?>"
+                    data-category="<?php echo htmlspecialchars($category39); ?>">
                 <div style=' width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status39); ?>;
             position:absolute; top:98px; left:534px;'>
                 </div>
@@ -7137,10 +7138,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 <!-- ASSET 40 -->
                 <img src='../image.php?id=40' style='width:12px; cursor:pointer; position:absolute; top:178px; left:278px; 
                         transform: rotate(-90deg);' alt='Asset Image' data-bs-toggle='modal'
-                    data-bs-target='#imageModal40' onclick='fetchAssetData(40);' class="asset-image" data-id="<?php echo $assetId40; ?>" data-room="<?php echo htmlspecialchars($room40); ?>"
-                data-floor="<?php echo htmlspecialchars($floor40); ?>"
-                data-image="<?php echo base64_encode($upload_img40); ?>"
-                data-category="<?php echo htmlspecialchars($category40); ?>">
+                    data-bs-target='#imageModal40' onclick='fetchAssetData(40);' class="asset-image"
+                    data-id="<?php echo $assetId40; ?>" data-room="<?php echo htmlspecialchars($room40); ?>"
+                    data-floor="<?php echo htmlspecialchars($floor40); ?>"
+                    data-image="<?php echo base64_encode($upload_img40); ?>"
+                    data-category="<?php echo htmlspecialchars($category40); ?>">
                 <div style=' width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status40); ?>;
             position:absolute; top:190px; left:275px;'>
                 </div>
@@ -7148,10 +7150,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 <!-- ASSET 1374 -->
                 <img src='../image.php?id=1374' style='width:12px; cursor:pointer; position:absolute; top:205px; left:557px; 
                         transform: rotate(-90deg);' alt='Asset Image' data-bs-toggle='modal'
-                    data-bs-target='#imageModal1374' onclick='fetchAssetData(1374);' class="asset-image" data-id="<?php echo $assetId1374; ?>" data-room="<?php echo htmlspecialchars($room1374); ?>"
-                data-floor="<?php echo htmlspecialchars($floor1374); ?>"
-                data-image="<?php echo base64_encode($upload_img1374); ?>"
-                data-category="<?php echo htmlspecialchars($category1374); ?>">
+                    data-bs-target='#imageModal1374' onclick='fetchAssetData(1374);' class="asset-image"
+                    data-id="<?php echo $assetId1374; ?>" data-room="<?php echo htmlspecialchars($room1374); ?>"
+                    data-floor="<?php echo htmlspecialchars($floor1374); ?>"
+                    data-image="<?php echo base64_encode($upload_img1374); ?>"
+                    data-category="<?php echo htmlspecialchars($category1374); ?>">
                 <div style=' width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status1374); ?>;
             position:absolute; top:217px; left:553px;'>
                 </div>
@@ -7164,10 +7167,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:35px; cursor:pointer; position:absolute; top:192px; left:670px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal6866' onclick='fetchAssetData(6866);'
                     class="asset-image" data-id="<?php echo $assetId6866; ?>"
-                data-room="<?php echo htmlspecialchars($room6866); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor6866); ?>"
-                data-image="<?php echo base64_encode($upload_img6866); ?>"
-                data-category=" <?php echo htmlspecialchars($category6866); ?>">
+                    data-room="<?php echo htmlspecialchars($room6866); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor6866); ?>"
+                    data-image="<?php echo base64_encode($upload_img6866); ?>"
+                    data-category=" <?php echo htmlspecialchars($category6866); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6866); ?>; 
                         position:absolute; top:192px; left:698px;'>
                 </div>
@@ -7177,10 +7180,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:34px; cursor:pointer; position:absolute; top:193px; left:636px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal898' onclick='fetchAssetData(898);'
                     class="asset-image" data-id="<?php echo $assetId898; ?>"
-                data-room="<?php echo htmlspecialchars($room898); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor898); ?>"
-                data-image="<?php echo base64_encode($upload_img898); ?>"
-                data-category=" <?php echo htmlspecialchars($category898); ?>">
+                    data-room="<?php echo htmlspecialchars($room898); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor898); ?>"
+                    data-image="<?php echo base64_encode($upload_img898); ?>"
+                    data-category=" <?php echo htmlspecialchars($category898); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status898); ?>; 
                         position:absolute; top:192px; left:635px;'>
                 </div>
@@ -7190,10 +7193,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:34px; cursor:pointer; position:absolute; top:140px; left:620px; transform: rotate(90deg);'
                     alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal899'
                     onclick=' fetchAssetData(899);' class="asset-image" data-id="<?php echo $assetId899; ?>"
-                data-room="<?php echo htmlspecialchars($room899); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor899); ?>"
-                data-image="<?php echo base64_encode($upload_img899); ?>"
-                data-category=" <?php echo htmlspecialchars($category899); ?>">
+                    data-room="<?php echo htmlspecialchars($room899); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor899); ?>"
+                    data-image="<?php echo base64_encode($upload_img899); ?>"
+                    data-category=" <?php echo htmlspecialchars($category899); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status899); ?>; 
                         position:absolute; top:140px; left:645px;'>
                 </div>
@@ -7205,10 +7208,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:34px; cursor:pointer; position:absolute; top:242px; left:800px; transform: rotate(-90deg);'
                     alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal901'
                     onclick=' fetchAssetData(901);' class="asset-image" data-id="<?php echo $assetId901; ?>"
-                data-room="<?php echo htmlspecialchars($room901); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor901); ?>"
-                data-image="<?php echo base64_encode($upload_img901); ?>"
-                data-category=" <?php echo htmlspecialchars($category901); ?>">
+                    data-room="<?php echo htmlspecialchars($room901); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor901); ?>"
+                    data-image="<?php echo base64_encode($upload_img901); ?>"
+                    data-category=" <?php echo htmlspecialchars($category901); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status901); ?>; 
                         position:absolute; top:265px; left:800px;'>
                 </div>
@@ -7218,10 +7221,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:34px; cursor:pointer; position:absolute; top:210px; left:800px; transform: rotate(-90deg);'
                     alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal902'
                     onclick=' fetchAssetData(902);' class="asset-image" data-id="<?php echo $assetId902; ?>"
-                data-room="<?php echo htmlspecialchars($room902); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor902); ?>"
-                data-image="<?php echo base64_encode($upload_img902); ?>"
-                data-category=" <?php echo htmlspecialchars($category902); ?>">
+                    data-room="<?php echo htmlspecialchars($room902); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor902); ?>"
+                    data-image="<?php echo base64_encode($upload_img902); ?>"
+                    data-category=" <?php echo htmlspecialchars($category902); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status902); ?>; 
                         position:absolute; top:205px; left:800px;'>
                 </div>
@@ -7233,10 +7236,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:30px; cursor:pointer; position:absolute; top:155px; left:500px; ' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7262' onclick='fetchAssetData(7262);'
                     class="asset-image" data-id="<?php echo $assetId7262; ?>"
-                data-room="<?php echo htmlspecialchars($room7262); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7262); ?>"
-                data-image="<?php echo base64_encode($upload_img7262); ?>"
-                data-category=" <?php echo htmlspecialchars($category7262); ?>">
+                    data-room="<?php echo htmlspecialchars($room7262); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7262); ?>"
+                    data-image="<?php echo base64_encode($upload_img7262); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7262); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7262); ?>; 
                         position:absolute; top:175px; left:512px;'>
                 </div>
@@ -7248,10 +7251,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:40px; cursor:pointer; position:absolute; top:150px; left:662px; ' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7263' onclick='fetchAssetData(7263);'
                     class="asset-image" data-id="<?php echo $assetId7263; ?>"
-                data-room="<?php echo htmlspecialchars($room7263); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7263); ?>"
-                data-image="<?php echo base64_encode($upload_img7263); ?>"
-                data-category=" <?php echo htmlspecialchars($category7263); ?>">
+                    data-room="<?php echo htmlspecialchars($room7263); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7263); ?>"
+                    data-image="<?php echo base64_encode($upload_img7263); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7263); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7263); ?>; 
                         position:absolute; top:150px; left:695px;'>
                 </div>
@@ -7261,10 +7264,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:30px; cursor:pointer; position:absolute; top:247px; left:650px;  transform: rotate(-90deg);'
                     alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7264'
                     onclick=' fetchAssetData(7264);' class="asset-image" data-id="<?php echo $assetId7264; ?>"
-                data-room="<?php echo htmlspecialchars($room7264); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7264); ?>"
-                data-image="<?php echo base64_encode($upload_img7264); ?>"
-                data-category=" <?php echo htmlspecialchars($category7264); ?>">
+                    data-room="<?php echo htmlspecialchars($room7264); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7264); ?>"
+                    data-image="<?php echo base64_encode($upload_img7264); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7264); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7264); ?>; 
                         position:absolute; top:242px; left:670px; z-index:1;'>
                 </div>
@@ -7274,10 +7277,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:40px; cursor:pointer; position:absolute; top:150px; left:712px; ' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7265' onclick='fetchAssetData(7265);'
                     class="asset-image" data-id="<?php echo $assetId7265; ?>"
-                data-room="<?php echo htmlspecialchars($room7265); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7265); ?>"
-                data-image="<?php echo base64_encode($upload_img7265); ?>"
-                data-category=" <?php echo htmlspecialchars($category7265); ?>">
+                    data-room="<?php echo htmlspecialchars($room7265); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7265); ?>"
+                    data-image="<?php echo base64_encode($upload_img7265); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7265); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7265); ?>; 
                         position:absolute; top:150px; left:745px;'>
                 </div>
@@ -7287,10 +7290,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:30px; cursor:pointer; position:absolute; top:150px; left:765px; ' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7266' onclick='fetchAssetData(7266);'
                     class="asset-image" data-id="<?php echo $assetId7266; ?>"
-                data-room="<?php echo htmlspecialchars($room7266); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7266); ?>"
-                data-image="<?php echo base64_encode($upload_img7266); ?>"
-                data-category=" <?php echo htmlspecialchars($category7266); ?>">
+                    data-room="<?php echo htmlspecialchars($room7266); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7266); ?>"
+                    data-image="<?php echo base64_encode($upload_img7266); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7266); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7266); ?>; 
                         position:absolute; top:150px; left:790px;'>
                 </div>
@@ -7303,10 +7306,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:305px; left:215px; ' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7138' onclick='fetchAssetData(7138);'
                     class="asset-image" data-id="<?php echo $assetId7138; ?>"
-                data-room="<?php echo htmlspecialchars($room7138); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7138); ?>"
-                data-image="<?php echo base64_encode($upload_img7138); ?>"
-                data-category=" <?php echo htmlspecialchars($category7138); ?>">
+                    data-room="<?php echo htmlspecialchars($room7138); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7138); ?>"
+                    data-image="<?php echo base64_encode($upload_img7138); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7138); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7138); ?>; 
                         position:absolute; top:300px; left:226px;'>
                 </div>
@@ -7316,10 +7319,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:305px; left:325px; ' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7139' onclick='fetchAssetData(7139);'
                     class="asset-image" data-id="<?php echo $assetId7139; ?>"
-                data-room="<?php echo htmlspecialchars($room7139); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7139); ?>"
-                data-image="<?php echo base64_encode($upload_img7139); ?>"
-                data-category=" <?php echo htmlspecialchars($category7139); ?>">
+                    data-room="<?php echo htmlspecialchars($room7139); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7139); ?>"
+                    data-image="<?php echo base64_encode($upload_img7139); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7139); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7139); ?>; 
                         position:absolute; top:300px; left:336px;'>
                 </div>
@@ -7329,10 +7332,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:305px; left:435px; ' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7140' onclick='fetchAssetData(7140);'
                     class="asset-image" data-id="<?php echo $assetId7140; ?>"
-                data-room="<?php echo htmlspecialchars($room7140); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7140); ?>"
-                data-image="<?php echo base64_encode($upload_img7140); ?>"
-                data-category=" <?php echo htmlspecialchars($category7140); ?>">
+                    data-room="<?php echo htmlspecialchars($room7140); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7140); ?>"
+                    data-image="<?php echo base64_encode($upload_img7140); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7140); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7140); ?>; 
                         position:absolute; top:300px; left:446px;'>
                 </div>
@@ -7342,10 +7345,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:305px; left:545px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7141' onclick='fetchAssetData(7141);'
                     class="asset-image" data-id="<?php echo $assetId7141; ?>"
-                data-room="<?php echo htmlspecialchars($room7141); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7141); ?>"
-                data-image="<?php echo base64_encode($upload_img7141); ?>"
-                data-category=" <?php echo htmlspecialchars($category7141); ?>">
+                    data-room="<?php echo htmlspecialchars($room7141); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7141); ?>"
+                    data-image="<?php echo base64_encode($upload_img7141); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7141); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7141); ?>; position:absolute; top:300px; left:556px;'>
                 </div>
@@ -7355,10 +7358,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:305px; left:655px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7142' onclick='fetchAssetData(7142);'
                     class="asset-image" data-id="<?php echo $assetId7142; ?>"
-                data-room="<?php echo htmlspecialchars($room7142); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7142); ?>"
-                data-image="<?php echo base64_encode($upload_img7142); ?>"
-                data-category=" <?php echo htmlspecialchars($category7142); ?>">
+                    data-room="<?php echo htmlspecialchars($room7142); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7142); ?>"
+                    data-image="<?php echo base64_encode($upload_img7142); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7142); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7142); ?>; position:absolute; top:300px; left:666px;'>
                 </div>
@@ -7368,10 +7371,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:305px; left:765px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7143' onclick='fetchAssetData(7143);'
                     class="asset-image" data-id="<?php echo $assetId7143; ?>"
-                data-room="<?php echo htmlspecialchars($room7143); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7143); ?>"
-                data-image="<?php echo base64_encode($upload_img7143); ?>"
-                data-category=" <?php echo htmlspecialchars($category7143); ?>">
+                    data-room="<?php echo htmlspecialchars($room7143); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7143); ?>"
+                    data-image="<?php echo base64_encode($upload_img7143); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7143); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7143); ?>; position:absolute; top:300px; left:776px;'>
                 </div>
@@ -7381,10 +7384,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:305px; left:875px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7144' onclick='fetchAssetData(7144);'
                     class="asset-image" data-id="<?php echo $assetId7144; ?>"
-                data-room="<?php echo htmlspecialchars($room7144); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7144); ?>"
-                data-image="<?php echo base64_encode($upload_img7144); ?>"
-                data-category=" <?php echo htmlspecialchars($category7144); ?>">
+                    data-room="<?php echo htmlspecialchars($room7144); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7144); ?>"
+                    data-image="<?php echo base64_encode($upload_img7144); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7144); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7144); ?>; position:absolute; top:300px; left:886px;'>
                 </div>
@@ -7394,10 +7397,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:355px; left:215px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7145' onclick='fetchAssetData(7145);'
                     class="asset-image" data-id="<?php echo $assetId7145; ?>"
-                data-room="<?php echo htmlspecialchars($room7145); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7145); ?>"
-                data-image="<?php echo base64_encode($upload_img7145); ?>"
-                data-category=" <?php echo htmlspecialchars($category7145); ?>">
+                    data-room="<?php echo htmlspecialchars($room7145); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7145); ?>"
+                    data-image="<?php echo base64_encode($upload_img7145); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7145); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7145); ?>; position:absolute; top:350px; left:226px;'>
                 </div>
@@ -7407,10 +7410,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:355px; left:325px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7146' onclick='fetchAssetData(7146);'
                     class="asset-image" data-id="<?php echo $assetId7146; ?>"
-                data-room="<?php echo htmlspecialchars($room7146); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7146); ?>"
-                data-image="<?php echo base64_encode($upload_img7146); ?>"
-                data-category=" <?php echo htmlspecialchars($category7146); ?>">
+                    data-room="<?php echo htmlspecialchars($room7146); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7146); ?>"
+                    data-image="<?php echo base64_encode($upload_img7146); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7146); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7146); ?>; position:absolute; top:350px; left:336px;'>
                 </div>
@@ -7420,10 +7423,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:355px; left:435px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7147' onclick='fetchAssetData(7147);'
                     class="asset-image" data-id="<?php echo $assetId7147; ?>"
-                data-room="<?php echo htmlspecialchars($room7147); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7147); ?>"
-                data-image="<?php echo base64_encode($upload_img7147); ?>"
-                data-category=" <?php echo htmlspecialchars($category7147); ?>">
+                    data-room="<?php echo htmlspecialchars($room7147); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7147); ?>"
+                    data-image="<?php echo base64_encode($upload_img7147); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7147); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7147); ?>; position:absolute; top:350px; left:446px;'>
                 </div>
@@ -7433,10 +7436,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:355px; left:545px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7148' onclick='fetchAssetData(7148);'
                     class="asset-image" data-id="<?php echo $assetId7148; ?>"
-                data-room="<?php echo htmlspecialchars($room7148); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7148); ?>"
-                data-image="<?php echo base64_encode($upload_img7148); ?>"
-                data-category=" <?php echo htmlspecialchars($category7148); ?>">
+                    data-room="<?php echo htmlspecialchars($room7148); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7148); ?>"
+                    data-image="<?php echo base64_encode($upload_img7148); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7148); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7148); ?>; position:absolute; top:350px; left:556px;'>
                 </div>
@@ -7446,10 +7449,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:355px; left:655px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7149' onclick='fetchAssetData(7149);'
                     class="asset-image" data-id="<?php echo $assetId7149; ?>"
-                data-room="<?php echo htmlspecialchars($room7149); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7149); ?>"
-                data-image="<?php echo base64_encode($upload_img7149); ?>"
-                data-category=" <?php echo htmlspecialchars($category7149); ?>">
+                    data-room="<?php echo htmlspecialchars($room7149); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7149); ?>"
+                    data-image="<?php echo base64_encode($upload_img7149); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7149); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7149); ?>; position:absolute; top:350px; left:666px;'>
                 </div>
@@ -7459,10 +7462,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:355px; left:765px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7150' onclick='fetchAssetData(7150);'
                     class="asset-image" data-id="<?php echo $assetId7150; ?>"
-                data-room="<?php echo htmlspecialchars($room7150); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7150); ?>"
-                data-image="<?php echo base64_encode($upload_img7150); ?>"
-                data-category=" <?php echo htmlspecialchars($category7150); ?>">
+                    data-room="<?php echo htmlspecialchars($room7150); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7150); ?>"
+                    data-image="<?php echo base64_encode($upload_img7150); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7150); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7150); ?>; position:absolute; top:350px; left:776px;'>
                 </div>
@@ -7472,10 +7475,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:355px; left:875px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7151' onclick='fetchAssetData(7151);'
                     class="asset-image" data-id="<?php echo $assetId7151; ?>"
-                data-room="<?php echo htmlspecialchars($room7151); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7151); ?>"
-                data-image="<?php echo base64_encode($upload_img7151); ?>"
-                data-category=" <?php echo htmlspecialchars($category7151); ?>">
+                    data-room="<?php echo htmlspecialchars($room7151); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7151); ?>"
+                    data-image="<?php echo base64_encode($upload_img7151); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7151); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7151); ?>; position:absolute; top:350px; left:886px;'>
                 </div>
@@ -7485,10 +7488,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:405px; left:215px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7152' onclick='fetchAssetData(7152);'
                     class="asset-image" data-id="<?php echo $assetId7152; ?>"
-                data-room="<?php echo htmlspecialchars($room7152); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7152); ?>"
-                data-image="<?php echo base64_encode($upload_img7152); ?>"
-                data-category=" <?php echo htmlspecialchars($category7152); ?>">
+                    data-room="<?php echo htmlspecialchars($room7152); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7152); ?>"
+                    data-image="<?php echo base64_encode($upload_img7152); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7152); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7152); ?>; position:absolute; top:400px; left:226px;'>
                 </div>
@@ -7498,10 +7501,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:405px; left:325px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7153' onclick='fetchAssetData(7153);'
                     class="asset-image" data-id="<?php echo $assetId7153; ?>"
-                data-room="<?php echo htmlspecialchars($room7153); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7153); ?>"
-                data-image="<?php echo base64_encode($upload_img7153); ?>"
-                data-category=" <?php echo htmlspecialchars($category7153); ?>">
+                    data-room="<?php echo htmlspecialchars($room7153); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7153); ?>"
+                    data-image="<?php echo base64_encode($upload_img7153); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7153); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7153); ?>; position:absolute; top:400px; left:336px;'>
                 </div>
@@ -7511,10 +7514,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:405px; left:435px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7154' onclick='fetchAssetData(7154);'
                     class="asset-image" data-id="<?php echo $assetId7154; ?>"
-                data-room="<?php echo htmlspecialchars($room7154); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7154); ?>"
-                data-image="<?php echo base64_encode($upload_img7154); ?>"
-                data-category=" <?php echo htmlspecialchars($category7154); ?>">
+                    data-room="<?php echo htmlspecialchars($room7154); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7154); ?>"
+                    data-image="<?php echo base64_encode($upload_img7154); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7154); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7154); ?>; position:absolute; top:400px; left:446px;'>
                 </div>
@@ -7524,10 +7527,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:405px; left:545px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7155' onclick='fetchAssetData(7155);'
                     class="asset-image" data-id="<?php echo $assetId7155; ?>"
-                data-room="<?php echo htmlspecialchars($room7155); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7155); ?>"
-                data-image="<?php echo base64_encode($upload_img7155); ?>"
-                data-category=" <?php echo htmlspecialchars($category7155); ?>">
+                    data-room="<?php echo htmlspecialchars($room7155); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7155); ?>"
+                    data-image="<?php echo base64_encode($upload_img7155); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7155); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7155); ?>; position:absolute; top:400px; left:556px;'>
                 </div>
@@ -7537,10 +7540,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:405px; left:655px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7156' onclick='fetchAssetData(7156);'
                     class="asset-image" data-id="<?php echo $assetId7156; ?>"
-                data-room="<?php echo htmlspecialchars($room7156); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7156); ?>"
-                data-image="<?php echo base64_encode($upload_img7156); ?>"
-                data-category=" <?php echo htmlspecialchars($category7156); ?>">
+                    data-room="<?php echo htmlspecialchars($room7156); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7156); ?>"
+                    data-image="<?php echo base64_encode($upload_img7156); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7156); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7156); ?>; position:absolute; top:400px; left:666px;'>
                 </div>
@@ -7550,10 +7553,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:405px; left:765px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7157' onclick='fetchAssetData(7157);'
                     class="asset-image" data-id="<?php echo $assetId7157; ?>"
-                data-room="<?php echo htmlspecialchars($room7157); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7157); ?>"
-                data-image="<?php echo base64_encode($upload_img7157); ?>"
-                data-category=" <?php echo htmlspecialchars($category7157); ?>">
+                    data-room="<?php echo htmlspecialchars($room7157); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7157); ?>"
+                    data-image="<?php echo base64_encode($upload_img7157); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7157); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7157); ?>; position:absolute; top:400px; left:776px;'>
                 </div>
@@ -7563,10 +7566,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:405px; left:875px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7158' onclick='fetchAssetData(7158);'
                     class="asset-image" data-id="<?php echo $assetId7158; ?>"
-                data-room="<?php echo htmlspecialchars($room7158); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7158); ?>"
-                data-image="<?php echo base64_encode($upload_img7158); ?>"
-                data-category=" <?php echo htmlspecialchars($category7158); ?>">
+                    data-room="<?php echo htmlspecialchars($room7158); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7158); ?>"
+                    data-image="<?php echo base64_encode($upload_img7158); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7158); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7158); ?>; position:absolute; top:400px; left:886px;'>
                 </div>
@@ -7577,10 +7580,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:455px; left:215px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7159' onclick='fetchAssetData(7159);'
                     class="asset-image" data-id="<?php echo $assetId7159; ?>"
-                data-room="<?php echo htmlspecialchars($room7159); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7159); ?>"
-                data-image="<?php echo base64_encode($upload_img7159); ?>"
-                data-category=" <?php echo htmlspecialchars($category7159); ?>">
+                    data-room="<?php echo htmlspecialchars($room7159); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7159); ?>"
+                    data-image="<?php echo base64_encode($upload_img7159); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7159); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7159); ?>; position:absolute; top:450px; left:226px;'>
                 </div>
@@ -7590,10 +7593,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:455px; left:325px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7160' onclick='fetchAssetData(7160);'
                     class="asset-image" data-id="<?php echo $assetId7160; ?>"
-                data-room="<?php echo htmlspecialchars($room7160); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7160); ?>"
-                data-image="<?php echo base64_encode($upload_img7160); ?>"
-                data-category=" <?php echo htmlspecialchars($category7160); ?>">
+                    data-room="<?php echo htmlspecialchars($room7160); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7160); ?>"
+                    data-image="<?php echo base64_encode($upload_img7160); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7160); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7160); ?>; position:absolute; top:450px; left:336px;'>
                 </div>
@@ -7603,10 +7606,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:455px; left:435px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7161' onclick='fetchAssetData(7161);'
                     class="asset-image" data-id="<?php echo $assetId7161; ?>"
-                data-room="<?php echo htmlspecialchars($room7161); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7161); ?>"
-                data-image="<?php echo base64_encode($upload_img7161); ?>"
-                data-category=" <?php echo htmlspecialchars($category7161); ?>">
+                    data-room="<?php echo htmlspecialchars($room7161); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7161); ?>"
+                    data-image="<?php echo base64_encode($upload_img7161); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7161); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7161); ?>; position:absolute; top:450px; left:446px;'>
                 </div>
@@ -7616,10 +7619,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:455px; left:545px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7162' onclick='fetchAssetData(7162);'
                     class="asset-image" data-id="<?php echo $assetId7162; ?>"
-                data-room="<?php echo htmlspecialchars($room7162); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7162); ?>"
-                data-image="<?php echo base64_encode($upload_img7162); ?>"
-                data-category=" <?php echo htmlspecialchars($category7162); ?>">
+                    data-room="<?php echo htmlspecialchars($room7162); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7162); ?>"
+                    data-image="<?php echo base64_encode($upload_img7162); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7162); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7162); ?>; position:absolute; top:450px; left:556px;'>
                 </div>
@@ -7629,10 +7632,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:455px; left:655px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7163' onclick='fetchAssetData(7163);'
                     class="asset-image" data-id="<?php echo $assetId7163; ?>"
-                data-room="<?php echo htmlspecialchars($room7163); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7163); ?>"
-                data-image="<?php echo base64_encode($upload_img7163); ?>"
-                data-category=" <?php echo htmlspecialchars($category7163); ?>">
+                    data-room="<?php echo htmlspecialchars($room7163); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7163); ?>"
+                    data-image="<?php echo base64_encode($upload_img7163); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7163); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7163); ?>; position:absolute; top:450px; left:666px;'>
                 </div>
@@ -7643,10 +7646,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:455px; left:765px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7164' onclick='fetchAssetData(7164);'
                     class="asset-image" data-id="<?php echo $assetId7164; ?>"
-                data-room="<?php echo htmlspecialchars($room7164); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7164); ?>"
-                data-image="<?php echo base64_encode($upload_img7164); ?>"
-                data-category=" <?php echo htmlspecialchars($category7164); ?>">
+                    data-room="<?php echo htmlspecialchars($room7164); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7164); ?>"
+                    data-image="<?php echo base64_encode($upload_img7164); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7164); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7164); ?>; position:absolute; top:450px; left:776px;'>
                 </div>
@@ -7656,10 +7659,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:455px; left:875px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7165' onclick='fetchAssetData(7165);'
                     class="asset-image" data-id="<?php echo $assetId7165; ?>"
-                data-room="<?php echo htmlspecialchars($room7165); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7165); ?>"
-                data-image="<?php echo base64_encode($upload_img7165); ?>"
-                data-category=" <?php echo htmlspecialchars($category7165); ?>">
+                    data-room="<?php echo htmlspecialchars($room7165); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7165); ?>"
+                    data-image="<?php echo base64_encode($upload_img7165); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7165); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7165); ?>; position:absolute; top:450px; left:886px;'>
                 </div>
@@ -7669,10 +7672,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:505px; left:455px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7166' onclick='fetchAssetData(7166);'
                     class="asset-image" data-id="<?php echo $assetId7166; ?>"
-                data-room="<?php echo htmlspecialchars($room7166); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7166); ?>"
-                data-image="<?php echo base64_encode($upload_img7166); ?>"
-                data-category=" <?php echo htmlspecialchars($category7166); ?>">
+                    data-room="<?php echo htmlspecialchars($room7166); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7166); ?>"
+                    data-image="<?php echo base64_encode($upload_img7166); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7166); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7166); ?>; position:absolute; top:500px; left:466px;'>
                 </div>
@@ -7682,10 +7685,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:505px; left:525px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7167' onclick='fetchAssetData(7167);'
                     class="asset-image" data-id="<?php echo $assetId7167; ?>"
-                data-room="<?php echo htmlspecialchars($room7167); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7167); ?>"
-                data-image="<?php echo base64_encode($upload_img7167); ?>"
-                data-category=" <?php echo htmlspecialchars($category7167); ?>">
+                    data-room="<?php echo htmlspecialchars($room7167); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7167); ?>"
+                    data-image="<?php echo base64_encode($upload_img7167); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7167); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7167); ?>; position:absolute; top:500px; left:536px;'>
                 </div>
@@ -7695,10 +7698,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:278px; left:1037px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7168' onclick='fetchAssetData(7168);'
                     class="asset-image" data-id="<?php echo $assetId7168; ?>"
-                data-room="<?php echo htmlspecialchars($room7168); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7168); ?>"
-                data-image="<?php echo base64_encode($upload_img7168); ?>"
-                data-category=" <?php echo htmlspecialchars($category7168); ?>">
+                    data-room="<?php echo htmlspecialchars($room7168); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7168); ?>"
+                    data-image="<?php echo base64_encode($upload_img7168); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7168); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7168); ?>; position:absolute; top:273px; left:1048px;'>
                 </div>
@@ -7708,10 +7711,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:278px; left:1073px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7169' onclick='fetchAssetData(7169);'
                     class="asset-image" data-id="<?php echo $assetId7169; ?>"
-                data-room="<?php echo htmlspecialchars($room7169); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7169); ?>"
-                data-image="<?php echo base64_encode($upload_img7169); ?>"
-                data-category=" <?php echo htmlspecialchars($category7169); ?>">
+                    data-room="<?php echo htmlspecialchars($room7169); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7169); ?>"
+                    data-image="<?php echo base64_encode($upload_img7169); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7169); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7169); ?>; position:absolute; top:273px; left:1084px;'>
                 </div>
@@ -7721,10 +7724,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:335px; left:1073px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7170' onclick='fetchAssetData(7170);'
                     class="asset-image" data-id="<?php echo $assetId7170; ?>"
-                data-room="<?php echo htmlspecialchars($room7170); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7170); ?>"
-                data-image="<?php echo base64_encode($upload_img7170); ?>"
-                data-category=" <?php echo htmlspecialchars($category7170); ?>">
+                    data-room="<?php echo htmlspecialchars($room7170); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7170); ?>"
+                    data-image="<?php echo base64_encode($upload_img7170); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7170); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7170); ?>; position:absolute; top:330px; left:1084px;'>
                 </div>
@@ -7734,10 +7737,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:335px; left:1037px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7171' onclick='fetchAssetData(7171);'
                     class="asset-image" data-id="<?php echo $assetId7171; ?>"
-                data-room="<?php echo htmlspecialchars($room7171); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7171); ?>"
-                data-image="<?php echo base64_encode($upload_img7171); ?>"
-                data-category=" <?php echo htmlspecialchars($category7171); ?>">
+                    data-room="<?php echo htmlspecialchars($room7171); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7171); ?>"
+                    data-image="<?php echo base64_encode($upload_img7171); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7171); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7171); ?>; position:absolute; top:330px; left:1048px;'>
                 </div>
@@ -7747,10 +7750,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:285px; left:1120px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7172' onclick='fetchAssetData(7172);'
                     class="asset-image" data-id="<?php echo $assetId7172; ?>"
-                data-room="<?php echo htmlspecialchars($room7172); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7172); ?>"
-                data-image="<?php echo base64_encode($upload_img7172); ?>"
-                data-category=" <?php echo htmlspecialchars($category7172); ?>">
+                    data-room="<?php echo htmlspecialchars($room7172); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7172); ?>"
+                    data-image="<?php echo base64_encode($upload_img7172); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7172); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7172); ?>; position:absolute; top:280px; left:1131px;'>
                 </div>
@@ -7760,10 +7763,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:325px; left:1120px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7173' onclick='fetchAssetData(7173);'
                     class="asset-image" data-id="<?php echo $assetId7173; ?>"
-                data-room="<?php echo htmlspecialchars($room7173); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7173); ?>"
-                data-image="<?php echo base64_encode($upload_img7173); ?>"
-                data-category=" <?php echo htmlspecialchars($category7173); ?>">
+                    data-room="<?php echo htmlspecialchars($room7173); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7173); ?>"
+                    data-image="<?php echo base64_encode($upload_img7173); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7173); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7173); ?>; position:absolute; top:320px; left:1131px;'>
                 </div>
@@ -7774,10 +7777,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:147px; left:1030px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7174' onclick='fetchAssetData(7174);'
                     class="asset-image" data-id="<?php echo $assetId7174; ?>"
-                data-room="<?php echo htmlspecialchars($room7174); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7174); ?>"
-                data-image="<?php echo base64_encode($upload_img7174); ?>"
-                data-category=" <?php echo htmlspecialchars($category7174); ?>">
+                    data-room="<?php echo htmlspecialchars($room7174); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7174); ?>"
+                    data-image="<?php echo base64_encode($upload_img7174); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7174); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7174); ?>; position:absolute; top:142px; left:1041px;'>
                 </div>
@@ -7787,10 +7790,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:147px; left:1095px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7175' onclick='fetchAssetData(7175);'
                     class="asset-image" data-id="<?php echo $assetId7175; ?>"
-                data-room="<?php echo htmlspecialchars($room7175); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7175); ?>"
-                data-image="<?php echo base64_encode($upload_img7175); ?>"
-                data-category=" <?php echo htmlspecialchars($category7175); ?>">
+                    data-room="<?php echo htmlspecialchars($room7175); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7175); ?>"
+                    data-image="<?php echo base64_encode($upload_img7175); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7175); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7175); ?>; position:absolute; top:142px; left:1106px;'>
                 </div>
@@ -7800,10 +7803,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:255px; left:1030px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7176' onclick='fetchAssetData(7176);'
                     class="asset-image" data-id="<?php echo $assetId7176; ?>"
-                data-room="<?php echo htmlspecialchars($room7176); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7176); ?>"
-                data-image="<?php echo base64_encode($upload_img7176); ?>"
-                data-category=" <?php echo htmlspecialchars($category7176); ?>">
+                    data-room="<?php echo htmlspecialchars($room7176); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7176); ?>"
+                    data-image="<?php echo base64_encode($upload_img7176); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7176); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7176); ?>; position:absolute; top:250px; left:1041px;'>
                 </div>
@@ -7813,10 +7816,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:255px; left:1095px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7177' onclick='fetchAssetData(7177);'
                     class="asset-image" data-id="<?php echo $assetId7177; ?>"
-                data-room="<?php echo htmlspecialchars($room7177); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7177); ?>"
-                data-image="<?php echo base64_encode($upload_img7177); ?>"
-                data-category=" <?php echo htmlspecialchars($category7177); ?>">
+                    data-room="<?php echo htmlspecialchars($room7177); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7177); ?>"
+                    data-image="<?php echo base64_encode($upload_img7177); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7177); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7177); ?>; position:absolute; top:250px; left:1106px;'>
                 </div>
@@ -7826,10 +7829,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:360px; left:90px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7178' onclick='fetchAssetData(7178);'
                     class="asset-image" data-id="<?php echo $assetId7178; ?>"
-                data-room="<?php echo htmlspecialchars($room7178); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7178); ?>"
-                data-image="<?php echo base64_encode($upload_img7178); ?>"
-                data-category=" <?php echo htmlspecialchars($category7178); ?>">
+                    data-room="<?php echo htmlspecialchars($room7178); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7178); ?>"
+                    data-image="<?php echo base64_encode($upload_img7178); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7178); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7178); ?>; position:absolute; top:355px; left:101px;'>
                 </div>
@@ -7839,10 +7842,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:360px; left:150px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7179' onclick='fetchAssetData(7179);'
                     class="asset-image" data-id="<?php echo $assetId7179; ?>"
-                data-room="<?php echo htmlspecialchars($room7179); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7179); ?>"
-                data-image="<?php echo base64_encode($upload_img7179); ?>"
-                data-category=" <?php echo htmlspecialchars($category7179); ?>">
+                    data-room="<?php echo htmlspecialchars($room7179); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7179); ?>"
+                    data-image="<?php echo base64_encode($upload_img7179); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7179); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7179); ?>; position:absolute; top:355px; left:161px;'>
                 </div>
@@ -7852,10 +7855,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:465px; left:90px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7180' onclick='fetchAssetData(7180);'
                     class="asset-image" data-id="<?php echo $assetId7180; ?>"
-                data-room="<?php echo htmlspecialchars($room7180); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7180); ?>"
-                data-image="<?php echo base64_encode($upload_img7180); ?>"
-                data-category=" <?php echo htmlspecialchars($category7180); ?>">
+                    data-room="<?php echo htmlspecialchars($room7180); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7180); ?>"
+                    data-image="<?php echo base64_encode($upload_img7180); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7180); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7180); ?>; position:absolute; top:460px; left:101px;'>
                 </div>
@@ -7865,10 +7868,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:465px; left:150px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7181' onclick='fetchAssetData(7181);'
                     class="asset-image" data-id="<?php echo $assetId7181; ?>"
-                data-room="<?php echo htmlspecialchars($room7181); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7181); ?>"
-                data-image="<?php echo base64_encode($upload_img7181); ?>"
-                data-category=" <?php echo htmlspecialchars($category7181); ?>">
+                    data-room="<?php echo htmlspecialchars($room7181); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7181); ?>"
+                    data-image="<?php echo base64_encode($upload_img7181); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7181); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7181); ?>; position:absolute; top:460px; left:161px;'>
                 </div>
@@ -7878,10 +7881,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:210px; left:290px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7182' onclick='fetchAssetData(7182);'
                     class="asset-image" data-id="<?php echo $assetId7182; ?>"
-                data-room="<?php echo htmlspecialchars($room7182); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7182); ?>"
-                data-image="<?php echo base64_encode($upload_img7182); ?>"
-                data-category=" <?php echo htmlspecialchars($category7182); ?>">
+                    data-room="<?php echo htmlspecialchars($room7182); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7182); ?>"
+                    data-image="<?php echo base64_encode($upload_img7182); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7182); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7182); ?>; position:absolute; top:205px; left:300px;'>
                 </div>
@@ -7891,10 +7894,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:210px; left:240px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7183' onclick='fetchAssetData(7183);'
                     class="asset-image" data-id="<?php echo $assetId7183; ?>"
-                data-room="<?php echo htmlspecialchars($room7183); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7183); ?>"
-                data-image="<?php echo base64_encode($upload_img7183); ?>"
-                data-category=" <?php echo htmlspecialchars($category7183); ?>">
+                    data-room="<?php echo htmlspecialchars($room7183); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7183); ?>"
+                    data-image="<?php echo base64_encode($upload_img7183); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7183); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7183); ?>; position:absolute; top:205px; left:250px;'>
                 </div>
@@ -7904,10 +7907,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:465px; left:1095px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7245' onclick='fetchAssetData(7245);'
                     class="asset-image" data-id="<?php echo $assetId7245; ?>"
-                data-room="<?php echo htmlspecialchars($room7245); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7245); ?>"
-                data-image="<?php echo base64_encode($upload_img7245); ?>"
-                data-category=" <?php echo htmlspecialchars($category7245); ?>">
+                    data-room="<?php echo htmlspecialchars($room7245); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7245); ?>"
+                    data-image="<?php echo base64_encode($upload_img7245); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7245); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7245); ?>; position:absolute; top:460px; left:1106px;'>
                 </div>
@@ -7917,10 +7920,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:465px; left:1030px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7246' onclick='fetchAssetData(7246);'
                     class="asset-image" data-id="<?php echo $assetId7246; ?>"
-                data-room="<?php echo htmlspecialchars($room7246); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7246); ?>"
-                data-image="<?php echo base64_encode($upload_img7246); ?>"
-                data-category=" <?php echo htmlspecialchars($category7246); ?>">
+                    data-room="<?php echo htmlspecialchars($room7246); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7246); ?>"
+                    data-image="<?php echo base64_encode($upload_img7246); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7246); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7246); ?>; position:absolute; top:460px; left:1041px;'>
                 </div>
@@ -7930,10 +7933,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:360px; left:1030px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7247' onclick='fetchAssetData(7247);'
                     class="asset-image" data-id="<?php echo $assetId7247; ?>"
-                data-room="<?php echo htmlspecialchars($room7247); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7247); ?>"
-                data-image="<?php echo base64_encode($upload_img7247); ?>"
-                data-category=" <?php echo htmlspecialchars($category7247); ?>">
+                    data-room="<?php echo htmlspecialchars($room7247); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7247); ?>"
+                    data-image="<?php echo base64_encode($upload_img7247); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7247); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7247); ?>; position:absolute; top:355px; left:1041px;'>
                 </div>
@@ -7943,10 +7946,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:360px; left:1095px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7248' onclick='fetchAssetData(7248);'
                     class="asset-image" data-id="<?php echo $assetId7248; ?>"
-                data-room="<?php echo htmlspecialchars($room7248); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7248); ?>"
-                data-image="<?php echo base64_encode($upload_img7248); ?>"
-                data-category=" <?php echo htmlspecialchars($category7248); ?>">
+                    data-room="<?php echo htmlspecialchars($room7248); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7248); ?>"
+                    data-image="<?php echo base64_encode($upload_img7248); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7248); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7248); ?>; position:absolute; top:355px; left:1106px;'>
                 </div>
@@ -7956,10 +7959,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:380px; left:1063px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7249' onclick='fetchAssetData(7249);'
                     class="asset-image" data-id="<?php echo $assetId7249; ?>"
-                data-room="<?php echo htmlspecialchars($room7249); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7249); ?>"
-                data-image="<?php echo base64_encode($upload_img7249); ?>"
-                data-category=" <?php echo htmlspecialchars($category7249); ?>">
+                    data-room="<?php echo htmlspecialchars($room7249); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7249); ?>"
+                    data-image="<?php echo base64_encode($upload_img7249); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7249); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7249); ?>; position:absolute; top:375px; left:1074px;'>
                 </div>
@@ -7969,10 +7972,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:415px; left:1063px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7250' onclick='fetchAssetData(7250);'
                     class="asset-image" data-id="<?php echo $assetId7250; ?>"
-                data-room="<?php echo htmlspecialchars($room7250); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7250); ?>"
-                data-image="<?php echo base64_encode($upload_img7250); ?>"
-                data-category=" <?php echo htmlspecialchars($category7250); ?>">
+                    data-room="<?php echo htmlspecialchars($room7250); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7250); ?>"
+                    data-image="<?php echo base64_encode($upload_img7250); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7250); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7250); ?>; position:absolute; top:410px; left:1074px;'>
                 </div>
@@ -7982,10 +7985,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:450px; left:1063px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7251' onclick='fetchAssetData(7251);'
                     class="asset-image" data-id="<?php echo $assetId7251; ?>"
-                data-room="<?php echo htmlspecialchars($room7251); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7251); ?>"
-                data-image="<?php echo base64_encode($upload_img7251); ?>"
-                data-category=" <?php echo htmlspecialchars($category7251); ?>">
+                    data-room="<?php echo htmlspecialchars($room7251); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7251); ?>"
+                    data-image="<?php echo base64_encode($upload_img7251); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7251); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7251); ?>; position:absolute; top:445px; left:1074px;'>
                 </div>
@@ -7996,10 +7999,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:402px; left:935px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7252' onclick='fetchAssetData(7252);'
                     class="asset-image" data-id="<?php echo $assetId7252; ?>"
-                data-room="<?php echo htmlspecialchars($room7252); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7252); ?>"
-                data-image="<?php echo base64_encode($upload_img7252); ?>"
-                data-category=" <?php echo htmlspecialchars($category7252); ?>">
+                    data-room="<?php echo htmlspecialchars($room7252); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7252); ?>"
+                    data-image="<?php echo base64_encode($upload_img7252); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7252); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7252); ?>; position:absolute; top:397px; left:946px;'>
                 </div>
@@ -8009,10 +8012,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:402px; left:1000px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7253' onclick='fetchAssetData(7253);'
                     class="asset-image" data-id="<?php echo $assetId7253; ?>"
-                data-room="<?php echo htmlspecialchars($room7253); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7253); ?>"
-                data-image="<?php echo base64_encode($upload_img7253); ?>"
-                data-category=" <?php echo htmlspecialchars($category7253); ?>">
+                    data-room="<?php echo htmlspecialchars($room7253); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7253); ?>"
+                    data-image="<?php echo base64_encode($upload_img7253); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7253); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7253); ?>; position:absolute; top:397px; left:1011px;'>
                 </div>
@@ -8022,10 +8025,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:470px; left:1000px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7254' onclick='fetchAssetData(7254);'
                     class="asset-image" data-id="<?php echo $assetId7254; ?>"
-                data-room="<?php echo htmlspecialchars($room7254); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7254); ?>"
-                data-image="<?php echo base64_encode($upload_img7254); ?>"
-                data-category=" <?php echo htmlspecialchars($category7254); ?>">
+                    data-room="<?php echo htmlspecialchars($room7254); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7254); ?>"
+                    data-image="<?php echo base64_encode($upload_img7254); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7254); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7254); ?>; position:absolute; top:465px; left:1011px;'>
                 </div>
@@ -8035,10 +8038,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:470px; left:935px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7255' onclick='fetchAssetData(7255);'
                     class="asset-image" data-id="<?php echo $assetId7255; ?>"
-                data-room="<?php echo htmlspecialchars($room7255); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7255); ?>"
-                data-image="<?php echo base64_encode($upload_img7255); ?>"
-                data-category=" <?php echo htmlspecialchars($category7255); ?>">
+                    data-room="<?php echo htmlspecialchars($room7255); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7255); ?>"
+                    data-image="<?php echo base64_encode($upload_img7255); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7255); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7255); ?>; position:absolute; top:465px; left:946px;'>
                 </div>
@@ -8048,10 +8051,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:450px; left:970px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7256' onclick='fetchAssetData(7256);'
                     class="asset-image" data-id="<?php echo $assetId7256; ?>"
-                data-room="<?php echo htmlspecialchars($room7256); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7256); ?>"
-                data-image="<?php echo base64_encode($upload_img7256); ?>"
-                data-category=" <?php echo htmlspecialchars($category7256); ?>">
+                    data-room="<?php echo htmlspecialchars($room7256); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7256); ?>"
+                    data-image="<?php echo base64_encode($upload_img7256); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7256); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7256); ?>; position:absolute; top:445px; left:981px;'>
                 </div>
@@ -8061,10 +8064,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:415px; left:970px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7257' onclick='fetchAssetData(7257);'
                     class="asset-image" data-id="<?php echo $assetId7257; ?>"
-                data-room="<?php echo htmlspecialchars($room7257); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7257); ?>"
-                data-image="<?php echo base64_encode($upload_img7257); ?>"
-                data-category=" <?php echo htmlspecialchars($category7257); ?>">
+                    data-room="<?php echo htmlspecialchars($room7257); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7257); ?>"
+                    data-image="<?php echo base64_encode($upload_img7257); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7257); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7257); ?>; position:absolute; top:410px; left:981px;'>
                 </div>
@@ -8074,10 +8077,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:375px; left:935px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7258' onclick='fetchAssetData(7258);'
                     class="asset-image" data-id="<?php echo $assetId7258; ?>"
-                data-room="<?php echo htmlspecialchars($room7258); ?>"
-                data-floor=" <?php echo htmlspecialchars($floor7258); ?>"
-                data-image="<?php echo base64_encode($upload_img7258); ?>"
-                data-category=" <?php echo htmlspecialchars($category7258); ?>">
+                    data-room="<?php echo htmlspecialchars($room7258); ?>"
+                    data-floor=" <?php echo htmlspecialchars($floor7258); ?>"
+                    data-image="<?php echo base64_encode($upload_img7258); ?>"
+                    data-category=" <?php echo htmlspecialchars($category7258); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7258); ?>; position:absolute; top:370px; left:946px;'>
                 </div>
@@ -8430,7 +8433,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId" value="<?php echo htmlspecialchars($assetId1); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId1); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -8583,12 +8586,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId" value="<?php echo htmlspecialchars($assetId2); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId2); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
                                 <!--IMAGE HERE-->
-                                <div class="col-12 center-content">
+                                <div class=" col-12 center-content">
                                     <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img2); ?>"
                                         alt="No Image">
                                 </div>
@@ -8736,12 +8739,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId" value="<?php echo htmlspecialchars($assetId3); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId3); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
                                 <!--IMAGE HERE-->
-                                <div class="col-12 center-content">
+                                <div class=" col-12 center-content">
                                     <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img3); ?>"
                                         alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
                                 </div>
@@ -8889,12 +8892,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId" value="<?php echo htmlspecialchars($assetId4); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId4); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
                                 <!--IMAGE HERE-->
-                                <div class="col-12 center-content">
+                                <div class=" col-12 center-content">
                                     <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img4); ?>"
                                         alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
                                 </div>
@@ -9043,12 +9046,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId" value="<?php echo htmlspecialchars($assetId5); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId5); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
                                 <!--IMAGE HERE-->
-                                <div class="col-12 center-content">
+                                <div class=" col-12 center-content">
                                     <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img5); ?>"
                                         alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
                                 </div>
@@ -9196,12 +9199,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId" value="<?php echo htmlspecialchars($assetId6); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId6); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
                                 <!--IMAGE HERE-->
-                                <div class="col-12 center-content">
+                                <div class=" col-12 center-content">
                                     <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img6); ?>"
                                         alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
                                 </div>
@@ -9349,12 +9352,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId" value="<?php echo htmlspecialchars($assetId7); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId7); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
                                 <!--IMAGE HERE-->
-                                <div class="col-12 center-content">
+                                <div class=" col-12 center-content">
                                     <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7); ?>"
                                         alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
                                 </div>
@@ -9502,12 +9505,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId" value="<?php echo htmlspecialchars($assetId8); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId8); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
                                 <!--IMAGE HERE-->
-                                <div class="col-12 center-content">
+                                <div class=" col-12 center-content">
                                     <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img8); ?>"
                                         alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
                                 </div>
@@ -9655,12 +9658,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId" value="<?php echo htmlspecialchars($assetId9); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId9); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
                                 <!--IMAGE HERE-->
-                                <div class="col-12 center-content">
+                                <div class=" col-12 center-content">
                                     <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img9); ?>"
                                         alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
                                 </div>
@@ -9808,8 +9811,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId10); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId10); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -9964,8 +9966,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId11); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId11); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -10120,8 +10121,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId12); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId12); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -10276,8 +10276,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId13); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId13); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -10432,8 +10431,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId14); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId14); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -10588,8 +10586,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId15); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId15); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -10744,8 +10741,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId16); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId16); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -10900,8 +10896,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId17); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId17); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -11056,8 +11051,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId18); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId18); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -11212,8 +11206,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId19); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId19); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -11368,8 +11361,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId20); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId20); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -11524,8 +11516,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId21); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId21); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -11680,8 +11671,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId22); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId22); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -11836,8 +11826,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId23); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId23); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -12150,8 +12139,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId25); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId25); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -12306,8 +12294,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId26); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId26); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -12462,8 +12449,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId27); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId27); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -12618,8 +12604,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId28); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId28); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -12774,8 +12759,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId29); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId29); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -12930,8 +12914,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId30); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId30); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -13086,8 +13069,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId31); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId31); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -13242,8 +13224,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId32); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId32); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -13398,8 +13379,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId33); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId33); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -13554,8 +13534,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId34); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId34); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -13710,8 +13689,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId35); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId35); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -13866,8 +13844,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId36); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId36); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -14022,8 +13999,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId37); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId37); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -14178,8 +14154,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId38); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId38); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -14334,8 +14309,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId39); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId39); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
@@ -14490,8 +14464,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!-- Modal body -->
                         <div class='modal-body'>
                             <form method="post" class="row g-3" enctype="multipart/form-data">
-                                <input type=" hidden" name="assetId"
-                                    value="<?php echo htmlspecialchars($assetId40); ?>">
+                                <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId40); ?>">
                                 <!--START DIV FOR IMAGE -->
 
                                 <!--First Row-->
