@@ -60441,7 +60441,7 @@ position:absolute; top:477px; left:917px;'>
         });
     </script>
 
-    <!--Start of JS Hover-->
+   <!--Start of JS Hover-->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const assetImages = document.querySelectorAll('.asset-image');
@@ -60454,6 +60454,7 @@ position:absolute; top:477px; left:917px;'>
                     const floor = this.dataset.floor;
                     const base64Data = this.dataset.image;
                     const category = this.dataset.category; // Get the category from the data attribute
+                    const assignedName = this.dataset.assignedname; // Add this line to get the assignedName from the data attribute
 
                     let imageHTML = '';
                     if (base64Data && base64Data.trim() !== '') {
@@ -60465,18 +60466,38 @@ position:absolute; top:477px; left:917px;'>
 
                     // Update hover element's content
                     hoverElement.innerHTML = `
-                <div class="center-content-hover">
-                    ${imageHTML}
-                </div>
-                <div>
-                    <label for="assetIdHover${id}" class="form-label TrackingHover">Tracking #:</label>
-                    <input type="text" class="form-control hover-input" id="assetId" value="${id}" readonly />
-                </div>
-                <div class="hover-location">
-                    <input type="text" class="form-control input-hover" id="category-hover" value="${category}" readonly />
-                    <input type="text" class="form-control input-hover" id="room" value="${room}" readonly />
-                    <input type="text" class="form-control input-hover" id="floor" value="${floor}" readonly />
-                </div>
+                    <div class="top-side-hover">
+                        <div class="center-content-hover">
+                            ${imageHTML}
+                        </div>
+                        <input type="text" class="form-control input-hover" id="category-hover" value="${category}" readonly />
+                    </div>
+
+                    <div class="hover-location">
+
+                        <div class ="hover-label">
+                            <label for="assetIdHover${id}" class="form-label TrackingHover">Tracking #:</label>
+                            <input type="text" class="form-control input-hover1 hover-input" id="assetId" value="${id}" readonly />
+                        </div>
+
+                        <div class = "hover-label">
+                            <label for="assetIdHover${id}" class="form-label TrackingHover1">Room:</label>
+                            <input type="text" class="form-control input-hover1 room-hover" id="room" value="${room}" readonly />
+                        </div>
+
+                        <div class = "hover-label">
+                            <label for="assetIdHover${id}" class="form-label TrackingHover1">Floor:</label>
+                            <input type="text" class="form-control input-hover1" id="floor" value="${floor}" readonly />
+                        </div>
+
+                    ${assignedName && assignedName.trim() !== '' ? `
+                        <div>
+                            <label for="assignedNameHover${id}" class="form-label TrackingHover">Assigned To:</label>
+                            <input type="text" class="form-control input-hover1" id="assignedName" value="${assignedName}" readonly />
+                        </div>
+                     ` : ''
+                        }
+                    </div>
             `;
 
                     // Show hover element

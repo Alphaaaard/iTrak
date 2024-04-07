@@ -68,12 +68,13 @@
   position: absolute;
   top: 30px;
   left: 1130px;
-  border: 2px solid;
+  border: 2px solid #3D3B40; 
   height: 200px;
   width: 125px;
   border-radius: 15px;
-  padding: 5px;
-  background-color: #f1f6ff;
+  padding: 15px 5px 5px 5px;
+  color: #3D3B40;
+  background-color: white;
 }
 #content
   .modal
@@ -202,7 +203,9 @@
 
 .hover-input {
   width: 100%;
-  text-align: center;
+  font-size: 10px;
+  text-align: start;
+  margin: 0 !important;
 }
 
 #assetId {
@@ -213,12 +216,32 @@
 
 .input-hover {
   text-align: center !important;
+
+  
+}
+.input-hover1 {
+  text-align: start !important;
+  font-size: 9px;
+
+  
+}
+
+.top-side-hover{
+  border-bottom: 2px solid #AAAAAA;
+  margin-bottom: 5px;
 }
 .hover-location {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 5px;
 }
+
+.room-hover{
+  margin:0 !important;
+}
+
+
 
 .center-content-hover img {
   height: 50px !important;
@@ -383,7 +406,13 @@
 .nav-tabs h3 {
   color: #163172;
 }
-
+.hover-label{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
 h3 {
   text-align: center;
   font-weight: bold;
@@ -403,21 +432,39 @@ h3 {
 .TrackingHover{
   margin: 0;
   display: flex;
-  justify-content: center;
+  width: 110px;
+  font-size: 9px;
+  font-weight: bold;
+}
+.TrackingHover1{
+  margin: 0;
+  display: flex;
+  font-size: 9px;
+  font-weight: bold;
 }
 #room {
   background-color: unset !important;
   border: unset !important;
+  color: #3D3B40;
 }
+
+#assignedName {
+  background-color: unset !important;
+  border: unset !important;
+  color: #3D3B40;
+}
+
 
 #floor {
   background-color: unset !important;
   border: unset !important;
+  color: #3D3B40;
 }
 
 #category {
   background-color: unset !important;
   border: unset !important;
+  color: #3D3B40;
 }
 
 .legend-button {
