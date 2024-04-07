@@ -444,16 +444,14 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                     <option value="location">Location</option>
                                 </select>
 
-                                <div class="col-4">
-                                    <select id="rows-display-dropdown" class="form-select dropdown-rows" aria-label="Default select example">
-                                        <option value="20" selected>Show 20 rows</option>
-                                        <option class="hidden"></option>
-                                        <option value="50">Show 50 rows</option>
-                                        <option value="100">Show 100 rows</option>
-                                        <option value="150">Show 150 rows</option>
-                                        <option value="200">Show 200 rows</option>
-                                    </select>
-                                </div>
+                                <select id="rows-display-dropdown" class="form-select dropdown-rows" aria-label="Default select example">
+                                    <option value="20" selected>Show 20 rows</option>
+                                    <option class="hidden"></option>
+                                    <option value="50">Show 50 rows</option>
+                                    <option value="100">Show 100 rows</option>
+                                    <option value="150">Show 150 rows</option>
+                                    <option value="200">Show 200 rows</option>
+                                </select>
 
                                 <!-- Search Box -->
                                 <form class="d-flex col-sm-5" role="search" id="searchForm">

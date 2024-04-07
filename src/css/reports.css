@@ -18,6 +18,13 @@
   display: none;
 }
 
+.export {
+  /* width: 100%; */
+  /* display: flex;
+  justify-content: end;
+  display: none; */
+}
+
 table {
   border-collapse: separate;
   border-spacing: 0 5px;
@@ -46,7 +53,7 @@ table {
 .headerskie {
   display: flex;
   padding: 10px 10px 10px 5%;
-  font-size: 14px;
+  font-size: 10px;
   font-weight: bold;
 }
 
@@ -381,9 +388,10 @@ img.icon.staff {
 
 @media (max-width: 600px) {
   .tbl-filter {
-    /* padding-bottom: 1em; */
+    padding-bottom: 0.5em;
     display: flex;
     /* justify-content: end; */
+    align-items: baseline;
   }
 
   .add-btn {
@@ -419,8 +427,8 @@ img.icon.staff {
   }
 
   #filter-criteria {
-    margin-top: 2.5em;
-    width: 50%;
+    /* margin-top: 2.5em; */
+    width: 40%;
     font-size: 0.8em;
   }
 
@@ -429,22 +437,53 @@ img.icon.staff {
     width: 50%;
     font-size: 0.8em !important;
   }
+
+  .export-mob-hide {
+    display: none;
+  }
+
+  .export {
+    display: flex !important;
+  }
 }
 
 .export {
-  margin-bottom: 1em; /* Adjust as necessary */
+  display: none;
 }
 
 /* New style for export button */
 #exportBtn {
-  color: black;
-  padding: 0.5em 1em; /* Adjust padding to match the nav links, if needed */
-  background-color: #f8f9fa; /* Adjust background color to match your design */
-  border: 1px solid #ddd; /* Adjust border as needed */
+  background-color: #1e56a0;
+  border: #1e56a0 1px solid;
+  border-radius: 20px;
+  padding: 0.7em 4em;
+  font-size: 0.7em;
+  font-weight: 500;
+  color: white;
+  transition: 0.3s ease;
   /* Add any other button styling you have */
 }
 
 #exportBtn:hover {
-  background-color: #94dba1; /* Darker shade on hover for contrast */
-  color: #333; /* Optionally, change the text color on hover for better visibility */
+  background-color: white;
+  color: #163172;
+  border: #163172 1px solid;
+}
+
+#exportBtn-mbl {
+  background-color: #1e56a0;
+  border: #1e56a0 1px solid;
+  border-radius: 20px;
+  padding: 0em 3em;
+  font-size: 0.7em;
+  font-weight: 500;
+  color: white;
+  transition: 0.3s ease;
+  /* Add any other button styling you have */
+}
+
+#exportBtn-mbl:hover {
+  background-color: white;
+  color: #163172;
+  border: #163172 1px solid;
 }
