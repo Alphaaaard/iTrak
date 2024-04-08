@@ -13,9 +13,23 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 if (isset($_POST['submit']) && $_POST['submit'] == 'Export to Excel') {
     $conn = connection();
     $status = $_POST['status'];
-    $sql = "SELECT assetId, category, building, floor, room, date, status FROM asset WHERE status = ?;";
+    $searchQuery = isset($_POST['searchQuery']) ? $_POST['searchQuery'] : '';
+
+    // Prepare the SQL query with optional search term
+    $sql = "SELECT assetId, category, building, floor, room, date, status FROM asset WHERE status = ?";
+    $types = 's'; // Type for status
+    $params = [$status]; // Parameters for the prepared statement
+
+    // If a search query is provided, extend the SQL query to include a LIKE clause
+    if (!empty($searchQuery)) {
+        $searchTerm = "%$searchQuery%";
+        $sql .= " AND (assetId LIKE ? OR date LIKE ? OR category LIKE ? OR CONCAT(building, ' ', floor, ' ', room) LIKE ?)";
+        $types .= 'ssss'; // Add types for new parameters
+        $params = array_merge($params, array_fill(0, 4, $searchTerm)); // Duplicate $searchTerm for each LIKE clause
+    }
+
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, 's', $status);
+    mysqli_stmt_bind_param($stmt, $types, ...$params);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
@@ -57,6 +71,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Export to Excel') {
         $sheet->mergeCells('G' . $rowNumber . ':I' . $rowNumber); // Merges cells for each data row
         $sheet->setCellValue('J' . $rowNumber, $row['status']);
         $sheet->mergeCells('J' . $rowNumber . ':K' . $rowNumber); // Merges cells for each data row
+
         // Apply center style to data cells that have been merged
         $sheet->getStyle('A' . $rowNumber . ':K' . $rowNumber)->applyFromArray($centerStyleArray);
         $rowNumber++;

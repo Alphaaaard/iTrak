@@ -1130,91 +1130,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </script>
 
         <script>
-            function exportTableToPDF(exportContentId, filename, tableName) {
-                const exportContent = document.getElementById(exportContentId);
-
-                if (!exportContent) {
-                    Swal.fire({
-                        title: 'Failed!',
-                        text: 'No data available to export.',
-                        icon: 'error',
-                        confirmButtonText: 'OK'
-                    });
-                    return;
-                }
-
-                Swal.fire({
-                    title: 'Preparing your PDF...',
-                    text: 'Please wait...',
-                    icon: 'info',
-                    showConfirmButton: false,
-                    allowOutsideClick: false,
-                    willOpen: () => {
-                        Swal.showLoading();
-                    }
-                });
-
-                html2canvas(exportContent, {
-                    useCORS: true,
-                    scale: 1,
-                    windowHeight: exportContent.scrollHeight,
-                    onclone: function(clonedDocument) {
-                        const clonedElement = clonedDocument.getElementById(exportContentId);
-                        clonedElement.style.height = `${exportContent.scrollHeight}px`;
-                    }
-                }).then(canvas => {
-                    const pdf = new jspdf.jsPDF({
-                        orientation: 'landscape', // Consider 'landscape' if tables are wide
-                        unit: 'mm',
-                        format: 'a4'
-                    });
-
-                    const imgData = canvas.toDataURL('image/png');
-                    const pdfWidth = pdf.internal.pageSize.getWidth();
-                    const pdfHeight = pdf.internal.pageSize.getHeight();
-                    const imgWidth = pdfWidth;
-                    const imgHeight = canvas.height * imgWidth / canvas.width;
-                    let heightLeft = imgHeight;
-
-                    pdf.setFontSize(12); // Set the title font size
-                    pdf.text(tableName, 10, 10); // Add the dynamic table name as the title
-
-                    let position = 20; // Adjust position to account for title
-
-                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                    heightLeft -= pdfHeight - position; // Adjust for the initial position offset
-
-                    while (heightLeft >= 0) {
-                        position = (heightLeft - imgHeight) < 0 ? heightLeft : heightLeft - imgHeight;
-                        pdf.addPage();
-                        pdf.text(tableName, 10, 10); // Add the table name as the title on new pages as well
-                        pdf.addImage(imgData, 'PNG', 0, position - pdfHeight + 20, imgWidth, imgHeight);
-                        heightLeft -= pdfHeight;
-                    }
-
-                    pdf.save(filename);
-
-                    Swal.close();
-                    Swal.fire({
-                        title: 'Done!',
-                        text: 'Your PDF has been downloaded.',
-                        icon: 'success',
-                        timer: 1000,
-                        showConfirmButton: false
-                    });
-                }).catch(error => {
-                    Swal.fire({
-                        title: 'Error!',
-                        text: 'There was a problem generating the PDF.',
-                        icon: 'error',
-                        confirmButtonText: 'OK'
-                    });
-                    console.error('Error generating PDF: ', error);
-                });
-            }
-        </script>
-
-        <script>
             $(document).ready(function() {
                 // Function to update hidden input with the active status
                 function updateStatusInput(tab) {
@@ -1264,82 +1179,39 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </script>
 
 <script>
-            document.getElementById('exportBtn').addEventListener('click', function() {
-                Swal.fire({
-                    title: 'Choose the file format',
-                    showDenyButton: true,
-                    confirmButtonText: 'PDF',
-                    denyButtonText: `Excel`,
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        var formData = new FormData(document.getElementById('exportForm'));
-                        formData.append('submit', 'Export to PDF');
-
-                        // Show a loading message with loading animation
-                        Swal.fire({
-                            title: 'Exporting...',
-                            html: 'Please wait while the PDF is being generated.',
-                            allowOutsideClick: false,
-                            showConfirmButton: false, // Do not show the confirm button
-                            willOpen: () => {
-                                Swal.showLoading(); // Show loading animation
-                            },
-                        });
-
-                        fetch('export-pdf.php', {
-                                method: 'POST',
-                                body: formData,
-                            })
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw new Error('Network response was not ok');
-                                }
-                                return response.blob();
-                            })
-                            .then(blob => {
-                                const tabIdentifier = sessionStorage.getItem("lastTab") || 'pills-manager';
-                                const tabNameMap = {
-                                    'pills-manager': 'Working Assets',
-                                    'pills-profile': 'Under-Maintenance Assets',
-                                    'pills-replace': 'For-Replacement Assets',
-                                    'pills-repair': 'Need Repair Assets',
-                                };
-                                const activeTabName = tabNameMap[tabIdentifier] || 'Exported-Data';
-
-                                const pdfUrl = window.URL.createObjectURL(blob);
-                                const downloadLink = document.createElement('a');
-                                downloadLink.href = pdfUrl;
-                                downloadLink.download = `${activeTabName}.pdf`;
-                                document.body.appendChild(downloadLink);
-                                downloadLink.click();
-
-                                window.URL.revokeObjectURL(pdfUrl);
-                                document.body.removeChild(downloadLink);
-
-                                // Show a success message
-                                Swal.fire({
-                                    title: 'Exporting Done',
-                                    text: 'Your file has been successfully generated.',
-                                    icon: 'success',
-                                    confirmButtonText: 'OK'
-                                });
-                            })
-                            .catch(error => {
-                                // Show an error message
-                                Swal.fire({
-                                    title: 'Error',
-                                    text: 'There was an issue generating the PDF.',
-                                    icon: 'error',
-                                    confirmButtonText: 'OK'
-                                });
-                            });
-                        } else if (result.isDenied) {
+document.getElementById('exportBtn').addEventListener('click', function() {
+    var filterCriteria = document.getElementById('filter-criteria').value;
+    var searchQuery = document.getElementById('search-box').value; // Get the value of the search box
     var formData = new FormData(document.getElementById('exportForm'));
-    formData.append('submit', 'Export to Excel');
+    formData.append('filterType', filterCriteria);
+    formData.append('searchQuery', searchQuery); // Include the search query in the FormData
 
     Swal.fire({
+        title: 'Choose the file format',
+        showDenyButton: true,
+        // showCancelButton: true,
+        confirmButtonText: 'PDF',
+        denyButtonText: `Excel`,
+        // cancelButtonText: 'Word',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            formData.append('submit', 'Export to PDF');
+            performExport(formData, 'export-pdf.php');
+        } else if (result.isDenied) {
+            formData.append('submit', 'Export to Excel');
+            performExport(formData, 'export-excel.php');
+        } 
+        // else if (result.dismiss === Swal.DismissReason.cancel) {
+        //     formData.append('submit', 'Export to Word');
+        //     performExport(formData, 'export-word.php');
+        // }
+    });
+});
+
+function performExport(formData, endpoint) {
+    Swal.fire({
         title: 'Exporting...',
-        html: 'Please wait while the Excel file is being generated.',
+        html: 'Please wait while the file is being generated.',
         allowOutsideClick: false,
         showConfirmButton: false,
         willOpen: () => {
@@ -1347,176 +1219,62 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         },
     });
 
-    fetch('export-excel.php', {
-            method: 'POST',
-            body: formData,
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.blob();
-        })
-        .then(blob => {
-            const excelUrl = window.URL.createObjectURL(blob);
-            const downloadLink = document.createElement('a');
-            downloadLink.href = excelUrl;
-            downloadLink.download = 'Exported-Data.xlsx'; // You can dynamically set the filename as per your requirement
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
+    fetch(endpoint, {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.blob();
+    })
+    .then(blob => {
+        const tabIdentifier = sessionStorage.getItem("lastTab") || 'pills-manager';
+        const tabNameMap = {
+            'pills-manager': 'Working-Assets',
+            'pills-profile': 'Under-Maintenance-Assets',
+            'pills-replace': 'For-Replacement-Assets',
+            'pills-repair': 'Need-Repair-Assets',
+        };
+        const activeTabName = tabNameMap[tabIdentifier] || 'Exported-Data';
+        const fileExtension = getFileExtension(endpoint);
+        const fileName = `${activeTabName}.${fileExtension}`;
 
-            window.URL.revokeObjectURL(excelUrl);
-            document.body.removeChild(downloadLink);
+        const downloadUrl = window.URL.createObjectURL(blob);
+        const downloadLink = document.createElement('a');
+        downloadLink.href = downloadUrl;
+        downloadLink.download = fileName;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
 
-            Swal.fire({
-                title: 'Exporting Done',
-                text: 'Your file has been successfully generated.',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        })
-        .catch(error => {
-            Swal.fire({
-                title: 'Error',
-                text: 'There was an issue generating the Excel file.',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
+        window.URL.revokeObjectURL(downloadUrl);
+        document.body.removeChild(downloadLink);
+
+        Swal.fire({
+            title: 'Exporting Done',
+            text: 'Your file has been successfully generated.',
+            icon: 'success',
+            confirmButtonText: 'OK'
         });
-}
-
-                });
-            });
-        </script>
-
-        <script>
-            document.getElementById('exportBtn-mbl').addEventListener('click', function() {
-                Swal.fire({
-                    title: 'Choose the file format',
-                    showDenyButton: true,
-                    confirmButtonText: 'PDF',
-                    denyButtonText: `Excel`,
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        var formData = new FormData(document.getElementById('exportForm'));
-                        formData.append('submit', 'Export to PDF');
-
-                        // Show a loading message with loading animation
-                        Swal.fire({
-                            title: 'Exporting...',
-                            html: 'Please wait while the PDF is being generated.',
-                            allowOutsideClick: false,
-                            showConfirmButton: false, // Do not show the confirm button
-                            willOpen: () => {
-                                Swal.showLoading(); // Show loading animation
-                            },
-                        });
-
-                        fetch('export-pdf.php', {
-                                method: 'POST',
-                                body: formData,
-                            })
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw new Error('Network response was not ok');
-                                }
-                                return response.blob();
-                            })
-                            .then(blob => {
-                                const tabIdentifier = sessionStorage.getItem("lastTab") || 'pills-manager';
-                                const tabNameMap = {
-                                    'pills-manager': 'Working Assets',
-                                    'pills-profile': 'Under-Maintenance Assets',
-                                    'pills-replace': 'For-Replacement Assets',
-                                    'pills-repair': 'Need Repair Assets',
-                                };
-                                const activeTabName = tabNameMap[tabIdentifier] || 'Exported-Data';
-
-                                const pdfUrl = window.URL.createObjectURL(blob);
-                                const downloadLink = document.createElement('a');
-                                downloadLink.href = pdfUrl;
-                                downloadLink.download = `${activeTabName}.pdf`;
-                                document.body.appendChild(downloadLink);
-                                downloadLink.click();
-
-                                window.URL.revokeObjectURL(pdfUrl);
-                                document.body.removeChild(downloadLink);
-
-                                // Show a success message
-                                Swal.fire({
-                                    title: 'Exporting Done',
-                                    text: 'Your file has been successfully generated.',
-                                    icon: 'success',
-                                    confirmButtonText: 'OK'
-                                });
-                            })
-                            .catch(error => {
-                                // Show an error message
-                                Swal.fire({
-                                    title: 'Error',
-                                    text: 'There was an issue generating the PDF.',
-                                    icon: 'error',
-                                    confirmButtonText: 'OK'
-                                });
-                            });
-                        } else if (result.isDenied) {
-    var formData = new FormData(document.getElementById('exportForm'));
-    formData.append('submit', 'Export to Excel');
-
-    Swal.fire({
-        title: 'Exporting...',
-        html: 'Please wait while the Excel file is being generated.',
-        allowOutsideClick: false,
-        showConfirmButton: false,
-        willOpen: () => {
-            Swal.showLoading();
-        },
+    })
+    .catch(error => {
+        Swal.fire({
+            title: 'Error',
+            text: 'There was an issue generating the file.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
     });
-
-    fetch('export-excel.php', {
-            method: 'POST',
-            body: formData,
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.blob();
-        })
-        .then(blob => {
-            const excelUrl = window.URL.createObjectURL(blob);
-            const downloadLink = document.createElement('a');
-            downloadLink.href = excelUrl;
-            downloadLink.download = 'Exported-Data.xlsx'; // You can dynamically set the filename as per your requirement
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-
-            window.URL.revokeObjectURL(excelUrl);
-            document.body.removeChild(downloadLink);
-
-            Swal.fire({
-                title: 'Exporting Done',
-                text: 'Your file has been successfully generated.',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        })
-        .catch(error => {
-            Swal.fire({
-                title: 'Error',
-                text: 'There was an issue generating the Excel file.',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-        });
 }
 
-                });
-            });
-        </script>
-
-
-
+function getFileExtension(endpoint) {
+    if (endpoint.includes('pdf')) return 'pdf';
+    if (endpoint.includes('excel')) return 'xlsx';
+    if (endpoint.includes('word')) return 'docx';
+    return '';
+}
+</script>
 
     </body>
 

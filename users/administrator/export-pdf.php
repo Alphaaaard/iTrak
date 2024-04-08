@@ -3,16 +3,35 @@
 ini_set('memory_limit', '1024M'); // Adjust the value as needed
 
 include_once("../../config/connection.php");
+
 // require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+
 use Dompdf\Dompdf;
 extract($_POST);
 
-if (isset($submit) && isset($status)) { // Check if the form is submitted and the status is set
-    $conn = connection(); // Call the connection function to get the mysqli object
-    $sql = "SELECT assetId, category, building, floor, room, date, status FROM asset WHERE status = ?;"; // Use prepared statement
+if (isset($submit) && isset($status)) {
+    $conn = connection();
+    // Start with your base SQL query
+    $sql = "SELECT assetId, category, building, floor, room, date, status FROM asset WHERE status = ?";
+    $types = 's';
+    $params = [$status];
+
+    // Check if a search query was provided and is not empty
+    if (!empty($searchQuery)) {
+        // Adjust this SQL to match your search needs, for example:
+        $sql .= " AND (assetId LIKE ? OR date LIKE ? OR category LIKE ? OR CONCAT(building, ' ', floor, ' ', room) LIKE ?)";
+        $types .= 'ssss'; // Add the types of the new parameters
+        $likeQuery = '%' . $searchQuery . '%';
+        $params[] = $likeQuery; // Add this parameter multiple times if needed for each LIKE clause
+        $params[] = $likeQuery;
+        $params[] = $likeQuery;
+        $params[] = $likeQuery;
+    }
+
+    // Prepare and bind parameters dynamically
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, 's', $status); // 's' specifies the variable type => 'string'
+    mysqli_stmt_bind_param($stmt, $types, ...$params);
     mysqli_stmt_execute($stmt);
     $query = mysqli_stmt_get_result($stmt);
 
