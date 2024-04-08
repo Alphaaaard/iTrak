@@ -503,18 +503,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <form class="d-flex col-sm-5" role="search" id="searchForm">
                                     <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" name="q" />
                                 </form>
-
-                                <div class="export">
-                                    <form method="post" id="exportForm">
-                                        <input type="hidden" name="status" id="statusField" value="For Replacement">
-                                        <button type="button" id="exportBtn-mbl" class="btn btn-outline-danger">Export Data</button>
-                                    </form>
-                                </div>
                             </div>
                         </div>
                     </header>
-                    <!-- Export button -->
-
 
                     <div class="new-nav-container">
                         <!--Content start of tabs-->
@@ -1272,7 +1263,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         </script>
 
-        <script>
+<script>
             document.getElementById('exportBtn').addEventListener('click', function() {
                 Swal.fire({
                     title: 'Choose the file format',
@@ -1342,9 +1333,58 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     confirmButtonText: 'OK'
                                 });
                             });
-                    } else if (result.isDenied) {
-                        Swal.fire('Excel export not implemented yet', '', 'info');
-                    }
+                        } else if (result.isDenied) {
+    var formData = new FormData(document.getElementById('exportForm'));
+    formData.append('submit', 'Export to Excel');
+
+    Swal.fire({
+        title: 'Exporting...',
+        html: 'Please wait while the Excel file is being generated.',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        willOpen: () => {
+            Swal.showLoading();
+        },
+    });
+
+    fetch('export-excel.php', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.blob();
+        })
+        .then(blob => {
+            const excelUrl = window.URL.createObjectURL(blob);
+            const downloadLink = document.createElement('a');
+            downloadLink.href = excelUrl;
+            downloadLink.download = 'Exported-Data.xlsx'; // You can dynamically set the filename as per your requirement
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+
+            window.URL.revokeObjectURL(excelUrl);
+            document.body.removeChild(downloadLink);
+
+            Swal.fire({
+                title: 'Exporting Done',
+                text: 'Your file has been successfully generated.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        })
+        .catch(error => {
+            Swal.fire({
+                title: 'Error',
+                text: 'There was an issue generating the Excel file.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        });
+}
+
                 });
             });
         </script>
@@ -1419,9 +1459,58 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     confirmButtonText: 'OK'
                                 });
                             });
-                    } else if (result.isDenied) {
-                        Swal.fire('Excel export not implemented yet', '', 'info');
-                    }
+                        } else if (result.isDenied) {
+    var formData = new FormData(document.getElementById('exportForm'));
+    formData.append('submit', 'Export to Excel');
+
+    Swal.fire({
+        title: 'Exporting...',
+        html: 'Please wait while the Excel file is being generated.',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        willOpen: () => {
+            Swal.showLoading();
+        },
+    });
+
+    fetch('export-excel.php', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.blob();
+        })
+        .then(blob => {
+            const excelUrl = window.URL.createObjectURL(blob);
+            const downloadLink = document.createElement('a');
+            downloadLink.href = excelUrl;
+            downloadLink.download = 'Exported-Data.xlsx'; // You can dynamically set the filename as per your requirement
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+
+            window.URL.revokeObjectURL(excelUrl);
+            document.body.removeChild(downloadLink);
+
+            Swal.fire({
+                title: 'Exporting Done',
+                text: 'Your file has been successfully generated.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        })
+        .catch(error => {
+            Swal.fire({
+                title: 'Error',
+                text: 'There was an issue generating the Excel file.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        });
+}
+
                 });
             });
         </script>
