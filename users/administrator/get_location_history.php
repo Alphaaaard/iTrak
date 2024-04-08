@@ -1,43 +1,52 @@
 <?php
 include_once("../../config/connection.php");
 
-// Function to get all locations from the database
-function getAllLocationsFromDatabase($accountId = null)
-{
+// Function to get all locations from the database by accountId and date
+function getLocationsByAccountAndDate($accountId, $date) {
     $conn = connection();
     $locations = array();
 
     $sql = "SELECT a.firstName, a.latitude, a.longitude, a.picture, lh.*, a.color
             FROM locationhistory AS lh
-        
-            LEFT JOIN account AS a ON a.accountId = lh.accountId";
+            LEFT JOIN account AS a ON a.accountId = lh.accountId
+            WHERE DATE(lh.timestamp) = ?"; // Filter by date
+
     if ($accountId) {
-        $sql .= " WHERE a.accountId = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $accountId);
+        $sql .= " AND a.accountId = ?";
+    }
+
+    $stmt = $conn->prepare($sql);
+
+    // Bind parameters based on whether an account ID was provided
+    if ($accountId) {
+        $stmt->bind_param("si", $date, $accountId);
     } else {
-        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $date);
     }
 
     $stmt->execute();
     $result = $stmt->get_result();
 
     while ($row = $result->fetch_assoc()) {
-        // Convert BLOB data to base64 encoding for the picture
         $pictureBase64 = base64_encode($row['picture']);
-        // Add base64 encoded picture to the row
         $row['picture'] = $pictureBase64;
         $locations[] = $row;
     }
 
     $stmt->close();
     $conn->close();
-
     return $locations;
 }
-
+// Get the accountId and date from the GET parameters
 $accountId = isset($_GET['accountId']) ? intval($_GET['accountId']) : null;
+$date = isset($_GET['date']) ? $_GET['date'] : date('Y-m-d'); // Default to current date if not provided
 
-$locations = getAllLocationsFromDatabase($accountId);
-
-echo json_encode($locations);
+// Fetch and echo location data as JSON
+if ($accountId && $date) {
+    $locations = getLocationsByAccountAndDate($accountId, $date);
+    echo json_encode($locations);
+} else {
+    // Handle the error: accountId or date is not provided
+    echo json_encode(array("error" => "Account ID or date not provided."));
+}
+?>

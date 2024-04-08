@@ -254,7 +254,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </li>
                 <li class="GPS-History active">
                     <a href="./gps_history.php">
-                        <i class="bi bi-radar"></i>
+                        <i class="bi bi-geo-alt"></i>
                         <span class="text">GPS History</span>
                     </a>
                 </li>
@@ -630,30 +630,29 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             }
 
                             function getLocationFromDatabase(accountId) {
-                                // Clear the map
-                                clearMap();
-                                // Fetch the locations from the server
-                                var xmlhttp = new XMLHttpRequest();
-                                xmlhttp.onreadystatechange = function() {
-                                    if (this.readyState == 4 && this.status == 200) {
-                                        var locations = JSON.parse(this.responseText);
+    // Clear the map
+    clearMap();
 
-                                        if (locations && locations.length > 0) {
-                                            // Update the map with the new locations
-                                            updateMarkers(locations);
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var locations = JSON.parse(this.responseText);
 
-                                            // Log locations to the console
-                                            console.log("Locations:", locations);
-                                        } else {
-                                            // Handle case where no location data is available
-                                            console.error("No location data available");
-                                        }
-                                    }
-                                };
+            if (locations && locations.length > 0) {
+                // Update the map with the new locations
+                updateMarkers(locations);
+            } else {
+                // Handle case where no location data is available
+                console.error("No location data available");
+            }
+        }
+    };
 
-                                xmlhttp.open("GET", "get_location_history.php?accountId=" + encodeURIComponent(accountId), true);
-                                xmlhttp.send();
-                            }
+    var date = new Date().toISOString().slice(0, 10); // Format the date as 'YYYY-MM-DD'
+    xmlhttp.open("GET", "get_location_history.php?accountId=" + encodeURIComponent(accountId) + "&date=" + date, true);
+    xmlhttp.send();
+
+}
 
                             // Initialize the map when the page loads
                             window.onload = function() {
@@ -751,7 +750,30 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 });
             });
 
+            function fetchTodaysLocations(accountId) {
+            const date = new Date().toISOString().slice(0, 10); // Get current date in YYYY-MM-DD format
+            const url = accountId ?
+                `get_location_history.php?accountId=${accountId}&date=${date}` :
+                `get_location_history.php?date=${date}`;
 
+            fetch(url)
+                .then(response => response.json())
+                .then(locations => {
+                    // Process the locations here
+                    console.log(locations);
+                    // For example, if you're updating markers on a map:
+                    updateMarkers(locations);
+                })
+                .catch(error => {
+                    console.error('Error fetching data: ', error);
+                });
+        }
+
+        // Initialize the map when the page loads
+        window.onload = function() {
+            initMap(); // Your function to initialize the map
+            fetchTodaysLocations(); // Fetch for all accounts today
+        };
 
 
             function clearMap() {
