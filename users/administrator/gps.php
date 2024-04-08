@@ -234,7 +234,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </li>
                 <li class="GPS-History">
                     <a href="./gps_history.php">
-                        <i class="bi bi-geo-alt"></i>
+                        <i class="bi bi-radar"></i>
                         <span class="text">GPS History</span>
                     </a>
                 </li>
