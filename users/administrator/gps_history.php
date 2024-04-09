@@ -1,15 +1,10 @@
 <?php
 session_start();
-
 include_once("../../config/connection.php");
-
 date_default_timezone_set('Asia/Manila'); //need ata to sa lahat ng page para sa security hahah 
-
 $conn = connection();
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
-
-
     // For personnel page, check if userLevel is 3
     if ($_SESSION['userLevel'] != 1) {
         // If not personnel, redirect to an error page or login
@@ -57,7 +52,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 ?>
-
     <!DOCTYPE html>
     <html lang="en">
 
@@ -68,6 +62,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <!-- BOOTSTRAP -->
         <link rel="icon" type="image/x-icon" href="../../src/img/tab-logo.png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- LEAFLET -->
@@ -80,18 +76,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link rel="stylesheet" href="../../src/css/gps.css" />
         <link rel="stylesheet" href="../../src/css/gps-history.css" />
     </head>
-    <style>
-        .notification-indicator {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: red;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-    </style>
+
 
     <body>
         <!-- NAVBAR -->
@@ -318,39 +303,28 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         if ($result->num_rows > 0) {
                             echo "<div class='accordion'id='accordionGPS'>";
                             echo "<div class='fake-header'>";
-
                             echo "<p>NAME</p>";
-
                             // echo "<p>Location</p>";
-
                             echo "</div>";
-
                             while ($row = $result->fetch_assoc()) {
-
                                 $accountId = $row["accountId"];
                                 $firstName = $row["firstName"];
                                 $lastName = $row["lastName"];
                                 $collapseId = "collapse" . $accountId;
                                 $headerId = "heading" . $accountId;
 
-
                                 // Accordion item
                                 echo "<div class='gps-container'>";
-
                                 echo "<div class='accordion-item'>";
                                 echo "<h2 class='accordion-header' id='" . $headerId . "'>";
                                 echo "<button class='accordion-btn gps-info' type='button' data-bs-toggle='collapse' data-bs-target='#" . $collapseId . "' aria-expanded='false' aria-controls='" . $collapseId . "' data-firstName='" . $firstName . "' data-accountId='" . $accountId . "'>";
-
                                 echo "<img src='data:image/jpeg;base64," . base64_encode($row["picture"]) . "' alt='Profile Picture' class='rounded-img' data-accountId='" . $accountId . "' />";
-
                                 echo "</button>";
                                 echo "</h2>";
                                 echo "<div id='" . $collapseId . "' class='accordion-collapse collapse' aria-labelledby='" . $headerId . "' data-bs-parent='#accordionGPS'>"; // Ensure this points to the main container ID
                                 echo "<div class='accordion-body'>";
                                 echo "<span style='color: " . $row["color"] . ";'><i class='bi bi-circle-fill'></i></span>";
                                 echo htmlspecialchars($firstName . " " . $lastName);
-
-
                                 echo "</div>"; // End of accordion body
                                 echo "</div>"; // End of accordion collapse
                                 echo "</div>"; // End of accordion item
@@ -519,7 +493,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 }); // Adjust the type as per your image type
                             }
 
-
                             // Function to convert blob data to base64 string
                             function blobToBase64(blob) {
                                 return new Promise((resolve, reject) => {
@@ -536,8 +509,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             var markers = [];
                             var polyline;
 
-                            // Update the function responsible for updating markers to show all markers at once
-                            // Update the function responsible for updating markers to show all markers at once
                             // Update the function responsible for updating markers to show all markers at once
                             async function updateMarkers(locations) {
                                 markers.forEach(marker => {
@@ -585,13 +556,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     }
 
                                     var popupContent = "Personnel: " + firstName + "<br>Location: " + qculocation + "<br>Timestamp: " + new Date(timestamp).toLocaleString();
-
                                     marker.bindPopup(popupContent);
-
                                     markers.push(marker);
-
                                     latLngs.push([latitude, longitude]);
-
                                     marker.on('mouseover', function(e) {
                                         this.openPopup();
                                     });
@@ -607,11 +574,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     color: 'blue'
                                 }).addTo(map);
                             }
-
-
-
-
-
 
                             function showMarker(firstName) {
                                 console.log("Clicked on:", firstName);
@@ -629,35 +591,39 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 }
                             }
 
-                            function getLocationFromDatabase(accountId) {
-    // Clear the map
-    clearMap();
+                            function getLocationFromDatabase(accountId, selectedDate) {
+                                // Clear the map
+                                clearMap();
 
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var locations = JSON.parse(this.responseText);
+                                var xmlhttp = new XMLHttpRequest();
+                                xmlhttp.onreadystatechange = function() {
+                                    if (this.readyState == 4 && this.status == 200) {
+                                        var locations = JSON.parse(this.responseText);
 
-            if (locations && locations.length > 0) {
-                // Update the map with the new locations
-                updateMarkers(locations);
-            } else {
-                // Handle case where no location data is available
-                console.error("No location data available");
-            }
-        }
-    };
+                                        if (locations && locations.length > 0) {
+                                            // Update the map with the new locations
+                                            updateMarkers(locations);
+                                        } else {
+                                            // Handle case where no location data is available
+                                            console.error("No location data available");
+                                        }
+                                    }
+                                };
 
-    var date = new Date().toISOString().slice(0, 10); // Format the date as 'YYYY-MM-DD'
-    xmlhttp.open("GET", "get_location_history.php?accountId=" + encodeURIComponent(accountId) + "&date=" + date, true);
-    xmlhttp.send();
-
-}
+                                xmlhttp.open("GET", "get_location_history.php?accountId=" + encodeURIComponent(accountId) + "&date=" + encodeURIComponent(selectedDate), true);
+                                xmlhttp.send();
+                            }
 
                             // Initialize the map when the page loads
                             window.onload = function() {
                                 initMap();
-                                getLocationFromDatabase();
+
+                                // Get current date for default selection
+                                var currentDate = new Date();
+                                var currentDateString = currentDate.toISOString().slice(0, 10); // Format as 'YYYY-MM-DD'
+
+                                // Initial fetch using current date
+                                getLocationFromDatabase(null, currentDateString);
                             };
                         </script>
 
@@ -697,7 +663,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             });
                         </script>
 
-
                         <style>
                             .custom-marker {
                                 width: 20px;
@@ -705,6 +670,39 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 border-radius: 50%;
                             }
                         </style>
+                    </div>
+                    <!-- Calendar container -->
+                    <div class="calendar-container">
+                        <div class="calendar">
+                            <div class="calendar-header">
+                                <div class="btn-group">
+                                    <button type="button" class="cal-btn" onclick="prevMonth()">
+                                        < </button>
+                                </div>
+                                <h5 class="month-year-text" id="currentMonthYear"></h5>
+                                <div class="btn-group">
+                                    <button type="button" class="cal-btn" onclick="nextMonth()">></button>
+                                </div>
+                            </div>
+                            <div class="calendar-body" id="calendarBody">
+                                <table class="table table-bordered calendar-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Sun</th>
+                                            <th>Mon</th>
+                                            <th>Tue</th>
+                                            <th>Wed</th>
+                                            <th>Thu</th>
+                                            <th>Fri</th>
+                                            <th>Sat</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="calendarContent">
+                                        <!-- Calendar body content will be generated here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </main>
@@ -736,6 +734,106 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/profileModalController.js"></script>
 
         <script>
+            $(document).ready(function() {
+                // Click event handler for the image in the table
+                $(document).on('click', '.locationTbl .rounded-img', function(e) {
+                    e.stopPropagation(); // Stop event propagation to parent elements
+
+                    // Get the accountId of the clicked user
+                    var accountId = $(this).data('accountId');
+
+                    // Get the current date in 'YYYY-MM-DD' format
+                    var currentDate = new Date().toISOString().slice(0, 10);
+
+                    // Call getLocationFromDatabase with the accountId and current date
+                    getLocationFromDatabase(accountId, currentDate);
+                });
+            });
+        </script>
+
+
+        <script>
+            var currentDate = new Date();
+            var currentMonth = currentDate.getMonth();
+            var currentYear = currentDate.getFullYear();
+
+            function generateCalendar(month, year) {
+                var calendarContent = document.getElementById('calendarContent');
+                var daysInMonth = new Date(year, month + 1, 0).getDate();
+
+                var firstDay = new Date(year, month, 1).getDay();
+                var lastDay = new Date(year, month, daysInMonth).getDay();
+
+                var currentDay = 1 - firstDay;
+                var currentDate = new Date(); // Get current date
+                var currentMonth = currentDate.getMonth();
+                var currentYear = currentDate.getFullYear();
+
+                var html = '';
+
+                while (currentDay <= daysInMonth) {
+                    html += '<tr>';
+
+                    for (var i = 0; i < 7; i++) {
+                        if (currentDay > 0 && currentDay <= daysInMonth) {
+                            if (currentYear === year && currentMonth === month && currentDay === currentDate.getDate()) {
+                                html += '<td class="days day-' + currentDay + ' current-day">' + currentDay + '</td>';
+                            } else {
+                                html += '<td class="days day-' + currentDay + '">' + currentDay + '</td>';
+                            }
+                        } else {
+                            html += '<td class="unselectable"></td>'; // Adding unselectable attribute
+                        }
+                        currentDay++;
+                    }
+
+                    html += '</tr>';
+                }
+
+                calendarContent.innerHTML = html;
+                document.getElementById('currentMonthYear').textContent = getMonthName(month) + ' ' + year;
+
+                // Add event listener to days
+                var days = document.querySelectorAll('.days');
+                days.forEach(function(day) {
+                    day.addEventListener('click', function() {
+                        var selectedDay = parseInt(day.textContent);
+                        var selectedDate = year + '-' + (month + 1).toString().padStart(2, '0') + '-' + selectedDay.toString().padStart(2, '0');
+                        getLocationFromDatabase(null, selectedDate);
+                    });
+                });
+            }
+
+            function prevMonth() {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                generateCalendar(currentMonth, currentYear);
+            }
+
+            function nextMonth() {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                generateCalendar(currentMonth, currentYear);
+            }
+
+            function getMonthName(month) {
+                var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                return months[month];
+            }
+
+            // Initial generation of the calendar
+            generateCalendar(currentMonth, currentYear);
+        </script>
+
+
+
+        <script>
             document.addEventListener('DOMContentLoaded', (event) => {
                 document.body.addEventListener('click', function(e) {
                     if (e.target && e.target.classList.contains('rounded-img')) {
@@ -751,29 +849,29 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
 
             function fetchTodaysLocations(accountId) {
-            const date = new Date().toISOString().slice(0, 10); // Get current date in YYYY-MM-DD format
-            const url = accountId ?
-                `get_location_history.php?accountId=${accountId}&date=${date}` :
-                `get_location_history.php?date=${date}`;
+                const date = new Date().toISOString().slice(0, 10); // Get current date in YYYY-MM-DD format
+                const url = accountId ?
+                    `get_location_history.php?accountId=${accountId}&date=${date}` :
+                    `get_location_history.php?date=${date}`;
 
-            fetch(url)
-                .then(response => response.json())
-                .then(locations => {
-                    // Process the locations here
-                    console.log(locations);
-                    // For example, if you're updating markers on a map:
-                    updateMarkers(locations);
-                })
-                .catch(error => {
-                    console.error('Error fetching data: ', error);
-                });
-        }
+                fetch(url)
+                    .then(response => response.json())
+                    .then(locations => {
+                        // Process the locations here
+                        console.log(locations);
+                        // For example, if you're updating markers on a map:
+                        updateMarkers(locations);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching data: ', error);
+                    });
+            }
 
-        // Initialize the map when the page loads
-        window.onload = function() {
-            initMap(); // Your function to initialize the map
-            fetchTodaysLocations(); // Fetch for all accounts today
-        };
+            // Initialize the map when the page loads
+            window.onload = function() {
+                initMap(); // Your function to initialize the map
+                fetchTodaysLocations(); // Fetch for all accounts today
+            };
 
 
             function clearMap() {
