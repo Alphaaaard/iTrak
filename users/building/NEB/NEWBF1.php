@@ -6753,7 +6753,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         data-room="<?php echo htmlspecialchars($room10); ?>"
                         data-floor=" <?php echo htmlspecialchars($floor10); ?>"
                         data-image="<?php echo base64_encode($upload_img10); ?>"
-                        data-category=" <?php echo htmlspecialchars($category10); ?>">
+                        data-category=" <?php echo htmlspecialchars($category10); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName10); ?>">
+
                     position:absolute; top:140px; left:862px;'>
                 </div>
 
@@ -6765,7 +6767,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room11); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor11); ?>"
                     data-image="<?php echo base64_encode($upload_img11); ?>"
-                    data-category=" <?php echo htmlspecialchars($category11); ?>">
+                    data-category=" <?php echo htmlspecialchars($category11); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName11); ?>">
+
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status11); ?>; 
                         position:absolute; top:140px; left:891.5px;'>
                 </div>
@@ -6781,7 +6785,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room12); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor12); ?>"
                     data-image="<?php echo base64_encode($upload_img12); ?>"
-                    data-category=" <?php echo htmlspecialchars($category12); ?>">
+                    data-category=" <?php echo htmlspecialchars($category12); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName12); ?>">
+
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status12); ?>; 
                         position:absolute; top:228px; left:825px; z-index:2;'>
                 </div>
@@ -6794,7 +6800,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room13); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor13); ?>"
                     data-image="<?php echo base64_encode($upload_img13); ?>"
-                    data-category=" <?php echo htmlspecialchars($category13); ?>">
+                    data-category=" <?php echo htmlspecialchars($category13); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName13); ?>">
+
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status13); ?>; 
                         position:absolute; top:255px; left:825px; z-index:2;'>
                 </div>
@@ -6807,7 +6815,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room14); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor14); ?>"
                     data-image="<?php echo base64_encode($upload_img14); ?>"
-                    data-category=" <?php echo htmlspecialchars($category14); ?>">
+                    data-category=" <?php echo htmlspecialchars($category14); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName14); ?>">
+
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status14); ?>; 
                         position:absolute; top:140px; left:783px; z-index:2;'>
                 </div>
@@ -6820,7 +6830,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room15); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor15); ?>"
                     data-image="<?php echo base64_encode($upload_img15); ?>"
-                    data-category=" <?php echo htmlspecialchars($category15); ?>">
+                    data-category=" <?php echo htmlspecialchars($category15); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName15); ?>">
+
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status15); ?>; 
                         position:absolute; top:140px; left:735px; z-index:2;'>
                 </div>
@@ -6833,7 +6845,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room16); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor16); ?>"
                     data-image="<?php echo base64_encode($upload_img16); ?>"
-                    data-category=" <?php echo htmlspecialchars($category16); ?>">
+                    data-category=" <?php echo htmlspecialchars($category16); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName16); ?>">
+
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status16); ?>; 
                         position:absolute; top:177px; left:712px; z-index:2;'>
                 </div>
@@ -6846,7 +6860,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room17); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor17); ?>"
                     data-image="<?php echo base64_encode($upload_img17); ?>"
-                    data-category=" <?php echo htmlspecialchars($category17); ?>">
+                    data-category=" <?php echo htmlspecialchars($category17); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName17); ?>">
+
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status17); ?>; 
                         position:absolute; top:177px; left:746px; z-index:2;'>
                 </div>
@@ -6859,7 +6875,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room18); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor18); ?>"
                     data-image="<?php echo base64_encode($upload_img18); ?>"
-                    data-category=" <?php echo htmlspecialchars($category18); ?>">
+                    data-category=" <?php echo htmlspecialchars($category18); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName18); ?>">
+
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status18); ?>; 
                         position:absolute; top:140px; left:685px; z-index:2;'>
                 </div>
@@ -6872,7 +6890,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room19); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor19); ?>"
                     data-image="<?php echo base64_encode($upload_img19); ?>"
-                    data-category=" <?php echo htmlspecialchars($category19); ?>">
+                    data-category=" <?php echo htmlspecialchars($category19); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName19); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status19); ?>; 
                         position:absolute; top:177px; left:660px; z-index:2;'>
                 </div>
@@ -6885,7 +6904,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room20); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor20); ?>"
                     data-image="<?php echo base64_encode($upload_img20); ?>"
-                    data-category=" <?php echo htmlspecialchars($category20); ?>">
+                    data-category=" <?php echo htmlspecialchars($category20); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName20); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status20); ?>; 
                         position:absolute; top:177px; left:698px; z-index:2;'>
                 </div>
@@ -6898,7 +6918,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room21); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor21); ?>"
                     data-image="<?php echo base64_encode($upload_img21); ?>"
-                    data-category=" <?php echo htmlspecialchars($category21); ?>">
+                    data-category=" <?php echo htmlspecialchars($category21); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName21); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status21); ?>; 
                         position:absolute; top:257px; left:644px; z-index:2;'>
                 </div>
@@ -6911,7 +6932,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room22); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor22); ?>"
                     data-image="<?php echo base64_encode($upload_img22); ?>"
-                    data-category=" <?php echo htmlspecialchars($category22); ?>">
+                    data-category=" <?php echo htmlspecialchars($category22); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName22); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status22); ?>; 
                         position:absolute; top:212px; left:685px; z-index:2;'>
                 </div>
@@ -6924,7 +6946,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room23); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor23); ?>"
                     data-image="<?php echo base64_encode($upload_img23); ?>"
-                    data-category=" <?php echo htmlspecialchars($category23); ?>">
+                    data-category=" <?php echo htmlspecialchars($category23); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName23); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status23); ?>; 
                         position:absolute; top:212px; left:648px; z-index:2;'>
                 </div>
@@ -6937,7 +6960,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room1368); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor1368); ?>"
                     data-image="<?php echo base64_encode($upload_img1368); ?>"
-                    data-category=" <?php echo htmlspecialchars($category1368); ?>">
+                    data-category=" <?php echo htmlspecialchars($category1368); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName1368); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status1368); ?>; 
                         position:absolute; top:160px; left:622px; z-index:2;'>
                 </div>
@@ -6953,7 +6977,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room25); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor25); ?>"
                     data-image="<?php echo base64_encode($upload_img25); ?>"
-                    data-category=" <?php echo htmlspecialchars($category25); ?>">
+                    data-category=" <?php echo htmlspecialchars($category25); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName25); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status25); ?>; 
                         position:absolute; top:199px; left:530px;'>
                 </div>
@@ -6966,7 +6991,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room26); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor26); ?>"
                     data-image="<?php echo base64_encode($upload_img26); ?>"
-                    data-category=" <?php echo htmlspecialchars($category26); ?>">
+                    data-category=" <?php echo htmlspecialchars($category26); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName26); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status26); ?>; 
                         position:absolute; top:183px; left:532px;'>
                 </div>
@@ -6979,7 +7005,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room27); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor27); ?>"
                     data-image="<?php echo base64_encode($upload_img27); ?>"
-                    data-category=" <?php echo htmlspecialchars($category27); ?>">
+                    data-category=" <?php echo htmlspecialchars($category27); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName27); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status27); ?>; 
                         position:absolute; top:167px; left:532px;'>
                 </div>
@@ -6992,7 +7019,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room28); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor28); ?>"
                     data-image="<?php echo base64_encode($upload_img28); ?>"
-                    data-category=" <?php echo htmlspecialchars($category28); ?>">
+                    data-category=" <?php echo htmlspecialchars($category28); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName28); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status28); ?>; 
                         position:absolute; top:143.9px; left:515px;'>
                 </div>
@@ -7005,7 +7033,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room29); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor29); ?>"
                     data-image="<?php echo base64_encode($upload_img29); ?>"
-                    data-category=" <?php echo htmlspecialchars($category29); ?>">
+                    data-category=" <?php echo htmlspecialchars($category29); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName29); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status29); ?>; 
                         position:absolute; top:167px; left:491px;'>
                 </div>
@@ -7018,7 +7047,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room30); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor30); ?>"
                     data-image="<?php echo base64_encode($upload_img30); ?>"
-                    data-category=" <?php echo htmlspecialchars($category30); ?>">
+                    data-category=" <?php echo htmlspecialchars($category30); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName30); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status30); ?>; 
                         position:absolute; top:183px; left:491px;'>
                 </div>
@@ -7031,7 +7061,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room31); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor31); ?>"
                     data-image="<?php echo base64_encode($upload_img31); ?>"
-                    data-category=" <?php echo htmlspecialchars($category31); ?>">
+                    data-category=" <?php echo htmlspecialchars($category31); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName31); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status31); ?>; 
                         position:absolute; top:199px; left:491px;'>
                 </div>
@@ -7043,7 +7074,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-id="<?php echo $assetId32; ?>" data-room="<?php echo htmlspecialchars($room32); ?>"
                     data-floor="<?php echo htmlspecialchars($floor32); ?>"
                     data-image="<?php echo base64_encode($upload_img32); ?>"
-                    data-category="<?php echo htmlspecialchars($category32); ?>">
+                    data-category="<?php echo htmlspecialchars($category32); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName32); ?>">
                 <div style=' width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status32); ?>;
                 position:absolute; top:214px; left:515px;'>
                 </div>
@@ -7058,7 +7090,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room33); ?>"
                     data-floor="<?php echo htmlspecialchars($floor33); ?>"
                     data-image="<?php echo base64_encode($upload_img33); ?>"
-                    data-category="<?php echo htmlspecialchars($category33); ?>">
+                    data-category="<?php echo htmlspecialchars($category33); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName33); ?>">
                 <div style=' width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status33); ?>;
             position:absolute; top:42px; left:450px;'>
                 </div>
@@ -7070,7 +7103,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room34); ?>"
                     data-floor="<?php echo htmlspecialchars($floor34); ?>"
                     data-image="<?php echo base64_encode($upload_img34); ?>"
-                    data-category="<?php echo htmlspecialchars($category34); ?>">
+                    data-category="<?php echo htmlspecialchars($category34); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName34); ?>">
                 <div style=' width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status34); ?>;
             position:absolute; top:42px; left:478px;'>
                 </div>
@@ -7082,7 +7116,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room35); ?>"
                     data-floor="<?php echo htmlspecialchars($floor35); ?>"
                     data-image="<?php echo base64_encode($upload_img35); ?>"
-                    data-category="<?php echo htmlspecialchars($category35); ?>">
+                    data-category="<?php echo htmlspecialchars($category35); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName35); ?>">
                 <div style=' width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status35); ?>;
             position:absolute; top:42px; left:506px;'>
                 </div>
@@ -7094,7 +7129,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room36); ?>"
                     data-floor="<?php echo htmlspecialchars($floor36); ?>"
                     data-image="<?php echo base64_encode($upload_img36); ?>"
-                    data-category="<?php echo htmlspecialchars($category36); ?>">
+                    data-category="<?php echo htmlspecialchars($category36); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName36); ?>">
                 <div style=' width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status36); ?>;
             position:absolute; top:42px; left:534px;'>
                 </div>
@@ -7106,7 +7142,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room37); ?>"
                     data-floor="<?php echo htmlspecialchars($floor37); ?>"
                     data-image="<?php echo base64_encode($upload_img37); ?>"
-                    data-category="<?php echo htmlspecialchars($category37); ?>">
+                    data-category="<?php echo htmlspecialchars($category37); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName37); ?>">
                 <div style=' width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status37); ?>;
             position:absolute; top:98px; left:478px;'>
                 </div>
@@ -7118,7 +7155,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room38); ?>"
                     data-floor="<?php echo htmlspecialchars($floor38); ?>"
                     data-image="<?php echo base64_encode($upload_img38); ?>"
-                    data-category="<?php echo htmlspecialchars($category38); ?>">
+                    data-category="<?php echo htmlspecialchars($category38); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName38); ?>">
                 <div style=' width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status38); ?>;
             position:absolute; top:98px; left:506px;'>
                 </div>
@@ -7130,7 +7168,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room39); ?>"
                     data-floor="<?php echo htmlspecialchars($floor39); ?>"
                     data-image="<?php echo base64_encode($upload_img39); ?>"
-                    data-category="<?php echo htmlspecialchars($category39); ?>">
+                    data-category="<?php echo htmlspecialchars($category39); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName39); ?>">
                 <div style=' width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status39); ?>;
             position:absolute; top:98px; left:534px;'>
                 </div>
@@ -7142,7 +7181,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-id="<?php echo $assetId40; ?>" data-room="<?php echo htmlspecialchars($room40); ?>"
                     data-floor="<?php echo htmlspecialchars($floor40); ?>"
                     data-image="<?php echo base64_encode($upload_img40); ?>"
-                    data-category="<?php echo htmlspecialchars($category40); ?>">
+                    data-category="<?php echo htmlspecialchars($category40); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName40); ?>">
                 <div style=' width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status40); ?>;
             position:absolute; top:190px; left:275px;'>
                 </div>
@@ -7154,7 +7194,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-id="<?php echo $assetId1374; ?>" data-room="<?php echo htmlspecialchars($room1374); ?>"
                     data-floor="<?php echo htmlspecialchars($floor1374); ?>"
                     data-image="<?php echo base64_encode($upload_img1374); ?>"
-                    data-category="<?php echo htmlspecialchars($category1374); ?>">
+                    data-category="<?php echo htmlspecialchars($category1374); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName1374); ?>">
                 <div style=' width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status1374); ?>;
             position:absolute; top:217px; left:553px;'>
                 </div>
@@ -7170,7 +7211,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room6866); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor6866); ?>"
                     data-image="<?php echo base64_encode($upload_img6866); ?>"
-                    data-category=" <?php echo htmlspecialchars($category6866); ?>">
+                    data-category=" <?php echo htmlspecialchars($category6866); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName6866); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6866); ?>; 
                         position:absolute; top:192px; left:698px;'>
                 </div>
@@ -7183,7 +7225,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room898); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor898); ?>"
                     data-image="<?php echo base64_encode($upload_img898); ?>"
-                    data-category=" <?php echo htmlspecialchars($category898); ?>">
+                    data-category=" <?php echo htmlspecialchars($category898); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName898); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status898); ?>; 
                         position:absolute; top:192px; left:635px;'>
                 </div>
@@ -7196,7 +7239,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room899); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor899); ?>"
                     data-image="<?php echo base64_encode($upload_img899); ?>"
-                    data-category=" <?php echo htmlspecialchars($category899); ?>">
+                    data-category=" <?php echo htmlspecialchars($category899); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName899); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status899); ?>; 
                         position:absolute; top:140px; left:645px;'>
                 </div>
@@ -7211,7 +7255,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room901); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor901); ?>"
                     data-image="<?php echo base64_encode($upload_img901); ?>"
-                    data-category=" <?php echo htmlspecialchars($category901); ?>">
+                    data-category=" <?php echo htmlspecialchars($category901); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName901); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status901); ?>; 
                         position:absolute; top:265px; left:800px;'>
                 </div>
@@ -7224,7 +7269,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room902); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor902); ?>"
                     data-image="<?php echo base64_encode($upload_img902); ?>"
-                    data-category=" <?php echo htmlspecialchars($category902); ?>">
+                    data-category=" <?php echo htmlspecialchars($category902); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName902); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status902); ?>; 
                         position:absolute; top:205px; left:800px;'>
                 </div>
@@ -7239,7 +7285,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7262); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7262); ?>"
                     data-image="<?php echo base64_encode($upload_img7262); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7262); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7262); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7262); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7262); ?>; 
                         position:absolute; top:175px; left:512px;'>
                 </div>
@@ -7254,7 +7301,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7263); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7263); ?>"
                     data-image="<?php echo base64_encode($upload_img7263); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7263); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7263); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7263); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7263); ?>; 
                         position:absolute; top:150px; left:695px;'>
                 </div>
@@ -7267,7 +7315,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7264); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7264); ?>"
                     data-image="<?php echo base64_encode($upload_img7264); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7264); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7264); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7264); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7264); ?>; 
                         position:absolute; top:242px; left:670px; z-index:1;'>
                 </div>
@@ -7280,7 +7329,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7265); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7265); ?>"
                     data-image="<?php echo base64_encode($upload_img7265); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7265); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7265); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7265); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7265); ?>; 
                         position:absolute; top:150px; left:745px;'>
                 </div>
@@ -7294,6 +7344,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-floor=" <?php echo htmlspecialchars($floor7266); ?>"
                     data-image="<?php echo base64_encode($upload_img7266); ?>"
                     data-category=" <?php echo htmlspecialchars($category7266); ?>">
+                data-assignedname="
+                <?php echo htmlspecialchars($assignedName7266); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7266); ?>; 
                         position:absolute; top:150px; left:790px;'>
                 </div>
@@ -7310,6 +7362,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-floor=" <?php echo htmlspecialchars($floor7138); ?>"
                     data-image="<?php echo base64_encode($upload_img7138); ?>"
                     data-category=" <?php echo htmlspecialchars($category7138); ?>">
+                data-assignedname="
+                <?php echo htmlspecialchars($assignedName7138); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7138); ?>; 
                         position:absolute; top:300px; left:226px;'>
                 </div>
@@ -7322,7 +7376,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7139); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7139); ?>"
                     data-image="<?php echo base64_encode($upload_img7139); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7139); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7139); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7139); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7139); ?>; 
                         position:absolute; top:300px; left:336px;'>
                 </div>
@@ -7335,7 +7390,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7140); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7140); ?>"
                     data-image="<?php echo base64_encode($upload_img7140); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7140); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7140); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7140); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7140); ?>; 
                         position:absolute; top:300px; left:446px;'>
                 </div>
@@ -7348,7 +7404,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7141); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7141); ?>"
                     data-image="<?php echo base64_encode($upload_img7141); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7141); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7141); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7141); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7141); ?>; position:absolute; top:300px; left:556px;'>
                 </div>
@@ -7361,7 +7418,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7142); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7142); ?>"
                     data-image="<?php echo base64_encode($upload_img7142); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7142); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7142); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7142); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7142); ?>; position:absolute; top:300px; left:666px;'>
                 </div>
@@ -7374,7 +7432,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7143); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7143); ?>"
                     data-image="<?php echo base64_encode($upload_img7143); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7143); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7143); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7143); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7143); ?>; position:absolute; top:300px; left:776px;'>
                 </div>
@@ -7387,7 +7446,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7144); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7144); ?>"
                     data-image="<?php echo base64_encode($upload_img7144); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7144); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7144); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7144); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7144); ?>; position:absolute; top:300px; left:886px;'>
                 </div>
@@ -7400,7 +7460,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7145); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7145); ?>"
                     data-image="<?php echo base64_encode($upload_img7145); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7145); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7145); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7145); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7145); ?>; position:absolute; top:350px; left:226px;'>
                 </div>
@@ -7413,7 +7474,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7146); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7146); ?>"
                     data-image="<?php echo base64_encode($upload_img7146); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7146); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7146); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7146); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7146); ?>; position:absolute; top:350px; left:336px;'>
                 </div>
@@ -7426,7 +7488,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7147); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7147); ?>"
                     data-image="<?php echo base64_encode($upload_img7147); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7147); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7147); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7147); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7147); ?>; position:absolute; top:350px; left:446px;'>
                 </div>
@@ -7439,7 +7502,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7148); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7148); ?>"
                     data-image="<?php echo base64_encode($upload_img7148); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7148); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7148); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7148); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7148); ?>; position:absolute; top:350px; left:556px;'>
                 </div>
@@ -7452,7 +7516,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7149); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7149); ?>"
                     data-image="<?php echo base64_encode($upload_img7149); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7149); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7149); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7149); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7149); ?>; position:absolute; top:350px; left:666px;'>
                 </div>
@@ -7465,7 +7530,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7150); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7150); ?>"
                     data-image="<?php echo base64_encode($upload_img7150); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7150); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7150); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7150); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7150); ?>; position:absolute; top:350px; left:776px;'>
                 </div>
@@ -7478,7 +7544,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7151); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7151); ?>"
                     data-image="<?php echo base64_encode($upload_img7151); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7151); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7151); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7151); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7151); ?>; position:absolute; top:350px; left:886px;'>
                 </div>
@@ -7491,7 +7558,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7152); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7152); ?>"
                     data-image="<?php echo base64_encode($upload_img7152); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7152); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7152); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7152); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7152); ?>; position:absolute; top:400px; left:226px;'>
                 </div>
@@ -7504,7 +7572,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7153); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7153); ?>"
                     data-image="<?php echo base64_encode($upload_img7153); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7153); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7153); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7153); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7153); ?>; position:absolute; top:400px; left:336px;'>
                 </div>
@@ -7517,7 +7586,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7154); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7154); ?>"
                     data-image="<?php echo base64_encode($upload_img7154); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7154); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7154); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7154); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7154); ?>; position:absolute; top:400px; left:446px;'>
                 </div>
@@ -7530,7 +7600,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7155); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7155); ?>"
                     data-image="<?php echo base64_encode($upload_img7155); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7155); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7155); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7155); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7155); ?>; position:absolute; top:400px; left:556px;'>
                 </div>
@@ -7543,7 +7614,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7156); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7156); ?>"
                     data-image="<?php echo base64_encode($upload_img7156); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7156); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7156); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7156); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7156); ?>; position:absolute; top:400px; left:666px;'>
                 </div>
@@ -7556,7 +7628,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7157); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7157); ?>"
                     data-image="<?php echo base64_encode($upload_img7157); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7157); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7157); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7157); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7157); ?>; position:absolute; top:400px; left:776px;'>
                 </div>
@@ -7569,7 +7642,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7158); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7158); ?>"
                     data-image="<?php echo base64_encode($upload_img7158); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7158); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7158); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7158); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7158); ?>; position:absolute; top:400px; left:886px;'>
                 </div>
@@ -7583,7 +7657,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7159); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7159); ?>"
                     data-image="<?php echo base64_encode($upload_img7159); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7159); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7159); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7159); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7159); ?>; position:absolute; top:450px; left:226px;'>
                 </div>
@@ -7596,7 +7671,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7160); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7160); ?>"
                     data-image="<?php echo base64_encode($upload_img7160); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7160); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7160); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7160); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7160); ?>; position:absolute; top:450px; left:336px;'>
                 </div>
@@ -7609,7 +7685,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7161); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7161); ?>"
                     data-image="<?php echo base64_encode($upload_img7161); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7161); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7161); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7161); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7161); ?>; position:absolute; top:450px; left:446px;'>
                 </div>
@@ -7622,7 +7699,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7162); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7162); ?>"
                     data-image="<?php echo base64_encode($upload_img7162); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7162); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7162); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7162); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7162); ?>; position:absolute; top:450px; left:556px;'>
                 </div>
@@ -7635,7 +7713,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7163); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7163); ?>"
                     data-image="<?php echo base64_encode($upload_img7163); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7163); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7163); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7163); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7163); ?>; position:absolute; top:450px; left:666px;'>
                 </div>
@@ -7649,7 +7728,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7164); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7164); ?>"
                     data-image="<?php echo base64_encode($upload_img7164); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7164); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7164); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7164); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7164); ?>; position:absolute; top:450px; left:776px;'>
                 </div>
@@ -7662,7 +7742,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7165); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7165); ?>"
                     data-image="<?php echo base64_encode($upload_img7165); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7165); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7165); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7165); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7165); ?>; position:absolute; top:450px; left:886px;'>
                 </div>
@@ -7675,7 +7756,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7166); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7166); ?>"
                     data-image="<?php echo base64_encode($upload_img7166); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7166); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7166); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7166); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7166); ?>; position:absolute; top:500px; left:466px;'>
                 </div>
@@ -7688,7 +7770,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7167); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7167); ?>"
                     data-image="<?php echo base64_encode($upload_img7167); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7167); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7167); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7167); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7167); ?>; position:absolute; top:500px; left:536px;'>
                 </div>
@@ -7701,7 +7784,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7168); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7168); ?>"
                     data-image="<?php echo base64_encode($upload_img7168); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7168); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7168); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7168); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7168); ?>; position:absolute; top:273px; left:1048px;'>
                 </div>
@@ -7714,7 +7798,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7169); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7169); ?>"
                     data-image="<?php echo base64_encode($upload_img7169); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7169); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7169); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7169); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7169); ?>; position:absolute; top:273px; left:1084px;'>
                 </div>
@@ -7727,7 +7812,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7170); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7170); ?>"
                     data-image="<?php echo base64_encode($upload_img7170); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7170); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7170); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7170); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7170); ?>; position:absolute; top:330px; left:1084px;'>
                 </div>
@@ -7740,7 +7826,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7171); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7171); ?>"
                     data-image="<?php echo base64_encode($upload_img7171); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7171); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7171); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7171); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7171); ?>; position:absolute; top:330px; left:1048px;'>
                 </div>
@@ -7753,7 +7840,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7172); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7172); ?>"
                     data-image="<?php echo base64_encode($upload_img7172); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7172); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7172); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7172); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7172); ?>; position:absolute; top:280px; left:1131px;'>
                 </div>
@@ -7766,7 +7854,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7173); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7173); ?>"
                     data-image="<?php echo base64_encode($upload_img7173); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7173); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7173); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7173); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7173); ?>; position:absolute; top:320px; left:1131px;'>
                 </div>
@@ -7780,7 +7869,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7174); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7174); ?>"
                     data-image="<?php echo base64_encode($upload_img7174); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7174); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7174); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7174); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7174); ?>; position:absolute; top:142px; left:1041px;'>
                 </div>
@@ -7793,7 +7883,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7175); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7175); ?>"
                     data-image="<?php echo base64_encode($upload_img7175); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7175); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7175); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7175); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7175); ?>; position:absolute; top:142px; left:1106px;'>
                 </div>
@@ -7806,7 +7897,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7176); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7176); ?>"
                     data-image="<?php echo base64_encode($upload_img7176); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7176); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7176); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7176); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7176); ?>; position:absolute; top:250px; left:1041px;'>
                 </div>
@@ -7819,7 +7911,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7177); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7177); ?>"
                     data-image="<?php echo base64_encode($upload_img7177); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7177); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7177); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7177); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7177); ?>; position:absolute; top:250px; left:1106px;'>
                 </div>
@@ -7832,7 +7925,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7178); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7178); ?>"
                     data-image="<?php echo base64_encode($upload_img7178); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7178); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7178); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7178); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7178); ?>; position:absolute; top:355px; left:101px;'>
                 </div>
@@ -7845,7 +7939,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7179); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7179); ?>"
                     data-image="<?php echo base64_encode($upload_img7179); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7179); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7179); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7179); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7179); ?>; position:absolute; top:355px; left:161px;'>
                 </div>
@@ -7858,7 +7953,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7180); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7180); ?>"
                     data-image="<?php echo base64_encode($upload_img7180); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7180); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7180); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7180); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7180); ?>; position:absolute; top:460px; left:101px;'>
                 </div>
@@ -7871,7 +7967,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7181); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7181); ?>"
                     data-image="<?php echo base64_encode($upload_img7181); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7181); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7181); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7181); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7181); ?>; position:absolute; top:460px; left:161px;'>
                 </div>
@@ -7884,7 +7981,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7182); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7182); ?>"
                     data-image="<?php echo base64_encode($upload_img7182); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7182); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7182); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7182); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7182); ?>; position:absolute; top:205px; left:300px;'>
                 </div>
@@ -7897,7 +7995,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7183); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7183); ?>"
                     data-image="<?php echo base64_encode($upload_img7183); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7183); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7183); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7183); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7183); ?>; position:absolute; top:205px; left:250px;'>
                 </div>
@@ -7910,7 +8009,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7245); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7245); ?>"
                     data-image="<?php echo base64_encode($upload_img7245); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7245); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7245); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7245); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7245); ?>; position:absolute; top:460px; left:1106px;'>
                 </div>
@@ -7923,7 +8023,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7246); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7246); ?>"
                     data-image="<?php echo base64_encode($upload_img7246); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7246); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7246); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7246); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7246); ?>; position:absolute; top:460px; left:1041px;'>
                 </div>
@@ -7936,7 +8037,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7247); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7247); ?>"
                     data-image="<?php echo base64_encode($upload_img7247); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7247); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7247); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7247); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7247); ?>; position:absolute; top:355px; left:1041px;'>
                 </div>
@@ -7949,7 +8051,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7248); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7248); ?>"
                     data-image="<?php echo base64_encode($upload_img7248); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7248); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7248); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7248); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7248); ?>; position:absolute; top:355px; left:1106px;'>
                 </div>
@@ -7962,7 +8065,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7249); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7249); ?>"
                     data-image="<?php echo base64_encode($upload_img7249); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7249); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7249); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7249); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7249); ?>; position:absolute; top:375px; left:1074px;'>
                 </div>
@@ -7975,7 +8079,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7250); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7250); ?>"
                     data-image="<?php echo base64_encode($upload_img7250); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7250); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7250); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7250); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7250); ?>; position:absolute; top:410px; left:1074px;'>
                 </div>
@@ -7988,7 +8093,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7251); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7251); ?>"
                     data-image="<?php echo base64_encode($upload_img7251); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7251); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7251); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7251); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7251); ?>; position:absolute; top:445px; left:1074px;'>
                 </div>
@@ -8002,7 +8108,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7252); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7252); ?>"
                     data-image="<?php echo base64_encode($upload_img7252); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7252); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7252); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7252); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7252); ?>; position:absolute; top:397px; left:946px;'>
                 </div>
@@ -8015,7 +8122,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7253); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7253); ?>"
                     data-image="<?php echo base64_encode($upload_img7253); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7253); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7253); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7253); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7253); ?>; position:absolute; top:397px; left:1011px;'>
                 </div>
@@ -8028,7 +8136,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7254); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7254); ?>"
                     data-image="<?php echo base64_encode($upload_img7254); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7254); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7254); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7254); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7254); ?>; position:absolute; top:465px; left:1011px;'>
                 </div>
@@ -8041,7 +8150,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7255); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7255); ?>"
                     data-image="<?php echo base64_encode($upload_img7255); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7255); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7255); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7255); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7255); ?>; position:absolute; top:465px; left:946px;'>
                 </div>
@@ -8054,7 +8164,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7256); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7256); ?>"
                     data-image="<?php echo base64_encode($upload_img7256); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7256); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7256); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7256); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7256); ?>; position:absolute; top:445px; left:981px;'>
                 </div>
@@ -8067,7 +8178,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7257); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7257); ?>"
                     data-image="<?php echo base64_encode($upload_img7257); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7257); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7257); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7257); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7257); ?>; position:absolute; top:410px; left:981px;'>
                 </div>
@@ -8080,7 +8192,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7258); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7258); ?>"
                     data-image="<?php echo base64_encode($upload_img7258); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7258); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7258); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7258); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7258); ?>; position:absolute; top:370px; left:946px;'>
                 </div>
@@ -8093,7 +8206,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7259); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7259); ?>"
                     data-image="<?php echo base64_encode($upload_img7259); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7259); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7259); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7259); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7259); ?>; position:absolute; top:350px; left:946px;'>
                 </div>
@@ -8106,7 +8220,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7260); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7260); ?>"
                     data-image="<?php echo base64_encode($upload_img7260); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7260); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7260); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7260); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7260); ?>; position:absolute; top:350px; left:1011px;'>
                 </div>
@@ -8119,7 +8234,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7261); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7261); ?>"
                     data-image="<?php echo base64_encode($upload_img7261); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7261); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7261); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7261); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7261); ?>; position:absolute; top:370px; left:1011px;'>
                 </div>
@@ -8133,7 +8249,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7184); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7184); ?>"
                     data-image="<?php echo base64_encode($upload_img7184); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7184); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7184); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7184); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7184); ?>; position:absolute; top:63px; left:465px;'>
                 </div>
@@ -8146,7 +8263,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7185); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7185); ?>"
                     data-image="<?php echo base64_encode($upload_img7185); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7185); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7185); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7185); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7185); ?>; position:absolute; top:63px; left:493px;'>
                 </div>
@@ -8159,7 +8277,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7186); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7186); ?>"
                     data-image="<?php echo base64_encode($upload_img7186); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7186); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7186); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7186); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7186); ?>; position:absolute; top:63px; left:521px;'>
                 </div>
@@ -8172,7 +8291,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7187); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7187); ?>"
                     data-image="<?php echo base64_encode($upload_img7187); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7187); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7187); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7187); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7187); ?>; position:absolute; top:63px; left:549px;'>
                 </div>
@@ -8185,7 +8305,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7188); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7188); ?>"
                     data-image="<?php echo base64_encode($upload_img7188); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7188); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7188); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7188); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7188); ?>; position:absolute; top:80px; left:450px;'>
                 </div>
@@ -8199,7 +8320,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7189); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7189); ?>"
                     data-image="<?php echo base64_encode($upload_img7189); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7189); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7189); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7189); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7189); ?>; position:absolute; top:80px; left:493px;'>
                 </div>
@@ -8212,7 +8334,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7190); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7190); ?>"
                     data-image="<?php echo base64_encode($upload_img7190); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7190); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7190); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7190); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7190); ?>; position:absolute; top:80px; left:536px;'>
                 </div>
@@ -8225,7 +8348,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7191); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7191); ?>"
                     data-image="<?php echo base64_encode($upload_img7191); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7191); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7191); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7191); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7191); ?>; position:absolute; top:119px; left:493px; z-index:2;'>
                 </div>
@@ -8238,7 +8362,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7192); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7192); ?>"
                     data-image="<?php echo base64_encode($upload_img7192); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7192); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7192); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7192); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7192); ?>; position:absolute; top:119px; left:521px; z-index:2;'>
                 </div>
@@ -8251,7 +8376,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7193); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7193); ?>"
                     data-image="<?php echo base64_encode($upload_img7193); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7193); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7193); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7193); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7193); ?>; position:absolute; top:119px; left:549px;'>
                 </div>
@@ -8265,9 +8391,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7194); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7194); ?>"
                     data-image="<?php echo base64_encode($upload_img7194); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7194); ?>">
-                <div
-                    style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7194); ?>; position:absolute; top:105px; left:465px;'>
+                    data-category=" <?php echo htmlspecialchars($category7194); ?>" data-assignedname="
+                <?php echo htmlspecialchars($assignedName7194); ?>">
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7194); ?>;
+                position:absolute; top:105px; left:465px;'>
                 </div>
 
                 <!-- ASSET 7195 -->
@@ -8278,7 +8405,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7195); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7195); ?>"
                     data-image="<?php echo base64_encode($upload_img7195); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7195); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7195); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7195); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7195); ?>; position:absolute; top:127px; left:465px;'>
                 </div>
@@ -8288,23 +8416,25 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     style='width:12px; cursor:pointer; position:absolute; top:122px; left:420px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7196' onclick='fetchAssetData(7196);'
                     class="asset-image" data-id="<?php echo $assetId7196; ?>"
-                    data-room="<?php echo htmlspecialchars($room7196); ?>"
+                    data-room=" <?php echo htmlspecialchars($room7196); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7196); ?>"
                     data-image="<?php echo base64_encode($upload_img7196); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7196); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7196); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7196); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7196); ?>; position:absolute; top:127px; left:430px;'>
                 </div>
 
                 <!-- ASSET 7197 -->
                 <img src='../image.php?id=7197'
-                    style='width:12px; cursor:pointer; position:absolute; top:100px; left:420px;' alt='Asset Image'
+                    style=' width:12px; cursor:pointer; position:absolute; top:100px; left:420px;' alt='Asset Image'
                     data-bs-toggle='modal' data-bs-target='#imageModal7197' onclick='fetchAssetData(7197);'
                     class="asset-image" data-id="<?php echo $assetId7197; ?>"
-                    data-room="<?php echo htmlspecialchars($room7197); ?>"
-                    data-floor=" <?php echo htmlspecialchars($floor7197); ?>"
-                    data-image="<?php echo base64_encode($upload_img7197); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7197); ?>">
+                    data-room=" <?php echo htmlspecialchars($room7197); ?>" data-floor="
+            <?php echo htmlspecialchars($floor7197); ?>" data-image="
+            <?php echo base64_encode($upload_img7197); ?>" data-category="
+            <?php echo htmlspecialchars($category7197); ?>" data-assignedname="
+            <?php echo htmlspecialchars($assignedName7197); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7197); ?>; position:absolute; top:105px; left:430px;'>
                 </div>
@@ -8317,7 +8447,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7198); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7198); ?>"
                     data-image="<?php echo base64_encode($upload_img7198); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7198); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7198); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7198); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7198); ?>; position:absolute; top:130px; left:505px;'>
                 </div>
@@ -8331,7 +8462,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7199); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7199); ?>"
                     data-image="<?php echo base64_encode($upload_img7199); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7199); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7199); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7199); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7199); ?>; position:absolute; top:130px; left:535px;'>
                 </div>
@@ -8344,7 +8476,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7200); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7200); ?>"
                     data-image="<?php echo base64_encode($upload_img7200); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7200); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7200); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7200); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7200); ?>; position:absolute; top:160px; left:310px;'>
                 </div>
@@ -8352,12 +8485,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 <!-- ASSET 7201 -->
                 <img src='../image.php?id=7201'
                     style='width:12px; cursor:pointer; position:absolute; top:185px; left:300px;' alt='Asset Image'
-                    data-bs-toggle='modal' data-bs-target='#imageModal7201' onclick='fetchAssetData(7201);'
+                    data-bs-toggle=' modal' data-bs-target='#imageModal7201' onclick='fetchAssetData(7201);'
                     class="asset-image" data-id="<?php echo $assetId7201; ?>"
                     data-room="<?php echo htmlspecialchars($room7201); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7201); ?>"
                     data-image="<?php echo base64_encode($upload_img7201); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7201); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7201); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7201); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7201); ?>; position:absolute; top:180px; left:310px; z-index:2;'>
                 </div>
@@ -8370,7 +8504,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7202); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7202); ?>"
                     data-image="<?php echo base64_encode($upload_img7202); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7202); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7202); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7202); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7202); ?>; position:absolute; top:168px; left:325px;'>
                 </div>
@@ -8383,7 +8518,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7203); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7203); ?>"
                     data-image="<?php echo base64_encode($upload_img7203); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7203); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7203); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7203); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7203); ?>; position:absolute; top:137px; left:470px;'>
                 </div>
@@ -8396,7 +8532,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7204); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7204); ?>"
                     data-image="<?php echo base64_encode($upload_img7204); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7204); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7204); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7204); ?>">
                 <div
                     style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7204); ?>; position:absolute; top:170px; left:410px;'>
                 </div>
@@ -8457,7 +8594,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room1); ?>" readonly />
                                 </div>
@@ -8490,17 +8627,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status1 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status1 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status1 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status1 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status1 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -8610,7 +8746,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room2); ?>" readonly />
                                 </div>
@@ -8643,17 +8779,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status2 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status2 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status2 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status2 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status2 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -8763,7 +8898,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room3); ?>" readonly />
                                 </div>
@@ -8796,17 +8931,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status3 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status3 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status3 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status3 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status3 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -8916,7 +9050,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room4); ?>" readonly />
                                 </div>
@@ -8949,17 +9083,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status4 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status4 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status4 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status4 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status4 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -9070,7 +9203,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room5); ?>" readonly />
                                 </div>
@@ -9103,17 +9236,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status5 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status5 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status5 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status5 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status5 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -9223,7 +9355,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room6); ?>" readonly />
                                 </div>
@@ -9256,17 +9388,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status6 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status6 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status6 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status6 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status6 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -9376,7 +9507,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7); ?>" readonly />
                                 </div>
@@ -9409,17 +9540,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status7 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status7 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status7 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status7 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status7 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -9529,7 +9659,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room8); ?>" readonly />
                                 </div>
@@ -9562,17 +9692,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status8 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status8 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status8 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status8 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status8 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -9682,7 +9811,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room9); ?>" readonly />
                                 </div>
@@ -9715,17 +9844,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status9 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status9 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status9 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status9 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status9 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -9835,7 +9963,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room10); ?>" readonly />
                                 </div>
@@ -9870,17 +9998,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status10 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status10 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status10 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status10 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status10 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -9990,7 +10117,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room11); ?>" readonly />
                                 </div>
@@ -10025,17 +10152,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status11 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status11 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status11 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status11 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status11 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -10145,7 +10271,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room12); ?>" readonly />
                                 </div>
@@ -10180,17 +10306,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status12 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status12 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status12 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status12 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status12 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -10300,7 +10425,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room13); ?>" readonly />
                                 </div>
@@ -10335,17 +10460,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status13 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status13 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status13 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status13 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status13 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -10455,7 +10579,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room14); ?>" readonly />
                                 </div>
@@ -10490,17 +10614,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status14 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status14 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status14 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status14 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status14 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -10610,7 +10733,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room15); ?>" readonly />
                                 </div>
@@ -10645,17 +10768,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status15 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status15 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status15 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status15 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status15 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -10765,7 +10887,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room16); ?>" readonly />
                                 </div>
@@ -10800,17 +10922,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status16 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status16 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status16 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status16 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status16 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -10920,7 +11041,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room17); ?>" readonly />
                                 </div>
@@ -10955,17 +11076,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status17 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status17 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status17 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status17 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status17 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -11075,7 +11195,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room18); ?>" readonly />
                                 </div>
@@ -11110,17 +11230,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status18 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status18 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status18 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status18 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status18 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -11230,7 +11349,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room19); ?>" readonly />
                                 </div>
@@ -11265,17 +11384,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status19 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status19 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status19 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status19 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status19 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -11385,7 +11503,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room20); ?>" readonly />
                                 </div>
@@ -11420,17 +11538,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status20 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status20 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status20 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status20 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status20 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -11540,7 +11657,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room21); ?>" readonly />
                                 </div>
@@ -11575,17 +11692,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status21 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status21 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status21 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status21 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status21 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -11695,7 +11811,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room22); ?>" readonly />
                                 </div>
@@ -11730,17 +11846,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status22 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status22 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status22 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status22 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status22 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -11850,7 +11965,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room23); ?>" readonly />
                                 </div>
@@ -11885,17 +12000,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status23 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status23 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status23 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status23 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status23 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -12006,7 +12120,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room1368); ?>" readonly />
                                 </div>
@@ -12041,7 +12155,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -12163,7 +12277,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room25); ?>" readonly />
                                 </div>
@@ -12198,17 +12312,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status25 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status25 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status25 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status25 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status25 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -12318,7 +12431,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room26); ?>" readonly />
                                 </div>
@@ -12353,17 +12466,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status26 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status26 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status26 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status26 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status26 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -12473,7 +12585,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room27); ?>" readonly />
                                 </div>
@@ -12508,17 +12620,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status27 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status27 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status27 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status27 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status27 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -12628,7 +12739,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room28); ?>" readonly />
                                 </div>
@@ -12663,17 +12774,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status28 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status28 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status28 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status28 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status28 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -12783,7 +12893,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room29); ?>" readonly />
                                 </div>
@@ -12818,17 +12928,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status29 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status29 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status29 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status29 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status29 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -12938,7 +13047,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room30); ?>" readonly />
                                 </div>
@@ -12973,17 +13082,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status30 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status30 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status30 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status30 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status30 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -13093,7 +13201,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room31); ?>" readonly />
                                 </div>
@@ -13128,17 +13236,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status31 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status31 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status31 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status31 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status31 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -13248,7 +13355,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room32); ?>" readonly />
                                 </div>
@@ -13283,17 +13390,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status32 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status32 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status32 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status32 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status32 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -13403,7 +13509,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room33); ?>" readonly />
                                 </div>
@@ -13438,17 +13544,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status33 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status33 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status33 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status33 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status33 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -13558,7 +13663,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room34); ?>" readonly />
                                 </div>
@@ -13593,17 +13698,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status34 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status34 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status34 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status34 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status34 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -13713,7 +13817,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room35); ?>" readonly />
                                 </div>
@@ -13748,17 +13852,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status35 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status35 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status35 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status35 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status35 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -13868,7 +13971,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room36); ?>" readonly />
                                 </div>
@@ -13903,17 +14006,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status36 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status36 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status36 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status36 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status36 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -14023,7 +14125,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room37); ?>" readonly />
                                 </div>
@@ -14058,17 +14160,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status37 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status37 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status37 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status37 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status37 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -14178,7 +14279,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room38); ?>" readonly />
                                 </div>
@@ -14213,17 +14314,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status38 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status38 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status38 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status38 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status38 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -14333,7 +14433,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room39); ?>" readonly />
                                 </div>
@@ -14368,17 +14468,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status39 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status39 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status39 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status39 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status39 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -14488,7 +14587,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room40); ?>" readonly />
                                 </div>
@@ -14523,17 +14622,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status40 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status40 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status40 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status40 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status40 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -14644,7 +14742,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room1374); ?>" readonly />
                                 </div>
@@ -14679,7 +14777,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -14801,7 +14899,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room898); ?>" readonly />
                                 </div>
@@ -14836,17 +14934,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status898 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status898 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status898 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status898 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status898 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -14956,7 +15053,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room899); ?>" readonly />
                                 </div>
@@ -14991,17 +15088,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status899 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status899 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status899 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status899 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status899 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -15111,7 +15207,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room901); ?>" readonly />
                                 </div>
@@ -15146,17 +15242,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status901 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status901 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status901 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status901 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status901 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -15266,7 +15361,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room902); ?>" readonly />
                                 </div>
@@ -15301,17 +15396,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <select class="form-select" id="status" name="status">
                                         <option value="Working" <?php echo ($status902 == 'Working')
                                             ? 'selected="selected"' : ''; ?>>Working</option>
                                         <option value="Under Maintenance" <?php echo ($status902 == 'Under Maintenance')
                                             ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                        <option value="For
-                                        Replacement" <?php echo ($status902 == 'For Replacement')
+                                        <option value="For Replacement" <?php echo ($status902 == 'For Replacement')
                                             ? 'selected="selected"' : ''; ?>>For Replacement</option>
                                         <option value="Need Repair" <?php echo ($status902 == 'Need Repair')
                                             ? 'selected="selected"' : ''; ?>>Need Repair
@@ -15421,7 +15515,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room6866); ?>" readonly />
                                 </div>
@@ -15456,7 +15550,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -15577,7 +15671,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7262); ?>" readonly />
                                 </div>
@@ -15612,7 +15706,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -15733,7 +15827,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7263); ?>" readonly />
                                 </div>
@@ -15768,7 +15862,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -15889,7 +15983,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7264); ?>" readonly />
                                 </div>
@@ -15924,7 +16018,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -16045,7 +16139,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7265); ?>" readonly />
                                 </div>
@@ -16080,7 +16174,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -16201,7 +16295,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7266); ?>" readonly />
                                 </div>
@@ -16236,7 +16330,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -16357,7 +16451,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7138); ?>" readonly />
                                 </div>
@@ -16392,7 +16486,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -16513,7 +16607,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7139); ?>" readonly />
                                 </div>
@@ -16548,7 +16642,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -16669,7 +16763,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7140); ?>" readonly />
                                 </div>
@@ -16704,7 +16798,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -16825,7 +16919,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7141); ?>" readonly />
                                 </div>
@@ -16860,7 +16954,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -16981,7 +17075,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7142); ?>" readonly />
                                 </div>
@@ -17016,7 +17110,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -17137,7 +17231,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7143); ?>" readonly />
                                 </div>
@@ -17172,7 +17266,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -17293,7 +17387,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7144); ?>" readonly />
                                 </div>
@@ -17328,7 +17422,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -17449,7 +17543,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7145); ?>" readonly />
                                 </div>
@@ -17484,7 +17578,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -17605,7 +17699,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7146); ?>" readonly />
                                 </div>
@@ -17640,7 +17734,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -17761,7 +17855,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7147); ?>" readonly />
                                 </div>
@@ -17796,7 +17890,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -17917,7 +18011,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7148); ?>" readonly />
                                 </div>
@@ -17952,7 +18046,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -18073,7 +18167,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7149); ?>" readonly />
                                 </div>
@@ -18108,7 +18202,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -18229,7 +18323,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7150); ?>" readonly />
                                 </div>
@@ -18264,7 +18358,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -18385,7 +18479,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7151); ?>" readonly />
                                 </div>
@@ -18420,7 +18514,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -18541,7 +18635,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7152); ?>" readonly />
                                 </div>
@@ -18576,7 +18670,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -18697,7 +18791,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7153); ?>" readonly />
                                 </div>
@@ -18732,7 +18826,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -18853,7 +18947,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7154); ?>" readonly />
                                 </div>
@@ -18888,7 +18982,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -19009,7 +19103,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7155); ?>" readonly />
                                 </div>
@@ -19044,7 +19138,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -19165,7 +19259,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7156); ?>" readonly />
                                 </div>
@@ -19200,7 +19294,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -19321,7 +19415,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7157); ?>" readonly />
                                 </div>
@@ -19356,7 +19450,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -19477,7 +19571,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7158); ?>" readonly />
                                 </div>
@@ -19512,7 +19606,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -19633,7 +19727,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7159); ?>" readonly />
                                 </div>
@@ -19668,7 +19762,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -19789,7 +19883,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7160); ?>" readonly />
                                 </div>
@@ -19824,7 +19918,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -19945,7 +20039,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7161); ?>" readonly />
                                 </div>
@@ -19980,7 +20074,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -20101,7 +20195,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7162); ?>" readonly />
                                 </div>
@@ -20136,7 +20230,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -20257,7 +20351,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7163); ?>" readonly />
                                 </div>
@@ -20292,7 +20386,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -20413,7 +20507,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7164); ?>" readonly />
                                 </div>
@@ -20448,7 +20542,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -20569,7 +20663,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7165); ?>" readonly />
                                 </div>
@@ -20604,7 +20698,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -20725,7 +20819,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7166); ?>" readonly />
                                 </div>
@@ -20760,7 +20854,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -20881,7 +20975,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7167); ?>" readonly />
                                 </div>
@@ -20916,7 +21010,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -21037,7 +21131,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7168); ?>" readonly />
                                 </div>
@@ -21072,7 +21166,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -21193,7 +21287,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7169); ?>" readonly />
                                 </div>
@@ -21228,7 +21322,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -21349,7 +21443,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7170); ?>" readonly />
                                 </div>
@@ -21384,7 +21478,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -21505,7 +21599,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7171); ?>" readonly />
                                 </div>
@@ -21540,7 +21634,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -21661,7 +21755,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7172); ?>" readonly />
                                 </div>
@@ -21696,7 +21790,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -21817,7 +21911,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7173); ?>" readonly />
                                 </div>
@@ -21852,7 +21946,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -21973,7 +22067,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7174); ?>" readonly />
                                 </div>
@@ -22008,7 +22102,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -22129,7 +22223,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7175); ?>" readonly />
                                 </div>
@@ -22164,7 +22258,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -22285,7 +22379,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7176); ?>" readonly />
                                 </div>
@@ -22320,7 +22414,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -22441,7 +22535,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7177); ?>" readonly />
                                 </div>
@@ -22476,7 +22570,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -22597,7 +22691,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7178); ?>" readonly />
                                 </div>
@@ -22632,7 +22726,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -22753,7 +22847,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7179); ?>" readonly />
                                 </div>
@@ -22788,7 +22882,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -22909,7 +23003,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7180); ?>" readonly />
                                 </div>
@@ -22944,7 +23038,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -23065,7 +23159,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7181); ?>" readonly />
                                 </div>
@@ -23100,7 +23194,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -23221,7 +23315,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7182); ?>" readonly />
                                 </div>
@@ -23256,7 +23350,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -23377,7 +23471,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7183); ?>" readonly />
                                 </div>
@@ -23412,7 +23506,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -23533,7 +23627,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7245); ?>" readonly />
                                 </div>
@@ -23568,7 +23662,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -23689,7 +23783,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7246); ?>" readonly />
                                 </div>
@@ -23724,7 +23818,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -23845,7 +23939,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7247); ?>" readonly />
                                 </div>
@@ -23880,7 +23974,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -24001,7 +24095,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7248); ?>" readonly />
                                 </div>
@@ -24036,7 +24130,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -24157,7 +24251,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7249); ?>" readonly />
                                 </div>
@@ -24192,7 +24286,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -24313,7 +24407,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7250); ?>" readonly />
                                 </div>
@@ -24348,7 +24442,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -24469,7 +24563,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7251); ?>" readonly />
                                 </div>
@@ -24504,7 +24598,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -24625,7 +24719,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7252); ?>" readonly />
                                 </div>
@@ -24660,7 +24754,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -24781,7 +24875,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7253); ?>" readonly />
                                 </div>
@@ -24816,7 +24910,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -24937,7 +25031,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7254); ?>" readonly />
                                 </div>
@@ -24972,7 +25066,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -25093,7 +25187,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7255); ?>" readonly />
                                 </div>
@@ -25128,7 +25222,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -25249,7 +25343,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7256); ?>" readonly />
                                 </div>
@@ -25284,7 +25378,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -25405,7 +25499,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7257); ?>" readonly />
                                 </div>
@@ -25440,7 +25534,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -25561,7 +25655,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7258); ?>" readonly />
                                 </div>
@@ -25596,7 +25690,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -25717,7 +25811,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7259); ?>" readonly />
                                 </div>
@@ -25752,7 +25846,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -25873,7 +25967,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7260); ?>" readonly />
                                 </div>
@@ -25908,7 +26002,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -26029,7 +26123,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7261); ?>" readonly />
                                 </div>
@@ -26064,7 +26158,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -26185,7 +26279,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7184); ?>" readonly />
                                 </div>
@@ -26220,7 +26314,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -26341,7 +26435,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7185); ?>" readonly />
                                 </div>
@@ -26376,7 +26470,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -26497,7 +26591,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7186); ?>" readonly />
                                 </div>
@@ -26532,7 +26626,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -26653,7 +26747,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7187); ?>" readonly />
                                 </div>
@@ -26688,7 +26782,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -26809,7 +26903,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7188); ?>" readonly />
                                 </div>
@@ -26844,7 +26938,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -26965,7 +27059,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7189); ?>" readonly />
                                 </div>
@@ -27000,7 +27094,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -27121,7 +27215,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7190); ?>" readonly />
                                 </div>
@@ -27156,7 +27250,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -27277,7 +27371,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7191); ?>" readonly />
                                 </div>
@@ -27312,7 +27406,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -27433,7 +27527,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7192); ?>" readonly />
                                 </div>
@@ -27468,7 +27562,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -27589,7 +27683,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7193); ?>" readonly />
                                 </div>
@@ -27624,7 +27718,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -27745,7 +27839,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7194); ?>" readonly />
                                 </div>
@@ -27780,7 +27874,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -27901,7 +27995,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7195); ?>" readonly />
                                 </div>
@@ -27936,7 +28030,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -28057,7 +28151,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7196); ?>" readonly />
                                 </div>
@@ -28092,7 +28186,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -28213,7 +28307,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7197); ?>" readonly />
                                 </div>
@@ -28248,7 +28342,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -28369,7 +28463,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7198); ?>" readonly />
                                 </div>
@@ -28404,7 +28498,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -28525,7 +28619,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7199); ?>" readonly />
                                 </div>
@@ -28560,7 +28654,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -28681,7 +28775,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7200); ?>" readonly />
                                 </div>
@@ -28716,7 +28810,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -28837,7 +28931,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7201); ?>" readonly />
                                 </div>
@@ -28872,7 +28966,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -28993,7 +29087,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7202); ?>" readonly />
                                 </div>
@@ -29028,7 +29122,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -29149,7 +29243,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7203); ?>" readonly />
                                 </div>
@@ -29184,7 +29278,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">
@@ -29305,7 +29399,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
 
                                 <!--Second Row-->
-                                <div class="col-6">
+                                <div class=" col-6">
                                     <input type="text" class="form-control" id="room" name="room"
                                         value="<?php echo htmlspecialchars($room7204); ?>" readonly />
                                 </div>
@@ -29340,7 +29434,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <!--Fourth Row-->
                                 <div class="col-2 Upload">
-                                    <label for="status" class="form-label">Status:</label>
+                                    <label for=" status" class="form-label">Status:</label>
                                 </div>
 
                                 <div class="col-6">

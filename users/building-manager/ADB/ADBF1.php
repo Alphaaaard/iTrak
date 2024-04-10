@@ -626,7 +626,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5762->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5762 to $status5762.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5762 to $status5762.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -654,7 +654,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5763->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5763 to $status5763.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5763 to $status5763.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -682,7 +682,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5764->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5764 to $status5764.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5764 to $status5764.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -710,7 +710,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5765->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5765 to $status5765.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5765 to $status5765.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -738,7 +738,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5766->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5766 to $status5766.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5766 to $status5766.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -766,7 +766,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5767->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5767 to $status5767.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5767 to $status5767.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -794,7 +794,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5768->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5768 to $status5768.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5768 to $status5768.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -822,7 +822,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5769->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5769 to $status5769.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5769 to $status5769.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -850,7 +850,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5770->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5770 to $status5770.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5770 to $status5770.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -878,7 +878,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5771->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5771 to $status5771.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5771 to $status5771.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -906,7 +906,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5772->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5772 to $status5772.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5772 to $status5772.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -934,7 +934,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5773->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5773 to $status5773.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5773 to $status5773.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -962,7 +962,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5774->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5774 to $status5774.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5774 to $status5774.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -990,7 +990,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5775->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5775 to $status5775.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5775 to $status5775.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -1018,7 +1018,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5776->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5776 to $status5776.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5776 to $status5776.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -1046,7 +1046,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5777->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5777 to $status5777.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5777 to $status5777.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -1074,7 +1074,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5778->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5778 to $status5778.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5778 to $status5778.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -1102,7 +1102,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5779->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5779 to $status5779.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5779 to $status5779.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -1130,7 +1130,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5780->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5780 to $status5780.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5780 to $status5780.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -1158,7 +1158,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5781->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5781 to $status5781.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5781 to $status5781.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -1186,7 +1186,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5782->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5782 to $status5782.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5782 to $status5782.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -1214,7 +1214,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5783->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5783 to $status5783.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5783 to $status5783.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -1242,7 +1242,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5784->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5784 to $status5784.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5784 to $status5784.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -1270,7 +1270,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5785->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5785 to $status5785.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5785 to $status5785.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -1298,7 +1298,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5786->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5786 to $status5786.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5786 to $status5786.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -1326,7 +1326,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5787->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5787 to $status5787.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5787 to $status5787.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -1354,7 +1354,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5788->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5788 to $status5788.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5788 to $status5788.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -1382,7 +1382,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5789->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5789 to $status5789.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5789 to $status5789.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -1410,7 +1410,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5790->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5790 to $status5790.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5790 to $status5790.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -1438,7 +1438,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         if ($stmt5791->execute()) {
             // Update success
-            // logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5791 to $status5791.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId5791 to $status5791.", 'Report');
             echo "<script>alert('Asset updated successfully!');</script>";
             header("Location: ADBF1.php");
         } else {
@@ -1497,159 +1497,159 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
     }
     ?>
 
-    <!DOCTYPE html>
-    <html lang="en">
+        <!DOCTYPE html>
+        <html lang="en">
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Dashboard</title>
-        <link rel="icon" type="image/x-icon" href="../../../src/img/tab-logo.png">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="../../src/js/locationTracker.js"></script>
-        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="../../../src/css/main.css" />
-        <link rel="stylesheet" href="../../buildingCSS/BEB/BEBF1.css" />
-        <link rel="stylesheet" href="../../../src/css/map.css" />
-    </head>
-    <style>
-        .notification-indicator {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: red;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-    </style>
+        <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Dashboard</title>
+            <link rel="icon" type="image/x-icon" href="../../../src/img/tab-logo.png">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+                integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+            <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script src="../../src/js/locationTracker.js"></script>
+            <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
+            <link rel="stylesheet" href="../../../src/css/main.css" />
+            <link rel="stylesheet" href="../../buildingCSS/BEB/BEBF1.css" />
+            <link rel="stylesheet" href="../../../src/css/map.css" />
+        </head>
+        <style>
+            .notification-indicator {
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: red;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
+        </style>
 
-    <body>
-        <div id="navbar" class="">
-            <nav>
-                <div class="hamburger">
-                    <i class="bi bi-list"></i>
-                    <a href="#" class="brand" title="logo">
-                    </a>
-                </div>
-                <div class="content-nav">
-                    <div class="notification-dropdown">
+        <body>
+            <div id="navbar" class="">
+                <nav>
+                    <div class="hamburger">
+                        <i class="bi bi-list"></i>
+                        <a href="#" class="brand" title="logo">
+                        </a>
+                    </div>
+                    <div class="content-nav">
+                        <div class="notification-dropdown">
 
-                        <!--NOTIF NI PABS-->
-                        <a href="#" class="notification" id="notification-button">
-                            <i class="fa fa-bell" aria-hidden="true"></i>
-                            <!-- Notification Indicator Dot -->
-                            <?php if ($unseenCount > 0): ?>
-                                <span class="notification-indicator"></span>
-                            <?php endif; ?>
+                            <!--NOTIF NI PABS-->
+                            <a href="#" class="notification" id="notification-button">
+                                <i class="fa fa-bell" aria-hidden="true"></i>
+                                <!-- Notification Indicator Dot -->
+                                <?php if ($unseenCount > 0): ?>
+                                        <span class="notification-indicator"></span>
+                                <?php endif; ?>
+                            </a>
+
+                            <div class="dropdown-content" id="notification-dropdown-content">
+                                <h6 class="dropdown-header">Alerts Center</h6>
+                                <!-- PHP code to display notifications will go here -->
+                                <?php
+                                if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
+                                    while ($row = $resultLatestLogs->fetch_assoc()) {
+                                        $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
+                                        $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
+                                        $actionText = $row["action"];
+
+                                        // Initialize the notification text as empty
+                                        $notificationText = "";
+                                        if (strpos($actionText, $adminRole) === false) {
+                                            // Role is not in the action text, so prepend it to the admin name
+                                            $adminName = "$adminRole $adminName";
+                                        }
+                                        // Check for 'Assigned maintenance personnel' action
+                                        if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
+                                            $assignedName = $matches[1];
+                                            $assetId = $matches[2];
+                                            $notificationText = "assigned $assignedName to asset ID $assetId";
+                                        }
+                                        // Check for 'Changed status of asset ID' action
+                                        elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
+                                            $assetId = $matches[1];
+                                            $newStatus = $matches[2];
+                                            $notificationText = "changed status of asset ID $assetId to $newStatus";
+                                        }
+
+                                        // If notification text is set, echo the notification
+                                        if (!empty($notificationText)) {
+                                            // HTML for notification item
+                                            echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
+                                        }
+                                    }
+                                } else {
+                                    // No notifications found
+                                    echo '<a href="#">No new notifications</a>';
+                                }
+                                ?>
+                                <a href="activity-logs.php" class="view-all">View All</a>
+
+                            </div>
+                        </div>
+                        <!--END NG  NOTIF NI PABS-->
+
+                        <a href="#" class="settings profile">
+                            <div class="profile-container" title="settings">
+                                <div class="profile-img">
+                                    <?php
+                                    if ($conn->connect_error) {
+                                        die('Connect Error (' . $conn->connect_errno . ') ' . $conn->connect_error);
+                                    }
+
+                                    $userId = $_SESSION['accountId'];
+                                    $query = "SELECT picture FROM account WHERE accountId = ?";
+                                    $stmt = $conn->prepare($query);
+                                    $stmt->bind_param('i', $userId);
+                                    $stmt->execute();
+                                    $stmt->store_result();
+
+                                    if ($stmt->num_rows > 0) {
+                                        $stmt->bind_result($userPicture);
+                                        $stmt->fetch();
+
+                                        echo "<img src='data:image/jpeg;base64," . base64_encode($userPicture) . "' title='profile-picture' />";
+                                    } else {
+                                        echo $_SESSION['firstName'];
+                                    }
+
+                                    $stmt->close();
+                                    ?>
+                                </div>
+                                <div class="profile-name-container " id="desktop">
+                                    <div><a class="profile-name">
+                                            <?php echo $_SESSION['firstName']; ?>
+                                        </a></div>
+                                    <div><a class="profile-role">
+                                            <?php echo $_SESSION['role']; ?>
+                                        </a></div>
+                                </div>
+                            </div>
+
                         </a>
 
-                        <div class="dropdown-content" id="notification-dropdown-content">
-                            <h6 class="dropdown-header">Alerts Center</h6>
-                            <!-- PHP code to display notifications will go here -->
-                            <?php
-                            if ($resultLatestLogs && $resultLatestLogs->num_rows > 0) {
-                                while ($row = $resultLatestLogs->fetch_assoc()) {
-                                    $adminName = $row["adminFirstName"] . ' ' . $row["adminLastName"];
-                                    $adminRole = $row["adminRole"]; // This should be the role such as 'Manager' or 'Personnel'
-                                    $actionText = $row["action"];
-
-                                    // Initialize the notification text as empty
-                                    $notificationText = "";
-                                    if (strpos($actionText, $adminRole) === false) {
-                                        // Role is not in the action text, so prepend it to the admin name
-                                        $adminName = "$adminRole $adminName";
-                                    }
-                                    // Check for 'Assigned maintenance personnel' action
-                                    if (preg_match('/Assigned maintenance personnel (.*?) to asset ID (\d+)/', $actionText, $matches)) {
-                                        $assignedName = $matches[1];
-                                        $assetId = $matches[2];
-                                        $notificationText = "assigned $assignedName to asset ID $assetId";
-                                    }
-                                    // Check for 'Changed status of asset ID' action
-                                    elseif (preg_match('/Changed status of asset ID (\d+) to (.+)/', $actionText, $matches)) {
-                                        $assetId = $matches[1];
-                                        $newStatus = $matches[2];
-                                        $notificationText = "changed status of asset ID $assetId to $newStatus";
-                                    }
-
-                                    // If notification text is set, echo the notification
-                                    if (!empty($notificationText)) {
-                                        // HTML for notification item
-                                        echo '<a href="#" class="notification-item" data-activity-id="' . $row["activityId"] . '">' . htmlspecialchars("$adminName $notificationText") . '</a>';
-                                    }
-                                }
-                            } else {
-                                // No notifications found
-                                echo '<a href="#">No new notifications</a>';
-                            }
-                            ?>
-                            <a href="activity-logs.php" class="view-all">View All</a>
-
-                        </div>
-                    </div>
-                    <!--END NG  NOTIF NI PABS-->
-
-                    <a href="#" class="settings profile">
-                        <div class="profile-container" title="settings">
-                            <div class="profile-img">
-                                <?php
-                                if ($conn->connect_error) {
-                                    die('Connect Error (' . $conn->connect_errno . ') ' . $conn->connect_error);
-                                }
-
-                                $userId = $_SESSION['accountId'];
-                                $query = "SELECT picture FROM account WHERE accountId = ?";
-                                $stmt = $conn->prepare($query);
-                                $stmt->bind_param('i', $userId);
-                                $stmt->execute();
-                                $stmt->store_result();
-
-                                if ($stmt->num_rows > 0) {
-                                    $stmt->bind_result($userPicture);
-                                    $stmt->fetch();
-
-                                    echo "<img src='data:image/jpeg;base64," . base64_encode($userPicture) . "' title='profile-picture' />";
-                                } else {
-                                    echo $_SESSION['firstName'];
-                                }
-
-                                $stmt->close();
-                                ?>
-                            </div>
-                            <div class="profile-name-container " id="desktop">
+                        <div id="settings-dropdown" class="dropdown-content1">
+                            <div class="profile-name-container" id="mobile">
                                 <div><a class="profile-name">
                                         <?php echo $_SESSION['firstName']; ?>
                                     </a></div>
                                 <div><a class="profile-role">
                                         <?php echo $_SESSION['role']; ?>
                                     </a></div>
+                                <hr>
                             </div>
+                            <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i
+                                    class="bi bi-person profile-icons"></i>Profile</a>
+                            <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
                         </div>
-
-                    </a>
-
-                    <div id="settings-dropdown" class="dropdown-content1">
-                        <div class="profile-name-container" id="mobile">
-                            <div><a class="profile-name">
-                                    <?php echo $_SESSION['firstName']; ?>
-                                </a></div>
-                            <div><a class="profile-role">
-                                    <?php echo $_SESSION['role']; ?>
-                                </a></div>
-                            <hr>
-                        </div>
-                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i
-                                class="bi bi-person profile-icons"></i>Profile</a>
-                        <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
-                    </div>
-                    <?php
+                        <?php
 } else {
     header("Location:../../index.php");
     exit();
@@ -1736,7 +1736,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5762); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5762); ?>"
                     data-image="<?php echo base64_encode($upload_img5762); ?>"
-                    data-category="<?php echo htmlspecialchars($category5762); ?>">
+                    data-category="<?php echo htmlspecialchars($category5762); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5762); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5762); ?>; 
     position:absolute; top:60px; left:875px;'>
                 </div>
@@ -1753,7 +1754,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5763); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5763); ?>"
                     data-image="<?php echo base64_encode($upload_img5763); ?>"
-                    data-category="<?php echo htmlspecialchars($category5763); ?>">
+                    data-category="<?php echo htmlspecialchars($category5763); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5763); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5763); ?>; 
     position:absolute; top:155px; left:135px;'>
                 </div>
@@ -1766,7 +1768,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5764); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5764); ?>"
                     data-image="<?php echo base64_encode($upload_img5764); ?>"
-                    data-category="<?php echo htmlspecialchars($category5764); ?>">
+                    data-category="<?php echo htmlspecialchars($category5764); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5764); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5764); ?>; 
     position:absolute; top:155px; left:305px;'>
                 </div>
@@ -1779,7 +1782,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5765); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5765); ?>"
                     data-image="<?php echo base64_encode($upload_img5765); ?>"
-                    data-category="<?php echo htmlspecialchars($category5765); ?>">
+                    data-category="<?php echo htmlspecialchars($category5765); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5765); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5765); ?>; 
     position:absolute; top:155px; left:465px;'>
                 </div>
@@ -1792,7 +1796,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5766); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5766); ?>"
                     data-image="<?php echo base64_encode($upload_img5766); ?>"
-                    data-category="<?php echo htmlspecialchars($category5766); ?>">
+                    data-category="<?php echo htmlspecialchars($category5766); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5766); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5766); ?>; 
     position:absolute; top:155px; left:805px;'>
                 </div>
@@ -1805,7 +1810,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5767); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5767); ?>"
                     data-image="<?php echo base64_encode($upload_img5767); ?>"
-                    data-category="<?php echo htmlspecialchars($category5767); ?>">
+                    data-category="<?php echo htmlspecialchars($category5767); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5767); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5767); ?>; 
     position:absolute; top:155px; left:945px;'>
                 </div>
@@ -1818,7 +1824,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5768); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5768); ?>"
                     data-image="<?php echo base64_encode($upload_img5768); ?>"
-                    data-category="<?php echo htmlspecialchars($category5768); ?>">
+                    data-category="<?php echo htmlspecialchars($category5768); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5768); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5768); ?>; 
     position:absolute; top:155px; left:1075px;'>
                 </div>
@@ -1831,7 +1838,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5769); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5769); ?>"
                     data-image="<?php echo base64_encode($upload_img5769); ?>"
-                    data-category="<?php echo htmlspecialchars($category5769); ?>">
+                    data-category="<?php echo htmlspecialchars($category5769); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5769); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5769); ?>; 
     position:absolute; top:255px; left:135px;'>
                 </div>
@@ -1844,7 +1852,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5770); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5770); ?>"
                     data-image="<?php echo base64_encode($upload_img5770); ?>"
-                    data-category="<?php echo htmlspecialchars($category5770); ?>">
+                    data-category="<?php echo htmlspecialchars($category5770); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5770); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5770); ?>; 
     position:absolute; top:255px; left:305px;'>
                 </div>
@@ -1857,7 +1866,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5771); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5771); ?>"
                     data-image="<?php echo base64_encode($upload_img5771); ?>"
-                    data-category="<?php echo htmlspecialchars($category5771); ?>">
+                    data-category="<?php echo htmlspecialchars($category5771); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5771); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5771); ?>; 
     position:absolute; top:255px; left:465px;'>
                 </div>
@@ -1870,7 +1880,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5772); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5772); ?>"
                     data-image="<?php echo base64_encode($upload_img5772); ?>"
-                    data-category="<?php echo htmlspecialchars($category5772); ?>">
+                    data-category="<?php echo htmlspecialchars($category5772); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5772); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5772); ?>; 
     position:absolute; top:255px; left:625px;'>
                 </div>
@@ -1883,7 +1894,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5773); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5773); ?>"
                     data-image="<?php echo base64_encode($upload_img5773); ?>"
-                    data-category="<?php echo htmlspecialchars($category5773); ?>">
+                    data-category="<?php echo htmlspecialchars($category5773); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5773); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5773); ?>; 
     position:absolute; top:255px; left:805px;'>
                 </div>
@@ -1896,7 +1908,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5774); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5774); ?>"
                     data-image="<?php echo base64_encode($upload_img5774); ?>"
-                    data-category="<?php echo htmlspecialchars($category5774); ?>">
+                    data-category="<?php echo htmlspecialchars($category5774); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5774); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5774); ?>; 
     position:absolute; top:255px; left:960px;'>
                 </div>
@@ -1909,7 +1922,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5775); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5775); ?>"
                     data-image="<?php echo base64_encode($upload_img5775); ?>"
-                    data-category="<?php echo htmlspecialchars($category5775); ?>">
+                    data-category="<?php echo htmlspecialchars($category5775); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5775); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5775); ?>; 
     position:absolute; top:255px; left:1105px;'>
                 </div>
@@ -1923,7 +1937,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5776); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5776); ?>"
                     data-image="<?php echo base64_encode($upload_img5776); ?>"
-                    data-category="<?php echo htmlspecialchars($category5776); ?>">
+                    data-category="<?php echo htmlspecialchars($category5776); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5776); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5776); ?>; 
     position:absolute; top:335px; left:135px;'>
                 </div>
@@ -1936,7 +1951,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5777); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5777); ?>"
                     data-image="<?php echo base64_encode($upload_img5777); ?>"
-                    data-category="<?php echo htmlspecialchars($category5777); ?>">
+                    data-category="<?php echo htmlspecialchars($category5777); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5777); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5777); ?>; 
     position:absolute; top:335px; left:245px;'>
                 </div>
@@ -1949,7 +1965,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5778); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5778); ?>"
                     data-image="<?php echo base64_encode($upload_img5778); ?>"
-                    data-category="<?php echo htmlspecialchars($category5778); ?>">
+                    data-category="<?php echo htmlspecialchars($category5778); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5778); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5778); ?>; 
     position:absolute; top:370px; left:300px;'>
                 </div>
@@ -1962,7 +1979,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5779); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5779); ?>"
                     data-image="<?php echo base64_encode($upload_img5779); ?>"
-                    data-category="<?php echo htmlspecialchars($category5779); ?>">
+                    data-category="<?php echo htmlspecialchars($category5779); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5779); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5779); ?>; 
     position:absolute; top:370px; left:455px;'>
                 </div>
@@ -1975,7 +1993,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5780); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5780); ?>"
                     data-image="<?php echo base64_encode($upload_img5780); ?>"
-                    data-category="<?php echo htmlspecialchars($category5780); ?>">
+                    data-category="<?php echo htmlspecialchars($category5780); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5780); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5780); ?>; 
     position:absolute; top:410px; left:355px;'>
                 </div>
@@ -1988,7 +2007,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5781); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5781); ?>"
                     data-image="<?php echo base64_encode($upload_img5781); ?>"
-                    data-category="<?php echo htmlspecialchars($category5781); ?>">
+                    data-category="<?php echo htmlspecialchars($category5781); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5781); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5781); ?>; 
     position:absolute; top:410px; left:395px;'>
                 </div>
@@ -2001,7 +2021,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5782); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5782); ?>"
                     data-image="<?php echo base64_encode($upload_img5782); ?>"
-                    data-category="<?php echo htmlspecialchars($category5782); ?>">
+                    data-category="<?php echo htmlspecialchars($category5782); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5782); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5782); ?>; 
     position:absolute; top:450px; left:300px;'>
                 </div>
@@ -2014,7 +2035,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5783); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5783); ?>"
                     data-image="<?php echo base64_encode($upload_img5783); ?>"
-                    data-category="<?php echo htmlspecialchars($category5783); ?>">
+                    data-category="<?php echo htmlspecialchars($category5783); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5783); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5783); ?>; 
     position:absolute; top:450px; left:455px;'>
                 </div>
@@ -2027,7 +2049,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5784); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5784); ?>"
                     data-image="<?php echo base64_encode($upload_img5784); ?>"
-                    data-category="<?php echo htmlspecialchars($category5784); ?>">
+                    data-category="<?php echo htmlspecialchars($category5784); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5784); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5784); ?>; 
     position:absolute; top:350px; left:595px;'>
                 </div>
@@ -2040,7 +2063,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5785); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5785); ?>"
                     data-image="<?php echo base64_encode($upload_img5785); ?>"
-                    data-category="<?php echo htmlspecialchars($category5785); ?>">
+                    data-category="<?php echo htmlspecialchars($category5785); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5785); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5785); ?>; 
     position:absolute; top:350px; left:665px;'>
                 </div>
@@ -2053,7 +2077,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5786); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5786); ?>"
                     data-image="<?php echo base64_encode($upload_img5786); ?>"
-                    data-category="<?php echo htmlspecialchars($category5786); ?>">
+                    data-category="<?php echo htmlspecialchars($category5786); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5786); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5786); ?>; 
     position:absolute; top:370px; left:795px;'>
                 </div>
@@ -2066,7 +2091,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5787); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5787); ?>"
                     data-image="<?php echo base64_encode($upload_img5787); ?>"
-                    data-category="<?php echo htmlspecialchars($category5787); ?>">
+                    data-category="<?php echo htmlspecialchars($category5787); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5787); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5787); ?>; 
     position:absolute; top:370px; left:945px;'>
                 </div>
@@ -2079,7 +2105,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5788); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5788); ?>"
                     data-image="<?php echo base64_encode($upload_img5788); ?>"
-                    data-category="<?php echo htmlspecialchars($category5788); ?>">
+                    data-category="<?php echo htmlspecialchars($category5788); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5788); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5788); ?>; 
     position:absolute; top:410px; left:845px;'>
                 </div>
@@ -2092,7 +2119,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5789); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5789); ?>"
                     data-image="<?php echo base64_encode($upload_img5789); ?>"
-                    data-category="<?php echo htmlspecialchars($category5789); ?>">
+                    data-category="<?php echo htmlspecialchars($category5789); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5789); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5789); ?>; 
     position:absolute; top:410px; left:885px;'>
                 </div>
@@ -2105,7 +2133,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5790); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5790); ?>"
                     data-image="<?php echo base64_encode($upload_img5790); ?>"
-                    data-category="<?php echo htmlspecialchars($category5790); ?>">
+                    data-category="<?php echo htmlspecialchars($category5790); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5790); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5790); ?>; 
     position:absolute; top:450px; left:795px;'>
                 </div>
@@ -2118,7 +2147,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     data-room="<?php echo htmlspecialchars($room5791); ?>"
                     data-floor="<?php echo htmlspecialchars($floor5791); ?>"
                     data-image="<?php echo base64_encode($upload_img5791); ?>"
-                    data-category="<?php echo htmlspecialchars($category5791); ?>">
+                    data-category="<?php echo htmlspecialchars($category5791); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName5791); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status5791); ?>; 
     position:absolute; top:450px; left:945px;'>
                 </div>
