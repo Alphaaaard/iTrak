@@ -8,13 +8,14 @@ function getLocationsByAccountAndDate($accountId, $date)
     $locations = array();
 
     $sql = "SELECT a.firstName, a.latitude, a.longitude, a.picture, lh.*, a.color
-            FROM locationhistory AS lh
-            LEFT JOIN account AS a ON a.accountId = lh.accountId
-            WHERE DATE(lh.timestamp) = ?"; // Filter by date
+        FROM locationhistory AS lh
+        LEFT JOIN account AS a ON a.accountId = lh.accountId
+        WHERE DATE(lh.timestamp) = ?"; // Filter by date
 
     if ($accountId) {
-        $sql .= " AND a.accountId = ?";
+        $sql .= " AND a.accountId = ?"; // Filter by accountId if provided
     }
+
 
     $stmt = $conn->prepare($sql);
 

@@ -592,6 +592,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             }
 
                             function getLocationFromDatabase(accountId, selectedDate) {
+                                if (!accountId) {
+                                    clearMap(); // Clear the map if no accountId is selected
+                                    console.log("No accountId provided for getLocationFromDatabase");
+                                    return; // Exit the function if no accountId is provided
+                                }
+
                                 // Clear the map
                                 clearMap();
 
@@ -613,6 +619,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 xmlhttp.open("GET", "get_location_history.php?accountId=" + encodeURIComponent(accountId) + "&date=" + encodeURIComponent(selectedDate), true);
                                 xmlhttp.send();
                             }
+
+
 
                             // Initialize the map when the page loads
                             window.onload = function() {
@@ -733,24 +741,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/gps.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
 
-        <script>
-            $(document).ready(function() {
-                // Click event handler for the image in the table
-                $(document).on('click', '.locationTbl .rounded-img', function(e) {
-                    e.stopPropagation(); // Stop event propagation to parent elements
-
-                    // Get the accountId of the clicked user
-                    var accountId = $(this).data('accountId');
-
-                    // Get the current date in 'YYYY-MM-DD' format
-                    var currentDate = new Date().toISOString().slice(0, 10);
-
-                    // Call getLocationFromDatabase with the accountId and current date
-                    getLocationFromDatabase(accountId, currentDate);
-                });
-            });
-        </script>
-
 
         <script>
             var currentDate = new Date();
@@ -795,13 +785,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                 // Add event listener to days
                 var days = document.querySelectorAll('.days');
+                // Inside your generateCalendar function or wherever you're setting up the click event listener for the calendar dates
                 days.forEach(function(day) {
                     day.addEventListener('click', function() {
                         var selectedDay = parseInt(day.textContent);
-                        var selectedDate = year + '-' + (month + 1).toString().padStart(2, '0') + '-' + selectedDay.toString().padStart(2, '0');
-                        getLocationFromDatabase(null, selectedDate);
+                        var selectedDate = currentYear + '-' + (currentMonth + 1).toString().padStart(2, '0') + '-' + selectedDay.toString().padStart(2, '0');
+
+                        // Check if an accountId has been selected by clicking on a user's image
+                        if (selectedAccountId) {
+                            getLocationFromDatabase(selectedAccountId, selectedDate);
+                        } else {
+                            console.log("No user selected. Please select a user first.");
+                            // Optionally, you can display a message to the user asking them to select a user first
+                        }
                     });
                 });
+
             }
 
             function prevMonth() {
@@ -831,22 +830,24 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             generateCalendar(currentMonth, currentYear);
         </script>
 
-
-
         <script>
+            // Define selectedAccountId at the top of your script to ensure wide accessibility
+            var selectedAccountId = null;
+
             document.addEventListener('DOMContentLoaded', (event) => {
+                // Event listener for clicking on a user's image
                 document.body.addEventListener('click', function(e) {
                     if (e.target && e.target.classList.contains('rounded-img')) {
-                        var accountId = e.target.getAttribute('data-accountId');
-                        console.log('Account ID:', accountId);
-
-                        // Check if data is already loaded for this account ID
-                        if (!markersByFirstName.hasOwnProperty(accountId)) {
-                            getLocationFromDatabase(accountId);
-                        }
+                        selectedAccountId = e.target.getAttribute('data-accountId');
+                        const currentDate = new Date().toISOString().slice(0, 10); // 'YYYY-MM-DD'
+                        getLocationFromDatabase(selectedAccountId, currentDate);
                     }
                 });
+
+                // Your existing code to handle calendar date clicks...
             });
+
+
 
             function fetchTodaysLocations(accountId) {
                 const date = new Date().toISOString().slice(0, 10); // Get current date in YYYY-MM-DD format
