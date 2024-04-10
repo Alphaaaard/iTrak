@@ -9,6 +9,7 @@ require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 
 if (isset($_POST['submit']) && $_POST['submit'] == 'Export to Excel') {
     $conn = connection();
@@ -36,15 +37,23 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Export to Excel') {
     $spreadsheet = new Spreadsheet();
     $sheet = $spreadsheet->getActiveSheet();
 
-    // Define the cell style with center alignment
-    $centerStyleArray = [
+    // Define the cell style with center alignment and bold font
+    $styleArray = [
+        'font' => [
+            'bold' => true,
+        ],
         'alignment' => [
             'horizontal' => Alignment::HORIZONTAL_CENTER,
             'vertical' => Alignment::VERTICAL_CENTER,
         ],
+        'borders' => [
+            'allBorders' => [
+                'borderStyle' => Border::BORDER_THIN,
+            ],
+        ],
     ];
 
-    // Set headers for the spreadsheet and merge cells for each header to span two columns
+    // Set headers for the spreadsheet and merge cells for each header
     $sheet->setCellValue('A1', 'Tracking #');
     $sheet->mergeCells('A1:B1');
     $sheet->setCellValue('C1', 'Date & Time');
@@ -52,12 +61,12 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Export to Excel') {
     $sheet->setCellValue('E1', 'Category');
     $sheet->mergeCells('E1:F1');
     $sheet->setCellValue('G1', 'Location');
-    $sheet->mergeCells('G1:I1');
-    $sheet->setCellValue('J1', 'Status');
-    $sheet->mergeCells('J1:K1');
+    $sheet->mergeCells('G1:J1'); // Merging four cells for Location
+    $sheet->setCellValue('K1', 'Status');
+    $sheet->mergeCells('K1:L1');
 
-    // Apply center style to header cells
-    $sheet->getStyle('A1:K1')->applyFromArray($centerStyleArray);
+    // Apply style to header cells
+    $sheet->getStyle('A1:L1')->applyFromArray($styleArray);
 
     $rowNumber = 2;
     while ($row = mysqli_fetch_assoc($result)) {
@@ -68,27 +77,27 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Export to Excel') {
         $sheet->setCellValue('E' . $rowNumber, $row['category']);
         $sheet->mergeCells('E' . $rowNumber . ':F' . $rowNumber); // Merges cells for each data row
         $sheet->setCellValue('G' . $rowNumber, $row['building'] . ' / ' . $row['floor'] . ' / ' . $row['room']);
-        $sheet->mergeCells('G' . $rowNumber . ':I' . $rowNumber); // Merges cells for each data row
-        $sheet->setCellValue('J' . $rowNumber, $row['status']);
-        $sheet->mergeCells('J' . $rowNumber . ':K' . $rowNumber); // Merges cells for each data row
+        $sheet->mergeCells('G' . $rowNumber . ':J' . $rowNumber); // Merges four cells for Location
+        $sheet->setCellValue('K' . $rowNumber, $row['status']);
+        $sheet->mergeCells('K' . $rowNumber . ':L' . $rowNumber); // Merges cells for Status
 
-        // Apply center style to data cells that have been merged
-        $sheet->getStyle('A' . $rowNumber . ':K' . $rowNumber)->applyFromArray($centerStyleArray);
+        // Apply center style to data cells
+        $sheet->getStyle('A' . $rowNumber . ':L' . $rowNumber)->applyFromArray($styleArray);
         $rowNumber++;
     }
 
-   // Redirect output to the browser
-   ob_end_clean();
-   ob_start();
+    // Redirect output to the browser
+    ob_end_clean();
+    ob_start();
 
-   header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-   header('Content-Disposition: attachment; filename="exported_data.xlsx"');
-   header('Cache-Control: max-age=0');
-   
-   $writer = new Xlsx($spreadsheet);
-   $writer->save('php://output');
-   ob_end_flush();
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment; filename="' . urlencode($status) . '_assets.xlsx"');
+    header('Cache-Control: max-age=0');
+    
+    $writer = new Xlsx($spreadsheet);
+    $writer->save('php://output');
+    ob_end_flush();
 
-   exit;
+    exit;
 }
 ?>
