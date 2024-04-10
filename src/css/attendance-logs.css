@@ -125,6 +125,24 @@ table {
  border-spacing: 0 10px;
 } */
 
+.new-nav-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.new-nav {
+  padding: 0.5em 0.5em 0 0.5em;
+  background-color: #3d518c;
+  justify-content: center;
+}
+
+.new-nav ul {
+  background-color: #3d518c;
+  align-items: center;
+  display: flex;
+  gap: 5px;
+}
+
 /* .new-nav{
   padding: 0.5em 0.5em 0 0.5em;
   background-color: #3D518C;
