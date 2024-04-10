@@ -834,7 +834,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <script>
             $(document).ready(function() {
                 // Define default month and week as January and Week 1
-                var defaultMonth = 3; // January
+                var defaultMonth = 4; // January
                 var defaultWeek = 1; // Week 1
 
                 // Set default selections for month and week filters
