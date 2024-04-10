@@ -1133,7 +1133,7 @@ document.getElementById('exportBtn').addEventListener('click', function() {
             performExport(formData, 'export-ad-pdf.php');
         } else if (result.isDenied) {
             formData.append('submit', 'Export to Excel');
-            performExport(formData, 'export-excel.php');
+            performExport(formData, 'export-ad-excel.php');
         }
     });
 });
