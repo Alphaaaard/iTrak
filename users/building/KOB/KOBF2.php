@@ -5927,6 +5927,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </li>
             </ul>
         </section>
+            <div id="map-top-nav">
+                            <a href="../../administrator/map.php" class="closeFloor"><i
+                                class="bi bi-box-arrow-left"></i></i></a>
+
+                    <div class="legend-button" id="legendButton">
+                        <i class="bi bi-info-circle"></i>
+                    </div>
+                    </div>
         <section id="content">
             <main>
                 <div class="content-container" id="content-container">
@@ -5934,10 +5942,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <!-- FLOOR PLAN -->
                         <img class="Floor-container-1 .NEWBF1" src="../../../src/floors/korPhil/Korphil2F.png" alt="">
-
-                        <div class="legend-button" id="legendButton">
-                            <i class="bi bi-info-circle"></i>
-                        </div>
 
                         <div class="legend-body" id="legendBody">
                             <!-- Your legend body content goes here -->
@@ -5950,7 +5954,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
                         
                         <div class="map-nav">
-                            <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
                             <div class="map-legend">
                                 <div class="legend-color-green"></div>
                                 <p>Working</p>

@@ -2925,16 +2925,20 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </li>
             </ul>
         </section>
+            <div id="map-top-nav">
+                            <a href="../../administrator/map.php" class="closeFloor"><i
+                                class="bi bi-box-arrow-left"></i></i></a>
+
+                    <div class="legend-button" id="legendButton">
+                        <i class="bi bi-info-circle"></i>
+                    </div>
+                    </div>
         <section id="content">
             <main>
                 <div class="content-container" id="content-container">
                     <div id="belmonte-F1" class="content">
                         <!-- FLOOR PLAN -->
                         <img class="Floor-container-1" src="../../../src/floors/techvocB/TV1F.png" alt="">
-
-                        <div class="legend-button" id="legendButton">
-                            <i class="bi bi-info-circle"></i>
-                        </div>
 
                         <div class="legend-body" id="legendBody">
                             <!-- Your legend body content goes here -->
@@ -2948,7 +2952,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
                         <div class="map-nav">
-                            <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
                             <div class="map-legend">
                                 <div class="legend-color-green"></div>
                                 <p>Working</p>
@@ -10581,24 +10584,24 @@ position:absolute; top:205px; left:297px;'>
             });
         </script>
         <script>
-    // Find all input elements with ID 'description'
-    var inputElements = document.querySelectorAll('input#description');
+            // Find all input elements with ID 'description'
+            var inputElements = document.querySelectorAll('input#description');
 
-    // Iterate through each input element
-    inputElements.forEach(function(inputElement) {
-        // Create a new textarea element
-        var textareaElement = document.createElement('textarea');
+            // Iterate through each input element
+            inputElements.forEach(function(inputElement) {
+                // Create a new textarea element
+                var textareaElement = document.createElement('textarea');
 
-        // Copy attributes from the input element
-        textareaElement.className = inputElement.className;
-        textareaElement.id = inputElement.id;
-        textareaElement.name = inputElement.name;
-        textareaElement.value = inputElement.value;
+                // Copy attributes from the input element
+                textareaElement.className = inputElement.className;
+                textareaElement.id = inputElement.id;
+                textareaElement.name = inputElement.name;
+                textareaElement.value = inputElement.value;
 
-        // Replace the input element with the textarea element
-        inputElement.parentNode.replaceChild(textareaElement, inputElement);
-    });
-</script>
+                // Replace the input element with the textarea element
+                inputElement.parentNode.replaceChild(textareaElement, inputElement);
+            });
+        </script>
 
         <script src="../../../src/js/main.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
