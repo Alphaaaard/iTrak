@@ -442,7 +442,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                   echo "</table>";
                   echo "</div>";
                 } else {
-                  echo '<tr><td colspan="7">No data available</td></tr>';
+                  echo "<div class='no-results'>No results found</div>";
                 }
                 $stmt->close();
                 ?>
@@ -511,7 +511,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                   echo "</table>";
                   echo "</div>";
                 } else {
-                  echo '<tr><td colspan="7">No data available</td></tr>';
+                  echo "<div class='no-results'>No results found</div>";
                 }
 
                 $stmt->close();
@@ -620,6 +620,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="col-4">
                           <label for="password" class="form-label">Password <span class="d-none text-danger error">*</span></label>
                           <input type="password" class="form-control" id="passwordField" name="password" placeholder="Password" required />
+                          <i class="bi bi-eye-slash" id="togglePassword"></i>
                         </div>
 
                         <div class="col-4">

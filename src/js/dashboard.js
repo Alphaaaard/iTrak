@@ -759,7 +759,7 @@ function confirmAlert(index) {
         //*alertboxes if there is assign personnel selected
         Swal.fire({
           icon: "success",
-          title: `Maintenance Personnel <b>${employeeNames}</b> has been removed successfully`,
+          title: `Maintenance Personnel has been removed successfully`,
           showConfirmButton: false,
           timer: 1000
         })

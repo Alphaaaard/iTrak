@@ -390,7 +390,7 @@ $(".updateBtn").click(function () {
       // success alertbox
       Swal.fire({
         title: "Success",
-        text: "Changes Saved Successfully!",
+        text: "Changes has been saved!",
         icon: "success",
         timer: 1000,
         showConfirmButton: false,
