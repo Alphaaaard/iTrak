@@ -176,11 +176,17 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </li>
             </ul>
         </section>
+        <div id="map-top-nav">
+            <a href="../../manager/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
+
+            <div class="legend-button" id="legendButton">
+                <i class="bi bi-info-circle"></i>
+            </div>
+        </div>
         <section id="content">
             <main>
                 <div class="content-container" id="content-container">
                     <div id="belmonte-F1" class="content">
-                        <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-arrow-left"></i></a>
                         <!-- ASSETS -->
                         <img src='../image.php?id=1' style='width:100px; cursor:pointer;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal1' onclick='fetchAssetData(1);'>
                         <img src='../image.php?id=2' style='width:100px; cursor:pointer;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal2' onclick='fetchAssetData(2);'>

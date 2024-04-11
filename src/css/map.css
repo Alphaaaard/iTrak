@@ -180,6 +180,12 @@
 }
 .map-legend {
   display: flex;
+  width: max-content;
+  /* margin: 0 auto; */
+  gap: 1em;
+  background-color: white;
+  padding: 0 2em;
+  border-radius: 25px;
 }
 
 .legend-color-green {
@@ -283,6 +289,8 @@
 .map-nav {
   display: flex;
   justify-content: space-around;
+  width: 1300px;
+  background-color: white;
 }
 
 .map-legend {

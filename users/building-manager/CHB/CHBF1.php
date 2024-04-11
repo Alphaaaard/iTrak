@@ -818,6 +818,13 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 </li>
             </ul>
         </section>
+        <div id="map-top-nav">
+            <a href="../../manager/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
+
+            <div class="legend-button" id="legendButton">
+                <i class="bi bi-info-circle"></i>
+            </div>
+        </div>
         <section id="content">
             <main>
                 <div class="content-container" id="content-container">
@@ -825,7 +832,6 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         <!-- FLOOR PLAN -->
                         <img src="../../../src/floors/chinesebB/ChineseB1F.png" alt="" class="Floor-container">
                         <div class="map-nav">
-                            <a href="../../manager/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
                             <div class="map-legend">
                                 <div class="legend-color-green"></div>
                                 <p>Working</p>
