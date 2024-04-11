@@ -376,23 +376,53 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             <!-- MAIN -->
             <main>
                 <header>
-                    <div class="cont-header">
-                        <!-- <h1 class="tab-name">Activity Logs</h1> -->
-                        <div class="tbl-filter">
-                            <select id="filter-criteria">
-                                <option value="all">All</option> <!-- Added "All" option -->
-                                <option value="reportId">Tracking ID</option>
-                                <option value="date">Date</option>
-                                <option value="category">Category</option>
-                                <option value="location">Location</option>
-                            </select>
-                            <!-- Search Box -->
-                            <form class="d-flex" role="search" id="searchForm">
-                                <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" name="q" />
-                            </form>
+                <div class="cont-header">
+                            <!-- <h1 class="tab-name">Reports</h1> -->
+                            <div class="tbl-filter">
+                                <select id="filter-criteria">
+                                    <option value="all">All</option> <!-- Added "All" option -->
+                                    <option value="reportId">Tracking ID</option>
+                                    <option value="date">Date</option>
+                                    <option value="category">Category</option>
+                                    <option value="location">Location</option>
+                                </select>
+
+                                <select id="rows-display-dropdown" class="form-select dropdown-rows" aria-label="Default select example">
+                                    <option value="20" selected>Show 20 rows</option>
+                                    <option class="hidden"></option>
+                                    <option value="50">Show 50 rows</option>
+                                    <option value="100">Show 100 rows</option>
+                                    <option value="150">Show 150 rows</option>
+                                    <option value="200">Show 200 rows</option>
+                                </select>
+
+                                <!-- Search Box -->
+                                <form class="d-flex col-sm-5" role="search" id="searchForm">
+                                    <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" name="q" />
+                                </form>
+
+
+                            </div>
                         </div>
-                    </div>
-                </header>
+                    </header>
+                    <script>
+  // Get elements from the DOM
+  const filterCriteria = document.getElementById('filter-criteria');
+  const searchBox = document.getElementById('search-box');
+
+  // Event listener for the filter dropdown changes
+  filterCriteria.addEventListener('change', function() {
+    if (this.value === 'date') {
+      // If "Date" is selected, change the search box to a date picker
+      searchBox.type = 'date';
+      searchBox.placeholder = 'Select a date';
+    } else {
+      // For all other options, change it back to a regular search box
+      searchBox.type = 'search';
+      searchBox.placeholder = 'Search';
+    }
+  });
+</script>
                 <!--Tab for table 4 - Repair -->
                 <div class="tab-content pt" id="myTabContent">
                     <div class="tab-pane fade show active" id="pills-repair" role="tabpanel" aria-labelledby="repair-tab">
@@ -476,7 +506,6 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 
-
         <script>
             $(document).ready(function() {
                 $('.notification-item').on('click', function(e) {
@@ -512,7 +541,6 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 });
             });
         </script>
-
         <script src="../../src/js/main.js"></script>
         <script src="../../src/js/locationTracker.js"></script>
         <script src="../../src/js/profileModalController.js"></script>

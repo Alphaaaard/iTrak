@@ -8,6 +8,7 @@ require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
+date_default_timezone_set('Asia/Manila');
 $conn = connection();
 
 function logActivity($conn, $accountId, $actionDescription, $tabValue)
@@ -85,7 +86,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
 
-    // Prepare the SQL statement
+   
+// Prepare the SQL statement
     $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
 
     // Bind the parameter to exclude the current user's account ID
@@ -110,48 +112,73 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $assignedName = $_POST['assignedName'];
         $assignSql = "UPDATE `asset` SET `assignedName`='$assignedName' WHERE `assetId`='$assetId'";
 
-        // Perform the query only if $assignSql is not empty
         if (!empty($assignSql) && $conn->query($assignSql) === TRUE) {
-            logActivity($conn, $_SESSION['accountId'], "Assigned maintenance personnel $assignedName to asset ID $assetId.", 'Report');
+            logActivity($conn, $_SESSION['accountId'], "Assigned maintenance personnel $assignedName to asset ID $assetId.", 'General');
 
-            // Fetch the email of the assigned personnel
-            $emailQuery = "SELECT email FROM account WHERE CONCAT(firstName, ' ', middleName, ' ', lastName) = ?";
-            $stmt = $conn->prepare($emailQuery);
-            $stmt->bind_param("s", $assignedName);
+            // Fetch the asset details
+            $assetDetailsQuery = "SELECT `category`, `building`, `floor`, `room` FROM `asset` WHERE `assetId` = ?";
+            $stmt = $conn->prepare($assetDetailsQuery);
+            $stmt->bind_param("i", $assetId);
             $stmt->execute();
-            $result = $stmt->get_result();
+            $assetDetailsResult = $stmt->get_result();
 
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                $toEmail = $row['email'];
+            if ($assetDetailsResult->num_rows > 0) {
+                $assetDetails = $assetDetailsResult->fetch_assoc();
 
-                // Set up PHPMailer
-                $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
+                // Fetch the email of the assigned personnel
+                $emailQuery = "SELECT email FROM account WHERE CONCAT(firstName, ' ', lastName) = ?";
+                $stmt = $conn->prepare($emailQuery);
+                $stmt->bind_param("s", $assignedName);
+                $stmt->execute();
+                $emailResult = $stmt->get_result();
 
-                try {
-                    //Server settings
-                    $mail->isSMTP();
-                    $mail->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers
-                    $mail->SMTPAuth = true;
-                    $mail->Username = 'qcu.upkeep@gmail.com'; // SMTP username
-                    $mail->Password = 'qvpx bbcm bgmy hcvf'; // SMTP password
-                    $mail->SMTPSecure = 'tls';
-                    $mail->Port = 587;
+                if ($emailResult->num_rows > 0) {
+                    $row = $emailResult->fetch_assoc();
+                    $toEmail = $row['email'];
 
-                    //Recipients
-                    $mail->setFrom('qcu.upkeep@gmail.com', 'UpKeep');
-                    $mail->addAddress($toEmail); // Add a recipient
+                    // Set up PHPMailer
+                    $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
 
-                    // Content
-                    $mail->isHTML(true); // Set email format to HTML
-                    $mail->Subject = 'Task Assignment Notification';
-                    $mail->Body = 'The Admin assigned you to a new task. Please check the system for details.';
+                    try {
+                        //Server settings
+                        $mail->isSMTP();
+                        $mail->Host = 'smtp.gmail.com';
+                        $mail->SMTPAuth = true;
+                        $mail->Username = 'qcu.upkeep@gmail.com';
+                        $mail->Password = 'qvpx bbcm bgmy hcvf';
+                        $mail->SMTPSecure = 'tls';
+                        $mail->Port = 587;
 
-                    $mail->send();
-                    // You can add additional echo or logging here if needed
-                } catch (Exception $e) {
-                    // Handle errors with mail sending here
-                    // You can add additional echo or logging here if needed
+                        //Recipients
+                        $mail->setFrom('qcu.upkeep@gmail.com', 'iTrak');
+                        $mail->addAddress($toEmail);
+
+                        // Content
+                        $mail->isHTML(true);
+                        $mail->Subject = 'Task Assignment Notification';
+                        $mail->Body = 'Dear ' . $assignedName . ',<br><br>
+
+                        I hope this message finds you well.<br><br>
+
+                        The administrator has assigned you to address the issues with the following details:<br>
+                        + Tracking Number: ' . $assetId . '<br>
+                        + Category: ' . $assetDetails['category'] . '<br> 
+                        + Location: ' . $assetDetails['building'] . ' ' . $assetDetails['floor'] . ' ' . $assetDetails['room'] . '<br><br>
+
+                        Please check the system for further details regarding this assignment.<br><br>
+
+                        Best regards,<br><br>
+
+                        Allyssa Bea Marie Cabal<br>
+
+                        Administrator<br>
+
+                        iTrak';
+
+                        $mail->send();
+                    } catch (Exception $e) {
+                        // Handle errors with mail sending here
+                    }
                 }
             }
         } else {
@@ -159,6 +186,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         }
         header("Location: reports.php");
     }
+
 
 ?>
     <!DOCTYPE html>
@@ -459,39 +487,66 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </select>
 
                                 <!-- Search Box -->
-                                <form class="d-flex col-sm-5" role="search" id="searchForm">
+                                  <!-- Search Box -->
+                                  <form class="d-flex col-sm-5" role="search" id="searchForm">
                                     <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" name="q" />
                                 </form>
-
-
                             </div>
                         </div>
                     </header>
+                    <script>
+  // Get elements from the DOM
+  const filterCriteria = document.getElementById('filter-criteria');
+  const searchBox = document.getElementById('search-box');
 
+  // Event listener for the filter dropdown changes
+  filterCriteria.addEventListener('change', function() {
+    if (this.value === 'date') {
+      // If "Date" is selected, change the search box to a date picker
+      searchBox.type = 'date';
+      searchBox.placeholder = 'Select a date';
+    } else {
+      // For all other options, change it back to a regular search box
+      searchBox.type = 'search';
+      searchBox.placeholder = 'Search';
+    }
+  });
+</script>
+<div class="new-nav-container">
                     <!--Content start of tabs-->
                     <div class="new-nav">
-                        <ul>
-                            <li><a href="#" class="nav-link" data-bs-target="pills-manager">Working</a></li>
-                            <li><a href="#" class="nav-link" data-bs-target="pills-profile">Under Maintenance</a></li>
-                            <li><a href="#" class="nav-link" data-bs-target="pills-replace">For Replacement</a></li>
-                            <li><a href="#" class="nav-link" data-bs-target="pills-repair">Need Repair</a></li>
-                        </ul>
+                            <ul>
+                                <li><a href="#" class="nav-link" data-bs-target="pills-manager">Working</a></li>
+                                <li><a href="#" class="nav-link" data-bs-target="pills-profile">Under Maintenance</a></li>
+                                <li><a href="#" class="nav-link" data-bs-target="pills-replace">For Replacement</a></li>
+                                <li><a href="#" class="nav-link" data-bs-target="pills-repair">Need Repair</a></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+
+                        <!-- Export button -->
+                        <div class="export-mob-hide">
+                            <form method="post" id="exportForm">
+                                <input type="hidden" name="status" id="statusField" value="For Replacement">
+                                <button type="button" id="exportBtn" class="btn btn-outline-danger">Export Data</button>
+                            </form>
+                        </div>
                     </div>
+
 
                     <!--Tab for table 1-->
                     <div class="tab-content pt" id="myTabContent">
                         <div class="tab-pane fade show active" id="pills-manager" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="table-content">
+                            <div class="table-content" id="exportContentWorking">
                                 <div class='table-header'>
-                                    <table>
-                                        <tr>
-                                            <th>TRACKING #</th>
-                                            <th>DATE & TIME</th>
-                                            <th>CATEGORY</th>
-                                            <th>LOCATION</th>
-                                            <th>STATUS</th>
-                                        </tr>
-                                    </table>
+                                    <div class='headerskie'>
+                                        <span>TRACKING #</span>
+                                        <span>DATE & TIME</span>
+                                        <span>CATEGORY</span>
+                                        <span>LOCATION</span>
+                                        <span>STATUS</span>
+                                    </div>
                                 </div>
                                 <?php
                                 if ($result->num_rows > 0) {
@@ -527,18 +582,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <!--Tab for table 2-->
                         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="table-content">
+                            <div class="table-content" id="exportContentUnderMaintenance">
                                 <div class='table-header'>
-                                    <table>
-                                        <tr>
-                                            <th>TRACKING #</th>
-                                            <th>DATE & TIME</th>
-                                            <th>CATEGORY</th>
-                                            <th>LOCATION</th>
-                                            <th>STATUS</th>
-                                        </tr>
-
-                                    </table>
+                                    <div class='headerskie'>
+                                        <span>TRACKING #</span>
+                                        <span>DATE & TIME</span>
+                                        <span>CATEGORY</span>
+                                        <span>LOCATION</span>
+                                        <span>STATUS</span>
+                                    </div>
                                 </div>
                                 <!--Content of table 2-->
                                 <?php
@@ -573,17 +625,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <!--Tab for table 3 - Replacement -->
                         <div class="tab-pane fade" id="pills-replace" role="tabpanel" aria-labelledby="replace-tab">
-                            <div class="table-content">
+                            <div class="table-content" id="exportContentReplacement">
                                 <div class='table-header'>
-                                    <table>
-                                        <tr>
-                                            <th>TRACKING #</th>
-                                            <th>DATE & TIME</th>
-                                            <th>CATEGORY</th>
-                                            <th>LOCATION</th>
-                                            <th>STATUS</th>
-                                        </tr>
-                                    </table>
+                                    <div class='headerskie'>
+                                        <span>TRACKING #</span>
+                                        <span>DATE & TIME</span>
+                                        <span>CATEGORY</span>
+                                        <span>LOCATION</span>
+                                        <span>STATUS</span>
+                                    </div>
                                 </div>
                                 <!--Content of table 3-->
                                 <?php
@@ -618,18 +668,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <!--Tab for table 4 - Repair -->
                         <div class="tab-pane fade" id="pills-repair" role="tabpanel" aria-labelledby="repair-tab">
-                            <div class="table-content">
+                            <div class="table-content" id="exportContentNeedforRepair">
                                 <div class='table-header'>
-                                    <table>
-                                        <tr>
-                                            <th>TRACKING #</th>
-                                            <th>DATE & TIME</th>
-                                            <th>CATEGORY</th>
-                                            <th>LOCATION</th>
-                                            <th>STATUS</th>
-                                            <th>ASSIGNEE</th>
-                                        </tr>
-                                    </table>
+                                    <div class='headerskie4'>
+                                        <span class="tab4">TRACKING #</span>
+                                        <span class="tab4">DATE & TIME</span>
+                                        <span class="tab4">CATEGORY</span>
+                                        <span class="tab4">LOCATION</span>
+                                        <span class="tab4">STATUS</span>
+                                        <span class="tab4">ASSIGNED NAME</span>
+                                    </div>
                                 </div>
                                 <!--Content of table 4-->
                                 <?php
@@ -707,15 +755,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 <div class="modal modal-xl fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content assingee-container">
-
+                            <div class="assignee-header">
+                                <label for="assignedName" class="form-label assignee-tag">CHOOSE A MAINTENANCE PERSONNEL:
+                                </label>
+                            </div>
                             <div class="header">
                                 <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                             </div>
                             <div class="modal-body">
-                                <div class="assignee-header">
-                                    <label for="assignedName" class="form-label assignee-tag">CHOOSE A MAINTENANCE
-                                        PERSONNEL: </label>
-                                </div>
                                 <form method="post" class="row g-3" id="assignPersonnelForm">
                                     <h5></h5>
                                     <input type="hidden" name="assignMaintenance">
@@ -802,7 +849,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                 </div>
             </div>
-
             <!-- Edit for table 4
             <div class="modal fade" id="staticBackdrop5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -1087,6 +1133,189 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         </script>
 
+        <script>
+            $(document).ready(function() {
+                // Function to update hidden input with the active status
+                function updateStatusInput(tab) {
+                    let status;
+                    switch (tab) {
+                        case 'pills-manager':
+                            status = 'Working';
+                            break;
+                        case 'pills-profile':
+                            status = 'Under Maintenance';
+                            break;
+                        case 'pills-replace':
+                            status = 'For Replacement';
+                            break;
+                        case 'pills-repair':
+                            status = 'Need Repair';
+                            break;
+                        default:
+                            status = 'Unknown';
+                    }
+                    $('input[name="status"]').val(status); // Update the hidden input's value
+                }
+
+                // Initial tab selection handling
+                let tabLastSelected = sessionStorage.getItem("lastTab");
+                if (!tabLastSelected) {
+                    $("#pills-manager").addClass("show active");
+                    $(".nav-link[data-bs-target='pills-manager']").addClass("active");
+                    updateStatusInput('pills-manager'); // Set default status
+                } else {
+                    $(`#${tabLastSelected}`).addClass("show active");
+                    $(`.nav-link[data-bs-target='${tabLastSelected}']`).addClass("active");
+                    updateStatusInput(tabLastSelected); // Update status based on sessionStorage
+                }
+
+                // Tab click event handling
+                $(".nav-link").click(function() {
+                    const targetId = $(this).data("bs-target");
+                    sessionStorage.setItem("lastTab", targetId); // Update lastTab in sessionStorage
+                    $(".tab-pane").removeClass("show active");
+                    $(`#${targetId}`).addClass("show active");
+                    $(".nav-link").removeClass("active");
+                    $(this).addClass("active");
+                    updateStatusInput(targetId); // Update the hidden input with the new status
+                });
+            });
+        </script>
+
+        <script>
+            document.getElementById('exportBtn').addEventListener('click', function() {
+                var filterCriteria = document.getElementById('filter-criteria').value;
+                var searchQuery = document.getElementById('search-box').value; // Get the value of the search box
+                var formData = new FormData(document.getElementById('exportForm'));
+                formData.append('filterType', filterCriteria);
+                formData.append('searchQuery', searchQuery); // Include the search query in the FormData
+
+                Swal.fire({
+                    title: 'Choose the file format',
+                    showDenyButton: true,
+                    // showCancelButton: true,
+                    confirmButtonText: 'PDF',
+                    denyButtonText: `Excel`,
+                    // cancelButtonText: 'Word',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        formData.append('submit', 'Export to PDF');
+                        performExport(formData, 'export-pdf.php');
+                    } else if (result.isDenied) {
+                        formData.append('submit', 'Export to Excel');
+                        performExport(formData, 'export-excel.php');
+                    }
+                    // else if (result.dismiss === Swal.DismissReason.cancel) {
+                    //     formData.append('submit', 'Export to Word');
+                    //     performExport(formData, 'export-word.php');
+                    // }
+                });
+            });
+
+            function performExport(formData, endpoint) {
+                Swal.fire({
+                    title: 'Exporting...',
+                    html: 'Please wait while the file is being generated.',
+                    allowOutsideClick: false,
+                    showConfirmButton: false,
+                    willOpen: () => {
+                        Swal.showLoading();
+                    },
+                });
+
+                fetch(endpoint, {
+                        method: 'POST',
+                        body: formData,
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.blob();
+                    })
+                    .then(blob => {
+                        const tabIdentifier = sessionStorage.getItem("lastTab") || 'pills-manager';
+                        const tabNameMap = {
+                            'pills-manager': 'Working-Assets',
+                            'pills-profile': 'Under-Maintenance-Assets',
+                            'pills-replace': 'For-Replacement-Assets',
+                            'pills-repair': 'Need-Repair-Assets',
+                        };
+                        const activeTabName = tabNameMap[tabIdentifier] || 'Exported-Data';
+                        const fileExtension = getFileExtension(endpoint);
+                        const fileName = `${activeTabName}.${fileExtension}`;
+
+                        const downloadUrl = window.URL.createObjectURL(blob);
+                        const downloadLink = document.createElement('a');
+                        downloadLink.href = downloadUrl;
+                        downloadLink.download = fileName;
+                        document.body.appendChild(downloadLink);
+                        downloadLink.click();
+
+                        window.URL.revokeObjectURL(downloadUrl);
+                        document.body.removeChild(downloadLink);
+
+                        Swal.fire({
+                            title: 'Exporting Done',
+                            text: 'Your file has been successfully generated.',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        });
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'There was an issue generating the file.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    });
+            }
+
+            function getFileExtension(endpoint) {
+                if (endpoint.includes('pdf')) return 'pdf';
+                if (endpoint.includes('excel')) return 'xlsx';
+                if (endpoint.includes('word')) return 'docx';
+                return '';
+            }
+        </script>
+
+
+        <script>
+            $(document).ready(function() {
+                $('.notification-item').on('click', function(e) {
+                    e.preventDefault();
+                    var activityId = $(this).data('activity-id');
+                    var notificationItem = $(this); // Store the clicked element
+
+                    $.ajax({
+                        type: "POST",
+                        url: "update_single_notification.php", // The URL to the PHP file
+                        data: {
+                            activityId: activityId
+                        },
+                        success: function(response) {
+                            if (response.trim() === "Notification updated successfully") {
+                                // If the notification is updated successfully, remove the clicked element
+                                notificationItem.remove();
+
+                                // Update the notification count
+                                var countElement = $('#noti_number');
+                                var count = parseInt(countElement.text()) || 0;
+                                countElement.text(count > 1 ? count - 1 : '');
+                            } else {
+                                // Handle error
+                                console.error("Failed to update notification:", response);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle AJAX error
+                            console.error("AJAX error:", status, error);
+                        }
+                    });
+                });
+            });
+        </script>
     </body>
 
     </html>

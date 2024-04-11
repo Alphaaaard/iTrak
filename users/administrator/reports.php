@@ -11,8 +11,6 @@ include_once("../../config/connection.php");
 date_default_timezone_set('Asia/Manila');
 $conn = connection();
 
-
-
 function logActivity($conn, $accountId, $actionDescription, $tabValue)
 {
     $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, NOW(), ?, ?)");
@@ -506,6 +504,24 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             </div>
                         </div>
                     </header>
+                    <script>
+  // Get elements from the DOM
+  const filterCriteria = document.getElementById('filter-criteria');
+  const searchBox = document.getElementById('search-box');
+
+  // Event listener for the filter dropdown changes
+  filterCriteria.addEventListener('change', function() {
+    if (this.value === 'date') {
+      // If "Date" is selected, change the search box to a date picker
+      searchBox.type = 'date';
+      searchBox.placeholder = 'Select a date';
+    } else {
+      // For all other options, change it back to a regular search box
+      searchBox.type = 'search';
+      searchBox.placeholder = 'Search';
+    }
+  });
+</script>
 
                     <div class="new-nav-container">
                         <!--Content start of tabs-->
@@ -1276,6 +1292,42 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             }
         </script>
 
+
+<script>
+            $(document).ready(function() {
+                $('.notification-item').on('click', function(e) {
+                    e.preventDefault();
+                    var activityId = $(this).data('activity-id');
+                    var notificationItem = $(this); // Store the clicked element
+
+                    $.ajax({
+                        type: "POST",
+                        url: "update_single_notification.php", // The URL to the PHP file
+                        data: {
+                            activityId: activityId
+                        },
+                        success: function(response) {
+                            if (response.trim() === "Notification updated successfully") {
+                                // If the notification is updated successfully, remove the clicked element
+                                notificationItem.remove();
+
+                                // Update the notification count
+                                var countElement = $('#noti_number');
+                                var count = parseInt(countElement.text()) || 0;
+                                countElement.text(count > 1 ? count - 1 : '');
+                            } else {
+                                // Handle error
+                                console.error("Failed to update notification:", response);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle AJAX error
+                            console.error("AJAX error:", status, error);
+                        }
+                    });
+                });
+            });
+        </script>
     </body>
 
     </html>

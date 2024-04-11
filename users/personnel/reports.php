@@ -8,6 +8,7 @@ require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
+date_default_timezone_set('Asia/Manila');
 $conn = connection();
 
 function logActivity($conn, $accountId, $actionDescription, $tabValue)
@@ -462,7 +463,24 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                             </div>
                         </div>
                     </header>
+                    <script>
+  // Get elements from the DOM
+  const filterCriteria = document.getElementById('filter-criteria');
+  const searchBox = document.getElementById('search-box');
 
+  // Event listener for the filter dropdown changes
+  filterCriteria.addEventListener('change', function() {
+    if (this.value === 'date') {
+      // If "Date" is selected, change the search box to a date picker
+      searchBox.type = 'date';
+      searchBox.placeholder = 'Select a date';
+    } else {
+      // For all other options, change it back to a regular search box
+      searchBox.type = 'search';
+      searchBox.placeholder = 'Search';
+    }
+  });
+</script>
                     <!--Content start of tabs-->
                     <div class="new-nav">
                         <ul>
