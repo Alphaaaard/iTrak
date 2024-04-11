@@ -3,7 +3,8 @@
 ini_set('memory_limit', '1024M'); // Adjust the value as needed
 
 include_once("../../config/connection.php");
-require 'C:\xampp\htdocs\iTrak\vendor\autoload.php'; // Adjust the path as necessary for your environment
+// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 use Dompdf\Dompdf;
 
