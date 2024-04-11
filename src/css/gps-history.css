@@ -76,14 +76,14 @@ td.unselectable:hover {
 
 .calendar-container {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 9999;
+  top: 25px;
+  right: 25px;
+  z-index: 0;
 }
 
 .calendar {
   border: 1px solid #dee2e6;
-  border-radius: 5px;
+  border-radius: 15px;
   overflow: hidden;
 }
 

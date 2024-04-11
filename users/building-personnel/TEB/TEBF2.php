@@ -2877,8 +2877,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 </div>
             </div>
             <ul class="side-menu top">
-            <li >
-            <a href="../../personnel/dashboard.php">
+                <li>
+                    <a href="../../personnel/dashboard.php">
                         <i class="bi bi-grid"></i>
                         <span class="text">Dashboard</span>
                     </a>
@@ -2889,7 +2889,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         <span class="text">Attendance Logs</span>
                     </a>
                 </li>
-             
+
                 <li class="active">
                     <a href="../../personnel/map.php">
                         <i class="bi bi-map"></i>
@@ -2903,7 +2903,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     </a>
                 </li>
                 <li>
-                        <a href="../../personnel/reports.php">
+                    <a href="../../personnel/reports.php">
                         <i class="bi bi-clipboard"></i>
                         <span class="text">Reports</span>
                     </a>
@@ -10555,6 +10555,26 @@ position:absolute; top:205px; left:297px;'>
                 }
             });
         </script>
+        <script>
+            // Find all input elements with ID 'description'
+            var inputElements = document.querySelectorAll('input#description');
+
+            // Iterate through each input element
+            inputElements.forEach(function(inputElement) {
+                // Create a new textarea element
+                var textareaElement = document.createElement('textarea');
+
+                // Copy attributes from the input element
+                textareaElement.className = inputElement.className;
+                textareaElement.id = inputElement.id;
+                textareaElement.name = inputElement.name;
+                textareaElement.value = inputElement.value;
+
+                // Replace the input element with the textarea element
+                inputElement.parentNode.replaceChild(textareaElement, inputElement);
+            });
+        </script>
+
         <script src="../../../src/js/main.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>

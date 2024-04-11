@@ -1178,103 +1178,103 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         </script>
 
-<script>
-document.getElementById('exportBtn').addEventListener('click', function() {
-    var filterCriteria = document.getElementById('filter-criteria').value;
-    var searchQuery = document.getElementById('search-box').value; // Get the value of the search box
-    var formData = new FormData(document.getElementById('exportForm'));
-    formData.append('filterType', filterCriteria);
-    formData.append('searchQuery', searchQuery); // Include the search query in the FormData
+        <script>
+            document.getElementById('exportBtn').addEventListener('click', function() {
+                var filterCriteria = document.getElementById('filter-criteria').value;
+                var searchQuery = document.getElementById('search-box').value; // Get the value of the search box
+                var formData = new FormData(document.getElementById('exportForm'));
+                formData.append('filterType', filterCriteria);
+                formData.append('searchQuery', searchQuery); // Include the search query in the FormData
 
-    Swal.fire({
-        title: 'Choose the file format',
-        showDenyButton: true,
-        // showCancelButton: true,
-        confirmButtonText: 'PDF',
-        denyButtonText: `Excel`,
-        // cancelButtonText: 'Word',
-    }).then((result) => {
-        if (result.isConfirmed) {
-            formData.append('submit', 'Export to PDF');
-            performExport(formData, 'export-pdf.php');
-        } else if (result.isDenied) {
-            formData.append('submit', 'Export to Excel');
-            performExport(formData, 'export-excel.php');
-        } 
-        // else if (result.dismiss === Swal.DismissReason.cancel) {
-        //     formData.append('submit', 'Export to Word');
-        //     performExport(formData, 'export-word.php');
-        // }
-    });
-});
+                Swal.fire({
+                    title: 'Choose the file format',
+                    showDenyButton: true,
+                    // showCancelButton: true,
+                    confirmButtonText: 'PDF',
+                    denyButtonText: `Excel`,
+                    // cancelButtonText: 'Word',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        formData.append('submit', 'Export to PDF');
+                        performExport(formData, 'export-pdf.php');
+                    } else if (result.isDenied) {
+                        formData.append('submit', 'Export to Excel');
+                        performExport(formData, 'export-excel.php');
+                    }
+                    // else if (result.dismiss === Swal.DismissReason.cancel) {
+                    //     formData.append('submit', 'Export to Word');
+                    //     performExport(formData, 'export-word.php');
+                    // }
+                });
+            });
 
-function performExport(formData, endpoint) {
-    Swal.fire({
-        title: 'Exporting...',
-        html: 'Please wait while the file is being generated.',
-        allowOutsideClick: false,
-        showConfirmButton: false,
-        willOpen: () => {
-            Swal.showLoading();
-        },
-    });
+            function performExport(formData, endpoint) {
+                Swal.fire({
+                    title: 'Exporting...',
+                    html: 'Please wait while the file is being generated.',
+                    allowOutsideClick: false,
+                    showConfirmButton: false,
+                    willOpen: () => {
+                        Swal.showLoading();
+                    },
+                });
 
-    fetch(endpoint, {
-        method: 'POST',
-        body: formData,
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.blob();
-    })
-    .then(blob => {
-        const tabIdentifier = sessionStorage.getItem("lastTab") || 'pills-manager';
-        const tabNameMap = {
-            'pills-manager': 'Working-Assets',
-            'pills-profile': 'Under-Maintenance-Assets',
-            'pills-replace': 'For-Replacement-Assets',
-            'pills-repair': 'Need-Repair-Assets',
-        };
-        const activeTabName = tabNameMap[tabIdentifier] || 'Exported-Data';
-        const fileExtension = getFileExtension(endpoint);
-        const fileName = `${activeTabName}.${fileExtension}`;
+                fetch(endpoint, {
+                        method: 'POST',
+                        body: formData,
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.blob();
+                    })
+                    .then(blob => {
+                        const tabIdentifier = sessionStorage.getItem("lastTab") || 'pills-manager';
+                        const tabNameMap = {
+                            'pills-manager': 'Working-Assets',
+                            'pills-profile': 'Under-Maintenance-Assets',
+                            'pills-replace': 'For-Replacement-Assets',
+                            'pills-repair': 'Need-Repair-Assets',
+                        };
+                        const activeTabName = tabNameMap[tabIdentifier] || 'Exported-Data';
+                        const fileExtension = getFileExtension(endpoint);
+                        const fileName = `${activeTabName}.${fileExtension}`;
 
-        const downloadUrl = window.URL.createObjectURL(blob);
-        const downloadLink = document.createElement('a');
-        downloadLink.href = downloadUrl;
-        downloadLink.download = fileName;
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
+                        const downloadUrl = window.URL.createObjectURL(blob);
+                        const downloadLink = document.createElement('a');
+                        downloadLink.href = downloadUrl;
+                        downloadLink.download = fileName;
+                        document.body.appendChild(downloadLink);
+                        downloadLink.click();
 
-        window.URL.revokeObjectURL(downloadUrl);
-        document.body.removeChild(downloadLink);
+                        window.URL.revokeObjectURL(downloadUrl);
+                        document.body.removeChild(downloadLink);
 
-        Swal.fire({
-            title: 'Exporting Done',
-            text: 'Your file has been successfully generated.',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        });
-    })
-    .catch(error => {
-        Swal.fire({
-            title: 'Error',
-            text: 'There was an issue generating the file.',
-            icon: 'error',
-            confirmButtonText: 'OK'
-        });
-    });
-}
+                        Swal.fire({
+                            title: 'Exporting Done',
+                            text: 'Your file has been successfully generated.',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        });
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'There was an issue generating the file.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    });
+            }
 
-function getFileExtension(endpoint) {
-    if (endpoint.includes('pdf')) return 'pdf';
-    if (endpoint.includes('excel')) return 'xlsx';
-    if (endpoint.includes('word')) return 'docx';
-    return '';
-}
-</script>
+            function getFileExtension(endpoint) {
+                if (endpoint.includes('pdf')) return 'pdf';
+                if (endpoint.includes('excel')) return 'xlsx';
+                if (endpoint.includes('word')) return 'docx';
+                return '';
+            }
+        </script>
 
     </body>
 

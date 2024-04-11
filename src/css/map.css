@@ -14,6 +14,10 @@
   height: 83vh;
 }
 
+#description {
+  height: 100px;
+}
+
 /* Add this CSS code to your stylesheet */
 .modal,
 .modal-content,
@@ -23,8 +27,13 @@
   cursor: auto !important;
 }
 
-.Upload{
+.modal-body label.form-label {
+  margin: unset;
+}
+
+.Upload {
   display: flex;
+  align-items: center;
 }
 
 .content {
@@ -68,12 +77,12 @@
   position: absolute;
   top: 30px;
   left: 1130px;
-  border: 2px solid #3D3B40; 
+  border: 2px solid #3d3b40;
   height: 200px;
   width: 125px;
   border-radius: 15px;
   padding: 15px 5px 5px 5px;
-  color: #3D3B40;
+  color: #3d3b40;
   background-color: white;
 }
 #content
@@ -216,18 +225,14 @@
 
 .input-hover {
   text-align: center !important;
-
-  
 }
 .input-hover1 {
   text-align: start !important;
   font-size: 9px;
-
-  
 }
 
-.top-side-hover{
-  border-bottom: 2px solid #AAAAAA;
+.top-side-hover {
+  border-bottom: 2px solid #aaaaaa;
   margin-bottom: 5px;
 }
 .hover-location {
@@ -237,11 +242,9 @@
   gap: 5px;
 }
 
-.room-hover{
-  margin:0 !important;
+.room-hover {
+  margin: 0 !important;
 }
-
-
 
 .center-content-hover img {
   height: 50px !important;
@@ -406,7 +409,7 @@
 .nav-tabs h3 {
   color: #163172;
 }
-.hover-label{
+.hover-label {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -422,21 +425,21 @@ h3 {
   font-size: 1em;
   margin-bottom: unset;
 }
-.NoImage{
+.NoImage {
   font-size: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 10px 0 10px 0;
 }
-.TrackingHover{
+.TrackingHover {
   margin: 0;
   display: flex;
   width: 110px;
   font-size: 9px;
   font-weight: bold;
 }
-.TrackingHover1{
+.TrackingHover1 {
   margin: 0;
   display: flex;
   font-size: 9px;
@@ -445,26 +448,25 @@ h3 {
 #room {
   background-color: unset !important;
   border: unset !important;
-  color: #3D3B40;
+  color: #3d3b40;
 }
 
 #assignedName {
   background-color: unset !important;
   border: unset !important;
-  color: #3D3B40;
+  color: #3d3b40;
 }
-
 
 #floor {
   background-color: unset !important;
   border: unset !important;
-  color: #3D3B40;
+  color: #3d3b40;
 }
 
 #category {
   background-color: unset !important;
   border: unset !important;
-  color: #3D3B40;
+  color: #3d3b40;
 }
 
 .legend-button {
@@ -492,21 +494,19 @@ h3 {
   border: 1px solid black;
 }
 
-.legend-item{
+.legend-item {
   display: flex;
   gap: 1em;
 }
 
-.legend-img{
+.legend-img {
   height: 20px;
   width: 20px;
 }
 
-
 /* .legend-button:hover {
   background-color: #0056b3;
 } */
-
 
 @media (max-width: 992px) {
   .content-container {
