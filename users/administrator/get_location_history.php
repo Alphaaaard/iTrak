@@ -1,26 +1,27 @@
 <?php
 include_once("../../config/connection.php");
 
-// Function to get all locations from the database by accountId and date
-function getLocationsByAccountAndDate($accountId, $date)
+// Function to get all locations from the database by date, and accountId (optional)
+function getLocationsByDate($date, $accountId = null)
 {
     $conn = connection();
     $locations = array();
 
+    // Base SQL query to select location data
     $sql = "SELECT a.firstName, a.latitude, a.longitude, a.picture, lh.*, a.color
-        FROM locationhistory AS lh
-        LEFT JOIN account AS a ON a.accountId = lh.accountId
-        WHERE DATE(lh.timestamp) = ?"; // Filter by date
+            FROM locationhistory AS lh
+            LEFT JOIN account AS a ON a.accountId = lh.accountId
+            WHERE DATE(lh.timestamp) = ?"; // Filter by date
 
-    if ($accountId) {
-        $sql .= " AND a.accountId = ?"; // Filter by accountId if provided
+    // If an accountId is provided, add it as a filter
+    if ($accountId !== null) {
+        $sql .= " AND a.accountId = ?";
     }
-
 
     $stmt = $conn->prepare($sql);
 
-    // Bind parameters based on whether an account ID was provided
-    if ($accountId) {
+    // Bind parameters based on whether an accountId was provided
+    if ($accountId !== null) {
         $stmt->bind_param("si", $date, $accountId);
     } else {
         $stmt->bind_param("s", $date);
@@ -31,7 +32,7 @@ function getLocationsByAccountAndDate($accountId, $date)
 
     while ($row = $result->fetch_assoc()) {
         $pictureBase64 = base64_encode($row['picture']);
-        $row['picture'] = $pictureBase64;
+        $row['picture'] = $pictureBase64; // Convert the picture to Base64 for easy embedding in JSON
         $locations[] = $row;
     }
 
@@ -40,15 +41,11 @@ function getLocationsByAccountAndDate($accountId, $date)
     return $locations;
 }
 
-// Get the accountId and date from the GET parameters
-$accountId = isset($_GET['accountId']) ? intval($_GET['accountId']) : null;
-$date = isset($_GET['date']) ? $_GET['date'] : date('Y-m-d'); // Default to current date if not provided
+// Get the date from the GET parameters or default to the current date
+$date = isset($_GET['date']) ? $_GET['date'] : date('Y-m-d');
 
-// Fetch and echo location data as JSON
-if ($accountId !== null && $date !== null) {
-    // Fetch and echo location data for the specified accountId and date
-    echo json_encode(getLocationsByAccountAndDate($accountId, $date));
-} else {
-    // Handle the error: accountId or date is not provided
-    echo json_encode(array("error" => "Account ID or date not provided."));
-}
+// Get the accountId from the GET parameters, if provided
+$accountId = isset($_GET['accountId']) ? intval($_GET['accountId']) : null;
+
+// Fetch and echo location data as JSON for the given date and optional accountId
+echo json_encode(getLocationsByDate($date, $accountId));

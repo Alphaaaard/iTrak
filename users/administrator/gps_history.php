@@ -323,8 +323,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 echo "</h2>";
                                 echo "<div id='" . $collapseId . "' class='accordion-collapse collapse' aria-labelledby='" . $headerId . "' data-bs-parent='#accordionGPS'>"; // Ensure this points to the main container ID
                                 echo "<div class='accordion-body'>";
-                                echo "<span style='color: " . $row["color"] . ";'><i class='bi bi-circle-fill'></i></span>";
-                                echo htmlspecialchars($firstName . " " . $lastName);
+
                                 echo "</div>"; // End of accordion body
                                 echo "</div>"; // End of accordion collapse
                                 echo "</div>"; // End of accordion item
@@ -505,75 +504,94 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 });
                             }
 
+
                             var markersByFirstName = {};
                             var markers = [];
                             var polyline;
+                            var polylinesByAccountId = {};
 
-                            // Update the function responsible for updating markers to show all markers at once
                             async function updateMarkers(locations) {
                                 markers.forEach(marker => {
                                     map.removeLayer(marker);
                                 });
                                 markers = [];
-                                if (polyline) {
-                                    map.removeLayer(polyline);
+
+                                // Clear existing polylines
+                                for (let accountId in polylinesByAccountId) {
+                                    map.removeLayer(polylinesByAccountId[accountId]);
                                 }
+                                polylinesByAccountId = {};
 
-                                // Sort locations array by timestamp
-                                locations.sort((a, b) => a.timestamp - b.timestamp);
+                                // Organize locations by accountId
+                                var locationsByAccountId = locations.reduce((acc, location) => {
+                                    var accountId = location.accountId;
+                                    if (!acc[accountId]) {
+                                        acc[accountId] = [];
+                                    }
+                                    acc[accountId].push(location);
+                                    return acc;
+                                }, {});
 
-                                var latLngs = [];
-                                for (var i = 0; i < locations.length; i++) {
-                                    var location = locations[i];
-                                    var latitude = location.latitude;
-                                    var longitude = location.longitude;
-                                    var firstName = location.firstName;
-                                    var qculocation = location.qculocation;
-                                    var timestamp = location.timestamp;
-                                    var picture = location.picture;
+                                // Process each accountId's locations
+                                for (let accountId in locationsByAccountId) {
+                                    let userLocations = locationsByAccountId[accountId];
+                                    let latLngs = [];
 
-                                    var isLast = i === locations.length - 1;
+                                    // Sort userLocations array by timestamp
+                                    userLocations.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
 
-                                    var marker;
-                                    if (isLast) {
-                                        const pictureBlob = base64ToBlob(picture);
-                                        const pictureBase64 = await blobToBase64(pictureBlob);
+                                    for (let location of userLocations) {
+                                        let latitude = location.latitude;
+                                        let longitude = location.longitude;
+                                        let firstName = location.firstName;
+                                        let qculocation = location.qculocation;
+                                        let timestamp = location.timestamp;
+                                        let picture = location.picture;
 
-                                        marker = L.marker([latitude, longitude], {
-                                            icon: L.divIcon({
-                                                className: 'custom-marker',
-                                                iconSize: [40, 20],
-                                                html: `<img src="${pictureBase64}" alt="Profile Picture" class="marker-img" />`
-                                            }),
-                                            location: qculocation
+                                        let marker;
+                                        if (location === userLocations[userLocations.length - 1]) {
+                                            const pictureBlob = base64ToBlob(picture);
+                                            const pictureBase64 = await blobToBase64(pictureBlob);
+
+                                            marker = L.marker([latitude, longitude], {
+                                                icon: L.divIcon({
+                                                    className: 'custom-marker',
+                                                    iconSize: [40, 20],
+                                                    html: `<img src="${pictureBase64}" alt="Profile Picture" class="marker-img" />`
+                                                }),
+                                                location: qculocation
+                                            });
+                                        } else {
+                                            var color = location.color || "black";
+                                            marker = L.marker([latitude, longitude], {
+                                                icon: coloredIcon(color),
+                                            });
+                                        }
+
+                                        let popupContent = "Personnel: " + firstName + "<br>Location: " + qculocation + "<br>Timestamp: " + new Date(timestamp).toLocaleString();
+                                        marker.bindPopup(popupContent);
+
+                                        marker.on('mouseover', function(e) {
+                                            this.openPopup();
                                         });
-                                    } else {
-                                        var color = location.color || "black";
-                                        marker = L.marker([latitude, longitude], {
-                                            icon: coloredIcon(color, i === 0), // Pass true if it's the first marker
+
+                                        marker.on('mouseout', function(e) {
+                                            this.closePopup();
                                         });
 
+                                        marker.addTo(map);
+                                        markers.push(marker);
+                                        latLngs.push([latitude, longitude]);
                                     }
 
-                                    var popupContent = "Personnel: " + firstName + "<br>Location: " + qculocation + "<br>Timestamp: " + new Date(timestamp).toLocaleString();
-                                    marker.bindPopup(popupContent);
-                                    markers.push(marker);
-                                    latLngs.push([latitude, longitude]);
-                                    marker.on('mouseover', function(e) {
-                                        this.openPopup();
-                                    });
-
-                                    marker.on('mouseout', function(e) {
-                                        this.closePopup();
-                                    });
-
-                                    marker.addTo(map);
+                                    // Draw polyline for each user
+                                    let polyline = L.polyline(latLngs, {
+                                        color: userLocations[0].color || 'blue'
+                                    }).addTo(map);
+                                    polylinesByAccountId[accountId] = polyline; // Store polyline by accountId
                                 }
-
-                                polyline = L.polyline(latLngs, {
-                                    color: 'blue'
-                                }).addTo(map);
                             }
+
 
                             function showMarker(firstName) {
                                 console.log("Clicked on:", firstName);
@@ -591,7 +609,34 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 }
                             }
 
-                            function getLocationFromDatabase(accountId, selectedDate) {
+
+
+                            function getLocationFromDatabase(selectedDate, accountId = null) {
+                                var xmlhttp = new XMLHttpRequest();
+                                xmlhttp.onreadystatechange = function() {
+                                    if (this.readyState == 4 && this.status == 200) {
+                                        var locations = JSON.parse(this.responseText);
+
+                                        if (locations && locations.length > 0) {
+                                            // Update the map with the new locations
+                                            updateMarkers(locations);
+                                        } else {
+                                            // Handle case where no location data is available
+                                            console.error("No location data available");
+                                        }
+                                    }
+                                };
+
+                                var url = "get_location_history.php?date=" + encodeURIComponent(selectedDate);
+                                if (accountId) {
+                                    url += "&accountId=" + encodeURIComponent(accountId);
+                                }
+
+                                xmlhttp.open("GET", url, true);
+                                xmlhttp.send();
+                            }
+
+                            function getLocationFromDatabaseIMG(accountId, selectedDate) {
                                 if (!accountId) {
                                     clearMap(); // Clear the map if no accountId is selected
                                     console.log("No accountId provided for getLocationFromDatabase");
@@ -620,7 +665,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 xmlhttp.send();
                             }
 
+                            function clearMapData() {
+                                markers.forEach(marker => map.removeLayer(marker));
+                                markers = [];
 
+                                for (let accountId in polylinesByAccountId) {
+                                    map.removeLayer(polylinesByAccountId[accountId]);
+                                }
+                                polylinesByAccountId = {};
+                            }
 
                             // Initialize the map when the page loads
                             window.onload = function() {
@@ -746,6 +799,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             var currentDate = new Date();
             var currentMonth = currentDate.getMonth();
             var currentYear = currentDate.getFullYear();
+            var previousClickedDate = null;
 
             function generateCalendar(month, year) {
                 var calendarContent = document.getElementById('calendarContent');
@@ -766,8 +820,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                     for (var i = 0; i < 7; i++) {
                         if (currentDay > 0 && currentDay <= daysInMonth) {
-                            if (currentYear === year && currentMonth === month && currentDay === currentDate.getDate()) {
+                            var selectedDate = currentYear + '-' + (currentMonth + 1).toString().padStart(2, '0') + '-' + currentDay.toString().padStart(2, '0');
+                            var hasData = checkDataAvailability(selectedDate); // Check if data is available for the selected date
+                            var isCurrentDay = currentYear === year && currentMonth === month && currentDay === currentDate.getDate();
+
+                            if (isCurrentDay) {
                                 html += '<td class="days day-' + currentDay + ' current-day">' + currentDay + '</td>';
+                            } else if (hasData) {
+                                html += '<td class="days day-' + currentDay + ' has-data">' + currentDay + '</td>'; // Add 'has-data' class if data is available
                             } else {
                                 html += '<td class="days day-' + currentDay + '">' + currentDay + '</td>';
                             }
@@ -780,27 +840,59 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     html += '</tr>';
                 }
 
+                function checkDataAvailability(selectedDate) {
+                    var xmlhttp = new XMLHttpRequest();
+                    var url = "get_location_history.php?date=" + encodeURIComponent(selectedDate);
+                    xmlhttp.open("GET", url, false); // Synchronous request
+                    xmlhttp.send();
+
+                    if (xmlhttp.status == 200) {
+                        var locations = JSON.parse(xmlhttp.responseText);
+                        return locations.length > 0; // Return true if data exists, false otherwise
+                    } else {
+                        console.error("Error fetching data for date: " + selectedDate);
+                        return false; // Error occurred or no data available
+                    }
+                }
+
+
+
                 calendarContent.innerHTML = html;
                 document.getElementById('currentMonthYear').textContent = getMonthName(month) + ' ' + year;
 
                 // Add event listener to days
                 var days = document.querySelectorAll('.days');
                 // Inside your generateCalendar function or wherever you're setting up the click event listener for the calendar dates
+                // Inside your generateCalendar function or wherever you're setting up the click event listener for the calendar dates
                 days.forEach(function(day) {
                     day.addEventListener('click', function() {
                         var selectedDay = parseInt(day.textContent);
                         var selectedDate = currentYear + '-' + (currentMonth + 1).toString().padStart(2, '0') + '-' + selectedDay.toString().padStart(2, '0');
 
-                        // Check if an accountId has been selected by clicking on a user's image
+                        // Clear existing markers and polylines before fetching new location data
+                        clearMapData();
+
+                        // Check if an accountId has been selected and fetch location data accordingly
                         if (selectedAccountId) {
-                            getLocationFromDatabase(selectedAccountId, selectedDate);
+                            // Fetch location data for a specific user and date
+                            getLocationFromDatabase(selectedDate, selectedAccountId);
                         } else {
-                            console.log("No user selected. Please select a user first.");
-                            // Optionally, you can display a message to the user asking them to select a user first
+                            // Fetch location data for all users for the selected date
+                            getLocationFromDatabase(selectedDate);
                         }
+
+                        // Remove the "clicked-date" class from the previously clicked date
+                        if (previousClickedDate) {
+                            previousClickedDate.classList.remove('clicked-date');
+                        }
+
+                        // Add the "clicked-date" class to the newly clicked date
+                        day.classList.add('clicked-date');
+
+                        // Update the previously clicked date
+                        previousClickedDate = day;
                     });
                 });
-
             }
 
             function prevMonth() {
@@ -830,6 +922,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             generateCalendar(currentMonth, currentYear);
         </script>
 
+
+
         <script>
             // Define selectedAccountId at the top of your script to ensure wide accessibility
             var selectedAccountId = null;
@@ -838,16 +932,23 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 // Event listener for clicking on a user's image
                 document.body.addEventListener('click', function(e) {
                     if (e.target && e.target.classList.contains('rounded-img')) {
-                        selectedAccountId = e.target.getAttribute('data-accountId');
-                        const currentDate = new Date().toISOString().slice(0, 10); // 'YYYY-MM-DD'
-                        getLocationFromDatabase(selectedAccountId, currentDate);
+                        const clickedAccountId = e.target.getAttribute('data-accountId');
+
+                        if (selectedAccountId === clickedAccountId) {
+                            // If clicked on the same image again, reset the map
+                            selectedAccountId = null;
+                            fetchTodaysLocations(); // Fetch all accounts for today
+                        } else {
+                            // Otherwise, filter the map by the clicked account ID
+                            selectedAccountId = clickedAccountId;
+                            const currentDate = new Date().toISOString().slice(0, 10); // 'YYYY-MM-DD'
+                            getLocationFromDatabaseIMG(selectedAccountId, currentDate);
+                        }
                     }
                 });
 
                 // Your existing code to handle calendar date clicks...
             });
-
-
 
             function fetchTodaysLocations(accountId) {
                 const date = new Date().toISOString().slice(0, 10); // Get current date in YYYY-MM-DD format
@@ -874,7 +975,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 fetchTodaysLocations(); // Fetch for all accounts today
             };
 
-
             function clearMap() {
                 // Assuming 'markers' is an array holding your marker instances
                 markers.forEach(marker => map.removeLayer(marker));
@@ -883,11 +983,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 // If you have a polyline, remove it as well
                 if (polyline) {
                     map.removeLayer(polyline);
-
                     polyline = null; // Clear the polyline reference
                 }
             }
         </script>
+
 
 
 

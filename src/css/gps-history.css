@@ -2,6 +2,10 @@
   min-width: unset;
 }
 
+.locationTbl {
+  background: rgba(255, 255, 255, 0.7);
+}
+
 .gps-info {
   width: unset;
   padding: 1em;
@@ -10,13 +14,54 @@
   transition: 0.3s ease;
 }
 
+.accordion-header {
+  display: flex;
+  justify-content: center;
+}
+
+.leaflet-left {
+  display: none;
+}
+
 .gps-container {
   padding: 0.5em 0;
+}
+
+td.days.has-data {
+  background-color: #d6e4f0; /* Change this to the desired background color */
+}
+
+.today {
+  background-color: green;
+}
+
+td.days.clicked-date {
+  border: 1px solid #163172;
 }
 
 .accordion-item {
   width: unset;
   margin: unset;
+}
+
+.accordion-btn.gps-info .rounded-img {
+  transition: 0.3s ease;
+}
+
+.accordion-btn.gps-info[aria-expanded="false"] .rounded-img {
+  height: 50px !important;
+  width: 50px !important;
+}
+
+.accordion-btn.gps-info[aria-expanded="false"]:hover .rounded-img {
+  height: 70px !important;
+  width: 70px !important;
+}
+
+/* CSS for profile pictures when accordion is expanded */
+.accordion-btn.gps-info[aria-expanded="true"] .rounded-img {
+  height: 70px !important;
+  width: 70px !important;
 }
 
 .fake-header p {
