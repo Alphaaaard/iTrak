@@ -356,13 +356,13 @@ $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
                         </ul>
                     </div>
 
-                    <!-- Export button -->
+                    <!-- Export button
                     <div class="export-mob-hide">
                             <form method="post" id="exportForm">
                                 <input type="hidden" name="status" id="statusField" value="For Replacement">
                                 <button type="button" id="exportBtn" class="btn btn-outline-danger">Export Data</button>
                             </form>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!--PILL TABS-->
@@ -1109,7 +1109,7 @@ function exportTableToPDF(exportContentId, filename, employeeName) {
 
 
 
-<script>
+<!-- <script>
 document.getElementById('exportBtn').addEventListener('click', function() {
     console.log("Export button clicked"); // Debugging line
     var searchQuery = document.getElementById('search-box').value; // Get the value of the search box
@@ -1196,7 +1196,7 @@ function getFileExtension(endpoint) {
     if (endpoint.includes('excel')) return 'xlsx';
     return '';
 }
-</script>
+</script> -->
 
     </body>
 

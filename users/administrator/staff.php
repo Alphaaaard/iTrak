@@ -378,13 +378,23 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
               </div>
             </div>
           </header>
-
+          <div class="new-nav-container">
+                        <!--Content start of tabs-->
           <div class="new-nav">
             <ul>
               <li><a href="#" class="nav-link" id="manager-pill" data-bs-target="pills-manager">Manager</a></li>
               <li><a href="#" class="nav-link" id="personnel-pill" data-bs-target="pills-profile">Personnel</a></li>
             </ul>
           </div>
+
+           <!-- Export button -->
+           <div class="export-mob-hide">
+                            <form method="post" id="exportForm">
+                                <input type="hidden" name="status" id="statusField" value="For Replacement">
+                                <button type="button" id="exportBtn" class="btn btn-outline-danger">Export Data</button>
+                            </form>
+                        </div>
+                    </div>
 
           <div class="tab-content" id="myTabContent">
             <!--Maintenance Manager-->
@@ -849,6 +859,95 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         this.classList.toggle("bi-eye");
       });
     </script>
+
+<script>
+document.getElementById('exportBtn').addEventListener('click', function() {
+    console.log("Export button clicked"); // Debugging line
+    var searchQuery = document.getElementById('search-box').value; // Get the value of the search box
+    var formData = new FormData(document.getElementById('exportForm'));
+
+    // Directly determine the role based on the active tab class
+    var activeTab = document.querySelector('.nav-link.active').getAttribute('data-bs-target');
+    var role = activeTab === 'pills-manager' ? 'Maintenance Manager' : 'Maintenance Personnel';
+
+    formData.append('searchQuery', searchQuery); // Include the search query in the FormData
+    formData.append('role', role); // Append determined role to formData
+
+    Swal.fire({
+        title: 'Choose the file format',
+        showDenyButton: true,
+        confirmButtonText: 'PDF',
+        denyButtonText: 'Excel',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            formData.append('submit', 'Export to PDF');
+            performExport(formData, 'export-ad-pdf.php');
+        } else if (result.isDenied) {
+            formData.append('submit', 'Export to Excel');
+            performExport(formData, 'export-ad-excel.php');
+        }
+    });
+});
+
+function performExport(formData, endpoint) {
+    Swal.fire({
+        title: 'Exporting...',
+        html: 'Please wait while the file is being generated.',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        willOpen: () => {
+            Swal.showLoading();
+        },
+    });
+
+    fetch(endpoint, {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.blob();
+    })
+    .then(blob => {
+        const role = formData.get('role').replace(/ /g, '-'); // Get the role and replace spaces with hyphens for the file name
+        const fileExtension = getFileExtension(endpoint);
+        const fileName = `${role}.${fileExtension}`;
+
+        const downloadUrl = window.URL.createObjectURL(blob);
+        const downloadLink = document.createElement('a');
+        downloadLink.href = downloadUrl;
+        downloadLink.download = fileName;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+
+        window.URL.revokeObjectURL(downloadUrl);
+        document.body.removeChild(downloadLink);
+
+        Swal.fire({
+            title: 'Exporting Done',
+            text: 'Your file has been successfully generated.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    })
+    .catch(error => {
+        Swal.fire({
+            title: 'Error',
+            text: 'There was an issue generating the file.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    });
+}
+
+function getFileExtension(endpoint) {
+    if (endpoint.includes('pdf')) return 'pdf';
+    if (endpoint.includes('excel')) return 'xlsx';
+    return '';
+}
+</script>
   </body>
 
   </html>

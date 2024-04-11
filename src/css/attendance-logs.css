@@ -477,39 +477,3 @@ div.pagination a.active {
     background-color: #4CAF50;
 }
 
-/* New style for export button */
-#exportBtn {
-  background-color: #1e56a0;
-  border: #1e56a0 1px solid;
-  border-radius: 20px;
-  padding: 0.7em 4em;
-  font-size: 0.7em;
-  font-weight: 500;
-  color: white;
-  transition: 0.3s ease;
-  /* Add any other button styling you have */
-}
-
-#exportBtn:hover {
-  background-color: white;
-  color: #163172;
-  border: #163172 1px solid;
-}
-
-#exportBtn-mbl {
-  background-color: #1e56a0;
-  border: #1e56a0 1px solid;
-  border-radius: 20px;
-  padding: 0em 3em;
-  font-size: 0.7em;
-  font-weight: 500;
-  color: white;
-  transition: 0.3s ease;
-  /* Add any other button styling you have */
-}
-
-#exportBtn-mbl:hover {
-  background-color: white;
-  color: #163172;
-  border: #163172 1px solid;
-}
