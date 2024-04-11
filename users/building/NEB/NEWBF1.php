@@ -6756,6 +6756,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         data-category=" <?php echo htmlspecialchars($category10); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName10); ?>">
 
+                <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status10); ?>; 
                     position:absolute; top:140px; left:862px;'>
                 </div>
 
@@ -7343,9 +7344,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7266); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7266); ?>"
                     data-image="<?php echo base64_encode($upload_img7266); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7266); ?>">
-                data-assignedname="
-                <?php echo htmlspecialchars($assignedName7266); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7266); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7266); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7266); ?>; 
                         position:absolute; top:150px; left:790px;'>
                 </div>
@@ -7361,9 +7361,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     data-room="<?php echo htmlspecialchars($room7138); ?>"
                     data-floor=" <?php echo htmlspecialchars($floor7138); ?>"
                     data-image="<?php echo base64_encode($upload_img7138); ?>"
-                    data-category=" <?php echo htmlspecialchars($category7138); ?>">
-                data-assignedname="
-                <?php echo htmlspecialchars($assignedName7138); ?>">
+                    data-category=" <?php echo htmlspecialchars($category7138); ?>"
+                    data-assignedname="<?php echo htmlspecialchars($assignedName7138); ?>">
                 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7138); ?>; 
                         position:absolute; top:300px; left:226px;'>
                 </div>

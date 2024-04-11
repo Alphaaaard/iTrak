@@ -131,45 +131,56 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </div>
         <section id="sidebar">
             <div href="#" class="brand" title="logo">
-                <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
+                <i><img src="../../../src/img/UpKeep.png" alt="" class="logo" /></i>
                 <div class="mobile-sidebar-close">
                     <i class="bi bi-arrow-left-circle"></i>
                 </div>
             </div>
             <ul class="side-menu top">
                 <li>
-                    <a href="../../personnel/dashboard.php">
+                    <a href="../../administrator/dashboard.php">
                         <i class="bi bi-grid"></i>
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../../personnel/attendance-logs.php">
+                    <a href="../../administrator/attendance-logs.php">
                         <i class="bi bi-calendar-week"></i>
                         <span class="text">Attendance Logs</span>
                     </a>
                 </li>
-
+                <li>
+                    <a href="../../administrator/staff.php">
+                        <i class="bi bi-person"></i>
+                        <span class="text">Staff</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../../administrator/gps.php">
+                        <i class="bi bi-geo-alt"></i>
+                        <span class="text">GPS</span>
+                    </a>
+                </li>
                 <li class="active">
-                    <a href="../../personnel/map.php">
+                    <a href="../../administrator/map.php">
                         <i class="bi bi-map"></i>
                         <span class="text">Map</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../../personnel/assigned-tasks.php">
-                        <i class="bi bi-geo-alt"></i>
-                        <span class="text">Assigned Tasks</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../../personnel/reports.php">
+                    <a href="../../administrator/reports.php">
                         <i class="bi bi-clipboard"></i>
                         <span class="text">Reports</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../../personnel/activity-logs.php">
+                    <a href="../../administrator/archive.php">
+                        <i class="bi bi-archive"></i>
+                        <span class="text">Archive</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../../administrator/activity-logs.php">
                         <i class="bi bi-arrow-counterclockwise"></i>
                         <span class="text">Activity Logs</span>
                     </a>
@@ -180,12 +191,50 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             <main>
                 <div class="content-container" id="content-container">
                     <div id="belmonte-F1" class="content">
-                        <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-arrow-left"></i></a>
                         <!-- ASSETS -->
-                        <img src='../image.php?id=1' style='width:100px; cursor:pointer;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal1' onclick='fetchAssetData(1);'>
-                        <img src='../image.php?id=2' style='width:100px; cursor:pointer;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal2' onclick='fetchAssetData(2);'>
                         <!-- FLOOR PLAN -->
-                        <img class="Floor-container-1" src="../../../src/floors/oldAcademicB/OAB1F.png" alt="">
+                        <img src="../../../src/floors/adminB/AB5F.png" alt="" class="Floor-container">
+
+                        <div class="legend-button" id="legendButton">
+                            <i class="bi bi-info-circle"></i>
+                        </div>
+
+                        <div class="legend-body" id="legendBody">
+                            <!-- Your legend body content goes here -->
+                            <div class="legend-item"><img src="../../../src/legend/AC.jpg" alt="" class="legend-img">
+                                <p>AIRCON</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/BULB.jpg" alt="" class="legend-img">
+                                <p>BULB</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/CASSETTE-AC.jpg" alt="" class="legend-img">
+                                <p>CASSETTE AC</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/DOOR.jpg" alt="" class="legend-img">
+                                <p>DOOR</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/SWING-DOOR.jpg" alt="" class="legend-img">
+                                <p>SWING DOOR</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/TOILET-SEAT.jpg" alt="" class="legend-img">
+                                <p>TOILET SEAT</p>
+                            </div>
+                        </div>
+
+
+                        <div class="map-nav">
+                            <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
+                            <div class="map-legend">
+                                <div class="legend-color-green"></div>
+                                <p>Working</p>
+                                <div class="legend-color-under-maintenance"></div>
+                                <p>Under maintenance</p>
+                                <div class="legend-color-need-repair"></div>
+                                <p>Need repair</p>
+                                <div class="legend-color-for-replacement"></div>
+                                <p>For replacement</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Modal structure for id 1 -->
                     <div class='modal fade' id='imageModal1' tabindex='-1' aria-labelledby='imageModalLabel1' aria-hidden='true'>

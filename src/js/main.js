@@ -20,6 +20,7 @@ const mobileMenuBar = document.querySelector(
 const sidebar = document.getElementById("sidebar");
 const hamburger = document.getElementById("navbar");
 const content = document.getElementById("content");
+const mapTopNav = document.getElementById("map-top-nav");
 const desktopProfile = document.getElementById("desktop");
 const mobileProfile = document.getElementById("mobile");
 
@@ -28,12 +29,14 @@ function closeSidebar() {
   sidebar.classList.add("hide");
   hamburger.classList.add("hide");
   content.classList.add("hide");
+  mapTopNav.classList.add("hide");
 }
 
 function openSidebar() {
   sidebar.classList.remove("hide");
   hamburger.classList.remove("hide");
   content.classList.remove("hide");
+  mapTopNav.classList.remove("hide");
 }
 
 // // Initial state based on screen width

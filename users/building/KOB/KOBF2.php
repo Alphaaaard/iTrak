@@ -5933,7 +5933,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <div id="belmonte-F1" class="content">
 
                         <!-- FLOOR PLAN -->
-                        <img class="Floor-container-1 .NEWBF1" src="../../../src/floors/korPhil/Korphil1F.png" alt="">
+                        <img class="Floor-container-1 .NEWBF1" src="../../../src/floors/korPhil/Korphil2F.png" alt="">
 
                         <div class="legend-button" id="legendButton">
                             <i class="bi bi-info-circle"></i>

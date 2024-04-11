@@ -7,6 +7,10 @@
   padding: 0;
 }
 
+#content {
+  top: 100px;
+}
+
 .content-container {
   overflow: hidden;
   border: #163172 5px solid;
@@ -327,10 +331,18 @@
   width: 10px;
 }
 
+#map-top-nav .closeFloor {
+  transition: 0.3s ease;
+}
+
+#map-top-nav.hide .closeFloor {
+  left: 4em;
+}
+
 .closeFloor {
   position: absolute;
-  left: 50px;
-  top: 40px;
+  left: 12em;
+  top: 3em;
   font-size: 1.5em;
 }
 
@@ -475,16 +487,16 @@ h3 {
   border-radius: 4px;
   cursor: pointer;
   position: fixed;
-  top: 13%;
-  right: 3%;
+  top: 4.5em;
+  right: 2.25em;
   font-size: 1.1em;
 }
 
 .legend-body {
   display: none; /* Hidden by default */
   position: fixed;
-  top: 16.5%;
-  right: 60px;
+  top: 6.5em;
+  right: 3.5em;
   background-color: white;
   /* height: 250px; */
   width: 200px;
@@ -597,19 +609,24 @@ h3 {
     margin: auto 1em;
   }
 
+  #map-top-nav.hide .closeFloor {
+    left: 6%;
+  }
+
   .closeFloor {
     position: fixed;
     left: 6%;
-    top: 14%;
+    top: 4.5em;
     font-size: 1.1em !important;
   }
 
   .legend-button {
-    top: 12.6%;
+    top: 4.2em;
     right: 5%;
   }
 
   .legend-body {
-    top: 17%;
+    top: 6.1em;
+    right: 2.1em;
   }
 }

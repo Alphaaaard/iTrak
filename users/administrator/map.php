@@ -442,6 +442,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link" id="admin-floor4-tab" href="../building/ADB/ADBF4.php" role="tab" aria-controls="floor4" aria-selected="false">4</a>
                                 </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="admin-floor4-tab" href="../building/ADB/ADBF5.php" role="tab" aria-controls="floor5" aria-selected="false">5</a>
+                                </li>
                             </div>
                             </ul>
                         </div>

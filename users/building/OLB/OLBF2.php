@@ -44,7 +44,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Dashboard</title>
+        <title>iTrak | Map</title>
         <link rel="icon" type="image/x-icon" href="../../../src/img/tab-logo.png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
@@ -192,7 +192,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 <div class="content-container" id="content-container">
                     <div id="belmonte-F1" class="content">
                         <!-- FLOOR PLAN -->
-                        <img class="Floor-container-1" src="../../../src/floors/OLBF1/OAB1F.png" alt="">
+                        <img class="Floor-container-1" src="../../../src/floors/oldAcademicB/OAB2F.png" alt="">
 
                         <div class="legend-button" id="legendButton">
                             <i class="bi bi-info-circle"></i>
