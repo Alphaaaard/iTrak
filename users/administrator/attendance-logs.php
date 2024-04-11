@@ -535,7 +535,8 @@ $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
                             // Close the attendance log statement
                             $attendanceStmt->close();
 
-                            echo '<button type="button" class="btn export-btn" onclick="exportTableToPDF(\'exportContent' . $row['accountId'] . '\', \'' . $row['firstname'] . '_' . $row['lastname'] . '.pdf\', \'' . addslashes($row['firstname']) . ' ' . addslashes($row['lastname']) . '\')">EXPORT PDF</button>';
+                            echo '<button type="button" class="btn export-btn" id="exportBtn' . $row['accountId'] . '">EXPORT PDF</button>';
+
 
 
                             echo '</div>';
@@ -717,7 +718,7 @@ $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
                             // Close the attendance log statement
                             $attendanceStmt->close();
 
-                            echo '<button type="button" class="btn export-btn" onclick="exportTableToPDF(\'exportContent' . $row['accountId'] . '\', \'' . $row['firstname'] . '_' . $row['lastname'] . '.pdf\', \'' . addslashes($row['firstname']) . ' ' . addslashes($row['lastname']) . '\')">EXPORT PDF</button>';
+                            echo '<button type="button" class="btn export-btn" id="exportBtn' . $row['accountId'] . '">EXPORT PDF</button>';
 
 
                             echo '</div>';
@@ -1109,36 +1110,48 @@ function exportTableToPDF(exportContentId, filename, employeeName) {
 
 
 
-<!-- <script>
-document.getElementById('exportBtn').addEventListener('click', function() {
-    console.log("Export button clicked"); // Debugging line
-    var searchQuery = document.getElementById('search-box').value; // Get the value of the search box
-    var formData = new FormData(document.getElementById('exportForm'));
-
-    // Directly determine the role based on the active tab class
-    var activeTab = document.querySelector('.nav-link.active').getAttribute('data-bs-target');
-    var role = activeTab === 'pills-manager' ? 'Maintenance Manager' : 'Maintenance Personnel';
-
-    formData.append('searchQuery', searchQuery); // Include the search query in the FormData
-    formData.append('role', role); // Append determined role to formData
-
-    Swal.fire({
-        title: 'Choose the file format',
-        showDenyButton: true,
-        confirmButtonText: 'PDF',
-        denyButtonText: 'Excel',
-    }).then((result) => {
-        if (result.isConfirmed) {
-            formData.append('submit', 'Export to PDF');
-            performExport(formData, 'export-ad-pdf.php');
-        } else if (result.isDenied) {
-            formData.append('submit', 'Export to Excel');
-            performExport(formData, 'export-ad-excel.php');
+<script>
+document.body.addEventListener('click', function(event) {
+    if (event.target.matches('.export-btn')) {
+        var accountId = event.target.id.replace('exportBtn', '');
+        var nameHeaderElement = document.getElementById('nameHeader' + accountId);
+        var filterTypeElement = document.getElementById('filterType' + accountId);
+        
+        if (!nameHeaderElement || !filterTypeElement) {
+            console.error('Required element not found for accountId:', accountId);
+            return;
         }
-    });
+
+        var nameHeader = nameHeaderElement.textContent;
+        var filterType = filterTypeElement.value; // Get the selected filter type
+        var formData = new FormData();
+        formData.append('accountId', accountId);
+        formData.append('name', nameHeader);
+        formData.append('filterType', filterType); // Include the filter type in the FormData
+
+        console.log('Account ID:', accountId);
+        console.log('Name:', nameHeader);
+
+        Swal.fire({
+            title: 'Choose the file format',
+            showDenyButton: true,
+            confirmButtonText: 'PDF',
+            denyButtonText: 'Excel',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                formData.append('submit', 'Export to PDF');
+                performExport(formData, 'export-pdf-al.php');
+            } else if (result.isDenied) {
+                formData.append('submit', 'Export to Excel');
+                performExport(formData, 'export-ad-excel.php');
+            }
+        });
+    }
 });
 
 function performExport(formData, endpoint) {
+    console.log('Performing export to:', endpoint);
+
     Swal.fire({
         title: 'Exporting...',
         html: 'Please wait while the file is being generated.',
@@ -1160,9 +1173,10 @@ function performExport(formData, endpoint) {
         return response.blob();
     })
     .then(blob => {
-        const role = formData.get('role').replace(/ /g, '-'); // Get the role and replace spaces with hyphens for the file name
         const fileExtension = getFileExtension(endpoint);
-        const fileName = `${role}.${fileExtension}`;
+        const fileName = `${formData.get('name').replace(/ /g, '-')}.${fileExtension}`;
+
+        console.log('Generated File Name:', fileName);
 
         const downloadUrl = window.URL.createObjectURL(blob);
         const downloadLink = document.createElement('a');
@@ -1170,7 +1184,6 @@ function performExport(formData, endpoint) {
         downloadLink.download = fileName;
         document.body.appendChild(downloadLink);
         downloadLink.click();
-
         window.URL.revokeObjectURL(downloadUrl);
         document.body.removeChild(downloadLink);
 
@@ -1182,6 +1195,7 @@ function performExport(formData, endpoint) {
         });
     })
     .catch(error => {
+        console.error('Export Error:', error);
         Swal.fire({
             title: 'Error',
             text: 'There was an issue generating the file.',
@@ -1196,7 +1210,8 @@ function getFileExtension(endpoint) {
     if (endpoint.includes('excel')) return 'xlsx';
     return '';
 }
-</script> -->
+
+</script>
 
     </body>
 
