@@ -80,9 +80,38 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             top: 10px;
             right: 10px;
         }
-    </style>
 
-    <body>
+        .loader {
+    position: fixed; /* Fixed position relative to the viewport */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #FFFFFF; /* Pure white background */
+    opacity: 1; /* Full visibility */
+    transition: opacity 1s ease-out; /* Transition for the opacity */
+    z-index: 9999; /* High z-index to ensure it's on top */
+    display: flex;
+    justify-content: center; /* Center the loader horizontally */
+    align-items: center; /* Center the loader vertically */
+}
+
+
+
+        /* Style for the SVG Loader */
+        svg {
+            width: 150px; /* You can adjust the size as needed */
+        }
+    </style>
+</head>
+<body>
+<div class="loader" aria-label="Page loading, please wait." role="status">
+       <!-- SVG Loader here -->
+       <?php echo file_get_contents('map_loader.svg'); // Make sure the path is correct ?>
+   </div>
+    <!-- Additional page content and script to hide loader after 10 seconds -->
+   
+    
         <!-- NAVBAR -->
         <div id="navbar" class="">
             <nav>
@@ -204,6 +233,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             }
                 ?>
                 </div>
+                
             </nav>
         </div>
         <!-- NAVBAR -->
@@ -640,6 +670,19 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 });
             });
         </script>
+<script>
+    setTimeout(function() {
+        // First fade out the loader
+        var loader = document.querySelector('.loader');
+        loader.style.opacity = '0';
+
+        // Then, after the transition, set display to none
+        setTimeout(function() {
+            loader.style.display = 'none';
+        }, 1000); // Corresponds to the transition duration
+    }, 10000); // Time before the fading starts (after 10 seconds in this case)
+</script>
+
 
 
     </body>
