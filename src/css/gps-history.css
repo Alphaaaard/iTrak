@@ -130,6 +130,44 @@ td.unselectable:hover {
   border: 1px solid #dee2e6;
   border-radius: 15px;
   overflow: hidden;
+  display: flex;
+  transition: 1s ease;
+}
+
+.calendar:hover .calendar-body {
+  width: unset;
+  transition: 1s ease;
+}
+
+.date-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.calendar .calendar-header .reset-container {
+  position: absolute;
+  right: 0;
+  margin: 0.1em 0.3em;
+}
+
+button.reset-btn {
+  border: 1px solid white;
+  background-color: #163172;
+  border-radius: 7.5px;
+  color: white;
+  font-size: 0.7em;
+  padding: 0 0.3em;
+  opacity: 0.5;
+}
+
+button.reset-btn:hover {
+  opacity: unset;
+}
+
+.calendar:hover .calendar-header .reset-container {
+  right: 15.4em;
 }
 
 .calendar-header {
@@ -138,6 +176,11 @@ td.unselectable:hover {
   text-align: center;
   display: flex;
   justify-content: space-between;
+}
+
+.calendar-header .day-text {
+  font-size: 5em;
+  color: white;
 }
 
 .calendar-header .month-year-text {
@@ -149,8 +192,9 @@ td.unselectable:hover {
 }
 
 .calendar-body {
-  /* padding: 10px; */
   background-color: white;
+  width: 0;
+  transition: 1s ease;
 }
 
 .calendar-table th,
@@ -241,7 +285,8 @@ td.unselectable:hover {
     border: unset;
     outline: unset;
     height: unset;
-    top: 20px;
+    top: 25px;
+    left: 25px !important;
     color: #3d3b40;
   }
 }

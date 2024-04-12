@@ -341,7 +341,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <script>
                             var map;
                             var markers = [];
-                            var initialCoordinates = [14.70040, 121.03199];
+                            var initialCoordinates = [14.70040, 121.03299];
                             var zoomLevel = 18.2;
                             var dragTimeout;
 
@@ -620,7 +620,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         if (locations && locations.length > 0) {
                                             // Update the map with the new locations
                                             updateMarkers(locations);
+                                            (locations);
                                         } else {
+                                            // Handle case where no location data is available
                                             // Handle case where no location data is available
                                             console.error("No location data available");
                                         }
@@ -736,11 +738,17 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <div class="calendar-container">
                         <div class="calendar">
                             <div class="calendar-header">
+                                <div class="reset-container">
+                                    <button type="button" class="reset-btn">RESET</button>
+                                </div>
                                 <div class="btn-group">
                                     <button type="button" class="cal-btn" onclick="prevMonth()">
                                         < </button>
                                 </div>
-                                <h5 class="month-year-text" id="currentMonthYear"></h5>
+                                <div class="date-container">
+                                    <h5 class="day-text" id="currentDay"></h5>
+                                    <h5 class="month-year-text" id="currentMonthYear"></h5>
+                                </div>
                                 <div class="btn-group">
                                     <button type="button" class="cal-btn" onclick="nextMonth()">></button>
                                 </div>
@@ -794,25 +802,28 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/gps.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
 
-
         <script>
             var currentDate = new Date();
             var currentMonth = currentDate.getMonth();
             var currentYear = currentDate.getFullYear();
             var previousClickedDate = null;
+            var selectedAccountId = null;
 
             function generateCalendar(month, year) {
+                // Update the currentDate variable
+                var currentDate = new Date(year, month, 1);
+
+                // Update the currentMonth and currentYear variables
+                var currentMonth = currentDate.getMonth();
+                var currentYear = currentDate.getFullYear();
+
                 var calendarContent = document.getElementById('calendarContent');
                 var daysInMonth = new Date(year, month + 1, 0).getDate();
 
                 var firstDay = new Date(year, month, 1).getDay();
                 var lastDay = new Date(year, month, daysInMonth).getDay();
 
-                var currentDay = 1 - firstDay;
-                var currentDate = new Date(); // Get current date
-                var currentMonth = currentDate.getMonth();
-                var currentYear = currentDate.getFullYear();
-
+                var currentDay = 1; // Start from the first day of the month
                 var html = '';
 
                 while (currentDay <= daysInMonth) {
@@ -821,8 +832,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     for (var i = 0; i < 7; i++) {
                         if (currentDay > 0 && currentDay <= daysInMonth) {
                             var selectedDate = currentYear + '-' + (currentMonth + 1).toString().padStart(2, '0') + '-' + currentDay.toString().padStart(2, '0');
-                            var hasData = checkDataAvailability(selectedDate); // Check if data is available for the selected date
-                            var isCurrentDay = currentYear === year && currentMonth === month && currentDay === currentDate.getDate();
+                            var hasData = checkDataAvailability(selectedDate, selectedAccountId); // Check if data is available for the selected date and user
+                            var isCurrentDay = currentYear === new Date().getFullYear() && currentMonth === new Date().getMonth() && currentDay === new Date().getDate();
 
                             if (isCurrentDay) {
                                 html += '<td class="days day-' + currentDay + ' current-day">' + currentDay + '</td>';
@@ -840,59 +851,98 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     html += '</tr>';
                 }
 
-                function checkDataAvailability(selectedDate) {
-                    var xmlhttp = new XMLHttpRequest();
-                    var url = "get_location_history.php?date=" + encodeURIComponent(selectedDate);
-                    xmlhttp.open("GET", url, false); // Synchronous request
-                    xmlhttp.send();
-
-                    if (xmlhttp.status == 200) {
-                        var locations = JSON.parse(xmlhttp.responseText);
-                        return locations.length > 0; // Return true if data exists, false otherwise
-                    } else {
-                        console.error("Error fetching data for date: " + selectedDate);
-                        return false; // Error occurred or no data available
-                    }
-                }
-
-
-
                 calendarContent.innerHTML = html;
                 document.getElementById('currentMonthYear').textContent = getMonthName(month) + ' ' + year;
+
+                // Call updateCurrentDay to initially set the current day
+                updateCurrentDay();
 
                 // Add event listener to days
                 var days = document.querySelectorAll('.days');
                 // Inside your generateCalendar function or wherever you're setting up the click event listener for the calendar dates
-                // Inside your generateCalendar function or wherever you're setting up the click event listener for the calendar dates
+                // Modify the event listener for calendar days
                 days.forEach(function(day) {
                     day.addEventListener('click', function() {
                         var selectedDay = parseInt(day.textContent);
-                        var selectedDate = currentYear + '-' + (currentMonth + 1).toString().padStart(2, '0') + '-' + selectedDay.toString().padStart(2, '0');
+                        var selectedDate = new Date(currentYear, currentMonth, selectedDay);
+                        var formattedDate = selectedDate.getFullYear() + '-' + (selectedDate.getMonth() + 1).toString().padStart(2, '0') + '-' + selectedDate.getDate().toString().padStart(2, '0');
 
-                        // Clear existing markers and polylines before fetching new location data
+                        // Call the updateCurrentDay function to update the displayed date
+                        updateCurrentDay(formattedDate);
+
+                        // Your existing code for fetching location data and updating clicked date class
                         clearMapData();
 
-                        // Check if an accountId has been selected and fetch location data accordingly
                         if (selectedAccountId) {
-                            // Fetch location data for a specific user and date
-                            getLocationFromDatabase(selectedDate, selectedAccountId);
+                            getLocationFromDatabase(formattedDate, selectedAccountId);
                         } else {
-                            // Fetch location data for all users for the selected date
-                            getLocationFromDatabase(selectedDate);
+                            getLocationFromDatabase(formattedDate);
                         }
 
-                        // Remove the "clicked-date" class from the previously clicked date
                         if (previousClickedDate) {
                             previousClickedDate.classList.remove('clicked-date');
                         }
 
-                        // Add the "clicked-date" class to the newly clicked date
                         day.classList.add('clicked-date');
-
-                        // Update the previously clicked date
                         previousClickedDate = day;
                     });
                 });
+
+
+            }
+
+
+            function updateCurrentDay(selectedDate) {
+                // Get the current day element
+                var currentDayElement = document.getElementById('currentDay');
+
+                // Parse the selected date to ensure it's in the correct format
+                var selectedDateObj = new Date(selectedDate);
+                var selectedDay = selectedDateObj.getDate();
+
+                // Check if the selected date is undefined (indicating the default current date)
+                if (!selectedDate) {
+                    var currentDate = new Date();
+                    selectedDay = currentDate.getDate();
+
+                    // Check if the displayed month is the same as the current month
+                    if (currentMonth === currentDate.getMonth() && currentYear === currentDate.getFullYear()) {
+                        currentDayElement.textContent = selectedDay.toString().padStart(2, '0'); // Display current day
+                    } else {
+                        currentDayElement.textContent = '01'; // Display the first day of the month
+                    }
+                } else {
+                    // Update the current day element with the selected date
+                    currentDayElement.textContent = selectedDay.toString().padStart(2, '0');
+
+                    // Check if the displayed month is the same as the selected month
+                    if (currentMonth === selectedDateObj.getMonth() && currentYear === selectedDateObj.getFullYear()) {
+                        currentDayElement.textContent = selectedDay.toString().padStart(2, '0'); // Display selected day
+                    } else {
+                        currentDayElement.textContent = '01'; // Display the first day of the month
+                    }
+                }
+            }
+
+
+
+
+            function checkDataAvailability(selectedDate, accountId) {
+                var xmlhttp = new XMLHttpRequest();
+                var url = "get_location_history.php?date=" + encodeURIComponent(selectedDate);
+                if (accountId) {
+                    url += "&accountId=" + encodeURIComponent(accountId);
+                }
+                xmlhttp.open("GET", url, false); // Synchronous request
+                xmlhttp.send();
+
+                if (xmlhttp.status == 200) {
+                    var locations = JSON.parse(xmlhttp.responseText);
+                    return locations.length > 0; // Return true if data exists, false otherwise
+                } else {
+                    console.error("Error fetching data for date: " + selectedDate);
+                    return false; // Error occurred or no data available
+                }
             }
 
             function prevMonth() {
@@ -920,34 +970,25 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
             // Initial generation of the calendar
             generateCalendar(currentMonth, currentYear);
-        </script>
 
+            // Event listener for clicking on a user's image
+            document.body.addEventListener('click', function(e) {
+                if (e.target && e.target.classList.contains('rounded-img')) {
+                    const clickedAccountId = e.target.getAttribute('data-accountId');
 
-
-        <script>
-            // Define selectedAccountId at the top of your script to ensure wide accessibility
-            var selectedAccountId = null;
-
-            document.addEventListener('DOMContentLoaded', (event) => {
-                // Event listener for clicking on a user's image
-                document.body.addEventListener('click', function(e) {
-                    if (e.target && e.target.classList.contains('rounded-img')) {
-                        const clickedAccountId = e.target.getAttribute('data-accountId');
-
-                        if (selectedAccountId === clickedAccountId) {
-                            // If clicked on the same image again, reset the map
-                            selectedAccountId = null;
-                            fetchTodaysLocations(); // Fetch all accounts for today
-                        } else {
-                            // Otherwise, filter the map by the clicked account ID
-                            selectedAccountId = clickedAccountId;
-                            const currentDate = new Date().toISOString().slice(0, 10); // 'YYYY-MM-DD'
-                            getLocationFromDatabaseIMG(selectedAccountId, currentDate);
-                        }
+                    if (selectedAccountId === clickedAccountId) {
+                        // If clicked on the same image again, reset the map
+                        selectedAccountId = null;
+                        generateCalendar(currentMonth, currentYear); // Refresh the calendar
+                        fetchTodaysLocations(); // Fetch all accounts for today
+                    } else {
+                        // Otherwise, filter the map by the clicked account ID
+                        selectedAccountId = clickedAccountId;
+                        generateCalendar(currentMonth, currentYear); // Refresh the calendar
+                        const currentDate = new Date().toISOString().slice(0, 10); // 'YYYY-MM-DD'
+                        getLocationFromDatabaseIMG(selectedAccountId, currentDate);
                     }
-                });
-
-                // Your existing code to handle calendar date clicks...
+                }
             });
 
             function fetchTodaysLocations(accountId) {
@@ -986,7 +1027,21 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     polyline = null; // Clear the polyline reference
                 }
             }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                // Event listener for the reset button
+                document.querySelector('.reset-btn').addEventListener('click', function() {
+                    // Reset the calendar to the default date
+                    currentMonth = currentDate.getMonth();
+                    currentYear = currentDate.getFullYear();
+                    selectedAccountId = null; // Reset selected account ID
+                    generateCalendar(currentMonth, currentYear);
+                    clearMap(); // Clear the map markers and polyline
+                    fetchTodaysLocations(); // Fetch locations for today and update the map
+                });
+            });
         </script>
+
 
 
 
