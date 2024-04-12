@@ -1146,10 +1146,10 @@ document.body.addEventListener('click', function(event) {
         }).then((result) => {
             if (result.isConfirmed) {
                 formData.append('submit', 'Export to PDF');
-                performExport(formData, 'export-pdf-al.php');
+                performExport(formData, 'export-pdf-attendancelogs.php');
             } else if (result.isDenied) {
                 formData.append('submit', 'Export to Excel');
-                performExport(formData, 'export-excel-al.php');
+                performExport(formData, 'export-excel-attendancelogs.php');
             }
         });
     }

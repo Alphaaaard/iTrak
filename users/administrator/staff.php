@@ -881,10 +881,10 @@ document.getElementById('exportBtn').addEventListener('click', function() {
     }).then((result) => {
         if (result.isConfirmed) {
             formData.append('submit', 'Export to PDF');
-            performExport(formData, 'export-ad-pdf.php');
+            performExport(formData, 'export-pdf-staffs.php');
         } else if (result.isDenied) {
             formData.append('submit', 'Export to Excel');
-            performExport(formData, 'export-ad-excel.php');
+            performExport(formData, 'export-excel-staffs.php');
         }
     });
 });

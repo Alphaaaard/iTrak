@@ -1212,10 +1212,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 }).then((result) => {
                     if (result.isConfirmed) {
                         formData.append('submit', 'Export to PDF');
-                        performExport(formData, 'export-pdf.php');
+                        performExport(formData, 'export-pdf-reports.php');
                     } else if (result.isDenied) {
                         formData.append('submit', 'Export to Excel');
-                        performExport(formData, 'export-excel.php');
+                        performExport(formData, 'export-excel-reports.php');
                     }
                     // else if (result.dismiss === Swal.DismissReason.cancel) {
                     //     formData.append('submit', 'Export to Word');
