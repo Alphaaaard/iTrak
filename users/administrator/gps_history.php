@@ -735,7 +735,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </style>
                     </div>
                     <!-- Calendar container -->
-                    <div class="calendar-container">
+                    <div class="calendar-container" id="calendar-container">
                         <div class="calendar">
                             <div class="calendar-header">
                                 <div class="reset-container">
@@ -743,7 +743,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <div class="btn-group">
                                     <button type="button" class="cal-btn" onclick="prevMonth()">
-                                        < </button>
+                                        &lt;
+                                    </button>
                                 </div>
                                 <div class="date-container">
                                     <h5 class="day-text" id="currentDay"></h5>
@@ -801,6 +802,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/main.js"></script>
         <script src="../../src/js/gps.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const calendarContainer = document.getElementById("calendar-container");
+
+                calendarContainer.addEventListener("click", function() {
+                    calendarContainer.classList.toggle("active");
+                });
+            });
+        </script>
 
         <script>
             var currentDate = new Date();

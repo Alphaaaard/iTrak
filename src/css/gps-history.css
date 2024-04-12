@@ -56,8 +56,8 @@ td.days.clicked-date {
 }
 
 .accordion-btn.gps-info[aria-expanded="false"]:hover .rounded-img {
-  height: 70px !important;
-  width: 70px !important;
+  height: 70px;
+  width: 70px;
 }
 
 /* CSS for profile pictures when accordion is expanded */
@@ -290,5 +290,91 @@ button.reset-btn:hover {
     top: 25px;
     left: 25px !important;
     color: #3d3b40;
+  }
+
+  .calendar-container {
+    position: unset;
+    top: unset;
+    right: unset;
+    z-index: 0;
+  }
+
+  /* .calendar {
+    height: 90px;
+    width: 90px;
+  } */
+
+  .calendar-header {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    border-radius: 15px;
+    padding: 0.2em;
+  }
+
+  .calendar-header .day-text {
+    font-size: 2em;
+    margin: 0;
+  }
+
+  .calendar-header .month-year-text {
+    font-size: 0.5em;
+  }
+
+  /* div#calendar-container.active .calendar {
+    width: unset;
+  } */
+
+  .calendar-body {
+    width: 100%;
+    display: none;
+  }
+
+  .table-bordered {
+    height: 95%;
+    width: 100%;
+  }
+
+  div#calendar-container.active .calendar .calendar-body {
+    position: absolute;
+    left: 59%;
+    top: 35.8%;
+    transform: translate(-50%, -50%);
+    display: block;
+    width: 70%;
+    height: 41%;
+    z-index: 2;
+    border-radius: 15px;
+  }
+
+  .accordion-btn.gps-info[aria-expanded="false"] .rounded-img {
+    height: 40px !important;
+    width: 40px !important;
+  }
+
+  .accordion-btn.gps-info[aria-expanded="true"] .rounded-img {
+    height: 50px !important;
+    width: 50px !important;
+  }
+
+  .gps-info {
+    padding: 0 0.5em;
+  }
+
+  .calendar .calendar-header .reset-container {
+    top: 240px;
+    z-index: 3;
+  }
+
+  .calendar-container button.reset-btn {
+    display: none;
+  }
+
+  .calendar-container.active button.reset-btn {
+    display: block;
+  }
+
+  .calendar:hover .calendar-header .reset-container {
+    right: 5px;
   }
 }
