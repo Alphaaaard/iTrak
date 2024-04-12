@@ -1116,18 +1116,24 @@ document.body.addEventListener('click', function(event) {
         var accountId = event.target.id.replace('exportBtn', '');
         var nameHeaderElement = document.getElementById('nameHeader' + accountId);
         var filterTypeElement = document.getElementById('filterType' + accountId);
-        
+
         if (!nameHeaderElement || !filterTypeElement) {
-            console.error('Required element not found for accountId:', accountId);
+            console.error('Required element(s) not found for accountId:', accountId);
+            Swal.fire({ // SweetAlert to inform the user
+                title: 'No Data Available',
+                text: 'Required data is missing for this account. Please check and try again.',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            });
             return;
         }
 
         var nameHeader = nameHeaderElement.textContent;
-        var filterType = filterTypeElement.value; // Get the selected filter type
+        var filterType = filterTypeElement.value;
         var formData = new FormData();
         formData.append('accountId', accountId);
         formData.append('name', nameHeader);
-        formData.append('filterType', filterType); // Include the filter type in the FormData
+        formData.append('filterType', filterType);
 
         console.log('Account ID:', accountId);
         console.log('Name:', nameHeader);
@@ -1143,7 +1149,7 @@ document.body.addEventListener('click', function(event) {
                 performExport(formData, 'export-pdf-al.php');
             } else if (result.isDenied) {
                 formData.append('submit', 'Export to Excel');
-                performExport(formData, 'export-ad-excel.php');
+                performExport(formData, 'export-excel-al.php');
             }
         });
     }

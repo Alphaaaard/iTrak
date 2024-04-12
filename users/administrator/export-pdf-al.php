@@ -3,8 +3,8 @@
 ini_set('memory_limit', '1024M'); // Adjust the value as needed
 
 include_once("../../config/connection.php");
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 use Dompdf\Dompdf;
 
@@ -12,30 +12,22 @@ if (isset($_POST['submit']) && isset($_POST['accountId'])) {
     $conn = connection();
 
     $accountId = $_POST['accountId']; // Retrieve the accountId from the POST data
-    // Retrieve the filterType from the POST data
-    $filterType = isset($_POST['filterType']) ? $_POST['filterType'] : 'all';
+    // Retrieve the filter type from POST data
+    $filterType = $_POST['filterType'] ?? 'all'; // Default to 'all' if not provided
 
     // Start building the SQL query
     $sql = "SELECT date, timeIn, timeOut FROM attendancelogs WHERE accountId = ?";
-    $params = [$accountId]; 
-    $types = 'i'; 
+    $params = [$accountId];
+    $types = 'i';
 
-    // Append conditions to the SQL based on the filterType
-    switch ($filterType) {
-    case 'week':
-        echo "Filtering by week"; // Debug statement
-        $sql .= " AND YEARWEEK(date, 1) = YEARWEEK(CURDATE(), 1)"; // Filter this week's data
-        break;
-    case 'month':
-        echo "Filtering by month"; // Debug statement
-        $sql .= " AND MONTH(date) = MONTH(CURDATE()) AND YEAR(date) = YEAR(CURDATE())"; // Filter this month's data
-        break;
-    case 'year':
-        echo "Filtering by year"; // Debug statement
-        $sql .= " AND YEAR(date) = YEAR(CURDATE())"; // Filter this year's data
-        break;
-    // The 'all' case doesn't need additional SQL
-}
+    // Depending on the filterType, append the SQL where clause conditions
+    if ($filterType === 'week') {
+        $sql .= " AND YEARWEEK(`date`, 1) = YEARWEEK(CURDATE(), 1)";
+    } elseif ($filterType === 'month') {
+        $sql .= " AND MONTH(`date`) = MONTH(CURDATE()) AND YEAR(`date`) = YEAR(CURDATE())";
+    } elseif ($filterType === 'year') {
+        $sql .= " AND YEAR(`date`) = YEAR(CURDATE())";
+    }
 
     $sql .= " ORDER BY date ASC"; // Add an ORDER BY clause
 
@@ -48,24 +40,24 @@ if (isset($_POST['submit']) && isset($_POST['accountId'])) {
     $employeeInfo = mysqli_fetch_assoc(mysqli_query($conn, "SELECT firstname, lastname FROM account WHERE accountId = $accountId"));
 
     // Convert images to base64 for logos
-    $leftLogoPath = '../../src/img/left-logo.png'; 
-    $rightLogoPath = '../../src/img/right-logo.png'; 
+    $leftLogoPath = '../../src/img/left-logo.png';
+    $rightLogoPath = '../../src/img/right-logo.png';
     $leftLogoData = base64_encode(file_get_contents($leftLogoPath));
     $rightLogoData = base64_encode(file_get_contents($rightLogoPath));
 
     // Start the HTML content for PDF
     $html = '<div style="text-align:center; margin-bottom: 20px;">' .
-            '<img src="data:image/png;base64,' . $leftLogoData . '" style="height:50px;"/> ' .
-            '<h1 style="display:inline; margin: 0 10px;">QUEZON CITY UNIVERSITY</h1>' .
-            '<img src="data:image/png;base64,' . $rightLogoData . '" style="height:50px;"/> ' .
-            '<div style="clear:both;"></div>' . // Ensure the text goes below images and header
-            '<h4 style="margin-top: 10px;">UPKEEP MAINTENANCE TEAM</h4>' . // Your additional text
-            '</div>';
+        '<img src="data:image/png;base64,' . $leftLogoData . '" style="height:50px;"/> ' .
+        '<h1 style="display:inline; margin: 0 10px;">QUEZON CITY UNIVERSITY</h1>' .
+        '<img src="data:image/png;base64,' . $rightLogoData . '" style="height:50px;"/> ' .
+        '<div style="clear:both;"></div>' . // Ensure the text goes below images and header
+        '<h4 style="margin-top: 10px;">UPKEEP MAINTENANCE TEAM</h4>' . // Your additional text
+        '</div>';
 
     $html .= '<h2 align="center">Attendance Log for ' . htmlspecialchars($employeeInfo['firstname']) . ' ' . htmlspecialchars($employeeInfo['lastname']) . '</h2>';
     $html .= '<style> th, td { text-align: center; vertical-align: middle; border: 1px solid #ddd; padding: 8px; } ' .
-             'img { border-radius: 50%; width: 50px; height: 50px; object-fit: cover; border: 2px solid #000; } ' .
-             'table { border-collapse: collapse; width: 100%; } </style>';
+        'img { border-radius: 50%; width: 50px; height: 50px; object-fit: cover; border: 2px solid #000; } ' .
+        'table { border-collapse: collapse; width: 100%; } </style>';
     $html .= '<table><tr><th>Date</th><th>Time In</th><th>Time Out</th><th>Total Hours</th></tr>';
 
     // Populate the table rows based on the fetched data
