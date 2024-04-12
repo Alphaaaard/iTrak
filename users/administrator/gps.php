@@ -316,8 +316,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 echo "<img src='data:image/jpeg;base64," . base64_encode($row["picture"]) . "' alt='Profile Picture' class='rounded-img'/>";
                                 echo "<span style='color: " . $row["color"] . ";'><i class='bi bi-circle-fill'></i></span>";
                                 echo htmlspecialchars($firstName . " " . $lastName);
-                                echo "<a><i class='bi bi-arrow-counterclockwise'></i></a>";
-
                                 echo "</button>";
                                 echo "</h2>";
                                 echo "<div id='" . $collapseId . "' class='accordion-collapse collapse' aria-labelledby='" . $headerId . "' data-bs-parent='#accordionGPS'>"; // Ensure this points to the main container ID

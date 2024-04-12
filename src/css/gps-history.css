@@ -8,10 +8,12 @@
 
 .gps-info {
   width: unset;
-  padding: 1em;
+  padding: 0 1em;
   border: unset;
   background-color: unset !important;
   transition: 0.3s ease;
+  overflow-y: hidden;
+  height: min-content;
 }
 
 .accordion-header {
@@ -89,10 +91,10 @@ td.days.clicked-date {
 /* .gps-info:hover {
 } */
 
-.locationTbl {
+/* .locationTbl {
   align-items: unset !important;
-  /* border-radius: 50px; */
-}
+  border-radius: 50px;
+} */
 
 .rounded-img {
   height: 60px !important;

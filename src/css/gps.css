@@ -109,6 +109,8 @@ td:last-child {
   display: flex;
   justify-content: center;
   align-items: center;
+  display: flex;
+  align-content: center;
 }
 
 /* #content.hide .locationTbl {
