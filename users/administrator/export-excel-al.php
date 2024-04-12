@@ -3,8 +3,8 @@
 ini_set('memory_limit', '1024M'); // Adjust the value as needed
 
 include_once("../../config/connection.php");
-require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
