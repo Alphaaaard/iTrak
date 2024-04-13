@@ -69,5 +69,5 @@ function showError(error) {
 // Initialize the map when the page loads
 window.onload = function() {
     getLocation();
-    setInterval(getLocation, 1000); // 30,000 milliseconds = 30 seconds
+    setInterval(getLocation, 30000); // 30,000 milliseconds = 30 seconds
 };
