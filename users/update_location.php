@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 session_start();
 include_once("../config/connection.php");
 
@@ -9,17 +12,25 @@ function logData($action, $user_id, $latitude, $longitude)
     error_log($logMessage);
 }
 
+date_default_timezone_set('Asia/Manila');
+
 if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
-    date_default_timezone_set('Asia/Manila');
     $conn = connection();
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
     if (isset($_SESSION['accountId'])) {
         $accountId = $_SESSION['accountId'];
         $todayDate = date("Y-m-d");
 
         // Check if there's a timeout value for this user for today
-        $timeoutQuery = "SELECT timeout FROM attendancelogs WHERE accountId = '$accountId' AND date = '$todayDate'";
-        $timeoutResult = $conn->query($timeoutQuery);
+        $timeoutQuery = "SELECT timeout FROM attendancelogs WHERE accountId = ? AND date = ?";
+        $timeoutStmt = $conn->prepare($timeoutQuery);
+        $timeoutStmt->bind_param("is", $accountId, $todayDate);
+        $timeoutStmt->execute();
+        $timeoutResult = $timeoutStmt->get_result();
         $timeoutRow = $timeoutResult->fetch_assoc();
 
         if ($timeoutRow && $timeoutRow['timeout'] !== null) {
@@ -42,12 +53,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
             }
 
             $user_id = $_SESSION['accountId'];
-
-            $conn = connection();
-
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
 
             try {
                 // Check if a location entry for the user has been made within the last minute
@@ -88,8 +93,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                 }
             } catch (Exception $e) {
                 echo "Error: " . $e->getMessage();
-            } finally {
-                $conn->close();
             }
         } else {
             echo "Latitude and longitude parameters are required!";
@@ -97,6 +100,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
     } else {
         echo "Invalid request method!";
     }
+
+    $conn->close();
 } else {
     echo "Session variables not set!";
 }
