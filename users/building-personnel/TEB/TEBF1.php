@@ -44,7 +44,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt->close();
     }
 
-
     // for notif below
     // Update the SQL to join with the account and asset tables to get the admin's name and asset information
     $loggedInUserFirstName = $_SESSION['firstName'];
@@ -2743,10 +2742,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 </div>
                 <div class="content-nav">
                     <div class="notification-dropdown">
-
-
-
-
+                        <!--NOTIF NI PABS-->
                         <a href="#" class="notification" id="notification-button">
                             <i class="fa fa-bell" aria-hidden="true"></i>
                             <!-- Notification Indicator Dot -->
@@ -2754,9 +2750,6 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                 <span class="notification-indicator"></span>
                             <?php endif; ?>
                         </a>
-
-
-
 
                         <div class="dropdown-content" id="notification-dropdown-content">
                             <h6 class="dropdown-header">Alerts Center</h6>
@@ -2802,11 +2795,6 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
                         </div>
                     </div>
-
-
-
-
-
 
                     <a href="#" class="settings profile">
                         <div class="profile-container" title="settings">
@@ -11742,6 +11730,76 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
             // Replace the input element with the textarea element
             inputElement.parentNode.replaceChild(textareaElement, inputElement);
+        });
+    </script>
+    <!--Start of JS Hover-->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const assetImages = document.querySelectorAll('.asset-image');
+            const hoverElement = document.getElementById('hover-asset');
+
+            assetImages.forEach(image => {
+                image.addEventListener('mouseenter', function () {
+                    const id = this.dataset.id;
+                    const room = this.dataset.room;
+                    const floor = this.dataset.floor;
+                    const base64Data = this.dataset.image;
+                    const category = this.dataset.category; // Get the category from the data attribute
+                    const assignedName = this.dataset.assignedname; // Add this line to get the assignedName from the data attribute
+
+                    let imageHTML = '';
+                    if (base64Data && base64Data.trim() !== '') {
+                        const imageSrc = "data:image/jpeg;base64," + base64Data;
+                        imageHTML = `<img src="${imageSrc}" alt="Asset Image">`;
+                    } else {
+                        imageHTML = '<p class="NoImage">No Image uploaded</p>';
+                    }
+
+                    // Update hover element's content
+                    hoverElement.innerHTML = `
+                    <div class="top-side-hover">
+                        <div class="center-content-hover">
+                            ${imageHTML}
+                        </div>
+                        <input type="text" class="form-control input-hover" id="category-hover" value="${category}" readonly />
+                    </div>
+
+                    <div class="hover-location">
+
+                        <div class ="hover-label">
+                            <label for="assetIdHover${id}" class="form-label TrackingHover">Tracking #:</label>
+                            <input type="text" class="form-control input-hover1 hover-input" id="assetId" value="${id}" readonly />
+                        </div>
+
+                        <div class = "hover-label">
+                            <label for="assetIdHover${id}" class="form-label TrackingHover1">Room:</label>
+                            <input type="text" class="form-control input-hover1 room-hover" id="room" value="${room}" readonly />
+                        </div>
+
+                        <div class = "hover-label">
+                            <label for="assetIdHover${id}" class="form-label TrackingHover1">Floor:</label>
+                            <input type="text" class="form-control input-hover1" id="floor" value="${floor}" readonly />
+                        </div>
+
+                    ${assignedName && assignedName.trim() !== '' ? `
+                        <div>
+                            <label for="assignedNameHover${id}" class="form-label TrackingHover">Assigned To:</label>
+                            <input type="text" class="form-control input-hover1" id="assignedName" value="${assignedName}" readonly />
+                        </div>
+                     ` : ''
+                        }
+                    </div>
+            `;
+
+                    // Show hover element
+                    hoverElement.style.display = 'block';
+                });
+
+                image.addEventListener('mouseleave', function () {
+                    // Hide hover element
+                    hoverElement.style.display = 'none';
+                });
+            });
         });
     </script>
 
