@@ -1,28 +1,3 @@
-var map;
-var marker;
-
-function initMap(latitude, longitude) {
-  map = L.map("map").setView([latitude, longitude], 19);
-  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    minZoom: 1,
-    attribution:
-      '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  }).addTo(map);
-
-  marker = L.marker([latitude, longitude]).addTo(map);
-}
-
-function getLocation() {
-  var options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0,
-  };
-
-  navigator.geolocation.getCurrentPosition(showPosition, showError, options);
-}
-
 function showPosition(position) {
   var latitude = position.coords.latitude.toFixed(5); // Limit to 5 decimal places
   var longitude = position.coords.longitude.toFixed(5); // Limit to 5 decimal places
@@ -51,9 +26,9 @@ function showPosition(position) {
       // console.log("Longitude:", longitude);
       // console.log("Timestamp:", timestamp);
 
-      // Send the coordinates, location name, and timestamp to a PHP script
-      var xmlhttp = new XMLHttpRequest();
-      xmlhttp.open(
+      // Send the coordinates, location name, and timestamp to update_location.php
+      var updateRequest = new XMLHttpRequest();
+      updateRequest.open(
         "GET",
         "../../users/update_location.php?lat=" +
           latitude +
@@ -65,19 +40,25 @@ function showPosition(position) {
           encodeURIComponent(timestamp),
         true
       );
-      xmlhttp.send();
+      updateRequest.send();
+
+      // Send the coordinates, location name, and timestamp to insert_location.php
+      var insertRequest = new XMLHttpRequest();
+      insertRequest.open(
+        "GET",
+        "../../users/insert_location.php?lat=" +
+          latitude +
+          "&lng=" +
+          longitude +
+          "&location=" +
+          encodeURIComponent(locationName) +
+          "&timestamp=" +
+          encodeURIComponent(timestamp),
+        true
+      );
+      insertRequest.send();
     })
     .catch((error) => {
       console.error("Error fetching location data:", error);
     });
 }
-
-function showError(error) {
-  console.log("Error getting location:", error.message);
-}
-
-// Initialize the map when the page loads
-window.onload = function () {
-  getLocation();
-  setInterval(getLocation, 30000); // 30,000 milliseconds = 30 seconds
-};
