@@ -1,66 +1,51 @@
-<?php
+    <?php
+    include_once("../../config/connection.php");
 
-include_once("../../config/connection.php");
+    // Function to get all locations from the database by date, and accountId (optional)
+    function getLocationsByDate($date, $accountId = null)
+    {
+        $conn = connection();
+        $locations = array();
 
-// Function to get locations for a specific account from the database
-function getLocationsForAccount($accountId)
-{
-    $conn = connection();
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    try {
-        $sql = "SELECT lh.id, lh.accountid, lh.latitude, lh.longitude, lh.timestamp, a.firstName, a.lastName
+        // Base SQL query to select location data
+        $sql = "SELECT a.firstName, a.latitude, a.longitude, a.picture, lh.*, a.color
                 FROM locationhistory AS lh
-                INNER JOIN account AS a ON lh.accountid = a.accountId
-                WHERE lh.accountid = ?
-                ORDER BY lh.timestamp DESC";
+                LEFT JOIN account AS a ON a.accountId = lh.accountId
+                WHERE DATE(lh.timestamp) = ?"; // Filter by date
+
+        // If an accountId is provided, add it as a filter
+        if ($accountId !== null) {
+            $sql .= " AND a.accountId = ?";
+        }
 
         $stmt = $conn->prepare($sql);
 
-        // Bind the accountId parameter
-        $stmt->bind_param("i", $accountId);
+        // Bind parameters based on whether an accountId was provided
+        if ($accountId !== null) {
+            $stmt->bind_param("si", $date, $accountId);
+        } else {
+            $stmt->bind_param("s", $date);
+        }
 
         $stmt->execute();
-
         $result = $stmt->get_result();
 
-        $locations = array();
-
         while ($row = $result->fetch_assoc()) {
+            $pictureBase64 = base64_encode($row['picture']);
+            $row['picture'] = $pictureBase64; // Convert the picture to Base64 for easy embedding in JSON
             $locations[] = $row;
         }
 
+        $stmt->close();
+        $conn->close();
         return $locations;
-    } catch (Exception $e) {
-        return array('error' => $e->getMessage());
-    } finally {
-        $stmt->close(); // Close the prepared statement
-        $conn->close(); // Close the database connection
     }
-}
 
-// Check if accountId is set in the URL
-if (isset($_GET['accountId'])) {
-    $accountId = $_GET['accountId'];
-    $locations = getLocationsForAccount($accountId);
-} else {
-    // Handle case where accountId is not provided
-    $locations = array('error' => 'No accountId provided');
-}
+    // Get the date from the GET parameters or default to the current date
+    $date = isset($_GET['date']) ? $_GET['date'] : date('Y-m-d');
 
-// Display the location history data
-if (!empty($locations)) {
-    // Output location history data as per your requirements
-    // For example, you could iterate over $locations and display each location
-    foreach ($locations as $location) {
-        echo "Latitude: " . $location['latitude'] . "<br>";
-        echo "Longitude: " . $location['longitude'] . "<br>";
-        echo "Timestamp: " . $location['timestamp'] . "<br>";
-        // Add more fields as needed
-    }
-} else {
-    echo "No location history found.";
-}
+    // Get the accountId from the GET parameters, if provided
+    $accountId = isset($_GET['accountId']) ? intval($_GET['accountId']) : null;
+
+    // Fetch and echo location data as JSON for the given date and optional accountId
+    echo json_encode(getLocationsByDate($date, $accountId));

@@ -227,16 +227,23 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </a>
                 </li>
                 <li class="active">
-                    <a href="./gps.php">
-                        <i class="bi bi-geo-alt"></i>
-                        <span class="text">GPS</span>
+                    <a href="./gps.php" class="GPS-cont">
+                        <div class="GPS-side-cont">
+                            <i class="bi bi-geo-alt"></i>
+                            <span class="text">GPS</span>
+                        </div>
+                        <div class="GPS-ind">
+                            <i class="bi bi-chevron-down"></i>
+                        </div>
                     </a>
+
                 </li>
-                <li>
+                <li class="GPS-History">
                     <a href="./gps_history.php">
-                        <i class="bi bi-geo-alt"></i>
+                        <i class="bi bi-radar"></i>
                         <span class="text">GPS History</span>
                     </a>
+
                 </li>
                 <li>
                     <a href="./map.php">
@@ -287,7 +294,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         $currentDate = date('Y-m-d');
 
-                        $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp, a.color, a.picture
+                        $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp, a.qculocation, a.color, a.picture
                                 FROM attendancelogs AS al
                                 LEFT JOIN account AS a ON al.accountID = a.accountID
                                 WHERE date = '$currentDate' AND (al.timeOut IS NULL OR al.timeOut = '') AND a.role = 'Maintenance Personnel'";
@@ -316,15 +323,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 echo "<img src='data:image/jpeg;base64," . base64_encode($row["picture"]) . "' alt='Profile Picture' class='rounded-img'/>";
                                 echo "<span style='color: " . $row["color"] . ";'><i class='bi bi-circle-fill'></i></span>";
                                 echo htmlspecialchars($firstName . " " . $lastName);
-                                echo "<a><i class='bi bi-arrow-counterclockwise'></i></a>";
-
                                 echo "</button>";
                                 echo "</h2>";
                                 echo "<div id='" . $collapseId . "' class='accordion-collapse collapse' aria-labelledby='" . $headerId . "' data-bs-parent='#accordionGPS'>"; // Ensure this points to the main container ID
                                 echo "<div class='accordion-body'>";
-                                echo "Latitude: " . $row["latitude"] . "<br>";
-                                echo "Longitude: " . $row["longitude"] . "<br>";
-                                echo "Timestamp: " . $row["timestamp"];
+                                echo "Timestamp: " . $row["timestamp"] . "<br>";
+                                echo "Location: " . $row["qculocation"];
                                 echo "</div>"; // End of accordion body
                                 echo "</div>"; // End of accordion collapse
                                 echo "</div>"; // End of accordion item
@@ -477,41 +481,93 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                             var markersByFirstName = {};
 
-                            function updateMarkers(locations) {
-                                // Process the locations and update/create markers
-                                locations.forEach(function(location) {
-                                    var latitude = location.latitude;
-                                    var longitude = location.longitude;
-                                    var firstName = location.firstName;
-                                    var qculocation = location.qculocation;
-                                    var color = location.color || "black";
+                            // Function to convert base64 string to Blob object
+                            // Function to convert base64 string to Blob object
+                            function base64ToBlob(base64String) {
+                                const byteCharacters = atob(base64String);
+                                const byteArray = new Uint8Array(byteCharacters.length);
+                                for (let i = 0; i < byteCharacters.length; i++) {
+                                    byteArray[i] = byteCharacters.charCodeAt(i);
+                                }
+                                return new Blob([byteArray], {
+                                    type: 'image/jpeg'
+                                }); // Adjust the type as per your image type
+                            }
 
-                                    var locationName;
-                                    // Determine the locationName based on the latitude and longitude
+
+                            // Function to convert blob data to base64 string
+                            function blobToBase64(blob) {
+                                return new Promise((resolve, reject) => {
+                                    const reader = new FileReader();
+                                    reader.onloadend = () => {
+                                        resolve(reader.result);
+                                    };
+                                    reader.onerror = reject;
+                                    reader.readAsDataURL(blob);
+                                });
+                            }
+
+                            // Update the markers with user images
+                            // Update the markers with user images
+                            async function updateMarkers(locations) {
+                                for (const location of locations) {
+                                    const {
+                                        latitude,
+                                        longitude,
+                                        firstName,
+                                        qculocation,
+                                        timestamp,
+                                        picture
+                                    } = location;
+                                    const color = location.color || "black";
+
+                                    // Convert base64 string to Blob object
+                                    const pictureBlob = base64ToBlob(picture);
+
+                                    // Convert blob to base64
+                                    const pictureBase64 = await blobToBase64(pictureBlob);
+
+                                    // Combine first name, location, and timestamp for marker
+                                    const locationInfo = `Firstname: ${firstName}<br>Location: ${qculocation}<br>Timestamp: ${timestamp}`;
 
                                     // Check if a marker with this firstName already exists
-                                    var existingMarker = markersByFirstName[firstName];
+                                    let existingMarker = markersByFirstName[firstName];
 
                                     if (existingMarker) {
-                                        // If the marker exists, update its position and popup
+                                        // If the marker exists, update its position, popup, and location data
                                         existingMarker.setLatLng([latitude, longitude]);
-                                        existingMarker.bindPopup("Personnel: " + firstName);
+                                        existingMarker.bindPopup(`${locationInfo}`);
+                                        existingMarker.location = qculocation;
                                     } else {
                                         // If the marker doesn't exist, create a new one
-                                        var newMarker = L.marker([latitude, longitude], {
-                                            icon: coloredIcon(color),
+                                        const newMarker = L.marker([latitude, longitude], {
+                                            icon: L.divIcon({
+                                                className: 'custom-marker',
+                                                iconSize: [40, 20], // Adjust icon size as needed
+                                                html: `<img src="${pictureBase64}" alt="Profile Picture" class="marker-img" />`
+                                            }),
+                                            location: qculocation // Store location data in marker
                                         }).addTo(map);
 
-                                        newMarker.bindPopup("Personnel: " + firstName);
+                                        // Bind popup to marker on mouseover
+                                        newMarker.on('mouseover', function(e) {
+                                            this.bindPopup(`${locationInfo}`).openPopup();
+                                        });
+
+                                        // Unbind popup on mouseout
+                                        newMarker.on('mouseout', function(e) {
+                                            this.closePopup();
+                                        });
+
                                         markersByFirstName[firstName] = newMarker;
                                     }
 
                                     // Update the location in the user table
-                                    var locationCell = document.getElementById('location_' + firstName);
+                                    const locationCell = document.getElementById('location_' + firstName);
                                     if (locationCell) {
-                                        locationCell.innerHTML = locationName;
+                                        locationCell.innerHTML = qculocation;
                                     }
-                                });
+                                }
                             }
 
                             function showMarker(firstName) {
@@ -639,6 +695,37 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/profileModalController.js"></script>
 
         <script>
+            document.querySelectorAll('.gps-info').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var accountId = this.getAttribute('data-accountId');
+
+                    // AJAX call to fetch personnel location
+                    $.ajax({
+                        type: "POST",
+                        url: "fetch_personnel_location.php",
+                        data: {
+                            accountId: accountId
+                        },
+                        success: function(response) {
+                            var locationData = JSON.parse(response);
+                            if (locationData.status === "inside") {
+
+                                // Update map with new location
+                            } else if (locationData.status === "outside") {
+
+                            } else {
+                                alert(locationData.error);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error: ", status, error);
+                        }
+                    });
+                });
+            });
+        </script>
+
+        <script>
             // Assuming showMarker is defined elsewhere to handle the map logic
             document.querySelectorAll('.gps-info').forEach(function(button) {
                 button.addEventListener('click', function() {
@@ -648,11 +735,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         </script>
 
-
-
-
-
-
         <script>
             var accordionButtons = document.querySelectorAll('.gps-info');
             accordionButtons.forEach(function(button) {
@@ -661,6 +743,23 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     showMarker(firstName); // Call the showMarker function with the clicked person's first name
                 });
             });
+        </script>
+        <script>
+            // Assume this is a function that checks whether GPS is active or not
+            function isGPSActive() {
+                // Replace this with your logic to check if GPS is active
+                // For the sake of example, let's assume GPS is active
+                return true;
+            }
+
+            // Get the GPS History menu item
+            var gpsHistoryMenuItem = document.querySelector('.GPS-History');
+
+            // Check if GPS is active
+            if (!isGPSActive()) {
+                // If GPS is not active, hide the GPS History menu item
+                gpsHistoryMenuItem.style.display = 'none';
+            }
         </script>
 
         <!-- BOOTSTRAP -->

@@ -13,16 +13,20 @@ function getAllLocationsFromDatabase()
 
     try {
 
-        $sql = "SELECT a.firstName, a.latitude, a.longitude, lh.*, a.color
-        FROM locationhistory AS lh
-        LEFT JOIN account AS a ON a.accountId = lh.accountId
-        ORDER BY lh.timestamp DESC";
+        $sql = "SELECT account.firstName, account.latitude, account.longitude, account.timestamp, account.color, account.qculocation, account.picture, attendancelogs.attendanceId
+        FROM attendancelogs
+        LEFT JOIN account ON account.accountId = attendancelogs.accountId
+        ORDER BY account.timestamp DESC";
 
         $result = $conn->query($sql);
 
         $locations = array();
 
         while ($row = $result->fetch_assoc()) {
+            // Convert BLOB data to base64 encoding for the picture
+            $pictureBase64 = base64_encode($row['picture']);
+            // Add base64 encoded picture to the row
+            $row['picture'] = $pictureBase64;
             $locations[] = $row;
         }
 
