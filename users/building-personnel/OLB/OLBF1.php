@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("../../../config/connection.php");
+include_once ("../../../config/connection.php");
 $conn = connection();
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role'])) {
@@ -36,7 +36,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $status2 = $row2['status'];
     $assignedName2 = $row2['assignedName'];
     $assignedBy2 = $row2['assignedBy'];
-?>
+    ?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -46,7 +46,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>iTrak | Map</title>
         <link rel="icon" type="image/x-icon" href="../../../src/img/tab-logo.png">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -117,258 +118,285 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             <div><a class="profile-role"><?php echo $_SESSION['role']; ?></a></div>
                             <hr>
                         </div>
-                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i class="bi bi-person profile-icons"></i>Profile</a>
+                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i
+                                class="bi bi-person profile-icons"></i>Profile</a>
                         <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
                     </div>
-                <?php
-            } else {
-                header("Location:../../index.php");
-                exit();
-            }
-                ?>
-                </div>
-            </nav>
+                    <?php
+} else {
+    header("Location:../../index.php");
+    exit();
+}
+?>
+            </div>
+        </nav>
+    </div>
+    <section id="sidebar">
+        <div href="#" class="brand" title="logo">
+            <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
+            <div class="mobile-sidebar-close">
+                <i class="bi bi-arrow-left-circle"></i>
+            </div>
         </div>
-        <section id="sidebar">
-            <div href="#" class="brand" title="logo">
-                <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
-                <div class="mobile-sidebar-close">
-                    <i class="bi bi-arrow-left-circle"></i>
+        <ul class="side-menu top">
+            <li>
+                <a href="../../personnel/dashboard.php">
+                    <i class="bi bi-grid"></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="../../personnel/attendance-logs.php">
+                    <i class="bi bi-calendar-week"></i>
+                    <span class="text">Attendance Logs</span>
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="../../personnel/map.php">
+                    <i class="bi bi-map"></i>
+                    <span class="text">Map</span>
+                </a>
+            </li>
+            <li>
+                <a href="../../personnel/assigned-tasks.php">
+                    <i class="bi bi-geo-alt"></i>
+                    <span class="text">Assigned Tasks</span>
+                </a>
+            </li>
+            <li>
+                <a href="../../personnel/reports.php">
+                    <i class="bi bi-clipboard"></i>
+                    <span class="text">Reports</span>
+                </a>
+            </li>
+            <li>
+                <a href="../../personnel/activity-logs.php">
+                    <i class="bi bi-arrow-counterclockwise"></i>
+                    <span class="text">Activity Logs</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <section id="content">
+        <main>
+            <div class="content-container" id="content-container">
+                <div id="belmonte-F1" class="content">
+                    <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-arrow-left"></i></a>
+                    <!-- ASSETS -->
+                    <img src='../image.php?id=1' style='width:100px; cursor:pointer;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal1' onclick='fetchAssetData(1);'>
+                    <img src='../image.php?id=2' style='width:100px; cursor:pointer;' alt='Asset Image'
+                        data-bs-toggle='modal' data-bs-target='#imageModal2' onclick='fetchAssetData(2);'>
+                    <!-- FLOOR PLAN -->
+                    <img class="Floor-container-1" src="../../../src/floors/oldAcademicB/OAB1F.png" alt="">
+                </div>
+                <!-- Modal structure for id 1 -->
+                <div class='modal fade' id='imageModal1' tabindex='-1' aria-labelledby='imageModalLabel1'
+                    aria-hidden='true'>
+                    <div class='modal-dialog modal-xl modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <!-- Modal header -->
+                            <div class='modal-header'>
+                                <h5 class='modal-title' id='imageModalLabel1'>Asset Detail</h5>
+                                <button type='button' class='btn-close' data-bs-dismiss='modal'
+                                    aria-label='Close'></button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class='modal-body'>
+                                <form method="post" class="row g-3">
+                                    <h5>Report Modal for Repair</h5>
+                                    <div class="col-4">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId"
+                                            value="<?php echo htmlspecialchars($assetId); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date"
+                                            value="<?php echo htmlspecialchars($date); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="category" class="form-label">Category:</label>
+                                        <input type="text" class="form-control" id="category" name="category"
+                                            value="<?php echo htmlspecialchars($category); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="building" class="form-label">Building:</label>
+                                        <input type="text" class="form-control" id="building" name="building"
+                                            value="<?php echo htmlspecialchars($building); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="floor" class="form-label">Floor:</label>
+                                        <input type="text" class="form-control" id="floor" name="floor"
+                                            value="<?php echo htmlspecialchars($floor); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="room" class="form-label">Room:</label>
+                                        <input type="text" class="form-control" id="room" name="room"
+                                            value="<?php echo htmlspecialchars($room); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="status" class="form-label">Status:</label>
+                                        <input type="text" class="form-control" id="status" name="status"
+                                            value="<?php echo htmlspecialchars($status); ?>" readonly />
+                                        <!-- <select class="form-select" id="status" name="status">
+                                                <option value="Working">Working</option>
+                                                <option value="Under Maintenance">Under Maintenance</option>
+                                                <option value="For Replacement">For Replacement</option>
+                                                <option value="Need Repair">Need Repair</option>
+                                            </select> -->
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName"
+                                            value="<?php echo htmlspecialchars($assignedName); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy"
+                                            value="<?php echo htmlspecialchars($assignedBy); ?>" readonly />
+                                    </div>
+                            </div>
+                            <!-- Modal footer -->
+                            <div class='modal-footer'>
+                                <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
+                                <button type='button' class='btn btn-primary'>Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal structure for id 2-->
+                <div class='modal fade' id='imageModal2' tabindex='-1' aria-labelledby='imageModalLabel1'
+                    aria-hidden='true'>
+                    <div class='modal-dialog modal-xl modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <!-- Modal header -->
+                            <div class='modal-header'>
+                                <h5 class='modal-title' id='imageModalLabel1'>Asset Detail</h5>
+                                <button type='button' class='btn-close' data-bs-dismiss='modal'
+                                    aria-label='Close'></button>
+                            </div>
+                            <!-- Modal body -->
+                            <div class='modal-body'>
+                                <form method="post" class="row g-3">
+                                    <h5>Report Modal for Repair</h5>
+                                    <div class="col-4">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId"
+                                            value="<?php echo htmlspecialchars($assetId2); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date"
+                                            value="<?php echo htmlspecialchars($date2); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="category" class="form-label">Category:</label>
+                                        <input type="text" class="form-control" id="category" name="category"
+                                            value="<?php echo htmlspecialchars($category2); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="building" class="form-label">Building:</label>
+                                        <input type="text" class="form-control" id="building" name="building"
+                                            value="<?php echo htmlspecialchars($building2); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="floor" class="form-label">Floor:</label>
+                                        <input type="text" class="form-control" id="floor" name="floor"
+                                            value="<?php echo htmlspecialchars($floor2); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="room" class="form-label">Room:</label>
+                                        <input type="text" class="form-control" id="room" name="room"
+                                            value="<?php echo htmlspecialchars($room2); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="status" class="form-label">Status:</label>
+                                        <input type="text" class="form-control" id="status" name="status"
+                                            value="<?php echo htmlspecialchars($status2); ?>" readonly />
+                                        <!-- <select class="form-select" id="status" name="status">
+                                                <option value="Working">Working</option>
+                                                <option value="Under Maintenance">Under Maintenance</option>
+                                                <option value="For Replacement">For Replacement</option>
+                                                <option value="Need Repair">Need Repair</option>
+                                            </select> -->
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName"
+                                            value="<?php echo htmlspecialchars($assignedName2); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy"
+                                            value="<?php echo htmlspecialchars($assignedBy2); ?>" readonly />
+                                    </div>
+                            </div>
+                            <!-- Modal footer -->
+                            <div class='modal-footer'>
+                                <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
+                                <button type='button' class='btn btn-primary'>Save changes</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <ul class="side-menu top">
-                <li>
-                    <a href="../../personnel/dashboard.php">
-                        <i class="bi bi-grid"></i>
-                        <span class="text">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../../personnel/attendance-logs.php">
-                        <i class="bi bi-calendar-week"></i>
-                        <span class="text">Attendance Logs</span>
-                    </a>
-                </li>
+        </main>
+    </section>
+    <script>
+        // Find all input elements with ID 'description'
+        var inputElements = document.querySelectorAll('input#description');
 
-                <li class="active">
-                    <a href="../../personnel/map.php">
-                        <i class="bi bi-map"></i>
-                        <span class="text">Map</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../../personnel/assigned-tasks.php">
-                        <i class="bi bi-geo-alt"></i>
-                        <span class="text">Assigned Tasks</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../../personnel/reports.php">
-                        <i class="bi bi-clipboard"></i>
-                        <span class="text">Reports</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../../personnel/activity-logs.php">
-                        <i class="bi bi-arrow-counterclockwise"></i>
-                        <span class="text">Activity Logs</span>
-                    </a>
-                </li>
-            </ul>
-        </section>
-        <section id="content">
-            <main>
-                <div class="content-container" id="content-container">
-                    <div id="belmonte-F1" class="content">
-                        <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-arrow-left"></i></a>
-                        <!-- ASSETS -->
-                        <img src='../image.php?id=1' style='width:100px; cursor:pointer;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal1' onclick='fetchAssetData(1);'>
-                        <img src='../image.php?id=2' style='width:100px; cursor:pointer;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal2' onclick='fetchAssetData(2);'>
-                        <!-- FLOOR PLAN -->
-                        <img class="Floor-container-1" src="../../../src/floors/oldAcademicB/OAB1F.png" alt="">
-                    </div>
-                    <!-- Modal structure for id 1 -->
-                    <div class='modal fade' id='imageModal1' tabindex='-1' aria-labelledby='imageModalLabel1' aria-hidden='true'>
-                        <div class='modal-dialog modal-xl modal-dialog-centered'>
-                            <div class='modal-content'>
-                                <!-- Modal header -->
-                                <div class='modal-header'>
-                                    <h5 class='modal-title' id='imageModalLabel1'>Asset Detail</h5>
-                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                </div>
-                                <!-- Modal body -->
-                                <div class='modal-body'>
-                                    <form method="post" class="row g-3">
-                                        <h5>Report Modal for Repair</h5>
-                                        <div class="col-4">
-                                            <label for="assetId" class="form-label">Tracking #:</label>
-                                            <input type="text" class="form-control" id="assetId" name="assetId" value="<?php echo htmlspecialchars($assetId); ?>" readonly />
-                                        </div>
+        // Iterate through each input element
+        inputElements.forEach(function (inputElement) {
+            // Create a new textarea element
+            var textareaElement = document.createElement('textarea');
 
-                                        <div class="col-4">
-                                            <label for="date" class="form-label">Date:</label>
-                                            <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($date); ?>" readonly />
-                                        </div>
+            // Copy attributes from the input element
+            textareaElement.className = inputElement.className;
+            textareaElement.id = inputElement.id;
+            textareaElement.name = inputElement.name;
+            textareaElement.value = inputElement.value;
 
-                                        <div class="col-4">
-                                            <label for="category" class="form-label">Category:</label>
-                                            <input type="text" class="form-control" id="category" name="category" value="<?php echo htmlspecialchars($category); ?>" readonly />
-                                        </div>
+            // Replace the input element with the textarea element
+            inputElement.parentNode.replaceChild(textareaElement, inputElement);
+        });
+    </script>
 
-                                        <div class="col-4">
-                                            <label for="building" class="form-label">Building:</label>
-                                            <input type="text" class="form-control" id="building" name="building" value="<?php echo htmlspecialchars($building); ?>" readonly />
-                                        </div>
+    <script src="../../../src/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
 
-                                        <div class="col-4">
-                                            <label for="floor" class="form-label">Floor:</label>
-                                            <input type="text" class="form-control" id="floor" name="floor" value="<?php echo htmlspecialchars($floor); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4">
-                                            <label for="room" class="form-label">Room:</label>
-                                            <input type="text" class="form-control" id="room" name="room" value="<?php echo htmlspecialchars($room); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4">
-                                            <label for="images" class="form-label">Images:</label>
-                                            <input type="text" class="form-control" id="" name="images" readonly />
-                                        </div>
-
-                                        <div class="col-4">
-                                            <label for="status" class="form-label">Status:</label>
-                                            <input type="text" class="form-control" id="status" name="status" value="<?php echo htmlspecialchars($status); ?>" readonly />
-                                            <!-- <select class="form-select" id="status" name="status">
-                                                <option value="Working">Working</option>
-                                                <option value="Under Maintenance">Under Maintenance</option>
-                                                <option value="For Replacement">For Replacement</option>
-                                                <option value="Need Repair">Need Repair</option>
-                                            </select> -->
-                                        </div>
-
-                                        <div class="col-4">
-                                            <label for="assignedName" class="form-label">Assigned Name:</label>
-                                            <input type="text" class="form-control" id="assignedName" name="assignedName" value="<?php echo htmlspecialchars($assignedName); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4">
-                                            <label for="assignedBy" class="form-label">Assigned By:</label>
-                                            <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="<?php echo htmlspecialchars($assignedBy); ?>" readonly />
-                                        </div>
-                                </div>
-                                <!-- Modal footer -->
-                                <div class='modal-footer'>
-                                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
-                                    <button type='button' class='btn btn-primary'>Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Modal structure for id 2-->
-                    <div class='modal fade' id='imageModal2' tabindex='-1' aria-labelledby='imageModalLabel1' aria-hidden='true'>
-                        <div class='modal-dialog modal-xl modal-dialog-centered'>
-                            <div class='modal-content'>
-                                <!-- Modal header -->
-                                <div class='modal-header'>
-                                    <h5 class='modal-title' id='imageModalLabel1'>Asset Detail</h5>
-                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                </div>
-                                <!-- Modal body -->
-                                <div class='modal-body'>
-                                    <form method="post" class="row g-3">
-                                        <h5>Report Modal for Repair</h5>
-                                        <div class="col-4">
-                                            <label for="assetId" class="form-label">Tracking #:</label>
-                                            <input type="text" class="form-control" id="assetId" name="assetId" value="<?php echo htmlspecialchars($assetId2); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4">
-                                            <label for="date" class="form-label">Date:</label>
-                                            <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($date2); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4">
-                                            <label for="category" class="form-label">Category:</label>
-                                            <input type="text" class="form-control" id="category" name="category" value="<?php echo htmlspecialchars($category2); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4">
-                                            <label for="building" class="form-label">Building:</label>
-                                            <input type="text" class="form-control" id="building" name="building" value="<?php echo htmlspecialchars($building2); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4">
-                                            <label for="floor" class="form-label">Floor:</label>
-                                            <input type="text" class="form-control" id="floor" name="floor" value="<?php echo htmlspecialchars($floor2); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4">
-                                            <label for="room" class="form-label">Room:</label>
-                                            <input type="text" class="form-control" id="room" name="room" value="<?php echo htmlspecialchars($room2); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4">
-                                            <label for="images" class="form-label">Images:</label>
-                                            <input type="text" class="form-control" id="" name="images" readonly />
-                                        </div>
-
-                                        <div class="col-4">
-                                            <label for="status" class="form-label">Status:</label>
-                                            <input type="text" class="form-control" id="status" name="status" value="<?php echo htmlspecialchars($status2); ?>" readonly />
-                                            <!-- <select class="form-select" id="status" name="status">
-                                                <option value="Working">Working</option>
-                                                <option value="Under Maintenance">Under Maintenance</option>
-                                                <option value="For Replacement">For Replacement</option>
-                                                <option value="Need Repair">Need Repair</option>
-                                            </select> -->
-                                        </div>
-
-                                        <div class="col-4">
-                                            <label for="assignedName" class="form-label">Assigned Name:</label>
-                                            <input type="text" class="form-control" id="assignedName" name="assignedName" value="<?php echo htmlspecialchars($assignedName2); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4">
-                                            <label for="assignedBy" class="form-label">Assigned By:</label>
-                                            <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="<?php echo htmlspecialchars($assignedBy2); ?>" readonly />
-                                        </div>
-                                </div>
-                                <!-- Modal footer -->
-                                <div class='modal-footer'>
-                                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
-                                    <button type='button' class='btn btn-primary'>Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
-        </section>
-        <script>
-            // Find all input elements with ID 'description'
-            var inputElements = document.querySelectorAll('input#description');
-
-            // Iterate through each input element
-            inputElements.forEach(function(inputElement) {
-                // Create a new textarea element
-                var textareaElement = document.createElement('textarea');
-
-                // Copy attributes from the input element
-                textareaElement.className = inputElement.className;
-                textareaElement.id = inputElement.id;
-                textareaElement.name = inputElement.name;
-                textareaElement.value = inputElement.value;
-
-                // Replace the input element with the textarea element
-                inputElement.parentNode.replaceChild(textareaElement, inputElement);
-            });
-        </script>
-
-        <script src="../../../src/js/main.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    </body>
-
-    </html>
+</html>

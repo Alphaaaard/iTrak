@@ -5843,6 +5843,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
+        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
@@ -5963,9 +5964,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </a>
             </li>
             <li>
-                <a href="../../administrator/gps.php">
-                    <i class="bi bi-geo-alt"></i>
-                    <span class="text">GPS</span>
+                <a href=" ../../administrator/gps.php" class="GPS-cont">
+                    <div class="GPS-side-cont">
+                        <i class="bi bi-geo-alt"></i>
+                        <span class="text">GPS</span>
+                    </div>
+                    <div class="GPS-ind">
+                        <i class="bi bi-chevron-up"></i>
+                    </div>
                 </a>
             </li>
             <li class="active">
@@ -5994,14 +6000,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             </li>
         </ul>
     </section>
-        <div id="map-top-nav">
-                            <a href="../../administrator/map.php" class="closeFloor"><i
-                                class="bi bi-box-arrow-left"></i></i></a>
+    <div id="map-top-nav">
+        <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
 
-                    <div class="legend-button" id="legendButton">
-                        <i class="bi bi-info-circle"></i>
-                    </div>
-                    </div>
+        <div class="legend-button" id="legendButton">
+            <i class="bi bi-info-circle"></i>
+        </div>
+    </div>
     <section id="content">
         <main>
             <div class="content-container" id="content-container">
@@ -27160,24 +27165,24 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         });
     </script>
     <script>
-    // Find all input elements with ID 'description'
-    var inputElements = document.querySelectorAll('input#description');
+        // Find all input elements with ID 'description'
+        var inputElements = document.querySelectorAll('input#description');
 
-    // Iterate through each input element
-    inputElements.forEach(function(inputElement) {
-        // Create a new textarea element
-        var textareaElement = document.createElement('textarea');
+        // Iterate through each input element
+        inputElements.forEach(function (inputElement) {
+            // Create a new textarea element
+            var textareaElement = document.createElement('textarea');
 
-        // Copy attributes from the input element
-        textareaElement.className = inputElement.className;
-        textareaElement.id = inputElement.id;
-        textareaElement.name = inputElement.name;
-        textareaElement.value = inputElement.value;
+            // Copy attributes from the input element
+            textareaElement.className = inputElement.className;
+            textareaElement.id = inputElement.id;
+            textareaElement.name = inputElement.name;
+            textareaElement.value = inputElement.value;
 
-        // Replace the input element with the textarea element
-        inputElement.parentNode.replaceChild(textareaElement, inputElement);
-    });
-</script>
+            // Replace the input element with the textarea element
+            inputElement.parentNode.replaceChild(textareaElement, inputElement);
+        });
+    </script>
 
     <script src="../../../src/js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

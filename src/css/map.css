@@ -131,7 +131,10 @@
 /* .row>*{
   display: flex;
 } */
-
+.legend-toggle{
+  border: none;
+  background: none;
+}
 .map-alert .modal-content .modal-footer {
   height: 30vh !important;
   display: flex;
@@ -517,6 +520,17 @@ h3 {
 .legend-item {
   display: flex;
   gap: 1em;
+  transition: opacity 0.2s ease-in-out; 
+}
+.asset-image {
+  transition: opacity 0.2s ease-in-out;
+  opacity: 1; /* Asset is fully visible */
+}
+
+.hidden-asset {
+  opacity: 0; /* Asset is fully transparent */
+  display: block !important; /* Override display:none */
+  pointer-events: none; /* Disables interactions */
 }
 
 .legend-img {

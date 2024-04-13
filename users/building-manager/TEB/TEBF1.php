@@ -2893,9 +2893,14 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 </a>
             </li>
             <li>
-                <a href="../../manager/gps.php">
-                    <i class="bi bi-geo-alt"></i>
-                    <span class="text">GPS</span>
+                <a href=" ../../manager/gps.php" class="GPS-cont">
+                    <div class="GPS-side-cont">
+                        <i class="bi bi-geo-alt"></i>
+                        <span class="text">GPS</span>
+                    </div>
+                    <div class="GPS-ind">
+                        <i class="bi bi-chevron-up"></i>
+                    </div>
                 </a>
             </li>
             <li class="active">
@@ -2945,7 +2950,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     </div>
                     <!-- assetss -->
 
-                     <!-- ASSET 910 -->
+                    <!-- ASSET 910 -->
                      <img src="../image.php?id=910" class="asset-image" data-id="<?php echo $assetId910; ?>"
                         style="width:15px; cursor:pointer; position:absolute; top:60px; left:590px;"
                         alt="Asset Image 910" data-bs-toggle="modal" data-bs-target="#imageModal910"
