@@ -134,6 +134,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             top: 10px;
             right: 10px;
         }
+
+        .export-btn{
+        font-size: 14px;
+        }
     </style>
 
     <body>
