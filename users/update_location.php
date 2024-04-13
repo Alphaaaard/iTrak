@@ -2,6 +2,13 @@
 session_start();
 include_once("../config/connection.php");
 
+// Function to log data
+function logData($action, $user_id, $latitude, $longitude)
+{
+    $logMessage = "$action data: accountId = $user_id, latitude = $latitude, longitude = $longitude";
+    error_log($logMessage);
+}
+
 if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
     date_default_timezone_set('Asia/Manila');
     $conn = connection();
@@ -58,11 +65,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                     $insertLocationHistoryStmt->bind_param("idd", $user_id, $latitude, $longitude);
                     $insertLocationHistoryStmt->execute();
 
+                    // Log inserted data
+                    logData("Inserted", $user_id, $latitude, $longitude);
+
+                    // Check if any rows were affected
+                    if ($insertLocationHistoryStmt->affected_rows == 0) {
+                        logData("Nothing inserted", $user_id, $latitude, $longitude);
+                    }
+
                     // Update the user's location in the account table
                     $updateLocationQuery = "UPDATE account SET latitude=?, longitude=?, timestamp=CURRENT_TIMESTAMP WHERE accountId=?";
                     $updateLocationStmt = $conn->prepare($updateLocationQuery);
                     $updateLocationStmt->bind_param("ddi", $latitude, $longitude, $user_id);
                     $updateLocationStmt->execute();
+
+                    // Log updated data
+                    logData("Updated", $user_id, $latitude, $longitude);
 
                     echo "Location updated successfully!";
                 } else {
