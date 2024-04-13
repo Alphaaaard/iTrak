@@ -6527,14 +6527,22 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         <a href="../../personnel/map.php" class="closeFloor"><i
                                 class="bi bi-box-arrow-left"></i></i></a>
                         <div class="map-legend">
-                            <div class="legend-color-green"></div>
-                            <p>Working</p>
-                            <div class="legend-color-under-maintenance"></div>
-                            <p>Under maintenance</p>
-                            <div class="legend-color-need-repair"></div>
-                            <p>Need repair</p>
-                            <div class="legend-color-for-replacement"></div>
-                            <p>For replacement</p>
+                            <div class="legend-item" data-status="Working">
+                                <div class="legend-color-green"></div>
+                                <button class="legend-toggle">Working</button>
+                            </div>
+                            <div class="legend-item" data-status="Under Maintenance">
+                                <div class="legend-color-under-maintenance"></div>
+                                <button class="legend-toggle">Under maintenance</button>
+                            </div>
+                            <div class="legend-item" data-status="Need Repair">
+                                <div class="legend-color-need-repair"></div>
+                                <button class="legend-toggle">Need repair</button>
+                            </div>
+                            <div class="legend-item" data-status="For Replacement">
+                                <div class="legend-color-for-replacement"></div>
+                                <button class="legend-toggle">For replacement</button>
+                            </div>
                         </div>
                     </div>
 
@@ -29026,24 +29034,24 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         });
     </script>
     <script>
-    // Find all input elements with ID 'description'
-    var inputElements = document.querySelectorAll('input#description');
+        // Find all input elements with ID 'description'
+        var inputElements = document.querySelectorAll('input#description');
 
-    // Iterate through each input element
-    inputElements.forEach(function(inputElement) {
-        // Create a new textarea element
-        var textareaElement = document.createElement('textarea');
+        // Iterate through each input element
+        inputElements.forEach(function (inputElement) {
+            // Create a new textarea element
+            var textareaElement = document.createElement('textarea');
 
-        // Copy attributes from the input element
-        textareaElement.className = inputElement.className;
-        textareaElement.id = inputElement.id;
-        textareaElement.name = inputElement.name;
-        textareaElement.value = inputElement.value;
+            // Copy attributes from the input element
+            textareaElement.className = inputElement.className;
+            textareaElement.id = inputElement.id;
+            textareaElement.name = inputElement.name;
+            textareaElement.value = inputElement.value;
 
-        // Replace the input element with the textarea element
-        inputElement.parentNode.replaceChild(textareaElement, inputElement);
-    });
-</script>
+            // Replace the input element with the textarea element
+            inputElement.parentNode.replaceChild(textareaElement, inputElement);
+        });
+    </script>
 
     <script src="../../../src/js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

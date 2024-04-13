@@ -6520,13 +6520,13 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             </li>
         </ul>
     </section>
-            <div id="map-top-nav">
-            <a href="../../manager/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
+    <div id="map-top-nav">
+        <a href="../../manager/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
 
-            <div class="legend-button" id="legendButton">
-                <i class="bi bi-info-circle"></i>
-            </div>
+        <div class="legend-button" id="legendButton">
+            <i class="bi bi-info-circle"></i>
         </div>
+    </div>
     <section id="content">
         <main>
             <div class="content-container" id="content-container">
@@ -6535,14 +6535,22 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     <img class="Floor-container-1" src="../../../src/floors/newAcademicB/NAB1F.png" alt="">
                     <div class="map-nav">
                         <div class="map-legend">
-                            <div class="legend-color-green"></div>
-                            <p>Working</p>
-                            <div class="legend-color-under-maintenance"></div>
-                            <p>Under maintenance</p>
-                            <div class="legend-color-need-repair"></div>
-                            <p>Need repair</p>
-                            <div class="legend-color-for-replacement"></div>
-                            <p>For replacement</p>
+                            <div class="legend-item" data-status="Working">
+                                <div class="legend-color-green"></div>
+                                <button class="legend-toggle">Working</button>
+                            </div>
+                            <div class="legend-item" data-status="Under Maintenance">
+                                <div class="legend-color-under-maintenance"></div>
+                                <button class="legend-toggle">Under maintenance</button>
+                            </div>
+                            <div class="legend-item" data-status="Need Repair">
+                                <div class="legend-color-need-repair"></div>
+                                <button class="legend-toggle">Need repair</button>
+                            </div>
+                            <div class="legend-item" data-status="For Replacement">
+                                <div class="legend-color-for-replacement"></div>
+                                <button class="legend-toggle">For replacement</button>
+                            </div>
                         </div>
                     </div>
 
@@ -29031,24 +29039,86 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         });
     </script>
     <script>
-    // Find all input elements with ID 'description'
-    var inputElements = document.querySelectorAll('input#description');
+        // Find all input elements with ID 'description'
+        var inputElements = document.querySelectorAll('input#description');
 
-    // Iterate through each input element
-    inputElements.forEach(function(inputElement) {
-        // Create a new textarea element
-        var textareaElement = document.createElement('textarea');
+        // Iterate through each input element
+        inputElements.forEach(function (inputElement) {
+            // Create a new textarea element
+            var textareaElement = document.createElement('textarea');
 
-        // Copy attributes from the input element
-        textareaElement.className = inputElement.className;
-        textareaElement.id = inputElement.id;
-        textareaElement.name = inputElement.name;
-        textareaElement.value = inputElement.value;
+            // Copy attributes from the input element
+            textareaElement.className = inputElement.className;
+            textareaElement.id = inputElement.id;
+            textareaElement.name = inputElement.name;
+            textareaElement.value = inputElement.value;
 
-        // Replace the input element with the textarea element
-        inputElement.parentNode.replaceChild(textareaElement, inputElement);
-    });
-</script>
+            // Replace the input element with the textarea element
+            inputElement.parentNode.replaceChild(textareaElement, inputElement);
+        });
+    </script>
+    <!--FOR LEGEND FILTER-->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const legendItems = document.querySelectorAll('.legend-item button');
+            let activeStatuses = []; // Keep track of active statuses
+
+            legendItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    const legendItem = this.closest('.legend-item');
+                    const status = legendItem.getAttribute('data-status');
+                    // Toggle the active status in the array
+                    const isActive = activeStatuses.includes(status);
+                    if (isActive) {
+                        // Remove the status if it's already active
+                        activeStatuses = activeStatuses.filter(s => s !== status);
+                    } else {
+                        // Add the status if it's not already active
+                        activeStatuses.push(status);
+                    }
+                    // Toggle visibility of assets
+                    toggleAssetVisibility(status);
+                    // Update the opacity of legend items
+                    updateLegendItems();
+                });
+            });
+
+            function toggleAssetVisibility(status) {
+                const assets = document.querySelectorAll(`.asset-image[data-status="${status}"]`);
+                assets.forEach(asset => {
+                    const isHidden = asset.classList.contains('hidden-asset');
+                    const statusIndicator = asset.nextElementSibling;
+
+                    if (isHidden) {
+                        asset.classList.remove('hidden-asset');
+                        if (statusIndicator) {
+                            statusIndicator.classList.remove('hidden-asset');
+                        }
+                    } else {
+                        asset.classList.add('hidden-asset');
+                        if (statusIndicator) {
+                            statusIndicator.classList.add('hidden-asset');
+                        }
+                    }
+                });
+            }
+
+            function updateLegendItems() {
+                // Update the opacity of all legend items based on activeStatuses
+                const allLegendItems = document.querySelectorAll('.legend-item');
+                allLegendItems.forEach(legendItem => {
+                    const status = legendItem.getAttribute('data-status');
+                    if (activeStatuses.includes(status)) {
+                        // If the status is active, change opacity to 50%
+                        legendItem.style.opacity = '0.2';
+                    } else {
+                        // If the status is not active, revert opacity to 100%
+                        legendItem.style.opacity = '1';
+                    }
+                });
+            }
+        });
+    </script>
 
     <script src="../../../src/js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
