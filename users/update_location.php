@@ -1,38 +1,18 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 session_start();
 include_once("../config/connection.php");
 
-// Function to log data
-function logData($action, $user_id, $latitude, $longitude)
-{
-    $logMessage = "$action data: accountId = $user_id, latitude = $latitude, longitude = $longitude";
-    error_log($logMessage);
-}
-
-date_default_timezone_set('Asia/Manila');
-
 if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
+    date_default_timezone_set('Asia/Manila');
     $conn = connection();
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    error_log("Session variables are set.");
 
     if (isset($_SESSION['accountId'])) {
         $accountId = $_SESSION['accountId'];
         $todayDate = date("Y-m-d");
 
         // Check if there's a timeout value for this user for today
-        $timeoutQuery = "SELECT timeout FROM attendancelogs WHERE accountId = ? AND date = ?";
-        $timeoutStmt = $conn->prepare($timeoutQuery);
-        $timeoutStmt->bind_param("is", $accountId, $todayDate);
-        $timeoutStmt->execute();
-        $timeoutResult = $timeoutStmt->get_result();
+        $timeoutQuery = "SELECT timeout FROM attendancelogs WHERE accountId = '$accountId' AND date = '$todayDate'";
+        $timeoutResult = $conn->query($timeoutQuery);
         $timeoutRow = $timeoutResult->fetch_assoc();
 
         if ($timeoutRow && $timeoutRow['timeout'] !== null) {
@@ -48,8 +28,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
             $latitude = $_GET['lat'];
             $longitude = $_GET['lng'];
 
-            error_log("Latitude: $latitude, Longitude: $longitude");
-
             // Check if the user is logged in
             if (!isset($_SESSION['accountId'])) {
                 echo "User not logged in!";
@@ -57,6 +35,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
             }
 
             $user_id = $_SESSION['accountId'];
+
+            $conn = connection();
+
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
 
             try {
                 // Check if a location entry for the user has been made within the last minute
@@ -74,22 +58,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                     $insertLocationHistoryStmt->bind_param("idd", $user_id, $latitude, $longitude);
                     $insertLocationHistoryStmt->execute();
 
-                    // Log inserted data
-                    logData("Inserted", $user_id, $latitude, $longitude);
-
-                    // Check if any rows were affected
-                    if ($insertLocationHistoryStmt->affected_rows == 0) {
-                        logData("Nothing inserted", $user_id, $latitude, $longitude);
-                    }
-
                     // Update the user's location in the account table
                     $updateLocationQuery = "UPDATE account SET latitude=?, longitude=?, timestamp=CURRENT_TIMESTAMP WHERE accountId=?";
                     $updateLocationStmt = $conn->prepare($updateLocationQuery);
                     $updateLocationStmt->bind_param("ddi", $latitude, $longitude, $user_id);
                     $updateLocationStmt->execute();
-
-                    // Log updated data
-                    logData("Updated", $user_id, $latitude, $longitude);
 
                     echo "Location updated successfully!";
                 } else {
@@ -97,6 +70,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                 }
             } catch (Exception $e) {
                 echo "Error: " . $e->getMessage();
+            } finally {
+                $conn->close();
             }
         } else {
             echo "Latitude and longitude parameters are required!";
@@ -104,8 +79,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
     } else {
         echo "Invalid request method!";
     }
-
-    $conn->close();
 } else {
     echo "Session variables not set!";
 }
