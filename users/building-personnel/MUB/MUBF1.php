@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once ("../../../config/connection.php");
+include_once("../../../config/connection.php");
 $conn = connection();
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role'])) {
@@ -937,7 +937,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         }
     }
 
-    ?>
+?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -947,8 +947,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>iTrak | Map</title>
         <link rel="icon" type="image/x-icon" href="../../../src/img/tab-logo.png">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -985,7 +984,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         <a href="#" class="notification" id="notification-button">
                             <i class="fa fa-bell" aria-hidden="true"></i>
                             <!-- Notification Indicator Dot -->
-                            <?php if ($unseenCount > 0): ?>
+                            <?php if ($unseenCount > 0) : ?>
                                 <span class="notification-indicator"></span>
                             <?php endif; ?>
                         </a>
@@ -1083,66 +1082,76 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                 </a></div>
                             <hr>
                         </div>
-                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i
-                                class="bi bi-person profile-icons"></i>Profile</a>
+                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i class="bi bi-person profile-icons"></i>Profile</a>
                         <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
                     </div>
-                    <?php
-} else {
-    header("Location:../../index.php");
-    exit();
-}
-?>
-            </div>
-        </nav>
-    </div>
-    <section id="sidebar">
-        <div href="#" class="brand" title="logo">
-            <i><img src="../../../src/img/UpKeep.png" alt="" class="logo" /></i>
-            <div class="mobile-sidebar-close">
-                <i class="bi bi-arrow-left-circle"></i>
-            </div>
+                <?php
+            } else {
+                header("Location:../../index.php");
+                exit();
+            }
+                ?>
+                </div>
+            </nav>
         </div>
-        <ul class="side-menu top">
-            <li>
-                <a href="../../personnel/dashboard.php">
-                    <i class="bi bi-grid"></i>
-                    <span class="text">Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="../../personnel/attendance-logs.php">
-                    <i class="bi bi-calendar-week"></i>
-                    <span class="text">Attendance Logs</span>
-                </a>
-            </li>
-
-            <li class="active">
-                <a href="../../personnel/map.php">
-                    <i class="bi bi-map"></i>
-                    <span class="text">Map</span>
-                </a>
-            </li>
-            <li>
-                <a href="../../personnel/assigned-tasks.php">
-                    <i class="bi bi-geo-alt"></i>
-                    <span class="text">Assigned Tasks</span>
-                </a>
-            </li>
-            <li>
-                <a href="../../personnel/reports.php">
-                    <i class="bi bi-clipboard"></i>
-                    <span class="text">Reports</span>
-                </a>
-            </li>
-            <li>
-                <a href="../../personnel/activity-logs.php">
-                    <i class="bi bi-arrow-counterclockwise"></i>
-                    <span class="text">Activity Logs</span>
-                </a>
-            </li>
-        </ul>
-    </section>
+        <section id="sidebar">
+            <div href="#" class="brand" title="logo">
+                <i><img src="../../../src/img/UpKeep.png" alt="" class="logo" /></i>
+                <div class="mobile-sidebar-close">
+                    <i class="bi bi-arrow-left-circle"></i>
+                </div>
+            </div>
+            <ul class="side-menu top">
+                <li>
+                    <a href="../../administrator/dashboard.php">
+                        <i class="bi bi-grid"></i>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../../administrator/attendance-logs.php">
+                        <i class="bi bi-calendar-week"></i>
+                        <span class="text">Attendance Logs</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../../administrator/staff.php">
+                        <i class="bi bi-person"></i>
+                        <span class="text">Staff</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../../administrator/gps.php">
+                        <i class="bi bi-geo-alt"></i>
+                        <span class="text">GPS</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="../../administrator/map.php">
+                        <i class="bi bi-map"></i>
+                        <span class="text">Map</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../../administrator/reports.php">
+                        <i class="bi bi-clipboard"></i>
+                        <span class="text">Reports</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../../administrator/archive.php">
+                        <i class="bi bi-archive"></i>
+                        <span class="text">Archive</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../../administrator/activity-logs.php">
+                        <i class="bi bi-arrow-counterclockwise"></i>
+                        <span class="text">Activity Logs</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
         <section id="content">
             <main>
                 <div class="content-container" id="content-container">
@@ -1333,15 +1342,15 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7086 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
+                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7086 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance
                                                 </option>
                                                 <option value="For Replacement" <?php echo ($status7086 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
+                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement
                                                 </option>
                                                 <option value="Need Repair" <?php echo ($status7086 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -1471,15 +1480,15 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7087 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
+                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7087 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance
                                                 </option>
                                                 <option value="For Replacement" <?php echo ($status7087 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
+                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement
                                                 </option>
                                                 <option value="Need Repair" <?php echo ($status7087 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -1609,15 +1618,15 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7088 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
+                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7088 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance
                                                 </option>
                                                 <option value="For Replacement" <?php echo ($status7088 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
+                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement
                                                 </option>
                                                 <option value="Need Repair" <?php echo ($status7088 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -1747,15 +1756,15 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7089 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
+                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7089 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance
                                                 </option>
                                                 <option value="For Replacement" <?php echo ($status7089 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
+                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement
                                                 </option>
                                                 <option value="Need Repair" <?php echo ($status7089 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -1885,15 +1894,15 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7090 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
+                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7090 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance
                                                 </option>
                                                 <option value="For Replacement" <?php echo ($status7090 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
+                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement
                                                 </option>
                                                 <option value="Need Repair" <?php echo ($status7090 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -2023,15 +2032,15 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7091 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
+                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7091 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance
                                                 </option>
                                                 <option value="For Replacement" <?php echo ($status7091 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
+                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement
                                                 </option>
                                                 <option value="Need Repair" <?php echo ($status7091 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -2161,15 +2170,15 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7092 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
+                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7092 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance
                                                 </option>
                                                 <option value="For Replacement" <?php echo ($status7092 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
+                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement
                                                 </option>
                                                 <option value="Need Repair" <?php echo ($status7092 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -2299,15 +2308,15 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7093 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
+                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7093 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance
                                                 </option>
                                                 <option value="For Replacement" <?php echo ($status7093 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
+                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement
                                                 </option>
                                                 <option value="Need Repair" <?php echo ($status7093 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -2437,15 +2446,15 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7094 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
+                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7094 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance
                                                 </option>
                                                 <option value="For Replacement" <?php echo ($status7094 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
+                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement
                                                 </option>
                                                 <option value="Need Repair" <?php echo ($status7094 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -2575,15 +2584,15 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7095 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
+                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7095 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance
                                                 </option>
                                                 <option value="For Replacement" <?php echo ($status7095 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
+                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement
                                                 </option>
                                                 <option value="Need Repair" <?php echo ($status7095 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -2713,15 +2722,15 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7096 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
+                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7096 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance
                                                 </option>
                                                 <option value="For Replacement" <?php echo ($status7096 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
+                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement
                                                 </option>
                                                 <option value="Need Repair" <?php echo ($status7096 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -2851,15 +2860,15 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7097 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
+                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7097 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance
                                                 </option>
                                                 <option value="For Replacement" <?php echo ($status7097 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
+                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement
                                                 </option>
                                                 <option value="Need Repair" <?php echo ($status7097 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -2989,15 +2998,15 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7080 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
+                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7080 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance
                                                 </option>
                                                 <option value="For Replacement" <?php echo ($status7080 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
+                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement
                                                 </option>
                                                 <option value="Need Repair" <?php echo ($status7080 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -3127,15 +3136,15 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7081 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
+                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7081 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance
                                                 </option>
                                                 <option value="For Replacement" <?php echo ($status7081 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
+                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement
                                                 </option>
                                                 <option value="Need Repair" <?php echo ($status7081 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -3265,15 +3274,15 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7082 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
+                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7082 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance
                                                 </option>
                                                 <option value="For Replacement" <?php echo ($status7082 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
+                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement
                                                 </option>
                                                 <option value="Need Repair" <?php echo ($status7082 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -3403,15 +3412,15 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7083 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
+                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7083 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance
                                                 </option>
                                                 <option value="For Replacement" <?php echo ($status7083 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
+                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement
                                                 </option>
                                                 <option value="Need Repair" <?php echo ($status7083 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -3541,15 +3550,15 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7084 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
+                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7084 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance
                                                 </option>
                                                 <option value="For Replacement" <?php echo ($status7084 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
+                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement
                                                 </option>
                                                 <option value="Need Repair" <?php echo ($status7084 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 
@@ -3679,15 +3688,15 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         <div class="col-6">
                                             <select class="form-select" id="status" name="status">
                                                 <option value="Working" <?php echo ($status7085 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
+                                                                            ? 'selected="selected"' : ''; ?>>Working</option>
                                                 <option value="Under Maintenance" <?php echo ($status7085 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                                                                        ? 'selected="selected"' : ''; ?>>Under Maintenance
                                                 </option>
                                                 <option value="For Replacement" <?php echo ($status7085 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
+                                                                                    ? 'selected="selected"' : ''; ?>>For Replacement
                                                 </option>
                                                 <option value="Need Repair" <?php echo ($status7085 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
                                             </select>
                                         </div>
 

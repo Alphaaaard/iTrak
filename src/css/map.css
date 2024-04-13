@@ -100,11 +100,6 @@
   background-color: unset !important;
 }
 
-.legend-toggle{
-  border: none;
-  background: none;
-}
-
 #category-hover {
   background-color: unset !important;
   border: unset !important;
@@ -115,7 +110,6 @@
   font-weight: bold;
   text-transform: uppercase;
 }
-
 
 .profile-container
   .modal-parent
@@ -523,19 +517,7 @@ h3 {
 .legend-item {
   display: flex;
   gap: 1em;
-  transition: opacity 0.2s ease-in-out; 
 }
-.asset-image {
-  transition: opacity 0.2s ease-in-out;
-  opacity: 1; /* Asset is fully visible */
-}
-
-.hidden-asset {
-  opacity: 0; /* Asset is fully transparent */
-  display: block !important; /* Override display:none */
-  pointer-events: none; /* Disables interactions */
-}
-
 
 .legend-img {
   height: 20px;

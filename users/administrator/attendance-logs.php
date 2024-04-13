@@ -81,8 +81,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
 
-    // Prepare the SQL statement
-    $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+// Prepare the SQL statement
+$stmtLatestLogs = $conn->prepare($sqlLatestLogs);
 
     // Bind the parameter to exclude the current user's account ID
     $stmtLatestLogs->bind_param("i", $loggedInAccountId);
@@ -288,14 +288,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </a>
                 </li>
                 <li>
-                    <a href="./gps.php" class="GPS-cont">
-                        <div class="GPS-side-cont">
-                            <i class="bi bi-geo-alt"></i>
-                            <span class="text">GPS</span>
-                        </div>
-                        <div class="GPS-ind">
-                            <i class="bi bi-chevron-up"></i>
-                        </div>
+                    <a href="./gps.php">
+                        <i class="bi bi-geo-alt"></i>
+                        <span class="text">GPS</span>
                     </a>
                 </li>
                 <li>
@@ -354,14 +349,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                     <div class="new-nav-container">
                         <!--Content start of tabs-->
-                        <div class="new-nav">
-                            <ul>
-                                <li><a href="#" class="nav-link active" id="manager-pill" data-bs-target="pills-manager">Manager</a></li>
-                                <li><a href="#" class="nav-link" id="personnel-pill" data-bs-target="pills-personnel">Personnel</a></li>
-                            </ul>
-                        </div>
+                    <div class="new-nav">
+                        <ul>
+                            <li><a href="#" class="nav-link active" id="manager-pill" data-bs-target="pills-manager">Manager</a></li>
+                            <li><a href="#" class="nav-link" id="personnel-pill" data-bs-target="pills-personnel">Personnel</a></li>
+                        </ul>
+                    </div>
 
-                        <!-- Export button
+                    <!-- Export button
                     <div class="export-mob-hide">
                             <form method="post" id="exportForm">
                                 <input type="hidden" name="status" id="statusField" value="For Replacement">
@@ -414,8 +409,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
                     </div>
 
-                    <!-- Modal -->
-                    <?php
+<!-- Modal -->
+<?php
                     // Fetch and display attendance log data within modals
                     if ($result->num_rows > 0) {
                         $result->data_seek(0); // Reset result pointer to the beginning
@@ -495,22 +490,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             $timeOut = strtotime($attendanceRow['timeOut']);
                                             $timeDifference = $timeOut - $timeIn;
                                             $hours = floor($timeDifference / 3600);
-                                            $hours -= 1;
+                                            $hours -=1;
                                             $totalHoursFormatted = $hours;
                                             $timeOutFormatted = date('h:i A', $timeOut);
                                         } else {
                                             $timeSinceIn = $currentTime - $timeIn;
 
-                                            // Check if the current time is past 12 AM and if the date has changed
-                                            if ($currentDate > $dateOfTimeSinceIn || date('H', $currentTimestamp) == '00') {
-                                                // If it's past 12 AM or the next day, set 'Not Timed Out' and '4 hours'
-                                                $totalHoursFormatted = "4";
-                                                $timeOutFormatted = 'Not Timed Out';
-                                            } else {
-                                                // If it's the same day and before 12 AM, keep both values empty
-                                                $totalHoursFormatted = ''; // Keep totalHours empty
-                                                $timeOutFormatted = ''; // Keep timeOut empty
-                                            }
+                                        // Check if the current time is past 12 AM and if the date has changed
+                                        if ($currentDate > $dateOfTimeSinceIn || date('H', $currentTimestamp) == '00') {
+                                            // If it's past 12 AM or the next day, set 'Not Timed Out' and '4 hours'
+                                            $totalHoursFormatted = "4";
+                                            $timeOutFormatted = 'Not Timed Out';
+                                        } else {
+                                            // If it's the same day and before 12 AM, keep both values empty
+                                            $totalHoursFormatted = ''; // Keep totalHours empty
+                                            $timeOutFormatted = ''; // Keep timeOut empty
+                                        }
                                         }
                                     } else {
                                         $totalHoursFormatted = "No TimeIn Recorded"; // In case the user hasn't timed in yet
@@ -597,8 +592,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
 
 
-                    <!-- Modal -->
-                    <?php
+<!-- Modal -->
+<?php
                     // Fetch and display attendance log data within modals
                     if ($result->num_rows > 0) {
                         $result->data_seek(0); // Reset result pointer to the beginning
@@ -678,22 +673,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             $timeOut = strtotime($attendanceRow['timeOut']);
                                             $timeDifference = $timeOut - $timeIn;
                                             $hours = floor($timeDifference / 3600);
-                                            $hours -= 1;
+                                            $hours -=1;
                                             $totalHoursFormatted = $hours;
                                             $timeOutFormatted = date('h:i A', $timeOut);
                                         } else {
                                             $timeSinceIn = $currentTime - $timeIn;
 
-                                            // Check if the current time is past 12 AM and if the date has changed
-                                            if ($currentDate > $dateOfTimeSinceIn || date('H', $currentTimestamp) == '00') {
-                                                // If it's past 12 AM or the next day, set 'Not Timed Out' and '4 hours'
-                                                $totalHoursFormatted = "4";
-                                                $timeOutFormatted = 'Not Timed Out';
-                                            } else {
-                                                // If it's the same day and before 12 AM, keep both values empty
-                                                $totalHoursFormatted = ''; // Keep totalHours empty
-                                                $timeOutFormatted = ''; // Keep timeOut empty
-                                            }
+                                        // Check if the current time is past 12 AM and if the date has changed
+                                        if ($currentDate > $dateOfTimeSinceIn || date('H', $currentTimestamp) == '00') {
+                                            // If it's past 12 AM or the next day, set 'Not Timed Out' and '4 hours'
+                                            $totalHoursFormatted = "4";
+                                            $timeOutFormatted = 'Not Timed Out';
+                                        } else {
+                                            // If it's the same day and before 12 AM, keep both values empty
+                                            $totalHoursFormatted = ''; // Keep totalHours empty
+                                            $timeOutFormatted = ''; // Keep timeOut empty
+                                        }
                                         }
                                     } else {
                                         $totalHoursFormatted = "No TimeIn Recorded"; // In case the user hasn't timed in yet
@@ -859,107 +854,108 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
         <script>
-            function exportTableToPDF(exportContentId, filename, employeeName) {
-                const exportContent = document.getElementById(exportContentId);
+function exportTableToPDF(exportContentId, filename, employeeName) {
+    const exportContent = document.getElementById(exportContentId);
 
-                if (!exportContent) {
-                    Swal.fire({
-                        title: 'Failed!',
-                        text: 'No data available to export.',
-                        icon: 'error',
-                        confirmButtonText: 'OK'
-                    });
-                    return;
-                }
+    if (!exportContent) {
+        Swal.fire({
+            title: 'Failed!',
+            text: 'No data available to export.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+        return;
+    }
 
-                // Store original styles
-                const modalContent = document.querySelector('.modal-content-th');
-                const originalMaxHeight = modalContent.style.maxHeight;
+    // Store original styles
+    const modalContent = document.querySelector('.modal-content-th');
+    const originalMaxHeight = modalContent.style.maxHeight;
 
-                // Temporarily change the style for export
-                modalContent.style.overflow = 'visible';
-                modalContent.style.maxHeight = 'none';
+    // Temporarily change the style for export
+    modalContent.style.overflow = 'visible';
+    modalContent.style.maxHeight = 'none';
 
-                Swal.fire({
-                    title: 'Preparing your PDF...',
-                    text: 'Please wait...',
-                    icon: 'info',
-                    showConfirmButton: false,
-                    allowOutsideClick: false,
-                    willOpen: () => {
-                        Swal.showLoading();
-                    }
-                });
+    Swal.fire({
+        title: 'Preparing your PDF...',
+        text: 'Please wait...',
+        icon: 'info',
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        willOpen: () => {
+            Swal.showLoading();
+        }
+    });
 
-                html2canvas(exportContent, {
-                    useCORS: true,
-                    scale: 1, // You might want to reduce the scale if the image is too large.
-                    windowHeight: exportContent.scrollHeight, // This ensures the height includes all scrollable content.
-                    onclone: function(clonedDocument) {
-                        // Explicitly set the height of the cloned element to its scrollHeight.
-                        const clonedElement = clonedDocument.getElementById(exportContentId);
-                        clonedElement.style.height = `${exportContent.scrollHeight}px`;
-                    }
-                }).then(canvas => {
-                    const pdf = new jspdf.jsPDF({
-                        orientation: 'portrait', // Change to landscape if required
-                        unit: 'mm',
-                        format: [215.9, 655.6] // Legal dimensions in mm
-                    });
-                    const addHeader = () => {
-                        pdf.setFontSize(15); // Increased font size for header
-                        pdf.text('Employee - ' + employeeName, 10, 10); // Adjusted y position for larger header
-                    };
+    html2canvas(exportContent, {
+        useCORS: true,
+        scale: 1, // You might want to reduce the scale if the image is too large.
+        windowHeight: exportContent.scrollHeight, // This ensures the height includes all scrollable content.
+        onclone: function (clonedDocument) {
+            // Explicitly set the height of the cloned element to its scrollHeight.
+            const clonedElement = clonedDocument.getElementById(exportContentId);
+            clonedElement.style.height = `${exportContent.scrollHeight}px`;
+        }
+    }).then(canvas => {
+        const pdf = new jspdf.jsPDF({
+            orientation: 'portrait', // Change to landscape if required
+            unit: 'mm',
+            format: [215.9, 655.6] // Legal dimensions in mm
+        });
+        const addHeader = () => {
+            pdf.setFontSize(15); // Increased font size for header
+            pdf.text('Employee - ' + employeeName, 10, 10); // Adjusted y position for larger header
+        };
 
-                    const imgData = canvas.toDataURL('image/png');
-                    const pdfWidth = pdf.internal.pageSize.getWidth();
-                    const pdfHeight = pdf.internal.pageSize.getHeight();
-                    const imgWidth = pdfWidth; // Use full page width for the image
-                    const imgHeight = canvas.height * imgWidth / canvas.width;
-                    let heightLeft = imgHeight;
+        const imgData = canvas.toDataURL('image/png');
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
+        const imgWidth = pdfWidth; // Use full page width for the image
+        const imgHeight = canvas.height * imgWidth / canvas.width;
+        let heightLeft = imgHeight;
 
-                    addHeader(); // Add the header for the first page
-                    let position = 20; // Position of the table image
+        addHeader(); // Add the header for the first page
+        let position = 20; // Position of the table image
 
-                    // Adjust position and height for the header
-                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                    heightLeft -= pdfHeight;
+        // Adjust position and height for the header
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pdfHeight;
 
-                    // Add additional pages if the table doesn't fit on one page
-                    while (heightLeft > 0) {
-                        position = heightLeft - imgHeight;
-                        pdf.addPage();
-                        addHeader(); // Add the header for subsequent pages
-                        pdf.addImage(imgData, 'PNG', 0, position - pdfHeight + 20, imgWidth, imgHeight); // Adjust the table position
-                        heightLeft -= pdfHeight;
-                    }
+        // Add additional pages if the table doesn't fit on one page
+        while (heightLeft > 0) {
+            position = heightLeft - imgHeight;
+            pdf.addPage();
+            addHeader(); // Add the header for subsequent pages
+            pdf.addImage(imgData, 'PNG', 0, position - pdfHeight + 20, imgWidth, imgHeight); // Adjust the table position
+            heightLeft -= pdfHeight;
+        }
 
-                    pdf.save(filename); // Save the PDF
+        pdf.save(filename); // Save the PDF
 
-                    // After saving the PDF, restore the original styles
-                    modalContent.style.maxHeight = originalMaxHeight;
+        // After saving the PDF, restore the original styles
+        modalContent.style.maxHeight = originalMaxHeight;
 
-                    Swal.close();
-                    Swal.fire({
-                        title: 'Done!',
-                        text: 'Your PDF has been downloaded.',
-                        icon: 'success',
-                        timer: 1000,
-                        showConfirmButton: false
-                    });
-                }).catch(error => {
-                    // In case of an error, also restore the original styles
-                    modalContent.style.maxHeight = originalMaxHeight;
+        Swal.close();
+        Swal.fire({
+            title: 'Done!',
+            text: 'Your PDF has been downloaded.',
+            icon: 'success',
+            timer: 1000,
+            showConfirmButton: false
+        });
+    }).catch(error => {
+        // In case of an error, also restore the original styles
+        modalContent.style.maxHeight = originalMaxHeight;
 
-                    Swal.fire({
-                        title: 'Error!',
-                        text: 'There was a problem generating the PDF.',
-                        icon: 'error',
-                        confirmButtonText: 'OK'
-                    });
-                    console.error('Error generating PDF: ', error);
-                });
-            }
+        Swal.fire({
+            title: 'Error!',
+            text: 'There was a problem generating the PDF.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+        console.error('Error generating PDF: ', error);
+    });
+}
+
         </script>
 
         <script>
@@ -992,66 +988,67 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <script>
             $(window).on('load', function() {
-                var managerPill = $('#manager-pill');
-                var personnelPill = $('#personnel-pill');
-                var managerContent = $('#pills-manager');
-                var personnelContent = $('#pills-personnel');
-                var searchBox = $("#search-box");
+    var managerPill = $('#manager-pill');
+    var personnelPill = $('#personnel-pill');
+    var managerContent = $('#pills-manager');
+    var personnelContent = $('#pills-personnel');
+    var searchBox = $("#search-box");
 
-                // Function to explicitly set the active tab based on the lastPill value and reapply the filter
-                function activateLastPill() {
-                    var lastPill = sessionStorage.getItem('lastPill') || 'manager';
+    // Function to explicitly set the active tab based on the lastPill value and reapply the filter
+    function activateLastPill() {
+        var lastPill = sessionStorage.getItem('lastPill') || 'manager';
 
-                    // Reset active states
-                    $('.nav-link').removeClass('active');
-                    $('.tab-pane').removeClass('show active');
+        // Reset active states
+        $('.nav-link').removeClass('active');
+        $('.tab-pane').removeClass('show active');
 
-                    if (lastPill === 'personnel') {
-                        personnelPill.addClass('active');
-                        personnelContent.addClass('show active');
-                    } else {
-                        managerPill.addClass('active');
-                        managerContent.addClass('show active');
-                    }
+        if (lastPill === 'personnel') {
+            personnelPill.addClass('active');
+            personnelContent.addClass('show active');
+        } else {
+            managerPill.addClass('active');
+            managerContent.addClass('show active');
+        }
 
-                    filterTable(); // Reapply the filter whenever a tab is activated
-                }
+        filterTable(); // Reapply the filter whenever a tab is activated
+    }
 
-                // Event listeners for tab clicks, including reapplying the filter
-                managerPill.on('click', function(e) {
-                    e.preventDefault();
-                    sessionStorage.setItem('lastPill', 'manager');
-                    activateLastPill();
-                });
+    // Event listeners for tab clicks, including reapplying the filter
+    managerPill.on('click', function(e) {
+        e.preventDefault();
+        sessionStorage.setItem('lastPill', 'manager');
+        activateLastPill();
+    });
 
-                personnelPill.on('click', function(e) {
-                    e.preventDefault();
-                    sessionStorage.setItem('lastPill', 'personnel');
-                    activateLastPill();
-                });
+    personnelPill.on('click', function(e) {
+        e.preventDefault();
+        sessionStorage.setItem('lastPill', 'personnel');
+        activateLastPill();
+    });
 
-                function filterTable() {
-                    var query = searchBox.val().toLowerCase();
-                    var activeRole = managerPill.hasClass('active') ? 'Maintenance Manager' : 'Maintenance Personnel';
+    function filterTable() {
+        var query = searchBox.val().toLowerCase();
+        var activeRole = managerPill.hasClass('active') ? 'Maintenance Manager' : 'Maintenance Personnel';
 
-                    $(".table-container tbody tr").each(function() {
-                        var row = $(this);
-                        var roleCell = row.find("td").last().text().toLowerCase();
+        $(".table-container tbody tr").each(function() {
+            var row = $(this);
+            var roleCell = row.find("td").last().text().toLowerCase();
 
-                        if (roleCell === activeRole.toLowerCase() && row.text().toLowerCase().includes(query)) {
-                            row.show();
-                        } else {
-                            row.hide();
-                        }
-                    });
-                }
+            if (roleCell === activeRole.toLowerCase() && row.text().toLowerCase().includes(query)) {
+                row.show();
+            } else {
+                row.hide();
+            }
+        });
+    }
 
-                // Bind the input event to the search box for dynamic filtering
-                searchBox.on("input", filterTable);
+    // Bind the input event to the search box for dynamic filtering
+    searchBox.on("input", filterTable);
 
-                // Check if the last active tab was personnel, and activate it immediately upon page load
-                activateLastPill();
-            });
+    // Check if the last active tab was personnel, and activate it immediately upon page load
+    activateLastPill();
+});
+
         </script>
 
         <script>
@@ -1113,65 +1110,34 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
-        <script>
-            document.body.addEventListener('click', function(event) {
-                if (event.target.matches('.export-btn')) {
-                    var accountId = event.target.id.replace('exportBtn', '');
-                    var nameHeaderElement = document.getElementById('nameHeader' + accountId);
-                    var filterTypeElement = document.getElementById('filterType' + accountId);
+<script>
+document.body.addEventListener('click', function(event) {
+    if (event.target.matches('.export-btn')) {
+        var accountId = event.target.id.replace('exportBtn', '');
+        var nameHeaderElement = document.getElementById('nameHeader' + accountId);
+        var filterTypeElement = document.getElementById('filterType' + accountId);
 
-                    if (!nameHeaderElement || !filterTypeElement) {
-                        console.error('Required element(s) not found for accountId:', accountId);
-                        Swal.fire({ // SweetAlert to inform the user
-                            title: 'No Data Available',
-                            text: 'Required data is missing for this account. Please check and try again.',
-                            icon: 'warning',
-                            confirmButtonText: 'OK'
-                        });
-                        return;
-                    }
-
-                    var nameHeader = nameHeaderElement.textContent;
-                    var filterType = filterTypeElement.value;
-                    var formData = new FormData();
-                    formData.append('accountId', accountId);
-                    formData.append('name', nameHeader);
-                    formData.append('filterType', filterType);
-
-                    console.log('Account ID:', accountId);
-                    console.log('Name:', nameHeader);
-
-                    Swal.fire({
-                        title: 'Choose the file format',
-                        showDenyButton: true,
-                        confirmButtonText: 'PDF',
-                        denyButtonText: 'Excel',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            formData.append('submit', 'Export to PDF');
-                            performExport(formData, 'export-pdf-al.php');
-                        } else if (result.isDenied) {
-                            formData.append('submit', 'Export to Excel');
-                            performExport(formData, 'export-excel-al.php');
-                        }
-                    });
-                }
+        if (!nameHeaderElement || !filterTypeElement) {
+            console.error('Required element(s) not found for accountId:', accountId);
+            Swal.fire({ // SweetAlert to inform the user
+                title: 'No Data Available',
+                text: 'Required data is missing for this account. Please check and try again.',
+                icon: 'warning',
+                confirmButtonText: 'OK'
             });
+            return;
+        }
 
-            function performExport(formData, endpoint) {
-                console.log('Performing export to:', endpoint);
+        var nameHeader = nameHeaderElement.textContent;
+        var filterType = filterTypeElement.value;
+        var formData = new FormData();
+        formData.append('accountId', accountId);
+        formData.append('name', nameHeader);
+        formData.append('filterType', filterType);
 
-                Swal.fire({
-                    title: 'Exporting...',
-                    html: 'Please wait while the file is being generated.',
-                    allowOutsideClick: false,
-                    showConfirmButton: false,
-                    willOpen: () => {
-                        Swal.showLoading();
-                    },
-                });
+        console.log('Account ID:', accountId);
+        console.log('Name:', nameHeader);
 
-<<<<<<< Updated upstream
         Swal.fire({
             title: 'Choose the file format',
             showDenyButton: true,
@@ -1184,57 +1150,74 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             } else if (result.isDenied) {
                 formData.append('submit', 'Export to Excel');
                 performExport(formData, 'export-excel-attendancelogs.php');
-=======
-                fetch(endpoint, {
-                        method: 'POST',
-                        body: formData,
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.blob();
-                    })
-                    .then(blob => {
-                        const fileExtension = getFileExtension(endpoint);
-                        const fileName = `${formData.get('name').replace(/ /g, '-')}.${fileExtension}`;
-
-                        console.log('Generated File Name:', fileName);
-
-                        const downloadUrl = window.URL.createObjectURL(blob);
-                        const downloadLink = document.createElement('a');
-                        downloadLink.href = downloadUrl;
-                        downloadLink.download = fileName;
-                        document.body.appendChild(downloadLink);
-                        downloadLink.click();
-                        window.URL.revokeObjectURL(downloadUrl);
-                        document.body.removeChild(downloadLink);
-
-                        Swal.fire({
-                            title: 'Exporting Done',
-                            text: 'Your file has been successfully generated.',
-                            icon: 'success',
-                            confirmButtonText: 'OK'
-                        });
-                    })
-                    .catch(error => {
-                        console.error('Export Error:', error);
-                        Swal.fire({
-                            title: 'Error',
-                            text: 'There was an issue generating the file.',
-                            icon: 'error',
-                            confirmButtonText: 'OK'
-                        });
-                    });
->>>>>>> Stashed changes
             }
+        });
+    }
+});
 
-            function getFileExtension(endpoint) {
-                if (endpoint.includes('pdf')) return 'pdf';
-                if (endpoint.includes('excel')) return 'xlsx';
-                return '';
-            }
-        </script>
+function performExport(formData, endpoint) {
+    console.log('Performing export to:', endpoint);
+
+    Swal.fire({
+        title: 'Exporting...',
+        html: 'Please wait while the file is being generated.',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        willOpen: () => {
+            Swal.showLoading();
+        },
+    });
+
+    fetch(endpoint, {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.blob();
+    })
+    .then(blob => {
+        const fileExtension = getFileExtension(endpoint);
+        const fileName = `${formData.get('name').replace(/ /g, '-')}.${fileExtension}`;
+
+        console.log('Generated File Name:', fileName);
+
+        const downloadUrl = window.URL.createObjectURL(blob);
+        const downloadLink = document.createElement('a');
+        downloadLink.href = downloadUrl;
+        downloadLink.download = fileName;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        window.URL.revokeObjectURL(downloadUrl);
+        document.body.removeChild(downloadLink);
+
+        Swal.fire({
+            title: 'Exporting Done',
+            text: 'Your file has been successfully generated.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    })
+    .catch(error => {
+        console.error('Export Error:', error);
+        Swal.fire({
+            title: 'Error',
+            text: 'There was an issue generating the file.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    });
+}
+
+function getFileExtension(endpoint) {
+    if (endpoint.includes('pdf')) return 'pdf';
+    if (endpoint.includes('excel')) return 'xlsx';
+    return '';
+}
+
+</script>
 
     </body>
 

@@ -10209,14 +10209,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </a>
                 </li>
                 <li>
-                    <a href=" ../../administrator/gps.php" class="GPS-cont">
-                        <div class="GPS-side-cont">
-                            <i class="bi bi-geo-alt"></i>
-                            <span class="text">GPS</span>
-                        </div>
-                        <div class="GPS-ind">
-                            <i class="bi bi-chevron-up"></i>
-                        </div>
+                    <a href="../../administrator/gps.php">
+                        <i class="bi bi-geo-alt"></i>
+                        <span class="text">GPS</span>
                     </a>
                 </li>
                 <li class="active">

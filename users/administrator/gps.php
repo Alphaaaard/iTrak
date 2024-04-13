@@ -227,23 +227,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </a>
                 </li>
                 <li class="active">
-                    <a href="./gps.php" class="GPS-cont">
-                        <div class="GPS-side-cont">
-                            <i class="bi bi-geo-alt"></i>
-                            <span class="text">GPS</span>
-                        </div>
-                        <div class="GPS-ind">
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
+                    <a href="./gps.php">
+                        <i class="bi bi-geo-alt"></i>
+                        <span class="text">GPS</span>
                     </a>
-
                 </li>
                 <li class="GPS-History">
                     <a href="./gps_history.php">
                         <i class="bi bi-radar"></i>
                         <span class="text">GPS History</span>
                     </a>
-
                 </li>
                 <li>
                     <a href="./map.php">
@@ -327,6 +320,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 echo "</h2>";
                                 echo "<div id='" . $collapseId . "' class='accordion-collapse collapse' aria-labelledby='" . $headerId . "' data-bs-parent='#accordionGPS'>"; // Ensure this points to the main container ID
                                 echo "<div class='accordion-body'>";
+                                echo "Latitude: " . $row["latitude"] . "<br>";
+                                echo "Longitude: " . $row["longitude"] . "<br>";
                                 echo "Timestamp: " . $row["timestamp"] . "<br>";
                                 echo "Location: " . $row["qculocation"];
                                 echo "</div>"; // End of accordion body
