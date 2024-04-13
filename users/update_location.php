@@ -19,38 +19,38 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
             // Begin transaction
             $conn->begin_transaction();
 
-            // Retrieve the current location
-            $selectQuery = "SELECT latitude, longitude, timestamp FROM account WHERE accountId=?";
-            $selectStmt = $conn->prepare($selectQuery);
-            $selectStmt->bind_param("i", $user_id);
-            $selectStmt->execute();
-            $result = $selectStmt->get_result();
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                $oldLatitude = $row['latitude'];
-                $oldLongitude = $row['longitude'];
-                $oldTimestamp = $row['timestamp'];
+          // Retrieve the current location
+$selectQuery = "SELECT latitude, longitude, timestamp FROM account WHERE accountId=?";
+$selectStmt = $conn->prepare($selectQuery);
+$selectStmt->bind_param("i", $user_id);
+$selectStmt->execute();
+$result = $selectStmt->get_result();
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $oldLatitude = $row['latitude'];
+    $oldLongitude = $row['longitude'];
+    $oldTimestamp = $row['timestamp'];
 
-                if ($oldLatitude != 0 && $oldLongitude != 0) {
-                    // Insert the old location into the locationhistory table
-                    $insertLocationQuery = "INSERT INTO locationhistory (accountId, latitude, longitude, timestamp) VALUES (?, ?, ?, ?)";
-                    $insertLocationStmt = $conn->prepare($insertLocationQuery);
-                    if (!$insertLocationStmt) {
-                        // Handle the error appropriately
-                        echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
-                        // Rollback if needed
-                        // $conn->rollback();
-                        exit();
-                    }
-                    $insertLocationStmt->bind_param("idds", $user_id, $oldLatitude, $oldLongitude, $oldTimestamp);
-                    if (!$insertLocationStmt->execute()) {
-                        // Handle the error appropriately
-                        echo "Execute failed: (" . $insertLocationStmt->errno . ") " . $insertLocationStmt->error;
-                        // Rollback if needed
-                        // $conn->rollback();
-                        exit();
-                    }
-                }
+    // Check if there is a significant location change
+    if ($newLatitude != $oldLatitude || $newLongitude != $oldLongitude) {
+        if ($oldLatitude != 0 && $oldLongitude != 0) {
+            // Insert the old location into the locationhistory table
+            $insertLocationQuery = "INSERT INTO locationhistory (accountId, latitude, longitude, timestamp) VALUES (?, ?, ?, ?)";
+            $insertLocationStmt = $conn->prepare($insertLocationQuery);
+            if (!$insertLocationStmt) {
+                // Handle the error appropriately
+                echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+                $conn->rollback();
+                exit();
+            }
+            $insertLocationStmt->bind_param("idds", $user_id, $oldLatitude, $oldLongitude, $oldTimestamp);
+            if (!$insertLocationStmt->execute()) {
+                // Handle the error appropriately
+                echo "Execute failed: (" . $insertLocationStmt->errno . ") " . $insertLocationStmt->error;
+                $conn->rollback();
+                exit();
+            }
+        }
 
 
                 // Update the new location in the account table
@@ -62,9 +62,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                 // Commit transaction
                 $conn->commit();
                 echo "Location updated successfully!";
-            } else {
-                echo "No existing location data found!";
-            }
+    } else {
+        // If the location has not changed significantly, there's no need to insert or update
+        echo "Location has not changed significantly.";
+    }
+} else {
+    echo "No existing location data found!";
+}
         } else {
             echo "Latitude and longitude parameters are required!";
         }
