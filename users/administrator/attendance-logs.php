@@ -544,7 +544,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             // Close the attendance log statement
                             $attendanceStmt->close();
 
-                            echo '<button type="button" class="btn export-btn" id="exportBtn' . $row['accountId'] . '">EXPORT PDF</button>';
+                            echo '<button type="button" class="btn export-btn" id="exportBtn' . $row['accountId'] . '">EXPORT DATA</button>';
 
 
 
@@ -727,7 +727,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             // Close the attendance log statement
                             $attendanceStmt->close();
 
-                            echo '<button type="button" class="btn export-btn" id="exportBtn' . $row['accountId'] . '">EXPORT PDF</button>';
+                            echo '<button type="button" class="btn export-btn" id="exportBtn' . $row['accountId'] . '">EXPORT DATA</button>';
 
 
                             echo '</div>';
