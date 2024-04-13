@@ -148,7 +148,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <span class="text">Attendance Logs</span>
                     </a>
                 </li>
-
+                <a href="../../manager/gps.php" class="GPS-cont">
+                    <div class="GPS-side-cont">
+                        <i class="bi bi-geo-alt"></i>
+                        <span class="text">GPS</span>
+                    </div>
+                    <div class="GPS-ind">
+                        <i class="bi bi-chevron-up"></i>
+                    </div>
+                </a>
                 <li class="active">
                     <a href="../../personnel/map.php">
                         <i class="bi bi-map"></i>

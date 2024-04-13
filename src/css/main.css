@@ -486,6 +486,18 @@ hr {
   transition: 0.3s ease;
 }
 
+.GPS-cont {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 1em;
+}
+
+.GPS-side-cont {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
 /* CONTENT */
 #content {
   left: 250px;
@@ -1193,6 +1205,10 @@ h5 {
 }
 
 @media (max-width: 600px) {
+  .loader {
+    display: none !important;
+  }
+
   #navbar nav {
     padding: 0 1em;
   }

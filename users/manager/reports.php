@@ -86,8 +86,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
 
-   
-// Prepare the SQL statement
+
+    // Prepare the SQL statement
     $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
 
     // Bind the parameter to exclude the current user's account ID
@@ -434,9 +434,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </a>
                 </li>
                 <li>
-                    <a href="./gps.php">
-                        <i class="bi bi-geo-alt"></i>
-                        <span class="text">GPS</span>
+                    <a href="./gps.php" class="GPS-cont">
+                        <div class="GPS-side-cont">
+                            <i class="bi bi-geo-alt"></i>
+                            <span class="text">GPS</span>
+                        </div>
+                        <div class="GPS-ind">
+                            <i class="bi bi-chevron-up"></i>
+                        </div>
                     </a>
                 </li>
                 <li>
@@ -487,34 +492,34 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </select>
 
                                 <!-- Search Box -->
-                                  <!-- Search Box -->
-                                  <form class="d-flex col-sm-5" role="search" id="searchForm">
+                                <!-- Search Box -->
+                                <form class="d-flex col-sm-5" role="search" id="searchForm">
                                     <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" name="q" />
                                 </form>
                             </div>
                         </div>
                     </header>
                     <script>
-  // Get elements from the DOM
-  const filterCriteria = document.getElementById('filter-criteria');
-  const searchBox = document.getElementById('search-box');
+                        // Get elements from the DOM
+                        const filterCriteria = document.getElementById('filter-criteria');
+                        const searchBox = document.getElementById('search-box');
 
-  // Event listener for the filter dropdown changes
-  filterCriteria.addEventListener('change', function() {
-    if (this.value === 'date') {
-      // If "Date" is selected, change the search box to a date picker
-      searchBox.type = 'date';
-      searchBox.placeholder = 'Select a date';
-    } else {
-      // For all other options, change it back to a regular search box
-      searchBox.type = 'search';
-      searchBox.placeholder = 'Search';
-    }
-  });
-</script>
-<div class="new-nav-container">
-                    <!--Content start of tabs-->
-                    <div class="new-nav">
+                        // Event listener for the filter dropdown changes
+                        filterCriteria.addEventListener('change', function() {
+                            if (this.value === 'date') {
+                                // If "Date" is selected, change the search box to a date picker
+                                searchBox.type = 'date';
+                                searchBox.placeholder = 'Select a date';
+                            } else {
+                                // For all other options, change it back to a regular search box
+                                searchBox.type = 'search';
+                                searchBox.placeholder = 'Search';
+                            }
+                        });
+                    </script>
+                    <div class="new-nav-container">
+                        <!--Content start of tabs-->
+                        <div class="new-nav">
                             <ul>
                                 <li><a href="#" class="nav-link" data-bs-target="pills-manager">Working</a></li>
                                 <li><a href="#" class="nav-link" data-bs-target="pills-profile">Under Maintenance</a></li>

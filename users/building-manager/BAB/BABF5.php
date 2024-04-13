@@ -10365,9 +10365,14 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     </a>
                 </li>
                 <li>
-                <a href="../../manager/gps.php">
-                        <i class="bi bi-geo-alt"></i>
-                        <span class="text">GPS</span>
+                    <a href="../../manager/gps.php" class="GPS-cont">
+                        <div class="GPS-side-cont">
+                            <i class="bi bi-geo-alt"></i>
+                            <span class="text">GPS</span>
+                        </div>
+                        <div class="GPS-ind">
+                            <i class="bi bi-chevron-up"></i>
+                        </div>
                     </a>
                 </li>
                 <li class="active">

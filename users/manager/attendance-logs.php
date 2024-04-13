@@ -305,9 +305,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </a>
                 </li>
                 <li>
-                    <a href="./gps.php">
-                        <i class="bi bi-geo-alt"></i>
-                        <span class="text">GPS</span>
+                    <a href="./gps.php" class="GPS-cont">
+                        <div class="GPS-side-cont">
+                            <i class="bi bi-geo-alt"></i>
+                            <span class="text">GPS</span>
+                        </div>
+                        <div class="GPS-ind">
+                            <i class="bi bi-chevron-up"></i>
+                        </div>
                     </a>
                 </li>
                 <li>
@@ -395,9 +400,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                         // Format timeIn and timeOut to show only the time with AM or PM
                                         $timeInFormatted = date('h:i A', strtotime($row['timeIn']));
-    
+
                                         date_default_timezone_set('Asia/Manila'); // Set the correct time zone, e.g., 'America/New_York'
-    
+
                                         // Get the current timestamp
                                         $currentTimestamp = time();
                                         if (isset($row['timeIn'])) {
@@ -406,27 +411,27 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             // Convert $timeSinceIn and current timestamp to date strings to compare dates
                                             $dateOfTimeSinceIn = date('Y-m-d', $timeIn);
                                             $currentDate = date('Y-m-d', $currentTimestamp);
-    
+
                                             if (isset($row['timeOut'])) {
                                                 $timeOut = strtotime($row['timeOut']);
                                                 $timeDifference = $timeOut - $timeIn;
                                                 $hours = floor($timeDifference / 3600);
-                                                $hours -=1;
+                                                $hours -= 1;
                                                 $totalHoursFormatted = $hours;
                                                 $timeOutFormatted = date('h:i A', $timeOut);
                                             } else {
                                                 $timeSinceIn = $currentTime - $timeIn;
-    
-                                            // Check if the current time is past 12 AM and if the date has changed
-                                            if ($currentDate > $dateOfTimeSinceIn || date('H', $currentTimestamp) == '00') {
-                                                // If it's past 12 AM or the next day, set 'Not Timed Out' and '4 hours'
-                                                $totalHoursFormatted = "4";
-                                                $timeOutFormatted = 'Not Timed Out';
-                                            } else {
-                                                // If it's the same day and before 12 AM, keep both values empty
-                                                $totalHoursFormatted = ''; // Keep totalHours empty
-                                                $timeOutFormatted = ''; // Keep timeOut empty
-                                            }
+
+                                                // Check if the current time is past 12 AM and if the date has changed
+                                                if ($currentDate > $dateOfTimeSinceIn || date('H', $currentTimestamp) == '00') {
+                                                    // If it's past 12 AM or the next day, set 'Not Timed Out' and '4 hours'
+                                                    $totalHoursFormatted = "4";
+                                                    $timeOutFormatted = 'Not Timed Out';
+                                                } else {
+                                                    // If it's the same day and before 12 AM, keep both values empty
+                                                    $totalHoursFormatted = ''; // Keep totalHours empty
+                                                    $timeOutFormatted = ''; // Keep timeOut empty
+                                                }
                                             }
                                         } else {
                                             $totalHoursFormatted = "No TimeIn Recorded"; // In case the user hasn't timed in yet
