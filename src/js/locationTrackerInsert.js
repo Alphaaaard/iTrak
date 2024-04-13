@@ -55,7 +55,7 @@ function showPosition(position) {
       var xmlhttp = new XMLHttpRequest();
       xmlhttp.open(
         "GET",
-        "../../users/update_location.php?lat=" +
+        "../../users/insert_location.php?lat=" +
           latitude +
           "&lng=" +
           longitude +

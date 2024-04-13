@@ -998,6 +998,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <script src="../../src/js/main.js"></script>
         <script src="../../src/js/dashboard-personnel.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
+        <script src="../../src/js/profileModalControllerInsert.js"></script>
 
 
     </body>
