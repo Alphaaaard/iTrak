@@ -82,25 +82,24 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         }
 
         .loader {
-  position: fixed; /* Position relative to the content area */
-  top: 0;
-  left: 250px; /* Assuming your sidebar width is 250px */
-  right: 0;
-  bottom: 0;
-  background-color: #FFFFFF; /* Pure white background */
-  opacity: 1; /* Full visibility */
-  z-index: 9999; /* High z-index to ensure it's on top */
-  display: flex;
-  justify-content: center; /* Center the loader horizontally */
-  align-items: center; /* Center the loader vertically */
-  transition: opacity 1s ease-out; /* Transition for the opacity change */
+    position: fixed; /* Position fixed relative to the viewport */
+    top: 60px; /* Height of the navbar */
+    left: 250px; /* Width of the sidebar */
+    right: 0;
+    bottom: 0;
+    background-color: #FFFFFF; /* White background */
+    z-index: 1; /* Ensure it's on top of other content */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    transition: opacity 1s ease-out; /* Smooth transition for fading out */
+    pointer-events: none; /* Ensures clicks go through to content underneath */
 }
-
 
 
         /* Style for the SVG Loader */
         svg {
-            width: 150px; /* You can adjust the size as needed */
+            width: 180px; /* You can adjust the size as needed */
         }
     </style>
 </head>
@@ -115,7 +114,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <!-- NAVBAR -->
         <div id="navbar" class="">
             <nav>
-                <div class="hamburger">
+            <div class="hamburger" id="hamburgerButton">
                     <i class="bi bi-list"></i>
                     <a href="#" class="brand" title="logo">
                         <!-- <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i> -->
@@ -680,10 +679,31 @@ setTimeout(function() {
         loader.style.display = 'none'; // Hide the loader after the fade out
     }, 1000); // 1000ms = 1s for the fade-out to complete
 }, 10000); // 10000ms = 10s before starting to fade out
+ 
+
+
 
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var sidebar = document.getElementById('sidebar');
+    var hamburgerButton = document.getElementById('hamburgerButton');
+    var loader = document.querySelector('.loader');
 
+    hamburgerButton.addEventListener('click', function() {
+        // Wait for the transition to finish before calculating the width
+        setTimeout(function() {
+            var sidebarWidth = sidebar.offsetWidth;
+            // Assuming your sidebar toggles between 250px and 0px
+            var loaderLeft = (sidebarWidth > 0) ? '80px' : '0px';
+            loader.style.left = loaderLeft;
+        }, ); // Adjust the timeout to match your sidebar transition duration
+    });
+});
+
+
+</script>
 
     </body>
 
