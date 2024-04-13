@@ -397,13 +397,9 @@ th:last-child {
   border-radius:1em ;
 }
 
-/* .export-btn{
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-bottom: 1em;
-} */
+.export-btn{
+  font-size: 14px;
+}
 
 .export-btn:hover{
   background-color: white;
