@@ -82,18 +82,18 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         }
 
         .loader {
-    position: fixed; /* Fixed position relative to the viewport */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #FFFFFF; /* Pure white background */
-    opacity: 1; /* Full visibility */
-    transition: opacity 1s ease-out; /* Transition for the opacity */
-    z-index: 9999; /* High z-index to ensure it's on top */
-    display: flex;
-    justify-content: center; /* Center the loader horizontally */
-    align-items: center; /* Center the loader vertically */
+  position: fixed; /* Position relative to the content area */
+  top: 0;
+  left: 250px; /* Assuming your sidebar width is 250px */
+  right: 0;
+  bottom: 0;
+  background-color: #FFFFFF; /* Pure white background */
+  opacity: 1; /* Full visibility */
+  z-index: 9999; /* High z-index to ensure it's on top */
+  display: flex;
+  justify-content: center; /* Center the loader horizontally */
+  align-items: center; /* Center the loader vertically */
+  transition: opacity 1s ease-out; /* Transition for the opacity change */
 }
 
 
@@ -671,16 +671,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         </script>
 <script>
-    setTimeout(function() {
-        // First fade out the loader
-        var loader = document.querySelector('.loader');
-        loader.style.opacity = '0';
+setTimeout(function() {
+    var loader = document.querySelector('.loader');
+    loader.style.opacity = '0'; // Start fading out
 
-        // Then, after the transition, set display to none
-        setTimeout(function() {
-            loader.style.display = 'none';
-        }, 1000); // Corresponds to the transition duration
-    }, 10000); // Time before the fading starts (after 10 seconds in this case)
+    // Set a timeout to match the transition time of the fade-out
+    setTimeout(function() {
+        loader.style.display = 'none'; // Hide the loader after the fade out
+    }, 1000); // 1000ms = 1s for the fade-out to complete
+}, 10000); // 10000ms = 10s before starting to fade out
+
 </script>
 
 
