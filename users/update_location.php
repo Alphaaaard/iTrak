@@ -21,6 +21,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
         die("Connection failed: " . $conn->connect_error);
     }
 
+    error_log("Session variables are set.");
+
     if (isset($_SESSION['accountId'])) {
         $accountId = $_SESSION['accountId'];
         $todayDate = date("Y-m-d");
@@ -45,6 +47,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
         if (isset($_GET['lat']) && isset($_GET['lng'])) {
             $latitude = $_GET['lat'];
             $longitude = $_GET['lng'];
+
+            error_log("Latitude: $latitude, Longitude: $longitude");
 
             // Check if the user is logged in
             if (!isset($_SESSION['accountId'])) {
