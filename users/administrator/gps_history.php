@@ -232,14 +232,19 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </a>
                 </li>
                 <li>
-                    <a href="./gps.php">
-                        <i class="bi bi-geo-alt"></i>
-                        <span class="text">GPS</span>
+                    <a href=" ./gps.php" class="GPS-cont">
+                        <div class="GPS-side-cont">
+                            <i class="bi bi-geo-alt"></i>
+                            <span class="text">GPS</span>
+                        </div>
+                        <div class="GPS-ind">
+                            <i class="bi bi-chevron-down"></i>
+                        </div>
                     </a>
                 </li>
                 <li class="GPS-History active">
                     <a href="./gps_history.php">
-                        <i class="bi bi-geo-alt"></i>
+                        <i class="bi bi-radar"></i>
                         <span class="text">GPS History</span>
                     </a>
                 </li>
@@ -963,6 +968,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     currentYear--;
                 }
                 generateCalendar(currentMonth, currentYear);
+                updateMapMarkers();
             }
 
             function nextMonth() {
@@ -972,7 +978,31 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     currentYear++;
                 }
                 generateCalendar(currentMonth, currentYear);
+                updateMapMarkers();
             }
+
+            function updateMapMarkers() {
+                if (currentMonth === new Date().getMonth() && currentYear === new Date().getFullYear()) {
+                    // If the displayed month is the current month, fetch locations for the current date
+                    fetchTodaysLocations(selectedAccountId);
+                } else {
+                    // Fetch locations for the selected month
+                    const date = currentYear + '-' + (currentMonth + 1).toString().padStart(2, '0') + '-01'; // First day of the selected month
+                    const url = selectedAccountId ? `get_location_history.php?accountId=${selectedAccountId}&date=${date}` : `get_location_history.php?date=${date}`;
+
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(locations => {
+                            clearMap(); // Clear existing markers
+                            updateMarkers(locations); // Update markers for the selected month
+                        })
+                        .catch(error => {
+                            console.error('Error fetching data: ', error);
+                        });
+                }
+            }
+
+
 
             function getMonthName(month) {
                 var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];

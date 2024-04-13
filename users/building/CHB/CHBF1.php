@@ -627,6 +627,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="../../../src/css/main.css" />
         <link rel="stylesheet" href="../../buildingCSS/BEB/BEBF1.css" />
         <link rel="stylesheet" href="../../../src/css/map.css" />
@@ -795,9 +796,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </a>
                 </li>
                 <li>
-                    <a href="../../administrator/gps.php">
-                        <i class="bi bi-geo-alt"></i>
-                        <span class="text">GPS</span>
+                    <a href=" ../../administrator/gps.php" class="GPS-cont">
+                        <div class="GPS-side-cont">
+                            <i class="bi bi-geo-alt"></i>
+                            <span class="text">GPS</span>
+                        </div>
+                        <div class="GPS-ind">
+                            <i class="bi bi-chevron-up"></i>
+                        </div>
                     </a>
                 </li>
                 <li class="active">

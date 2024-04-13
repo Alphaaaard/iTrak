@@ -455,6 +455,18 @@ hr {
   color: #163172;
 }
 
+.GPS-cont {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 1em;
+}
+
+.GPS-side-cont {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
 .icons {
   height: 1.35em;
   width: 1.35em;
