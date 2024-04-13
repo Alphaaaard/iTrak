@@ -6,67 +6,42 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
     date_default_timezone_set('Asia/Manila');
     $conn = connection();
 
-    if (isset($_SESSION['accountId'])) {
-        $accountId = $_SESSION['accountId'];
-        $todayDate = date("Y-m-d");
-
-        // Check if there's a timeout value for this user for today
-        $timeoutQuery = "SELECT timeout FROM attendancelogs WHERE accountId = '$accountId' AND date = '$todayDate'";
-        $timeoutResult = $conn->query($timeoutQuery);
-        $timeoutRow = $timeoutResult->fetch_assoc();
-
-        if ($timeoutRow && $timeoutRow['timeout'] !== null) {
-            // User has a timeout value, force logout
-            session_destroy(); // Destroy all session data
-            header("Location: ../../index.php?logout=timeout"); // Redirect to the login page with a timeout flag
-            exit;
-        }
-    }
-
     if ($_SERVER["REQUEST_METHOD"] === "GET") {
         if (isset($_GET['lat']) && isset($_GET['lng'])) {
             $latitude = $_GET['lat'];
             $longitude = $_GET['lng'];
-
-            // Check if the user is logged in
-            if (!isset($_SESSION['accountId'])) {
-                echo "User not logged in!";
-                exit();
-            }
-
             $user_id = $_SESSION['accountId'];
 
-            $conn = connection();
-
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-
+            // Update the user's location in the account table and insert into locationHistory
             try {
-                // Check if a location entry for the user has been made within the last minute
-                $checkLastEntryQuery = "SELECT TIMESTAMPDIFF(SECOND, MAX(timestamp), NOW()) AS diff FROM locationHistory WHERE accountId = ?";
-                $checkLastEntryStmt = $conn->prepare($checkLastEntryQuery);
-                $checkLastEntryStmt->bind_param("i", $user_id);
-                $checkLastEntryStmt->execute();
-                $result = $checkLastEntryStmt->get_result();
-                $row = $result->fetch_assoc();
+                $conn->begin_transaction(); // Start the transaction
 
-                if ($row['diff'] > 60 || $row['diff'] === null) {
-                   
-
-                    // Update the user's location in the account table
-                    $updateLocationQuery = "UPDATE account SET latitude=?, longitude=?, timestamp=CURRENT_TIMESTAMP WHERE accountId=?";
-                    $updateLocationStmt = $conn->prepare($updateLocationQuery);
-                    $updateLocationStmt->bind_param("ddi", $latitude, $longitude, $user_id);
-                    $updateLocationStmt->execute();
-
-                    echo "Location updated successfully!";
-                } else {
-                    echo "Location already updated within the last minute.";
+                // Update account table
+                $updateLocationQuery = "UPDATE account SET latitude=?, longitude=?, timestamp=CURRENT_TIMESTAMP WHERE accountId=?";
+                $updateLocationStmt = $conn->prepare($updateLocationQuery);
+                if ($updateLocationStmt === false) {
+                    throw new Exception("Unable to prepare location update statement.");
                 }
+                $updateLocationStmt->bind_param("ddi", $latitude, $longitude, $user_id);
+                $updateLocationStmt->execute();
+                
+                // Insert into locationHistory table
+                $insertLocationHistoryQuery = "INSERT INTO locationHistory (accountId, latitude, longitude, timestamp) VALUES (?, ?, ?, CURRENT_TIMESTAMP)";
+                $insertLocationHistoryStmt = $conn->prepare($insertLocationHistoryQuery);
+                if ($insertLocationHistoryStmt === false) {
+                    throw new Exception("Unable to prepare location history insert statement.");
+                }
+                $insertLocationHistoryStmt->bind_param("idd", $user_id, $latitude, $longitude);
+                $insertLocationHistoryStmt->execute();
+
+                $conn->commit(); // Commit the transaction if both queries were successful
+                echo "Location updated and history recorded successfully!";
             } catch (Exception $e) {
+                $conn->rollback(); // Rollback the transaction on error
                 echo "Error: " . $e->getMessage();
             } finally {
+                if (isset($updateLocationStmt)) $updateLocationStmt->close();
+                if (isset($insertLocationHistoryStmt)) $insertLocationHistoryStmt->close();
                 $conn->close();
             }
         } else {
@@ -78,3 +53,4 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
 } else {
     echo "Session variables not set!";
 }
+?>
