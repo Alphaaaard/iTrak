@@ -8,35 +8,46 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
 
     if ($_SERVER["REQUEST_METHOD"] === "GET") {
         if (isset($_GET['lat']) && isset($_GET['lng'])) {
-            $latitude = $_GET['lat'];
-            $longitude = $_GET['lng'];
-
-            // Check if the user is logged in
-            if (!isset($_SESSION['accountId'])) {
-                echo "User not logged in!";
-                exit();
-            }
-
+            $newLatitude = $_GET['lat'];
+            $newLongitude = $_GET['lng'];
             $user_id = $_SESSION['accountId'];
-
-            $conn = connection();
 
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
             }
 
-            // Update the user's location in the account table
-            try {
+            // Begin transaction
+            $conn->begin_transaction();
+
+            // Retrieve the current location
+            $selectQuery = "SELECT latitude, longitude, timestamp FROM account WHERE accountId=?";
+            $selectStmt = $conn->prepare($selectQuery);
+            $selectStmt->bind_param("i", $user_id);
+            $selectStmt->execute();
+            $result = $selectStmt->get_result();
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $oldLatitude = $row['latitude'];
+                $oldLongitude = $row['longitude'];
+                $oldTimestamp = $row['timestamp'];
+
+                // Insert the old location into the locationhistory table
+                $insertLocationQuery = "INSERT INTO locationhistory (accountId, latitude, longitude, timestamp) VALUES (?, ?, ?, ?)";
+                $insertLocationStmt = $conn->prepare($insertLocationQuery);
+                $insertLocationStmt->bind_param("idds", $user_id, $oldLatitude, $oldLongitude, $oldTimestamp);
+                $insertLocationStmt->execute();
+
+                // Update the new location in the account table
                 $updateLocationQuery = "UPDATE account SET latitude=?, longitude=?, timestamp=CURRENT_TIMESTAMP WHERE accountId=?";
                 $updateLocationStmt = $conn->prepare($updateLocationQuery);
-                $updateLocationStmt->bind_param("ddi", $latitude, $longitude, $user_id);
+                $updateLocationStmt->bind_param("ddi", $newLatitude, $newLongitude, $user_id);
                 $updateLocationStmt->execute();
 
+                // Commit transaction
+                $conn->commit();
                 echo "Location updated successfully!";
-            } catch (Exception $e) {
-                echo "Error: " . $e->getMessage();
-            } finally {
-                $conn->close();
+            } else {
+                echo "No existing location data found!";
             }
         } else {
             echo "Latitude and longitude parameters are required!";
@@ -44,6 +55,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
     } else {
         echo "Invalid request method!";
     }
+    $conn->close();
 } else {
     echo "Session variables not set!";
 }
