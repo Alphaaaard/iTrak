@@ -307,7 +307,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 $lastName = $row["lastName"];
                                 $collapseId = "collapse" . $accountId;
                                 $headerId = "heading" . $accountId;
+                                $latitude = $row["latitude"];
+                                $longitude = $row["longitude"];
 
+                                $status = ($latitude != 0 && $longitude != 0) ? 'Online' : 'Offline';
                                 // Accordion item
                                 echo "<div class='gps-container'>";
                                 echo "<div class='accordion-item'>";
@@ -320,7 +323,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 echo "</h2>";
                                 echo "<div id='" . $collapseId . "' class='accordion-collapse collapse' aria-labelledby='" . $headerId . "' data-bs-parent='#accordionGPS'>"; // Ensure this points to the main container ID
                                 echo "<div class='accordion-body'>";
-                     
+                                echo "Status: " . $status . "<br>";
                                 echo "Timestamp: " . $row["timestamp"] . "<br>";
                                 echo "Location: " . $row["qculocation"];
                                 echo "</div>"; // End of accordion body
