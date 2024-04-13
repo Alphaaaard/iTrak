@@ -60,11 +60,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                     $updateLocationStmt->bind_param("ddi", $latitude, $longitude, $user_id);
                     $updateLocationStmt->execute();
 
-                     // Insert location data into locationHistory table
-                     $insertLocationHistoryQuery = "INSERT INTO locationHistory (accountId, latitude, longitude, timestamp) VALUES (?, ?, ?, CURRENT_TIMESTAMP)";
-                     $insertLocationHistoryStmt = $conn->prepare($insertLocationHistoryQuery);
-                     $insertLocationHistoryStmt->bind_param("idd", $user_id, $latitude, $longitude);
-                     $insertLocationHistoryStmt->execute();
                     echo "Location updated successfully!";
                 } else {
                     echo "Location already updated within the last minute.";
