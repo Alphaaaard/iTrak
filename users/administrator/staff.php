@@ -904,12 +904,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
       function performExport(formData, endpoint) {
         Swal.fire({
           title: 'Exporting...',
-          html: 'Please wait while the file is being generated.',
+          html: '<div class="swal2-custom-loader"><div></div><div></div><div></div></div>',
           allowOutsideClick: false,
           showConfirmButton: false,
-          willOpen: () => {
-            Swal.showLoading();
-          },
+          didOpen: () => {
+          // Remove Swal's own loading mechanism to prevent interference with the custom loader
+          Swal.getContent().querySelector('.swal2-loader').style.display = 'none';
+          }
         });
 
         fetch(endpoint, {
@@ -943,7 +944,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 icon: 'success',
                 allowOutsideClick: false,
                 showConfirmButton: false,
-                timer: 1000, // closes after 2000 milliseconds (2 seconds)
+                timer: 1300, // closes after 2000 milliseconds (2 seconds)
                 timerProgressBar: true // shows a visual progress bar for the timer
             });
           })
