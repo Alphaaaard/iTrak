@@ -505,23 +505,23 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
                     </header>
                     <script>
-  // Get elements from the DOM
-  const filterCriteria = document.getElementById('filter-criteria');
-  const searchBox = document.getElementById('search-box');
+                        // Get elements from the DOM
+                        const filterCriteria = document.getElementById('filter-criteria');
+                        const searchBox = document.getElementById('search-box');
 
-  // Event listener for the filter dropdown changes
-  filterCriteria.addEventListener('change', function() {
-    if (this.value === 'date') {
-      // If "Date" is selected, change the search box to a date picker
-      searchBox.type = 'date';
-      searchBox.placeholder = 'Select a date';
-    } else {
-      // For all other options, change it back to a regular search box
-      searchBox.type = 'search';
-      searchBox.placeholder = 'Search';
-    }
-  });
-</script>
+                        // Event listener for the filter dropdown changes
+                        filterCriteria.addEventListener('change', function() {
+                            if (this.value === 'date') {
+                                // If "Date" is selected, change the search box to a date picker
+                                searchBox.type = 'date';
+                                searchBox.placeholder = 'Select a date';
+                            } else {
+                                // For all other options, change it back to a regular search box
+                                searchBox.type = 'search';
+                                searchBox.placeholder = 'Search';
+                            }
+                        });
+                    </script>
 
                     <div class="new-nav-container">
                         <!--Content start of tabs-->
@@ -1293,7 +1293,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </script>
 
 
-<script>
+        <script>
             $(document).ready(function() {
                 $('.notification-item').on('click', function(e) {
                     e.preventDefault();
