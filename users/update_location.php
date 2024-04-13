@@ -31,11 +31,27 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                 $oldLongitude = $row['longitude'];
                 $oldTimestamp = $row['timestamp'];
 
-                // Insert the old location into the locationhistory table
-                $insertLocationQuery = "INSERT INTO locationhistory (accountId, latitude, longitude, timestamp) VALUES (?, ?, ?, ?)";
-                $insertLocationStmt = $conn->prepare($insertLocationQuery);
-                $insertLocationStmt->bind_param("idds", $user_id, $oldLatitude, $oldLongitude, $oldTimestamp);
-                $insertLocationStmt->execute();
+                if ($oldLatitude != 0 && $oldLongitude != 0) {
+                    // Insert the old location into the locationhistory table
+                    $insertLocationQuery = "INSERT INTO locationhistory (accountId, latitude, longitude, timestamp) VALUES (?, ?, ?, ?)";
+                    $insertLocationStmt = $conn->prepare($insertLocationQuery);
+                    if (!$insertLocationStmt) {
+                        // Handle the error appropriately
+                        echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+                        // Rollback if needed
+                        // $conn->rollback();
+                        exit();
+                    }
+                    $insertLocationStmt->bind_param("idds", $user_id, $oldLatitude, $oldLongitude, $oldTimestamp);
+                    if (!$insertLocationStmt->execute()) {
+                        // Handle the error appropriately
+                        echo "Execute failed: (" . $insertLocationStmt->errno . ") " . $insertLocationStmt->error;
+                        // Rollback if needed
+                        // $conn->rollback();
+                        exit();
+                    }
+                }
+
 
                 // Update the new location in the account table
                 $updateLocationQuery = "UPDATE account SET latitude=?, longitude=?, timestamp=CURRENT_TIMESTAMP WHERE accountId=?";
