@@ -1143,2675 +1143,3188 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             </li>
         </ul>
     </section>
-        <section id="content">
-            <main>
-                <div class="content-container" id="content-container">
-                    <div id="belmonte-F1" class="content">
-                        <!-- FLOOR PLAN -->
-                        <img src="../../../src/floors/multipurpose/Multipurpose1F.png" alt="" class="Floor-container">
-                        <div class="map-nav">
-                            <a href="../../personnel/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
-                            <div class="map-legend">
+    <section id="content">
+        <main>
+            <div class="content-container" id="content-container">
+                <div id="belmonte-F1" class="content">
+                    <!-- FLOOR PLAN -->
+                    <img src="../../../src/floors/multipurpose/Multipurpose1F.png" alt="" class="Floor-container">
+                    <div class="map-nav">
+                        <div class="map-legend">
+                            <div class="legend-item" data-status="Working">
                                 <div class="legend-color-green"></div>
-                                <p>Working</p>
+                                <button class="legend-toggle">Working</button>
+                            </div>
+                            <div class="legend-item" data-status="Under Maintenance">
                                 <div class="legend-color-under-maintenance"></div>
-                                <p>Under maintenance</p>
+                                <button class="legend-toggle">Under maintenance</button>
+                            </div>
+                            <div class="legend-item" data-status="Need Repair">
                                 <div class="legend-color-need-repair"></div>
-                                <p>Need repair</p>
+                                <button class="legend-toggle">Need repair</button>
+                            </div>
+                            <div class="legend-item" data-status="For Replacement">
                                 <div class="legend-color-for-replacement"></div>
-                                <p>For replacement</p>
-                            </div>
-                        </div>
-                        <!-- ASSETS -->
-
-                        <!-- ASSET S -->
-
-                        <!-- ASSET 7086 -->
-                        <img src='../image.php?id=7086' class="asset-image" data-id="<?php echo $assetId7086; ?>" style='width:60px; cursor:pointer; position:absolute; top:145px; left:230px;' alt='Asset Image 7086' data-bs-toggle='modal' data-bs-target='#imageModal7086' onclick='fetchAssetData(7086);' data-room="<?php echo htmlspecialchars($room7086); ?>" data-floor="<?php echo htmlspecialchars($floor7086); ?>" data-image="<?php echo base64_encode($upload_img7086); ?>" data-category="<?php echo htmlspecialchars($category7086); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName7086); ?>">
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7086); ?>; position:absolute; top:145px; left:230px;'>
-                        </div>
-
-                        <!-- ASSET 7087 -->
-                        <img src='../image.php?id=7087' class="asset-image" data-id="<?php echo $assetId7087; ?>" style='width:60px; cursor:pointer; position:absolute; top:145px; left:355px;' alt='Asset Image 7087' data-bs-toggle='modal' data-bs-target='#imageModal7087' onclick='fetchAssetData(7087);' data-room="<?php echo htmlspecialchars($room7087); ?>" data-floor="<?php echo htmlspecialchars($floor7087); ?>" data-image="<?php echo base64_encode($upload_img7087); ?>" data-category="<?php echo htmlspecialchars($category7087); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName7087); ?>">
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7087); ?>; position:absolute; top:145px; left:355px;'>
-                        </div>
-
-                        <!-- ASSET 7088 -->
-                        <img src='../image.php?id=7088' class="asset-image" data-id="<?php echo $assetId7088; ?>" style='width:60px; cursor:pointer; position:absolute; top:380px; left:230px;' alt='Asset Image 7088' data-bs-toggle='modal' data-bs-target='#imageModal7088' onclick='fetchAssetData(7088);' data-room="<?php echo htmlspecialchars($room7088); ?>" data-floor="<?php echo htmlspecialchars($floor7088); ?>" data-image="<?php echo base64_encode($upload_img7088); ?>" data-category="<?php echo htmlspecialchars($category7088); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName7088); ?>">
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7088); ?>; position:absolute; top:380px; left:230px;'>
-                        </div>
-
-                        <!-- ASSET 7089 -->
-                        <img src='../image.php?id=7089' class="asset-image" data-id="<?php echo $assetId7089; ?>" style='width:60px; cursor:pointer; position:absolute; top:380px; left:355px;' alt='Asset Image 7089' data-bs-toggle='modal' data-bs-target='#imageModal7089' onclick='fetchAssetData(7089);' data-room="<?php echo htmlspecialchars($room7089); ?>" data-floor="<?php echo htmlspecialchars($floor7089); ?>" data-image="<?php echo base64_encode($upload_img7089); ?>" data-category="<?php echo htmlspecialchars($category7089); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName7089); ?>">
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7089); ?>; position:absolute; top:380px; left:355px;'>
-                        </div>
-
-
-                        <!-- ASSET 7090 -->
-                        <img src='../image.php?id=7090' class="asset-image" data-id="<?php echo $assetId7090; ?>" style='width:60px; cursor:pointer; position:absolute; top:145px; left:555px;' alt='Asset Image 7090' data-bs-toggle='modal' data-bs-target='#imageModal7090' onclick='fetchAssetData(7090);' data-room="<?php echo htmlspecialchars($room7090); ?>" data-floor="<?php echo htmlspecialchars($floor7090); ?>" data-image="<?php echo base64_encode($upload_img7090); ?>" data-category="<?php echo htmlspecialchars($category7090); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName7090); ?>">
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7090); ?>; position:absolute; top:145px; left:555px;'>
-                        </div>
-
-                        <!-- ASSET 7091 -->
-                        <img src='../image.php?id=7091' class="asset-image" data-id="<?php echo $assetId7091; ?>" style='width:60px; cursor:pointer; position:absolute; top:145px; left:680px;' alt='Asset Image 7091' data-bs-toggle='modal' data-bs-target='#imageModal7091' onclick='fetchAssetData(7091);' data-room="<?php echo htmlspecialchars($room7091); ?>" data-floor="<?php echo htmlspecialchars($floor7091); ?>" data-image="<?php echo base64_encode($upload_img7091); ?>" data-category="<?php echo htmlspecialchars($category7091); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName7091); ?>">
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7091); ?>; position:absolute; top:145px; left:680px;'>
-                        </div>
-
-                        <!-- ASSET 7092 -->
-                        <img src='../image.php?id=7092' class="asset-image" data-id="<?php echo $assetId7092; ?>" style='width:60px; cursor:pointer; position:absolute; top:235px; left:-125px;' alt='Asset Image 7092' data-bs-toggle='modal' data-bs-target='#imageModal7092' onclick='fetchAssetData(7092);' data-room="<?php echo htmlspecialchars($room7092); ?>" data-floor="<?php echo htmlspecialchars($floor7092); ?>" data-image="<?php echo base64_encode($upload_img7092); ?>" data-category="<?php echo htmlspecialchars($category7092); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName7092); ?>">
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7092); ?>; position:absolute; top:235px; left:-125px;'>
-                        </div>
-
-                        <!-- ASSET 7093 -->
-                        <img src='../image.php?id=7093' class="asset-image" data-id="<?php echo $assetId7093; ?>" style='width:60px; cursor:pointer; position:absolute; top:235px; left:0px;' alt='Asset Image 7093' data-bs-toggle='modal' data-bs-target='#imageModal7093' onclick='fetchAssetData(7093);' data-room="<?php echo htmlspecialchars($room7093); ?>" data-floor="<?php echo htmlspecialchars($floor7093); ?>" data-image="<?php echo base64_encode($upload_img7093); ?>" data-category="<?php echo htmlspecialchars($category7093); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName7093); ?>">
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7093); ?>; position:absolute; top:235px; left:0px;'>
-                        </div>
-
-
-                        <!-- ASSET 7094 -->
-                        <img src='../image.php?id=7094' class="asset-image" data-id="<?php echo $assetId7094; ?>" style='width:60px; cursor:pointer; position:absolute; top:0px; left:200px;' alt='Asset Image 7094' data-bs-toggle='modal' data-bs-target='#imageModal7094' onclick='fetchAssetData(7094);' data-room="<?php echo htmlspecialchars($room7094); ?>" data-floor="<?php echo htmlspecialchars($floor7094); ?>" data-image="<?php echo base64_encode($upload_img7094); ?>" data-category="<?php echo htmlspecialchars($category7094); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName7094); ?>">
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7094); ?>; position:absolute; top:0px; left:200px;'>
-                        </div>
-
-                        <!-- ASSET 7095 -->
-                        <img src='../image.php?id=7095' class="asset-image" data-id="<?php echo $assetId7095; ?>" style='width:60px; cursor:pointer; position:absolute; top:0px; left:325px;' alt='Asset Image 7095' data-bs-toggle='modal' data-bs-target='#imageModal7095' onclick='fetchAssetData(7095);' data-room="<?php echo htmlspecialchars($room7095); ?>" data-floor="<?php echo htmlspecialchars($floor7095); ?>" data-image="<?php echo base64_encode($upload_img7095); ?>" data-category="<?php echo htmlspecialchars($category7095); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName7095); ?>">
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7095); ?>; position:absolute; top:0px; left:325px;'>
-                        </div>
-
-                        <!-- ASSET 7096 -->
-                        <img src='../image.php?id=7096' class="asset-image" data-id="<?php echo $assetId7096; ?>" style='width:60px; cursor:pointer; position:absolute; top:235px; left:200px;' alt='Asset Image 7096' data-bs-toggle='modal' data-bs-target='#imageModal7096' onclick='fetchAssetData(7096);' data-room="<?php echo htmlspecialchars($room7096); ?>" data-floor="<?php echo htmlspecialchars($floor7096); ?>" data-image="<?php echo base64_encode($upload_img7096); ?>" data-category="<?php echo htmlspecialchars($category7096); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName7096); ?>">
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7096); ?>; position:absolute; top:235px; left:200px;'>
-                        </div>
-
-                        <!-- ASSET 7097 -->
-                        <img src='../image.php?id=7097' class="asset-image" data-id="<?php echo $assetId7097; ?>" style='width:60px; cursor:pointer; position:absolute; top:235px; left:325px;' alt='Asset Image 7097' data-bs-toggle='modal' data-bs-target='#imageModal7097' onclick='fetchAssetData(7097);' data-room="<?php echo htmlspecialchars($room7097); ?>" data-floor="<?php echo htmlspecialchars($floor7097); ?>" data-image="<?php echo base64_encode($upload_img7097); ?>" data-category="<?php echo htmlspecialchars($category7097); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName7097); ?>">
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7097); ?>; position:absolute; top:235px; left:325px;'>
-                        </div>
-
-
-                        <!-- ASSET 7080 -->
-                        <img src='../image.php?id=7080' class="asset-image" data-id="<?php echo $assetId7080; ?>" style='width:65px; cursor:pointer; position:absolute; top:60px; left:-390px;' alt='Asset Image 7080' data-bs-toggle='modal' data-bs-target='#imageModal7080' onclick='fetchAssetData(7080);' data-room="<?php echo htmlspecialchars($room7080); ?>" data-floor="<?php echo htmlspecialchars($floor7080); ?>" data-image="<?php echo base64_encode($upload_img7080); ?>" data-category="<?php echo htmlspecialchars($category7080); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName7080); ?>">
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7080); ?>; position:absolute; top:60px; left:-390px;'>
-                        </div>
-
-                        <!-- ASSET 7081 -->
-                        <img src='../image.php?id=7081' class="asset-image" data-id="<?php echo $assetId7081; ?>" style='width:65px; cursor:pointer; position:absolute; top:60px; left:-65px;' alt='Asset Image 7081' data-bs-toggle='modal' data-bs-target='#imageModal7081' onclick='fetchAssetData(7081);' data-room="<?php echo htmlspecialchars($room7081); ?>" data-floor="<?php echo htmlspecialchars($floor7081); ?>" data-image="<?php echo base64_encode($upload_img7081); ?>" data-category="<?php echo htmlspecialchars($category7081); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName7081); ?>">
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7081); ?>; position:absolute; top:60px; left:-65px;'>
-                        </div>
-
-                        <!-- ASSET 7082 -->
-                        <img src='../image.php?id=7082' class="asset-image" data-id="<?php echo $assetId7082; ?>" style='width:65px; cursor:pointer; position:absolute; top:60px; left:260px;' alt='Asset Image 7082' data-bs-toggle='modal' data-bs-target='#imageModal7082' onclick='fetchAssetData(7082);' data-room="<?php echo htmlspecialchars($room7082); ?>" data-floor="<?php echo htmlspecialchars($floor7082); ?>" data-image="<?php echo base64_encode($upload_img7082); ?>" data-category="<?php echo htmlspecialchars($category7082); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName7082); ?>">
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7082); ?>; position:absolute; top:60px; left:260px;'>
-                        </div>
-
-                        <!-- ASSET 7083 -->
-                        <img src='../image.php?id=7083' class="asset-image" data-id="<?php echo $assetId7083; ?>" style='width:65px; cursor:pointer; position:absolute; top:160px; left:-390px;' alt='Asset Image 7083' data-bs-toggle='modal' data-bs-target='#imageModal7083' onclick='fetchAssetData(7083);' data-room="<?php echo htmlspecialchars($room7083); ?>" data-floor="<?php echo htmlspecialchars($floor7083); ?>" data-image="<?php echo base64_encode($upload_img7083); ?>" data-category="<?php echo htmlspecialchars($category7083); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName7083); ?>">
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7083); ?>; position:absolute; top:160px; left:-390px;'>
-                        </div>
-
-
-                        <!-- ASSET 7084 -->
-                        <img src='../image.php?id=7084' class="asset-image" data-id="<?php echo $assetId7084; ?>" style='width:65px; cursor:pointer; position:absolute; top:160px; left:-65px;' alt='Asset Image 7084' data-bs-toggle='modal' data-bs-target='#imageModal7084' onclick='fetchAssetData(7084);' data-room="<?php echo htmlspecialchars($room7084); ?>" data-floor="<?php echo htmlspecialchars($floor7084); ?>" data-image="<?php echo base64_encode($upload_img7084); ?>" data-category="<?php echo htmlspecialchars($category7084); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName7084); ?>">
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7084); ?>; position:absolute; top:160px; left:-65px;'>
-                        </div>
-
-                        <!-- ASSET 7085 -->
-                        <img src='../image.php?id=7085' class="asset-image" data-id="<?php echo $assetId7085; ?>" style='width:65px; cursor:pointer; position:absolute; top:160px; left:260px;' alt='Asset Image 7085' data-bs-toggle='modal' data-bs-target='#imageModal7085' onclick='fetchAssetData(7085);' data-room="<?php echo htmlspecialchars($room7085); ?>" data-floor="<?php echo htmlspecialchars($floor7085); ?>" data-image="<?php echo base64_encode($upload_img7085); ?>" data-category="<?php echo htmlspecialchars($category7085); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName7085); ?>">
-                        <div style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7085); ?>; position:absolute; top:160px; left:260px;'>
-                        </div>
-                        <!--Start of hover-->
-                        <div id="hover-asset" class="hover-asset" style="display: none;">
-                            <!-- Content will be added dynamically -->
-                        </div>
-
-                    </div>
-                    <!-- Modal structure for id 7086-->
-                    <div class='modal fade' id='imageModal7086' tabindex='-1' aria-labelledby='imageModalLabel7086' aria-hidden='true'>
-                        <div class='modal-dialog modal-xl modal-dialog-centered'>
-                            <div class='modal-content'>
-                                <!-- Modal header -->
-                                <div class='modal-header'>
-                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                </div>
-
-                                <!-- Modal body -->
-                                <div class='modal-body'>
-                                    <form method="post" class="row g-3" enctype="multipart/form-data">
-                                        <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId7086); ?>">
-                                        <!--START DIV FOR IMAGE -->
-
-                                        <!--First Row-->
-                                        <!--IMAGE HERE-->
-                                        <div class="col-12 center-content">
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7086); ?>" alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
-                                        </div>
-                                        <!--END DIV FOR IMAGE -->
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assetId" class="form-label">Tracking #:</label>
-                                            <input type="text" class="form-control" id="assetId" name="assetId" value="<?php echo htmlspecialchars($assetId7086); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="date" class="form-label">Date:</label>
-                                            <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($date7086); ?>" readonly />
-                                        </div>
-
-                                        <!--Second Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="room" name="room" value="<?php echo htmlspecialchars($room7086); ?>" readonly />
-                                        </div>
-
-
-                                        <div class="col-6" style="display:none">
-                                            <input type="text" class="form-control  center-content" id="building" name="building" value="<?php echo htmlspecialchars($building7086); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Second Row-->
-
-                                        <!--Third Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="floor" name="floor" value="<?php echo htmlspecialchars($floor7086); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-12 center-content">
-                                            <input type="text" class="form-control  center-content" id="category" name="category" value="<?php echo htmlspecialchars($category7086); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="images" class="form-label">Images:</label>
-                                            <input type="text" class="form-control" id="" name="images" readonly />
-                                        </div>
-
-                                        <!--End of Third Row-->
-
-                                        <!--Fourth Row-->
-                                        <div class="col-2">
-                                            <label for="status" class="form-label">Status:</label>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <select class="form-select" id="status" name="status">
-                                                <option value="Working" <?php echo ($status7086 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
-                                                <option value="Under Maintenance" <?php echo ($status7086 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
-                                                </option>
-                                                <option value="For Replacement" <?php echo ($status7086 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
-                                                </option>
-                                                <option value="Need Repair" <?php echo ($status7086 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedName" class="form-label">Assigned Name:</label>
-                                            <input type="text" class="form-control" id="assignedName" name="assignedName" value="<?php echo htmlspecialchars($assignedName7086); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedBy" class="form-label">Assigned By:</label>
-                                            <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="<?php echo htmlspecialchars($assignedBy7086); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Fourth Row-->
-
-                                        <!--Fifth Row-->
-                                        <!-- <div class="col-3">
-                                            <label for="description" class="form-label">Description:</label>
-                                        </div> -->
-                                        <div class="col-12">
-                                            <input type="text" class="form-control" id="description" name="description" value="<?php echo htmlspecialchars($description7086); ?>" />
-                                        </div>
-                                        <!--End of Fifth Row-->
-
-                                        <!--Sixth Row-->
-                                        <div class="col-2">
-                                            <label for="upload_img" class="form-label">Upload:</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
-                                        </div>
-                                        <!--End of Sixth Row-->
-
-                                        <!-- Modal footer -->
-                                        <div class="button-submit-container">
-                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop7086">
-                                                Save
-                                            </button>
-                                        </div>
-                                </div>
+                                <button class="legend-toggle">For replacement</button>
                             </div>
                         </div>
                     </div>
-                    <!--Edit for table 7086-->
-                    <div class="map-alert">
-                        <div class="modal fade" id="staticBackdrop7086" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-footer">
-                                        <p>Are you sure you want to save changes?</p>
-                                        <div class="modal-popups">
-                                            <button type="submit" class="btn add-modal-btn" name="edit7086">Yes</button>
-                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- ASSETS -->
+
+                    <!-- ASSET S -->
+
+                    <!-- ASSETS -->
+
+                    <!-- ASSET 7086 -->
+                    <img src='../image.php?id=7086' class="asset-image" data-id="<?php echo $assetId7086; ?>"
+                        style='width:60px; cursor:pointer; position:absolute; top:145px; left:230px;'
+                        alt='Asset Image 7086' data-bs-toggle='modal' data-bs-target='#imageModal7086'
+                        onclick='fetchAssetData(7086);' data-room="<?php echo htmlspecialchars($room7086); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7086); ?>"
+                        data-image="<?php echo base64_encode($upload_img7086); ?>"
+                        data-category="<?php echo htmlspecialchars($category7086); ?>"
+                        data-status="<?php echo htmlspecialchars($status7086); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName7086); ?>">
+                    <div
+                        style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7086); ?>; position:absolute; top:145px; left:230px;'>
                     </div>
-                    </form>
 
-                    <!-- Modal structure for id 7087-->
-                    <div class='modal fade' id='imageModal7087' tabindex='-1' aria-labelledby='imageModalLabel7087' aria-hidden='true'>
-                        <div class='modal-dialog modal-xl modal-dialog-centered'>
-                            <div class='modal-content'>
-                                <!-- Modal header -->
-                                <div class='modal-header'>
-                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                </div>
-
-                                <!-- Modal body -->
-                                <div class='modal-body'>
-                                    <form method="post" class="row g-3" enctype="multipart/form-data">
-                                        <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId7087); ?>">
-                                        <!--START DIV FOR IMAGE -->
-
-                                        <!--First Row-->
-                                        <!--IMAGE HERE-->
-                                        <div class="col-12 center-content">
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7087); ?>" alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
-                                        </div>
-                                        <!--END DIV FOR IMAGE -->
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assetId" class="form-label">Tracking #:</label>
-                                            <input type="text" class="form-control" id="assetId" name="assetId" value="<?php echo htmlspecialchars($assetId7087); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="date" class="form-label">Date:</label>
-                                            <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($date7087); ?>" readonly />
-                                        </div>
-
-                                        <!--Second Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="room" name="room" value="<?php echo htmlspecialchars($room7087); ?>" readonly />
-                                        </div>
-
-
-                                        <div class="col-6" style="display:none">
-                                            <input type="text" class="form-control  center-content" id="building" name="building" value="<?php echo htmlspecialchars($building7087); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Second Row-->
-
-                                        <!--Third Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="floor" name="floor" value="<?php echo htmlspecialchars($floor7087); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-12 center-content">
-                                            <input type="text" class="form-control  center-content" id="category" name="category" value="<?php echo htmlspecialchars($category7087); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="images" class="form-label">Images:</label>
-                                            <input type="text" class="form-control" id="" name="images" readonly />
-                                        </div>
-
-                                        <!--End of Third Row-->
-
-                                        <!--Fourth Row-->
-                                        <div class="col-2">
-                                            <label for="status" class="form-label">Status:</label>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <select class="form-select" id="status" name="status">
-                                                <option value="Working" <?php echo ($status7087 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
-                                                <option value="Under Maintenance" <?php echo ($status7087 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
-                                                </option>
-                                                <option value="For Replacement" <?php echo ($status7087 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
-                                                </option>
-                                                <option value="Need Repair" <?php echo ($status7087 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedName" class="form-label">Assigned Name:</label>
-                                            <input type="text" class="form-control" id="assignedName" name="assignedName" value="<?php echo htmlspecialchars($assignedName7087); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedBy" class="form-label">Assigned By:</label>
-                                            <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="<?php echo htmlspecialchars($assignedBy7087); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Fourth Row-->
-
-                                        <!--Fifth Row-->
-                                        <!-- <div class="col-3">
-                                            <label for="description" class="form-label">Description:</label>
-                                        </div> -->
-                                        <div class="col-12">
-                                            <input type="text" class="form-control" id="description" name="description" value="<?php echo htmlspecialchars($description7087); ?>" />
-                                        </div>
-                                        <!--End of Fifth Row-->
-
-                                        <!--Sixth Row-->
-                                        <div class="col-2">
-                                            <label for="upload_img" class="form-label">Upload:</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
-                                        </div>
-                                        <!--End of Sixth Row-->
-
-                                        <!-- Modal footer -->
-                                        <div class="button-submit-container">
-                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop7087">
-                                                Save
-                                            </button>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- ASSET 7087 -->
+                    <img src='../image.php?id=7087' class="asset-image" data-id="<?php echo $assetId7087; ?>"
+                        style='width:60px; cursor:pointer; position:absolute; top:145px; left:355px;'
+                        alt='Asset Image 7087' data-bs-toggle='modal' data-bs-target='#imageModal7087'
+                        onclick='fetchAssetData(7087);' data-room="<?php echo htmlspecialchars($room7087); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7087); ?>"
+                        data-image="<?php echo base64_encode($upload_img7087); ?>"
+                        data-category="<?php echo htmlspecialchars($category7087); ?>"
+                        data-status="<?php echo htmlspecialchars($status7087); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName7087); ?>">
+                    <div
+                        style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7087); ?>; position:absolute; top:145px; left:355px;'>
                     </div>
-                    <!--Edit for table 7087-->
-                    <div class="map-alert">
-                        <div class="modal fade" id="staticBackdrop7087" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-footer">
-                                        <p>Are you sure you want to save changes?</p>
-                                        <div class="modal-popups">
-                                            <button type="submit" class="btn add-modal-btn" name="edit7087">Yes</button>
-                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+                    <!-- ASSET 7088 -->
+                    <img src='../image.php?id=7088' class="asset-image" data-id="<?php echo $assetId7088; ?>"
+                        style='width:60px; cursor:pointer; position:absolute; top:380px; left:230px;'
+                        alt='Asset Image 7088' data-bs-toggle='modal' data-bs-target='#imageModal7088'
+                        onclick='fetchAssetData(7088);' data-room="<?php echo htmlspecialchars($room7088); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7088); ?>"
+                        data-image="<?php echo base64_encode($upload_img7088); ?>"
+                        data-category="<?php echo htmlspecialchars($category7088); ?>"
+                        data-status="<?php echo htmlspecialchars($status7088); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName7088); ?>">
+                    <div
+                        style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7088); ?>; position:absolute; top:380px; left:230px;'>
                     </div>
-                    </form>
 
-                    <!-- Modal structure for id 7088-->
-                    <div class='modal fade' id='imageModal7088' tabindex='-1' aria-labelledby='imageModalLabel7088' aria-hidden='true'>
-                        <div class='modal-dialog modal-xl modal-dialog-centered'>
-                            <div class='modal-content'>
-                                <!-- Modal header -->
-                                <div class='modal-header'>
-                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                </div>
-
-                                <!-- Modal body -->
-                                <div class='modal-body'>
-                                    <form method="post" class="row g-3" enctype="multipart/form-data">
-                                        <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId7088); ?>">
-                                        <!--START DIV FOR IMAGE -->
-
-                                        <!--First Row-->
-                                        <!--IMAGE HERE-->
-                                        <div class="col-12 center-content">
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7088); ?>" alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
-                                        </div>
-                                        <!--END DIV FOR IMAGE -->
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assetId" class="form-label">Tracking #:</label>
-                                            <input type="text" class="form-control" id="assetId" name="assetId" value="<?php echo htmlspecialchars($assetId7088); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="date" class="form-label">Date:</label>
-                                            <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($date7088); ?>" readonly />
-                                        </div>
-
-                                        <!--Second Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="room" name="room" value="<?php echo htmlspecialchars($room7088); ?>" readonly />
-                                        </div>
-
-
-                                        <div class="col-6" style="display:none">
-                                            <input type="text" class="form-control  center-content" id="building" name="building" value="<?php echo htmlspecialchars($building7088); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Second Row-->
-
-                                        <!--Third Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="floor" name="floor" value="<?php echo htmlspecialchars($floor7088); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-12 center-content">
-                                            <input type="text" class="form-control  center-content" id="category" name="category" value="<?php echo htmlspecialchars($category7088); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="images" class="form-label">Images:</label>
-                                            <input type="text" class="form-control" id="" name="images" readonly />
-                                        </div>
-
-                                        <!--End of Third Row-->
-
-                                        <!--Fourth Row-->
-                                        <div class="col-2">
-                                            <label for="status" class="form-label">Status:</label>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <select class="form-select" id="status" name="status">
-                                                <option value="Working" <?php echo ($status7088 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
-                                                <option value="Under Maintenance" <?php echo ($status7088 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
-                                                </option>
-                                                <option value="For Replacement" <?php echo ($status7088 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
-                                                </option>
-                                                <option value="Need Repair" <?php echo ($status7088 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedName" class="form-label">Assigned Name:</label>
-                                            <input type="text" class="form-control" id="assignedName" name="assignedName" value="<?php echo htmlspecialchars($assignedName7088); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedBy" class="form-label">Assigned By:</label>
-                                            <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="<?php echo htmlspecialchars($assignedBy7088); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Fourth Row-->
-
-                                        <!--Fifth Row-->
-                                        <!-- <div class="col-3">
-                                            <label for="description" class="form-label">Description:</label>
-                                        </div> -->
-                                        <div class="col-12">
-                                            <input type="text" class="form-control" id="description" name="description" value="<?php echo htmlspecialchars($description7088); ?>" />
-                                        </div>
-                                        <!--End of Fifth Row-->
-
-                                        <!--Sixth Row-->
-                                        <div class="col-2">
-                                            <label for="upload_img" class="form-label">Upload:</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
-                                        </div>
-                                        <!--End of Sixth Row-->
-
-                                        <!-- Modal footer -->
-                                        <div class="button-submit-container">
-                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop7088">
-                                                Save
-                                            </button>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- ASSET 7089 -->
+                    <img src='../image.php?id=7089' class="asset-image" data-id="<?php echo $assetId7089; ?>"
+                        style='width:60px; cursor:pointer; position:absolute; top:380px; left:355px;'
+                        alt='Asset Image 7089' data-bs-toggle='modal' data-bs-target='#imageModal7089'
+                        onclick='fetchAssetData(7089);' data-room="<?php echo htmlspecialchars($room7089); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7089); ?>"
+                        data-image="<?php echo base64_encode($upload_img7089); ?>"
+                        data-category="<?php echo htmlspecialchars($category7089); ?>"
+                        data-status="<?php echo htmlspecialchars($status7089); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName7089); ?>">
+                    <div
+                        style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7089); ?>; position:absolute; top:380px; left:355px;'>
                     </div>
-                    <!--Edit for table 7088-->
-                    <div class="map-alert">
-                        <div class="modal fade" id="staticBackdrop7088" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-footer">
-                                        <p>Are you sure you want to save changes?</p>
-                                        <div class="modal-popups">
-                                            <button type="submit" class="btn add-modal-btn" name="edit7088">Yes</button>
-                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+
+                    <!-- ASSET 7090 -->
+                    <img src='../image.php?id=7090' class="asset-image" data-id="<?php echo $assetId7090; ?>"
+                        style='width:60px; cursor:pointer; position:absolute; top:145px; left:555px;'
+                        alt='Asset Image 7090' data-bs-toggle='modal' data-bs-target='#imageModal7090'
+                        onclick='fetchAssetData(7090);' data-room="<?php echo htmlspecialchars($room7090); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7090); ?>"
+                        data-image="<?php echo base64_encode($upload_img7090); ?>"
+                        data-category="<?php echo htmlspecialchars($category7090); ?>"
+                        data-status="<?php echo htmlspecialchars($status7090); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName7090); ?>">
+                    <div
+                        style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7090); ?>; position:absolute; top:145px; left:555px;'>
                     </div>
-                    </form>
 
-                    <!-- Modal structure for id 7089-->
-                    <div class='modal fade' id='imageModal7089' tabindex='-1' aria-labelledby='imageModalLabel7089' aria-hidden='true'>
-                        <div class='modal-dialog modal-xl modal-dialog-centered'>
-                            <div class='modal-content'>
-                                <!-- Modal header -->
-                                <div class='modal-header'>
-                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                </div>
-
-                                <!-- Modal body -->
-                                <div class='modal-body'>
-                                    <form method="post" class="row g-3" enctype="multipart/form-data">
-                                        <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId7089); ?>">
-                                        <!--START DIV FOR IMAGE -->
-
-                                        <!--First Row-->
-                                        <!--IMAGE HERE-->
-                                        <div class="col-12 center-content">
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7089); ?>" alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
-                                        </div>
-                                        <!--END DIV FOR IMAGE -->
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assetId" class="form-label">Tracking #:</label>
-                                            <input type="text" class="form-control" id="assetId" name="assetId" value="<?php echo htmlspecialchars($assetId7089); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="date" class="form-label">Date:</label>
-                                            <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($date7089); ?>" readonly />
-                                        </div>
-
-                                        <!--Second Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="room" name="room" value="<?php echo htmlspecialchars($room7089); ?>" readonly />
-                                        </div>
-
-
-                                        <div class="col-6" style="display:none">
-                                            <input type="text" class="form-control  center-content" id="building" name="building" value="<?php echo htmlspecialchars($building7089); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Second Row-->
-
-                                        <!--Third Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="floor" name="floor" value="<?php echo htmlspecialchars($floor7089); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-12 center-content">
-                                            <input type="text" class="form-control  center-content" id="category" name="category" value="<?php echo htmlspecialchars($category7089); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="images" class="form-label">Images:</label>
-                                            <input type="text" class="form-control" id="" name="images" readonly />
-                                        </div>
-
-                                        <!--End of Third Row-->
-
-                                        <!--Fourth Row-->
-                                        <div class="col-2">
-                                            <label for="status" class="form-label">Status:</label>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <select class="form-select" id="status" name="status">
-                                                <option value="Working" <?php echo ($status7089 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
-                                                <option value="Under Maintenance" <?php echo ($status7089 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
-                                                </option>
-                                                <option value="For Replacement" <?php echo ($status7089 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
-                                                </option>
-                                                <option value="Need Repair" <?php echo ($status7089 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedName" class="form-label">Assigned Name:</label>
-                                            <input type="text" class="form-control" id="assignedName" name="assignedName" value="<?php echo htmlspecialchars($assignedName7089); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedBy" class="form-label">Assigned By:</label>
-                                            <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="<?php echo htmlspecialchars($assignedBy7089); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Fourth Row-->
-
-                                        <!--Fifth Row-->
-                                        <!-- <div class="col-3">
-                                            <label for="description" class="form-label">Description:</label>
-                                        </div> -->
-                                        <div class="col-12">
-                                            <input type="text" class="form-control" id="description" name="description" value="<?php echo htmlspecialchars($description7089); ?>" />
-                                        </div>
-                                        <!--End of Fifth Row-->
-
-                                        <!--Sixth Row-->
-                                        <div class="col-2">
-                                            <label for="upload_img" class="form-label">Upload:</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
-                                        </div>
-                                        <!--End of Sixth Row-->
-
-                                        <!-- Modal footer -->
-                                        <div class="button-submit-container">
-                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop7089">
-                                                Save
-                                            </button>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- ASSET 7091 -->
+                    <img src='../image.php?id=7091' class="asset-image" data-id="<?php echo $assetId7091; ?>"
+                        style='width:60px; cursor:pointer; position:absolute; top:145px; left:680px;'
+                        alt='Asset Image 7091' data-bs-toggle='modal' data-bs-target='#imageModal7091'
+                        onclick='fetchAssetData(7091);' data-room="<?php echo htmlspecialchars($room7091); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7091); ?>"
+                        data-image="<?php echo base64_encode($upload_img7091); ?>"
+                        data-category="<?php echo htmlspecialchars($category7091); ?>"
+                        data-status="<?php echo htmlspecialchars($status7091); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName7091); ?>">
+                    <div
+                        style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7091); ?>; position:absolute; top:145px; left:680px;'>
                     </div>
-                    <!--Edit for table 7089-->
-                    <div class="map-alert">
-                        <div class="modal fade" id="staticBackdrop7089" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-footer">
-                                        <p>Are you sure you want to save changes?</p>
-                                        <div class="modal-popups">
-                                            <button type="submit" class="btn add-modal-btn" name="edit7089">Yes</button>
-                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+                    <!-- ASSET 7092 -->
+                    <img src='../image.php?id=7092' class="asset-image" data-id="<?php echo $assetId7092; ?>"
+                        style='width:60px; cursor:pointer; position:absolute; top:235px; left:-125px;'
+                        alt='Asset Image 7092' data-bs-toggle='modal' data-bs-target='#imageModal7092'
+                        onclick='fetchAssetData(7092);' data-room="<?php echo htmlspecialchars($room7092); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7092); ?>"
+                        data-image="<?php echo base64_encode($upload_img7092); ?>"
+                        data-status="<?php echo htmlspecialchars($status7092); ?>"
+                        data-category="<?php echo htmlspecialchars($category7092); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName7092); ?>">
+                    <div
+                        style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7092); ?>; position:absolute; top:235px; left:-125px;'>
                     </div>
-                    </form>
 
-                    <!-- Modal structure for id 7090-->
-                    <div class='modal fade' id='imageModal7090' tabindex='-1' aria-labelledby='imageModalLabel7090' aria-hidden='true'>
-                        <div class='modal-dialog modal-xl modal-dialog-centered'>
-                            <div class='modal-content'>
-                                <!-- Modal header -->
-                                <div class='modal-header'>
-                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                </div>
-
-                                <!-- Modal body -->
-                                <div class='modal-body'>
-                                    <form method="post" class="row g-3" enctype="multipart/form-data">
-                                        <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId7090); ?>">
-                                        <!--START DIV FOR IMAGE -->
-
-                                        <!--First Row-->
-                                        <!--IMAGE HERE-->
-                                        <div class="col-12 center-content">
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7090); ?>" alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
-                                        </div>
-                                        <!--END DIV FOR IMAGE -->
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assetId" class="form-label">Tracking #:</label>
-                                            <input type="text" class="form-control" id="assetId" name="assetId" value="<?php echo htmlspecialchars($assetId7090); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="date" class="form-label">Date:</label>
-                                            <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($date7090); ?>" readonly />
-                                        </div>
-
-                                        <!--Second Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="room" name="room" value="<?php echo htmlspecialchars($room7090); ?>" readonly />
-                                        </div>
-
-
-                                        <div class="col-6" style="display:none">
-                                            <input type="text" class="form-control  center-content" id="building" name="building" value="<?php echo htmlspecialchars($building7090); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Second Row-->
-
-                                        <!--Third Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="floor" name="floor" value="<?php echo htmlspecialchars($floor7090); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-12 center-content">
-                                            <input type="text" class="form-control  center-content" id="category" name="category" value="<?php echo htmlspecialchars($category7090); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="images" class="form-label">Images:</label>
-                                            <input type="text" class="form-control" id="" name="images" readonly />
-                                        </div>
-
-                                        <!--End of Third Row-->
-
-                                        <!--Fourth Row-->
-                                        <div class="col-2">
-                                            <label for="status" class="form-label">Status:</label>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <select class="form-select" id="status" name="status">
-                                                <option value="Working" <?php echo ($status7090 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
-                                                <option value="Under Maintenance" <?php echo ($status7090 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
-                                                </option>
-                                                <option value="For Replacement" <?php echo ($status7090 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
-                                                </option>
-                                                <option value="Need Repair" <?php echo ($status7090 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedName" class="form-label">Assigned Name:</label>
-                                            <input type="text" class="form-control" id="assignedName" name="assignedName" value="<?php echo htmlspecialchars($assignedName7090); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedBy" class="form-label">Assigned By:</label>
-                                            <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="<?php echo htmlspecialchars($assignedBy7090); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Fourth Row-->
-
-                                        <!--Fifth Row-->
-                                        <!-- <div class="col-3">
-                                            <label for="description" class="form-label">Description:</label>
-                                        </div> -->
-                                        <div class="col-12">
-                                            <input type="text" class="form-control" id="description" name="description" value="<?php echo htmlspecialchars($description7090); ?>" />
-                                        </div>
-                                        <!--End of Fifth Row-->
-
-                                        <!--Sixth Row-->
-                                        <div class="col-2">
-                                            <label for="upload_img" class="form-label">Upload:</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
-                                        </div>
-                                        <!--End of Sixth Row-->
-
-                                        <!-- Modal footer -->
-                                        <div class="button-submit-container">
-                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop7090">
-                                                Save
-                                            </button>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- ASSET 7093 -->
+                    <img src='../image.php?id=7093' class="asset-image" data-id="<?php echo $assetId7093; ?>"
+                        style='width:60px; cursor:pointer; position:absolute; top:235px; left:0px;'
+                        alt='Asset Image 7093' data-bs-toggle='modal' data-bs-target='#imageModal7093'
+                        onclick='fetchAssetData(7093);' data-room="<?php echo htmlspecialchars($room7093); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7093); ?>"
+                        data-image="<?php echo base64_encode($upload_img7093); ?>"
+                        data-category="<?php echo htmlspecialchars($category7093); ?>"
+                        data-status="<?php echo htmlspecialchars($status7093); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName7093); ?>">
+                    <div
+                        style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7093); ?>; position:absolute; top:235px; left:0px;'>
                     </div>
-                    <!--Edit for table 7090-->
-                    <div class="map-alert">
-                        <div class="modal fade" id="staticBackdrop7090" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-footer">
-                                        <p>Are you sure you want to save changes?</p>
-                                        <div class="modal-popups">
-                                            <button type="submit" class="btn add-modal-btn" name="edit7090">Yes</button>
-                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+
+                    <!-- ASSET 7094 -->
+                    <img src='../image.php?id=7094' class="asset-image" data-id="<?php echo $assetId7094; ?>"
+                        style='width:60px; cursor:pointer; position:absolute; top:0px; left:200px;'
+                        alt='Asset Image 7094' data-bs-toggle='modal' data-bs-target='#imageModal7094'
+                        onclick='fetchAssetData(7094);' data-room="<?php echo htmlspecialchars($room7094); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7094); ?>"
+                        data-image="<?php echo base64_encode($upload_img7094); ?>"
+                        data-category="<?php echo htmlspecialchars($category7094); ?>"
+                        data-status="<?php echo htmlspecialchars($status7094); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName7094); ?>">
+                    <div
+                        style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7094); ?>; position:absolute; top:0px; left:200px;'>
                     </div>
-                    </form>
 
-                    <!-- Modal structure for id 7091-->
-                    <div class='modal fade' id='imageModal7091' tabindex='-1' aria-labelledby='imageModalLabel7091' aria-hidden='true'>
-                        <div class='modal-dialog modal-xl modal-dialog-centered'>
-                            <div class='modal-content'>
-                                <!-- Modal header -->
-                                <div class='modal-header'>
-                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                </div>
-
-                                <!-- Modal body -->
-                                <div class='modal-body'>
-                                    <form method="post" class="row g-3" enctype="multipart/form-data">
-                                        <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId7091); ?>">
-                                        <!--START DIV FOR IMAGE -->
-
-                                        <!--First Row-->
-                                        <!--IMAGE HERE-->
-                                        <div class="col-12 center-content">
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7091); ?>" alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
-                                        </div>
-                                        <!--END DIV FOR IMAGE -->
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assetId" class="form-label">Tracking #:</label>
-                                            <input type="text" class="form-control" id="assetId" name="assetId" value="<?php echo htmlspecialchars($assetId7091); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="date" class="form-label">Date:</label>
-                                            <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($date7091); ?>" readonly />
-                                        </div>
-
-                                        <!--Second Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="room" name="room" value="<?php echo htmlspecialchars($room7091); ?>" readonly />
-                                        </div>
-
-
-                                        <div class="col-6" style="display:none">
-                                            <input type="text" class="form-control  center-content" id="building" name="building" value="<?php echo htmlspecialchars($building7091); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Second Row-->
-
-                                        <!--Third Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="floor" name="floor" value="<?php echo htmlspecialchars($floor7091); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-12 center-content">
-                                            <input type="text" class="form-control  center-content" id="category" name="category" value="<?php echo htmlspecialchars($category7091); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="images" class="form-label">Images:</label>
-                                            <input type="text" class="form-control" id="" name="images" readonly />
-                                        </div>
-
-                                        <!--End of Third Row-->
-
-                                        <!--Fourth Row-->
-                                        <div class="col-2">
-                                            <label for="status" class="form-label">Status:</label>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <select class="form-select" id="status" name="status">
-                                                <option value="Working" <?php echo ($status7091 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
-                                                <option value="Under Maintenance" <?php echo ($status7091 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
-                                                </option>
-                                                <option value="For Replacement" <?php echo ($status7091 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
-                                                </option>
-                                                <option value="Need Repair" <?php echo ($status7091 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedName" class="form-label">Assigned Name:</label>
-                                            <input type="text" class="form-control" id="assignedName" name="assignedName" value="<?php echo htmlspecialchars($assignedName7091); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedBy" class="form-label">Assigned By:</label>
-                                            <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="<?php echo htmlspecialchars($assignedBy7091); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Fourth Row-->
-
-                                        <!--Fifth Row-->
-                                        <!-- <div class="col-3">
-                                            <label for="description" class="form-label">Description:</label>
-                                        </div> -->
-                                        <div class="col-12">
-                                            <input type="text" class="form-control" id="description" name="description" value="<?php echo htmlspecialchars($description7091); ?>" />
-                                        </div>
-                                        <!--End of Fifth Row-->
-
-                                        <!--Sixth Row-->
-                                        <div class="col-2">
-                                            <label for="upload_img" class="form-label">Upload:</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
-                                        </div>
-                                        <!--End of Sixth Row-->
-
-                                        <!-- Modal footer -->
-                                        <div class="button-submit-container">
-                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop7091">
-                                                Save
-                                            </button>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- ASSET 7095 -->
+                    <img src='../image.php?id=7095' class="asset-image" data-id="<?php echo $assetId7095; ?>"
+                        style='width:60px; cursor:pointer; position:absolute; top:0px; left:325px;'
+                        alt='Asset Image 7095' data-bs-toggle='modal' data-bs-target='#imageModal7095'
+                        onclick='fetchAssetData(7095);' data-room="<?php echo htmlspecialchars($room7095); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7095); ?>"
+                        data-image="<?php echo base64_encode($upload_img7095); ?>"
+                        data-status="<?php echo htmlspecialchars($status7095); ?>"
+                        data-category="<?php echo htmlspecialchars($category7095); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName7095); ?>">
+                    <div
+                        style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7095); ?>; position:absolute; top:0px; left:325px;'>
                     </div>
-                    <!--Edit for table 7091-->
-                    <div class="map-alert">
-                        <div class="modal fade" id="staticBackdrop7091" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-footer">
-                                        <p>Are you sure you want to save changes?</p>
-                                        <div class="modal-popups">
-                                            <button type="submit" class="btn add-modal-btn" name="edit7091">Yes</button>
-                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+                    <!-- ASSET 7096 -->
+                    <img src='../image.php?id=7096' class="asset-image" data-id="<?php echo $assetId7096; ?>"
+                        style='width:60px; cursor:pointer; position:absolute; top:235px; left:200px;'
+                        alt='Asset Image 7096' data-bs-toggle='modal' data-bs-target='#imageModal7096'
+                        onclick='fetchAssetData(7096);' data-room="<?php echo htmlspecialchars($room7096); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7096); ?>"
+                        data-image="<?php echo base64_encode($upload_img7096); ?>"
+                        data-category="<?php echo htmlspecialchars($category7096); ?>"
+                        data-status="<?php echo htmlspecialchars($status7096); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName7096); ?>">
+                    <div
+                        style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7096); ?>; position:absolute; top:235px; left:200px;'>
                     </div>
-                    </form>
 
-                    <!-- Modal structure for id 7092-->
-                    <div class='modal fade' id='imageModal7092' tabindex='-1' aria-labelledby='imageModalLabel7092' aria-hidden='true'>
-                        <div class='modal-dialog modal-xl modal-dialog-centered'>
-                            <div class='modal-content'>
-                                <!-- Modal header -->
-                                <div class='modal-header'>
-                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                </div>
-
-                                <!-- Modal body -->
-                                <div class='modal-body'>
-                                    <form method="post" class="row g-3" enctype="multipart/form-data">
-                                        <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId7092); ?>">
-                                        <!--START DIV FOR IMAGE -->
-
-                                        <!--First Row-->
-                                        <!--IMAGE HERE-->
-                                        <div class="col-12 center-content">
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7092); ?>" alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
-                                        </div>
-                                        <!--END DIV FOR IMAGE -->
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assetId" class="form-label">Tracking #:</label>
-                                            <input type="text" class="form-control" id="assetId" name="assetId" value="<?php echo htmlspecialchars($assetId7092); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="date" class="form-label">Date:</label>
-                                            <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($date7092); ?>" readonly />
-                                        </div>
-
-                                        <!--Second Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="room" name="room" value="<?php echo htmlspecialchars($room7092); ?>" readonly />
-                                        </div>
-
-
-                                        <div class="col-6" style="display:none">
-                                            <input type="text" class="form-control  center-content" id="building" name="building" value="<?php echo htmlspecialchars($building7092); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Second Row-->
-
-                                        <!--Third Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="floor" name="floor" value="<?php echo htmlspecialchars($floor7092); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-12 center-content">
-                                            <input type="text" class="form-control  center-content" id="category" name="category" value="<?php echo htmlspecialchars($category7092); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="images" class="form-label">Images:</label>
-                                            <input type="text" class="form-control" id="" name="images" readonly />
-                                        </div>
-
-                                        <!--End of Third Row-->
-
-                                        <!--Fourth Row-->
-                                        <div class="col-2">
-                                            <label for="status" class="form-label">Status:</label>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <select class="form-select" id="status" name="status">
-                                                <option value="Working" <?php echo ($status7092 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
-                                                <option value="Under Maintenance" <?php echo ($status7092 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
-                                                </option>
-                                                <option value="For Replacement" <?php echo ($status7092 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
-                                                </option>
-                                                <option value="Need Repair" <?php echo ($status7092 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedName" class="form-label">Assigned Name:</label>
-                                            <input type="text" class="form-control" id="assignedName" name="assignedName" value="<?php echo htmlspecialchars($assignedName7092); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedBy" class="form-label">Assigned By:</label>
-                                            <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="<?php echo htmlspecialchars($assignedBy7092); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Fourth Row-->
-
-                                        <!--Fifth Row-->
-                                        <!-- <div class="col-3">
-                                            <label for="description" class="form-label">Description:</label>
-                                        </div> -->
-                                        <div class="col-12">
-                                            <input type="text" class="form-control" id="description" name="description" value="<?php echo htmlspecialchars($description7092); ?>" />
-                                        </div>
-                                        <!--End of Fifth Row-->
-
-                                        <!--Sixth Row-->
-                                        <div class="col-2">
-                                            <label for="upload_img" class="form-label">Upload:</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
-                                        </div>
-                                        <!--End of Sixth Row-->
-
-                                        <!-- Modal footer -->
-                                        <div class="button-submit-container">
-                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop7092">
-                                                Save
-                                            </button>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- ASSET 7097 -->
+                    <img src='../image.php?id=7097' class="asset-image" data-id="<?php echo $assetId7097; ?>"
+                        style='width:60px; cursor:pointer; position:absolute; top:235px; left:325px;'
+                        alt='Asset Image 7097' data-bs-toggle='modal' data-bs-target='#imageModal7097'
+                        onclick='fetchAssetData(7097);' data-room="<?php echo htmlspecialchars($room7097); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7097); ?>"
+                        data-image="<?php echo base64_encode($upload_img7097); ?>"
+                        data-category="<?php echo htmlspecialchars($category7097); ?>"
+                        data-status="<?php echo htmlspecialchars($status7097); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName7097); ?>">
+                    <div
+                        style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7097); ?>; position:absolute; top:235px; left:325px;'>
                     </div>
-                    <!--Edit for table 7092-->
-                    <div class="map-alert">
-                        <div class="modal fade" id="staticBackdrop7092" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-footer">
-                                        <p>Are you sure you want to save changes?</p>
-                                        <div class="modal-popups">
-                                            <button type="submit" class="btn add-modal-btn" name="edit7092">Yes</button>
-                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+
+                    <!-- ASSET 7080 -->
+                    <img src='../image.php?id=7080' class="asset-image" data-id="<?php echo $assetId7080; ?>"
+                        style='width:65px; cursor:pointer; position:absolute; top:60px; left:-390px;'
+                        alt='Asset Image 7080' data-bs-toggle='modal' data-bs-target='#imageModal7080'
+                        onclick='fetchAssetData(7080);' data-room="<?php echo htmlspecialchars($room7080); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7080); ?>"
+                        data-image="<?php echo base64_encode($upload_img7080); ?>"
+                        data-category="<?php echo htmlspecialchars($category7080); ?>"
+                        data-status="<?php echo htmlspecialchars($status7080); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName7080); ?>">
+                    <div
+                        style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7080); ?>; position:absolute; top:60px; left:-390px;'>
                     </div>
-                    </form>
 
-                    <!-- Modal structure for id 7093-->
-                    <div class='modal fade' id='imageModal7093' tabindex='-1' aria-labelledby='imageModalLabel7093' aria-hidden='true'>
-                        <div class='modal-dialog modal-xl modal-dialog-centered'>
-                            <div class='modal-content'>
-                                <!-- Modal header -->
-                                <div class='modal-header'>
-                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                </div>
-
-                                <!-- Modal body -->
-                                <div class='modal-body'>
-                                    <form method="post" class="row g-3" enctype="multipart/form-data">
-                                        <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId7093); ?>">
-                                        <!--START DIV FOR IMAGE -->
-
-                                        <!--First Row-->
-                                        <!--IMAGE HERE-->
-                                        <div class="col-12 center-content">
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7093); ?>" alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
-                                        </div>
-                                        <!--END DIV FOR IMAGE -->
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assetId" class="form-label">Tracking #:</label>
-                                            <input type="text" class="form-control" id="assetId" name="assetId" value="<?php echo htmlspecialchars($assetId7093); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="date" class="form-label">Date:</label>
-                                            <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($date7093); ?>" readonly />
-                                        </div>
-
-                                        <!--Second Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="room" name="room" value="<?php echo htmlspecialchars($room7093); ?>" readonly />
-                                        </div>
-
-
-                                        <div class="col-6" style="display:none">
-                                            <input type="text" class="form-control  center-content" id="building" name="building" value="<?php echo htmlspecialchars($building7093); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Second Row-->
-
-                                        <!--Third Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="floor" name="floor" value="<?php echo htmlspecialchars($floor7093); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-12 center-content">
-                                            <input type="text" class="form-control  center-content" id="category" name="category" value="<?php echo htmlspecialchars($category7093); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="images" class="form-label">Images:</label>
-                                            <input type="text" class="form-control" id="" name="images" readonly />
-                                        </div>
-
-                                        <!--End of Third Row-->
-
-                                        <!--Fourth Row-->
-                                        <div class="col-2">
-                                            <label for="status" class="form-label">Status:</label>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <select class="form-select" id="status" name="status">
-                                                <option value="Working" <?php echo ($status7093 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
-                                                <option value="Under Maintenance" <?php echo ($status7093 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
-                                                </option>
-                                                <option value="For Replacement" <?php echo ($status7093 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
-                                                </option>
-                                                <option value="Need Repair" <?php echo ($status7093 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedName" class="form-label">Assigned Name:</label>
-                                            <input type="text" class="form-control" id="assignedName" name="assignedName" value="<?php echo htmlspecialchars($assignedName7093); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedBy" class="form-label">Assigned By:</label>
-                                            <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="<?php echo htmlspecialchars($assignedBy7093); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Fourth Row-->
-
-                                        <!--Fifth Row-->
-                                        <!-- <div class="col-3">
-                                            <label for="description" class="form-label">Description:</label>
-                                        </div> -->
-                                        <div class="col-12">
-                                            <input type="text" class="form-control" id="description" name="description" value="<?php echo htmlspecialchars($description7093); ?>" />
-                                        </div>
-                                        <!--End of Fifth Row-->
-
-                                        <!--Sixth Row-->
-                                        <div class="col-2">
-                                            <label for="upload_img" class="form-label">Upload:</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
-                                        </div>
-                                        <!--End of Sixth Row-->
-
-                                        <!-- Modal footer -->
-                                        <div class="button-submit-container">
-                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop7093">
-                                                Save
-                                            </button>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- ASSET 7081 -->
+                    <img src='../image.php?id=7081' class="asset-image" data-id="<?php echo $assetId7081; ?>"
+                        style='width:65px; cursor:pointer; position:absolute; top:60px; left:-65px;'
+                        alt='Asset Image 7081' data-bs-toggle='modal' data-bs-target='#imageModal7081'
+                        onclick='fetchAssetData(7081);' data-room="<?php echo htmlspecialchars($room7081); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7081); ?>"
+                        data-image="<?php echo base64_encode($upload_img7081); ?>"
+                        data-category="<?php echo htmlspecialchars($category7081); ?>"
+                        data-status="<?php echo htmlspecialchars($status7081); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName7081); ?>">
+                    <div
+                        style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7081); ?>; position:absolute; top:60px; left:-65px;'>
                     </div>
-                    <!--Edit for table 7093-->
-                    <div class="map-alert">
-                        <div class="modal fade" id="staticBackdrop7093" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-footer">
-                                        <p>Are you sure you want to save changes?</p>
-                                        <div class="modal-popups">
-                                            <button type="submit" class="btn add-modal-btn" name="edit7093">Yes</button>
-                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+                    <!-- ASSET 7082 -->
+                    <img src='../image.php?id=7082' class="asset-image" data-id="<?php echo $assetId7082; ?>"
+                        style='width:65px; cursor:pointer; position:absolute; top:60px; left:260px;'
+                        alt='Asset Image 7082' data-bs-toggle='modal' data-bs-target='#imageModal7082'
+                        onclick='fetchAssetData(7082);' data-room="<?php echo htmlspecialchars($room7082); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7082); ?>"
+                        data-image="<?php echo base64_encode($upload_img7082); ?>"
+                        data-category="<?php echo htmlspecialchars($category7082); ?>"
+                        data-status="<?php echo htmlspecialchars($status7082); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName7082); ?>">
+                    <div
+                        style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7082); ?>; position:absolute; top:60px; left:260px;'>
                     </div>
-                    </form>
 
-                    <!-- Modal structure for id 7094-->
-                    <div class='modal fade' id='imageModal7094' tabindex='-1' aria-labelledby='imageModalLabel7094' aria-hidden='true'>
-                        <div class='modal-dialog modal-xl modal-dialog-centered'>
-                            <div class='modal-content'>
-                                <!-- Modal header -->
-                                <div class='modal-header'>
-                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                </div>
-
-                                <!-- Modal body -->
-                                <div class='modal-body'>
-                                    <form method="post" class="row g-3" enctype="multipart/form-data">
-                                        <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId7094); ?>">
-                                        <!--START DIV FOR IMAGE -->
-
-                                        <!--First Row-->
-                                        <!--IMAGE HERE-->
-                                        <div class="col-12 center-content">
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7094); ?>" alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
-                                        </div>
-                                        <!--END DIV FOR IMAGE -->
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assetId" class="form-label">Tracking #:</label>
-                                            <input type="text" class="form-control" id="assetId" name="assetId" value="<?php echo htmlspecialchars($assetId7094); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="date" class="form-label">Date:</label>
-                                            <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($date7094); ?>" readonly />
-                                        </div>
-
-                                        <!--Second Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="room" name="room" value="<?php echo htmlspecialchars($room7094); ?>" readonly />
-                                        </div>
-
-
-                                        <div class="col-6" style="display:none">
-                                            <input type="text" class="form-control  center-content" id="building" name="building" value="<?php echo htmlspecialchars($building7094); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Second Row-->
-
-                                        <!--Third Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="floor" name="floor" value="<?php echo htmlspecialchars($floor7094); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-12 center-content">
-                                            <input type="text" class="form-control  center-content" id="category" name="category" value="<?php echo htmlspecialchars($category7094); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="images" class="form-label">Images:</label>
-                                            <input type="text" class="form-control" id="" name="images" readonly />
-                                        </div>
-
-                                        <!--End of Third Row-->
-
-                                        <!--Fourth Row-->
-                                        <div class="col-2">
-                                            <label for="status" class="form-label">Status:</label>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <select class="form-select" id="status" name="status">
-                                                <option value="Working" <?php echo ($status7094 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
-                                                <option value="Under Maintenance" <?php echo ($status7094 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
-                                                </option>
-                                                <option value="For Replacement" <?php echo ($status7094 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
-                                                </option>
-                                                <option value="Need Repair" <?php echo ($status7094 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedName" class="form-label">Assigned Name:</label>
-                                            <input type="text" class="form-control" id="assignedName" name="assignedName" value="<?php echo htmlspecialchars($assignedName7094); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedBy" class="form-label">Assigned By:</label>
-                                            <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="<?php echo htmlspecialchars($assignedBy7094); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Fourth Row-->
-
-                                        <!--Fifth Row-->
-                                        <!-- <div class="col-3">
-                                            <label for="description" class="form-label">Description:</label>
-                                        </div> -->
-                                        <div class="col-12">
-                                            <input type="text" class="form-control" id="description" name="description" value="<?php echo htmlspecialchars($description7094); ?>" />
-                                        </div>
-                                        <!--End of Fifth Row-->
-
-                                        <!--Sixth Row-->
-                                        <div class="col-2">
-                                            <label for="upload_img" class="form-label">Upload:</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
-                                        </div>
-                                        <!--End of Sixth Row-->
-
-                                        <!-- Modal footer -->
-                                        <div class="button-submit-container">
-                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop7094">
-                                                Save
-                                            </button>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- ASSET 7083 -->
+                    <img src='../image.php?id=7083' class="asset-image" data-id="<?php echo $assetId7083; ?>"
+                        style='width:65px; cursor:pointer; position:absolute; top:160px; left:-390px;'
+                        alt='Asset Image 7083' data-bs-toggle='modal' data-bs-target='#imageModal7083'
+                        onclick='fetchAssetData(7083);' data-room="<?php echo htmlspecialchars($room7083); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7083); ?>"
+                        data-image="<?php echo base64_encode($upload_img7083); ?>"
+                        data-category="<?php echo htmlspecialchars($category7083); ?>"
+                        data-status="<?php echo htmlspecialchars($status7083); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName7083); ?>">
+                    <div
+                        style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7083); ?>; position:absolute; top:160px; left:-390px;'>
                     </div>
-                    <!--Edit for table 7094-->
-                    <div class="map-alert">
-                        <div class="modal fade" id="staticBackdrop7094" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-footer">
-                                        <p>Are you sure you want to save changes?</p>
-                                        <div class="modal-popups">
-                                            <button type="submit" class="btn add-modal-btn" name="edit7094">Yes</button>
-                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+
+                    <!-- ASSET 7084 -->
+                    <img src='../image.php?id=7084' class="asset-image" data-id="<?php echo $assetId7084; ?>"
+                        style='width:65px; cursor:pointer; position:absolute; top:160px; left:-65px;'
+                        alt='Asset Image 7084' data-bs-toggle='modal' data-bs-target='#imageModal7084'
+                        onclick='fetchAssetData(7084);' data-room="<?php echo htmlspecialchars($room7084); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7084); ?>"
+                        data-image="<?php echo base64_encode($upload_img7084); ?>"
+                        data-category="<?php echo htmlspecialchars($category7084); ?>"
+                        data-status="<?php echo htmlspecialchars($status7084); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName7084); ?>">
+                    <div
+                        style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7084); ?>; position:absolute; top:160px; left:-65px;'>
                     </div>
-                    </form>
 
-                    <!-- Modal structure for id 7095-->
-                    <div class='modal fade' id='imageModal7095' tabindex='-1' aria-labelledby='imageModalLabel7095' aria-hidden='true'>
-                        <div class='modal-dialog modal-xl modal-dialog-centered'>
-                            <div class='modal-content'>
-                                <!-- Modal header -->
-                                <div class='modal-header'>
-                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                </div>
-
-                                <!-- Modal body -->
-                                <div class='modal-body'>
-                                    <form method="post" class="row g-3" enctype="multipart/form-data">
-                                        <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId7095); ?>">
-                                        <!--START DIV FOR IMAGE -->
-
-                                        <!--First Row-->
-                                        <!--IMAGE HERE-->
-                                        <div class="col-12 center-content">
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7095); ?>" alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
-                                        </div>
-                                        <!--END DIV FOR IMAGE -->
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assetId" class="form-label">Tracking #:</label>
-                                            <input type="text" class="form-control" id="assetId" name="assetId" value="<?php echo htmlspecialchars($assetId7095); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="date" class="form-label">Date:</label>
-                                            <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($date7095); ?>" readonly />
-                                        </div>
-
-                                        <!--Second Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="room" name="room" value="<?php echo htmlspecialchars($room7095); ?>" readonly />
-                                        </div>
-
-
-                                        <div class="col-6" style="display:none">
-                                            <input type="text" class="form-control  center-content" id="building" name="building" value="<?php echo htmlspecialchars($building7095); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Second Row-->
-
-                                        <!--Third Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="floor" name="floor" value="<?php echo htmlspecialchars($floor7095); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-12 center-content">
-                                            <input type="text" class="form-control  center-content" id="category" name="category" value="<?php echo htmlspecialchars($category7095); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="images" class="form-label">Images:</label>
-                                            <input type="text" class="form-control" id="" name="images" readonly />
-                                        </div>
-
-                                        <!--End of Third Row-->
-
-                                        <!--Fourth Row-->
-                                        <div class="col-2">
-                                            <label for="status" class="form-label">Status:</label>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <select class="form-select" id="status" name="status">
-                                                <option value="Working" <?php echo ($status7095 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
-                                                <option value="Under Maintenance" <?php echo ($status7095 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
-                                                </option>
-                                                <option value="For Replacement" <?php echo ($status7095 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
-                                                </option>
-                                                <option value="Need Repair" <?php echo ($status7095 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedName" class="form-label">Assigned Name:</label>
-                                            <input type="text" class="form-control" id="assignedName" name="assignedName" value="<?php echo htmlspecialchars($assignedName7095); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedBy" class="form-label">Assigned By:</label>
-                                            <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="<?php echo htmlspecialchars($assignedBy7095); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Fourth Row-->
-
-                                        <!--Fifth Row-->
-                                        <!-- <div class="col-3">
-                                            <label for="description" class="form-label">Description:</label>
-                                        </div> -->
-                                        <div class="col-12">
-                                            <input type="text" class="form-control" id="description" name="description" value="<?php echo htmlspecialchars($description7095); ?>" />
-                                        </div>
-                                        <!--End of Fifth Row-->
-
-                                        <!--Sixth Row-->
-                                        <div class="col-2">
-                                            <label for="upload_img" class="form-label">Upload:</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
-                                        </div>
-                                        <!--End of Sixth Row-->
-
-                                        <!-- Modal footer -->
-                                        <div class="button-submit-container">
-                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop7095">
-                                                Save
-                                            </button>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- ASSET 7085 -->
+                    <img src='../image.php?id=7085' class="asset-image" data-id="<?php echo $assetId7085; ?>"
+                        style='width:65px; cursor:pointer; position:absolute; top:160px; left:260px;'
+                        alt='Asset Image 7085' data-bs-toggle='modal' data-bs-target='#imageModal7085'
+                        onclick='fetchAssetData(7085);' data-room="<?php echo htmlspecialchars($room7085); ?>"
+                        data-floor="<?php echo htmlspecialchars($floor7085); ?>"
+                        data-image="<?php echo base64_encode($upload_img7085); ?>"
+                        data-category="<?php echo htmlspecialchars($category7085); ?>"
+                        data-status="<?php echo htmlspecialchars($status7085); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName7085); ?>">
+                    <div
+                        style='width:13px; height:13px; border-radius:50%; background-color: <?php echo getStatusColor($status7085); ?>; position:absolute; top:160px; left:260px;'>
                     </div>
-                    <!--Edit for table 7095-->
-                    <div class="map-alert">
-                        <div class="modal fade" id="staticBackdrop7095" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-footer">
-                                        <p>Are you sure you want to save changes?</p>
-                                        <div class="modal-popups">
-                                            <button type="submit" class="btn add-modal-btn" name="edit7095">Yes</button>
-                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!--Start of hover-->
+                    <div id="hover-asset" class="hover-asset" style="display: none;">
+                        <!-- Content will be added dynamically -->
                     </div>
-                    </form>
-
-                    <!-- Modal structure for id 7096-->
-                    <div class='modal fade' id='imageModal7096' tabindex='-1' aria-labelledby='imageModalLabel7096' aria-hidden='true'>
-                        <div class='modal-dialog modal-xl modal-dialog-centered'>
-                            <div class='modal-content'>
-                                <!-- Modal header -->
-                                <div class='modal-header'>
-                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                </div>
-
-                                <!-- Modal body -->
-                                <div class='modal-body'>
-                                    <form method="post" class="row g-3" enctype="multipart/form-data">
-                                        <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId7096); ?>">
-                                        <!--START DIV FOR IMAGE -->
-
-                                        <!--First Row-->
-                                        <!--IMAGE HERE-->
-                                        <div class="col-12 center-content">
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7096); ?>" alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
-                                        </div>
-                                        <!--END DIV FOR IMAGE -->
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assetId" class="form-label">Tracking #:</label>
-                                            <input type="text" class="form-control" id="assetId" name="assetId" value="<?php echo htmlspecialchars($assetId7096); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="date" class="form-label">Date:</label>
-                                            <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($date7096); ?>" readonly />
-                                        </div>
-
-                                        <!--Second Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="room" name="room" value="<?php echo htmlspecialchars($room7096); ?>" readonly />
-                                        </div>
-
-
-                                        <div class="col-6" style="display:none">
-                                            <input type="text" class="form-control  center-content" id="building" name="building" value="<?php echo htmlspecialchars($building7096); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Second Row-->
-
-                                        <!--Third Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="floor" name="floor" value="<?php echo htmlspecialchars($floor7096); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-12 center-content">
-                                            <input type="text" class="form-control  center-content" id="category" name="category" value="<?php echo htmlspecialchars($category7096); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="images" class="form-label">Images:</label>
-                                            <input type="text" class="form-control" id="" name="images" readonly />
-                                        </div>
-
-                                        <!--End of Third Row-->
-
-                                        <!--Fourth Row-->
-                                        <div class="col-2">
-                                            <label for="status" class="form-label">Status:</label>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <select class="form-select" id="status" name="status">
-                                                <option value="Working" <?php echo ($status7096 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
-                                                <option value="Under Maintenance" <?php echo ($status7096 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
-                                                </option>
-                                                <option value="For Replacement" <?php echo ($status7096 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
-                                                </option>
-                                                <option value="Need Repair" <?php echo ($status7096 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedName" class="form-label">Assigned Name:</label>
-                                            <input type="text" class="form-control" id="assignedName" name="assignedName" value="<?php echo htmlspecialchars($assignedName7096); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedBy" class="form-label">Assigned By:</label>
-                                            <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="<?php echo htmlspecialchars($assignedBy7096); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Fourth Row-->
-
-                                        <!--Fifth Row-->
-                                        <!-- <div class="col-3">
-                                            <label for="description" class="form-label">Description:</label>
-                                        </div> -->
-                                        <div class="col-12">
-                                            <input type="text" class="form-control" id="description" name="description" value="<?php echo htmlspecialchars($description7096); ?>" />
-                                        </div>
-                                        <!--End of Fifth Row-->
-
-                                        <!--Sixth Row-->
-                                        <div class="col-2">
-                                            <label for="upload_img" class="form-label">Upload:</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
-                                        </div>
-                                        <!--End of Sixth Row-->
-
-                                        <!-- Modal footer -->
-                                        <div class="button-submit-container">
-                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop7096">
-                                                Save
-                                            </button>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Edit for table 7096-->
-                    <div class="map-alert">
-                        <div class="modal fade" id="staticBackdrop7096" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-footer">
-                                        <p>Are you sure you want to save changes?</p>
-                                        <div class="modal-popups">
-                                            <button type="submit" class="btn add-modal-btn" name="edit7096">Yes</button>
-                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </form>
-
-                    <!-- Modal structure for id 7097-->
-                    <div class='modal fade' id='imageModal7097' tabindex='-1' aria-labelledby='imageModalLabel7097' aria-hidden='true'>
-                        <div class='modal-dialog modal-xl modal-dialog-centered'>
-                            <div class='modal-content'>
-                                <!-- Modal header -->
-                                <div class='modal-header'>
-                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                </div>
-
-                                <!-- Modal body -->
-                                <div class='modal-body'>
-                                    <form method="post" class="row g-3" enctype="multipart/form-data">
-                                        <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId7097); ?>">
-                                        <!--START DIV FOR IMAGE -->
-
-                                        <!--First Row-->
-                                        <!--IMAGE HERE-->
-                                        <div class="col-12 center-content">
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7097); ?>" alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
-                                        </div>
-                                        <!--END DIV FOR IMAGE -->
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assetId" class="form-label">Tracking #:</label>
-                                            <input type="text" class="form-control" id="assetId" name="assetId" value="<?php echo htmlspecialchars($assetId7097); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="date" class="form-label">Date:</label>
-                                            <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($date7097); ?>" readonly />
-                                        </div>
-
-                                        <!--Second Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="room" name="room" value="<?php echo htmlspecialchars($room7097); ?>" readonly />
-                                        </div>
-
-
-                                        <div class="col-6" style="display:none">
-                                            <input type="text" class="form-control  center-content" id="building" name="building" value="<?php echo htmlspecialchars($building7097); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Second Row-->
-
-                                        <!--Third Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="floor" name="floor" value="<?php echo htmlspecialchars($floor7097); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-12 center-content">
-                                            <input type="text" class="form-control  center-content" id="category" name="category" value="<?php echo htmlspecialchars($category7097); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="images" class="form-label">Images:</label>
-                                            <input type="text" class="form-control" id="" name="images" readonly />
-                                        </div>
-
-                                        <!--End of Third Row-->
-
-                                        <!--Fourth Row-->
-                                        <div class="col-2">
-                                            <label for="status" class="form-label">Status:</label>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <select class="form-select" id="status" name="status">
-                                                <option value="Working" <?php echo ($status7097 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
-                                                <option value="Under Maintenance" <?php echo ($status7097 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
-                                                </option>
-                                                <option value="For Replacement" <?php echo ($status7097 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
-                                                </option>
-                                                <option value="Need Repair" <?php echo ($status7097 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedName" class="form-label">Assigned Name:</label>
-                                            <input type="text" class="form-control" id="assignedName" name="assignedName" value="<?php echo htmlspecialchars($assignedName7097); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedBy" class="form-label">Assigned By:</label>
-                                            <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="<?php echo htmlspecialchars($assignedBy7097); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Fourth Row-->
-
-                                        <!--Fifth Row-->
-                                        <!-- <div class="col-3">
-                                            <label for="description" class="form-label">Description:</label>
-                                        </div> -->
-                                        <div class="col-12">
-                                            <input type="text" class="form-control" id="description" name="description" value="<?php echo htmlspecialchars($description7097); ?>" />
-                                        </div>
-                                        <!--End of Fifth Row-->
-
-                                        <!--Sixth Row-->
-                                        <div class="col-2">
-                                            <label for="upload_img" class="form-label">Upload:</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
-                                        </div>
-                                        <!--End of Sixth Row-->
-
-                                        <!-- Modal footer -->
-                                        <div class="button-submit-container">
-                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop7097">
-                                                Save
-                                            </button>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Edit for table 7097-->
-                    <div class="map-alert">
-                        <div class="modal fade" id="staticBackdrop7097" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-footer">
-                                        <p>Are you sure you want to save changes?</p>
-                                        <div class="modal-popups">
-                                            <button type="submit" class="btn add-modal-btn" name="edit7097">Yes</button>
-                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </form>
-
-                    <!-- Modal structure for id 7080-->
-                    <div class='modal fade' id='imageModal7080' tabindex='-1' aria-labelledby='imageModalLabel7080' aria-hidden='true'>
-                        <div class='modal-dialog modal-xl modal-dialog-centered'>
-                            <div class='modal-content'>
-                                <!-- Modal header -->
-                                <div class='modal-header'>
-                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                </div>
-
-                                <!-- Modal body -->
-                                <div class='modal-body'>
-                                    <form method="post" class="row g-3" enctype="multipart/form-data">
-                                        <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId7080); ?>">
-                                        <!--START DIV FOR IMAGE -->
-
-                                        <!--First Row-->
-                                        <!--IMAGE HERE-->
-                                        <div class="col-12 center-content">
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7080); ?>" alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
-                                        </div>
-                                        <!--END DIV FOR IMAGE -->
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assetId" class="form-label">Tracking #:</label>
-                                            <input type="text" class="form-control" id="assetId" name="assetId" value="<?php echo htmlspecialchars($assetId7080); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="date" class="form-label">Date:</label>
-                                            <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($date7080); ?>" readonly />
-                                        </div>
-
-                                        <!--Second Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="room" name="room" value="<?php echo htmlspecialchars($room7080); ?>" readonly />
-                                        </div>
-
-
-                                        <div class="col-6" style="display:none">
-                                            <input type="text" class="form-control  center-content" id="building" name="building" value="<?php echo htmlspecialchars($building7080); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Second Row-->
-
-                                        <!--Third Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="floor" name="floor" value="<?php echo htmlspecialchars($floor7080); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-12 center-content">
-                                            <input type="text" class="form-control  center-content" id="category" name="category" value="<?php echo htmlspecialchars($category7080); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="images" class="form-label">Images:</label>
-                                            <input type="text" class="form-control" id="" name="images" readonly />
-                                        </div>
-
-                                        <!--End of Third Row-->
-
-                                        <!--Fourth Row-->
-                                        <div class="col-2">
-                                            <label for="status" class="form-label">Status:</label>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <select class="form-select" id="status" name="status">
-                                                <option value="Working" <?php echo ($status7080 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
-                                                <option value="Under Maintenance" <?php echo ($status7080 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
-                                                </option>
-                                                <option value="For Replacement" <?php echo ($status7080 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
-                                                </option>
-                                                <option value="Need Repair" <?php echo ($status7080 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedName" class="form-label">Assigned Name:</label>
-                                            <input type="text" class="form-control" id="assignedName" name="assignedName" value="<?php echo htmlspecialchars($assignedName7080); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedBy" class="form-label">Assigned By:</label>
-                                            <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="<?php echo htmlspecialchars($assignedBy7080); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Fourth Row-->
-
-                                        <!--Fifth Row-->
-                                        <!-- <div class="col-3">
-                                            <label for="description" class="form-label">Description:</label>
-                                        </div> -->
-                                        <div class="col-12">
-                                            <input type="text" class="form-control" id="description" name="description" value="<?php echo htmlspecialchars($description7080); ?>" />
-                                        </div>
-                                        <!--End of Fifth Row-->
-
-                                        <!--Sixth Row-->
-                                        <div class="col-2">
-                                            <label for="upload_img" class="form-label">Upload:</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
-                                        </div>
-                                        <!--End of Sixth Row-->
-
-                                        <!-- Modal footer -->
-                                        <div class="button-submit-container">
-                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop7080">
-                                                Save
-                                            </button>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Edit for table 7080-->
-                    <div class="map-alert">
-                        <div class="modal fade" id="staticBackdrop7080" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-footer">
-                                        <p>Are you sure you want to save changes?</p>
-                                        <div class="modal-popups">
-                                            <button type="submit" class="btn add-modal-btn" name="edit7080">Yes</button>
-                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </form>
-
-                    <!-- Modal structure for id 7081-->
-                    <div class='modal fade' id='imageModal7081' tabindex='-1' aria-labelledby='imageModalLabel7081' aria-hidden='true'>
-                        <div class='modal-dialog modal-xl modal-dialog-centered'>
-                            <div class='modal-content'>
-                                <!-- Modal header -->
-                                <div class='modal-header'>
-                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                </div>
-
-                                <!-- Modal body -->
-                                <div class='modal-body'>
-                                    <form method="post" class="row g-3" enctype="multipart/form-data">
-                                        <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId7081); ?>">
-                                        <!--START DIV FOR IMAGE -->
-
-                                        <!--First Row-->
-                                        <!--IMAGE HERE-->
-                                        <div class="col-12 center-content">
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7081); ?>" alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
-                                        </div>
-                                        <!--END DIV FOR IMAGE -->
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assetId" class="form-label">Tracking #:</label>
-                                            <input type="text" class="form-control" id="assetId" name="assetId" value="<?php echo htmlspecialchars($assetId7081); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="date" class="form-label">Date:</label>
-                                            <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($date7081); ?>" readonly />
-                                        </div>
-
-                                        <!--Second Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="room" name="room" value="<?php echo htmlspecialchars($room7081); ?>" readonly />
-                                        </div>
-
-
-                                        <div class="col-6" style="display:none">
-                                            <input type="text" class="form-control  center-content" id="building" name="building" value="<?php echo htmlspecialchars($building7081); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Second Row-->
-
-                                        <!--Third Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="floor" name="floor" value="<?php echo htmlspecialchars($floor7081); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-12 center-content">
-                                            <input type="text" class="form-control  center-content" id="category" name="category" value="<?php echo htmlspecialchars($category7081); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="images" class="form-label">Images:</label>
-                                            <input type="text" class="form-control" id="" name="images" readonly />
-                                        </div>
-
-                                        <!--End of Third Row-->
-
-                                        <!--Fourth Row-->
-                                        <div class="col-2">
-                                            <label for="status" class="form-label">Status:</label>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <select class="form-select" id="status" name="status">
-                                                <option value="Working" <?php echo ($status7081 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
-                                                <option value="Under Maintenance" <?php echo ($status7081 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
-                                                </option>
-                                                <option value="For Replacement" <?php echo ($status7081 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
-                                                </option>
-                                                <option value="Need Repair" <?php echo ($status7081 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedName" class="form-label">Assigned Name:</label>
-                                            <input type="text" class="form-control" id="assignedName" name="assignedName" value="<?php echo htmlspecialchars($assignedName7081); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedBy" class="form-label">Assigned By:</label>
-                                            <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="<?php echo htmlspecialchars($assignedBy7081); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Fourth Row-->
-
-                                        <!--Fifth Row-->
-                                        <!-- <div class="col-3">
-                                            <label for="description" class="form-label">Description:</label>
-                                        </div> -->
-                                        <div class="col-12">
-                                            <input type="text" class="form-control" id="description" name="description" value="<?php echo htmlspecialchars($description7081); ?>" />
-                                        </div>
-                                        <!--End of Fifth Row-->
-
-                                        <!--Sixth Row-->
-                                        <div class="col-2">
-                                            <label for="upload_img" class="form-label">Upload:</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
-                                        </div>
-                                        <!--End of Sixth Row-->
-
-                                        <!-- Modal footer -->
-                                        <div class="button-submit-container">
-                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop7081">
-                                                Save
-                                            </button>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Edit for table 7081-->
-                    <div class="map-alert">
-                        <div class="modal fade" id="staticBackdrop7081" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-footer">
-                                        <p>Are you sure you want to save changes?</p>
-                                        <div class="modal-popups">
-                                            <button type="submit" class="btn add-modal-btn" name="edit7081">Yes</button>
-                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </form>
-
-                    <!-- Modal structure for id 7082-->
-                    <div class='modal fade' id='imageModal7082' tabindex='-1' aria-labelledby='imageModalLabel7082' aria-hidden='true'>
-                        <div class='modal-dialog modal-xl modal-dialog-centered'>
-                            <div class='modal-content'>
-                                <!-- Modal header -->
-                                <div class='modal-header'>
-                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                </div>
-
-                                <!-- Modal body -->
-                                <div class='modal-body'>
-                                    <form method="post" class="row g-3" enctype="multipart/form-data">
-                                        <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId7082); ?>">
-                                        <!--START DIV FOR IMAGE -->
-
-                                        <!--First Row-->
-                                        <!--IMAGE HERE-->
-                                        <div class="col-12 center-content">
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7082); ?>" alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
-                                        </div>
-                                        <!--END DIV FOR IMAGE -->
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assetId" class="form-label">Tracking #:</label>
-                                            <input type="text" class="form-control" id="assetId" name="assetId" value="<?php echo htmlspecialchars($assetId7082); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="date" class="form-label">Date:</label>
-                                            <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($date7082); ?>" readonly />
-                                        </div>
-
-                                        <!--Second Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="room" name="room" value="<?php echo htmlspecialchars($room7082); ?>" readonly />
-                                        </div>
-
-
-                                        <div class="col-6" style="display:none">
-                                            <input type="text" class="form-control  center-content" id="building" name="building" value="<?php echo htmlspecialchars($building7082); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Second Row-->
-
-                                        <!--Third Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="floor" name="floor" value="<?php echo htmlspecialchars($floor7082); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-12 center-content">
-                                            <input type="text" class="form-control  center-content" id="category" name="category" value="<?php echo htmlspecialchars($category7082); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="images" class="form-label">Images:</label>
-                                            <input type="text" class="form-control" id="" name="images" readonly />
-                                        </div>
-
-                                        <!--End of Third Row-->
-
-                                        <!--Fourth Row-->
-                                        <div class="col-2">
-                                            <label for="status" class="form-label">Status:</label>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <select class="form-select" id="status" name="status">
-                                                <option value="Working" <?php echo ($status7082 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
-                                                <option value="Under Maintenance" <?php echo ($status7082 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
-                                                </option>
-                                                <option value="For Replacement" <?php echo ($status7082 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
-                                                </option>
-                                                <option value="Need Repair" <?php echo ($status7082 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedName" class="form-label">Assigned Name:</label>
-                                            <input type="text" class="form-control" id="assignedName" name="assignedName" value="<?php echo htmlspecialchars($assignedName7082); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedBy" class="form-label">Assigned By:</label>
-                                            <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="<?php echo htmlspecialchars($assignedBy7082); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Fourth Row-->
-
-                                        <!--Fifth Row-->
-                                        <!-- <div class="col-3">
-                                            <label for="description" class="form-label">Description:</label>
-                                        </div> -->
-                                        <div class="col-12">
-                                            <input type="text" class="form-control" id="description" name="description" value="<?php echo htmlspecialchars($description7082); ?>" />
-                                        </div>
-                                        <!--End of Fifth Row-->
-
-                                        <!--Sixth Row-->
-                                        <div class="col-2">
-                                            <label for="upload_img" class="form-label">Upload:</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
-                                        </div>
-                                        <!--End of Sixth Row-->
-
-                                        <!-- Modal footer -->
-                                        <div class="button-submit-container">
-                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop7082">
-                                                Save
-                                            </button>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Edit for table 7082-->
-                    <div class="map-alert">
-                        <div class="modal fade" id="staticBackdrop7082" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-footer">
-                                        <p>Are you sure you want to save changes?</p>
-                                        <div class="modal-popups">
-                                            <button type="submit" class="btn add-modal-btn" name="edit7082">Yes</button>
-                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </form>
-
-                    <!-- Modal structure for id 7083-->
-                    <div class='modal fade' id='imageModal7083' tabindex='-1' aria-labelledby='imageModalLabel7083' aria-hidden='true'>
-                        <div class='modal-dialog modal-xl modal-dialog-centered'>
-                            <div class='modal-content'>
-                                <!-- Modal header -->
-                                <div class='modal-header'>
-                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                </div>
-
-                                <!-- Modal body -->
-                                <div class='modal-body'>
-                                    <form method="post" class="row g-3" enctype="multipart/form-data">
-                                        <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId7083); ?>">
-                                        <!--START DIV FOR IMAGE -->
-
-                                        <!--First Row-->
-                                        <!--IMAGE HERE-->
-                                        <div class="col-12 center-content">
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7083); ?>" alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
-                                        </div>
-                                        <!--END DIV FOR IMAGE -->
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assetId" class="form-label">Tracking #:</label>
-                                            <input type="text" class="form-control" id="assetId" name="assetId" value="<?php echo htmlspecialchars($assetId7083); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="date" class="form-label">Date:</label>
-                                            <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($date7083); ?>" readonly />
-                                        </div>
-
-                                        <!--Second Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="room" name="room" value="<?php echo htmlspecialchars($room7083); ?>" readonly />
-                                        </div>
-
-
-                                        <div class="col-6" style="display:none">
-                                            <input type="text" class="form-control  center-content" id="building" name="building" value="<?php echo htmlspecialchars($building7083); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Second Row-->
-
-                                        <!--Third Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="floor" name="floor" value="<?php echo htmlspecialchars($floor7083); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-12 center-content">
-                                            <input type="text" class="form-control  center-content" id="category" name="category" value="<?php echo htmlspecialchars($category7083); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="images" class="form-label">Images:</label>
-                                            <input type="text" class="form-control" id="" name="images" readonly />
-                                        </div>
-
-                                        <!--End of Third Row-->
-
-                                        <!--Fourth Row-->
-                                        <div class="col-2">
-                                            <label for="status" class="form-label">Status:</label>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <select class="form-select" id="status" name="status">
-                                                <option value="Working" <?php echo ($status7083 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
-                                                <option value="Under Maintenance" <?php echo ($status7083 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
-                                                </option>
-                                                <option value="For Replacement" <?php echo ($status7083 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
-                                                </option>
-                                                <option value="Need Repair" <?php echo ($status7083 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedName" class="form-label">Assigned Name:</label>
-                                            <input type="text" class="form-control" id="assignedName" name="assignedName" value="<?php echo htmlspecialchars($assignedName7083); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedBy" class="form-label">Assigned By:</label>
-                                            <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="<?php echo htmlspecialchars($assignedBy7083); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Fourth Row-->
-
-                                        <!--Fifth Row-->
-                                        <!-- <div class="col-3">
-                                            <label for="description" class="form-label">Description:</label>
-                                        </div> -->
-                                        <div class="col-12">
-                                            <input type="text" class="form-control" id="description" name="description" value="<?php echo htmlspecialchars($description7083); ?>" />
-                                        </div>
-                                        <!--End of Fifth Row-->
-
-                                        <!--Sixth Row-->
-                                        <div class="col-2">
-                                            <label for="upload_img" class="form-label">Upload:</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
-                                        </div>
-                                        <!--End of Sixth Row-->
-
-                                        <!-- Modal footer -->
-                                        <div class="button-submit-container">
-                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop7083">
-                                                Save
-                                            </button>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Edit for table 7083-->
-                    <div class="map-alert">
-                        <div class="modal fade" id="staticBackdrop7083" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-footer">
-                                        <p>Are you sure you want to save changes?</p>
-                                        <div class="modal-popups">
-                                            <button type="submit" class="btn add-modal-btn" name="edit7083">Yes</button>
-                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </form>
-
-                    <!-- Modal structure for id 7084-->
-                    <div class='modal fade' id='imageModal7084' tabindex='-1' aria-labelledby='imageModalLabel7084' aria-hidden='true'>
-                        <div class='modal-dialog modal-xl modal-dialog-centered'>
-                            <div class='modal-content'>
-                                <!-- Modal header -->
-                                <div class='modal-header'>
-                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                </div>
-
-                                <!-- Modal body -->
-                                <div class='modal-body'>
-                                    <form method="post" class="row g-3" enctype="multipart/form-data">
-                                        <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId7084); ?>">
-                                        <!--START DIV FOR IMAGE -->
-
-                                        <!--First Row-->
-                                        <!--IMAGE HERE-->
-                                        <div class="col-12 center-content">
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7084); ?>" alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
-                                        </div>
-                                        <!--END DIV FOR IMAGE -->
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assetId" class="form-label">Tracking #:</label>
-                                            <input type="text" class="form-control" id="assetId" name="assetId" value="<?php echo htmlspecialchars($assetId7084); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="date" class="form-label">Date:</label>
-                                            <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($date7084); ?>" readonly />
-                                        </div>
-
-                                        <!--Second Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="room" name="room" value="<?php echo htmlspecialchars($room7084); ?>" readonly />
-                                        </div>
-
-
-                                        <div class="col-6" style="display:none">
-                                            <input type="text" class="form-control  center-content" id="building" name="building" value="<?php echo htmlspecialchars($building7084); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Second Row-->
-
-                                        <!--Third Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="floor" name="floor" value="<?php echo htmlspecialchars($floor7084); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-12 center-content">
-                                            <input type="text" class="form-control  center-content" id="category" name="category" value="<?php echo htmlspecialchars($category7084); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="images" class="form-label">Images:</label>
-                                            <input type="text" class="form-control" id="" name="images" readonly />
-                                        </div>
-
-                                        <!--End of Third Row-->
-
-                                        <!--Fourth Row-->
-                                        <div class="col-2">
-                                            <label for="status" class="form-label">Status:</label>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <select class="form-select" id="status" name="status">
-                                                <option value="Working" <?php echo ($status7084 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
-                                                <option value="Under Maintenance" <?php echo ($status7084 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
-                                                </option>
-                                                <option value="For Replacement" <?php echo ($status7084 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
-                                                </option>
-                                                <option value="Need Repair" <?php echo ($status7084 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedName" class="form-label">Assigned Name:</label>
-                                            <input type="text" class="form-control" id="assignedName" name="assignedName" value="<?php echo htmlspecialchars($assignedName7084); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedBy" class="form-label">Assigned By:</label>
-                                            <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="<?php echo htmlspecialchars($assignedBy7084); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Fourth Row-->
-
-                                        <!--Fifth Row-->
-                                        <!-- <div class="col-3">
-                                            <label for="description" class="form-label">Description:</label>
-                                        </div> -->
-                                        <div class="col-12">
-                                            <input type="text" class="form-control" id="description" name="description" value="<?php echo htmlspecialchars($description7084); ?>" />
-                                        </div>
-                                        <!--End of Fifth Row-->
-
-                                        <!--Sixth Row-->
-                                        <div class="col-2">
-                                            <label for="upload_img" class="form-label">Upload:</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
-                                        </div>
-                                        <!--End of Sixth Row-->
-
-                                        <!-- Modal footer -->
-                                        <div class="button-submit-container">
-                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop7084">
-                                                Save
-                                            </button>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Edit for table 7084-->
-                    <div class="map-alert">
-                        <div class="modal fade" id="staticBackdrop7084" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-footer">
-                                        <p>Are you sure you want to save changes?</p>
-                                        <div class="modal-popups">
-                                            <button type="submit" class="btn add-modal-btn" name="edit7084">Yes</button>
-                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </form>
-
-                    <!-- Modal structure for id 7085-->
-                    <div class='modal fade' id='imageModal7085' tabindex='-1' aria-labelledby='imageModalLabel7085' aria-hidden='true'>
-                        <div class='modal-dialog modal-xl modal-dialog-centered'>
-                            <div class='modal-content'>
-                                <!-- Modal header -->
-                                <div class='modal-header'>
-                                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                                </div>
-
-                                <!-- Modal body -->
-                                <div class='modal-body'>
-                                    <form method="post" class="row g-3" enctype="multipart/form-data">
-                                        <input type="hidden" name="assetId" value="<?php echo htmlspecialchars($assetId7085); ?>">
-                                        <!--START DIV FOR IMAGE -->
-
-                                        <!--First Row-->
-                                        <!--IMAGE HERE-->
-                                        <div class="col-12 center-content">
-                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7085); ?>" alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
-                                        </div>
-                                        <!--END DIV FOR IMAGE -->
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assetId" class="form-label">Tracking #:</label>
-                                            <input type="text" class="form-control" id="assetId" name="assetId" value="<?php echo htmlspecialchars($assetId7085); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="date" class="form-label">Date:</label>
-                                            <input type="text" class="form-control" id="date" name="date" value="<?php echo htmlspecialchars($date7085); ?>" readonly />
-                                        </div>
-
-                                        <!--Second Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="room" name="room" value="<?php echo htmlspecialchars($room7085); ?>" readonly />
-                                        </div>
-
-
-                                        <div class="col-6" style="display:none">
-                                            <input type="text" class="form-control  center-content" id="building" name="building" value="<?php echo htmlspecialchars($building7085); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Second Row-->
-
-                                        <!--Third Row-->
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="floor" name="floor" value="<?php echo htmlspecialchars($floor7085); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-12 center-content">
-                                            <input type="text" class="form-control  center-content" id="category" name="category" value="<?php echo htmlspecialchars($category7085); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="images" class="form-label">Images:</label>
-                                            <input type="text" class="form-control" id="" name="images" readonly />
-                                        </div>
-
-                                        <!--End of Third Row-->
-
-                                        <!--Fourth Row-->
-                                        <div class="col-2">
-                                            <label for="status" class="form-label">Status:</label>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <select class="form-select" id="status" name="status">
-                                                <option value="Working" <?php echo ($status7085 == 'Working')
-                                                    ? 'selected="selected"' : ''; ?>>Working</option>
-                                                <option value="Under Maintenance" <?php echo ($status7085 == 'Under Maintenance')
-                                                    ? 'selected="selected"' : ''; ?>>Under Maintenance
-                                                </option>
-                                                <option value="For Replacement" <?php echo ($status7085 == 'For Replacement')
-                                                    ? 'selected="selected"' : ''; ?>>For Replacement
-                                                </option>
-                                                <option value="Need Repair" <?php echo ($status7085 == 'Need Repair')
-                                                    ? 'selected="selected"' : ''; ?>>Need Repair</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedName" class="form-label">Assigned Name:</label>
-                                            <input type="text" class="form-control" id="assignedName" name="assignedName" value="<?php echo htmlspecialchars($assignedName7085); ?>" readonly />
-                                        </div>
-
-                                        <div class="col-4" style="display:none">
-                                            <label for="assignedBy" class="form-label">Assigned By:</label>
-                                            <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="<?php echo htmlspecialchars($assignedBy7085); ?>" readonly />
-                                        </div>
-
-                                        <!--End of Fourth Row-->
-
-                                        <!--Fifth Row-->
-                                        <!-- <div class="col-3">
-                                            <label for="description" class="form-label">Description:</label>
-                                        </div> -->
-                                        <div class="col-12">
-                                            <input type="text" class="form-control" id="description" name="description" value="<?php echo htmlspecialchars($description7085); ?>" />
-                                        </div>
-                                        <!--End of Fifth Row-->
-
-                                        <!--Sixth Row-->
-                                        <div class="col-2">
-                                            <label for="upload_img" class="form-label">Upload:</label>
-                                        </div>
-                                        <div class="col-9">
-                                            <input type="file" class="form-control" id="upload_img" name="upload_img" accept="image/*" capture="user" />
-                                        </div>
-                                        <!--End of Sixth Row-->
-
-                                        <!-- Modal footer -->
-                                        <div class="button-submit-container">
-                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop7085">
-                                                Save
-                                            </button>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Edit for table 7085-->
-                    <div class="map-alert">
-                        <div class="modal fade" id="staticBackdrop7085" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-footer">
-                                        <p>Are you sure you want to save changes?</p>
-                                        <div class="modal-popups">
-                                            <button type="submit" class="btn add-modal-btn" name="edit7085">Yes</button>
-                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </form>
 
                 </div>
-            </main>
-        </section>
-        <script>
-            $(document).ready(function() {
-                $('.notification-item').on('click', function(e) {
-                    e.preventDefault();
-                    var activityId = $(this).data('activity-id');
-                    var notificationItem = $(this); // Store the clicked element
+                <!-- Modal structure for id 7086-->
+                <div class='modal fade' id='imageModal7086' tabindex='-1' aria-labelledby='imageModalLabel7086'
+                    aria-hidden='true'>
+                    <div class='modal-dialog modal-xl modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <!-- Modal header -->
+                            <div class='modal-header'>
+                                <button type='button' class='btn-close' data-bs-dismiss='modal'
+                                    aria-label='Close'></button>
+                            </div>
 
-                    $.ajax({
-                        type: "POST",
-                        url: "../../administrator/update_single_notification.php", // The URL to the PHP file
-                        data: {
-                            activityId: activityId
-                        },
-                        success: function(response) {
-                            if (response.trim() === "Notification updated successfully") {
-                                // If the notification is updated successfully, remove the clicked element
-                                notificationItem.remove();
+                            <!-- Modal body -->
+                            <div class='modal-body'>
+                                <form method="post" class="row g-3" enctype="multipart/form-data">
+                                    <input type="hidden" name="assetId"
+                                        value="<?php echo htmlspecialchars($assetId7086); ?>">
+                                    <!--START DIV FOR IMAGE -->
 
-                                // Update the notification count
-                                var countElement = $('#noti_number');
-                                var count = parseInt(countElement.text()) || 0;
-                                countElement.text(count > 1 ? count - 1 : '');
-                            } else {
-                                // Handle error
-                                console.error("Failed to update notification:", response);
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            // Handle AJAX error
-                            console.error("AJAX error:", status, error);
+                                    <!--First Row-->
+                                    <!--IMAGE HERE-->
+                                    <div class="col-12 center-content">
+                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7086); ?>"
+                                            alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
+                                    </div>
+                                    <!--END DIV FOR IMAGE -->
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId"
+                                            value="<?php echo htmlspecialchars($assetId7086); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date"
+                                            value="<?php echo htmlspecialchars($date7086); ?>" readonly />
+                                    </div>
+
+                                    <!--Second Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="room" name="room"
+                                            value="<?php echo htmlspecialchars($room7086); ?>" readonly />
+                                    </div>
+
+
+                                    <div class="col-6" style="display:none">
+                                        <input type="text" class="form-control  center-content" id="building"
+                                            name="building" value="<?php echo htmlspecialchars($building7086); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <!--End of Second Row-->
+
+                                    <!--Third Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="floor" name="floor"
+                                            value="<?php echo htmlspecialchars($floor7086); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-12 center-content">
+                                        <input type="text" class="form-control  center-content" id="category"
+                                            name="category" value="<?php echo htmlspecialchars($category7086); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <!--End of Third Row-->
+
+                                    <!--Fourth Row-->
+                                    <div class="col-2">
+                                        <label for="status" class="form-label">Status:</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working" <?php echo ($status7086 == 'Working')
+                                                ? 'selected="selected"' : ''; ?>>Working</option>
+                                            <option value="Under Maintenance" <?php echo ($status7086 == 'Under Maintenance')
+                                                ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                            </option>
+                                            <option value="For Replacement" <?php echo ($status7086 == 'For Replacement')
+                                                ? 'selected="selected"' : ''; ?>>For Replacement
+                                            </option>
+                                            <option value="Need Repair" <?php echo ($status7086 == 'Need Repair')
+                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName"
+                                            value="<?php echo htmlspecialchars($assignedName7086); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy"
+                                            value="<?php echo htmlspecialchars($assignedBy7086); ?>" readonly />
+                                    </div>
+
+                                    <!--End of Fourth Row-->
+
+                                    <!--Fifth Row-->
+                                    <!-- <div class="col-3">
+                                            <label for="description" class="form-label">Description:</label>
+                                        </div> -->
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" id="description" name="description"
+                                            value="<?php echo htmlspecialchars($description7086); ?>" />
+                                    </div>
+                                    <!--End of Fifth Row-->
+
+                                    <!--Sixth Row-->
+                                    <div class="col-2">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop7086">
+                                            Save
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Edit for table 7086-->
+                <div class="map-alert">
+                    <div class="modal fade" id="staticBackdrop7086" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    <p>Are you sure you want to save changes?</p>
+                                    <div class="modal-popups">
+                                        <button type="submit" class="btn add-modal-btn" name="edit7086">Yes</button>
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+                <!-- Modal structure for id 7087-->
+                <div class='modal fade' id='imageModal7087' tabindex='-1' aria-labelledby='imageModalLabel7087'
+                    aria-hidden='true'>
+                    <div class='modal-dialog modal-xl modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <!-- Modal header -->
+                            <div class='modal-header'>
+                                <button type='button' class='btn-close' data-bs-dismiss='modal'
+                                    aria-label='Close'></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class='modal-body'>
+                                <form method="post" class="row g-3" enctype="multipart/form-data">
+                                    <input type="hidden" name="assetId"
+                                        value="<?php echo htmlspecialchars($assetId7087); ?>">
+                                    <!--START DIV FOR IMAGE -->
+
+                                    <!--First Row-->
+                                    <!--IMAGE HERE-->
+                                    <div class="col-12 center-content">
+                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7087); ?>"
+                                            alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
+                                    </div>
+                                    <!--END DIV FOR IMAGE -->
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId"
+                                            value="<?php echo htmlspecialchars($assetId7087); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date"
+                                            value="<?php echo htmlspecialchars($date7087); ?>" readonly />
+                                    </div>
+
+                                    <!--Second Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="room" name="room"
+                                            value="<?php echo htmlspecialchars($room7087); ?>" readonly />
+                                    </div>
+
+
+                                    <div class="col-6" style="display:none">
+                                        <input type="text" class="form-control  center-content" id="building"
+                                            name="building" value="<?php echo htmlspecialchars($building7087); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <!--End of Second Row-->
+
+                                    <!--Third Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="floor" name="floor"
+                                            value="<?php echo htmlspecialchars($floor7087); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-12 center-content">
+                                        <input type="text" class="form-control  center-content" id="category"
+                                            name="category" value="<?php echo htmlspecialchars($category7087); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <!--End of Third Row-->
+
+                                    <!--Fourth Row-->
+                                    <div class="col-2">
+                                        <label for="status" class="form-label">Status:</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working" <?php echo ($status7087 == 'Working')
+                                                ? 'selected="selected"' : ''; ?>>Working</option>
+                                            <option value="Under Maintenance" <?php echo ($status7087 == 'Under Maintenance')
+                                                ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                            </option>
+                                            <option value="For Replacement" <?php echo ($status7087 == 'For Replacement')
+                                                ? 'selected="selected"' : ''; ?>>For Replacement
+                                            </option>
+                                            <option value="Need Repair" <?php echo ($status7087 == 'Need Repair')
+                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName"
+                                            value="<?php echo htmlspecialchars($assignedName7087); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy"
+                                            value="<?php echo htmlspecialchars($assignedBy7087); ?>" readonly />
+                                    </div>
+
+                                    <!--End of Fourth Row-->
+
+                                    <!--Fifth Row-->
+                                    <!-- <div class="col-3">
+                                            <label for="description" class="form-label">Description:</label>
+                                        </div> -->
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" id="description" name="description"
+                                            value="<?php echo htmlspecialchars($description7087); ?>" />
+                                    </div>
+                                    <!--End of Fifth Row-->
+
+                                    <!--Sixth Row-->
+                                    <div class="col-2">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop7087">
+                                            Save
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Edit for table 7087-->
+                <div class="map-alert">
+                    <div class="modal fade" id="staticBackdrop7087" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    <p>Are you sure you want to save changes?</p>
+                                    <div class="modal-popups">
+                                        <button type="submit" class="btn add-modal-btn" name="edit7087">Yes</button>
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+                <!-- Modal structure for id 7088-->
+                <div class='modal fade' id='imageModal7088' tabindex='-1' aria-labelledby='imageModalLabel7088'
+                    aria-hidden='true'>
+                    <div class='modal-dialog modal-xl modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <!-- Modal header -->
+                            <div class='modal-header'>
+                                <button type='button' class='btn-close' data-bs-dismiss='modal'
+                                    aria-label='Close'></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class='modal-body'>
+                                <form method="post" class="row g-3" enctype="multipart/form-data">
+                                    <input type="hidden" name="assetId"
+                                        value="<?php echo htmlspecialchars($assetId7088); ?>">
+                                    <!--START DIV FOR IMAGE -->
+
+                                    <!--First Row-->
+                                    <!--IMAGE HERE-->
+                                    <div class="col-12 center-content">
+                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7088); ?>"
+                                            alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
+                                    </div>
+                                    <!--END DIV FOR IMAGE -->
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId"
+                                            value="<?php echo htmlspecialchars($assetId7088); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date"
+                                            value="<?php echo htmlspecialchars($date7088); ?>" readonly />
+                                    </div>
+
+                                    <!--Second Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="room" name="room"
+                                            value="<?php echo htmlspecialchars($room7088); ?>" readonly />
+                                    </div>
+
+
+                                    <div class="col-6" style="display:none">
+                                        <input type="text" class="form-control  center-content" id="building"
+                                            name="building" value="<?php echo htmlspecialchars($building7088); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <!--End of Second Row-->
+
+                                    <!--Third Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="floor" name="floor"
+                                            value="<?php echo htmlspecialchars($floor7088); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-12 center-content">
+                                        <input type="text" class="form-control  center-content" id="category"
+                                            name="category" value="<?php echo htmlspecialchars($category7088); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <!--End of Third Row-->
+
+                                    <!--Fourth Row-->
+                                    <div class="col-2">
+                                        <label for="status" class="form-label">Status:</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working" <?php echo ($status7088 == 'Working')
+                                                ? 'selected="selected"' : ''; ?>>Working</option>
+                                            <option value="Under Maintenance" <?php echo ($status7088 == 'Under Maintenance')
+                                                ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                            </option>
+                                            <option value="For Replacement" <?php echo ($status7088 == 'For Replacement')
+                                                ? 'selected="selected"' : ''; ?>>For Replacement
+                                            </option>
+                                            <option value="Need Repair" <?php echo ($status7088 == 'Need Repair')
+                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName"
+                                            value="<?php echo htmlspecialchars($assignedName7088); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy"
+                                            value="<?php echo htmlspecialchars($assignedBy7088); ?>" readonly />
+                                    </div>
+
+                                    <!--End of Fourth Row-->
+
+                                    <!--Fifth Row-->
+                                    <!-- <div class="col-3">
+                                            <label for="description" class="form-label">Description:</label>
+                                        </div> -->
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" id="description" name="description"
+                                            value="<?php echo htmlspecialchars($description7088); ?>" />
+                                    </div>
+                                    <!--End of Fifth Row-->
+
+                                    <!--Sixth Row-->
+                                    <div class="col-2">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop7088">
+                                            Save
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Edit for table 7088-->
+                <div class="map-alert">
+                    <div class="modal fade" id="staticBackdrop7088" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    <p>Are you sure you want to save changes?</p>
+                                    <div class="modal-popups">
+                                        <button type="submit" class="btn add-modal-btn" name="edit7088">Yes</button>
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+                <!-- Modal structure for id 7089-->
+                <div class='modal fade' id='imageModal7089' tabindex='-1' aria-labelledby='imageModalLabel7089'
+                    aria-hidden='true'>
+                    <div class='modal-dialog modal-xl modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <!-- Modal header -->
+                            <div class='modal-header'>
+                                <button type='button' class='btn-close' data-bs-dismiss='modal'
+                                    aria-label='Close'></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class='modal-body'>
+                                <form method="post" class="row g-3" enctype="multipart/form-data">
+                                    <input type="hidden" name="assetId"
+                                        value="<?php echo htmlspecialchars($assetId7089); ?>">
+                                    <!--START DIV FOR IMAGE -->
+
+                                    <!--First Row-->
+                                    <!--IMAGE HERE-->
+                                    <div class="col-12 center-content">
+                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7089); ?>"
+                                            alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
+                                    </div>
+                                    <!--END DIV FOR IMAGE -->
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId"
+                                            value="<?php echo htmlspecialchars($assetId7089); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date"
+                                            value="<?php echo htmlspecialchars($date7089); ?>" readonly />
+                                    </div>
+
+                                    <!--Second Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="room" name="room"
+                                            value="<?php echo htmlspecialchars($room7089); ?>" readonly />
+                                    </div>
+
+
+                                    <div class="col-6" style="display:none">
+                                        <input type="text" class="form-control  center-content" id="building"
+                                            name="building" value="<?php echo htmlspecialchars($building7089); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <!--End of Second Row-->
+
+                                    <!--Third Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="floor" name="floor"
+                                            value="<?php echo htmlspecialchars($floor7089); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-12 center-content">
+                                        <input type="text" class="form-control  center-content" id="category"
+                                            name="category" value="<?php echo htmlspecialchars($category7089); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <!--End of Third Row-->
+
+                                    <!--Fourth Row-->
+                                    <div class="col-2">
+                                        <label for="status" class="form-label">Status:</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working" <?php echo ($status7089 == 'Working')
+                                                ? 'selected="selected"' : ''; ?>>Working</option>
+                                            <option value="Under Maintenance" <?php echo ($status7089 == 'Under Maintenance')
+                                                ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                            </option>
+                                            <option value="For Replacement" <?php echo ($status7089 == 'For Replacement')
+                                                ? 'selected="selected"' : ''; ?>>For Replacement
+                                            </option>
+                                            <option value="Need Repair" <?php echo ($status7089 == 'Need Repair')
+                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName"
+                                            value="<?php echo htmlspecialchars($assignedName7089); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy"
+                                            value="<?php echo htmlspecialchars($assignedBy7089); ?>" readonly />
+                                    </div>
+
+                                    <!--End of Fourth Row-->
+
+                                    <!--Fifth Row-->
+                                    <!-- <div class="col-3">
+                                            <label for="description" class="form-label">Description:</label>
+                                        </div> -->
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" id="description" name="description"
+                                            value="<?php echo htmlspecialchars($description7089); ?>" />
+                                    </div>
+                                    <!--End of Fifth Row-->
+
+                                    <!--Sixth Row-->
+                                    <div class="col-2">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop7089">
+                                            Save
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Edit for table 7089-->
+                <div class="map-alert">
+                    <div class="modal fade" id="staticBackdrop7089" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    <p>Are you sure you want to save changes?</p>
+                                    <div class="modal-popups">
+                                        <button type="submit" class="btn add-modal-btn" name="edit7089">Yes</button>
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+                <!-- Modal structure for id 7090-->
+                <div class='modal fade' id='imageModal7090' tabindex='-1' aria-labelledby='imageModalLabel7090'
+                    aria-hidden='true'>
+                    <div class='modal-dialog modal-xl modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <!-- Modal header -->
+                            <div class='modal-header'>
+                                <button type='button' class='btn-close' data-bs-dismiss='modal'
+                                    aria-label='Close'></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class='modal-body'>
+                                <form method="post" class="row g-3" enctype="multipart/form-data">
+                                    <input type="hidden" name="assetId"
+                                        value="<?php echo htmlspecialchars($assetId7090); ?>">
+                                    <!--START DIV FOR IMAGE -->
+
+                                    <!--First Row-->
+                                    <!--IMAGE HERE-->
+                                    <div class="col-12 center-content">
+                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7090); ?>"
+                                            alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
+                                    </div>
+                                    <!--END DIV FOR IMAGE -->
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId"
+                                            value="<?php echo htmlspecialchars($assetId7090); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date"
+                                            value="<?php echo htmlspecialchars($date7090); ?>" readonly />
+                                    </div>
+
+                                    <!--Second Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="room" name="room"
+                                            value="<?php echo htmlspecialchars($room7090); ?>" readonly />
+                                    </div>
+
+
+                                    <div class="col-6" style="display:none">
+                                        <input type="text" class="form-control  center-content" id="building"
+                                            name="building" value="<?php echo htmlspecialchars($building7090); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <!--End of Second Row-->
+
+                                    <!--Third Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="floor" name="floor"
+                                            value="<?php echo htmlspecialchars($floor7090); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-12 center-content">
+                                        <input type="text" class="form-control  center-content" id="category"
+                                            name="category" value="<?php echo htmlspecialchars($category7090); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <!--End of Third Row-->
+
+                                    <!--Fourth Row-->
+                                    <div class="col-2">
+                                        <label for="status" class="form-label">Status:</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working" <?php echo ($status7090 == 'Working')
+                                                ? 'selected="selected"' : ''; ?>>Working</option>
+                                            <option value="Under Maintenance" <?php echo ($status7090 == 'Under Maintenance')
+                                                ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                            </option>
+                                            <option value="For Replacement" <?php echo ($status7090 == 'For Replacement')
+                                                ? 'selected="selected"' : ''; ?>>For Replacement
+                                            </option>
+                                            <option value="Need Repair" <?php echo ($status7090 == 'Need Repair')
+                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName"
+                                            value="<?php echo htmlspecialchars($assignedName7090); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy"
+                                            value="<?php echo htmlspecialchars($assignedBy7090); ?>" readonly />
+                                    </div>
+
+                                    <!--End of Fourth Row-->
+
+                                    <!--Fifth Row-->
+                                    <!-- <div class="col-3">
+                                            <label for="description" class="form-label">Description:</label>
+                                        </div> -->
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" id="description" name="description"
+                                            value="<?php echo htmlspecialchars($description7090); ?>" />
+                                    </div>
+                                    <!--End of Fifth Row-->
+
+                                    <!--Sixth Row-->
+                                    <div class="col-2">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop7090">
+                                            Save
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Edit for table 7090-->
+                <div class="map-alert">
+                    <div class="modal fade" id="staticBackdrop7090" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    <p>Are you sure you want to save changes?</p>
+                                    <div class="modal-popups">
+                                        <button type="submit" class="btn add-modal-btn" name="edit7090">Yes</button>
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+                <!-- Modal structure for id 7091-->
+                <div class='modal fade' id='imageModal7091' tabindex='-1' aria-labelledby='imageModalLabel7091'
+                    aria-hidden='true'>
+                    <div class='modal-dialog modal-xl modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <!-- Modal header -->
+                            <div class='modal-header'>
+                                <button type='button' class='btn-close' data-bs-dismiss='modal'
+                                    aria-label='Close'></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class='modal-body'>
+                                <form method="post" class="row g-3" enctype="multipart/form-data">
+                                    <input type="hidden" name="assetId"
+                                        value="<?php echo htmlspecialchars($assetId7091); ?>">
+                                    <!--START DIV FOR IMAGE -->
+
+                                    <!--First Row-->
+                                    <!--IMAGE HERE-->
+                                    <div class="col-12 center-content">
+                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7091); ?>"
+                                            alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
+                                    </div>
+                                    <!--END DIV FOR IMAGE -->
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId"
+                                            value="<?php echo htmlspecialchars($assetId7091); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date"
+                                            value="<?php echo htmlspecialchars($date7091); ?>" readonly />
+                                    </div>
+
+                                    <!--Second Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="room" name="room"
+                                            value="<?php echo htmlspecialchars($room7091); ?>" readonly />
+                                    </div>
+
+
+                                    <div class="col-6" style="display:none">
+                                        <input type="text" class="form-control  center-content" id="building"
+                                            name="building" value="<?php echo htmlspecialchars($building7091); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <!--End of Second Row-->
+
+                                    <!--Third Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="floor" name="floor"
+                                            value="<?php echo htmlspecialchars($floor7091); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-12 center-content">
+                                        <input type="text" class="form-control  center-content" id="category"
+                                            name="category" value="<?php echo htmlspecialchars($category7091); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <!--End of Third Row-->
+
+                                    <!--Fourth Row-->
+                                    <div class="col-2">
+                                        <label for="status" class="form-label">Status:</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working" <?php echo ($status7091 == 'Working')
+                                                ? 'selected="selected"' : ''; ?>>Working</option>
+                                            <option value="Under Maintenance" <?php echo ($status7091 == 'Under Maintenance')
+                                                ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                            </option>
+                                            <option value="For Replacement" <?php echo ($status7091 == 'For Replacement')
+                                                ? 'selected="selected"' : ''; ?>>For Replacement
+                                            </option>
+                                            <option value="Need Repair" <?php echo ($status7091 == 'Need Repair')
+                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName"
+                                            value="<?php echo htmlspecialchars($assignedName7091); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy"
+                                            value="<?php echo htmlspecialchars($assignedBy7091); ?>" readonly />
+                                    </div>
+
+                                    <!--End of Fourth Row-->
+
+                                    <!--Fifth Row-->
+                                    <!-- <div class="col-3">
+                                            <label for="description" class="form-label">Description:</label>
+                                        </div> -->
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" id="description" name="description"
+                                            value="<?php echo htmlspecialchars($description7091); ?>" />
+                                    </div>
+                                    <!--End of Fifth Row-->
+
+                                    <!--Sixth Row-->
+                                    <div class="col-2">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop7091">
+                                            Save
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Edit for table 7091-->
+                <div class="map-alert">
+                    <div class="modal fade" id="staticBackdrop7091" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    <p>Are you sure you want to save changes?</p>
+                                    <div class="modal-popups">
+                                        <button type="submit" class="btn add-modal-btn" name="edit7091">Yes</button>
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+                <!-- Modal structure for id 7092-->
+                <div class='modal fade' id='imageModal7092' tabindex='-1' aria-labelledby='imageModalLabel7092'
+                    aria-hidden='true'>
+                    <div class='modal-dialog modal-xl modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <!-- Modal header -->
+                            <div class='modal-header'>
+                                <button type='button' class='btn-close' data-bs-dismiss='modal'
+                                    aria-label='Close'></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class='modal-body'>
+                                <form method="post" class="row g-3" enctype="multipart/form-data">
+                                    <input type="hidden" name="assetId"
+                                        value="<?php echo htmlspecialchars($assetId7092); ?>">
+                                    <!--START DIV FOR IMAGE -->
+
+                                    <!--First Row-->
+                                    <!--IMAGE HERE-->
+                                    <div class="col-12 center-content">
+                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7092); ?>"
+                                            alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
+                                    </div>
+                                    <!--END DIV FOR IMAGE -->
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId"
+                                            value="<?php echo htmlspecialchars($assetId7092); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date"
+                                            value="<?php echo htmlspecialchars($date7092); ?>" readonly />
+                                    </div>
+
+                                    <!--Second Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="room" name="room"
+                                            value="<?php echo htmlspecialchars($room7092); ?>" readonly />
+                                    </div>
+
+
+                                    <div class="col-6" style="display:none">
+                                        <input type="text" class="form-control  center-content" id="building"
+                                            name="building" value="<?php echo htmlspecialchars($building7092); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <!--End of Second Row-->
+
+                                    <!--Third Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="floor" name="floor"
+                                            value="<?php echo htmlspecialchars($floor7092); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-12 center-content">
+                                        <input type="text" class="form-control  center-content" id="category"
+                                            name="category" value="<?php echo htmlspecialchars($category7092); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <!--End of Third Row-->
+
+                                    <!--Fourth Row-->
+                                    <div class="col-2">
+                                        <label for="status" class="form-label">Status:</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working" <?php echo ($status7092 == 'Working')
+                                                ? 'selected="selected"' : ''; ?>>Working</option>
+                                            <option value="Under Maintenance" <?php echo ($status7092 == 'Under Maintenance')
+                                                ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                            </option>
+                                            <option value="For Replacement" <?php echo ($status7092 == 'For Replacement')
+                                                ? 'selected="selected"' : ''; ?>>For Replacement
+                                            </option>
+                                            <option value="Need Repair" <?php echo ($status7092 == 'Need Repair')
+                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName"
+                                            value="<?php echo htmlspecialchars($assignedName7092); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy"
+                                            value="<?php echo htmlspecialchars($assignedBy7092); ?>" readonly />
+                                    </div>
+
+                                    <!--End of Fourth Row-->
+
+                                    <!--Fifth Row-->
+                                    <!-- <div class="col-3">
+                                            <label for="description" class="form-label">Description:</label>
+                                        </div> -->
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" id="description" name="description"
+                                            value="<?php echo htmlspecialchars($description7092); ?>" />
+                                    </div>
+                                    <!--End of Fifth Row-->
+
+                                    <!--Sixth Row-->
+                                    <div class="col-2">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop7092">
+                                            Save
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Edit for table 7092-->
+                <div class="map-alert">
+                    <div class="modal fade" id="staticBackdrop7092" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    <p>Are you sure you want to save changes?</p>
+                                    <div class="modal-popups">
+                                        <button type="submit" class="btn add-modal-btn" name="edit7092">Yes</button>
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+                <!-- Modal structure for id 7093-->
+                <div class='modal fade' id='imageModal7093' tabindex='-1' aria-labelledby='imageModalLabel7093'
+                    aria-hidden='true'>
+                    <div class='modal-dialog modal-xl modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <!-- Modal header -->
+                            <div class='modal-header'>
+                                <button type='button' class='btn-close' data-bs-dismiss='modal'
+                                    aria-label='Close'></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class='modal-body'>
+                                <form method="post" class="row g-3" enctype="multipart/form-data">
+                                    <input type="hidden" name="assetId"
+                                        value="<?php echo htmlspecialchars($assetId7093); ?>">
+                                    <!--START DIV FOR IMAGE -->
+
+                                    <!--First Row-->
+                                    <!--IMAGE HERE-->
+                                    <div class="col-12 center-content">
+                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7093); ?>"
+                                            alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
+                                    </div>
+                                    <!--END DIV FOR IMAGE -->
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId"
+                                            value="<?php echo htmlspecialchars($assetId7093); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date"
+                                            value="<?php echo htmlspecialchars($date7093); ?>" readonly />
+                                    </div>
+
+                                    <!--Second Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="room" name="room"
+                                            value="<?php echo htmlspecialchars($room7093); ?>" readonly />
+                                    </div>
+
+
+                                    <div class="col-6" style="display:none">
+                                        <input type="text" class="form-control  center-content" id="building"
+                                            name="building" value="<?php echo htmlspecialchars($building7093); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <!--End of Second Row-->
+
+                                    <!--Third Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="floor" name="floor"
+                                            value="<?php echo htmlspecialchars($floor7093); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-12 center-content">
+                                        <input type="text" class="form-control  center-content" id="category"
+                                            name="category" value="<?php echo htmlspecialchars($category7093); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <!--End of Third Row-->
+
+                                    <!--Fourth Row-->
+                                    <div class="col-2">
+                                        <label for="status" class="form-label">Status:</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working" <?php echo ($status7093 == 'Working')
+                                                ? 'selected="selected"' : ''; ?>>Working</option>
+                                            <option value="Under Maintenance" <?php echo ($status7093 == 'Under Maintenance')
+                                                ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                            </option>
+                                            <option value="For Replacement" <?php echo ($status7093 == 'For Replacement')
+                                                ? 'selected="selected"' : ''; ?>>For Replacement
+                                            </option>
+                                            <option value="Need Repair" <?php echo ($status7093 == 'Need Repair')
+                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName"
+                                            value="<?php echo htmlspecialchars($assignedName7093); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy"
+                                            value="<?php echo htmlspecialchars($assignedBy7093); ?>" readonly />
+                                    </div>
+
+                                    <!--End of Fourth Row-->
+
+                                    <!--Fifth Row-->
+                                    <!-- <div class="col-3">
+                                            <label for="description" class="form-label">Description:</label>
+                                        </div> -->
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" id="description" name="description"
+                                            value="<?php echo htmlspecialchars($description7093); ?>" />
+                                    </div>
+                                    <!--End of Fifth Row-->
+
+                                    <!--Sixth Row-->
+                                    <div class="col-2">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop7093">
+                                            Save
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Edit for table 7093-->
+                <div class="map-alert">
+                    <div class="modal fade" id="staticBackdrop7093" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    <p>Are you sure you want to save changes?</p>
+                                    <div class="modal-popups">
+                                        <button type="submit" class="btn add-modal-btn" name="edit7093">Yes</button>
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+                <!-- Modal structure for id 7094-->
+                <div class='modal fade' id='imageModal7094' tabindex='-1' aria-labelledby='imageModalLabel7094'
+                    aria-hidden='true'>
+                    <div class='modal-dialog modal-xl modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <!-- Modal header -->
+                            <div class='modal-header'>
+                                <button type='button' class='btn-close' data-bs-dismiss='modal'
+                                    aria-label='Close'></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class='modal-body'>
+                                <form method="post" class="row g-3" enctype="multipart/form-data">
+                                    <input type="hidden" name="assetId"
+                                        value="<?php echo htmlspecialchars($assetId7094); ?>">
+                                    <!--START DIV FOR IMAGE -->
+
+                                    <!--First Row-->
+                                    <!--IMAGE HERE-->
+                                    <div class="col-12 center-content">
+                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7094); ?>"
+                                            alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
+                                    </div>
+                                    <!--END DIV FOR IMAGE -->
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId"
+                                            value="<?php echo htmlspecialchars($assetId7094); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date"
+                                            value="<?php echo htmlspecialchars($date7094); ?>" readonly />
+                                    </div>
+
+                                    <!--Second Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="room" name="room"
+                                            value="<?php echo htmlspecialchars($room7094); ?>" readonly />
+                                    </div>
+
+
+                                    <div class="col-6" style="display:none">
+                                        <input type="text" class="form-control  center-content" id="building"
+                                            name="building" value="<?php echo htmlspecialchars($building7094); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <!--End of Second Row-->
+
+                                    <!--Third Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="floor" name="floor"
+                                            value="<?php echo htmlspecialchars($floor7094); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-12 center-content">
+                                        <input type="text" class="form-control  center-content" id="category"
+                                            name="category" value="<?php echo htmlspecialchars($category7094); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <!--End of Third Row-->
+
+                                    <!--Fourth Row-->
+                                    <div class="col-2">
+                                        <label for="status" class="form-label">Status:</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working" <?php echo ($status7094 == 'Working')
+                                                ? 'selected="selected"' : ''; ?>>Working</option>
+                                            <option value="Under Maintenance" <?php echo ($status7094 == 'Under Maintenance')
+                                                ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                            </option>
+                                            <option value="For Replacement" <?php echo ($status7094 == 'For Replacement')
+                                                ? 'selected="selected"' : ''; ?>>For Replacement
+                                            </option>
+                                            <option value="Need Repair" <?php echo ($status7094 == 'Need Repair')
+                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName"
+                                            value="<?php echo htmlspecialchars($assignedName7094); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy"
+                                            value="<?php echo htmlspecialchars($assignedBy7094); ?>" readonly />
+                                    </div>
+
+                                    <!--End of Fourth Row-->
+
+                                    <!--Fifth Row-->
+                                    <!-- <div class="col-3">
+                                            <label for="description" class="form-label">Description:</label>
+                                        </div> -->
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" id="description" name="description"
+                                            value="<?php echo htmlspecialchars($description7094); ?>" />
+                                    </div>
+                                    <!--End of Fifth Row-->
+
+                                    <!--Sixth Row-->
+                                    <div class="col-2">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop7094">
+                                            Save
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Edit for table 7094-->
+                <div class="map-alert">
+                    <div class="modal fade" id="staticBackdrop7094" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    <p>Are you sure you want to save changes?</p>
+                                    <div class="modal-popups">
+                                        <button type="submit" class="btn add-modal-btn" name="edit7094">Yes</button>
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+                <!-- Modal structure for id 7095-->
+                <div class='modal fade' id='imageModal7095' tabindex='-1' aria-labelledby='imageModalLabel7095'
+                    aria-hidden='true'>
+                    <div class='modal-dialog modal-xl modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <!-- Modal header -->
+                            <div class='modal-header'>
+                                <button type='button' class='btn-close' data-bs-dismiss='modal'
+                                    aria-label='Close'></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class='modal-body'>
+                                <form method="post" class="row g-3" enctype="multipart/form-data">
+                                    <input type="hidden" name="assetId"
+                                        value="<?php echo htmlspecialchars($assetId7095); ?>">
+                                    <!--START DIV FOR IMAGE -->
+
+                                    <!--First Row-->
+                                    <!--IMAGE HERE-->
+                                    <div class="col-12 center-content">
+                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7095); ?>"
+                                            alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
+                                    </div>
+                                    <!--END DIV FOR IMAGE -->
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId"
+                                            value="<?php echo htmlspecialchars($assetId7095); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date"
+                                            value="<?php echo htmlspecialchars($date7095); ?>" readonly />
+                                    </div>
+
+                                    <!--Second Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="room" name="room"
+                                            value="<?php echo htmlspecialchars($room7095); ?>" readonly />
+                                    </div>
+
+
+                                    <div class="col-6" style="display:none">
+                                        <input type="text" class="form-control  center-content" id="building"
+                                            name="building" value="<?php echo htmlspecialchars($building7095); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <!--End of Second Row-->
+
+                                    <!--Third Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="floor" name="floor"
+                                            value="<?php echo htmlspecialchars($floor7095); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-12 center-content">
+                                        <input type="text" class="form-control  center-content" id="category"
+                                            name="category" value="<?php echo htmlspecialchars($category7095); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <!--End of Third Row-->
+
+                                    <!--Fourth Row-->
+                                    <div class="col-2">
+                                        <label for="status" class="form-label">Status:</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working" <?php echo ($status7095 == 'Working')
+                                                ? 'selected="selected"' : ''; ?>>Working</option>
+                                            <option value="Under Maintenance" <?php echo ($status7095 == 'Under Maintenance')
+                                                ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                            </option>
+                                            <option value="For Replacement" <?php echo ($status7095 == 'For Replacement')
+                                                ? 'selected="selected"' : ''; ?>>For Replacement
+                                            </option>
+                                            <option value="Need Repair" <?php echo ($status7095 == 'Need Repair')
+                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName"
+                                            value="<?php echo htmlspecialchars($assignedName7095); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy"
+                                            value="<?php echo htmlspecialchars($assignedBy7095); ?>" readonly />
+                                    </div>
+
+                                    <!--End of Fourth Row-->
+
+                                    <!--Fifth Row-->
+                                    <!-- <div class="col-3">
+                                            <label for="description" class="form-label">Description:</label>
+                                        </div> -->
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" id="description" name="description"
+                                            value="<?php echo htmlspecialchars($description7095); ?>" />
+                                    </div>
+                                    <!--End of Fifth Row-->
+
+                                    <!--Sixth Row-->
+                                    <div class="col-2">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop7095">
+                                            Save
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Edit for table 7095-->
+                <div class="map-alert">
+                    <div class="modal fade" id="staticBackdrop7095" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    <p>Are you sure you want to save changes?</p>
+                                    <div class="modal-popups">
+                                        <button type="submit" class="btn add-modal-btn" name="edit7095">Yes</button>
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+                <!-- Modal structure for id 7096-->
+                <div class='modal fade' id='imageModal7096' tabindex='-1' aria-labelledby='imageModalLabel7096'
+                    aria-hidden='true'>
+                    <div class='modal-dialog modal-xl modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <!-- Modal header -->
+                            <div class='modal-header'>
+                                <button type='button' class='btn-close' data-bs-dismiss='modal'
+                                    aria-label='Close'></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class='modal-body'>
+                                <form method="post" class="row g-3" enctype="multipart/form-data">
+                                    <input type="hidden" name="assetId"
+                                        value="<?php echo htmlspecialchars($assetId7096); ?>">
+                                    <!--START DIV FOR IMAGE -->
+
+                                    <!--First Row-->
+                                    <!--IMAGE HERE-->
+                                    <div class="col-12 center-content">
+                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7096); ?>"
+                                            alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
+                                    </div>
+                                    <!--END DIV FOR IMAGE -->
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId"
+                                            value="<?php echo htmlspecialchars($assetId7096); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date"
+                                            value="<?php echo htmlspecialchars($date7096); ?>" readonly />
+                                    </div>
+
+                                    <!--Second Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="room" name="room"
+                                            value="<?php echo htmlspecialchars($room7096); ?>" readonly />
+                                    </div>
+
+
+                                    <div class="col-6" style="display:none">
+                                        <input type="text" class="form-control  center-content" id="building"
+                                            name="building" value="<?php echo htmlspecialchars($building7096); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <!--End of Second Row-->
+
+                                    <!--Third Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="floor" name="floor"
+                                            value="<?php echo htmlspecialchars($floor7096); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-12 center-content">
+                                        <input type="text" class="form-control  center-content" id="category"
+                                            name="category" value="<?php echo htmlspecialchars($category7096); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <!--End of Third Row-->
+
+                                    <!--Fourth Row-->
+                                    <div class="col-2">
+                                        <label for="status" class="form-label">Status:</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working" <?php echo ($status7096 == 'Working')
+                                                ? 'selected="selected"' : ''; ?>>Working</option>
+                                            <option value="Under Maintenance" <?php echo ($status7096 == 'Under Maintenance')
+                                                ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                            </option>
+                                            <option value="For Replacement" <?php echo ($status7096 == 'For Replacement')
+                                                ? 'selected="selected"' : ''; ?>>For Replacement
+                                            </option>
+                                            <option value="Need Repair" <?php echo ($status7096 == 'Need Repair')
+                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName"
+                                            value="<?php echo htmlspecialchars($assignedName7096); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy"
+                                            value="<?php echo htmlspecialchars($assignedBy7096); ?>" readonly />
+                                    </div>
+
+                                    <!--End of Fourth Row-->
+
+                                    <!--Fifth Row-->
+                                    <!-- <div class="col-3">
+                                            <label for="description" class="form-label">Description:</label>
+                                        </div> -->
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" id="description" name="description"
+                                            value="<?php echo htmlspecialchars($description7096); ?>" />
+                                    </div>
+                                    <!--End of Fifth Row-->
+
+                                    <!--Sixth Row-->
+                                    <div class="col-2">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop7096">
+                                            Save
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Edit for table 7096-->
+                <div class="map-alert">
+                    <div class="modal fade" id="staticBackdrop7096" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    <p>Are you sure you want to save changes?</p>
+                                    <div class="modal-popups">
+                                        <button type="submit" class="btn add-modal-btn" name="edit7096">Yes</button>
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+                <!-- Modal structure for id 7097-->
+                <div class='modal fade' id='imageModal7097' tabindex='-1' aria-labelledby='imageModalLabel7097'
+                    aria-hidden='true'>
+                    <div class='modal-dialog modal-xl modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <!-- Modal header -->
+                            <div class='modal-header'>
+                                <button type='button' class='btn-close' data-bs-dismiss='modal'
+                                    aria-label='Close'></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class='modal-body'>
+                                <form method="post" class="row g-3" enctype="multipart/form-data">
+                                    <input type="hidden" name="assetId"
+                                        value="<?php echo htmlspecialchars($assetId7097); ?>">
+                                    <!--START DIV FOR IMAGE -->
+
+                                    <!--First Row-->
+                                    <!--IMAGE HERE-->
+                                    <div class="col-12 center-content">
+                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7097); ?>"
+                                            alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
+                                    </div>
+                                    <!--END DIV FOR IMAGE -->
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId"
+                                            value="<?php echo htmlspecialchars($assetId7097); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date"
+                                            value="<?php echo htmlspecialchars($date7097); ?>" readonly />
+                                    </div>
+
+                                    <!--Second Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="room" name="room"
+                                            value="<?php echo htmlspecialchars($room7097); ?>" readonly />
+                                    </div>
+
+
+                                    <div class="col-6" style="display:none">
+                                        <input type="text" class="form-control  center-content" id="building"
+                                            name="building" value="<?php echo htmlspecialchars($building7097); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <!--End of Second Row-->
+
+                                    <!--Third Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="floor" name="floor"
+                                            value="<?php echo htmlspecialchars($floor7097); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-12 center-content">
+                                        <input type="text" class="form-control  center-content" id="category"
+                                            name="category" value="<?php echo htmlspecialchars($category7097); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <!--End of Third Row-->
+
+                                    <!--Fourth Row-->
+                                    <div class="col-2">
+                                        <label for="status" class="form-label">Status:</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working" <?php echo ($status7097 == 'Working')
+                                                ? 'selected="selected"' : ''; ?>>Working</option>
+                                            <option value="Under Maintenance" <?php echo ($status7097 == 'Under Maintenance')
+                                                ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                            </option>
+                                            <option value="For Replacement" <?php echo ($status7097 == 'For Replacement')
+                                                ? 'selected="selected"' : ''; ?>>For Replacement
+                                            </option>
+                                            <option value="Need Repair" <?php echo ($status7097 == 'Need Repair')
+                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName"
+                                            value="<?php echo htmlspecialchars($assignedName7097); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy"
+                                            value="<?php echo htmlspecialchars($assignedBy7097); ?>" readonly />
+                                    </div>
+
+                                    <!--End of Fourth Row-->
+
+                                    <!--Fifth Row-->
+                                    <!-- <div class="col-3">
+                                            <label for="description" class="form-label">Description:</label>
+                                        </div> -->
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" id="description" name="description"
+                                            value="<?php echo htmlspecialchars($description7097); ?>" />
+                                    </div>
+                                    <!--End of Fifth Row-->
+
+                                    <!--Sixth Row-->
+                                    <div class="col-2">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop7097">
+                                            Save
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Edit for table 7097-->
+                <div class="map-alert">
+                    <div class="modal fade" id="staticBackdrop7097" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    <p>Are you sure you want to save changes?</p>
+                                    <div class="modal-popups">
+                                        <button type="submit" class="btn add-modal-btn" name="edit7097">Yes</button>
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+                <!-- Modal structure for id 7080-->
+                <div class='modal fade' id='imageModal7080' tabindex='-1' aria-labelledby='imageModalLabel7080'
+                    aria-hidden='true'>
+                    <div class='modal-dialog modal-xl modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <!-- Modal header -->
+                            <div class='modal-header'>
+                                <button type='button' class='btn-close' data-bs-dismiss='modal'
+                                    aria-label='Close'></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class='modal-body'>
+                                <form method="post" class="row g-3" enctype="multipart/form-data">
+                                    <input type="hidden" name="assetId"
+                                        value="<?php echo htmlspecialchars($assetId7080); ?>">
+                                    <!--START DIV FOR IMAGE -->
+
+                                    <!--First Row-->
+                                    <!--IMAGE HERE-->
+                                    <div class="col-12 center-content">
+                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7080); ?>"
+                                            alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
+                                    </div>
+                                    <!--END DIV FOR IMAGE -->
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId"
+                                            value="<?php echo htmlspecialchars($assetId7080); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date"
+                                            value="<?php echo htmlspecialchars($date7080); ?>" readonly />
+                                    </div>
+
+                                    <!--Second Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="room" name="room"
+                                            value="<?php echo htmlspecialchars($room7080); ?>" readonly />
+                                    </div>
+
+
+                                    <div class="col-6" style="display:none">
+                                        <input type="text" class="form-control  center-content" id="building"
+                                            name="building" value="<?php echo htmlspecialchars($building7080); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <!--End of Second Row-->
+
+                                    <!--Third Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="floor" name="floor"
+                                            value="<?php echo htmlspecialchars($floor7080); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-12 center-content">
+                                        <input type="text" class="form-control  center-content" id="category"
+                                            name="category" value="<?php echo htmlspecialchars($category7080); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <!--End of Third Row-->
+
+                                    <!--Fourth Row-->
+                                    <div class="col-2">
+                                        <label for="status" class="form-label">Status:</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working" <?php echo ($status7080 == 'Working')
+                                                ? 'selected="selected"' : ''; ?>>Working</option>
+                                            <option value="Under Maintenance" <?php echo ($status7080 == 'Under Maintenance')
+                                                ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                            </option>
+                                            <option value="For Replacement" <?php echo ($status7080 == 'For Replacement')
+                                                ? 'selected="selected"' : ''; ?>>For Replacement
+                                            </option>
+                                            <option value="Need Repair" <?php echo ($status7080 == 'Need Repair')
+                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName"
+                                            value="<?php echo htmlspecialchars($assignedName7080); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy"
+                                            value="<?php echo htmlspecialchars($assignedBy7080); ?>" readonly />
+                                    </div>
+
+                                    <!--End of Fourth Row-->
+
+                                    <!--Fifth Row-->
+                                    <!-- <div class="col-3">
+                                            <label for="description" class="form-label">Description:</label>
+                                        </div> -->
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" id="description" name="description"
+                                            value="<?php echo htmlspecialchars($description7080); ?>" />
+                                    </div>
+                                    <!--End of Fifth Row-->
+
+                                    <!--Sixth Row-->
+                                    <div class="col-2">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop7080">
+                                            Save
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Edit for table 7080-->
+                <div class="map-alert">
+                    <div class="modal fade" id="staticBackdrop7080" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    <p>Are you sure you want to save changes?</p>
+                                    <div class="modal-popups">
+                                        <button type="submit" class="btn add-modal-btn" name="edit7080">Yes</button>
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+                <!-- Modal structure for id 7081-->
+                <div class='modal fade' id='imageModal7081' tabindex='-1' aria-labelledby='imageModalLabel7081'
+                    aria-hidden='true'>
+                    <div class='modal-dialog modal-xl modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <!-- Modal header -->
+                            <div class='modal-header'>
+                                <button type='button' class='btn-close' data-bs-dismiss='modal'
+                                    aria-label='Close'></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class='modal-body'>
+                                <form method="post" class="row g-3" enctype="multipart/form-data">
+                                    <input type="hidden" name="assetId"
+                                        value="<?php echo htmlspecialchars($assetId7081); ?>">
+                                    <!--START DIV FOR IMAGE -->
+
+                                    <!--First Row-->
+                                    <!--IMAGE HERE-->
+                                    <div class="col-12 center-content">
+                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7081); ?>"
+                                            alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
+                                    </div>
+                                    <!--END DIV FOR IMAGE -->
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId"
+                                            value="<?php echo htmlspecialchars($assetId7081); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date"
+                                            value="<?php echo htmlspecialchars($date7081); ?>" readonly />
+                                    </div>
+
+                                    <!--Second Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="room" name="room"
+                                            value="<?php echo htmlspecialchars($room7081); ?>" readonly />
+                                    </div>
+
+
+                                    <div class="col-6" style="display:none">
+                                        <input type="text" class="form-control  center-content" id="building"
+                                            name="building" value="<?php echo htmlspecialchars($building7081); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <!--End of Second Row-->
+
+                                    <!--Third Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="floor" name="floor"
+                                            value="<?php echo htmlspecialchars($floor7081); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-12 center-content">
+                                        <input type="text" class="form-control  center-content" id="category"
+                                            name="category" value="<?php echo htmlspecialchars($category7081); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <!--End of Third Row-->
+
+                                    <!--Fourth Row-->
+                                    <div class="col-2">
+                                        <label for="status" class="form-label">Status:</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working" <?php echo ($status7081 == 'Working')
+                                                ? 'selected="selected"' : ''; ?>>Working</option>
+                                            <option value="Under Maintenance" <?php echo ($status7081 == 'Under Maintenance')
+                                                ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                            </option>
+                                            <option value="For Replacement" <?php echo ($status7081 == 'For Replacement')
+                                                ? 'selected="selected"' : ''; ?>>For Replacement
+                                            </option>
+                                            <option value="Need Repair" <?php echo ($status7081 == 'Need Repair')
+                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName"
+                                            value="<?php echo htmlspecialchars($assignedName7081); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy"
+                                            value="<?php echo htmlspecialchars($assignedBy7081); ?>" readonly />
+                                    </div>
+
+                                    <!--End of Fourth Row-->
+
+                                    <!--Fifth Row-->
+                                    <!-- <div class="col-3">
+                                            <label for="description" class="form-label">Description:</label>
+                                        </div> -->
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" id="description" name="description"
+                                            value="<?php echo htmlspecialchars($description7081); ?>" />
+                                    </div>
+                                    <!--End of Fifth Row-->
+
+                                    <!--Sixth Row-->
+                                    <div class="col-2">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop7081">
+                                            Save
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Edit for table 7081-->
+                <div class="map-alert">
+                    <div class="modal fade" id="staticBackdrop7081" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    <p>Are you sure you want to save changes?</p>
+                                    <div class="modal-popups">
+                                        <button type="submit" class="btn add-modal-btn" name="edit7081">Yes</button>
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+                <!-- Modal structure for id 7082-->
+                <div class='modal fade' id='imageModal7082' tabindex='-1' aria-labelledby='imageModalLabel7082'
+                    aria-hidden='true'>
+                    <div class='modal-dialog modal-xl modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <!-- Modal header -->
+                            <div class='modal-header'>
+                                <button type='button' class='btn-close' data-bs-dismiss='modal'
+                                    aria-label='Close'></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class='modal-body'>
+                                <form method="post" class="row g-3" enctype="multipart/form-data">
+                                    <input type="hidden" name="assetId"
+                                        value="<?php echo htmlspecialchars($assetId7082); ?>">
+                                    <!--START DIV FOR IMAGE -->
+
+                                    <!--First Row-->
+                                    <!--IMAGE HERE-->
+                                    <div class="col-12 center-content">
+                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7082); ?>"
+                                            alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
+                                    </div>
+                                    <!--END DIV FOR IMAGE -->
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId"
+                                            value="<?php echo htmlspecialchars($assetId7082); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date"
+                                            value="<?php echo htmlspecialchars($date7082); ?>" readonly />
+                                    </div>
+
+                                    <!--Second Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="room" name="room"
+                                            value="<?php echo htmlspecialchars($room7082); ?>" readonly />
+                                    </div>
+
+
+                                    <div class="col-6" style="display:none">
+                                        <input type="text" class="form-control  center-content" id="building"
+                                            name="building" value="<?php echo htmlspecialchars($building7082); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <!--End of Second Row-->
+
+                                    <!--Third Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="floor" name="floor"
+                                            value="<?php echo htmlspecialchars($floor7082); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-12 center-content">
+                                        <input type="text" class="form-control  center-content" id="category"
+                                            name="category" value="<?php echo htmlspecialchars($category7082); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <!--End of Third Row-->
+
+                                    <!--Fourth Row-->
+                                    <div class="col-2">
+                                        <label for="status" class="form-label">Status:</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working" <?php echo ($status7082 == 'Working')
+                                                ? 'selected="selected"' : ''; ?>>Working</option>
+                                            <option value="Under Maintenance" <?php echo ($status7082 == 'Under Maintenance')
+                                                ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                            </option>
+                                            <option value="For Replacement" <?php echo ($status7082 == 'For Replacement')
+                                                ? 'selected="selected"' : ''; ?>>For Replacement
+                                            </option>
+                                            <option value="Need Repair" <?php echo ($status7082 == 'Need Repair')
+                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName"
+                                            value="<?php echo htmlspecialchars($assignedName7082); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy"
+                                            value="<?php echo htmlspecialchars($assignedBy7082); ?>" readonly />
+                                    </div>
+
+                                    <!--End of Fourth Row-->
+
+                                    <!--Fifth Row-->
+                                    <!-- <div class="col-3">
+                                            <label for="description" class="form-label">Description:</label>
+                                        </div> -->
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" id="description" name="description"
+                                            value="<?php echo htmlspecialchars($description7082); ?>" />
+                                    </div>
+                                    <!--End of Fifth Row-->
+
+                                    <!--Sixth Row-->
+                                    <div class="col-2">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop7082">
+                                            Save
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Edit for table 7082-->
+                <div class="map-alert">
+                    <div class="modal fade" id="staticBackdrop7082" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    <p>Are you sure you want to save changes?</p>
+                                    <div class="modal-popups">
+                                        <button type="submit" class="btn add-modal-btn" name="edit7082">Yes</button>
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+                <!-- Modal structure for id 7083-->
+                <div class='modal fade' id='imageModal7083' tabindex='-1' aria-labelledby='imageModalLabel7083'
+                    aria-hidden='true'>
+                    <div class='modal-dialog modal-xl modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <!-- Modal header -->
+                            <div class='modal-header'>
+                                <button type='button' class='btn-close' data-bs-dismiss='modal'
+                                    aria-label='Close'></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class='modal-body'>
+                                <form method="post" class="row g-3" enctype="multipart/form-data">
+                                    <input type="hidden" name="assetId"
+                                        value="<?php echo htmlspecialchars($assetId7083); ?>">
+                                    <!--START DIV FOR IMAGE -->
+
+                                    <!--First Row-->
+                                    <!--IMAGE HERE-->
+                                    <div class="col-12 center-content">
+                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7083); ?>"
+                                            alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
+                                    </div>
+                                    <!--END DIV FOR IMAGE -->
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId"
+                                            value="<?php echo htmlspecialchars($assetId7083); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date"
+                                            value="<?php echo htmlspecialchars($date7083); ?>" readonly />
+                                    </div>
+
+                                    <!--Second Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="room" name="room"
+                                            value="<?php echo htmlspecialchars($room7083); ?>" readonly />
+                                    </div>
+
+
+                                    <div class="col-6" style="display:none">
+                                        <input type="text" class="form-control  center-content" id="building"
+                                            name="building" value="<?php echo htmlspecialchars($building7083); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <!--End of Second Row-->
+
+                                    <!--Third Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="floor" name="floor"
+                                            value="<?php echo htmlspecialchars($floor7083); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-12 center-content">
+                                        <input type="text" class="form-control  center-content" id="category"
+                                            name="category" value="<?php echo htmlspecialchars($category7083); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <!--End of Third Row-->
+
+                                    <!--Fourth Row-->
+                                    <div class="col-2">
+                                        <label for="status" class="form-label">Status:</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working" <?php echo ($status7083 == 'Working')
+                                                ? 'selected="selected"' : ''; ?>>Working</option>
+                                            <option value="Under Maintenance" <?php echo ($status7083 == 'Under Maintenance')
+                                                ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                            </option>
+                                            <option value="For Replacement" <?php echo ($status7083 == 'For Replacement')
+                                                ? 'selected="selected"' : ''; ?>>For Replacement
+                                            </option>
+                                            <option value="Need Repair" <?php echo ($status7083 == 'Need Repair')
+                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName"
+                                            value="<?php echo htmlspecialchars($assignedName7083); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy"
+                                            value="<?php echo htmlspecialchars($assignedBy7083); ?>" readonly />
+                                    </div>
+
+                                    <!--End of Fourth Row-->
+
+                                    <!--Fifth Row-->
+                                    <!-- <div class="col-3">
+                                            <label for="description" class="form-label">Description:</label>
+                                        </div> -->
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" id="description" name="description"
+                                            value="<?php echo htmlspecialchars($description7083); ?>" />
+                                    </div>
+                                    <!--End of Fifth Row-->
+
+                                    <!--Sixth Row-->
+                                    <div class="col-2">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop7083">
+                                            Save
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Edit for table 7083-->
+                <div class="map-alert">
+                    <div class="modal fade" id="staticBackdrop7083" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    <p>Are you sure you want to save changes?</p>
+                                    <div class="modal-popups">
+                                        <button type="submit" class="btn add-modal-btn" name="edit7083">Yes</button>
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+                <!-- Modal structure for id 7084-->
+                <div class='modal fade' id='imageModal7084' tabindex='-1' aria-labelledby='imageModalLabel7084'
+                    aria-hidden='true'>
+                    <div class='modal-dialog modal-xl modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <!-- Modal header -->
+                            <div class='modal-header'>
+                                <button type='button' class='btn-close' data-bs-dismiss='modal'
+                                    aria-label='Close'></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class='modal-body'>
+                                <form method="post" class="row g-3" enctype="multipart/form-data">
+                                    <input type="hidden" name="assetId"
+                                        value="<?php echo htmlspecialchars($assetId7084); ?>">
+                                    <!--START DIV FOR IMAGE -->
+
+                                    <!--First Row-->
+                                    <!--IMAGE HERE-->
+                                    <div class="col-12 center-content">
+                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7084); ?>"
+                                            alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
+                                    </div>
+                                    <!--END DIV FOR IMAGE -->
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId"
+                                            value="<?php echo htmlspecialchars($assetId7084); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date"
+                                            value="<?php echo htmlspecialchars($date7084); ?>" readonly />
+                                    </div>
+
+                                    <!--Second Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="room" name="room"
+                                            value="<?php echo htmlspecialchars($room7084); ?>" readonly />
+                                    </div>
+
+
+                                    <div class="col-6" style="display:none">
+                                        <input type="text" class="form-control  center-content" id="building"
+                                            name="building" value="<?php echo htmlspecialchars($building7084); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <!--End of Second Row-->
+
+                                    <!--Third Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="floor" name="floor"
+                                            value="<?php echo htmlspecialchars($floor7084); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-12 center-content">
+                                        <input type="text" class="form-control  center-content" id="category"
+                                            name="category" value="<?php echo htmlspecialchars($category7084); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <!--End of Third Row-->
+
+                                    <!--Fourth Row-->
+                                    <div class="col-2">
+                                        <label for="status" class="form-label">Status:</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working" <?php echo ($status7084 == 'Working')
+                                                ? 'selected="selected"' : ''; ?>>Working</option>
+                                            <option value="Under Maintenance" <?php echo ($status7084 == 'Under Maintenance')
+                                                ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                            </option>
+                                            <option value="For Replacement" <?php echo ($status7084 == 'For Replacement')
+                                                ? 'selected="selected"' : ''; ?>>For Replacement
+                                            </option>
+                                            <option value="Need Repair" <?php echo ($status7084 == 'Need Repair')
+                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName"
+                                            value="<?php echo htmlspecialchars($assignedName7084); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy"
+                                            value="<?php echo htmlspecialchars($assignedBy7084); ?>" readonly />
+                                    </div>
+
+                                    <!--End of Fourth Row-->
+
+                                    <!--Fifth Row-->
+                                    <!-- <div class="col-3">
+                                            <label for="description" class="form-label">Description:</label>
+                                        </div> -->
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" id="description" name="description"
+                                            value="<?php echo htmlspecialchars($description7084); ?>" />
+                                    </div>
+                                    <!--End of Fifth Row-->
+
+                                    <!--Sixth Row-->
+                                    <div class="col-2">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop7084">
+                                            Save
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Edit for table 7084-->
+                <div class="map-alert">
+                    <div class="modal fade" id="staticBackdrop7084" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    <p>Are you sure you want to save changes?</p>
+                                    <div class="modal-popups">
+                                        <button type="submit" class="btn add-modal-btn" name="edit7084">Yes</button>
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+                <!-- Modal structure for id 7085-->
+                <div class='modal fade' id='imageModal7085' tabindex='-1' aria-labelledby='imageModalLabel7085'
+                    aria-hidden='true'>
+                    <div class='modal-dialog modal-xl modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <!-- Modal header -->
+                            <div class='modal-header'>
+                                <button type='button' class='btn-close' data-bs-dismiss='modal'
+                                    aria-label='Close'></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class='modal-body'>
+                                <form method="post" class="row g-3" enctype="multipart/form-data">
+                                    <input type="hidden" name="assetId"
+                                        value="<?php echo htmlspecialchars($assetId7085); ?>">
+                                    <!--START DIV FOR IMAGE -->
+
+                                    <!--First Row-->
+                                    <!--IMAGE HERE-->
+                                    <div class="col-12 center-content">
+                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($upload_img7085); ?>"
+                                            alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
+                                    </div>
+                                    <!--END DIV FOR IMAGE -->
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId"
+                                            value="<?php echo htmlspecialchars($assetId7085); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date"
+                                            value="<?php echo htmlspecialchars($date7085); ?>" readonly />
+                                    </div>
+
+                                    <!--Second Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="room" name="room"
+                                            value="<?php echo htmlspecialchars($room7085); ?>" readonly />
+                                    </div>
+
+
+                                    <div class="col-6" style="display:none">
+                                        <input type="text" class="form-control  center-content" id="building"
+                                            name="building" value="<?php echo htmlspecialchars($building7085); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <!--End of Second Row-->
+
+                                    <!--Third Row-->
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" id="floor" name="floor"
+                                            value="<?php echo htmlspecialchars($floor7085); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-12 center-content">
+                                        <input type="text" class="form-control  center-content" id="category"
+                                            name="category" value="<?php echo htmlspecialchars($category7085); ?>"
+                                            readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <!--End of Third Row-->
+
+                                    <!--Fourth Row-->
+                                    <div class="col-2">
+                                        <label for="status" class="form-label">Status:</label>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working" <?php echo ($status7085 == 'Working')
+                                                ? 'selected="selected"' : ''; ?>>Working</option>
+                                            <option value="Under Maintenance" <?php echo ($status7085 == 'Under Maintenance')
+                                                ? 'selected="selected"' : ''; ?>>Under Maintenance
+                                            </option>
+                                            <option value="For Replacement" <?php echo ($status7085 == 'For Replacement')
+                                                ? 'selected="selected"' : ''; ?>>For Replacement
+                                            </option>
+                                            <option value="Need Repair" <?php echo ($status7085 == 'Need Repair')
+                                                ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedName" class="form-label">Assigned Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName"
+                                            value="<?php echo htmlspecialchars($assignedName7085); ?>" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy"
+                                            value="<?php echo htmlspecialchars($assignedBy7085); ?>" readonly />
+                                    </div>
+
+                                    <!--End of Fourth Row-->
+
+                                    <!--Fifth Row-->
+                                    <!-- <div class="col-3">
+                                            <label for="description" class="form-label">Description:</label>
+                                        </div> -->
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" id="description" name="description"
+                                            value="<?php echo htmlspecialchars($description7085); ?>" />
+                                    </div>
+                                    <!--End of Fifth Row-->
+
+                                    <!--Sixth Row-->
+                                    <div class="col-2">
+                                        <label for="upload_img" class="form-label">Upload:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control" id="upload_img" name="upload_img"
+                                            accept="image/*" capture="user" />
+                                    </div>
+                                    <!--End of Sixth Row-->
+
+                                    <!-- Modal footer -->
+                                    <div class="button-submit-container">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#staticBackdrop7085">
+                                            Save
+                                        </button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Edit for table 7085-->
+                <div class="map-alert">
+                    <div class="modal fade" id="staticBackdrop7085" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    <p>Are you sure you want to save changes?</p>
+                                    <div class="modal-popups">
+                                        <button type="submit" class="btn add-modal-btn" name="edit7085">Yes</button>
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+            </div>
+        </main>
+    </section>
+    <script>
+        $(document).ready(function () {
+            $('.notification-item').on('click', function (e) {
+                e.preventDefault();
+                var activityId = $(this).data('activity-id');
+                var notificationItem = $(this); // Store the clicked element
+
+                $.ajax({
+                    type: "POST",
+                    url: "../../administrator/update_single_notification.php", // The URL to the PHP file
+                    data: {
+                        activityId: activityId
+                    },
+                    success: function (response) {
+                        if (response.trim() === "Notification updated successfully") {
+                            // If the notification is updated successfully, remove the clicked element
+                            notificationItem.remove();
+
+                            // Update the notification count
+                            var countElement = $('#noti_number');
+                            var count = parseInt(countElement.text()) || 0;
+                            countElement.text(count > 1 ? count - 1 : '');
+                        } else {
+                            // Handle error
+                            console.error("Failed to update notification:", response);
                         }
-                    });
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle AJAX error
+                        console.error("AJAX error:", status, error);
+                    }
                 });
             });
-        </script>
-        <!--Start of JS Hover-->
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const assetImages = document.querySelectorAll('.asset-image');
-                const hoverElement = document.getElementById('hover-asset');
+        });
+    </script>
+    <!--Start of JS Hover-->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const assetImages = document.querySelectorAll('.asset-image');
+            const hoverElement = document.getElementById('hover-asset');
 
-                assetImages.forEach(image => {
-                    image.addEventListener('mouseenter', function() {
-                        const id = this.dataset.id;
-                        const room = this.dataset.room;
-                        const floor = this.dataset.floor;
-                        const base64Data = this.dataset.image;
-                        const category = this.dataset.category; // Get the category from the data attribute
-                        const assignedName = this.dataset.assignedname; // Add this line to get the assignedName from the data attribute
+            assetImages.forEach(image => {
+                image.addEventListener('mouseenter', function () {
+                    const id = this.dataset.id;
+                    const room = this.dataset.room;
+                    const floor = this.dataset.floor;
+                    const base64Data = this.dataset.image;
+                    const category = this.dataset.category; // Get the category from the data attribute
+                    const assignedName = this.dataset.assignedname; // Add this line to get the assignedName from the data attribute
 
-                        let imageHTML = '';
-                        if (base64Data && base64Data.trim() !== '') {
-                            const imageSrc = "data:image/jpeg;base64," + base64Data;
-                            imageHTML = `<img src="${imageSrc}" alt="Asset Image">`;
-                        } else {
-                            imageHTML = '<p class="NoImage">No Image uploaded</p>';
-                        }
+                    let imageHTML = '';
+                    if (base64Data && base64Data.trim() !== '') {
+                        const imageSrc = "data:image/jpeg;base64," + base64Data;
+                        imageHTML = `<img src="${imageSrc}" alt="Asset Image">`;
+                    } else {
+                        imageHTML = '<p class="NoImage">No Image uploaded</p>';
+                    }
 
-                        // Update hover element's content
-                        hoverElement.innerHTML = `
+                    // Update hover element's content
+                    hoverElement.innerHTML = `
                     <div class="top-side-hover">
                         <div class="center-content-hover">
                             ${imageHTML}
@@ -3846,53 +4359,119 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     </div>
             `;
 
-                        // Show hover element
-                        hoverElement.style.display = 'block';
-                    });
+                    // Show hover element
+                    hoverElement.style.display = 'block';
+                });
 
-                    image.addEventListener('mouseleave', function() {
-                        // Hide hover element
-                        hoverElement.style.display = 'none';
-                    });
+                image.addEventListener('mouseleave', function () {
+                    // Hide hover element
+                    hoverElement.style.display = 'none';
                 });
             });
-        </script>
+        });
+    </script>
 
-        <script>
-            $(document).ready(function() {
-                var urlParams = new URLSearchParams(window.location.search);
-                var assetId = urlParams.get('assetId'); // Get the assetId from the URL
+    <script>
+        $(document).ready(function () {
+            var urlParams = new URLSearchParams(window.location.search);
+            var assetId = urlParams.get('assetId'); // Get the assetId from the URL
 
-                if (assetId) {
-                    var modalId = '#imageModal' + assetId;
-                    $(modalId).modal('show'); // Open the modal with the corresponding ID
-                }
+            if (assetId) {
+                var modalId = '#imageModal' + assetId;
+                $(modalId).modal('show'); // Open the modal with the corresponding ID
+            }
+        });
+    </script>
+    <script>
+        // Find all input elements with ID 'description'
+        var inputElements = document.querySelectorAll('input#description');
+
+        // Iterate through each input element
+        inputElements.forEach(function (inputElement) {
+            // Create a new textarea element
+            var textareaElement = document.createElement('textarea');
+
+            // Copy attributes from the input element
+            textareaElement.className = inputElement.className;
+            textareaElement.id = inputElement.id;
+            textareaElement.name = inputElement.name;
+            textareaElement.value = inputElement.value;
+
+            // Replace the input element with the textarea element
+            inputElement.parentNode.replaceChild(textareaElement, inputElement);
+        });
+    </script>
+
+
+    <!--FOR LEGEND FILTER-->
+     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const legendItems = document.querySelectorAll('.legend-item button');
+            let activeStatuses = []; // Keep track of active statuses
+
+            legendItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    const legendItem = this.closest('.legend-item');
+                    const status = legendItem.getAttribute('data-status');
+                    // Toggle the active status in the array
+                    const isActive = activeStatuses.includes(status);
+                    if (isActive) {
+                        // Remove the status if it's already active
+                        activeStatuses = activeStatuses.filter(s => s !== status);
+                    } else {
+                        // Add the status if it's not already active
+                        activeStatuses.push(status);
+                    }
+                    // Toggle visibility of assets
+                    toggleAssetVisibility(status);
+                    // Update the opacity of legend items
+                    updateLegendItems();
+                });
             });
-        </script>
-        <script>
-            // Find all input elements with ID 'description'
-            var inputElements = document.querySelectorAll('input#description');
 
-            // Iterate through each input element
-            inputElements.forEach(function(inputElement) {
-                // Create a new textarea element
-                var textareaElement = document.createElement('textarea');
+            function toggleAssetVisibility(status) {
+                const assets = document.querySelectorAll(`.asset-image[data-status="${status}"]`);
+                assets.forEach(asset => {
+                    const isHidden = asset.classList.contains('hidden-asset');
+                    const statusIndicator = asset.nextElementSibling;
 
-                // Copy attributes from the input element
-                textareaElement.className = inputElement.className;
-                textareaElement.id = inputElement.id;
-                textareaElement.name = inputElement.name;
-                textareaElement.value = inputElement.value;
+                    if (isHidden) {
+                        asset.classList.remove('hidden-asset');
+                        if (statusIndicator) {
+                            statusIndicator.classList.remove('hidden-asset');
+                        }
+                    } else {
+                        asset.classList.add('hidden-asset');
+                        if (statusIndicator) {
+                            statusIndicator.classList.add('hidden-asset');
+                        }
+                    }
+                });
+            }
 
-                // Replace the input element with the textarea element
-                inputElement.parentNode.replaceChild(textareaElement, inputElement);
-            });
-        </script>
+            function updateLegendItems() {
+                // Update the opacity of all legend items based on activeStatuses
+                const allLegendItems = document.querySelectorAll('.legend-item');
+                allLegendItems.forEach(legendItem => {
+                    const status = legendItem.getAttribute('data-status');
+                    if (activeStatuses.includes(status)) {
+                        // If the status is active, change opacity to 50%
+                        legendItem.style.opacity = '0.2';
+                    } else {
+                        // If the status is not active, revert opacity to 100%
+                        legendItem.style.opacity = '1';
+                    }
+                });
+            }
+        });
+    </script>
 
-        <script src="../../../src/js/main.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    </body>
+    <script src="../../../src/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
 
-    </html>
+</html>

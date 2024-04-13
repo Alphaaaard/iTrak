@@ -10427,7 +10427,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                             </div>
                         </div>
                     </div>
-                    <!-- ASSETS -->
+                      <!-- ASSETS -->
 
                     <!-- ASSET 7272 -->
                     <img src='../image.php?id=7272'
@@ -11612,7 +11612,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         class="asset-image" data-id="<?php echo $assetId6867; ?>"
                         data-room="<?php echo htmlspecialchars($room6867); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6867); ?>"
-                        data-status="<?php echo htmlspecialchars($status68667); ?>"
+                        data-status="<?php echo htmlspecialchars($status6867); ?>"
                         data-image="<?php echo base64_encode($upload_img6867); ?>"
                         data-category="<?php echo htmlspecialchars($category6867); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName6867); ?>">
@@ -12046,6 +12046,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         class="asset-image" data-id="<?php echo $assetId6973; ?>"
                         data-room="<?php echo htmlspecialchars($room6973); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6973); ?>"
+                        data-status="<?php echo htmlspecialchars($status6973); ?>"
                         data-image="<?php echo base64_encode($upload_img6973); ?>"
                         data-category="<?php echo htmlspecialchars($category6973); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName6973); ?>">

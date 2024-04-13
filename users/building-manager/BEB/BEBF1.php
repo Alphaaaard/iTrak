@@ -12888,17 +12888,17 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     <span class="text">Attendance Logs</span>
                 </a>
             </li>
-                <li>
-                    <a href=" ../../manager/gps.php" class="GPS-cont">
-                        <div class="GPS-side-cont">
-                            <i class="bi bi-geo-alt"></i>
-                            <span class="text">GPS</span>
-                        </div>
-                        <div class="GPS-ind">
-                            <i class="bi bi-chevron-up"></i>
-                        </div>
-                    </a>
-                </li>
+            <li>
+                <a href=" ../../manager/gps.php" class="GPS-cont">
+                    <div class="GPS-side-cont">
+                        <i class="bi bi-geo-alt"></i>
+                        <span class="text">GPS</span>
+                    </div>
+                    <div class="GPS-ind">
+                        <i class="bi bi-chevron-up"></i>
+                    </div>
+                </a>
+            </li>
             <li class="active">
                 <a href="../../manager/map.php">
                     <i class="bi bi-map"></i>
@@ -12919,13 +12919,13 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             </li>
         </ul>
     </section>
-            <div id="map-top-nav">
-            <a href="../../manager/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
+    <div id="map-top-nav">
+        <a href="../../manager/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
 
-            <div class="legend-button" id="legendButton">
-                <i class="bi bi-info-circle"></i>
-            </div>
+        <div class="legend-button" id="legendButton">
+            <i class="bi bi-info-circle"></i>
         </div>
+    </div>
     <section id="content">
         <main>
             <div class="content-container" id="content-container">
@@ -12957,7 +12957,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-room="<?php echo htmlspecialchars($room6137); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6137); ?>"
                         data-image="<?php echo base64_encode($upload_img6137); ?>"
-                        data-category="<?php echo htmlspecialchars($category6137); ?>">
+                        data-category="<?php echo htmlspecialchars($category6137); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6137); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6137); ?>; 
 position:absolute; top:70px; left:200px;'>
                     </div>
@@ -12970,7 +12971,8 @@ position:absolute; top:70px; left:200px;'>
                         data-room="<?php echo htmlspecialchars($room6138); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6138); ?>"
                         data-image="<?php echo base64_encode($upload_img6138); ?>"
-                        data-category="<?php echo htmlspecialchars($category6138); ?>">
+                        data-category="<?php echo htmlspecialchars($category6138); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6138); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6138); ?>; 
 position:absolute; top:120px; left:200px;'>
                     </div>
@@ -12983,7 +12985,8 @@ position:absolute; top:120px; left:200px;'>
                         data-room="<?php echo htmlspecialchars($room6139); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6139); ?>"
                         data-image="<?php echo base64_encode($upload_img6139); ?>"
-                        data-category="<?php echo htmlspecialchars($category6139); ?>">
+                        data-category="<?php echo htmlspecialchars($category6139); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6139); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6139); ?>; 
 position:absolute; top:100px; left:250px;'>
                     </div>
@@ -12996,7 +12999,9 @@ position:absolute; top:100px; left:250px;'>
                         data-room="<?php echo htmlspecialchars($room6134); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6134); ?>"
                         data-image="<?php echo base64_encode($upload_img6134); ?>"
-                        data-category="<?php echo htmlspecialchars($category6134); ?>">
+                        data-category="<?php echo htmlspecialchars($category6134); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6134); ?>">
+
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6134); ?>; 
 position:absolute; top:170px; left:200px;'>
                     </div>
@@ -13009,7 +13014,8 @@ position:absolute; top:170px; left:200px;'>
                         data-room="<?php echo htmlspecialchars($room6136); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6136); ?>"
                         data-image="<?php echo base64_encode($upload_img6136); ?>"
-                        data-category="<?php echo htmlspecialchars($category6136); ?>">
+                        data-category="<?php echo htmlspecialchars($category6136); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6136); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6136); ?>; 
 position:absolute; top:207px; left:200px;'>
                     </div>
@@ -13024,7 +13030,8 @@ position:absolute; top:207px; left:200px;'>
                         data-room="<?php echo htmlspecialchars($room6135); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6135); ?>"
                         data-image="<?php echo base64_encode($upload_img6135); ?>"
-                        data-category="<?php echo htmlspecialchars($category6135); ?>">
+                        data-category="<?php echo htmlspecialchars($category6135); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6135); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6135); ?>; 
 position:absolute; top:190px; left:250px;'>
                     </div>
@@ -13037,7 +13044,8 @@ position:absolute; top:190px; left:250px;'>
                         data-room="<?php echo htmlspecialchars($room6103); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6103); ?>"
                         data-image="<?php echo base64_encode($upload_img6103); ?>"
-                        data-category="<?php echo htmlspecialchars($category6103); ?>">
+                        data-category="<?php echo htmlspecialchars($category6103); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6103); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6103); ?>; 
 position:absolute; top:252px; left:235px;'>
                     </div>
@@ -13050,7 +13058,8 @@ position:absolute; top:252px; left:235px;'>
                         data-room="<?php echo htmlspecialchars($room6107); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6107); ?>"
                         data-image="<?php echo base64_encode($upload_img6107); ?>"
-                        data-category="<?php echo htmlspecialchars($category6107); ?>">
+                        data-category="<?php echo htmlspecialchars($category6107); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6107); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6107); ?>; 
 position:absolute; top:300px; left:235px;'>
                     </div>
@@ -13063,7 +13072,8 @@ position:absolute; top:300px; left:235px;'>
                         data-room="<?php echo htmlspecialchars($room6108); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6108); ?>"
                         data-image="<?php echo base64_encode($upload_img6108); ?>"
-                        data-category="<?php echo htmlspecialchars($category6108); ?>">
+                        data-category="<?php echo htmlspecialchars($category6108); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6108); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6108); ?>; 
 position:absolute; top:300px; left:320px;'>
                     </div>
@@ -13076,7 +13086,8 @@ position:absolute; top:300px; left:320px;'>
                         data-room="<?php echo htmlspecialchars($room6109); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6109); ?>"
                         data-image="<?php echo base64_encode($upload_img6109); ?>"
-                        data-category="<?php echo htmlspecialchars($category6109); ?>">
+                        data-category="<?php echo htmlspecialchars($category6109); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6109); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6109); ?>; 
 position:absolute; top:252px; left:320px;'>
                     </div>
@@ -13091,7 +13102,8 @@ position:absolute; top:252px; left:320px;'>
                         data-room="<?php echo htmlspecialchars($room6110); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6110); ?>"
                         data-image="<?php echo base64_encode($upload_img6110); ?>"
-                        data-category="<?php echo htmlspecialchars($category6110); ?>">
+                        data-category="<?php echo htmlspecialchars($category6110); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6110); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6110); ?>; 
 position:absolute; top:252px; left:395px;'>
                     </div>
@@ -13104,7 +13116,8 @@ position:absolute; top:252px; left:395px;'>
                         data-room="<?php echo htmlspecialchars($room6111); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6111); ?>"
                         data-image="<?php echo base64_encode($upload_img6111); ?>"
-                        data-category="<?php echo htmlspecialchars($category6111); ?>">
+                        data-category="<?php echo htmlspecialchars($category6111); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6111); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6111); ?>; 
 position:absolute; top:300px; left:395px;'>
                     </div>
@@ -13117,7 +13130,8 @@ position:absolute; top:300px; left:395px;'>
                         data-room="<?php echo htmlspecialchars($room6104); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6104); ?>"
                         data-image="<?php echo base64_encode($upload_img6104); ?>"
-                        data-category="<?php echo htmlspecialchars($category6104); ?>">
+                        data-category="<?php echo htmlspecialchars($category6104); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6104); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6104); ?>; 
 position:absolute; top:300px; left:495px;'>
                     </div>
@@ -13130,7 +13144,8 @@ position:absolute; top:300px; left:495px;'>
                         data-room="<?php echo htmlspecialchars($room6105); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6105); ?>"
                         data-image="<?php echo base64_encode($upload_img6105); ?>"
-                        data-category="<?php echo htmlspecialchars($category6105); ?>">
+                        data-category="<?php echo htmlspecialchars($category6105); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6105); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6105); ?>; 
 position:absolute; top:252px; left:495px;'>
                     </div>
@@ -13143,7 +13158,8 @@ position:absolute; top:252px; left:495px;'>
                         data-room="<?php echo htmlspecialchars($room6106); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6106); ?>"
                         data-image="<?php echo base64_encode($upload_img6106); ?>"
-                        data-category="<?php echo htmlspecialchars($category6106); ?>">
+                        data-category="<?php echo htmlspecialchars($category6106); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6106); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6106); ?>; 
 position:absolute; top:252px; left:575px;'>
                     </div>
@@ -13158,7 +13174,8 @@ position:absolute; top:252px; left:575px;'>
                         data-room="<?php echo htmlspecialchars($room6112); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6112); ?>"
                         data-image="<?php echo base64_encode($upload_img6112); ?>"
-                        data-category="<?php echo htmlspecialchars($category6112); ?>">
+                        data-category="<?php echo htmlspecialchars($category6112); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6112); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6112); ?>; 
 position:absolute; top:300px; left:575px;'>
                     </div>
@@ -13171,7 +13188,8 @@ position:absolute; top:300px; left:575px;'>
                         data-room="<?php echo htmlspecialchars($room6113); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6113); ?>"
                         data-image="<?php echo base64_encode($upload_img6113); ?>"
-                        data-category="<?php echo htmlspecialchars($category6113); ?>">
+                        data-category="<?php echo htmlspecialchars($category6113); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName61113); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6113); ?>; 
 position:absolute; top:300px; left:655px;'>
                     </div>
@@ -13184,7 +13202,8 @@ position:absolute; top:300px; left:655px;'>
                         data-room="<?php echo htmlspecialchars($room6114); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6114); ?>"
                         data-image="<?php echo base64_encode($upload_img6114); ?>"
-                        data-category="<?php echo htmlspecialchars($category6114); ?>">
+                        data-category="<?php echo htmlspecialchars($category6114); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6114); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6114); ?>; 
 position:absolute; top:252px; left:655px;'>
                     </div>
@@ -13197,7 +13216,8 @@ position:absolute; top:252px; left:655px;'>
                         data-room="<?php echo htmlspecialchars($room6115); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6115); ?>"
                         data-image="<?php echo base64_encode($upload_img6115); ?>"
-                        data-category="<?php echo htmlspecialchars($category6115); ?>">
+                        data-category="<?php echo htmlspecialchars($category6115); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6115); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6115); ?>; 
 position:absolute; top:252px; left:740px;'>
                     </div>
@@ -13210,7 +13230,8 @@ position:absolute; top:252px; left:740px;'>
                         data-room="<?php echo htmlspecialchars($room6116); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6116); ?>"
                         data-image="<?php echo base64_encode($upload_img6116); ?>"
-                        data-category="<?php echo htmlspecialchars($category6116); ?>">
+                        data-category="<?php echo htmlspecialchars($category6116); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6116); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6116); ?>; 
 position:absolute; top:300px; left:740px;'>
                     </div>
@@ -13225,7 +13246,8 @@ position:absolute; top:300px; left:740px;'>
                         data-room="<?php echo htmlspecialchars($room6117); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6117); ?>"
                         data-image="<?php echo base64_encode($upload_img6117); ?>"
-                        data-category="<?php echo htmlspecialchars($category6117); ?>">
+                        data-category="<?php echo htmlspecialchars($category6117); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6117); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6117); ?>; 
 position:absolute; top:300px; left:830px;'>
                     </div>
@@ -13238,7 +13260,8 @@ position:absolute; top:300px; left:830px;'>
                         data-room="<?php echo htmlspecialchars($room6118); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6118); ?>"
                         data-image="<?php echo base64_encode($upload_img6118); ?>"
-                        data-category="<?php echo htmlspecialchars($category6118); ?>">
+                        data-category="<?php echo htmlspecialchars($category6118); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6118); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6118); ?>; 
 position:absolute; top:252px; left:830px;'>
                     </div>
@@ -13251,7 +13274,8 @@ position:absolute; top:252px; left:830px;'>
                         data-room="<?php echo htmlspecialchars($room6119); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6119); ?>"
                         data-image="<?php echo base64_encode($upload_img6119); ?>"
-                        data-category="<?php echo htmlspecialchars($category6119); ?>">
+                        data-category="<?php echo htmlspecialchars($category6119); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6119); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6119); ?>; 
 position:absolute; top:252px; left:905px;'>
                     </div>
@@ -13264,7 +13288,8 @@ position:absolute; top:252px; left:905px;'>
                         data-room="<?php echo htmlspecialchars($room6120); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6120); ?>"
                         data-image="<?php echo base64_encode($upload_img6120); ?>"
-                        data-category="<?php echo htmlspecialchars($category6120); ?>">
+                        data-category="<?php echo htmlspecialchars($category6120); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6120); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6120); ?>; 
 position:absolute; top:300px; left:905px;'>
                     </div>
@@ -13277,7 +13302,8 @@ position:absolute; top:300px; left:905px;'>
                         data-room="<?php echo htmlspecialchars($room6121); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6121); ?>"
                         data-image="<?php echo base64_encode($upload_img6121); ?>"
-                        data-category="<?php echo htmlspecialchars($category6121); ?>">
+                        data-category="<?php echo htmlspecialchars($category6121); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6121); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6121); ?>; 
 position:absolute; top:300px; left:985px;'>
                     </div>
@@ -13291,7 +13317,8 @@ position:absolute; top:300px; left:985px;'>
                         data-room="<?php echo htmlspecialchars($room6122); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6122); ?>"
                         data-image="<?php echo base64_encode($upload_img6122); ?>"
-                        data-category="<?php echo htmlspecialchars($category6122); ?>">
+                        data-category="<?php echo htmlspecialchars($category6122); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6122); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6122); ?>; 
 position:absolute; top:252px; left:985px;'>
                     </div>
@@ -13304,7 +13331,8 @@ position:absolute; top:252px; left:985px;'>
                         data-room="<?php echo htmlspecialchars($room6123); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6123); ?>"
                         data-image="<?php echo base64_encode($upload_img6123); ?>"
-                        data-category="<?php echo htmlspecialchars($category6123); ?>">
+                        data-category="<?php echo htmlspecialchars($category6123); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6123); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6123); ?>; 
 position:absolute; top:252px; left:1065px;'>
                     </div>
@@ -13317,7 +13345,8 @@ position:absolute; top:252px; left:1065px;'>
                         data-room="<?php echo htmlspecialchars($room6124); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6124); ?>"
                         data-image="<?php echo base64_encode($upload_img6124); ?>"
-                        data-category="<?php echo htmlspecialchars($category6124); ?>">
+                        data-category="<?php echo htmlspecialchars($category6124); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6124); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6124); ?>; 
 position:absolute; top:300px; left:1065px;'>
                     </div>
@@ -13330,7 +13359,8 @@ position:absolute; top:300px; left:1065px;'>
                         data-room="<?php echo htmlspecialchars($room6125); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6125); ?>"
                         data-image="<?php echo base64_encode($upload_img6125); ?>"
-                        data-category="<?php echo htmlspecialchars($category6125); ?>">
+                        data-category="<?php echo htmlspecialchars($category6125); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6125); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6125); ?>; 
 position:absolute; top:360px; left:520px;'>
                     </div>
@@ -13343,7 +13373,8 @@ position:absolute; top:360px; left:520px;'>
                         data-room="<?php echo htmlspecialchars($room6126); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6126); ?>"
                         data-image="<?php echo base64_encode($upload_img6126); ?>"
-                        data-category="<?php echo htmlspecialchars($category6126); ?>">
+                        data-category="<?php echo htmlspecialchars($category6126); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6126); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6126); ?>; 
 position:absolute; top:360px; left:625px;'>
                     </div>
@@ -13356,7 +13387,8 @@ position:absolute; top:360px; left:625px;'>
                         data-room="<?php echo htmlspecialchars($room6127); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6127); ?>"
                         data-image="<?php echo base64_encode($upload_img6127); ?>"
-                        data-category="<?php echo htmlspecialchars($category6127); ?>">
+                        data-category="<?php echo htmlspecialchars($category6127); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6127); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6127); ?>; 
 position:absolute; top:360px; left:725px;'>
                     </div>
@@ -13369,7 +13401,8 @@ position:absolute; top:360px; left:725px;'>
                         data-room="<?php echo htmlspecialchars($room6128); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6128); ?>"
                         data-image="<?php echo base64_encode($upload_img6128); ?>"
-                        data-category="<?php echo htmlspecialchars($category6128); ?>">
+                        data-category="<?php echo htmlspecialchars($category6128); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6128); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6128); ?>; 
 position:absolute; top:410px; left:520px;'>
                     </div>
@@ -13382,7 +13415,8 @@ position:absolute; top:410px; left:520px;'>
                         data-room="<?php echo htmlspecialchars($room6129); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6129); ?>"
                         data-image="<?php echo base64_encode($upload_img6129); ?>"
-                        data-category="<?php echo htmlspecialchars($category6129); ?>">
+                        data-category="<?php echo htmlspecialchars($category6129); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6129); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6129); ?>; 
 position:absolute; top:410px; left:625px;'>
                     </div>
@@ -13396,7 +13430,8 @@ position:absolute; top:410px; left:625px;'>
                         data-room="<?php echo htmlspecialchars($room6130); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6130); ?>"
                         data-image="<?php echo base64_encode($upload_img6130); ?>"
-                        data-category="<?php echo htmlspecialchars($category6130); ?>">
+                        data-category="<?php echo htmlspecialchars($category6130); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6130); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6130); ?>; 
 position:absolute; top:410px; left:725px;'>
                     </div>
@@ -13409,7 +13444,8 @@ position:absolute; top:410px; left:725px;'>
                         data-room="<?php echo htmlspecialchars($room6131); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6131); ?>"
                         data-image="<?php echo base64_encode($upload_img6131); ?>"
-                        data-category="<?php echo htmlspecialchars($category6131); ?>">
+                        data-category="<?php echo htmlspecialchars($category6131); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6131); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6131); ?>; 
 position:absolute; top:460px; left:625px;'>
                     </div>
@@ -13422,7 +13458,8 @@ position:absolute; top:460px; left:625px;'>
                         data-room="<?php echo htmlspecialchars($room6132); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6132); ?>"
                         data-image="<?php echo base64_encode($upload_img6132); ?>"
-                        data-category="<?php echo htmlspecialchars($category6132); ?>">
+                        data-category="<?php echo htmlspecialchars($category6132); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6132); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6132); ?>; 
 position:absolute; top:460px; left:520px;'>
                     </div>
@@ -13435,7 +13472,8 @@ position:absolute; top:460px; left:520px;'>
                         data-room="<?php echo htmlspecialchars($room6133); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6133); ?>"
                         data-image="<?php echo base64_encode($upload_img6133); ?>"
-                        data-category="<?php echo htmlspecialchars($category6133); ?>">
+                        data-category="<?php echo htmlspecialchars($category6133); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6113); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6133); ?>; 
 position:absolute; top:460px; left:725px;'>
                     </div>
@@ -13453,7 +13491,8 @@ position:absolute; top:460px; left:725px;'>
                         data-room="<?php echo htmlspecialchars($room6140); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6140); ?>"
                         data-image="<?php echo base64_encode($upload_img6140); ?>"
-                        data-category="<?php echo htmlspecialchars($category6140); ?>">
+                        data-category="<?php echo htmlspecialchars($category6140); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6140); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6140); ?>; 
 position:absolute; top:70px; left:285px;'>
                     </div>
@@ -13466,7 +13505,8 @@ position:absolute; top:70px; left:285px;'>
                         data-room="<?php echo htmlspecialchars($room6141); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6141); ?>"
                         data-image="<?php echo base64_encode($upload_img6141); ?>"
-                        data-category="<?php echo htmlspecialchars($category6141); ?>">
+                        data-category="<?php echo htmlspecialchars($category6141); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6141); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6141); ?>; 
 position:absolute; top:145px; left:285px;'>
                     </div>
@@ -13479,7 +13519,8 @@ position:absolute; top:145px; left:285px;'>
                         data-room="<?php echo htmlspecialchars($room6142); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6142); ?>"
                         data-image="<?php echo base64_encode($upload_img6142); ?>"
-                        data-category="<?php echo htmlspecialchars($category6142); ?>">
+                        data-category="<?php echo htmlspecialchars($category6142); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6142); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6142); ?>; 
 position:absolute; top:70px; left:377px;'>
                     </div>
@@ -13492,7 +13533,8 @@ position:absolute; top:70px; left:377px;'>
                         data-room="<?php echo htmlspecialchars($room6143); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6143); ?>"
                         data-image="<?php echo base64_encode($upload_img6143); ?>"
-                        data-category="<?php echo htmlspecialchars($category6143); ?>">
+                        data-category="<?php echo htmlspecialchars($category6143); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6143); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6143); ?>; 
 position:absolute; top:145px; left:377px;'>
                     </div>
@@ -13506,7 +13548,8 @@ position:absolute; top:145px; left:377px;'>
                         data-room="<?php echo htmlspecialchars($room6144); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6144); ?>"
                         data-image="<?php echo base64_encode($upload_img6144); ?>"
-                        data-category="<?php echo htmlspecialchars($category6144); ?>">
+                        data-category="<?php echo htmlspecialchars($category6144); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6144); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6144); ?>; 
 position:absolute; top:145px; left:485px;'>
                     </div>
@@ -13519,7 +13562,8 @@ position:absolute; top:145px; left:485px;'>
                         data-room="<?php echo htmlspecialchars($room6145); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6145); ?>"
                         data-image="<?php echo base64_encode($upload_img6145); ?>"
-                        data-category="<?php echo htmlspecialchars($category6145); ?>">
+                        data-category="<?php echo htmlspecialchars($category6145); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6145); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6145); ?>; 
 position:absolute; top:70px; left:485px;'>
                     </div>
@@ -13532,7 +13576,8 @@ position:absolute; top:70px; left:485px;'>
                         data-room="<?php echo htmlspecialchars($room6200); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6200); ?>"
                         data-image="<?php echo base64_encode($upload_img6200); ?>"
-                        data-category="<?php echo htmlspecialchars($category6200); ?>">
+                        data-category="<?php echo htmlspecialchars($category6200); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6200); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6200); ?>; 
 position:absolute; top:135px; left:448.5px;'>
                     </div>
@@ -13545,7 +13590,8 @@ position:absolute; top:135px; left:448.5px;'>
                         data-room="<?php echo htmlspecialchars($room6199); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6199); ?>"
                         data-image="<?php echo base64_encode($upload_img6199); ?>"
-                        data-category="<?php echo htmlspecialchars($category6199); ?>">
+                        data-category="<?php echo htmlspecialchars($category6199); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6199); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6199); ?>; 
 position:absolute; top:142px; left:465px;'>
                     </div>
@@ -13559,7 +13605,8 @@ position:absolute; top:142px; left:465px;'>
                         data-room="<?php echo htmlspecialchars($room6146); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6146); ?>"
                         data-image="<?php echo base64_encode($upload_img6146); ?>"
-                        data-category="<?php echo htmlspecialchars($category6146); ?>">
+                        data-category="<?php echo htmlspecialchars($category6146); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6146); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6146); ?>; 
 position:absolute; top:214px; left:285px;'>
                     </div>
@@ -13572,7 +13619,8 @@ position:absolute; top:214px; left:285px;'>
                         data-room="<?php echo htmlspecialchars($room6147); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6147); ?>"
                         data-image="<?php echo base64_encode($upload_img6147); ?>"
-                        data-category="<?php echo htmlspecialchars($category6147); ?>">
+                        data-category="<?php echo htmlspecialchars($category6147); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6147); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6147); ?>; 
 position:absolute; top:214px; left:377px;'>
                     </div>
@@ -13585,7 +13633,8 @@ position:absolute; top:214px; left:377px;'>
                         data-room="<?php echo htmlspecialchars($room6148); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6148); ?>"
                         data-image="<?php echo base64_encode($upload_img6148); ?>"
-                        data-category="<?php echo htmlspecialchars($category6148); ?>">
+                        data-category="<?php echo htmlspecialchars($category6148); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6148); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6148); ?>; 
 position:absolute; top:214px; left:485px;'>
                     </div>
@@ -13598,7 +13647,8 @@ position:absolute; top:214px; left:485px;'>
                         data-room="<?php echo htmlspecialchars($room6149); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6149); ?>"
                         data-image="<?php echo base64_encode($upload_img6149); ?>"
-                        data-category="<?php echo htmlspecialchars($category6149); ?>">
+                        data-category="<?php echo htmlspecialchars($category6149); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6149); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6149); ?>; 
 position:absolute; top:79px; left:303px;'>
                     </div>
@@ -13612,7 +13662,8 @@ position:absolute; top:79px; left:303px;'>
                         data-room="<?php echo htmlspecialchars($room6150); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6150); ?>"
                         data-image="<?php echo base64_encode($upload_img6150); ?>"
-                        data-category="<?php echo htmlspecialchars($category6150); ?>">
+                        data-category="<?php echo htmlspecialchars($category6150); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6150); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6150); ?>; 
 position:absolute; top:91px; left:303px;'>
                     </div>
@@ -13625,7 +13676,8 @@ position:absolute; top:91px; left:303px;'>
                         data-room="<?php echo htmlspecialchars($room6151); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6151); ?>"
                         data-image="<?php echo base64_encode($upload_img6151); ?>"
-                        data-category="<?php echo htmlspecialchars($category6151); ?>">
+                        data-category="<?php echo htmlspecialchars($category6151); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6151); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6151); ?>; 
 position:absolute; top:104px; left:303px;'>
                     </div>
@@ -13638,7 +13690,8 @@ position:absolute; top:104px; left:303px;'>
                         data-room="<?php echo htmlspecialchars($room6152); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6152); ?>"
                         data-image="<?php echo base64_encode($upload_img6152); ?>"
-                        data-category="<?php echo htmlspecialchars($category6152); ?>">
+                        data-category="<?php echo htmlspecialchars($category6152); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6152); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6152); ?>; 
 position:absolute; top:117px; left:303px;'>
                     </div>
@@ -13651,7 +13704,8 @@ position:absolute; top:117px; left:303px;'>
                         data-room="<?php echo htmlspecialchars($room6153); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6153); ?>"
                         data-image="<?php echo base64_encode($upload_img6153); ?>"
-                        data-category="<?php echo htmlspecialchars($category6153); ?>">
+                        data-category="<?php echo htmlspecialchars($category6153); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6153); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6153); ?>; 
 position:absolute; top:130px; left:303px;'>
                     </div>
@@ -13665,7 +13719,8 @@ position:absolute; top:130px; left:303px;'>
                         data-room="<?php echo htmlspecialchars($room6154); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6154); ?>"
                         data-image="<?php echo base64_encode($upload_img6154); ?>"
-                        data-category="<?php echo htmlspecialchars($category6154); ?>">
+                        data-category="<?php echo htmlspecialchars($category6154); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6154); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6154); ?>; 
 position:absolute; top:79px; left:333px;'>
                     </div>
@@ -13678,7 +13733,8 @@ position:absolute; top:79px; left:333px;'>
                         data-room="<?php echo htmlspecialchars($room6155); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6155); ?>"
                         data-image="<?php echo base64_encode($upload_img6155); ?>"
-                        data-category="<?php echo htmlspecialchars($category6155); ?>">
+                        data-category="<?php echo htmlspecialchars($category6155); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6155); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6155); ?>; 
 position:absolute; top:91px; left:333px;'>
                     </div>
@@ -13691,7 +13747,8 @@ position:absolute; top:91px; left:333px;'>
                         data-room="<?php echo htmlspecialchars($room6156); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6156); ?>"
                         data-image="<?php echo base64_encode($upload_img6156); ?>"
-                        data-category="<?php echo htmlspecialchars($category6156); ?>">
+                        data-category="<?php echo htmlspecialchars($category6156); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6156); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6156); ?>; 
 position:absolute; top:104px; left:333px;'>
                     </div>
@@ -13704,7 +13761,8 @@ position:absolute; top:104px; left:333px;'>
                         data-room="<?php echo htmlspecialchars($room6157); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6157); ?>"
                         data-image="<?php echo base64_encode($upload_img6157); ?>"
-                        data-category="<?php echo htmlspecialchars($category6157); ?>">
+                        data-category="<?php echo htmlspecialchars($category6157); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6157); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6157); ?>; 
 position:absolute; top:117px; left:333px;'>
                     </div>
@@ -13718,7 +13776,8 @@ position:absolute; top:117px; left:333px;'>
                         data-room="<?php echo htmlspecialchars($room6158); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6158); ?>"
                         data-image="<?php echo base64_encode($upload_img6158); ?>"
-                        data-category="<?php echo htmlspecialchars($category6158); ?>">
+                        data-category="<?php echo htmlspecialchars($category6158); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6158); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6158); ?>; 
 position:absolute; top:130px; left:333px;'>
                     </div>
@@ -13731,7 +13790,8 @@ position:absolute; top:130px; left:333px;'>
                         data-room="<?php echo htmlspecialchars($room6159); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6159); ?>"
                         data-image="<?php echo base64_encode($upload_img6159); ?>"
-                        data-category="<?php echo htmlspecialchars($category6159); ?>">
+                        data-category="<?php echo htmlspecialchars($category6159); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6159); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6159); ?>; 
 position:absolute; top:79px; left:363px;'>
                     </div>
@@ -13744,7 +13804,8 @@ position:absolute; top:79px; left:363px;'>
                         data-room="<?php echo htmlspecialchars($room6160); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6160); ?>"
                         data-image="<?php echo base64_encode($upload_img6160); ?>"
-                        data-category="<?php echo htmlspecialchars($category6160); ?>">
+                        data-category="<?php echo htmlspecialchars($category6160); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6160); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6160); ?>; 
 position:absolute; top:91px; left:363px;'>
                     </div>
@@ -13757,7 +13818,8 @@ position:absolute; top:91px; left:363px;'>
                         data-room="<?php echo htmlspecialchars($room6161); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6161); ?>"
                         data-image="<?php echo base64_encode($upload_img6161); ?>"
-                        data-category="<?php echo htmlspecialchars($category6161); ?>">
+                        data-category="<?php echo htmlspecialchars($category6161); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6161); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6161); ?>; 
 position:absolute; top:104px; left:363px;'>
                     </div>
@@ -13771,7 +13833,8 @@ position:absolute; top:104px; left:363px;'>
                         data-room="<?php echo htmlspecialchars($room6162); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6162); ?>"
                         data-image="<?php echo base64_encode($upload_img6162); ?>"
-                        data-category="<?php echo htmlspecialchars($category6162); ?>">
+                        data-category="<?php echo htmlspecialchars($category6162); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6162); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6162); ?>; 
 position:absolute; top:117px; left:363px;'>
                     </div>
@@ -13784,7 +13847,8 @@ position:absolute; top:117px; left:363px;'>
                         data-room="<?php echo htmlspecialchars($room6163); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6163); ?>"
                         data-image="<?php echo base64_encode($upload_img6163); ?>"
-                        data-category="<?php echo htmlspecialchars($category6163); ?>">
+                        data-category="<?php echo htmlspecialchars($category6163); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6163); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6163); ?>; 
 position:absolute; top:130px; left:363px;'>
                     </div>
@@ -13797,7 +13861,8 @@ position:absolute; top:130px; left:363px;'>
                         data-room="<?php echo htmlspecialchars($room6164); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6164); ?>"
                         data-image="<?php echo base64_encode($upload_img6164); ?>"
-                        data-category="<?php echo htmlspecialchars($category6164); ?>">
+                        data-category="<?php echo htmlspecialchars($category6164); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6164); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6164); ?>; 
 position:absolute; top:79px; left:393px;'>
                     </div>
@@ -13811,6 +13876,7 @@ position:absolute; top:79px; left:393px;'>
                         data-floor="<?php echo htmlspecialchars($floor6165); ?>"
                         data-image="<?php echo base64_encode($upload_img6165); ?>"
                         data-category="<?php echo htmlspecialchars($category6165); ?>">
+                    data-assignedname="<?php echo htmlspecialchars($assignedName6165); ?>"
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6165); ?>; 
 position:absolute; top:91px; left:393px;'>
                     </div>
@@ -13824,7 +13890,8 @@ position:absolute; top:91px; left:393px;'>
                         data-room="<?php echo htmlspecialchars($room6166); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6166); ?>"
                         data-image="<?php echo base64_encode($upload_img6166); ?>"
-                        data-category="<?php echo htmlspecialchars($category6166); ?>">
+                        data-category="<?php echo htmlspecialchars($category6166); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6166); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6166); ?>; 
 position:absolute; top:104px; left:393px;'>
                     </div>
@@ -13837,7 +13904,8 @@ position:absolute; top:104px; left:393px;'>
                         data-room="<?php echo htmlspecialchars($room6167); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6167); ?>"
                         data-image="<?php echo base64_encode($upload_img6167); ?>"
-                        data-category="<?php echo htmlspecialchars($category6167); ?>">
+                        data-category="<?php echo htmlspecialchars($category6167); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6167); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6167); ?>; 
 position:absolute; top:117px; left:393px;'>
                     </div>
@@ -13850,7 +13918,8 @@ position:absolute; top:117px; left:393px;'>
                         data-room="<?php echo htmlspecialchars($room6168); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6168); ?>"
                         data-image="<?php echo base64_encode($upload_img6168); ?>"
-                        data-category="<?php echo htmlspecialchars($category6168); ?>">
+                        data-category="<?php echo htmlspecialchars($category6168); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6168); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6168); ?>; 
 position:absolute; top:130px; left:393px;'>
                     </div>
@@ -13863,7 +13932,8 @@ position:absolute; top:130px; left:393px;'>
                         data-room="<?php echo htmlspecialchars($room6169); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6169); ?>"
                         data-image="<?php echo base64_encode($upload_img6169); ?>"
-                        data-category="<?php echo htmlspecialchars($category6169); ?>">
+                        data-category="<?php echo htmlspecialchars($category6169); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6169); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6169); ?>; 
 position:absolute; top:79px; left:423px;'>
                     </div>
@@ -13877,7 +13947,8 @@ position:absolute; top:79px; left:423px;'>
                         data-room="<?php echo htmlspecialchars($room6170); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6170); ?>"
                         data-image="<?php echo base64_encode($upload_img6170); ?>"
-                        data-category="<?php echo htmlspecialchars($category6170); ?>">
+                        data-category="<?php echo htmlspecialchars($category6170); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6170); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6170); ?>; 
 position:absolute; top:91px; left:423px;'>
                     </div>
@@ -13890,7 +13961,8 @@ position:absolute; top:91px; left:423px;'>
                         data-room="<?php echo htmlspecialchars($room6171); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6171); ?>"
                         data-image="<?php echo base64_encode($upload_img6171); ?>"
-                        data-category="<?php echo htmlspecialchars($category6171); ?>">
+                        data-category="<?php echo htmlspecialchars($category6171); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6171); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6171); ?>; 
 position:absolute; top:104px; left:423px;'>
                     </div>
@@ -13903,7 +13975,8 @@ position:absolute; top:104px; left:423px;'>
                         data-room="<?php echo htmlspecialchars($room6172); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6172); ?>"
                         data-image="<?php echo base64_encode($upload_img6172); ?>"
-                        data-category="<?php echo htmlspecialchars($category6172); ?>">
+                        data-category="<?php echo htmlspecialchars($category6172); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6172); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6172); ?>; 
 position:absolute; top:117px; left:423px;'>
                     </div>
@@ -13916,7 +13989,8 @@ position:absolute; top:117px; left:423px;'>
                         data-room="<?php echo htmlspecialchars($room6173); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6173); ?>"
                         data-image="<?php echo base64_encode($upload_img6173); ?>"
-                        data-category="<?php echo htmlspecialchars($category6173); ?>">
+                        data-category="<?php echo htmlspecialchars($category6173); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6173); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6173); ?>; 
 position:absolute; top:130px; left:423px;'>
                     </div>
@@ -13930,7 +14004,8 @@ position:absolute; top:130px; left:423px;'>
                         data-room="<?php echo htmlspecialchars($room6174); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6174); ?>"
                         data-image="<?php echo base64_encode($upload_img6174); ?>"
-                        data-category="<?php echo htmlspecialchars($category6174); ?>">
+                        data-category="<?php echo htmlspecialchars($category6174); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6174); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6174); ?>; 
 position:absolute; top:159px; left:303px;'>
                     </div>
@@ -13943,7 +14018,8 @@ position:absolute; top:159px; left:303px;'>
                         data-room="<?php echo htmlspecialchars($room6175); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6175); ?>"
                         data-image="<?php echo base64_encode($upload_img6175); ?>"
-                        data-category="<?php echo htmlspecialchars($category6175); ?>">
+                        data-category="<?php echo htmlspecialchars($category6175); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6175); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6175); ?>; 
 position:absolute; top:171px; left:303px;'>
                     </div>
@@ -13956,7 +14032,8 @@ position:absolute; top:171px; left:303px;'>
                         data-room="<?php echo htmlspecialchars($room6176); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6176); ?>"
                         data-image="<?php echo base64_encode($upload_img6176); ?>"
-                        data-category="<?php echo htmlspecialchars($category6176); ?>">
+                        data-category="<?php echo htmlspecialchars($category6176); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6176); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6176); ?>; 
 position:absolute; top:183px; left:303px;'>
                     </div>
@@ -13969,7 +14046,8 @@ position:absolute; top:183px; left:303px;'>
                         data-room="<?php echo htmlspecialchars($room6177); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6177); ?>"
                         data-image="<?php echo base64_encode($upload_img6177); ?>"
-                        data-category="<?php echo htmlspecialchars($category6177); ?>">
+                        data-category="<?php echo htmlspecialchars($category6177); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6177); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6177); ?>; 
 position:absolute; top:194px; left:303px;'>
                     </div>
@@ -13983,7 +14061,8 @@ position:absolute; top:194px; left:303px;'>
                         data-room="<?php echo htmlspecialchars($room6178); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6178); ?>"
                         data-image="<?php echo base64_encode($upload_img6178); ?>"
-                        data-category="<?php echo htmlspecialchars($category6178); ?>">
+                        data-category="<?php echo htmlspecialchars($category6178); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6178); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6178); ?>; 
 position:absolute; top:207px; left:303px;'>
                     </div>
@@ -13996,7 +14075,8 @@ position:absolute; top:207px; left:303px;'>
                         data-room="<?php echo htmlspecialchars($room6179); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6179); ?>"
                         data-image="<?php echo base64_encode($upload_img6179); ?>"
-                        data-category="<?php echo htmlspecialchars($category6179); ?>">
+                        data-category="<?php echo htmlspecialchars($category6179); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6179); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6179); ?>; 
 position:absolute; top:159px; left:333px;'>
                     </div>
@@ -14009,7 +14089,8 @@ position:absolute; top:159px; left:333px;'>
                         data-room="<?php echo htmlspecialchars($room6180); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6180); ?>"
                         data-image="<?php echo base64_encode($upload_img6180); ?>"
-                        data-category="<?php echo htmlspecialchars($category6180); ?>">
+                        data-category="<?php echo htmlspecialchars($category6180); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6180); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6180); ?>; 
 position:absolute; top:171px; left:333px;'>
                     </div>
@@ -14022,7 +14103,8 @@ position:absolute; top:171px; left:333px;'>
                         data-room="<?php echo htmlspecialchars($room6181); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6181); ?>"
                         data-image="<?php echo base64_encode($upload_img6181); ?>"
-                        data-category="<?php echo htmlspecialchars($category6181); ?>">
+                        data-category="<?php echo htmlspecialchars($category6181); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6181); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6181); ?>; 
 position:absolute; top:183px; left:333px;'>
                     </div>
@@ -14036,7 +14118,8 @@ position:absolute; top:183px; left:333px;'>
                         data-room="<?php echo htmlspecialchars($room6182); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6182); ?>"
                         data-image="<?php echo base64_encode($upload_img6182); ?>"
-                        data-category="<?php echo htmlspecialchars($category6182); ?>">
+                        data-category="<?php echo htmlspecialchars($category6182); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6182); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6182); ?>; 
 position:absolute; top:194px; left:333px;'>
                     </div>
@@ -14049,7 +14132,8 @@ position:absolute; top:194px; left:333px;'>
                         data-room="<?php echo htmlspecialchars($room6183); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6183); ?>"
                         data-image="<?php echo base64_encode($upload_img6183); ?>"
-                        data-category="<?php echo htmlspecialchars($category6183); ?>">
+                        data-category="<?php echo htmlspecialchars($category6183); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6183); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6183); ?>; 
 position:absolute; top:207px; left:333px;'>
                     </div>
@@ -14062,7 +14146,8 @@ position:absolute; top:207px; left:333px;'>
                         data-room="<?php echo htmlspecialchars($room6184); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6184); ?>"
                         data-image="<?php echo base64_encode($upload_img6184); ?>"
-                        data-category="<?php echo htmlspecialchars($category6184); ?>">
+                        data-category="<?php echo htmlspecialchars($category6184); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6184); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6184); ?>; 
 position:absolute; top:159px; left:363px;'>
                     </div>
@@ -14075,7 +14160,8 @@ position:absolute; top:159px; left:363px;'>
                         data-room="<?php echo htmlspecialchars($room6185); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6185); ?>"
                         data-image="<?php echo base64_encode($upload_img6185); ?>"
-                        data-category="<?php echo htmlspecialchars($category6185); ?>">
+                        data-category="<?php echo htmlspecialchars($category6185); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6185); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6185); ?>; 
 position:absolute; top:171px; left:363px;'>
                     </div>
@@ -14089,7 +14175,8 @@ position:absolute; top:171px; left:363px;'>
                         data-room="<?php echo htmlspecialchars($room6186); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6186); ?>"
                         data-image="<?php echo base64_encode($upload_img6186); ?>"
-                        data-category="<?php echo htmlspecialchars($category6186); ?>">
+                        data-category="<?php echo htmlspecialchars($category6186); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6186); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6186); ?>; 
 position:absolute; top:183px; left:363px;'>
                     </div>
@@ -14102,7 +14189,8 @@ position:absolute; top:183px; left:363px;'>
                         data-room="<?php echo htmlspecialchars($room6187); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6187); ?>"
                         data-image="<?php echo base64_encode($upload_img6187); ?>"
-                        data-category="<?php echo htmlspecialchars($category6187); ?>">
+                        data-category="<?php echo htmlspecialchars($category6187); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6187); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6187); ?>; 
 position:absolute; top:194px; left:363px;'>
                     </div>
@@ -14115,7 +14203,8 @@ position:absolute; top:194px; left:363px;'>
                         data-room="<?php echo htmlspecialchars($room6188); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6188); ?>"
                         data-image="<?php echo base64_encode($upload_img6188); ?>"
-                        data-category="<?php echo htmlspecialchars($category6188); ?>">
+                        data-category="<?php echo htmlspecialchars($category6188); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6188); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6188); ?>; 
 position:absolute; top:207px; left:363px;'>
                     </div>
@@ -14128,7 +14217,8 @@ position:absolute; top:207px; left:363px;'>
                         data-room="<?php echo htmlspecialchars($room6189); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6189); ?>"
                         data-image="<?php echo base64_encode($upload_img6189); ?>"
-                        data-category="<?php echo htmlspecialchars($category6189); ?>">
+                        data-category="<?php echo htmlspecialchars($category6189); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6189); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6189); ?>; 
 position:absolute; top:159px; left:393px;'>
                     </div>
@@ -14142,7 +14232,8 @@ position:absolute; top:159px; left:393px;'>
                         data-room="<?php echo htmlspecialchars($room6190); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6190); ?>"
                         data-image="<?php echo base64_encode($upload_img6190); ?>"
-                        data-category="<?php echo htmlspecialchars($category6190); ?>">
+                        data-category="<?php echo htmlspecialchars($category6190); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6190); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6190); ?>; 
 position:absolute; top:171px; left:393px;'>
                     </div>
@@ -14155,7 +14246,8 @@ position:absolute; top:171px; left:393px;'>
                         data-room="<?php echo htmlspecialchars($room6191); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6191); ?>"
                         data-image="<?php echo base64_encode($upload_img6191); ?>"
-                        data-category="<?php echo htmlspecialchars($category6191); ?>">
+                        data-category="<?php echo htmlspecialchars($category6191); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6191); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6191); ?>; 
 position:absolute; top:183px; left:393px;'>
                     </div>
@@ -14168,7 +14260,8 @@ position:absolute; top:183px; left:393px;'>
                         data-room="<?php echo htmlspecialchars($room6192); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6192); ?>"
                         data-image="<?php echo base64_encode($upload_img6192); ?>"
-                        data-category="<?php echo htmlspecialchars($category6192); ?>">
+                        data-category="<?php echo htmlspecialchars($category6192); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6192); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6192); ?>; 
 position:absolute; top:194px; left:393px;'>
                     </div>
@@ -14181,7 +14274,8 @@ position:absolute; top:194px; left:393px;'>
                         data-room="<?php echo htmlspecialchars($room6193); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6193); ?>"
                         data-image="<?php echo base64_encode($upload_img6193); ?>"
-                        data-category="<?php echo htmlspecialchars($category6193); ?>">
+                        data-category="<?php echo htmlspecialchars($category6193); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6193); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6193); ?>; 
 position:absolute; top:207px; left:393px;'>
                     </div>
@@ -14195,7 +14289,8 @@ position:absolute; top:207px; left:393px;'>
                         data-room="<?php echo htmlspecialchars($room6194); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6194); ?>"
                         data-image="<?php echo base64_encode($upload_img6194); ?>"
-                        data-category="<?php echo htmlspecialchars($category6194); ?>">
+                        data-category="<?php echo htmlspecialchars($category6194); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6194); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6194); ?>; 
 position:absolute; top:159px; left:423px;'>
                     </div>
@@ -14208,7 +14303,8 @@ position:absolute; top:159px; left:423px;'>
                         data-room="<?php echo htmlspecialchars($room6195); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6195); ?>"
                         data-image="<?php echo base64_encode($upload_img6195); ?>"
-                        data-category="<?php echo htmlspecialchars($category6195); ?>">
+                        data-category="<?php echo htmlspecialchars($category6195); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6195); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6195); ?>; 
 position:absolute; top:171px; left:423px;'>
                     </div>
@@ -14221,7 +14317,8 @@ position:absolute; top:171px; left:423px;'>
                         data-room="<?php echo htmlspecialchars($room6196); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6196); ?>"
                         data-image="<?php echo base64_encode($upload_img6196); ?>"
-                        data-category="<?php echo htmlspecialchars($category6196); ?>">
+                        data-category="<?php echo htmlspecialchars($category6196); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6196); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6196); ?>; 
 position:absolute; top:183px; left:423px;'>
                     </div>
@@ -14234,7 +14331,8 @@ position:absolute; top:183px; left:423px;'>
                         data-room="<?php echo htmlspecialchars($room6197); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6197); ?>"
                         data-image="<?php echo base64_encode($upload_img6197); ?>"
-                        data-category="<?php echo htmlspecialchars($category6197); ?>">
+                        data-category="<?php echo htmlspecialchars($category6197); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6197); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6197); ?>; 
 position:absolute; top:194px; left:423px;'>
                     </div>
@@ -14248,7 +14346,8 @@ position:absolute; top:194px; left:423px;'>
                         data-room="<?php echo htmlspecialchars($room6198); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6198); ?>"
                         data-image="<?php echo base64_encode($upload_img6198); ?>"
-                        data-category="<?php echo htmlspecialchars($category6198); ?>">
+                        data-category="<?php echo htmlspecialchars($category6198); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6198); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6198); ?>; 
 position:absolute; top:207px; left:423px;'>
                     </div>
@@ -14261,7 +14360,8 @@ position:absolute; top:207px; left:423px;'>
                         data-room="<?php echo htmlspecialchars($room6202); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6202); ?>"
                         data-image="<?php echo base64_encode($upload_img6202); ?>"
-                        data-category="<?php echo htmlspecialchars($category6202); ?>">
+                        data-category="<?php echo htmlspecialchars($category6202); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6202); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6202); ?>; 
 position:absolute; top:70px; left:520px;'>
                     </div>
@@ -14274,7 +14374,8 @@ position:absolute; top:70px; left:520px;'>
                         data-room="<?php echo htmlspecialchars($room6203); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6203); ?>"
                         data-image="<?php echo base64_encode($upload_img6203); ?>"
-                        data-category="<?php echo htmlspecialchars($category6203); ?>">
+                        data-category="<?php echo htmlspecialchars($category6203); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6203); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6203); ?>; 
 position:absolute; top:145px; left:520px;'>
                     </div>
@@ -14287,7 +14388,8 @@ position:absolute; top:145px; left:520px;'>
                         data-room="<?php echo htmlspecialchars($room6204); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6204); ?>"
                         data-image="<?php echo base64_encode($upload_img6204); ?>"
-                        data-category="<?php echo htmlspecialchars($category6204); ?>">
+                        data-category="<?php echo htmlspecialchars($category6204); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6204); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6204); ?>; 
 position:absolute; top:70px; left:615px;'>
                     </div>
@@ -14301,7 +14403,8 @@ position:absolute; top:70px; left:615px;'>
                         data-room="<?php echo htmlspecialchars($room6205); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6205); ?>"
                         data-image="<?php echo base64_encode($upload_img6205); ?>"
-                        data-category="<?php echo htmlspecialchars($category6205); ?>">
+                        data-category="<?php echo htmlspecialchars($category6205); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6205); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6205); ?>; 
 position:absolute; top:145px; left:615px;'>
                     </div>
@@ -14314,7 +14417,8 @@ position:absolute; top:145px; left:615px;'>
                         data-room="<?php echo htmlspecialchars($room6206); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6206); ?>"
                         data-image="<?php echo base64_encode($upload_img6206); ?>"
-                        data-category="<?php echo htmlspecialchars($category6206); ?>">
+                        data-category="<?php echo htmlspecialchars($category6206); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6206); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6206); ?>; 
 position:absolute; top:145px; left:721px;'>
                     </div>
@@ -14327,7 +14431,8 @@ position:absolute; top:145px; left:721px;'>
                         data-room="<?php echo htmlspecialchars($room6207); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6207); ?>"
                         data-image="<?php echo base64_encode($upload_img6207); ?>"
-                        data-category="<?php echo htmlspecialchars($category6207); ?>">
+                        data-category="<?php echo htmlspecialchars($category6207); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6207); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6207); ?>; 
 position:absolute; top:70px; left:721px;'>
                     </div>
@@ -14340,7 +14445,8 @@ position:absolute; top:70px; left:721px;'>
                         data-room="<?php echo htmlspecialchars($room6208); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6208); ?>"
                         data-image="<?php echo base64_encode($upload_img6208); ?>"
-                        data-category="<?php echo htmlspecialchars($category6208); ?>">
+                        data-category="<?php echo htmlspecialchars($category6208); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6208); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6208); ?>; 
 position:absolute; top:214px; left:520px;'>
                     </div>
@@ -14354,7 +14460,8 @@ position:absolute; top:214px; left:520px;'>
                         data-room="<?php echo htmlspecialchars($room6209); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6209); ?>"
                         data-image="<?php echo base64_encode($upload_img6209); ?>"
-                        data-category="<?php echo htmlspecialchars($category6209); ?>">
+                        data-category="<?php echo htmlspecialchars($category6209); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6209); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6209); ?>; 
 position:absolute; top:214px; left:615px;'>
                     </div>
@@ -14367,7 +14474,8 @@ position:absolute; top:214px; left:615px;'>
                         data-room="<?php echo htmlspecialchars($room6210); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6210); ?>"
                         data-image="<?php echo base64_encode($upload_img6210); ?>"
-                        data-category="<?php echo htmlspecialchars($category6210); ?>">
+                        data-category="<?php echo htmlspecialchars($category6210); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6210); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6210); ?>; 
 position:absolute; top:214px; left:721px;'>
                     </div>
@@ -14380,7 +14488,8 @@ position:absolute; top:214px; left:721px;'>
                         data-room="<?php echo htmlspecialchars($room6211); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6211); ?>"
                         data-image="<?php echo base64_encode($upload_img6211); ?>"
-                        data-category="<?php echo htmlspecialchars($category6211); ?>">
+                        data-category="<?php echo htmlspecialchars($category6211); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6211); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6211); ?>; 
 position:absolute; top:79px; left:541px;'>
                     </div>
@@ -14393,7 +14502,8 @@ position:absolute; top:79px; left:541px;'>
                         data-room="<?php echo htmlspecialchars($room6212); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6212); ?>"
                         data-image="<?php echo base64_encode($upload_img6212); ?>"
-                        data-category="<?php echo htmlspecialchars($category6212); ?>">
+                        data-category="<?php echo htmlspecialchars($category6212); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6212); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6212); ?>; 
 position:absolute; top:92px; left:541px;'>
                     </div>
@@ -14407,7 +14517,8 @@ position:absolute; top:92px; left:541px;'>
                         data-room="<?php echo htmlspecialchars($room6213); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6213); ?>"
                         data-image="<?php echo base64_encode($upload_img6213); ?>"
-                        data-category="<?php echo htmlspecialchars($category6213); ?>">
+                        data-category="<?php echo htmlspecialchars($category6213); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6213); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6213); ?>; 
 position:absolute; top:104px; left:541px;'>
                     </div>
@@ -14420,7 +14531,8 @@ position:absolute; top:104px; left:541px;'>
                         data-room="<?php echo htmlspecialchars($room6214); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6214); ?>"
                         data-image="<?php echo base64_encode($upload_img6214); ?>"
-                        data-category="<?php echo htmlspecialchars($category6214); ?>">
+                        data-category="<?php echo htmlspecialchars($category6214); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6214); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6214); ?>; 
 position:absolute; top:118px; left:541px;'>
                     </div>
@@ -14433,7 +14545,8 @@ position:absolute; top:118px; left:541px;'>
                         data-room="<?php echo htmlspecialchars($room6215); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6215); ?>"
                         data-image="<?php echo base64_encode($upload_img6215); ?>"
-                        data-category="<?php echo htmlspecialchars($category6215); ?>">
+                        data-category="<?php echo htmlspecialchars($category6215); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6215); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6215); ?>; 
 position:absolute; top:131px; left:541px;'>
                     </div>
@@ -14446,7 +14559,8 @@ position:absolute; top:131px; left:541px;'>
                         data-room="<?php echo htmlspecialchars($room6216); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6216); ?>"
                         data-image="<?php echo base64_encode($upload_img6216); ?>"
-                        data-category="<?php echo htmlspecialchars($category6216); ?>">
+                        data-category="<?php echo htmlspecialchars($category6216); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6216); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6216); ?>; 
 position:absolute; top:79px; left:571px;'>
                     </div>
@@ -14459,7 +14573,8 @@ position:absolute; top:79px; left:571px;'>
                         data-room="<?php echo htmlspecialchars($room6217); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6217); ?>"
                         data-image="<?php echo base64_encode($upload_img6217); ?>"
-                        data-category="<?php echo htmlspecialchars($category6217); ?>">
+                        data-category="<?php echo htmlspecialchars($category6217); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6217); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6217); ?>; 
 position:absolute; top:91px; left:571px;'>
                     </div>
@@ -14472,7 +14587,8 @@ position:absolute; top:91px; left:571px;'>
                         data-room="<?php echo htmlspecialchars($room6218); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6218); ?>"
                         data-image="<?php echo base64_encode($upload_img6218); ?>"
-                        data-category="<?php echo htmlspecialchars($category6218); ?>">
+                        data-category="<?php echo htmlspecialchars($category6218); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6218); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6218); ?>; 
 position:absolute; top:104px; left:571px;'>
                     </div>
@@ -14485,7 +14601,8 @@ position:absolute; top:104px; left:571px;'>
                         data-room="<?php echo htmlspecialchars($room6219); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6219); ?>"
                         data-image="<?php echo base64_encode($upload_img6219); ?>"
-                        data-category="<?php echo htmlspecialchars($category6219); ?>">
+                        data-category="<?php echo htmlspecialchars($category6219); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6219); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6219); ?>; 
 position:absolute; top:117px; left:571px;'>
                     </div>
@@ -14498,7 +14615,8 @@ position:absolute; top:117px; left:571px;'>
                         data-room="<?php echo htmlspecialchars($room6220); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6220); ?>"
                         data-image="<?php echo base64_encode($upload_img6220); ?>"
-                        data-category="<?php echo htmlspecialchars($category6220); ?>">
+                        data-category="<?php echo htmlspecialchars($category6220); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6220); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6220); ?>; 
 position:absolute; top:130px; left:571px;'>
                     </div>
@@ -14511,7 +14629,8 @@ position:absolute; top:130px; left:571px;'>
                         data-room="<?php echo htmlspecialchars($room6221); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6221); ?>"
                         data-image="<?php echo base64_encode($upload_img6221); ?>"
-                        data-category="<?php echo htmlspecialchars($category6221); ?>">
+                        data-category="<?php echo htmlspecialchars($category6221); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6221); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6221); ?>; 
 position:absolute; top:79px; left:601px;'>
                     </div>
@@ -14524,7 +14643,8 @@ position:absolute; top:79px; left:601px;'>
                         data-room="<?php echo htmlspecialchars($room6222); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6222); ?>"
                         data-image="<?php echo base64_encode($upload_img6222); ?>"
-                        data-category="<?php echo htmlspecialchars($category6222); ?>">
+                        data-category="<?php echo htmlspecialchars($category6222); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6222); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6222); ?>; 
 position:absolute; top:91px; left:601px;'>
                     </div>
@@ -14537,7 +14657,8 @@ position:absolute; top:91px; left:601px;'>
                         data-room="<?php echo htmlspecialchars($room6223); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6223); ?>"
                         data-image="<?php echo base64_encode($upload_img6223); ?>"
-                        data-category="<?php echo htmlspecialchars($category6223); ?>">
+                        data-category="<?php echo htmlspecialchars($category6223); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6223); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6223); ?>; 
 position:absolute; top:104px; left:601px;'>
                     </div>
@@ -14550,7 +14671,8 @@ position:absolute; top:104px; left:601px;'>
                         data-room="<?php echo htmlspecialchars($room6224); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6224); ?>"
                         data-image="<?php echo base64_encode($upload_img6224); ?>"
-                        data-category="<?php echo htmlspecialchars($category6224); ?>">
+                        data-category="<?php echo htmlspecialchars($category6224); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6224); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6224); ?>; 
 position:absolute; top:117px; left:601px;'>
                     </div>
@@ -14564,7 +14686,8 @@ position:absolute; top:117px; left:601px;'>
                         data-room="<?php echo htmlspecialchars($room6225); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6225); ?>"
                         data-image="<?php echo base64_encode($upload_img6225); ?>"
-                        data-category="<?php echo htmlspecialchars($category6225); ?>">
+                        data-category="<?php echo htmlspecialchars($category6225); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6225); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6225); ?>; 
 position:absolute; top:130px; left:601px;'>
                     </div>
@@ -14577,7 +14700,8 @@ position:absolute; top:130px; left:601px;'>
                         data-room="<?php echo htmlspecialchars($room6226); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6226); ?>"
                         data-image="<?php echo base64_encode($upload_img6226); ?>"
-                        data-category="<?php echo htmlspecialchars($category6226); ?>">
+                        data-category="<?php echo htmlspecialchars($category6226); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6226); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6226); ?>; 
 position:absolute; top:79px; left:631px;'>
                     </div>
@@ -14590,7 +14714,8 @@ position:absolute; top:79px; left:631px;'>
                         data-room="<?php echo htmlspecialchars($room6227); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6227); ?>"
                         data-image="<?php echo base64_encode($upload_img6227); ?>"
-                        data-category="<?php echo htmlspecialchars($category6227); ?>">
+                        data-category="<?php echo htmlspecialchars($category6227); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6227); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6227); ?>; 
 position:absolute; top:91px; left:631px;'>
                     </div>
@@ -14603,7 +14728,8 @@ position:absolute; top:91px; left:631px;'>
                         data-room="<?php echo htmlspecialchars($room6228); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6228); ?>"
                         data-image="<?php echo base64_encode($upload_img6228); ?>"
-                        data-category="<?php echo htmlspecialchars($category6228); ?>">
+                        data-category="<?php echo htmlspecialchars($category6228); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6228); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6228); ?>; 
 position:absolute; top:104px; left:631px;'>
                     </div>
@@ -14617,7 +14743,8 @@ position:absolute; top:104px; left:631px;'>
                         data-room="<?php echo htmlspecialchars($room6229); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6229); ?>"
                         data-image="<?php echo base64_encode($upload_img6229); ?>"
-                        data-category="<?php echo htmlspecialchars($category6229); ?>">
+                        data-category="<?php echo htmlspecialchars($category6229); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6229); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6229); ?>; 
 position:absolute; top:117px; left:631px;'>
                     </div>
@@ -14630,7 +14757,8 @@ position:absolute; top:117px; left:631px;'>
                         data-room="<?php echo htmlspecialchars($room6230); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6230); ?>"
                         data-image="<?php echo base64_encode($upload_img6230); ?>"
-                        data-category="<?php echo htmlspecialchars($category6230); ?>">
+                        data-category="<?php echo htmlspecialchars($category6230); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6230); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6230); ?>; 
 position:absolute; top:130px; left:631px;'>
                     </div>
@@ -14643,7 +14771,8 @@ position:absolute; top:130px; left:631px;'>
                         data-room="<?php echo htmlspecialchars($room6231); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6231); ?>"
                         data-image="<?php echo base64_encode($upload_img6231); ?>"
-                        data-category="<?php echo htmlspecialchars($category6231); ?>">
+                        data-category="<?php echo htmlspecialchars($category6231); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6231); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6231); ?>; 
 position:absolute; top:79px; left:661px;'>
                     </div>
@@ -14657,7 +14786,8 @@ position:absolute; top:79px; left:661px;'>
                         data-room="<?php echo htmlspecialchars($room6232); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6232); ?>"
                         data-image="<?php echo base64_encode($upload_img6232); ?>"
-                        data-category="<?php echo htmlspecialchars($category6232); ?>">
+                        data-category="<?php echo htmlspecialchars($category6232); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6232); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6232); ?>; 
 position:absolute; top:91px; left:661px;'>
                     </div>
@@ -14670,7 +14800,8 @@ position:absolute; top:91px; left:661px;'>
                         data-room="<?php echo htmlspecialchars($room6233); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6233); ?>"
                         data-image="<?php echo base64_encode($upload_img6233); ?>"
-                        data-category="<?php echo htmlspecialchars($category6233); ?>">
+                        data-category="<?php echo htmlspecialchars($category6233); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6233); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6233); ?>; 
 position:absolute; top:104px; left:661px;'>
                     </div>
@@ -14683,7 +14814,8 @@ position:absolute; top:104px; left:661px;'>
                         data-room="<?php echo htmlspecialchars($room6234); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6234); ?>"
                         data-image="<?php echo base64_encode($upload_img6234); ?>"
-                        data-category="<?php echo htmlspecialchars($category6234); ?>">
+                        data-category="<?php echo htmlspecialchars($category6234); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6234); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6234); ?>; 
 position:absolute; top:117px; left:661px;'>
                     </div>
@@ -14696,7 +14828,8 @@ position:absolute; top:117px; left:661px;'>
                         data-room="<?php echo htmlspecialchars($room6235); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6235); ?>"
                         data-image="<?php echo base64_encode($upload_img6235); ?>"
-                        data-category="<?php echo htmlspecialchars($category6235); ?>">
+                        data-category="<?php echo htmlspecialchars($category6235); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6235); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6235); ?>; 
 position:absolute; top:130px; left:661px;'>
                     </div>
@@ -14709,7 +14842,8 @@ position:absolute; top:130px; left:661px;'>
                         data-room="<?php echo htmlspecialchars($room6236); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6236); ?>"
                         data-image="<?php echo base64_encode($upload_img6236); ?>"
-                        data-category="<?php echo htmlspecialchars($category6236); ?>">
+                        data-category="<?php echo htmlspecialchars($category6236); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6236); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6236); ?>; 
 position:absolute; top:159px; left:541px;'>
                     </div>
@@ -14722,7 +14856,8 @@ position:absolute; top:159px; left:541px;'>
                         data-room="<?php echo htmlspecialchars($room6237); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6237); ?>"
                         data-image="<?php echo base64_encode($upload_img6237); ?>"
-                        data-category="<?php echo htmlspecialchars($category6237); ?>">
+                        data-category="<?php echo htmlspecialchars($category6237); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6237); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6237); ?>; 
 position:absolute; top:171px; left:541px;'>
                     </div>
@@ -14735,7 +14870,8 @@ position:absolute; top:171px; left:541px;'>
                         data-room="<?php echo htmlspecialchars($room6238); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6238); ?>"
                         data-image="<?php echo base64_encode($upload_img6238); ?>"
-                        data-category="<?php echo htmlspecialchars($category6238); ?>">
+                        data-category="<?php echo htmlspecialchars($category6238); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6238); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6238); ?>; 
 position:absolute; top:183px; left:541px;'>
                     </div>
@@ -14748,7 +14884,8 @@ position:absolute; top:183px; left:541px;'>
                         data-room="<?php echo htmlspecialchars($room6239); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6239); ?>"
                         data-image="<?php echo base64_encode($upload_img6239); ?>"
-                        data-category="<?php echo htmlspecialchars($category6239); ?>">
+                        data-category="<?php echo htmlspecialchars($category6239); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6239); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6239); ?>; 
 position:absolute; top:194px; left:541px;'>
                     </div>
@@ -14762,7 +14899,8 @@ position:absolute; top:194px; left:541px;'>
                         data-room="<?php echo htmlspecialchars($room6240); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6240); ?>"
                         data-image="<?php echo base64_encode($upload_img6240); ?>"
-                        data-category="<?php echo htmlspecialchars($category6240); ?>">
+                        data-category="<?php echo htmlspecialchars($category6240); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6240); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6240); ?>; 
 position:absolute; top:207px; left:541px;'>
                     </div>
@@ -14775,7 +14913,8 @@ position:absolute; top:207px; left:541px;'>
                         data-room="<?php echo htmlspecialchars($room6241); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6241); ?>"
                         data-image="<?php echo base64_encode($upload_img6241); ?>"
-                        data-category="<?php echo htmlspecialchars($category6241); ?>">
+                        data-category="<?php echo htmlspecialchars($category6241); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6241); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6241); ?>; 
 position:absolute; top:159px; left:571px;'>
                     </div>
@@ -14788,7 +14927,8 @@ position:absolute; top:159px; left:571px;'>
                         data-room="<?php echo htmlspecialchars($room6242); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6242); ?>"
                         data-image="<?php echo base64_encode($upload_img6242); ?>"
-                        data-category="<?php echo htmlspecialchars($category6242); ?>">
+                        data-category="<?php echo htmlspecialchars($category6242); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6242); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6242); ?>; 
 position:absolute; top:171px; left:571px;'>
                     </div>
@@ -14801,7 +14941,8 @@ position:absolute; top:171px; left:571px;'>
                         data-room="<?php echo htmlspecialchars($room6243); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6243); ?>"
                         data-image="<?php echo base64_encode($upload_img6243); ?>"
-                        data-category="<?php echo htmlspecialchars($category6243); ?>">
+                        data-category="<?php echo htmlspecialchars($category6243); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6243); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6243); ?>; 
 position:absolute; top:183px; left:571px;'>
                     </div>
@@ -14815,7 +14956,8 @@ position:absolute; top:183px; left:571px;'>
                         data-room="<?php echo htmlspecialchars($room6244); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6244); ?>"
                         data-image="<?php echo base64_encode($upload_img6244); ?>"
-                        data-category="<?php echo htmlspecialchars($category6244); ?>">
+                        data-category="<?php echo htmlspecialchars($category6244); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6244); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6244); ?>; 
 position:absolute; top:195px; left:571px;'>
                     </div>
@@ -14828,7 +14970,8 @@ position:absolute; top:195px; left:571px;'>
                         data-room="<?php echo htmlspecialchars($room6245); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6245); ?>"
                         data-image="<?php echo base64_encode($upload_img6245); ?>"
-                        data-category="<?php echo htmlspecialchars($category6245); ?>">
+                        data-category="<?php echo htmlspecialchars($category6245); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6245); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6245); ?>; 
 position:absolute; top:207px; left:571px;'>
                     </div>
@@ -14841,7 +14984,8 @@ position:absolute; top:207px; left:571px;'>
                         data-room="<?php echo htmlspecialchars($room6246); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6246); ?>"
                         data-image="<?php echo base64_encode($upload_img6246); ?>"
-                        data-category="<?php echo htmlspecialchars($category6246); ?>">
+                        data-category="<?php echo htmlspecialchars($category6246); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6246); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6246); ?>; 
 position:absolute; top:159px; left:601px;'>
                     </div>
@@ -14854,7 +14998,8 @@ position:absolute; top:159px; left:601px;'>
                         data-room="<?php echo htmlspecialchars($room6247); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6247); ?>"
                         data-image="<?php echo base64_encode($upload_img6247); ?>"
-                        data-category="<?php echo htmlspecialchars($category6247); ?>">
+                        data-category="<?php echo htmlspecialchars($category6247); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6247); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6247); ?>; 
 position:absolute; top:171px; left:601px;'>
                     </div>
@@ -14868,7 +15013,8 @@ position:absolute; top:171px; left:601px;'>
                         data-room="<?php echo htmlspecialchars($room6248); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6248); ?>"
                         data-image="<?php echo base64_encode($upload_img6248); ?>"
-                        data-category="<?php echo htmlspecialchars($category6248); ?>">
+                        data-category="<?php echo htmlspecialchars($category6248); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6248); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6248); ?>; 
 position:absolute; top:183px; left:601px;'>
                     </div>
@@ -14881,7 +15027,9 @@ position:absolute; top:183px; left:601px;'>
                         data-room="<?php echo htmlspecialchars($room6249); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6249); ?>"
                         data-image="<?php echo base64_encode($upload_img6249); ?>"
-                        data-category="<?php echo htmlspecialchars($category6249); ?>">
+                        data-category="<?php echo htmlspecialchars($category6249); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6249); ?>">
+
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6249); ?>; 
 position:absolute; top:194px; left:601px;'>
                     </div>
@@ -14894,7 +15042,8 @@ position:absolute; top:194px; left:601px;'>
                         data-room="<?php echo htmlspecialchars($room6250); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6250); ?>"
                         data-image="<?php echo base64_encode($upload_img6250); ?>"
-                        data-category="<?php echo htmlspecialchars($category6250); ?>">
+                        data-category="<?php echo htmlspecialchars($category6250); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6250); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6250); ?>; 
 position:absolute; top:207px; left:601px;'>
                     </div>
@@ -14907,7 +15056,8 @@ position:absolute; top:207px; left:601px;'>
                         data-room="<?php echo htmlspecialchars($room6251); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6251); ?>"
                         data-image="<?php echo base64_encode($upload_img6251); ?>"
-                        data-category="<?php echo htmlspecialchars($category6251); ?>">
+                        data-category="<?php echo htmlspecialchars($category6251); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6251); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6251); ?>; 
 position:absolute; top:159px; left:631px;'>
                     </div>
@@ -14921,7 +15071,8 @@ position:absolute; top:159px; left:631px;'>
                         data-room="<?php echo htmlspecialchars($room6252); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6252); ?>"
                         data-image="<?php echo base64_encode($upload_img6252); ?>"
-                        data-category="<?php echo htmlspecialchars($category6252); ?>">
+                        data-category="<?php echo htmlspecialchars($category6252); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6252); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6252); ?>; 
 position:absolute; top:171px; left:631px;'>
                     </div>
@@ -14934,7 +15085,8 @@ position:absolute; top:171px; left:631px;'>
                         data-room="<?php echo htmlspecialchars($room6253); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6253); ?>"
                         data-image="<?php echo base64_encode($upload_img6253); ?>"
-                        data-category="<?php echo htmlspecialchars($category6253); ?>">
+                        data-category="<?php echo htmlspecialchars($category6253); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6253); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6253); ?>; 
 position:absolute; top:183px; left:631px;'>
                     </div>
@@ -14947,7 +15099,8 @@ position:absolute; top:183px; left:631px;'>
                         data-room="<?php echo htmlspecialchars($room6254); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6254); ?>"
                         data-image="<?php echo base64_encode($upload_img6254); ?>"
-                        data-category="<?php echo htmlspecialchars($category6254); ?>">
+                        data-category="<?php echo htmlspecialchars($category6254); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6254); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6254); ?>; 
 position:absolute; top:194px; left:631px;'>
                     </div>
@@ -14961,6 +15114,7 @@ position:absolute; top:194px; left:631px;'>
                         data-floor="<?php echo htmlspecialchars($floor6255); ?>"
                         data-image="<?php echo base64_encode($upload_img6255); ?>"
                         data-category="<?php echo htmlspecialchars($category6255); ?>">
+                    data-assignedname="<?php echo htmlspecialchars($assignedName6255); ?>"
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6255); ?>; 
 position:absolute; top:207px; left:631px;'>
                     </div>
@@ -14974,7 +15128,8 @@ position:absolute; top:207px; left:631px;'>
                         data-room="<?php echo htmlspecialchars($room6256); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6256); ?>"
                         data-image="<?php echo base64_encode($upload_img6256); ?>"
-                        data-category="<?php echo htmlspecialchars($category6256); ?>">
+                        data-category="<?php echo htmlspecialchars($category6256); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6256); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6256); ?>; 
 position:absolute; top:159px; left:661px;'>
                     </div>
@@ -14987,7 +15142,8 @@ position:absolute; top:159px; left:661px;'>
                         data-room="<?php echo htmlspecialchars($room6257); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6257); ?>"
                         data-image="<?php echo base64_encode($upload_img6257); ?>"
-                        data-category="<?php echo htmlspecialchars($category6257); ?>">
+                        data-category="<?php echo htmlspecialchars($category6257); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6257); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6257); ?>; 
 position:absolute; top:171px; left:661px;'>
                     </div>
@@ -15000,7 +15156,8 @@ position:absolute; top:171px; left:661px;'>
                         data-room="<?php echo htmlspecialchars($room6258); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6258); ?>"
                         data-image="<?php echo base64_encode($upload_img6258); ?>"
-                        data-category="<?php echo htmlspecialchars($category6258); ?>">
+                        data-category="<?php echo htmlspecialchars($category6258); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6258); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6258); ?>; 
 position:absolute; top:183px; left:661px;'>
                     </div>
@@ -15013,7 +15170,8 @@ position:absolute; top:183px; left:661px;'>
                         data-room="<?php echo htmlspecialchars($room6259); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6259); ?>"
                         data-image="<?php echo base64_encode($upload_img6259); ?>"
-                        data-category="<?php echo htmlspecialchars($category6259); ?>">
+                        data-category="<?php echo htmlspecialchars($category6259); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6259); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6259); ?>; 
 position:absolute; top:194px; left:661px;'>
                     </div>
@@ -15027,7 +15185,8 @@ position:absolute; top:194px; left:661px;'>
                         data-room="<?php echo htmlspecialchars($room6260); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6260); ?>"
                         data-image="<?php echo base64_encode($upload_img6260); ?>"
-                        data-category="<?php echo htmlspecialchars($category6260); ?>">
+                        data-category="<?php echo htmlspecialchars($category6260); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6260); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6260); ?>; 
 position:absolute; top:207px; left:661px;'>
                     </div>
@@ -15040,7 +15199,8 @@ position:absolute; top:207px; left:661px;'>
                         data-room="<?php echo htmlspecialchars($room6261); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6261); ?>"
                         data-image="<?php echo base64_encode($upload_img6261); ?>"
-                        data-category="<?php echo htmlspecialchars($category6261); ?>">
+                        data-category="<?php echo htmlspecialchars($category6261); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6261); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6261); ?>; 
 position:absolute; top:142px; left:700px;'>
                     </div>
@@ -15053,7 +15213,8 @@ position:absolute; top:142px; left:700px;'>
                         data-room="<?php echo htmlspecialchars($room6262); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6262); ?>"
                         data-image="<?php echo base64_encode($upload_img6262); ?>"
-                        data-category="<?php echo htmlspecialchars($category6262); ?>">
+                        data-category="<?php echo htmlspecialchars($category6262); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6262); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6262); ?>; 
 position:absolute; top:135px; left:685px;'>
                     </div>
@@ -15066,7 +15227,8 @@ position:absolute; top:135px; left:685px;'>
                         data-room="<?php echo htmlspecialchars($room6263); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6263); ?>"
                         data-image="<?php echo base64_encode($upload_img6263); ?>"
-                        data-category="<?php echo htmlspecialchars($category6263); ?>">
+                        data-category="<?php echo htmlspecialchars($category6263); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6263); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6263); ?>; 
 position:absolute; top:70px; left:755px;'>
                     </div>
@@ -15080,7 +15242,8 @@ position:absolute; top:70px; left:755px;'>
                         data-room="<?php echo htmlspecialchars($room6264); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6264); ?>"
                         data-image="<?php echo base64_encode($upload_img6264); ?>"
-                        data-category="<?php echo htmlspecialchars($category6264); ?>">
+                        data-category="<?php echo htmlspecialchars($category6264); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6264); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6264); ?>; 
 position:absolute; top:145px; left:755px;'>
                     </div>
@@ -15093,7 +15256,8 @@ position:absolute; top:145px; left:755px;'>
                         data-room="<?php echo htmlspecialchars($room6265); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6265); ?>"
                         data-image="<?php echo base64_encode($upload_img6265); ?>"
-                        data-category="<?php echo htmlspecialchars($category6265); ?>">
+                        data-category="<?php echo htmlspecialchars($category6265); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6265); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6265); ?>; 
 position:absolute; top:70px; left:850px;'>
                     </div>
@@ -15106,7 +15270,8 @@ position:absolute; top:70px; left:850px;'>
                         data-room="<?php echo htmlspecialchars($room6266); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6266); ?>"
                         data-image="<?php echo base64_encode($upload_img6266); ?>"
-                        data-category="<?php echo htmlspecialchars($category6266); ?>">
+                        data-category="<?php echo htmlspecialchars($category6266); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6266); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6266); ?>; 
 position:absolute; top:145px; left:850px;'>
                     </div>
@@ -15119,7 +15284,8 @@ position:absolute; top:145px; left:850px;'>
                         data-room="<?php echo htmlspecialchars($room6267); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6267); ?>"
                         data-image="<?php echo base64_encode($upload_img6267); ?>"
-                        data-category="<?php echo htmlspecialchars($category6267); ?>">
+                        data-category="<?php echo htmlspecialchars($category6267); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6267); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6267); ?>; 
 position:absolute; top:145px; left:955px;'>
                     </div>
@@ -15133,7 +15299,8 @@ position:absolute; top:145px; left:955px;'>
                         data-room="<?php echo htmlspecialchars($room6268); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6268); ?>"
                         data-image="<?php echo base64_encode($upload_img6268); ?>"
-                        data-category="<?php echo htmlspecialchars($category6268); ?>">
+                        data-category="<?php echo htmlspecialchars($category6268); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6268); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6268); ?>; 
 position:absolute; top:70px; left:955px;'>
                     </div>
@@ -15146,7 +15313,8 @@ position:absolute; top:70px; left:955px;'>
                         data-room="<?php echo htmlspecialchars($room6269); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6269); ?>"
                         data-image="<?php echo base64_encode($upload_img6269); ?>"
-                        data-category="<?php echo htmlspecialchars($category6269); ?>">
+                        data-category="<?php echo htmlspecialchars($category6269); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6269); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6269); ?>; 
 position:absolute; top:214px; left:755px;'>
                     </div>
@@ -15159,7 +15327,8 @@ position:absolute; top:214px; left:755px;'>
                         data-room="<?php echo htmlspecialchars($room6270); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6270); ?>"
                         data-image="<?php echo base64_encode($upload_img6270); ?>"
-                        data-category="<?php echo htmlspecialchars($category6270); ?>">
+                        data-category="<?php echo htmlspecialchars($category6270); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6270); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6270); ?>; 
 position:absolute; top:214px; left:850px;'>
                     </div>
@@ -15173,6 +15342,7 @@ position:absolute; top:214px; left:850px;'>
                         data-floor="<?php echo htmlspecialchars($floor6271); ?>"
                         data-image="<?php echo base64_encode($upload_img6271); ?>"
                         data-category="<?php echo htmlspecialchars($category6271); ?>">
+                    data-assignedname="<?php echo htmlspecialchars($assignedName6271); ?>"
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6271); ?>; 
 position:absolute; top:214px; left:955px;'>
                     </div>
@@ -15188,7 +15358,8 @@ position:absolute; top:214px; left:955px;'>
                         data-room="<?php echo htmlspecialchars($room6764); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6764); ?>"
                         data-image="<?php echo base64_encode($upload_img6764); ?>"
-                        data-category="<?php echo htmlspecialchars($category6764); ?>">
+                        data-category="<?php echo htmlspecialchars($category6764); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6764); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6764); ?>; 
 position:absolute; top:79px; left:778px;'>
                     </div>
@@ -15201,7 +15372,8 @@ position:absolute; top:79px; left:778px;'>
                         data-room="<?php echo htmlspecialchars($room6765); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6765); ?>"
                         data-image="<?php echo base64_encode($upload_img6765); ?>"
-                        data-category="<?php echo htmlspecialchars($category6765); ?>">
+                        data-category="<?php echo htmlspecialchars($category6765); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6765); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6765); ?>; 
 position:absolute; top:92px; left:778px;'>
                     </div>
@@ -15214,7 +15386,8 @@ position:absolute; top:92px; left:778px;'>
                         data-room="<?php echo htmlspecialchars($room6766); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6766); ?>"
                         data-image="<?php echo base64_encode($upload_img6766); ?>"
-                        data-category="<?php echo htmlspecialchars($category6766); ?>">
+                        data-category="<?php echo htmlspecialchars($category6766); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6766); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6766); ?>; 
 position:absolute; top:104px; left:778px;'>
                     </div>
@@ -15227,7 +15400,8 @@ position:absolute; top:104px; left:778px;'>
                         data-room="<?php echo htmlspecialchars($room6767); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6767); ?>"
                         data-image="<?php echo base64_encode($upload_img6767); ?>"
-                        data-category="<?php echo htmlspecialchars($category6767); ?>">
+                        data-category="<?php echo htmlspecialchars($category6767); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6767); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6767); ?>; 
 position:absolute; top:118px; left:778px;'>
                     </div>
@@ -15241,7 +15415,8 @@ position:absolute; top:118px; left:778px;'>
                         data-room="<?php echo htmlspecialchars($room6768); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6768); ?>"
                         data-image="<?php echo base64_encode($upload_img6768); ?>"
-                        data-category="<?php echo htmlspecialchars($category6768); ?>">
+                        data-category="<?php echo htmlspecialchars($category6768); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6768); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6768); ?>; 
 position:absolute; top:131px; left:778px;'>
                     </div>
@@ -15254,7 +15429,8 @@ position:absolute; top:131px; left:778px;'>
                         data-room="<?php echo htmlspecialchars($room6769); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6769); ?>"
                         data-image="<?php echo base64_encode($upload_img6769); ?>"
-                        data-category="<?php echo htmlspecialchars($category6769); ?>">
+                        data-category="<?php echo htmlspecialchars($category6769); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6769); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6769); ?>; 
 position:absolute; top:79px; left:808px;'>
                     </div>
@@ -15267,7 +15443,8 @@ position:absolute; top:79px; left:808px;'>
                         data-room="<?php echo htmlspecialchars($room6770); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6770); ?>"
                         data-image="<?php echo base64_encode($upload_img6770); ?>"
-                        data-category="<?php echo htmlspecialchars($category6770); ?>">
+                        data-category="<?php echo htmlspecialchars($category6770); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6770); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6770); ?>; 
 position:absolute; top:91px; left:808px;'>
                     </div>
@@ -15280,7 +15457,8 @@ position:absolute; top:91px; left:808px;'>
                         data-room="<?php echo htmlspecialchars($room6771); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6771); ?>"
                         data-image="<?php echo base64_encode($upload_img6771); ?>"
-                        data-category="<?php echo htmlspecialchars($category6771); ?>">
+                        data-category="<?php echo htmlspecialchars($category6771); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6771); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6771); ?>; 
 position:absolute; top:104px; left:808px;'>
                     </div>
@@ -15294,7 +15472,8 @@ position:absolute; top:104px; left:808px;'>
                         data-room="<?php echo htmlspecialchars($room6772); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6772); ?>"
                         data-image="<?php echo base64_encode($upload_img6772); ?>"
-                        data-category="<?php echo htmlspecialchars($category6772); ?>">
+                        data-category="<?php echo htmlspecialchars($category6772); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6772); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6772); ?>; 
 position:absolute; top:117px; left:808px;'>
                     </div>
@@ -15307,7 +15486,8 @@ position:absolute; top:117px; left:808px;'>
                         data-room="<?php echo htmlspecialchars($room6773); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6773); ?>"
                         data-image="<?php echo base64_encode($upload_img6773); ?>"
-                        data-category="<?php echo htmlspecialchars($category6773); ?>">
+                        data-category="<?php echo htmlspecialchars($category6773); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6773); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6773); ?>; 
 position:absolute; top:130px; left:808px;'>
                     </div>
@@ -15320,7 +15500,8 @@ position:absolute; top:130px; left:808px;'>
                         data-room="<?php echo htmlspecialchars($room6774); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6774); ?>"
                         data-image="<?php echo base64_encode($upload_img6774); ?>"
-                        data-category="<?php echo htmlspecialchars($category6774); ?>">
+                        data-category="<?php echo htmlspecialchars($category6774); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6774); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6774); ?>; 
 position:absolute; top:79px; left:838px;'>
                     </div>
@@ -15333,7 +15514,8 @@ position:absolute; top:79px; left:838px;'>
                         data-room="<?php echo htmlspecialchars($room6775); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6775); ?>"
                         data-image="<?php echo base64_encode($upload_img6775); ?>"
-                        data-category="<?php echo htmlspecialchars($category6775); ?>">
+                        data-category="<?php echo htmlspecialchars($category6775); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6775); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6775); ?>; 
 position:absolute; top:91px; left:838px;'>
                     </div>
@@ -15347,7 +15529,8 @@ position:absolute; top:91px; left:838px;'>
                         data-room="<?php echo htmlspecialchars($room6776); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6776); ?>"
                         data-image="<?php echo base64_encode($upload_img6776); ?>"
-                        data-category="<?php echo htmlspecialchars($category6776); ?>">
+                        data-category="<?php echo htmlspecialchars($category6776); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6776); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6776); ?>; 
 position:absolute; top:104px; left:838px;'>
                     </div>
@@ -15360,7 +15543,8 @@ position:absolute; top:104px; left:838px;'>
                         data-room="<?php echo htmlspecialchars($room6777); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6777); ?>"
                         data-image="<?php echo base64_encode($upload_img6777); ?>"
-                        data-category="<?php echo htmlspecialchars($category6777); ?>">
+                        data-category="<?php echo htmlspecialchars($category6777); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6777); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6777); ?>; 
 position:absolute; top:117px; left:838px;'>
                     </div>
@@ -15373,7 +15557,8 @@ position:absolute; top:117px; left:838px;'>
                         data-room="<?php echo htmlspecialchars($room6778); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6778); ?>"
                         data-image="<?php echo base64_encode($upload_img6778); ?>"
-                        data-category="<?php echo htmlspecialchars($category6778); ?>">
+                        data-category="<?php echo htmlspecialchars($category6778); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6778); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6778); ?>; 
 position:absolute; top:130px; left:838px;'>
                     </div>
@@ -15386,7 +15571,8 @@ position:absolute; top:130px; left:838px;'>
                         data-room="<?php echo htmlspecialchars($room6779); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6779); ?>"
                         data-image="<?php echo base64_encode($upload_img6779); ?>"
-                        data-category="<?php echo htmlspecialchars($category6779); ?>">
+                        data-category="<?php echo htmlspecialchars($category6779); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6779); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6779); ?>; 
 position:absolute; top:79px; left:868px;'>
                     </div>
@@ -15400,7 +15586,8 @@ position:absolute; top:79px; left:868px;'>
                         data-room="<?php echo htmlspecialchars($room6780); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6780); ?>"
                         data-image="<?php echo base64_encode($upload_img6780); ?>"
-                        data-category="<?php echo htmlspecialchars($category6780); ?>">
+                        data-category="<?php echo htmlspecialchars($category6780); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6780); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6780); ?>; 
 position:absolute; top:91px; left:868px;'>
                     </div>
@@ -15413,7 +15600,8 @@ position:absolute; top:91px; left:868px;'>
                         data-room="<?php echo htmlspecialchars($room6781); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6781); ?>"
                         data-image="<?php echo base64_encode($upload_img6781); ?>"
-                        data-category="<?php echo htmlspecialchars($category6781); ?>">
+                        data-category="<?php echo htmlspecialchars($category6781); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6781); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6781); ?>; 
 position:absolute; top:104px; left:868px;'>
                     </div>
@@ -15426,7 +15614,8 @@ position:absolute; top:104px; left:868px;'>
                         data-room="<?php echo htmlspecialchars($room6782); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6782); ?>"
                         data-image="<?php echo base64_encode($upload_img6782); ?>"
-                        data-category="<?php echo htmlspecialchars($category6782); ?>">
+                        data-category="<?php echo htmlspecialchars($category6782); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6782); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6782); ?>; 
 position:absolute; top:117px; left:868px;'>
                     </div>
@@ -15439,7 +15628,8 @@ position:absolute; top:117px; left:868px;'>
                         data-room="<?php echo htmlspecialchars($room6783); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6783); ?>"
                         data-image="<?php echo base64_encode($upload_img6783); ?>"
-                        data-category="<?php echo htmlspecialchars($category6783); ?>">
+                        data-category="<?php echo htmlspecialchars($category6783); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6783); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6783); ?>; 
 position:absolute; top:130px; left:868px;'>
                     </div>
@@ -15453,7 +15643,8 @@ position:absolute; top:130px; left:868px;'>
                         data-room="<?php echo htmlspecialchars($room6784); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6784); ?>"
                         data-image="<?php echo base64_encode($upload_img6784); ?>"
-                        data-category="<?php echo htmlspecialchars($category6784); ?>">
+                        data-category="<?php echo htmlspecialchars($category6784); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6784); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6784); ?>; 
 position:absolute; top:79px; left:898px;'>
                     </div>
@@ -15466,7 +15657,8 @@ position:absolute; top:79px; left:898px;'>
                         data-room="<?php echo htmlspecialchars($room6785); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6785); ?>"
                         data-image="<?php echo base64_encode($upload_img6785); ?>"
-                        data-category="<?php echo htmlspecialchars($category6785); ?>">
+                        data-category="<?php echo htmlspecialchars($category6785); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6785); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6785); ?>; 
 position:absolute; top:91px; left:898px;'>
                     </div>
@@ -15479,7 +15671,8 @@ position:absolute; top:91px; left:898px;'>
                         data-room="<?php echo htmlspecialchars($room6786); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6786); ?>"
                         data-image="<?php echo base64_encode($upload_img6786); ?>"
-                        data-category="<?php echo htmlspecialchars($category6786); ?>">
+                        data-category="<?php echo htmlspecialchars($category6786); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6786); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6786); ?>; 
 position:absolute; top:104px; left:898px;'>
                     </div>
@@ -15492,7 +15685,8 @@ position:absolute; top:104px; left:898px;'>
                         data-room="<?php echo htmlspecialchars($room6787); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6787); ?>"
                         data-image="<?php echo base64_encode($upload_img6787); ?>"
-                        data-category="<?php echo htmlspecialchars($category6787); ?>">
+                        data-category="<?php echo htmlspecialchars($category6787); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6787); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6787); ?>; 
 position:absolute; top:117px; left:898px;'>
                     </div>
@@ -15506,7 +15700,8 @@ position:absolute; top:117px; left:898px;'>
                         data-room="<?php echo htmlspecialchars($room6788); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6788); ?>"
                         data-image="<?php echo base64_encode($upload_img6788); ?>"
-                        data-category="<?php echo htmlspecialchars($category6788); ?>">
+                        data-category="<?php echo htmlspecialchars($category6788); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6788); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6788); ?>; 
 position:absolute; top:130px; left:898px;'>
                     </div>
@@ -15519,7 +15714,8 @@ position:absolute; top:130px; left:898px;'>
                         data-room="<?php echo htmlspecialchars($room6789); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6789); ?>"
                         data-image="<?php echo base64_encode($upload_img6789); ?>"
-                        data-category="<?php echo htmlspecialchars($category6789); ?>">
+                        data-category="<?php echo htmlspecialchars($category6789); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6789); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6789); ?>; 
 position:absolute; top:159px; left:778px;'>
                     </div>
@@ -15532,7 +15728,8 @@ position:absolute; top:159px; left:778px;'>
                         data-room="<?php echo htmlspecialchars($room6790); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6790); ?>"
                         data-image="<?php echo base64_encode($upload_img6790); ?>"
-                        data-category="<?php echo htmlspecialchars($category6790); ?>">
+                        data-category="<?php echo htmlspecialchars($category6790); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6790); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6790); ?>; 
 position:absolute; top:171px; left:778px;'>
                     </div>
@@ -15545,7 +15742,8 @@ position:absolute; top:171px; left:778px;'>
                         data-room="<?php echo htmlspecialchars($room6791); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6791); ?>"
                         data-image="<?php echo base64_encode($upload_img6791); ?>"
-                        data-category="<?php echo htmlspecialchars($category6791); ?>">
+                        data-category="<?php echo htmlspecialchars($category6791); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6791); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6791); ?>; 
 position:absolute; top:183px; left:778px;'>
                     </div>
@@ -15559,7 +15757,8 @@ position:absolute; top:183px; left:778px;'>
                         data-room="<?php echo htmlspecialchars($room6792); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6792); ?>"
                         data-image="<?php echo base64_encode($upload_img6792); ?>"
-                        data-category="<?php echo htmlspecialchars($category6792); ?>">
+                        data-category="<?php echo htmlspecialchars($category6792); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6792); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6792); ?>; 
 position:absolute; top:194px; left:778px;'>
                     </div>
@@ -15572,7 +15771,8 @@ position:absolute; top:194px; left:778px;'>
                         data-room="<?php echo htmlspecialchars($room6793); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6793); ?>"
                         data-image="<?php echo base64_encode($upload_img6793); ?>"
-                        data-category="<?php echo htmlspecialchars($category6793); ?>">
+                        data-category="<?php echo htmlspecialchars($category6793); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6793); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6793); ?>; 
 position:absolute; top:207px; left:778px;'>
                     </div>
@@ -15585,7 +15785,8 @@ position:absolute; top:207px; left:778px;'>
                         data-room="<?php echo htmlspecialchars($room6794); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6794); ?>"
                         data-image="<?php echo base64_encode($upload_img6794); ?>"
-                        data-category="<?php echo htmlspecialchars($category6794); ?>">
+                        data-category="<?php echo htmlspecialchars($category6794); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6794); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6794); ?>; 
 position:absolute; top:159px; left:808px;'>
                     </div>
@@ -15598,7 +15799,8 @@ position:absolute; top:159px; left:808px;'>
                         data-room="<?php echo htmlspecialchars($room6795); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6795); ?>"
                         data-image="<?php echo base64_encode($upload_img6795); ?>"
-                        data-category="<?php echo htmlspecialchars($category6795); ?>">
+                        data-category="<?php echo htmlspecialchars($category6795); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6795); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6795); ?>; 
 position:absolute; top:171px; left:808px;'>
                     </div>
@@ -15611,7 +15813,8 @@ position:absolute; top:171px; left:808px;'>
                         data-room="<?php echo htmlspecialchars($room6796); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6796); ?>"
                         data-image="<?php echo base64_encode($upload_img6796); ?>"
-                        data-category="<?php echo htmlspecialchars($category6796); ?>">
+                        data-category="<?php echo htmlspecialchars($category6796); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6796); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6796); ?>; 
 position:absolute; top:183px; left:808px;'>
                     </div>
@@ -15624,7 +15827,8 @@ position:absolute; top:183px; left:808px;'>
                         data-room="<?php echo htmlspecialchars($room6797); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6797); ?>"
                         data-image="<?php echo base64_encode($upload_img6797); ?>"
-                        data-category="<?php echo htmlspecialchars($category6797); ?>">
+                        data-category="<?php echo htmlspecialchars($category6797); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6797); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6797); ?>; 
 position:absolute; top:195px; left:808px;'>
                     </div>
@@ -15637,7 +15841,8 @@ position:absolute; top:195px; left:808px;'>
                         data-room="<?php echo htmlspecialchars($room6798); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6798); ?>"
                         data-image="<?php echo base64_encode($upload_img6798); ?>"
-                        data-category="<?php echo htmlspecialchars($category6798); ?>">
+                        data-category="<?php echo htmlspecialchars($category6798); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6798); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6798); ?>; 
 position:absolute; top:207px; left:808px;'>
                     </div>
@@ -15650,7 +15855,8 @@ position:absolute; top:207px; left:808px;'>
                         data-room="<?php echo htmlspecialchars($room6799); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6799); ?>"
                         data-image="<?php echo base64_encode($upload_img6799); ?>"
-                        data-category="<?php echo htmlspecialchars($category6799); ?>">
+                        data-category="<?php echo htmlspecialchars($category6799); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6799); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6799); ?>; 
 position:absolute; top:159px; left:838px;'>
                     </div>
@@ -15664,7 +15870,8 @@ position:absolute; top:159px; left:838px;'>
                         data-room="<?php echo htmlspecialchars($room6800); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6800); ?>"
                         data-image="<?php echo base64_encode($upload_img6800); ?>"
-                        data-category="<?php echo htmlspecialchars($category6800); ?>">
+                        data-category="<?php echo htmlspecialchars($category6800); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6800); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6800); ?>; 
 position:absolute; top:171px; left:838px;'>
                     </div>
@@ -15677,7 +15884,8 @@ position:absolute; top:171px; left:838px;'>
                         data-room="<?php echo htmlspecialchars($room6801); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6801); ?>"
                         data-image="<?php echo base64_encode($upload_img6801); ?>"
-                        data-category="<?php echo htmlspecialchars($category6801); ?>">
+                        data-category="<?php echo htmlspecialchars($category6801); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6801); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6801); ?>; 
 position:absolute; top:183px; left:838px;'>
                     </div>
@@ -15690,7 +15898,8 @@ position:absolute; top:183px; left:838px;'>
                         data-room="<?php echo htmlspecialchars($room6802); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6802); ?>"
                         data-image="<?php echo base64_encode($upload_img6802); ?>"
-                        data-category="<?php echo htmlspecialchars($category6802); ?>">
+                        data-category="<?php echo htmlspecialchars($category6802); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6802); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6802); ?>; 
 position:absolute; top:194px; left:838px;'>
                     </div>
@@ -15703,7 +15912,8 @@ position:absolute; top:194px; left:838px;'>
                         data-room="<?php echo htmlspecialchars($room6803); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6803); ?>"
                         data-image="<?php echo base64_encode($upload_img6803); ?>"
-                        data-category="<?php echo htmlspecialchars($category6803); ?>">
+                        data-category="<?php echo htmlspecialchars($category6803); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6803); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6803); ?>; 
 position:absolute; top:207px; left:838px;'>
                     </div>
@@ -15716,7 +15926,8 @@ position:absolute; top:207px; left:838px;'>
                         data-room="<?php echo htmlspecialchars($room6804); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6804); ?>"
                         data-image="<?php echo base64_encode($upload_img6804); ?>"
-                        data-category="<?php echo htmlspecialchars($category6804); ?>">
+                        data-category="<?php echo htmlspecialchars($category6804); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6804); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6804); ?>; 
 position:absolute; top:159px; left:868px;'>
                     </div>
@@ -15729,7 +15940,8 @@ position:absolute; top:159px; left:868px;'>
                         data-room="<?php echo htmlspecialchars($room6805); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6805); ?>"
                         data-image="<?php echo base64_encode($upload_img6805); ?>"
-                        data-category="<?php echo htmlspecialchars($category6805); ?>">
+                        data-category="<?php echo htmlspecialchars($category6805); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6805); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6805); ?>; 
 position:absolute; top:171px; left:868px;'>
                     </div>
@@ -15742,7 +15954,8 @@ position:absolute; top:171px; left:868px;'>
                         data-room="<?php echo htmlspecialchars($room6806); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6806); ?>"
                         data-image="<?php echo base64_encode($upload_img6806); ?>"
-                        data-category="<?php echo htmlspecialchars($category6806); ?>">
+                        data-category="<?php echo htmlspecialchars($category6806); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6806); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6806); ?>; 
 position:absolute; top:183px; left:868px;'>
                     </div>
@@ -15755,7 +15968,8 @@ position:absolute; top:183px; left:868px;'>
                         data-room="<?php echo htmlspecialchars($room6807); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6807); ?>"
                         data-image="<?php echo base64_encode($upload_img6807); ?>"
-                        data-category="<?php echo htmlspecialchars($category6807); ?>">
+                        data-category="<?php echo htmlspecialchars($category6807); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6807); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6807); ?>; 
 position:absolute; top:194px; left:868px;'>
                     </div>
@@ -15769,7 +15983,8 @@ position:absolute; top:194px; left:868px;'>
                         data-room="<?php echo htmlspecialchars($room6808); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6808); ?>"
                         data-image="<?php echo base64_encode($upload_img6808); ?>"
-                        data-category="<?php echo htmlspecialchars($category6808); ?>">
+                        data-category="<?php echo htmlspecialchars($category6808); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6808); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6808); ?>; 
 position:absolute; top:207px; left:868px;'>
                     </div>
@@ -15782,7 +15997,8 @@ position:absolute; top:207px; left:868px;'>
                         data-room="<?php echo htmlspecialchars($room6809); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6809); ?>"
                         data-image="<?php echo base64_encode($upload_img6809); ?>"
-                        data-category="<?php echo htmlspecialchars($category6809); ?>">
+                        data-category="<?php echo htmlspecialchars($category6809); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6809); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6809); ?>; 
 position:absolute; top:159px; left:898px;'>
                     </div>
@@ -15795,7 +16011,8 @@ position:absolute; top:159px; left:898px;'>
                         data-room="<?php echo htmlspecialchars($room6810); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6810); ?>"
                         data-image="<?php echo base64_encode($upload_img6810); ?>"
-                        data-category="<?php echo htmlspecialchars($category6810); ?>">
+                        data-category="<?php echo htmlspecialchars($category6810); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6810); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6810); ?>; 
 position:absolute; top:171px; left:898px;'>
                     </div>
@@ -15808,7 +16025,8 @@ position:absolute; top:171px; left:898px;'>
                         data-room="<?php echo htmlspecialchars($room6811); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6811); ?>"
                         data-image="<?php echo base64_encode($upload_img6811); ?>"
-                        data-category="<?php echo htmlspecialchars($category6811); ?>">
+                        data-category="<?php echo htmlspecialchars($category6811); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6811); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6811); ?>; 
 position:absolute; top:183px; left:898px;'>
                     </div>
@@ -15822,7 +16040,8 @@ position:absolute; top:183px; left:898px;'>
                         data-room="<?php echo htmlspecialchars($room6812); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6812); ?>"
                         data-image="<?php echo base64_encode($upload_img6812); ?>"
-                        data-category="<?php echo htmlspecialchars($category6812); ?>">
+                        data-category="<?php echo htmlspecialchars($category6812); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6812); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6812); ?>; 
 position:absolute; top:194px; left:898px;'>
                     </div>
@@ -15835,7 +16054,8 @@ position:absolute; top:194px; left:898px;'>
                         data-room="<?php echo htmlspecialchars($room6813); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6813); ?>"
                         data-image="<?php echo base64_encode($upload_img6813); ?>"
-                        data-category="<?php echo htmlspecialchars($category6813); ?>">
+                        data-category="<?php echo htmlspecialchars($category6813); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6813); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6813); ?>; 
 position:absolute; top:207px; left:898px;'>
                     </div>
@@ -15848,7 +16068,8 @@ position:absolute; top:207px; left:898px;'>
                         data-room="<?php echo htmlspecialchars($room6814); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6814); ?>"
                         data-image="<?php echo base64_encode($upload_img6814); ?>"
-                        data-category="<?php echo htmlspecialchars($category6814); ?>">
+                        data-category="<?php echo htmlspecialchars($category6814); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6814); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6814); ?>; 
 position:absolute; top:142px; left:700px;'>
                     </div>
@@ -15861,7 +16082,8 @@ position:absolute; top:142px; left:700px;'>
                         data-room="<?php echo htmlspecialchars($room6324); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6324); ?>"
                         data-image="<?php echo base64_encode($upload_img6324); ?>"
-                        data-category="<?php echo htmlspecialchars($category6324); ?>">
+                        data-category="<?php echo htmlspecialchars($category6324); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6324); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6324); ?>; 
 position:absolute; top:70px; left:995px;'>
                     </div>
@@ -15875,7 +16097,8 @@ position:absolute; top:70px; left:995px;'>
                         data-room="<?php echo htmlspecialchars($room6325); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6325); ?>"
                         data-image="<?php echo base64_encode($upload_img6325); ?>"
-                        data-category="<?php echo htmlspecialchars($category6325); ?>">
+                        data-category="<?php echo htmlspecialchars($category6325); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6325); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6325); ?>; 
 position:absolute; top:195px; left:995px;'>
                     </div>
@@ -15888,7 +16111,8 @@ position:absolute; top:195px; left:995px;'>
                         data-room="<?php echo htmlspecialchars($room6326); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6326); ?>"
                         data-image="<?php echo base64_encode($upload_img6326); ?>"
-                        data-category="<?php echo htmlspecialchars($category6326); ?>">
+                        data-category="<?php echo htmlspecialchars($category6326); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6324); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6326); ?>; 
 position:absolute; top:70px; left:1075px;'>
                     </div>
@@ -15901,7 +16125,8 @@ position:absolute; top:70px; left:1075px;'>
                         data-room="<?php echo htmlspecialchars($room6327); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6327); ?>"
                         data-image="<?php echo base64_encode($upload_img6327); ?>"
-                        data-category="<?php echo htmlspecialchars($category6327); ?>">
+                        data-category="<?php echo htmlspecialchars($category6327); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6327); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6327); ?>; 
 position:absolute; top:195px; left:1075px;'>
                     </div>
@@ -15914,7 +16139,8 @@ position:absolute; top:195px; left:1075px;'>
                         data-room="<?php echo htmlspecialchars($room6328); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6328); ?>"
                         data-image="<?php echo base64_encode($upload_img6328); ?>"
-                        data-category="<?php echo htmlspecialchars($category6328); ?>">
+                        data-category="<?php echo htmlspecialchars($category6328); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6328); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6328); ?>; 
 position:absolute; top:335px; left:285px;'>
                     </div>
@@ -15928,7 +16154,8 @@ position:absolute; top:335px; left:285px;'>
                         data-room="<?php echo htmlspecialchars($room6329); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6329); ?>"
                         data-image="<?php echo base64_encode($upload_img6329); ?>"
-                        data-category="<?php echo htmlspecialchars($category6329); ?>">
+                        data-category="<?php echo htmlspecialchars($category6329); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6329); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6329); ?>; 
 position:absolute; top:410px; left:285px;'>
                     </div>
@@ -15941,7 +16168,8 @@ position:absolute; top:410px; left:285px;'>
                         data-room="<?php echo htmlspecialchars($room6330); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6330); ?>"
                         data-image="<?php echo base64_encode($upload_img6330); ?>"
-                        data-category="<?php echo htmlspecialchars($category6330); ?>">
+                        data-category="<?php echo htmlspecialchars($category6330); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6330); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6330); ?>; 
 position:absolute; top:335px; left:377px;'>
                     </div>
@@ -15954,7 +16182,8 @@ position:absolute; top:335px; left:377px;'>
                         data-room="<?php echo htmlspecialchars($room6331); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6331); ?>"
                         data-image="<?php echo base64_encode($upload_img6331); ?>"
-                        data-category="<?php echo htmlspecialchars($category6331); ?>">
+                        data-category="<?php echo htmlspecialchars($category6331); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6331); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6331); ?>; 
 position:absolute; top:410px; left:377px;'>
                     </div>
@@ -15967,7 +16196,8 @@ position:absolute; top:410px; left:377px;'>
                         data-room="<?php echo htmlspecialchars($room6332); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6332); ?>"
                         data-image="<?php echo base64_encode($upload_img6332); ?>"
-                        data-category="<?php echo htmlspecialchars($category6332); ?>">
+                        data-category="<?php echo htmlspecialchars($category6332); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6332); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6332); ?>; 
 position:absolute; top:410px; left:485px;'>
                     </div>
@@ -15981,7 +16211,8 @@ position:absolute; top:410px; left:485px;'>
                         data-room="<?php echo htmlspecialchars($room6333); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6333); ?>"
                         data-image="<?php echo base64_encode($upload_img6333); ?>"
-                        data-category="<?php echo htmlspecialchars($category6333); ?>">
+                        data-category="<?php echo htmlspecialchars($category6333); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6333); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6333); ?>; 
 position:absolute; top:335px; left:485px;'>
                     </div>
@@ -15994,7 +16225,8 @@ position:absolute; top:335px; left:485px;'>
                         data-room="<?php echo htmlspecialchars($room6200); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6200); ?>"
                         data-image="<?php echo base64_encode($upload_img6200); ?>"
-                        data-category="<?php echo htmlspecialchars($category6200); ?>">
+                        data-category="<?php echo htmlspecialchars($category6200); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6200); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6200); ?>; 
 position:absolute; top:406px; left:315.5px;'>
                     </div>
@@ -16007,7 +16239,8 @@ position:absolute; top:406px; left:315.5px;'>
                         data-room="<?php echo htmlspecialchars($room6199); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6199); ?>"
                         data-image="<?php echo base64_encode($upload_img6199); ?>"
-                        data-category="<?php echo htmlspecialchars($category6199); ?>">
+                        data-category="<?php echo htmlspecialchars($category6199); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6199); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6199); ?>; 
 position:absolute; top:406px; left:303px;'>
                     </div>
@@ -16020,7 +16253,8 @@ position:absolute; top:406px; left:303px;'>
                         data-room="<?php echo htmlspecialchars($room6334); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6334); ?>"
                         data-image="<?php echo base64_encode($upload_img6334); ?>"
-                        data-category="<?php echo htmlspecialchars($category6334); ?>">
+                        data-category="<?php echo htmlspecialchars($category6334); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6334); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6334); ?>; 
 position:absolute; top:475px; left:285px;'>
                     </div>
@@ -16034,7 +16268,8 @@ position:absolute; top:475px; left:285px;'>
                         data-room="<?php echo htmlspecialchars($room6335); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6335); ?>"
                         data-image="<?php echo base64_encode($upload_img6335); ?>"
-                        data-category="<?php echo htmlspecialchars($category6335); ?>">
+                        data-category="<?php echo htmlspecialchars($category6335); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6335); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6335); ?>; 
 position:absolute; top:475px; left:387px;'>
                     </div>
@@ -16047,7 +16282,8 @@ position:absolute; top:475px; left:387px;'>
                         data-room="<?php echo htmlspecialchars($room6336); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6336); ?>"
                         data-image="<?php echo base64_encode($upload_img6336); ?>"
-                        data-category="<?php echo htmlspecialchars($category6336); ?>">
+                        data-category="<?php echo htmlspecialchars($category6336); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6336); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6336); ?>; 
 position:absolute; top:475px; left:485px;'>
                     </div>
@@ -16060,7 +16296,8 @@ position:absolute; top:475px; left:485px;'>
                         data-room="<?php echo htmlspecialchars($room6337); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6337); ?>"
                         data-image="<?php echo base64_encode($upload_img6337); ?>"
-                        data-category="<?php echo htmlspecialchars($category6337); ?>">
+                        data-category="<?php echo htmlspecialchars($category6337); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6337); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6337); ?>; 
 position:absolute; top:351px; left:331px;'>
                     </div>
@@ -16073,7 +16310,8 @@ position:absolute; top:351px; left:331px;'>
                         data-room="<?php echo htmlspecialchars($room6338); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6338); ?>"
                         data-image="<?php echo base64_encode($upload_img6338); ?>"
-                        data-category="<?php echo htmlspecialchars($category6338); ?>">
+                        data-category="<?php echo htmlspecialchars($category6338); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6338); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6338); ?>; 
 position:absolute; top:364px; left:331px;'>
                     </div>
@@ -16087,7 +16325,8 @@ position:absolute; top:364px; left:331px;'>
                         data-room="<?php echo htmlspecialchars($room6339); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6339); ?>"
                         data-image="<?php echo base64_encode($upload_img6339); ?>"
-                        data-category="<?php echo htmlspecialchars($category6339); ?>">
+                        data-category="<?php echo htmlspecialchars($category6339); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6339); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6339); ?>; 
 position:absolute; top:377px; left:331px;'>
                     </div>
@@ -16100,7 +16339,8 @@ position:absolute; top:377px; left:331px;'>
                         data-room="<?php echo htmlspecialchars($room6340); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6340); ?>"
                         data-image="<?php echo base64_encode($upload_img6340); ?>"
-                        data-category="<?php echo htmlspecialchars($category6340); ?>">
+                        data-category="<?php echo htmlspecialchars($category6340); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6340); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6340); ?>; 
 position:absolute; top:390px; left:331px;'>
                     </div>
@@ -16113,7 +16353,8 @@ position:absolute; top:390px; left:331px;'>
                         data-room="<?php echo htmlspecialchars($room6341); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6341); ?>"
                         data-image="<?php echo base64_encode($upload_img6341); ?>"
-                        data-category="<?php echo htmlspecialchars($category6341); ?>">
+                        data-category="<?php echo htmlspecialchars($category6341); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6341); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6341); ?>; 
 position:absolute; top:403px; left:331px;'>
                     </div>
@@ -16126,7 +16367,8 @@ position:absolute; top:403px; left:331px;'>
                         data-room="<?php echo htmlspecialchars($room6342); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6342); ?>"
                         data-image="<?php echo base64_encode($upload_img6342); ?>"
-                        data-category="<?php echo htmlspecialchars($category6342); ?>">
+                        data-category="<?php echo htmlspecialchars($category6342); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6342); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6342); ?>; 
 position:absolute; top:351px; left:361px;'>
                     </div>
@@ -16140,7 +16382,8 @@ position:absolute; top:351px; left:361px;'>
                         data-room="<?php echo htmlspecialchars($room6343); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6343); ?>"
                         data-image="<?php echo base64_encode($upload_img6343); ?>"
-                        data-category="<?php echo htmlspecialchars($category6343); ?>">
+                        data-category="<?php echo htmlspecialchars($category6343); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6343); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6343); ?>; 
 position:absolute; top:364px; left:361px;'>
                     </div>
@@ -16153,7 +16396,8 @@ position:absolute; top:364px; left:361px;'>
                         data-room="<?php echo htmlspecialchars($room6344); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6344); ?>"
                         data-image="<?php echo base64_encode($upload_img6344); ?>"
-                        data-category="<?php echo htmlspecialchars($category6344); ?>">
+                        data-category="<?php echo htmlspecialchars($category6344); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6344); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6344); ?>; 
 position:absolute; top:377px; left:361px;'>
                     </div>
@@ -16166,7 +16410,8 @@ position:absolute; top:377px; left:361px;'>
                         data-room="<?php echo htmlspecialchars($room6345); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6345); ?>"
                         data-image="<?php echo base64_encode($upload_img6345); ?>"
-                        data-category="<?php echo htmlspecialchars($category6345); ?>">
+                        data-category="<?php echo htmlspecialchars($category6345); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6345); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6345); ?>; 
 position:absolute; top:390px; left:361px;'>
                     </div>
@@ -16179,7 +16424,8 @@ position:absolute; top:390px; left:361px;'>
                         data-room="<?php echo htmlspecialchars($room6346); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6346); ?>"
                         data-image="<?php echo base64_encode($upload_img6346); ?>"
-                        data-category="<?php echo htmlspecialchars($category6346); ?>">
+                        data-category="<?php echo htmlspecialchars($category6346); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6346); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6346); ?>; 
 position:absolute; top:403px; left:361px;'>
                     </div>
@@ -16193,7 +16439,8 @@ position:absolute; top:403px; left:361px;'>
                         data-room="<?php echo htmlspecialchars($room6347); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6347); ?>"
                         data-image="<?php echo base64_encode($upload_img6347); ?>"
-                        data-category="<?php echo htmlspecialchars($category6347); ?>">
+                        data-category="<?php echo htmlspecialchars($category6347); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6347); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6347); ?>; 
 position:absolute; top:351px; left:391px;'>
                     </div>
@@ -16206,7 +16453,8 @@ position:absolute; top:351px; left:391px;'>
                         data-room="<?php echo htmlspecialchars($room6348); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6348); ?>"
                         data-image="<?php echo base64_encode($upload_img6348); ?>"
-                        data-category="<?php echo htmlspecialchars($category6348); ?>">
+                        data-category="<?php echo htmlspecialchars($category6348); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6348); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6348); ?>; 
 position:absolute; top:364px; left:391px;'>
                     </div>
@@ -16219,7 +16467,8 @@ position:absolute; top:364px; left:391px;'>
                         data-room="<?php echo htmlspecialchars($room6349); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6349); ?>"
                         data-image="<?php echo base64_encode($upload_img6349); ?>"
-                        data-category="<?php echo htmlspecialchars($category6349); ?>">
+                        data-category="<?php echo htmlspecialchars($category6349); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6349); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6349); ?>; 
 position:absolute; top:377px; left:391px;'>
                     </div>
@@ -16232,7 +16481,8 @@ position:absolute; top:377px; left:391px;'>
                         data-room="<?php echo htmlspecialchars($room6350); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6350); ?>"
                         data-image="<?php echo base64_encode($upload_img6350); ?>"
-                        data-category="<?php echo htmlspecialchars($category6350); ?>">
+                        data-category="<?php echo htmlspecialchars($category6350); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6450); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6350); ?>; 
 position:absolute; top:390px; left:391px;'>
                     </div>
@@ -16246,7 +16496,8 @@ position:absolute; top:390px; left:391px;'>
                         data-room="<?php echo htmlspecialchars($room6351); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6351); ?>"
                         data-image="<?php echo base64_encode($upload_img6351); ?>"
-                        data-category="<?php echo htmlspecialchars($category6351); ?>">
+                        data-category="<?php echo htmlspecialchars($category6351); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6351); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6351); ?>; 
 position:absolute; top:403px; left:391px;'>
                     </div>
@@ -16259,7 +16510,8 @@ position:absolute; top:403px; left:391px;'>
                         data-room="<?php echo htmlspecialchars($room6352); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6352); ?>"
                         data-image="<?php echo base64_encode($upload_img6352); ?>"
-                        data-category="<?php echo htmlspecialchars($category6352); ?>">
+                        data-category="<?php echo htmlspecialchars($category6352); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6352); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6352); ?>; 
 position:absolute; top:351px; left:421px;'>
                     </div>
@@ -16272,7 +16524,8 @@ position:absolute; top:351px; left:421px;'>
                         data-room="<?php echo htmlspecialchars($room6353); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6353); ?>"
                         data-image="<?php echo base64_encode($upload_img6353); ?>"
-                        data-category="<?php echo htmlspecialchars($category6353); ?>">
+                        data-category="<?php echo htmlspecialchars($category6353); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6353); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6353); ?>; 
 position:absolute; top:364px; left:421px;'>
                     </div>
@@ -16285,7 +16538,8 @@ position:absolute; top:364px; left:421px;'>
                         data-room="<?php echo htmlspecialchars($room6354); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6354); ?>"
                         data-image="<?php echo base64_encode($upload_img6354); ?>"
-                        data-category="<?php echo htmlspecialchars($category6354); ?>">
+                        data-category="<?php echo htmlspecialchars($category6354); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6354); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6354); ?>; 
 position:absolute; top:377px; left:421px;'>
                     </div>
@@ -16300,7 +16554,8 @@ position:absolute; top:377px; left:421px;'>
                         data-room="<?php echo htmlspecialchars($room6355); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6355); ?>"
                         data-image="<?php echo base64_encode($upload_img6355); ?>"
-                        data-category="<?php echo htmlspecialchars($category6355); ?>">
+                        data-category="<?php echo htmlspecialchars($category6355); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6355); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6355); ?>; 
 position:absolute; top:390px; left:421px;'>
                     </div>
@@ -16313,7 +16568,8 @@ position:absolute; top:390px; left:421px;'>
                         data-room="<?php echo htmlspecialchars($room6356); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6356); ?>"
                         data-image="<?php echo base64_encode($upload_img6356); ?>"
-                        data-category="<?php echo htmlspecialchars($category6356); ?>">
+                        data-category="<?php echo htmlspecialchars($category6356); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6356); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6356); ?>; 
 position:absolute; top:403px; left:421px;'>
                     </div>
@@ -16326,7 +16582,8 @@ position:absolute; top:403px; left:421px;'>
                         data-room="<?php echo htmlspecialchars($room6357); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6357); ?>"
                         data-image="<?php echo base64_encode($upload_img6357); ?>"
-                        data-category="<?php echo htmlspecialchars($category6357); ?>">
+                        data-category="<?php echo htmlspecialchars($category6357); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6357); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6357); ?>; 
 position:absolute; top:351px; left:451px;'>
                     </div>
@@ -16339,7 +16596,8 @@ position:absolute; top:351px; left:451px;'>
                         data-room="<?php echo htmlspecialchars($room6358); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6358); ?>"
                         data-image="<?php echo base64_encode($upload_img6358); ?>"
-                        data-category="<?php echo htmlspecialchars($category6358); ?>">
+                        data-category="<?php echo htmlspecialchars($category6358); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6358); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6358); ?>; 
 position:absolute; top:364px; left:451px;'>
                     </div>
@@ -16354,7 +16612,8 @@ position:absolute; top:364px; left:451px;'>
                         data-room="<?php echo htmlspecialchars($room6359); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6359); ?>"
                         data-image="<?php echo base64_encode($upload_img6359); ?>"
-                        data-category="<?php echo htmlspecialchars($category6359); ?>">
+                        data-category="<?php echo htmlspecialchars($category6359); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6359); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6359); ?>; 
 position:absolute; top:377px; left:451px;'>
                     </div>
@@ -16368,6 +16627,7 @@ position:absolute; top:377px; left:451px;'>
                         data-floor="<?php echo htmlspecialchars($floor6360); ?>"
                         data-image="<?php echo base64_encode($upload_img6360); ?>"
                         data-category="<?php echo htmlspecialchars($category6360); ?>">
+                    data-assignedname="<?php echo htmlspecialchars($assignedName6360); ?>"
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6360); ?>; 
 position:absolute; top:390px; left:451px;'>
                     </div>
@@ -16380,7 +16640,8 @@ position:absolute; top:390px; left:451px;'>
                         data-room="<?php echo htmlspecialchars($room6361); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6361); ?>"
                         data-image="<?php echo base64_encode($upload_img6361); ?>"
-                        data-category="<?php echo htmlspecialchars($category6361); ?>">
+                        data-category="<?php echo htmlspecialchars($category6361); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6361); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6361); ?>; 
 position:absolute; top:403px; left:451px;'>
                     </div>
@@ -16393,7 +16654,8 @@ position:absolute; top:403px; left:451px;'>
                         data-room="<?php echo htmlspecialchars($room6362); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6362); ?>"
                         data-image="<?php echo base64_encode($upload_img6362); ?>"
-                        data-category="<?php echo htmlspecialchars($category6362); ?>">
+                        data-category="<?php echo htmlspecialchars($category6362); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6362); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6362); ?>; 
 position:absolute; top:425px; left:331px;'>
                     </div>
@@ -16407,7 +16669,8 @@ position:absolute; top:425px; left:331px;'>
                         data-room="<?php echo htmlspecialchars($room6363); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6363); ?>"
                         data-image="<?php echo base64_encode($upload_img6363); ?>"
-                        data-category="<?php echo htmlspecialchars($category6363); ?>">
+                        data-category="<?php echo htmlspecialchars($category6363); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6363); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6363); ?>; 
 position:absolute; top:438px; left:331px;'>
                     </div>
@@ -16420,7 +16683,8 @@ position:absolute; top:438px; left:331px;'>
                         data-room="<?php echo htmlspecialchars($room6364); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6364); ?>"
                         data-image="<?php echo base64_encode($upload_img6364); ?>"
-                        data-category="<?php echo htmlspecialchars($category6364); ?>">
+                        data-category="<?php echo htmlspecialchars($category6364); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6364); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6364); ?>; 
 position:absolute; top:451px; left:331px;'>
                     </div>
@@ -16433,7 +16697,8 @@ position:absolute; top:451px; left:331px;'>
                         data-room="<?php echo htmlspecialchars($room6365); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6365); ?>"
                         data-image="<?php echo base64_encode($upload_img6365); ?>"
-                        data-category="<?php echo htmlspecialchars($category6365); ?>">
+                        data-category="<?php echo htmlspecialchars($category6365); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6365); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6365); ?>; 
 position:absolute; top:464px; left:331px;'>
                     </div>
@@ -16446,7 +16711,8 @@ position:absolute; top:464px; left:331px;'>
                         data-room="<?php echo htmlspecialchars($room6366); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6366); ?>"
                         data-image="<?php echo base64_encode($upload_img6366); ?>"
-                        data-category="<?php echo htmlspecialchars($category6366); ?>">
+                        data-category="<?php echo htmlspecialchars($category6366); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6366); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6366); ?>; 
 position:absolute; top:477px; left:331px;'>
                     </div>
@@ -16460,7 +16726,8 @@ position:absolute; top:477px; left:331px;'>
                         data-room="<?php echo htmlspecialchars($room6367); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6367); ?>"
                         data-image="<?php echo base64_encode($upload_img6367); ?>"
-                        data-category="<?php echo htmlspecialchars($category6367); ?>">
+                        data-category="<?php echo htmlspecialchars($category6367); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6367); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6367); ?>; 
 position:absolute; top:425px; left:361px;'>
                     </div>
@@ -16473,7 +16740,8 @@ position:absolute; top:425px; left:361px;'>
                         data-room="<?php echo htmlspecialchars($room6368); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6368); ?>"
                         data-image="<?php echo base64_encode($upload_img6368); ?>"
-                        data-category="<?php echo htmlspecialchars($category6368); ?>">
+                        data-category="<?php echo htmlspecialchars($category6368); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6368); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6368); ?>; 
 position:absolute; top:438px; left:361px;'>
                     </div>
@@ -16486,7 +16754,8 @@ position:absolute; top:438px; left:361px;'>
                         data-room="<?php echo htmlspecialchars($room6369); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6369); ?>"
                         data-image="<?php echo base64_encode($upload_img6369); ?>"
-                        data-category="<?php echo htmlspecialchars($category6369); ?>">
+                        data-category="<?php echo htmlspecialchars($category6369); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6469); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6369); ?>; 
 position:absolute; top:451px; left:361px;'>
                     </div>
@@ -16499,7 +16768,8 @@ position:absolute; top:451px; left:361px;'>
                         data-room="<?php echo htmlspecialchars($room6370); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6370); ?>"
                         data-image="<?php echo base64_encode($upload_img6370); ?>"
-                        data-category="<?php echo htmlspecialchars($category6370); ?>">
+                        data-category="<?php echo htmlspecialchars($category6370); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6370); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6370); ?>; 
 position:absolute; top:464px; left:361px;'>
                     </div>
@@ -16513,7 +16783,8 @@ position:absolute; top:464px; left:361px;'>
                         data-room="<?php echo htmlspecialchars($room6371); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6371); ?>"
                         data-image="<?php echo base64_encode($upload_img6371); ?>"
-                        data-category="<?php echo htmlspecialchars($category6371); ?>">
+                        data-category="<?php echo htmlspecialchars($category6371); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6371); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6371); ?>; 
 position:absolute; top:477px; left:361px;'>
                     </div>
@@ -16526,7 +16797,8 @@ position:absolute; top:477px; left:361px;'>
                         data-room="<?php echo htmlspecialchars($room6371); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6371); ?>"
                         data-image="<?php echo base64_encode($upload_img6371); ?>"
-                        data-category="<?php echo htmlspecialchars($category6371); ?>">
+                        data-category="<?php echo htmlspecialchars($category6371); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6371); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6371); ?>; 
 position:absolute; top:425px; left:391px;'>
                     </div>
@@ -16539,7 +16811,8 @@ position:absolute; top:425px; left:391px;'>
                         data-room="<?php echo htmlspecialchars($room6372); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6372); ?>"
                         data-image="<?php echo base64_encode($upload_img6372); ?>"
-                        data-category="<?php echo htmlspecialchars($category6372); ?>">
+                        data-category="<?php echo htmlspecialchars($category6372); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6372); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6372); ?>; 
 position:absolute; top:438px; left:391px;'>
                     </div>
@@ -16552,7 +16825,8 @@ position:absolute; top:438px; left:391px;'>
                         data-room="<?php echo htmlspecialchars($room6373); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6373); ?>"
                         data-image="<?php echo base64_encode($upload_img6373); ?>"
-                        data-category="<?php echo htmlspecialchars($category6373); ?>">
+                        data-category="<?php echo htmlspecialchars($category6373); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6373); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6373); ?>; 
 position:absolute; top:451px; left:391px;'>
                     </div>
@@ -16566,7 +16840,8 @@ position:absolute; top:451px; left:391px;'>
                         data-room="<?php echo htmlspecialchars($room6374); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6374); ?>"
                         data-image="<?php echo base64_encode($upload_img6374); ?>"
-                        data-category="<?php echo htmlspecialchars($category6374); ?>">
+                        data-category="<?php echo htmlspecialchars($category6374); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6374); ?>; 
 position:absolute; top:464px; left:391px;'>
                     </div>
@@ -16579,7 +16854,8 @@ position:absolute; top:464px; left:391px;'>
                         data-room="<?php echo htmlspecialchars($room6375); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6375); ?>"
                         data-image="<?php echo base64_encode($upload_img6375); ?>"
-                        data-category="<?php echo htmlspecialchars($category6375); ?>">
+                        data-category="<?php echo htmlspecialchars($category6375); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6375); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6375); ?>; 
 position:absolute; top:477px; left:391px;'>
                     </div>
@@ -16592,7 +16868,8 @@ position:absolute; top:477px; left:391px;'>
                         data-room="<?php echo htmlspecialchars($room6376); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6376); ?>"
                         data-image="<?php echo base64_encode($upload_img6376); ?>"
-                        data-category="<?php echo htmlspecialchars($category6376); ?>">
+                        data-category="<?php echo htmlspecialchars($category6376); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6376); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6376); ?>; 
 position:absolute; top:425px; left:421px;'>
                     </div>
@@ -16606,6 +16883,7 @@ position:absolute; top:425px; left:421px;'>
                         data-floor="<?php echo htmlspecialchars($floor6377); ?>"
                         data-image="<?php echo base64_encode($upload_img6377); ?>"
                         data-category="<?php echo htmlspecialchars($category6377); ?>">
+                    data-assignedname="<?php echo htmlspecialchars($assignedName6377); ?>"
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6377); ?>; 
 position:absolute; top:438px; left:421px;'>
                     </div>
@@ -16619,7 +16897,8 @@ position:absolute; top:438px; left:421px;'>
                         data-room="<?php echo htmlspecialchars($room6378); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6378); ?>"
                         data-image="<?php echo base64_encode($upload_img6378); ?>"
-                        data-category="<?php echo htmlspecialchars($category6378); ?>">
+                        data-category="<?php echo htmlspecialchars($category6378); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6378); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6378); ?>; 
 position:absolute; top:451px; left:421px;'>
                     </div>
@@ -16632,7 +16911,8 @@ position:absolute; top:451px; left:421px;'>
                         data-room="<?php echo htmlspecialchars($room6379); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6379); ?>"
                         data-image="<?php echo base64_encode($upload_img6379); ?>"
-                        data-category="<?php echo htmlspecialchars($category6379); ?>">
+                        data-category="<?php echo htmlspecialchars($category6379); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6379); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6379); ?>; 
 position:absolute; top:464px; left:421px;'>
                     </div>
@@ -16645,7 +16925,8 @@ position:absolute; top:464px; left:421px;'>
                         data-room="<?php echo htmlspecialchars($room6380); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6380); ?>"
                         data-image="<?php echo base64_encode($upload_img6380); ?>"
-                        data-category="<?php echo htmlspecialchars($category6380); ?>">
+                        data-category="<?php echo htmlspecialchars($category6380); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6380); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6380); ?>; 
 position:absolute; top:477px; left:421px;'>
                     </div>
@@ -16658,7 +16939,8 @@ position:absolute; top:477px; left:421px;'>
                         data-room="<?php echo htmlspecialchars($room6381); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6381); ?>"
                         data-image="<?php echo base64_encode($upload_img6381); ?>"
-                        data-category="<?php echo htmlspecialchars($category6381); ?>">
+                        data-category="<?php echo htmlspecialchars($category6381); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6381); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6381); ?>; 
 position:absolute; top:425px; left:451px;'>
                     </div>
@@ -16674,6 +16956,7 @@ position:absolute; top:425px; left:451px;'>
                         data-floor="<?php echo htmlspecialchars($floor6382); ?>"
                         data-image="<?php echo base64_encode($upload_img6382); ?>"
                         data-category="<?php echo htmlspecialchars($category6382); ?>">
+                    data-assignedname="<?php echo htmlspecialchars($assignedName6382); ?>"
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6382); ?>; 
 position:absolute; top:438px; left:451px;'>
                     </div>
@@ -16686,7 +16969,8 @@ position:absolute; top:438px; left:451px;'>
                         data-room="<?php echo htmlspecialchars($room6383); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6383); ?>"
                         data-image="<?php echo base64_encode($upload_img6383); ?>"
-                        data-category="<?php echo htmlspecialchars($category6383); ?>">
+                        data-category="<?php echo htmlspecialchars($category6383); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6383); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6383); ?>; 
 position:absolute; top:451px; left:451px;'>
                     </div>
@@ -16699,7 +16983,8 @@ position:absolute; top:451px; left:451px;'>
                         data-room="<?php echo htmlspecialchars($room6384); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6384); ?>"
                         data-image="<?php echo base64_encode($upload_img6384); ?>"
-                        data-category="<?php echo htmlspecialchars($category6384); ?>">
+                        data-category="<?php echo htmlspecialchars($category6384); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6384); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6384); ?>; 
 position:absolute; top:464px; left:451px;'>
                     </div>
@@ -16712,7 +16997,8 @@ position:absolute; top:464px; left:451px;'>
                         data-room="<?php echo htmlspecialchars($room6385); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6385); ?>"
                         data-image="<?php echo base64_encode($upload_img6385); ?>"
-                        data-category="<?php echo htmlspecialchars($category6385); ?>">
+                        data-category="<?php echo htmlspecialchars($category6385); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6385); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6385); ?>; 
 position:absolute; top:477px; left:451px;'>
                     </div>
@@ -16729,7 +17015,8 @@ position:absolute; top:477px; left:451px;'>
                         data-room="<?php echo htmlspecialchars($room6388); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6388); ?>"
                         data-image="<?php echo base64_encode($upload_img6388); ?>"
-                        data-category="<?php echo htmlspecialchars($category6388); ?>">
+                        data-category="<?php echo htmlspecialchars($category6388); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6388); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6388); ?>; 
 position:absolute; top:335px; left:755px;'>
                     </div>
@@ -16742,7 +17029,8 @@ position:absolute; top:335px; left:755px;'>
                         data-room="<?php echo htmlspecialchars($room6389); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6389); ?>"
                         data-image="<?php echo base64_encode($upload_img6389); ?>"
-                        data-category="<?php echo htmlspecialchars($category6389); ?>">
+                        data-category="<?php echo htmlspecialchars($category6389); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6389); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6389); ?>; 
 position:absolute; top:410px; left:755px;'>
                     </div>
@@ -16755,7 +17043,8 @@ position:absolute; top:410px; left:755px;'>
                         data-room="<?php echo htmlspecialchars($room6390); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6390); ?>"
                         data-image="<?php echo base64_encode($upload_img6390); ?>"
-                        data-category="<?php echo htmlspecialchars($category6390); ?>">
+                        data-category="<?php echo htmlspecialchars($category6390); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6390); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6390); ?>; 
 position:absolute; top:335px; left:857px;'>
                     </div>
@@ -16768,7 +17057,8 @@ position:absolute; top:335px; left:857px;'>
                         data-room="<?php echo htmlspecialchars($room6391); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6391); ?>"
                         data-image="<?php echo base64_encode($upload_img6391); ?>"
-                        data-category="<?php echo htmlspecialchars($category6391); ?>">
+                        data-category="<?php echo htmlspecialchars($category6391); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6391); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6391); ?>; 
 position:absolute; top:410px; left:857px;'>
                     </div>
@@ -16783,7 +17073,8 @@ position:absolute; top:410px; left:857px;'>
                         data-room="<?php echo htmlspecialchars($room6392); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6392); ?>"
                         data-image="<?php echo base64_encode($upload_img6392); ?>"
-                        data-category="<?php echo htmlspecialchars($category6392); ?>">
+                        data-category="<?php echo htmlspecialchars($category6392); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6392); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6392); ?>; 
 position:absolute; top:410px; left:959px;'>
                     </div>
@@ -16796,7 +17087,8 @@ position:absolute; top:410px; left:959px;'>
                         data-room="<?php echo htmlspecialchars($room6393); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6393); ?>"
                         data-image="<?php echo base64_encode($upload_img6393); ?>"
-                        data-category="<?php echo htmlspecialchars($category6393); ?>">
+                        data-category="<?php echo htmlspecialchars($category6393); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6393); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6393); ?>; 
 position:absolute; top:335px; left:959px;'>
                     </div>
@@ -16809,7 +17101,8 @@ position:absolute; top:335px; left:959px;'>
                         data-room="<?php echo htmlspecialchars($room6499); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6499); ?>"
                         data-image="<?php echo base64_encode($upload_img6499); ?>"
-                        data-category="<?php echo htmlspecialchars($category6499); ?>">
+                        data-category="<?php echo htmlspecialchars($category6499); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6499); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6499); ?>; 
 position:absolute; top:397px; left:780px;'>
                     </div>
@@ -16822,7 +17115,8 @@ position:absolute; top:397px; left:780px;'>
                         data-room="<?php echo htmlspecialchars($room6498); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6498); ?>"
                         data-image="<?php echo base64_encode($upload_img6498); ?>"
-                        data-category="<?php echo htmlspecialchars($category6498); ?>">
+                        data-category="<?php echo htmlspecialchars($category6498); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6498); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6498); ?>; 
 position:absolute; top:405px; left:764px;'>
                     </div>
@@ -16837,7 +17131,8 @@ position:absolute; top:405px; left:764px;'>
                         data-room="<?php echo htmlspecialchars($room6394); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6394); ?>"
                         data-image="<?php echo base64_encode($upload_img6394); ?>"
-                        data-category="<?php echo htmlspecialchars($category6394); ?>">
+                        data-category="<?php echo htmlspecialchars($category6394); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6394); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6394); ?>; 
 position:absolute; top:475px; left:755px;'>
                     </div>
@@ -16850,7 +17145,8 @@ position:absolute; top:475px; left:755px;'>
                         data-room="<?php echo htmlspecialchars($room6395); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6395); ?>"
                         data-image="<?php echo base64_encode($upload_img6395); ?>"
-                        data-category="<?php echo htmlspecialchars($category6395); ?>">
+                        data-category="<?php echo htmlspecialchars($category6395); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6395); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6395); ?>; 
 position:absolute; top:475px; left:857px;'>
                     </div>
@@ -16863,7 +17159,8 @@ position:absolute; top:475px; left:857px;'>
                         data-room="<?php echo htmlspecialchars($room6396); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6396); ?>"
                         data-image="<?php echo base64_encode($upload_img6396); ?>"
-                        data-category="<?php echo htmlspecialchars($category6396); ?>">
+                        data-category="<?php echo htmlspecialchars($category6396); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6396); ?>">
                     <div style='width:6px; height:6px; border-radius:50%; background-color: <?php echo getStatusColor($status6396); ?>; 
 position:absolute; top:475px; left:959px;'>
                     </div>
@@ -16876,7 +17173,8 @@ position:absolute; top:475px; left:959px;'>
                         data-room="<?php echo htmlspecialchars($room6397); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6397); ?>"
                         data-image="<?php echo base64_encode($upload_img6397); ?>"
-                        data-category="<?php echo htmlspecialchars($category6397); ?>">
+                        data-category="<?php echo htmlspecialchars($category6397); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6397); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6397); ?>; 
 position:absolute; top:351px; left:797px;'>
                     </div>
@@ -16891,7 +17189,8 @@ position:absolute; top:351px; left:797px;'>
                         data-room="<?php echo htmlspecialchars($room6398); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6398); ?>"
                         data-image="<?php echo base64_encode($upload_img6398); ?>"
-                        data-category="<?php echo htmlspecialchars($category6398); ?>">
+                        data-category="<?php echo htmlspecialchars($category6398); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6398); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6398); ?>; 
 position:absolute; top:364px; left:797px;'>
                     </div>
@@ -16904,7 +17203,8 @@ position:absolute; top:364px; left:797px;'>
                         data-room="<?php echo htmlspecialchars($room6399); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6399); ?>"
                         data-image="<?php echo base64_encode($upload_img6399); ?>"
-                        data-category="<?php echo htmlspecialchars($category6399); ?>">
+                        data-category="<?php echo htmlspecialchars($category6399); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6399); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6399); ?>; 
 position:absolute; top:377px; left:797px;'>
                     </div>
@@ -16917,7 +17217,8 @@ position:absolute; top:377px; left:797px;'>
                         data-room="<?php echo htmlspecialchars($room6400); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6400); ?>"
                         data-image="<?php echo base64_encode($upload_img6400); ?>"
-                        data-category="<?php echo htmlspecialchars($category6400); ?>">
+                        data-category="<?php echo htmlspecialchars($category6400); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6400); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6400); ?>; 
 position:absolute; top:390px; left:797px;'>
                     </div>
@@ -16930,7 +17231,8 @@ position:absolute; top:390px; left:797px;'>
                         data-room="<?php echo htmlspecialchars($room6401); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6401); ?>"
                         data-image="<?php echo base64_encode($upload_img6401); ?>"
-                        data-category="<?php echo htmlspecialchars($category6401); ?>">
+                        data-category="<?php echo htmlspecialchars($category6401); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6401); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6401); ?>; 
 position:absolute; top:403px; left:797px;'>
                     </div>
@@ -16945,7 +17247,8 @@ position:absolute; top:403px; left:797px;'>
                         data-room="<?php echo htmlspecialchars($room6402); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6402); ?>"
                         data-image="<?php echo base64_encode($upload_img6402); ?>"
-                        data-category="<?php echo htmlspecialchars($category6402); ?>">
+                        data-category="<?php echo htmlspecialchars($category6402); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6402); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6402); ?>; 
 position:absolute; top:351px; left:827px;'>
                     </div>
@@ -16958,7 +17261,8 @@ position:absolute; top:351px; left:827px;'>
                         data-room="<?php echo htmlspecialchars($room6403); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6403); ?>"
                         data-image="<?php echo base64_encode($upload_img6403); ?>"
-                        data-category="<?php echo htmlspecialchars($category6403); ?>">
+                        data-category="<?php echo htmlspecialchars($category6403); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6403); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6403); ?>; 
 position:absolute; top:364px; left:827px;'>
                     </div>
@@ -16971,7 +17275,8 @@ position:absolute; top:364px; left:827px;'>
                         data-room="<?php echo htmlspecialchars($room6404); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6404); ?>"
                         data-image="<?php echo base64_encode($upload_img6404); ?>"
-                        data-category="<?php echo htmlspecialchars($category6404); ?>">
+                        data-category="<?php echo htmlspecialchars($category6404); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6404); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6404); ?>; 
 position:absolute; top:377px; left:827px;'>
                     </div>
@@ -16984,7 +17289,8 @@ position:absolute; top:377px; left:827px;'>
                         data-room="<?php echo htmlspecialchars($room6405); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6405); ?>"
                         data-image="<?php echo base64_encode($upload_img6405); ?>"
-                        data-category="<?php echo htmlspecialchars($category6405); ?>">
+                        data-category="<?php echo htmlspecialchars($category6405); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6405); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6405); ?>; 
 position:absolute; top:390px; left:827px;'>
                     </div>
@@ -16999,7 +17305,8 @@ position:absolute; top:390px; left:827px;'>
                         data-room="<?php echo htmlspecialchars($room6406); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6406); ?>"
                         data-image="<?php echo base64_encode($upload_img6406); ?>"
-                        data-category="<?php echo htmlspecialchars($category6406); ?>">
+                        data-category="<?php echo htmlspecialchars($category6406); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6406); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6406); ?>; 
 position:absolute; top:403px; left:827px;'>
                     </div>
@@ -17012,7 +17319,8 @@ position:absolute; top:403px; left:827px;'>
                         data-room="<?php echo htmlspecialchars($room6407); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6407); ?>"
                         data-image="<?php echo base64_encode($upload_img6407); ?>"
-                        data-category="<?php echo htmlspecialchars($category6407); ?>">
+                        data-category="<?php echo htmlspecialchars($category6407); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6407); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6407); ?>; 
 position:absolute; top:351px; left:857px;'>
                     </div>
@@ -17025,7 +17333,8 @@ position:absolute; top:351px; left:857px;'>
                         data-room="<?php echo htmlspecialchars($room6408); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6408); ?>"
                         data-image="<?php echo base64_encode($upload_img6408); ?>"
-                        data-category="<?php echo htmlspecialchars($category6408); ?>">
+                        data-category="<?php echo htmlspecialchars($category6408); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6408); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6408); ?>; 
 position:absolute; top:364px; left:857px;'>
                     </div>
@@ -17038,7 +17347,8 @@ position:absolute; top:364px; left:857px;'>
                         data-room="<?php echo htmlspecialchars($room6409); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6409); ?>"
                         data-image="<?php echo base64_encode($upload_img6409); ?>"
-                        data-category="<?php echo htmlspecialchars($category6409); ?>">
+                        data-category="<?php echo htmlspecialchars($category6409); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6409); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6409); ?>; 
 position:absolute; top:377px; left:857px;'>
                     </div>
@@ -17053,7 +17363,8 @@ position:absolute; top:377px; left:857px;'>
                         data-room="<?php echo htmlspecialchars($room6410); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6410); ?>"
                         data-image="<?php echo base64_encode($upload_img6410); ?>"
-                        data-category="<?php echo htmlspecialchars($category6410); ?>">
+                        data-category="<?php echo htmlspecialchars($category6410); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6410); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6410); ?>; 
 position:absolute; top:390px; left:857px;'>
                     </div>
@@ -17066,7 +17377,8 @@ position:absolute; top:390px; left:857px;'>
                         data-room="<?php echo htmlspecialchars($room6411); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6411); ?>"
                         data-image="<?php echo base64_encode($upload_img6411); ?>"
-                        data-category="<?php echo htmlspecialchars($category6411); ?>">
+                        data-category="<?php echo htmlspecialchars($category6411); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6411); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6411); ?>; 
 position:absolute; top:403px; left:857px;'>
                     </div>
@@ -17079,7 +17391,8 @@ position:absolute; top:403px; left:857px;'>
                         data-room="<?php echo htmlspecialchars($room6412); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6412); ?>"
                         data-image="<?php echo base64_encode($upload_img6412); ?>"
-                        data-category="<?php echo htmlspecialchars($category6412); ?>">
+                        data-category="<?php echo htmlspecialchars($category6412); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6412); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6412); ?>; 
 position:absolute; top:351px; left:887px;'>
                     </div>
@@ -17092,7 +17405,8 @@ position:absolute; top:351px; left:887px;'>
                         data-room="<?php echo htmlspecialchars($room6413); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6413); ?>"
                         data-image="<?php echo base64_encode($upload_img6413); ?>"
-                        data-category="<?php echo htmlspecialchars($category6413); ?>">
+                        data-category="<?php echo htmlspecialchars($category6413); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6413); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6413); ?>; 
 position:absolute; top:364px; left:887px;'>
                     </div>
@@ -17107,7 +17421,8 @@ position:absolute; top:364px; left:887px;'>
                         data-room="<?php echo htmlspecialchars($room6414); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6414); ?>"
                         data-image="<?php echo base64_encode($upload_img6414); ?>"
-                        data-category="<?php echo htmlspecialchars($category6414); ?>">
+                        data-category="<?php echo htmlspecialchars($category6414); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6414); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6414); ?>; 
 position:absolute; top:377px; left:887px;'>
                     </div>
@@ -17120,7 +17435,8 @@ position:absolute; top:377px; left:887px;'>
                         data-room="<?php echo htmlspecialchars($room6415); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6415); ?>"
                         data-image="<?php echo base64_encode($upload_img6415); ?>"
-                        data-category="<?php echo htmlspecialchars($category6415); ?>">
+                        data-category="<?php echo htmlspecialchars($category6415); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6415); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6415); ?>; 
 position:absolute; top:390px; left:887px;'>
                     </div>
@@ -17133,7 +17449,8 @@ position:absolute; top:390px; left:887px;'>
                         data-room="<?php echo htmlspecialchars($room6416); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6416); ?>"
                         data-image="<?php echo base64_encode($upload_img6416); ?>"
-                        data-category="<?php echo htmlspecialchars($category6416); ?>">
+                        data-category="<?php echo htmlspecialchars($category6416); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6416); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6416); ?>; 
 position:absolute; top:403px; left:887px;'>
                     </div>
@@ -17146,7 +17463,8 @@ position:absolute; top:403px; left:887px;'>
                         data-room="<?php echo htmlspecialchars($room6417); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6417); ?>"
                         data-image="<?php echo base64_encode($upload_img6417); ?>"
-                        data-category="<?php echo htmlspecialchars($category6417); ?>">
+                        data-category="<?php echo htmlspecialchars($category6417); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6417); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6417); ?>; 
 position:absolute; top:351px; left:917px;'>
                     </div>
@@ -17160,7 +17478,8 @@ position:absolute; top:351px; left:917px;'>
                         data-room="<?php echo htmlspecialchars($room6418); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6418); ?>"
                         data-image="<?php echo base64_encode($upload_img6418); ?>"
-                        data-category="<?php echo htmlspecialchars($category6418); ?>">
+                        data-category="<?php echo htmlspecialchars($category6418); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6418); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6418); ?>; 
 position:absolute; top:364px; left:917px;'>
                     </div>
@@ -17173,7 +17492,8 @@ position:absolute; top:364px; left:917px;'>
                         data-room="<?php echo htmlspecialchars($room6419); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6419); ?>"
                         data-image="<?php echo base64_encode($upload_img6419); ?>"
-                        data-category="<?php echo htmlspecialchars($category6419); ?>">
+                        data-category="<?php echo htmlspecialchars($category6419); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6419); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6419); ?>; 
 position:absolute; top:377px; left:917px;'>
                     </div>
@@ -17186,7 +17506,8 @@ position:absolute; top:377px; left:917px;'>
                         data-room="<?php echo htmlspecialchars($room6420); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6420); ?>"
                         data-image="<?php echo base64_encode($upload_img6420); ?>"
-                        data-category="<?php echo htmlspecialchars($category6420); ?>">
+                        data-category="<?php echo htmlspecialchars($category6420); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6420); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6420); ?>; 
 position:absolute; top:390px; left:917px;'>
                     </div>
@@ -17199,7 +17520,8 @@ position:absolute; top:390px; left:917px;'>
                         data-room="<?php echo htmlspecialchars($room6421); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6421); ?>"
                         data-image="<?php echo base64_encode($upload_img6421); ?>"
-                        data-category="<?php echo htmlspecialchars($category6421); ?>">
+                        data-category="<?php echo htmlspecialchars($category6421); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6421); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6421); ?>; 
 position:absolute; top:403px; left:917px;'>
                     </div>
@@ -17213,7 +17535,8 @@ position:absolute; top:403px; left:917px;'>
                         data-room="<?php echo htmlspecialchars($room6422); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6422); ?>"
                         data-image="<?php echo base64_encode($upload_img6422); ?>"
-                        data-category="<?php echo htmlspecialchars($category6422); ?>">
+                        data-category="<?php echo htmlspecialchars($category6422); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6422); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6422); ?>; 
 position:absolute; top:425px; left:797px;'>
                     </div>
@@ -17226,7 +17549,8 @@ position:absolute; top:425px; left:797px;'>
                         data-room="<?php echo htmlspecialchars($room6423); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6423); ?>"
                         data-image="<?php echo base64_encode($upload_img6423); ?>"
-                        data-category="<?php echo htmlspecialchars($category6423); ?>">
+                        data-category="<?php echo htmlspecialchars($category6423); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6423); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6423); ?>; 
 position:absolute; top:438px; left:797px;'>
                     </div>
@@ -17239,7 +17563,8 @@ position:absolute; top:438px; left:797px;'>
                         data-room="<?php echo htmlspecialchars($room6424); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6424); ?>"
                         data-image="<?php echo base64_encode($upload_img6424); ?>"
-                        data-category="<?php echo htmlspecialchars($category6424); ?>">
+                        data-category="<?php echo htmlspecialchars($category6424); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6424); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6424); ?>; 
 position:absolute; top:451px; left:797px;'>
                     </div>
@@ -17252,7 +17577,8 @@ position:absolute; top:451px; left:797px;'>
                         data-room="<?php echo htmlspecialchars($room6425); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6425); ?>"
                         data-image="<?php echo base64_encode($upload_img6425); ?>"
-                        data-category="<?php echo htmlspecialchars($category6425); ?>">
+                        data-category="<?php echo htmlspecialchars($category6425); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6425); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6425); ?>; 
 position:absolute; top:464px; left:797px;'>
                     </div>
@@ -17266,7 +17592,8 @@ position:absolute; top:464px; left:797px;'>
                         data-room="<?php echo htmlspecialchars($room6426); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6426); ?>"
                         data-image="<?php echo base64_encode($upload_img6426); ?>"
-                        data-category="<?php echo htmlspecialchars($category6426); ?>">
+                        data-category="<?php echo htmlspecialchars($category6426); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6426); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6426); ?>; 
 position:absolute; top:477px; left:797px;'>
                     </div>
@@ -17279,7 +17606,8 @@ position:absolute; top:477px; left:797px;'>
                         data-room="<?php echo htmlspecialchars($room6427); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6427); ?>"
                         data-image="<?php echo base64_encode($upload_img6427); ?>"
-                        data-category="<?php echo htmlspecialchars($category6427); ?>">
+                        data-category="<?php echo htmlspecialchars($category6427); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6427); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6427); ?>; 
 position:absolute; top:425px; left:827px;'>
                     </div>
@@ -17292,7 +17620,8 @@ position:absolute; top:425px; left:827px;'>
                         data-room="<?php echo htmlspecialchars($room6428); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6428); ?>"
                         data-image="<?php echo base64_encode($upload_img6428); ?>"
-                        data-category="<?php echo htmlspecialchars($category6428); ?>">
+                        data-category="<?php echo htmlspecialchars($category6428); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6428); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6428); ?>; 
 position:absolute; top:438px; left:827px;'>
                     </div>
@@ -17305,7 +17634,8 @@ position:absolute; top:438px; left:827px;'>
                         data-room="<?php echo htmlspecialchars($room6429); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6429); ?>"
                         data-image="<?php echo base64_encode($upload_img6429); ?>"
-                        data-category="<?php echo htmlspecialchars($category6429); ?>">
+                        data-category="<?php echo htmlspecialchars($category6429); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6429); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6429); ?>; 
 position:absolute; top:451px; left:827px;'>
                     </div>
@@ -17319,7 +17649,8 @@ position:absolute; top:451px; left:827px;'>
                         data-room="<?php echo htmlspecialchars($room6430); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6430); ?>"
                         data-image="<?php echo base64_encode($upload_img6430); ?>"
-                        data-category="<?php echo htmlspecialchars($category6430); ?>">
+                        data-category="<?php echo htmlspecialchars($category6430); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6430); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6430); ?>; 
 position:absolute; top:464px; left:827px;'>
                     </div>
@@ -17332,7 +17663,8 @@ position:absolute; top:464px; left:827px;'>
                         data-room="<?php echo htmlspecialchars($room6431); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6431); ?>"
                         data-image="<?php echo base64_encode($upload_img6431); ?>"
-                        data-category="<?php echo htmlspecialchars($category6431); ?>">
+                        data-category="<?php echo htmlspecialchars($category6431); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6431); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6431); ?>; 
 position:absolute; top:477px; left:827px;'>
                     </div>
@@ -17345,7 +17677,8 @@ position:absolute; top:477px; left:827px;'>
                         data-room="<?php echo htmlspecialchars($room6432); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6432); ?>"
                         data-image="<?php echo base64_encode($upload_img6432); ?>"
-                        data-category="<?php echo htmlspecialchars($category6432); ?>">
+                        data-category="<?php echo htmlspecialchars($category6432); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6432); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6432); ?>; 
 position:absolute; top:425px; left:857px;'>
                     </div>
@@ -17358,7 +17691,8 @@ position:absolute; top:425px; left:857px;'>
                         data-room="<?php echo htmlspecialchars($room6433); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6433); ?>"
                         data-image="<?php echo base64_encode($upload_img6433); ?>"
-                        data-category="<?php echo htmlspecialchars($category6433); ?>">
+                        data-category="<?php echo htmlspecialchars($category6433); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6433); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6433); ?>; 
 position:absolute; top:438px; left:857px;'>
                     </div>
@@ -17372,7 +17706,8 @@ position:absolute; top:438px; left:857px;'>
                         data-room="<?php echo htmlspecialchars($room6434); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6434); ?>"
                         data-image="<?php echo base64_encode($upload_img6434); ?>"
-                        data-category="<?php echo htmlspecialchars($category6434); ?>">
+                        data-category="<?php echo htmlspecialchars($category6434); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6434); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6434); ?>; 
 position:absolute; top:451px; left:857px;'>
                     </div>
@@ -17385,7 +17720,8 @@ position:absolute; top:451px; left:857px;'>
                         data-room="<?php echo htmlspecialchars($room6435); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6435); ?>"
                         data-image="<?php echo base64_encode($upload_img6435); ?>"
-                        data-category="<?php echo htmlspecialchars($category6435); ?>">
+                        data-category="<?php echo htmlspecialchars($category6435); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6435); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6435); ?>; 
 position:absolute; top:464px; left:857px;'>
                     </div>
@@ -17398,7 +17734,8 @@ position:absolute; top:464px; left:857px;'>
                         data-room="<?php echo htmlspecialchars($room6436); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6436); ?>"
                         data-image="<?php echo base64_encode($upload_img6436); ?>"
-                        data-category="<?php echo htmlspecialchars($category6436); ?>">
+                        data-category="<?php echo htmlspecialchars($category6436); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6436); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6436); ?>; 
 position:absolute; top:477px; left:857px;'>
                     </div>
@@ -17411,7 +17748,8 @@ position:absolute; top:477px; left:857px;'>
                         data-room="<?php echo htmlspecialchars($room6437); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6437); ?>"
                         data-image="<?php echo base64_encode($upload_img6437); ?>"
-                        data-category="<?php echo htmlspecialchars($category6437); ?>">
+                        data-category="<?php echo htmlspecialchars($category6437); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6437); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6437); ?>; 
 position:absolute; top:425px; left:887px;'>
                     </div>
@@ -17425,7 +17763,8 @@ position:absolute; top:425px; left:887px;'>
                         data-room="<?php echo htmlspecialchars($room6438); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6438); ?>"
                         data-image="<?php echo base64_encode($upload_img6438); ?>"
-                        data-category="<?php echo htmlspecialchars($category6438); ?>">
+                        data-category="<?php echo htmlspecialchars($category6438); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6438); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6438); ?>; 
 position:absolute; top:438px; left:887px;'>
                     </div>
@@ -17438,7 +17777,8 @@ position:absolute; top:438px; left:887px;'>
                         data-room="<?php echo htmlspecialchars($room6439); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6439); ?>"
                         data-image="<?php echo base64_encode($upload_img6439); ?>"
-                        data-category="<?php echo htmlspecialchars($category6439); ?>">
+                        data-category="<?php echo htmlspecialchars($category6439); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6439); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6439); ?>; 
 position:absolute; top:451px; left:887px;'>
                     </div>
@@ -17451,7 +17791,8 @@ position:absolute; top:451px; left:887px;'>
                         data-room="<?php echo htmlspecialchars($room6440); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6440); ?>"
                         data-image="<?php echo base64_encode($upload_img6440); ?>"
-                        data-category="<?php echo htmlspecialchars($category6440); ?>">
+                        data-category="<?php echo htmlspecialchars($category6440); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6440); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6440); ?>; 
 position:absolute; top:464px; left:887px;'>
                     </div>
@@ -17464,7 +17805,8 @@ position:absolute; top:464px; left:887px;'>
                         data-room="<?php echo htmlspecialchars($room6441); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6441); ?>"
                         data-image="<?php echo base64_encode($upload_img6441); ?>"
-                        data-category="<?php echo htmlspecialchars($category6441); ?>">
+                        data-category="<?php echo htmlspecialchars($category6441); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6441); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6441); ?>; 
 position:absolute; top:477px; left:887px;'>
                     </div>
@@ -17478,7 +17820,8 @@ position:absolute; top:477px; left:887px;'>
                         data-room="<?php echo htmlspecialchars($room6442); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6442); ?>"
                         data-image="<?php echo base64_encode($upload_img6442); ?>"
-                        data-category="<?php echo htmlspecialchars($category6442); ?>">
+                        data-category="<?php echo htmlspecialchars($category6442); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6442); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6442); ?>; 
 position:absolute; top:425px; left:917px;'>
                     </div>
@@ -17491,7 +17834,8 @@ position:absolute; top:425px; left:917px;'>
                         data-room="<?php echo htmlspecialchars($room6443); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6443); ?>"
                         data-image="<?php echo base64_encode($upload_img6443); ?>"
-                        data-category="<?php echo htmlspecialchars($category6443); ?>">
+                        data-category="<?php echo htmlspecialchars($category6443); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6443); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6443); ?>; 
 position:absolute; top:438px; left:917px;'>
                     </div>
@@ -17504,7 +17848,8 @@ position:absolute; top:438px; left:917px;'>
                         data-room="<?php echo htmlspecialchars($room6444); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6444); ?>"
                         data-image="<?php echo base64_encode($upload_img6444); ?>"
-                        data-category="<?php echo htmlspecialchars($category6444); ?>">
+                        data-category="<?php echo htmlspecialchars($category6444); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6444); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6444); ?>; 
 position:absolute; top:451px; left:917px;'>
                     </div>
@@ -17517,7 +17862,8 @@ position:absolute; top:451px; left:917px;'>
                         data-room="<?php echo htmlspecialchars($room6445); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6445); ?>"
                         data-image="<?php echo base64_encode($upload_img6445); ?>"
-                        data-category="<?php echo htmlspecialchars($category6445); ?>">
+                        data-category="<?php echo htmlspecialchars($category6445); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6445); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6445); ?>; 
 position:absolute; top:464px; left:917px;'>
                     </div>
@@ -17530,7 +17876,8 @@ position:absolute; top:464px; left:917px;'>
                         data-room="<?php echo htmlspecialchars($room6446); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6446); ?>"
                         data-image="<?php echo base64_encode($upload_img6446); ?>"
-                        data-category="<?php echo htmlspecialchars($category6446); ?>">
+                        data-category="<?php echo htmlspecialchars($category6446); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6446); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6446); ?>; 
 position:absolute; top:477px; left:917px;'>
                     </div>
@@ -60452,7 +60799,7 @@ position:absolute; top:477px; left:917px;'>
         });
     </script>
 
-   <!--Start of JS Hover-->
+    <!--Start of JS Hover-->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const assetImages = document.querySelectorAll('.asset-image');
@@ -60536,24 +60883,24 @@ position:absolute; top:477px; left:917px;'>
         });
     </script>
     <script>
-    // Find all input elements with ID 'description'
-    var inputElements = document.querySelectorAll('input#description');
+        // Find all input elements with ID 'description'
+        var inputElements = document.querySelectorAll('input#description');
 
-    // Iterate through each input element
-    inputElements.forEach(function(inputElement) {
-        // Create a new textarea element
-        var textareaElement = document.createElement('textarea');
+        // Iterate through each input element
+        inputElements.forEach(function (inputElement) {
+            // Create a new textarea element
+            var textareaElement = document.createElement('textarea');
 
-        // Copy attributes from the input element
-        textareaElement.className = inputElement.className;
-        textareaElement.id = inputElement.id;
-        textareaElement.name = inputElement.name;
-        textareaElement.value = inputElement.value;
+            // Copy attributes from the input element
+            textareaElement.className = inputElement.className;
+            textareaElement.id = inputElement.id;
+            textareaElement.name = inputElement.name;
+            textareaElement.value = inputElement.value;
 
-        // Replace the input element with the textarea element
-        inputElement.parentNode.replaceChild(textareaElement, inputElement);
-    });
-</script>
+            // Replace the input element with the textarea element
+            inputElement.parentNode.replaceChild(textareaElement, inputElement);
+        });
+    </script>
 
     <script src="../../../src/js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

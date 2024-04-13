@@ -55322,7 +55322,7 @@ position:absolute; top:477px; left:917px;'>
                 </div>
             </main>
         </section>
-     <!--Start of JS Hover-->
+    <!--Start of JS Hover-->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const assetImages = document.querySelectorAll('.asset-image');
@@ -55461,6 +55461,7 @@ position:absolute; top:477px; left:917px;'>
         inputElement.parentNode.replaceChild(textareaElement, inputElement);
     });
 </script>
+
 
         <script src="../../../src/js/main.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

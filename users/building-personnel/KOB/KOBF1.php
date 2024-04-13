@@ -6050,17 +6050,23 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     <!-- FLOOR PLAN -->
                     <img class="Floor-container-1 .NEWBF1" src="../../../src/floors/korPhil/Korphil1F.png" alt="">
                     <div class="map-nav">
-                        <a href="../../personnel/map.php" class="closeFloor"><i
-                                class="bi bi-box-arrow-left"></i></i></a>
                         <div class="map-legend">
-                            <div class="legend-color-green"></div>
-                            <p>Working</p>
-                            <div class="legend-color-under-maintenance"></div>
-                            <p>Under maintenance</p>
-                            <div class="legend-color-need-repair"></div>
-                            <p>Need repair</p>
-                            <div class="legend-color-for-replacement"></div>
-                            <p>For replacement</p>
+                            <div class="legend-item" data-status="Working">
+                                <div class="legend-color-green"></div>
+                                <button class="legend-toggle">Working</button>
+                            </div>
+                            <div class="legend-item" data-status="Under Maintenance">
+                                <div class="legend-color-under-maintenance"></div>
+                                <button class="legend-toggle">Under maintenance</button>
+                            </div>
+                            <div class="legend-item" data-status="Need Repair">
+                                <div class="legend-color-need-repair"></div>
+                                <button class="legend-toggle">Need repair</button>
+                            </div>
+                            <div class="legend-item" data-status="For Replacement">
+                                <div class="legend-color-for-replacement"></div>
+                                <button class="legend-toggle">For replacement</button>
+                            </div>
                         </div>
                     </div>
 
@@ -6073,6 +6079,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2336); ?>"
                         data-image="<?php echo base64_encode($upload_img2336); ?>"
                         data-category="<?php echo htmlspecialchars($category2336); ?>"
+                        data-status="<?php echo htmlspecialchars($status2336); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2336); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2336); ?>; position:absolute; top:361px; left:475px;'>
@@ -6086,7 +6093,9 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2337); ?>"
                         data-image="<?php echo base64_encode($upload_img2337); ?>"
                         data-category="<?php echo htmlspecialchars($category2337); ?>"
+                        data-status="<?php echo htmlspecialchars($status2337); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2337); ?>">
+
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2337); ?>; position:absolute; top:361px; left:495px;'>
                     </div>
@@ -6099,6 +6108,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2338); ?>"
                         data-image="<?php echo base64_encode($upload_img2338); ?>"
                         data-category="<?php echo htmlspecialchars($category2338); ?>"
+                        data-status="<?php echo htmlspecialchars($status2338); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2338); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2338); ?>; position:absolute; top:361px; left:515px;'>
@@ -6112,6 +6122,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2339); ?>"
                         data-image="<?php echo base64_encode($upload_img2339); ?>"
                         data-category="<?php echo htmlspecialchars($category2339); ?>"
+                        data-status="<?php echo htmlspecialchars($status2339); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2339); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2339); ?>; position:absolute; top:361px; left:535px;'>
@@ -6126,6 +6137,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2340); ?>"
                         data-image="<?php echo base64_encode($upload_img2340); ?>"
                         data-category="<?php echo htmlspecialchars($category2340); ?>"
+                        data-status="<?php echo htmlspecialchars($status2340); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2340); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2340); ?>; 
     position:absolute; top:361px; left:760px;'>
@@ -6139,6 +6151,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2341); ?>"
                         data-image="<?php echo base64_encode($upload_img2341); ?>"
                         data-category="<?php echo htmlspecialchars($category2341); ?>"
+                        data-status="<?php echo htmlspecialchars($status2341); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2341); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2341); ?>; position:absolute; top:361px; left:795px;'>
@@ -6152,6 +6165,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2342); ?>"
                         data-image="<?php echo base64_encode($upload_img2342); ?>"
                         data-category="<?php echo htmlspecialchars($category2342); ?>"
+                        data-status="<?php echo htmlspecialchars($status2342); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2342); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2342); ?>; position:absolute; top:420px; left:224px;'>
@@ -6165,6 +6179,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2343); ?>"
                         data-image="<?php echo base64_encode($upload_img2343); ?>"
                         data-category="<?php echo htmlspecialchars($category2343); ?>"
+                        data-status="<?php echo htmlspecialchars($status2343); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2343); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2343); ?>; position:absolute; top:440px; left:395px;'>
@@ -6179,6 +6194,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2344); ?>"
                         data-image="<?php echo base64_encode($upload_img2344); ?>"
                         data-category="<?php echo htmlspecialchars($category2344); ?>"
+                        data-status="<?php echo htmlspecialchars($status2344); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2344); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2344); ?>; position:absolute; top:470px; left:224px;'>
@@ -6191,6 +6207,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         onclick='fetchAssetData(2345);' data-room="<?php echo htmlspecialchars($room2345); ?>"
                         data-floor="<?php echo htmlspecialchars($floor2345); ?>"
                         data-image="<?php echo base64_encode($upload_img2345); ?>"
+                        data-status="<?php echo htmlspecialchars($status2345); ?>"
                         data-category="<?php echo htmlspecialchars($category2345); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2345); ?>">
                     <div
@@ -6205,6 +6222,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2346); ?>"
                         data-image="<?php echo base64_encode($upload_img2346); ?>"
                         data-category="<?php echo htmlspecialchars($category2346); ?>"
+                        data-status="<?php echo htmlspecialchars($status2346); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2346); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2346); ?>; position:absolute; top:470px; left:475px;'>
@@ -6218,6 +6236,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2347); ?>"
                         data-image="<?php echo base64_encode($upload_img2347); ?>"
                         data-category="<?php echo htmlspecialchars($category2347); ?>"
+                        data-status="<?php echo htmlspecialchars($status2347); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2347); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2347); ?>; position:absolute; top:410px; left:833px;'>
@@ -6232,6 +6251,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2348); ?>"
                         data-image="<?php echo base64_encode($upload_img2348); ?>"
                         data-category="<?php echo htmlspecialchars($category2348); ?>"
+                        data-status="<?php echo htmlspecialchars($status2348); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2348); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2348); ?>; position:absolute; top:470px; left:833px;'>
@@ -6244,6 +6264,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         onclick='fetchAssetData(2349);' data-room="<?php echo htmlspecialchars($room2349); ?>"
                         data-floor="<?php echo htmlspecialchars($floor2349); ?>"
                         data-image="<?php echo base64_encode($upload_img2349); ?>"
+                        data-status="<?php echo htmlspecialchars($status2349); ?>"
                         data-category="<?php echo htmlspecialchars($category2349); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2349); ?>">
                     <div
@@ -6258,6 +6279,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2350); ?>"
                         data-image="<?php echo base64_encode($upload_img2350); ?>"
                         data-category="<?php echo htmlspecialchars($category2350); ?>"
+                        data-status="<?php echo htmlspecialchars($status2350); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2350); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2350); ?>; position:absolute; top:470px; left:957px;'>
@@ -6271,6 +6293,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2351); ?>"
                         data-image="<?php echo base64_encode($upload_img2351); ?>"
                         data-category="<?php echo htmlspecialchars($category2351); ?>"
+                        data-status="<?php echo htmlspecialchars($status2351); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2351); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2351); ?>; position:absolute; top:410px; left:1076px;'>
@@ -6285,6 +6308,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2352); ?>"
                         data-image="<?php echo base64_encode($upload_img2352); ?>"
                         data-category="<?php echo htmlspecialchars($category2352); ?>"
+                        data-status="<?php echo htmlspecialchars($status2352); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2352); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2352); ?>; position:absolute; top:470px; left:1076px;'>
@@ -6297,6 +6321,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         onclick='fetchAssetData(2353);' data-room="<?php echo htmlspecialchars($room2353); ?>"
                         data-floor="<?php echo htmlspecialchars($floor2353); ?>"
                         data-image="<?php echo base64_encode($upload_img2353); ?>"
+                        data-status="<?php echo htmlspecialchars($status2353); ?>"
                         data-category="<?php echo htmlspecialchars($category2353); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2353); ?>">
                     <div
@@ -6310,6 +6335,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         onclick='fetchAssetData(2354);' data-room="<?php echo htmlspecialchars($room2354); ?>"
                         data-floor="<?php echo htmlspecialchars($floor2354); ?>"
                         data-image="<?php echo base64_encode($upload_img2354); ?>"
+                        data-status="<?php echo htmlspecialchars($status2354); ?>"
                         data-category="<?php echo htmlspecialchars($category2354); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2354); ?>">
                     <div
@@ -6324,6 +6350,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2355); ?>"
                         data-image="<?php echo base64_encode($upload_img2355); ?>"
                         data-category="<?php echo htmlspecialchars($category2355); ?>"
+                        data-status="<?php echo htmlspecialchars($status2355); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2355); ?>">
                     <div
                         style='width:10px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2355); ?>; position:absolute; top:435px; left:295px;'>
@@ -6338,6 +6365,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2356); ?>"
                         data-image="<?php echo base64_encode($upload_img2356); ?>"
                         data-category="<?php echo htmlspecialchars($category2356); ?>"
+                        data-status="<?php echo htmlspecialchars($status2356); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2356); ?>">
                     <div
                         style='width:10px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2356); ?>; position:absolute; top:300px; left:1065px;'>
@@ -6351,6 +6379,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2357); ?>"
                         data-image="<?php echo base64_encode($upload_img2357); ?>"
                         data-category="<?php echo htmlspecialchars($category2357); ?>"
+                        data-status="<?php echo htmlspecialchars($status2357); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2357); ?>">
                     <div
                         style='width:10px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2357); ?>; position:absolute; top:250px; left:260px;'>
@@ -6364,6 +6393,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2358); ?>"
                         data-image="<?php echo base64_encode($upload_img2358); ?>"
                         data-category="<?php echo htmlspecialchars($category2358); ?>"
+                        data-status="<?php echo htmlspecialchars($status2358); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2358); ?>">
                     <div
                         style='width:10px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2358); ?>; position:absolute; top:365px; left:364px;'>
@@ -6377,6 +6407,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2359); ?>"
                         data-image="<?php echo base64_encode($upload_img2359); ?>"
                         data-category="<?php echo htmlspecialchars($category2359); ?>"
+                        data-status="<?php echo htmlspecialchars($status2359); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2359); ?>">
                     <div
                         style='width:10px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2359); ?>; position:absolute; top:150px; left:1185px;'>
@@ -6390,6 +6421,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         onclick='fetchAssetData(2360);' data-room="<?php echo htmlspecialchars($room2360); ?>"
                         data-floor="<?php echo htmlspecialchars($floor2360); ?>"
                         data-image="<?php echo base64_encode($upload_img2360); ?>"
+                        data-status="<?php echo htmlspecialchars($status2360); ?>"
                         data-category="<?php echo htmlspecialchars($category2360); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2360); ?>">
                     <div
@@ -6404,6 +6436,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2361); ?>"
                         data-image="<?php echo base64_encode($upload_img2361); ?>"
                         data-category="<?php echo htmlspecialchars($category2361); ?>"
+                        data-status="<?php echo htmlspecialchars($status2361); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2361); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2361); ?>; position:absolute; top:405px; left:230px;'>
@@ -6417,6 +6450,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2362); ?>"
                         data-image="<?php echo base64_encode($upload_img2362); ?>"
                         data-category="<?php echo htmlspecialchars($category2362); ?>"
+                        data-status="<?php echo htmlspecialchars($status2362); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2362); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2362); ?>; position:absolute; top:405px; left:390px;'>
@@ -6430,6 +6464,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2363); ?>"
                         data-image="<?php echo base64_encode($upload_img2363); ?>"
                         data-category="<?php echo htmlspecialchars($category2363); ?>"
+                        data-status="<?php echo htmlspecialchars($status2363); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2363); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2363); ?>; position:absolute; top:440px; left:455px;'>
@@ -6444,6 +6479,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2364); ?>"
                         data-image="<?php echo base64_encode($upload_img2364); ?>"
                         data-category="<?php echo htmlspecialchars($category2364); ?>"
+                        data-status="<?php echo htmlspecialchars($status2364); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2364); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2364); ?>; position:absolute; top:410px; left:455px;'>
@@ -6457,6 +6493,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2365); ?>"
                         data-image="<?php echo base64_encode($upload_img2365); ?>"
                         data-category="<?php echo htmlspecialchars($category2365); ?>"
+                        data-status="<?php echo htmlspecialchars($status2365); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2365); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2365); ?>; position:absolute; top:402px; left:575px;'>
@@ -6470,6 +6507,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2366); ?>"
                         data-image="<?php echo base64_encode($upload_img2366); ?>"
                         data-category="<?php echo htmlspecialchars($category2366); ?>"
+                        data-status="<?php echo htmlspecialchars($status2366); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2366); ?>">
                     <div
                         style='width:10px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2366); ?>; position:absolute; top:402px; left:720px;'>
@@ -6483,6 +6521,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2367); ?>"
                         data-image="<?php echo base64_encode($upload_img2367); ?>"
                         data-category="<?php echo htmlspecialchars($category2367); ?>"
+                        data-status="<?php echo htmlspecialchars($status2367); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2367); ?>">
                     <div
                         style='width:10px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2367); ?>; position:absolute; top:402px; left:845px;'>
@@ -6497,6 +6536,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2368); ?>"
                         data-image="<?php echo base64_encode($upload_img2368); ?>"
                         data-category="<?php echo htmlspecialchars($category2368); ?>"
+                        data-status="<?php echo htmlspecialchars($status2368); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2368); ?>">
                     <div
                         style='width:10px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2368); ?>; position:absolute; top:402px; left:970px;'>
@@ -6510,6 +6550,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2369); ?>"
                         data-image="<?php echo base64_encode($upload_img2369); ?>"
                         data-category="<?php echo htmlspecialchars($category2369); ?>"
+                        data-status="<?php echo htmlspecialchars($status2369); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2369); ?>">
                     <div
                         style='width:10px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2369); ?>; position:absolute; top:369px; left:570px;'>
@@ -6523,6 +6564,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2370); ?>"
                         data-image="<?php echo base64_encode($upload_img2370); ?>"
                         data-category="<?php echo htmlspecialchars($category2370); ?>"
+                        data-status="<?php echo htmlspecialchars($status2370); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2370); ?>">
                     <div
                         style='width:10px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2370); ?>; position:absolute; top:369px; left:722px;'>
@@ -6536,6 +6578,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2371); ?>"
                         data-image="<?php echo base64_encode($upload_img2371); ?>"
                         data-category="<?php echo htmlspecialchars($category2371); ?>"
+                        data-status="<?php echo htmlspecialchars($status2371); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2371); ?>">
                     <div
                         style='width:10px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2371); ?>; position:absolute; top:369px; left:803px;'>
@@ -6555,6 +6598,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         onclick='fetchAssetData(2249);' data-room="<?php echo htmlspecialchars($room2249); ?>"
                         data-floor="<?php echo htmlspecialchars($floor2249); ?>"
                         data-image="<?php echo base64_encode($upload_img2249); ?>"
+                        data-status="<?php echo htmlspecialchars($status2249); ?>"
                         data-category="<?php echo htmlspecialchars($category2249); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2249); ?>">
                     <div
@@ -6568,6 +6612,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         onclick='fetchAssetData(2250);' data-room="<?php echo htmlspecialchars($room2250); ?>"
                         data-floor="<?php echo htmlspecialchars($floor2250); ?>"
                         data-image="<?php echo base64_encode($upload_img2250); ?>"
+                        data-status="<?php echo htmlspecialchars($status2250); ?>"
                         data-category="<?php echo htmlspecialchars($category2250); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2250); ?>">
                     <div
@@ -6582,6 +6627,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2251); ?>"
                         data-image="<?php echo base64_encode($upload_img2251); ?>"
                         data-category="<?php echo htmlspecialchars($category2251); ?>"
+                        data-status="<?php echo htmlspecialchars($status2251); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2251); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2251); ?>; position:absolute; top:180px; left:160px;'>
@@ -6595,6 +6641,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2252); ?>"
                         data-image="<?php echo base64_encode($upload_img2252); ?>"
                         data-category="<?php echo htmlspecialchars($category2252); ?>"
+                        data-status="<?php echo htmlspecialchars($status2252); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2252); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2252); ?>; position:absolute; top:220px; left:120px;'>
@@ -6609,6 +6656,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2253); ?>"
                         data-image="<?php echo base64_encode($upload_img2253); ?>"
                         data-category="<?php echo htmlspecialchars($category2253); ?>"
+                        data-status="<?php echo htmlspecialchars($status2253); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2253); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2253); ?>; position:absolute; top:225px; left:200px;'>
@@ -6622,6 +6670,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2254); ?>"
                         data-image="<?php echo base64_encode($upload_img2254); ?>"
                         data-category="<?php echo htmlspecialchars($category2254); ?>"
+                        data-status="<?php echo htmlspecialchars($status2254); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2254); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2254); ?>; position:absolute; top:115px; left:180px;'>
@@ -6635,6 +6684,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2255); ?>"
                         data-image="<?php echo base64_encode($upload_img2255); ?>"
                         data-category="<?php echo htmlspecialchars($category2255); ?>"
+                        data-status="<?php echo htmlspecialchars($status2255); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2255); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2255); ?>; position:absolute; top:110px; left:260px;'>
@@ -6648,6 +6698,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2256); ?>"
                         data-image="<?php echo base64_encode($upload_img2256); ?>"
                         data-category="<?php echo htmlspecialchars($category2256); ?>"
+                        data-status="<?php echo htmlspecialchars($status2256); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2256); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2256); ?>; position:absolute; top:150px; left:220px;'>
@@ -6661,6 +6712,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2257); ?>"
                         data-image="<?php echo base64_encode($upload_img2257); ?>"
                         data-category="<?php echo htmlspecialchars($category2257); ?>"
+                        data-status="<?php echo htmlspecialchars($status2257); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2257); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2257); ?>; position:absolute; top:150px; left:300px;'>
@@ -6674,6 +6726,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2258); ?>"
                         data-image="<?php echo base64_encode($upload_img2258); ?>"
                         data-category="<?php echo htmlspecialchars($category2258); ?>"
+                        data-status="<?php echo htmlspecialchars($status2258); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2258); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2258); ?>; position:absolute; top:200px; left:255px;'>
@@ -6687,6 +6740,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2259); ?>"
                         data-image="<?php echo base64_encode($upload_img2259); ?>"
                         data-category="<?php echo htmlspecialchars($category2259); ?>"
+                        data-status="<?php echo htmlspecialchars($status2259); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2259); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2259); ?>; position:absolute; top:385px; left:115px;'>
@@ -6700,6 +6754,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2260); ?>"
                         data-image="<?php echo base64_encode($upload_img2260); ?>"
                         data-category="<?php echo htmlspecialchars($category2260); ?>"
+                        data-status="<?php echo htmlspecialchars($status2260); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2260); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2260); ?>; position:absolute; top:385px; left:185px;'>
@@ -6714,6 +6769,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2261); ?>"
                         data-image="<?php echo base64_encode($upload_img2261); ?>"
                         data-category="<?php echo htmlspecialchars($category2261); ?>"
+                        data-status="<?php echo htmlspecialchars($status2261); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2261); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2261); ?>; position:absolute; top:415px; left:115px;'>
@@ -6727,6 +6783,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2262); ?>"
                         data-image="<?php echo base64_encode($upload_img2262); ?>"
                         data-category="<?php echo htmlspecialchars($category2262); ?>"
+                        data-status="<?php echo htmlspecialchars($status2262); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2262); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2262); ?>; position:absolute; top:415px; left:185px;'>
@@ -6740,6 +6797,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2263); ?>"
                         data-image="<?php echo base64_encode($upload_img2263); ?>"
                         data-category="<?php echo htmlspecialchars($category2263); ?>"
+                        data-status="<?php echo htmlspecialchars($status2263); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2263); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2263); ?>; position:absolute; top:415px; left:250px;'>
@@ -6753,6 +6811,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2264); ?>"
                         data-image="<?php echo base64_encode($upload_img2264); ?>"
                         data-category="<?php echo htmlspecialchars($category2264); ?>"
+                        data-status="<?php echo htmlspecialchars($status2264); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2264); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2264); ?>; position:absolute; top:415px; left:365px;'>
@@ -6766,6 +6825,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         onclick='fetchAssetData(2265);' data-room="<?php echo htmlspecialchars($room2265); ?>"
                         data-floor="<?php echo htmlspecialchars($floor2265); ?>"
                         data-image="<?php echo base64_encode($upload_img2265); ?>"
+                        data-status="<?php echo htmlspecialchars($status2265); ?>"
                         data-category="<?php echo htmlspecialchars($category2265); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2265); ?>">
                     <div
@@ -6780,6 +6840,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2266); ?>"
                         data-image="<?php echo base64_encode($upload_img2266); ?>"
                         data-category="<?php echo htmlspecialchars($category2266); ?>"
+                        data-status="<?php echo htmlspecialchars($status2266); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2266); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2266); ?>; position:absolute; top:455px; left:300px;'>
@@ -6793,6 +6854,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2267); ?>"
                         data-image="<?php echo base64_encode($upload_img2267); ?>"
                         data-category="<?php echo htmlspecialchars($category2267); ?>"
+                        data-status="<?php echo htmlspecialchars($status2267); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2267); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2267); ?>; position:absolute; top:470px; left:250px;'>
@@ -6805,6 +6867,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         onclick='fetchAssetData(2268);' data-room="<?php echo htmlspecialchars($room2268); ?>"
                         data-floor="<?php echo htmlspecialchars($floor2268); ?>"
                         data-image="<?php echo base64_encode($upload_img2268); ?>"
+                        data-status="<?php echo htmlspecialchars($status2268); ?>"
                         data-category="<?php echo htmlspecialchars($category2268); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2268); ?>">
                     <div
@@ -6820,6 +6883,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2269); ?>"
                         data-image="<?php echo base64_encode($upload_img2269); ?>"
                         data-category="<?php echo htmlspecialchars($category2269); ?>"
+                        data-status="<?php echo htmlspecialchars($status2269); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2269); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2269); ?>; position:absolute; top:440px; left:435px;'>
@@ -6833,6 +6897,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2270); ?>"
                         data-image="<?php echo base64_encode($upload_img2270); ?>"
                         data-category="<?php echo htmlspecialchars($category2270); ?>"
+                        data-status="<?php echo htmlspecialchars($status2270); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2270); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2270); ?>; position:absolute; top:470px; left:435px;'>
@@ -6846,6 +6911,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2271); ?>"
                         data-image="<?php echo base64_encode($upload_img2271); ?>"
                         data-category="<?php echo htmlspecialchars($category2271); ?>"
+                        data-status="<?php echo htmlspecialchars($status2271); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2271); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2271); ?>; position:absolute; top:410px; left:435px;'>
@@ -6858,6 +6924,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         onclick='fetchAssetData(2272);' data-room="<?php echo htmlspecialchars($room2272); ?>"
                         data-floor="<?php echo htmlspecialchars($floor2272); ?>"
                         data-image="<?php echo base64_encode($upload_img2272); ?>"
+                        data-status="<?php echo htmlspecialchars($status2272); ?>"
                         data-category="<?php echo htmlspecialchars($category2272); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2272); ?>">
                     <div
@@ -6873,6 +6940,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2273); ?>"
                         data-image="<?php echo base64_encode($upload_img2273); ?>"
                         data-category="<?php echo htmlspecialchars($category2273); ?>"
+                        data-status="<?php echo htmlspecialchars($status2273); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2273); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2273); ?>; position:absolute; top:415px; left:560px;'>
@@ -6886,6 +6954,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2274); ?>"
                         data-image="<?php echo base64_encode($upload_img2274); ?>"
                         data-category="<?php echo htmlspecialchars($category2274); ?>"
+                        data-status="<?php echo htmlspecialchars($status2274); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2274); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2274); ?>; position:absolute; top:440px; left:525px;'>
@@ -6899,6 +6968,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2275); ?>"
                         data-image="<?php echo base64_encode($upload_img2275); ?>"
                         data-category="<?php echo htmlspecialchars($category2275); ?>"
+                        data-status="<?php echo htmlspecialchars($status2275); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2275); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2275); ?>; position:absolute; top:470px; left:485px;'>
@@ -6912,6 +6982,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2276); ?>"
                         data-image="<?php echo base64_encode($upload_img2276); ?>"
                         data-category="<?php echo htmlspecialchars($category2276); ?>"
+                        data-status="<?php echo htmlspecialchars($status2276); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2276); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2276); ?>; position:absolute; top:470px; left:560px;'>
@@ -6925,6 +6996,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         onclick='fetchAssetData(2277);' data-room="<?php echo htmlspecialchars($room2277); ?>"
                         data-floor="<?php echo htmlspecialchars($floor2277); ?>"
                         data-image="<?php echo base64_encode($upload_img2277); ?>"
+                        data-status="<?php echo htmlspecialchars($status2277); ?>"
                         data-category="<?php echo htmlspecialchars($category2277); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2277); ?>">
                     <div
@@ -6939,6 +7011,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2278); ?>"
                         data-image="<?php echo base64_encode($upload_img2278); ?>"
                         data-category="<?php echo htmlspecialchars($category2278); ?>"
+                        data-status="<?php echo htmlspecialchars($status2278); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2278); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2278); ?>; position:absolute; top:440px; left:610px;'>
@@ -6952,6 +7025,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2279); ?>"
                         data-image="<?php echo base64_encode($upload_img2279); ?>"
                         data-category="<?php echo htmlspecialchars($category2279); ?>"
+                        data-status="<?php echo htmlspecialchars($status2279); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2279); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2279); ?>; position:absolute; top:440px; left:645px;'>
@@ -6964,6 +7038,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         onclick='fetchAssetData(2280);' data-room="<?php echo htmlspecialchars($room2280); ?>"
                         data-floor="<?php echo htmlspecialchars($floor2280); ?>"
                         data-image="<?php echo base64_encode($upload_img2280); ?>"
+                        data-status="<?php echo htmlspecialchars($status2280); ?>"
                         data-category="<?php echo htmlspecialchars($category2280); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2280); ?>">
                     <div
@@ -6979,6 +7054,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2281); ?>"
                         data-image="<?php echo base64_encode($upload_img2281); ?>"
                         data-category="<?php echo htmlspecialchars($category2281); ?>"
+                        data-status="<?php echo htmlspecialchars($status2281); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2281); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2281); ?>; position:absolute; top:415px; left:725px;'>
@@ -6992,6 +7068,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2282); ?>"
                         data-image="<?php echo base64_encode($upload_img2282); ?>"
                         data-category="<?php echo htmlspecialchars($category2282); ?>"
+                        data-status="<?php echo htmlspecialchars($status2282); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2282); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2282); ?>; position:absolute; top:410px; left:805px;'>
@@ -7004,6 +7081,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         onclick='fetchAssetData(2283);' data-room="<?php echo htmlspecialchars($room2283); ?>"
                         data-floor="<?php echo htmlspecialchars($floor2283); ?>"
                         data-image="<?php echo base64_encode($upload_img2283); ?>"
+                        data-status="<?php echo htmlspecialchars($status2283); ?>"
                         data-category="<?php echo htmlspecialchars($category2283); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2283); ?>">
                     <div
@@ -7018,6 +7096,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2284); ?>"
                         data-image="<?php echo base64_encode($upload_img2284); ?>"
                         data-category="<?php echo htmlspecialchars($category2284); ?>"
+                        data-status="<?php echo htmlspecialchars($status2284); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2284); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2284); ?>; position:absolute; top:470px; left:725px;'>
@@ -7032,6 +7111,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2285); ?>"
                         data-image="<?php echo base64_encode($upload_img2285); ?>"
                         data-category="<?php echo htmlspecialchars($category2285); ?>"
+                        data-status="<?php echo htmlspecialchars($status2285); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2285); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2285); ?>; position:absolute; top:470px; left:805px;'>
@@ -7045,6 +7125,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2286); ?>"
                         data-image="<?php echo base64_encode($upload_img2286); ?>"
                         data-category="<?php echo htmlspecialchars($category2286); ?>"
+                        data-status="<?php echo htmlspecialchars($status2286); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2286); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2286); ?>; position:absolute; top:415px; left:850px;'>
@@ -7058,6 +7139,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2287); ?>"
                         data-image="<?php echo base64_encode($upload_img2287); ?>"
                         data-category="<?php echo htmlspecialchars($category2287); ?>"
+                        data-status="<?php echo htmlspecialchars($status2287); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2287); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2287); ?>; position:absolute; top:410px; left:930px;'>
@@ -7071,6 +7153,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2288); ?>"
                         data-image="<?php echo base64_encode($upload_img2288); ?>"
                         data-category="<?php echo htmlspecialchars($category2288); ?>"
+                        data-status="<?php echo htmlspecialchars($status2288); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2288); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2288); ?>; position:absolute; top:440px; left:890px;'>
@@ -7085,6 +7168,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2289); ?>"
                         data-image="<?php echo base64_encode($upload_img2289); ?>"
                         data-category="<?php echo htmlspecialchars($category2289); ?>"
+                        data-status="<?php echo htmlspecialchars($status2289); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2289); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2289); ?>; position:absolute; top:470px; left:850px;'>
@@ -7098,6 +7182,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2290); ?>"
                         data-image="<?php echo base64_encode($upload_img2290); ?>"
                         data-category="<?php echo htmlspecialchars($category2290); ?>"
+                        data-status="<?php echo htmlspecialchars($status2290); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2290); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2290); ?>; position:absolute; top:470px; left:930px;'>
@@ -7111,6 +7196,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2291); ?>"
                         data-image="<?php echo base64_encode($upload_img2291); ?>"
                         data-category="<?php echo htmlspecialchars($category2291); ?>"
+                        data-status="<?php echo htmlspecialchars($status2291); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2291); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2291); ?>; position:absolute; top:415px; left:975px;'>
@@ -7124,6 +7210,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2292); ?>"
                         data-image="<?php echo base64_encode($upload_img2292); ?>"
                         data-category="<?php echo htmlspecialchars($category2292); ?>"
+                        data-status="<?php echo htmlspecialchars($status2292); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2292); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2292); ?>; position:absolute; top:410px; left:1045px;'>
@@ -7138,6 +7225,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2293); ?>"
                         data-image="<?php echo base64_encode($upload_img2293); ?>"
                         data-category="<?php echo htmlspecialchars($category2293); ?>"
+                        data-status="<?php echo htmlspecialchars($status2293); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2293); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2293); ?>; position:absolute; top:440px; left:1010px;'>
@@ -7151,6 +7239,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2294); ?>"
                         data-image="<?php echo base64_encode($upload_img2294); ?>"
                         data-category="<?php echo htmlspecialchars($category2294); ?>"
+                        data-status="<?php echo htmlspecialchars($status2294); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2294); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2294); ?>; position:absolute; top:470px; left:975px;'>
@@ -7164,6 +7253,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2295); ?>"
                         data-image="<?php echo base64_encode($upload_img2295); ?>"
                         data-category="<?php echo htmlspecialchars($category2295); ?>"
+                        data-status="<?php echo htmlspecialchars($status2295); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2295); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2295); ?>; position:absolute; top:470px; left:1045px;'>
@@ -7177,6 +7267,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2296); ?>"
                         data-image="<?php echo base64_encode($upload_img2296); ?>"
                         data-category="<?php echo htmlspecialchars($category2296); ?>"
+                        data-status="<?php echo htmlspecialchars($status2296); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2296); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2296); ?>; position:absolute; top:380px; left:1085px;'>
@@ -7190,6 +7281,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2297); ?>"
                         data-image="<?php echo base64_encode($upload_img2297); ?>"
                         data-category="<?php echo htmlspecialchars($category2297); ?>"
+                        data-status="<?php echo htmlspecialchars($status2297); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2297); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2297); ?>; position:absolute; top:380px; left:1160px;'>
@@ -7203,6 +7295,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2298); ?>"
                         data-image="<?php echo base64_encode($upload_img2298); ?>"
                         data-category="<?php echo htmlspecialchars($category2298); ?>"
+                        data-status="<?php echo htmlspecialchars($status2298); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2298); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2298); ?>; position:absolute; top:410px; left:1085px;'>
@@ -7216,6 +7309,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2299); ?>"
                         data-image="<?php echo base64_encode($upload_img2299); ?>"
                         data-category="<?php echo htmlspecialchars($category2299); ?>"
+                        data-status="<?php echo htmlspecialchars($status2299); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2299); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2299); ?>; position:absolute; top:410px; left:1160px;'>
@@ -7229,6 +7323,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2300); ?>"
                         data-image="<?php echo base64_encode($upload_img2300); ?>"
                         data-category="<?php echo htmlspecialchars($category2300); ?>"
+                        data-status="<?php echo htmlspecialchars($status2300); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2300); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2300); ?>; position:absolute; top:250px; left:1020px;'>
@@ -7243,6 +7338,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2301); ?>"
                         data-image="<?php echo base64_encode($upload_img2301); ?>"
                         data-category="<?php echo htmlspecialchars($category2301); ?>"
+                        data-status="<?php echo htmlspecialchars($status2301); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2301); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2301); ?>; position:absolute; top:250px; left:1120px;'>
@@ -7256,6 +7352,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2302); ?>"
                         data-image="<?php echo base64_encode($upload_img2302); ?>"
                         data-category="<?php echo htmlspecialchars($category2302); ?>"
+                        data-status="<?php echo htmlspecialchars($status2302); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2302); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2302); ?>; position:absolute; top:280px; left:1070px;'>
@@ -7269,6 +7366,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2303); ?>"
                         data-image="<?php echo base64_encode($upload_img2303); ?>"
                         data-category="<?php echo htmlspecialchars($category2303); ?>"
+                        data-status="<?php echo htmlspecialchars($status2303); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2303); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2303); ?>; position:absolute; top:320px; left:1070px;'>
@@ -7281,6 +7379,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         onclick='fetchAssetData(2304);' data-room="<?php echo htmlspecialchars($room2304); ?>"
                         data-floor="<?php echo htmlspecialchars($floor2304); ?>"
                         data-image="<?php echo base64_encode($upload_img2304); ?>"
+                        data-status="<?php echo htmlspecialchars($status2304); ?>"
                         data-category="<?php echo htmlspecialchars($category2304); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2304); ?>">
                     <div
@@ -7296,6 +7395,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2305); ?>"
                         data-image="<?php echo base64_encode($upload_img2305); ?>"
                         data-category="<?php echo htmlspecialchars($category2305); ?>"
+                        data-status="<?php echo htmlspecialchars($status2305); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2305); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2305); ?>; position:absolute; top:340px; left:1140px;'>
@@ -7309,6 +7409,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2306); ?>"
                         data-image="<?php echo base64_encode($upload_img2306); ?>"
                         data-category="<?php echo htmlspecialchars($category2306); ?>"
+                        data-status="<?php echo htmlspecialchars($status2306); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2306); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2306); ?>; position:absolute; top:80px; left:1010px;'>
@@ -7322,6 +7423,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2307); ?>"
                         data-image="<?php echo base64_encode($upload_img2307); ?>"
                         data-category="<?php echo htmlspecialchars($category2307); ?>"
+                        data-status="<?php echo htmlspecialchars($status2307); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2307); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2307); ?>; position:absolute; top:80px; left:1070px;'>
@@ -7335,6 +7437,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2308); ?>"
                         data-image="<?php echo base64_encode($upload_img2308); ?>"
                         data-category="<?php echo htmlspecialchars($category2308); ?>"
+                        data-status="<?php echo htmlspecialchars($status2308); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2308); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2308); ?>; position:absolute; top:115px; left:1040px;'>
@@ -7349,6 +7452,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2309); ?>"
                         data-image="<?php echo base64_encode($upload_img2309); ?>"
                         data-category="<?php echo htmlspecialchars($category2309); ?>"
+                        data-status="<?php echo htmlspecialchars($status2309); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2309); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2309); ?>; position:absolute; top:150px; left:1010px;'>
@@ -7362,6 +7466,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2310); ?>"
                         data-image="<?php echo base64_encode($upload_img2310); ?>"
                         data-category="<?php echo htmlspecialchars($category2310); ?>"
+                        data-status="<?php echo htmlspecialchars($status2310); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2310); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2310); ?>; position:absolute; top:150px; left:1070px;'>
@@ -7375,6 +7480,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2311); ?>"
                         data-image="<?php echo base64_encode($upload_img2311); ?>"
                         data-category="<?php echo htmlspecialchars($category2311); ?>"
+                        data-status="<?php echo htmlspecialchars($status2311); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2311); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2311); ?>; position:absolute; top:80px; left:1110px;'>
@@ -7388,6 +7494,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2312); ?>"
                         data-image="<?php echo base64_encode($upload_img2312); ?>"
                         data-category="<?php echo htmlspecialchars($category2312); ?>"
+                        data-status="<?php echo htmlspecialchars($status2312); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2312); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2312); ?>; position:absolute; top:80px; left:1150px;'>
@@ -7402,6 +7509,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2313); ?>"
                         data-image="<?php echo base64_encode($upload_img2313); ?>"
                         data-category="<?php echo htmlspecialchars($category2313); ?>"
+                        data-status="<?php echo htmlspecialchars($status2313); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2313); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2313); ?>; position:absolute; top:150px; left:1110px;'>
@@ -7414,6 +7522,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         onclick='fetchAssetData(2314);' data-room="<?php echo htmlspecialchars($room2314); ?>"
                         data-floor="<?php echo htmlspecialchars($floor2314); ?>"
                         data-image="<?php echo base64_encode($upload_img2314); ?>"
+                        data-status="<?php echo htmlspecialchars($status2314); ?>"
                         data-category="<?php echo htmlspecialchars($category2314); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2314); ?>">
                     <div
@@ -7428,6 +7537,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2315); ?>"
                         data-image="<?php echo base64_encode($upload_img2315); ?>"
                         data-category="<?php echo htmlspecialchars($category2315); ?>"
+                        data-status="<?php echo htmlspecialchars($status2315); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2315); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2315); ?>; position:absolute; top:383px; left:230px;'>
@@ -7441,6 +7551,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2316); ?>"
                         data-image="<?php echo base64_encode($upload_img2316); ?>"
                         data-category="<?php echo htmlspecialchars($category2316); ?>"
+                        data-status="<?php echo htmlspecialchars($status2316); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2316); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2316); ?>; position:absolute; top:383px; left:300px;'>
@@ -7455,6 +7566,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2317); ?>"
                         data-image="<?php echo base64_encode($upload_img2317); ?>"
                         data-category="<?php echo htmlspecialchars($category2317); ?>"
+                        data-status="<?php echo htmlspecialchars($status2317); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2317); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2317); ?>; position:absolute; top:382px; left:360px;'>
@@ -7468,6 +7580,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2318); ?>"
                         data-image="<?php echo base64_encode($upload_img2318); ?>"
                         data-category="<?php echo htmlspecialchars($category2318); ?>"
+                        data-status="<?php echo htmlspecialchars($status2318); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2318); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2318); ?>; position:absolute; top:382px; left:440px;'>
@@ -7481,6 +7594,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2319); ?>"
                         data-image="<?php echo base64_encode($upload_img2319); ?>"
                         data-category="<?php echo htmlspecialchars($category2319); ?>"
+                        data-status="<?php echo htmlspecialchars($status2319); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2319); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2319); ?>; position:absolute; top:382px; left:510px;'>
@@ -7494,6 +7608,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2320); ?>"
                         data-image="<?php echo base64_encode($upload_img2320); ?>"
                         data-category="<?php echo htmlspecialchars($category2320); ?>"
+                        data-status="<?php echo htmlspecialchars($status2320); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2320); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2320); ?>; position:absolute; top:382px; left:570px;'>
@@ -7508,6 +7623,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2321); ?>"
                         data-image="<?php echo base64_encode($upload_img2321); ?>"
                         data-category="<?php echo htmlspecialchars($category2321); ?>"
+                        data-status="<?php echo htmlspecialchars($status2321); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2321); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2321); ?>; position:absolute; top:380px; left:710px;'>
@@ -7520,6 +7636,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         onclick='fetchAssetData(2322);' data-room="<?php echo htmlspecialchars($room2322); ?>"
                         data-floor="<?php echo htmlspecialchars($floor2322); ?>"
                         data-image="<?php echo base64_encode($upload_img2322); ?>"
+                        data-status="<?php echo htmlspecialchars($status2322); ?>"
                         data-category="<?php echo htmlspecialchars($category2322); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2322); ?>">
                     <div
@@ -7534,6 +7651,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2323); ?>"
                         data-image="<?php echo base64_encode($upload_img2323); ?>"
                         data-category="<?php echo htmlspecialchars($category2323); ?>"
+                        data-status="<?php echo htmlspecialchars($status2323); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2323); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2323); ?>; position:absolute; top:380px; left:840px;'>
@@ -7547,6 +7665,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2324); ?>"
                         data-image="<?php echo base64_encode($upload_img2324); ?>"
                         data-category="<?php echo htmlspecialchars($category2324); ?>"
+                        data-status="<?php echo htmlspecialchars($status2324); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2324); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2324); ?>; position:absolute; top:380px; left:910px;'>
@@ -7561,6 +7680,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2325); ?>"
                         data-image="<?php echo base64_encode($upload_img2325); ?>"
                         data-category="<?php echo htmlspecialchars($category2325); ?>"
+                        data-status="<?php echo htmlspecialchars($status2325); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2325); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2325); ?>; position:absolute; top:380px; left:980px;'>
@@ -7574,6 +7694,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2326); ?>"
                         data-image="<?php echo base64_encode($upload_img2326); ?>"
                         data-category="<?php echo htmlspecialchars($category2326); ?>"
+                        data-status="<?php echo htmlspecialchars($status2326); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2326); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2326); ?>; position:absolute; top:380px; left:1050px;'>
@@ -7587,6 +7708,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2327); ?>"
                         data-image="<?php echo base64_encode($upload_img2327); ?>"
                         data-category="<?php echo htmlspecialchars($category2327); ?>"
+                        data-status="<?php echo htmlspecialchars($status2327); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2327); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2327); ?>; position:absolute; top:180px; left:1010px;'>
@@ -7600,6 +7722,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2328); ?>"
                         data-image="<?php echo base64_encode($upload_img2328); ?>"
                         data-category="<?php echo htmlspecialchars($category2328); ?>"
+                        data-status="<?php echo htmlspecialchars($status2328); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2328); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2328); ?>; position:absolute; top:185px; left:1150px;'>
@@ -7614,6 +7737,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2329); ?>"
                         data-image="<?php echo base64_encode($upload_img2329); ?>"
                         data-category="<?php echo htmlspecialchars($category2329); ?>"
+                        data-status="<?php echo htmlspecialchars($status2329); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2329); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2329); ?>; position:absolute; top:195px; left:1080px;'>
@@ -7627,6 +7751,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2330); ?>"
                         data-image="<?php echo base64_encode($upload_img2330); ?>"
                         data-category="<?php echo htmlspecialchars($category2330); ?>"
+                        data-status="<?php echo htmlspecialchars($status2330); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2330); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2330); ?>; position:absolute; top:210px; left:1010px;'>
@@ -7640,6 +7765,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2331); ?>"
                         data-image="<?php echo base64_encode($upload_img2331); ?>"
                         data-category="<?php echo htmlspecialchars($category2331); ?>"
+                        data-status="<?php echo htmlspecialchars($status2331); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2331); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2331); ?>; position:absolute; top:345px; left:480px;'>
@@ -7653,6 +7779,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2332); ?>"
                         data-image="<?php echo base64_encode($upload_img2332); ?>"
                         data-category="<?php echo htmlspecialchars($category2332); ?>"
+                        data-status="<?php echo htmlspecialchars($status2332); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2332); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2332); ?>; position:absolute; top:350px; left:560px;'>
@@ -7667,6 +7794,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2333); ?>"
                         data-image="<?php echo base64_encode($upload_img2333); ?>"
                         data-category="<?php echo htmlspecialchars($category2333); ?>"
+                        data-status="<?php echo htmlspecialchars($status2333); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2333); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2333); ?>; position:absolute; top:350px; left:715px;'>
@@ -7680,6 +7808,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2334); ?>"
                         data-image="<?php echo base64_encode($upload_img2334); ?>"
                         data-category="<?php echo htmlspecialchars($category2334); ?>"
+                        data-status="<?php echo htmlspecialchars($status2334); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2334); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2334); ?>; position:absolute; top:350px; left:775px;'>
@@ -7693,6 +7822,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         data-floor="<?php echo htmlspecialchars($floor2335); ?>"
                         data-image="<?php echo base64_encode($upload_img2335); ?>"
                         data-category="<?php echo htmlspecialchars($category2335); ?>"
+                        data-status="<?php echo htmlspecialchars($status2335); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName2335); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status2335); ?>; position:absolute; top:350px; left:810px;'>
@@ -27173,24 +27303,86 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         });
     </script>
     <script>
-    // Find all input elements with ID 'description'
-    var inputElements = document.querySelectorAll('input#description');
+        // Find all input elements with ID 'description'
+        var inputElements = document.querySelectorAll('input#description');
 
-    // Iterate through each input element
-    inputElements.forEach(function(inputElement) {
-        // Create a new textarea element
-        var textareaElement = document.createElement('textarea');
+        // Iterate through each input element
+        inputElements.forEach(function (inputElement) {
+            // Create a new textarea element
+            var textareaElement = document.createElement('textarea');
 
-        // Copy attributes from the input element
-        textareaElement.className = inputElement.className;
-        textareaElement.id = inputElement.id;
-        textareaElement.name = inputElement.name;
-        textareaElement.value = inputElement.value;
+            // Copy attributes from the input element
+            textareaElement.className = inputElement.className;
+            textareaElement.id = inputElement.id;
+            textareaElement.name = inputElement.name;
+            textareaElement.value = inputElement.value;
 
-        // Replace the input element with the textarea element
-        inputElement.parentNode.replaceChild(textareaElement, inputElement);
-    });
-</script>
+            // Replace the input element with the textarea element
+            inputElement.parentNode.replaceChild(textareaElement, inputElement);
+        });
+    </script>
+    <!--FOR LEGEND FILTER-->
+     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const legendItems = document.querySelectorAll('.legend-item button');
+            let activeStatuses = []; // Keep track of active statuses
+
+            legendItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    const legendItem = this.closest('.legend-item');
+                    const status = legendItem.getAttribute('data-status');
+                    // Toggle the active status in the array
+                    const isActive = activeStatuses.includes(status);
+                    if (isActive) {
+                        // Remove the status if it's already active
+                        activeStatuses = activeStatuses.filter(s => s !== status);
+                    } else {
+                        // Add the status if it's not already active
+                        activeStatuses.push(status);
+                    }
+                    // Toggle visibility of assets
+                    toggleAssetVisibility(status);
+                    // Update the opacity of legend items
+                    updateLegendItems();
+                });
+            });
+
+            function toggleAssetVisibility(status) {
+                const assets = document.querySelectorAll(`.asset-image[data-status="${status}"]`);
+                assets.forEach(asset => {
+                    const isHidden = asset.classList.contains('hidden-asset');
+                    const statusIndicator = asset.nextElementSibling;
+
+                    if (isHidden) {
+                        asset.classList.remove('hidden-asset');
+                        if (statusIndicator) {
+                            statusIndicator.classList.remove('hidden-asset');
+                        }
+                    } else {
+                        asset.classList.add('hidden-asset');
+                        if (statusIndicator) {
+                            statusIndicator.classList.add('hidden-asset');
+                        }
+                    }
+                });
+            }
+
+            function updateLegendItems() {
+                // Update the opacity of all legend items based on activeStatuses
+                const allLegendItems = document.querySelectorAll('.legend-item');
+                allLegendItems.forEach(legendItem => {
+                    const status = legendItem.getAttribute('data-status');
+                    if (activeStatuses.includes(status)) {
+                        // If the status is active, change opacity to 50%
+                        legendItem.style.opacity = '0.2';
+                    } else {
+                        // If the status is not active, revert opacity to 100%
+                        legendItem.style.opacity = '1';
+                    }
+                });
+            }
+        });
+    </script>
 
     <script src="../../../src/js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
