@@ -20,7 +20,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
             $conn->begin_transaction();
 
             // Retrieve the current location
-            $selectQuery = "SELECT latitude, longitude, timestamp FROM account WHERE accountId=?";
+            $selectQuery = "SELECT latitude, longitude, timestamp, qculocation FROM account WHERE accountId=?";
             $selectStmt = $conn->prepare($selectQuery);
             $selectStmt->bind_param("i", $user_id);
             $selectStmt->execute();
@@ -30,24 +30,25 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                 $oldLatitude = $row['latitude'];
                 $oldLongitude = $row['longitude'];
                 $oldTimestamp = $row['timestamp'];
-
+                $oldQcLocation = $row['qculocation']; // Fetch the qculocation
+            
                 if ($oldLatitude != 0 && $oldLongitude != 0) {
-                    // Insert the old location into the locationhistory table
-                    $insertLocationQuery = "INSERT INTO locationhistory (accountId, latitude, longitude, timestamp) VALUES (?, ?, ?, ?)";
+                    // Insert the old location and qculocation into the locationhistory table
+                    $insertLocationQuery = "INSERT INTO locationhistory (accountId, latitude, longitude, timestamp, qculocation) VALUES (?, ?, ?, ?, ?)";
                     $insertLocationStmt = $conn->prepare($insertLocationQuery);
                     if (!$insertLocationStmt) {
                         // Handle the error appropriately
                         echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
                         // Rollback if needed
-                        // $conn->rollback();
+                        $conn->rollback();
                         exit();
                     }
-                    $insertLocationStmt->bind_param("idds", $user_id, $oldLatitude, $oldLongitude, $oldTimestamp);
+                    // Bind the qculocation parameter
+                    $insertLocationStmt->bind_param("iddss", $user_id, $oldLatitude, $oldLongitude, $oldTimestamp, $oldQcLocation);
                     if (!$insertLocationStmt->execute()) {
                         // Handle the error appropriately
                         echo "Execute failed: (" . $insertLocationStmt->errno . ") " . $insertLocationStmt->error;
-                        // Rollback if needed
-                        // $conn->rollback();
+                        $conn->rollback();
                         exit();
                     }
                 }

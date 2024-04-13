@@ -320,8 +320,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 echo "</h2>";
                                 echo "<div id='" . $collapseId . "' class='accordion-collapse collapse' aria-labelledby='" . $headerId . "' data-bs-parent='#accordionGPS'>"; // Ensure this points to the main container ID
                                 echo "<div class='accordion-body'>";
-                                echo "Latitude: " . $row["latitude"] . "<br>";
-                                echo "Longitude: " . $row["longitude"] . "<br>";
+                     
                                 echo "Timestamp: " . $row["timestamp"] . "<br>";
                                 echo "Location: " . $row["qculocation"];
                                 echo "</div>"; // End of accordion body
