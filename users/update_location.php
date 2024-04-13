@@ -25,14 +25,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                 die("Connection failed: " . $conn->connect_error);
             }
 
-            // Update the user's location in the account table
+            // Insert location data into locationHistory table
             try {
-                $updateLocationQuery = "UPDATE account SET latitude=?, longitude=?, timestamp=CURRENT_TIMESTAMP WHERE accountId=?";
-                $updateLocationStmt = $conn->prepare($updateLocationQuery);
-                $updateLocationStmt->bind_param("ddi", $latitude, $longitude, $user_id);
-                $updateLocationStmt->execute();
+                $insertLocationHistoryQuery = "INSERT INTO locationHistory (accountId, latitude, longitude, timestamp) VALUES (?, ?, ?, CURRENT_TIMESTAMP)";
+                $insertLocationHistoryStmt = $conn->prepare($insertLocationHistoryQuery);
+                $insertLocationHistoryStmt->bind_param("idd", $user_id, $latitude, $longitude);
+                $insertLocationHistoryStmt->execute();
 
-                echo "Location updated successfully!";
+                echo "Location inserted successfully!";
             } catch (Exception $e) {
                 echo "Error: " . $e->getMessage();
             } finally {
