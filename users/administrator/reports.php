@@ -1211,7 +1211,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     // showCancelButton: true,
                     confirmButtonText: 'PDF',
                     denyButtonText: `Excel`,
-                    // cancelButtonText: 'Word',
+                    didOpen: () => {
+                            Swal.getConfirmButton().style.setProperty('background-color', '#ff4c4c', 'important');
+                            Swal.getConfirmButton().style.setProperty('color', 'white', 'important');
+
+                            Swal.getDenyButton().style.setProperty('background-color', '#09ba23', 'important');
+                            Swal.getDenyButton().style.setProperty('color', 'white', 'important');
+                        }
                 }).then((result) => {
                     if (result.isConfirmed) {
                         formData.append('submit', 'Export to PDF');
