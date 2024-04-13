@@ -938,10 +938,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             document.body.removeChild(downloadLink);
 
             Swal.fire({
-              title: 'Exporting Done',
-              text: 'Your file has been successfully generated.',
-              icon: 'success',
-              confirmButtonText: 'OK'
+                title: 'Exporting Done',
+                text: 'Your file has been successfully generated.',
+                icon: 'success',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                timer: 1000, // closes after 2000 milliseconds (2 seconds)
+                timerProgressBar: true // shows a visual progress bar for the timer
             });
           })
           .catch(error => {
