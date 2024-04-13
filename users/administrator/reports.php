@@ -1235,14 +1235,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
             function performExport(formData, endpoint) {
                 Swal.fire({
-                    title: 'Exporting...',
-                    html: '<div class="swal2-custom-loader"><div></div><div></div><div></div></div>',
-                    allowOutsideClick: false,
-                    showConfirmButton: false,
-                    didOpen: () => {
-                    // Remove Swal's own loading mechanism to prevent interference with the custom loader
-                    Swal.getContent().querySelector('.swal2-loader').style.display = 'none';
-                    }
+                title: 'Exporting...',
+                html: 'Please wait while the file is being generated.',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                willOpen: () => {
+                    Swal.showLoading();
+                },
             });
 
                 fetch(endpoint, {

@@ -476,38 +476,3 @@ div.pagination a.active {
     color: #FFFFFF;
     background-color: #4CAF50;
 }
-
-@keyframes assembleAnimation {
-  0%, 100% {
-      transform: scale(1) translateY(0);
-      opacity: 1;
-  }
-  50% {
-      transform: scale(2) translateY(-20px);
-      opacity: 0.5;
-  }
-}
-
-.swal2-custom-loader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-}
-
-.swal2-custom-loader div {
-  width: 10px;
-  height: 10px;
-  background-color: #3085d6;
-  margin: 0 2px;
-  border-radius: 50%;
-  animation: assembleAnimation 1s infinite ease-in-out;
-}
-
-.swal2-custom-loader div:nth-child(2) {
-  animation-delay: 0.1s;
-}
-
-.swal2-custom-loader div:nth-child(3) {
-  animation-delay: 0.2s;
-}
