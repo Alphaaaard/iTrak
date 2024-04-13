@@ -42,7 +42,7 @@ if (isset($_POST['submit']) && isset($_POST['role'])) {
         $html .= '<h1 style="display:inline; margin: 0 10px;">QUEZON CITY UNIVERSITY</h1>';
         $html .= '<img src="data:image/png;base64,' . $rightLogoData . '" style="height:50px;"/> ';
         $html .= '<div style="clear:both;"></div>'; // Ensure the text goes below images and header
-        $html .= '<h4 style="margin-top: 10px;">UPKEEP MAINTENANCE TEAM</h4>'; // Your additional text
+        $html .= '<h4 style="margin-top: 10px;">ITRAK MAINTENANCE TEAM</h4>'; // Your additional text
         $html .= '</div>';
 
     $html .= '<h2 align="center">'.htmlspecialchars($role).' Accounts</h2>';

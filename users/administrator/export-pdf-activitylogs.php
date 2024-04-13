@@ -42,7 +42,7 @@ if (isset($_POST['submit']) && isset($_POST['tab'])) {
     $html .= '<h1 style="display:inline; margin: 0 10px;">QUEZON CITY UNIVERSITY</h1>';
     $html .= '<img src="data:image/png;base64,' . $rightLogoData . '" style="height:50px;"/> ';
     $html .= '<div style="clear:both;"></div>';
-    $html .= '<h4 style="margin-top: 10px;">UPKEEP MAINTENANCE TEAM</h4>';
+    $html .= '<h4 style="margin-top: 10px;">ITRAK MAINTENANCE TEAM</h4>';
     $html .= '</div>';
 
     $html .= '<h2 align="center">Activity Logs (' . htmlspecialchars($tab) . ')</h2>';
