@@ -29,7 +29,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                 $row = $result->fetch_assoc();
                 $oldLatitude = $row['latitude'];
                 $oldLongitude = $row['longitude'];
-                $oldTimestamp = date('Y-m-d H:i:s', strtotime($row['timestamp'] . ' +8 hours'));
+                $oldTimestamp = $row['timestamp'];
                 $oldQcLocation = $row['qculocation']; // Fetch the qculocation
             
                 if ($oldLatitude != 0 && $oldLongitude != 0) {
@@ -55,26 +55,29 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
 
 
                 // Update the new location in the account table
-                $updateLocationQuery = "UPDATE account SET latitude=?, longitude=?, timestamp=CURRENT_TIMESTAMP WHERE accountId=?";
-                $updateLocationStmt = $conn->prepare($updateLocationQuery);
-                $updateLocationStmt->bind_param("ddi", $newLatitude, $newLongitude, $user_id);
-                $updateLocationStmt->execute();
+           // Adjust the timestamp by adding 8 hours
+           $newTimestamp = date('Y-m-d H:i:s', strtotime($oldTimestamp . ' +8 hours'));
 
-                // Commit transaction
-                $conn->commit();
-                echo "Location updated successfully!";
-            } else {
-                echo "No existing location data found!";
-            }
-        } else {
-            echo "Latitude and longitude parameters are required!";
-        }
-    } else {
-        echo "Invalid request method!";
-    }
-    $conn->close();
+           // Update the new location in the account table
+           $updateLocationQuery = "UPDATE account SET latitude=?, longitude=?, timestamp=? WHERE accountId=?";
+           $updateLocationStmt = $conn->prepare($updateLocationQuery);
+           $updateLocationStmt->bind_param("ddsi", $newLatitude, $newLongitude, $newTimestamp, $user_id);
+           $updateLocationStmt->execute();
+
+           // Commit transaction
+           $conn->commit();
+           echo "Location updated successfully!";
+       } else {
+           echo "No existing location data found!";
+       }
+   } else {
+       echo "Latitude and longitude parameters are required!";
+   }
 } else {
-    echo "Session variables not set!";
+   echo "Invalid request method!";
 }
-
+$conn->close();
+} else {
+echo "Session variables not set!";
+}
 ?>
