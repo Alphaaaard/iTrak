@@ -372,12 +372,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
                                 }).addTo(map);
 
-                                // Fetch initial location data
-                                fetchLocationsAndUpdateMap();
-
-                                // Set an interval to refresh location data every 5 seconds (5000 milliseconds)
-                                setInterval(fetchLocationsAndUpdateMap, 5000);
-
                                 // Add custom text overlay for the Bautista Building directly to the map
                                 var bautistaBuildingText = L.marker([14.70065, 121.03241], {
                                     icon: L.divIcon({
@@ -484,15 +478,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     map.setView(initialCoordinates, zoomLevel);
                                 });
                             }
-
-                            function fetchLocationsAndUpdateMap() {
-                                console.log('Refreshing GPS data at: ' + new Date().toLocaleString());
-                                var currentDate = new Date();
-                                var currentDateString = currentDate.toISOString().slice(0, 10); // 'YYYY-MM-DD'
-                                getLocationFromDatabase(null, currentDateString);
-                            }
-
-                            window.onload = initMap; // Call initMap when the window loads
 
                             // Modify coloredIcon function to accept isFirst parameter
                             function coloredIcon(color, isFirst) {
