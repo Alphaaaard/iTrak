@@ -692,7 +692,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 polylinesByAccountId = {};
                             }
 
-                            // Initialize the map when the page loads
+                            function setupAutoRefresh(selectedDate, accountId = null) {
+                                setInterval(function() {
+                                    getLocationFromDatabase(selectedDate, accountId);
+                                }, 5000); // Refresh every 5000 milliseconds (5 seconds)
+                            }
+
+                            // Initialize the map and set up auto-refresh when the page loads
                             window.onload = function() {
                                 initMap();
 
@@ -701,7 +707,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 var currentDateString = currentDate.toISOString().slice(0, 10); // Format as 'YYYY-MM-DD'
 
                                 // Initial fetch using current date
-                                getLocationFromDatabase(null, currentDateString);
+                                getLocationFromDatabase(currentDateString);
+
+                                // Set up auto-refresh with the current date and optional account ID
+                                setupAutoRefresh(currentDateString);
                             };
                         </script>
 
