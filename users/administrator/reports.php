@@ -3,8 +3,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+// require 'D:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
@@ -552,6 +552,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <li><a href="#" class="nav-link" data-bs-target="pills-profile">Under Maintenance</a></li>
                                 <li><a href="#" class="nav-link" data-bs-target="pills-replace">For Replacement</a></li>
                                 <li><a href="#" class="nav-link" data-bs-target="pills-repair">Need Repair</a></li>
+                                <li></li>
+                                <li></li>
                             </ul>
                         </div>
 
@@ -580,13 +582,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <?php
                                 if ($result->num_rows > 0) {
-                                    echo "<div class='table-container'>";
+                                    echo "<div class='table-container working-table'>";
+                                    echo "<table>";
                                     while ($row = $result->fetch_assoc()) {
                                         $date = new DateTime($row['date']); // Create DateTime object from fetched date
                                         $date->modify('+8 hours'); // Add 8 hours
                                         $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
-                                
-                                        echo "<table>";
                                         echo '<tr>';
                                         echo '<td>' . $row['assetId'] . '</td>';
                                         echo '<td>' . $formattedDate . '</td>';
@@ -629,13 +630,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <!--Content of table 2-->
                                 <?php
                                 if ($result2->num_rows > 0) {
-                                    echo "<div class='table-container'>";
+                                    echo "<div class='table-container maintenance-table'>";
+                                    echo "<table>";
                                     while ($row2 = $result2->fetch_assoc()) {
                                         $date = new DateTime($row2['date']); // Create DateTime object from fetched date
                                         $date->modify('+8 hours'); // Add 8 hours
                                         $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
-                                
-                                        echo "<table>";
                                         echo '<tr>';
                                         echo '<td>' . $row2['assetId'] . '</td>';
                                         echo '<td>' . $formattedDate . '</td>'; // Display the adjusted date
@@ -676,17 +676,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <!--Content of table 3-->
                                 <?php
                                 if ($result3->num_rows > 0) {
-                                    echo "<div class='table-container'>";
+                                    echo "<div class='table-container replacement-table'>";
+                                    echo "<table>";
                                     while ($row3 = $result3->fetch_assoc()) {
                                         $date = new DateTime($row3['date']); // Create DateTime object from fetched date
                                         $date->modify('+8 hours'); // Add 8 hours
                                         $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
-                                
-                                        echo "<table>";
                                         echo '<tr>';
                                         echo '<td>' . $row3['assetId'] . '</td>';
                                         echo '<td>' . $formattedDate . '</td>'; // Display the adjusted date
-
                                         echo '<td >' . $row3['category'] . '</td>';
                                         echo '<td >' . $row3['building'] . " / " . $row3['floor'] . " / " . $row3['room'] . '</td>';
                                         echo '<td style="display: none;">' . $row3['building'] . '</td>';
@@ -725,15 +723,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <!--Content of table 4-->
                                 <?php
                                 if ($result4->num_rows > 0) {
-                                    echo "<div class='table-container'>";
+                                    echo "<div class='table-container repair-table'>";
+                                    echo "<table>";
                                     while ($row4 = $result4->fetch_assoc()) {
                                         $date = new DateTime($row4['date']); // Create DateTime object from fetched date
                                         $date->modify('+8 hours'); // Add 8 hours
                                         $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
-                                
-                                   
-                                      
-                                        echo "<table>";
                                         echo '<tr>';
                                         echo '<td>' . $row4['assetId'] . '</td>';
                                         echo '<td>' . $formattedDate . '</td>'; // Display the adjusted date
@@ -1061,7 +1056,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 });
 
                 function filterTable(query) {
-                    $(".table-container tbody tr").each(function() {
+                    let workingHasData = false;
+                    let maintenanceHasData = false;
+                    let replacementHasData = false;
+                    let repairHasData = false;
+
+
+                    //* checks every table if there is a match or no match
+                    $(".working-table tbody tr").each(function() {
                         var row = $(this);
                         var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
                         var firstNameCell = row.find("td:eq(1)"); // FirstName column
@@ -1094,11 +1096,158 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         // Show or hide the row based on the result
                         if (showRow) {
+                            workingHasData = true;
                             row.show();
                         } else {
                             row.hide();
                         }
                     });
+
+                    $(".maintenance-table tbody tr").each(function() {
+                        var row = $(this);
+                        var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
+                        var firstNameCell = row.find("td:eq(1)"); // FirstName column
+                        var middleNameCell = row.find("td:eq(2)");
+                        var lastNameCell = row.find("td:eq(3)");
+                        var dateCell = row.find("td:eq(5)");
+                        var actionCell = row.find("td:eq(6)");
+
+                        // Get the text content of each cell
+                        var archiveIDText = archiveIDCell.text().toLowerCase();
+                        var firstNameText = firstNameCell.text().toLowerCase();
+                        var middleNameText = middleNameCell.text().toLowerCase();
+                        var lastNameText = lastNameCell.text().toLowerCase();
+                        var dateText = dateCell.text().toLowerCase();
+                        var actionText = actionCell.text().toLowerCase();
+
+                        // Check if any of the cells contain the query
+                        var showRow = archiveIDText.includes(query) ||
+                            firstNameText.includes(query) ||
+                            middleNameText.includes(query) ||
+                            lastNameText.includes(query) ||
+                            dateText.includes(query) ||
+                            actionText.includes(query) ||
+                            archiveIDText == query || // Exact match for Archive ID
+                            firstNameText == query || // Exact match for FirstName
+                            middleNameText == query || // Exact match for LastName
+                            lastNameText == query || // Exact match for LastName
+                            dateText == query || // Exact match for LastName
+                            actionText == query; // Exact match for LastName
+
+                        // Show or hide the row based on the result
+                        if (showRow) {
+                            maintenanceHasData = true;
+                            row.show();
+                        } else {
+                            row.hide();
+                        }
+                    });
+
+                    $(".replacement-table tbody tr").each(function() {
+                        var row = $(this);
+                        var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
+                        var firstNameCell = row.find("td:eq(1)"); // FirstName column
+                        var middleNameCell = row.find("td:eq(2)");
+                        var lastNameCell = row.find("td:eq(3)");
+                        var dateCell = row.find("td:eq(5)");
+                        var actionCell = row.find("td:eq(6)");
+
+                        // Get the text content of each cell
+                        var archiveIDText = archiveIDCell.text().toLowerCase();
+                        var firstNameText = firstNameCell.text().toLowerCase();
+                        var middleNameText = middleNameCell.text().toLowerCase();
+                        var lastNameText = lastNameCell.text().toLowerCase();
+                        var dateText = dateCell.text().toLowerCase();
+                        var actionText = actionCell.text().toLowerCase();
+
+                        // Check if any of the cells contain the query
+                        var showRow = archiveIDText.includes(query) ||
+                            firstNameText.includes(query) ||
+                            middleNameText.includes(query) ||
+                            lastNameText.includes(query) ||
+                            dateText.includes(query) ||
+                            actionText.includes(query) ||
+                            archiveIDText == query || // Exact match for Archive ID
+                            firstNameText == query || // Exact match for FirstName
+                            middleNameText == query || // Exact match for LastName
+                            lastNameText == query || // Exact match for LastName
+                            dateText == query || // Exact match for LastName
+                            actionText == query; // Exact match for LastName
+
+                        // Show or hide the row based on the result
+                        if (showRow) {
+                            replacementHasData = true;
+                            row.show();
+                        } else {
+                            row.hide();
+                        }
+                    });
+
+                    $(".repair-table tbody tr").each(function() {
+                        var row = $(this);
+                        var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
+                        var firstNameCell = row.find("td:eq(1)"); // FirstName column
+                        var middleNameCell = row.find("td:eq(2)");
+                        var lastNameCell = row.find("td:eq(3)");
+                        var dateCell = row.find("td:eq(5)");
+                        var actionCell = row.find("td:eq(6)");
+
+                        // Get the text content of each cell
+                        var archiveIDText = archiveIDCell.text().toLowerCase();
+                        var firstNameText = firstNameCell.text().toLowerCase();
+                        var middleNameText = middleNameCell.text().toLowerCase();
+                        var lastNameText = lastNameCell.text().toLowerCase();
+                        var dateText = dateCell.text().toLowerCase();
+                        var actionText = actionCell.text().toLowerCase();
+
+                        // Check if any of the cells contain the query
+                        var showRow = archiveIDText.includes(query) ||
+                            firstNameText.includes(query) ||
+                            middleNameText.includes(query) ||
+                            lastNameText.includes(query) ||
+                            dateText.includes(query) ||
+                            actionText.includes(query) ||
+                            archiveIDText == query || // Exact match for Archive ID
+                            firstNameText == query || // Exact match for FirstName
+                            middleNameText == query || // Exact match for LastName
+                            lastNameText == query || // Exact match for LastName
+                            dateText == query || // Exact match for LastName
+                            actionText == query; // Exact match for LastName
+
+                        // Show or hide the row based on the result
+                        if (showRow) {
+                            repairHasData = true;
+                            row.show();
+                        } else {
+                            row.hide();
+                        }
+                    });
+
+                    // * checks if rows are empty or not using the HasData variables
+                    //* appends the tr-td child on the manager or personnel table 
+                    if (!workingHasData) {
+                        $(".working-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+                    } else {
+                        $('.working-table tbody .emptyMsg').remove();
+                    }
+
+                    if (!maintenanceHasData) {
+                        $(".maintenance-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+                    } else {
+                        $('.maintenance-table tbody .emptyMsg').remove();
+                    }
+
+                    if (!replacementHasData) {
+                        $(".replacement-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+                    } else {
+                        $('.replacement-table tbody .emptyMsg').remove();
+                    }
+
+                    if (!repairHasData) {
+                        $(".repair-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+                    } else {
+                        $('.repair-table tbody .emptyMsg').remove();
+                    }
                 }
             });
         </script>
@@ -1124,7 +1273,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                 // Event listener for filter dropdown change
                 $('#search-filter').change(function() {
-                    $('#search-box').val(''); // Clear the search input
+                    $('#search-box').val(''); // Clear the search inputaaaaaaaaa
                     filterTable(); // Filter table with new criteria
                 });
             });
@@ -1156,11 +1305,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             }
 
                             // Show or hide the row based on whether the searchText contains the filter
-                            if (searchText.indexOf(filter) > -1) {
-                                tr[i].style.display = "";
-                            } else {
-                                tr[i].style.display = "none";
-                            }
+                            // if (searchText.indexOf(filter) > -1) {
+                            //     tr[i].style.display = "";
+                            // } else {
+                            //     tr[i].style.display = "none";
+                            // }
                         }
                     }
                 }
@@ -1185,6 +1334,202 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <script>
             $(document).ready(function() {
+
+                function filterTable(query) {
+                    let workingHasData = false;
+                    let maintenanceHasData = false;
+                    let replacementHasData = false;
+                    let repairHasData = false;
+
+
+                    //* checks every table if there is a match or no match
+                    $(".working-table tbody tr").each(function() {
+                        var row = $(this);
+                        var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
+                        var firstNameCell = row.find("td:eq(1)"); // FirstName column
+                        var middleNameCell = row.find("td:eq(2)");
+                        var lastNameCell = row.find("td:eq(3)");
+                        var dateCell = row.find("td:eq(5)");
+                        var actionCell = row.find("td:eq(6)");
+
+                        // Get the text content of each cell
+                        var archiveIDText = archiveIDCell.text().toLowerCase();
+                        var firstNameText = firstNameCell.text().toLowerCase();
+                        var middleNameText = middleNameCell.text().toLowerCase();
+                        var lastNameText = lastNameCell.text().toLowerCase();
+                        var dateText = dateCell.text().toLowerCase();
+                        var actionText = actionCell.text().toLowerCase();
+
+                        // Check if any of the cells contain the query
+                        var showRow = archiveIDText.includes(query) ||
+                            firstNameText.includes(query) ||
+                            middleNameText.includes(query) ||
+                            lastNameText.includes(query) ||
+                            dateText.includes(query) ||
+                            actionText.includes(query) ||
+                            archiveIDText == query || // Exact match for Archive ID
+                            firstNameText == query || // Exact match for FirstName
+                            middleNameText == query || // Exact match for LastName
+                            lastNameText == query || // Exact match for LastName
+                            dateText == query || // Exact match for LastName
+                            actionText == query; // Exact match for LastName
+
+                        // Show or hide the row based on the result
+                        if (showRow) {
+                            workingHasData = true;
+                            row.show();
+                        } else {
+                            row.hide();
+                        }
+                    });
+
+                    $(".maintenance-table tbody tr").each(function() {
+                        var row = $(this);
+                        var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
+                        var firstNameCell = row.find("td:eq(1)"); // FirstName column
+                        var middleNameCell = row.find("td:eq(2)");
+                        var lastNameCell = row.find("td:eq(3)");
+                        var dateCell = row.find("td:eq(5)");
+                        var actionCell = row.find("td:eq(6)");
+
+                        // Get the text content of each cell
+                        var archiveIDText = archiveIDCell.text().toLowerCase();
+                        var firstNameText = firstNameCell.text().toLowerCase();
+                        var middleNameText = middleNameCell.text().toLowerCase();
+                        var lastNameText = lastNameCell.text().toLowerCase();
+                        var dateText = dateCell.text().toLowerCase();
+                        var actionText = actionCell.text().toLowerCase();
+
+                        // Check if any of the cells contain the query
+                        var showRow = archiveIDText.includes(query) ||
+                            firstNameText.includes(query) ||
+                            middleNameText.includes(query) ||
+                            lastNameText.includes(query) ||
+                            dateText.includes(query) ||
+                            actionText.includes(query) ||
+                            archiveIDText == query || // Exact match for Archive ID
+                            firstNameText == query || // Exact match for FirstName
+                            middleNameText == query || // Exact match for LastName
+                            lastNameText == query || // Exact match for LastName
+                            dateText == query || // Exact match for LastName
+                            actionText == query; // Exact match for LastName
+
+                        // Show or hide the row based on the result
+                        if (showRow) {
+                            maintenanceHasData = true;
+                            row.show();
+                        } else {
+                            row.hide();
+                        }
+                    });
+
+                    $(".replacement-table tbody tr").each(function() {
+                        var row = $(this);
+                        var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
+                        var firstNameCell = row.find("td:eq(1)"); // FirstName column
+                        var middleNameCell = row.find("td:eq(2)");
+                        var lastNameCell = row.find("td:eq(3)");
+                        var dateCell = row.find("td:eq(5)");
+                        var actionCell = row.find("td:eq(6)");
+
+                        // Get the text content of each cell
+                        var archiveIDText = archiveIDCell.text().toLowerCase();
+                        var firstNameText = firstNameCell.text().toLowerCase();
+                        var middleNameText = middleNameCell.text().toLowerCase();
+                        var lastNameText = lastNameCell.text().toLowerCase();
+                        var dateText = dateCell.text().toLowerCase();
+                        var actionText = actionCell.text().toLowerCase();
+
+                        // Check if any of the cells contain the query
+                        var showRow = archiveIDText.includes(query) ||
+                            firstNameText.includes(query) ||
+                            middleNameText.includes(query) ||
+                            lastNameText.includes(query) ||
+                            dateText.includes(query) ||
+                            actionText.includes(query) ||
+                            archiveIDText == query || // Exact match for Archive ID
+                            firstNameText == query || // Exact match for FirstName
+                            middleNameText == query || // Exact match for LastName
+                            lastNameText == query || // Exact match for LastName
+                            dateText == query || // Exact match for LastName
+                            actionText == query; // Exact match for LastName
+
+                        // Show or hide the row based on the result
+                        if (showRow) {
+                            replacementHasData = true;
+                            row.show();
+                        } else {
+                            row.hide();
+                        }
+                    });
+
+                    $(".repair-table tbody tr").each(function() {
+                        var row = $(this);
+                        var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
+                        var firstNameCell = row.find("td:eq(1)"); // FirstName column
+                        var middleNameCell = row.find("td:eq(2)");
+                        var lastNameCell = row.find("td:eq(3)");
+                        var dateCell = row.find("td:eq(5)");
+                        var actionCell = row.find("td:eq(6)");
+
+                        // Get the text content of each cell
+                        var archiveIDText = archiveIDCell.text().toLowerCase();
+                        var firstNameText = firstNameCell.text().toLowerCase();
+                        var middleNameText = middleNameCell.text().toLowerCase();
+                        var lastNameText = lastNameCell.text().toLowerCase();
+                        var dateText = dateCell.text().toLowerCase();
+                        var actionText = actionCell.text().toLowerCase();
+
+                        // Check if any of the cells contain the query
+                        var showRow = archiveIDText.includes(query) ||
+                            firstNameText.includes(query) ||
+                            middleNameText.includes(query) ||
+                            lastNameText.includes(query) ||
+                            dateText.includes(query) ||
+                            actionText.includes(query) ||
+                            archiveIDText == query || // Exact match for Archive ID
+                            firstNameText == query || // Exact match for FirstName
+                            middleNameText == query || // Exact match for LastName
+                            lastNameText == query || // Exact match for LastName
+                            dateText == query || // Exact match for LastName
+                            actionText == query; // Exact match for LastName
+
+                        // Show or hide the row based on the result
+                        if (showRow) {
+                            repairHasData = true;
+                            row.show();
+                        } else {
+                            row.hide();
+                        }
+                    });
+
+                    // * checks if rows are empty or not using the HasData variables
+                    //* appends the tr-td child on the manager or personnel table 
+                    if (!workingHasData) {
+                        $(".working-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+                    } else {
+                        $('.working-table tbody .emptyMsg').remove();
+                    }
+
+                    if (!maintenanceHasData) {
+                        $(".maintenance-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+                    } else {
+                        $('.maintenance-table tbody .emptyMsg').remove();
+                    }
+
+                    if (!replacementHasData) {
+                        $(".replacement-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+                    } else {
+                        $('.replacement-table tbody .emptyMsg').remove();
+                    }
+
+                    if (!repairHasData) {
+                        $(".repair-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+                    } else {
+                        $('.repair-table tbody .emptyMsg').remove();
+                    }
+                }
+
                 // Function to update hidden input with the active status
                 function updateStatusInput(tab) {
                     let status;
@@ -1204,11 +1549,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         default:
                             status = 'Unknown';
                     }
+                    
                     $('input[name="status"]').val(status); // Update the hidden input's value
+
+                    
                 }
 
-                // Initial tab selection handling
+                // // Initial tab selection handling
                 let tabLastSelected = sessionStorage.getItem("lastTab");
+                
                 if (!tabLastSelected) {
                     $("#pills-manager").addClass("show active");
                     $(".nav-link[data-bs-target='pills-manager']").addClass("active");
@@ -1229,6 +1578,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     $(this).addClass("active");
                     updateStatusInput(targetId); // Update the hidden input with the new status
                 });
+                
             });
         </script>
 
@@ -1253,6 +1603,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         Swal.getDenyButton().style.setProperty('background-color', '#09ba23', 'important');
                         Swal.getDenyButton().style.setProperty('color', 'white', 'important');
                     }
+                    // cancelButtonText: 'Word',
                 }).then((result) => {
                     if (result.isConfirmed) {
                         formData.append('submit', 'Export to PDF');
@@ -1319,6 +1670,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             showConfirmButton: false,
                             timer: 1300, // closes after 2000 milliseconds (2 seconds)
                             timerProgressBar: true // shows a visual progress bar for the timer
+                            confirmButtonText: 'OK'
                         });
                     })
                     .catch(error => {

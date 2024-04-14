@@ -742,7 +742,7 @@ function confirmAlert(index) {
         if (!personnel) {
           Swal.fire({
             icon: "success",
-            title: `Maintenance Personnel <b>${employeeNames}</b> has been removed successfully`,
+            title: `Maintenance Personnel has been removed successfully`,
             timer: 1000,
             showConfirmButton: false
           }).then((result) => {

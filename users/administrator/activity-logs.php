@@ -390,8 +390,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <!--Content start of tabs-->
                         <div class="new-nav">
                             <ul>
-                                <li><a href="#" class="nav-link active" data-bs-target="pills-general">General History</a></li>
-                                <li><a href="#" class="nav-link" data-bs-target="pills-report">Report History</a></li>
+                            <li><a href="#" class="nav-link active pills-general" data-bs-target="pills-general">General History</a></li>
+                            <li><a href="#" class="nav-link pills-report" data-bs-target="pills-report">Report History</a></li>
                             </ul>
                         </div>
                         <!-- Export button -->
@@ -419,7 +419,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <!-- General History Tab Content -->
                                 <?php
                                 if ($resultGeneral->num_rows > 0) {
-                                    echo "<div class='table-container'>";
+                                    echo "<div class='table-container general-table'>";
                                     echo "<table>";
                                     echo "<tbody>";
                                     while ($row = $resultGeneral->fetch_assoc()) {
@@ -462,7 +462,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <?php
                                 if ($resultReport->num_rows > 0) {
-                                    echo "<div class='table-container'>";
+                                    echo "<div class='table-container report-table'>";
                                     echo "<table>";
                                     echo "<tbody>";
                                     while ($row = $resultReport->fetch_assoc()) {
@@ -481,7 +481,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         echo '<td style="display:none">' . $row['middleName'] . '</td>';
                                         echo '<td style="display:none">' . $row['lastName'] . '</td>';
                                         echo '<td>' . $formattedDate . '</td>'; // Display the adjusted date
-                                           
+                                         
                                         echo '<td>' . $row['action'] . '</td>';
                                         echo '</tr>';
                                     }
@@ -595,33 +595,71 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </script>
         <script>
             $(document).ready(function() {
-                // Bind the filter function to the search input field
-                $("#search-box").on("input", function() {
-                    var query = $(this).val().toLowerCase();
-                    filterTable(query);
 
-                    // Recalculate and reset pagination for each tab after filtering
-                    resetPaginationForFilteredResults('#pills-general .table-container tbody', 'pagination-container-general', 5);
-                    resetPaginationForFilteredResults('#pills-report .table-container tbody', 'pagination-container-report', 5);
-                });
+// Bind the filter function to the search input field
+$("#search-box").on("input", function() {
+    var query = $(this).val().toLowerCase();
+    filterTable(query);
 
-                // Updated filterTable function
-                function filterTable(query) {
-                    $(".table-container tbody tr").each(function() {
-                        var row = $(this);
-                        var text = row.text().toLowerCase();
-                        var isMatch = text.includes(query);
-                        row.toggle(isMatch); // Show or hide the row based on the search match
-                    });
-                }
+    // Recalculate and reset pagination for each tab after filtering
+    resetPaginationForFilteredResults('#pills-general .table-container tbody', 'pagination-container-general', 5);
+    resetPaginationForFilteredResults('#pills-report .table-container tbody', 'pagination-container-report', 5);
+});
 
-                // Show or hide the row based on the result
-                if (showRow) {
-                    row.show();
-                } else {
-                    row.hide();
-                }
-            });
+// Updated filterTable function
+function filterTable(query) {
+
+    //* keep tracks of the tables row count
+    let generalHasData = false;
+    let reportsHasData = false;
+
+    $(".general-table tbody tr").each(function() {
+        var row = $(this);
+        var text = row.text().toLowerCase();
+        console.log(text);
+        var isMatch = text.includes(query);
+        // row.toggle(isMatch); // Show or hide the row based on the search match
+
+        //Show or hide the row based on the result
+        if (isMatch) {
+            generalHasData = true;
+            row.show();
+        } else {
+            row.hide();
+        }
+    });
+
+    $(".report-table tbody tr").each(function() {
+        var row = $(this);
+        var text = row.text().toLowerCase();
+        var isMatch = text.includes(query);
+        // row.toggle(isMatch); // Show or hide the row based on the search match
+
+        //Show or hide the row based on the result
+        if (isMatch) {
+            reportsHasData = true;
+            row.show();
+        } else {
+            row.hide();
+        }
+    });
+
+    // * checks if rows are empty or not using the HasData variables
+    //* appends the tr-td child on the manager or personnel table 
+    if (!generalHasData) {
+        $(".general-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+    } else {
+        $('.general-table tbody .emptyMsg').remove();
+    }
+
+    if (!reportsHasData) {
+        $(".report-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+    } else {
+        $('.report-table tbody .emptyMsg').remove();
+    }
+}
+});
+
         </script>
         <script>
             function filterDate(order) {
@@ -648,109 +686,166 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Initial setup for pagination on page load for both tabs
-            setupPagination('#pills-general .table-container tbody', 'pagination-container-general', 25);
-            setupPagination('#pills-report .table-container tbody', 'pagination-container-report', 25);
 
-            // Tab click event listeners for dynamic pagination setup on tab switch
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', function() {
-                    const targetId = this.getAttribute('data-bs-target');
+// Updated filterTable function
+function filterTable(query) {
 
-                    // Clear existing pagination from all tabs
-                    document.getElementById('pagination-container-general').innerHTML = '';
-                    document.getElementById('pagination-container-report').innerHTML = '';
+    let generalHasData = false;
+    let reportsHasData = false;
 
-                    // Use setTimeout to delay the setupPagination call, ensuring tab content is fully visible
-                    setTimeout(() => {
-                        if (targetId.includes('general')) {
-                            setupPagination('#pills-general .table-container tbody', 'pagination-container-general', 25);
-                        } else if (targetId.includes('report')) {
-                            setupPagination('#pills-report .table-container tbody', 'pagination-container-report', 25);
-                        }
-                    }, 100); // Adjust the delay as needed, 100ms is just an example
-                });
-            });
+    $(".general-table tbody tr").each(function() {
+        var row = $(this);
+        var text = row.text().toLowerCase();
+        console.log(text);
+        var isMatch = text.includes(query);
+        // row.toggle(isMatch); // Show or hide the row based on the search match
 
-            // The setupPagination function definition
-            function setupPagination(tableBodySelector, paginationContainerId, itemsPerPage) {
-                const tbody = document.querySelector(tableBodySelector);
-                const rows = tbody.querySelectorAll('tr');
-                const pageCount = Math.ceil(rows.length / itemsPerPage);
-                const paginationContainer = document.getElementById(paginationContainerId);
+        //Show or hide the row based on the result
+        if (isMatch) {
+            generalHasData = true;
+            row.show();
+        } else {
+            row.hide();
+        }
+    });
 
-                let currentPage = 1;
+    $(".report-table tbody tr").each(function() {
+        var row = $(this);
+        var text = row.text().toLowerCase();
+        var isMatch = text.includes(query);
+        // row.toggle(isMatch); // Show or hide the row based on the search match
 
-                function showPage(pageNumber) {
-                    console.log(`Showing page: ${pageNumber} for ${tableBodySelector}`); // Debugging log
-                    const start = (pageNumber - 1) * itemsPerPage;
-                    const end = start + itemsPerPage;
-                    rows.forEach((row, index) => {
-                        row.style.display = 'none'; // Hide all rows
-                        if (index >= start && index < end) {
-                            row.style.display = ''; // Show rows for the current page
-                        }
-                    });
+        //Show or hide the row based on the result
+        if (isMatch) {
+            reportsHasData = true;
+            row.show();
+        } else {
+            row.hide();
+        }
+    });
+
+
+    // * checks if rows are empty or not using the HasData variables
+    //* appends the tr-td child on the manager or personnel table 
+    if (!generalHasData) {
+        $(".general-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+    } else {
+        $('.general-table tbody .emptyMsg').remove();
+    }
+
+    if (!reportsHasData) {
+        $(".report-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+    } else {
+        $('.report-table tbody .emptyMsg').remove();
+    }
+}
+
+    //Initial setup for pagination on page load for both tabs
+    setupPagination('#pills-general .table-container tbody', 'pagination-container-general', 25);
+    setupPagination('#pills-report .table-container tbody', 'pagination-container-report', 25);
+
+    // Tab click event listeners for dynamic pagination setup on tab switch
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-bs-target');
+
+            // Clear existing pagination from all tabs
+            document.getElementById('pagination-container-general').innerHTML = '';
+            document.getElementById('pagination-container-report').innerHTML = '';
+
+            // Use setTimeout to delay the setupPagination call, ensuring tab content is fully visible
+            setTimeout(() => {
+                if (targetId.includes('general')) {
+                    setupPagination('#pills-general .table-container tbody', 'pagination-container-general', 25);
+                } else if (targetId.includes('report')) {
+                    setupPagination('#pills-report .table-container tbody', 'pagination-container-report', 25);
                 }
-
-                function createPaginationControls() {
-                    paginationContainer.innerHTML = ''; // Clear existing controls
-                    const ul = document.createElement('ul');
-                    ul.className = 'pagination';
-
-                    // Calculate the range of pages to display
-                    const maxPagesToShow = 3;
-                    let startPage = currentPage - Math.floor(maxPagesToShow / 2);
-                    startPage = Math.max(startPage, 1);
-                    let endPage = startPage + maxPagesToShow - 1;
-                    endPage = Math.min(endPage, pageCount);
-
-                    if (endPage - startPage < maxPagesToShow - 1) {
-                        startPage = endPage - maxPagesToShow + 1;
-                        startPage = Math.max(startPage, 1); // Ensure startPage does not go below 1
-                    }
-
-                    // Create Previous Button
-                    createPageButton('<<', () => Math.max(currentPage - 1, 1), currentPage === 1);
-
-                    // Create page number buttons within the range
-                    for (let i = startPage; i <= endPage; i++) {
-                        createPageButton(i, () => i, i === currentPage);
-                    }
-
-                    // Create Next Button
-                    createPageButton('>>', () => Math.min(currentPage + 1, pageCount), currentPage === pageCount);
-
-                    paginationContainer.appendChild(ul);
-
-                    function createPageButton(text, pageResolver, isDisabled) {
-                        const li = document.createElement('li');
-                        li.className = 'page-item';
-                        if (isDisabled) {
-                            li.classList.add('disabled');
-                        }
-                        const a = document.createElement('a');
-                        a.className = 'page-link';
-                        a.href = '#';
-                        a.textContent = text;
-                        a.addEventListener('click', (e) => {
-                            e.preventDefault();
-                            if (!isDisabled) {
-                                const newPage = pageResolver();
-                                currentPage = newPage;
-                                showPage(currentPage);
-                                createPaginationControls(); // Recreate the pagination controls to reflect the new current page
-                            }
-                        });
-                        li.appendChild(a);
-                        ul.appendChild(li);
-                    }
-                }
-
-                showPage(currentPage); // Initialize to show the first page
-                createPaginationControls();
-            }
+            }, 100); // Adjust the delay as needed, 100ms is just an example
         });
+    });
+
+    // The setupPagination function definition
+    function setupPagination(tableBodySelector, paginationContainerId, itemsPerPage) {
+        const tbody = document.querySelector(tableBodySelector);
+        const rows = tbody.querySelectorAll('tr');
+        const pageCount = Math.ceil(rows.length / itemsPerPage);
+        const paginationContainer = document.getElementById(paginationContainerId);
+
+        let currentPage = 1;
+
+        function showPage(pageNumber) {
+            // console.log(`Showing page: ${pageNumber} for ${tableBodySelector}`); // Debugging log
+            const start = (pageNumber - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            rows.forEach((row, index) => {
+                row.style.display = 'none'; // Hide all rows
+                if (index >= start && index < end) {
+                    row.style.display = ''; // Show rows for the current page
+                }
+            });
+        }
+
+        function createPaginationControls() {
+            paginationContainer.innerHTML = ''; // Clear existing controls
+            const ul = document.createElement('ul');
+            ul.className = 'pagination';
+
+            // Calculate the range of pages to display
+            const maxPagesToShow = 3;
+            let startPage = currentPage - Math.floor(maxPagesToShow / 2);
+            startPage = Math.max(startPage, 1);
+            let endPage = startPage + maxPagesToShow - 1;
+            endPage = Math.min(endPage, pageCount);
+
+            if (endPage - startPage < maxPagesToShow - 1) {
+                startPage = endPage - maxPagesToShow + 1;
+                startPage = Math.max(startPage, 1); // Ensure startPage does not go below 1
+            }
+
+            // Create Previous Button
+            createPageButton('<<', () => Math.max(currentPage - 1, 1), currentPage === 1);
+
+            // Create page number buttons within the range
+            for (let i = startPage; i <= endPage; i++) {
+                createPageButton(i, () => i, i === currentPage);
+            }
+
+            // Create Next Button
+            createPageButton('>>', () => Math.min(currentPage + 1, pageCount), currentPage === pageCount);
+
+            paginationContainer.appendChild(ul);
+
+            function createPageButton(text, pageResolver, isDisabled) {
+                const li = document.createElement('li');
+                li.className = 'page-item';
+                if (isDisabled) {
+                    li.classList.add('disabled');
+                }
+                const a = document.createElement('a');
+                a.className = 'page-link';
+                a.href = '#';
+                a.textContent = text;
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (!isDisabled) {
+                        const newPage = pageResolver();
+                        currentPage = newPage;
+                        showPage(currentPage);
+                        createPaginationControls(); // Recreate the pagination controls to reflect the new current page
+                    }
+                });
+                li.appendChild(a);
+                ul.appendChild(li);
+            }
+        }
+
+        showPage(currentPage); // Initialize to show the first page
+        createPaginationControls();
+        
+        filterTable($("#search-box").val().toLowerCase());
+    }
+});
+
     </script>
 
     <script>

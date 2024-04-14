@@ -394,8 +394,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <?php
                                 if ($result->num_rows > 0) {
                                     echo "<div class='table-container'>";
+                                    echo "<table>";
                                     while ($row = $result->fetch_assoc()) {
-                                        echo "<table>";
                                         echo '<tr>';
                                         echo '<td>' . $row['archiveId'] . '</td>';
                                         $imageData = $row["picture"];
@@ -469,8 +469,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <?php
                                 if ($result2->num_rows > 0) {
                                     echo "<div class='table-container'>";
+                                    echo "<table>";
                                     while ($row2 = $result2->fetch_assoc()) {
-                                        echo "<table>";
                                         echo '<tr>';
                                         echo '<td>' . $row2['archiveId'] . '</td>';
                                         $imageData = $row2["picture"];
@@ -799,6 +799,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 });
 
                 function filterTable(query) {
+                    let hasData = false;
+                    let child = $("<tr class='emptyMsg'><td>No results found</td></tr>");
+
                     $(".table-container tbody tr").each(function() {
                         var row = $(this);
                         var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
@@ -828,11 +831,18 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         // Show or hide the row based on the result
                         if (showRow) {
+                            hasData = true;
                             row.show();
                         } else {
                             row.hide();
                         }
                     });
+
+                    if (!hasData) {
+                        $(".table-container tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+                    } else {
+                        $('.emptyMsg').remove();
+                    }
                 }
             });
         </script>

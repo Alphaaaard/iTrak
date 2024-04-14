@@ -409,7 +409,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 // Modify your SQL query to fetch only the subset of results
                                 $result = $conn->query("SELECT accountId, picture, firstname, lastname, role FROM account WHERE role = 'Maintenance Manager'");
                                 if ($result->num_rows > 0) {
-                                    echo "<div class='table-container'>";
+                                    echo "<div class='table-container manager-table'>";
                                     echo "<table>";
                                     while ($row = $result->fetch_assoc()) {
                                         // Output account information in each row
@@ -591,7 +591,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 // Modify your SQL query to fetch only the subset of results
                                 $result = $conn->query("SELECT accountId, picture, firstname, lastname, role FROM account WHERE role = 'Maintenance Personnel'");
                                 if ($result->num_rows > 0) {
-                                    echo "<div class='table-container'>";
+                                    echo "<div class='table-container personnel-table'>";
                                     echo "<table>";
                                     while ($row = $result->fetch_assoc()) {
                                         // Output account information in each row
@@ -1018,60 +1018,93 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 var personnelContent = $('#pills-personnel');
                 var searchBox = $("#search-box");
 
-                // Function to explicitly set the active tab based on the lastPill value and reapply the filter
-                function activateLastPill() {
-                    var lastPill = sessionStorage.getItem('lastPill') || 'manager';
+    // Function to explicitly set the active tab based on the lastPill value and reapply the filter
+    function activateLastPill() {
+        var lastPill = sessionStorage.getItem('lastPill') || 'manager';
 
-                    // Reset active states
-                    $('.nav-link').removeClass('active');
-                    $('.tab-pane').removeClass('show active');
+        // Reset active states
+        $('.nav-link').removeClass('active');
+        $('.tab-pane').removeClass('show active');
 
-                    if (lastPill === 'personnel') {
-                        personnelPill.addClass('active');
-                        personnelContent.addClass('show active');
-                    } else {
-                        managerPill.addClass('active');
-                        managerContent.addClass('show active');
-                    }
+        if (lastPill === 'personnel') {
+            personnelPill.addClass('active');
+            personnelContent.addClass('show active');
+        } else {
+            managerPill.addClass('active');
+            managerContent.addClass('show active');
+        }
 
-                    filterTable(); // Reapply the filter whenever a tab is activated
-                }
+        filterTable(); // Reapply the filter whenever a tab is activated
+    }
 
-                // Event listeners for tab clicks, including reapplying the filter
-                managerPill.on('click', function(e) {
-                    e.preventDefault();
-                    sessionStorage.setItem('lastPill', 'manager');
-                    activateLastPill();
-                });
+    // Event listeners for tab clicks, including reapplying the filter
+    managerPill.on('click', function(e) {
+        e.preventDefault();
+        sessionStorage.setItem('lastPill', 'manager');
+        activateLastPill();
+    });
 
-                personnelPill.on('click', function(e) {
-                    e.preventDefault();
-                    sessionStorage.setItem('lastPill', 'personnel');
-                    activateLastPill();
-                });
+    personnelPill.on('click', function(e) {
+        e.preventDefault();
+        sessionStorage.setItem('lastPill', 'personnel');
+        activateLastPill();
+    });
 
-                function filterTable() {
-                    var query = searchBox.val().toLowerCase();
-                    var activeRole = managerPill.hasClass('active') ? 'Maintenance Manager' : 'Maintenance Personnel';
+    function filterTable() {
+        var query = searchBox.val().toLowerCase();
+        var activeRole = managerPill.hasClass('active') ? 'Maintenance Manager' : 'Maintenance Personnel';
 
-                    $(".table-container tbody tr").each(function() {
-                        var row = $(this);
-                        var roleCell = row.find("td").last().text().toLowerCase();
+        let managerHasData = false;
+        let personnelHasData = false;
 
-                        if (roleCell === activeRole.toLowerCase() && row.text().toLowerCase().includes(query)) {
-                            row.show();
-                        } else {
-                            row.hide();
-                        }
-                    });
-                }
+        $(".manager-table tbody tr").each(function() {
+            var row = $(this);
+            var roleCell = row.find("td").last().text().toLowerCase();
 
-                // Bind the input event to the search box for dynamic filtering
-                searchBox.on("input", filterTable);
+            if (roleCell === activeRole.toLowerCase() && row.text().toLowerCase().includes(query)) {
+                managerHasData = true;
+                row.show();
+            } else {
+                row.hide();
+            }
+        });
 
-                // Check if the last active tab was personnel, and activate it immediately upon page load
-                activateLastPill();
-            });
+        $(".personnel-table tbody tr").each(function() {
+            var row = $(this);
+            var roleCell = row.find("td").last().text().toLowerCase();
+
+            if (roleCell === activeRole.toLowerCase() && row.text().toLowerCase().includes(query)) {
+                personnelHasData = true;
+                row.show();
+            } else {
+                row.hide();
+            }
+        });
+
+        let child = $("<tr class='emptyMsg'><td>No results found</td></tr>"); //* creates a new tr-td child
+
+        // * checks if rows are empty or not using the HasData variables
+        //* appends the tr-td child on the manager or personnel table 
+        if (!managerHasData) {
+            $(".manager-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+        } else {
+            $('.manager-table tbody .emptyMsg').remove();
+        }
+
+        if (!personnelHasData) {
+            $(".personnel-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+        } else {
+            $('.personnel-table tbody .emptyMsg').remove();
+        }
+    }
+
+    // Bind the input event to the search box for dynamic filtering
+    searchBox.on("input", filterTable);
+
+    // Check if the last active tab was personnel, and activate it immediately upon page load
+    activateLastPill();
+});
+
         </script>
 
         <script>
