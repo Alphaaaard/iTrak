@@ -314,13 +314,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 $headerId = "heading" . $accountId;
                                 $latitude = $row["latitude"];
                                 $longitude = $row["longitude"];
-
+                                $qcuLocation = $row["qculocation"];
                                 $status = ($latitude != 0 && $longitude != 0) ? 'Online' : 'Offline';
                                 // Accordion item
                                 echo "<div class='gps-container'>";
                                 echo "<div class='accordion-item'>";
                                 echo "<h2 class='accordion-header' id='" . $headerId . "'>";
-                                echo "<button class='accordion-btn gps-info' type='button' data-bs-toggle='collapse' data-bs-target='#" . $collapseId . "' aria-expanded='false' aria-controls='" . $collapseId . "' data-firstName='" . $firstName . "' data-accountId='" . $accountId . "' data-status='" . $status . "'>";
+                                echo "<button class='accordion-btn gps-info' type='button' data-bs-toggle='collapse' data-bs-target='#" . $collapseId . "' aria-expanded='false' aria-controls='" . $collapseId . "' data-firstName='" . $firstName . "' data-accountId='" . $accountId . "'>";
                                 echo "<img src='data:image/jpeg;base64," . base64_encode($row["picture"]) . "' alt='Profile Picture' class='rounded-img'/>";
                                 echo "<span style='color: " . $row["color"] . ";'><i class='bi bi-circle-fill'></i></span>";
                                 echo htmlspecialchars($firstName . " " . $lastName);
@@ -330,7 +330,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 echo "<div class='accordion-body'>";
                                 echo "Status: " . $status . "<br>";
                                 echo "Timestamp: " . $row["timestamp"] . "<br>";
-                                echo "Location: " . $row["qculocation"];
+                                if ($status !== 'Offline') {
+                                    echo "Location: " . $qcuLocation;
+                                } else {
+                                    echo "Location: Hidden";
+                                }
                                 echo "</div>"; // End of accordion body
                                 echo "</div>"; // End of accordion collapse
                                 echo "</div>"; // End of accordion item
@@ -728,22 +732,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </script>
 
         <script>
-       document.querySelectorAll('.gps-info').forEach(function(button) {
-    button.addEventListener('click', function() {
-        var accountId = this.getAttribute('data-accountId');
-        var status = this.getAttribute('data-status');
-
-        // If the status is 'Offline', do not proceed with showing the marker
-        if (status === 'Offline') {
-            console.log('User is offline, location is not available.');
-            return;
-        }
-
-        // If the user is online, show the marker on the map
-        showMarker(this.getAttribute('data-firstName'));
-    });
-});
-
+            // Assuming showMarker is defined elsewhere to handle the map logic
+            document.querySelectorAll('.gps-info').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var firstName = this.getAttribute('data-firstName');
+                    showMarker(firstName); // Call the showMarker function with the clicked person's first name
+                });
+            });
         </script>
 
         <script>
