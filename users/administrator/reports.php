@@ -13,12 +13,13 @@ $conn = connection();
 
 function logActivity($conn, $accountId, $actionDescription, $tabValue)
 {
-    $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, NOW(), ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, DATE_ADD(NOW(), INTERVAL 8 HOUR), ?, ?)");
     $stmt->bind_param("iss", $accountId, $actionDescription, $tabValue);
     if (!$stmt->execute()) {
         echo "Error logging activity: " . $stmt->error;
     }
     $stmt->close();
+    
 }
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
@@ -58,13 +59,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
-        $updateSql = "UPDATE `asset` SET `category`='$category', `building`='$building', `floor`='$floor', `room`='$room', `status`='$status', `assignedName`='$assignedName', `assignedBy`='$assignedBy', `date`='$date' WHERE `assetId`='$assetId'";
+        $dateAdjusted = date('Y-m-d H:i:s', strtotime('+8 hours', strtotime($_POST['date'])));
+
+        $updateSql = "UPDATE `asset` SET `category`='$category', `building`='$building', `floor`='$floor', `room`='$room', `status`='$status', `assignedName`='$assignedName', `assignedBy`='$assignedBy', `date`='$dateAdjusted' WHERE `assetId`='$assetId'";
         if ($conn->query($updateSql) === TRUE) {
             logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId to $status.", 'Report');
         } else {
-            echo "Error updating asset: " . $conn->error;
+            echo "Error updating asset: " . $conn.connect_error;
         }
         header("Location: reports.php");
+        
     }
 
 
