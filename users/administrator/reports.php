@@ -13,14 +13,12 @@ $conn = connection();
 
 function logActivity($conn, $accountId, $actionDescription, $tabValue)
 {
-    $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, DATE_ADD(NOW(), INTERVAL 8 HOUR), ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, NOW(), ?, ?)");
     $stmt->bind_param("iss", $accountId, $actionDescription, $tabValue);
     if (!$stmt->execute()) {
         echo "Error logging activity: " . $stmt->error;
     }
     $stmt->close();
-    
-    
 }
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
@@ -59,27 +57,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
-        if (isset($_POST['date'])) {
-            // Create a DateTime object from the posted date, assuming it's in a valid format 'Y-m-d H:i:s'
-            $date = new DateTime($_POST['date']);
-            $date->modify('+8 hours'); // Add 8 hours
-            $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
-        
-            $updateSql = "UPDATE `asset` SET `category`=?, `building`=?, `floor`=?, `room`=?, `status`=?, `assignedName`=?, `assignedBy`=?, `date`=? WHERE `assetId`=?";
-            $stmt = $conn->prepare($updateSql);
-            if ($stmt) {
-                $stmt->bind_param("ssssssssi", $category, $building, $floor, $room, $status, $assignedName, $assignedBy, $formattedDate, $assetId);
-                if (!$stmt->execute()) {
-                    echo "Error updating asset: " . $stmt->error;
-                }
-                $stmt->close();
-            } else {
-                echo "Failed to prepare statement: " . $conn->error;
-            }
+
+        $updateSql = "UPDATE `asset` SET `category`='$category', `building`='$building', `floor`='$floor', `room`='$room', `status`='$status', `assignedName`='$assignedName', `assignedBy`='$assignedBy', `date`='$date' WHERE `assetId`='$assetId'";
+        if ($conn->query($updateSql) === TRUE) {
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId to $status.", 'Report');
+        } else {
+            echo "Error updating asset: " . $conn->error;
         }
-        
         header("Location: reports.php");
-        
     }
 
 
