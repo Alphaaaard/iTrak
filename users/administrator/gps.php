@@ -302,11 +302,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         $currentDate = date('Y-m-d');
 
-                        $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, DATE_ADD(a.timestamp, INTERVAL 8 HOUR) AS adjustedTimestamp, a.qculocation, a.color, a.picture
-                        FROM attendancelogs AS al
-                        LEFT JOIN account AS a ON al.accountID = a.accountID
-                        WHERE date = '$currentDate' AND (al.timeOut IS NULL OR al.timeOut = '') AND a.role = 'Maintenance Personnel'";
-                
+                        $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp, a.qculocation, a.color, a.picture
+                                FROM attendancelogs AS al
+                                LEFT JOIN account AS a ON al.accountID = a.accountID
+                                WHERE date = '$currentDate' AND (al.timeOut IS NULL OR al.timeOut = '') AND a.role = 'Maintenance Personnel'";
+
                         $result = $conn->query($sql);
 
                         // Display the user table
