@@ -63,31 +63,40 @@ if (isset($_POST['submit']) && isset($_POST['accountId'])) {
     // Populate the table rows based on the fetched data
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-            $timeInFormatted = date('h:i A', strtotime($row['timeIn']));
-            $isTimedOut = isset($row['timeOut']) && !empty($row['timeOut']);
-            $timeOutFormatted = $isTimedOut ? date('h:i A', strtotime($row['timeOut'])) : 'Not Timed Out';
+        $timeInFormatted = date('h:i A', strtotime($row['timeIn']));
+        $isTimedOut = isset($row['timeOut']) && !empty($row['timeOut']);
+        $timeInNextDay = strtotime($row['timeIn']) + (24 * 60 * 60); // Adding 24 hours to timeIn
 
-            // Calculate total hours
-            if ($isTimedOut) {
-                $totalHours = (strtotime($row['timeOut']) - strtotime($row['timeIn'])) / 3600 - 1; // Deduct one hour
-            } else {
-                $totalHours = 4; // Default to 4 hours if timeOut is NULL or empty
-            }
-
-            // Format total hours based on whether it's a whole number
-            if (floor($totalHours) == $totalHours) {
-                $totalHoursFormatted = floor($totalHours); // It's a whole number, no decimal point
-            } else {
-                $totalHoursFormatted = number_format($totalHours, 0); // One decimal place
-            }
-            $totalHoursFormatted .= ' hours';
-
-            $html .= '<tr><td>' . $row['date'] . '</td><td>' . $timeInFormatted . '</td><td>' . $timeOutFormatted . '</td><td>' . $totalHoursFormatted . '</td></tr>';
+        // Determine the content for timeOutFormatted
+        if ($isTimedOut) {
+            $timeOutFormatted = date('h:i A', strtotime($row['timeOut']));
+        } elseif (time() > $timeInNextDay) {
+            $timeOutFormatted = 'Not Timed Out'; // Only show 'Not Timed Out' if it's past midnight
+        } else {
+            $timeOutFormatted = ''; // Leave TimeOut empty if it's not past midnight and not timed out
         }
+
+        // Calculate total hours
+        if ($isTimedOut) {
+            $totalHours = (strtotime($row['timeOut']) - strtotime($row['timeIn'])) / 3600 - 1; // Deduct one hour
+        } elseif (time() > $timeInNextDay) {
+            $totalHours = 4; // Default to 4 hours if it's past midnight and not timed out
+        } else {
+            $totalHours = null; // Leave total hours empty if it's not past midnight
+        }
+
+        // Format total hours if not null
+        if ($totalHours !== null) {
+            $totalHoursFormatted = floor($totalHours) . ' hours';
+        } else {
+            $totalHoursFormatted = ''; // Leave the total hours cell empty
+        }
+
+        $html .= '<tr><td>' . $row['date'] . '</td><td>' . $timeInFormatted . '</td><td>' . $timeOutFormatted . '</td><td>' . $totalHoursFormatted . '</td></tr>';
+    }
     } else {
         $html .= '<tr><td colspan="4">No data available</td></tr>';
     }
-
     $html .= '</table>';
 
     // Generate and stream the PDF
