@@ -53,31 +53,30 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                     }
                 }
 
+                // Adjust the timestamp by adding 8 hours
+                $newTimestamp = date('Y-m-d H:i:s', strtotime($oldTimestamp . ' +8 hours'));
 
                 // Update the new location in the account table
-           // Adjust the timestamp by adding 8 hours
-           $newTimestamp = date('Y-m-d H:i:s', strtotime($oldTimestamp . ' +8 hours'));
+                $updateLocationQuery = "UPDATE account SET latitude=?, longitude=?, timestamp=? WHERE accountId=?";
+                $updateLocationStmt = $conn->prepare($updateLocationQuery);
+                $updateLocationStmt->bind_param("ddsi", $newLatitude, $newLongitude, $newTimestamp, $user_id);
+                $updateLocationStmt->execute();
 
-           // Update the new location in the account table
-           $updateLocationQuery = "UPDATE account SET latitude=?, longitude=?, timestamp=? WHERE accountId=?";
-           $updateLocationStmt = $conn->prepare($updateLocationQuery);
-           $updateLocationStmt->bind_param("ddsi", $newLatitude, $newLongitude, $newTimestamp, $user_id);
-           $updateLocationStmt->execute();
+                // Commit transaction
+                $conn->commit();
+                echo "Location updated successfully!";
+            } else {
+                echo "No existing location data found!";
+            }
+        } else {
+            echo "Latitude and longitude parameters are required!";
+        }
+    } else {
+        echo "Invalid request method!";
+    }
+    $conn->close();
+} else {
+    echo "Session variables not set!";
+}
 
-           // Commit transaction
-           $conn->commit();
-           echo "Location updated successfully!";
-       } else {
-           echo "No existing location data found!";
-       }
-   } else {
-       echo "Latitude and longitude parameters are required!";
-   }
-} else {
-   echo "Invalid request method!";
-}
-$conn->close();
-} else {
-echo "Session variables not set!";
-}
 ?>
