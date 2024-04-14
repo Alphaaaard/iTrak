@@ -3,8 +3,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'D:\xampp\htdocs\iTrak\vendor\autoload.php';
-// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
@@ -1549,15 +1549,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         default:
                             status = 'Unknown';
                     }
-                    
+
                     $('input[name="status"]').val(status); // Update the hidden input's value
 
-                    
+
                 }
 
                 // // Initial tab selection handling
                 let tabLastSelected = sessionStorage.getItem("lastTab");
-                
+
                 if (!tabLastSelected) {
                     $("#pills-manager").addClass("show active");
                     $(".nav-link[data-bs-target='pills-manager']").addClass("active");
@@ -1578,7 +1578,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     $(this).addClass("active");
                     updateStatusInput(targetId); // Update the hidden input with the new status
                 });
-                
+
             });
         </script>
 
@@ -1670,7 +1670,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             showConfirmButton: false,
                             timer: 1300, // closes after 2000 milliseconds (2 seconds)
                             timerProgressBar: true // shows a visual progress bar for the timer
-                            confirmButtonText: 'OK'
                         });
                     })
                     .catch(error => {
