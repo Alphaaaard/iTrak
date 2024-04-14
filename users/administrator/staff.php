@@ -661,7 +661,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <div class="col-4">
                           <label for="role" class="form-label">Role <span class="d-none text-danger error">*</span></label>
-                          <input type="text" class="form-control" id="roleField" name="role" required />
+                          <input type="text" class="form-control" id="roleField" name="role" required  readonly/>
                         </div>
 
                         <div class="col-4">
@@ -744,7 +744,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <div class="col-4">
                           <label for="role" class="form-label">Role</label>
-                          <input type="text" class="form-control" id="roleEdit" name="role" />
+                          <input type="text" class="form-control" id="roleEdit" name="role"  readonly/>
                         </div>
 
                         <div class="col-4">
