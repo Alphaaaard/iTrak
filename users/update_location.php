@@ -29,7 +29,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                 $row = $result->fetch_assoc();
                 $oldLatitude = $row['latitude'];
                 $oldLongitude = $row['longitude'];
-                $oldTimestamp = $row['timestamp'];
+                $oldTimestamp = date('Y-m-d H:i:s', strtotime($row['timestamp'] . ' +8 hours'));
                 $oldQcLocation = $row['qculocation']; // Fetch the qculocation
             
                 if ($oldLatitude != 0 && $oldLongitude != 0) {
@@ -76,4 +76,5 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
 } else {
     echo "Session variables not set!";
 }
+
 ?>
