@@ -692,6 +692,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 polylinesByAccountId = {};
                             }
 
+                            // Initialize the map when the page loads
                             window.onload = function() {
                                 initMap();
 
@@ -699,16 +700,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 var currentDate = new Date();
                                 var currentDateString = currentDate.toISOString().slice(0, 10); // Format as 'YYYY-MM-DD'
 
-                                // Fetch the initial location data
+                                // Initial fetch using current date
                                 getLocationFromDatabase(null, currentDateString);
-                                getLocationFromDatabaseIMG(null, currentDateString); // Also fetch using the IMG function
-
-                                // Set interval to fetch location updates every 5 seconds
-                                setInterval(function() {
-                                    console.log("Refreshing location data...");
-                                    getLocationFromDatabase(null, currentDateString);
-                                    getLocationFromDatabaseIMG(null, currentDateString); // Also fetch using the IMG function
-                                }, 5000); // 5000 milliseconds = 5 seconds
                             };
                         </script>
 
