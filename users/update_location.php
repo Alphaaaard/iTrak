@@ -19,6 +19,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
             // Begin transaction
             $conn->begin_transaction();
 
+            // Calculate nearest 8-hour timestamp
+            $currentTimestamp = time();
+            $nearestTimestamp = ceil($currentTimestamp / (8 * 3600)) * (8 * 3600);
+
             // Retrieve the current location
             $selectQuery = "SELECT latitude, longitude, timestamp, qculocation FROM account WHERE accountId=?";
             $selectStmt = $conn->prepare($selectQuery);
@@ -29,7 +33,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                 $row = $result->fetch_assoc();
                 $oldLatitude = $row['latitude'];
                 $oldLongitude = $row['longitude'];
-                $oldTimestamp = $row['timestamp'];
+                $oldTimestamp = $nearestTimestamp; // Use the nearest 8-hour timestamp
                 $oldQcLocation = $row['qculocation']; // Fetch the qculocation
             
                 if ($oldLatitude != 0 && $oldLongitude != 0) {
@@ -55,9 +59,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
 
 
                 // Update the new location in the account table
-                $updateLocationQuery = "UPDATE account SET latitude=?, longitude=?, timestamp=CURRENT_TIMESTAMP WHERE accountId=?";
+                $updateLocationQuery = "UPDATE account SET latitude=?, longitude=?, timestamp=FROM_UNIXTIME(?) WHERE accountId=?";
                 $updateLocationStmt = $conn->prepare($updateLocationQuery);
-                $updateLocationStmt->bind_param("ddi", $newLatitude, $newLongitude, $user_id);
+                $updateLocationStmt->bind_param("ddii", $newLatitude, $newLongitude, $oldTimestamp, $user_id);
                 $updateLocationStmt->execute();
 
                 // Commit transaction
