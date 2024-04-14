@@ -702,6 +702,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 // Initial fetch using current date
                                 getLocationFromDatabase(null, currentDateString);
+
+                                // Run the function every 30 seconds
+                                setInterval(function() {
+                                    var currentDate = new Date();
+                                    var currentDateString = currentDate.toISOString().slice(0, 10); // Format as 'YYYY-MM-DD'
+                                    getLocationFromDatabase(null, currentDateString);
+                                }, 30000); // 30 seconds in milliseconds
                             };
                         </script>
 
