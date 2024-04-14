@@ -6,30 +6,34 @@ $conn = connection();
 
 // Check if the user is logged in
 if (isset($_SESSION['accountId'])) {
-    // Get the user's account ID from the session
     $accountId = $_SESSION['accountId'];
 
-    $conn = connection();
     // Check the database connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Clear the latitude and longitude data in the 'upkeep' table for the user
-    $sql = "UPDATE account SET latitude = NULL, longitude = NULL WHERE accountId = ?";
+    // Prepare SQL to clear the latitude and longitude data for the user, and adjust the timestamp by +8 hours
+    $sql = "UPDATE account SET latitude = NULL, longitude = NULL, timestamp = DATE_ADD(NOW(), INTERVAL 8 HOUR) WHERE accountId = ?";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $accountId);
-    $stmt->execute();
+    if ($stmt) {
+        $stmt->bind_param("i", $accountId);
+        $stmt->execute();
+        $stmt->close();  // Close the statement
+    } else {
+        echo "Failed to prepare statement";
+    }
 
     // Destroy the session
     unset($_SESSION['accountId']);
     session_destroy();
 
     // Close the database connection
-    $stmt->close();
     $conn->close();
-}
 
-// Redirect the user to the "index.php" page
-header("Location: index.php");
+    // Redirect the user to the login page
+    header("Location: index.php");
+    exit();  // Ensure no further execution of script after redirect
+}
+?>
