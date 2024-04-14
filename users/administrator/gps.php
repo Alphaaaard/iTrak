@@ -314,7 +314,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 $headerId = "heading" . $accountId;
                                 $latitude = $row["latitude"];
                                 $longitude = $row["longitude"];
-                                $qcuLocation = $row["qculocation"];
+
                                 $status = ($latitude != 0 && $longitude != 0) ? 'Online' : 'Offline';
                                 // Accordion item
                                 echo "<div class='gps-container'>";
@@ -330,11 +330,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 echo "<div class='accordion-body'>";
                                 echo "Status: " . $status . "<br>";
                                 echo "Timestamp: " . $row["timestamp"] . "<br>";
-                                if ($status !== 'Offline') {
-                                    echo "Location: " . $qcuLocation;
-                                } else {
-                                    echo "Location: Hidden";
-                                }
+                          
+    // Only display location if status is 'Online'
+    if ($status === 'Online') {
+        echo "Location: " . $row["qculocation"] . "<br>";
+    }
+
                                 echo "</div>"; // End of accordion body
                                 echo "</div>"; // End of accordion collapse
                                 echo "</div>"; // End of accordion item
