@@ -300,12 +300,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             die("Connection failed: " . $conn->connect_error);
                         }
 
-                        $currentDate = date('Y-m-d');
+                        $currentDate = date('Y-m-d', strtotime('+8 hours'));
 
-                        $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp, a.qculocation, a.color, a.picture
-                                FROM attendancelogs AS al
-                                LEFT JOIN account AS a ON al.accountID = a.accountID
-                                WHERE date = '$currentDate' AND (al.timeOut IS NULL OR al.timeOut = '') AND a.role = 'Maintenance Personnel'";
+$sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp, a.qculocation, a.color, a.picture
+        FROM attendancelogs AS al
+        LEFT JOIN account AS a ON al.accountID = a.accountID
+        WHERE date = '$currentDate' AND (al.timeOut IS NULL OR al.timeOut = '') AND a.role = 'Maintenance Personnel'";
 
                         $result = $conn->query($sql);
 
