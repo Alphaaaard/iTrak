@@ -692,13 +692,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 polylinesByAccountId = {};
                             }
 
-                            function setupAutoRefresh(selectedDate, accountId = null) {
-                                setInterval(function() {
-                                    getLocationFromDatabase(selectedDate, accountId);
-                                }, 5000); // Refresh every 5000 milliseconds (5 seconds)
-                            }
-
-                            // Initialize the map and set up auto-refresh when the page loads
                             window.onload = function() {
                                 initMap();
 
@@ -706,11 +699,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 var currentDate = new Date();
                                 var currentDateString = currentDate.toISOString().slice(0, 10); // Format as 'YYYY-MM-DD'
 
-                                // Initial fetch using current date
-                                getLocationFromDatabase(currentDateString);
+                                // Fetch the initial location data
+                                getLocationFromDatabase(null, currentDateString);
+                                getLocationFromDatabaseIMG(null, currentDateString); // Also fetch using the IMG function
 
-                                // Set up auto-refresh with the current date and optional account ID
-                                setupAutoRefresh(currentDateString);
+                                // Set interval to fetch location updates every 5 seconds
+                                setInterval(function() {
+                                    console.log("Refreshing location data...");
+                                    getLocationFromDatabase(null, currentDateString);
+                                    getLocationFromDatabaseIMG(null, currentDateString); // Also fetch using the IMG function
+                                }, 5000); // 5000 milliseconds = 5 seconds
                             };
                         </script>
 
