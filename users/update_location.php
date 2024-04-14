@@ -19,10 +19,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
             // Begin transaction
             $conn->begin_transaction();
 
-            // Calculate nearest 8-hour timestamp
-            $currentTimestamp = time();
-            $nearestTimestamp = ceil($currentTimestamp / (8 * 3600)) * (8 * 3600);
-
             // Retrieve the current location
             $selectQuery = "SELECT latitude, longitude, timestamp, qculocation FROM account WHERE accountId=?";
             $selectStmt = $conn->prepare($selectQuery);
@@ -33,7 +29,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                 $row = $result->fetch_assoc();
                 $oldLatitude = $row['latitude'];
                 $oldLongitude = $row['longitude'];
-                $oldTimestamp = $nearestTimestamp; // Use the nearest 8-hour timestamp
+                $oldTimestamp = $row['timestamp'];
                 $oldQcLocation = $row['qculocation']; // Fetch the qculocation
             
                 if ($oldLatitude != 0 && $oldLongitude != 0) {
@@ -47,7 +43,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                         $conn->rollback();
                         exit();
                     }
-                    // Bind the qculocation parameter
                     $insertLocationStmt->bind_param("iddss", $user_id, $oldLatitude, $oldLongitude, $oldTimestamp, $oldQcLocation);
                     if (!$insertLocationStmt->execute()) {
                         // Handle the error appropriately
@@ -57,12 +52,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                     }
                 }
 
-
-                // Update the new location in the account table
-                $updateLocationQuery = "UPDATE account SET latitude=?, longitude=?, timestamp=FROM_UNIXTIME(?) WHERE accountId=?";
+                // Update the new location in the account table with adjusted timestamp
+                $updateLocationQuery = "UPDATE account SET latitude=?, longitude=?, timestamp=DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 8 HOUR) WHERE accountId=?";
                 $updateLocationStmt = $conn->prepare($updateLocationQuery);
-                $updateLocationStmt->bind_param("ddii", $newLatitude, $newLongitude, $oldTimestamp, $user_id);
-                $updateLocationStmt->execute();
+                $updateLocationStmt->bind_param("ddi", $newLatitude, $newLongitude, $user_id);
+                if (!$updateLocationStmt->execute()) {
+                    echo "Update failed: (" . $updateLocationStmt->errno . ") " . $updateLocationStmt->error;
+                    $conn->rollback();
+                    exit();
+                }
 
                 // Commit transaction
                 $conn->commit();
