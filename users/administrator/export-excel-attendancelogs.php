@@ -67,7 +67,7 @@ if (isset($_POST['submit']) && isset($_POST['accountId'])) {
         $timeOut = $row['timeOut'] ? date('h:i A', strtotime($row['timeOut'])) : '';
         $timeInNextDay = strtotime($row['timeIn']) + (24 * 60 * 60);
 
-        if ($row['timeOut'] && (time() > $timeInNextDay)) {
+        if ($row['timeOut']) {
             $totalHours = floor((strtotime($row['timeOut']) - strtotime($row['timeIn'])) / 3600) - 1 . ' hours';
         } elseif (!$row['timeOut'] && (time() > $timeInNextDay)) {
             $totalHours = '4 hours';
@@ -102,8 +102,8 @@ if (isset($_POST['submit']) && isset($_POST['accountId'])) {
         header('Content-Disposition: attachment;filename="Attendance-Logs.xlsx"');
         header('Cache-Control: max-age=0');
 
-$writer = new Xlsx($spreadsheet);
-$writer->save('php://output');
-exit;
+    $writer = new Xlsx($spreadsheet);
+    $writer->save('php://output');
+    exit;
 }
 ?>
