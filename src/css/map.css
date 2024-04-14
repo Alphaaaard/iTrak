@@ -151,6 +151,16 @@
   border-radius: 10px;
   height: 70vh;
 }
+.buttonskie{
+  border: none;
+  background-color: #f1f6ff;
+  height: 68px;
+  width: 75px;
+    cursor: pointer;
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #163172;
+}
 
 .building-name {
   font-weight: bold;
@@ -158,6 +168,61 @@
   margin-top: 3em;
   width: 100%;
 }
+
+.building2 {
+  background-image: url(../../src/img/techvocPic.png);
+  background-color: rgba(255, 255, 255, 0.5); /* Adjust opacity here */
+  background-size: cover; /* Adjust as needed */
+}
+
+.building3 {
+  background-image: url(../../src/img/oldacadPic.png);
+  background-color: rgba(255, 255, 255, 0.5); /* Adjust opacity here */
+  background-size: cover; /* Adjust as needed */
+}
+
+.building4 {
+  background-image: url(../../src/img/belmontePic.png);
+  background-color: rgba(255, 255, 255, 0.5); /* Adjust opacity here */
+  background-size: cover; /* Adjust as needed */
+}
+
+.building5 {
+  background-image: url(../../src/img/korphilPic.png);
+  background-color: rgba(255, 255, 255, 0.5); /* Adjust opacity here */
+  background-size: cover; /* Adjust as needed */
+}
+
+.building6 {
+  background-image: url(../../src/img/ballroomPic.png);
+  background-color: rgba(255, 255, 255, 0.5); /* Adjust opacity here */
+  background-size: cover; /* Adjust as needed */
+}
+
+.building7 {
+  background-image: url(../../src/img/multipurposePic.png);
+  background-color: rgba(255, 255, 255, 0.5); /* Adjust opacity here */
+  background-size: cover; /* Adjust as needed */
+}
+
+.building8 {
+  background-image: url(../../src/img/adminPic.png);
+  background-color: rgba(255, 255, 255, 0.5); /* Adjust opacity here */
+  background-size: cover; /* Adjust as needed */
+}
+
+.building9 {
+  background-image: url(../../src/img/bautistaPic.png);
+  background-color: rgba(255, 255, 255, 0.5); /* Adjust opacity here */
+  background-size: cover; /* Adjust as needed */
+}
+
+.building10 {
+  background-image: url(../../src/img/academicPic.png);
+  background-color: rgba(255, 255, 255, 0.5); /* Adjust opacity here */
+  background-size: cover; /* Adjust as needed */
+}
+
 
 .close {
   color: red;
