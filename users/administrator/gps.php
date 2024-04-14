@@ -226,23 +226,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <span class="text">Staff</span>
                     </a>
                 </li>
-                <li class="active">
-                    <a href="./gps.php" class="GPS-cont">
-                        <div class="GPS-side-cont">
-                            <i class="bi bi-geo-alt"></i>
-                            <span class="text">GPS</span>
+                <div class="GPS-cont" onclick="toggleGPS()">
+                    <li class="GPS-dropdown active">
+                        <div class="GPS-drondown-content">
+                            <div class="GPS-side-cont">
+                                <i class="bi bi-geo-alt"></i>
+                                <span class="text">GPS</span>
+                            </div>
+                            <div class="GPS-ind">
+                                <i id="chevron-icon" class="bi bi-chevron-down"></i>
+                            </div>
                         </div>
-                        <div class="GPS-ind">
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
-                    </a>
-                </li>
-                <li class="GPS-History">
-                    <a href="./gps_history.php">
-                        <i class="bi bi-radar"></i>
-                        <span class="text">GPS History</span>
-                    </a>
-                </li>
+                    </li>
+                </div>
+                <div class="GPS-container aaa ">
+                    <li class="GPS-Tracker active">
+                        <a href="./gps.php">
+                            <i class="bi bi-crosshair"></i>
+                            <span class="text">GPS Tracker</span>
+                        </a>
+                    </li>
+                    <li class="GPS-History">
+                        <a href="./gps_history.php">
+                            <i class="bi bi-radar"></i>
+                            <span class="text">GPS History</span>
+                        </a>
+                    </li>
+                </div>
                 <li>
                     <a href="./map.php">
                         <i class="bi bi-map"></i>
@@ -330,11 +340,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 echo "<div class='accordion-body'>";
                                 echo "Status: " . $status . "<br>";
                                 echo "Timestamp: " . $row["timestamp"] . "<br>";
-                          
-    // Only display location if status is 'Online'
-    if ($status === 'Online') {
-        echo "Location: " . $row["qculocation"] . "<br>";
-    }
+
+                                // Only display location if status is 'Online'
+                                if ($status === 'Online') {
+                                    echo "Location: " . $row["qculocation"] . "<br>";
+                                }
 
                                 echo "</div>"; // End of accordion body
                                 echo "</div>"; // End of accordion collapse

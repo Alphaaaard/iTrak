@@ -18,12 +18,12 @@
   display: none;
 }
 
-.export {
-  /* width: 100%; */
-  /* display: flex;
+/* .export {
+   width: 100%;
+   display: flex;
   justify-content: end;
-  display: none; */
-}
+  display: none;
+} */
 
 table {
   border-collapse: separate;
@@ -434,16 +434,26 @@ img.icon.staff {
 
   #rows-display-dropdown {
     margin-top: 1em;
-    width: 50%;
+    width: 55%;
     font-size: 0.8em !important;
   }
 
   .export-mob-hide {
-    display: none;
+    position: absolute;
+    top: 3.7em;
+    right: 1em;
+  }
+
+  #exportBtn {
+    padding: 0.7em 1em !important;
   }
 
   .export {
     display: flex !important;
+  }
+
+  .cont-header {
+    width: 70%;
   }
 }
 

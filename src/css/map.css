@@ -131,7 +131,7 @@
 /* .row>*{
   display: flex;
 } */
-.legend-toggle{
+.legend-toggle {
   border: none;
   background: none;
 }
@@ -455,6 +455,8 @@
 
 .nav-link {
   text-align: center !important;
+  padding: 1em;
+  z-index: 99;
 }
 
 .nav-tabs .nav-link:hover {
@@ -481,6 +483,7 @@
   font-size: 1.75rem;
   font-weight: bold;
   color: #163172;
+  z-index: 999;
 }
 
 .nav-container .nav-item:hover {
@@ -585,7 +588,7 @@ h3 {
 .legend-item {
   display: flex;
   gap: 1em;
-  transition: opacity 0.2s ease-in-out; 
+  transition: opacity 0.2s ease-in-out;
 }
 .asset-image {
   transition: opacity 0.2s ease-in-out;
@@ -698,7 +701,7 @@ h3 {
 
   .nav-container .nav-item {
     font-size: 3.5rem;
-    padding: 0.5em 0.5em;
+    padding: unset;
   }
 
   .nav-container {

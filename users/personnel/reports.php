@@ -179,6 +179,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/reports.css" />
+        <link rel="stylesheet" href="../../src/css/personnel-reports.css" />
         <script src="../../src/js/reports.js"></script>
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
         <script src="../../src/js/locationTracker.js"></script>
@@ -464,23 +465,23 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         </div>
                     </header>
                     <script>
-  // Get elements from the DOM
-  const filterCriteria = document.getElementById('filter-criteria');
-  const searchBox = document.getElementById('search-box');
+                        // Get elements from the DOM
+                        const filterCriteria = document.getElementById('filter-criteria');
+                        const searchBox = document.getElementById('search-box');
 
-  // Event listener for the filter dropdown changes
-  filterCriteria.addEventListener('change', function() {
-    if (this.value === 'date') {
-      // If "Date" is selected, change the search box to a date picker
-      searchBox.type = 'date';
-      searchBox.placeholder = 'Select a date';
-    } else {
-      // For all other options, change it back to a regular search box
-      searchBox.type = 'search';
-      searchBox.placeholder = 'Search';
-    }
-  });
-</script>
+                        // Event listener for the filter dropdown changes
+                        filterCriteria.addEventListener('change', function() {
+                            if (this.value === 'date') {
+                                // If "Date" is selected, change the search box to a date picker
+                                searchBox.type = 'date';
+                                searchBox.placeholder = 'Select a date';
+                            } else {
+                                // For all other options, change it back to a regular search box
+                                searchBox.type = 'search';
+                                searchBox.placeholder = 'Search';
+                            }
+                        });
+                    </script>
                     <!--Content start of tabs-->
                     <div class="new-nav">
                         <ul>

@@ -1,0 +1,14 @@
+@media (max-width: 600px) {
+  .cont-header {
+    width: 100%;
+  }
+  #rows-display-dropdown {
+    width: 50%;
+  }
+
+  #filter-criteria {
+    /* margin-top: 2.5em; */
+    width: 45%;
+    font-size: 0.8em;
+  }
+}

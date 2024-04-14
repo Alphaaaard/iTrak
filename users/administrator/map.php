@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once ("../../config/connection.php");
+include_once("../../config/connection.php");
 $conn = connection();
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
@@ -51,7 +51,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->fetch();
     $stmt->close();
 
-    ?>
+?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -61,13 +61,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>iTrak | Map</title>
         <link rel="icon" type="image/x-icon" href="../../src/img/tab-logo.png">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/map.css" />
+        <link rel="stylesheet" href="../../src/css/map-choices.css" />
+
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
     </head>
     <style>
@@ -119,7 +120,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <div class="loader" aria-label="Page loading, please wait." role="status">
             <!-- SVG Loader here -->
             <?php echo file_get_contents('map_loader.svg'); // Make sure the path is correct 
-                ?>
+            ?>
         </div>
         <!-- Additional page content and script to hide loader after 10 seconds -->
 
@@ -138,7 +139,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <a href="#" class="notification" id="notification-button">
                             <i class="fa fa-bell" aria-hidden="true"></i>
                             <!-- Notification Indicator Dot -->
-                            <?php if ($unseenCount > 0): ?>
+                            <?php if ($unseenCount > 0) : ?>
                                 <span class="notification-indicator"></span>
                             <?php endif; ?>
                         </a>
@@ -235,481 +236,450 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             <div><a class="profile-role"><?php echo $_SESSION['role']; ?></a></div>
                             <hr>
                         </div>
-                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i
-                                class="bi bi-person profile-icons"></i>Profile</a>
+                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i class="bi bi-person profile-icons"></i>Profile</a>
                         <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
                     </div>
-                    <?php
-} else {
-    header("Location:../../index.php");
-    exit();
-}
-?>
-            </div>
+                <?php
+            } else {
+                header("Location:../../index.php");
+                exit();
+            }
+                ?>
+                </div>
 
-        </nav>
-    </div>
-    <!-- NAVBAR -->
-    <!-- SIDEBAR -->
-    <section id="sidebar">
-        <div href="#" class="brand" title="logo">
-            <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
-            <div class="mobile-sidebar-close">
-                <i class="bi bi-arrow-left-circle"></i>
-            </div>
+            </nav>
         </div>
-        <ul class="side-menu top">
-            <li>
-                <a href="./dashboard.php">
-                    <i class="bi bi-grid"></i>
-                    <span class="text">Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="./attendance-logs.php">
-                    <i class="bi bi-calendar-week"></i>
-                    <span class="text">Attendance Logs</span>
-                </a>
-            </li>
-            <li>
-                <a href="./staff.php">
-                    <i class="bi bi-person"></i>
-                    <span class="text">Staff</span>
-                </a>
-            </li>
-            <li>
-                <a href="./gps.php" class="GPS-cont">
-                    <div class="GPS-side-cont">
-                        <i class="bi bi-geo-alt"></i>
-                        <span class="text">GPS</span>
-                    </div>
-                    <div class="GPS-ind">
-                        <i class="bi bi-chevron-up"></i>
-                    </div>
-                </a>
-            </li>
-            <li class="active">
-                <a href="./map.php">
-                    <i class="bi bi-map"></i>
-                    <span class="text">Map</span>
-                </a>
-            </li>
-            <li>
-                <a href="./reports.php">
-                    <i class="bi bi-clipboard"></i>
-                    <span class="text">Reports</span>
-                </a>
-            </li>
-            <li>
-                <a href="./archive.php">
-                    <i class="bi bi-archive"></i>
-                    <span class="text">Archive</span>
-                </a>
-            </li>
-            <li>
-                <a href="./activity-logs.php">
-                    <i class="bi bi-arrow-counterclockwise"></i>
-                    <span class="text">Activity Logs</span>
-                </a>
-            </li>
-        </ul>
-    </section>
-    <!-- SIDEBAR -->
-    <!-- CONTENT -->
-    <section id="content">
-        <!-- MAIN -->
+        <!-- NAVBAR -->
+        <!-- SIDEBAR -->
+        <section id="sidebar">
+            <div href="#" class="brand" title="logo">
+                <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
+                <div class="mobile-sidebar-close">
+                    <i class="bi bi-arrow-left-circle"></i>
+                </div>
+            </div>
+            <ul class="side-menu top">
+                <li>
+                    <a href="./dashboard.php">
+                        <i class="bi bi-grid"></i>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./attendance-logs.php">
+                        <i class="bi bi-calendar-week"></i>
+                        <span class="text">Attendance Logs</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./staff.php">
+                        <i class="bi bi-person"></i>
+                        <span class="text">Staff</span>
+                    </a>
+                </li>
+                <div class="GPS-cont" onclick="toggleGPS()">
+                    <li class="GPS-dropdown">
+                        <div class="GPS-drondown-content">
+                            <div class="GPS-side-cont">
+                                <i class="bi bi-geo-alt"></i>
+                                <span class="text">GPS</span>
+                            </div>
+                            <div class="GPS-ind">
+                                <i id="chevron-icon" class="bi bi-chevron-down"></i>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <div class="GPS-container">
+                    <li class="GPS-Tracker">
+                        <a href="./gps.php">
+                            <i class="bi bi-crosshair"></i>
+                            <span class="text">GPS Tracker</span>
+                        </a>
+                    </li>
+                    <li class="GPS-History">
+                        <a href="./gps_history.php">
+                            <i class="bi bi-radar"></i>
+                            <span class="text">GPS History</span>
+                        </a>
+                    </li>
+                </div>
+                <li class="active">
+                    <a href="./map.php">
+                        <i class="bi bi-map"></i>
+                        <span class="text">Map</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./reports.php">
+                        <i class="bi bi-clipboard"></i>
+                        <span class="text">Reports</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./archive.php">
+                        <i class="bi bi-archive"></i>
+                        <span class="text">Archive</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./activity-logs.php">
+                        <i class="bi bi-arrow-counterclockwise"></i>
+                        <span class="text">Activity Logs</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <!-- SIDEBAR -->
+        <!-- CONTENT -->
+        <section id="content">
+            <!-- MAIN -->
 
-        <main>
-            <div class="content-container" id="content-container">
+            <main>
+                <div class="content-container" id="content-container">
 
-                <!-- <header>
+                    <!-- <header>
                         <div class="cont-header">
                             <h1 class="tab-name">3D Map</h1>
                         </div>
                     </header> -->
 
-                <div id="model-container" class="content"></div>
+                    <div id="model-container" class="content"></div>
 
-                <!-- Mobile View Building Selection -->
-                <div class="buildings" id="buildings" style="visibility:hidden">
-                    <div class="building building1" style="display: none;">Floor</div>
-                    <div class="building building2">TechVoc</div>
-                    <div class="building building3">Old Academic</div>
-                    <div class="building building4">Belmonte</div>
-                    <div class="building building5">KORPHIL</div>
-                    <div class="building building6">Ballroom</div>
-                    <div class="building building7">Multipurpose</div>
-                    <div class="building building8">Admin</div>
-                    <div class="building building9">Bautista</div>
-                    <div class="building building10">Academic</div>
-                </div>
+                    <!-- Mobile View Building Selection -->
+                    <div class="buildings" id="buildings" style="visibility:hidden">
+                        <div class="building building1" style="display: none;">Floor</div>
+                        <div class="building building2">TechVoc</div>
+                        <div class="building building3">Old Academic</div>
+                        <div class="building building4">Belmonte</div>
+                        <div class="building building5">KORPHIL</div>
+                        <div class="building building6">Ballroom</div>
+                        <div class="building building7">Multipurpose</div>
+                        <div class="building building8">Admin</div>
+                        <div class="building building9">Bautista</div>
+                        <div class="building building10">Academic</div>
+                    </div>
 
-                <!-- MODAL 1 -->
-                <div id="myModal1" class="modal">
-                    <div class="modal-content">
-                        <div id="modalContent1">
+                    <!-- MODAL 1 -->
+                    <div id="myModal1" class="modal">
+                        <div class="modal-content">
+                            <div id="modalContent1">
+                            </div>
+                            <span class="close" id="closeModal1"><i class="bi bi-x-lg"></i></span>
                         </div>
-                        <span class="close" id="closeModal1"><i class="bi bi-x-lg"></i></span>
+                    </div>
+
+                    <!-- MODAL 2 -->
+                    <div id="myModal2" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header"> <span class="close" id="closeModal2"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>TechVoc Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <button class="buttonskie" onclick="redirectToURL('../building/TEB/TEBF1.php')" role="tab" aria-controls="floor1" aria-selected="true">1</button>
+
+                                <button class="buttonskie" onclick="redirectToURL('../building/TEB/TEBF2.php')" role="tab" aria-controls="floor1" aria-selected="true">2</button>
+                            </div>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- MODAL 3 -->
+                    <div id="myModal3" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header"> <span class="close" id="closeModal3"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>Old Academic Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <button class="buttonskie" onclick="redirectToURL('../building/OLB/OLBF1.php')" role="tab" aria-controls="floor1" aria-selected="true">1</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/OLB/OLBF2.php')" role="tab" aria-controls="floor2" aria-selected="false">2</button>
+                            </div>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- MODAL 4 -->
+                    <div id="myModal4" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header"> <span class="close" id="closeModal4"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>Belmonte Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <button class="buttonskie" onclick="redirectToURL('../building/BEB/BEBF1.php')" role="tab" aria-controls="floor1" aria-selected="true">1</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/BEB/BEBF2.php')" role="tab" aria-controls="floor2" aria-selected="false">2</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/BEB/BEBF3.php')" role="tab" aria-controls="floor3" aria-selected="false">3</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/BEB/BEBF4.php')" role="tab" aria-controls="floor4" aria-selected="false">4</button>
+                            </div>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- MODAL 5 -->
+                    <div id="myModal5" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header"> <span class="close" id="closeModal5"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>KorPhil Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <button class="buttonskie" onclick="redirectToURL('../building/KOB/KOBF1.php')" role="tab" aria-controls="floor1" aria-selected="true">1</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/KOB/KOBF2.php')" role="tab" aria-controls="floor2" aria-selected="false">2</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/KOB/KOBF3.php')" role="tab" aria-controls="floor3" aria-selected="false">3</button>
+                            </div>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- MODAL 6 -->
+                    <div id="myModal6" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header"> <span class="close" id="closeModal6"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>Ballroom Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <button class="buttonskie" onclick="redirectToURL('../building/CHB/CHBF1.php')" role="tab" aria-controls="floor1" aria-selected="true">1</button>
+                            </div>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- MODAL 7 -->
+                    <div id="myModal7" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header"> <span class="close" id="closeModal7"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>Multipurpose Building </h3>
+                            </div>
+                            <div class="nav-container">
+                                <button class="buttonskie" onclick="redirectToURL('../building/MUB/MUBF1.php')" role="tab" aria-controls="floor1" aria-selected="true">1</button>
+                            </div>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- MODAL 8 -->
+                    <div id="myModal8" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header"> <span class="close" id="closeModal8"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>Admin Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <button class="buttonskie" onclick="redirectToURL('../building/ADB/ADBF1.php')" role="tab" aria-controls="floor1" aria-selected="true">1</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/ADB/ADBF2.php')" role="tab" aria-controls="floor2" aria-selected="false">2</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/ADB/ADBF3.php')" role="tab" aria-controls="floor3" aria-selected="false">3</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/ADB/ADBF4.php')" role="tab" aria-controls="floor4" aria-selected="false">4</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/ADB/ADBF5.php')" role="tab" aria-controls="floor5" aria-selected="false">5</button>
+                            </div>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- MODAL 9 -->
+                    <div id="myModal9" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header"> <span class="close" id="closeModal9"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>Bautista Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <button class="buttonskie" onclick="redirectToURL('../building/BAB/BABFB.php')" role="tab" aria-controls="floorb" aria-selected="true">B</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/BAB/BABF1.php')" role="tab" aria-controls="floor1" aria-selected="false">1</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/BAB/BABF2.php')" role="tab" aria-controls="floor2" aria-selected="false">2</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/BAB/BABF3.php')" role="tab" aria-controls="floor3" aria-selected="false">3</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/BAB/BABF4.php')" role="tab" aria-controls="floor4" aria-selected="false">4</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/BAB/BABF5.php')" role="tab" aria-controls="floor5" aria-selected="false">5</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/BAB/BABF6.php')" role="tab" aria-controls="floor6" aria-selected="false">6</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/BAB/BABF7.php')" role="tab" aria-controls="floor7" aria-selected="false">7</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/BAB/BABF8.php')" role="tab" aria-controls="floor8" aria-selected="false">8</button>
+                            </div>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- MODAL 10 -->
+                    <div id="myModal10" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header"> <span class="close" id="closeModal10"><i class="bi bi-x-lg"></i></span>
+                                <ul class="nav nav-tabs" id="floorTab" role="tablist">
+                                    <h3>Academic Building</h3>
+                            </div>
+                            <div class="nav-container">
+                                <button class="buttonskie" onclick="redirectToURL('../building/NEB/NEWBF1.php')" role="tab" aria-controls="floor1" aria-selected="true">1</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/NEB/NEWBF2.php')" role="tab" aria-controls="floor2" aria-selected="false">2</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/NEB/NEWBF3.php')" role="tab" aria-controls="floor3" aria-selected="false">3</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/NEB/NEWBF4.php')" role="tab" aria-controls="floor4" aria-selected="false">4</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/NEB/NEWBF5.php')" role="tab" aria-controls="floor5" aria-selected="false">5</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/NEB/NEWBF6.php')" role="tab" aria-controls="floor6" aria-selected="false">6</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building/NEB/NEWBF7.php')" role="tab" aria-controls="floor7" aria-selected="false">7</button>
+                            </div>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- MODALS-->
+                    <div id="modalTemplate1" style="display: none">
+                        <h2 id="modalTitle1"></h2>
+                        <p id="modalDescription1"></p>
+                    </div>
+
+                    <div id="modalTemplate2" style="display: none">
+                        <h2 id="modalTitle2"></h2>
+                        <p id="modalDescription2"></p>
+                    </div>
+
+                    <div id="modalTemplate3" style="display: none">
+                        <h2 id="modalTitle3"></h2>
+                        <p id="modalDescription3"></p>
+                    </div>
+
+                    <div id="modalTemplate4" style="display: none">
+                        <h2 id="modalTitle4"></h2>
+                        <p id="modalDescription4"></p>
+                    </div>
+
+                    <div id="modalTemplate5" style="display: none">
+                        <h2 id="modalTitle5"></h2>
+                        <p id="modalDescription5"></p>
+                    </div>
+
+                    <div id="modalTemplate6" style="display: none">
+                        <h2 id="modalTitle6"></h2>
+                        <p id="modalDescription6"></p>
+                    </div>
+
+                    <div id="modalTemplate7" style="display: none">
+                        <h2 id="modalTitle7"></h2>
+                        <p id="modalDescription7"></p>
+                    </div>
+
+                    <div id="modalTemplate8" style="display: none">
+                        <h2 id="modalTitle8"></h2>
+                        <p id="modalDescription8"></p>
+                    </div>
+
+                    <div id="modalTemplate9" style="display: none">
+                        <h2 id="modalTitle9"></h2>
+                        <p id="modalDescription9"></p>
+                    </div>
+
+                    <div id="modalTemplate10" style="display: none">
+                        <h2 id="modalTitle10"></h2>
+                        <p id="modalDescription10"></p>
                     </div>
                 </div>
+            </main>
+        </section>
 
-                <!-- MODAL 2 -->
-                <div id="myModal2" class="modal">
-                    <div class="modal-content">
-                        <div class="modal-header"> <span class="close" id="closeModal2"><i
-                                    class="bi bi-x-lg"></i></span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>TechVoc Building</h3>
-                        </div>
-                        <div class="nav-container">
-                            <button class="buttonskie" onclick="redirectToURL('../building/TEB/TEBF1.php')" role="tab"
-                                aria-controls="floor1" aria-selected="true">1</button>
+        <!-- MODALS -->
+        <!-- commented some code in map.css (related to modals, it affects profile modal) -->
+        <?php include_once 'modals/modal_layout.php'; ?>
 
-                            <button class="buttonskie" onclick="redirectToURL('../building/TEB/TEBF2.php')" role="tab"
-                                aria-controls="floor1" aria-selected="true">2</button>
-                        </div>
-                        </ul>
+        <!-- RFID MODAL -->
+        <div class="modal" id="staticBackdrop112" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img src="../../src/img/taprfid.jpg" width="100%" alt="" class="Scan" />
+
+                        <form id="rfidForm">
+                            <input type="text" id="rfid" name="rfid" value="">
+                        </form>
                     </div>
-                </div>
-
-                <!-- MODAL 3 -->
-                <div id="myModal3" class="modal">
-                    <div class="modal-content">
-                        <div class="modal-header"> <span class="close" id="closeModal3"><i
-                                    class="bi bi-x-lg"></i></span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>Old Academic Building</h3>
-                        </div>
-                        <div class="nav-container">
-                            <button class="buttonskie" onclick="redirectToURL('../building/OLB/OLBF1.php')" role="tab"
-                                aria-controls="floor1" aria-selected="true">1</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/OLB/OLBF2.php')" role="tab"
-                                aria-controls="floor2" aria-selected="false">2</button>
-                        </div>
-
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- MODAL 4 -->
-                <div id="myModal4" class="modal">
-                    <div class="modal-content">
-                        <div class="modal-header"> <span class="close" id="closeModal4"><i
-                                    class="bi bi-x-lg"></i></span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>Belmonte Building</h3>
-                        </div>
-                        <div class="nav-container">
-                            <button class="buttonskie" onclick="redirectToURL('../building/BEB/BEBF1.php')" role="tab"
-                                aria-controls="floor1" aria-selected="true">1</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/BEB/BEBF2.php')" role="tab"
-                                aria-controls="floor2" aria-selected="false">2</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/BEB/BEBF3.php')" role="tab"
-                                aria-controls="floor3" aria-selected="false">3</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/BEB/BEBF4.php')" role="tab"
-                                aria-controls="floor4" aria-selected="false">4</button>
-                        </div>
-
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- MODAL 5 -->
-                <div id="myModal5" class="modal">
-                    <div class="modal-content">
-                        <div class="modal-header"> <span class="close" id="closeModal5"><i
-                                    class="bi bi-x-lg"></i></span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>KorPhil Building</h3>
-                        </div>
-                        <div class="nav-container">
-                            <button class="buttonskie" onclick="redirectToURL('../building/KOB/KOBF1.php')" role="tab"
-                                aria-controls="floor1" aria-selected="true">1</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/KOB/KOBF2.php')" role="tab"
-                                aria-controls="floor2" aria-selected="false">2</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/KOB/KOBF3.php')" role="tab"
-                                aria-controls="floor3" aria-selected="false">3</button>
-                        </div>
-
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- MODAL 6 -->
-                <div id="myModal6" class="modal">
-                    <div class="modal-content">
-                        <div class="modal-header"> <span class="close" id="closeModal6"><i
-                                    class="bi bi-x-lg"></i></span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>Ballroom Building</h3>
-                        </div>
-                        <div class="nav-container">
-                            <button class="buttonskie" onclick="redirectToURL('../building/CHB/CHBF1.php')" role="tab"
-                                aria-controls="floor1" aria-selected="true">1</button>
-                        </div>
-
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- MODAL 7 -->
-                <div id="myModal7" class="modal">
-                    <div class="modal-content">
-                        <div class="modal-header"> <span class="close" id="closeModal7"><i
-                                    class="bi bi-x-lg"></i></span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>Multipurpose Building </h3>
-                        </div>
-                        <div class="nav-container">
-                            <button class="buttonskie" onclick="redirectToURL('../building/MUB/MUBF1.php')" role="tab"
-                                aria-controls="floor1" aria-selected="true">1</button>
-                        </div>
-
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- MODAL 8 -->
-                <div id="myModal8" class="modal">
-                    <div class="modal-content">
-                        <div class="modal-header"> <span class="close" id="closeModal8"><i
-                                    class="bi bi-x-lg"></i></span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>Admin Building</h3>
-                        </div>
-                        <div class="nav-container">
-                            <button class="buttonskie" onclick="redirectToURL('../building/ADB/ADBF1.php')" role="tab"
-                                aria-controls="floor1" aria-selected="true">1</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/ADB/ADBF2.php')" role="tab"
-                                aria-controls="floor2" aria-selected="false">2</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/ADB/ADBF3.php')" role="tab"
-                                aria-controls="floor3" aria-selected="false">3</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/ADB/ADBF4.php')" role="tab"
-                                aria-controls="floor4" aria-selected="false">4</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/ADB/ADBF5.php')" role="tab"
-                                aria-controls="floor5" aria-selected="false">5</button>
-                        </div>
-
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- MODAL 9 -->
-                <div id="myModal9" class="modal">
-                    <div class="modal-content">
-                        <div class="modal-header"> <span class="close" id="closeModal9"><i
-                                    class="bi bi-x-lg"></i></span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>Bautista Building</h3>
-                        </div>
-                        <div class="nav-container">
-                            <button class="buttonskie" onclick="redirectToURL('../building/BAB/BABFB.php')" role="tab"
-                                aria-controls="floorb" aria-selected="true">B</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/BAB/BABF1.php')" role="tab"
-                                aria-controls="floor1" aria-selected="false">1</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/BAB/BABF2.php')" role="tab"
-                                aria-controls="floor2" aria-selected="false">2</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/BAB/BABF3.php')" role="tab"
-                                aria-controls="floor3" aria-selected="false">3</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/BAB/BABF4.php')" role="tab"
-                                aria-controls="floor4" aria-selected="false">4</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/BAB/BABF5.php')" role="tab"
-                                aria-controls="floor5" aria-selected="false">5</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/BAB/BABF6.php')" role="tab"
-                                aria-controls="floor6" aria-selected="false">6</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/BAB/BABF7.php')" role="tab"
-                                aria-controls="floor7" aria-selected="false">7</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/BAB/BABF8.php')" role="tab"
-                                aria-controls="floor8" aria-selected="false">8</button>
-                        </div>
-
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- MODAL 10 -->
-                <div id="myModal10" class="modal">
-                    <div class="modal-content">
-                        <div class="modal-header"> <span class="close" id="closeModal10"><i
-                                    class="bi bi-x-lg"></i></span>
-                            <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                <h3>Academic Building</h3>
-                        </div>
-                        <div class="nav-container">
-                            <button class="buttonskie" onclick="redirectToURL('../building/NEB/NEWBF1.php')" role="tab"
-                                aria-controls="floor1" aria-selected="true">1</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/NEB/NEWBF2.php')" role="tab"
-                                aria-controls="floor2" aria-selected="false">2</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/NEB/NEWBF3.php')" role="tab"
-                                aria-controls="floor3" aria-selected="false">3</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/NEB/NEWBF4.php')" role="tab"
-                                aria-controls="floor4" aria-selected="false">4</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/NEB/NEWBF5.php')" role="tab"
-                                aria-controls="floor5" aria-selected="false">5</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/NEB/NEWBF6.php')" role="tab"
-                                aria-controls="floor6" aria-selected="false">6</button>
-                            <button class="buttonskie" onclick="redirectToURL('../building/NEB/NEWBF7.php')" role="tab"
-                                aria-controls="floor7" aria-selected="false">7</button>
-                        </div>
-
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- MODALS-->
-                <div id="modalTemplate1" style="display: none">
-                    <h2 id="modalTitle1"></h2>
-                    <p id="modalDescription1"></p>
-                </div>
-
-                <div id="modalTemplate2" style="display: none">
-                    <h2 id="modalTitle2"></h2>
-                    <p id="modalDescription2"></p>
-                </div>
-
-                <div id="modalTemplate3" style="display: none">
-                    <h2 id="modalTitle3"></h2>
-                    <p id="modalDescription3"></p>
-                </div>
-
-                <div id="modalTemplate4" style="display: none">
-                    <h2 id="modalTitle4"></h2>
-                    <p id="modalDescription4"></p>
-                </div>
-
-                <div id="modalTemplate5" style="display: none">
-                    <h2 id="modalTitle5"></h2>
-                    <p id="modalDescription5"></p>
-                </div>
-
-                <div id="modalTemplate6" style="display: none">
-                    <h2 id="modalTitle6"></h2>
-                    <p id="modalDescription6"></p>
-                </div>
-
-                <div id="modalTemplate7" style="display: none">
-                    <h2 id="modalTitle7"></h2>
-                    <p id="modalDescription7"></p>
-                </div>
-
-                <div id="modalTemplate8" style="display: none">
-                    <h2 id="modalTitle8"></h2>
-                    <p id="modalDescription8"></p>
-                </div>
-
-                <div id="modalTemplate9" style="display: none">
-                    <h2 id="modalTitle9"></h2>
-                    <p id="modalDescription9"></p>
-                </div>
-
-                <div id="modalTemplate10" style="display: none">
-                    <h2 id="modalTitle10"></h2>
-                    <p id="modalDescription10"></p>
-                </div>
-            </div>
-        </main>
-    </section>
-
-    <!-- MODALS -->
-    <!-- commented some code in map.css (related to modals, it affects profile modal) -->
-    <?php include_once 'modals/modal_layout.php'; ?>
-
-    <!-- RFID MODAL -->
-    <div class="modal" id="staticBackdrop112" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <img src="../../src/img/taprfid.jpg" width="100%" alt="" class="Scan" />
-
-                    <form id="rfidForm">
-                        <input type="text" id="rfid" name="rfid" value="">
-                    </form>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-    <script src="../../src/js/main.js"></script>
-    <script type="module" src="../../src/js/map.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-    <script src="../../src/js/profileModalController.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+        <script src="../../src/js/main.js"></script>
+        <script type="module" src="../../src/js/map.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="../../src/js/profileModalController.js"></script>
 
 
-    <script>
-        $(document).ready(function () {
-            $('.notification-item').on('click', function (e) {
-                e.preventDefault();
-                var activityId = $(this).data('activity-id');
-                var notificationItem = $(this); // Store the clicked element
+        <script>
+            $(document).ready(function() {
+                $('.notification-item').on('click', function(e) {
+                    e.preventDefault();
+                    var activityId = $(this).data('activity-id');
+                    var notificationItem = $(this); // Store the clicked element
 
-                $.ajax({
-                    type: "POST",
-                    url: "update_single_notification.php", // The URL to the PHP file
-                    data: {
-                        activityId: activityId
-                    },
-                    success: function (response) {
-                        if (response.trim() === "Notification updated successfully") {
-                            // If the notification is updated successfully, remove the clicked element
-                            notificationItem.remove();
+                    $.ajax({
+                        type: "POST",
+                        url: "update_single_notification.php", // The URL to the PHP file
+                        data: {
+                            activityId: activityId
+                        },
+                        success: function(response) {
+                            if (response.trim() === "Notification updated successfully") {
+                                // If the notification is updated successfully, remove the clicked element
+                                notificationItem.remove();
 
-                            // Update the notification count
-                            var countElement = $('#noti_number');
-                            var count = parseInt(countElement.text()) || 0;
-                            countElement.text(count > 1 ? count - 1 : '');
-                        } else {
-                            // Handle error
-                            console.error("Failed to update notification:", response);
+                                // Update the notification count
+                                var countElement = $('#noti_number');
+                                var count = parseInt(countElement.text()) || 0;
+                                countElement.text(count > 1 ? count - 1 : '');
+                            } else {
+                                // Handle error
+                                console.error("Failed to update notification:", response);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle AJAX error
+                            console.error("AJAX error:", status, error);
                         }
-                    },
-                    error: function (xhr, status, error) {
-                        // Handle AJAX error
-                        console.error("AJAX error:", status, error);
-                    }
+                    });
                 });
             });
-        });
-    </script>
-    <script>
-        setTimeout(function () {
-            var loader = document.querySelector('.loader');
-            loader.style.opacity = '0'; // Start fading out
+        </script>
+        <script>
+            setTimeout(function() {
+                var loader = document.querySelector('.loader');
+                loader.style.opacity = '0'; // Start fading out
 
-            // Set a timeout to match the transition time of the fade-out
-            setTimeout(function () {
-                loader.style.display = 'none'; // Hide the loader after the fade out
-            }, 1000); // 1000ms = 1s for the fade-out to complete
-        }, 10000); // 10000ms = 10s before starting to fade out
-    </script>
+                // Set a timeout to match the transition time of the fade-out
+                setTimeout(function() {
+                    loader.style.display = 'none'; // Hide the loader after the fade out
+                }, 1000); // 1000ms = 1s for the fade-out to complete
+            }, 10000); // 10000ms = 10s before starting to fade out
+        </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var sidebar = document.getElementById('sidebar');
-            var hamburgerButton = document.getElementById('hamburgerButton');
-            var loader = document.querySelector('.loader');
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var sidebar = document.getElementById('sidebar');
+                var hamburgerButton = document.getElementById('hamburgerButton');
+                var loader = document.querySelector('.loader');
 
-            hamburgerButton.addEventListener('click', function () {
-                // Wait for the transition to finish before calculating the width
-                setTimeout(function () {
-                    var sidebarWidth = sidebar.offsetWidth;
-                    // Assuming your sidebar toggles between 250px and 0px
-                    var loaderLeft = (sidebarWidth > 0) ? '80px' : '0px';
-                    loader.style.left = loaderLeft;
-                },); // Adjust the timeout to match your sidebar transition duration
+                hamburgerButton.addEventListener('click', function() {
+                    // Wait for the transition to finish before calculating the width
+                    setTimeout(function() {
+                        var sidebarWidth = sidebar.offsetWidth;
+                        // Assuming your sidebar toggles between 250px and 0px
+                        var loaderLeft = (sidebarWidth > 0) ? '80px' : '0px';
+                        loader.style.left = loaderLeft;
+                    }, ); // Adjust the timeout to match your sidebar transition duration
+                });
             });
-        });
-    </script>
-    <script>
-        function redirectToURL(url) {
-            window.location.href = url;
-        }
-    </script>
+        </script>
+        <script>
+            function redirectToURL(url) {
+                window.location.href = url;
+            }
+        </script>
 
-</body>
+    </body>
 
-</html>
+    </html>

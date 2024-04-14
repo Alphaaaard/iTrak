@@ -33,6 +33,17 @@ input::-ms-clear {
     rgba(17, 17, 26, 0.05) 0px 8px 32px;
 }
 
+/* Your CSS styles here */
+.GPS-container {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease; /* You can adjust the duration and timing function as needed */
+}
+
+.GPS-container.aaa {
+  max-height: 200px; /* Set the maximum height to a value larger than the content */
+}
+
 .mb-5 {
   margin: unset !important;
 }
@@ -318,13 +329,22 @@ hr {
   background: #163172;
   bottom: 0;
   left: 0;
-  overflow-y: auto;
+  overflow-y: overlay; /* Prevent scrollbar from affecting width */
   overflow-x: hidden;
   position: fixed;
   top: 0;
   transition: 0.3s ease;
   width: 250px;
   z-index: 3;
+  scrollbar-width: thin;
+}
+
+#sidebar::-webkit-scrollbar {
+  width: 0; /* Hide scrollbar for WebKit browsers (Chrome, Safari) */
+}
+
+#sidebar {
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
 }
 
 #sidebar.hide {
@@ -405,6 +425,7 @@ hr {
   text-decoration: none;
   width: 100%;
   border-radius: 0.5em;
+  overflow-y: hidden;
 }
 
 #sidebar .side-menu li a:hover {
@@ -486,16 +507,66 @@ hr {
   transition: 0.3s ease;
 }
 
-.GPS-cont {
+.GPS-side-cont {
+  display: flex;
+  gap: 0.8em;
+  align-items: center;
+}
+
+/* div.GPS-cont {
   display: flex;
   justify-content: space-between;
   padding-right: 1em;
+} */
+
+.GPS-dropdown.active div.GPS-drondown-content {
+  background-color: #d6e4f0;
+  transition: 0.3s ease;
+  color: #163172;
 }
 
-.GPS-side-cont {
+.GPS-dropdown.active div.GPS-drondown-content div.GPS-side-cont .text {
+  color: #163172 !important;
+}
+
+div.GPS-drondown-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.7em;
+  height: 100%;
+  align-items: center;
+  border-radius: 10px;
+}
+
+div.GPS-drondown-content:hover {
+  background-color: #d6e4f0;
+  transition: 0.3s ease;
+  color: #163172;
+}
+
+div.GPS-drondown-content:hover div.GPS-side-cont .text {
+  color: #163172 !important;
+}
+
+/* .GPS-cont {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 1em;
+} */
+
+/* .GPS-side-cont {
   display: flex;
   align-items: center;
   gap: 1em;
+} */
+
+.GPS-cont {
+  cursor: pointer;
+}
+
+.GPS-History,
+.GPS-Tracker {
+  padding-left: 2em !important;
 }
 
 /* CONTENT */

@@ -441,17 +441,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <span class="text">Staff</span>
                     </a>
                 </li>
-                <li>
-                    <a href="./gps.php" class="GPS-cont">
-                        <div class="GPS-side-cont">
-                            <i class="bi bi-geo-alt"></i>
-                            <span class="text">GPS</span>
+                <div class="GPS-cont" onclick="toggleGPS()">
+                    <li class="GPS-dropdown">
+                        <div class="GPS-drondown-content">
+                            <div class="GPS-side-cont">
+                                <i class="bi bi-geo-alt"></i>
+                                <span class="text">GPS</span>
+                            </div>
+                            <div class="GPS-ind">
+                                <i id="chevron-icon" class="bi bi-chevron-down"></i>
+                            </div>
                         </div>
-                        <div class="GPS-ind">
-                            <i class="bi bi-chevron-up"></i>
-                        </div>
-                    </a>
-                </li>
+                    </li>
+                </div>
+                <div class="GPS-container">
+                    <li class="GPS-Tracker">
+                        <a href="./gps.php">
+                            <i class="bi bi-crosshair"></i>
+                            <span class="text">GPS Tracker</span>
+                        </a>
+                    </li>
+                    <li class="GPS-History">
+                        <a href="./gps_history.php">
+                            <i class="bi bi-radar"></i>
+                            <span class="text">GPS History</span>
+                        </a>
+                    </li>
+                </div>
                 <li>
                     <a href="./map.php">
                         <i class="bi bi-map"></i>
@@ -1212,12 +1228,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     confirmButtonText: 'PDF',
                     denyButtonText: `Excel`,
                     didOpen: () => {
-                            Swal.getConfirmButton().style.setProperty('background-color', '#ff4c4c', 'important');
-                            Swal.getConfirmButton().style.setProperty('color', 'white', 'important');
+                        Swal.getConfirmButton().style.setProperty('background-color', '#ff4c4c', 'important');
+                        Swal.getConfirmButton().style.setProperty('color', 'white', 'important');
 
-                            Swal.getDenyButton().style.setProperty('background-color', '#09ba23', 'important');
-                            Swal.getDenyButton().style.setProperty('color', 'white', 'important');
-                        }
+                        Swal.getDenyButton().style.setProperty('background-color', '#09ba23', 'important');
+                        Swal.getDenyButton().style.setProperty('color', 'white', 'important');
+                    }
                 }).then((result) => {
                     if (result.isConfirmed) {
                         formData.append('submit', 'Export to PDF');
@@ -1235,14 +1251,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
             function performExport(formData, endpoint) {
                 Swal.fire({
-                title: 'Exporting...',
-                html: 'Please wait while the file is being generated.',
-                allowOutsideClick: false,
-                showConfirmButton: false,
-                willOpen: () => {
-                    Swal.showLoading();
-                },
-            });
+                    title: 'Exporting...',
+                    html: 'Please wait while the file is being generated.',
+                    allowOutsideClick: false,
+                    showConfirmButton: false,
+                    willOpen: () => {
+                        Swal.showLoading();
+                    },
+                });
 
                 fetch(endpoint, {
                         method: 'POST',

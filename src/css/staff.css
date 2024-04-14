@@ -176,12 +176,12 @@ td:last-child {
   .tbl-filter {
     /* padding-bottom: 1em; */
     display: flex;
-    justify-content: end;
+    /* justify-content: end; */
     padding-top: 1em;
   }
 
   .add-btn {
-    padding: 0.3em 3em;
+    padding: 0.7em 2.9em;
   }
 
   td,
@@ -196,6 +196,16 @@ td:last-child {
 
   .col-5 {
     width: 50%;
+  }
+  #exportBtn {
+    padding: 0.7em 1em !important;
+    margin-bottom: 0.5em;
+  }
+
+  .export-mob-hide {
+    position: absolute;
+    top: 3.9em;
+    right: 1em;
   }
 }
 
@@ -222,7 +232,7 @@ td:last-child {
   background-color: #1e56a0;
   border: #1e56a0 1px solid;
   border-radius: 20px;
-  padding: 0.7em 4em;
+  padding: 0.7em 3em;
   font-size: 0.7em;
   font-weight: 500;
   color: white;

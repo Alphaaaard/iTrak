@@ -19,7 +19,7 @@ function isWithinBoundary($userLat, $userLong, $centerLat, $centerLong, $radius)
 
 
 $buildings = [
-    'Belmonte Hall' => [
+    'Belmonte Building' => [
         ['lat' => 14.70088, 'long' => 121.03298, 'radius' => 12],
         ['lat' => 14.70084, 'long' => 121.03307, 'radius' => 12],
         ['lat' => 14.70079, 'long' => 121.03317, 'radius' => 12],

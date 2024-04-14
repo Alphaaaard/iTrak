@@ -2871,7 +2871,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         </div>
         <section id="sidebar">
             <div href="#" class="brand" title="logo">
-                <i><img src="../../../src/img/UpKeep.png" alt="" class="logo" /></i>
+                <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
                 <div class="mobile-sidebar-close">
                     <i class="bi bi-arrow-left-circle"></i>
                 </div>
@@ -2889,21 +2889,43 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         <span class="text">Attendance Logs</span>
                     </a>
                 </li>
-                <li>
-                    <a href="../../manager/gps.php" class="GPS-cont">
-                        <div class="GPS-side-cont">
-                            <i class="bi bi-geo-alt"></i>
-                            <span class="text">GPS</span>
+                <div class="GPS-cont" onclick="toggleGPS()">
+                    <li class="GPS-dropdown">
+                        <div class="GPS-drondown-content">
+                            <div class="GPS-side-cont">
+                                <i class="bi bi-geo-alt"></i>
+                                <span class="text">GPS</span>
+                            </div>
+                            <div class="GPS-ind">
+                                <i id="chevron-icon" class="bi bi-chevron-down"></i>
+                            </div>
                         </div>
-                        <div class="GPS-ind">
-                            <i class="bi bi-chevron-up"></i>
-                        </div>
-                    </a>
-                </li>
+                    </li>
+                </div>
+                <div class="GPS-container">
+                    <li class="GPS-Tracker">
+                        <a href="../../manager/gps.php">
+                            <i class="bi bi-crosshair"></i>
+                            <span class="text">GPS Tracker</span>
+                        </a>
+                    </li>
+                    <li class="GPS-History">
+                        <a href="../../manager/gps-history.php">
+                            <i class="bi bi-radar"></i>
+                            <span class="text">GPS History</span>
+                        </a>
+                    </li>
+                </div>
                 <li class="active">
                     <a href="../../manager/map.php">
                         <i class="bi bi-map"></i>
                         <span class="text">Map</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../../manager/assigned-tasks.php">
+                        <i class="bi bi-geo-alt"></i>
+                        <span class="text">Assigned Tasks</span>
                     </a>
                 </li>
                 <li>

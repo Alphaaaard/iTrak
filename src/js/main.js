@@ -385,3 +385,26 @@ filterSelect.addEventListener("change", function () {
     this.style.backgroundColor = "#ffffff";
   }
 });
+
+function toggleGPS() {
+  var gpsItems = document.querySelectorAll(".GPS-container");
+  gpsItems.forEach(function (item) {
+    item.classList.toggle("aaa");
+  });
+
+  var gpsItems = document.querySelectorAll(".GPS-dropdown");
+  gpsItems.forEach(function (item) {
+    item.classList.toggle("active");
+  });
+
+  var chevronIcon = document.getElementById("chevron-icon");
+  chevronIcon.classList.toggle("rotate");
+
+  if (chevronIcon.classList.contains("rotate")) {
+    chevronIcon.style.transition = "transform 0.3s ease";
+    chevronIcon.style.transform = "rotate(180deg)";
+  } else {
+    chevronIcon.style.transition = "transform 0.3s ease";
+    chevronIcon.style.transform = "rotate(0deg)";
+  }
+}
