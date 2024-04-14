@@ -15535,7 +15535,7 @@ position:absolute; top:214px; left:955px;'>
                         data-floor="<?php echo htmlspecialchars($floor6764); ?>"
                         data-image="<?php echo base64_encode($upload_img6764); ?>"
                         data-category="<?php echo htmlspecialchars($category6764); ?>"
-                        data-status="<?php echo htmlspecialchars($status6274); ?>"
+                        data-status="<?php echo htmlspecialchars($status6764); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName6764); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6764); ?>; 
 position:absolute; top:79px; left:778px;'>
@@ -15550,7 +15550,7 @@ position:absolute; top:79px; left:778px;'>
                         data-floor="<?php echo htmlspecialchars($floor6765); ?>"
                         data-image="<?php echo base64_encode($upload_img6765); ?>"
                         data-category="<?php echo htmlspecialchars($category6765); ?>"
-                        data-status="<?php echo htmlspecialchars($status6275); ?>"
+                        data-status="<?php echo htmlspecialchars($status6765); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName6765); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6765); ?>; 
 position:absolute; top:92px; left:778px;'>
@@ -17243,9 +17243,9 @@ position:absolute; top:425px; left:451px;'>
                         data-room="<?php echo htmlspecialchars($room6382); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6382); ?>"
                         data-image="<?php echo base64_encode($upload_img6382); ?>"
-                        data-category="<?php echo htmlspecialchars($category6382); ?>">
+                        data-category="<?php echo htmlspecialchars($category6382); ?>"
                         data-status="<?php echo htmlspecialchars($status6382); ?>"
-                        data-assignedname="<?php echo htmlspecialchars($assignedName6382); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName6382); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status6382); ?>; 
 position:absolute; top:438px; left:451px;'>
                     </div>
