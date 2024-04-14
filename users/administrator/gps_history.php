@@ -708,7 +708,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     var currentDate = new Date();
                                     var currentDateString = currentDate.toISOString().slice(0, 10); // Format as 'YYYY-MM-DD'
                                     getLocationFromDatabase(null, currentDateString);
-                                }, 30000); // 30 seconds in milliseconds
+                                }, 1000); // 30 seconds in milliseconds
                             };
                         </script>
 
