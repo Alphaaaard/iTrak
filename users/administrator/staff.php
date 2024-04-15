@@ -651,7 +651,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="col-4">
                           <label for="password" class="form-label">Password <span class="d-none text-danger error">*</span></label>
                           <input type="password" class="form-control" id="passwordField" name="password" placeholder="Password" required />
-                          <i class="bi-eye-slash" id="togglePassword" onclick="togglePassword()"></i>
+                          <i class="bi-eye-slash" id="togglePasswordADD" onclick="togglePasswordADD()"></i>
                         </div>
 
                         <div class="col-4">
@@ -666,8 +666,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <div class="col-4">
                           <label for="user_pass" class="form-label">Register RFID <span class="d-none text-danger error">*</span></label>
-                          <button type="button" class="form-control btn-custom" data-bs-toggle="modal" data-bs-target="#staticBackdrop112" onclick="setAction('add');" value="123456789">SCAN</button>
-                          <input type="password" name="rfidNumber" id="rfidFieldAdd" title="" value="1234567" required />
+                          <button type="button" class="form-control btn-custom" data-bs-toggle="modal" data-bs-target="#staticBackdrop112" onclick="setAction('add');" value="">SCAN</button>
+                          <input type="password" name="rfidNumber" id="rfidFieldAdd" title="" value="" required />
                         </div>
 
                         <div class="col-5">
@@ -708,17 +708,17 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <div class="col-4">
                           <label for="firstname" class="form-label">First name</label>
-                          <input type="text" class="form-control" id="firstnameEdit" name="firstname" oninput="this.value = this.value.replace(/\d/g, '')" />
+                          <input type="text" class="form-control" id="firstnameEdit" name="firstname" oninput="this.value = this.value.replace(/\d/g, '')" readonly/>
                         </div>
 
                         <div class="col-4">
                           <label for="middlename" class="form-label">Middle name</label>
-                          <input type="text" class="form-control" id="middlenameEdit" name="middlename" oninput="this.value = this.value.replace(/\d/g, '')" />
+                          <input type="text" class="form-control" id="middlenameEdit" name="middlename" oninput="this.value = this.value.replace(/\d/g, '')" readonly/>
                         </div>
 
                         <div class="col-4">
                           <label for="lastname" class="form-label">Last name</label>
-                          <input type="text" class="form-control" id="lastnameEdit" name="lastname" oninput="this.value = this.value.replace(/\d/g, '')" />
+                          <input type="text" class="form-control" id="lastnameEdit" name="lastname" oninput="this.value = this.value.replace(/\d/g, '')" readonly/>
                         </div>
 
                         <div class="col-4">
@@ -734,12 +734,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="col-4">
                           <label for="password" class="form-label">Password</label>
                           <input type="password" class="form-control" id="passwordEdit" name="password" />
-                          <i class="bi-eye-slash" id="togglePassword" onclick="togglePassword()"></i>
+                          <i class="bi-eye-slash" id="togglePasswordEDIT" onclick="togglePasswordEDIT()"></i>
                         </div>
 
                         <div class="col-4">
                           <label for="birthday" class="form-label">Birthday</label>
-                          <input type="date" class="form-control" id="birthdayEdit" max="2005-01-01" name="birthday" />
+                          <input type="date" class="form-control" id="birthdayEdit" max="2005-01-01" name="birthday" readonly/>
                         </div>
 
                         <div class="col-4">
@@ -928,9 +928,26 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
     </script>
     <script>
-      function togglePassword() {
+      function togglePasswordEDIT() {
         var passwordField = document.getElementById("passwordEdit");
-        var toggleIcon = document.getElementById("togglePassword");
+        var toggleIcon = document.getElementById("togglePasswordEDIT");
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            toggleIcon.classList.remove("bi-eye-slash");
+            toggleIcon.classList.add("bi-eye");
+        } else {
+            passwordField.type = "password";
+            toggleIcon.classList.remove("bi-eye");
+            toggleIcon.classList.add("bi-eye-slash");
+        }
+    }
+    </script>
+
+<script>
+      function togglePasswordADD() {
+        var passwordField = document.getElementById("passwordField");
+        var toggleIcon = document.getElementById("togglePasswordADD");
 
         if (passwordField.type === "password") {
             passwordField.type = "text";
