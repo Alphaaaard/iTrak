@@ -76,7 +76,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
     </head>
     <style>
-        .notification-indicator {
+       .notification-indicator {
             display: inline-block;
             width: 10px;
             height: 10px;
@@ -87,18 +87,54 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             right: 10px;
         }
 
-        #map {
-            display: none;
+        .loader {
+            position: fixed;
+            /* Position fixed relative to the viewport */
+            top: 60px;
+            /* Height of the navbar */
+            left: 250px;
+            /* Width of the sidebar */
+            right: 0;
+            bottom: 0;
+            background-color: #FFFFFF;
+            /* White background */
+            z-index: 1;
+            /* Ensure it's on top of other content */
+            display: flex;
+            justify-content: center;
+            /* Center horizontally */
+            align-items: center;
+            /* Center vertically */
+            transition: opacity 1s ease-out;
+            /* Smooth transition for fading out */
+            pointer-events: none;
+            /* Ensures clicks go through to content underneath */
+        }
+
+
+        /* Style for the SVG Loader */
+        svg {
+            width: 180px;
+            /* You can adjust the size as needed */
         }
     </style>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script> -->
 
 
-    <body>
+    </head>
+
+<body>
+    <div class="loader" aria-label="Page loading, please wait." role="status">
+        <!-- SVG Loader here -->
+        <?php echo file_get_contents('map_loader.svg'); // Make sure the path is correct 
+        ?>
+    </div>
+    <!-- Additional page content and script to hide loader after 10 seconds -->
+
         <!-- NAVBAR -->
         <div id="navbar" class="">
             <nav>
-                <div class="hamburger">
+            <div class="hamburger" id="hamburgerButton">
                     <i class="bi bi-list"></i>
                     <a href="#" class="brand" title="logo">
                         <!-- <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i> -->
@@ -637,6 +673,40 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     });
                 });
             });
+        </script>
+<script>
+            setTimeout(function() {
+                var loader = document.querySelector('.loader');
+                loader.style.opacity = '0'; // Start fading out
+
+                // Set a timeout to match the transition time of the fade-out
+                setTimeout(function() {
+                    loader.style.display = 'none'; // Hide the loader after the fade out
+                }, 1000); // 1000ms = 1s for the fade-out to complete
+            }, 10000); // 10000ms = 10s before starting to fade out
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var sidebar = document.getElementById('sidebar');
+                var hamburgerButton = document.getElementById('hamburgerButton');
+                var loader = document.querySelector('.loader');
+
+                hamburgerButton.addEventListener('click', function() {
+                    // Wait for the transition to finish before calculating the width
+                    setTimeout(function() {
+                        var sidebarWidth = sidebar.offsetWidth;
+                        // Assuming your sidebar toggles between 250px and 0px
+                        var loaderLeft = (sidebarWidth > 0) ? '80px' : '0px';
+                        loader.style.left = loaderLeft;
+                    }, ); // Adjust the timeout to match your sidebar transition duration
+                });
+            });
+        </script>
+        <script>
+            function redirectToURL(url) {
+                window.location.href = url;
+            }
         </script>
 
 
