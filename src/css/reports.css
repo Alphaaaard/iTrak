@@ -421,7 +421,7 @@ img.icon.staff {
     position: absolute;
     top: 0;
     left: 0;
-    margin: 1em;
+    margin: 1em 0.8em;
     right: 0;
     width: unset;
   }

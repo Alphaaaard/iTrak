@@ -134,6 +134,9 @@ td.unselectable:hover {
   overflow: hidden;
   display: flex;
   transition: 1s ease;
+  height: 215px;
+  min-height: 215px;
+  max-height: 215px;
 }
 
 .calendar:hover .calendar-body {
@@ -178,6 +181,9 @@ button.reset-btn:hover {
   text-align: center;
   display: flex;
   justify-content: space-between;
+  width: 190px;
+  min-width: 190px;
+  max-width: 190px;
 }
 
 .calendar-header .day-text {
@@ -273,7 +279,7 @@ button.reset-btn:hover {
 
 @media (max-width: 600px) {
   #content {
-    padding: 10px 20px;
+    padding: 1.25em 20px;
   }
   #locationTbl {
     display: block !important;
@@ -304,12 +310,23 @@ button.reset-btn:hover {
     width: 90px;
   } */
 
+  .calendar {
+    border: unset;
+    height: unset;
+    min-height: unset;
+    max-width: unset;
+  }
+
   .calendar-header {
     position: absolute;
     top: 25px;
     right: 25px;
     border-radius: 15px;
     padding: 0.2em;
+    width: 125px !important;
+    min-width: 125px;
+    max-width: 125px;
+    height: 60px;
   }
 
   .calendar-header .day-text {
@@ -338,7 +355,7 @@ button.reset-btn:hover {
   div#calendar-container.active .calendar .calendar-body {
     position: absolute;
     left: 59%;
-    top: 35.8%;
+    top: 36.8%;
     transform: translate(-50%, -50%);
     display: block;
     width: 70%;

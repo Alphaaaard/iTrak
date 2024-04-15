@@ -68,6 +68,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/map.css" />
         <link rel="stylesheet" href="../../src/css/map-choices.css" />
+        <link rel="stylesheet" href="../../src/css/map-container.css" />
 
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
     </head>

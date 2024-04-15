@@ -1576,7 +1576,7 @@ h5 {
     margin: unset;
     right: 0;
     width: unset;
-    padding: 1em;
+    padding: 1em 0.7em;
   }
 
   .icon {

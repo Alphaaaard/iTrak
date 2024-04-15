@@ -1,3 +1,7 @@
-.table-content{
-    border-top-left-radius:15px!important ;
+.table-content {
+  border-top-left-radius: 15px !important ;
+}
+
+.content-container {
+  margin-top: unset;
 }

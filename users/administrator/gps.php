@@ -635,7 +635,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 initMap();
                                 getLocationFromDatabase();
                                 // Refresh location every 1 minute
-                                setInterval(getLocationFromDatabase, 1000); // 1 seconds
+                                setInterval(getLocationFromDatabase, 30000); // 1 seconds
                             };
                         </script>
 

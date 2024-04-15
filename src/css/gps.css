@@ -105,8 +105,8 @@ td:last-child {
   display: flex;
   justify-content: center;
   align-items: center;
-  display: flex;
   align-content: center;
+  padding: 1em;
 }
 
 /* #content.hide .locationTbl {
@@ -286,6 +286,7 @@ td {
 
   #LocBurger {
     display: block;
+    margin-bottom: 0.5em;
   }
 
   .cont-header {
@@ -293,6 +294,7 @@ td {
     margin-bottom: 5px;
     justify-content: end;
     padding: 0;
+    margin: unset;
   }
 
   .tab-name-only {

@@ -68,6 +68,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/map.css" />
         <link rel="stylesheet" href="../../src/css/map-choices.css" />
+        <link rel="stylesheet" href="../../src/css/map-container.css" />
+
 
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
 
@@ -115,20 +117,20 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             /* You can adjust the size as needed */
         }
     </style>
-</head>
+    </head>
 
-<body>
-    <div class="loader" aria-label="Page loading, please wait." role="status">
-        <!-- SVG Loader here -->
-        <?php echo file_get_contents('map_loader.svg'); // Make sure the path is correct 
-        ?>
-    </div>
-    <!-- Additional page content and script to hide loader after 10 seconds -->
+    <body>
+        <div class="loader" aria-label="Page loading, please wait." role="status">
+            <!-- SVG Loader here -->
+            <?php echo file_get_contents('map_loader.svg'); // Make sure the path is correct 
+            ?>
+        </div>
+        <!-- Additional page content and script to hide loader after 10 seconds -->
 
         <!-- NAVBAR -->
         <div id="navbar" class="">
             <nav>
-            <div class="hamburger" id="hamburgerButton">
+                <div class="hamburger" id="hamburgerButton">
                     <i class="bi bi-list"></i>
                     <a href="#" class="brand" title="logo">
                         <!-- <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i> -->
@@ -686,7 +688,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 });
             });
         </script>
-  <script>
+        <script>
             setTimeout(function() {
                 var loader = document.querySelector('.loader');
                 loader.style.opacity = '0'; // Start fading out
