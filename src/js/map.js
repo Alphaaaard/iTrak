@@ -3,9 +3,14 @@ import { OrbitControls } from "https://cdn.skypack.dev/three@0.129.0/examples/js
 import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/DRACOLoader.js";
 
-let scene, camera, renderer, models = [], controls, raycaster, mouse;
+let scene,
+  camera,
+  renderer,
+  models = [],
+  controls,
+  raycaster,
+  mouse;
 let currentHighlighted = null;
-
 
 document.addEventListener("DOMContentLoaded", function () {
   init();
@@ -95,7 +100,9 @@ function createControls() {
 function loadModels() {
   const loader = new GLTFLoader();
   const dracoLoader = new DRACOLoader();
-  dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.7/");
+  dracoLoader.setDecoderPath(
+    "https://www.gstatic.com/draco/versioned/decoders/1.5.7/"
+  );
   dracoLoader.setDecoderConfig({ type: "js" });
   loader.setDRACOLoader(dracoLoader);
 
@@ -112,8 +119,8 @@ function loadModels() {
       path: "../../src/models/dino/TechVoc.glb",
       name: "Model 2",
       description: "Description for Model 2",
-      scale: 0.007  ,
-      position: { x: -1, y: -.75, z: -2.2 },
+      scale: 0.007,
+      position: { x: -1, y: -0.75, z: -2.2 },
       rotation: { x: 0, y: 1.5, z: 0 },
     },
     {
@@ -122,15 +129,15 @@ function loadModels() {
       description: "Description for Model 3",
       scale: 0.008,
       position: { x: -3.6, y: -1.31, z: -3.7 },
-      rotation: { x: 0, y: -.05, z: 0 },
+      rotation: { x: 0, y: -0.05, z: 0 },
     },
     {
       path: "../../src/models/dino/Belmonte.glb",
       name: "Model 4",
       description: "Description for Model 4",
-      scale: 0.050,
-      position: { x: -0.5, y: -.87, z: -2.7 },
-      rotation: { x: 0, y: -.07, z: 0 },
+      scale: 0.05,
+      position: { x: -0.5, y: -0.87, z: -2.7 },
+      rotation: { x: 0, y: -0.07, z: 0 },
     },
     {
       path: "../../src/models/dino/KorPhil.glb",
@@ -145,7 +152,7 @@ function loadModels() {
       name: "Model 6",
       description: "Description for Model 6",
       scale: 0.029,
-      position: { x: -2.455, y: -.7, z: -4.3 },
+      position: { x: -2.455, y: -0.7, z: -4.3 },
       rotation: { x: 0, y: 0, z: 0 },
     },
     {
@@ -153,7 +160,7 @@ function loadModels() {
       name: "Model 7",
       description: "Description for Model 7",
       scale: 0.007,
-      position: { x: -1.55, y: -.75, z: -4 },  
+      position: { x: -1.55, y: -0.75, z: -4 },
       rotation: { x: 0, y: 0, z: 0 },
     },
     {
@@ -161,7 +168,7 @@ function loadModels() {
       name: "Model 8",
       description: "Description for Model 8",
       scale: 0.026,
-      position: { x: -5.3 , y: -.9, z: -1.49 },
+      position: { x: -5.3, y: -0.9, z: -1.49 },
       rotation: { x: 0, y: 1.5, z: 0 },
     },
     {
@@ -177,7 +184,7 @@ function loadModels() {
       name: "Model 10",
       description: "Description for Model 10",
       scale: 0.025,
-      position: { x: -2.4, y: -.8, z: -4 },
+      position: { x: -2.4, y: -0.8, z: -4 },
       rotation: { x: 0, y: -1.64, z: 0 },
     },
   ];
@@ -284,11 +291,20 @@ function highlightModel(model, highlight = true) {
   });
 }
 
-
 function onDocumentMouseMove(event) {
   const canvasBounds = renderer.domElement.getBoundingClientRect();
-  mouse.x = ((event.clientX - canvasBounds.left) / (canvasBounds.right - canvasBounds.left)) * 2 - 1;
-  mouse.y = -((event.clientY - canvasBounds.top) / (canvasBounds.bottom - canvasBounds.top)) * 2 + 1;
+  mouse.x =
+    ((event.clientX - canvasBounds.left) /
+      (canvasBounds.right - canvasBounds.left)) *
+      2 -
+    1;
+  mouse.y =
+    -(
+      (event.clientY - canvasBounds.top) /
+      (canvasBounds.bottom - canvasBounds.top)
+    ) *
+      2 +
+    1;
 
   raycaster.setFromCamera(mouse, camera);
 
@@ -310,7 +326,6 @@ function onDocumentMouseMove(event) {
   }
   document.body.style.cursor = intersects.length ? "pointer" : "auto";
 }
-
 
 function onDocumentClick(event) {
   event.preventDefault();
@@ -338,7 +353,6 @@ function onDocumentClick(event) {
   }
 }
 
-
 animate();
 
 // Mobile JS
@@ -359,5 +373,3 @@ function handleResize() {
 window.addEventListener("resize", handleResize);
 
 handleResize();
-
-

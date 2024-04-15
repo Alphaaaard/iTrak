@@ -568,7 +568,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/main.js"></script>
         <script src="../../src/js/gps.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
-
+        <script src="../../src/js/logout.js"></script>
 
         <script>
             // Assuming showMarker is defined elsewhere to handle the map logic

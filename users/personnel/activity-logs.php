@@ -491,7 +491,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <!-- SCRIPTS -->
         <script src="../../src/js/main.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
-        <!-- BOOTSTRAP -->
+        <script src="../../src/js/logout.js"></script> <!-- BOOTSTRAP -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <!-- BOOTSTRAP -->
         <!-- SCRIPTS -->
@@ -565,40 +565,40 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         </script>
     </body>
     <script>
-            $(document).ready(function() {
-                $('.notification-item').on('click', function(e) {
-                    e.preventDefault();
-                    var activityId = $(this).data('activity-id');
-                    var notificationItem = $(this); // Store the clicked element
+        $(document).ready(function() {
+            $('.notification-item').on('click', function(e) {
+                e.preventDefault();
+                var activityId = $(this).data('activity-id');
+                var notificationItem = $(this); // Store the clicked element
 
-                    $.ajax({
-                        type: "POST",
-                        url: "update_single_notification.php", // The URL to the PHP file
-                        data: {
-                            activityId: activityId
-                        },
-                        success: function(response) {
-                            if (response.trim() === "Notification updated successfully") {
-                                // If the notification is updated successfully, remove the clicked element
-                                notificationItem.remove();
+                $.ajax({
+                    type: "POST",
+                    url: "update_single_notification.php", // The URL to the PHP file
+                    data: {
+                        activityId: activityId
+                    },
+                    success: function(response) {
+                        if (response.trim() === "Notification updated successfully") {
+                            // If the notification is updated successfully, remove the clicked element
+                            notificationItem.remove();
 
-                                // Update the notification count
-                                var countElement = $('#noti_number');
-                                var count = parseInt(countElement.text()) || 0;
-                                countElement.text(count > 1 ? count - 1 : '');
-                            } else {
-                                // Handle error
-                                console.error("Failed to update notification:", response);
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            // Handle AJAX error
-                            console.error("AJAX error:", status, error);
+                            // Update the notification count
+                            var countElement = $('#noti_number');
+                            var count = parseInt(countElement.text()) || 0;
+                            countElement.text(count > 1 ? count - 1 : '');
+                        } else {
+                            // Handle error
+                            console.error("Failed to update notification:", response);
                         }
-                    });
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle AJAX error
+                        console.error("AJAX error:", status, error);
+                    }
                 });
             });
-        </script>
+        });
+    </script>
 
 
     <script>

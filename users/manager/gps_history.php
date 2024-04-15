@@ -805,7 +805,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/main.js"></script>
         <script src="../../src/js/gps.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
-
+        <script src="../../src/js/logout.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 const calendarContainer = document.getElementById("calendar-container");

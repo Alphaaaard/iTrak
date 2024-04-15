@@ -519,7 +519,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="../../src/js/main.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
-        <!-- BOOTSTRAP -->
+        <script src="../../src/js/logout.js"></script> <!-- BOOTSTRAP -->
         <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
         <link rel="stylesheet" href="path/to/bootstrap.min.css">
         <script src="path/to/jquery.min.js"></script>

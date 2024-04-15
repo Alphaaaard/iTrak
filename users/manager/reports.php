@@ -909,6 +909,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/main.js"></script>
         <script src="../../src/js/archive.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
+        <script src="../../src/js/logout.js"></script>
         <script src="../../src/js/reports.js"></script>
         <!-- Add this script after your existing scripts -->
         <!-- Add this script after your existing scripts -->

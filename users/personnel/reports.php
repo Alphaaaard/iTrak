@@ -854,6 +854,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <script src="../../src/js/main.js"></script>
         <script src="../../src/js/archive.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
+        <script src="../../src/js/logout.js"></script>
         <script src="../../src/js/reports.js"></script>
         <!-- Add this script after your existing scripts -->
         <!-- Add this script after your existing scripts -->

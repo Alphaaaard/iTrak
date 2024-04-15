@@ -328,32 +328,32 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
           </a>
         </li>
         <div class="GPS-cont" onclick="toggleGPS()">
-                    <li class="GPS-dropdown">
-                        <div class="GPS-drondown-content">
-                            <div class="GPS-side-cont">
-                                <i class="bi bi-geo-alt"></i>
-                                <span class="text">GPS</span>
-                            </div>
-                            <div class="GPS-ind">
-                                <i id="chevron-icon" class="bi bi-chevron-down"></i>
-                            </div>
-                        </div>
-                    </li>
-                </div>
-                <div class="GPS-container">
-                    <li class="GPS-Tracker">
-                        <a href="./gps.php">
-                            <i class="bi bi-crosshair"></i>
-                            <span class="text">GPS Tracker</span>
-                        </a>
-                    </li>
-                    <li class="GPS-History">
-                        <a href="./gps_history.php">
-                            <i class="bi bi-radar"></i>
-                            <span class="text">GPS History</span>
-                        </a>
-                    </li>
-    </div>
+          <li class="GPS-dropdown">
+            <div class="GPS-drondown-content">
+              <div class="GPS-side-cont">
+                <i class="bi bi-geo-alt"></i>
+                <span class="text">GPS</span>
+              </div>
+              <div class="GPS-ind">
+                <i id="chevron-icon" class="bi bi-chevron-down"></i>
+              </div>
+            </div>
+          </li>
+        </div>
+        <div class="GPS-container">
+          <li class="GPS-Tracker">
+            <a href="./gps.php">
+              <i class="bi bi-crosshair"></i>
+              <span class="text">GPS Tracker</span>
+            </a>
+          </li>
+          <li class="GPS-History">
+            <a href="./gps_history.php">
+              <i class="bi bi-radar"></i>
+              <span class="text">GPS History</span>
+            </a>
+          </li>
+        </div>
         <li>
           <a href="./map.php">
             <i class="bi bi-map"></i>
@@ -400,22 +400,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             </div>
           </header>
           <div class="new-nav-container">
-                        <!--Content start of tabs-->
-          <div class="new-nav">
-            <ul>
-              <li><a href="#" class="nav-link" id="manager-pill" data-bs-target="pills-manager">Manager</a></li>
-              <li><a href="#" class="nav-link" id="personnel-pill" data-bs-target="pills-profile">Personnel</a></li>
-            </ul>
-          </div>
+            <!--Content start of tabs-->
+            <div class="new-nav">
+              <ul>
+                <li><a href="#" class="nav-link" id="manager-pill" data-bs-target="pills-manager">Manager</a></li>
+                <li><a href="#" class="nav-link" id="personnel-pill" data-bs-target="pills-profile">Personnel</a></li>
+              </ul>
+            </div>
 
-           <!-- Export button -->
-           <div class="export-mob-hide">
-                            <form method="post" id="exportForm">
-                                <input type="hidden" name="status" id="statusField" value="For Replacement">
-                                <button type="button" id="exportBtn" class="btn btn-outline-danger">Export Data</button>
-                            </form>
-                        </div>
-                    </div>
+            <!-- Export button -->
+            <div class="export-mob-hide">
+              <form method="post" id="exportForm">
+                <input type="hidden" name="status" id="statusField" value="For Replacement">
+                <button type="button" id="exportBtn" class="btn btn-outline-danger">Export Data</button>
+              </form>
+            </div>
+          </div>
 
           <div class="tab-content" id="myTabContent">
             <!--Maintenance Manager-->
@@ -661,7 +661,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <div class="col-4">
                           <label for="role" class="form-label">Role <span class="d-none text-danger error">*</span></label>
-                          <input type="text" class="form-control" id="roleField" name="role" required  readonly/>
+                          <input type="text" class="form-control" id="roleField" name="role" required readonly />
                         </div>
 
                         <div class="col-4">
@@ -708,17 +708,17 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <div class="col-4">
                           <label for="firstname" class="form-label">First name</label>
-                          <input type="text" class="form-control" id="firstnameEdit" name="firstname" oninput="this.value = this.value.replace(/\d/g, '')" readonly/>
+                          <input type="text" class="form-control" id="firstnameEdit" name="firstname" oninput="this.value = this.value.replace(/\d/g, '')" readonly />
                         </div>
 
                         <div class="col-4">
                           <label for="middlename" class="form-label">Middle name</label>
-                          <input type="text" class="form-control" id="middlenameEdit" name="middlename" oninput="this.value = this.value.replace(/\d/g, '')" readonly/>
+                          <input type="text" class="form-control" id="middlenameEdit" name="middlename" oninput="this.value = this.value.replace(/\d/g, '')" readonly />
                         </div>
 
                         <div class="col-4">
                           <label for="lastname" class="form-label">Last name</label>
-                          <input type="text" class="form-control" id="lastnameEdit" name="lastname" oninput="this.value = this.value.replace(/\d/g, '')" readonly/>
+                          <input type="text" class="form-control" id="lastnameEdit" name="lastname" oninput="this.value = this.value.replace(/\d/g, '')" readonly />
                         </div>
 
                         <div class="col-4">
@@ -739,12 +739,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <div class="col-4">
                           <label for="birthday" class="form-label">Birthday</label>
-                          <input type="date" class="form-control" id="birthdayEdit" max="2005-01-01" name="birthday" readonly/>
+                          <input type="date" class="form-control" id="birthdayEdit" max="2005-01-01" name="birthday" readonly />
                         </div>
 
                         <div class="col-4">
                           <label for="role" class="form-label">Role</label>
-                          <input type="text" class="form-control" id="roleEdit" name="role"  readonly/>
+                          <input type="text" class="form-control" id="roleEdit" name="role" readonly />
                         </div>
 
                         <div class="col-4">
@@ -784,6 +784,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     <script src="../../src/js/ajax.js"></script>
     <script src="../../src/js/staff.js"></script>
     <script src="../../src/js/profileModalController.js"></script>
+    <script src="../../src/js/logout.js"></script>
 
 
 
@@ -823,109 +824,109 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
       });
     </script>
     <script>
-       $(document).ready(function() {
-                // Bind the filter function to the input field
-                $("#search-box").on("input", function() {
-                    var query = $(this).val().toLowerCase();
-                    filterTable(query);
-                });
+      $(document).ready(function() {
+        // Bind the filter function to the input field
+        $("#search-box").on("input", function() {
+          var query = $(this).val().toLowerCase();
+          filterTable(query);
+        });
 
-                function filterTable(query) {
-                  // * these variables keep tracks of the existing rows on each table
-                    let managerHasData = false;
-                    let personnelHasData = false;
-                    
+        function filterTable(query) {
+          // * these variables keep tracks of the existing rows on each table
+          let managerHasData = false;
+          let personnelHasData = false;
 
-                    $(".manager-table tbody tr").each(function() {
-                        var row = $(this);
-                        var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
-                        var firstNameCell = row.find("td:eq(1)"); // FirstName column
-                        var middleNameCell = row.find("td:eq(2)"); // LastName column
-                        var lastNameCell = row.find("td:eq(3)"); // LastName column
-                        var roleCell = row.find("td:eq(10)"); // LastName column
 
-                        // Get the text content of each cell
-                        var archiveIDText = archiveIDCell.text().toLowerCase();
-                        var firstNameText = firstNameCell.text().toLowerCase();
-                        var middleNameText = middleNameCell.text().toLowerCase();
-                        var lastNameText = lastNameCell.text().toLowerCase();
-                        var roleText = roleCell.text().toLowerCase();
+          $(".manager-table tbody tr").each(function() {
+            var row = $(this);
+            var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
+            var firstNameCell = row.find("td:eq(1)"); // FirstName column
+            var middleNameCell = row.find("td:eq(2)"); // LastName column
+            var lastNameCell = row.find("td:eq(3)"); // LastName column
+            var roleCell = row.find("td:eq(10)"); // LastName column
 
-                        // Check if any of the cells contain the query
-                        var showRow = archiveIDText.includes(query) ||
-                            firstNameText.includes(query) ||
-                            middleNameText.includes(query) ||
-                            lastNameText.includes(query) ||
-                            roleText.includes(query) ||
-                            archiveIDText == query || // Exact match for Archive ID
-                            firstNameText == query || // Exact match for FirstName
-                            middleNameText == query || // Exact match for LastName
-                            lastNameText == query || // Exact match for LastName
-                            roleText == query; // Exact match for LastName
+            // Get the text content of each cell
+            var archiveIDText = archiveIDCell.text().toLowerCase();
+            var firstNameText = firstNameCell.text().toLowerCase();
+            var middleNameText = middleNameCell.text().toLowerCase();
+            var lastNameText = lastNameCell.text().toLowerCase();
+            var roleText = roleCell.text().toLowerCase();
 
-                        // Show or hide the row based on the result
-                        if (showRow) {
-                            managerHasData = true;
-                            row.show();
-                        } else {
-                            row.hide();
-                        }
-                    });
+            // Check if any of the cells contain the query
+            var showRow = archiveIDText.includes(query) ||
+              firstNameText.includes(query) ||
+              middleNameText.includes(query) ||
+              lastNameText.includes(query) ||
+              roleText.includes(query) ||
+              archiveIDText == query || // Exact match for Archive ID
+              firstNameText == query || // Exact match for FirstName
+              middleNameText == query || // Exact match for LastName
+              lastNameText == query || // Exact match for LastName
+              roleText == query; // Exact match for LastName
 
-                    $(".personnel-table tbody tr").each(function() {
-                        var row = $(this);
-                        var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
-                        var firstNameCell = row.find("td:eq(1)"); // FirstName column
-                        var middleNameCell = row.find("td:eq(2)"); // LastName column
-                        var lastNameCell = row.find("td:eq(3)"); // LastName column
-                        var roleCell = row.find("td:eq(10)"); // LastName column
+            // Show or hide the row based on the result
+            if (showRow) {
+              managerHasData = true;
+              row.show();
+            } else {
+              row.hide();
+            }
+          });
 
-                        // Get the text content of each cell
-                        var archiveIDText = archiveIDCell.text().toLowerCase();
-                        var firstNameText = firstNameCell.text().toLowerCase();
-                        var middleNameText = middleNameCell.text().toLowerCase();
-                        var lastNameText = lastNameCell.text().toLowerCase();
-                        var roleText = roleCell.text().toLowerCase();
+          $(".personnel-table tbody tr").each(function() {
+            var row = $(this);
+            var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
+            var firstNameCell = row.find("td:eq(1)"); // FirstName column
+            var middleNameCell = row.find("td:eq(2)"); // LastName column
+            var lastNameCell = row.find("td:eq(3)"); // LastName column
+            var roleCell = row.find("td:eq(10)"); // LastName column
 
-                        // Check if any of the cells contain the query
-                        var showRow = archiveIDText.includes(query) ||
-                            firstNameText.includes(query) ||
-                            middleNameText.includes(query) ||
-                            lastNameText.includes(query) ||
-                            roleText.includes(query) ||
-                            archiveIDText == query || // Exact match for Archive ID
-                            firstNameText == query || // Exact match for FirstName
-                            middleNameText == query || // Exact match for LastName
-                            lastNameText == query || // Exact match for LastName
-                            roleText == query; // Exact match for LastName
+            // Get the text content of each cell
+            var archiveIDText = archiveIDCell.text().toLowerCase();
+            var firstNameText = firstNameCell.text().toLowerCase();
+            var middleNameText = middleNameCell.text().toLowerCase();
+            var lastNameText = lastNameCell.text().toLowerCase();
+            var roleText = roleCell.text().toLowerCase();
 
-                        // Show or hide the row based on the result
-                        if (showRow) {
-                            personnelHasData = true;
-                            row.show();
-                        } else {
-                            row.hide();
-                        }
-                    });
+            // Check if any of the cells contain the query
+            var showRow = archiveIDText.includes(query) ||
+              firstNameText.includes(query) ||
+              middleNameText.includes(query) ||
+              lastNameText.includes(query) ||
+              roleText.includes(query) ||
+              archiveIDText == query || // Exact match for Archive ID
+              firstNameText == query || // Exact match for FirstName
+              middleNameText == query || // Exact match for LastName
+              lastNameText == query || // Exact match for LastName
+              roleText == query; // Exact match for LastName
 
-                    
-                    let child = $("<tr class='emptyMsg'><td>No results found</td></tr>"); //* creates a new tr-td child
+            // Show or hide the row based on the result
+            if (showRow) {
+              personnelHasData = true;
+              row.show();
+            } else {
+              row.hide();
+            }
+          });
 
-                    // * checks if rows are empty or not using the HasData variables
-                    //* appends the tr-td child on the manager or personnel table 
-                    if (!managerHasData) {
-                        $(".manager-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
-                    } else {
-                        $('.manager-table tbody .emptyMsg').remove();
-                    }
 
-                    if (!personnelHasData) {
-                        $(".personnel-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
-                    } else {
-                        $('.personnel-table tbody .emptyMsg').remove();
-                    }
-                }
-            });
+          let child = $("<tr class='emptyMsg'><td>No results found</td></tr>"); //* creates a new tr-td child
+
+          // * checks if rows are empty or not using the HasData variables
+          //* appends the tr-td child on the manager or personnel table 
+          if (!managerHasData) {
+            $(".manager-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+          } else {
+            $('.manager-table tbody .emptyMsg').remove();
+          }
+
+          if (!personnelHasData) {
+            $(".personnel-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+          } else {
+            $('.personnel-table tbody .emptyMsg').remove();
+          }
+        }
+      });
     </script>
     <script>
       function togglePasswordEDIT() {
@@ -933,122 +934,122 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         var toggleIcon = document.getElementById("togglePasswordEDIT");
 
         if (passwordField.type === "password") {
-            passwordField.type = "text";
-            toggleIcon.classList.remove("bi-eye-slash");
-            toggleIcon.classList.add("bi-eye");
+          passwordField.type = "text";
+          toggleIcon.classList.remove("bi-eye-slash");
+          toggleIcon.classList.add("bi-eye");
         } else {
-            passwordField.type = "password";
-            toggleIcon.classList.remove("bi-eye");
-            toggleIcon.classList.add("bi-eye-slash");
+          passwordField.type = "password";
+          toggleIcon.classList.remove("bi-eye");
+          toggleIcon.classList.add("bi-eye-slash");
         }
-    }
+      }
     </script>
 
-<script>
+    <script>
       function togglePasswordADD() {
         var passwordField = document.getElementById("passwordField");
         var toggleIcon = document.getElementById("togglePasswordADD");
 
         if (passwordField.type === "password") {
-            passwordField.type = "text";
-            toggleIcon.classList.remove("bi-eye-slash");
-            toggleIcon.classList.add("bi-eye");
+          passwordField.type = "text";
+          toggleIcon.classList.remove("bi-eye-slash");
+          toggleIcon.classList.add("bi-eye");
         } else {
-            passwordField.type = "password";
-            toggleIcon.classList.remove("bi-eye");
-            toggleIcon.classList.add("bi-eye-slash");
+          passwordField.type = "password";
+          toggleIcon.classList.remove("bi-eye");
+          toggleIcon.classList.add("bi-eye-slash");
         }
-    }
+      }
     </script>
 
-<script>
-document.getElementById('exportBtn').addEventListener('click', function() {
-    console.log("Export button clicked"); // Debugging line
-    var searchQuery = document.getElementById('search-box').value; // Get the value of the search box
-    var formData = new FormData(document.getElementById('exportForm'));
+    <script>
+      document.getElementById('exportBtn').addEventListener('click', function() {
+        console.log("Export button clicked"); // Debugging line
+        var searchQuery = document.getElementById('search-box').value; // Get the value of the search box
+        var formData = new FormData(document.getElementById('exportForm'));
 
-    // Directly determine the role based on the active tab class
-    var activeTab = document.querySelector('.nav-link.active').getAttribute('data-bs-target');
-    var role = activeTab === 'pills-manager' ? 'Maintenance Manager' : 'Maintenance Personnel';
+        // Directly determine the role based on the active tab class
+        var activeTab = document.querySelector('.nav-link.active').getAttribute('data-bs-target');
+        var role = activeTab === 'pills-manager' ? 'Maintenance Manager' : 'Maintenance Personnel';
 
-    formData.append('searchQuery', searchQuery); // Include the search query in the FormData
-    formData.append('role', role); // Append determined role to formData
+        formData.append('searchQuery', searchQuery); // Include the search query in the FormData
+        formData.append('role', role); // Append determined role to formData
 
-    Swal.fire({
-        title: 'Choose the file format',
-        showDenyButton: true,
-        confirmButtonText: 'PDF',
-        denyButtonText: 'Excel',
-    }).then((result) => {
-        if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Choose the file format',
+          showDenyButton: true,
+          confirmButtonText: 'PDF',
+          denyButtonText: 'Excel',
+        }).then((result) => {
+          if (result.isConfirmed) {
             formData.append('submit', 'Export to PDF');
             performExport(formData, 'export-pdf-staffs.php');
-        } else if (result.isDenied) {
+          } else if (result.isDenied) {
             formData.append('submit', 'Export to Excel');
             performExport(formData, 'export-excel-staffs.php');
-        }
-    });
-});
+          }
+        });
+      });
 
-function performExport(formData, endpoint) {
-    Swal.fire({
-        title: 'Exporting...',
-        html: 'Please wait while the file is being generated.',
-        allowOutsideClick: false,
-        showConfirmButton: false,
-        willOpen: () => {
+      function performExport(formData, endpoint) {
+        Swal.fire({
+          title: 'Exporting...',
+          html: 'Please wait while the file is being generated.',
+          allowOutsideClick: false,
+          showConfirmButton: false,
+          willOpen: () => {
             Swal.showLoading();
-        },
-    });
-
-    fetch(endpoint, {
-        method: 'POST',
-        body: formData,
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.blob();
-    })
-    .then(blob => {
-        const role = formData.get('role').replace(/ /g, '-'); // Get the role and replace spaces with hyphens for the file name
-        const fileExtension = getFileExtension(endpoint);
-        const fileName = `${role}.${fileExtension}`;
-
-        const downloadUrl = window.URL.createObjectURL(blob);
-        const downloadLink = document.createElement('a');
-        downloadLink.href = downloadUrl;
-        downloadLink.download = fileName;
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-
-        window.URL.revokeObjectURL(downloadUrl);
-        document.body.removeChild(downloadLink);
-
-        Swal.fire({
-            title: 'Exporting Done',
-            text: 'Your file has been successfully generated.',
-            icon: 'success',
-            confirmButtonText: 'OK'
+          },
         });
-    })
-    .catch(error => {
-        Swal.fire({
-            title: 'Error',
-            text: 'There was an issue generating the file.',
-            icon: 'error',
-            confirmButtonText: 'OK'
-        });
-    });
-}
 
-function getFileExtension(endpoint) {
-    if (endpoint.includes('pdf')) return 'pdf';
-    if (endpoint.includes('excel')) return 'xlsx';
-    return '';
-}
-</script>
+        fetch(endpoint, {
+            method: 'POST',
+            body: formData,
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.blob();
+          })
+          .then(blob => {
+            const role = formData.get('role').replace(/ /g, '-'); // Get the role and replace spaces with hyphens for the file name
+            const fileExtension = getFileExtension(endpoint);
+            const fileName = `${role}.${fileExtension}`;
+
+            const downloadUrl = window.URL.createObjectURL(blob);
+            const downloadLink = document.createElement('a');
+            downloadLink.href = downloadUrl;
+            downloadLink.download = fileName;
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+
+            window.URL.revokeObjectURL(downloadUrl);
+            document.body.removeChild(downloadLink);
+
+            Swal.fire({
+              title: 'Exporting Done',
+              text: 'Your file has been successfully generated.',
+              icon: 'success',
+              confirmButtonText: 'OK'
+            });
+          })
+          .catch(error => {
+            Swal.fire({
+              title: 'Error',
+              text: 'There was an issue generating the file.',
+              icon: 'error',
+              confirmButtonText: 'OK'
+            });
+          });
+      }
+
+      function getFileExtension(endpoint) {
+        if (endpoint.includes('pdf')) return 'pdf';
+        if (endpoint.includes('excel')) return 'xlsx';
+        return '';
+      }
+    </script>
   </body>
 
   </html>

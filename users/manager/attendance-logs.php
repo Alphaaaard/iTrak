@@ -506,7 +506,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         <!-- <script src="path/to/bootstrap.min.js"></script> -->
         <script src="../../src/js/profileModalController.js"></script>
-
+        <script src="../../src/js/logout.js"></script>
         <script>
             $(document).ready(function() {
                 $('.notification-item').on('click', function(e) {

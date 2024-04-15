@@ -545,6 +545,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <script src="../../src/js/main.js"></script>
         <script src="../../src/js/locationTracker.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
+        <script src="../../src/js/logout.js"></script>
         <script>
             setInterval(function() {
                 // Call a script to check if the user has timed out
