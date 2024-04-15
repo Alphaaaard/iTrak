@@ -1,14 +1,11 @@
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
 import { OrbitControls } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
+import { DRACOLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/DRACOLoader.js";
 
-let scene,
-  camera,
-  renderer,
-  models = [],
-  controls,
-  raycaster,
-  mouse;
+let scene, camera, renderer, models = [], controls, raycaster, mouse;
+let currentHighlighted = null;
+
 
 document.addEventListener("DOMContentLoaded", function () {
   init();
@@ -97,29 +94,34 @@ function createControls() {
 
 function loadModels() {
   const loader = new GLTFLoader();
+  const dracoLoader = new DRACOLoader();
+  dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.7/");
+  dracoLoader.setDecoderConfig({ type: "js" });
+  loader.setDRACOLoader(dracoLoader);
+
   const modelsData = [
     {
       path: "../../src/models/dino/Flooring.glb",
       name: "Model 1",
       description: "Description for Model 1",
-      scale: 0.15,
-      position: { x: 0, y: -1, z: -3 },
+      scale: 0.13,
+      position: { x: -6, y: -0.5, z: -3 },
       rotation: { x: 0, y: 1.5, z: 0 },
     },
     {
       path: "../../src/models/dino/TechVoc.glb",
       name: "Model 2",
       description: "Description for Model 2",
-      scale: 0.008  ,
-      position: { x: -1, y: -.75, z: -2.7 },
+      scale: 0.007  ,
+      position: { x: -1, y: -.75, z: -2.2 },
       rotation: { x: 0, y: 1.5, z: 0 },
     },
     {
       path: "../../src/models/dino/Yellow.glb",
       name: "Model 3",
       description: "Description for Model 3",
-      scale: 0.009,
-      position: { x: -4, y: -1.3, z: -4.1 },
+      scale: 0.008,
+      position: { x: -3.6, y: -1.31, z: -3.7 },
       rotation: { x: 0, y: -.05, z: 0 },
     },
     {
@@ -127,23 +129,23 @@ function loadModels() {
       name: "Model 4",
       description: "Description for Model 4",
       scale: 0.050,
-      position: { x: -1.1, y: -.85, z: -3.15 },
+      position: { x: -0.5, y: -.87, z: -2.7 },
       rotation: { x: 0, y: -.07, z: 0 },
     },
     {
       path: "../../src/models/dino/KorPhil.glb",
       name: "Model 5",
       description: "Description for Model 5",
-      scale: 0.15,
-      position: { x: -7, y: -1.3, z: 1.8 },
+      scale: 0.13,
+      position: { x: -6.5, y: -1.2, z: 1.5 },
       rotation: { x: 0, y: 4.6, z: 0 },
     },
     {
       path: "../../src/models/dino/Ballroom.glb",
       name: "Model 6",
       description: "Description for Model 6",
-      scale: 0.03,
-      position: { x: -2.5, y: -.7, z: -5.1 },
+      scale: 0.029,
+      position: { x: -2.455, y: -.7, z: -4.3 },
       rotation: { x: 0, y: 0, z: 0 },
     },
     {
@@ -151,15 +153,15 @@ function loadModels() {
       name: "Model 7",
       description: "Description for Model 7",
       scale: 0.007,
-      position: { x: -1.3, y: -.71, z: -4.7 },  
+      position: { x: -1.55, y: -.75, z: -4 },  
       rotation: { x: 0, y: 0, z: 0 },
     },
     {
       path: "../../src/models/dino/Admin.glb",
       name: "Model 8",
       description: "Description for Model 8",
-      scale: 0.03,
-      position: { x: -6, y: -.9, z: -1.8 },
+      scale: 0.026,
+      position: { x: -5.3 , y: -.9, z: -1.49 },
       rotation: { x: 0, y: 1.5, z: 0 },
     },
     {
@@ -167,7 +169,7 @@ function loadModels() {
       name: "Model 9",
       description: "Description for Model 9",
       scale: 0.05,
-      position: { x: -7.5, y: -1, z: -2.3 },
+      position: { x: -6.8, y: -1, z: -2 },
       rotation: { x: 0, y: -4.8, z: 0 },
     },
     {
@@ -175,7 +177,7 @@ function loadModels() {
       name: "Model 10",
       description: "Description for Model 10",
       scale: 0.025,
-      position: { x: -3.2, y: -.9, z: -4.75 },
+      position: { x: -2.4, y: -.8, z: -4 },
       rotation: { x: 0, y: -1.64, z: 0 },
     },
   ];
@@ -269,39 +271,46 @@ function animate() {
 //     camera.updateProjectionMatrix();
 //     renderer.setSize(window.innerWidth, window.innerHeight);
 // }
+function highlightModel(model, highlight = true) {
+  model.traverse((child) => {
+    if (child.isMesh) {
+      if (highlight) {
+        child.material.emissive.setHex(0x0000ff); // Set to blue
+        child.material.emissiveIntensity = 0.5; // Adjust intensity to your liking
+      } else {
+        child.material.emissive.setHex(0x000000); // Reset to no emissive color
+      }
+    }
+  });
+}
+
 
 function onDocumentMouseMove(event) {
   const canvasBounds = renderer.domElement.getBoundingClientRect();
-  mouse.x =
-    ((event.clientX - canvasBounds.left) /
-      (canvasBounds.right - canvasBounds.left)) *
-      2 -
-    1;
-  mouse.y =
-    -(
-      (event.clientY - canvasBounds.top) /
-      (canvasBounds.bottom - canvasBounds.top)
-    ) *
-      2 +
-    1;
+  mouse.x = ((event.clientX - canvasBounds.left) / (canvasBounds.right - canvasBounds.left)) * 2 - 1;
+  mouse.y = -((event.clientY - canvasBounds.top) / (canvasBounds.bottom - canvasBounds.top)) * 2 + 1;
 
   raycaster.setFromCamera(mouse, camera);
 
-  let isClickable = false;
-
-  for (let i = 0; i < models.length; i++) {
-    const model = models[i];
-    const intersects = raycaster.intersectObject(model, true);
-
-    if (intersects.length > 0) {
-      isClickable = true;
-      break;
+  let intersects = raycaster.intersectObjects(models, true);
+  if (intersects.length > 0) {
+    let selectedModel = intersects[0].object.parent; // Assuming the parent object is what you need
+    if (selectedModel !== currentHighlighted) {
+      if (currentHighlighted) {
+        highlightModel(currentHighlighted, false); // Unhighlight the previous model
+      }
+      currentHighlighted = selectedModel;
+      highlightModel(currentHighlighted, true); // Highlight the new model
+    }
+  } else {
+    if (currentHighlighted) {
+      highlightModel(currentHighlighted, false); // Unhighlight if no models are intersected
+      currentHighlighted = null;
     }
   }
-
-  // Set cursor style based on whether the mouse is over a clickable model or not
-  document.body.style.cursor = isClickable ? "pointer" : "auto";
+  document.body.style.cursor = intersects.length ? "pointer" : "auto";
 }
+
 
 function onDocumentClick(event) {
   event.preventDefault();

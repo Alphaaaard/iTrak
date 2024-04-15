@@ -356,6 +356,7 @@ button {
   justify-content: center;
   color: #163172;
   padding: 0 1em;
+  text-align: center;
 }
 .building-body input {
   border: none;
