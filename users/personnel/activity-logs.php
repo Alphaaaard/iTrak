@@ -409,7 +409,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                 } else {
                                     echo '<table>';
                                     echo "<div class=noDataImgH>";
-                                    echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
+                                    echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
                                     echo "</tbody>";
                                     echo "</table>";
                                     echo "</div>";
@@ -452,7 +452,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                 } else {
                                     echo '<table>';
                                     echo "<div class=noDataImgH>";
-                                    echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
+                                    echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
                                     echo "</tbody>";
                                     echo "</table>";
                                     echo "</div>";

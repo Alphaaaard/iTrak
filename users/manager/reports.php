@@ -590,7 +590,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 } else {
                                     echo '<table>';
                                     echo "<div class=noDataImgH>";
-                                    echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
+                                    echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
                                     echo "</div>";
                                     echo '</table>';
                                 }
@@ -634,7 +634,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 } else {
                                     echo '<table>';
                                     echo "<div class=noDataImgH>";
-                                    echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
+                                    echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
                                     echo "</div>";
                                     echo '</table>';
                                 }
@@ -677,7 +677,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 } else {
                                     echo '<table>';
                                     echo "<div class=noDataImgH>";
-                                    echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
+                                    echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
                                     echo "</div>";
                                     echo '</table>';
                                 }
@@ -734,7 +734,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 } else {
                                     echo '<table>';
                                     echo "<div class=noDataImgH>";
-                                    echo '<img src="../../src/img/emptyTable.jpg" alt="No data available" class="noDataImg"/>';
+                                    echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
                                     echo "</div>";
                                     echo '</table>';
                                 }
