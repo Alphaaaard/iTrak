@@ -32,8 +32,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                 $oldTimestamp = $row['timestamp'];
                 $oldQcLocation = $row['qculocation']; // Fetch the qculocation
             
-                if ($oldLatitude != 0 && $oldLongitude != 0) {
-                    // Insert the old location and qculocation into the locationhistory table
+                if ($oldLatitude != 0 && $oldLongitude != 0 && $oldQcLocation !== "Outside of QCU") {
+                    // Only insert the old location into the locationhistory table if it's not "Outside of QCU"
                     $insertLocationQuery = "INSERT INTO locationhistory (accountId, latitude, longitude, timestamp, qculocation) VALUES (?, ?, ?, ?, ?)";
                     $insertLocationStmt = $conn->prepare($insertLocationQuery);
                     if (!$insertLocationStmt) {
@@ -51,7 +51,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                         exit();
                     }
                 }
-
                 // Update the new location in the account table with adjusted timestamp
                 $updateLocationQuery = "UPDATE account SET latitude=?, longitude=?, timestamp=DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 8 HOUR) WHERE accountId=?";
                 $updateLocationStmt = $conn->prepare($updateLocationQuery);
