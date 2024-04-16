@@ -337,11 +337,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             $lastName = $row["lastName"];
                             $collapseId = "collapse" . $accountId;
                             $headerId = "heading" . $accountId;
+                            $latitude = $row["latitude"];
+                            $longitude = $row["longitude"];
 
+                            $status = ($latitude != 0 && $longitude != 0) ? 'Online' : 'Offline';
                             // Accordion item
+                            echo "<div class='gps-container'>";
                             echo "<div class='accordion-item'>";
                             echo "<h2 class='accordion-header' id='" . $headerId . "'>";
-                            echo "<button class='accordion-btn gps-info' type='button' data-bs-toggle='collapse' data-bs-target='#" . $collapseId . "' aria-expanded='false' aria-controls='" . $collapseId . "' data-firstName='" . $firstName . "'>";
+                            echo "<button class='accordion-btn gps-info' type='button' data-bs-toggle='collapse' data-bs-target='#" . $collapseId . "' aria-expanded='false' aria-controls='" . $collapseId . "' data-firstName='" . $firstName . "' data-accountId='" . $accountId . "'>";
                             echo "<img src='data:image/jpeg;base64," . base64_encode($row["picture"]) . "' alt='Profile Picture' class='rounded-img'/>";
                             echo "<span style='color: " . $row["color"] . ";'><i class='bi bi-circle-fill'></i></span>";
                             echo htmlspecialchars($firstName . " " . $lastName);
@@ -349,12 +353,18 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             echo "</h2>";
                             echo "<div id='" . $collapseId . "' class='accordion-collapse collapse' aria-labelledby='" . $headerId . "' data-bs-parent='#accordionGPS'>"; // Ensure this points to the main container ID
                             echo "<div class='accordion-body'>";
-                            echo "Latitude: " . $row["latitude"] . "<br>";
-                            echo "Longitude: " . $row["longitude"] . "<br>";
-                            echo "Timestamp: " . $row["timestamp"];
+                            echo "Status: " . $status . "<br>";
+                            echo "Timestamp: " . $row["timestamp"] . "<br>";
+
+                            // Only display location if status is 'Online'
+                            if ($status === 'Online') {
+                                echo "Location: " . $row["qculocation"] . "<br>";
+                            }
+
                             echo "</div>"; // End of accordion body
                             echo "</div>"; // End of accordion collapse
                             echo "</div>"; // End of accordion item
+                            echo "</div>"; // End of gps-container
                         }
                         echo "</div>"; // Close the main container for the accordion
                     } else {
