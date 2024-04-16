@@ -635,7 +635,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 initMap();
                                 getLocationFromDatabase();
                                 // Refresh location every 1 minute
-                                setInterval(getLocationFromDatabase, 1000); // 1 seconds
+                                setInterval(getLocationFromDatabase, 30000); // 1 seconds
                             };
                         </script>
 
@@ -710,7 +710,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/main.js"></script>
         <script src="../../src/js/gps.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
-
+        <script src="../../src/js/logout.js"></script>
         <script>
             document.querySelectorAll('.gps-info').forEach(function(button) {
                 button.addEventListener('click', function() {
