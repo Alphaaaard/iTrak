@@ -2717,6 +2717,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
 
         <link rel="stylesheet" href="../../../src/css/map.css" />
+        <link rel="stylesheet" href="../../../src/css/map-container.css" />
     </head>
     <style>
         .notification-indicator {
@@ -2845,8 +2846,6 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         </div>
                         <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i class="bi bi-person profile-icons"></i>Profile</a>
                         <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
-                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i class="bi bi-person profile-icons"></i>Profile</a>
-                        <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
                     </div>
                 <?php
             } else {
@@ -2918,7 +2917,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         <!-- FLOOR PLAN -->
                         <img class="Floor-container-1" src="../../../src/floors/techvocB/TV1F.png" alt="">
 
-                                                <div class="legend-body" id="legendBody">
+                        <div class="legend-body" id="legendBody">
                             <!-- Your legend body content goes here -->
                             <div class="legend-item"><img src="../../../src/legend/BULB.jpg" alt="" class="legend-img">
                                 <p>BULB</p>
@@ -2927,7 +2926,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                 <p>CASSETTE-AC</p>
                             </div>
                         </div>
-                        
+
                         <div class="map-nav">
                             <div class="map-legend">
                                 <div class="legend-color-green"></div>

@@ -54,6 +54,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link rel="stylesheet" href="../../../src/css/main.css" />
         <link rel="stylesheet" href="../../buildingCSS/BEB/BEBF1.css" />
         <link rel="stylesheet" href="../../../src/css/map.css" />
+        <link rel="stylesheet" href="../../../src/css/map-container.css" />
     </head>
 
     <body>

@@ -6325,6 +6325,7 @@ $stmt->close();
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
         <script src="../../src/js/locationTracker.js"></script>
         <link rel="stylesheet" href="../../../src/css/map.css" />
+        <link rel="stylesheet" href="../../../src/css/map-container.css" />
     </head>
     <style>
         .notification-indicator {

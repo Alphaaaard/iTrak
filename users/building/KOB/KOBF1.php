@@ -5897,6 +5897,7 @@ try {
         <link rel="stylesheet" href="../../../src/css/main.css" />
         <link rel="stylesheet" href="../../buildingCSS/KOB/KOBF1.css" />
         <link rel="stylesheet" href="../../../src/css/map.css" />
+        <link rel="stylesheet" href="../../../src/css/map-container.css" />
         <script src="../../src/js/locationTracker.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>

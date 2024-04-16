@@ -5850,6 +5850,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <link rel="stylesheet" href="../../../src/css/main.css" />
         <link rel="stylesheet" href="../../buildingCSS/KOB/KOBF1.css" />
         <link rel="stylesheet" href="../../../src/css/map.css" />
+        <link rel="stylesheet" href="../../../src/css/map-container.css" />
         <script src="../../src/js/locationTracker.js"></script>
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

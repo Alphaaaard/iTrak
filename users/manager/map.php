@@ -367,12 +367,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <h3>TechVoc Building</h3>
                             </div>
                             <div class="nav-container">
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="techvoc-floor1-tab" href="../building-manager/TEB/TEBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="techvoc-floor2-tab" href="../building-manager/TEB/TEBF2.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
-                                </li>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/TEB/TEBF1.php')" role="tab" aria-controls="floor1" aria-selected="true">1</button>
+
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/TEB/TEBF2.php')" role="tab" aria-controls="floor1" aria-selected="true">2</button>
                             </div>
                             </ul>
                         </div>
@@ -386,13 +383,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <h3>Old Academic Building</h3>
                             </div>
                             <div class="nav-container">
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="old-floor1-tab" href="../building-manager/OLB/OLBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="old-floor2-tab" href="../building-manager/OLB/OLBF1.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
-                                </li>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/OLB/OLBF1.php')" role="tab" aria-controls="floor1" aria-selected="true">1</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/OLB/OLBF2.php')" role="tab" aria-controls="floor2" aria-selected="false">2</button>
                             </div>
+
                             </ul>
                         </div>
                     </div>
@@ -405,19 +399,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <h3>Belmonte Building</h3>
                             </div>
                             <div class="nav-container">
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="belmonte-floor1-tab" href="../building-manager/BEB/BEBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="belmonte-floor2-tab" href="../building-manager/BEB/BEBF2.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="belmonte-floor3-tab" href="../building-manager/BEB/BEBF3.php" role="tab" aria-controls="floor3" aria-selected="false">3</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="belmonte-floor4-tab" href="../building-manager/BEB/BEBF4.php" role="tab" aria-controls="floor4" aria-selected="false">4</a>
-                                </li>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/BEB/BEBF1.php')" role="tab" aria-controls="floor1" aria-selected="true">1</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/BEB/BEBF2.php')" role="tab" aria-controls="floor2" aria-selected="false">2</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/BEB/BEBF3.php')" role="tab" aria-controls="floor3" aria-selected="false">3</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/BEB/BEBF4.php')" role="tab" aria-controls="floor4" aria-selected="false">4</button>
                             </div>
+
                             </ul>
                         </div>
                     </div>
@@ -430,16 +417,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <h3>KorPhil Building</h3>
                             </div>
                             <div class="nav-container">
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="korphil-floor1-tab" href="../building-manager/KOB/KOBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="korphil-floor2-tab" href="../building-manager/KOB/KOBF2.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="korphil-floor3-tab" href="../building-manager/KOB/KOBF3.php" role="tab" aria-controls="floor3" aria-selected="false">3</a>
-                                </li>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/KOB/KOBF1.php')" role="tab" aria-controls="floor1" aria-selected="true">1</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/KOB/KOBF2.php')" role="tab" aria-controls="floor2" aria-selected="false">2</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/KOB/KOBF3.php')" role="tab" aria-controls="floor3" aria-selected="false">3</button>
                             </div>
+
                             </ul>
                         </div>
                     </div>
@@ -452,10 +434,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <h3>Ballroom Building</h3>
                             </div>
                             <div class="nav-container">
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="ballroom-floor1-tab" href="../building-manager/CHB/CHBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
-                                </li>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/CHB/CHBF1.php')" role="tab" aria-controls="floor1" aria-selected="true">1</button>
                             </div>
+
                             </ul>
                         </div>
                     </div>
@@ -468,10 +449,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <h3>Multipurpose Building </h3>
                             </div>
                             <div class="nav-container">
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="multipurpose-floor1-tab" href="../building-manager/MUB/MUBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
-                                </li>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/MUB/MUBF1.php')" role="tab" aria-controls="floor1" aria-selected="true">1</button>
                             </div>
+
                             </ul>
                         </div>
                     </div>
@@ -484,19 +464,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <h3>Admin Building</h3>
                             </div>
                             <div class="nav-container">
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="admin-floor1-tab" href="../building-manager/ADB/ADBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="admin-floor2-tab" href="../building-manager/ADB/ADBF2.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="admin-floor3-tab" href="../building-manager/ADB/ADBF3.php" role="tab" aria-controls="floor3" aria-selected="false">3</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="admin-floor4-tab" href="../building-manager/ADB/ADBF4.php" role="tab" aria-controls="floor4" aria-selected="false">4</a>
-                                </li>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/ADB/ADBF1.php')" role="tab" aria-controls="floor1" aria-selected="true">1</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/ADB/ADBF2.php')" role="tab" aria-controls="floor2" aria-selected="false">2</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/ADB/ADBF3.php')" role="tab" aria-controls="floor3" aria-selected="false">3</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/ADB/ADBF4.php')" role="tab" aria-controls="floor4" aria-selected="false">4</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/ADB/ADBF5.php')" role="tab" aria-controls="floor5" aria-selected="false">5</button>
                             </div>
+
                             </ul>
                         </div>
                     </div>
@@ -509,31 +483,17 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <h3>Bautista Building</h3>
                             </div>
                             <div class="nav-container">
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="bautista-floor1-tab" href="../building-manager/BAB/BABF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class=" nav-link" id="bautista-floor2-tab" href="../building-manager/BAB/BABF2.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="bautista-floor3-tab" href="../building-manager/BAB/BABF3.php" role="tab" aria-controls="floor3" aria-selected="false">3</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="bautista-floor4-tab" href="../building-manager/BAB/BABF4.php" role="tab" aria-controls="floor4" aria-selected="false">4</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="bautista-floor5-tab" href="../building-manager/BAB/BABF5.php" role="tab" aria-controls="floor5" aria-selected="false">5</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="bautista-floor6-tab" href="../building-manager/BAB/BABF6.php" role="tab" aria-controls="floor6" aria-selected="false">6</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="bautista-floor7-tab" href="../building-manager/BAB/BABF7.php" role="tab" aria-controls="floor7" aria-selected="false">7</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="bautista-floor8-tab" href="../building-manager/BAB/BABF8.php" role="tab" aria-controls="floor8" aria-selected="false">8</a>
-                                </li>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/BAB/BABFB.php')" role="tab" aria-controls="floorb" aria-selected="true">B</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/BAB/BABF1.php')" role="tab" aria-controls="floor1" aria-selected="false">1</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/BAB/BABF2.php')" role="tab" aria-controls="floor2" aria-selected="false">2</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/BAB/BABF3.php')" role="tab" aria-controls="floor3" aria-selected="false">3</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/BAB/BABF4.php')" role="tab" aria-controls="floor4" aria-selected="false">4</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/BAB/BABF5.php')" role="tab" aria-controls="floor5" aria-selected="false">5</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/BAB/BABF6.php')" role="tab" aria-controls="floor6" aria-selected="false">6</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/BAB/BABF7.php')" role="tab" aria-controls="floor7" aria-selected="false">7</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/BAB/BABF8.php')" role="tab" aria-controls="floor8" aria-selected="false">8</button>
                             </div>
+
                             </ul>
                         </div>
                     </div>
@@ -546,28 +506,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <h3>Academic Building</h3>
                             </div>
                             <div class="nav-container">
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="academic-floor1-tab" href="../building-manager/NEB/NEWBF1.php" role="tab" aria-controls="floor1" aria-selected="true">1</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="academic-floor2-tab" href="../building-manager/NEB/NEWBF2.php" role="tab" aria-controls="floor2" aria-selected="false">2</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="academic-floor3-tab" href="../building-manager/NEB/NEWBF3.php" role="tab" aria-controls="floor3" aria-selected="false">3</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="academic-floor4-tab" href="../building-manager/NEB/NEWBF4.php" role="tab" aria-controls="floor4" aria-selected="false">4</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="academic-floor5-tab" href="../building-manager/NEB/NEWBF5.php" role="tab" aria-controls="floor4" aria-selected="false">5</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="academic-floor6-tab" href="../building-manager/NEB/NEWBF6.php" role="tab" aria-controls="floor4" aria-selected="false">6</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="academic-floor7-tab" href="../building-manager/NEB/NEWBF7.php" role="tab" aria-controls="floor4" aria-selected="false">7</a>
-                                </li>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/NEB/NEWBF1.php')" role="tab" aria-controls="floor1" aria-selected="true">1</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/NEB/NEWBF2.php')" role="tab" aria-controls="floor2" aria-selected="false">2</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/NEB/NEWBF3.php')" role="tab" aria-controls="floor3" aria-selected="false">3</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/NEB/NEWBF4.php')" role="tab" aria-controls="floor4" aria-selected="false">4</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/NEB/NEWBF5.php')" role="tab" aria-controls="floor5" aria-selected="false">5</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/NEB/NEWBF6.php')" role="tab" aria-controls="floor6" aria-selected="false">6</button>
+                                <button class="buttonskie" onclick="redirectToURL('../building-manager/NEB/NEWBF7.php')" role="tab" aria-controls="floor7" aria-selected="false">7</button>
                             </div>
+
                             </ul>
                         </div>
                     </div>
