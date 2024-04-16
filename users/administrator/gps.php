@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 
@@ -527,21 +528,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             // Update the markers with user images
                             // Update the markers with user images
                             async function updateMarkers(locations) {
-    for (const location of locations) {
-        const {
-            latitude,
-            longitude,
-            firstName,
-            qculocation,
-            timestamp,
-            picture
-        } = location;
-
-        if (qculocation === "Outside of QCU") {
-            // If the user is outside QCU, remove the marker and skip to the next iteration
-            removeMarker(firstName);
-            continue; // Skip this iteration, don't add a marker
-        }
+                                for (const location of locations) {
+                                    const {
+                                        latitude,
+                                        longitude,
+                                        firstName,
+                                        qculocation,
+                                        timestamp,
+                                        picture
+                                    } = location;
+                                    const color = location.color || "black";
 
                                     // Convert base64 string to Blob object
                                     const pictureBlob = base64ToBlob(picture);
@@ -717,46 +713,34 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/profileModalController.js"></script>
         <script src="../../src/js/logout.js"></script>
         <script>
-            // Function to fetch personnel location
-function fetchPersonnelLocation(accountId) {
-    // AJAX call to fetch personnel location
-    $.ajax({
-        type: "POST",
-        url: "fetch_personnel_location.php",
-        data: {
-            accountId: accountId
-        },
-        success: function(response) {
-            var locationData = JSON.parse(response);
-            if (locationData.status === "inside") {
-                // Update map with new location
-            } else if (locationData.status === "outside") {
-                // Handle case when personnel is outside
-            } else {
-                alert(locationData.error);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error("Error: ", status, error);
-        }
-    });
-}
+            document.querySelectorAll('.gps-info').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var accountId = this.getAttribute('data-accountId');
 
-document.querySelectorAll('.gps-info').forEach(function(button) {
-    button.addEventListener('click', function() {
-        var accountId = this.getAttribute('data-accountId');
-        fetchPersonnelLocation(accountId);
-    });
-});
+                    // AJAX call to fetch personnel location
+                    $.ajax({
+                        type: "POST",
+                        url: "fetch_personnel_location.php",
+                        data: {
+                            accountId: accountId
+                        },
+                        success: function(response) {
+                            var locationData = JSON.parse(response);
+                            if (locationData.status === "inside") {
 
-// Automatically fetch location every 30 seconds
-setInterval(function() {
-    document.querySelectorAll('.gps-info').forEach(function(button) {
-        var accountId = button.getAttribute('data-accountId');
-        fetchPersonnelLocation(accountId);
-    });
-}, 1000); // 30 seconds
+                                // Update map with new location
+                            } else if (locationData.status === "outside") {
 
+                            } else {
+                                alert(locationData.error);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error: ", status, error);
+                        }
+                    });
+                });
+            });
         </script>
 
         <script>
