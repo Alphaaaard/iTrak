@@ -537,7 +537,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             picture
         } = location;
 
-        if (qculocation === "Outside at QCU") {
+        if (qculocation === "Outside of QCU") {
             // If the user is outside QCU, remove the marker and skip to the next iteration
             removeMarker(firstName);
             continue; // Skip this iteration, don't add a marker
