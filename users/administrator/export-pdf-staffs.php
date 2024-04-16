@@ -36,17 +36,26 @@ if (isset($_POST['submit']) && isset($_POST['role'])) {
     $leftLogoData = base64_encode(file_get_contents($leftLogoPath));
     $rightLogoData = base64_encode(file_get_contents($rightLogoPath));
 
-        // Start the HTML content
-        $html = '<div style="text-align:center; margin-bottom: 20px;">';
-        $html .= '<img src="data:image/png;base64,' . $leftLogoData . '" style="height:50px;"/> ';
-        $html .= '<h1 style="display:inline; margin: 0 10px;">QUEZON CITY UNIVERSITY</h1>';
-        $html .= '<img src="data:image/png;base64,' . $rightLogoData . '" style="height:50px;"/> ';
-        $html .= '<div style="clear:both;"></div>'; // Ensure the text goes below images and header
-        $html .= '<h4 style="margin-top: 10px;">ITRAK MAINTENANCE TEAM</h4>'; // Your additional text
-        $html .= '</div>';
+        // Start the HTML content for PDF
+    $html = '<div style="text-align:center; margin-bottom: 20px;">' .
+    '<div style="display:inline-block; vertical-align:middle; height:50px;">' .
+    '<img src="data:image/png;base64,' . $leftLogoData . '" style="height:100%;"/>' .
+    '</div>' .
+    '<h1 style="display:inline; vertical-align:middle; margin: 0 20px;">QUEZON CITY UNIVERSITY</h1>' .
+    '<div style="display:inline-block; vertical-align:middle; height:50px;">' .
+    '<img src="data:image/png;base64,' . $rightLogoData . '" style="height:100%;"/>' .
+    '</div>' .
+    '<div style="clear:both;"></div>' .
+    '<h4 style="margin-top: 0px;">673 Quirino Hwy, Novaliches, Quezon City, Metro Manila</h4>' .
+    '<div style="clear:both;"></div>' .
+    '<h4 style="margin-top: 5px;">ITRAK MAINTENANCE TEAM</h4>' .
+    '<hr style="border:0; height:2px; background:#333; margin-top:5px;" />' . // Horizontal line
+    '</div>';
 
     $html .= '<h2 align="center">'.htmlspecialchars($role).' Accounts</h2>';
-    $html .= '<style> th, td { text-align: center; vertical-align: middle; border: 1px solid #ddd; padding: 8px; } img { border-radius: 50%; width: 50px; height: 50px; object-fit: cover; border: 2px solid #000; } table { border-collapse: collapse; width: 100%; } </style>';
+    $html .= '<style> th, td { text-align: center; vertical-align: middle; border: 1px solid #ddd; padding: 8px; } ' .
+    'img { border-radius: 50%; width: 50px; height: 50px; object-fit: cover; border: 2px solid #000; } ' .
+    'table { border-collapse: collapse; width: 100%; } </style>';
     $html .= '<table><tr>';
     $html .= '<th>Account ID</th>';
     $html .= '<th>Picture</th>';

@@ -32,21 +32,32 @@ if (isset($_POST['submit']) && isset($_POST['tab'])) {
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
-    $leftLogoPath = '../../src/img/left-logo.png'; // Correct path to your left logo
-    $rightLogoPath = '../../src/img/right-logo.png'; // Correct path to your right logo
+    // Convert images to base64 for logos
+    $leftLogoPath = '../../src/img/left-logo.png';
+    $rightLogoPath = '../../src/img/right-logo.png';
     $leftLogoData = base64_encode(file_get_contents($leftLogoPath));
     $rightLogoData = base64_encode(file_get_contents($rightLogoPath));
 
-    $html = '<div style="text-align:center; margin-bottom: 20px;">';
-    $html .= '<img src="data:image/png;base64,' . $leftLogoData . '" style="height:50px;"/> ';
-    $html .= '<h1 style="display:inline; margin: 0 10px;">QUEZON CITY UNIVERSITY</h1>';
-    $html .= '<img src="data:image/png;base64,' . $rightLogoData . '" style="height:50px;"/> ';
-    $html .= '<div style="clear:both;"></div>';
-    $html .= '<h4 style="margin-top: 10px;">ITRAK MAINTENANCE TEAM</h4>';
-    $html .= '</div>';
+   // Start the HTML content for PDF
+    $html = '<div style="text-align:center; margin-bottom: 20px;">' .
+    '<div style="display:inline-block; vertical-align:middle; height:50px;">' .
+    '<img src="data:image/png;base64,' . $leftLogoData . '" style="height:100%;"/>' .
+    '</div>' .
+    '<h1 style="display:inline; vertical-align:middle; margin: 0 20px;">QUEZON CITY UNIVERSITY</h1>' .
+    '<div style="display:inline-block; vertical-align:middle; height:50px;">' .
+    '<img src="data:image/png;base64,' . $rightLogoData . '" style="height:100%;"/>' .
+    '</div>' .
+    '<div style="clear:both;"></div>' .
+    '<h4 style="margin-top: 0px;">673 Quirino Hwy, Novaliches, Quezon City, Metro Manila</h4>' .
+    '<div style="clear:both;"></div>' .
+    '<h4 style="margin-top: 5px;">ITRAK MAINTENANCE TEAM</h4>' .
+    '<hr style="border:0; height:2px; background:#333; margin-top:5px;" />' . // Horizontal line
+    '</div>';
 
     $html .= '<h2 align="center">Activity Logs (' . htmlspecialchars($tab) . ')</h2>';
-    $html .= '<style> th, td { text-align: center; vertical-align: middle; border: 1px solid #ddd; padding: 8px; } table { border-collapse: collapse; width: 100%; } </style>';
+    $html .= '<style> th, td { text-align: center; vertical-align: middle; border: 1px solid #ddd; padding: 8px; } ' .
+    'img { border-radius: 50%; width: 50px; height: 50px; object-fit: cover; border: 2px solid #000; } ' .
+    'table { border-collapse: collapse; width: 100%; } </style>';
     $html .= '<table><tr>';
     $html .= '<th>Name</th>';
     $html .= '<th>Date</th>';
