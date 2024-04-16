@@ -138,58 +138,38 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             </div>
             <ul class="side-menu top">
                 <li>
-                    <a href="../../manager/dashboard.php">
+                    <a href="../../personnel/dashboard.php">
                         <i class="bi bi-grid"></i>
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../../manager/attendance-logs.php">
+                    <a href="../../personnel/attendance-logs.php">
                         <i class="bi bi-calendar-week"></i>
                         <span class="text">Attendance Logs</span>
                     </a>
                 </li>
-                <div class="GPS-cont" onclick="toggleGPS()">
-                    <li class="GPS-dropdown">
-                        <div class="GPS-drondown-content">
-                            <div class="GPS-side-cont">
-                                <i class="bi bi-geo-alt"></i>
-                                <span class="text">GPS</span>
-                            </div>
-                            <div class="GPS-ind">
-                                <i id="chevron-icon" class="bi bi-chevron-down"></i>
-                            </div>
-                        </div>
-                    </li>
-                </div>
-                <div class="GPS-container">
-                    <li class="GPS-Tracker">
-                        <a href="../../manager/gps.php">
-                            <i class="bi bi-crosshair"></i>
-                            <span class="text">GPS Tracker</span>
-                        </a>
-                    </li>
-                    <li class="GPS-History">
-                        <a href="../../manager/gps-history.php">
-                            <i class="bi bi-radar"></i>
-                            <span class="text">GPS History</span>
-                        </a>
-                    </li>
-                </div>
+
                 <li class="active">
-                    <a href="../../manager/map.php">
+                    <a href="../../personnel/map.php">
                         <i class="bi bi-map"></i>
                         <span class="text">Map</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../../manager/reports.php">
+                    <a href="../../personnel/assigned-tasks.php">
+                        <i class="bi bi-geo-alt"></i>
+                        <span class="text">Assigned Tasks</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../../personnel/reports.php">
                         <i class="bi bi-clipboard"></i>
                         <span class="text">Reports</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../../manager/activity-logs.php">
+                    <a href="../../personnel/activity-logs.php">
                         <i class="bi bi-arrow-counterclockwise"></i>
                         <span class="text">Activity Logs</span>
                     </a>
@@ -197,7 +177,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             </ul>
         </section>
         <div id="map-top-nav">
-            <a href="../../manager/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
+            <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
 
             <div class="legend-button" id="legendButton">
                 <i class="bi bi-info-circle"></i>
@@ -207,9 +187,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             <main>
                 <div class="content-container" id="content-container">
                     <div id="belmonte-F1" class="content">
+                        <!-- ASSETS -->
                         <!-- FLOOR PLAN -->
-                        <img src="../../../src/floors/belmonteB/BB1F.png" alt="" class="Floor-container">
-
+                        <img src="../../../src/floors/adminB/AB5F.png" alt="" class="Floor-container">
                         <div class="legend-body" id="legendBody">
                             <!-- Your legend body content goes here -->
                             <div class="legend-item"><img src="../../../src/legend/AC.jpg" alt="" class="legend-img">
@@ -229,6 +209,20 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             </div>
                             <div class="legend-item"><img src="../../../src/legend/TOILET-SEAT.jpg" alt="" class="legend-img">
                                 <p>TOILET SEAT</p>
+                            </div>
+                        </div>
+
+
+                        <div class="map-nav">
+                            <div class="map-legend">
+                                <div class="legend-color-green"></div>
+                                <p>Working</p>
+                                <div class="legend-color-under-maintenance"></div>
+                                <p>Under maintenance</p>
+                                <div class="legend-color-need-repair"></div>
+                                <p>Need repair</p>
+                                <div class="legend-color-for-replacement"></div>
+                                <p>For replacement</p>
                             </div>
                         </div>
                     </div>

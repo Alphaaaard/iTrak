@@ -176,16 +176,38 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </li>
             </ul>
         </section>
+        <div id="map-top-nav">
+            <a href="../../personnel/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
+
+            <div class="legend-button" id="legendButton">
+                <i class="bi bi-info-circle"></i>
+            </div>
+        </div>
         <section id="content">
             <main>
                 <div class="content-container" id="content-container">
                     <div id="belmonte-F1" class="content">
-                        <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-arrow-left"></i></a>
-                        <!-- ASSETS -->
-                        <img src='../image.php?id=1' style='width:100px; cursor:pointer;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal1' onclick='fetchAssetData(1);'>
-                        <img src='../image.php?id=2' style='width:100px; cursor:pointer;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal2' onclick='fetchAssetData(2);'>
                         <!-- FLOOR PLAN -->
                         <img class="Floor-container-1" src="../../../src/floors/oldAcademicB/OAB2F.png" alt="">
+
+                        <div class="legend-body" id="legendBody">
+                            <!-- Your legend body content goes here -->
+                            <div class="legend-item"><img src="../../../src/legend/AC.jpg" alt="" class="legend-img">
+                                <p>AIRCON</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/BULB.jpg" alt="" class="legend-img">
+                                <p>BULB</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/CHAIR.jpg" alt="" class="legend-img">
+                                <p>CHAIR</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/B-TABLE.jpg" alt="" class="legend-img">
+                                <p>TABLE</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/TOILET-SEAT.jpg" alt="" class="legend-img">
+                                <p>TOILET-SEAT</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Modal structure for id 1 -->
                     <div class='modal fade' id='imageModal1' tabindex='-1' aria-labelledby='imageModalLabel1' aria-hidden='true'>

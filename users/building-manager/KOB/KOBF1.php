@@ -6076,6 +6076,30 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
                     <!-- FLOOR PLAN -->
                     <img class="Floor-container-1 .NEWBF1" src="../../../src/floors/korPhil/Korphil1F.png" alt="">
+                                        <div class="legend-body" id="legendBody">
+                        <!-- Your legend body content goes here -->
+                        <div class="legend-item"><img src="../../../src/legend/AC.jpg" alt="" class="legend-img">
+                            <p>AIRCON</p>
+                        </div>
+                        <div class="legend-item"><img src="../../../src/legend/BULB.jpg" alt="" class="legend-img">
+                            <p>BULB</p>
+                        </div>
+                        <div class="legend-item"><img src="../../../src/legend/CASSETTE-AC.jpg" alt=""
+                                class="legend-img">
+                            <p>CASSETTE AC</p>
+                        </div>
+                        <div class="legend-item"><img src="../../../src/legend/DOOR.jpg" alt="" class="legend-img">
+                            <p>DOOR</p>
+                        </div>
+                        <div class="legend-item"><img src="../../../src/legend/SWING-DOOR.jpg" alt=""
+                                class="legend-img">
+                            <p>SWING DOOR</p>
+                        </div>
+                        <div class="legend-item"><img src="../../../src/legend/TOILET-SEAT.jpg" alt=""
+                                class="legend-img">
+                            <p>TOILET SEAT</p>
+                        </div>
+                    </div>
                     <div class="map-nav">
                         <div class="map-legend">
                             <div class="legend-item" data-status="Working">

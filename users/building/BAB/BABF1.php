@@ -10482,9 +10482,7 @@ try {
                 <div id="belmonte-F1" class="content">
                     <!-- FLOOR PLAN -->
                     <img src="../../../src/floors/bautistaB/BB1B.png" alt="" class="Floor-container">
-
-
-
+                    
                     <div class="legend-body" id="legendBody">
                         <!-- Your legend body content goes here -->
                         <div class="legend-item"><img src="../../../src/legend/AC.jpg" alt="" class="legend-img">

@@ -6040,6 +6040,13 @@ exit();
                 </li>
             </ul>
         </section>
+                <div id="map-top-nav">
+            <a href="../../personnel/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
+
+            <div class="legend-button" id="legendButton">
+                <i class="bi bi-info-circle"></i>
+            </div>
+        </div>
         <section id="content">
             <main>
                 <div class="content-container" id="content-container">
@@ -6047,8 +6054,18 @@ exit();
 
                         <!-- FLOOR PLAN -->
                         <img class="Floor-container-1 .NEWBF1" src="../../../src/floors/korPhil/Korphil1F.png" alt="">
+
+                                                <div class="legend-body" id="legendBody">
+                            <!-- Your legend body content goes here -->
+                            <div class="legend-item"><img src="../../../src/legend/AC.jpg" alt="" class="legend-img"><p>AIRCON</p></div>
+                            <div class="legend-item"><img src="../../../src/legend/BULB.jpg" alt="" class="legend-img" ><p>BULB</p></div>
+                            <div class="legend-item"><img src="../../../src/legend/CASSETTE-AC.jpg" alt="" class="legend-img"><p>CASSETTE AC</p></div>
+                            <div class="legend-item"><img src="../../../src/legend/DOOR.jpg" alt="" class="legend-img" ><p>DOOR</p></div>
+                            <div class="legend-item"><img src="../../../src/legend/SWING-DOOR.jpg" alt=""class="legend-img" ><p>SWING DOOR</p></div>
+                            <div class="legend-item"><img src="../../../src/legend/TOILET-SEAT.jpg" alt="" class="legend-img"><p>TOILET SEAT</p></div>
+                        </div>
+                        
                         <div class="map-nav">
-                        <a href="../../personnel/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
                             <div class="map-legend">
                                 <div class="legend-color-green"></div>
                                 <p>Working</p>

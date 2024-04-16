@@ -197,7 +197,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             </ul>
         </section>
         <div id="map-top-nav">
-            <a href="../../manager/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
+            <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
 
             <div class="legend-button" id="legendButton">
                 <i class="bi bi-info-circle"></i>
@@ -207,9 +207,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             <main>
                 <div class="content-container" id="content-container">
                     <div id="belmonte-F1" class="content">
+                        <!-- ASSETS -->
                         <!-- FLOOR PLAN -->
-                        <img src="../../../src/floors/belmonteB/BB1F.png" alt="" class="Floor-container">
-
+                        <img src="../../../src/floors/adminB/AB5F.png" alt="" class="Floor-container">
                         <div class="legend-body" id="legendBody">
                             <!-- Your legend body content goes here -->
                             <div class="legend-item"><img src="../../../src/legend/AC.jpg" alt="" class="legend-img">
@@ -229,6 +229,20 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             </div>
                             <div class="legend-item"><img src="../../../src/legend/TOILET-SEAT.jpg" alt="" class="legend-img">
                                 <p>TOILET SEAT</p>
+                            </div>
+                        </div>
+
+
+                        <div class="map-nav">
+                            <div class="map-legend">
+                                <div class="legend-color-green"></div>
+                                <p>Working</p>
+                                <div class="legend-color-under-maintenance"></div>
+                                <p>Under maintenance</p>
+                                <div class="legend-color-need-repair"></div>
+                                <p>Need repair</p>
+                                <div class="legend-color-for-replacement"></div>
+                                <p>For replacement</p>
                             </div>
                         </div>
                     </div>

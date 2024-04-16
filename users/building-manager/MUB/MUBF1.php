@@ -1174,6 +1174,26 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     <div id="belmonte-F1" class="content">
                         <!-- FLOOR PLAN -->
                         <img src="../../../src/floors/multipurpose/Multipurpose1F.png" alt="" class="Floor-container">
+
+                        <div class="legend-body" id="legendBody">
+                            <!-- Your legend body content goes here -->
+                            <div class="legend-item"><img src="../../../src/legend/AC.jpg" alt="" class="legend-img">
+                                <p>AIRCON</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/BULB.jpg" alt="" class="legend-img">
+                                <p>BULB</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/CHAIR.jpg" alt="" class="legend-img">
+                                <p>CHAIR</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/B-TABLE.jpg" alt="" class="legend-img">
+                                <p>TABLE</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/TOILET-SEAT.jpg" alt="" class="legend-img">
+                                <p>TOILET-SEAT</p>
+                            </div>
+                        </div>
+
                         <div class="map-nav">
                             <div class="map-legend">
                                 <div class="legend-item" data-status="Working">
