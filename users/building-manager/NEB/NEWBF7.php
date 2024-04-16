@@ -6467,9 +6467,9 @@ $stmt->close();
                 </div>
             </nav>
         </div>
-          <section id="sidebar">
+        <section id="sidebar">
             <div href="#" class="brand" title="logo">
-                <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
+                <i><img src="../../../src/img/UpKeep.png" alt="" class="logo" /></i>
                 <div class="mobile-sidebar-close">
                     <i class="bi bi-arrow-left-circle"></i>
                 </div>
@@ -6518,12 +6518,6 @@ $stmt->close();
                     <a href="../../manager/map.php">
                         <i class="bi bi-map"></i>
                         <span class="text">Map</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../../manager/assigned-tasks.php">
-                        <i class="bi bi-geo-alt"></i>
-                        <span class="text">Assigned Tasks</span>
                     </a>
                 </li>
                 <li>
