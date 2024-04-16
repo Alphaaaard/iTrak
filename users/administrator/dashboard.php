@@ -2573,11 +2573,21 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             datasets: [{
                 label: 'Manager',
                 data: filledManager,
-                // ... (your dataset settings)
+                borderColor: 'orange',
+                            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                            fill: true,
+                            pointRadius: 3,
+                            pointBackgroundColor: 'white',
+                            tension: 0.1
             }, {
                 label: 'Personnel',
                 data: filledPersonnel,
-                // ... (your dataset settings)
+                borderColor: 'purple',
+                            backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                            fill: true,
+                            pointRadius: 3,
+                            pointBackgroundColor: 'white',
+                            tension: 0.1
             }]
         },
         options: {
