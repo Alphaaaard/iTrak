@@ -20,6 +20,31 @@ input::-ms-clear {
   display: none;
 }
 
+img.rounded-img {
+  background-image: url("../img/noUserImg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.col-12.center-content img {
+  background-image: url("../img/noImg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-size: 0;
+}
+
+img[src=""],
+img:not([src]) {
+  display: block;
+  width: 50px;
+  height: 50px;
+  background-image: url("../img/noImg.jpg");
+  color: transparent; /* Hides any alt text */
+  text-indent: 100%; /* Moves any alt text off the view */
+  overflow: hidden; /* Ensures no part of the text is visible */
+  border: none; /* Removes any border */
+}
+
 /* NAVBAR */
 #navbar {
   align-items: center;
