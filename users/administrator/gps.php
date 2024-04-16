@@ -635,7 +635,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 initMap();
                                 getLocationFromDatabase();
                                 // Refresh location every 1 minute
-                                setInterval(getLocationFromDatabase, 30000); // 1 seconds
+                                setInterval(getLocationFromDatabase, 1000); // 1 seconds
                             };
                         </script>
 
@@ -710,47 +710,36 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/main.js"></script>
         <script src="../../src/js/gps.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
-        <script src="../../src/js/logout.js"></script>
+
         <script>
-            // Function to fetch personnel location
-function fetchPersonnelLocation(accountId) {
-    // AJAX call to fetch personnel location
-    $.ajax({
-        type: "POST",
-        url: "fetch_personnel_location.php",
-        data: {
-            accountId: accountId
-        },
-        success: function(response) {
-            var locationData = JSON.parse(response);
-            if (locationData.status === "inside") {
-                // Update map with new location
-            } else if (locationData.status === "outside") {
-                // Handle case when personnel is outside
-            } else {
-                alert(locationData.error);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error("Error: ", status, error);
-        }
-    });
-}
+            document.querySelectorAll('.gps-info').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var accountId = this.getAttribute('data-accountId');
 
-document.querySelectorAll('.gps-info').forEach(function(button) {
-    button.addEventListener('click', function() {
-        var accountId = this.getAttribute('data-accountId');
-        fetchPersonnelLocation(accountId);
-    });
-});
+                    // AJAX call to fetch personnel location
+                    $.ajax({
+                        type: "POST",
+                        url: "fetch_personnel_location.php",
+                        data: {
+                            accountId: accountId
+                        },
+                        success: function(response) {
+                            var locationData = JSON.parse(response);
+                            if (locationData.status === "inside") {
 
-// Automatically fetch location every 30 seconds
-setInterval(function() {
-    document.querySelectorAll('.gps-info').forEach(function(button) {
-        var accountId = button.getAttribute('data-accountId');
-        fetchPersonnelLocation(accountId);
-    });
-}, 1000); // 30 seconds
+                                // Update map with new location
+                            } else if (locationData.status === "outside") {
+
+                            } else {
+                                alert(locationData.error);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error: ", status, error);
+                        }
+                    });
+                });
+            });
         </script>
 
         <script>
