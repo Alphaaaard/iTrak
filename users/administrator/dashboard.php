@@ -2532,89 +2532,105 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         </script>
 
-        <script>
-            function fetchAttendanceData(period) {
-                $.ajax({
-                    url: 'get_attendance_data.php',
-                    type: 'GET',
-                    data: {
-                        period: period
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        var ctx = document.getElementById('attendanceChart').getContext('2d');
-                        var labels;
-                        var format = 'week';
-                        if (period === 'week') {
-                            labels = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
-                        } else if (period === 'month') {
-                            labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
-                            format = 'week';
-                        } else if (period === 'year') {
-                            labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                            format = 'month';
-                        }
+<script>
+    function fetchAttendanceData(period) {
+        $.ajax({
+            url: 'get_attendance_data.php',
+            type: 'GET',
+            data: {
+                period: period
+            },
+            dataType: 'json',
+            success: function(response) {
+    var ctx = document.getElementById('attendanceChart').getContext('2d');
+    var labels;
+    // Define the labels based on the period
+    if (period === 'week') {
+        labels = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
+    } else if (period === 'month') {
+        labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+    } else if (period === 'year') {
+        labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    }
 
-                        if (window.attendanceChart instanceof Chart) {
-                            window.attendanceChart.destroy();
+    console.log("Actual Received Manager Data:", response.Manager);
+    console.log("Actual Received Personnel Data:", response.Personnel);
+
+    var filledManager = fillMissingData(response.Manager, labels, response.labels);
+    var filledPersonnel = fillMissingData(response.Personnel, labels, response.labels);
+
+    console.log("Processed Manager Data:", filledManager);
+    console.log("Processed Personnel Data:", filledPersonnel);
+
+    // Update your chart initialization code to use the correct syntax for Chart.js 3.x
+    if (window.attendanceChart instanceof Chart) {
+        window.attendanceChart.destroy();
+    }
+    window.attendanceChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Manager',
+                data: filledManager,
+                // ... (your dataset settings)
+            }, {
+                label: 'Personnel',
+                data: filledPersonnel,
+                // ... (your dataset settings)
+            }]
+        },
+        options: {
+    scales: {
+        y: {
+            beginAtZero: true,
+            ticks: {
+                precision: 0, // No decimal places
+                stepSize: 1, // Force step size to 1
+                suggestedMax: 5 // Adjust this value as needed
+            }
+        },
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: {
+                            display: true,
+                            position: 'bottom'
                         }
-                        window.attendanceChart = new Chart(ctx, {
-                            type: 'line',
-                            data: {
-                                labels: labels,
-                                datasets: [{
-                                    label: 'Manager',
-                                    data: response.Manager,
-                                    borderColor: 'orange',
-                                    backgroundColor: 'rgba(255, 159, 64, 0.2)',
-                                    fill: true,
-                                    pointRadius: 5,
-                                    pointBackgroundColor: 'orange',
-                                    tension: 0.4
-                                }, {
-                                    label: 'Personnel',
-                                    data: response.Personnel,
-                                    borderColor: 'purple',
-                                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                                    fill: true,
-                                    pointRadius: 5,
-                                    pointBackgroundColor: 'purple',
-                                    tension: 0.4
-                                }]
-                            },
-                            options: {
-                                scales: {
-                                    y: {
-                                        beginAtZero: true
-                                    },
-                                    x: {
-                                        type: 'category',
-                                        labels: labels
-                                    }
-                                },
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                legend: {
-                                    display: true,
-                                    position: 'bottom'
-                                }
-                            }
-                        });
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("An error occurred: " + xhr.status + " " + error);
                     }
                 });
+            },
+            error: function(xhr, status, error) {
+                console.error("An error occurred: " + xhr.status + " " + error);
             }
+        });
+    }
 
-            document.getElementById('timeFilter').addEventListener('change', function() {
-                fetchAttendanceData(this.value);
-            });
+    document.getElementById('timeFilter').addEventListener('change', function() {
+        fetchAttendanceData(this.value);
+    });
 
-            $(document).ready(function() {
-                fetchAttendanceData('month');
-            });
-        </script>
+    $(document).ready(function() {
+        fetchAttendanceData('month');
+    });
+
+    function fillMissingData(data, labels, periodDataLabels) {
+    var filledData = new Array(labels.length).fill(0);
+
+    console.log("Expected labels:", labels);
+    console.log("Period data labels:", periodDataLabels);
+
+    for (let i = 0; i < periodDataLabels.length; i++) {
+        let labelIndex = labels.indexOf(periodDataLabels[i]);
+        console.log(`Data for ${periodDataLabels[i]}:`, data[i], `Index in labels:`, labelIndex);
+        if (labelIndex !== -1) {
+            filledData[labelIndex] = data[i];
+        }
+    }
+    return filledData;
+}
+
+</script>
 
         <script>
             $(document).ready(function() {
