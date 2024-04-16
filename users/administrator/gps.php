@@ -705,85 +705,74 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </div>
         </div>
-
-        <!-- CONTENT -->
-        <!-- SCRIPTS -->
-        <script src="../../src/js/main.js"></script>
-        <script src="../../src/js/gps.js"></script>
-        <script src="../../src/js/profileModalController.js"></script>
-        <script src="../../src/js/logout.js"></script>
-        <script>
-            document.querySelectorAll('.gps-info').forEach(function(button) {
-                button.addEventListener('click', function() {
-                    var accountId = this.getAttribute('data-accountId');
-
-                    // AJAX call to fetch personnel location
-                    $.ajax({
-                        type: "POST",
-                        url: "fetch_personnel_location.php",
-                        data: {
-                            accountId: accountId
-                        },
-                        success: function(response) {
-                            var locationData = JSON.parse(response);
-                            if (locationData.status === "inside") {
-
-                                // Update map with new location
-                            } else if (locationData.status === "outside") {
-
-                            } else {
-                                alert(locationData.error);
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            console.error("Error: ", status, error);
-                        }
-                    });
-                });
-            });
-        </script>
-
-        <script>
-            // Assuming showMarker is defined elsewhere to handle the map logic
-            document.querySelectorAll('.gps-info').forEach(function(button) {
-                button.addEventListener('click', function() {
-                    var firstName = this.getAttribute('data-firstName');
-                    showMarker(firstName); // Call the showMarker function with the clicked person's first name
-                });
-            });
-        </script>
-
-        <script>
-            var accordionButtons = document.querySelectorAll('.gps-info');
-            accordionButtons.forEach(function(button) {
-                button.addEventListener('click', function() {
-                    var firstName = this.getAttribute('data-firstName');
-                    showMarker(firstName); // Call the showMarker function with the clicked person's first name
-                });
-            });
-        </script>
-        <script>
-            // Assume this is a function that checks whether GPS is active or not
-            function isGPSActive() {
-                // Replace this with your logic to check if GPS is active
-                // For the sake of example, let's assume GPS is active
-                return true;
+<!-- CONTENT -->
+<!-- SCRIPTS -->
+<script src="../../src/js/main.js"></script>
+<script src="../../src/js/gps.js"></script>
+<script src="../../src/js/profileModalController.js"></script>
+<script src="../../src/js/logout.js"></script>
+<script>
+    // Function to fetch personnel location
+    function fetchPersonnelLocation(accountId) {
+        // AJAX call to fetch personnel location
+        $.ajax({
+            type: "POST",
+            url: "fetch_personnel_location.php",
+            data: {
+                accountId: accountId
+            },
+            success: function(response) {
+                var locationData = JSON.parse(response);
+                if (locationData.status === "inside") {
+                    // Update map with new location
+                } else if (locationData.status === "outside") {
+                    // Handle case when personnel is outside
+                } else {
+                    alert(locationData.error);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("Error: ", status, error);
             }
+        });
+    }
 
-            // Get the GPS History menu item
-            var gpsHistoryMenuItem = document.querySelector('.GPS-History');
+    // Function to handle click event for personnel location
+    document.querySelectorAll('.gps-info').forEach(function(button) {
+        button.addEventListener('click', function() {
+            var accountId = this.getAttribute('data-accountId');
+            fetchPersonnelLocation(accountId);
+            var firstName = this.getAttribute('data-firstName');
+            showMarker(firstName); // Call the showMarker function with the clicked person's first name
+        });
+    });
 
-            // Check if GPS is active
-            if (!isGPSActive()) {
-                // If GPS is not active, hide the GPS History menu item
-                gpsHistoryMenuItem.style.display = 'none';
-            }
-        </script>
+    // Automatically fetch location every 30 seconds
+    setInterval(function() {
+        document.querySelectorAll('.gps-info').forEach(function(button) {
+            var accountId = button.getAttribute('data-accountId');
+            fetchPersonnelLocation(accountId);
+        });
+    }, 1000); // 30 seconds
 
-        <!-- BOOTSTRAP -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-        <!-- BOOTSTRAP -->
-        <!-- SCRIPTS -->
+    // Check if GPS is active and hide GPS History menu item if not
+    function isGPSActive() {
+        // Replace this with your logic to check if GPS is active
+        // For the sake of example, let's assume GPS is active
+        return true;
+    }
+
+    var gpsHistoryMenuItem = document.querySelector('.GPS-History');
+    if (!isGPSActive()) {
+        gpsHistoryMenuItem.style.display = 'none';
+    }
+</script>
+
+<!-- BOOTSTRAP -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<!-- BOOTSTRAP -->
+<!-- SCRIPTS -->
+
     </body>
 
     </html>
