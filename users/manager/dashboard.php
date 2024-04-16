@@ -1,9 +1,8 @@
 <?php
 session_start();
 include_once ("../../config/connection.php");
-date_default_timezone_set('Asia/Manila');
 $conn = connection();
-
+date_default_timezone_set('Asia/Manila');
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
 
@@ -31,7 +30,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
                 FROM activitylogs AS al
                JOIN account AS acc ON al.accountID = acc.accountID
-               WHERE  al.seen = '0' AND al.accountID != ?
+               WHERE al.m_seen= '0' AND al.accountID != ?  AND action NOT LIKE '%logged in'
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
 
@@ -46,7 +45,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $resultLatestLogs = $stmtLatestLogs->get_result();
 
 
-    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE m_seen= '0' AND action NOT LIKE '%logged in' AND accountID != ?";
     $stmt = $conn->prepare($unseenCountQuery);
     $stmt->bind_param("i", $loggedInAccountId);
     $stmt->execute();
@@ -551,6 +550,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </ul>
     </section>
     <!-- SIDEBAR -->
+
     <!-- CONTENT -->
     <section id="content">
         <!-- MAIN -->
@@ -2409,17 +2409,21 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             </div>
         </div>
         <!--End of div for attendance report chart-->
-
         <div class="calendar-container">
             <div class="calendar">
+
                 <div class="month-indicator">
+
                     <span class="today-btn">Today</span>
+
                     <input type="text" id="datepicker" style="display: none;">
+
                     <div class="date-selector">
                         <span class="month clickMe span-label">January</span>
                         <span class="year clickMe span-label-2">2024</span>
                     </div>
                 </div>
+
                 <div class="calendar-ulit">
                     <div class="day-of-week">
                         <div>SUN</div>
@@ -2430,21 +2434,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div>FRI</div>
                         <div>SAT</div>
                     </div>
+
                     <div class="date-grid">
                         <!-- Dynamically generated dates will go here -->
                     </div>
                 </div>
+
             </div>
+
         </div>
         <!--End of div for calendar-container-->
-
         <!-- Building Filter and Chart Container -->
         <div class="doughnut-chart-container">
             <div class="statistics">
                 <h5>Select a Building</h5>
                 <div class="filter-container">
                     <select id="filter-select" onchange="updateChart()">
-                        <option value="">Choose A Building</option>
                         <option value="all">All Buildings</option>
                         <?php
                         $buildingQuery = "SELECT DISTINCT building FROM asset";
@@ -2529,6 +2534,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         });
     </script>
+
     <script>
         // Status to color mapping
         var statusColors = {
@@ -2610,25 +2616,17 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 success: function (response) {
                     var ctx = document.getElementById('attendanceChart').getContext('2d');
                     var labels;
-                    // Define the labels based on the period
+                    var format = 'week';
                     if (period === 'week') {
                         labels = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
                     } else if (period === 'month') {
                         labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+                        format = 'week';
                     } else if (period === 'year') {
                         labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                        format = 'month';
                     }
 
-                    console.log("Actual Received Manager Data:", response.Manager);
-                    console.log("Actual Received Personnel Data:", response.Personnel);
-
-                    var filledManager = fillMissingData(response.Manager, labels, response.labels);
-                    var filledPersonnel = fillMissingData(response.Personnel, labels, response.labels);
-
-                    console.log("Processed Manager Data:", filledManager);
-                    console.log("Processed Personnel Data:", filledPersonnel);
-
-                    // Update your chart initialization code to use the correct syntax for Chart.js 3.x
                     if (window.attendanceChart instanceof Chart) {
                         window.attendanceChart.destroy();
                     }
@@ -2638,34 +2636,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             labels: labels,
                             datasets: [{
                                 label: 'Manager',
-                                data: filledManager,
+                                data: response.Manager,
                                 borderColor: 'orange',
                                 backgroundColor: 'rgba(255, 159, 64, 0.2)',
                                 fill: true,
-                                pointRadius: 3,
-                                pointBackgroundColor: 'white',
-                                tension: 0.1
+                                pointRadius: 5,
+                                pointBackgroundColor: 'orange',
+                                tension: 0.4
                             }, {
                                 label: 'Personnel',
-                                data: filledPersonnel,
+                                data: response.Personnel,
                                 borderColor: 'purple',
                                 backgroundColor: 'rgba(153, 102, 255, 0.2)',
                                 fill: true,
-                                pointRadius: 3,
-                                pointBackgroundColor: 'white',
-                                tension: 0.1
+                                pointRadius: 5,
+                                pointBackgroundColor: 'purple',
+                                tension: 0.4
                             }]
                         },
                         options: {
                             scales: {
                                 y: {
-                                    beginAtZero: true,
-                                    ticks: {
-                                        precision: 0, // No decimal places
-                                        stepSize: 1, // Force step size to 1
-                                        suggestedMax: 5 // Adjust this value as needed
-                                    }
+                                    beginAtZero: true
                                 },
+                                x: {
+                                    type: 'category',
+                                    labels: labels
+                                }
                             },
                             responsive: true,
                             maintainAspectRatio: false,
@@ -2689,23 +2686,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $(document).ready(function () {
             fetchAttendanceData('month');
         });
-
-        function fillMissingData(data, labels, periodDataLabels) {
-            var filledData = new Array(labels.length).fill(0);
-
-            console.log("Expected labels:", labels);
-            console.log("Period data labels:", periodDataLabels);
-
-            for (let i = 0; i < periodDataLabels.length; i++) {
-                let labelIndex = labels.indexOf(periodDataLabels[i]);
-                console.log(`Data for ${periodDataLabels[i]}:`, data[i], `Index in labels:`, labelIndex);
-                if (labelIndex !== -1) {
-                    filledData[labelIndex] = data[i];
-                }
-            }
-            return filledData;
-        }
-
     </script>
 
     <script>
@@ -2724,7 +2704,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 type: 'GET',
                 dataType: 'json',
                 success: function (employeeNames) {
-                    $('#employeeFilter').empty().append($('<option>').text('Choose Personnel').attr('value', ''));
+                    $('#employeeFilter').empty().append($('<option>').text('Select Employee').attr('value', ''));
                     employeeNames.forEach(function (name) {
                         $('#employeeFilter').append($('<option>').text(name).attr('value', name));
                     });
@@ -2881,7 +2861,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     <script src="../../src/js/dashboard.js"></script>
     <script src="../../src/js/profileModalController.js"></script>
     <script src="../../src/js/logout.js"></script>
-
 
 </body>
 
