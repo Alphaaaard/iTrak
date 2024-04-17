@@ -60,12 +60,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <!-- CSS -->
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/gps.css" />
-        <script>
-        // This script will reload the page every 1000 milliseconds (1 second)
-        setTimeout(function(){
-            window.location.reload(1);
-        }, 1000);
-    </script>
+        
     </head>
     <style>
         .notification-indicator {
@@ -288,7 +283,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </section>
         <!-- SIDEBAR -->
         <!-- CONTENT -->
+      
         <section id="content">
+        <script>
+        // This script will reload the page every 1000 milliseconds (1 second)
+        setTimeout(function(){
+            window.location.reload(1);
+        }, 1000);
+    </script>
             <!-- MAIN -->
             <main>
                 <header>
@@ -297,6 +299,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div id="LocBurger" onclick="showLocation()"><i class="bi bi-list"></i></div>
                     </div>
                 </header>
+                
                 <div class="content-container">
                     <div class="locationTbl" id="locationTbl">
                         <?php
