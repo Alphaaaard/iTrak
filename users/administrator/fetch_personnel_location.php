@@ -50,7 +50,7 @@ $buildings = [
     'Multipurpose Building' => [
         ['lat' => 14.70046, 'long' => 121.03401, 'radius' =>  16.68],
 
-        ['lat' => 14.66368, 'long' => 121.04499, 'radius' =>  16.68],
+       
     ],
 
     'Academic Building' => [
@@ -61,7 +61,7 @@ $buildings = [
         ['lat' => 14.70078, 'long' => 121.03203, 'radius' => 24.77],
         ['lat' => 14.70108, 'long' => 121.03223, 'radius' => 26],
         ['lat' => 14.70095, 'long' => 121.03181, 'radius' => 27.10],
-        ['lat' => 14.69406, 'long' => 121.02914, 'radius' => 36],
+       
 
     ],
 
