@@ -61,12 +61,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/gps.css" />
         <script>
-    // This script will reload the page every 1000 milliseconds (1 second)
+    // This script will reload the page every 1000 milliseconds (1 second) without displaying the white indicator
     setTimeout(function(){
-        window.history.replaceState(null, null, window.location.pathname + window.location.search);
-        window.location.reload(1);
+        location.reload();
     }, 1000);
 </script>
+
 
     </head>
     <style>
