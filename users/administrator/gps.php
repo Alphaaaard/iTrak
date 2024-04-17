@@ -362,20 +362,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             echo "No users found.";
                         }
                         ?>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    setInterval(function() {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'gps.php', true);
-        xhr.onload = function() {
-            if (this.status === 200) {
-                document.getElementById('locationTbl').innerHTML = this.responseText;
-            }
-        };
-        xhr.send();
-    }, 1000); // Refresh every 1000 milliseconds (1 second)
-});
-</script>
+
                     </div>
                     <div id="map">
                         <!-- User Table Section -->
@@ -735,6 +722,20 @@ document.addEventListener("DOMContentLoaded", function() {
         <script src="../../src/js/gps.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
         <script src="../../src/js/logout.js"></script>
+        <script>
+document.addEventListener("DOMContentLoaded", function() {
+    setInterval(function() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'gps.php', true);
+        xhr.onload = function() {
+            if (this.status === 200) {
+                document.getElementById('locationTbl').innerHTML = this.responseText;
+            }
+        };
+        xhr.send();
+    }, 5000); // Refresh every 1000 milliseconds (1 second)
+});
+</script>
         <script>
             // Function to fetch personnel location
 function fetchPersonnelLocation(accountId) {
