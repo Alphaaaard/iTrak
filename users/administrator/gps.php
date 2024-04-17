@@ -807,9 +807,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'gps.php', true);
         xhr.onload = function() {
-            if (this.status === 200) {
-                document.getElementById('locationTbl').innerHTML = this.responseText;
-            }
+           
         };
         xhr.send();
     }, 5000); // Refresh every 1000 milliseconds (1 second)
