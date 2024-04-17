@@ -48,7 +48,9 @@ $buildings = [
     ],
 
     'Multipurpose Building' => [
-        ['lat' => 14.70046, 'long' => 121.03401, 'radius' =>  16.68]
+        ['lat' => 14.70046, 'long' => 121.03401, 'radius' =>  16.68],
+
+        ['lat' => 14.66368, 'long' => 121.04499, 'radius' =>  16.68],
     ],
 
     'Academic Building' => [
