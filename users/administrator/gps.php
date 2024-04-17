@@ -543,6 +543,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         continue; // Skip this iteration, don't add a marker
                                     }
 
+                                    // Check if latitude and longitude are both 0
+                                    if (latitude === 0 && longitude === 0) {
+                                        // If both are 0, remove the marker and skip to the next iteration
+                                        removeMarker(firstName);
+                                        continue;
+                                    }
+
                                     // Convert base64 string to Blob object
                                     const pictureBlob = base64ToBlob(picture);
 
