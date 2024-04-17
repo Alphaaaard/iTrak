@@ -810,7 +810,7 @@ document.addEventListener("DOMContentLoaded", function() {
         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); // Set custom header for AJAX request
         xhr.onload = function() {
             if (this.status === 200) {
-                document.getElementById('locationTbl').innerHTML = this.responseText;
+                document.getElementById('gps-container').innerHTML = this.responseText;
             }
         };
         xhr.send();
