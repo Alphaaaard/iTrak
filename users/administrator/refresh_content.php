@@ -6,6 +6,9 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Set default timezone to Asia/Manila
+date_default_timezone_set('Asia/Manila');
+
 $currentDate = date('Y-m-d');
 
 $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp, a.qculocation, a.color, a.picture
@@ -17,7 +20,7 @@ $result = $conn->query($sql);
 
 // Display the user table
 if ($result->num_rows > 0) {
-    echo "<div class='accordion'id='accordionGPS'>";
+    echo "<div class='accordion' id='accordionGPS'>";
     echo "<div class='fake-header'>";
     echo "<p>NAME</p>";
     echo "</div>";
