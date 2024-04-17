@@ -671,10 +671,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 });
                             }
 
-
-
-
-
                             function removeMarker(firstName) {
                                 const marker = markersByFirstName[firstName];
                                 if (marker) {
@@ -701,45 +697,59 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     // Combine first name, location, and timestamp for marker
                                     const locationInfo = `Firstname: ${firstName}<br>Location: ${qculocation}<br>Timestamp: ${timestamp}`;
 
-                                    // Check if a marker with this firstName already exists
-                                    let existingMarker = markersByFirstName[firstName];
+                                    // Check if the timestamp corresponds to the current date
+                                    const locationDate = new Date(timestamp);
+                                    const currentDate = new Date();
+                                    if (
+                                        locationDate.getDate() === currentDate.getDate() &&
+                                        locationDate.getMonth() === currentDate.getMonth() &&
+                                        locationDate.getFullYear() === currentDate.getFullYear()
+                                    ) {
+                                        // Marker is for today's date
+                                        // Check if a marker with this firstName already exists
+                                        let existingMarker = markersByFirstName[firstName];
 
-                                    if (existingMarker) {
-                                        // If the marker exists, update its position, popup, and location data
-                                        existingMarker.setLatLng([latitude, longitude]);
-                                        existingMarker.bindPopup(`${locationInfo}`);
-                                        existingMarker.location = qculocation;
+                                        if (existingMarker) {
+                                            // If the marker exists, update its position, popup, and location data
+                                            existingMarker.setLatLng([latitude, longitude]);
+                                            existingMarker.bindPopup(`${locationInfo}`);
+                                            existingMarker.location = qculocation;
+                                        } else {
+                                            // If the marker doesn't exist, create a new one
+                                            const newMarker = L.marker([latitude, longitude], {
+                                                icon: L.divIcon({
+                                                    className: 'custom-marker',
+                                                    iconSize: [40, 20], // Adjust icon size as needed
+                                                    html: `<img src="${pictureBase64}" alt="Profile Picture" class="marker-img" />`
+                                                }),
+                                                location: qculocation // Store location data in marker
+                                            }).addTo(map);
+
+                                            // Bind popup to marker on mouseover
+                                            newMarker.on('mouseover', function(e) {
+                                                this.bindPopup(`${locationInfo}`).openPopup();
+                                            });
+
+                                            // Unbind popup on mouseout
+                                            newMarker.on('mouseout', function(e) {
+                                                this.closePopup();
+                                            });
+
+                                            markersByFirstName[firstName] = newMarker;
+                                        }
+
+                                        // Update the location in the user table
+                                        const locationCell = document.getElementById('location_' + firstName);
+                                        if (locationCell) {
+                                            locationCell.innerHTML = qculocation;
+                                        }
                                     } else {
-                                        // If the marker doesn't exist, create a new one
-                                        const newMarker = L.marker([latitude, longitude], {
-                                            icon: L.divIcon({
-                                                className: 'custom-marker',
-                                                iconSize: [40, 20], // Adjust icon size as needed
-                                                html: `<img src="${pictureBase64}" alt="Profile Picture" class="marker-img" />`
-                                            }),
-                                            location: qculocation // Store location data in marker
-                                        }).addTo(map);
-
-                                        // Bind popup to marker on mouseover
-                                        newMarker.on('mouseover', function(e) {
-                                            this.bindPopup(`${locationInfo}`).openPopup();
-                                        });
-
-                                        // Unbind popup on mouseout
-                                        newMarker.on('mouseout', function(e) {
-                                            this.closePopup();
-                                        });
-
-                                        markersByFirstName[firstName] = newMarker;
-                                    }
-
-                                    // Update the location in the user table
-                                    const locationCell = document.getElementById('location_' + firstName);
-                                    if (locationCell) {
-                                        locationCell.innerHTML = qculocation;
+                                        // Marker is not for today's date, remove it if exists
+                                        removeMarker(firstName);
                                     }
                                 });
                             }
+
 
 
 
@@ -750,7 +760,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 // Refresh location immediately after page load and then every 30 seconds
                                 setTimeout(function() {
                                     getLocationFromDatabase();
-                                    setInterval(getLocationFromDatabase, 5000); // 30 seconds
+                                    setInterval(getLocationFromDatabase, 30000); // 30 seconds
                                 }, 1000); // 1 second
                             };
                         </script>
