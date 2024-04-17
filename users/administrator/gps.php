@@ -72,7 +72,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 $('.accordion').html(accordionContent);
             }
         });
-    }, 1000);
+    }, 8000);
 </script>
 
 
