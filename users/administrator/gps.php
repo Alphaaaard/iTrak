@@ -69,11 +69,41 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             url: "gps.php", // Replace "your_page.php" with the URL of the page containing the accordion content
             success: function(data){
                 var accordionContent = $(data).find('.status').html();
-                $('.status').html(accordionContent);
+                $('.status').text(newData.status);
             }
         });
-    }, 9000);
+    }, 2000);
 </script>
+
+<script>
+    // This script will reload the content inside the accordion every 1000 milliseconds (1 second) without displaying the white indicator
+    setInterval(function(){
+        $.ajax({
+            url: "gps.php", // Replace "your_page.php" with the URL of the page containing the accordion content
+            success: function(data){
+                var accordionContent = $(data).find('.timestamp').html();
+                $('.timestamp').text(newData.timestamp);
+            }
+        });
+    }, 2000);
+</script>
+
+<script>
+    // This script will reload the content inside the accordion every 1000 milliseconds (1 second) without displaying the white indicator
+    setInterval(function(){
+        $.ajax({
+            url: "gps.php", // Replace "your_page.php" with the URL of the page containing the accordion content
+            success: function(data){
+                var accordionContent = $(data).find('.location').html();
+                if (newData.status === 'Online') {
+                $('.location').text(newData.location);
+            } }
+        });
+    }, 2000);
+</script>
+
+
+
 <!-- <script>
     // This script will update the status, timestamp, and location every 1000 milliseconds (1 second) without displaying the white indicator
     setInterval(function(){
