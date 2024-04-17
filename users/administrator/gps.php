@@ -66,7 +66,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         window.history.replaceState(null, null, window.location.pathname + window.location.search);
     }, 1000);
 </script>
-
+<script>
+        // This script will reload the page every 1000 milliseconds (1 second)
+        setTimeout(function(){
+            window.location.reload(1);
+        }, 1000);
+    </script>
     </head>
     <style>
         .notification-indicator {
