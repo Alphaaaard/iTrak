@@ -68,7 +68,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         xhr.open('GET', 'gps.php', true);
         xhr.onload = function() {
             if (this.status === 200) {
-                document.getElementById('locationTbl').innerHTML = this.responseText;
+                document.getElementById('accordion').innerHTML = this.responseText;
             }
         };
         xhr.send();
