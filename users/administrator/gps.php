@@ -60,12 +60,21 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <!-- CSS -->
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/gps.css" />
+
+
         <script>
-    // This script will reload the page every 1000 milliseconds (1 second) without displaying the white indicator
-    setTimeout(function(){
-        location.replace(location.href);
+    // This script will reload the content inside the accordion every 1000 milliseconds (1 second) without displaying the white indicator
+    setInterval(function(){
+        $.ajax({
+            url: "gps.php", // Replace "your_page.php" with the URL of the page containing the accordion content
+            success: function(data){
+                var accordionContent = $(data).find('.accordion').html();
+                $('.accordion').html(accordionContent);
+            }
+        });
     }, 1000);
 </script>
+
 
 
 
