@@ -60,7 +60,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <!-- CSS -->
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/gps.css" />
-        
+        <script>// Initialize the map when the page loads
+window.onload = function() {
+    initMap();
+    getLocationFromDatabase();
+    // Refresh location every 1 minute
+    setInterval(function() {
+        getLocationFromDatabase();
+    }, 1000); // 1 minute
+};
+</script>
     </head>
     <style>
         .notification-indicator {
@@ -801,37 +810,7 @@ setInterval(function() {
                 gpsHistoryMenuItem.style.display = 'none';
             }
         </script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    setInterval(function() {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'gps.php', true);
-        xhr.onload = function() {
-            if (this.status === 200) {
-                var newContent = this.responseText;
-                // Save current scroll position
-                var scrollY = window.scrollY;
-                var scrollX = window.scrollX;
 
-                // Update content without causing a visual change
-                var tempDiv = document.createElement('div');
-                tempDiv.style.position = 'absolute';
-                tempDiv.style.left = '-9999px';
-                tempDiv.innerHTML = newContent;
-                document.body.appendChild(tempDiv);
-                // Update content silently
-                document.getElementById('locationTbl').innerHTML = tempDiv.querySelector('#locationTbl').innerHTML;
-                // Remove temporary div
-                document.body.removeChild(tempDiv);
-
-                // Restore scroll position
-                window.scrollTo(scrollX, scrollY);
-            }
-        };
-        xhr.send();
-    }, 5000); // Refresh every 5000 milliseconds (5 seconds)
-});
-</script>
 
 
         <!-- BOOTSTRAP -->
