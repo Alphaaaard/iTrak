@@ -62,11 +62,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link rel="stylesheet" href="../../src/css/gps.css" />
 
         <script>
-        // This script will reload the page every 1000 milliseconds (1 second)
-        setTimeout(function(){
-            window.location.reload(4);
-        }, 7000);
-    </script>
+    // Function to refresh content using AJAX
+    function refreshContent() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'gps.php', true);
+        xhr.onload = function() {
+            if (this.status === 200) {
+                document.getElementById('locationTbl').innerHTML = this.responseText;
+            }
+        };
+        xhr.send();
+    }
+
+    // Refresh content every 7 seconds
+    setInterval(refreshContent, 7000);
+</script>
+
 
 
 
