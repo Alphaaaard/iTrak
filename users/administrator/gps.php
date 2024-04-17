@@ -60,16 +60,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <!-- CSS -->
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/gps.css" />
-        <script>// Initialize the map when the page loads
-window.onload = function() {
-    initMap();
-    getLocationFromDatabase();
-    // Refresh location every 1 minute
-    setInterval(function() {
-        getLocationFromDatabase();
-    }, 1000); // 1 minute
-};
+        <script>
+    // This script will reload the page every 1000 milliseconds (1 second)
+    setTimeout(function(){
+        window.history.replaceState(null, null, window.location.pathname + window.location.search);
+    }, 1000);
 </script>
+
     </head>
     <style>
         .notification-indicator {
