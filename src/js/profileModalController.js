@@ -7,51 +7,29 @@ $('.edit-btn').on('click', function () {
 //*prevents user from erasing 09 in contact value
 let contactCurrentValue = $('.contactEdit').val();
 
-$('.contactEdit').on('keydown', function (e) {
+$('.contactEdit').on('input', function (e) {
   contactCurrentValue = $(this).val();
 
-  if (e.ctrlKey) {
-    e.preventDefault();
-    return false;
-  }
-
   // Check if the input length is 1 and the event type is 'deleteContentBackward'
-  if (contactCurrentValue.length <= 2 && e.keyCode == 8) {
-    e.preventDefault();
-    return false;
-  }
-});
-
-//*prevents user from erasing 09 in contact value
-$('.contactEdit').on('keydown', function (e) {
-  let contactCurrentValue = $(this).val();
-
-  if (e.ctrlKey) {
-    e.preventDefault();
-    return false;
-  }
-
-  // Check if the input length is 1 and the event type is 'deleteContentBackward'
-  if (contactCurrentValue.length <= 2 && e.keyCode == 8) {
+  if (contactCurrentValue.length <= 2 && e.inputType === 'deleteContentBackward') {
     e.preventDefault();
     return false;
   }
 });
 
 //*prevents from entering e on the keyboard
-$(".contactEdit").on('keypress', function (e) {
+$(".contactEdit").on('input', function (e) {
   let contactCurrentValue = $(this).val();
 
-
-  if (e.key >= 'a' && e.key <= 'z' || e.key >= 'A' && e.key <= 'Z') {
-    e.preventDefault();
+  if (e.target.value.match(/[a-zA-Z]/)) {
+    e.target.value = e.target.value.replace(/[a-zA-Z]/g, '');
   }
 
-  if (e.keyCode >= 33 && e.keyCode <= 47 || e.keyCode >= 58 && e.keyCode <= 64) {
-    e.preventDefault();
+  if (e.target.value.match(/[^0-9]/)) {
+    e.target.value = e.target.value.replace(/[^0-9]/g, '');
   }
 
-  if (contactCurrentValue.length == 11) {
+  if (contactCurrentValue.length >= 11) {
     e.preventDefault();
   }
 });
@@ -65,7 +43,6 @@ function showErrorAlert(msg) {
     showConfirmButton: false
   });
 }
-
 
 //*update current user alertbox
 $(".updateSelfBtn").click(function () {
