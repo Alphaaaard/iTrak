@@ -63,9 +63,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script>
     // This script will reload the page every 1000 milliseconds (1 second) without displaying the white indicator
     setTimeout(function(){
-        location.reload();
+        location.replace(location.href);
     }, 1000);
 </script>
+
 
 
     </head>
