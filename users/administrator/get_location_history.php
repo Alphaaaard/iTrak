@@ -12,9 +12,7 @@
         FROM locationhistory AS lh
         LEFT JOIN account AS a ON a.accountId = lh.accountId
         WHERE DATE(lh.timestamp) = ? 
-        AND a.qculocation <> 'Outside of QCU'";
-
-
+        AND a.qculocation != 'Outside of QCU'";
 
 
 
