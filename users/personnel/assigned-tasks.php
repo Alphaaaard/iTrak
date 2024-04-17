@@ -445,6 +445,10 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                             if ($result->num_rows > 0) {
                                 echo "<div class='table-container'>";
                                 while ($row = $result->fetch_assoc()) {
+                                    $date = new DateTime($row['date']); // Create DateTime object from fetched date
+                                        $date->modify('+8 hours'); // Add 8 hours
+                                        $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
+                                  
                                     echo "<table>";
                                     echo '<tr>';
                                     echo '<td>' . $row['assetId'] . '</td>';
