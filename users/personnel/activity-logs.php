@@ -436,13 +436,19 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                     echo "<table>";
                                     echo "<tbody>";
                                     while ($row = $resultReport->fetch_assoc()) {
+                                        $date = new DateTime($row['date']); // Create DateTime object from fetched date
+                                        $date->modify('+8 hours'); // Add 8 hours
+                                        $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
+
+                                     
                                         echo '<tr>';
                                         echo '<td>' . $row['firstName'] . " " . $row['lastName'] . '</td>';
                                         echo '<td style="display:none">' . $row['activityId'] . '</td>';
                                         echo '<td style="display:none">' . $row['firstName'] . '</td>';
                                         echo '<td style="display:none">' . $row['middleName'] . '</td>';
                                         echo '<td style="display:none">' . $row['lastName'] . '</td>';
-                                        echo '<td>' . $row['date'] . '</td>';
+                                        echo '<td>' . $formattedDate . '</td>'; // Display the adjusted date
+
                                         echo '<td>' . $row['action'] . '</td>';
                                         echo '</tr>';
                                     }
