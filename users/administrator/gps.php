@@ -62,56 +62,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link rel="stylesheet" href="../../src/css/gps.css" />
 
         <script>
-    // This script will update the status, timestamp, and location every 2000 milliseconds (2 seconds) without displaying the white indicator
-    setInterval(function(){
-        $.ajax({
-            url: "gps.php", // Replace "gps.php" with the URL of the script that provides updated data
-            success: function(data){
-                // Parse the JSON response
-                var newData = JSON.parse(data);
+        // This script will reload the page every 1000 milliseconds (1 second)
+        setTimeout(function(){
+            window.location.reload(4);
+        }, 7000);
+    </script>
 
-                // Update status
-                $('.status').text(newData.status);
-
-                // Update timestamp
-                $('.timestamp').text(newData.timestamp);
-
-                // Update location (only if status is 'Online')
-                if (newData.status === 'Online') {
-                    $('.location').text(newData.location);
-                } else {
-                    $('.location').empty(); // Clear location if status is not 'Online'
-                }
-            }
-        });
-    }, 2000);
-</script>
-
-
-
-<!-- <script>
-    // This script will update the status, timestamp, and location every 1000 milliseconds (1 second) without displaying the white indicator
-    setInterval(function(){
-        $.ajax({
-            url: "gps.php", // Replace "your_data_source.php" with the URL of the script that provides updated data
-            success: function(data){
-                // Parse the JSON response
-                var newData = JSON.parse(data);
-
-                // Update status
-                $('.status').text(newData.status);
-
-                // Update timestamp
-                $('.timestamp').text(newData.timestamp);
-
-                // Update location (only if status is 'Online')
-                if (newData.status === 'Online') {
-                    $('.location').text(newData.location);
-                }
-            }
-        });
-    }, 3000);
-</script> -->
 
 
 
