@@ -672,8 +672,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                             echo '<td>';
                                             echo '<form method="post" action="">';
                                             echo '<input type="hidden" name="assetId" value="' . $row4['assetId'] . '">';
-                                            echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#exampleModal5">Assign</button>';
-                                            echo '</form>';
+                                           echo '</form>';
                                             echo '</td>';
                                         } else {
                                             // Pagmeron data eto ilalabas
