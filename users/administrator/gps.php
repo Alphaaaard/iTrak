@@ -543,12 +543,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         continue; // Skip this iteration, don't add a marker
                                     }
 
-                                    if (latitude && longitude === 0 || null) {
-                                        // If the user is outside QCU, remove the marker and skip to the next iteration
-                                        removeMarker(showMarker);
-                                        continue; // Skip this iteration, don't add a marker
-                                    }
-
                                     // Convert base64 string to Blob object
                                     const pictureBlob = base64ToBlob(picture);
 
@@ -614,6 +608,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             }
 
 
+
                             function getLocationFromDatabase() {
                                 // Fetch the locations from the server
                                 var xmlhttp = new XMLHttpRequest();
@@ -622,9 +617,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         var locations = JSON.parse(this.responseText);
 
                                         if (locations && locations.length > 0) {
-                                            // Remove markers with latitude and longitude both equal to 0
-                                            removeZeroMarkers();
-
                                             // Update the map with the new locations
                                             updateMarkers(locations);
 
@@ -640,18 +632,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 xmlhttp.open("GET", "get_location.php", true);
                                 xmlhttp.send();
                             }
-
-                            function removeZeroMarkers() {
-                                Object.keys(markersByFirstName).forEach(function(firstName) {
-                                    const marker = markersByFirstName[firstName];
-                                    const latlng = marker.getLatLng();
-                                    if (latlng.lat === 0 && latlng.lng === 0) {
-                                        map.removeLayer(marker);
-                                        delete markersByFirstName[firstName];
-                                    }
-                                });
-                            }
-
 
 
                             // Initialize the map when the page loads
