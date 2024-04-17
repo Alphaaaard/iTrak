@@ -76,12 +76,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link rel="stylesheet" href="../../src/css/gps.css" />
         <link rel="stylesheet" href="../../src/css/gps-history.css" />
 
-        <script>
+        <!-- <script>
             // This script will reload the page every 1000 milliseconds (1 second)
             setTimeout(function() {
                 window.location.reload(1);
             }, 30000);
-        </script>
+        </script> -->
     </head>
 
 
@@ -105,9 +105,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <span class="notification-indicator"></span>
                             <?php endif; ?>
                         </a>
-
-
-
 
                         <div class="dropdown-content" id="notification-dropdown-content">
                             <h6 class="dropdown-header">Alerts Center</h6>
@@ -526,7 +523,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 });
                             }
 
-
                             var markersByFirstName = {};
                             var markers = [];
                             var polyline;
@@ -614,7 +610,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 }
                             }
 
-
                             function showMarker(firstName) {
                                 console.log("Clicked on:", firstName);
 
@@ -630,8 +625,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     console.error("Marker not found for:", firstName);
                                 }
                             }
-
-
 
                             function getLocationFromDatabase(selectedDate, accountId = null) {
                                 var xmlhttp = new XMLHttpRequest();

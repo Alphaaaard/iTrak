@@ -493,6 +493,22 @@ hr {
   transition: 0.3s ease;
 }
 
+#sidebar .side-menu .GPS-container .GPS-History {
+  transition: 0.3s ease;
+}
+
+#sidebar .side-menu .GPS-container .GPS-Tracker {
+  transition: 0.3s ease;
+}
+
+#sidebar.hide .side-menu .GPS-container .GPS-History {
+  padding-left: 10px !important;
+}
+
+#sidebar.hide .side-menu .GPS-container .GPS-Tracker {
+  padding-left: 10px !important;
+}
+
 #sidebar .side-menu.top li.active a span {
   color: #163172;
 }
@@ -1458,6 +1474,22 @@ h5 {
   #sidebar.hide ~ #content {
     left: 0;
     width: 100%;
+  }
+
+  #sidebar .side-menu .GPS-container .GPS-History {
+    transition: 0.3s ease;
+  }
+
+  #sidebar .side-menu .GPS-container .GPS-Tracker {
+    transition: 0.3s ease;
+  }
+
+  #sidebar.hide .side-menu .GPS-container .GPS-History {
+    padding-left: 2em !important;
+  }
+
+  #sidebar.hide .side-menu .GPS-container .GPS-Tracker {
+    padding-left: 2em !important;
   }
 
   #content {

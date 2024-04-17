@@ -47,8 +47,8 @@
 }
 
 .content-container {
-  height: 83vh;
-  transition: 0.3s ease;
+  position: relative;
+  height: 85vh;
 }
 
 #content.hide .content-container {
@@ -91,15 +91,21 @@ td:last-child {
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
 }
+
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+  display: none;
+}
 .locationTbl {
   position: absolute;
-  left: 25px;
-  top: 25px;
+  height: auto;
+  max-height: 97%;
+  left: 10px;
+  top: 10px;
   z-index: 2;
   border-radius: 15px;
   background-color: white;
   /* padding: 0px 5px 0 5px; */
-  min-height: 90px;
   min-width: 150px;
   text-align: center;
   display: flex;
@@ -176,8 +182,10 @@ td {
   border-radius: 15px;
   background-color: white;
   border: solid 1px #3d3b40;
-  max-height: 400px;
   overflow-y: auto;
+  scrollbar-width: none;
+  max-height: 82vh;
+  height: 100%;
 }
 
 .accordion-button {
@@ -185,7 +193,7 @@ td {
 }
 
 .accordion-item {
-  width: 350px;
+  width: 250px;
   border-radius: 15px;
   margin: 0 0.5em 0.25em 0.5em;
 }
@@ -232,8 +240,8 @@ td {
   align-items: center;
   background-color: white;
   height: 7vh;
-  gap: 3em;
-  padding: 0 2em;
+  gap: 1em;
+  padding: 0 1em;
   border: #3d3b40 1px solid;
 }
 
@@ -261,11 +269,11 @@ td {
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    width: 90%; /* Need a specific value to work */
+    /* width: 90%; */
     border: unset;
     outline: unset;
-    height: unset;
-    top: 56px;
+    height: 66%;
+    top: 0;
     color: #3d3b40;
   }
 
