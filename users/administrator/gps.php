@@ -775,7 +775,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     var accountId = button.getAttribute('data-accountId');
                     fetchPersonnelLocation(accountId);
                 });
-            }, 30000); // 30 seconds
+            }, 5000); // 30 seconds
         </script>
 
         <script>
