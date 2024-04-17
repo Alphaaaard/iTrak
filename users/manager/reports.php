@@ -553,9 +553,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
                     </div>
 
-
-                    <!--Tab for table 1-->
-                    <div class="tab-content pt" id="myTabContent">
+<!--Tab for table 1-->
+<div class="tab-content pt" id="myTabContent">
                         <div class="tab-pane fade show active" id="pills-manager" role="tabpanel" aria-labelledby="home-tab">
                             <div class="table-content" id="exportContentWorking">
                                 <div class='table-header'>
@@ -569,12 +568,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <?php
                                 if ($result->num_rows > 0) {
-                                    echo "<div class='table-container'>";
+                                    echo "<div class='table-container working-table'>";
+                                    echo "<table>";
                                     while ($row = $result->fetch_assoc()) {
-                                        echo "<table>";
+                                        $date = new DateTime($row['date']); // Create DateTime object from fetched date
+                                        $date->modify('+8 hours'); // Add 8 hours
+                                        $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
                                         echo '<tr>';
                                         echo '<td>' . $row['assetId'] . '</td>';
-                                        echo '<td >' . $row['date'] . '</td>';
+                                        echo '<td>' . $formattedDate . '</td>';
                                         echo '<td >' . $row['category'] . '</td>';
                                         echo '<td >' . $row['building'] . " / " . $row['floor'] . " / " . $row['room'] . '</td>';
                                         echo '<td style="display: none;">' . $row['building'] . '</td>';
@@ -614,12 +616,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <!--Content of table 2-->
                                 <?php
                                 if ($result2->num_rows > 0) {
-                                    echo "<div class='table-container'>";
+                                    echo "<div class='table-container maintenance-table'>";
+                                    echo "<table>";
                                     while ($row2 = $result2->fetch_assoc()) {
-                                        echo "<table>";
+                                        $date = new DateTime($row2['date']); // Create DateTime object from fetched date
+                                        $date->modify('+8 hours'); // Add 8 hours
+                                        $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
                                         echo '<tr>';
                                         echo '<td>' . $row2['assetId'] . '</td>';
-                                        echo '<td >' . $row2['date'] . '</td>';
+                                        echo '<td>' . $formattedDate . '</td>'; // Display the adjusted date
                                         echo '<td >' . $row2['category'] . '</td>';
                                         echo '<td >' . $row2['building'] . " / " . $row2['floor'] . " / " . $row2['room'] . '</td>';
                                         echo '<td style="display: none;">' . $row2['building'] . '</td>';
@@ -657,12 +662,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <!--Content of table 3-->
                                 <?php
                                 if ($result3->num_rows > 0) {
-                                    echo "<div class='table-container'>";
+                                    echo "<div class='table-container replacement-table'>";
+                                    echo "<table>";
                                     while ($row3 = $result3->fetch_assoc()) {
-                                        echo "<table>";
+                                        $date = new DateTime($row3['date']); // Create DateTime object from fetched date
+                                        $date->modify('+8 hours'); // Add 8 hours
+                                        $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
                                         echo '<tr>';
                                         echo '<td>' . $row3['assetId'] . '</td>';
-                                        echo '<td >' . $row3['date'] . '</td>';
+                                        echo '<td>' . $formattedDate . '</td>'; // Display the adjusted date
                                         echo '<td >' . $row3['category'] . '</td>';
                                         echo '<td >' . $row3['building'] . " / " . $row3['floor'] . " / " . $row3['room'] . '</td>';
                                         echo '<td style="display: none;">' . $row3['building'] . '</td>';
@@ -701,12 +709,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <!--Content of table 4-->
                                 <?php
                                 if ($result4->num_rows > 0) {
-                                    echo "<div class='table-container'>";
+                                    echo "<div class='table-container repair-table'>";
+                                    echo "<table>";
                                     while ($row4 = $result4->fetch_assoc()) {
-                                        echo "<table>";
+                                        $date = new DateTime($row4['date']); // Create DateTime object from fetched date
+                                        $date->modify('+8 hours'); // Add 8 hours
+                                        $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
                                         echo '<tr>';
                                         echo '<td>' . $row4['assetId'] . '</td>';
-                                        echo '<td>' . $row4['date'] . '</td>';
+                                        echo '<td>' . $formattedDate . '</td>'; // Display the adjusted date
                                         echo '<td>' . $row4['category'] . '</td>';
                                         echo '<td>' . $row4['building'] . " / " . $row4['floor'] . " / " . $row4['room'] . '</td>';
                                         echo '<td style="display: none;">' . $row4['building'] . '</td>';
@@ -738,6 +749,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     echo "</div>";
                                     echo '</table>';
                                 }
+                    
                                 ?>
                             </div>
                         </div>
