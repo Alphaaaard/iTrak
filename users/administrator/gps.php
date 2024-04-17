@@ -63,17 +63,29 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
         <script>
-    // This script will reload the content inside the accordion every 1000 milliseconds (1 second) without displaying the white indicator
+    // This script will update the status, timestamp, and location every 1000 milliseconds (1 second) without displaying the white indicator
     setInterval(function(){
         $.ajax({
-            url: "gps.php", // Replace "your_page.php" with the URL of the page containing the accordion content
+            url: "gps.php", // Replace "your_data_source.php" with the URL of the script that provides updated data
             success: function(data){
-                var accordionContent = $(data).find('.accordion').html();
-                $('.accordion').html(accordionContent);
+                // Parse the JSON response
+                var newData = JSON.parse(data);
+
+                // Update status
+                $('.status').text(newData.status);
+
+                // Update timestamp
+                $('.timestamp').text(newData.timestamp);
+
+                // Update location (only if status is 'Online')
+                if (newData.status === 'Online') {
+                    $('.location').text(newData.location);
+                }
             }
         });
-    }, 8000);
+    }, 1000);
 </script>
+
 
 
 
