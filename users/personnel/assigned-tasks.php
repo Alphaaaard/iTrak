@@ -452,7 +452,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                     echo "<table>";
                                     echo '<tr>';
                                     echo '<td>' . $row['assetId'] . '</td>';
-                                    echo '<td>' . $row['date'] . '</td>';
+                                    echo '<td>' . $formattedDate . '</td>';
                                     echo '<td>' . $row['category'] . '</td>';
                                     echo '<td>' . $row['building'] . " / " . $row['floor'] . " / " . $row['room'] . '</td>';
                                     echo '<td style="display: none;">' . $row['building'] . '</td>';
