@@ -46,7 +46,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>iTrak | GPS</title>
-        
         <!-- BOOTSTRAP -->
         <link rel="icon" type="image/x-icon" href="../../src/img/tab-logo.png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
@@ -60,29 +59,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <!-- CSS -->
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/gps.css" />
-
-        <script>
-    // Function to refresh content using AJAX
-    function refreshContent() {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'gps.php', true);
-        xhr.onload = function() {
-            if (this.status === 200) {
-                document.getElementById('accordion').innerHTML = this.responseText;
-            }
-        };
-        xhr.send();
-    }
-
-    // Refresh content every 7 seconds
-    setInterval(refreshContent, 7000);
-</script>
-
-
-
-
-
-
     </head>
     <style>
         .notification-indicator {
@@ -305,9 +281,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </section>
         <!-- SIDEBAR -->
         <!-- CONTENT -->
-      
         <section id="content">
-       
             <!-- MAIN -->
             <main>
                 <header>
@@ -316,10 +290,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div id="LocBurger" onclick="showLocation()"><i class="bi bi-list"></i></div>
                     </div>
                 </header>
-                
                 <div class="content-container">
                     <div class="locationTbl" id="locationTbl">
-                        
                         <?php
                         include_once("../../config/connection.php");
                         $conn = connection();
@@ -555,21 +527,21 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             // Update the markers with user images
                             // Update the markers with user images
                             async function updateMarkers(locations) {
-    for (const location of locations) {
-        const {
-            latitude,
-            longitude,
-            firstName,
-            qculocation,
-            timestamp,
-            picture
-        } = location;
+                                for (const location of locations) {
+                                    const {
+                                        latitude,
+                                        longitude,
+                                        firstName,
+                                        qculocation,
+                                        timestamp,
+                                        picture
+                                    } = location;
 
-        if (qculocation === "Outside of QCU") {
-            // If the user is outside QCU, remove the marker and skip to the next iteration
-            removeMarker(firstName);
-            continue; // Skip this iteration, don't add a marker
-        }
+                                    if (qculocation === "Outside of QCU") {
+                                        // If the user is outside QCU, remove the marker and skip to the next iteration
+                                        removeMarker(firstName);
+                                        continue; // Skip this iteration, don't add a marker
+                                    }
 
                                     // Convert base64 string to Blob object
                                     const pictureBlob = base64ToBlob(picture);
@@ -714,6 +686,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 border-radius: 50%;
                             }
                         </style>
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                        <script>
+                            function refreshContent() {
+                                $('#locationTbl').load('refresh_content.php');
+                            }
+                            // Refresh content every 5 seconds
+                            setInterval(refreshContent, 30000);
+                            // Initial content load
+                            refreshContent();
+                        </script>
                     </div>
                 </div>
             </main>
@@ -746,45 +728,44 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/logout.js"></script>
         <script>
             // Function to fetch personnel location
-function fetchPersonnelLocation(accountId) {
-    // AJAX call to fetch personnel location
-    $.ajax({
-        type: "POST",
-        url: "fetch_personnel_location.php",
-        data: {
-            accountId: accountId
-        },
-        success: function(response) {
-            var locationData = JSON.parse(response);
-            if (locationData.status === "inside") {
-                // Update map with new location
-            } else if (locationData.status === "outside") {
-                // Handle case when personnel is outside
-            } else {
-                alert(locationData.error);
+            function fetchPersonnelLocation(accountId) {
+                // AJAX call to fetch personnel location
+                $.ajax({
+                    type: "POST",
+                    url: "fetch_personnel_location.php",
+                    data: {
+                        accountId: accountId
+                    },
+                    success: function(response) {
+                        var locationData = JSON.parse(response);
+                        if (locationData.status === "inside") {
+                            // Update map with new location
+                        } else if (locationData.status === "outside") {
+                            // Handle case when personnel is outside
+                        } else {
+                            alert(locationData.error);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error: ", status, error);
+                    }
+                });
             }
-        },
-        error: function(xhr, status, error) {
-            console.error("Error: ", status, error);
-        }
-    });
-}
 
-document.querySelectorAll('.gps-info').forEach(function(button) {
-    button.addEventListener('click', function() {
-        var accountId = this.getAttribute('data-accountId');
-        fetchPersonnelLocation(accountId);
-    });
-});
+            document.querySelectorAll('.gps-info').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var accountId = this.getAttribute('data-accountId');
+                    fetchPersonnelLocation(accountId);
+                });
+            });
 
-// Automatically fetch location every 30 seconds
-setInterval(function() {
-    document.querySelectorAll('.gps-info').forEach(function(button) {
-        var accountId = button.getAttribute('data-accountId');
-        fetchPersonnelLocation(accountId);
-    });
-}, 1000); // 30 seconds
-
+            // Automatically fetch location every 30 seconds
+            setInterval(function() {
+                document.querySelectorAll('.gps-info').forEach(function(button) {
+                    var accountId = button.getAttribute('data-accountId');
+                    fetchPersonnelLocation(accountId);
+                });
+            }, 1000); // 30 seconds
         </script>
 
         <script>
@@ -823,8 +804,6 @@ setInterval(function() {
                 gpsHistoryMenuItem.style.display = 'none';
             }
         </script>
-
-
 
         <!-- BOOTSTRAP -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
