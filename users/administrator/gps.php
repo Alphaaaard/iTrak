@@ -722,7 +722,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/gps.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
         <script src="../../src/js/logout.js"></script>
-   
         <script>
             // Function to fetch personnel location
 function fetchPersonnelLocation(accountId) {
@@ -802,7 +801,20 @@ setInterval(function() {
                 gpsHistoryMenuItem.style.display = 'none';
             }
         </script>
-
+     <script>
+document.addEventListener("DOMContentLoaded", function() {
+    setInterval(function() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'gps.php', true);
+        xhr.onload = function() {
+            if (this.status === 200) {
+                document.getElementById('locationTbl').innerHTML = this.responseText;
+            }
+        };
+        xhr.send();
+    }, 5000); // Refresh every 1000 milliseconds (1 second)
+});
+</script>
         <!-- BOOTSTRAP -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <!-- BOOTSTRAP -->
