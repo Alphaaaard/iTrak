@@ -623,17 +623,17 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <div class="col-4">
                           <label for="firstName" class="form-label label">First name <span class="d-none text-danger error">*</span></label>
-                          <input type="text" class="form-control" id="firstNameField" name="firstName" placeholder="First Name" oninput="this.value = this.value.replace(/\d/g, '')" required />
+                          <input type="text" class="form-control" id="firstNameField" name="firstName" placeholder="First Name" oninput="this.value = this.value.replace(/[^a-zA-Z-]/g, '')" required />
                         </div>
 
                         <div class="col-4">
                           <label for="middleName" class="form-label label">Middle name <span class="d-none text-danger error">*</span></label>
-                          <input type="text" class="form-control" id="middleNameField" name="middleName" placeholder="Middle Name" oninput="this.value = this.value.replace(/\d/g, '')" />
+                          <input type="text" class="form-control" id="middleNameField" name="middleName" placeholder="Middle Name" oninput="this.value = this.value.replace(/[^a-zA-Z-]/g, '')" required />
                         </div>
 
                         <div class="col-4">
                           <label for="lastName" class="form-label">Last name <span class="d-none text-danger error">*</span></label>
-                          <input type="text" class="form-control" id="lastNameField" name="lastName" placeholder="Last Name" required oninput="this.value = this.value.replace(/\d/g, '')" />
+                          <input type="text" class="form-control" id="lastNameField" name="lastName" placeholder="Last Name" oninput="this.value = this.value.replace(/[^a-zA-Z-]/g, '')" required />
                         </div>
 
                         <div class="col-4">
@@ -708,17 +708,17 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <div class="col-4">
                           <label for="firstname" class="form-label">First name</label>
-                          <input type="text" class="form-control" id="firstnameEdit" name="firstname" oninput="this.value = this.value.replace(/\d/g, '')" readonly />
+                          <input type="text" class="form-control" id="firstnameEdit" name="firstname" oninput="this.value = this.value.replace(/[^a-zA-Z-]/g, '')" readonly />
                         </div>
 
                         <div class="col-4">
                           <label for="middlename" class="form-label">Middle name</label>
-                          <input type="text" class="form-control" id="middlenameEdit" name="middlename" oninput="this.value = this.value.replace(/\d/g, '')" readonly />
+                          <input type="text" class="form-control" id="middlenameEdit" name="middlename" oninput="this.value = this.value.replace(/[^a-zA-Z-]/g, '')" readonly />
                         </div>
 
                         <div class="col-4">
                           <label for="lastname" class="form-label">Last name</label>
-                          <input type="text" class="form-control" id="lastnameEdit" name="lastname" oninput="this.value = this.value.replace(/\d/g, '')" readonly />
+                          <input type="text" class="form-control" id="lastnameEdit" name="lastname" oninput="this.value = this.value.replace(/[^a-zA-Z-]/g, '')" readonly />
                         </div>
 
                         <div class="col-4">
