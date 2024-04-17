@@ -9,9 +9,11 @@
 
         // Base SQL query to select location data
         $sql = "SELECT a.firstName, a.latitude, a.longitude, a.qculocation, a.picture, lh.*, a.color
-                FROM locationhistory AS lh
-                LEFT JOIN account AS a ON a.accountId = lh.accountId
-                WHERE DATE(lh.timestamp) = ?"; // Filter by date
+        FROM locationhistory AS lh
+        LEFT JOIN account AS a ON a.accountId = lh.accountId
+        WHERE DATE(lh.timestamp) = ? 
+        AND a.qculocation <> 'Outside of QCU'";
+
 
 
 
