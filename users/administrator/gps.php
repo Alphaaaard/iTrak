@@ -46,7 +46,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>iTrak | GPS</title>
-        
         <!-- BOOTSTRAP -->
         <link rel="icon" type="image/x-icon" href="../../src/img/tab-logo.png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
@@ -60,18 +59,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <!-- CSS -->
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/gps.css" />
-
-
-     
-        <script>
-        // This script will reload the page every 1000 milliseconds (1 second)
-        setTimeout(function(){
-            window.location.reload(1);
-        }, 30000);
-    </script>
-
-
-
     </head>
     <style>
         .notification-indicator {
@@ -294,9 +281,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </section>
         <!-- SIDEBAR -->
         <!-- CONTENT -->
-      
         <section id="content">
-       
             <!-- MAIN -->
             <main>
                 <header>
@@ -305,10 +290,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div id="LocBurger" onclick="showLocation()"><i class="bi bi-list"></i></div>
                     </div>
                 </header>
-                
                 <div class="content-container">
                     <div class="locationTbl" id="locationTbl">
-                        
                         <?php
                         include_once("../../config/connection.php");
                         $conn = connection();
@@ -544,21 +527,21 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             // Update the markers with user images
                             // Update the markers with user images
                             async function updateMarkers(locations) {
-    for (const location of locations) {
-        const {
-            latitude,
-            longitude,
-            firstName,
-            qculocation,
-            timestamp,
-            picture
-        } = location;
+                                for (const location of locations) {
+                                    const {
+                                        latitude,
+                                        longitude,
+                                        firstName,
+                                        qculocation,
+                                        timestamp,
+                                        picture
+                                    } = location;
 
-        if (qculocation === "Outside of QCU") {
-            // If the user is outside QCU, remove the marker and skip to the next iteration
-            removeMarker(firstName);
-            continue; // Skip this iteration, don't add a marker
-        }
+                                    if (qculocation === "Outside of QCU") {
+                                        // If the user is outside QCU, remove the marker and skip to the next iteration
+                                        removeMarker(firstName);
+                                        continue; // Skip this iteration, don't add a marker
+                                    }
 
                                     // Convert base64 string to Blob object
                                     const pictureBlob = base64ToBlob(picture);
@@ -610,16 +593,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             }
 
                             function showMarker(firstName) {
-                                console.log("Clicked on:", firstName);
-
-                                // Retrieve the marker based on the firstName from the markersByFirstName object
-                                var marker = markersByFirstName[firstName];
-
-                                // If the marker exists
+                                var marker = markersByFirstName[firstName]; // Retrieve the marker based on the firstName from the markersByFirstName object
                                 if (marker) {
-                                    // Zoom to the marker and open its popup
-                                    map.setView(marker.getLatLng(), zoomLevel);
-                                    marker.openPopup();
+                                    if (marker.isPopupOpen()) {
+                                        marker.closePopup(); // Close the popup if it's currently open
+                                    } else {
+                                        // Zoom to the marker and open its popup
+                                        map.setView(marker.getLatLng(), zoomLevel);
+                                        marker.openPopup();
+                                    }
                                 } else {
                                     console.error("Marker not found for:", firstName);
                                 }
@@ -656,8 +638,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             window.onload = function() {
                                 initMap();
                                 getLocationFromDatabase();
-                                // Refresh location every 1 minute
-                                setInterval(getLocationFromDatabase, 30000); // 1 seconds
+                                // Refresh location immediately after page load and then every 30 seconds
+                                setTimeout(function() {
+                                    getLocationFromDatabase();
+                                    setInterval(getLocationFromDatabase, 30000); // 30 seconds
+                                }, 1); // 1 second
                             };
                         </script>
 
@@ -703,6 +688,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 border-radius: 50%;
                             }
                         </style>
+                        <script>
+                            function refreshContent() {
+                                console.log("Refreshing content...");
+                                $('#locationTbl').load('refresh_content.php');
+                            }
+                            // Refresh content every 5 seconds
+                            setInterval(refreshContent, 5000);
+                            // Initial content load
+                            refreshContent();
+                        </script>
                     </div>
                 </div>
             </main>
@@ -735,66 +730,50 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/logout.js"></script>
         <script>
             // Function to fetch personnel location
-function fetchPersonnelLocation(accountId) {
-    // AJAX call to fetch personnel location
-    $.ajax({
-        type: "POST",
-        url: "fetch_personnel_location.php",
-        data: {
-            accountId: accountId
-        },
-        success: function(response) {
-            var locationData = JSON.parse(response);
-            if (locationData.status === "inside") {
-                // Update map with new location
-            } else if (locationData.status === "outside") {
-                // Handle case when personnel is outside
-            } else {
-                alert(locationData.error);
+            function fetchPersonnelLocation(accountId) {
+                $.ajax({
+                    type: "POST",
+                    url: "fetch_personnel_location.php",
+                    data: {
+                        accountId: accountId
+                    },
+                    success: function(response) {
+                        try {
+                            var locationData = JSON.parse(response);
+                            if (locationData.status === "inside") {
+                                // Update map with new location
+                            } else if (locationData.status === "outside") {
+                                // Handle case when personnel is outside
+                            } else {
+                                console.error("Invalid status:", locationData.status);
+                            }
+                        } catch (error) {
+                            console.error("Error parsing JSON:", error);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("AJAX Error:", status, error);
+                    }
+                });
             }
-        },
-        error: function(xhr, status, error) {
-            console.error("Error: ", status, error);
-        }
-    });
-}
 
-document.querySelectorAll('.gps-info').forEach(function(button) {
-    button.addEventListener('click', function() {
-        var accountId = this.getAttribute('data-accountId');
-        fetchPersonnelLocation(accountId);
-    });
-});
-
-// Automatically fetch location every 30 seconds
-setInterval(function() {
-    document.querySelectorAll('.gps-info').forEach(function(button) {
-        var accountId = button.getAttribute('data-accountId');
-        fetchPersonnelLocation(accountId);
-    });
-}, 1000); // 30 seconds
-
-        </script>
-
-        <script>
             // Assuming showMarker is defined elsewhere to handle the map logic
-            document.querySelectorAll('.gps-info').forEach(function(button) {
-                button.addEventListener('click', function() {
-                    var firstName = this.getAttribute('data-firstName');
+            document.getElementById('locationTbl').addEventListener('click', function(event) {
+                if (event.target && event.target.matches('.gps-info')) {
+                    var firstName = event.target.getAttribute('data-firstName');
                     showMarker(firstName); // Call the showMarker function with the clicked person's first name
-                });
+                }
             });
+
+            // Automatically fetch location every 30 seconds
+            setInterval(function() {
+                document.querySelectorAll('.gps-info').forEach(function(button) {
+                    var accountId = button.getAttribute('data-accountId');
+                    fetchPersonnelLocation(accountId);
+                });
+            }, 30000); // 30 seconds
         </script>
 
-        <script>
-            var accordionButtons = document.querySelectorAll('.gps-info');
-            accordionButtons.forEach(function(button) {
-                button.addEventListener('click', function() {
-                    var firstName = this.getAttribute('data-firstName');
-                    showMarker(firstName); // Call the showMarker function with the clicked person's first name
-                });
-            });
-        </script>
         <script>
             // Assume this is a function that checks whether GPS is active or not
             function isGPSActive() {
@@ -813,12 +792,11 @@ setInterval(function() {
             }
         </script>
 
-
-
         <!-- BOOTSTRAP -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <!-- BOOTSTRAP -->
         <!-- SCRIPTS -->
+
     </body>
 
     </html>
