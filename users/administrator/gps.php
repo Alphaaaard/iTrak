@@ -694,7 +694,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 $('#locationTbl').load('refresh_content.php');
                             }
                             // Refresh content every 5 seconds
-                            setInterval(refreshContent, 5000);
+                            setInterval(refreshContent, 30000);
                             // Initial content load
                             refreshContent();
                         </script>
