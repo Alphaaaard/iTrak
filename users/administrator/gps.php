@@ -62,6 +62,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link rel="stylesheet" href="../../src/css/gps.css" />
 
 
+     
+        <script>
+        // This script will reload the page every 1000 milliseconds (1 second)
+        setTimeout(function(){
+            window.location.reload(1);
+        }, 1000);
+    </script>
+
 
 
     </head>
