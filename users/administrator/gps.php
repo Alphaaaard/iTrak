@@ -68,11 +68,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $.ajax({
             url: "gps.php", // Replace "your_page.php" with the URL of the page containing the accordion content
             success: function(data){
-                var accordionContent = $(data).find('.timestamp').html();
-                $('.timestamp').html(accordionContent);
+                var accordionContent = $(data).find('.status').html();
+                $('.status').html(accordionContent);
             }
         });
-    }, 3000);
+    }, 9000);
 </script>
 <!-- <script>
     // This script will update the status, timestamp, and location every 1000 milliseconds (1 second) without displaying the white indicator
