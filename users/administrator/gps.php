@@ -607,31 +607,116 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 }
                             }
 
-
-
                             function getLocationFromDatabase() {
-                                // Fetch the locations from the server
-                                var xmlhttp = new XMLHttpRequest();
-                                xmlhttp.onreadystatechange = function() {
-                                    if (this.readyState == 4 && this.status == 200) {
-                                        var locations = JSON.parse(this.responseText);
+                                // Fetch the locations from the server using AJAX
+                                $.ajax({
+                                    url: "get_location.php",
+                                    type: "GET",
+                                    dataType: "json",
+                                    success: function(locations) {
+                                        // Log the received data
+                                        console.log("Received location data:", locations);
 
                                         if (locations && locations.length > 0) {
-                                            // Update the map with the new locations
-                                            updateMarkers(locations);
+                                            // Iterate through the locations
+                                            locations.forEach(function(location) {
+                                                const {
+                                                    latitude,
+                                                    longitude,
+                                                    firstName,
+                                                    qculocation,
+                                                    timestamp,
+                                                    picture
+                                                } = location;
 
-                                            // Log locations to the console
-                                            console.log("Locations:", locations);
+                                                // Check if latitude and longitude are both 0 or null
+                                                if (!latitude || !longitude || latitude === 0 || longitude === 0) {
+                                                    // If latitude or longitude is null or 0, remove the marker
+                                                    removeMarker(firstName);
+                                                } else {
+                                                    // If not, update or add the marker
+                                                    updateOrAddMarker(location);
+                                                }
+                                            });
                                         } else {
                                             // Handle case where no location data is available
                                             console.error("No location data available");
                                         }
+                                    },
+                                    error: function(xhr, status, error) {
+                                        // Handle AJAX error
+                                        console.error("AJAX error:", status, error);
                                     }
-                                };
-
-                                xmlhttp.open("GET", "get_location.php", true);
-                                xmlhttp.send();
+                                });
                             }
+
+
+                            function removeMarker(firstName) {
+                                const marker = markersByFirstName[firstName];
+                                if (marker) {
+                                    map.removeLayer(marker);
+                                    delete markersByFirstName[firstName];
+                                }
+                            }
+
+                            function updateOrAddMarker(location) {
+                                const {
+                                    latitude,
+                                    longitude,
+                                    firstName,
+                                    qculocation,
+                                    timestamp,
+                                    picture
+                                } = location;
+
+                                // Convert base64 string to Blob object
+                                const pictureBlob = base64ToBlob(picture);
+
+                                // Convert blob to base64
+                                blobToBase64(pictureBlob).then(function(pictureBase64) {
+                                    // Combine first name, location, and timestamp for marker
+                                    const locationInfo = `Firstname: ${firstName}<br>Location: ${qculocation}<br>Timestamp: ${timestamp}`;
+
+                                    // Check if a marker with this firstName already exists
+                                    let existingMarker = markersByFirstName[firstName];
+
+                                    if (existingMarker) {
+                                        // If the marker exists, update its position, popup, and location data
+                                        existingMarker.setLatLng([latitude, longitude]);
+                                        existingMarker.bindPopup(`${locationInfo}`);
+                                        existingMarker.location = qculocation;
+                                    } else {
+                                        // If the marker doesn't exist, create a new one
+                                        const newMarker = L.marker([latitude, longitude], {
+                                            icon: L.divIcon({
+                                                className: 'custom-marker',
+                                                iconSize: [40, 20], // Adjust icon size as needed
+                                                html: `<img src="${pictureBase64}" alt="Profile Picture" class="marker-img" />`
+                                            }),
+                                            location: qculocation // Store location data in marker
+                                        }).addTo(map);
+
+                                        // Bind popup to marker on mouseover
+                                        newMarker.on('mouseover', function(e) {
+                                            this.bindPopup(`${locationInfo}`).openPopup();
+                                        });
+
+                                        // Unbind popup on mouseout
+                                        newMarker.on('mouseout', function(e) {
+                                            this.closePopup();
+                                        });
+
+                                        markersByFirstName[firstName] = newMarker;
+                                    }
+
+                                    // Update the location in the user table
+                                    const locationCell = document.getElementById('location_' + firstName);
+                                    if (locationCell) {
+                                        locationCell.innerHTML = qculocation;
+                                    }
+                                });
+                            }
+
 
 
                             // Initialize the map when the page loads
