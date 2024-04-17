@@ -389,7 +389,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         echo '<td style="display:none">' . $row['firstName'] . '</td>';
                                         echo '<td style="display:none">' . $row['middleName'] . '</td>';
                                         echo '<td style="display:none">' . $row['lastName'] . '</td>';
-                                        echo '<td>' . $formattedDate . '</td>';
+                                        echo '<td>' . $row['date'] . '</td>';
                                         echo '<td>' . $row['action'] . '</td>';
                                         echo '</tr>';
                                     }
@@ -440,7 +440,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         echo '<td style="display:none">' . $row['firstName'] . '</td>';
                                         echo '<td style="display:none">' . $row['middleName'] . '</td>';
                                         echo '<td style="display:none">' . $row['lastName'] . '</td>';
-                                        echo '<td>' . $row['date'] . '</td>';
+                                        echo '<td>' . $formattedDate . '</td>'; // Displa
                                         echo '<td>' . $row['action'] . '</td>';
                                         echo '</tr>';
                                     }
