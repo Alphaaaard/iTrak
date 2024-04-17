@@ -641,7 +641,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 // Refresh location immediately after page load and then every 30 seconds
                                 setTimeout(function() {
                                     getLocationFromDatabase();
-                                    setInterval(getLocationFromDatabase, 31000); // 30 seconds
+                                    setInterval(getLocationFromDatabase, 30000); // 30 seconds
                                 }, 1); // 1 second
                             };
                         </script>
@@ -699,7 +699,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             setTimeout(refreshContent, 1000);
 
                             // Refresh content every 30 seconds after the initial refresh
-                            setInterval(refreshContent, 30000);
+                            setInterval(refreshContent, 31000);
                         </script>
 
                     </div>
