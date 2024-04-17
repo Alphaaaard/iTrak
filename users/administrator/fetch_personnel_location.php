@@ -30,7 +30,7 @@ $buildings = [
     'TechVoc Building' => [
         ['lat' => 14.70019, 'long' => 121.03364, 'radius' => 27],
     ],
-    'Yellow Building' => [
+    'Old Academic Building' => [
         ['lat' => 14.70035, 'long' => 121.03309, 'radius' => 10.46],
         ['lat' => 14.70031, 'long' => 121.03318, 'radius' => 10.68],
         ['lat' => 14.70043, 'long' => 121.03326, 'radius' => 7.67],
@@ -53,7 +53,7 @@ $buildings = [
         ['lat' => 14.66368, 'long' => 121.04499, 'radius' =>  16.68],
     ],
 
-    'Academic Building' => [
+    'New Academic Building' => [
         ['lat' => 14.70108, 'long' => 121.03276, 'radius' =>  22.03]
     ],
 
@@ -65,7 +65,7 @@ $buildings = [
 
     ],
 
-    'ballroom Building' => [
+    'Ballroom Building' => [
         ['lat' => 14.70055, 'long' => 121.03382, 'radius' =>  9.92],
         ['lat' => 14.74151, 'long' => 121.06723, 'radius' =>  100],
 

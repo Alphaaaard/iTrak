@@ -624,7 +624,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                     latitude,
                                                     longitude,
                                                     firstName,
-                                                    qculocation,
+                                                    qculocation, // Make sure this property exists in the server response
                                                     timestamp,
                                                     picture
                                                 } = location;
@@ -634,8 +634,29 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                     // If latitude or longitude is null or 0, remove the marker
                                                     removeMarker(firstName);
                                                 } else {
-                                                    // If not, update or add the marker
-                                                    updateOrAddMarker(location);
+                                                    // Check if the location is inside or outside QCU
+                                                    if (qculocation === "Belmonte Building" ||
+                                                        qculocation === "Admin Building" ||
+                                                        qculocation === "TechVoc Building" ||
+                                                        qculocation === "Old Academic Building" ||
+                                                        qculocation === "Bautista Building" ||
+                                                        qculocation === "KorPhil Building" ||
+                                                        qculocation === "Multipurpose Building" ||
+                                                        qculocation === "New Academic Building" ||
+                                                        qculocation === "Urban Farming" ||
+                                                        qculocation === "Ballroom Building" ||
+                                                        qculocation === "Open Ground" ||
+                                                        qculocation === "University Park" ||
+                                                        qculocation === "Inside at QCU"
+                                                    ) {
+                                                        // If inside QCU, update or add the marker
+                                                        updateOrAddMarker(location);
+                                                    } else if (qculocation === "outside") {
+                                                        // If outside, remove the marker
+                                                        removeMarker(firstName);
+                                                    } else {
+                                                        console.error("Invalid QCU location status:", qculocation);
+                                                    }
                                                 }
                                             });
                                         } else {
@@ -649,6 +670,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     }
                                 });
                             }
+
+
+
 
 
                             function removeMarker(firstName) {
