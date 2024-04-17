@@ -802,18 +802,21 @@ setInterval(function() {
             }
         </script>
      <script>
+// This script should be at the end of your `gps.php` inside a script tag
 document.addEventListener("DOMContentLoaded", function() {
     setInterval(function() {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'gps.php', true);
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); // Set custom header for AJAX request
         xhr.onload = function() {
             if (this.status === 200) {
                 document.getElementById('locationTbl').innerHTML = this.responseText;
             }
         };
         xhr.send();
-    }, 5000); // Refresh every 1000 milliseconds (1 second)
+    }, 5000); // Refresh every 5000 milliseconds (5 seconds)
 });
+
 </script>
         <!-- BOOTSTRAP -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
