@@ -26,7 +26,8 @@ $buildings = [
         ['lat' => 14.70043, 'long' => 121.03287, 'radius' => 17]
     ],
     'TechVoc Building' => [
-        ['lat' => 14.70019, 'long' => 121.03364, 'radius' => 27]
+        ['lat' => 14.70019, 'long' => 121.03364, 'radius' => 27],
+        ['lat' => 14.74148, 'long' => 121.06723, 'radius' => 27]
     ],
     'Yellow Building' => [
         ['lat' => 14.70035, 'long' => 121.03309, 'radius' => 10.46],
