@@ -285,12 +285,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <!-- CONTENT -->
       
         <section id="content">
-        <script>
-        // This script will reload the page every 1000 milliseconds (1 second)
-        setTimeout(function(){
-            window.location.reload(1);
-        }, 1000);
-    </script>
+       
             <!-- MAIN -->
             <main>
                 <header>
@@ -302,6 +297,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 
                 <div class="content-container">
                     <div class="locationTbl" id="locationTbl">
+                        
                         <?php
                         include_once("../../config/connection.php");
                         $conn = connection();
@@ -366,7 +362,20 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             echo "No users found.";
                         }
                         ?>
-
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    setInterval(function() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'gps.php', true);
+        xhr.onload = function() {
+            if (this.status === 200) {
+                document.getElementById('locationTbl').innerHTML = this.responseText;
+            }
+        };
+        xhr.send();
+    }, 1000); // Refresh every 1000 milliseconds (1 second)
+});
+</script>
                     </div>
                     <div id="map">
                         <!-- User Table Section -->
