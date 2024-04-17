@@ -689,15 +689,19 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             }
                         </style>
                         <script>
+                            // Define the refreshContent function
                             function refreshContent() {
                                 console.log("Refreshing content...");
                                 $('#locationTbl').load('refresh_content.php');
                             }
-                            // Refresh content every 5 seconds
+
+                            // Initial content load after 1 second
+                            setTimeout(refreshContent, 1000);
+
+                            // Refresh content every 30 seconds after the initial refresh
                             setInterval(refreshContent, 30000);
-                            // Initial content load
-                            refreshContent();
                         </script>
+
                     </div>
                 </div>
             </main>
