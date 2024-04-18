@@ -99,52 +99,39 @@ document.addEventListener("DOMContentLoaded", function () {
   var currentPage = 1;
   var currentRangeStart = 1;
   var pagesPerRange = 10;
-  var rowsPerPage = 20; // Default value
 
   function initializePaginationForTab(activeTabContent) {
-      currentPage = 1;
-      currentRangeStart = 1;
-      updateDataAndPagination(activeTabContent);
+    currentPage = 1;
+    currentRangeStart = 1;
+    updateDataAndPagination(activeTabContent);
   }
 
-   function updateDataAndPagination(activeTabContent) {
-        var selectedValue = parseInt(document.getElementById("rows-display-dropdown").value);
-        rowsPerPage = selectedValue; // Update rows per page value
+  function updateDataAndPagination(activeTabContent) {
+    var activeTabContent = document.querySelector(
+      ".tab-pane.active .table-container"
+    );
+    if (!activeTabContent) return;
 
-        var activeTabContent = document.querySelector(".tab-pane.active .table-container");
-        if (!activeTabContent) return;
+    var selectedValue = parseInt(
+      document.getElementById("rows-display-dropdown").value
+    );
+    var rows = activeTabContent.querySelectorAll("table tr:not(.table-header)"); // Exclude header row if present
+    var totalItems = rows.length - 1; // Adjust if there's a header row
+    var totalPages = Math.ceil(totalItems / selectedValue);
 
-        var rows = activeTabContent.querySelectorAll("table tr:not(.table-header)");
-        var totalItems = rows.length;
-        var totalPages = Math.ceil(totalItems / rowsPerPage);
-
-        if (currentPage > totalPages) {
-            currentPage = totalPages || 1;
-            currentRangeStart = Math.max(1, (Math.ceil(currentPage / pagesPerRange) - 1) * pagesPerRange + 1);
-        }
-
-        var pagination = document.querySelector(".pagination");
-        pagination.innerHTML = "";
-        appendPaginationButtons(pagination, totalPages, selectedValue);
-        showPage(currentPage, rowsPerPage, activeTabContent);
+    // Ensure the currentPage does not exceed the number of available pages
+    if (currentPage > totalPages) {
+      currentPage = totalPages || 1; // Ensure currentPage is not 0 when totalPages is 0
+      currentRangeStart = Math.max(
+        1,
+        (Math.ceil(currentPage / pagesPerRange) - 1) * pagesPerRange + 1
+      );
     }
 
-    // Function to initially show only the first 20 rows and hide the rest
-    function showInitialRows(activeTabContent) {
-      var rows = activeTabContent.querySelectorAll("table tr:not(.table-header)");
-      for (var i = 0; i < rows.length; i++) {
-          if (i < rowsPerPage) {
-              rows[i].style.display = ""; // Show the first 20 rows
-          } else {
-              rows[i].style.display = "none"; // Hide the rest
-          }
-      }
-  }
-
-  // Hide all rows except the first 20 upon page load
-  var activeTabContent = document.querySelector(".tab-pane.active .table-container");
-  if (activeTabContent) {
-      showInitialRows(activeTabContent);
+    var pagination = document.querySelector(".pagination");
+    pagination.innerHTML = "";
+    appendPaginationButtons(pagination, totalPages, selectedValue);
+    showPage(currentPage, selectedValue, activeTabContent);
   }
 
   // Function to reset and initialize pagination when tab is switched
@@ -267,16 +254,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Event listener for dropdown change
 
-   document.getElementById("rows-display-dropdown").addEventListener("change", function () {
-    currentPage = 1; // Reset to the first page when dropdown changes
-    currentRangeStart = 1;
-    updateDataAndPagination(); // Trigger pagination update
-});
+  document
+    .getElementById("rows-display-dropdown")
+    .addEventListener("change", function () {
+      // Reset to the first page
+      currentPage = 1;
+      currentRangeStart = 1;
+      updateDataAndPagination(
+        document.querySelector(".tab-pane.active .table-container")
+      );
+    });
 
-  // Auto-click on the dropdown to initialize the display
+  //Auto-click on the dropdown to initialize the display
   setTimeout(function () {
-    document.getElementById("rows-display-dropdown").dispatchEvent(new Event("change"));
-}, 100);
+    document
+      .getElementById("rows-display-dropdown")
+      .dispatchEvent(new Event("change"));
+  }, 100);
 
   // Listen for tab changes and update content accordingly
   var tabs = document.querySelectorAll(".nav-link");
