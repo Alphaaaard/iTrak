@@ -311,9 +311,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         $currentDate = date('Y-m-d');
 
                         $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp, a.color, a.picture
-                        FROM attendancelogs AS al
-                        LEFT JOIN account AS a ON al.accountID = a.accountID
-                        WHERE date = '$currentDate' AND (al.timeOut IS NULL OR al.timeOut = '') AND a.role = 'Maintenance Personnel'";
+                                FROM attendancelogs AS al
+                                LEFT JOIN account AS a ON al.accountID = a.accountID
+                                WHERE date = '$currentDate' AND (al.timeOut IS NULL OR al.timeOut = '') AND a.role = 'Maintenance Personnel'";
 
                         $result = $conn->query($sql);
 
@@ -734,7 +734,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 return qculocation === "outside";
                             }
 
-
                             function clearMapData() {
                                 markers.forEach(marker => map.removeLayer(marker));
                                 markers = [];
@@ -801,6 +800,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 border-radius: 50%;
                             }
                         </style>
+
                         <script>
                             // Define the refreshContent function
                             function refreshContent() {
@@ -812,8 +812,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             setTimeout(refreshContent, 1000);
 
                             // Refresh content every 30 seconds after the initial refresh
-                            setInterval(refreshContent, 6000);
+                            setInterval(refreshContent, 31000);
                         </script>
+
                     </div>
                     <!-- Calendar container -->
                     <div class="calendar-container" id="calendar-container">
@@ -974,15 +975,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         if (previousClickedDate) {
                             previousClickedDate.classList.remove('clicked-date');
                         }
-
                         day.classList.add('clicked-date');
                         previousClickedDate = day;
                     });
                 });
-
-
             }
-
 
             function updateCurrentDay(selectedDate) {
                 // Get the current day element
@@ -1015,9 +1012,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     }
                 }
             }
-
-
-
 
             function checkDataAvailability(selectedDate, accountId) {
                 var xmlhttp = new XMLHttpRequest();
@@ -1108,9 +1102,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 fetchTodaysLocations(); // Fetch for all accounts today
 
                 // Fetch locations every 5 seconds
-                setInterval(fetchTodaysLocations, 5000);
+                setInterval(fetchTodaysLocations, 30000);
             };
-
 
             function clearMap() {
                 // Assuming 'markers' is an array holding your marker instances
@@ -1137,10 +1130,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 });
             });
         </script>
-
-
-
-
 
         <!-- BOOTSTRAP -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
