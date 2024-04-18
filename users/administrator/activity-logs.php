@@ -375,10 +375,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="cont-header">
                             <h1 class="tab-name"></h1>
                             <div class="tbl-filter">
+                                
                                 <select name="filterRole" id="filterRole" onchange="filterDate(this.value)">
                                     <option value="newest">Newest</option>
                                     <option value="oldest">Oldest</option>
                                 </select>
+
                                 <select id="rows-display-dropdown" class="form-select dropdown-rows"aria-label="Default select example">
                                     <option value="20" selected>Show 20 rows</option>
                                     <option class="hidden"></option>
@@ -387,9 +389,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <option value="150">Show 150 rows</option>
                                     <option value="200">Show 200 rows</option>
                                 </select>
+
                                 <form class="d-flex" role="search">
                                     <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" onkeyup="searchTable()" />
                                 </form>
+
                             </div>
                         </div>
                     </header>
@@ -606,22 +610,26 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         </script>
 
-        <script>
-            $(document).ready(function() {
-                $("#pills-general").addClass("show active");
-                $("#pills-report").removeClass("show active");
-                $(".nav-link[data-bs-target='pills-general']").addClass("active");
-                $(".nav-link[data-bs-target='pills-report']").removeClass("active");
+<script>
+    $(document).ready(function() {
+        $("#pills-general").addClass("show active");
+        $("#pills-report").removeClass("show active");
+        $(".nav-link[data-bs-target='pills-general']").addClass("active");
+        $(".nav-link[data-bs-target='pills-report']").removeClass("active");
 
-                $(".nav-link").click(function() {
-                    const targetId = $(this).data("bs-target");
-                    $(".tab-pane").removeClass("show active");
-                    $(`#${targetId}`).addClass("show active");
-                    $(".nav-link").removeClass("active");
-                    $(this).addClass("active");
-                });
-            });
-        </script>
+        $(".nav-link").click(function() {
+            const targetId = $(this).data("bs-target");
+            $(".tab-pane").removeClass("show active");
+            $(`#${targetId}`).addClass("show active");
+            $(".nav-link").removeClass("active");
+            $(this).addClass("active");
+            
+            // Reset the search input value
+            $("#search-box").val("");
+        });
+    });
+</script>
+
         <script>
             $(document).ready(function() {
 
@@ -629,10 +637,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 $("#search-box").on("input", function() {
                     var query = $(this).val().toLowerCase();
                     filterTable(query);
-
-                    // Recalculate and reset pagination for each tab after filtering
-                    resetPaginationForFilteredResults('#pills-general .table-container tbody', 'pagination-container-general', 5);
-                    resetPaginationForFilteredResults('#pills-report .table-container tbody', 'pagination-container-report', 5);
                 });
 
                 // Updated filterTable function
@@ -675,17 +679,17 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                     // * checks if rows are empty or not using the HasData variables
                     //* appends the tr-td child on the manager or personnel table 
-                    if (!generalHasData) {
-                        $(".general-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
-                    } else {
-                        $('.general-table tbody .emptyMsg').remove();
-                    }
+                    // if (!generalHasData) {
+                    //     $(".general-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+                    // } else {
+                    //     $('.general-table tbody .emptyMsg').remove();
+                    // }
 
-                    if (!reportsHasData) {
-                        $(".report-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
-                    } else {
-                        $('.report-table tbody .emptyMsg').remove();
-                    }
+                    // if (!reportsHasData) {
+                    //     $(".report-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+                    // } else {
+                    //     $('.report-table tbody .emptyMsg').remove();
+                    // }
                 }
             });
         </script>
@@ -753,44 +757,20 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 });
 
 
-                // * checks if rows are empty or not using the HasData variables
-                //* appends the tr-td child on the manager or personnel table 
-                if (!generalHasData) {
-                    $(".general-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
-                } else {
-                    $('.general-table tbody .emptyMsg').remove();
-                }
+                // // * checks if rows are empty or not using the HasData variables
+                // //* appends the tr-td child on the manager or personnel table 
+                // if (!generalHasData) {
+                //     $(".general-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+                // } else {
+                //     $('.general-table tbody .emptyMsg').remove();
+                // }
 
-                if (!reportsHasData) {
-                    $(".report-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
-                } else {
-                    $('.report-table tbody .emptyMsg').remove();
-                }
+                // if (!reportsHasData) {
+                //     $(".report-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+                // } else {
+                //     $('.report-table tbody .emptyMsg').remove();
+                // }
             }
-
-            //Initial setup for pagination on page load for both tabs
-            setupPagination('#pills-general .table-container tbody', 'pagination-container-general', 25);
-            setupPagination('#pills-report .table-container tbody', 'pagination-container-report', 25);
-
-            // Tab click event listeners for dynamic pagination setup on tab switch
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', function() {
-                    const targetId = this.getAttribute('data-bs-target');
-
-                    // Clear existing pagination from all tabs
-                    document.getElementById('pagination-container-general').innerHTML = '';
-                    document.getElementById('pagination-container-report').innerHTML = '';
-
-                    // Use setTimeout to delay the setupPagination call, ensuring tab content is fully visible
-                    setTimeout(() => {
-                        if (targetId.includes('general')) {
-                            setupPagination('#pills-general .table-container tbody', 'pagination-container-general', 25);
-                        } else if (targetId.includes('report')) {
-                            setupPagination('#pills-report .table-container tbody', 'pagination-container-report', 25);
-                        }
-                    }, 100); // Adjust the delay as needed, 100ms is just an example
-                });
-            });
 
             // The setupPagination function definition
             function setupPagination(tableBodySelector, paginationContainerId, itemsPerPage) {
