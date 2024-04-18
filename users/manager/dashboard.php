@@ -2618,7 +2618,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     var labels;
     // Define the labels based on the period
     if (period === 'week') {
-        labels = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
+        labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     } else if (period === 'month') {
         labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
     } else if (period === 'year') {
@@ -2705,7 +2705,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     for (let i = 0; i < periodDataLabels.length; i++) {
         let labelIndex = labels.indexOf(periodDataLabels[i]);
         console.log(`Data for ${periodDataLabels[i]}:`, data[i], `Index in labels:`, labelIndex);
-        if (labelIndex !== -1) {
+        if (labelIndex !== 1) {
             filledData[labelIndex] = data[i];
         }
     }
