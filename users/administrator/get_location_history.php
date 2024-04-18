@@ -14,9 +14,6 @@
         WHERE DATE(lh.timestamp) = ? 
         AND lh.qculocation != 'Outside of QCU'";
 
-
-
-
         // If an accountId is provided, add it as a filter
         if ($accountId !== null) {
             $sql .= " AND a.accountId = ?";

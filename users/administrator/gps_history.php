@@ -76,12 +76,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link rel="stylesheet" href="../../src/css/gps.css" />
         <link rel="stylesheet" href="../../src/css/gps-history.css" />
 
-        <script>
-            // This script will reload the page every 1000 milliseconds (1 second)
+        <!-- <script>
             setTimeout(function() {
                 window.location.reload(1);
             }, 30000);
-        </script>
+        </script> -->
     </head>
 
 
@@ -802,6 +801,19 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 border-radius: 50%;
                             }
                         </style>
+                        <script>
+                            // Define the refreshContent function
+                            function refreshContent() {
+                                console.log("Refreshing content...");
+                                $('#locationTbl').load('refresh_content_history.php');
+                            }
+
+                            // Initial content load after 1 second
+                            setTimeout(refreshContent, 1000);
+
+                            // Refresh content every 30 seconds after the initial refresh
+                            setInterval(refreshContent, 6000);
+                        </script>
                     </div>
                     <!-- Calendar container -->
                     <div class="calendar-container" id="calendar-container">
@@ -1094,7 +1106,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             window.onload = function() {
                 initMap(); // Your function to initialize the map
                 fetchTodaysLocations(); // Fetch for all accounts today
+
+                // Fetch locations every 5 seconds
+                setInterval(fetchTodaysLocations, 5000);
             };
+
 
             function clearMap() {
                 // Assuming 'markers' is an array holding your marker instances

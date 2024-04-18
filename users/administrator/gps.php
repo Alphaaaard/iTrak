@@ -750,9 +750,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 });
                             }
 
-
-
-
                             // Initialize the map when the page loads
                             window.onload = function() {
                                 initMap();
@@ -820,7 +817,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             // Refresh content every 30 seconds after the initial refresh
                             setInterval(refreshContent, 6000);
                         </script>
-
                     </div>
                 </div>
             </main>

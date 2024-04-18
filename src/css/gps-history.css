@@ -152,9 +152,9 @@ td.unselectable:hover {
   overflow: hidden;
   display: flex;
   transition: 1s ease;
-  height: 215px;
-  min-height: 215px;
-  max-height: 215px;
+  height: 250px;
+  min-height: 250px;
+  max-height: 250px;
 }
 
 .calendar:hover .calendar-body {
