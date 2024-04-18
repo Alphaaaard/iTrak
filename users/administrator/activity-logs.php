@@ -110,22 +110,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     //! commented code also in line 125
     //! bracket later remove this later
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -144,6 +128,21 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/activity-logs.css" />
+        <script src="../../src/js/activity-logs.js"></script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>iTrak | Reports</title>
+        <link rel="icon" type="image/x-icon" href="../../src/img/tab-logo.png">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <link rel="stylesheet" href="../../src/css/main.css" />
+        <link rel="stylesheet" href="../../src/css/reports.css" />
+        <script src="../../src/js/reports.js"></script>
+        <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
 
     </head>
     <style>
@@ -380,6 +379,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <option value="newest">Newest</option>
                                     <option value="oldest">Oldest</option>
                                 </select>
+                                <select id="rows-display-dropdown" class="form-select dropdown-rows"aria-label="Default select example">
+                                    <option value="20" selected>Show 20 rows</option>
+                                    <option class="hidden"></option>
+                                    <option value="50">Show 50 rows</option>
+                                    <option value="100">Show 100 rows</option>
+                                    <option value="150">Show 150 rows</option>
+                                    <option value="200">Show 200 rows</option>
+                                </select>
                                 <form class="d-flex" role="search">
                                     <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" onkeyup="searchTable()" />
                                 </form>
@@ -446,7 +453,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 }
                                 ?>
                             </div>
-                            <div id="pagination-container-general" class="pagination-container"></div>
+                            <!-- <div id="pagination-container-general" class="pagination-container"></div> -->
                         </div>
                         <!-- Report History Tab Content -->
                         <div class="tab-pane fade" id="pills-report" role="tabpanel" aria-labelledby="profile-tab">
@@ -498,14 +505,34 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 }
                                 ?>
                             </div>
-                            <div id="pagination-container-report" class="pagination-container"></div>
+                            <!-- <div id="pagination-container-report" class="pagination-container"></div> -->
                         </div>
                         <!--EMPLOYEE INFORMATION MODALS-->
 
                     </div>
                 </div>
             </main>
-            <!-- MAIN -->
+            <div class="pagination-reports">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
         </section>
 
         <!-- MODALS -->

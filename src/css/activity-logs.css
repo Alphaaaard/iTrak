@@ -26,6 +26,10 @@ table {
   background-color: #f1f6ff;
 }
 
+.hidden {
+  display: none;
+}
+
 .table-header {
   background-color: #3d518c;
 }
@@ -219,4 +223,30 @@ td:last-child {
   background-color: white;
   color: #163172;
   border: #163172 1px solid;
+}
+
+.pagination-reports {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1em auto;
+}
+/* .pagination {
+  margin-right: 7em;
+} */
+.active > .page-link {
+  color: #3d3b40;
+  background-color: #d6e4f0;
+  border-color: #1e56a0;
+}
+
+.pagination li {
+  display: flex;
+  margin: 0 1% 0 1%;
+}
+
+.tbl-filter select {
+  padding: 0.375rem 2.25rem 0.375rem 0.75rem !important;
+  font-size: 14px;
 }
