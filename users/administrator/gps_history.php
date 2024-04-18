@@ -76,12 +76,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link rel="stylesheet" href="../../src/css/gps.css" />
         <link rel="stylesheet" href="../../src/css/gps-history.css" />
 
-        <!-- <script>
+        <script>
             // This script will reload the page every 1000 milliseconds (1 second)
             setTimeout(function() {
                 window.location.reload(1);
             }, 30000);
-        </script> -->
+        </script>
     </head>
 
 
@@ -681,6 +681,60 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 xmlhttp.open("GET", "get_location_history.php?accountId=" + encodeURIComponent(accountId) + "&date=" + encodeURIComponent(selectedDate), true);
                                 xmlhttp.send();
                             }
+
+                            function updateOrAddMarker(location) {
+                                const {
+                                    latitude,
+                                    longitude,
+                                    firstName
+                                } = location;
+
+                                // Check if the user is outside of QCU
+                                if (!latitude || !longitude || latitude === 0 || longitude === 0) {
+                                    // If outside QCU, remove the marker
+                                    removeMarker(firstName);
+                                } else {
+                                    // Check if the location is inside or outside QCU
+                                    if (qculocation === "Belmonte Building" ||
+                                        qculocation === "Admin Building" ||
+                                        qculocation === "TechVoc Building" ||
+                                        qculocation === "Old Academic Building" ||
+                                        qculocation === "Bautista Building" ||
+                                        qculocation === "KorPhil Building" ||
+                                        qculocation === "Multipurpose Building" ||
+                                        qculocation === "New Academic Building" ||
+                                        qculocation === "Urban Farming" ||
+                                        qculocation === "Ballroom Building" ||
+                                        qculocation === "Open Ground" ||
+                                        qculocation === "University Park" ||
+                                        qculocation === "Inside at QCU"
+                                    ) {
+                                        // If inside QCU, update or add the marker
+                                        updateOrAddMarker(location);
+                                    } else if (qculocation === "outside") {
+                                        // If outside, remove the marker
+                                        removeMarker(firstName);
+                                    } else {
+                                        console.error("Invalid QCU location status:", qculocation);
+                                    }
+                                }
+                            }
+
+                            function removeMarker(firstName) {
+                                const marker = markersByFirstName[firstName];
+                                if (marker) {
+                                    map.removeLayer(marker);
+                                    delete markersByFirstName[firstName];
+                                }
+                            }
+
+                            function isOutsideQCU(location) {
+                                const {
+                                    qculocation
+                                } = location;
+                                return qculocation === "outside";
+                            }
+
 
                             function clearMapData() {
                                 markers.forEach(marker => map.removeLayer(marker));
