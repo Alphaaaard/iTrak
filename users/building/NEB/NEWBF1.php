@@ -3,8 +3,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once ("../../../config/connection.php");
@@ -72,26 +72,26 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
     // Your PHPMailer settings and email credentials
     $mail = new PHPMailer(true);
-    
+
     try {
         //Server settings
         // $mail->SMTPDebug = SMTP::DEBUG_SERVER;              // Enable verbose debug output
         $mail->isSMTP();                                      // Send using SMTP
-        $mail->Host       = 'smtp.gmail.com';               // Set the SMTP server to send through
-        $mail->SMTPAuth   = true;                             // Enable SMTP authentication
-        $mail->Username   = 'qcu.upkeep@gmail.com';         // SMTP username
-        $mail->Password   = 'qvpx bbcm bgmy hcvf';                  // SMTP password
+        $mail->Host = 'smtp.gmail.com';               // Set the SMTP server to send through
+        $mail->SMTPAuth = true;                             // Enable SMTP authentication
+        $mail->Username = 'qcu.upkeep@gmail.com';         // SMTP username
+        $mail->Password = 'qvpx bbcm bgmy hcvf';                  // SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;   // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
-        $mail->Port       = 587;                              // TCP port to connect to
-    
+        $mail->Port = 587;                              // TCP port to connect to
+
         //Recipients
         $mail->setFrom('qcu.upkeep@gmail.com', 'iTrak');
         $mail->addAddress('qcu.upkeep@gmail.com', 'Admin');     // Baguhin niyo email to test
-    
+
         // Content
         $mail->isHTML(true);                                  // Set email format to HTML
         $mail->Subject = 'Asset Status Changed';
-    
+
         // Handle form submission
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             foreach ($_POST as $key => $value) {
@@ -99,8 +99,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     $assetId = str_replace('edit', '', $key);
                     $status = $_POST['status']; // Ensure you have a field with name 'status' in your form
                     // Add your mail body content
-                    $mail->Body    = "The status of asset with ID $assetId has been changed to $status.";
-    
+                    $mail->Body = "The status of asset with ID $assetId has been changed to $status.";
+
                     $mail->send();
                     echo 'Message has been sent';
                     break; // Stop the loop after sending the email
@@ -6577,33 +6577,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <span class="text">Staff</span>
                 </a>
             </li>
-                <div class="GPS-cont" onclick="toggleGPS()">
-                    <li class="GPS-dropdown">
-                        <div class="GPS-drondown-content">
-                            <div class="GPS-side-cont">
-                                <i class="bi bi-geo-alt"></i>
-                                <span class="text">GPS</span>
-                            </div>
-                            <div class="GPS-ind">
-                                <i id="chevron-icon" class="bi bi-chevron-down"></i>
-                            </div>
+            <div class="GPS-cont" onclick="toggleGPS()">
+                <li class="GPS-dropdown">
+                    <div class="GPS-drondown-content">
+                        <div class="GPS-side-cont">
+                            <i class="bi bi-geo-alt"></i>
+                            <span class="text">GPS</span>
                         </div>
-                    </li>
-                </div>
-                <div class="GPS-container">
-                    <li class="GPS-Tracker">
-                        <a href="../../administrator/gps.php">
-                            <i class="bi bi-crosshair"></i>
-                            <span class="text">GPS Tracker</span>
-                        </a>
-                    </li>
-                    <li class="GPS-History">
-                        <a href="../../administrator/gps-history.php">
-                            <i class="bi bi-radar"></i>
-                            <span class="text">GPS History</span>
-                        </a>
-                    </li>
-                </div>
+                        <div class="GPS-ind">
+                            <i id="chevron-icon" class="bi bi-chevron-down"></i>
+                        </div>
+                    </div>
+                </li>
+            </div>
+            <div class="GPS-container">
+                <li class="GPS-Tracker">
+                    <a href="../../administrator/gps.php">
+                        <i class="bi bi-crosshair"></i>
+                        <span class="text">GPS Tracker</span>
+                    </a>
+                </li>
+                <li class="GPS-History">
+                    <a href="../../administrator/gps-history.php">
+                        <i class="bi bi-radar"></i>
+                        <span class="text">GPS History</span>
+                    </a>
+                </li>
+            </div>
             <li class="active">
                 <a href="../../administrator/map.php">
                     <i class="bi bi-map"></i>
@@ -30314,7 +30314,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
     <script src="../../../src/js/main.js"></script>
-        <script src="../../../src/js/logoutMap.js"></script>
+    <script src="../../../src/js/logoutMap.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

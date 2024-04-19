@@ -10368,33 +10368,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <span class="text">Staff</span>
                 </a>
             </li>
-                <div class="GPS-cont" onclick="toggleGPS()">
-                    <li class="GPS-dropdown">
-                        <div class="GPS-drondown-content">
-                            <div class="GPS-side-cont">
-                                <i class="bi bi-geo-alt"></i>
-                                <span class="text">GPS</span>
-                            </div>
-                            <div class="GPS-ind">
-                                <i id="chevron-icon" class="bi bi-chevron-down"></i>
-                            </div>
+            <div class="GPS-cont" onclick="toggleGPS()">
+                <li class="GPS-dropdown">
+                    <div class="GPS-drondown-content">
+                        <div class="GPS-side-cont">
+                            <i class="bi bi-geo-alt"></i>
+                            <span class="text">GPS</span>
                         </div>
-                    </li>
-                </div>
-                <div class="GPS-container">
-                    <li class="GPS-Tracker">
-                        <a href="../../administrator/gps.php">
-                            <i class="bi bi-crosshair"></i>
-                            <span class="text">GPS Tracker</span>
-                        </a>
-                    </li>
-                    <li class="GPS-History">
-                        <a href="../../administrator/gps-history.php">
-                            <i class="bi bi-radar"></i>
-                            <span class="text">GPS History</span>
-                        </a>
-                    </li>
-                </div>
+                        <div class="GPS-ind">
+                            <i id="chevron-icon" class="bi bi-chevron-down"></i>
+                        </div>
+                    </div>
+                </li>
+            </div>
+            <div class="GPS-container">
+                <li class="GPS-Tracker">
+                    <a href="../../administrator/gps.php">
+                        <i class="bi bi-crosshair"></i>
+                        <span class="text">GPS Tracker</span>
+                    </a>
+                </li>
+                <li class="GPS-History">
+                    <a href="../../administrator/gps-history.php">
+                        <i class="bi bi-radar"></i>
+                        <span class="text">GPS History</span>
+                    </a>
+                </li>
+            </div>
             <li class="active">
                 <a href="../../administrator/map.php">
                     <i class="bi bi-map"></i>
@@ -11538,9 +11538,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                     <!-- ASSET 6875 -->
                     <img src='../image.php?id=6875'
-                        style='width:50px; cursor:pointer; position:absolute; top:315px; left:815px;' alt='Asset Image'
-                        data-bs-toggle='modal' data-bs-target='#imageModal6875' onclick='fetchAssetData(6875);'
-                        class="asset-image" data-id="<?php echo $assetId6875; ?>"
+                        style='width:25px; cursor:pointer; position:absolute; top:310px; left:825px; transform: rotate(-90deg);'' alt='
+                        Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6875'
+                        onclick='fetchAssetData(6875);' class="asset-image" data-id="<?php echo $assetId6875; ?>"
                         data-room="<?php echo htmlspecialchars($room6875); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6875); ?>"
                         data-image="<?php echo base64_encode($upload_img6875); ?>"
@@ -11553,9 +11553,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                     <!-- ASSET 6874 -->
                     <img src='../image.php?id=6874'
-                        style='width:50px; cursor:pointer; position:absolute; top:315px; left:715px;' alt='Asset Image'
-                        data-bs-toggle='modal' data-bs-target='#imageModal6874' onclick='fetchAssetData(6874);'
-                        class="asset-image" data-id="<?php echo $assetId6874; ?>"
+                        style='width:25px; cursor:pointer; position:absolute; top:310px; left:725px; transform: rotate(-90deg);'' alt='
+                        Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6874'
+                        onclick='fetchAssetData(6874);' class="asset-image" data-id="<?php echo $assetId6874; ?>"
                         data-room="<?php echo htmlspecialchars($room6874); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6874); ?>"
                         data-image="<?php echo base64_encode($upload_img6874); ?>"
@@ -11568,9 +11568,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                     <!-- ASSET 6873 -->
                     <img src='../image.php?id=6873'
-                        style='width:50px; cursor:pointer; position:absolute; top:315px; left:615px;' alt='Asset Image'
-                        data-bs-toggle='modal' data-bs-target='#imageModal6873' onclick='fetchAssetData(6873);'
-                        class="asset-image" data-id="<?php echo $assetId6873; ?>"
+                        style='width:25px; cursor:pointer; position:absolute; top:310px; left:630px;transform: rotate(-90deg);'' alt='
+                        Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6873'
+                        onclick='fetchAssetData(6873);' class="asset-image" data-id="<?php echo $assetId6873; ?>"
                         data-room="<?php echo htmlspecialchars($room6873); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6873); ?>"
                         data-image="<?php echo base64_encode($upload_img6873); ?>"
@@ -11582,9 +11582,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                     <!-- ASSET 6872 -->
                     <img src='../image.php?id=6872'
-                        style='width:50px; cursor:pointer; position:absolute; top:245px; left:815px;' alt='Asset Image'
-                        data-bs-toggle='modal' data-bs-target='#imageModal6872' onclick='fetchAssetData(6872);'
-                        class="asset-image" data-id="<?php echo $assetId6872; ?>"
+                        style='width:25px; cursor:pointer; position:absolute; top:240px; left:825px; transform: rotate(-90deg);'' alt='
+                        Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6872'
+                        onclick='fetchAssetData(6872);' class="asset-image" data-id="<?php echo $assetId6872; ?>"
                         data-room="<?php echo htmlspecialchars($room6872); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6872); ?>"
                         data-image="<?php echo base64_encode($upload_img6872); ?>"
@@ -11597,9 +11597,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                     <!-- ASSET 6871 -->
                     <img src='../image.php?id=6871'
-                        style='width:50px; cursor:pointer; position:absolute; top:245px; left:715px;' alt='Asset Image'
-                        data-bs-toggle='modal' data-bs-target='#imageModal6871' onclick='fetchAssetData(6871);'
-                        class="asset-image" data-id="<?php echo $assetId6871; ?>"
+                        style='width:25px; cursor:pointer; position:absolute; top:240px; left:725px; transform: rotate(-90deg);'' alt='
+                        Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6871'
+                        onclick='fetchAssetData(6871);' class="asset-image" data-id="<?php echo $assetId6871; ?>"
                         data-room="<?php echo htmlspecialchars($room6871); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6871); ?>"
                         data-image="<?php echo base64_encode($upload_img6871); ?>"
@@ -11612,9 +11612,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                     <!-- ASSET 6870 -->
                     <img src='../image.php?id=6870'
-                        style='width:50px; cursor:pointer; position:absolute; top:245px; left:615px;' alt='Asset Image'
-                        data-bs-toggle='modal' data-bs-target='#imageModal6870' onclick='fetchAssetData(6870);'
-                        class="asset-image" data-id="<?php echo $assetId6870; ?>"
+                        style='width:25px; cursor:pointer; position:absolute; top:240px; left:630px;transform: rotate(-90deg);'' alt='
+                        Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6870'
+                        onclick='fetchAssetData(6870);' class="asset-image" data-id="<?php echo $assetId6870; ?>"
                         data-room="<?php echo htmlspecialchars($room6870); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6870); ?>"
                         data-image="<?php echo base64_encode($upload_img6870); ?>"
@@ -11627,9 +11627,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                     <!-- ASSET 6869 -->
                     <img src='../image.php?id=6869'
-                        style='width:50px; cursor:pointer; position:absolute; top:175px; left:815px;' alt='Asset Image'
-                        data-bs-toggle='modal' data-bs-target='#imageModal6869' onclick='fetchAssetData(6869);'
-                        class="asset-image" data-id="<?php echo $assetId6869; ?>"
+                        style='width:25px; cursor:pointer; position:absolute; top:170px; left:825px; transform: rotate(-90deg);'' alt='
+                        Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6869'
+                        onclick='fetchAssetData(6869);' class="asset-image" data-id="<?php echo $assetId6869; ?>"
                         data-room="<?php echo htmlspecialchars($room6869); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6869); ?>"
                         data-image="<?php echo base64_encode($upload_img6869); ?>"
@@ -11642,9 +11642,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                     <!-- ASSET 6868 -->
                     <img src='../image.php?id=6868'
-                        style='width:50px; cursor:pointer; position:absolute; top:175px; left:715px;' alt='Asset Image'
-                        data-bs-toggle='modal' data-bs-target='#imageModal6868' onclick='fetchAssetData(6868);'
-                        class="asset-image" data-id="<?php echo $assetId6868; ?>"
+                        style='width:25px; cursor:pointer; position:absolute; top:170px; left:725px; transform: rotate(-90deg);'' alt='
+                        Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6868'
+                        onclick='fetchAssetData(6868);' class="asset-image" data-id="<?php echo $assetId6868; ?>"
                         data-room="<?php echo htmlspecialchars($room6868); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6868); ?>"
                         data-image="<?php echo base64_encode($upload_img6868); ?>"
@@ -11656,9 +11656,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                     <!-- ASSET 6867 -->
                     <img src='../image.php?id=6867'
-                        style='width:50px; cursor:pointer; position:absolute; top:175px; left:615px;' alt='Asset Image'
-                        data-bs-toggle='modal' data-bs-target='#imageModal6867' onclick='fetchAssetData(6867);'
-                        class="asset-image" data-id="<?php echo $assetId6867; ?>"
+                        style='width:25px; cursor:pointer; position:absolute; top:170px; left:630px; transform: rotate(-90deg);'' alt='
+                        Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal6867'
+                        onclick='fetchAssetData(6867);' class="asset-image" data-id="<?php echo $assetId6867; ?>"
                         data-room="<?php echo htmlspecialchars($room6867); ?>"
                         data-floor="<?php echo htmlspecialchars($floor6867); ?>"
                         data-status="<?php echo htmlspecialchars($status6867); ?>"
@@ -48016,7 +48016,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
     <script src="../../../src/js/main.js"></script>
-        <script src="../../../src/js/logoutMap.js"></script>
+    <script src="../../../src/js/logoutMap.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
