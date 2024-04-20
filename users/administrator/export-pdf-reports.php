@@ -1,6 +1,7 @@
 <?php
 
-ini_set('memory_limit', '1024M'); // Adjust the value as needed
+ini_set('memory_limit', '20000M'); // Adjust the value as needed
+ini_set('max_execution_time', 400); // Set maximum execution time to 300 seconds (10 minutes)
 
 include_once("../../config/connection.php");
 // require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
