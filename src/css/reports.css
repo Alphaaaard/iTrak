@@ -53,7 +53,7 @@ table {
 .headerskie {
   display: flex;
   padding: 10px 10px 10px 5%;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: bold;
 }
 
@@ -415,6 +415,14 @@ img.icon.staff {
   }
   .new-nav li a {
     width: 8em !important;
+  }
+
+  .headerskie {
+    font-size: 10px;
+  }
+
+  .table-header.personnel-table-header tr {
+    font-size: 10.5px;
   }
 
   .icon {
