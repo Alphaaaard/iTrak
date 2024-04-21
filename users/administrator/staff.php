@@ -621,10 +621,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <div class="modal-body">
                       <form method="post" enctype="multipart/form-data" class="row g-3" id="addForm">
 
-                      <div class="col-4">
-  <label for="firstName" class="form-label label">First name <span class="d-none text-danger error">*</span></label>
+                        <div class="col-4">
+                          <label for="firstName" class="form-label label">First name <span class="d-none text-danger error">*</span></label>
   <input type="text" class="form-control" id="firstNameField" name="firstName" placeholder="First Name" oninput="this.value = this.value.replace(/[^a-zA-Z\s-]/g, '')" required />
-</div>
+                        </div>
 
                         <div class="col-4">
                           <label for="middleName" class="form-label label">Middle name <span class="d-none text-danger error">*</span></label>
@@ -632,9 +632,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
 
                         <div class="col-4">
-  <label for="lastName" class="form-label">Last name <span class="d-none text-danger error">*</span></label>
+                          <label for="lastName" class="form-label">Last name <span class="d-none text-danger error">*</span></label>
   <input type="text" class="form-control" id="lastNameField" name="lastName" placeholder="Last Name" oninput="this.value = this.value.replace(/[^a-zA-Z\s-]/g, '')" required />
-</div>
+                        </div>
 
 
                         <div class="col-4">
@@ -709,7 +709,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <div class="col-4">
                           <label for="firstname" class="form-label">First name</label>
-                          <input type="text" class="form-control" id="firstnameEdit" name="firstname" oninput="this.value = this.value.replace(/[^a-zA-Z-]/g,'')"  />
+                          <input type="text" class="form-control" id="firstnameEdit" name="firstname" oninput="this.value = this.value.replace(/[^a-zA-Z-]/g,'')" />
                         </div>
 
                         <div class="col-4">
