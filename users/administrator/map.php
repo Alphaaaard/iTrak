@@ -655,7 +655,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 setTimeout(function() {
                     loader.style.display = 'none'; // Hide the loader after the fade out
                 }, 1000); // 1000ms = 1s for the fade-out to complete
-            }, 10000); // 10000ms = 10s before starting to fade out
+            }, 15000); // 10000ms = 10s before starting to fade out
         </script>
 
         <script>
