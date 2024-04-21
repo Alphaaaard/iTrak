@@ -5,6 +5,7 @@ header("Content-Type: application/json");
 
 date_default_timezone_set('Asia/Manila'); //need ata to sa lahat ng page para sa security hahah 
 $current_timestamp = date("Y-m-d H:i:s");
+$current_date = date("Y-m-d H:i:s");
 
 function message($status, $message)
 {
