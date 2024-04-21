@@ -708,9 +708,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <input type="hidden" name="accountId" class="accountIdEdit" id="accountIdEdit">
 
                         <div class="col-4">
-                          <label for="firstname" class="form-label">First name</label>
-                          <input type="text" class="form-control" id="firstnameEdit" name="firstname" oninput="this.value = this.value.replace(/[^a-zA-Z-]/g, '')"  />
-                        </div>
+  <label for="firstName" class="form-label label">First name <span class="d-none text-danger error">*</span></label>
+  <input type="text" class="form-control" id="firstNameField" name="firstName" placeholder="First Name" oninput="this.value = this.value.replace(/[^a-zA-Z\s-]/g, '')" required />
+</div>
 
                         <div class="col-4">
                           <label for="middlename" class="form-label">Middle name</label>
@@ -718,9 +718,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
 
                         <div class="col-4">
-                          <label for="lastname" class="form-label">Last name</label>
-                          <input type="text" class="form-control" id="lastnameEdit" name="lastname" oninput="this.value = this.value.replace(/[^a-zA-Z-]/g, '')"  />
-                        </div>
+  <label for="lastName" class="form-label">Last name <span class="d-none text-danger error">*</span></label>
+  <input type="text" class="form-control" id="lastNameField" name="lastName" placeholder="Last Name" oninput="this.value = this.value.replace(/[^a-zA-Z\s-]/g, '')" required />
+</div>
 
                         <div class="col-4">
                           <label for="contact" class="form-label">Contact Number</label>
