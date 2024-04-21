@@ -75,8 +75,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Time out
         if ($log) {
-            $updateLogStmt = $conn->prepare('UPDATE attendancelogs SET timeOut = ? WHERE attendanceId = ?');
-            $updateLogStmt->bind_param('si', $current_timestamp, $log['attendanceId']);
+            $updateLogStmt = $conn->prepare('UPDATE attendancelogs SET timeOut = ?, date = ? WHERE attendanceId = ?');
+            $current_date = date("Y-m-d");
+            $updateLogStmt->bind_param('ssi', $current_timestamp, $current_date, $log['attendanceId']);
             $updateLogStmt->execute();
             $updateResult = $updateLogStmt->get_result();
 
@@ -86,6 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             message("Timed out successfully!", true);
         }
+
 
         // If user is accessing for the first time
         if (!isset($log['attendanceId'])) {
