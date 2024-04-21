@@ -51,7 +51,7 @@ function createScene() {
     0.1,
     1000
   );
-  camera.position.set(5, 10, 5);
+  camera.position.set(5, 0, 5);
   camera.lookAt(new THREE.Vector3(0, 0, 0));
 }
 
