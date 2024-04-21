@@ -88,8 +88,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // If user is accessing for the first time
         if (!isset($log['attendanceId'])) {
-            $createLogStmt = $conn->prepare('INSERT INTO `attendancelogs` (`attendanceId`, `accountId`, `date`, `timeIn`, `timeOut`) VALUES (NULL, ?, current_date(), ?, NULL)');
-            $createLogStmt->bind_param('is', $user['accountId'], $current_timestamp);
+            $createLogStmt = $conn->prepare('INSERT INTO `attendancelogs` (`attendanceId`, `accountId`, `date`, `timeIn`, `timeOut`) VALUES (NULL, ?, ?, ?, NULL)');
+            $createLogStmt->bind_param('iss', $user['accountId'], $current_date, $current_timestamp);
             $createLogStmt->execute();
 
             message("Timed in successfully!", true);
