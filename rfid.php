@@ -5,7 +5,6 @@ header("Content-Type: application/json");
 
 date_default_timezone_set('Asia/Manila'); //need ata to sa lahat ng page para sa security hahah 
 $current_timestamp = date("Y-m-d H:i:s");
-$current_date = date("Y-m-d H:i:s");
 
 function message($status, $message)
 {
@@ -75,9 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Time out
         if ($log) {
-            $updateLogStmt = $conn->prepare('UPDATE attendancelogs SET timeOut = ?, date = ? WHERE attendanceId = ?');
-            $current_date = date("Y-m-d");
-            $updateLogStmt->bind_param('ssi', $current_timestamp, $current_date, $log['attendanceId']);
+            $updateLogStmt = $conn->prepare('UPDATE attendancelogs SET timeOut = ? WHERE attendanceId = ?');
+            $updateLogStmt->bind_param('si', $current_timestamp, $log['attendanceId']);
             $updateLogStmt->execute();
             $updateResult = $updateLogStmt->get_result();
 
@@ -88,11 +86,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             message("Timed out successfully!", true);
         }
 
-
         // If user is accessing for the first time
         if (!isset($log['attendanceId'])) {
             $createLogStmt = $conn->prepare('INSERT INTO `attendancelogs` (`attendanceId`, `accountId`, `date`, `timeIn`, `timeOut`) VALUES (NULL, ?, current_date(), ?, NULL)');
-            $createLogStmt->bind_param('iss', $user['accountId'], $current_date, $current_timestamp);
+            $createLogStmt->bind_param('is', $user['accountId'], $current_timestamp);
             $createLogStmt->execute();
 
             message("Timed in successfully!", true);
