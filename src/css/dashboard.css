@@ -161,6 +161,7 @@ p {
   padding: 10px;
   justify-content: space-between;
   background-color: white;
+  height: 425px;
 }
 
 .building {
@@ -171,6 +172,7 @@ p {
   border: 1px solid;
   border-radius: 15px;
   background-color: #f6f6f6;
+  height: 160px;
 }
 
 .personnel-building {
@@ -232,7 +234,7 @@ button {
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: end;
   margin-right: 3.5%;
 }
 
@@ -812,6 +814,9 @@ button {
     margin: 0 0 10px 0;
   }
 
+  .pagination-container {
+    align-items: end;
+  }
   #calendar {
     /* margin: 10px 0; */
     min-height: auto;
@@ -955,7 +960,7 @@ canvas#attendanceChart {
 }
 
 canvas#statusChart {
-  height: 323px !important;
+  height: 304px !important;
 }
 
 .bar-filter {
