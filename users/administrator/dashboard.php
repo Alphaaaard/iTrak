@@ -2546,7 +2546,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     var labels;
     // Define the labels based on the period
     if (period === 'week') {
-        labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     } else if (period === 'month') {
         labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
     } else if (period === 'year') {
