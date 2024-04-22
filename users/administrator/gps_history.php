@@ -1003,9 +1003,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 });
             }
 
-
-
-
             function updateCurrentDay(selectedDate) {
                 // Get the current day element
                 var currentDayElement = document.getElementById('currentDay');
@@ -1103,12 +1100,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
 
             function fetchTodaysLocations(accountId) {
-                const date = new Date().toLocaleString('en-US', {
+                const now = new Date().toLocaleString('en-US', {
                     timeZone: 'Asia/Manila'
-                }).slice(0, 10); // Get current date in YYYY-MM-DD format in Asia/Manila timezone
+                }); // Get current date and time in Asia/Manila timezone
+                const date = now.slice(0, 10); // Extract the date in YYYY-MM-DD format
+                const time = now.slice(11, 19); // Extract the time in HH:MM:SS format
                 const url = accountId ?
-                    `get_location_history.php?accountId=${accountId}&date=${date}` :
-                    `get_location_history.php?date=${date}`;
+                    `get_location_history.php?accountId=${accountId}&date=${date}&time=${time}` :
+                    `get_location_history.php?date=${date}&time=${time}`;
 
                 fetch(url)
                     .then(response => response.json())
@@ -1128,9 +1127,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 initMap(); // Your function to initialize the map
                 fetchTodaysLocations(); // Fetch for all accounts today
 
-                // Fetch locations every 5 seconds
+                // Fetch locations every 30 seconds
                 setInterval(fetchTodaysLocations, 30000);
             };
+
 
             function clearMap() {
                 // Assuming 'markers' is an array holding your marker instances
