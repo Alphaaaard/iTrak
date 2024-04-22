@@ -15,7 +15,10 @@ if (isset($_SESSION['accountId'])) {
   if ($currentTime === "00:00:00") {
     // Clear the latitude and longitude data in the 'account' table for the user
 
-    $sql = "UPDATE account SET latitude = NULL, longitude = NULL, timestamp = NULLIF(:timestamp, '0000-00-00 00:00:00') WHERE accountId = ?";
+
+
+
+    $sql = "UPDATE account SET latitude = NULL, longitude = NULL, timestamp = NULL WHERE accountId = ?";
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $accountId);
