@@ -43,8 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // If user has already timed out within the day
-        $checkTimeoutStmt = $conn->prepare("SELECT * FROM `attendancelogs` WHERE accountId = ? AND date = ?");
-        $checkTimeoutStmt->bind_param("is", $user['accountId'], $current_date);
+        $checkTimeoutStmt = $conn->prepare("SELECT * FROM attendancelogs WHERE accountId = ? AND date = CURRENT_DATE() AND timeOut IS NOT NULL");
+        $checkTimeoutStmt->bind_param("i", $user['accountId']);
         $checkTimeoutStmt->execute();
 
         // Get results 
