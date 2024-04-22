@@ -440,7 +440,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         $date->modify('+8 hours'); // Add 8 hours
                                         $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
 
-                                     
+
                                         echo '<tr>';
                                         echo '<td>' . $row['firstName'] . " " . $row['lastName'] . '</td>';
                                         echo '<td style="display:none">' . $row['activityId'] . '</td>';
@@ -533,7 +533,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 }
             });
         </script>
-        <script src="../../src/js/locationTracker.js"></script>
+        <script src="../../src/js/locationTrackerS.js"></script>
         <script>
             setInterval(function() {
                 // Call a script to check if the user has timed out

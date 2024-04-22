@@ -446,9 +446,9 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                 echo "<div class='table-container'>";
                                 while ($row = $result->fetch_assoc()) {
                                     $date = new DateTime($row['date']); // Create DateTime object from fetched date
-                                        $date->modify('+8 hours'); // Add 8 hours
-                                        $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
-                                  
+                                    $date->modify('+8 hours'); // Add 8 hours
+                                    $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
+
                                     echo "<table>";
                                     echo '<tr>';
                                     echo '<td>' . $row['assetId'] . '</td>';
@@ -547,7 +547,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             });
         </script>
         <script src="../../src/js/main.js"></script>
-        <script src="../../src/js/locationTracker.js"></script>
+        <script src="../../src/js/locationTrackerS.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
         <script src="../../src/js/logout.js"></script>
         <script>
