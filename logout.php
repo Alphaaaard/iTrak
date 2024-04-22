@@ -14,7 +14,8 @@ if (isset($_SESSION['accountId'])) {
     }
 
     // Prepare SQL to clear the latitude and longitude data for the user, and adjust the timestamp by +8 hours
-    $sql = "UPDATE account SET latitude = NULL, longitude = NULL, timestamp = NULL, WHERE accountId = ?";
+$sql = "UPDATE account SET latitude = NULL, longitude = NULL, timestamp = NULL WHERE accountId = ?";
+
 
     $stmt = $conn->prepare($sql);
     if ($stmt) {
