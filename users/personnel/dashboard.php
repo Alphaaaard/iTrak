@@ -622,7 +622,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     </section>
 
 
-                    <script src="../../src/js/locationTrackerS.js"></script>
+                    <script src="../../src/js/SIKE.js"></script>
 
 
                     <!-- para sa auto logout -->

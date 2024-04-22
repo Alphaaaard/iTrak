@@ -533,7 +533,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 }
             });
         </script>
-        <script src="../../src/js/locationTrackerS.js"></script>
+        <script src="../../src/js/SIKE.js"></script>
         <script>
             setInterval(function() {
                 // Call a script to check if the user has timed out

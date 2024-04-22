@@ -547,7 +547,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             });
         </script>
         <script src="../../src/js/main.js"></script>
-        <script src="../../src/js/locationTrackerS.js"></script>
+        <script src="../../src/js/SIKE.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
         <script src="../../src/js/logout.js"></script>
         <script>
