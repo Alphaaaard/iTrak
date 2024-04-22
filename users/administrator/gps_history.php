@@ -1103,17 +1103,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
 
             function fetchTodaysLocations(accountId) {
-                // Get the selected date from the calendar
-                const selectedDateElement = document.getElementById('currentDay').textContent;
-                const selectedMonthYear = document.getElementById('currentMonthYear').textContent.split(' ');
-                const selectedYear = parseInt(selectedMonthYear[1]);
-                const selectedMonth = getMonthNumber(selectedMonthYear[0]); // You'll need to define getMonthNumber function to convert month name to number
-                const selectedDate = new Date(selectedYear, selectedMonth, selectedDateElement).toISOString().slice(0, 10);
-
-                // Construct the URL based on the selected date and accountId
+                const date = new Date().toISOString().slice(0, 10);
                 const url = accountId ?
-                    `get_location_history.php?accountId=${accountId}&date=${selectedDate}` :
-                    `get_location_history.php?date=${selectedDate}`;
+                    `get_location_history.php?accountId=${accountId}&date=${date}` :
+                    `get_location_history.php?date=${date}`;
 
                 fetch(url)
                     .then(response => response.json())
@@ -1127,7 +1120,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         console.error('Error fetching data: ', error);
                     });
             }
-
 
             // Initialize the map when the page loads
             window.onload = function() {
