@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 include_once("../../config/connection.php");
@@ -310,11 +311,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         $currentDate = date('Y-m-d');
 
-                        $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp, a.color, a.picture
-                                FROM attendancelogs AS al
-                                LEFT JOIN account AS a ON al.accountID = a.accountID
-                                WHERE date = '$currentDate' AND (al.timeOut IS NULL OR al.timeOut = '') AND a.role = 'Maintenance Personnel'";
-
+                        $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp, a.color, a.picture,
+                        DATE_ADD(al.date, INTERVAL 8 HOUR) AS modifiedDate
+                        FROM attendancelogs AS al
+                        LEFT JOIN account AS a ON al.accountID = a.accountID
+                        WHERE date = '$currentDate' AND (al.timeOut IS NULL OR al.timeOut = '') AND a.role = 'Maintenance Personnel'";
+                
                         $result = $conn->query($sql);
 
                         // Display the user table
@@ -1106,8 +1108,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 const options = {
                     timeZone: 'Asia/Manila'
                 };
-                const currentDate = new Date();
-                const date = currentDate.toLocaleString('en-US', options).slice(0, 10);
+                const date = new Date().toLocaleString('en-US', options).slice(0, 10);
                 const url = accountId ?
                     `get_location_history.php?accountId=${accountId}&date=${date}` :
                     `get_location_history.php?date=${date}`;
@@ -1124,7 +1125,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         console.error('Error fetching data: ', error);
                     });
             }
-
 
 
             // Initialize the map when the page loads
