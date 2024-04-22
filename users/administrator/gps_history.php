@@ -1103,7 +1103,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
 
             function fetchTodaysLocations(accountId) {
-                const date = new Date().toISOString().slice(0, 10);
+                const options = {
+                    timeZone: 'Asia/Manila'
+                };
+                const date = new Date().toLocaleString('en-US', options).slice(0, 10);
                 const url = accountId ?
                     `get_location_history.php?accountId=${accountId}&date=${date}` :
                     `get_location_history.php?date=${date}`;
@@ -1120,6 +1123,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         console.error('Error fetching data: ', error);
                     });
             }
+
 
             // Initialize the map when the page loads
             window.onload = function() {
