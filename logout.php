@@ -14,30 +14,26 @@ if (isset($_SESSION['accountId'])) {
     }
 
     // Prepare SQL to clear the latitude and longitude data for the user, and adjust the timestamp by +8 hours
-$sql = "UPDATE account SET latitude = NULL, longitude = NULL, timestamp = NULL, qculocation = NULL WHERE accountId = ?";
+    $sql = "UPDATE account SET latitude = NULL, longitude = NULL, timestamp = NULLIF(:timestamp, '0000-00-00 00:00:00') WHERE accountId = ?";
 
 
     $stmt = $conn->prepare($sql);
     if ($stmt) {
         $stmt->bind_param("i", $accountId);
-        if ($stmt->execute()) {
-            // Destroy the session
-            unset($_SESSION['accountId']);
-            session_destroy();
-
-            // Close the statement
-            $stmt->close();
-
-            // Close the database connection
-            $conn->close();
-
-            // Redirect the user to the login page
-            header("Location: index.php");
-            exit();  // Ensure no further execution of script after redirect
-        } else {
-            echo "Failed to execute the statement";
-        }
+        $stmt->execute();
+        $stmt->close();  // Close the statement
     } else {
         echo "Failed to prepare statement";
     }
+
+    // Destroy the session
+    unset($_SESSION['accountId']);
+    session_destroy();
+
+    // Close the database connection
+    $conn->close();
+
+    // Redirect the user to the login page
+    header("Location: index.php");
+    exit();  // Ensure no further execution of script after redirect
 }
