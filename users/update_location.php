@@ -33,7 +33,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                 $oldQcLocation = $row['qculocation']; // Fetch the qculocation
 
                 // Calculate the distance between old and new coordinates
-                $distanceThreshold = 2; // Adjust this threshold as needed (in meters)
+                $distanceThreshold = 10; // Adjust this threshold as needed (in meters)
                 $distance = calculateDistance($oldLatitude, $oldLongitude, $newLatitude, $newLongitude);
 
                 if ($distance >= $distanceThreshold) {
