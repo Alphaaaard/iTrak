@@ -30,7 +30,7 @@ function showPosition(position) {
 
   // Reverse geocoding using OpenCage API
   fetch(
-    `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=`
+    `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=72d423917f504dff9e59e91777ee9da4`
   )
     .then((response) => response.json())
     .then((data) => {
