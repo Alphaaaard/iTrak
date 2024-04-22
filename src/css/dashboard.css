@@ -161,7 +161,7 @@ p {
   padding: 10px;
   justify-content: space-between;
   background-color: white;
-  height: 425px;
+  /* height: 425px; */
 }
 
 .building {
