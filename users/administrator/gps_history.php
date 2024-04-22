@@ -1103,16 +1103,21 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
 
             function fetchTodaysLocations(accountId) {
-                const date = new Date().toLocaleString('en-US', {
+                const now = new Date();
+                const options = {
                     timeZone: 'Asia/Manila',
                     year: 'numeric',
                     month: '2-digit',
-                    day: '2-digit'
-                }).split(', ')[0].replace(/\//g, '-');
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                };
+                const formattedDate = now.toLocaleString('en-US', options).replace(/\//g, '-');
 
                 const url = accountId ?
-                    `get_location_history.php?accountId=${accountId}&date=${date}` :
-                    `get_location_history.php?date=${date}`;
+                    `get_location_history.php?accountId=${accountId}&date=${formattedDate}` :
+                    `get_location_history.php?date=${formattedDate}`;
 
                 fetch(url)
                     .then(response => response.json())
@@ -1126,6 +1131,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         console.error('Error fetching data: ', error);
                     });
             }
+
 
 
             // Initialize the map when the page loads
