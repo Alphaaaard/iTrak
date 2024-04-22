@@ -18,7 +18,7 @@ if (isset($_SESSION['accountId'])) {
 
 
 
-    $sql = "UPDATE account SET latitude = NULL, longitude = NULL, timestamp = NULLIF(:timestamp, '0000-00-00 00:00:00'), qculocation = NULL WHERE accountId = ?";
+    $sql = "UPDATE account SET latitude = NULL, longitude = NULL, timestamp = NULL, qculocation = NULL WHERE accountId = ?";
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $accountId);
