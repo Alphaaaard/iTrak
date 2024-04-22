@@ -2,9 +2,9 @@
 require_once("./config/connection1.php");
 header("Content-Type: application/json");
 
-
-date_default_timezone_set('Asia/Manila'); //need ata to sa lahat ng page para sa security hahah 
+date_default_timezone_set('Asia/Manila');
 $current_timestamp = date("Y-m-d H:i:s");
+$current_date = date("Y-m-d"); // Define current date
 
 function message($status, $message)
 {
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // If user has already timed out within the day
-        $checkTimeoutStmt = $conn->prepare("SELECT * FROM `attendancelogs` WHERE accountId = ? AND date = CURRENT_DATE() AND timeOut IS NOT NULL");
+        $checkTimeoutStmt = $conn->prepare("SELECT * FROM attendancelogs WHERE accountId = ? AND timeOut IS NOT NULL");
         $checkTimeoutStmt->bind_param("i", $user['accountId']);
         $checkTimeoutStmt->execute();
 
@@ -60,8 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Check user if he/she has logs today
         $checkLogStmt = $conn->prepare("SELECT attendancelogs.*, account.rfidNumber 
         FROM attendancelogs LEFT JOIN account ON attendancelogs.accountId = account.accountId 
-        WHERE account.rfidNumber = ? AND attendancelogs.date = CURRENT_DATE()");
-        $checkLogStmt->bind_param("s", $rfid);
+        WHERE account.rfidNumber = ? AND attendancelogs.date = ?");
+        $checkLogStmt->bind_param("ss", $rfid, $current_date);
         $checkLogStmt->execute();
 
         // Get results
@@ -88,8 +88,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // If user is accessing for the first time
         if (!isset($log['attendanceId'])) {
-            $createLogStmt = $conn->prepare('INSERT INTO `attendancelogs` (`attendanceId`, `accountId`, `date`, `timeIn`, `timeOut`) VALUES (NULL, ?, current_date(), ?, NULL)');
-            $createLogStmt->bind_param('is', $user['accountId'], $current_timestamp);
+            $createLogStmt = $conn->prepare('INSERT INTO `attendancelogs` (`attendanceId`, `accountId`, `date`, `timeIn`, `timeOut`) VALUES (NULL, ?, ?, ?, NULL)');
+            $createLogStmt->bind_param('iss', $user['accountId'], $current_date, $current_timestamp);
             $createLogStmt->execute();
 
             message("Timed in successfully!", true);
