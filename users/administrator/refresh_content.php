@@ -52,12 +52,11 @@
             echo "<div id='" . $collapseId . "' class='accordion-collapse collapse' aria-labelledby='" . $headerId . "' data-bs-parent='#accordionGPS'>"; // Ensure this points to the main container ID
             echo "<div class='accordion-body'>";
             echo "Status: " . $status . "<br>";
-            echo "Timestamp: " . $timestamp . "<br>";
 
             // Only display location if status is 'Online'
             if ($status === 'Online') {
 
-                echo "Timestamp: " . $row["timestamp"] . "<br>";
+                echo "Timestamp: " . $timestamp . "<br>";
                 echo "Location: " . $row["qculocation"] . "<br>";
             }
 
