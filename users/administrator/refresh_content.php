@@ -35,10 +35,10 @@ if ($result->num_rows > 0) {
         $latitude = $row["latitude"];
         $longitude = $row["longitude"];
 
-        $timestamp = ($status === 'Online') ? date('h:i A', strtotime($row["timestamp"])) : ''; // Convert timestamp to standard 12-hour time format if status is 'Online'
+        // Convert timestamp to standard 12-hour time format
+        $timestamp = date('h:i A', strtotime($row["timestamp"]));
 
         $status = ($latitude != 0 && $longitude != 0) ? 'Online' : 'Offline';
-
         // Accordion item
         echo "<div class='gps-container'>";
         echo "<div class='accordion-item'>";
@@ -53,12 +53,13 @@ if ($result->num_rows > 0) {
         echo "<div class='accordion-body'>";
         echo "Status: " . $status . "<br>";
 
-        // Only display location if status is 'Online'
+
         if ($status === 'Online') {
 
             echo "Timestamp: " . $row["timestamp"] . "<br>";
             echo "Location: " . $row["qculocation"] . "<br>";
         }
+
 
         echo "</div>"; // End of accordion body
         echo "</div>"; // End of accordion collapse
