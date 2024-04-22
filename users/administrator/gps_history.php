@@ -1102,33 +1102,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 }
             });
 
-            function fetchTodaysLocations(accountId) {
-                const date = new Date().toISOString().slice(0, 10);
-                const url = accountId ?
-                    `get_location_history.php?accountId=${accountId}&date=${date}` :
-                    `get_location_history.php?date=${date}`;
 
-                fetch(url)
-                    .then(response => response.json())
-                    .then(locations => {
-                        // Process the locations here
-                        console.log(locations);
-                        // For example, if you're updating markers on a map:
-                        updateMarkers(locations);
-                    })
-                    .catch(error => {
-                        console.error('Error fetching data: ', error);
-                    });
-            }
-
-            // Initialize the map when the page loads
-            window.onload = function() {
-                initMap(); // Your function to initialize the map
-                fetchTodaysLocations(); // Fetch for all accounts today
-
-                // Fetch locations every 5 seconds
-                setInterval(fetchTodaysLocations, 30000);
-            };
 
             function clearMap() {
                 // Assuming 'markers' is an array holding your marker instances
