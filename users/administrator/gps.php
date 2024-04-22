@@ -325,6 +325,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 $latitude = $row["latitude"];
                                 $longitude = $row["longitude"];
 
+                                // Convert timestamp to standard 12-hour time format
+                                $timestamp = date('h:i A', strtotime($row["timestamp"]));
+
                                 $status = ($latitude != 0 && $longitude != 0) ? 'Online' : 'Offline';
                                 // Accordion item
                                 echo "<div class='gps-container'>";
@@ -339,7 +342,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 echo "<div id='" . $collapseId . "' class='accordion-collapse collapse' aria-labelledby='" . $headerId . "' data-bs-parent='#accordionGPS'>"; // Ensure this points to the main container ID
                                 echo "<div class='accordion-body'>";
                                 echo "Status: " . $status . "<br>";
-                                echo "Timestamp: " . $row["timestamp"] . "<br>";
+                                echo "Timestamp: " . $timestamp . "<br>";
 
                                 // Only display location if status is 'Online'
                                 if ($status === 'Online') {
@@ -525,7 +528,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             }
 
                             // Update the markers with user images
-                            // Update the markers with user images
                             async function updateMarkers(locations) {
                                 for (const location of locations) {
                                     const {
@@ -549,8 +551,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     // Convert blob to base64
                                     const pictureBase64 = await blobToBase64(pictureBlob);
 
+                                    // Format timestamp to 12-hour time
+                                    const formattedTimestamp = formatTimestamp(timestamp);
+
                                     // Combine first name, location, and timestamp for marker
-                                    const locationInfo = `Firstname: ${firstName}<br>Location: ${qculocation}<br>Timestamp: ${timestamp}`;
+                                    const locationInfo = `Firstname: ${firstName}<br>Timestamp: ${formattedTimestamp}<br>Location: ${qculocation}`;
 
                                     // Check if a marker with this firstName already exists
                                     let existingMarker = markersByFirstName[firstName];
@@ -591,6 +596,18 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     }
                                 }
                             }
+
+                            // Function to format timestamp to 12-hour time
+                            function formatTimestamp(timestamp) {
+                                const date = new Date(timestamp);
+                                const hours = date.getHours();
+                                const minutes = date.getMinutes();
+                                const ampm = hours >= 12 ? 'PM' : 'AM';
+                                const formattedHours = hours % 12 || 12;
+                                const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+                                return `${formattedHours}:${formattedMinutes} ${ampm}`;
+                            }
+
 
                             function showMarker(firstName) {
                                 var marker = markersByFirstName[firstName]; // Retrieve the marker based on the firstName from the markersByFirstName object
@@ -694,8 +711,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 // Convert blob to base64
                                 blobToBase64(pictureBlob).then(function(pictureBase64) {
+                                    // Format timestamp to 12-hour time
+                                    const formattedTimestamp = formatTimestamp(timestamp);
+
                                     // Combine first name, location, and timestamp for marker
-                                    const locationInfo = `Firstname: ${firstName}<br>Location: ${qculocation}<br>Timestamp: ${timestamp}`;
+                                    const locationInfo = `Firstname: ${firstName} <br>Timestamp: ${formattedTimestamp} <br>Location: ${qculocation}`;
 
                                     // Check if the timestamp corresponds to the current date
                                     const locationDate = new Date(timestamp);
@@ -749,6 +769,18 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     }
                                 });
                             }
+
+                            // Function to format timestamp to 12-hour time
+                            function formatTimestamp(timestamp) {
+                                const date = new Date(timestamp);
+                                const hours = date.getHours();
+                                const minutes = date.getMinutes();
+                                const ampm = hours >= 12 ? 'PM' : 'AM';
+                                const formattedHours = hours % 12 || 12;
+                                const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+                                return `${formattedHours}:${formattedMinutes} ${ampm}`;
+                            }
+
 
                             // Initialize the map when the page loads
                             window.onload = function() {

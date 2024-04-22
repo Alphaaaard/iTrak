@@ -1,4 +1,3 @@
-@ -1,82 +1,81 @@
 <?php
 session_start();
 include_once("../config/connection.php");
@@ -32,8 +31,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
                 $oldLongitude = $row['longitude'];
                 $oldTimestamp = $row['timestamp'];
                 $oldQcLocation = $row['qculocation']; // Fetch the qculocation
-            
-                if ($oldLatitude != 0 && $oldLongitude != 0) {
+
+                // Calculate the distance between old and new coordinates
+                $distanceThreshold = 2; // Adjust this threshold as needed (in meters)
+                $distance = calculateDistance($oldLatitude, $oldLongitude, $newLatitude, $newLongitude);
+
+                if ($distance >= $distanceThreshold) {
                     // Insert the old location and qculocation into the locationhistory table
                     $insertLocationQuery = "INSERT INTO locationhistory (accountId, latitude, longitude, timestamp, qculocation) VALUES (?, ?, ?, ?, ?)";
                     $insertLocationStmt = $conn->prepare($insertLocationQuery);
@@ -79,4 +82,19 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email'])) {
 } else {
     echo "Session variables not set!";
 }
-?>
+
+// Function to calculate distance between two coordinates using Haversine formula
+function calculateDistance($lat1, $lon1, $lat2, $lon2)
+{
+    $R = 6371000; // Earth radius in meters
+    $phi1 = deg2rad($lat1);
+    $phi2 = deg2rad($lat2);
+    $deltaPhi = deg2rad($lat2 - $lat1);
+    $deltaLambda = deg2rad($lon2 - $lon1);
+
+    $a = sin($deltaPhi / 2) * sin($deltaPhi / 2) + cos($phi1) * cos($phi2) * sin($deltaLambda / 2) * sin($deltaLambda / 2);
+    $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+    $distance = $R * $c;
+
+    return $distance;
+}
