@@ -913,30 +913,52 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 var calendarContent = document.getElementById('calendarContent');
                 var daysInMonth = new Date(year, month + 1, 0).getDate();
 
+                // Calculate the first day of the month
                 var firstDay = new Date(year, month, 1).getDay();
-                var lastDay = new Date(year, month, daysInMonth).getDay();
 
                 var currentDay = 1; // Start from the first day of the month
                 var html = '';
 
+                html += '<tr>'; // Start a new row
+
+                // Add empty cells for days before the first day of the month
+                for (var i = 0; i < firstDay; i++) {
+                    html += '<td class="unselectable"></td>'; // Adding unselectable attribute
+                }
+
+                // Loop through each day of the month
+                for (var i = firstDay; i < 7; i++) {
+                    var selectedDate = currentYear + '-' + (currentMonth + 1).toString().padStart(2, '0') + '-' + currentDay.toString().padStart(2, '0');
+                    var hasData = checkDataAvailability(selectedDate, selectedAccountId); // Check if data is available for the selected date and user
+                    var isCurrentDay = currentYear === new Date().getFullYear() && currentMonth === new Date().getMonth() && currentDay === new Date().getDate();
+
+                    if (isCurrentDay) {
+                        html += '<td class="days day-' + currentDay + ' current-day">' + currentDay + '</td>';
+                    } else if (hasData) {
+                        html += '<td class="days day-' + currentDay + ' has-data">' + currentDay + '</td>'; // Add 'has-data' class if data is available
+                    } else {
+                        html += '<td class="days day-' + currentDay + '">' + currentDay + '</td>';
+                    }
+                    currentDay++;
+                }
+
+                html += '</tr>'; // End the first row
+
+                // Continue adding rows for the remaining days of the month
                 while (currentDay <= daysInMonth) {
                     html += '<tr>';
 
-                    for (var i = 0; i < 7; i++) {
-                        if (currentDay > 0 && currentDay <= daysInMonth) {
-                            var selectedDate = currentYear + '-' + (currentMonth + 1).toString().padStart(2, '0') + '-' + currentDay.toString().padStart(2, '0');
-                            var hasData = checkDataAvailability(selectedDate, selectedAccountId); // Check if data is available for the selected date and user
-                            var isCurrentDay = currentYear === new Date().getFullYear() && currentMonth === new Date().getMonth() && currentDay === new Date().getDate();
+                    for (var i = 0; i < 7 && currentDay <= daysInMonth; i++) {
+                        var selectedDate = currentYear + '-' + (currentMonth + 1).toString().padStart(2, '0') + '-' + currentDay.toString().padStart(2, '0');
+                        var hasData = checkDataAvailability(selectedDate, selectedAccountId); // Check if data is available for the selected date and user
+                        var isCurrentDay = currentYear === new Date().getFullYear() && currentMonth === new Date().getMonth() && currentDay === new Date().getDate();
 
-                            if (isCurrentDay) {
-                                html += '<td class="days day-' + currentDay + ' current-day">' + currentDay + '</td>';
-                            } else if (hasData) {
-                                html += '<td class="days day-' + currentDay + ' has-data">' + currentDay + '</td>'; // Add 'has-data' class if data is available
-                            } else {
-                                html += '<td class="days day-' + currentDay + '">' + currentDay + '</td>';
-                            }
+                        if (isCurrentDay) {
+                            html += '<td class="days day-' + currentDay + ' current-day">' + currentDay + '</td>';
+                        } else if (hasData) {
+                            html += '<td class="days day-' + currentDay + ' has-data">' + currentDay + '</td>'; // Add 'has-data' class if data is available
                         } else {
-                            html += '<td class="unselectable"></td>'; // Adding unselectable attribute
+                            html += '<td class="days day-' + currentDay + '">' + currentDay + '</td>';
                         }
                         currentDay++;
                     }
@@ -980,6 +1002,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     });
                 });
             }
+
+
+
 
             function updateCurrentDay(selectedDate) {
                 // Get the current day element

@@ -326,7 +326,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 $longitude = $row["longitude"];
 
                                 // Convert timestamp to standard 12-hour time format
-                                $timestamp = date('h:i A', strtotime($row["timestamp"]));
+                                // $timestamp = date('h:i A', strtotime($row["timestamp"]));
 
                                 $status = ($latitude != 0 && $longitude != 0) ? 'Online' : 'Offline';
                                 // Accordion item

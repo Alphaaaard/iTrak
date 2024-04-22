@@ -67,7 +67,7 @@ $buildings = [
 
     'Ballroom Building' => [
         ['lat' => 14.70055, 'long' => 121.03382, 'radius' =>  9.92],
-        ['lat' => 14.74151, 'long' => 121.06723, 'radius' =>  100],
+        ['lat' => 14.74151, 'long' => 121.06723, 'radius' =>  10],
 
     ],
 
