@@ -351,10 +351,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <div class="buildings" id="buildings" style="visibility:hidden">
                         <div class="building building1" style="display: none;">Floor</div>
                         <div class="building building2">TechVoc</div>
-                        <div class="building building3">Old Academic</div>
+                        <div class="building building3">Yellow</div>
                         <div class="building building4">Belmonte</div>
                         <div class="building building5">KORPHIL</div>
-                        <div class="building building6">Ballroom</div>
+                        <div class="building building6">ROTC</div>
                         <div class="building building7">Multipurpose</div>
                         <div class="building building8">Admin</div>
                         <div class="building building9">Bautista</div>
@@ -391,7 +391,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="modal-content">
                             <div class="modal-header"> <span class="close" id="closeModal3"><i class="bi bi-x-lg"></i></span>
                                 <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                    <h3>Old Academic Building</h3>
+                                    <h3>Yellow Building</h3>
                             </div>
                             <div class="nav-container">
                                 <button class="buttonskie" onclick="redirectToURL('../building/OLB/OLBF1.php')" role="tab" aria-controls="floor1" aria-selected="true">1</button>
@@ -442,7 +442,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="modal-content">
                             <div class="modal-header"> <span class="close" id="closeModal6"><i class="bi bi-x-lg"></i></span>
                                 <ul class="nav nav-tabs" id="floorTab" role="tablist">
-                                    <h3>Ballroom Building</h3>
+                                    <h3>ROTC Building</h3>
                             </div>
                             <div class="nav-container">
                                 <button class="buttonskie" onclick="redirectToURL('../building/CHB/CHBF1.php')" role="tab" aria-controls="floor1" aria-selected="true">1</button>
