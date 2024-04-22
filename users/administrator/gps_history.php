@@ -309,11 +309,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         }
 
 
-                     // Add 8 hours to the current date
-$currentDate = date('Y-m-d H:i:s', strtotime($currentDate . ' +8 hours'));
+                        // Add 8 hours to the current date
+                        $currentDate = date('Y-m-d H:i:s', strtotime($currentDate . ' +8 hours'));
 
-// Construct the SQL query with the modified date
-$sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp, a.color, a.picture,
+                        // Construct the SQL query with the modified date
+                        $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp, a.color, a.picture,
 
         FROM attendancelogs AS al
         LEFT JOIN account AS a ON al.accountID = a.accountID
@@ -1111,7 +1111,14 @@ $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timesta
                 const manilaTime = new Date().toLocaleString("en-US", {
                     timeZone: "Asia/Manila"
                 });
-                const date = new Date(manilaTime).toISOString().slice(0, 10);
+                const manilaDate = new Date(manilaTime);
+                const offset = manilaDate.getTimezoneOffset() / 60; // Convert offset to hours
+
+                // Adjust date to compensate for timezone offset
+                manilaDate.setHours(manilaDate.getHours() + offset);
+
+                // Format date in YYYY-MM-DD format
+                const date = manilaDate.toISOString().slice(0, 10);
 
                 const url = accountId ?
                     `get_location_history.php?accountId=${accountId}&date=${date}` :
@@ -1129,7 +1136,6 @@ $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timesta
                         console.error('Error fetching data: ', error);
                     });
             }
-
 
             // Initialize the map when the page loads
             window.onload = function() {
