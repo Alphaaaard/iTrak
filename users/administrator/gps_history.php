@@ -313,7 +313,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         $currentDate = date('Y-m-d H:i:s', strtotime($currentDate . ' +8 hours'));
 
                         // Construct the SQL query with the modified date
-                        $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp, a.color, a.picture
+                        $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp, a.color, a.picture,
 
         FROM attendancelogs AS al
         LEFT JOIN account AS a ON al.accountID = a.accountID
@@ -1111,14 +1111,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 const manilaTime = new Date().toLocaleString("en-US", {
                     timeZone: "Asia/Manila"
                 });
-                const manilaDate = new Date(manilaTime);
-                const offset = manilaDate.getTimezoneOffset() / 60; // Convert offset to hours
 
-                // Adjust date to compensate for timezone offset
-                manilaDate.setHours(manilaDate.getHours() + offset);
-
-                // Format date in YYYY-MM-DD format
-                const date = manilaDate.toISOString().slice(0, 10);
+                // Extract date in YYYY-MM-DD format
+                const date = manilaTime.slice(0, 10);
 
                 const url = accountId ?
                     `get_location_history.php?accountId=${accountId}&date=${date}` :
