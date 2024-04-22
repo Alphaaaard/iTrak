@@ -1103,7 +1103,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
 
             function fetchTodaysLocations(accountId) {
-                const date = new Date().toISOString().slice(0, 10); // Get current date in YYYY-MM-DD format
+                const date = new Date().toLocaleString('en-US', {
+                    timeZone: 'Asia/Manila'
+                }).slice(0, 10); // Get current date in YYYY-MM-DD format in Asia/Manila timezone
                 const url = accountId ?
                     `get_location_history.php?accountId=${accountId}&date=${date}` :
                     `get_location_history.php?date=${date}`;
