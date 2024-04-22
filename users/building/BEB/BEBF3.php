@@ -10,7 +10,6 @@ session_start();
 include_once ("../../../config/connection.php");
 $conn = connection();
 
-// transform: rotate(180deg);
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
     // For personnel page, check if userLevel is 3
@@ -514,9 +513,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="legend-item"><img src="../../../src/legend/I-CHAIR.jpg" alt="" class="legend-img">
                             <p>CHAIR</p>
                         </div>
-                        <div class="legend-item"><img src="../../../src/legend/CHAIR.jpg" alt="" class="legend-img">
-                            <p>CHAIR</p>
-                        </div>
+
                         <div class="legend-item"><img src="../../../src/legend/I-TABLE.jpg" alt="" class="legend-img">
                             <p>TABLE</p>
                         </div>
