@@ -1102,7 +1102,41 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 }
             });
 
+            function fetchTodaysLocations(accountId) {
+                // Get the selected date from the calendar
+                const selectedDateElement = document.getElementById('currentDay').textContent;
+                const selectedMonthYear = document.getElementById('currentMonthYear').textContent.split(' ');
+                const selectedYear = parseInt(selectedMonthYear[1]);
+                const selectedMonth = getMonthNumber(selectedMonthYear[0]); // You'll need to define getMonthNumber function to convert month name to number
+                const selectedDate = new Date(selectedYear, selectedMonth, selectedDateElement).toISOString().slice(0, 10);
 
+                // Construct the URL based on the selected date and accountId
+                const url = accountId ?
+                    `get_location_history.php?accountId=${accountId}&date=${selectedDate}` :
+                    `get_location_history.php?date=${selectedDate}`;
+
+                fetch(url)
+                    .then(response => response.json())
+                    .then(locations => {
+                        // Process the locations here
+                        console.log(locations);
+                        // For example, if you're updating markers on a map:
+                        updateMarkers(locations);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching data: ', error);
+                    });
+            }
+
+
+            // Initialize the map when the page loads
+            window.onload = function() {
+                initMap(); // Your function to initialize the map
+                fetchTodaysLocations(); // Fetch for all accounts today
+
+                // Fetch locations every 5 seconds
+                setInterval(fetchTodaysLocations, 30000);
+            };
 
             function clearMap() {
                 // Assuming 'markers' is an array holding your marker instances
