@@ -85,7 +85,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         //Recipients
         $mail->setFrom('qcu.upkeep@gmail.com', 'iTrak');
-        $mail->addAddress('daniel.quinto015@gmail.com', 'Admin');     // Add a recipient
+        $mail->addAddress('qcu.upkeep@gmail.com', 'Admin');     // Add a recipient
 
         // Content
         $mail->isHTML(true);                                  // Set email format to HTML
