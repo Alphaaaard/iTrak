@@ -34,9 +34,9 @@
             $latitude = $row["latitude"];
             $longitude = $row["longitude"];
 
-   
-// Convert timestamp to standard 12-hour time format and add 8 hours
-$timestamp = date('h:i A', strtotime($row["timestamp"] . ' +8 hours'));
+
+            // Convert timestamp to standard 12-hour time format and add 8 hours
+            $timestamp = date('h:i A', strtotime($row["timestamp"] . ' +8 hours'));
 
             $status = ($latitude != 0 && $longitude != 0) ? 'Online' : 'Offline';
             // Accordion item
@@ -52,11 +52,11 @@ $timestamp = date('h:i A', strtotime($row["timestamp"] . ' +8 hours'));
             echo "<div id='" . $collapseId . "' class='accordion-collapse collapse' aria-labelledby='" . $headerId . "' data-bs-parent='#accordionGPS'>"; // Ensure this points to the main container ID
             echo "<div class='accordion-body'>";
             echo "Status: " . $status . "<br>";
-            echo "Timestamp: " . $timestamp . "<br>";
+
 
             // Only display location if status is 'Online'
             if ($status === 'Online') {
-                
+
                 echo "Location: " . $row["qculocation"] . "<br>";
             }
 
