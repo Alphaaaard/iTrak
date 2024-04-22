@@ -313,7 +313,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         $currentDate = date('Y-m-d H:i:s', strtotime($currentDate . ' +8 hours'));
 
                         // Construct the SQL query with the modified date
-                        $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp, a.color, a.picture,
+                        $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp, a.color, a.picture
 
         FROM attendancelogs AS al
         LEFT JOIN account AS a ON al.accountID = a.accountID
