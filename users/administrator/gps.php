@@ -302,11 +302,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         $currentDate = date('Y-m-d');
 
-                        $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, DATE_ADD(a.timestamp, INTERVAL 8 HOUR) AS timestamp_with_hours, a.qculocation, a.color, a.picture
-        FROM attendancelogs AS al
-        LEFT JOIN account AS a ON al.accountID = a.accountID
-        WHERE date = '$currentDate' AND (al.timeOut IS NULL OR al.timeOut = '') AND a.role = 'Maintenance Personnel'";
-
+                        $sql = "SELECT al.*, a.firstName, a.latitude, a.lastName, a.longitude, a.timestamp, a.qculocation, a.color, a.picture
+                                FROM attendancelogs AS al
+                                LEFT JOIN account AS a ON al.accountID = a.accountID
+                                WHERE date = '$currentDate' AND (al.timeOut IS NULL OR al.timeOut = '') AND a.role = 'Maintenance Personnel'";
 
                         $result = $conn->query($sql);
 
@@ -343,7 +342,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 echo "<div id='" . $collapseId . "' class='accordion-collapse collapse' aria-labelledby='" . $headerId . "' data-bs-parent='#accordionGPS'>"; // Ensure this points to the main container ID
                                 echo "<div class='accordion-body'>";
                                 echo "Status: " . $status . "<br>";
-
+                                echo "Timestamp: " . $timestamp . "<br>";
 
                                 // Only display location if status is 'Online'
                                 if ($status === 'Online') {
