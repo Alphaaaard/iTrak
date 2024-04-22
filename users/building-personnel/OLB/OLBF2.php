@@ -466,7 +466,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                             <div class="legend-item"><img src="../../../src/legend/BULB.jpg" alt="" class="legend-img">
                                 <p>BULB</p>
                             </div>
-                            <div class="legend-item"><img src="../../../src/legend/CHAIR.jpg" alt="" class="legend-img">
+                            <div class="legend-item"><img src="../../../src/legend/I-CHAIR.jpg" alt="" class="legend-img">
                                 <p>CHAIR</p>
                             </div>
                             <div class="legend-item"><img src="../../../src/legend/TOILET-SEAT.jpg" alt="" class="legend-img">
@@ -476,7 +476,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
 
                         <!-- FLOOR PLAN -->
-                        <img class="Floor-container-1" src="../../../src/floors/oldAcademicB/OAB1F.png" alt="">
+                        <img class="Floor-container-1" src="../../../src/floors/oldAcademicB/OAB2F.png" alt="">
                         <div class="map-nav">
                             <div class="map-legend">
                                 <div class="legend-item" data-status="Working">

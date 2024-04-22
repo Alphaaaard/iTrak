@@ -478,7 +478,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="legend-item"><img src="../../../src/legend/BULB.jpg" alt="" class="legend-img">
                             <p>BULB</p>
                         </div>
-                        <div class="legend-item"><img src="../../../src/legend/CHAIR.jpg" alt="" class="legend-img">
+                        <div class="legend-item"><img src="../../../src/legend/I-CHAIR.jpg" alt="" class="legend-img">
                             <p>CHAIR</p>
                         </div>
                         <div class="legend-item"><img src="../../../src/legend/TOILET-SEAT.jpg" alt=""
