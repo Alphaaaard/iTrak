@@ -11,6 +11,11 @@ date_default_timezone_set('Asia/Manila'); //need ata to sa lahat ng page para sa
 
 
 // ******************************************BASAHIN NYO MUNA TO**********************************************
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
@@ -68,7 +73,46 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->bind_result($unseenCount);
     $stmt->fetch();
     $stmt->close();
+// Your PHPMailer settings and email credentials
+$mail = new PHPMailer(true);
 
+try {
+    //Server settings
+    // $mail->SMTPDebug = SMTP::DEBUG_SERVER;              // Enable verbose debug output
+    $mail->isSMTP();                                      // Send using SMTP
+    $mail->Host = 'smtp.gmail.com';               // Set the SMTP server to send through
+    $mail->SMTPAuth = true;                             // Enable SMTP authentication
+    $mail->Username = 'qcu.upkeep@gmail.com';         // SMTP username
+    $mail->Password = 'qvpx bbcm bgmy hcvf';                  // SMTP password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;   // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+    $mail->Port = 587;                              // TCP port to connect to
+
+    //Recipients
+    $mail->setFrom('qcu.upkeep@gmail.com', 'iTrak');
+    $mail->addAddress('qcu.upkeep@gmail.com', 'Admin');     // Baguhin niyo email to test
+
+    // Content
+    $mail->isHTML(true);                                  // Set email format to HTML
+    $mail->Subject = 'Asset Status Changed';
+
+    // Handle form submission
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        foreach ($_POST as $key => $value) {
+            if (strpos($key, 'edit') === 0) {
+                $assetId = str_replace('edit', '', $key);
+                $status = $_POST['status']; // Ensure you have a field with name 'status' in your form
+                // Add your mail body content
+                $mail->Body = "The status of asset with ID $assetId has been changed to $status.";
+
+                $mail->send();
+                echo 'Message has been sent';
+                break; // Stop the loop after sending the email
+            }
+        }
+    }
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
 
 
 
