@@ -74,7 +74,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
     //FOR ID 910 LIGHTS
     
-    $assetIds = range(9715, 9920);
+    $assetIds = range(9715, 9932);
     // $assetIds = [910, 911, 912, 913, 914, 915, 916, 917, 918, 9727]; // Add more asset IDs here
 
     // Loop through each asset ID
@@ -159,7 +159,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     }
 
     // Call updateAsset function for each asset ID you want to handle
-    $assetIds = range(9715, 9920); // Add more asset IDs here
+    $assetIds = range(9715, 9932); // Add more asset IDs here
    
     foreach ($assetIds as $id) {
         updateAsset($conn, $id);
@@ -1571,6 +1571,64 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 <img src="../image.php?id=9776" class="asset-image" data-id="<?php echo $assetId9912; ?>" style="width:11px; cursor:pointer; position:absolute; top:497px; left:832px; transform: rotate(270deg);" alt="Asset Image 9912" data-bs-toggle="modal" data-bs-target="#imageModal9912" onclick="fetchAssetData(9912);" data-room="<?php echo htmlspecialchars($room9912); ?>" data-floor="<?php echo htmlspecialchars($floor9912); ?>" data-image="<?php echo base64_encode($upload_img9912); ?>" data-category="<?php echo htmlspecialchars($category9912); ?>" data-status="<?php echo htmlspecialchars($status9912); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName9912); ?>">
 <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status9912); ?>; position:absolute; top:541px; left:831px;'>
 </div>
+<!-- ASSET 9923 Sofa -->
+<img src="../image.php?id=9923" class="asset-image" data-id="<?php echo $assetId9923; ?>" style="width:50px; cursor:pointer; position:absolute; top:456px; left:973px;" alt="Asset Image 9923" data-bs-toggle="modal" data-bs-target="#imageModal9923" onclick="fetchAssetData(9923);" data-room="<?php echo htmlspecialchars($room9923); ?>" data-floor="<?php echo htmlspecialchars($floor9923); ?>" data-image="<?php echo base64_encode($upload_img9923); ?>" data-category="<?php echo htmlspecialchars($category9923); ?>" data-status="<?php echo htmlspecialchars($status9923); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName9923); ?>">
+<div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status9923); ?>; position:absolute; top:454px; left:1017px;'>
+</div>
+<!-- ASSET 9917 ac-->
+<img src="../image.php?id=9917" class="asset-image" data-id="<?php echo $assetId9917; ?>" style="width:30px; cursor:pointer; position:absolute; top:485px; left:1006px;" alt="Asset Image 9917" data-bs-toggle="modal" data-bs-target="#imageModal9917" onclick="fetchAssetData(9917);" data-room="<?php echo htmlspecialchars($room9917); ?>" data-floor="<?php echo htmlspecialchars($floor9917); ?>" data-image="<?php echo base64_encode($upload_img9917); ?>" data-category="<?php echo htmlspecialchars($category9917); ?>" data-status="<?php echo htmlspecialchars($status9917); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName9917); ?>">
+<div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status9917); ?>; position:absolute; top:485px; left:1028px;'>
+</div>
+<!-- ASSET 9924 ac-->
+<img src="../image.php?id=9924" class="asset-image" data-id="<?php echo $assetId9924; ?>" style="width:30px; cursor:pointer; position:absolute; top:485px; left:1006px;" alt="Asset Image 9924" data-bs-toggle="modal" data-bs-target="#imageModal9924" onclick="fetchAssetData(9924);" data-room="<?php echo htmlspecialchars($room9924); ?>" data-floor="<?php echo htmlspecialchars($floor9924); ?>" data-image="<?php echo base64_encode($upload_img9924); ?>" data-category="<?php echo htmlspecialchars($category9924); ?>" data-status="<?php echo htmlspecialchars($status9924); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName9924); ?>">
+<div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status9924); ?>; position:absolute; top:485px; left:1028px;'>
+</div>
+<!-- ASSET 9930 desk -->
+<img src="../image.php?id=9930" class="asset-image" data-id="<?php echo $assetId9930; ?>" style="width:15px; cursor:pointer; position:absolute; top:472px; left:1050px;" alt="Asset Image 9930" data-bs-toggle="modal" data-bs-target="#imageModal9930" onclick="fetchAssetData(9930);" data-room="<?php echo htmlspecialchars($room9930); ?>" data-floor="<?php echo htmlspecialchars($floor9930); ?>" data-image="<?php echo base64_encode($upload_img9930); ?>" data-category="<?php echo htmlspecialchars($category9930); ?>" data-status="<?php echo htmlspecialchars($status9930); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName9930); ?>">
+<div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status9930); ?>; position:absolute; top:469px; left:1047px;'>
+</div>
+
+<!-- ASSET 9926 chair -->
+<img src="../image.php?id=9776" class="asset-image" data-id="<?php echo $assetId9926; ?>" style="width:11px; cursor:pointer; position:absolute; top:482px; left:1062px; transform: rotate(90deg);" alt="Asset Image 9926" data-bs-toggle="modal" data-bs-target="#imageModal9926" onclick="fetchAssetData(9926);" data-room="<?php echo htmlspecialchars($room9926); ?>" data-floor="<?php echo htmlspecialchars($floor9926); ?>" data-image="<?php echo base64_encode($upload_img9926); ?>" data-category="<?php echo htmlspecialchars($category9926); ?>" data-status="<?php echo htmlspecialchars($status9926); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName9926); ?>">
+<div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status9926); ?>; position:absolute; top:478px; left:1068px;'>
+</div>
+
+
+<!-- ASSET 9931 desk -->
+<img src="../image.php?id=9931" class="asset-image" data-id="<?php echo $assetId9931; ?>" style="width:15px; cursor:pointer; position:absolute; top:506px; left:1048px; transform: rotate(360deg);" alt="Asset Image 9931" data-bs-toggle="modal" data-bs-target="#imageModal9931" onclick="fetchAssetData(9931);" data-room="<?php echo htmlspecialchars($room9931); ?>" data-floor="<?php echo htmlspecialchars($floor9931); ?>" data-image="<?php echo base64_encode($upload_img9931); ?>" data-category="<?php echo htmlspecialchars($category9931); ?>" data-status="<?php echo htmlspecialchars($status9931); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName9931); ?>">
+<div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status9931); ?>; position:absolute; top:502px; left:1058px;'>
+</div>
+
+
+
+
+
+
+
+<!-- ASSET 9927 chair -->
+<img src="../image.php?id=9776" class="asset-image" data-id="<?php echo $assetId9927; ?>" style="width:11px; cursor:pointer; position:absolute; top:520px; left:1062px; transform: rotate(138deg);" alt="Asset Image 9927" data-bs-toggle="modal" data-bs-target="#imageModal9927" onclick="fetchAssetData(9927);" data-room="<?php echo htmlspecialchars($room9927); ?>" data-floor="<?php echo htmlspecialchars($floor9927); ?>" data-image="<?php echo base64_encode($upload_img9927); ?>" data-category="<?php echo htmlspecialchars($category9927); ?>" data-status="<?php echo htmlspecialchars($status9927); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName9927); ?>">
+<div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status9927); ?>; position:absolute; top:520px; left:1070px;'>
+</div>
+
+<!-- ASSET 9928 chair -->
+<img src="../image.php?id=9776" class="asset-image" data-id="<?php echo $assetId9928; ?>" style="width:11px; cursor:pointer; position:absolute; top:507px; left:1038px;" alt="Asset Image 9928" data-bs-toggle="modal" data-bs-target="#imageModal9928" onclick="fetchAssetData(9928);" data-room="<?php echo htmlspecialchars($room9928); ?>" data-floor="<?php echo htmlspecialchars($floor9928); ?>" data-image="<?php echo base64_encode($upload_img9928); ?>" data-category="<?php echo htmlspecialchars($category9928); ?>" data-status="<?php echo htmlspecialchars($status9928); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName9928); ?>">
+<div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status9928); ?>; position:absolute; top:528px; left:1034px;'>
+</div>
+
+
+<!-- ASSET 9929 chair -->
+<img src="../image.php?id=9776" class="asset-image" data-id="<?php echo $assetId9929; ?>" style="width:11px; cursor:pointer; position:absolute; top:523px; left:1038px; transform: rotate(180deg);" alt="Asset Image 9929" data-bs-toggle="modal" data-bs-target="#imageModal9929" onclick="fetchAssetData(9929);" data-room="<?php echo htmlspecialchars($room9929); ?>" data-floor="<?php echo htmlspecialchars($floor9929); ?>" data-image="<?php echo base64_encode($upload_img9929); ?>" data-category="<?php echo htmlspecialchars($category9929); ?>" data-status="<?php echo htmlspecialchars($status9929); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName9929); ?>">
+<div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status9929); ?>; position:absolute; top:502px; left:1040px;'>
+</div>
+
+
+
+
+
+
+
+
+
 
 
                         <!--Start of hover-->
