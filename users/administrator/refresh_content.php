@@ -36,7 +36,7 @@
 
 
             // Convert timestamp to standard 12-hour time format and add 8 hours
-            $timestamp = date('h:i A', strtotime($row["timestamp"] . ' +8 hours'));
+            $timestamp = date('h:i A', strtotime($row["timestamp"]));
 
             $status = ($latitude != 0 && $longitude != 0) ? 'Online' : 'Offline';
             // Accordion item
@@ -55,8 +55,8 @@
 
             // Only display location if status is 'Online'
             if ($status === 'Online') {
-
                 echo "Timestamp: " . $timestamp . "<br>";
+
                 echo "Location: " . $row["qculocation"] . "<br>";
             }
 
