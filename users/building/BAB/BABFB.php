@@ -10435,25 +10435,30 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <!-- FLOOR PLAN -->
                     <img src="../../../src/floors/bautistaB/BB1B.png" alt="" class="Floor-container">
 
-                    <div class="legend-body" id="legendBody">
-                        <!-- Your legend body content goes here -->
-                        <div class="legend-item"><img src="../../../src/legend/AC.jpg" alt="" class="legend-img">
-                            <p>AIRCON</p>
+                        <div class="legend-body" id="legendBody">
+                            <!-- Your legend body content goes here -->
+                            <div class="legend-item"><img src="../../../src/legend/AC.jpg" alt="" class="legend-img">
+                                <p>AIRCON</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/BULB.jpg" alt="" class="legend-img">
+                                <p>BULB</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/CASSETTE-AC.jpg" alt="" class="legend-img">
+                                <p>CASSETTE AIRCON</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/CHAIR.jpg" alt="" class="legend-img">
+                                <p>CHAIR</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/DOOR.jpg" alt="" class="legend-img">
+                                <p>DOOR</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/DESK-TABLE.jpg" alt="" class="legend-img">
+                                <p>TABLE</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/TOILET-SEAT.jpg" alt="" class="legend-img">
+                                <p>TOILET-SEAT</p>
+                            </div>
                         </div>
-                        <div class="legend-item"><img src="../../../src/legend/BULB.jpg" alt="" class="legend-img">
-                            <p>BULB</p>
-                        </div>
-                        <div class="legend-item"><img src="../../../src/legend/CHAIR.jpg" alt="" class="legend-img">
-                            <p>CHAIR</p>
-                        </div>
-                        <div class="legend-item"><img src="../../../src/legend/B-TABLE.jpg" alt="" class="legend-img">
-                            <p>TABLE</p>
-                        </div>
-                        <div class="legend-item"><img src="../../../src/legend/TOILET-SEAT.jpg" alt=""
-                                class="legend-img">
-                            <p>TOILET-SEAT</p>
-                        </div>
-                    </div>
 
                     <div class="map-nav">
 

@@ -212,23 +212,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <div class="legend-body" id="legendBody">
                             <!-- Your legend body content goes here -->
-                            <div class="legend-item"><img src="../../../src/legend/AC.jpg" alt="" class="legend-img">
-                                <p>AIRCON</p>
-                            </div>
                             <div class="legend-item"><img src="../../../src/legend/BULB.jpg" alt="" class="legend-img">
                                 <p>BULB</p>
                             </div>
-                            <div class="legend-item"><img src="../../../src/legend/CASSETTE-AC.jpg" alt="" class="legend-img">
-                                <p>CASSETTE AC</p>
-                            </div>
-                            <div class="legend-item"><img src="../../../src/legend/DOOR.jpg" alt="" class="legend-img">
-                                <p>DOOR</p>
-                            </div>
-                            <div class="legend-item"><img src="../../../src/legend/SWING-DOOR.jpg" alt="" class="legend-img">
-                                <p>SWING DOOR</p>
-                            </div>
-                            <div class="legend-item"><img src="../../../src/legend/TOILET-SEAT.jpg" alt="" class="legend-img">
-                                <p>TOILET SEAT</p>
+                        </div>
+
+
+                        <div class="map-nav">
+                            <div class="map-legend">
+                                <div class="legend-color-green"></div>
+                                <p>Working</p>
+                                <div class="legend-color-under-maintenance"></div>
+                                <p>Under maintenance</p>
+                                <div class="legend-color-need-repair"></div>
+                                <p>Need repair</p>
+                                <div class="legend-color-for-replacement"></div>
+                                <p>For replacement</p>
                             </div>
                         </div>
                     </div>
