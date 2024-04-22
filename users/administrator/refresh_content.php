@@ -55,6 +55,7 @@ if ($result->num_rows > 0) {
 
         // Only display location if status is 'Online'
         if ($status === 'Online') {
+            echo "Timestamp: " . $row["Timestamp"] . "<br>";
             echo "Location: " . $row["qculocation"] . "<br>";
         }
 
