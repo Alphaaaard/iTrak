@@ -91,6 +91,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         $conn->close();
     }
+ 
+
     ?>
 
 
@@ -162,7 +164,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             top: 10px;
             right: 10px;
         }
-    </style>
+
+
+    .blue {
+        color: blue;
+    }
+
+    .green {
+        color: green;
+    }
+
+    .red {
+        color: red;
+    }
+</style>
+
+   
 
     <body>
         <div id="navbar" class="">
@@ -465,9 +482,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     echo '<td>' . $row['building'] . ', ' . $row['floor'] . ', ' . $row['room'] . '</td>';
                                     echo '<td>' . $row['equipment'] . '</td>';
                                     echo '<td>' . $row['assignee'] . '</td>';
-                                    echo '<td >' . $row['status'] . '</td>';
-                                    echo '<td>' . $row['deadline'] . '</td>';
+                                  
+                                 
+                                   
 
+                                    $status = $row['status'];
+                                    $status_color = '';
+                                    
+                                    // Set the color based on the status
+                                    switch ($status) {
+                                        case 'Assigned':
+                                            $status_color = 'blue';
+                                            break;
+                                        case 'Done':
+                                            $status_color = 'green';
+                                            break;
+                                        case 'For Approval':
+                                            $status_color = 'red';
+                                            break;
+                                        default:
+                                            // Default color if status doesn't match
+                                            $status_color = 'black';
+                                    }
+                                    
+                                    // Output the status with appropriate color
+                                    echo '<td class="' . $status_color . '">' . $status . '</td>';
+                                    echo '<td>' . $row['deadline'] . '</td>';
+                                    echo '<tr>';
                                     echo '<td style="display:none;">' . $row['campus'] . '</td>';
                                     echo '<td style="display:none;">' . $row['building'] . '</td>';
                                     echo '<td style="display:none;">' . $row['floor'] . '</td>';
