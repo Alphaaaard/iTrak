@@ -51,7 +51,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->fetch();
     $stmt->close();
 
-    $sql = "SELECT * FROM request";
+    $sql = "SELECT * FROM request WHERE campus = 'Batasan'";
     $result = $conn->query($sql) or die($conn->error);
 
     if (isset($_POST['edit'])) {
@@ -491,62 +491,38 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             <div class='table-header'>
                                 <table>
                                     <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th>NAME</th>
-                                        <th>ROLE</th>
-                                        <th></th>
+                                        <th>Request ID</th>
+                                        <th>Date & Time</th>
+                                        <th>Category</th>
+                                        <th>Location</th>
+                                        <th>Equipment</th>
+                                        <th>Assignee</th>
+                                        <th>Status</th>
+                                        <th>Deadline</th>
                                     </tr>
                                 </table>
                             </div>
                             <?php
-                            if ($result2->num_rows > 0) {
+                            if ($result->num_rows > 0) {
                                 echo "<div class='table-container'>";
                                 echo "<table>";
-                                while ($row2 = $result2->fetch_assoc()) {
+                                while ($row = $result->fetch_assoc()) {
                                     echo '<tr>';
-                                    echo '<td>' . $row2['archiveId'] . '</td>';
-                                    $imageData = $row2["picture"];
-                                    $imageSrc = "data:image/jpeg;base64," . base64_encode($imageData);
-                                    echo "<td><img src='" . $imageSrc . "' alt='Profile Picture' width='50' class='rounded-img'/></td>";
-                                    echo '<td>' . $row2['firstName'] . " " . $row2['lastName'] . '</td>';
-                                    echo '<td style="display:none">' . $row2['firstName'] . '</td>';
-                                    echo '<td style="display:none">' . $row2['middleName'] . '</td>';
-                                    echo '<td style="display:none">' . $row2['lastName'] . '</td>';
-                                    echo '<td style="display:none">' . $row2['email'] . '</td>';
-                                    echo '<td style="display:none">' . $row2['password'] . '</td>';
-                                    echo '<td style="display:none">' . $row2['contact'] . '</td>';
-                                    echo '<td style="display:none">' . $row2['birthday'] . '</td>';
-                                    echo '<td>' . $row2['role'] . '</td>';
-                                    echo '<td style="display:none">' . $row2['userLevel'] . '</td>';
-                                    echo '<td style="display:none">' . $row2['latitude'] . '</td>';
-                                    echo '<td style="display:none">' . $row2['longitude'] . '</td>';
-                                    echo '<td style="display:none">' . $row2['timestamp'] . '</td>';
-                                    echo '<td style="display:none">' . $row2['color'] . '</td>';
-                                    echo '<td>';
-                                    echo '<form method="post" action="">';
-                                    echo '<input type="hidden" name="report_id" value="' . $row2['archiveId'] . '">';
-                                    echo '<button type="button" class="btn archive-btn restore-btn" data-row2-html="' . htmlentities('<tr class="solid">
-                                                <td>' . $row2['archiveId'] . '</td>
-                                                <td>' . $row2['firstName'] . '</td>
-                                                <td>' . $row2['middleName'] . '</td>
-                                                <td>' . $row2['lastName'] . '</td>
-                                                <td>' . $row2['email'] . '</td>
-                                                <td>' . $row2['password'] . '</td>
-                                                <td>' . $row2['contact'] . '</td>
-                                                <td>' . $row2['birthday'] . '</td>
-                                                <td>' . $row2['role'] . '</td>
-                                                <td>' . $row2['picture'] . '</td>
-                                                <td>' . $row2['userLevel'] . '</td>
-                                                <td>' . $row2['latitude'] . '</td>
-                                                <td>' . $row2['longitude'] . '</td>
-                                                <td>' . $row2['timestamp'] . '</td>
-                                                <td>' . $row2['color'] . '</td>
-                                                </tr>') . '">
-                                                RESTORE
-                                              </button>';
-                                    echo '</form>';
-                                    echo '</td>';
+                                    echo '<td>' . $row['request_id'] . '</td>';
+                                    echo '<td>' . $row['date'] . '</td>';
+                                    echo '<td>' . $row['category'] . '</td>';
+                                    echo '<td>' . $row['building'] . ', ' . $row['floor'] . ', ' . $row['room'] . '</td>';
+                                    echo '<td>' . $row['equipment'] . '</td>';
+                                    echo '<td>' . $row['assignee'] . '</td>';
+                                    echo '<td >' . $row['status'] . '</td>';
+                                    echo '<td>' . $row['deadline'] . '</td>';
+
+                                    echo '<td style="display:none;">' . $row['campus'] . '</td>';
+                                    echo '<td style="display:none;">' . $row['building'] . '</td>';
+                                    echo '<td style="display:none;">' . $row['floor'] . '</td>';
+                                    echo '<td style="display:none;">' . $row['room'] . '</td>';
+                                    echo '<td style="display:none;">' . $row['description'] . '</td>';
+                                    echo '<td style="display:none;">' . $row['req_by'] . '</td>';
                                     echo '</tr>';
                                 }
                                 echo "</table>";
@@ -559,10 +535,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 echo '</table>';
                             }
                             ?>
-
                         </div>
                     </div>
-                    <!--EMPLOYEE INFORMATION MODALS-->
+                    <!--MODAL FOR NEW REQUEST-->
                     <div class="modal-parent">
                         <div class="modal modal-xl fade" id="addRequest" tabindex="-1"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -631,12 +606,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                             <div class="col-4" style="display: none;">
                                                 <label for="status" class="form-label">Status:</label>
-                                                <input type="text" class="form-control" id="status" name="status" />
+                                                <input type="text" class="form-control" value="Assigned" id="status"
+                                                    name="status" />
                                             </div>
 
                                             <div class="col-4">
                                                 <label for="deadline" class="form-label">Deadline:</label>
-                                                <input type="text" class="form-control" id="deadline" name="deadline" />
+                                                <input type="date" class="form-control" id="deadline" name="deadline" />
                                             </div>
 
                                             <div class="col-12">
