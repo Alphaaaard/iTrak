@@ -51,11 +51,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->fetch();
     $stmt->close();
 
-    $sql = "SELECT * FROM request WHERE campus = 'Batasan' AND status IN ('Assigned', 'Done', 'For Approval')";
+    $sql = "SELECT * FROM request WHERE campus = 'Batasan' AND status IN ('Assigned', 'Done', 'For Approval') AND category != 'Outsource'";
     $result = $conn->query($sql) or die($conn->error);
+
 
     $sql2 = "SELECT * FROM request WHERE campus = 'Batasan' AND category = 'Outsource'";
     $result2 = $conn->query($sql2) or die($conn->error);
+
+
+
 
     if (isset($_POST['add'])) {
         $request_id = $_POST['new_request_id'];
@@ -91,6 +95,49 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $conn->close();
     }
 
+
+    if (isset($_POST['approval'])) {
+        // Retrieve request_id from the form
+        $request_id2 = $_POST['request_id'];
+
+        // Retrieve other form data
+        $campus2 = $_POST['campus'];
+        $building2 = $_POST['building'];
+        $floor2 = $_POST['floor'];
+        $room2 = $_POST['room'];
+        $equipment2 = $_POST['equipment'];
+        $category2 = $_POST['category'];
+        $assignee2 = $_POST['assignee'];
+        $status2 = $_POST['status'];
+        $description2 = $_POST['description'];
+        $deadline2 = $_POST['deadline'];
+
+        // SQL UPDATE query
+        $sql3 = "UPDATE request 
+                 SET campus = ?, building = ?, floor = ?, room = ?, 
+                     equipment = ?, category = ?, assignee = ?, 
+                     status = ?, description = ?, deadline = ? 
+                 WHERE request_id = ?";
+
+        // Prepare the SQL statement
+        $stmt3 = $conn->prepare($sql3);
+
+        // Bind parameters
+        $stmt3->bind_param("ssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $request_id2);
+
+        // Execute the query
+        if ($stmt3->execute()) {
+            // Update successful, redirect back to batasan.php or any other page
+            header("Location: batasan.php");
+            exit();
+        } else {
+            // Error occurred while updating
+            echo "Error updating request: " . $stmt3->error;
+        }
+
+        // Close statement
+        $stmt3->close();
+    }
 
     ?>
 
@@ -630,6 +677,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                     <option value="Carpentry">Carpentry</option>
                                                     <option value="Electrical">Electrical</option>
                                                     <option value="Plumbing">Plumbing</option>
+                                                    <option value="Plumbing">Outsource</option>
                                                 </select>
                                             </div>
 
@@ -734,23 +782,26 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             </div>
                                             <div class="col-4">
                                                 <label for="building" class="form-label">Building:</label>
-                                                <input type="text" class="form-control" id="building" name="building" />
+                                                <input type="text" class="form-control" id="building" name="building"
+                                                    readonly />
                                             </div>
 
                                             <div class="col-4">
                                                 <label for="floor" class="form-label">Floor:</label>
-                                                <input type="text" class="form-control" id="floor" name="floor" />
+                                                <input type="text" class="form-control" id="floor" name="floor"
+                                                    readonly />
                                             </div>
 
                                             <div class="col-4">
                                                 <label for="room" class="form-label">Room: </label>
-                                                <input type="text" class="form-control" id="room" name="room" />
+                                                <input type="text" class="form-control" id="room" name="room"
+                                                    readonly />
                                             </div>
 
                                             <div class="col-4">
                                                 <label for="equipment" class="form-label">Equipment :</label>
                                                 <input type="text" class="form-control" id="equipment"
-                                                    name="equipment" />
+                                                    name="equipment" readonly/>
                                             </div>
 
                                             <div class="col-4" style="display:none;">
@@ -765,6 +816,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                     <option value="Carpentry">Carpentry</option>
                                                     <option value="Electrical">Electrical</option>
                                                     <option value="Plumbing">Plumbing</option>
+                                                    <option value="Outsource">Outsource</option>
                                                 </select>
                                             </div>
 
@@ -786,9 +838,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
                                             <div class="col-4">
-                                                <label for="assignee" class="form-label">Assignee:</label>
+                                                <label id="assignee-label" for="assignee"
+                                                    class="form-label">Assignee:</label>
                                                 <input type="text" class="form-control" id="assignee" name="assignee" />
                                             </div>
+
+
 
                                             <div class="col-4" style="display:none;">
                                                 <label for="status" class="form-label">Status:</label>
@@ -918,6 +973,20 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         });
     </script>
 
+    <!--PARA SA PAGCHANGE NG LABEL-->
+    <script>
+        function fetchRandomAssignee() {
+            var category = document.getElementById('category').value;
+            var assigneeLabel = document.getElementById('assignee-label');
+
+            if (category === 'Outsource') {
+                assigneeLabel.textContent = 'Outsource Name:';
+            } else {
+                assigneeLabel.textContent = 'Assignee:';
+            }
+        }
+    </script>
+
     <script>
         $(document).ready(function () {
             $('.notification-item').on('click', function (e) {
@@ -927,7 +996,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                 $.ajax({
                     type: "POST",
-                    url: "update_single_notification.php", // The URL to the PHP file
+                    url: "single_notification.php", // The URL to the PHP file
                     data: {
                         activityId: activityId
                     },

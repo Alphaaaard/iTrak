@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("../../config/connection.php");
+include_once ("../../config/connection.php");
 $conn = connection();
 
 date_default_timezone_set('Asia/Manila');
@@ -67,25 +67,25 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->execute();
     $resultReport = $stmt->get_result();
 
-// Assuming $loggedInAccountId contains the ID of the logged-in user
+    // Assuming $loggedInAccountId contains the ID of the logged-in user
 
-// Modify the first query to filter by the logged-in account ID
-$sql01 = "SELECT r.* FROM request r
+    // Modify the first query to filter by the logged-in account ID
+    $sql01 = "SELECT r.* FROM request r
 INNER JOIN account a ON r.assignee = CONCAT(a.firstName, ' ', a.lastName)
 WHERE r.campus = 'Batasan' AND r.status IN ('Assigned', 'For Approval') AND a.accountId = ?";
-$stmt01 = $conn->prepare($sql01);
-$stmt01->bind_param("i", $accountId);
-$stmt01->execute();
-$result01 = $stmt01->get_result();
+    $stmt01 = $conn->prepare($sql01);
+    $stmt01->bind_param("i", $accountId);
+    $stmt01->execute();
+    $result01 = $stmt01->get_result();
 
-// Fetch data from "request" table for "Outsource" status based on the logged-in user's name
-$sql02 = "SELECT r.* FROM request r
+    // Fetch data from "request" table for "Outsource" status based on the logged-in user's name
+    $sql02 = "SELECT r.* FROM request r
 INNER JOIN account a ON r.assignee = CONCAT(a.firstName, ' ', a.lastName)
 WHERE r.campus = 'Batasan' AND r.status = 'Outsource' AND a.accountId = ?";
-$stmt02 = $conn->prepare($sql02);
-$stmt02->bind_param("i", $accountId);
-$stmt02->execute();
-$result02 = $stmt02->get_result();
+    $stmt02 = $conn->prepare($sql02);
+    $stmt02->bind_param("i", $accountId);
+    $stmt02->execute();
+    $result02 = $stmt02->get_result();
 
     // for notif below
     // Update the SQL to join with the account and asset tables to get the admin's name and asset information
@@ -110,7 +110,7 @@ $result02 = $stmt02->get_result();
     $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
 
     // Bind the parameter to exclude the current user's account ID
-    $stmtLatestLogs->bind_param("si",  $pattern, $loggedInAccountId);
+    $stmtLatestLogs->bind_param("si", $pattern, $loggedInAccountId);
 
     // Execute the query
     $stmtLatestLogs->execute();
@@ -151,7 +151,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             exit;
         }
     }
-?>
+    ?>
 
 
     <!DOCTYPE html>
@@ -162,7 +162,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>iTrak | Request</title>
         <link rel="icon" type="image/x-icon" href="../../src/img/tab-logo.png">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -171,7 +172,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <link rel="stylesheet" href="../../src/css/reports.css" />
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
         <script>
-            $(document).ready(function() {
+            $(document).ready(function () {
                 let lastPillSelected = sessionStorage.getItem('lastPillArchive');
 
                 if (!lastPillSelected) {
@@ -196,7 +197,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     }
                 }
 
-                $(".nav-link").click(function() {
+                $(".nav-link").click(function () {
                     const targetId = $(this).data("bs-target");
 
                     sessionStorage.setItem('lastPillArchive', targetId);
@@ -237,7 +238,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         <a href="#" class="notification" id="notification-button">
                             <i class="fa fa-bell" aria-hidden="true"></i>
                             <!-- Notification Indicator Dot -->
-                            <?php if ($unseenCount > 0) : ?>
+                            <?php if ($unseenCount > 0): ?>
                                 <span class="notification-indicator"></span>
                             <?php endif; ?>
                         </a>
@@ -334,105 +335,107 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                             <div><a class="profile-role"><?php echo $_SESSION['role']; ?></a></div>
                             <hr>
                         </div>
-                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i class="bi bi-person profile-icons"></i>Profile</a>
+                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i
+                                class="bi bi-person profile-icons"></i>Profile</a>
                         <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
                     </div>
-                <?php
-            } else {
-                header("Location:../../index.php");
-                exit();
-            }
-                ?>
-                </div>
-            </nav>
-        </div>
-        <!-- SIDEBAR -->
-        <section id="sidebar">
-            <a href="./dashboard.php" class="brand" title="logo">
-                <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
-                <div class="mobile-sidebar-close">
-                    <i class="bi bi-arrow-left-circle"></i>
-                </div>
-            </a>
-            <ul class="side-menu top">
-                <li>
-                    <a href="./dashboard.php">
-                        <i class="bi bi-grid"></i>
-                        <span class="text">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="./attendance-logs.php">
-                        <i class="bi bi-calendar-week"></i>
-                        <span class="text">Attendance Logs</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="./map.php">
-                        <i class="bi bi-map"></i>
-                        <span class="text">Map</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="./assigned-tasks.php">
-                        <i class="bi bi-geo-alt"></i>
-                        <span class="text">Assigned Tasks</span>
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="./request.php">
-                        <i class="bi bi-receipt"></i>
-                        <span class="text">Request</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="./reports.php">
-                        <i class="bi bi-clipboard"></i>
-                        <span class="text">Reports</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="./activity-logs.php">
-                        <i class="bi bi-arrow-counterclockwise"></i>
-                        <span class="text">Activity Logs</span>
-                    </a>
-                </li>
-            </ul>
-        </section>
-        <!-- SIDEBAR -->
-        <section id="content">
-            <main>
-                <div class="content-container">
-                    <header>
-                        <div class="cont-header">
-                            <h1 class="tab-name"></h1>
-                            <div class="tbl-filter">
-                                <form class="d-flex" role="search" id="searchForm">
-                                    <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" name="q" />
-                                </form>
-                            </div>
-                        </div>
-                    </header>
-                    <div class="new-nav-container">
-                        <!--Content start of tabs-->
-                        <div class="new-nav">
-                            <ul>
-                                <li><a href="#" class="nav-link" data-bs-target="pills-manager">Request</a></li>
-                     
-                            </ul>
-                        </div>
-
-                        <!-- Export button -->
-                        <div class="export-mob-hide">
-                            <form method="post" id="exportForm">
-                                <input type="hidden" name="status" id="statusField" value="For Replacement">
-               
+                    <?php
+} else {
+    header("Location:../../index.php");
+    exit();
+}
+?>
+            </div>
+        </nav>
+    </div>
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <a href="./dashboard.php" class="brand" title="logo">
+            <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
+            <div class="mobile-sidebar-close">
+                <i class="bi bi-arrow-left-circle"></i>
+            </div>
+        </a>
+        <ul class="side-menu top">
+            <li>
+                <a href="./dashboard.php">
+                    <i class="bi bi-grid"></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="./attendance-logs.php">
+                    <i class="bi bi-calendar-week"></i>
+                    <span class="text">Attendance Logs</span>
+                </a>
+            </li>
+            <li>
+                <a href="./map.php">
+                    <i class="bi bi-map"></i>
+                    <span class="text">Map</span>
+                </a>
+            </li>
+            <li>
+                <a href="./assigned-tasks.php">
+                    <i class="bi bi-geo-alt"></i>
+                    <span class="text">Assigned Tasks</span>
+                </a>
+            </li>
+            <li class="active">
+                <a href="./request.php">
+                    <i class="bi bi-receipt"></i>
+                    <span class="text">Request</span>
+                </a>
+            </li>
+            <li>
+                <a href="./reports.php">
+                    <i class="bi bi-clipboard"></i>
+                    <span class="text">Reports</span>
+                </a>
+            </li>
+            <li>
+                <a href="./activity-logs.php">
+                    <i class="bi bi-arrow-counterclockwise"></i>
+                    <span class="text">Activity Logs</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!-- SIDEBAR -->
+    <section id="content">
+        <main>
+            <div class="content-container">
+                <header>
+                    <div class="cont-header">
+                        <h1 class="tab-name"></h1>
+                        <div class="tbl-filter">
+                            <form class="d-flex" role="search" id="searchForm">
+                                <input class="form-control icon" type="search" placeholder="Search" aria-label="Search"
+                                    id="search-box" name="q" />
                             </form>
                         </div>
                     </div>
+                </header>
+                <div class="new-nav-container">
+                    <!--Content start of tabs-->
+                    <div class="new-nav">
+                        <ul>
+                            <li><a href="#" class="nav-link" data-bs-target="pills-manager">Request</a></li>
+
+                        </ul>
+                    </div>
+
+                    <!-- Export button -->
+                    <div class="export-mob-hide">
+                        <form method="post" id="exportForm">
+                            <input type="hidden" name="status" id="statusField" value="For Replacement">
+
+                        </form>
+                    </div>
+                </div>
 
 
-                    <div class="tab-content pt" id="myTabContent">
+                <div class="tab-content pt" id="myTabContent">
                     <div class="tab-pane fade show active" id="pills-manager" role="tabpanel"
                         aria-labelledby="home-tab">
                         <div class="table-content">
@@ -487,311 +490,314 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         </div>
                     </div>
 
-                 
-                      <!-- Modal -->
-<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to mark this request as completed?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="confirmCompletionBtn">OK</button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog"
+                        aria-labelledby="confirmationModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to mark this request as completed?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-primary" id="confirmCompletionBtn">OK</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        function showConfirmationModal(requestId) {
+                            $('#confirmationModal').modal('show');
+                            $('#confirmCompletionBtn').data('requestId', requestId);
+                        }
+
+                        $(document).ready(function () {
+                            $('#confirmCompletionBtn').click(function () {
+                                var requestId = $(this).data('requestId');
+                                // AJAX request to update status
+                                $.ajax({
+                                    url: 'request_update_status.php',
+                                    method: 'POST',
+                                    data: { requestId: requestId },
+                                    success: function (response) {
+                                        if (response == 'success') {
+                                            // Reload the page or update the status cell dynamically
+                                            location.reload();
+                                        } else {
+                                            alert('Failed to update status.');
+                                        }
+                                    }
+                                });
+                            });
+                        });
+                    </script>
+
+                </div>
+        </main>
+    </section>
+
+    <!-- PROFILE MODALS -->
+    <?php include_once 'modals/modal_layout.php'; ?>
+
+
+    <!-- RFID MODAL -->
+    <div class="modal" id="staticBackdrop112" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="../../src/img/taprfid.jpg" width="100%" alt="" class="Scan" />
+
+                    <form id="rfidForm">
+                        <input type="text" id="rfid" name="rfid" value="">
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    function showConfirmationModal(requestId) {
-        $('#confirmationModal').modal('show');
-        $('#confirmCompletionBtn').data('requestId', requestId);
-    }
 
-    $(document).ready(function () {
-        $('#confirmCompletionBtn').click(function () {
-            var requestId = $(this).data('requestId');
-            // AJAX request to update status
-            $.ajax({
-                url: 'request_update_status.php',
-                method: 'POST',
-                data: { requestId: requestId },
-                success: function (response) {
-                    if (response == 'success') {
-                        // Reload the page or update the status cell dynamically
-                        location.reload();
-                    } else {
-                        alert('Failed to update status.');
+    <script src="../../src/js/main.js"></script>
+    <script src="../../src/js/archive.js"></script>
+    <script src="../../src/js/profileModalController.js"></script>
+    <script src="../../src/js/logout.js"></script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $('.notification-item').on('click', function (e) {
+                e.preventDefault();
+                var activityId = $(this).data('activity-id');
+                var notificationItem = $(this); // Store the clicked element
+
+                $.ajax({
+                    type: "POST",
+                    url: "update_single_notification.php", // The URL to the PHP file
+                    data: {
+                        activityId: activityId
+                    },
+                    success: function (response) {
+                        if (response.trim() === "Notification updated successfully") {
+                            // If the notification is updated successfully, remove the clicked element
+                            notificationItem.remove();
+
+                            // Update the notification count
+                            var countElement = $('#noti_number');
+                            var count = parseInt(countElement.text()) || 0;
+                            countElement.text(count > 1 ? count - 1 : '');
+                        } else {
+                            // Handle error
+                            console.error("Failed to update notification:", response);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle AJAX error
+                        console.error("AJAX error:", status, error);
                     }
+                });
+            });
+        });
+    </script>
+
+    <!-- Add this script after your existing scripts -->
+    <!-- Add this script after your existing scripts -->
+    <script>
+        // Add a click event listener to the logout link
+        document.getElementById('logoutBtn').addEventListener('click', function () {
+            // Display SweetAlert
+            Swal.fire({
+                text: 'Are you sure you want to logout?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If user clicks "Yes, logout!" execute the logout action
+                    window.location.href = '../../logout.php';
                 }
             });
         });
-    });
-</script>
+    </script>
+    <script>
+        $(document).ready(function () {
+            let fullname;
 
-                </div>
-            </main>
-        </section>
+            class AccountManager {
+                constructor() {
+                    this.setupEventListeners();
+                }
 
-        <!-- PROFILE MODALS -->
-        <?php include_once 'modals/modal_layout.php'; ?>
+                showAlert(title, text, icon, timer = null) {
+                    const options = {
+                        title: title,
+                        text: text,
+                        icon: icon,
+                        showConfirmButton: false,
+                    };
 
+                    if (timer !== null) {
+                        options.timer = timer;
+                    }
 
-        <!-- RFID MODAL -->
-        <div class="modal" id="staticBackdrop112" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <img src="../../src/img/taprfid.jpg" width="100%" alt="" class="Scan" />
+                    Swal.fire(options);
+                }
 
-                        <form id="rfidForm">
-                            <input type="text" id="rfid" name="rfid" value="">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <script src="../../src/js/main.js"></script>
-        <script src="../../src/js/archive.js"></script>
-        <script src="../../src/js/profileModalController.js"></script>
-        <script src="../../src/js/logout.js"></script>
-
-
-
-        <script>
-            $(document).ready(function() {
-                $('.notification-item').on('click', function(e) {
-                    e.preventDefault();
-                    var activityId = $(this).data('activity-id');
-                    var notificationItem = $(this); // Store the clicked element
-
+                restoreAccount(archiveId) {
                     $.ajax({
                         type: "POST",
-                        url: "update_single_notification.php", // The URL to the PHP file
+                        url: "archive.php",
                         data: {
-                            activityId: activityId
+                            accept: true,
+                            archiveId: archiveId,
                         },
-                        success: function(response) {
-                            if (response.trim() === "Notification updated successfully") {
-                                // If the notification is updated successfully, remove the clicked element
-                                notificationItem.remove();
+                        success: (response) => {
+                            console.log(response);
+                            this.showAlert("", fullname + " has been restored successfully!", "success");
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1000);
+                        },
+                        error: (error) => {
+                            console.error("Error restoring account:", error);
+                            this.showAlert("", "Failed to restore account.", "error");
+                        },
+                    });
+                }
 
-                                // Update the notification count
-                                var countElement = $('#noti_number');
-                                var count = parseInt(countElement.text()) || 0;
-                                countElement.text(count > 1 ? count - 1 : '');
-                            } else {
-                                // Handle error
-                                console.error("Failed to update notification:", response);
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            // Handle AJAX error
-                            console.error("AJAX error:", status, error);
+                confirmRestore(rowData) {
+                    fullname = rowData.firstName + ' ' + rowData.lastName;
+
+                    Swal.fire({
+                        title: `Are you sure you want to restore<span style="font-weight: bold;">${rowData.firstName}</span> <span style="font-weight: bold;">${rowData.lastName}</span>?`,
+                        showCancelButton: true,
+                        allowOutsideClick: false,
+                        confirmButtonText: "Yes",
+                        cancelButtonText: "No",
+                        icon: "warning",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            this.restoreAccount(rowData.archiveId);
+                        } else {
+                            this.showAlert("", "Account restoration cancelled.", "info", 1000);
                         }
                     });
-                });
-            });
-        </script>
+                }
 
-        <!-- Add this script after your existing scripts -->
-        <!-- Add this script after your existing scripts -->
-        <script>
-            // Add a click event listener to the logout link
-            document.getElementById('logoutBtn').addEventListener('click', function() {
-                // Display SweetAlert
-                Swal.fire({
-                    text: 'Are you sure you want to logout?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Yes',
-                    cancelButtonText: 'No'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // If user clicks "Yes, logout!" execute the logout action
-                        window.location.href = '../../logout.php';
-                    }
-                });
-            });
-        </script>
-        <script>
-            $(document).ready(function() {
-                let fullname;
 
-                class AccountManager {
-                    constructor() {
-                        this.setupEventListeners();
-                    }
 
-                    showAlert(title, text, icon, timer = null) {
-                        const options = {
-                            title: title,
-                            text: text,
-                            icon: icon,
-                            showConfirmButton: false,
+                setupEventListeners() {
+                    $(".restore-btn").click((event) => {
+                        event.stopPropagation();
+                        const row = $(event.target).closest("tr");
+                        const rowData = {
+                            archiveId: row.find("td:eq(0)").text(),
+                            firstName: row.find("td:eq(1)").text(),
+                            lastName: row.find("td:eq(2)").text(),
                         };
 
-                        if (timer !== null) {
-                            options.timer = timer;
-                        }
-
-                        Swal.fire(options);
-                    }
-
-                    restoreAccount(archiveId) {
-                        $.ajax({
-                            type: "POST",
-                            url: "archive.php",
-                            data: {
-                                accept: true,
-                                archiveId: archiveId,
-                            },
-                            success: (response) => {
-                                console.log(response);
-                                this.showAlert("", fullname + " has been restored successfully!", "success");
-                                setTimeout(() => {
-                                    location.reload();
-                                }, 1000);
-                            },
-                            error: (error) => {
-                                console.error("Error restoring account:", error);
-                                this.showAlert("", "Failed to restore account.", "error");
-                            },
-                        });
-                    }
-
-                    confirmRestore(rowData) {
-                        fullname = rowData.firstName + ' ' + rowData.lastName;
-
-                        Swal.fire({
-                            title: `Are you sure you want to restore<span style="font-weight: bold;">${rowData.firstName}</span> <span style="font-weight: bold;">${rowData.lastName}</span>?`,
-                            showCancelButton: true,
-                            allowOutsideClick: false,
-                            confirmButtonText: "Yes",
-                            cancelButtonText: "No",
-                            icon: "warning",
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                this.restoreAccount(rowData.archiveId);
-                            } else {
-                                this.showAlert("", "Account restoration cancelled.", "info", 1000);
-                            }
-                        });
-                    }
-
-
-
-                    setupEventListeners() {
-                        $(".restore-btn").click((event) => {
-                            event.stopPropagation();
-                            const row = $(event.target).closest("tr");
-                            const rowData = {
-                                archiveId: row.find("td:eq(0)").text(),
-                                firstName: row.find("td:eq(1)").text(),
-                                lastName: row.find("td:eq(2)").text(),
-                            };
-
-                            this.confirmRestore(rowData);
-                        });
-                    }
-                }
-
-                // Instantiate the class
-                const accountManager = new AccountManager();
-            });
-        </script>
-
-        <script>
-            $(document).ready(function() {
-                function populateModal(row) {
-                    // Your existing code to populate the modal fields
-                    $("#archiveId").val(row.find("td:eq(0)").text());
-                    $("#picture").val(row.find("td:eq(1)").text());
-                    $("#firstName").val(row.find("td:eq(3)").text());
-                    $("#middleName").val(row.find("td:eq(4)").text());
-                    $("#lastName").val(row.find("td:eq(5)").text());
-                    $("#role").val(row.find("td:eq(10)").text());
-                    $("#contact").val(row.find("td:eq(8)").text());
-                    $("#email").val(row.find("td:eq(6)").text());
-                    $("#password").val(row.find("td:eq(7)").text());
-                }
-
-                // Click event for the table row
-                $(".table-container table tbody tr").click(function() {
-                    var row = $(this);
-                    populateModal(row);
-                    $("#exampleModal").modal("show");
-                });
-            });
-        </script>
-        <script>
-            $(document).ready(function() {
-                // Bind the filter function to the input field
-                $("#search-box").on("input", function() {
-                    var query = $(this).val().toLowerCase();
-                    filterTable(query);
-                });
-
-                function filterTable(query) {
-                    let hasData = false;
-                    let child = $("<tr class='emptyMsg'><td>No results found</td></tr>");
-
-                    $(".table-container tbody tr").each(function() {
-                        var row = $(this);
-                        var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
-                        var firstNameCell = row.find("td:eq(1)"); // FirstName column
-                        var middleNameCell = row.find("td:eq(2)"); // LastName column
-                        var lastNameCell = row.find("td:eq(3)"); // LastName column
-                        var roleCell = row.find("td:eq(10)"); // LastName column
-
-                        // Get the text content of each cell
-                        var archiveIDText = archiveIDCell.text().toLowerCase();
-                        var firstNameText = firstNameCell.text().toLowerCase();
-                        var middleNameText = middleNameCell.text().toLowerCase();
-                        var lastNameText = lastNameCell.text().toLowerCase();
-                        var roleText = roleCell.text().toLowerCase();
-
-                        // Check if any of the cells contain the query
-                        var showRow = archiveIDText.includes(query) ||
-                            firstNameText.includes(query) ||
-                            middleNameText.includes(query) ||
-                            lastNameText.includes(query) ||
-                            roleText.includes(query) ||
-                            archiveIDText == query || // Exact match for Archive ID
-                            firstNameText == query || // Exact match for FirstName
-                            middleNameText == query || // Exact match for LastName
-                            lastNameText == query || // Exact match for LastName
-                            roleText == query; // Exact match for LastName
-
-                        // Show or hide the row based on the result
-                        if (showRow) {
-                            hasData = true;
-                            row.show();
-                        } else {
-                            row.hide();
-                        }
+                        this.confirmRestore(rowData);
                     });
-
-                    if (!hasData) {
-                        $(".table-container tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
-                    } else {
-                        $('.emptyMsg').remove();
-                    }
                 }
+            }
+
+            // Instantiate the class
+            const accountManager = new AccountManager();
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            function populateModal(row) {
+                // Your existing code to populate the modal fields
+                $("#archiveId").val(row.find("td:eq(0)").text());
+                $("#picture").val(row.find("td:eq(1)").text());
+                $("#firstName").val(row.find("td:eq(3)").text());
+                $("#middleName").val(row.find("td:eq(4)").text());
+                $("#lastName").val(row.find("td:eq(5)").text());
+                $("#role").val(row.find("td:eq(10)").text());
+                $("#contact").val(row.find("td:eq(8)").text());
+                $("#email").val(row.find("td:eq(6)").text());
+                $("#password").val(row.find("td:eq(7)").text());
+            }
+
+            // Click event for the table row
+            $(".table-container table tbody tr").click(function () {
+                var row = $(this);
+                populateModal(row);
+                $("#exampleModal").modal("show");
             });
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            // Bind the filter function to the input field
+            $("#search-box").on("input", function () {
+                var query = $(this).val().toLowerCase();
+                filterTable(query);
+            });
 
-    </body>
+            function filterTable(query) {
+                let hasData = false;
+                let child = $("<tr class='emptyMsg'><td>No results found</td></tr>");
 
-    </html>
+                $(".table-container tbody tr").each(function () {
+                    var row = $(this);
+                    var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
+                    var firstNameCell = row.find("td:eq(1)"); // FirstName column
+                    var middleNameCell = row.find("td:eq(2)"); // LastName column
+                    var lastNameCell = row.find("td:eq(3)"); // LastName column
+                    var roleCell = row.find("td:eq(10)"); // LastName column
+
+                    // Get the text content of each cell
+                    var archiveIDText = archiveIDCell.text().toLowerCase();
+                    var firstNameText = firstNameCell.text().toLowerCase();
+                    var middleNameText = middleNameCell.text().toLowerCase();
+                    var lastNameText = lastNameCell.text().toLowerCase();
+                    var roleText = roleCell.text().toLowerCase();
+
+                    // Check if any of the cells contain the query
+                    var showRow = archiveIDText.includes(query) ||
+                        firstNameText.includes(query) ||
+                        middleNameText.includes(query) ||
+                        lastNameText.includes(query) ||
+                        roleText.includes(query) ||
+                        archiveIDText == query || // Exact match for Archive ID
+                        firstNameText == query || // Exact match for FirstName
+                        middleNameText == query || // Exact match for LastName
+                        lastNameText == query || // Exact match for LastName
+                        roleText == query; // Exact match for LastName
+
+                    // Show or hide the row based on the result
+                    if (showRow) {
+                        hasData = true;
+                        row.show();
+                    } else {
+                        row.hide();
+                    }
+                });
+
+                if (!hasData) {
+                    $(".table-container tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+                } else {
+                    $('.emptyMsg').remove();
+                }
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
