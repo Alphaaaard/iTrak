@@ -1,21 +1,91 @@
 <?php
 session_start();
 include_once("../../config/connection.php");
-date_default_timezone_set('Asia/Manila');
 $conn = connection();
+
+date_default_timezone_set('Asia/Manila');
+
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
-
-
     // For personnel page, check if userLevel is 3
     if ($_SESSION['userLevel'] != 3) {
         // If not personnel, redirect to an error page or login
         header("Location:error.php");
         exit;
     }
+    $accountId = $_SESSION['accountId'];
+
+    // Prepare a statement to count unseen notifications
+    $stmt = $conn->prepare("SELECT COUNT(*) AS unseenCount FROM activitylogs WHERE p_seen = '0' AND accountID = ?");
+    $stmt->bind_param("i", $accountId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    // Now you can echo the count where needed
+    $unseenCount = $row['unseenCount'];
+
+    // Fetch Report activity logs
+    $loggedInUserFirstName = $_SESSION['firstName']; // or the name field you have in session that you want to check against
+    $loggedInUsermiddleName = $_SESSION['middleName']; // assuming you also have the last name in the session
+    $loggedInUserLastName = $_SESSION['lastName']; //kung ano ung naka declare dito eto lang ung magiging data 
+    // Concatenate first name and last name for the action field check
+    $loggedInFullName = $loggedInUserFirstName . " " . $loggedInUsermiddleName . " " . $loggedInUserLastName; //kung ano ung naka declare dito eto lang ung magiging data 
 
 
 
+    $sqlGeneral = "SELECT ac.*, a.firstName, a.middleName, a.lastName
+    FROM activitylogs AS ac
+    LEFT JOIN account AS a ON ac.accountID = a.accountID
+    WHERE (ac.tab = 'General' AND ac.action LIKE 'Assigned maintenance personnel%' AND ac.action LIKE ?)
+    ORDER BY ac.date DESC";
 
+    // Prepare the SQL statement
+    $stmtg = $conn->prepare($sqlGeneral);
+
+    // Bind the parameter and execute
+    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
+    $stmtg->bind_param("s", $pattern);
+    $stmtg->execute();
+    $resultGeneral = $stmtg->get_result();
+
+
+
+    // Adjust the SQL to check the 'action' field for the logged-in user's name
+    $sqlReport = "SELECT ac.*, a.firstName, a.middleName, a.lastName
+    FROM activitylogs AS ac
+    LEFT JOIN account AS a ON ac.accountID = a.accountID
+    WHERE (ac.tab = 'Report' AND ac.accountID = ?)
+
+    ORDER BY ac.date DESC";
+
+    // Prepare the SQL statement
+    $stmt = $conn->prepare($sqlReport);
+
+    // Bind the parameter and execute
+
+    $stmt->bind_param("i", $accountId);
+    $stmt->execute();
+    $resultReport = $stmt->get_result();
+
+// Assuming $loggedInAccountId contains the ID of the logged-in user
+
+// Modify the first query to filter by the logged-in account ID
+$sql01 = "SELECT r.* FROM request r
+INNER JOIN account a ON r.assignee = CONCAT(a.firstName, ' ', a.lastName)
+WHERE r.campus = 'Batasan' AND r.status IN ('Assigned', 'Done', 'For Approval') AND a.accountId = ?";
+$stmt01 = $conn->prepare($sql01);
+$stmt01->bind_param("i", $accountId);
+$stmt01->execute();
+$result01 = $stmt01->get_result();
+
+// Fetch data from "request" table for "Outsource" status based on the logged-in user's name
+$sql02 = "SELECT r.* FROM request r
+INNER JOIN account a ON r.assignee = CONCAT(a.firstName, ' ', a.lastName)
+WHERE r.campus = 'Batasan' AND r.status = 'Outsource' AND a.accountId = ?";
+$stmt02 = $conn->prepare($sql02);
+$stmt02->bind_param("i", $accountId);
+$stmt02->execute();
+$result02 = $stmt02->get_result();
 
     // for notif below
     // Update the SQL to join with the account and asset tables to get the admin's name and asset information
@@ -31,59 +101,55 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
                 FROM activitylogs AS al
                JOIN account AS acc ON al.accountID = acc.accountID
-               WHERE  al.seen = '0' AND al.accountID != ?
+               WHERE al.tab = 'General' AND al.p_seen = '0' AND al.action LIKE 'Assigned maintenance personnel%' AND al.action LIKE ? AND al.accountID != ?
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
 
     // Prepare the SQL statement
     $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
+    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
 
     // Bind the parameter to exclude the current user's account ID
-    $stmtLatestLogs->bind_param("i", $loggedInAccountId);
+    $stmtLatestLogs->bind_param("si",  $pattern, $loggedInAccountId);
 
     // Execute the query
     $stmtLatestLogs->execute();
     $resultLatestLogs = $stmtLatestLogs->get_result();
 
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs 
+WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance personnel%' AND action LIKE ?";
+    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
 
-    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
     $stmt = $conn->prepare($unseenCountQuery);
-    $stmt->bind_param("i", $loggedInAccountId);
+    $stmt->bind_param("is", $loggedInAccountId, $pattern);
     $stmt->execute();
     $stmt->bind_result($unseenCount);
     $stmt->fetch();
     $stmt->close();
 
-    $sql = "SELECT * FROM archiveacc WHERE userLevel = 2";
-    $result = $conn->query($sql) or die($conn->error);
 
-    $sql2 = "SELECT * FROM archiveacc WHERE userLevel = 3";
+    $sql2 = "SELECT ac.*, a.firstName, a.middleName, a.lastName 
+  FROM activitylogs AS ac
+  LEFT JOIN account AS a ON ac.accountID = a.accountID";
+    $result = $conn->query($sql2) or die($conn->error);
+
+    $sql2 = "SELECT * FROM reportlogs";
     $result2 = $conn->query($sql2) or die($conn->error);
+    if (isset($_SESSION['accountId'])) {
+        $accountId = $_SESSION['accountId'];
+        $todayDate = date("Y-m-d");
 
-    if (isset($_POST['accept']) && isset($_POST['archiveId'])) {
-        $archiveId = $_POST['archiveId'];
+        // Check if there's a timeout value for this user for today
+        $timeoutQuery = "SELECT timeout FROM attendancelogs WHERE accountId = '$accountId' AND date = '$todayDate'";
+        $timeoutResult = $conn->query($timeoutQuery);
+        $timeoutRow = $timeoutResult->fetch_assoc();
 
-        // Retrieve data from archiveacc
-        $retrieveData = "SELECT * FROM archiveacc WHERE archiveId = $archiveId";
-        $resultRetrieveData = $conn->query($retrieveData);
-        $row = $resultRetrieveData->fetch_assoc();
-
-        // Insert the data into the account table with the archiveId as the accountId
-        $insertQuery = "INSERT INTO account (accountId, firstName, middleName, lastName, email, password, contact, birthday, role, picture, userLevel, latitude, longitude, timestamp, color, rfidNumber)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        $stmt = $conn->prepare($insertQuery);
-
-        $stmt->bind_param("isssssssssssssss", $row['archiveId'], $row['firstName'], $row['middleName'], $row['lastName'], $row['email'], $row['password'], $row['contact'], $row['birthday'], $row['role'], $row['picture'], $row['userLevel'], $row['latitude'], $row['longitude'], $row['timestamp'], $row['color'], $row['rfidNumber']);
-        if ($stmt->execute()) {
-            // Delete the restored record from archiveacc
-            $deleteQuery = "DELETE FROM archiveacc WHERE archiveId = $archiveId";
-            $conn->query($deleteQuery);
-        } else {
-            echo "Error restoring account: " . $conn->error;
+        if ($timeoutRow && $timeoutRow['timeout'] !== null) {
+            // User has a timeout value, force logout
+            session_destroy(); // Destroy all session data
+            header("Location: ../../index.php?logout=timeout"); // Redirect to the login page with a timeout flag
+            exit;
         }
-
-        $conn->close();
     }
 ?>
 
@@ -367,159 +433,110 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
                     <div class="tab-content pt" id="myTabContent">
-                        <div class="tab-pane fade show active" id="pills-manager" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="table-content">
-                                <div class='table-header'>
-                                    <table>
-                                        <tr>
-                                            <th>Request ID</th>
-                                            <th>Location</th>
-                                            <th>Equipment</th>
-                                            <th>Category</th>
-                                            <th>Assignee</th>
-                                            <th>Status</th>
-                                            <th>Deadline</th>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <?php
-                                if ($result->num_rows > 0) {
-                                    echo "<div class='table-container'>";
-                                    echo "<table>";
-                                    while ($row = $result->fetch_assoc()) {
-                                        echo '<tr>';
-                                        echo '<td>' . $row['archiveId'] . '</td>';
-                                        $imageData = $row["picture"];
-                                        $imageSrc = "data:image/jpeg;base64," . base64_encode($imageData);
-                                        echo "<td><img src='" . $imageSrc . "' alt='Profile Picture' width='50' class='rounded-img'/></td>";
-                                        echo '<td>' . $row['firstName'] . "  " . $row['lastName'] . '</td>';
-                                        echo '<td style="display:none">' . $row['firstName'] . '</td>';
-                                        echo '<td style="display:none">' . $row['middleName'] . '</td>';
-                                        echo '<td style="display:none">' . $row['lastName'] . '</td>';
-                                        echo '<td style="display:none">' . $row['email'] . '</td>';
-                                        echo '<td style="display:none">' . $row['password'] . '</td>';
-                                        echo '<td style="display:none">' . $row['contact'] . '</td>';
-                                        echo '<td style="display:none">' . $row['birthday'] . '</td>';
-                                        echo '<td>' . $row['role'] . '</td>';
-                                        echo '<td style="display:none">' . $row['userLevel'] . '</td>';
-                                        echo '<td style="display:none">' . $row['latitude'] . '</td>';
-                                        echo '<td style="display:none">' . $row['longitude'] . '</td>';
-                                        echo '<td style="display:none">' . $row['timestamp'] . '</td>';
-                                        echo '<td style="display:none">' . $row['color'] . '</td>';
-                                        echo '<td>';
-                                        echo '<form method="post" action="">';
-                                        echo '<input type="hidden" name="report_id" value="' . $row['archiveId'] . '">';
-                                        echo '<button type="button" class="btn archive-btn restore-btn" data-row-html="' . htmlentities('<tr class="solid">
-                                                <td>' . $row['archiveId'] . '</td>
-                                                <td>' . $row['firstName'] . '</td>
-                                                <td>' . $row['middleName'] . '</td>
-                                                <td>' . $row['lastName'] . '</td>
-                                                <td>' . $row['email'] . '</td>
-                                                <td>' . $row['password'] . '</td>
-                                                <td>' . $row['contact'] . '</td>
-                                                <td>' . $row['birthday'] . '</td>
-                                                <td>' . $row['role'] . '</td>
-                                                <td>' . $row['picture'] . '</td>
-                                                <td>' . $row['userLevel'] . '</td>
-                                                <td>' . $row['latitude'] . '</td>
-                                                <td>' . $row['longitude'] . '</td>
-                                                <td>' . $row['timestamp'] . '</td>
-                                                <td>' . $row['color'] . '</td>
-                                                </tr>') . '">
-                                                RESTORE
-                                              </button>';
-                                        echo '</td>';
-                                        echo '</tr>';
-                                    }
-                                    echo "</table>";
-                                    echo "</div>";
-                                } else {
-                                    echo '<table>';
-                                    echo "<div class=noDataImgH>";
-                                    echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
-                                    echo "</div>";
-                                    echo '</table>';
-                                }
-                                ?>
+                    <div class="tab-pane fade show active" id="pills-manager" role="tabpanel"
+                        aria-labelledby="home-tab">
+                        <div class="table-content">
+                            <div class='table-header'>
+                                <table>
+                                    <tr>
+                                        <th>Request ID</th>
+                                        <th>Date & Time</th>
+                                        <th>Category</th>
+                                        <th>Location</th>
+                                        <th>Equipment</th>
+                                        <th>Assignee</th>
+                                        <th>Status</th>
+                                        <th>Deadline</th>
+                                    </tr>
+                                </table>
                             </div>
-                        </div>
+                            <?php
+                            if ($result01->num_rows > 0) {
+                                echo "<div class='table-container'>";
+                                echo "<table>";
+                                while ($row = $result01->fetch_assoc()) {
+                                    echo '<tr>';
+                                    echo '<td>' . $row['request_id'] . '</td>';
+                                    echo '<td>' . $row['date'] . '</td>';
+                                    echo '<td>' . $row['category'] . '</td>';
+                                    echo '<td>' . $row['building'] . ', ' . $row['floor'] . ', ' . $row['room'] . '</td>';
+                                    echo '<td>' . $row['equipment'] . '</td>';
+                                    echo '<td>' . $row['assignee'] . '</td>';
+                                    echo '<td >' . $row['status'] . '</td>';
+                                    echo '<td>' . $row['deadline'] . '</td>';
 
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="table-content">
-                                <div class='table-header'>
-                                    <table>
-                                        <tr>
-                                            <th></th>
-                                            <th></th>
-                                            <th>NAME</th>
-                                            <th>ROLE</th>
-                                            <th></th>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <?php
-                                if ($result2->num_rows > 0) {
-                                    echo "<div class='table-container'>";
-                                    echo "<table>";
-                                    while ($row2 = $result2->fetch_assoc()) {
-                                        echo '<tr>';
-                                        echo '<td>' . $row2['archiveId'] . '</td>';
-                                        $imageData = $row2["picture"];
-                                        $imageSrc = "data:image/jpeg;base64," . base64_encode($imageData);
-                                        echo "<td><img src='" . $imageSrc . "' alt='Profile Picture' width='50' class='rounded-img'/></td>";
-                                        echo '<td>' . $row2['firstName'] . " " . $row2['lastName'] . '</td>';
-                                        echo '<td style="display:none">' . $row2['firstName'] . '</td>';
-                                        echo '<td style="display:none">' . $row2['middleName'] . '</td>';
-                                        echo '<td style="display:none">' . $row2['lastName'] . '</td>';
-                                        echo '<td style="display:none">' . $row2['email'] . '</td>';
-                                        echo '<td style="display:none">' . $row2['password'] . '</td>';
-                                        echo '<td style="display:none">' . $row2['contact'] . '</td>';
-                                        echo '<td style="display:none">' . $row2['birthday'] . '</td>';
-                                        echo '<td>' . $row2['role'] . '</td>';
-                                        echo '<td style="display:none">' . $row2['userLevel'] . '</td>';
-                                        echo '<td style="display:none">' . $row2['latitude'] . '</td>';
-                                        echo '<td style="display:none">' . $row2['longitude'] . '</td>';
-                                        echo '<td style="display:none">' . $row2['timestamp'] . '</td>';
-                                        echo '<td style="display:none">' . $row2['color'] . '</td>';
-                                        echo '<td>';
-                                        echo '<form method="post" action="">';
-                                        echo '<input type="hidden" name="report_id" value="' . $row2['archiveId'] . '">';
-                                        echo '<button type="button" class="btn archive-btn restore-btn" data-row2-html="' . htmlentities('<tr class="solid">
-                                                <td>' . $row2['archiveId'] . '</td>
-                                                <td>' . $row2['firstName'] . '</td>
-                                                <td>' . $row2['middleName'] . '</td>
-                                                <td>' . $row2['lastName'] . '</td>
-                                                <td>' . $row2['email'] . '</td>
-                                                <td>' . $row2['password'] . '</td>
-                                                <td>' . $row2['contact'] . '</td>
-                                                <td>' . $row2['birthday'] . '</td>
-                                                <td>' . $row2['role'] . '</td>
-                                                <td>' . $row2['picture'] . '</td>
-                                                <td>' . $row2['userLevel'] . '</td>
-                                                <td>' . $row2['latitude'] . '</td>
-                                                <td>' . $row2['longitude'] . '</td>
-                                                <td>' . $row2['timestamp'] . '</td>
-                                                <td>' . $row2['color'] . '</td>
-                                                </tr>') . '">
-                                                RESTORE
-                                              </button>';
-                                        echo '</form>';
-                                        echo '</td>';
-                                        echo '</tr>';
-                                    }
-                                    echo "</table>";
-                                    echo "</div>";
-                                } else {
-                                    echo '<table>';
-                                    echo "<div class=noDataImgH>";
-                                    echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
-                                    echo "</div>";
-                                    echo '</table>';
+                                    echo '<td style="display:none;">' . $row['campus'] . '</td>';
+                                    echo '<td style="display:none;">' . $row['building'] . '</td>';
+                                    echo '<td style="display:none;">' . $row['floor'] . '</td>';
+                                    echo '<td style="display:none;">' . $row['room'] . '</td>';
+                                    echo '<td style="display:none;">' . $row['description'] . '</td>';
+                                    echo '<td style="display:none;">' . $row['req_by'] . '</td>';
+                                    echo '</tr>';
                                 }
-                                ?>
-
-                            </div>
+                                echo "</table>";
+                                echo "</div>";
+                            } else {
+                                echo '<table>';
+                                echo "<div class=noDataImgH>";
+                                echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
+                                echo "</div>";
+                                echo '</table>';
+                            }
+                            ?>
                         </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="table-content">
+                            <div class='table-header'>
+                                <table>
+                                    <tr>
+                                        <th>Request ID</th>
+                                        <th>Date & Time</th>
+                                        <th>Category</th>
+                                        <th>Location</th>
+                                        <th>Equipment</th>
+                                        <th>Assignee</th>
+                                        <th>Status</th>
+                                        <th>Deadline</th>
+                                    </tr>
+                                </table>
+                            </div>
+                            <?php
+                            if ($result02->num_rows > 0) {
+                                echo "<div class='table-container'>";
+                                echo "<table>";
+                                while ($row2 = $result02->fetch_assoc()) {
+                                    echo '<tr>';
+                                    echo '<td>' . $row2['request_id'] . '</td>';
+                                    echo '<td>' . $row2['date'] . '</td>';
+                                    echo '<td>' . $row2['category'] . '</td>';
+                                    echo '<td>' . $row2['building'] . ', ' . $row2['floor'] . ', ' . $row2['room'] . '</td>';
+                                    echo '<td>' . $row2['equipment'] . '</td>';
+                                    echo '<td>' . $row2['assignee'] . '</td>';
+                                    echo '<td >' . $row2['status'] . '</td>';
+                                    echo '<td>' . $row2['deadline'] . '</td>';
+
+                                    echo '<td style="display:none;">' . $row2['campus'] . '</td>';
+                                    echo '<td style="display:none;">' . $row2['building'] . '</td>';
+                                    echo '<td style="display:none;">' . $row2['floor'] . '</td>';
+                                    echo '<td style="display:none;">' . $row2['room'] . '</td>';
+                                    echo '<td style="display:none;">' . $row2['description'] . '</td>';
+                                    echo '<td style="display:none;">' . $row2['req_by'] . '</td>';
+                                    echo '</tr>';
+                                }
+                                echo "</table>";
+                                echo "</div>";
+                            } else {
+                                echo '<table>';
+                                echo "<div class=noDataImgH>";
+                                echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
+                                echo "</div>";
+                                echo '</table>';
+                            }
+                            ?>
+                        </div>
+                    </div>
                         <!--EMPLOYEE INFORMATION MODALS-->
                         <div class="modal-parent">
                             <div class="modal modal-xl fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
