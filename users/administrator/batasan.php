@@ -619,6 +619,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 }
 </script>
 
+
                                             <div class="col-4">
                                                 <label for="assignee" class="form-label">Assignee:</label>
                                                 <input type="text" class="form-control" id="assignee" name="assignee" />
@@ -706,7 +707,20 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     <script src="../../src/js/profileModalController.js"></script>
     <script src="../../src/js/logout.js"></script>
 
+    <script>
+    // Get today's date
+    var today = new Date();
 
+    // Set tomorrow's date
+    var tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    // Format tomorrow's date as yyyy-mm-dd
+    var tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+
+    // Set the minimum date of the input field to tomorrow
+    document.getElementById("deadline").min = tomorrowFormatted;
+</script>
 
     <script>
         $(document).ready(function () {
