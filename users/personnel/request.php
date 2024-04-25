@@ -72,7 +72,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 // Modify the first query to filter by the logged-in account ID
 $sql01 = "SELECT r.* FROM request r
 INNER JOIN account a ON r.assignee = CONCAT(a.firstName, ' ', a.lastName)
-WHERE r.campus = 'Batasan' AND r.status IN ('Assigned', 'Done', 'For Approval') AND a.accountId = ?";
+WHERE r.campus = 'Batasan' AND r.status IN ('Assigned', 'For Approval') AND a.accountId = ?";
 $stmt01 = $conn->prepare($sql01);
 $stmt01->bind_param("i", $accountId);
 $stmt01->execute();
@@ -418,7 +418,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         <div class="new-nav">
                             <ul>
                                 <li><a href="#" class="nav-link" data-bs-target="pills-manager">Request</a></li>
-                                <li><a href="#" class="nav-link" data-bs-target="pills-profile">Outsource</a></li>
+                     
                             </ul>
                         </div>
 
@@ -426,7 +426,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         <div class="export-mob-hide">
                             <form method="post" id="exportForm">
                                 <input type="hidden" name="status" id="statusField" value="For Replacement">
-                                <button type="button" id="exportBtn" class="btn btn-outline-danger">Add Task</button>
+               
                             </form>
                         </div>
                     </div>
@@ -464,6 +464,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                     echo '<td>' . $row['assignee'] . '</td>';
                                     echo '<td >' . $row['status'] . '</td>';
                                     echo '<td>' . $row['deadline'] . '</td>';
+                                    echo '<td><button class="btn btn-primary" onclick="showConfirmationModal(' . $row['request_id'] . ')">Completed</button></td>';
 
                                     echo '<td style="display:none;">' . $row['campus'] . '</td>';
                                     echo '<td style="display:none;">' . $row['building'] . '</td>';
@@ -486,123 +487,56 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         </div>
                     </div>
 
-                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="table-content">
-                            <div class='table-header'>
-                                <table>
-                                    <tr>
-                                        <th>Request ID</th>
-                                        <th>Date & Time</th>
-                                        <th>Category</th>
-                                        <th>Location</th>
-                                        <th>Equipment</th>
-                                        <th>Assignee</th>
-                                        <th>Status</th>
-                                        <th>Deadline</th>
-                                    </tr>
-                                </table>
-                            </div>
-                            <?php
-                            if ($result02->num_rows > 0) {
-                                echo "<div class='table-container'>";
-                                echo "<table>";
-                                while ($row2 = $result02->fetch_assoc()) {
-                                    echo '<tr>';
-                                    echo '<td>' . $row2['request_id'] . '</td>';
-                                    echo '<td>' . $row2['date'] . '</td>';
-                                    echo '<td>' . $row2['category'] . '</td>';
-                                    echo '<td>' . $row2['building'] . ', ' . $row2['floor'] . ', ' . $row2['room'] . '</td>';
-                                    echo '<td>' . $row2['equipment'] . '</td>';
-                                    echo '<td>' . $row2['assignee'] . '</td>';
-                                    echo '<td >' . $row2['status'] . '</td>';
-                                    echo '<td>' . $row2['deadline'] . '</td>';
+                 
+                      <!-- Modal -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to mark this request as completed?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="confirmCompletionBtn">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-                                    echo '<td style="display:none;">' . $row2['campus'] . '</td>';
-                                    echo '<td style="display:none;">' . $row2['building'] . '</td>';
-                                    echo '<td style="display:none;">' . $row2['floor'] . '</td>';
-                                    echo '<td style="display:none;">' . $row2['room'] . '</td>';
-                                    echo '<td style="display:none;">' . $row2['description'] . '</td>';
-                                    echo '<td style="display:none;">' . $row2['req_by'] . '</td>';
-                                    echo '</tr>';
-                                }
-                                echo "</table>";
-                                echo "</div>";
-                            } else {
-                                echo '<table>';
-                                echo "<div class=noDataImgH>";
-                                echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
-                                echo "</div>";
-                                echo '</table>';
-                            }
-                            ?>
-                        </div>
-                    </div>
-                        <!--EMPLOYEE INFORMATION MODALS-->
-                        <div class="modal-parent">
-                            <div class="modal modal-xl fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5>Maintenance Staff Information</h5>
+<script>
+    function showConfirmationModal(requestId) {
+        $('#confirmationModal').modal('show');
+        $('#confirmCompletionBtn').data('requestId', requestId);
+    }
 
-                                            <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form method="post" class="row g-3">
-                                                <div class="col-4">
-                                                    <label for="archiveId" class="form-label">ID:</label>
-                                                    <input type="text" class="form-control" id="archiveId" name="archiveId" readonly />
-                                                </div>
-                                                <div class="col-4">
-                                                    <label for="picture" class="form-label">Picture:</label>
-                                                    <input type="text" class="form-control" id="picture" name="picture" readonly />
-                                                </div>
-                                                <div class="col-4">
-                                                    <label for="firstName" class="form-label">First name:</label>
-                                                    <input type="text" class="form-control" id="firstName" name="firstName" readonly />
-                                                </div>
-                                                <div class="col-4">
-                                                    <label for="middleName" class="form-label">Middle name:</label>
-                                                    <input type="text" class="form-control" id="middleName" name="middleName" readonly />
-                                                </div>
-                                                <div class="col-4">
-                                                    <label for="lastName" class="form-label">Last name:</label>
-                                                    <input type="text" class="form-control" id="lastName" name="lastName" readonly />
-                                                </div>
+    $(document).ready(function () {
+        $('#confirmCompletionBtn').click(function () {
+            var requestId = $(this).data('requestId');
+            // AJAX request to update status
+            $.ajax({
+                url: 'request_update_status.php',
+                method: 'POST',
+                data: { requestId: requestId },
+                success: function (response) {
+                    if (response == 'success') {
+                        // Reload the page or update the status cell dynamically
+                        location.reload();
+                    } else {
+                        alert('Failed to update status.');
+                    }
+                }
+            });
+        });
+    });
+</script>
 
-                                                <div class="col-4" style="display:none">
-                                                    <label for="per_expertise" class="form-label">Expertise</label>
-                                                    <input type="text" class="form-control" id="per_expertise" name="per_expertise" readonly />
-                                                </div>
-
-                                                <div class="col-4">
-                                                    <label for="role" class="form-label">Role</label>
-                                                    <input type="text" class="form-control" id="role" name="role" readonly />
-                                                </div>
-
-                                                <div class="col-4">
-                                                    <label for="contact" class="form-label">Contact</label>
-                                                    <input type="text" class="form-control" id="contact" name="contact" readonly />
-                                                </div>
-                                                <div class="col-4">
-                                                    <label for="email" class="form-label">Email</label>
-                                                    <input type="text" class="form-control" id="email" name="email" readonly />
-                                                </div>
-                                                <div class="col-4">
-                                                    <label for="password" class="form-label">Password</label>
-                                                    <input type="text" class="form-control" id="password" name="password" readonly />
-                                                </div>
-                                                <div class="col-4" style="display: none;">
-                                                    <label for="user_level" class="form-label">Level</label>
-                                                    <input type="text" class="form-control" id="user_level" name="user_level" readonly />
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </main>
         </section>
