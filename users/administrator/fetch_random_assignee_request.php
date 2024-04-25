@@ -1,6 +1,6 @@
 <?php
 // Include your database connection file
-include_once("../../config/connection.php");
+include_once ("../../config/connection.php");
 
 // Create a new database connection
 $conn = connection();

@@ -54,23 +54,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sql = "SELECT * FROM request WHERE campus = 'Batasan' AND status IN ('Assigned', 'Done', 'For Approval')";
     $result = $conn->query($sql) or die($conn->error);
 
-    $sql2 = "SELECT * FROM request WHERE campus = 'Batasan' AND status = 'Outsource'";
+    $sql2 = "SELECT * FROM request WHERE campus = 'Batasan' AND category = 'Outsource'";
     $result2 = $conn->query($sql2) or die($conn->error);
 
-    if (isset($_POST['edit'])) {
-        $request_id = $_POST['request_id'];
-
-        $campus = $_POST['campus'];
-        $building = $_POST['building'];
-        $floor = $_POST['floor'];
-        $room = $_POST['room'];
-        $equipment = $_POST['equipment'];
-        $req_by = $_POST['req_by'];
-        $category = $_POST['category'];
-        $assignee = $_POST['assignee'];
-        $status = $_POST['status'];
-        $description = $_POST['description'];
-        $deadline = $_POST['deadline'];
+    if (isset($_POST['add'])) {
+        $request_id = $_POST['new_request_id'];
+        $campus = $_POST['new_campus'];
+        $building = $_POST['new_building'];
+        $floor = $_POST['new_floor'];
+        $room = $_POST['new_room'];
+        $equipment = $_POST['new_equipment'];
+        $req_by = $_POST['new_req_by'];
+        $category = $_POST['new_category'];
+        $assignee = $_POST['new_assignee'];
+        $status = $_POST['new_status'];
+        $description = $_POST['new_description'];
+        $deadline = $_POST['new_deadline'];
 
         // Insert data into the request table
         $insertQuery = "INSERT INTO request (request_id, campus, building, floor, room, equipment, req_by, category, assignee, status, description, deadline)
@@ -91,7 +90,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         $conn->close();
     }
- 
+
 
     ?>
 
@@ -166,20 +165,20 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         }
 
 
-    .blue {
-        color: blue;
-    }
+        .blue {
+            color: blue;
+        }
 
-    .green {
-        color: green;
-    }
+        .green {
+            color: green;
+        }
 
-    .red {
-        color: red;
-    }
-</style>
+        .red {
+            color: red;
+        }
+    </style>
 
-   
+
 
     <body>
         <div id="navbar" class="">
@@ -467,6 +466,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         <th>Assignee</th>
                                         <th>Status</th>
                                         <th>Deadline</th>
+                                        <th></th>
                                     </tr>
                                 </table>
                             </div>
@@ -482,33 +482,21 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     echo '<td>' . $row['building'] . ', ' . $row['floor'] . ', ' . $row['room'] . '</td>';
                                     echo '<td>' . $row['equipment'] . '</td>';
                                     echo '<td>' . $row['assignee'] . '</td>';
-                                  
-                                 
-                                   
-
-                                    $status = $row['status'];
-                                    $status_color = '';
-                                    
-                                    // Set the color based on the status
-                                    switch ($status) {
-                                        case 'Assigned':
-                                            $status_color = 'blue';
-                                            break;
-                                        case 'Done':
-                                            $status_color = 'green';
-                                            break;
-                                        case 'For Approval':
-                                            $status_color = 'red';
-                                            break;
-                                        default:
-                                            // Default color if status doesn't match
-                                            $status_color = 'black';
-                                    }
-                                    
-                                    // Output the status with appropriate color
-                                    echo '<td class="' . $status_color . '">' . $status . '</td>';
+                                    echo '<td >' . $row['status'] . '</td>';
                                     echo '<td>' . $row['deadline'] . '</td>';
-                                    echo '<tr>';
+                                    // Check if status is "For Approval"
+                                    if ($row['status'] == 'For Approval') {
+                                        // Display the button
+                                        echo '<td>';
+                                        echo '<form method="post" action="">';
+                                        echo '<input type="hidden" name="request_id" value="' . $row['request_id'] . '">';
+                                        echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#ForApproval">Approve</button>';
+                                        echo '</form>';
+                                        echo '</td>';
+                                    } else {
+                                        // Otherwise, display an empty cell
+                                        echo '<td></td>';
+                                    }
                                     echo '<td style="display:none;">' . $row['campus'] . '</td>';
                                     echo '<td style="display:none;">' . $row['building'] . '</td>';
                                     echo '<td style="display:none;">' . $row['floor'] . '</td>';
@@ -581,6 +569,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             ?>
                         </div>
                     </div>
+
                     <!--MODAL FOR NEW REQUEST-->
                     <div class="modal-parent">
                         <div class="modal modal-xl fade" id="addRequest" tabindex="-1"
@@ -588,7 +577,141 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5>Maintenance Staff Information</h5>
+                                        <h5>Add New Request:</h5>
+                                        <button class="btn btn-close-modal-emp close-modal-btn"
+                                            data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="post" class="row g-3">
+                                            <div class="col-4" style="display:none;">
+                                                <label for="new_request_id" class="form-label">Request ID:</label>
+                                                <input type="text" class="form-control" id="new_request_id"
+                                                    name="new_request_id" readonly />
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="new_building" class="form-label">Building:</label>
+                                                <input type="text" class="form-control" id="new_building"
+                                                    name="new_building" />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="new_floor" class="form-label">Floor:</label>
+                                                <input type="text" class="form-control" id="new_floor"
+                                                    name="new_floor" />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="new_room" class="form-label">Room: </label>
+                                                <input type="text" class="form-control" id="new_room" name="new_room" />
+                                            </div>
+                                            <div class="col-4" style="display:none;">
+                                                <label for="new_campus" class="form-label">Campus:</label>
+                                                <input type="text" class="form-control" id="new_campus"
+                                                    name="new_campus" value="Batasan" />
+                                            </div>
+
+
+                                            <div class="col-4">
+                                                <label for="new_equipment" class="form-label">Equipment :</label>
+                                                <input type="text" class="form-control" id="new_equipment"
+                                                    name="new_equipment" />
+                                            </div>
+
+                                            <div class="col-4" style="display:none;">
+                                                <label for="new_req_by" class="form-label">Requested By: </label>
+                                                <input type="text" class="form-control" id="new_req_by"
+                                                    name="new_req_by" />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="new_category" class="form-label">Category:</label>
+                                                <select class="form-select" id="new_category" name="new_category"
+                                                    onchange="fetchRandomAssignee1()">
+                                                    <option value="Carpentry">Carpentry</option>
+                                                    <option value="Electrical">Electrical</option>
+                                                    <option value="Plumbing">Plumbing</option>
+                                                </select>
+                                            </div>
+
+                                            <script>
+                                                function fetchRandomAssignee1() {
+                                                    var category = document.getElementById('new_category').value;
+                                                    $.ajax({
+                                                        url: 'fetch_random_assignee_request.php', // PHP script to fetch random assignee
+                                                        type: 'POST',
+                                                        data: { category: category },
+                                                        success: function (response) {
+                                                            $('#new_assignee').val(response);
+                                                        },
+                                                        error: function (xhr, status, error) {
+                                                            alert('Error: ' + error);
+                                                        }
+                                                    });
+                                                }
+                                            </script>
+
+                                            <div class="col-4">
+                                                <label for="new_assignee" class="form-label">Assignee:</label>
+                                                <input type="text" class="form-control" id="new_assignee"
+                                                    name="new_assignee" />
+                                            </div>
+
+                                            <div class="col-4" style="display: none;">
+                                                <label for="new_status" class="form-label">Status:</label>
+                                                <input type="text" class="form-control" value="Assigned" id="new_status"
+                                                    name="new_status" />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="new_deadline" class="form-label">Deadline:</label>
+                                                <input type="date" class="form-control" id="new_deadline"
+                                                    name="new_deadline" />
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label for="new_description" class="form-label">Description:</label>
+                                                <input type="text" class="form-control" id="new_description"
+                                                    name="new_description" />
+                                            </div>
+
+                                            <div class="footer">
+                                                <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                                    data-bs-target="#staticBackdrop1">
+                                                    Save
+                                                </button>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--add for new request-->
+                    <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    Are you sure you want to save changes?
+                                    <div class="modal-popups">
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                        <button class="btn add-modal-btn" name="add"
+                                            data-bs-dismiss="modal">Yes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+
+                    <!--MODAL FOR THE APPROVAL-->
+                    <div class="modal-parent">
+                        <div class="modal modal-xl fade" id="ForApproval" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5>For Approval:</h5>
 
                                         <button class="btn btn-close-modal-emp close-modal-btn"
                                             data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
@@ -636,29 +759,30 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             </div>
 
                                             <div class="col-4">
-    <label for="category" class="form-label">Category:</label>
-    <select class="form-select" id="category" name="category" onchange="fetchRandomAssignee()">
-        <option value="Carpentry">Carpentry</option>
-        <option value="Electrical">Electrical</option>
-        <option value="Plumbing">Plumbing</option>
-    </select>
-</div>
+                                                <label for="category" class="form-label">Category:</label>
+                                                <select class="form-select" id="category" name="category"
+                                                    onchange="fetchRandomAssignee()">
+                                                    <option value="Carpentry">Carpentry</option>
+                                                    <option value="Electrical">Electrical</option>
+                                                    <option value="Plumbing">Plumbing</option>
+                                                </select>
+                                            </div>
 
-<script>function fetchRandomAssignee() {
-    var category = document.getElementById('category').value;
-    $.ajax({
-        url: 'fetch_random_assignee_request.php', // PHP script to fetch random assignee
-        type: 'POST',
-        data: { category: category },
-        success: function(response) {
-            $('#assignee').val(response);
-        },
-        error: function(xhr, status, error) {
-            alert('Error: ' + error);
-        }
-    });
-}
-</script>
+                                            <script>function fetchRandomAssignee() {
+                                                    var category = document.getElementById('category').value;
+                                                    $.ajax({
+                                                        url: 'fetch_random_assignee_request.php', // PHP script to fetch random assignee
+                                                        type: 'POST',
+                                                        data: { category: category },
+                                                        success: function (response) {
+                                                            $('#assignee').val(response);
+                                                        },
+                                                        error: function (xhr, status, error) {
+                                                            alert('Error: ' + error);
+                                                        }
+                                                    });
+                                                }
+                                            </script>
 
 
                                             <div class="col-4">
@@ -666,10 +790,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 <input type="text" class="form-control" id="assignee" name="assignee" />
                                             </div>
 
-                                            <div class="col-4" style="display: none;">
+                                            <div class="col-4" style="display:none;">
                                                 <label for="status" class="form-label">Status:</label>
-                                                <input type="text" class="form-control" value="Assigned" id="status"
-                                                    name="status" />
+                                                <input type="text" class="form-control" value="Assigned"
+                                                    id="status_modal" name="status" />
                                             </div>
 
                                             <div class="col-4">
@@ -685,7 +809,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                             <div class="footer">
                                                 <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                                    data-bs-target="#staticBackdrop1">
+                                                    data-bs-target="#staticBackdrop2">
                                                     Save
                                                 </button>
                                             </div>
@@ -695,8 +819,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
                     </div>
 
-                    <!--Edit for table 1-->
-                    <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false"
+                    <!--Edit for approval-->
+                    <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false"
                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
@@ -705,14 +829,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <div class="modal-popups">
                                         <button type="button" class="btn close-popups"
                                             data-bs-dismiss="modal">No</button>
-                                        <button class="btn add-modal-btn" name="edit"
+                                        <button class="btn add-modal-btn" name="approval"
                                             data-bs-dismiss="modal">Yes</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     </form>
 
 
@@ -749,19 +872,51 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     <script src="../../src/js/logout.js"></script>
 
     <script>
-    // Get today's date
-    var today = new Date();
+        // Get today's date
+        var today = new Date();
 
-    // Set tomorrow's date
-    var tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
+        // Set tomorrow's date
+        var tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
 
-    // Format tomorrow's date as yyyy-mm-dd
-    var tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+        // Format tomorrow's date as yyyy-mm-dd
+        var tomorrowFormatted = tomorrow.toISOString().split('T')[0];
 
-    // Set the minimum date of the input field to tomorrow
-    document.getElementById("deadline").min = tomorrowFormatted;
-</script>
+        // Set the minimum date of the input field to tomorrow
+        document.getElementById("new_deadline").min = tomorrowFormatted;
+    </script>
+
+
+    <!--PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
+    <script>
+        $(document).ready(function () {
+            // Function to populate modal fields
+            function populateModal(row) {
+                // Populate modal fields with data from the row
+                $("#request_id").val(row.find("td:eq(0)").text());
+                $("#date").val(row.find("td:eq(1)").text());
+                $("#category").val(row.find("td:eq(2)").text());
+                // If building, floor, and room are concatenated in a single cell, split them
+                var buildingFloorRoom = row.find("td:eq(3)").text().split(', ');
+                $("#building").val(buildingFloorRoom[0]);
+                $("#floor").val(buildingFloorRoom[1]);
+                $("#room").val(buildingFloorRoom[2]);
+                $("#equipment").val(row.find("td:eq(4)").text());
+                $("#assignee").val(row.find("td:eq(5)").text());
+                $("#status").val(row.find("td:eq(6)").text());
+                $("#deadline").val(row.find("td:eq(7)").text());
+                $("#description").val(row.find("td:eq(13)").text());
+
+            }
+
+            // Click event for the "Approve" button
+            $("button[data-bs-target='#ForApproval']").click(function () {
+                var row = $(this).closest("tr"); // Get the closest row to the clicked button
+                populateModal(row); // Populate modal fields with data from the row
+                $("#ForApproval").modal("show"); // Show the modal
+            });
+        });
+    </script>
 
     <script>
         $(document).ready(function () {
@@ -799,6 +954,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         });
     </script>
 
+
+
+
+
     <!-- Add this script after your existing scripts -->
     <!-- Add this script after your existing scripts -->
     <script>
@@ -819,7 +978,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         });
     </script>
-
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
