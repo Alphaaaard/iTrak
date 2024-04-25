@@ -595,13 +595,29 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             </div>
 
                                             <div class="col-4">
-                                                <label for="category" class="form-label">Category: </label>
-                                                <select class="form-select" id="category" name="category">
-                                                    <option value="Carpentry">Carpentry</option>
-                                                    <option value="Electrical">Electrical</option>
-                                                    <option value="Plumbing">Plumbing</option>
-                                                </select>
-                                            </div>
+    <label for="category" class="form-label">Category:</label>
+    <select class="form-select" id="category" name="category" onchange="fetchRandomAssignee()">
+        <option value="Carpentry">Carpentry</option>
+        <option value="Electrical">Electrical</option>
+        <option value="Plumbing">Plumbing</option>
+    </select>
+</div>
+
+<script>function fetchRandomAssignee() {
+    var category = document.getElementById('category').value;
+    $.ajax({
+        url: 'fetch_random_assignee_request.php', // PHP script to fetch random assignee
+        type: 'POST',
+        data: { category: category },
+        success: function(response) {
+            $('#assignee').val(response);
+        },
+        error: function(xhr, status, error) {
+            alert('Error: ' + error);
+        }
+    });
+}
+</script>
 
                                             <div class="col-4">
                                                 <label for="assignee" class="form-label">Assignee:</label>
