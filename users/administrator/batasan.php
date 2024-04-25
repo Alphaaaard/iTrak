@@ -565,7 +565,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             </div>
                                             <div class="col-4" style="display:none;">
                                                 <label for="campus" class="form-label">Campus:</label>
-                                                <input type="text" class="form-control" id="campus" name="campus" />
+                                                <input type="text" class="form-control" id="campus" name="campus"
+                                                    value="Batasan" />
                                             </div>
                                             <div class="col-4">
                                                 <label for="building" class="form-label">Building:</label>
@@ -747,172 +748,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         });
     </script>
-    <script>
-        $(document).ready(function () {
-            let fullname;
-
-            class AccountManager {
-                constructor() {
-                    this.setupEventListeners();
-                }
-
-                showAlert(title, text, icon, timer = null) {
-                    const options = {
-                        title: title,
-                        text: text,
-                        icon: icon,
-                        showConfirmButton: false,
-                    };
-
-                    if (timer !== null) {
-                        options.timer = timer;
-                    }
-
-                    Swal.fire(options);
-                }
-
-                restoreAccount(archiveId) {
-                    $.ajax({
-                        type: "POST",
-                        url: "archive.php",
-                        data: {
-                            accept: true,
-                            archiveId: archiveId,
-                        },
-                        success: (response) => {
-                            console.log(response);
-                            this.showAlert("", fullname + " has been restored successfully!", "success");
-                            setTimeout(() => {
-                                location.reload();
-                            }, 1000);
-                        },
-                        error: (error) => {
-                            console.error("Error restoring account:", error);
-                            this.showAlert("", "Failed to restore account.", "error");
-                        },
-                    });
-                }
-
-                confirmRestore(rowData) {
-                    fullname = rowData.firstName + ' ' + rowData.lastName;
-
-                    Swal.fire({
-                        title: `Are you sure you want to restore<span style="font-weight: bold;">${rowData.firstName}</span> <span style="font-weight: bold;">${rowData.lastName}</span>?`,
-                        showCancelButton: true,
-                        allowOutsideClick: false,
-                        confirmButtonText: "Yes",
-                        cancelButtonText: "No",
-                        icon: "warning",
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            this.restoreAccount(rowData.archiveId);
-                        } else {
-                            this.showAlert("", "Account restoration cancelled.", "info", 1000);
-                        }
-                    });
-                }
 
 
 
-                setupEventListeners() {
-                    $(".restore-btn").click((event) => {
-                        event.stopPropagation();
-                        const row = $(event.target).closest("tr");
-                        const rowData = {
-                            archiveId: row.find("td:eq(0)").text(),
-                            firstName: row.find("td:eq(1)").text(),
-                            lastName: row.find("td:eq(2)").text(),
-                        };
-
-                        this.confirmRestore(rowData);
-                    });
-                }
-            }
-
-            // Instantiate the class
-            const accountManager = new AccountManager();
-        });
-    </script>
-
-    <script>
-        $(document).ready(function () {
-            function populateModal(row) {
-                // Your existing code to populate the modal fields
-                $("#archiveId").val(row.find("td:eq(0)").text());
-                $("#picture").val(row.find("td:eq(1)").text());
-                $("#firstName").val(row.find("td:eq(3)").text());
-                $("#middleName").val(row.find("td:eq(4)").text());
-                $("#lastName").val(row.find("td:eq(5)").text());
-                $("#role").val(row.find("td:eq(10)").text());
-                $("#contact").val(row.find("td:eq(8)").text());
-                $("#email").val(row.find("td:eq(6)").text());
-                $("#password").val(row.find("td:eq(7)").text());
-            }
-
-            // Click event for the table row
-            $(".table-container table tbody tr").click(function () {
-                var row = $(this);
-                populateModal(row);
-                $("#exampleModal").modal("show");
-            });
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
-            // Bind the filter function to the input field
-            $("#search-box").on("input", function () {
-                var query = $(this).val().toLowerCase();
-                filterTable(query);
-            });
-
-            function filterTable(query) {
-                let hasData = false;
-                let child = $("<tr class='emptyMsg'><td>No results found</td></tr>");
-
-                $(".table-container tbody tr").each(function () {
-                    var row = $(this);
-                    var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
-                    var firstNameCell = row.find("td:eq(1)"); // FirstName column
-                    var middleNameCell = row.find("td:eq(2)"); // LastName column
-                    var lastNameCell = row.find("td:eq(3)"); // LastName column
-                    var roleCell = row.find("td:eq(10)"); // LastName column
-
-                    // Get the text content of each cell
-                    var archiveIDText = archiveIDCell.text().toLowerCase();
-                    var firstNameText = firstNameCell.text().toLowerCase();
-                    var middleNameText = middleNameCell.text().toLowerCase();
-                    var lastNameText = lastNameCell.text().toLowerCase();
-                    var roleText = roleCell.text().toLowerCase();
-
-                    // Check if any of the cells contain the query
-                    var showRow = archiveIDText.includes(query) ||
-                        firstNameText.includes(query) ||
-                        middleNameText.includes(query) ||
-                        lastNameText.includes(query) ||
-                        roleText.includes(query) ||
-                        archiveIDText == query || // Exact match for Archive ID
-                        firstNameText == query || // Exact match for FirstName
-                        middleNameText == query || // Exact match for LastName
-                        lastNameText == query || // Exact match for LastName
-                        roleText == query; // Exact match for LastName
-
-                    // Show or hide the row based on the result
-                    if (showRow) {
-                        hasData = true;
-                        row.show();
-                    } else {
-                        row.hide();
-                    }
-                });
-
-                if (!hasData) {
-                    $(".table-container tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
-                } else {
-                    $('.emptyMsg').remove();
-                }
-            }
-        });
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
