@@ -51,8 +51,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->fetch();
     $stmt->close();
 
-    $sql = "SELECT * FROM request WHERE campus = 'Batasan'";
+    $sql = "SELECT * FROM request WHERE campus = 'Batasan' AND status IN ('Assigned', 'Done', 'For Approval')";
     $result = $conn->query($sql) or die($conn->error);
+
+    $sql2 = "SELECT * FROM request WHERE campus = 'Batasan' AND status = 'Outsource'";
+    $result2 = $conn->query($sql2) or die($conn->error);
 
     if (isset($_POST['edit'])) {
         $request_id = $_POST['request_id'];
@@ -503,26 +506,26 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </table>
                             </div>
                             <?php
-                            if ($result->num_rows > 0) {
+                            if ($result2->num_rows > 0) {
                                 echo "<div class='table-container'>";
                                 echo "<table>";
-                                while ($row = $result->fetch_assoc()) {
+                                while ($row2 = $result2->fetch_assoc()) {
                                     echo '<tr>';
-                                    echo '<td>' . $row['request_id'] . '</td>';
-                                    echo '<td>' . $row['date'] . '</td>';
-                                    echo '<td>' . $row['category'] . '</td>';
-                                    echo '<td>' . $row['building'] . ', ' . $row['floor'] . ', ' . $row['room'] . '</td>';
-                                    echo '<td>' . $row['equipment'] . '</td>';
-                                    echo '<td>' . $row['assignee'] . '</td>';
-                                    echo '<td >' . $row['status'] . '</td>';
-                                    echo '<td>' . $row['deadline'] . '</td>';
+                                    echo '<td>' . $row2['request_id'] . '</td>';
+                                    echo '<td>' . $row2['date'] . '</td>';
+                                    echo '<td>' . $row2['category'] . '</td>';
+                                    echo '<td>' . $row2['building'] . ', ' . $row2['floor'] . ', ' . $row2['room'] . '</td>';
+                                    echo '<td>' . $row2['equipment'] . '</td>';
+                                    echo '<td>' . $row2['assignee'] . '</td>';
+                                    echo '<td >' . $row2['status'] . '</td>';
+                                    echo '<td>' . $row2['deadline'] . '</td>';
 
-                                    echo '<td style="display:none;">' . $row['campus'] . '</td>';
-                                    echo '<td style="display:none;">' . $row['building'] . '</td>';
-                                    echo '<td style="display:none;">' . $row['floor'] . '</td>';
-                                    echo '<td style="display:none;">' . $row['room'] . '</td>';
-                                    echo '<td style="display:none;">' . $row['description'] . '</td>';
-                                    echo '<td style="display:none;">' . $row['req_by'] . '</td>';
+                                    echo '<td style="display:none;">' . $row2['campus'] . '</td>';
+                                    echo '<td style="display:none;">' . $row2['building'] . '</td>';
+                                    echo '<td style="display:none;">' . $row2['floor'] . '</td>';
+                                    echo '<td style="display:none;">' . $row2['room'] . '</td>';
+                                    echo '<td style="display:none;">' . $row2['description'] . '</td>';
+                                    echo '<td style="display:none;">' . $row2['req_by'] . '</td>';
                                     echo '</tr>';
                                 }
                                 echo "</table>";
