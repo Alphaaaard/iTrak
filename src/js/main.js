@@ -393,3 +393,26 @@ function toggleGPS() {
     chevronIcon.style.transform = "rotate(0deg)";
   }
 }
+
+function toggleMAP() {
+  var mapItems = document.querySelectorAll(".Map-container");
+  mapItems.forEach(function (item) {
+    item.classList.toggle("aaa");
+  });
+
+  var mapItems = document.querySelectorAll(".Map-dropdown");
+  mapItems.forEach(function (item) {
+    item.classList.toggle("active");
+  });
+
+  var chevronIcon = document.getElementById("map-chevron-icon");
+  chevronIcon.classList.toggle("rotate");
+
+  if (chevronIcon.classList.contains("rotate")) {
+    chevronIcon.style.transition = "transform 0.3s ease";
+    chevronIcon.style.transform = "rotate(180deg)";
+  } else {
+    chevronIcon.style.transition = "transform 0.3s ease";
+    chevronIcon.style.transform = "rotate(0deg)";
+  }
+}

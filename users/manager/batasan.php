@@ -3,8 +3,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
@@ -195,7 +195,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>iTrak | Reports</title>
+        <title>iTrak | Request</title>
         <link rel="icon" type="image/x-icon" href="../../src/img/tab-logo.png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
@@ -466,14 +466,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <span class="text">Map</span>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="./reports.php">
                         <i class="bi bi-clipboard"></i>
                         <span class="text">Reports</span>
                     </a>
                 </li>
                 <div class="Map-cont" onclick="toggleMAP()">
-                    <li class="Map-dropdown">
+                    <li class="Map-dropdown active">
                         <div class="Map-drondown-content">
                             <div class="Map-side-cont">
                                 <i class="bi bi-receipt"></i>
@@ -485,8 +485,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
                     </li>
                 </div>
-                <div class="Map-container">
-                    <li class="Map-Batasan">
+                <div class="Map-container aaa">
+                    <li class="Map-Batasan active">
                         <a href="./batasan.php">
                             <i class="bi bi-building"></i>
                             <span class="text">Batasan</span>

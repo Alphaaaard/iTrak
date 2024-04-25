@@ -7,7 +7,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
     // For personnel page, check if userLevel is 3
-    if ($_SESSION['userLevel'] != 1) {
+    if ($_SESSION['userLevel'] != 3) {
         // If not personnel, redirect to an error page or login
         header("Location:error.php");
         exit;
@@ -94,7 +94,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>iTrak | Archive</title>
+        <title>iTrak | Request</title>
         <link rel="icon" type="image/x-icon" href="../../src/img/tab-logo.png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
@@ -102,6 +102,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/archive.css" />
+        <link rel="stylesheet" href="../../src/css/reports.css" />
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
         <script>
             $(document).ready(function() {
@@ -279,6 +280,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </nav>
         </div>
+        <!-- SIDEBAR -->
         <section id="sidebar">
             <a href="./dashboard.php" class="brand" title="logo">
                 <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
@@ -300,87 +302,27 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </a>
                 </li>
                 <li>
-                    <a href="./staff.php">
-                        <i class="bi bi-person"></i>
-                        <span class="text">Staff</span>
-                    </a>
-                </li>
-                <div class="GPS-cont" onclick="toggleGPS()">
-                    <li class="GPS-dropdown">
-                        <div class="GPS-drondown-content">
-                            <div class="GPS-side-cont">
-                                <i class="bi bi-geo-alt"></i>
-                                <span class="text">GPS</span>
-                            </div>
-                            <div class="GPS-ind">
-                                <i id="chevron-icon" class="bi bi-chevron-down"></i>
-                            </div>
-                        </div>
-                    </li>
-                </div>
-                <div class="GPS-container">
-                    <li class="GPS-Tracker">
-                        <a href="./gps.php">
-                            <i class="bi bi-crosshair"></i>
-                            <span class="text">GPS Tracker</span>
-                        </a>
-                    </li>
-                    <li class="GPS-History">
-                        <a href="./gps_history.php">
-                            <i class="bi bi-radar"></i>
-                            <span class="text">GPS History</span>
-                        </a>
-                    </li>
-                </div>
-                <li>
                     <a href="./map.php">
                         <i class="bi bi-map"></i>
                         <span class="text">Map</span>
                     </a>
                 </li>
                 <li>
+                    <a href="./assigned-tasks.php">
+                        <i class="bi bi-geo-alt"></i>
+                        <span class="text">Assigned Tasks</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="./request.php">
+                        <i class="bi bi-receipt"></i>
+                        <span class="text">Request</span>
+                    </a>
+                </li>
+                <li>
                     <a href="./reports.php">
                         <i class="bi bi-clipboard"></i>
                         <span class="text">Reports</span>
-                    </a>
-                </li>
-                <div class="Map-cont" onclick="toggleMAP()">
-                    <li class="Map-dropdown">
-                        <div class="Map-drondown-content">
-                            <div class="Map-side-cont">
-                                <i class="bi bi-receipt"></i>
-                                <span class="text">Request</span>
-                            </div>
-                            <div class="Map-ind">
-                                <i id="map-chevron-icon" class="bi bi-chevron-down"></i>
-                            </div>
-                        </div>
-                    </li>
-                </div>
-                <div class="Map-container">
-                    <li class="Map-Batasan">
-                        <a href="./batasan.php">
-                            <i class="bi bi-building"></i>
-                            <span class="text">Batasan</span>
-                        </a>
-                    </li>
-                    <li class="Map-SanBartolome">
-                        <a href="./sanBartolome.php">
-                            <i class="bi bi-building"></i>
-                            <span class="text">San Bartolome</span>
-                        </a>
-                    </li>
-                    <li class="Map-SanFrancisco">
-                        <a href="./sanFrancisco.php">
-                            <i class="bi bi-building"></i>
-                            <span class="text">San Francisco</span>
-                        </a>
-                    </li>
-                </div>
-                <li class="active">
-                    <a href="./archive.php">
-                        <i class="bi bi-archive"></i>
-                        <span class="text">Archive</span>
                     </a>
                 </li>
                 <li>
@@ -391,6 +333,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </li>
             </ul>
         </section>
+        <!-- SIDEBAR -->
         <section id="content">
             <main>
                 <div class="content-container">
@@ -404,23 +347,38 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             </div>
                         </div>
                     </header>
-                    <div class="new-nav">
-                        <ul>
-                            <li><a href="#" class="nav-link" data-bs-target="pills-manager">Manager</a></li>
-                            <li><a href="#" class="nav-link" data-bs-target="pills-profile">Personnel</a></li>
-                        </ul>
+                    <div class="new-nav-container">
+                        <!--Content start of tabs-->
+                        <div class="new-nav">
+                            <ul>
+                                <li><a href="#" class="nav-link" data-bs-target="pills-manager">Request</a></li>
+                                <li><a href="#" class="nav-link" data-bs-target="pills-profile">Outsource</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Export button -->
+                        <div class="export-mob-hide">
+                            <form method="post" id="exportForm">
+                                <input type="hidden" name="status" id="statusField" value="For Replacement">
+                                <button type="button" id="exportBtn" class="btn btn-outline-danger">Add Task</button>
+                            </form>
+                        </div>
                     </div>
+
+
                     <div class="tab-content pt" id="myTabContent">
                         <div class="tab-pane fade show active" id="pills-manager" role="tabpanel" aria-labelledby="home-tab">
                             <div class="table-content">
                                 <div class='table-header'>
                                     <table>
                                         <tr>
-                                            <th></th>
-                                            <th></th>
-                                            <th>NAME</th>
-                                            <th>ROLE</th>
-                                            <th></th>
+                                            <th>Request ID</th>
+                                            <th>Location</th>
+                                            <th>Equipment</th>
+                                            <th>Category</th>
+                                            <th>Assignee</th>
+                                            <th>Status</th>
+                                            <th>Deadline</th>
                                         </tr>
                                     </table>
                                 </div>

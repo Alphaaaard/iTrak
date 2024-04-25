@@ -59,15 +59,6 @@ img:not([src]) {
 }
 
 /* Your CSS styles here */
-.GPS-container {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease; /* You can adjust the duration and timing function as needed */
-}
-
-.GPS-container.aaa {
-  max-height: 200px; /* Set the maximum height to a value larger than the content */
-}
 
 .mb-5 {
   margin: unset !important;
@@ -554,6 +545,16 @@ hr {
   align-items: center;
 }
 
+.GPS-container {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease; /* You can adjust the duration and timing function as needed */
+}
+
+.GPS-container.aaa {
+  max-height: 200px; /* Set the maximum height to a value larger than the content */
+}
+
 /* div.GPS-cont {
   display: flex;
   justify-content: space-between;
@@ -607,6 +608,79 @@ div.GPS-drondown-content:hover div.GPS-side-cont .text {
 
 .GPS-History,
 .GPS-Tracker {
+  padding-left: 2em !important;
+}
+
+.Map-side-cont {
+  display: flex;
+  gap: 0.8em;
+  align-items: center;
+}
+
+.Map-container {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease; /* You can adjust the duration and timing function as needed */
+}
+
+.Map-container.aaa {
+  max-height: 200px; /* Set the maximum height to a value larger than the content */
+}
+
+/* div.Map-cont {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 1em;
+} */
+
+.Map-dropdown.active div.Map-drondown-content {
+  background-color: #d6e4f0;
+  transition: 0.3s ease;
+  color: #163172;
+}
+
+.Map-dropdown.active div.Map-drondown-content div.Map-side-cont .text {
+  color: #163172 !important;
+}
+
+div.Map-drondown-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.7em;
+  height: 100%;
+  align-items: center;
+  border-radius: 10px;
+}
+
+div.Map-drondown-content:hover {
+  background-color: #d6e4f0;
+  transition: 0.3s ease;
+  color: #163172;
+}
+
+div.Map-drondown-content:hover div.Map-side-cont .text {
+  color: #163172 !important;
+}
+
+/* .Map-cont {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 1em;
+} */
+
+/* .Map-side-cont {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+} */
+
+.Map-cont {
+  cursor: pointer;
+}
+
+.Map-Batasan,
+.Map-SanBartolome,
+.Map-SanFrancisco {
   padding-left: 2em !important;
 }
 

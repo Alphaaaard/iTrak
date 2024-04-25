@@ -286,12 +286,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <!-- NAVBAR -->
         <!-- SIDEBAR -->
         <section id="sidebar">
-            <div href="#" class="brand" title="logo">
+            <a href="./dashboard.php" class="brand" title="logo">
                 <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
                 <div class="mobile-sidebar-close">
                     <i class="bi bi-arrow-left-circle"></i>
                 </div>
-            </div>
+            </a>
             <ul class="side-menu top">
                 <li>
                     <a href="./dashboard.php">
@@ -350,6 +350,39 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <span class="text">Reports</span>
                     </a>
                 </li>
+                <div class="Map-cont" onclick="toggleMAP()">
+                    <li class="Map-dropdown">
+                        <div class="Map-drondown-content">
+                            <div class="Map-side-cont">
+                                <i class="bi bi-receipt"></i>
+                                <span class="text">Request</span>
+                            </div>
+                            <div class="Map-ind">
+                                <i id="map-chevron-icon" class="bi bi-chevron-down"></i>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <div class="Map-container">
+                    <li class="Map-Batasan">
+                        <a href="./batasan.php">
+                            <i class="bi bi-building"></i>
+                            <span class="text">Batasan</span>
+                        </a>
+                    </li>
+                    <li class="Map-SanBartolome">
+                        <a href="./sanBartolome.php">
+                            <i class="bi bi-building"></i>
+                            <span class="text">San Bartolome</span>
+                        </a>
+                    </li>
+                    <li class="Map-SanFrancisco">
+                        <a href="./sanFrancisco.php">
+                            <i class="bi bi-building"></i>
+                            <span class="text">San Francisco</span>
+                        </a>
+                    </li>
+                </div>
                 <li>
                     <a href="./archive.php">
                         <i class="bi bi-archive"></i>
@@ -375,13 +408,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="cont-header">
                             <h1 class="tab-name"></h1>
                             <div class="tbl-filter">
-                                
+
                                 <select name="filterRole" id="filterRole" onchange="filterDate(this.value)">
                                     <option value="newest">Newest</option>
                                     <option value="oldest">Oldest</option>
                                 </select>
 
-                                <select id="rows-display-dropdown" class="form-select dropdown-rows"aria-label="Default select example">
+                                <select id="rows-display-dropdown" class="form-select dropdown-rows" aria-label="Default select example">
                                     <option value="20" selected>Show 20 rows</option>
                                     <option class="hidden"></option>
                                     <option value="50">Show 50 rows</option>
@@ -517,26 +550,26 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
             </main>
             <div class="pagination-reports">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </section>
 
         <!-- MODALS -->
@@ -610,25 +643,25 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         </script>
 
-<script>
-    $(document).ready(function() {
-        $("#pills-general").addClass("show active");
-        $("#pills-report").removeClass("show active");
-        $(".nav-link[data-bs-target='pills-general']").addClass("active");
-        $(".nav-link[data-bs-target='pills-report']").removeClass("active");
+        <script>
+            $(document).ready(function() {
+                $("#pills-general").addClass("show active");
+                $("#pills-report").removeClass("show active");
+                $(".nav-link[data-bs-target='pills-general']").addClass("active");
+                $(".nav-link[data-bs-target='pills-report']").removeClass("active");
 
-        $(".nav-link").click(function() {
-            const targetId = $(this).data("bs-target");
-            $(".tab-pane").removeClass("show active");
-            $(`#${targetId}`).addClass("show active");
-            $(".nav-link").removeClass("active");
-            $(this).addClass("active");
-            
-            // Reset the search input value
-            $("#search-box").val("");
-        });
-    });
-</script>
+                $(".nav-link").click(function() {
+                    const targetId = $(this).data("bs-target");
+                    $(".tab-pane").removeClass("show active");
+                    $(`#${targetId}`).addClass("show active");
+                    $(".nav-link").removeClass("active");
+                    $(this).addClass("active");
+
+                    // Reset the search input value
+                    $("#search-box").val("");
+                });
+            });
+        </script>
 
         <script>
             $(document).ready(function() {

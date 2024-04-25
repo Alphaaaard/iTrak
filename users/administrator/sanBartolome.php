@@ -94,7 +94,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>iTrak | Archive</title>
+        <title>iTrak | Request</title>
         <link rel="icon" type="image/x-icon" href="../../src/img/tab-logo.png">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
@@ -102,6 +102,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/archive.css" />
+        <link rel="stylesheet" href="../../src/css/reports.css" />
+
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
         <script>
             $(document).ready(function() {
@@ -345,7 +347,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </a>
                 </li>
                 <div class="Map-cont" onclick="toggleMAP()">
-                    <li class="Map-dropdown">
+                    <li class="Map-dropdown active">
                         <div class="Map-drondown-content">
                             <div class="Map-side-cont">
                                 <i class="bi bi-receipt"></i>
@@ -357,14 +359,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
                     </li>
                 </div>
-                <div class="Map-container">
+                <div class="Map-container aaa">
                     <li class="Map-Batasan">
                         <a href="./batasan.php">
                             <i class="bi bi-building"></i>
                             <span class="text">Batasan</span>
                         </a>
                     </li>
-                    <li class="Map-SanBartolome">
+                    <li class="Map-SanBartolome active">
                         <a href="./sanBartolome.php">
                             <i class="bi bi-building"></i>
                             <span class="text">San Bartolome</span>
@@ -377,7 +379,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </a>
                     </li>
                 </div>
-                <li class="active">
+                <li>
                     <a href="./archive.php">
                         <i class="bi bi-archive"></i>
                         <span class="text">Archive</span>
@@ -404,11 +406,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             </div>
                         </div>
                     </header>
-                    <div class="new-nav">
-                        <ul>
-                            <li><a href="#" class="nav-link" data-bs-target="pills-manager">Manager</a></li>
-                            <li><a href="#" class="nav-link" data-bs-target="pills-profile">Personnel</a></li>
-                        </ul>
+                    <div class="new-nav-container">
+                        <!--Content start of tabs-->
+                        <div class="new-nav">
+                            <ul>
+                                <li><a href="#" class="nav-link" data-bs-target="pills-manager">Request</a></li>
+                                <li><a href="#" class="nav-link" data-bs-target="pills-profile">Outsource</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Export button -->
+                        <div class="export-mob-hide">
+                            <form method="post" id="exportForm">
+                                <input type="hidden" name="status" id="statusField" value="For Replacement">
+                                <button type="button" id="exportBtn" class="btn btn-outline-danger">Add Task</button>
+                            </form>
+                        </div>
                     </div>
                     <div class="tab-content pt" id="myTabContent">
                         <div class="tab-pane fade show active" id="pills-manager" role="tabpanel" aria-labelledby="home-tab">
@@ -416,11 +429,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <div class='table-header'>
                                     <table>
                                         <tr>
-                                            <th></th>
-                                            <th></th>
-                                            <th>NAME</th>
-                                            <th>ROLE</th>
-                                            <th></th>
+                                            <th>Request ID</th>
+                                            <th>Location</th>
+                                            <th>Equipment</th>
+                                            <th>Category</th>
+                                            <th>Assignee</th>
+                                            <th>Status</th>
+                                            <th>Deadline</th>
                                         </tr>
                                     </table>
                                 </div>

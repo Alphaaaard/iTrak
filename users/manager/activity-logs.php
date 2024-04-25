@@ -269,12 +269,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <!-- NAVBAR -->
         <!-- SIDEBAR -->
         <section id="sidebar">
-            <div href="#" class="brand" title="logo">
+            <a href="./dashboard.php" class="brand" title="logo">
                 <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
                 <div class="mobile-sidebar-close">
                     <i class="bi bi-arrow-left-circle"></i>
                 </div>
-            </div>
+            </a>
             <ul class="side-menu top">
                 <li>
                     <a href="./dashboard.php">
@@ -327,6 +327,39 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <span class="text">Reports</span>
                     </a>
                 </li>
+                <div class="Map-cont" onclick="toggleMAP()">
+                    <li class="Map-dropdown">
+                        <div class="Map-drondown-content">
+                            <div class="Map-side-cont">
+                                <i class="bi bi-receipt"></i>
+                                <span class="text">Request</span>
+                            </div>
+                            <div class="Map-ind">
+                                <i id="map-chevron-icon" class="bi bi-chevron-down"></i>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <div class="Map-container">
+                    <li class="Map-Batasan">
+                        <a href="./batasan.php">
+                            <i class="bi bi-building"></i>
+                            <span class="text">Batasan</span>
+                        </a>
+                    </li>
+                    <li class="Map-SanBartolome">
+                        <a href="./sanBartolome.php">
+                            <i class="bi bi-building"></i>
+                            <span class="text">San Bartolome</span>
+                        </a>
+                    </li>
+                    <li class="Map-SanFrancisco">
+                        <a href="./sanFrancisco.php">
+                            <i class="bi bi-building"></i>
+                            <span class="text">San Francisco</span>
+                        </a>
+                    </li>
+                </div>
                 <li class="active">
                     <a href="./activity-logs.php">
                         <i class="bi bi-arrow-counterclockwise"></i>
@@ -426,14 +459,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     echo "<table>";
                                     echo "<tbody>";
                                     while ($row = $resultReport->fetch_assoc()) {
-                                      
-                
 
 
-                                            $date = new DateTime($row['date']); // Create DateTime object from fetched date
-                                            $date->modify('+8 hours'); // Add 8 hours
-                                            $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
-    
+
+
+                                        $date = new DateTime($row['date']); // Create DateTime object from fetched date
+                                        $date->modify('+8 hours'); // Add 8 hours
+                                        $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
+
                                         echo '<tr>';
                                         echo '<td>' . $row['firstName'] . " " . $row['lastName'] . '</td>';
                                         echo '<td style="display:none">' . $row['activityId'] . '</td>';

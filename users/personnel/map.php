@@ -259,12 +259,12 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <!-- NAVBAR -->
         <!-- SIDEBAR -->
         <section id="sidebar">
-            <div href="#" class="brand" title="logo">
+            <a href="./dashboard.php" class="brand" title="logo">
                 <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
                 <div class="mobile-sidebar-close">
                     <i class="bi bi-arrow-left-circle"></i>
                 </div>
-            </div>
+            </a>
             <ul class="side-menu top">
                 <li>
                     <a href="./dashboard.php">
@@ -278,7 +278,6 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         <span class="text">Attendance Logs</span>
                     </a>
                 </li>
-
                 <li class="active">
                     <a href="./map.php">
                         <i class="bi bi-map"></i>
@@ -289,6 +288,12 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     <a href="./assigned-tasks.php">
                         <i class="bi bi-geo-alt"></i>
                         <span class="text">Assigned Tasks</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./request.php">
+                        <i class="bi bi-receipt"></i>
+                        <span class="text">Request</span>
                     </a>
                 </li>
                 <li>

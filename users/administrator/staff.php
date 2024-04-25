@@ -302,12 +302,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     </div>
 
     <section id="sidebar">
-      <div href="#" class="brand" title="logo">
+      <a href="./dashboard.php" class="brand" title="logo">
         <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
         <div class="mobile-sidebar-close">
           <i class="bi bi-arrow-left-circle"></i>
         </div>
-      </div>
+      </a>
       <ul class="side-menu top">
         <li>
           <a href="./dashboard.php">
@@ -366,6 +366,39 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             <span class="text">Reports</span>
           </a>
         </li>
+        <div class="Map-cont" onclick="toggleMAP()">
+          <li class="Map-dropdown">
+            <div class="Map-drondown-content">
+              <div class="Map-side-cont">
+                <i class="bi bi-receipt"></i>
+                <span class="text">Request</span>
+              </div>
+              <div class="Map-ind">
+                <i id="map-chevron-icon" class="bi bi-chevron-down"></i>
+              </div>
+            </div>
+          </li>
+        </div>
+        <div class="Map-container">
+          <li class="Map-Batasan">
+            <a href="./batasan.php">
+              <i class="bi bi-building"></i>
+              <span class="text">Batasan</span>
+            </a>
+          </li>
+          <li class="Map-SanBartolome">
+            <a href="./sanBartolome.php">
+              <i class="bi bi-building"></i>
+              <span class="text">San Bartolome</span>
+            </a>
+          </li>
+          <li class="Map-SanFrancisco">
+            <a href="./sanFrancisco.php">
+              <i class="bi bi-building"></i>
+              <span class="text">San Francisco</span>
+            </a>
+          </li>
+        </div>
         <li>
           <a href="./archive.php">
             <i class="bi bi-archive"></i>
@@ -623,7 +656,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <div class="col-4">
                           <label for="firstName" class="form-label label">First name <span class="d-none text-danger error">*</span></label>
-  <input type="text" class="form-control" id="firstNameField" name="firstName" placeholder="First Name" oninput="this.value = this.value.replace(/[^a-zA-Z\s-]/g, '')" required />
+                          <input type="text" class="form-control" id="firstNameField" name="firstName" placeholder="First Name" oninput="this.value = this.value.replace(/[^a-zA-Z\s-]/g, '')" required />
                         </div>
 
                         <div class="col-4">
@@ -633,7 +666,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <div class="col-4">
                           <label for="lastName" class="form-label">Last name <span class="d-none text-danger error">*</span></label>
-  <input type="text" class="form-control" id="lastNameField" name="lastName" placeholder="Last Name" oninput="this.value = this.value.replace(/[^a-zA-Z\s-]/g, '')" required />
+                          <input type="text" class="form-control" id="lastNameField" name="lastName" placeholder="Last Name" oninput="this.value = this.value.replace(/[^a-zA-Z\s-]/g, '')" required />
                         </div>
 
 
@@ -714,12 +747,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <div class="col-4">
                           <label for="middlename" class="form-label">Middle name</label>
-                          <input type="text" class="form-control" id="middlenameEdit" name="middlename"   />
+                          <input type="text" class="form-control" id="middlenameEdit" name="middlename" />
                         </div>
 
                         <div class="col-4">
                           <label for="lastname" class="form-label">Last name</label>
-                          <input type="text" class="form-control" id="lastnameEdit" name="lastname"   />
+                          <input type="text" class="form-control" id="lastnameEdit" name="lastname" />
                         </div>
 
                         <div class="col-4">
@@ -977,17 +1010,17 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         formData.append('role', role); // Append determined role to formData
 
         Swal.fire({
-                title: 'Choose the file format',
-                showDenyButton: true,
-                confirmButtonText: 'PDF',
-                denyButtonText: 'Excel',
-                didOpen: () => {
-                    Swal.getConfirmButton().style.setProperty('background-color', '#ff4c4c', 'important');
-                    Swal.getConfirmButton().style.setProperty('color', 'white', 'important');
+          title: 'Choose the file format',
+          showDenyButton: true,
+          confirmButtonText: 'PDF',
+          denyButtonText: 'Excel',
+          didOpen: () => {
+            Swal.getConfirmButton().style.setProperty('background-color', '#ff4c4c', 'important');
+            Swal.getConfirmButton().style.setProperty('color', 'white', 'important');
 
-                    Swal.getDenyButton().style.setProperty('background-color', '#09ba23', 'important');
-                    Swal.getDenyButton().style.setProperty('color', 'white', 'important');
-                }
+            Swal.getDenyButton().style.setProperty('background-color', '#09ba23', 'important');
+            Swal.getDenyButton().style.setProperty('color', 'white', 'important');
+          }
         }).then((result) => {
           if (result.isConfirmed) {
             formData.append('submit', 'Export to PDF');
@@ -1036,14 +1069,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             document.body.removeChild(downloadLink);
 
             Swal.fire({
-                        title: 'Exporting Done',
-                        text: 'Your file has been successfully generated.',
-                        icon: 'success',
-                        allowOutsideClick: false,
-                        showConfirmButton: false,
-                        timer: 1300, // closes after 2000 milliseconds (2 seconds)
-                        timerProgressBar: true // shows a visual progress bar for the timer
-                    });
+              title: 'Exporting Done',
+              text: 'Your file has been successfully generated.',
+              icon: 'success',
+              allowOutsideClick: false,
+              showConfirmButton: false,
+              timer: 1300, // closes after 2000 milliseconds (2 seconds)
+              timerProgressBar: true // shows a visual progress bar for the timer
+            });
           })
           .catch(error => {
             Swal.fire({
