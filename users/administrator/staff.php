@@ -672,9 +672,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         <div class="col-4">
                           <label for="contactField" class="form-label">Contact Number <span class="d-none text-danger error">*</span></label>
-
                           <input type="tel" class="form-control contact" id="contactField" name="contact" required maxlength="11" value="09" title="Contact number must start with '09' and be 10 to 11 digits long" oninput="this.value = this.value.replace(/\D/g, '').substring(0, 11)" />
-
                         </div>
 
                         <div class="col-4">
@@ -698,10 +696,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                           <input type="text" class="form-control" id="roleField" name="role" required readonly />
                         </div>
 
+                        <div class="col-4" id="addExpertise">
+                          <label for="expertise">Expertise:</label>
+                          <div class="input-group">
+                            <select class="form-select shadow-none" name="expertise" id="expertise" required>
+                              <option value="" disabled selected hidden>Select expertise</option>
+                              <option value="Electrical">Electrical</option>
+                              <option value="Plumbing">Plumbing</option>
+                              <option value="Outsource">Outsource</option>
+                            </select>
+                          </div>
+                        </div>
+
                         <div class="col-4">
                           <label for="user_pass" class="form-label">Register RFID <span class="d-none text-danger error">*</span></label>
-                          <button type="button" class="form-control btn-custom" data-bs-toggle="modal" data-bs-target="#staticBackdrop112" onclick="setAction('add');" value="">SCAN</button>
-                          <input type="password" name="rfidNumber" id="rfidFieldAdd" title="" value="" required />
+                          <button type="button" class="form-control btn-custom" data-bs-toggle="modal" data-bs-target="#staticBackdrop112" onclick="setAction('add');" value="1234567890">SCAN</button>
+                          <input type="password" name="rfidNumber" id="rfidFieldAdd" title="" value="1234567890" required />
                         </div>
 
                         <div class="col-5">
@@ -779,6 +789,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="col-4">
                           <label for="role" class="form-label">Role</label>
                           <input type="text" class="form-control" id="roleEdit" name="role" readonly />
+                        </div>
+
+                        <div class="col-4">
+                          <label for="expertise" class="form-label">Expertise</label>
+                          <input type="text" class="form-control" id="expertiseEdit" name="expertise" readonly />
                         </div>
 
                         <div class="col-4">
@@ -878,6 +893,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             var middleNameCell = row.find("td:eq(2)"); // LastName column
             var lastNameCell = row.find("td:eq(3)"); // LastName column
             var roleCell = row.find("td:eq(10)"); // LastName column
+            var expertiseCell = row.find("td:eq(10)"); // LastName column
 
             // Get the text content of each cell
             var archiveIDText = archiveIDCell.text().toLowerCase();
@@ -885,6 +901,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             var middleNameText = middleNameCell.text().toLowerCase();
             var lastNameText = lastNameCell.text().toLowerCase();
             var roleText = roleCell.text().toLowerCase();
+            var expertiseText = roleCell.text().toLowerCase();
 
             // Check if any of the cells contain the query
             var showRow = archiveIDText.includes(query) ||
@@ -892,11 +909,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
               middleNameText.includes(query) ||
               lastNameText.includes(query) ||
               roleText.includes(query) ||
+              expertiseText.includes(query) ||
               archiveIDText == query || // Exact match for Archive ID
               firstNameText == query || // Exact match for FirstName
               middleNameText == query || // Exact match for LastName
               lastNameText == query || // Exact match for LastName
-              roleText == query; // Exact match for LastName
+              roleText == query || // Exact match for LastName
+              expertiseText == query; // Exact match for LastName
 
             // Show or hide the row based on the result
             if (showRow) {
@@ -914,6 +933,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             var middleNameCell = row.find("td:eq(2)"); // LastName column
             var lastNameCell = row.find("td:eq(3)"); // LastName column
             var roleCell = row.find("td:eq(10)"); // LastName column
+            var expertiseCell = row.find("td:eq(10)"); // LastName column
 
             // Get the text content of each cell
             var archiveIDText = archiveIDCell.text().toLowerCase();
@@ -921,6 +941,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             var middleNameText = middleNameCell.text().toLowerCase();
             var lastNameText = lastNameCell.text().toLowerCase();
             var roleText = roleCell.text().toLowerCase();
+            var expertiseText = roleCell.text().toLowerCase();
 
             // Check if any of the cells contain the query
             var showRow = archiveIDText.includes(query) ||
@@ -928,11 +949,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
               middleNameText.includes(query) ||
               lastNameText.includes(query) ||
               roleText.includes(query) ||
+              expertiseText.includes(query) ||
               archiveIDText == query || // Exact match for Archive ID
               firstNameText == query || // Exact match for FirstName
               middleNameText == query || // Exact match for LastName
               lastNameText == query || // Exact match for LastName
-              roleText == query; // Exact match for LastName
+              roleText == query || // Exact match for LastName
+              expertiseText == query; // Exact match for LastName
 
             // Show or hide the row based on the result
             if (showRow) {

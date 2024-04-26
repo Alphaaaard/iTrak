@@ -18,6 +18,7 @@ if (isset($_POST['submit'])) {
     $contact = $_POST['contact'];
     $birthday = $_POST['birthday'];
     $role = $_POST['role'];
+    $expertise = $_POST['expertise']; // Added expertise field
     $userLevel = isset($_POST['userLevel']) ? $_POST['userLevel'] : '';
     $rfidNumber = $_POST['rfidNumber'];
     $photo = $_FILES['picture']['name'];
@@ -32,8 +33,8 @@ if (isset($_POST['submit'])) {
         // Setting the image
         $photo = file_get_contents($_FILES['picture']['tmp_name']);
 
-        $stmt = $conn->prepare("INSERT INTO `account` (`userLevel`, `firstName`, `middleName`, `lastName`, `email`, `password`, `contact`, `birthday`, `role`, `picture`, `rfidNumber`, `color`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssssssssss", $userLevel, $firstName, $middleName, $lastName, $email, $password, $contact, $birthday, $role, $photo, $rfidNumber, $color);
+        $stmt = $conn->prepare("INSERT INTO `account` (`userLevel`, `firstName`, `middleName`, `lastName`, `email`, `password`, `contact`, `birthday`, `role`, `expertise`, `picture`, `rfidNumber`, `color`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssssssssss", $userLevel, $firstName, $middleName, $lastName, $email, $password, $contact, $birthday, $role, $expertise, $photo, $rfidNumber, $color);
 
         if ($stmt->execute()) {
             header("Location: staff.php");
