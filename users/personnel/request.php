@@ -468,12 +468,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                     echo '<td >' . $row['status'] . '</td>';
                                     echo '<td>' . $row['deadline'] . '</td>';
                                     echo '<td>';
-                                    echo '<button class="btn btn-sm" style="border-radius: 15px; border: 2px solid #6c757d; background-color: #1e56a0; color: #ffffff; padding: 5px 10px;" onclick="showConfirmationModal(' . $row['request_id'] . ')">Mark as Done</button>';
+                                    echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#ForView">View</button>';
                                     echo '</td>';
-
-
-
-
 
 
                                     echo '<td style="display:none;">' . $row['campus'] . '</td>';
@@ -497,55 +493,137 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         </div>
                     </div>
 
+                    <!--MODAL FOR THE VIEW-->
+                    <div class="modal-parent">
+                        <div class="modal modal-xl fade" id="ForView" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5>View Task</h5>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog"
-                        aria-labelledby="confirmationModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    Are you sure you want to mark this request as completed?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-primary" id="confirmCompletionBtn">OK</button>
+                                        <button class="btn btn-close-modal-emp close-modal-btn"
+                                            data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="post" class="row g-3">
+                                            <div class="col-4" style="display:none;">
+                                                <label for="request_id" class="form-label">Request ID:</label>
+                                                <input type="text" class="form-control" id="request_id"
+                                                    name="request_id" readonly />
+                                            </div>
+                                            <div class="col-4" style="display:none;">
+                                                <label for="date" class="form-label">Date & Time:</label>
+                                                <input type="text" class="form-control" id="date" name="date"
+                                                    readonly />
+                                            </div>
+                                            <div class="col-4" style="display:none;">
+                                                <label for="campus" class="form-label">Campus:</label>
+                                                <input type="text" class="form-control" id="campus" name="campus"
+                                                    value="Batasan" />
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="building" class="form-label">Building:</label>
+                                                <input type="text" class="form-control" id="building" name="building"
+                                                    readonly />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="floor" class="form-label">Floor:</label>
+                                                <input type="text" class="form-control" id="floor" name="floor"
+                                                    readonly />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="room" class="form-label">Room: </label>
+                                                <input type="text" class="form-control" id="room" name="room"
+                                                    readonly />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="equipment" class="form-label">Equipment :</label>
+                                                <input type="text" class="form-control" id="equipment" name="equipment"
+                                                    readonly />
+                                            </div>
+
+                                            <div class="col-4" style="display:none;">
+                                                <label for="req_by" class="form-label">Requested By: </label>
+                                                <input type="text" class="form-control" id="req_by" name="req_by" />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="category" class="form-label">Category:</label>
+                                                <select class="form-select" id="category" name="category"
+                                                    onchange="fetchRandomAssignee()" disabled>
+                                                    <option value="Carpentry">Carpentry</option>
+                                                    <option value="Electrical">Electrical</option>
+                                                    <option value="Plumbing">Plumbing</option>
+                                                    <option value="Outsource">Outsource</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label id="assignee-label" for="assignee"
+                                                    class="form-label">Assignee:</label>
+                                                <input type="text" class="form-control" id="assignee" name="assignee"
+                                                    readonly />
+                                            </div>
+
+                                            <div class="col-4" style="display:none;">
+                                                <label for="status" class="form-label">Status:</label>
+                                                <input type="text" class="form-control" value="Pending"
+                                                    id="status_modal" name="status" readonly />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="deadline" class="form-label">Deadline:</label>
+                                                <input type="date" class="form-control" id="deadline" name="deadline"
+                                                    readonly />
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label for="description" class="form-label">Description:</label>
+                                                <input type="text" class="form-control" id="description"
+                                                    name="description" readonly />
+                                            </div>
+
+                                            <div class="footer">
+                                                <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                                    data-bs-target="#ForTransfer">
+                                                    Transfer
+                                                </button>
+                                                <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                                    data-bs-target="#ForDone">
+                                                    Done
+                                                </button>
+                                            </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <script>
-                        function showConfirmationModal(requestId) {
-                            $('#confirmationModal').modal('show');
-                            $('#confirmCompletionBtn').data('requestId', requestId);
-                        }
+                    <!--Edit for approval-->
+                    <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    Are you sure you want to save changes?
+                                    <div class="modal-popups">
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                        <button class="btn add-modal-btn" name="approval"
+                                            data-bs-dismiss="modal">Yes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
 
-                        $(document).ready(function () {
-                            $('#confirmCompletionBtn').click(function () {
-                                var requestId = $(this).data('requestId');
-                                // AJAX request to update status
-                                $.ajax({
-                                    url: 'request_update_status.php',
-                                    method: 'POST',
-                                    data: { requestId: requestId },
-                                    success: function (response) {
-                                        if (response == 'success') {
-                                            // Reload the page or update the status cell dynamically
-                                            location.reload();
-                                        } else {
-                                            alert('Failed to update status.');
-                                        }
-                                    }
-                                });
-                            });
-                        });
-                    </script>
+
+
 
                 </div>
         </main>
@@ -576,6 +654,37 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
     <script src="../../src/js/archive.js"></script>
     <script src="../../src/js/profileModalController.js"></script>
     <script src="../../src/js/logout.js"></script>
+
+    <!--PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
+    <script>
+        $(document).ready(function () {
+            // Function to populate modal fields
+            function populateModal(row) {
+                // Populate modal fields with data from the row
+                $("#request_id").val(row.find("td:eq(0)").text());
+                $("#date").val(row.find("td:eq(1)").text());
+                $("#category").val(row.find("td:eq(2)").text());
+                // If building, floor, and room are concatenated in a single cell, split them
+                var buildingFloorRoom = row.find("td:eq(3)").text().split(', ');
+                $("#building").val(buildingFloorRoom[0]);
+                $("#floor").val(buildingFloorRoom[1]);
+                $("#room").val(buildingFloorRoom[2]);
+                $("#equipment").val(row.find("td:eq(4)").text());
+                $("#assignee").val(row.find("td:eq(5)").text());
+                $("#status").val(row.find("td:eq(6)").text());
+                $("#deadline").val(row.find("td:eq(7)").text());
+                $("#description").val(row.find("td:eq(13)").text());
+
+            }
+
+            // Click event for the "Approve" button
+            $("button[data-bs-target='#ForView']").click(function () {
+                var row = $(this).closest("tr"); // Get the closest row to the clicked button
+                populateModal(row); // Populate modal fields with data from the row
+                $("#ForView").modal("show"); // Show the modal
+            });
+        });
+    </script>
 
 
 
