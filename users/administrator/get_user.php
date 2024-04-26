@@ -32,6 +32,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             'email' => $row['email'],
             'birthday' => $row['birthday'],
             'role' => $row['role'],
+            'expertise' => $row['expertise'],
             'picture' => base64_encode($picture),
             'rfid' => $row['rfidNumber'],
         );

@@ -100,6 +100,7 @@ function getInfoFromAdd() {
   let password = document.querySelector("#passwordField");
   let birthday = document.querySelector("#birthdayField");
   let role = document.querySelector("#roleField");
+  let expertise = document.querySelector("#expertise");
   let rfid = document.querySelector("#rfidFieldAdd");
   let picture = document.querySelector("#pictureField");
 
@@ -112,6 +113,7 @@ function getInfoFromAdd() {
   document.querySelector("#addPassword").value = password.value;
   document.querySelector("#addBirthday").value = birthday.value;
   document.querySelector("#addRole").value = role.value;
+  document.querySelector("#expertise").value = expertise.value;
   document.querySelector("#rfidFieldAdd").value = rfid.value;
 }
 

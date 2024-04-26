@@ -16,6 +16,7 @@ function getUser(accountId) {
             document.querySelector('#passwordEdit').value = user.password;
             document.querySelector('#birthdayEdit').value = user.birthday;
             document.querySelector('#roleEdit').value = user.role;
+            document.querySelector('#expertiseEdit').value = user.expertise;
         } else {
             console.log('Error: ' + this.status);
         }
@@ -45,6 +46,7 @@ function getUserEdit() {
             document.querySelector('#passwordEdit').value = user.password;
             document.querySelector('#birthdayEdit').value = user.birthday;
             document.querySelector('#roleEdit').value = user.role; 
+            document.querySelector('#expertiseEdit').value = user.expertise;
         } else {
             console.log('Error: ' + this.status);
         }

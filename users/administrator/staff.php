@@ -37,11 +37,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $contact = $_POST['contact'];
     $birthday = $_POST['birthday'];
     $role = $_POST['role'];
+    $expertise = $_POST['expertise']; // Added expertise field
     $picture = $_POST['picture'];
     $userLevel = $_POST['userLevel'];
 
-    $stmt = $conn->prepare("UPDATE `account` SET `firstName` = ?, `middleName` = ?, `lastName` = ?, `email` = ?, `password` = ?, `contact` = ?, `birthday` = ?, `role` = ?, `picture` = ?, `userLevel` = ? WHERE `accountId` = ?");
-    $stmt->bind_param("ssssssssssi", $firstName, $middleName, $lastName, $email, $password, $contact, $birthday, $role, $picture, $userLevel, $accountId);
+    $stmt = $conn->prepare("UPDATE `account` SET `firstName` = ?, `middleName` = ?, `lastName` = ?, `email` = ?, `password` = ?, `contact` = ?, `birthday` = ?, `role` = ?, `expertise` = ?, `picture` = ?, `userLevel` = ? WHERE `accountId` = ?");
+    $stmt->bind_param("sssssssssssi", $firstName, $middleName, $lastName, $email, $password, $contact, $birthday, $role, $expertise, $picture, $userLevel, $accountId);
 
     if ($stmt->execute()) {
       exit;
