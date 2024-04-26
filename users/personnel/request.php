@@ -72,7 +72,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     // Modify the first query to filter by the logged-in account ID
     $sql01 = "SELECT r.* FROM request r
 INNER JOIN account a ON r.assignee = CONCAT(a.firstName, ' ', a.lastName)
-WHERE r.campus = 'Batasan' AND r.status IN ('Assigned', 'For Approval') AND a.accountId = ?";
+WHERE r.campus = 'Batasan' AND r.status IN ('Done', 'For Approval' , 'Pending') AND a.accountId = ?";
     $stmt01 = $conn->prepare($sql01);
     $stmt01->bind_param("i", $accountId);
     $stmt01->execute();
@@ -470,11 +470,11 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                     echo '<td>';
                                     echo '<button class="btn btn-sm" style="border-radius: 15px; border: 2px solid #6c757d; background-color: #1e56a0; color: #ffffff; padding: 5px 10px;" onclick="showConfirmationModal(' . $row['request_id'] . ')">Mark as Done</button>';
                                     echo '</td>';
-                                    
-                                    
-                                    
-                                    
-                                
+
+
+
+
+
 
                                     echo '<td style="display:none;">' . $row['campus'] . '</td>';
                                     echo '<td style="display:none;">' . $row['building'] . '</td>';
