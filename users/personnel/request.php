@@ -467,7 +467,14 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                     echo '<td>' . $row['assignee'] . '</td>';
                                     echo '<td >' . $row['status'] . '</td>';
                                     echo '<td>' . $row['deadline'] . '</td>';
-                                    echo '<td><button class="btn btn-primary" onclick="showConfirmationModal(' . $row['request_id'] . ')">Completed</button></td>';
+                                    echo '<td>';
+                                    echo '<button class="btn btn-sm" style="border-radius: 15px; border: 2px solid #6c757d; background-color: #1e56a0; color: #ffffff; padding: 5px 10px;" onclick="showConfirmationModal(' . $row['request_id'] . ')">Mark as Done</button>';
+                                    echo '</td>';
+                                    
+                                    
+                                    
+                                    
+                                
 
                                     echo '<td style="display:none;">' . $row['campus'] . '</td>';
                                     echo '<td style="display:none;">' . $row['building'] . '</td>';
