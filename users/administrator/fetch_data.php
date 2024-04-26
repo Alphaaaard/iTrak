@@ -11,21 +11,31 @@ if ($conn->connect_error) {
 
 $month = isset($_GET['month']) ? (int)$_GET['month'] : date('n');
 $employee = isset($_GET['employee']) ? $_GET['employee'] : null;
+$campus = isset($_GET['campus']) ? $_GET['campus'] : '';
 
 function getCountByWeek($conn, $weekStart, $weekEnd, $employeeFullName = null) {
     // Modified SQL query to join with the account table and to check for a specific action
-    $sql = "SELECT COUNT(*) AS num 
-            FROM activitylogs al
-            INNER JOIN account ac ON al.accountId = ac.accountId
-            WHERE CONCAT(ac.firstName, ' ', ac.lastName) LIKE CONCAT(?, '%')
-            AND al.action LIKE '%Changed Status of% to Working%'
-            AND DATE(al.date) BETWEEN ? AND ?";
+    $sql = "SELECT 
+                (SELECT COUNT(*) 
+                FROM activitylogs al
+                INNER JOIN account ac ON al.accountId = ac.accountId
+                WHERE CONCAT(ac.firstName, ' ', ac.lastName) LIKE CONCAT(?, '%')
+                AND al.action LIKE '%Changed Status of% to Working%'
+                AND DATE(al.date) BETWEEN ? AND ?) AS num_activitylogs,
+                
+                (SELECT COUNT(*) 
+                FROM request r
+                INNER JOIN account ac ON CONCAT(ac.firstName, ' ', ac.lastName) = r.assignee
+                WHERE CONCAT(ac.firstName, ' ', ac.lastName) LIKE CONCAT(?, '%')
+                AND r.status = 'Done'
+                AND DATE(r.date) BETWEEN ? AND ?) AS num_request";
 
     // Assuming $employeeFullName might be null, use a wildcard in such a case
     $employeeFullName = $employeeFullName ? $employeeFullName . '%' : '%';
 
-    // Updated parameters - removed the first 's' since we're no longer using the 'action' column for the employee name
-    $params = ["sss", $employeeFullName, $weekStart, $weekEnd];
+    // Updated parameters
+    // Include 's' for each parameter being used in the SQL query
+    $params = ["ssssss", $employeeFullName, $weekStart, $weekEnd, $employeeFullName, $weekStart, $weekEnd];
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param(...$params);
@@ -33,8 +43,14 @@ function getCountByWeek($conn, $weekStart, $weekEnd, $employeeFullName = null) {
     $result = $stmt->get_result();
 
     $row = $result->fetch_assoc();
-    return $row ? $row['num'] : 0;
+    
+    // Summing up the counts from both activitylogs and request tables
+    $total = ($row['num_activitylogs'] ?? 0) + ($row['num_request'] ?? 0);
+
+    return $total;
 }
+
+
 
 
 function getWeeksData($selectedMonth) {

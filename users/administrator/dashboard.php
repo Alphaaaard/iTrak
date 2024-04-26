@@ -2347,6 +2347,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <option value="">Choose Personnel</option>
                         <!-- Employee options will be populated dynamically via AJAX -->
                     </select>
+
+                    <select id="campusFilter">
+                        <option value="">Select Campus</option>
+                        <option value="San Bartolome">San Bartolome</option>
+                        <option value="San Francisco">San Francisco</option>
+                        <option value="Batasan">Batasan</option>
+                </select>
+
                 </div>
             </div>
             <canvas id="statusChart"></canvas>
@@ -2716,6 +2724,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     var month = $('#monthFilter').val() || defaultMonth;
                     var week = $('#weekFilter').val() || defaultWeek;
                     var employee = $('#employeeFilter').val() || '';
+                    
 
                     // Calculate the start date of the selected week within the selected month
                     var startDate = moment([new Date().getFullYear(), month - 1]).startOf('month').add((week - 1) * 7, 'days');
