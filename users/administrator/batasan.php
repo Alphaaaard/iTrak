@@ -51,7 +51,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->fetch();
     $stmt->close();
 
-    $sql = "SELECT * FROM request WHERE campus = 'Batasan' AND status IN ('Assigned', 'Done', 'For Approval') AND category != 'Outsource'";
+    $sql = "SELECT * FROM request WHERE campus = 'Batasan' AND status IN ('Pending', 'Done', 'For Approval') AND category != 'Outsource'";
     $result = $conn->query($sql) or die($conn->error);
 
 
@@ -511,8 +511,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         <th>Location</th>
                                         <th>Equipment</th>
                                         <th>Assignee</th>
-                                        <th>Status</th>
                                         <th>Deadline</th>
+                                        <th>Status</th>
+                                     
                                         <th></th>
                                     </tr>
                                 </table>
@@ -529,8 +530,29 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     echo '<td>' . $row['building'] . ', ' . $row['floor'] . ', ' . $row['room'] . '</td>';
                                     echo '<td>' . $row['equipment'] . '</td>';
                                     echo '<td>' . $row['assignee'] . '</td>';
-                                    echo '<td >' . $row['status'] . '</td>';
                                     echo '<td>' . $row['deadline'] . '</td>';
+                                    $status = $row['status'];
+                                    $status_color = '';
+                                    
+                                    // Set the color based on the status
+                                    switch ($status) {
+                                        case 'Assigned':
+                                            $status_color = 'blue';
+                                            break;
+                                        case 'Done':
+                                            $status_color = 'green';
+                                            break;
+                                        case 'For Approval':
+                                            $status_color = 'red';
+                                            break;
+                                        default:
+                                            // Default color if status doesn't match
+                                            $status_color = 'black';
+                                    }
+                                    
+                                    // Output the status with appropriate color
+                                    echo '<td class="' . $status_color . '">' . $status . '</td>';
+                                
                                     // Check if status is "For Approval"
                                     if ($row['status'] == 'For Approval') {
                                         // Display the button
@@ -706,7 +728,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                             <div class="col-4" style="display: none;">
                                                 <label for="new_status" class="form-label">Status:</label>
-                                                <input type="text" class="form-control" value="Assigned" id="new_status"
+                                                <input type="text" class="form-control" value="Pending" id="new_status"
                                                     name="new_status" />
                                             </div>
 
@@ -847,7 +869,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                             <div class="col-4" style="display:none;">
                                                 <label for="status" class="form-label">Status:</label>
-                                                <input type="text" class="form-control" value="Assigned"
+                                                <input type="text" class="form-control" value="Pending"
                                                     id="status_modal" name="status" />
                                             </div>
 
