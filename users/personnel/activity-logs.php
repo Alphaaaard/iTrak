@@ -35,11 +35,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
  $sqlGeneral = "SELECT ac.*, a.firstName, a.middleName, a.lastName
  FROM activitylogs AS ac
  LEFT JOIN account AS a ON ac.accountID = a.accountID
- WHERE ac.tab = 'General' AND (ac.action LIKE 'Assigned maintenance personnel $loggedInUserFirstName%' OR ac.action LIKE 'Created and assigned task to $loggedInUserFirstName%')";
-$stmtg = $conn->prepare($sqlGeneral);
-$stmtg->execute();
-$resultGeneral = $stmtg->get_result();
-$stmtg->close();
+ WHERE ac.tab = 'General' AND 
+ (ac.action LIKE ? OR ac.action LIKE ? OR ac.action LIKE ?)
+ ORDER BY ac.date DESC";
+ 
+ // Prepare the SQL statement
+ $stmtg = $conn->prepare($sqlGeneral);
+ 
+ // Bind the parameters
+ $pattern1 = "Assigned maintenance personnel $loggedInUserFirstName%";
+ $pattern2 = "Created and assigned task to $loggedInUserFirstName%";
+ $pattern3 = "Changed status of%";
+ $stmtg->bind_param("sss", $pattern1, $pattern2, $pattern3);
+ $stmtg->execute();
+ $resultGeneral = $stmtg->get_result();
+ 
+
 
 
     // Adjust the SQL to check the 'action' field for the logged-in user's name
@@ -78,7 +89,6 @@ $stmtg->close();
                WHERE al.tab = 'General' AND al.p_seen = '0' AND al.action LIKE 'Assigned maintenance personnel%' AND al.action LIKE ? AND al.accountID != ?
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
-
 
 
 
