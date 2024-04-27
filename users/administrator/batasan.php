@@ -724,7 +724,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="post" class="row g-3">
+                                        <form id="addrequestForm" method="post" class="row g-3">
                                             <div class="col-4" style="display:none;">
                                                 <label for="new_request_id" class="form-label">Request ID:</label>
                                                 <input type="text" class="form-control" id="new_request_id"
@@ -822,7 +822,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                             <div class="footer">
                                                 <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                                    data-bs-target="#staticBackdrop1">
+                                                    data-bs-target="#ForAdd" onclick="showAddConfirmation()">
                                                     Save
                                                 </button>
                                             </div>
@@ -841,8 +841,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <div class="modal-popups">
                                         <button type="button" class="btn close-popups"
                                             data-bs-dismiss="modal">No</button>
-                                        <button class="btn add-modal-btn" name="add"
-                                            data-bs-dismiss="modal">Yes</button>
+                                        <!-- <button class="btn add-modal-btn" name="add"
+                                            data-bs-dismiss="modal">Yes</button> -->
                                     </div>
                                 </div>
                             </div>
@@ -863,7 +863,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="post" class="row g-3">
+                                        <form id="approvalForm" method="post" class="row g-3">
                                             <div class="col-4" style="display:none;">
                                                 <label for="request_id" class="form-label">Request ID:</label>
                                                 <input type="text" class="form-control" id="request_id"
@@ -953,7 +953,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                             <div class="footer">
                                                 <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                                    data-bs-target="#staticBackdrop2">
+                                                    data-bs-target="#ForApprovals" onclick="showApprovalConfirmation()">
                                                     Save
                                                 </button>
                                             </div>
@@ -994,7 +994,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="post" class="row g-3">
+                                        <form id="outsourceForm" method="post" class="row g-3">
                                             <div class="col-4" style="display:none;">
                                                 <label for="new_request_id" class="form-label">Request ID:</label>
                                                 <input type="text" class="form-control" id="new2_request_id"
@@ -1082,7 +1082,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                             <div class="footer">
                                                 <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                                    data-bs-target="#addoutsource">
+                                                    data-bs-target="#ForOutsources"
+                                                    onclick="showOutsourceConfirmation()">
                                                     Save
                                                 </button>
                                             </div>
@@ -1101,8 +1102,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <div class="modal-popups">
                                         <button type="button" class="btn close-popups"
                                             data-bs-dismiss="modal">No</button>
-                                        <button class="btn add-modal-btn" name="outsource"
-                                            data-bs-dismiss="modal">Yes</button>
+                                        <!-- <button class="btn add-modal-btn" name="outsource"
+                                            data-bs-dismiss="modal">Yes</button> -->
                                     </div>
                                 </div>
                             </div>
@@ -1142,6 +1143,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     <script src="../../src/js/archive.js"></script>
     <script src="../../src/js/profileModalController.js"></script>
     <script src="../../src/js/logout.js"></script>
+    <script src="../../src/js/batasan.js"></script>
 
 
 
@@ -1181,7 +1183,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     // Populate the assignee select element
                     for (var i = 0; i < assignees.length; i++) {
                         var option = document.createElement('option');
-                        option.value = assignees[i].accountId;
+                        // Set the option value to concatenated firstName and lastName
+                        option.value = assignees[i].firstName + ' ' + assignees[i].lastName;
                         option.textContent = assignees[i].firstName + ' ' + assignees[i].lastName;
                         assigneeSelect.appendChild(option);
                     }
