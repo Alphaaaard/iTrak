@@ -151,6 +151,104 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             exit;
         }
     }
+
+    // UPDATE FOR APPROVAL
+    if (isset($_POST['approval'])) {
+        // Retrieve request_id from the form
+        $request_id2 = $_POST['request_id'];
+
+        // Retrieve other form data
+        $campus2 = $_POST['campus'];
+        $building2 = $_POST['building'];
+        $floor2 = $_POST['floor'];
+        $room2 = $_POST['room'];
+        $equipment2 = $_POST['equipment'];
+        $category2 = $_POST['category'];
+        $assignee2 = $_POST['assignee'];
+        $status2 = "For Approval";
+        $description2 = $_POST['description'];
+        $deadline2 = $_POST['deadline'];
+
+        // Retrieve selected return_reason from radio buttons
+        $return_reason = $_POST['return_reason'];
+
+
+        // SQL UPDATE query
+        $sql3 = "UPDATE request 
+             SET campus = ?, building = ?, floor = ?, room = ?, 
+                 equipment = ?, category = ?, assignee = ?, 
+                 status = ?, description = ?, deadline = ?,
+                 return_reason = ?
+             WHERE request_id = ?";
+
+        // Prepare the SQL statement
+        $stmt3 = $conn->prepare($sql3);
+
+        // Bind parameters
+        $stmt3->bind_param("sssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $return_reason, $request_id2);
+
+        // Execute the query
+        if ($stmt3->execute()) {
+            // Update successful, redirect back to batasan.php or any other page
+            header("Location: request.php");
+            exit();
+        } else {
+            // Error occurred while updating
+            echo "Error updating request: " . $stmt3->error;
+        }
+
+        // Close statement
+        $stmt3->close();
+    }
+
+    // UPDATE FOR DONE
+    if (isset($_POST['done'])) {
+        // Retrieve request_id from the form
+        $request_id5 = $_POST['request_id'];
+
+        // Retrieve other form data
+        $campus5 = $_POST['campus'];
+        $building5 = $_POST['building'];
+        $floor5 = $_POST['floor'];
+        $room5 = $_POST['room'];
+        $equipment5 = $_POST['equipment'];
+        $category5 = $_POST['category'];
+        $assignee5 = $_POST['assignee'];
+        $status5 = "Done";
+        $description5 = $_POST['description'];
+        $deadline5 = $_POST['deadline'];
+
+        // Retrieve selected return_reason from radio buttons
+        $return_reason5 = $_POST['return_reason'];
+
+
+        // SQL UPDATE query
+        $sql5 = "UPDATE request 
+             SET campus = ?, building = ?, floor = ?, room = ?, 
+                 equipment = ?, category = ?, assignee = ?, 
+                 status = ?, description = ?, deadline = ?,
+                 return_reason = ?
+             WHERE request_id = ?";
+
+        // Prepare the SQL statement
+        $stmt5 = $conn->prepare($sql5);
+
+        // Bind parameters
+        $stmt5->bind_param("sssssssssssi", $campus5, $building5, $floor5, $room5, $equipment5, $category5, $assignee5, $status5, $description5, $deadline5, $return_reason5, $request_id5);
+
+        // Execute the query
+        if ($stmt5->execute()) {
+            // Update successful, redirect back to batasan.php or any other page
+            header("Location: request.php");
+            exit();
+        } else {
+            // Error occurred while updating
+            echo "Error updating request: " . $stmt5->error;
+        }
+
+        // Close statement
+        $stmt5->close();
+    }
     ?>
 
 
@@ -450,6 +548,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         <th>Assignee</th>
                                         <th>Status</th>
                                         <th>Deadline</th>
+                                        <th></th>
                                     </tr>
                                 </table>
                             </div>
@@ -478,6 +577,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                     echo '<td style="display:none;">' . $row['room'] . '</td>';
                                     echo '<td style="display:none;">' . $row['description'] . '</td>';
                                     echo '<td style="display:none;">' . $row['req_by'] . '</td>';
+                                    echo '<td style="display:none;">' . $row['return_reason'] . '</td>';
                                     echo '</tr>';
                                 }
                                 echo "</table>";
@@ -554,7 +654,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                             <div class="col-4">
                                                 <label for="category" class="form-label">Category:</label>
                                                 <select class="form-select" id="category" name="category"
-                                                    onchange="fetchRandomAssignee()" disabled>
+                                                    onchange="fetchRandomAssignee()" readonly>
                                                     <option value="Carpentry">Carpentry</option>
                                                     <option value="Electrical">Electrical</option>
                                                     <option value="Plumbing">Plumbing</option>
@@ -571,9 +671,10 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
                                             <div class="col-4" style="display:none;">
                                                 <label for="status" class="form-label">Status:</label>
-                                                <input type="text" class="form-control" value="Pending"
-                                                    id="status_modal" name="status" readonly />
+                                                <input type="text" class="form-control" id="status" name="status"
+                                                    readonly />
                                             </div>
+
 
                                             <div class="col-4">
                                                 <label for="deadline" class="form-label">Deadline:</label>
@@ -585,6 +686,13 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                                 <label for="description" class="form-label">Description:</label>
                                                 <input type="text" class="form-control" id="description"
                                                     name="description" readonly />
+                                            </div>
+
+                                            <div class="col-12" style="display:none">
+                                                <label for="return_reason_show" class="form-label">Transfer
+                                                    Reason:</label>
+                                                <input type="text" class="form-control" id="return_reason_show"
+                                                    name="return_reason" readonly />
                                             </div>
 
                                             <div class="footer">
@@ -603,17 +711,120 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         </div>
                     </div>
 
+                    <!--MODAL FOR THE TRANSFER-->
+                    <div class="modal-parent">
+                        <div class="modal modal-xl fade" id="ForTransfer" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5>Transfer Task</h5>
+
+                                        <button class="btn btn-close-modal-emp close-modal-btn"
+                                            data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="col-12">
+                                            <label class="form-label">Select a reason:</label>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" value="Lack of Tools"
+                                                    id="reason_lack_of_tools" name="reason"
+                                                    onchange="updateTextInput(this)">
+                                                <label class="form-check-label" for="reason_lack_of_tools">Lack of
+                                                    Tools</label>
+                                            </div>
+
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio"
+                                                    value="Insufficient Personnel" id="reason_insufficient_personnel"
+                                                    name="reason" onchange="updateTextInput(this)">
+                                                <label class="form-check-label"
+                                                    for="reason_insufficient_personnel">Insufficient Personnel</label>
+                                            </div>
+
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" value="Skills Mismatch"
+                                                    id="reason_skills_mismatch" name="reason"
+                                                    onchange="updateTextInput(this)">
+                                                <label class="form-check-label" for="reason_skills_mismatch">Skills
+                                                    Mismatch</label>
+                                            </div>
+
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio"
+                                                    value="Coordination with Other Departments"
+                                                    id="reason_coordination_with_other_departments" name="reason"
+                                                    onchange="updateTextInput(this)">
+                                                <label class="form-check-label"
+                                                    for="reason_coordination_with_other_departments">Coordination with
+                                                    Other Departments</label>
+                                            </div>
+
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" value="Outsource"
+                                                    id="reason_outsource" name="reason"
+                                                    onchange="updateTextInput(this)">
+                                                <label class="form-check-label" for="reason_outsource">Outsource</label>
+                                            </div>
+
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" id="reason_others" value=""
+                                                    name="reason" onchange="updateTextInput(this)">
+                                                <label class=" form-check-label" for="reason_others">Others</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12" id="othersInput" style="display:none;">
+                                            <label for=" description" class="form-label">Others:</label>
+                                            <input type="text" class="form-control" id="return_reason"
+                                                name="return_reason" />
+                                        </div>
+                                    </div>
+
+                                    <div class="footer">
+                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                            data-bs-target="#ForSave">
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!--Edit for approval-->
-                    <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false"
+                    <div class="modal fade" id="ForSave" data-bs-backdrop="static" data-bs-keyboard="false"
                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-footer">
-                                    Are you sure you want to save changes?
+                                    Are you sure you want to transfer this task?
                                     <div class="modal-popups">
                                         <button type="button" class="btn close-popups"
                                             data-bs-dismiss="modal">No</button>
                                         <button class="btn add-modal-btn" name="approval"
+                                            data-bs-dismiss="modal">Yes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Edit for done-->
+                    <div class="modal fade" id="ForDone" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    Are you sure you want to mark this task as completed?
+                                    <div class="modal-popups">
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                        <button class="btn add-modal-btn" name="done"
                                             data-bs-dismiss="modal">Yes</button>
                                     </div>
                                 </div>
@@ -655,7 +866,63 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
     <script src="../../src/js/profileModalController.js"></script>
     <script src="../../src/js/logout.js"></script>
 
+
+    <!-- PARA SA PAGLAGAY NG VALUE SA OTHER FIELD TYPE ALSO SA PAGAPPEAR NG OTHER DESCRIPTION BOX -->
+    <script>
+        function updateTextInput(radio) {
+            console.log("updateTextInput function called");
+            // Get the input field for "Others"
+            var othersInput = document.getElementById('othersInput');
+            console.log("othersInput:", othersInput);
+
+            // If the radio button for "Others" is checked, display the input field; otherwise, hide it
+            if (radio.checked && radio.value === '') {
+                othersInput.style.display = 'block'; // Display the input field
+            } else {
+                othersInput.style.display = 'none'; // Hide the input field
+            }
+
+            // Update the value of the text input based on the selected radio button
+            document.getElementById('return_reason').value = radio.value;
+            console.log("return_reason value:", radio.value);
+        }
+    </script>
+
+
+
+
     <!--PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
+    <!-- <script>
+        $(document).ready(function () {
+            // Function to populate modal fields
+            function populateModal(row) {
+                // Populate modal fields with data from the row
+                $("#request_id").val(row.find("td:eq(0)").text());
+                $("#date").val(row.find("td:eq(1)").text());
+                $("#category").val(row.find("td:eq(2)").text());
+                // If building, floor, and room are concatenated in a single cell, split them
+                var buildingFloorRoom = row.find("td:eq(3)").text().split(', ');
+                $("#building").val(buildingFloorRoom[0]);
+                $("#floor").val(buildingFloorRoom[1]);
+                $("#room").val(buildingFloorRoom[2]);
+                $("#equipment").val(row.find("td:eq(4)").text());
+                $("#assignee").val(row.find("td:eq(5)").text());
+                $("#status").val(row.find("td:eq(6)").text());
+                $("#deadline").val(row.find("td:eq(7)").text());
+                $("#description").val(row.find("td:eq(13)").text());
+                $("#return_reason_show").val(row.find("td:eq(15)").text());
+
+            }
+
+            // Click event for the "Approve" button
+            $("button[data-bs-target='#ForView']").click(function () {
+                var row = $(this).closest("tr"); // Get the closest row to the clicked button
+                populateModal(row); // Populate modal fields with data from the row
+                $("#ForView").modal("show"); // Show the modal
+            });
+        });
+    </script> -->
+
     <script>
         $(document).ready(function () {
             // Function to populate modal fields
@@ -674,17 +941,30 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 $("#status").val(row.find("td:eq(6)").text());
                 $("#deadline").val(row.find("td:eq(7)").text());
                 $("#description").val(row.find("td:eq(13)").text());
-
+                $("#return_reason_show").val(row.find("td:eq(15)").text());
             }
 
-            // Click event for the "Approve" button
+            // Click event for the "View" button
             $("button[data-bs-target='#ForView']").click(function () {
                 var row = $(this).closest("tr"); // Get the closest row to the clicked button
                 populateModal(row); // Populate modal fields with data from the row
+
+                // Check if return_reason_show input has a value
+                if ($("#return_reason_show").val().trim() !== '') {
+                    // If it has a value, remove the display:none style
+                    $("#return_reason_show").closest(".col-12").show();
+                } else {
+                    // If it's empty, keep it hidden
+                    $("#return_reason_show").closest(".col-12").hide();
+                }
+
                 $("#ForView").modal("show"); // Show the modal
             });
         });
+
     </script>
+
+
 
 
 
