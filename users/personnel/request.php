@@ -5,6 +5,20 @@ $conn = connection();
 
 date_default_timezone_set('Asia/Manila');
 
+
+function insertActivityLog($conn, $accountId, $action) {
+    // Set default values for additional columns
+    $tab = "General";
+    $seen = 0;
+    $m_seen = 0;
+    $p_seen = 1;
+
+    $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab, seen, m_seen, p_seen) VALUES (?, NOW(), ?, ?, ?, ?, ?)");
+    $stmt->bind_param("issiii", $accountId, $action, $tab, $seen, $m_seen, $p_seen);
+    $stmt->execute();
+    $stmt->close();
+}
+
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
     // For personnel page, check if userLevel is 3
     if ($_SESSION['userLevel'] != 3) {
@@ -171,7 +185,15 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         // Retrieve selected return_reason from radio buttons
         $return_reason = $_POST['return_reason'];
-
+ // Check if status is being updated from pending to for approval
+ $status_before_update_query = "SELECT status FROM request WHERE request_id = ?";
+ $stmt_check_status = $conn->prepare($status_before_update_query);
+ $stmt_check_status->bind_param("i", $request_id2);
+ $stmt_check_status->execute();
+ $result_status = $stmt_check_status->get_result();
+ $row_status = $result_status->fetch_assoc();
+ $status_before_update = $row_status['status'];
+ $stmt_check_status->close();
 
         // SQL UPDATE query
         $sql3 = "UPDATE request 
@@ -189,14 +211,21 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         // Execute the query
         if ($stmt3->execute()) {
-            // Update successful, redirect back to batasan.php or any other page
+            // Check if status changed from pending to for approval
+            if ($status_before_update == 'Pending' && $status2 == 'For Approval') {
+                // Log the activity
+                $action = "Changed status of Task ID $request_id2 from Pending to For Approval";
+                insertActivityLog($conn, $accountId, $action);
+            }
+    
+            // Update successful, redirect back to request.php or any other page
             header("Location: request.php");
             exit();
         } else {
             // Error occurred while updating
             echo "Error updating request: " . $stmt3->error;
         }
-
+    
         // Close statement
         $stmt3->close();
     }
@@ -221,6 +250,15 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         // Retrieve selected return_reason from radio buttons
         $return_reason5 = $_POST['return_reason'];
 
+        $status_before_update_query = "SELECT status FROM request WHERE request_id = ?";
+        $stmt_check_status = $conn->prepare($status_before_update_query);
+        $stmt_check_status->bind_param("i", $request_id5);
+        $stmt_check_status->execute();
+        $result_status = $stmt_check_status->get_result();
+        $row_status = $result_status->fetch_assoc();
+        $status_before_update = $row_status['status'];
+        $stmt_check_status->close();
+
 
         // SQL UPDATE query
         $sql5 = "UPDATE request 
@@ -236,8 +274,16 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         // Bind parameters
         $stmt5->bind_param("sssssssssssi", $campus5, $building5, $floor5, $room5, $equipment5, $category5, $assignee5, $status5, $description5, $deadline5, $return_reason5, $request_id5);
 
+        
         // Execute the query
         if ($stmt5->execute()) {
+            // Check if status changed from pending to done
+            if ($status_before_update == 'Pending' && $status5 == 'Done') {
+                // Log the activity
+                $action = "Changed status of Task ID $request_id5 from Pending to Done";
+                insertActivityLog($conn, $accountId, $action);
+            }
+
             // Update successful, redirect back to batasan.php or any other page
             header("Location: request.php");
             exit();
@@ -250,7 +296,6 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         $stmt5->close();
     }
 ?>
-
 
     <!DOCTYPE html>
     <html lang="en">
