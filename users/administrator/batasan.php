@@ -919,26 +919,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 </select>
                                             </div>
 
-                                            <script>
-                                                function fetchRandomAssignee() {
-                                                    var category = document.getElementById('category').value;
-                                                    $.ajax({
-                                                        url: 'fetch_random_assignee_request.php', // PHP script to fetch random assignee
-                                                        type: 'POST',
-                                                        data: {
-                                                            category: category
-                                                        },
-                                                        success: function (response) {
-                                                            $('#assignee').val(response);
-                                                        },
-                                                        error: function (xhr, status, error) {
-                                                            alert('Error: ' + error);
-                                                        }
-                                                    });
-                                                }
-                                            </script>
-
-
                                             <div class="col-4">
                                                 <label id="assignee-label" for="assignee"
                                                     class="form-label">Assignee:</label>
@@ -1111,7 +1091,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             </div>
                         </div>
                     </div>
-                    <!--add for outsource-->
+                    <!--edit for outsource-->
                     <div class="modal fade" id="addoutsource" data-bs-backdrop="static" data-bs-keyboard="false"
                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
@@ -1163,6 +1143,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     <script src="../../src/js/profileModalController.js"></script>
     <script src="../../src/js/logout.js"></script>
 
+
+
     <script>
         // Get today's date
         var today = new Date();
@@ -1176,6 +1158,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         // Set the minimum date of the input field to tomorrow
         document.getElementById("new_deadline").min = tomorrowFormatted;
+    </script>
+
+    <!--PARA SA PAGCHANGE NG LABEL-->
+    <script>
+        function fetchRandomAssignee() {
+            var category = document.getElementById('category').value;
+            var assigneeLabel = document.getElementById('assignee-label');
+            var assigneeInput = document.getElementById('assignee');
+
+            if (category === 'Outsource') {
+                assigneeLabel.textContent = 'Outsource Name:';
+                assigneeInput.value = ''; // Clear the input field
+            } else {
+                assigneeLabel.textContent = 'Assignee:';
+            }
+        }
     </script>
 
 
@@ -1255,19 +1253,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
-    <!--PARA SA PAGCHANGE NG LABEL-->
-    <script>
-        function fetchRandomAssignee() {
-            var category = document.getElementById('category').value;
-            var assigneeLabel = document.getElementById('assignee-label');
 
-            if (category === 'Outsource') {
-                assigneeLabel.textContent = 'Outsource Name:';
-            } else {
-                assigneeLabel.textContent = 'Assignee:';
-            }
-        }
-    </script>
+
 
     <script>
         $(document).ready(function () {
