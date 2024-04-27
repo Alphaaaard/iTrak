@@ -40,10 +40,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
     // Adjust the SQL to check the 'action' field for the logged-in user's name
     $sqlReport = "SELECT ac.*, a.firstName, a.middleName, a.lastName
-FROM activitylogs AS ac
-LEFT JOIN account AS a ON ac.accountID = a.accountID
-WHERE ac.tab='Report' AND ac.action LIKE ?
-ORDER BY ac.date DESC";
+    FROM activitylogs AS ac
+    LEFT JOIN account AS a ON ac.accountID = a.accountID
+    WHERE ac.tab='Report' AND ac.action LIKE ?
+    ORDER BY ac.date DESC";
 
     // Prepare the SQL statement
     $stmt = $conn->prepare($sqlReport);
@@ -148,13 +148,53 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
     }
 
 
+    // UPDATE FOR APPROVAL
+    if (isset($_POST['approval'])) {
+        // Retrieve request_id from the form
+        $asset_id2 = $_POST['asset_id'];
+
+        // Retrieve other form data
+        $category = $_POST['category'];
+        $building2 = $_POST['building'];
+        $floor2 = $_POST['floor'];
+        $room2 = $_POST['room'];
+        // $equipment2 = $_POST['equipment'];
+        $category2 = $_POST['category'];
+        $assignee2 = "";
+        $status2 = "For Approval";
+        $description2 = $_POST['description'];
+        $date = $_POST['date'];
+
+        // Retrieve selected return_reason from radio buttons
+        $return_reason = $_POST['return_reason'];
 
 
+        // SQL UPDATE query
+        $sql3 = "UPDATE asset 
+             SET category = ?, building = ?, floor = ?, room = ?, 
+                 assignedName = ?, status = ?, description = ?, date = ?,
+                 return_reason = ?
+             WHERE assetId = ?";
 
+        // Prepare the SQL statement
+        $stmt3 = $conn->prepare($sql3);
 
+        // Bind parameters
+        $stmt3->bind_param("sssssssssi", $category, $building2, $floor2, $room2, $assignee2, $status2, $description2, $date, $return_reason, $asset_id2);
 
+        // Execute the query
+        if ($stmt3->execute()) {
+            // Update successful, redirect back to batasan.php or any other page
+            header("Location: request.php");
+            exit();
+        } else {
+            // Error occurred while updating
+            echo "Error updating request: " . $stmt3->error;
+        }
 
-
+        // Close statement
+        $stmt3->close();
+    }
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -443,6 +483,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         <th>LOCATION</th>
                                         <th>STATUS</th>
                                         <th>ASSIGNEE</th>
+                                        <th></th>
                                     </tr>
                                 </table>
                             </div>
@@ -479,6 +520,9 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         // Pagmeron data eto ilalabas
                                         echo '<td>' . $row['assignedName'] . '</td>';
                                     }
+                                    echo '<td>';
+                                    echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#ForView">View</button>';
+                                    echo '</td>';
                                     echo '</tr>';
                                 }
                                 echo "</table>";
@@ -498,7 +542,189 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 </div>
             </main>
         </section>
+        
+        <!--MODAL FOR THE VIEW-->
+        <div class="modal-parent">
+                            <div class="modal modal-xl fade" id="ForView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5>View Task</h5>
 
+                                            <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="post" class="row g-3">
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="request_id" class="form-label">Tracking #:</label>
+                                                    <input type="text" class="form-control" id="asset_id" name="asset_id" readonly />
+                                                </div>
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="date" class="form-label">Date & Time:</label>
+                                                    <input type="text" class="form-control" id="date" name="date" readonly />
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="building" class="form-label">Building:</label>
+                                                    <input type="text" class="form-control" id="building" name="building" readonly />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="floor" class="form-label">Floor:</label>
+                                                    <input type="text" class="form-control" id="floor" name="floor" readonly />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="room" class="form-label">Room: </label>
+                                                    <input type="text" class="form-control" id="room" name="room" readonly />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="category" class="form-label">Category:</label>
+                                                    <input type="text" class="form-control" id="category" name="category" value="Carpentry" readonly>
+                                                </div>
+
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="category" class="form-label">Status:</label>
+                                                    <input type="text" class="form-control" id="status" name="status" readonly>
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label id="assignee-label" for="assignee" class="form-label">Assignee:</label>
+                                                    <input type="text" class="form-control" id="assignee" name="assignee" readonly />
+                                                </div>
+
+                                                <!-- <div class="col-4">
+                                                    <label for="status" class="form-label">Status:</label>
+                                                    <input type="text" class="form-control" id="status" name="status" readonly />
+                                                </div> -->
+
+
+                                                <div class="col-4">
+                                                    <label for="deadline" class="form-label">Date:</label>
+                                                    <input type="text" class="form-control" id="date" name="date" readonly />
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <label for="description" class="form-label">Description:</label>
+                                                    <input type="text" class="form-control" id="description" name="description" readonly />
+                                                </div>
+
+                                                <div class="col-12" style="display:none">
+                                                    <label for="return_reason_show" class="form-label">Transfer
+                                                        Reason:</label>
+                                                    <input type="text" class="form-control" id="return_reason_show" name="return_reason" readonly />
+                                                </div>
+
+                                                <div class="footer">
+                                                    <button type="button" class="btn add-modal-btn" id="transferBtn" data-bs-toggle="modal" data-bs-target="#ForTransfer">
+                                                        Transfer
+                                                    </button>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--MODAL FOR THE TRANSFER-->
+                        <div class="modal-parent">
+                            <div class="modal modal-xl fade" id="ForTransfer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5>Transfer Task</h5>
+
+                                            <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                        </div>
+                                        <div class="modal-body" id="transfer-body">
+
+                                            <div class="col-12">
+                                                <label class="form-label">Select a reason:</label>
+                                            </div>
+
+                                            <div class="col-12" id="transfer-options">
+                                                <div class="form-check">
+                                                    <div>
+                                                        <input class="form-check-input" type="radio" value="Lack of Tools" id="reason_lack_of_tools" name="reason" onchange="updateTextInput(this)">
+                                                        <label class="form-check-label" for="reason_lack_of_tools">Lack of Tools</label>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" value="Insufficient Personnel" id="reason_insufficient_personnel" name="reason" onchange="updateTextInput(this)">
+                                                    <label class="form-check-label" for="reason_insufficient_personnel">Insufficient Personnel</label>
+                                                </div>
+
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" value="Skills Mismatch" id="reason_skills_mismatch" name="reason" onchange="updateTextInput(this)">
+                                                    <label class="form-check-label" for="reason_skills_mismatch">Skills
+                                                        Mismatch</label>
+                                                </div>
+
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" value="Coordination with Other Departments" id="reason_coordination_with_other_departments" name="reason" onchange="updateTextInput(this)">
+                                                    <label class="form-check-label" for="reason_coordination_with_other_departments">Coordination with
+                                                        Other Departments</label>
+                                                </div>
+
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" value="Outsource" id="reason_outsource" name="reason" onchange="updateTextInput(this)">
+                                                    <label class="form-check-label" for="reason_outsource">Outsource</label>
+                                                </div>
+
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="reason_others" value="" name="reason" onchange="updateTextInput(this)">
+                                                    <label class=" form-check-label" for="reason_others">Others</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12" id="othersInput" style="display:none;">
+                                                <label for="description" class="form-label">Others:</label>
+                                                <textarea class="form-control" id="return_reason" name="return_reason"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="footer" id="transfer-footer">
+                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#ForSave">
+                                                Save
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Edit for approval-->
+                        <div class="modal fade" id="ForSave" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-footer">
+                                        Are you sure you want to transfer this task?
+                                        <div class="modal-popups">
+                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                            <button class="btn add-modal-btn" name="approval" data-bs-dismiss="modal">Yes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Edit for done-->
+                        <div class="modal fade" id="ForDone" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-footer">
+                                        Are you sure you want to mark this task as completed?
+                                        <div class="modal-popups">
+                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                            <button class="btn add-modal-btn" name="done" data-bs-dismiss="modal">Yes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
 
 
 
@@ -556,6 +782,58 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <script src="../../src/js/SIKE.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
         <script src="../../src/js/logout.js"></script>
+
+        <!-- PARA SA PAGLAGAY NG VALUE SA OTHER FIELD TYPE ALSO SA PAGAPPEAR NG OTHER DESCRIPTION BOX -->
+        <script>
+            function updateTextInput(radio) {
+                console.log("updateTextInput function called");
+                // Get the input field for "Others"
+                var othersInput = document.getElementById('othersInput');
+                console.log("othersInput:", othersInput);
+
+                // If the radio button for "Others" is checked, display the input field; otherwise, hide it
+                if (radio.checked && radio.value === '') {
+                    othersInput.style.display = 'block'; // Display the input field
+                } else {
+                    othersInput.style.display = 'none'; // Hide the input field
+                }
+
+                // Update the value of the text input based on the selected radio button
+                document.getElementById('return_reason').value = radio.value;
+                console.log("return_reason value:", radio.value);
+            }
+        </script>
+        <script>
+            // Function to disable/enable transfer and done buttons based on status
+            function updateButtons() {
+                var statusInput = document.getElementById('status');
+                var transferBtn = document.getElementById('transferBtn');
+                var doneBtn = document.getElementById('doneBtn');
+
+                if (statusInput.value === 'For Approval' || statusInput.value === 'Done') {
+                    transferBtn.disabled = true;
+                    doneBtn.disabled = true;
+                } else {
+                    transferBtn.disabled = false;
+                    doneBtn.disabled = false;
+                }
+            }
+
+            // Call updateButtons function when modal is shown or status input changes
+            document.addEventListener('DOMContentLoaded', function() {
+                // Call updateButtons when modal is shown
+                $('#ForView').on('shown.bs.modal', function() {
+                    updateButtons();
+                });
+
+                // Call updateButtons when status input changes
+                document.getElementById('status').addEventListener('change', function() {
+                    updateButtons();
+                });
+            });
+        </script>
+
+
         <script>
             setInterval(function() {
                 // Call a script to check if the user has timed out
@@ -763,7 +1041,76 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             });
         </script>
 
+        <script>
+            // Function to disable/enable transfer and done buttons based on status
+            function updateButtons() {
+                var statusInput = document.getElementById('status');
+                var transferBtn = document.getElementById('transferBtn');
+                var doneBtn = document.getElementById('doneBtn');
 
+                if (statusInput.value === 'For Approval' || statusInput.value === 'Done') {
+                    transferBtn.disabled = true;
+                    doneBtn.disabled = true;
+                } else {
+                    transferBtn.disabled = false;
+                    doneBtn.disabled = false;
+                }
+            }
+
+            // Call updateButtons function when modal is shown or status input changes
+            document.addEventListener('DOMContentLoaded', function() {
+                // Call updateButtons when modal is shown
+                $('#ForView').on('shown.bs.modal', function() {
+                    updateButtons();
+                });
+
+                // Call updateButtons when status input changes
+                document.getElementById('status').addEventListener('change', function() {
+                    updateButtons();
+                });
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                // Function to populate modal fields
+                function populateModal(row) {
+                    // Populate modal fields with data from the row
+                    $("#asset_id").val(row.find("td:eq(0)").text());
+                    $("#date").val(row.find("td:eq(1)").text());
+                    $("#category").val(row.find("td:eq(2)").text());
+                    // If building, floor, and room are concatenated in a single cell, split them
+                    var buildingFloorRoom = row.find("td:eq(3)").text().split('/ ');
+                    $("#building").val(buildingFloorRoom[0]);
+                    $("#floor").val(buildingFloorRoom[1]);
+                    $("#room").val(buildingFloorRoom[2]);
+                    $("#assignee").val(row.find("td:eq(10)").text());
+                    $("#status").val(row.find("td:eq(8)").text());
+                    $("#date").val(row.find("td:eq(11)").text());
+                    $("#description").val(row.find("td:eq(12)").text());
+                    $("#return_reason_show").val(row.find("td:eq(15)").text());
+                }
+
+                // Click event for the "View" button
+                $("button[data-bs-target='#ForView']").click(function() {
+                    event.stopPropagation();
+                    var row = $(this).closest("tr"); // Get the closest row to the clicked button
+                    populateModal(row); // Populate modal fields with data from the row
+
+                    // Check if return_reason_show input has a value
+                    if ($("#return_reason_show").val().trim() !== '') {
+                        // If it has a value, remove the display:none style
+                        $("#return_reason_show").closest(".col-12").show();
+                    } else {
+                        // If it's empty, keep it hidden
+                        $("#return_reason_show").closest(".col-12").hide();
+                    }
+
+                    $("#ForView").modal("show"); // Show the modal
+                });
+            });
+        </script>
+        
     </body>
 
     </html>
