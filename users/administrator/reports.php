@@ -3,8 +3,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
@@ -41,14 +41,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sql4 = "SELECT * FROM asset WHERE status = 'Need Repair' ORDER BY assignedName IS NULL, assignedName";
     $result4 = $conn->query($sql4) or die($conn->error);
 
-
-
-
-
-
-
-
-
+    $sql5 = "SELECT * FROM asset WHERE status = 'Outsource' ORDER BY assignedName IS NULL, assignedName";
+    $result5 = $conn->query($sql5) or die($conn->error);
 
     //Edit
     if (isset($_POST['edit'])) {
@@ -63,9 +57,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $assignedBy = $_POST['assignedBy'];
         $date = $_POST['date'];
 
-
-
-
         $updateSql = "UPDATE `asset` SET `category`='$category', `building`='$building', `floor`='$floor', `room`='$room', `status`='$status', `assignedName`='$assignedName', `assignedBy`='$assignedBy', `date`='$date' WHERE `assetId`='$assetId'";
         if ($conn->query($updateSql) === TRUE) {
             logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId to $status.", 'Report');
@@ -74,7 +65,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         }
         header("Location: reports.php");
     }
-
 
     // for notif below
     // Update the SQL to join with the account and asset tables to get the admin's name and asset information
@@ -94,7 +84,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
 
-
     // Prepare the SQL statement
     $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
 
@@ -105,7 +94,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmtLatestLogs->execute();
     $resultLatestLogs = $stmtLatestLogs->get_result();
 
-
     $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
     $stmt = $conn->prepare($unseenCountQuery);
     $stmt->bind_param("i", $loggedInAccountId);
@@ -113,7 +101,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->bind_result($unseenCount);
     $stmt->fetch();
     $stmt->close();
-
 
     if (isset($_POST['assignMaintenance'])) {
         $assetId = $_POST['assetId'];
@@ -194,8 +181,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         }
         header("Location: reports.php");
     }
-
-
 ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -215,9 +200,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
-
-
-
 
         <!--JS for the fcking tabs-->
         <script>
@@ -259,17 +241,20 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             $(".nav-link[data-bs-target='pills-repair']").addClass("active");
                             $(".nav-link[data-bs-target='pills-manager']").removeClass("active");
                             break;
+                        case 'pills-out-source':
+                            $("#pills-out-source").addClass("show active");
+                            $("#pills-manager").removeClass("show active");
+                            $(".nav-link[data-bs-target='pills-out-source']").addClass("active");
+                            $(".nav-link[data-bs-target='pills-manager']").removeClass("active");
+                            break;
                     }
                 }
 
                 // $("#pills-manager").addClass("show active");
                 // $("#pills-profile").removeClass("show active");
-
                 $(".nav-link").click(function() {
                     const targetId = $(this).data("bs-target");
-
                     sessionStorage.setItem("lastTab", targetId); //* sets the targetId to the sessionStorage lastTab item
-
                     $(".tab-pane").removeClass("show active");
                     $(`#${targetId}`).addClass("show active");
                     $(".nav-link").removeClass("active");
@@ -302,7 +287,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
                 <div class="content-nav">
                     <div class="notification-dropdown">
-
                         <a href="#" class="notification" id="notification-button">
                             <i class="fa fa-bell" aria-hidden="true"></i>
                             <!-- Notification Indicator Dot -->
@@ -310,10 +294,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <span class="notification-indicator"></span>
                             <?php endif; ?>
                         </a>
-
-
-
-
                         <div class="dropdown-content" id="notification-dropdown-content">
                             <h6 class="dropdown-header">Alerts Center</h6>
                             <!-- PHP code to display notifications will go here -->
@@ -593,6 +573,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <li><a href="#" class="nav-link" data-bs-target="pills-profile">Under Maintenance</a></li>
                                 <li><a href="#" class="nav-link" data-bs-target="pills-replace">For Replacement</a></li>
                                 <li><a href="#" class="nav-link" data-bs-target="pills-repair">Need Repair</a></li>
+                                <li><a href="#" class="nav-link" data-bs-target="pills-out-source">Outsource</a></li>
                             </ul>
                         </div>
 
@@ -604,7 +585,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             </form>
                         </div>
                     </div>
-
 
                     <!--Tab for table 1-->
                     <div class="tab-content pt" id="myTabContent">
@@ -790,6 +770,66 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         } else {
                                             // Pagmeron data eto ilalabas
                                             echo '<td>' . $row4['assignedName'] . '</td>';
+                                        }
+                                        echo '</tr>';
+                                    }
+                                    echo "</table>";
+                                    echo "</div>";
+                                } else {
+                                    echo '<table>';
+                                    echo "<div class=noDataImgH>";
+                                    echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
+                                    echo "</div>";
+                                    echo '</table>';
+                                }
+                                ?>
+                            </div>
+                        </div>
+
+                        <!--Tab for table 5 - out-source -->
+                        <div class="tab-pane fade" id="pills-out-source" role="tabpanel" aria-labelledby="out-source-tab">
+                            <div class="table-content" id="exportContentNeedforout-source">
+                                <div class='table-header'>
+                                    <div class='headerskie4'>
+                                        <span class="tab4">TRACKING #</span>
+                                        <span class="tab4">DATE & TIME</span>
+                                        <span class="tab4">CATEGORY</span>
+                                        <span class="tab4">LOCATION</span>
+                                        <span class="tab4">STATUS</span>
+                                        <span class="tab4">ASSIGNED NAME</span>
+                                    </div>
+                                </div>
+                                <!--Content of table 4-->
+                                <?php
+                                if ($result5->num_rows > 0) {
+                                    echo "<div class='table-container out-source-table'>";
+                                    echo "<table>";
+                                    while ($row5 = $result5->fetch_assoc()) {
+                                        $date = new DateTime($row5['date']); // Create DateTime object from fetched date
+                                        $date->modify('+8 hours'); // Add 8 hours
+                                        $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
+                                        echo '<tr>';
+                                        echo '<td>' . $row5['assetId'] . '</td>';
+                                        echo '<td>' . $formattedDate . '</td>'; // Display the adjusted date
+                                        echo '<td>' . $row5['category'] . '</td>';
+                                        echo '<td>' . $row5['building'] . " / " . $row5['floor'] . " / " . $row5['room'] . '</td>';
+                                        echo '<td style="display: none;">' . $row5['building'] . '</td>';
+                                        echo '<td style="display: none;">' . $row5['floor'] . '</td>';
+                                        echo '<td style="display: none;">' . $row5['room'] . '</td>';
+                                        echo '<td style="display: none;">' . $row5['images'] . '</td>';
+                                        echo '<td >' . $row5['status'] . '</td>';
+                                        echo '<td style="display: none;">' . $row5['assignedBy'] . '</td>';
+                                        if (empty($row5['assignedName'])) {
+                                            // Pagwalang data eto ilalabas
+                                            echo '<td>';
+                                            echo '<form method="post" action="">';
+                                            echo '<input type="hidden" name="assetId" value="' . $row5['assetId'] . '">';
+                                            echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#exampleModal5">Assign</button>';
+                                            echo '</form>';
+                                            echo '</td>';
+                                        } else {
+                                            // Pagmeron data eto ilalabas
+                                            echo '<td>' . $row5['assignedName'] . '</td>';
                                         }
                                         echo '</tr>';
                                     }
