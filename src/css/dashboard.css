@@ -993,7 +993,8 @@ canvas#statusChart {
 select#filter-select,
 select#timeFilter,
 select#monthFilter,
-select#employeeFilter {
+select#employeeFilter,
+select#campusFilter {
   color: #aaaaaa;
   border: 1px bold #aaaaaa;
   background-color: #f6f6f6;
@@ -1010,6 +1011,12 @@ select#employeeFilter {
   color: #3d3b40;
 }
 
+#campusFilter:focus {
+  outline: none;
+  color: #3d3b40;
+}
+
+
 #timeFilter:focus {
   outline: none;
   color: #3d3b40;
@@ -1021,7 +1028,8 @@ select#employeeFilter {
 }
 
 #monthFilter,
-#employeeFilter {
+#employeeFilter,
+#campusFilter {
   border-radius: 5px;
   padding: 0px;
   width: 100%; /* Set width to 100% to fill the container */
@@ -1082,7 +1090,8 @@ select {
   }
 
   #monthFilter,
-  #employeeFilter {
+  #employeeFilter,
+  #campusFilter {
     font-size: 90%; /* Adjust font size if necessary */
     margin-bottom: 10px; /* Margin bottom for spacing */
   }
@@ -1107,7 +1116,8 @@ select {
   }
 
   #monthFilter,
-  #employeeFilter {
+  #employeeFilter,
+  #campusFilter {
     width: auto; /* Allows filters to size according to their content */
     margin-right: 10px; /* Space between filters */
     margin-left: 0; /* Reset left margin */
@@ -1126,7 +1136,8 @@ select {
   }
 
   #monthFilter,
-  #employeeFilter {
+  #employeeFilter,
+  #campusFilter {
     width: 100%; /* Filters take full width to avoid text compression */
     margin-right: 0; /* Reset right margin for stacked layout */
   }
