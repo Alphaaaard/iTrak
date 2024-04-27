@@ -16,7 +16,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Export to Excel') {
     $role = $_POST['role'];
     $searchQuery = isset($_POST['searchQuery']) ? $_POST['searchQuery'] : '';
 
-    $sql = "SELECT accountID, CONCAT(firstName, ' ', lastName) AS fullName, role, picture FROM account WHERE role = ?";
+    $sql = "SELECT accountID, CONCAT(firstName, ' ', lastName) AS fullName, role, picture, expertise FROM account WHERE role = ?";
     $params = [$role];
     $types = 's';
 
@@ -60,7 +60,9 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Export to Excel') {
     $sheet->mergeCells('C1:D1');
     $sheet->setCellValue('E1', 'Role');
     $sheet->mergeCells('E1:F1');
-    $sheet->getStyle('A1:F1')->applyFromArray($headerStyleArray);
+    $sheet->setCellValue('G1', 'Expertise');
+    $sheet->mergeCells('G1:H1');
+    $sheet->getStyle('A1:H1')->applyFromArray($headerStyleArray);
 
     // Set data rows
     $rowNumber = 2;
@@ -74,9 +76,11 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Export to Excel') {
         $sheet->mergeCells('C' . $rowNumber . ':D' . $rowNumber);
         $sheet->setCellValue('E' . $rowNumber, $row['role']);
         $sheet->mergeCells('E' . $rowNumber . ':F' . $rowNumber);
+        $sheet->setCellValue('G' . $rowNumber, $row['expertise']);
+        $sheet->mergeCells('G' . $rowNumber . ':H' . $rowNumber);
         
         // Apply styles to each row
-        $sheet->getStyle('A' . $rowNumber . ':F' . $rowNumber)->applyFromArray($headerStyleArray);
+        $sheet->getStyle('A' . $rowNumber . ':H' . $rowNumber)->applyFromArray($headerStyleArray);
         
         $rowNumber++;
     }
@@ -85,6 +89,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Export to Excel') {
     $sheet->getColumnDimension('A')->setWidth(20);
     $sheet->getColumnDimension('C')->setWidth(30);
     $sheet->getColumnDimension('E')->setWidth(20);
+    $sheet->getColumnDimension('G')->setWidth(20);
 
     // Redirect output to the browser
     ob_end_clean();
