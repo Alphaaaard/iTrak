@@ -319,6 +319,17 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             top: 10px;
             right: 10px;
         }
+            .blue {
+            color: blue;
+        }
+
+        .green {
+            color: green;
+        }
+
+        .red {
+            color: red;
+        }
     </style>
 
     <body>
@@ -542,9 +553,9 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                             <th>Category</th>
                                             <th>Location</th>
                                             <th>Equipment</th>
-                                            <th>Assignee</th>
-                                            <th>Status</th>
                                             <th>Deadline</th>
+                                            <th>Status</th>
+                                           
                                             <th></th>
                                         </tr>
                                     </table>
@@ -560,9 +571,35 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         echo '<td>' . $row['category'] . '</td>';
                                         echo '<td>' . $row['building'] . ', ' . $row['floor'] . ', ' . $row['room'] . '</td>';
                                         echo '<td>' . $row['equipment'] . '</td>';
-                                        echo '<td>' . $row['assignee'] . '</td>';
-                                        echo '<td >' . $row['status'] . '</td>';
+                          
+                                        echo '<td style="display:none;">' . $row['assignee'] . '</td>';
                                         echo '<td>' . $row['deadline'] . '</td>';
+                                        $status = $row['status'];
+                                      
+                                        $status_color = '';
+
+                                        // Set the color based on the status
+                                        switch ($status) {
+                                            case 'Assigned':
+                                                $status_color = 'blue';
+                                                break;
+                                            case 'Done':
+                                                $status_color = 'green';
+                                                break;
+                                            case 'For Approval':
+                                                $status_color = 'red';
+                                                break;
+                                            default:
+                                                // Default color if status doesn't match
+                                                $status_color = 'black';
+                                        }
+
+                                        // Output the status with appropriate color
+                                   
+                                        echo '<td class="' . $status_color . '">' . $status . '</td>';
+                                      
+
+                                    
                                         echo '<td>';
                                         echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#ForView">View</button>';
                                         echo '</td>';
@@ -920,8 +957,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     $("#room").val(buildingFloorRoom[2]);
                     $("#equipment").val(row.find("td:eq(4)").text());
                     $("#assignee").val(row.find("td:eq(5)").text());
-                    $("#status").val(row.find("td:eq(6)").text());
-                    $("#deadline").val(row.find("td:eq(7)").text());
+                    $("#status").val(row.find("td:eq(7)").text());
+                    $("#deadline").val(row.find("td:eq(6)").text());
                     $("#description").val(row.find("td:eq(13)").text());
                     $("#return_reason_show").val(row.find("td:eq(15)").text());
                 }

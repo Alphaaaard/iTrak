@@ -682,10 +682,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 <div class="col-4">
                                                     <label for="new_category" class="form-label">Category:</label>
                                                     <select class="form-select" id="new_category" name="new_category" onchange="fetchRandomAssignee1()">
-                                                        <option value="Carpentry">Carpentry</option>
+                                                    <option value="Outsource">Outsource</option>    
+                                                    <option value="Carpentry">Carpentry</option>
                                                         <option value="Electrical">Electrical</option>
                                                         <option value="Plumbing">Plumbing</option>
-                                                        <option value="Plumbing">Outsource</option>
+                                                       
                                                     </select>
                                                 </div>
 
@@ -806,10 +807,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 <div class="col-4">
                                                     <label for="category" class="form-label">Category:</label>
                                                     <select class="form-select" id="category" name="category" onchange="fetchRandomAssignee()">
-                                                        <option value="Carpentry">Carpentry</option>
+                                                    <option value="Outsource">Outsource</option>  
+                                                    <option value="Carpentry">Carpentry</option>
                                                         <option value="Electrical">Electrical</option>
                                                         <option value="Plumbing">Plumbing</option>
-                                                        <option value="Outsource">Outsource</option>
+                                                       
                                                     </select>
                                                 </div>
 
