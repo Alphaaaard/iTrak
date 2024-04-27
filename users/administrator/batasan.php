@@ -58,7 +58,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sql2 = "SELECT * FROM request WHERE campus = 'Batasan' AND category = 'Outsource'";
     $result2 = $conn->query($sql2) or die($conn->error);
 
-
+    function logActivity($conn, $accountId, $actionDescription, $tabValue)
+    {
+        $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, NOW(), ?, ?)");
+        $stmt->bind_param("iss", $accountId, $actionDescription, $tabValue);
+        if (!$stmt->execute()) {
+            echo "Error logging activity: " . $stmt->error;
+        }
+        $stmt->close();
+    }
+    
 
 
     if (isset($_POST['add'])) {
@@ -85,13 +94,17 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt->bind_param("ssssssssssss", $request_id, $campus, $building, $floor, $room, $equipment, $req_by, $category, $assignee, $status, $description, $deadline);
 
         if ($stmt->execute()) {
-            // Data inserted successfully, redirect to batasan.php
+            // Log activity for task creation and assignment
+            $action = "Created and assigned task to $assignee";
+            logActivity($conn, $_SESSION['accountId'], $action, 'General');
+            
+            // Redirect to the desired page
             header("Location: batasan.php");
             exit(); // Make sure to exit to prevent further execution
         } else {
             echo "Error inserting data: " . $conn->error;
         }
-
+    
         $conn->close();
     }
 
@@ -139,7 +152,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt3->close();
     }
 
-?>
+
+ 
+
+ ?>
 
 
     <!DOCTYPE html>
@@ -531,7 +547,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                         // Set the color based on the status
                                         switch ($status) {
-                                            case 'Assigned':
+                                            case 'Pending':
                                                 $status_color = 'blue';
                                                 break;
                                             case 'Done':

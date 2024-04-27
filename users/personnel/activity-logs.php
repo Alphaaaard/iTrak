@@ -31,23 +31,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     // Concatenate first name and last name for the action field check
     $loggedInFullName = $loggedInUserFirstName . " " . $loggedInUsermiddleName . " " . $loggedInUserLastName; //kung ano ung naka declare dito eto lang ung magiging data 
 
-
-
-    $sqlGeneral = "SELECT ac.*, a.firstName, a.middleName, a.lastName
-    FROM activitylogs AS ac
-    LEFT JOIN account AS a ON ac.accountID = a.accountID
-    WHERE (ac.tab = 'General' AND ac.action LIKE 'Assigned maintenance personnel%' AND ac.action LIKE ?)
-    ORDER BY ac.date DESC";
-
-    // Prepare the SQL statement
-    $stmtg = $conn->prepare($sqlGeneral);
-
-    // Bind the parameter and execute
-    $pattern = "%Assigned maintenance personnel $loggedInUserFirstName%";
-    $stmtg->bind_param("s", $pattern);
-    $stmtg->execute();
-    $resultGeneral = $stmtg->get_result();
-
+ // Fetch General activity logs where the user's name appears in 'Assigned maintenance personnel' or 'Created and assigned task' actions
+ $sqlGeneral = "SELECT ac.*, a.firstName, a.middleName, a.lastName
+ FROM activitylogs AS ac
+ LEFT JOIN account AS a ON ac.accountID = a.accountID
+ WHERE ac.tab = 'General' AND (ac.action LIKE 'Assigned maintenance personnel $loggedInUserFirstName%' OR ac.action LIKE 'Created and assigned task to $loggedInUserFirstName%')";
+$stmtg = $conn->prepare($sqlGeneral);
+$stmtg->execute();
+$resultGeneral = $stmtg->get_result();
+$stmtg->close();
 
 
     // Adjust the SQL to check the 'action' field for the logged-in user's name
@@ -86,6 +78,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                WHERE al.tab = 'General' AND al.p_seen = '0' AND al.action LIKE 'Assigned maintenance personnel%' AND al.action LIKE ? AND al.accountID != ?
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
+
+
+
 
     // Prepare the SQL statement
     $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
