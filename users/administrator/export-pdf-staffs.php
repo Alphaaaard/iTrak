@@ -14,7 +14,7 @@ if (isset($_POST['submit']) && isset($_POST['role'])) {
     $role = $_POST['role'];
     $searchQuery = isset($_POST['searchQuery']) ? $_POST['searchQuery'] : '';
 
-    $sql = "SELECT accountID, CONCAT(firstName, ' ', lastName) AS fullName, role, picture FROM account WHERE role = ?";
+    $sql = "SELECT accountID, CONCAT(firstName, ' ', lastName) AS fullName, role, picture, expertise FROM account WHERE role = ?";
     $params = [$role];
     $types = 's';
 
@@ -61,6 +61,7 @@ if (isset($_POST['submit']) && isset($_POST['role'])) {
     $html .= '<th>Picture</th>';
     $html .= '<th>Name</th>';
     $html .= '<th>Role</th>';
+    $html .= '<th>Expertise</th>';
     $html .= '</tr>';
 
     if (mysqli_num_rows($result) > 0) {
@@ -71,6 +72,7 @@ if (isset($_POST['submit']) && isset($_POST['role'])) {
             $html .= '<td><img src="data:image/jpeg;base64,' . $base64Image . '"></td>';
             $html .= '<td>'.htmlspecialchars($row['fullName']).'</td>';
             $html .= '<td>'.htmlspecialchars($row['role']).'</td>';
+            $html .= '<td>'.htmlspecialchars($row['expertise']).'</td>';
             $html .= '</tr>';
         }
     } else {
