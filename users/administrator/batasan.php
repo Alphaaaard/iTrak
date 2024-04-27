@@ -915,14 +915,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                     <option value="Carpentry">Carpentry</option>
                                                     <option value="Electrical">Electrical</option>
                                                     <option value="Plumbing">Plumbing</option>
-
                                                 </select>
                                             </div>
 
+                                            <!-- Add an empty assignee select element -->
                                             <div class="col-4">
                                                 <label id="assignee-label" for="assignee"
                                                     class="form-label">Assignee:</label>
-                                                <input type="text" class="form-control" id="assignee" name="assignee" />
+                                                <select class="form-select" id="assignee" name="assignee"></select>
                                             </div>
 
 
@@ -1163,16 +1163,31 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     <!--PARA SA PAGCHANGE NG LABEL-->
     <script>
         function fetchRandomAssignee() {
+            // Get the selected category
             var category = document.getElementById('category').value;
-            var assigneeLabel = document.getElementById('assignee-label');
-            var assigneeInput = document.getElementById('assignee');
 
-            if (category === 'Outsource') {
-                assigneeLabel.textContent = 'Outsource Name:';
-                assigneeInput.value = ''; // Clear the input field
-            } else {
-                assigneeLabel.textContent = 'Assignee:';
-            }
+            // Make an AJAX request
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'fetchAssignees.php?category=' + category, true);
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    // Parse the JSON response
+                    var assignees = JSON.parse(xhr.responseText);
+
+                    // Clear previous options
+                    var assigneeSelect = document.getElementById('assignee');
+                    assigneeSelect.innerHTML = '';
+
+                    // Populate the assignee select element
+                    for (var i = 0; i < assignees.length; i++) {
+                        var option = document.createElement('option');
+                        option.value = assignees[i].accountId;
+                        option.textContent = assignees[i].firstName + ' ' + assignees[i].lastName;
+                        assigneeSelect.appendChild(option);
+                    }
+                }
+            };
+            xhr.send();
         }
     </script>
 
