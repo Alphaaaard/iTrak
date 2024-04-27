@@ -628,6 +628,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         </div>
 
                         <!--MODAL FOR THE VIEW-->
+                    <!-- <form action="POST" id=""> -->
                         <div class="modal-parent">
                             <div class="modal modal-xl fade" id="ForView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
@@ -637,8 +638,9 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
                                             <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                                         </div>
+
                                         <div class="modal-body">
-                                            <form method="post" class="row g-3">
+                                            <form id="requestForm" method="post" class="row g-3">
                                                 <div class="col-4" style="display:none;">
                                                     <label for="request_id" class="form-label">Request ID:</label>
                                                     <input type="text" class="form-control" id="request_id" name="request_id" readonly />
@@ -713,7 +715,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                                     <button type="button" class="btn add-modal-btn" id="transferBtn" data-bs-toggle="modal" data-bs-target="#ForTransfer">
                                                         Transfer
                                                     </button>
-                                                    <button type="button" class="btn add-modal-btn" id="doneBtn" data-bs-toggle="modal" data-bs-target="#ForDone">
+                                                    <button type="button" class="btn add-modal-btn" id="doneBtn" data-bs-toggle="modal" data-bs-target="#ForDones" onclick="showTaskConfirmation()">
                                                         Done
                                                     </button>
                                                 </div>
@@ -783,7 +785,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         </div>
 
                                         <div class="footer" id="transfer-footer">
-                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#ForSave">
+                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#ForSaves" onclick="showTransferConfirmation()">
                                                 Save
                                             </button>
                                         </div>
@@ -800,7 +802,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         Are you sure you want to transfer this task?
                                         <div class="modal-popups">
                                             <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                            <button class="btn add-modal-btn" name="approval" data-bs-dismiss="modal">Yes</button>
+                                            <!-- <button class="btn add-modal-btn" name="approval" data-bs-dismiss="modal">Yes</button> -->
                                         </div>
                                     </div>
                                 </div>
@@ -815,13 +817,13 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         Are you sure you want to mark this task as completed?
                                         <div class="modal-popups">
                                             <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                            <button class="btn add-modal-btn" name="done" data-bs-dismiss="modal">Yes</button>
+                                            <!-- <button class="btn add-modal-btn" name="done" data-bs-dismiss="modal">Yes</button> -->
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        </form>
+                    </form>
 
 
 
@@ -854,6 +856,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <script src="../../src/js/archive.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
         <script src="../../src/js/logout.js"></script>
+        <script src="../../src/js/requestPersonnel.js"></script>
 
 
         <!-- PARA SA PAGLAGAY NG VALUE SA OTHER FIELD TYPE ALSO SA PAGAPPEAR NG OTHER DESCRIPTION BOX -->
