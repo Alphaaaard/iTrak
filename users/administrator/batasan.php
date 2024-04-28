@@ -65,15 +65,18 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sql2 = "SELECT * FROM request WHERE campus = 'Batasan' AND category = 'Outsource'";
     $result2 = $conn->query($sql2) or die($conn->error);
 
-    function logActivity($conn, $accountId, $actionDescription, $tabValue)
-    {
-        $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, NOW(), ?, ?)");
-        $stmt->bind_param("iss", $accountId, $actionDescription, $tabValue);
-        if (!$stmt->execute()) {
-            echo "Error logging activity: " . $stmt->error;
-        }
-        $stmt->close();
+function logActivity($conn, $accountId, $actionDescription, $tabValue)
+{
+    // Add 8 hours to the current date
+    $date = date('Y-m-d H:i:s', strtotime('+8 hours'));
+
+    $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("isss", $accountId, $date, $actionDescription, $tabValue);
+    if (!$stmt->execute()) {
+        echo "Error logging activity: " . $stmt->error;
     }
+    $stmt->close();
+}
 
 
 

@@ -626,7 +626,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
                                         // Set the color based on the status
                                         switch ($status) {
-                                            case 'Assigned':
+                                            case 'Pending':
                                                 $status_color = 'blue';
                                                 break;
                                             case 'Done':
