@@ -7,6 +7,10 @@
   padding: 0;
 }
 
+#transfer-reason-for-modal {
+  display: block !important;
+}
+
 .table-container {
   padding: 0 5px;
   background-color: #fcfcfc;

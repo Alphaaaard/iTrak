@@ -44,7 +44,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sql5 = "SELECT * FROM asset WHERE status = 'Outsource'";
     $result5 = $conn->query($sql5) or die($conn->error);
 
-
     //Edit
     if (isset($_POST['edit'])) {
         $assetId = $_POST['assetId'];

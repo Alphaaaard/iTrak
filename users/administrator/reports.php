@@ -21,6 +21,51 @@ function logActivity($conn, $accountId, $actionDescription, $tabValue)
     $stmt->close();
 }
 
+// Assuming you have a database connection established in $conn
+
+
+// Assuming you have a valid database connection in $conn
+
+// Check if the form is submitted
+if (isset($_POST['transfer'])) {
+    // Retrieve assetId from the form
+    $assetId = $_POST['assetId'];
+
+    // Retrieve other form data
+    $assignedName = $_POST['assignedName'];
+    $return_reason = $_POST['return_reason']; // Assuming this field is optional
+
+    // SQL UPDATE query
+    $sql = "UPDATE assets 
+             SET assignedName = ?, return_reason = ?
+             WHERE assetId = ?";
+
+    // Prepare the SQL statement
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt === false) {
+        // Error occurred in preparing the statement
+        echo "Error preparing statement: " . $conn->error;
+        exit();
+    }
+
+    // Bind parameters
+    $stmt->bind_param("ssi", $assignedName, $return_reason, $assetId);
+
+    // Execute the query
+    if ($stmt->execute()) {
+        // Update successful, redirect back to the page or any other page
+        header("Location: reports.php");
+        exit();
+    } else {
+        // Error occurred while updating
+        echo "Error transferring asset: " . $stmt->error;
+    }
+
+    // Close statement
+    $stmt->close();
+}
+
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
     // For personnel page, check if userLevel is 3
     if ($_SESSION['userLevel'] != 1) {
@@ -38,10 +83,19 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sql3 = "SELECT * FROM asset WHERE status = 'For Replacement'";
     $result3 = $conn->query($sql3) or die($conn->error);
 
-    $sql4 = "SELECT * FROM asset WHERE status = 'Need Repair' ORDER BY assignedName IS NULL, assignedName";
+    $sql4 = "SELECT * FROM asset 
+         WHERE status IN ('Need Repair', 'For Approval') 
+         ORDER BY assignedName IS NULL, assignedName";
     $result4 = $conn->query($sql4) or die($conn->error);
 
-    $sql5 = "SELECT * FROM asset WHERE status = 'Outsource' ORDER BY assignedName IS NULL, assignedName";
+    $sql5 = "SELECT a.* 
+         FROM asset a
+         LEFT JOIN account ac ON a.assignedName = CONCAT(ac.firstName, ' ', ac.middleName, ' ', ac.lastName)
+         WHERE a.status = 'Need Repair' 
+         AND a.assignedName IS NOT NULL
+         AND a.assignedName != ''
+         AND ac.firstName IS NULL
+         ORDER BY a.assignedName";
     $result5 = $conn->query($sql5) or die($conn->error);
 
     //Edit
@@ -78,11 +132,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $loggedInAccountId = $_SESSION['accountId'];
     // SQL query to fetch notifications related to report activities
     $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
-                FROM activitylogs AS al
-               JOIN account AS acc ON al.accountID = acc.accountID
-               WHERE  al.seen = '0' AND al.accountID != ?
-               ORDER BY al.date DESC 
-               LIMIT 5"; // Set limit to 5
+    FROM activitylogs AS al
+    JOIN account AS acc ON al.accountID = acc.accountID
+    WHERE al.seen = '0' AND al.accountID != ?
+    ORDER BY al.date DESC
+    LIMIT 5"; // Set limit to 5
 
     // Prepare the SQL statement
     $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
@@ -153,22 +207,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         $mail->Subject = 'Task Assignment Notification';
                         $mail->Body = 'Dear ' . $assignedName . ',<br><br>
 
-                        I hope this message finds you well.<br><br>
+    I hope this message finds you well.<br><br>
 
-                        The administrator has assigned you to address the issues with the following details:<br>
-                        + Tracking Number: ' . $assetId . '<br>
-                        + Category: ' . $assetDetails['category'] . '<br> 
-                        + Location: ' . $assetDetails['building'] . ' ' . $assetDetails['floor'] . ' ' . $assetDetails['room'] . '<br><br>
+    The administrator has assigned you to address the issues with the following details:<br>
+    + Tracking Number: ' . $assetId . '<br>
+    + Category: ' . $assetDetails['category'] . '<br>
+    + Location: ' . $assetDetails['building'] . ' ' . $assetDetails['floor'] . ' ' . $assetDetails['room'] . '<br><br>
 
-                        Please check the system for further details regarding this assignment.<br><br>
+    Please check the system for further details regarding this assignment.<br><br>
 
-                        Best regards,<br><br>
+    Best regards,<br><br>
 
-                        Allyssa Bea Marie Cabal<br>
+    Allyssa Bea Marie Cabal<br>
 
-                        Administrator<br>
+    Administrator<br>
 
-                        iTrak';
+    iTrak';
 
                         $mail->send();
                     } catch (Exception $e) {
@@ -741,6 +795,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <!--Content of table 4-->
                                 <?php
+                                // Assuming $result4 is the result set containing the data for repair
                                 if ($result4->num_rows > 0) {
                                     echo "<div class='table-container repair-table'>";
                                     echo "<table>";
@@ -757,20 +812,23 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         echo '<td style="display: none;">' . $row4['floor'] . '</td>';
                                         echo '<td style="display: none;">' . $row4['room'] . '</td>';
                                         echo '<td style="display: none;">' . $row4['images'] . '</td>';
-                                        echo '<td >' . $row4['status'] . '</td>';
+                                        echo '<td>' . $row4['status'] . '</td>';
                                         echo '<td style="display: none;">' . $row4['assignedBy'] . '</td>';
-                                        if (empty($row4['assignedName'])) {
-                                            // Pagwalang data eto ilalabas
-                                            echo '<td>';
+                                        echo '<td style="display: none;">' . $row4['description'] . '</td>';
+                                        echo '<td style="display: none;">' . $row4['return_reason'] . '</td>';
+                                        echo '<td>';
+                                        if ($row4['status'] == 'For Approval') {
+                                            echo '<form method="post" action="">';
+                                            echo '<input type="hidden" name="assetId" value="' . $row4['assetId'] . '">';
+                                            echo '<button type="button" class="btn btn-primary archive-btn" data-bs-toggle="modal" data-bs-target="#exampleModal6">Approve</button>';
+                                            echo '</form>';
+                                        } elseif ($row4['status'] == 'Need Repair') {
                                             echo '<form method="post" action="">';
                                             echo '<input type="hidden" name="assetId" value="' . $row4['assetId'] . '">';
                                             echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#exampleModal5">Assign</button>';
                                             echo '</form>';
-                                            echo '</td>';
-                                        } else {
-                                            // Pagmeron data eto ilalabas
-                                            echo '<td>' . $row4['assignedName'] . '</td>';
                                         }
+                                        echo '</td>';
                                         echo '</tr>';
                                     }
                                     echo "</table>";
@@ -799,7 +857,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         <span class="tab4">ASSIGNED NAME</span>
                                     </div>
                                 </div>
-                                <!--Content of table 4-->
+                                <!--Content of table 5-->
                                 <?php
                                 if ($result5->num_rows > 0) {
                                     echo "<div class='table-container out-source-table'>";
@@ -845,9 +903,88 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 ?>
                             </div>
                         </div>
+                        <!--MODAL FOR THE VIEW-->
+                        <div class="modal-parent">
+                            <div class="modal modal-xl fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5>View Task</h5>
+
+                                            <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="reportOutsource" method="post" class="row g-3">
+                                                <div class="col-4">
+                                                    <label for="assetId" class="form-label">Tracking ID:</label>
+                                                    <input type="text" class="form-control" id="assetId" name="assetId" readonly />
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="date" class="form-label">Date & Time:</label>
+                                                    <input type="text" class="form-control" id="date" name="date" readonly />
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="category" class="form-label">Category:</label>
+                                                    <input type="text" class="form-control" id="category" name="category" value="Batasan" />
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="building" class="form-label">Location:</label>
+                                                    <input type="text" class="form-control" id="building" name="building" readonly />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="status" class="form-label">Status:</label>
+                                                    <input type="text" class="form-control" id="status" name="status" readonly />
+                                                </div>
+
+                                                <div class="col-6" id="assignedNameContainer">
+                                                    <?php
+                                                    // Assuming you have a database connection established in $conn
+                                                    // SQL to fetch personnel with the role of "Maintenance Personnel"
+                                                    $assignSql = "SELECT firstName, middleName, lastName FROM account WHERE userlevel = '3'";
+                                                    $personnelResult = $conn->query($assignSql);
+
+                                                    if ($personnelResult) {
+                                                        echo '<select class="form-select assignedName" id="assignedName" name="assignedName" style="color: black;">';
+                                                        while ($row = $personnelResult->fetch_assoc()) {
+                                                            $fullName = $row['firstName'] . ' ' . $row['lastName'];
+                                                            // Echo each option within the select
+                                                            echo '<option value="' . htmlspecialchars($fullName) . '">' . htmlspecialchars($fullName) . '</option>';
+                                                        }
+                                                        // Add an input box option
+                                                        echo '<option value="custom">Custom Input</option>';
+                                                        echo '</select>';
+                                                    } else {
+                                                        // Handle potential errors or no results
+                                                        echo '<input type="text" class="form-control assignedName" id="assignedName" name="assignedName" placeholder="Enter custom input" style="color: black;">';
+                                                    }
+                                                    ?>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <label for="description" class="form-label">Description:</label>
+                                                    <input type="text" class="form-control" id="description" name="description" readonly />
+                                                </div>
+
+                                                <div class="col-12" id="transfer-reason-for-modal" style="display:none">
+                                                    <label for="return_reason" class="form-label">Transfer Reason:</label>
+                                                    <input type="text" class="form-control" id="return_reason" name="return_reason" readonly />
+                                                </div>
+
+                                                <div class="footer">
+                                                    <button type="button" class="btn add-modal-btn" id="transferBtn" data-bs-toggle="modal" data-bs-target="#ForSaves" onclick="showTransferConfirmation()">
+                                                        Transfer
+                                                    </button>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </main>
+
             <div class="pagination-reports">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
@@ -934,27 +1071,28 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         </select>
                                     </div>
 
-                                    <div class="col-6">
-                                        <select class="form-select assignedName" id="assignedName" name="assignedName" style="color: black;">
-                                            <?php
-                                            // Assuming you have a database connection established in $conn
-                                            // SQL to fetch personnel with the role of "Maintenance Personnel"
-                                            $assignSql = "SELECT firstName, middleName, lastName FROM account WHERE userlevel = '3'";
-                                            $personnelResult = $conn->query($assignSql);
+                                    <div class="col-6" id="assignedNameContainer">
+                                        <?php
+                                        // Assuming you have a database connection established in $conn
+                                        // SQL to fetch personnel with the role of "Maintenance Personnel"
+                                        $assignSql = "SELECT firstName, middleName, lastName FROM account WHERE userlevel = '3'";
+                                        $personnelResult = $conn->query($assignSql);
 
-
-                                            if ($personnelResult) {
-                                                while ($row = $personnelResult->fetch_assoc()) {
-                                                    $fullName = $row['firstName'] . ' ' . $row['lastName'];
-                                                    // Echo each option within the select
-                                                    echo '<option value="' . htmlspecialchars($fullName) . '">' . htmlspecialchars($fullName) . '</option>';
-                                                }
-                                            } else {
-                                                // Handle potential errors or no results
-                                                echo '<option value="No Maintenance Personnel Found">';
+                                        if ($personnelResult) {
+                                            echo '<select class="form-select assignedName" id="assignedName" name="assignedName" style="color: black;">';
+                                            while ($row = $personnelResult->fetch_assoc()) {
+                                                $fullName = $row['firstName'] . ' ' . $row['lastName'];
+                                                // Echo each option within the select
+                                                echo '<option value="' . htmlspecialchars($fullName) . '">' . htmlspecialchars($fullName) . '</option>';
                                             }
-                                            ?>
-                                        </select>
+                                            // Add an input box option
+                                            echo '<option value="custom">Custom Input</option>';
+                                            echo '</select>';
+                                        } else {
+                                            // Handle potential errors or no results
+                                            echo '<input type="text" class="form-control assignedName" id="assignedName" name="assignedName" placeholder="Enter custom input" style="color: black;">';
+                                        }
+                                        ?>
                                     </div>
                                 </form>
 
@@ -972,22 +1110,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                 </div>
             </div>
-
-            <!-- Edit for table 4
-            <div class="modal fade" id="staticBackdrop5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-footer">
-                            Are you sure you want to save changes?
-                            <div class="modal-popups">
-                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                <button class="btn add-modal-btn" name="assignMaintenance" data-bs-dismiss="modal">Yes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </form> -->
         </section>
 
         <!-- PROFILE MODALS -->
@@ -1009,6 +1131,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             </div>
         </div>
 
+
+
         <script src="../../src/js/main.js"></script>
         <script src="../../src/js/archive.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
@@ -1017,9 +1141,43 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <!-- Add this script after your existing scripts -->
         <!-- Add this script after your existing scripts -->
 
-
-
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+        <!--PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
+        <script>
+            $(document).ready(function() {
+                // Function to populate modal fields
+                function populateModal(row) {
+                    // Populate modal fields with data from the row
+                    $("#assetId").val(row.find("td:eq(0)").text());
+                    $("#date").val(row.find("td:eq(1)").text());
+                    $("#category").val(row.find("td:eq(2)").text());
+                    // If building, floor, and room are concatenated in a single cell, split them
+                    var buildingFloorRoom = row.find("td:eq(3)").text().split(', ');
+                    $("#building").val(buildingFloorRoom[0]);
+                    $("#floor").val(buildingFloorRoom[1]);
+                    $("#room").val(buildingFloorRoom[2]);
+                    $("#equipment").val(row.find("td:eq(4)").text());
+                    $("#assignee").val(row.find("td:eq(5)").text());
+                    $("#status").val(row.find("td:eq(8)").text());
+                    $("#deadline").val(row.find("td:eq(6)").text());
+                    $("#description").val(row.find("td:eq(10)").text());
+                    $("#return_reason").val(row.find("td:eq(11)").text());
+                }
+
+                // Click event for the "View" button
+                $("button[data-bs-target='#exampleModal6']").click(function() {
+                    event.stopPropagation(); // Prevent the click from reaching the parent <tr>
+
+                    var row = $(this).closest("tr"); // Get the closest row to the clicked button
+                    populateModal(row); // Populate modal fields with data from the row
+
+
+
+                    $("#exampleModal6").modal("show"); // Show the modal
+                });
+            });
+        </script>
 
         <script>
             //PARA MAGDIRECT KA SA PAGE 
@@ -1856,6 +2014,68 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     });
                 });
             });
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('assignedName').addEventListener('change', function() {
+                    var selectValue = this.value;
+                    if (selectValue === 'custom') {
+                        // Replace select element with input element
+                        var selectContainer = document.getElementById('assignedNameContainer');
+                        var inputElement = document.createElement('input');
+                        inputElement.setAttribute('type', 'text');
+                        inputElement.setAttribute('class', 'form-control assignedName');
+                        inputElement.setAttribute('id', 'assignedName');
+                        inputElement.setAttribute('name', 'assignedName');
+                        inputElement.setAttribute('placeholder', 'Enter custom input');
+                        inputElement.style.color = 'black';
+                        selectContainer.innerHTML = ''; // Clear select container
+                        selectContainer.appendChild(inputElement); // Append input element
+                    }
+                });
+            });
+        </script>
+        <script>
+            function showTransferConfirmation() {
+                Swal.fire({
+                        icon: "info",
+                        title: `Are you sure you want to transfer this task?`,
+                        showCancelButton: true,
+                        cancelButtonText: "No",
+                        focusConfirm: false,
+                        confirmButtonText: "Yes",
+                    })
+                    .then((result) => {
+                        if (result.isConfirmed) {
+                            // AJAX
+                            let form = document.querySelector("#reportOutsource");
+                            let xhr = new XMLHttpRequest();
+
+                            xhr.open("POST", "../../users/administrator/reports.php", true);
+
+                            xhr.onerror = function() {
+                                console.error("An error occurred during the XMLHttpRequest");
+                            };
+
+                            let formData = new FormData(form);
+                            formData.set("transfer", "transfer"); // Corrected line
+                            xhr.send(formData);
+
+                            // success alertbox
+                            Swal.fire({
+                                text: "Transfer Completed",
+                                icon: "success",
+                                timer: 1000,
+                                showConfirmButton: false,
+                            }).then((result) => {
+                                if (result.dismiss || Swal.DismissReason.timer) {
+                                    window.location.reload();
+                                }
+                            });
+                        }
+
+                    });
+            }
         </script>
     </body>
 

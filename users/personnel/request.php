@@ -6,7 +6,8 @@ $conn = connection();
 date_default_timezone_set('Asia/Manila');
 
 
-function insertActivityLog($conn, $accountId, $action) {
+function insertActivityLog($conn, $accountId, $action)
+{
     // Set default values for additional columns
     $tab = "General";
     $seen = 0;
@@ -185,15 +186,15 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         // Retrieve selected return_reason from radio buttons
         $return_reason = $_POST['return_reason'];
- // Check if status is being updated from pending to for approval
- $status_before_update_query = "SELECT status FROM request WHERE request_id = ?";
- $stmt_check_status = $conn->prepare($status_before_update_query);
- $stmt_check_status->bind_param("i", $request_id2);
- $stmt_check_status->execute();
- $result_status = $stmt_check_status->get_result();
- $row_status = $result_status->fetch_assoc();
- $status_before_update = $row_status['status'];
- $stmt_check_status->close();
+        // Check if status is being updated from pending to for approval
+        $status_before_update_query = "SELECT status FROM request WHERE request_id = ?";
+        $stmt_check_status = $conn->prepare($status_before_update_query);
+        $stmt_check_status->bind_param("i", $request_id2);
+        $stmt_check_status->execute();
+        $result_status = $stmt_check_status->get_result();
+        $row_status = $result_status->fetch_assoc();
+        $status_before_update = $row_status['status'];
+        $stmt_check_status->close();
 
         // SQL UPDATE query
         $sql3 = "UPDATE request 
@@ -217,7 +218,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 $action = "Changed status of Task ID $request_id2 from Pending to For Approval";
                 insertActivityLog($conn, $accountId, $action);
             }
-    
+
             // Update successful, redirect back to request.php or any other page
             header("Location: request.php");
             exit();
@@ -225,7 +226,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             // Error occurred while updating
             echo "Error updating request: " . $stmt3->error;
         }
-    
+
         // Close statement
         $stmt3->close();
     }
@@ -274,7 +275,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         // Bind parameters
         $stmt5->bind_param("sssssssssssi", $campus5, $building5, $floor5, $room5, $equipment5, $category5, $assignee5, $status5, $description5, $deadline5, $return_reason5, $request_id5);
 
-        
+
         // Execute the query
         if ($stmt5->execute()) {
             // Check if status changed from pending to done
@@ -364,7 +365,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             top: 10px;
             right: 10px;
         }
-            .blue {
+
+        .blue {
             color: blue;
         }
 
@@ -600,7 +602,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                             <th>Equipment</th>
                                             <th>Deadline</th>
                                             <th>Status</th>
-                                           
+
                                             <th></th>
                                         </tr>
                                     </table>
@@ -616,11 +618,10 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         echo '<td>' . $row['category'] . '</td>';
                                         echo '<td>' . $row['building'] . ', ' . $row['floor'] . ', ' . $row['room'] . '</td>';
                                         echo '<td>' . $row['equipment'] . '</td>';
-                          
                                         echo '<td style="display:none;">' . $row['assignee'] . '</td>';
                                         echo '<td>' . $row['deadline'] . '</td>';
                                         $status = $row['status'];
-                                      
+
                                         $status_color = '';
 
                                         // Set the color based on the status
@@ -640,15 +641,11 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         }
 
                                         // Output the status with appropriate color
-                                   
-                                        echo '<td class="' . $status_color . '">' . $status . '</td>';
-                                      
 
-                                    
+                                        echo '<td class="' . $status_color . '">' . $status . '</td>';
                                         echo '<td>';
                                         echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#ForView">View</button>';
                                         echo '</td>';
-
                                         echo '<td style="display:none;">' . $row['campus'] . '</td>';
                                         echo '<td style="display:none;">' . $row['building'] . '</td>';
                                         echo '<td style="display:none;">' . $row['floor'] . '</td>';
@@ -673,14 +670,13 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         </div>
 
                         <!--MODAL FOR THE VIEW-->
-                    <!-- <form action="POST" id=""> -->
+                        <!-- <form action="POST" id=""> -->
                         <div class="modal-parent">
                             <div class="modal modal-xl fade" id="ForView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5>View Task</h5>
-
                                             <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                                         </div>
 
@@ -839,21 +835,6 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                             </div>
                         </div>
 
-                        <!--Edit for approval-->
-                        <div class="modal fade" id="ForSave" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-footer">
-                                        Are you sure you want to transfer this task?
-                                        <div class="modal-popups">
-                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                            <!-- <button class="btn add-modal-btn" name="approval" data-bs-dismiss="modal">Yes</button> -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <!--Edit for done-->
                         <div class="modal fade" id="ForDone" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
@@ -868,11 +849,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                 </div>
                             </div>
                         </div>
-                    </form>
-
-
-
-
+                        </form>
                     </div>
             </main>
         </section>
@@ -924,6 +901,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 console.log("return_reason value:", radio.value);
             }
         </script>
+
         <script>
             // Function to disable/enable transfer and done buttons based on status
             function updateButtons() {
