@@ -273,6 +273,11 @@ td:last-child {
   text-align: center;
 }
 
+.table-container table tbody tr td:nth-child(10) {
+  width: 15%;
+  text-align: center;
+}
+
 /* .table-header table tr th:nth-child(1),
 .table-header table tr th:nth-child(2) {
   width: 15%;

@@ -53,13 +53,36 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sql4 = "SELECT * FROM asset WHERE status IN ('For Approval', 'Need Repair') ORDER BY (status = 'For Approval') DESC, (status = 'Need Repair') DESC, assignedName IS NULL, assignedName";
     $result4 = $conn->query($sql4) or die($conn->error);
 
-
-
     $sql5 = "SELECT * FROM asset WHERE os_identity = 'Outsource' ORDER BY CASE WHEN assignedName IS NULL THEN 1 ELSE 0 END, assignedName";
     $result5 = $conn->query($sql5) or die($conn->error);
 
     //Edit
     if (isset($_POST['edit'])) {
+        $assetId = $_POST['assetId'];
+        $category = $_POST['category'];
+        $building = $_POST['building'];
+        $floor = $_POST['floor'];
+        $room = $_POST['room'];
+
+        $status = $_POST['status'];
+        $assignedName = $_POST['assignedName'];
+        $assignedBy = $_POST['assignedBy'];
+        $date = $_POST['date'];
+
+        // New column
+        $os_identity = $_POST['os_identity'];
+
+        $updateSql = "UPDATE `asset` SET `category`='$category', `building`='$building', `floor`='$floor', `room`='$room', `status`='$status', `assignedName`='$assignedName', `assignedBy`='$assignedBy', `date`='$date', `os_identity`='$os_identity' WHERE `assetId`='$assetId'";
+        if ($conn->query($updateSql) === TRUE) {
+            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId to $status.", 'Report');
+        } else {
+            echo "Error updating asset: " . $conn->error;
+        }
+        header("Location: reports.php");
+    }
+
+    //Edit
+    if (isset($_POST['assignedMPOUT'])) {
         $assetId = $_POST['assetId'];
         $category = $_POST['category'];
         $building = $_POST['building'];
@@ -822,6 +845,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         echo '<td style="display: none;">' . $row4['description'] . '</td>';
                                         echo '<td style="display: none;">' . $row4['return_reason'] . '</td>';
                                         echo '<td>';
+
                                         if ($row4['status'] == 'For Approval') {
                                             echo '<form method="post" action="">';
                                             echo '<input type="hidden" name="assetId" value="' . $row4['assetId'] . '">';
@@ -887,23 +911,23 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         echo '<td style="display: none;">' . $row5['os_identity'] . '</td>';
                                         echo '<td>' . $row5['status'] . '</td>';
                                         echo '<td style="display: none;">' . $row5['assignedBy'] . '</td>';
-                                        if ($row5['status'] === 'Need Repair') {
-                                            echo '<td>';
+                                        echo '<td>';
+
+                                        // Check conditions for button display
+                                        if ($row5['status'] === 'Need Repair' && !empty($row5['assignedName'])) {
                                             echo '<form method="post" action="">';
                                             echo '<input type="hidden" name="assetId" value="' . $row5['assetId'] . '">';
                                             echo '<button type="submit" name="complete" class="btn btn-primary view-btn archive-btn">Done</button>';
                                             echo '</form>';
-                                            echo '</td>';
-                                        } elseif ($row5['status'] === 'Complete') {
-                                            echo '<td>' . $row5['assignedName'] . '</td>';
-                                        } else {
-                                            echo '<td>';
+                                        } elseif ($row5['status'] === 'Need Repair' && (empty($row5['assignedName']) || is_null($row5['assignedName']))) {
                                             echo '<form method="post" action="">';
                                             echo '<input type="hidden" name="assetId" value="' . $row5['assetId'] . '">';
-                                            echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#exampleModal5">Assign</button>';
+                                            echo '<button type="submit" class="btn btn-primary view-btn archive-btn" onclick="openModal(event)">Assign</button>';
                                             echo '</form>';
-                                            echo '</td>';
+                                        } elseif ($row5['status'] === 'Complete') {
+                                            echo $row5['assignedName'] . '</td>';
                                         }
+                                        echo '</td>';
                                         echo '</tr>';
                                     }
                                     echo "</table>";
@@ -915,9 +939,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 }
 
                                 ?>
-
                             </div>
                         </div>
+
                     </div>
                 </div>
             </main>
@@ -946,6 +970,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <section>
             <!--Modal sections-->
+
             <!--Assign Modal for table 4-->
             <div class="modal-parent">
                 <div class="modal modal-xl fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1041,14 +1066,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         <input type="text" class="form-control" id="assignedName" name="assignedName">
                                     </div>
 
-
-
                                     <div class="col-4" style="display:none">
                                         <label for="assignedBy" class="form-label">Assigned By:</label>
                                         <input type="text" class="form-control" id="assignedBy" name="assignedBy" readonly />
                                     </div>
-
-
                             </div>
                             <div class="footer">
                                 <button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#LezgoApproval">
@@ -1060,6 +1081,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                 </div>
             </div>
+
 
             <!-- Edit for table 4 -->
             <div class="modal fade" id="LezgoApproval" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -1075,6 +1097,133 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                 </div>
             </div>
+
+            <!--Assign Modal for table 5-->
+            <div class="modal-parent">
+                <div class="modal modal-xl fade" id="assignOutsource" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content assingee-container">
+                            <div class="assignee-header">
+                                <label for="assignedName" class="form-label assignee-tag">CHOOSE A MAINTENANCE nel:
+                                </label>
+                            </div>
+                            <div class="header">
+                                <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" class="row g-3">
+                                    <h5></h5>
+                                    <input type="hidden" name="assignMaintenance">
+                                    <div class="col-4" style="display:none">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="category" class="form-label">Category:</label>
+                                        <input type="text" class="form-control" id="category" name="category" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="building" class="form-label">Building:</label>
+                                        <input type="text" class="form-control" id="building" name="building" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="floor" class="form-label">Floor:</label>
+                                        <input type="text" class="form-control" id="floor" name="floor" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="room" class="form-label">Room:</label>
+                                        <input type="text" class="form-control" id="room" name="room" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="status" class="form-label">Status:</label>
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working">Working</option>
+                                            <option value="Under Maintenance">Under Maintenance</option>
+                                            <option value="For Replacement">For Replacement</option>
+                                            <option value="Need Repair">Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <select class="form-select assignedName2" id="assignedName2" name="assignedName" style="color: black;">
+                                            <?php
+                                            // Assuming you have a database connection established in $conn
+                                            // SQL to fetch personnel with the role of "Maintenance Personnel"
+                                            $assignSql = "SELECT firstName, middleName, lastName FROM account WHERE userlevel = '3'";
+                                            $personnelResult = $conn->query($assignSql);
+
+                                            if ($personnelResult && $personnelResult->num_rows > 0) {
+                                                while ($row = $personnelResult->fetch_assoc()) {
+                                                    $fullName = $row['firstName'] . ' ' . $row['lastName'];
+                                                    // Echo each option within the select
+                                                    echo '<option value="' . htmlspecialchars($fullName) . '">' . htmlspecialchars($fullName) . '</option>';
+                                                }
+                                            } else {
+                                                // Handle potential errors or no results
+                                                echo '<option value="No Maintenance Personnel Found">No Maintenance Personnel Found</option>';
+                                            }
+
+                                            // Add the fixed option for "Outsource"
+                                            echo '<option value="Outsource">Outsource</option>';
+                                            ?>
+                                        </select>
+
+                                        <label for="os_identity" class="form-label" style="display:none;">Outsource
+                                            Name:</label>
+                                        <input type="text" class="form-control" id="os_identity" name="os_identity" style="display:none;" />
+                                    </div>
+
+                                    <div class="col-4" id="outsourceNameField" style="display:none;">
+                                        <label for="assignedBy" class="form-label">Outsource Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName">
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy" readonly />
+                                    </div>
+                            </div>
+                            <div class="footer">
+                                <button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#assignmelods">
+                                    Save
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit for table 4 -->
+            <div class="modal fade" id="assignmelods" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-footer">
+                            Are you sure you want to save changes?
+                            <div class="modal-popups">
+                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                <button class="btn add-modal-btn" name="assignedMPOUT" data-bs-dismiss=" modal">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             </form>
         </section>
 
@@ -1454,6 +1603,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     populateModal(row, "#exampleModal4");
                     $("#exampleModal4").modal("show");
                 });
+
+
+
 
                 //PARA TO SA PAGASSIGN MODAL
                 $(document).on("click", "#pills-repair .view-btn", function(event) {
@@ -2203,6 +2355,39 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     });
             }
         </script>
+        <script>
+            function openModal(event) {
+                // Prevent the default behavior of the button
+                event.preventDefault();
+                // Stop the event from propagating to parent elements
+                event.stopPropagation();
+
+                // Get the modal element by ID
+                var modal = document.getElementById('assignOutsource');
+                // Show the modal
+                var modalInstance = new bootstrap.Modal(modal);
+                modalInstance.show();
+            }
+        </script>
+
+
+        <script>
+            // Add event listener to the form
+            document.getElementById('assignForm').addEventListener('submit', function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
+                // Submit the form
+                submitForm();
+            });
+
+            // Function to submit the form
+            function submitForm() {
+                // Your form submission logic here
+                document.getElementById('assignForm').submit();
+            }
+        </script>
+
+
 
     </body>
 
