@@ -3,8 +3,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once ("../../config/connection.php");
@@ -187,6 +187,48 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         }
         header("Location: reports.php");
     }
+
+    // Check if the form is submitted
+if (isset($_POST['transfer'])) {
+    // Retrieve assetId from the form
+    $assetIdtransfer = $_POST['asset_Idtransfer'];
+
+    // Retrieve other form data
+    $assignedNametransfer = $_POST['assignedNametransfer'];
+    $return_reasontransfer = $_POST['return_reasontransfer']; // Assuming this field is optional
+    $statustransfer = 'Need Repair';
+    $os_identitytransfer = $_POST['os_identity'];
+    // SQL UPDATE query
+    $sql6 = "UPDATE asset 
+             SET assignedName = ?, return_reason = ?, status = ?, os_identity = ?
+             WHERE assetId = ?";
+
+    // Prepare the SQL statement
+    $stmt6 = $conn->prepare($sql6);
+
+    if ($stmt6 === false) {
+        // Error occurred in preparing the statement
+        echo "Error preparing statement: " . $conn->error;
+        exit();
+    }
+
+    // Bind parameters
+    $stmt6->bind_param("ssssi", $assignedNametransfer, $return_reasontransfer, $statustransfer, $os_identitytransfer, $assetIdtransfer);
+
+    // Execute the query
+    if ($stmt6->execute()) {
+        // Update successful, redirect back to the page or any other page
+        header("Location: reports.php");
+        exit();
+    } else {
+        // Error occurred while updating
+        echo "Error transferring asset: " . $stmt6->error;
+    }
+
+    // Close statement
+    $stmt6->close();
+}
+
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -750,59 +792,59 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <span class="tab4">ASSIGNED NAME</span>
                                 </div>
                             </div>
-                            <!--Content of table 4-->
-                            <?php
-                            if ($result4->num_rows > 0) {
-                                echo "<div class='table-container repair-table'>";
-                                echo "<table>";
-                                while ($row4 = $result4->fetch_assoc()) {
-                                    $date = new DateTime($row4['date']); // Create DateTime object from fetched date
-                                    $date->modify('+8 hours'); // Add 8 hours
-                                    $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
-                                    echo '<tr>';
-                                    echo '<td>' . $row4['assetId'] . '</td>';
-                                    echo '<td>' . $formattedDate . '</td>'; // Display the adjusted date
-                                    echo '<td>' . $row4['category'] . '</td>';
-                                    echo '<td>' . $row4['building'] . " / " . $row4['floor'] . " / " . $row4['room'] . '</td>';
-                                    echo '<td style="display: none;">' . $row4['building'] . '</td>';
-                                    echo '<td style="display: none;">' . $row4['floor'] . '</td>';
-                                    echo '<td style="display: none;">' . $row4['room'] . '</td>';
-                                    echo '<td style="display: none;">' . $row4['images'] . '</td>';
-                                    echo '<td>' . $row4['status'] . '</td>';
-                                    echo '<td style="display: none;">' . $row4['assignedBy'] . '</td>';
-                                    echo '<td style="display: none;">' . $row4['description'] . '</td>';
-                                    echo '<td style="display: none;">' . $row4['return_reason'] . '</td>';
-                                    echo '<td>';
-                                    if ($row4['status'] == 'For Approval') {
-                                        echo '<form method="post" action="">';
-                                        echo '<input type="hidden" name="assetId" value="' . $row4['assetId'] . '">';
-                                        echo '<button type="button" class="btn btn-primary archive-btn" data-bs-toggle="modal" data-bs-target="#exampleModal6">Approve</button>';
-                                        echo '</form>';
-                                    } elseif ($row4['status'] == 'Need Repair' && empty($row4['assignedName'])) {
-                                        // If status is 'Need Repair' and assignedName is empty, display the assign button
-                                        echo '<form method="post" action="">';
-                                        echo '<input type="hidden" name="assetId" value="' . $row4['assetId'] . '">';
-                                        echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#exampleModal5">Assign</button>';
-                                        echo '</form>';
-                                    } else {
-                                        // Pagmeron data eto ilalabas
-                                        echo $row4['assignedName'] . '</td>';
+                           <!--Content of table 4-->
+                           <?php
+                                if ($result4->num_rows > 0) {
+                                    echo "<div class='table-container repair-table'>";
+                                    echo "<table>";
+                                    while ($row4 = $result4->fetch_assoc()) {
+                                        $date = new DateTime($row4['date']); // Create DateTime object from fetched date
+                                        $date->modify('+8 hours'); // Add 8 hours
+                                        $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
+                                        echo '<tr>';
+                                        echo '<td>' . $row4['assetId'] . '</td>';
+                                        echo '<td>' . $formattedDate . '</td>'; // Display the adjusted date
+                                        echo '<td>' . $row4['category'] . '</td>';
+                                        echo '<td>' . $row4['building'] . " / " . $row4['floor'] . " / " . $row4['room'] . '</td>';
+                                        echo '<td style="display: none;">' . $row4['building'] . '</td>';
+                                        echo '<td style="display: none;">' . $row4['floor'] . '</td>';
+                                        echo '<td style="display: none;">' . $row4['room'] . '</td>';
+                                        echo '<td style="display: none;">' . $row4['images'] . '</td>';
+                                        echo '<td>' . $row4['status'] . '</td>';
+                                        echo '<td style="display: none;">' . $row4['assignedBy'] . '</td>';
+                                        echo '<td style="display: none;">' . $row4['description'] . '</td>';
+                                        echo '<td style="display: none;">' . $row4['return_reason'] . '</td>';
+                                        echo '<td>';
+                                        if ($row4['status'] == 'For Approval') {
+                                            echo '<form method="post" action="">';
+                                            echo '<input type="hidden" name="assetId" value="' . $row4['assetId'] . '">';
+                                            echo '<button type="button" class="btn btn-primary archive-btn" data-bs-toggle="modal" data-bs-target="#exampleModal6">Approve</button>';
+                                            echo '</form>';
+                                        } elseif ($row4['status'] == 'Need Repair' && empty($row4['assignedName'])) {
+                                            // If status is 'Need Repair' and assignedName is empty, display the assign button
+                                            echo '<form method="post" action="">';
+                                            echo '<input type="hidden" name="assetId" value="' . $row4['assetId'] . '">';
+                                            echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#exampleModal5">Assign</button>';
+                                            echo '</form>';
+                                        } else {
+                                            // Pagmeron data eto ilalabas
+                                            echo $row4['assignedName'] . '</td>';
+                                        }
+                                        echo '</td>';
+                                        echo '</tr>';
                                     }
-                                    echo '</td>';
-                                    echo '</tr>';
+                                    echo "</table>";
+                                    echo "</div>";
+                                } else {
+                                    echo '<table>';
+                                    echo "<div class=noDataImgH>";
+                                    echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
+                                    echo "</div>";
+                                    echo '</table>';
                                 }
-                                echo "</table>";
-                                echo "</div>";
-                            } else {
-                                echo '<table>';
-                                echo "<div class=noDataImgH>";
-                                echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
-                                echo "</div>";
-                                echo '</table>';
-                            }
-                            ?>
+                                ?>
+                            </div>
                         </div>
-                    </div>
 
                     <!--Tab for table 5 - out-source -->
                     <div class="tab-pane fade" id="pills-out-source" role="tabpanel" aria-labelledby="out-source-tab">
@@ -1030,6 +1072,178 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </div>
         </form>
     </section>
+
+    <!--MODAL FOR THE VIEW-->
+    <div class="modal-parent">
+                            <div class="modal modal-xl fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5>View Task</h5>
+
+                                            <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="reportOutsource" method="post" class="row g-3">
+                                                <div class="col-4">
+                                                    <label for="asset_Id" class="form-label">Tracking ID:</label>
+                                                    <input type="text" class="form-control" id="asset_Idtransfer" name="asset_Idtransfer" readonly />
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="eandtime" class="form-label">Date & Time:</label>
+                                                    <input type="text" class="form-control" id="dateandtime" name="eandtime" readonly />
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="categorychuchu" class="form-label">Category:</label>
+                                                    <input type="text" class="form-control" id="categorychuchu" name="categorychuchu"  readonly  />
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="buildingdet" class="form-label">Location:</label>
+                                                    <input type="text" class="form-control" id="buildingdet" name="buildingdet" readonly />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="statusq" class="form-label">Status:</label>
+                                                    <input type="text" class="form-control" id="statusq" name="statusq" readonly />
+                                                </div>
+
+                                                <div class="col-6" id="assignedNameContainer">
+                                                <?php
+    // Assuming you have a database connection established in $conn
+    // SQL to fetch personnel with the role of "Maintenance Personnel"
+    $assignSql = "SELECT firstName, middleName, lastName FROM account WHERE userlevel = '3'";
+    $personnelResult = $conn->query($assignSql);
+
+    if ($personnelResult) {
+        echo '<select class="form-select assignedName" id="assignedNametransfer" name="assignedNametransfer" style="color: black;">';
+        while ($row = $personnelResult->fetch_assoc()) {
+            $fullName = $row['firstName'] . ' ' . $row['lastName'];
+            // Echo each option within the select
+            echo '<option value="' . htmlspecialchars($fullName) . '">' . htmlspecialchars($fullName) . '</option>';
+        }
+        // Add an input box option
+        echo '<option value="custom">Custom Input</option>';
+        echo '</select>';
+    } else {
+        // Handle potential errors or no results
+        echo '<input type="text" class="form-control assignedName" id="assignedNametransfer" name="assignedNametransfer" placeholder="Enter custom input" style="color: black; display: none;">';
+    }
+?>
+
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <label for="description" class="form-label">Description:</label>
+                                                    <input type="text" class="form-control" id="description" name="description" readonly />
+                                                </div>
+
+                                                <div class="col-12">
+    <label for="return_reason" class="form-label">Transfer Reason:</label>
+    <input type="text" class="form-control" id="return_reasontransfer" name="return_reasontransfer" readonly />
+</div>
+
+<div class="col-12" style="display:none;">
+    <label for="return_reason" class="form-label">OS Identity:</label>
+    <input type="text" class="form-control" id="os_identity" name="os_identity" readonly />
+</div>
+
+                                                <div class="footer">
+                                                    <button type="button" class="btn add-modal-btn" id="transferBtn" data-bs-toggle="modal" data-bs-target="#ForSaves" onclick="showTransferConfirmation()">
+                                                        Transfer
+                                                    </button>
+                                                </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var select = document.getElementById("assignedName");
+        var input = document.getElementById("assignedName");
+
+        select.addEventListener("change", function() {
+            if (select.value === "Custom Input") {
+                select.style.display = "none";
+                input.style.display = "block";
+            } else {
+                select.style.display = "block";
+                input.style.display = "none";
+            }
+        });
+    });
+</script>
+
+                
+
+        <!-- Modal approval-->
+        <div class="modal fade" id="ForSave" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-footer">
+                                        Are you sure you want to transfer this task?
+                                        <div class="modal-popups">
+                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                            <button class="btn add-modal-btn" name="transfer" data-bs-dismiss="modal">Yes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+        <script src="../../src/js/main.js"></script>
+        <script src="../../src/js/archive.js"></script>
+        <script src="../../src/js/profileModalController.js"></script>
+        <script src="../../src/js/logout.js"></script>
+        <script src="../../src/js/reports.js"></script>
+        <!-- Add this script after your existing scripts -->
+        <!-- Add this script after your existing scripts -->
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+<!--PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
+         <script>
+            $(document).ready(function() {
+                // Function to populate modal fields
+                function populateModal(row) {
+                    // Populate modal fields with data from the row
+                    $("#asset_Idtransfer").val(row.find("td:eq(0)").text());
+                    $("#dateandtime").val(row.find("td:eq(1)").text());
+                    $("#categorychuchu").val(row.find("td:eq(2)").text());
+                    // If building, floor, and room are concatenated in a single cell, split them
+                    var buildingFloorRoom = row.find("td:eq(3)").text().split(', ');
+                    $("#buildingdet").val(buildingFloorRoom[0]);
+                    $("#floor").val(buildingFloorRoom[1]);
+                    $("#room").val(buildingFloorRoom[2]);
+                    $("#equipment").val(row.find("td:eq(4)").text());
+                    $("#assignee").val(row.find("td:eq(5)").text());
+                    $("#statusq").val(row.find("td:eq(8)").text());
+                    $("#deadline").val(row.find("td:eq(6)").text());
+                    $("#description").val(row.find("td:eq(10)").text());
+                    $("#return_reasontransfer").val(row.find("td:eq(11)").text());
+                    $("#os_identity").val(row.find("td:eq(11)").text());
+
+                }
+
+                // Click event for the "View" button
+                $("button[data-bs-target='#exampleModal6']").click(function() {
+                    event.stopPropagation(); // Prevent the click from reaching the parent <tr>
+
+                    var row = $(this).closest("tr"); // Get the closest row to the clicked button
+                    populateModal(row); // Populate modal fields with data from the row
+
+
+
+                    $("#exampleModal6").modal("show"); // Show the modal
+                });
+            });
+        </script>
 
     <!-- PROFILE MODALS -->
     <?php include_once 'modals/modal_layout.php'; ?>
@@ -1943,6 +2157,51 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         });
     </script>
+
+        
+<script>
+            function showTransferConfirmation() {
+                Swal.fire({
+                        icon: "info",
+                        title: `Are you sure you want to transfer this task?`,
+                        showCancelButton: true,
+                        cancelButtonText: "No",
+                        focusConfirm: false,
+                        confirmButtonText: "Yes",
+                    })
+                    .then((result) => {
+                        if (result.isConfirmed) {
+                            // AJAX
+                            let form = document.querySelector("#reportOutsource");
+                            let xhr = new XMLHttpRequest();
+
+                            xhr.open("POST", "../../users/administrator/reports.php", true);
+
+                            xhr.onerror = function() {
+                                console.error("An error occurred during the XMLHttpRequest");
+                            };
+
+                            let formData = new FormData(form);
+                            formData.set("transfer", "transfer"); // Corrected line
+                            xhr.send(formData);
+
+                            // success alertbox
+                            Swal.fire({
+                                text: "Transfer Completed",
+                                icon: "success",
+                                timer: 1000,
+                                showConfirmButton: false,
+                            }).then((result) => {
+                                if (result.dismiss || Swal.DismissReason.timer) {
+                                    window.location.reload();
+                                }
+                            });
+                        }
+
+                    });
+            }
+        </script>
+
 </body>
 
 </html>
