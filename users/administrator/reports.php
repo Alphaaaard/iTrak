@@ -1281,7 +1281,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             echo '<option value="' . htmlspecialchars($fullName) . '">' . htmlspecialchars($fullName) . '</option>';
                                         }
                                         // Add an input box option
-                                        echo '<option value="custom">Custom Input</option>';
+                                        echo '<option value="custom">Outsource</option>';
                                         echo '</select>';
                                     } else {
                                         // Handle potential errors or no results
