@@ -120,7 +120,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $room2 = $_POST['room'];
         $equipment2 = $_POST['equipment'];
         $category2 = $_POST['category'];
-        $assignee2 = $_POST['assignee'];
+        $assignee2 = $_POST['assigneereal'];
         $status2 = $_POST['status'];
         $description2 = $_POST['description'];
         $deadline2 = $_POST['deadline'];
@@ -923,9 +923,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 <label id="assignee-label" for="assignee"
                                                     class="form-label">Assignee:</label>
                                                 <select class="form-select" id="assignee" name="assignee"></select>
+
+                                                <input type="text" class="form-control" id="assigneeInput"
+                                                    name="assignee" style="display: none;">
+
+                                                <input type="text" class="form-control" id="assigneeInputreal"
+                                                    name="assigneereal" style="display:none;">
                                             </div>
-
-
 
                                             <div class="col-4" style="display:none;">
                                                 <label for="status" class="form-label">Status:</label>
@@ -1048,10 +1052,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 </select>
                                             </div>
 
+                                            <!-- Add an empty assignee select element -->
                                             <div class="col-4">
-                                                <label for="new2_assignee" class="form-label">Assignee:</label>
-                                                <input type="text" class="form-control" id="new2_assignee"
-                                                    name="new2_assignee" />
+                                                <label id="assignee-label" for="assignee"
+                                                    class="form-label">Assignee:</label>
+                                                <select class="form-select" id="assignee" name="assignee"></select>
                                             </div>
 
                                             <div class="col-4" style="display: none;">
@@ -1168,31 +1173,72 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             // Get the selected category
             var category = document.getElementById('category').value;
 
-            // Make an AJAX request
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'fetchAssignees.php?category=' + category, true);
-            xhr.onload = function () {
-                if (xhr.status == 200) {
-                    // Parse the JSON response
-                    var assignees = JSON.parse(xhr.responseText);
+            // Get the assignee select and input elements
+            var assigneeSelect = document.getElementById('assignee');
+            var assigneeInput = document.getElementById('assigneeInput');
+            var assigneeInputReal = document.getElementById('assigneeInputreal');
 
-                    // Clear previous options
-                    var assigneeSelect = document.getElementById('assignee');
-                    assigneeSelect.innerHTML = '';
+            // Function to update assigneeInputreal value
+            function updateAssigneeInputReal(value) {
+                assigneeInputReal.value = value;
+            }
 
-                    // Populate the assignee select element
-                    for (var i = 0; i < assignees.length; i++) {
-                        var option = document.createElement('option');
-                        // Set the option value to concatenated firstName and lastName
-                        option.value = assignees[i].firstName + ' ' + assignees[i].lastName;
-                        option.textContent = assignees[i].firstName + ' ' + assignees[i].lastName;
-                        assigneeSelect.appendChild(option);
+            // Event listener for assigneeInput
+            assigneeInput.addEventListener('input', function () {
+                updateAssigneeInputReal(this.value);
+            });
+
+            // Check if the selected category is "Outsource"
+            if (category === "Outsource") {
+                // If it is, show the input and hide the select
+                assigneeSelect.style.display = 'none';
+                assigneeInput.style.display = 'block';
+
+                // Copy the value from the input to assigneeInputreal
+                updateAssigneeInputReal(assigneeInput.value);
+            } else {
+                // Otherwise, show the select and hide the input
+                assigneeInput.style.display = 'none';
+                assigneeSelect.style.display = 'block';
+
+                // Make an AJAX request to fetch assignees
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'fetchAssignees.php?category=' + category, true);
+                xhr.onload = function () {
+                    if (xhr.status == 200) {
+                        // Parse the JSON response
+                        var assignees = JSON.parse(xhr.responseText);
+
+                        // Clear previous options
+                        assigneeSelect.innerHTML = '';
+
+                        // Populate the assignee select element
+                        for (var i = 0; i < assignees.length; i++) {
+                            var option = document.createElement('option');
+                            // Set the option value to concatenated firstName and lastName
+                            option.value = assignees[i].firstName + ' ' + assignees[i].lastName;
+                            option.textContent = assignees[i].firstName + ' ' + assignees[i].lastName;
+                            assigneeSelect.appendChild(option);
+                        }
+
+                        // Automatically select the first option if available
+                        if (assignees.length > 0) {
+                            assigneeSelect.value = assignees[0].firstName + ' ' + assignees[0].lastName;
+                            updateAssigneeInputReal(assignees[0].firstName + ' ' + assignees[0].lastName);
+                        }
+
+                        // Event listener for assigneeSelect
+                        assigneeSelect.addEventListener('change', function () {
+                            updateAssigneeInputReal(assigneeSelect.value);
+                        });
                     }
-                }
-            };
-            xhr.send();
+                };
+                xhr.send();
+            }
         }
+
     </script>
+
 
 
     <!--PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
