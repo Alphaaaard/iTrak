@@ -3,8 +3,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
@@ -228,11 +228,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         // Retrieve assetId from the form
         $assetIdtransfer = $_POST['asset_Idtransfer'];
 
-        // Retrieve other form data
-        $assignedNametransfer = $_POST['assignedNametransfer'];
+        /// Determine the value for assignedName
+        if ($_POST['assignedNametransfer'] == 'custom') {
+            $assignedNametransfer = $_POST['outsource_assignee']; // Use outsource_assignee value if custom input is selected
+        } else {
+            $assignedNametransfer = $_POST['assignedNametransfer']; // Use assignedNametransfer value otherwise
+        }
+
         $return_reasontransfer = $_POST['return_reasontransfer']; // Assuming this field is optional
         $statustransfer = 'Need Repair';
-        $os_identitytransfer = $_POST['os_identity'];
+        $os_identitytransfer = $_POST['os_identitytransfer'];
         // SQL UPDATE query
         $sql6 = "UPDATE asset 
              SET assignedName = ?, return_reason = ?, status = ?, os_identity = ?
@@ -1284,7 +1289,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     }
                                     ?>
 
+                                    <div class="col-6" id="outsourceAssigneeSection" style="display: none;">
+                                            <label for="outsource_assignee" class="form-label">Outsource Name:</label>
+                                            <input type="text" class="form-control" id="outsource_assignee" name="outsource_assignee"/>
+                                    </div>
+
                                 </div>
+
+                                
 
                                 <div class="col-12">
                                     <label for="description" class="form-label">Description:</label>
@@ -1298,7 +1310,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                 <div class="col-12" style="display:none;">
                                     <label for="return_reason" class="form-label">OS Identity:</label>
-                                    <input type="text" class="form-control" id="os_identity" name="os_identity" readonly />
+                                    <input type="text" class="form-control" id="os_identitytransfer" name="os_identitytransfer" readonly />
                                 </div>
 
                                 <div class="footer">
@@ -1315,22 +1327,30 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </div>
         </div>
         </div>
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                var select = document.getElementById("assignedName");
-                var input = document.getElementById("assignedName");
 
-                select.addEventListener("change", function() {
-                    if (select.value === "Custom Input") {
-                        select.style.display = "none";
-                        input.style.display = "block";
-                    } else {
-                        select.style.display = "block";
-                        input.style.display = "none";
-                    }
-                });
-            });
+        <script>
+            function toggleCustomInput() {
+            var assignedNameSelect = document.getElementById("assignedNametransfer");
+            var outsourceAssigneeSection = document.getElementById("outsourceAssigneeSection");
+
+            if (assignedNameSelect.value === "custom") {
+                outsourceAssigneeSection.style.display = "block";
+            } else {
+                outsourceAssigneeSection.style.display = "none";
+            }
+            }
+
+            // Call toggleCustomInput() when the page loads to ensure correct initial state
+            toggleCustomInput();
+
+            // Adding an event listener to trigger toggleCustomInput() when the select value changes
+            document.getElementById("assignedNametransfer").addEventListener("change", toggleCustomInput);
         </script>
+
+     
+
+
+
 
 
 
@@ -1381,7 +1401,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     $("#deadline").val(row.find("td:eq(6)").text());
                     $("#description").val(row.find("td:eq(10)").text());
                     $("#return_reasontransfer").val(row.find("td:eq(11)").text());
-                    $("#os_identity").val(row.find("td:eq(11)").text());
+                    $("#os_identitytransfer").val(row.find("td:eq(11)").text());
 
                 }
 
