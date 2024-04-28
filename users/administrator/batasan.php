@@ -139,20 +139,27 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt3->bind_param("ssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $request_id2);
 
         // Execute the query
-        if ($stmt3->execute()) {
-            // Update successful, redirect back to batasan.php or any other page
-            header("Location: batasan.php");
-            exit();
-        } else {
-            // Error occurred while updating
-            echo "Error updating request: " . $stmt3->error;
-        }
-
-        // Close statement
-        $stmt3->close();
+    if ($stmt3->execute()) {
+        // Log activity for admin approval with new assignee
+        $approval_action = "Task ID $request_id2 approved with $assignee2 as new assignee.";
+        $reassignment_action =  "Task ID $request_id2 reassigned to $assignee2.";
+        logActivity($conn, $_SESSION['accountId'], $approval_action, 'General');
+        logActivity($conn, $_SESSION['accountId'], $reassignment_action, 'General');
+    
+        // Redirect back to the page
+        header("Location: batasan.php");
+        
+        exit();
+    } else {
+        // Error occurred while updating
+        echo "Error updating request: " . $stmt3->error;
     }
 
-    if (isset($_POST['outsource'])) {
+    // Close statement
+    $stmt3->close();
+}
+
+    if (isset($_POST['Outsource'])) {
         $request_id4 = $_POST['new2_request_id'];
         $campus4 = $_POST['new2_campus'];
         $building4 = $_POST['new2_building'];
@@ -174,21 +181,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         // Bind parameters
         $stmt4->bind_param("ssssssssssss", $campus4, $building4, $floor4, $room4, $equipment4, $req_by4, $category4, $assignee4, $status4, $description4, $deadline4, $request_id4);
 
-        if ($stmt4->execute()) {
-            // Log activity for task update
-            $action4 = "Updated task for $assignee4";
-            logActivity($conn, $_SESSION['accountId'], $action4, 'General');
+       // Execute the query
+    if ($stmt4->execute()) {
+        // Log activity for admin approval with outsource as new assignee
+        $action4 = "Task ID $request_id4 approved with Outsource ($assignee4) as new assignee.";
 
-            // Redirect to the desired page
-            header("Location: batasan.php");
-            exit(); // Make sure to exit to prevent further execution
-        } else {
-            echo "Error updating data: " . $conn->error;
-        }
+        logActivity($conn, $_SESSION['accountId'], $action4, 'General');
 
-        $conn->close();
+        // Redirect back to the page
+        header("Location: batasan.php");
+        exit();
+    } else {
+        echo "Error updating data: " . $conn->error;
     }
 
+    $stmt4->close();
+}
 
 
 

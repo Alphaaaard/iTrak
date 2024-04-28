@@ -36,7 +36,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
  FROM activitylogs AS ac
  LEFT JOIN account AS a ON ac.accountID = a.accountID
  WHERE ac.tab = 'General' AND 
- (ac.action LIKE ? OR ac.action LIKE ? OR ac.action LIKE ?)
+ (ac.action LIKE ? OR ac.action LIKE ? OR ac.action LIKE ? OR ac.action LIKE ?)
  ORDER BY ac.date DESC";
  
  // Prepare the SQL statement
@@ -46,9 +46,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
  $pattern1 = "Assigned maintenance personnel $loggedInUserFirstName%";
  $pattern2 = "Created and assigned task to $loggedInUserFirstName%";
  $pattern3 = "Changed status of%";
- $stmtg->bind_param("sss", $pattern1, $pattern2, $pattern3);
+ $pattern4 = "Task ID % reassigned to $loggedInUserFirstName%";
+ 
+ $stmtg->bind_param("ssss", $pattern1, $pattern2, $pattern3, $pattern4);
  $stmtg->execute();
  $resultGeneral = $stmtg->get_result();
+ 
  
 
 
