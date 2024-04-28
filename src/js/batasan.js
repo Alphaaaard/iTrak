@@ -41,10 +41,10 @@ function showAddConfirmation() {
   });
 }
 
-function showOutsourceConfirmation() {
+function showOutsourcesConfirmation() {
   Swal.fire({
       icon: "info",
-      title: `Are you sure you want to outsource this task?`,
+      title: `Are you sure you want to mark this task as completed?`,
       showCancelButton: true,
       cancelButtonText: "No",
       focusConfirm: false,
@@ -56,7 +56,7 @@ function showOutsourceConfirmation() {
         swalConfirm.setAttribute("name", "done");
   
         // AJAX
-        let form = document.querySelector("#outsourceForm");
+        let form = document.querySelector("#outsourcesForm");
         let xhr = new XMLHttpRequest();
   
         xhr.open("POST", "../../users/administrator/batasan.php", true);
@@ -71,7 +71,7 @@ function showOutsourceConfirmation() {
   
         // success alertbox
         Swal.fire({
-          text: "The task has been outsourced!",
+          text: "The task has been marked as done!",
           icon: "success",
           timer: 1000,
           showConfirmButton: false,

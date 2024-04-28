@@ -44,7 +44,7 @@ function showAddConfirmation() {
   function showOutsourcesConfirmation() {
     Swal.fire({
         icon: "info",
-        title: `Are you sure you want to outsource this task?`,
+        title: `Are you sure you want to mark this task as completed?`,
         showCancelButton: true,
         cancelButtonText: "No",
         focusConfirm: false,
@@ -71,7 +71,7 @@ function showAddConfirmation() {
     
           // success alertbox
           Swal.fire({
-            text: "The task has been outsourced!",
+            text: "The task has been marked as done!",
             icon: "success",
             timer: 1000,
             showConfirmButton: false,
