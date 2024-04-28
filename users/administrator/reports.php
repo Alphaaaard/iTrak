@@ -3,8 +3,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once ("../../config/connection.php");
@@ -197,7 +197,7 @@ if (isset($_POST['transfer'])) {
     $assignedNametransfer = $_POST['assignedNametransfer'];
     $return_reasontransfer = $_POST['return_reasontransfer']; // Assuming this field is optional
     $statustransfer = 'Need Repair';
-    $os_identitytransfer = $_POST['os_identity'];
+    $os_identitytransfer = $_POST['os_identitytransfer'];
     // SQL UPDATE query
     $sql6 = "UPDATE asset 
              SET assignedName = ?, return_reason = ?, status = ?, os_identity = ?
@@ -1142,9 +1142,9 @@ if (isset($_POST['transfer'])) {
     <input type="text" class="form-control" id="return_reasontransfer" name="return_reasontransfer" readonly />
 </div>
 
-<div class="col-12" style="display:none;">
-    <label for="return_reason" class="form-label">OS Identity:</label>
-    <input type="text" class="form-control" id="os_identity" name="os_identity" readonly />
+<div class="col-12">
+    <label for="os_identity" class="form-label">OS Identity:</label>
+    <input type="text" class="form-control" id="os_identitytransfer" name="os_identitytransfer" readonly />
 </div>
 
                                                 <div class="footer">
@@ -1227,7 +1227,7 @@ if (isset($_POST['transfer'])) {
                     $("#deadline").val(row.find("td:eq(6)").text());
                     $("#description").val(row.find("td:eq(10)").text());
                     $("#return_reasontransfer").val(row.find("td:eq(11)").text());
-                    $("#os_identity").val(row.find("td:eq(11)").text());
+                    $("#os_identitytransfer").val(row.find("td:eq(11)").text());
 
                 }
 
