@@ -154,7 +154,6 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         $asset_id2 = $_POST['asset_id'];
 
         // Retrieve other form data
-        $category = $_POST['category'];
         $building2 = $_POST['building'];
         $floor2 = $_POST['floor'];
         $room2 = $_POST['room'];
@@ -163,7 +162,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         $assignee2 = "";
         $status2 = "For Approval";
         $description2 = $_POST['description'];
-        $date = $_POST['date'];
+        $date2 = $_POST['brrt'];
 
         // Retrieve selected return_reason from radio buttons
         $return_reason = $_POST['return_reason'];
@@ -180,12 +179,12 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         $stmt3 = $conn->prepare($sql3);
 
         // Bind parameters
-        $stmt3->bind_param("sssssssssi", $category, $building2, $floor2, $room2, $assignee2, $status2, $description2, $date, $return_reason, $asset_id2);
+        $stmt3->bind_param("sssssssssi", $category2, $building2, $floor2, $room2, $assignee2, $status2, $description2, $date2, $return_reason, $asset_id2);
 
         // Execute the query
         if ($stmt3->execute()) {
             // Update successful, redirect back to batasan.php or any other page
-            header("Location: request.php");
+            header("Location: assigned-tasks.php");
             exit();
         } else {
             // Error occurred while updating
@@ -593,15 +592,9 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                                     <input type="text" class="form-control" id="assignee" name="assignee" readonly />
                                                 </div>
 
-                                                <!-- <div class="col-4">
-                                                    <label for="status" class="form-label">Status:</label>
-                                                    <input type="text" class="form-control" id="status" name="status" readonly />
-                                                </div> -->
-
-
                                                 <div class="col-4">
-                                                    <label for="deadline" class="form-label">Date:</label>
-                                                    <input type="text" class="form-control" id="date" name="date" readonly />
+                                                    <label for="brrt" class="form-label">Date:</label>
+                                                    <input type="text" class="form-control" id="brrt" name="brrt" readonly />
                                                 </div>
 
                                                 <div class="col-12">
@@ -1076,8 +1069,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 // Function to populate modal fields
                 function populateModal(row) {
                     // Populate modal fields with data from the row
-                    $("#asset_id").val(row.find("td:eq(0)").text());
-                    $("#date").val(row.find("td:eq(1)").text());
+                    $("#asset_id").val(row.find("td:eq(0)").text());                
                     $("#category").val(row.find("td:eq(2)").text());
                     // If building, floor, and room are concatenated in a single cell, split them
                     var buildingFloorRoom = row.find("td:eq(3)").text().split('/ ');
@@ -1085,8 +1077,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     $("#floor").val(buildingFloorRoom[1]);
                     $("#room").val(buildingFloorRoom[2]);
                     $("#assignee").val(row.find("td:eq(10)").text());
+                    $("#brrt").val(row.find("td:eq(1)").text());
                     $("#status").val(row.find("td:eq(8)").text());
-                    $("#date").val(row.find("td:eq(11)").text());
                     $("#description").val(row.find("td:eq(12)").text());
                     $("#return_reason_show").val(row.find("td:eq(15)").text());
                 }
