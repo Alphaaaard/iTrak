@@ -195,6 +195,47 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         // Close statement
         $stmt3->close();
     }
+
+        // UPDATE FOR DONE
+        if (isset($_POST['done'])) {
+            // Retrieve request_id from the form
+            $asset_iddone = $_POST['asset_id'];
+            $statusdone = "Working";
+    
+    
+            // SQL UPDATE query
+            $sqldone = "UPDATE asset
+                 SET status = ?      
+                 WHERE assetId = ?";
+    
+            // Prepare the SQL statement
+            $stmt5 = $conn->prepare($sqldone);
+    
+            // Bind parameters
+            $stmt5->bind_param("si", $statusdone, $asset_iddone);
+    
+    
+            // Execute the query
+            if ($stmt5->execute()) {
+                // Check if status changed from pending to done
+                if ($status_before_update == 'Need Repair' && $statusdone == 'Working') {
+                    // Log the activity
+                    $action = "Changed status of Task ID $request_id5 from Need Repair to Working";
+                    insertActivityLog($conn, $accountId, $action);
+                }
+    
+                // Update successful, redirect back to batasan.php or any other page
+                header("Location: assigned-tasks.php");
+                exit();
+            } else {
+                // Error occurred while updating
+                echo "Error updating request: " . $stmt5->error;
+            }
+    
+            // Close statement
+            $stmt5->close();
+        }
+
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -623,7 +664,12 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                     data-bs-target="#ForTransfer">
                                     Transfer
                                 </button>
+                                <button type="button" class="btn add-modal-btn" id="doneBtn"
+                                    data-bs-toggle="modal" data-bs-target="#ForDone">
+                                    Done
+                                </button>
                             </div>
+                            
                     </div>
                 </div>
             </div>
@@ -1130,6 +1176,49 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         });
     </script>
 
+    <script>
+        function showTaskConfirmation() {
+        Swal.fire({
+            icon: "info",
+            title: `Are you sure you want to mark this task as completed?`,
+            showCancelButton: true,
+            cancelButtonText: "No",
+            focusConfirm: false,
+            confirmButtonText: "Yes",
+        }).then((result) => {
+            if (result.isConfirmed) {
+            let swalConfirm = document.querySelector(".swal2-confirm");
+            swalConfirm.setAttribute("name", "done");
+
+            // AJAX
+            let form = document.querySelector("#requestForm");
+            let xhr = new XMLHttpRequest();
+
+            xhr.open("POST", "../../users/personnel/request.php", true);
+
+            xhr.onerror = function () {
+                console.error("An error occurred during the XMLHttpRequest");
+            };
+
+            let formData = new FormData(form);
+            formData.set("done", swalConfirm);
+            xhr.send(formData);
+
+            // success alertbox
+            Swal.fire({
+                text: "The task has been marked as done!",
+                icon: "success",
+                timer: 1000,
+                showConfirmButton: false,
+            }).then((result) => {
+                if (result.dismiss || Swal.DismissReason.timer) {
+                window.location.reload();
+                }
+            });
+            }
+        });
+        }
+    </script>   
 </body>
 
 </html>
