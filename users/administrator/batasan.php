@@ -199,15 +199,18 @@ if (isset($_POST['add'])) {
         $status4 = 'Done';
         $description4 = $_POST['new2_description'];
         $deadline4 = $_POST['new2_deadline'];
-
+    
+        // Calculate the current date plus 8 hours
+        $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
+    
         // Update data in the request table
-        $updateQuery = "UPDATE request SET campus=?, building=?, floor=?, room=?, equipment=?, req_by=?, category=?, assignee=?, status=?, description=?, deadline=? WHERE request_id=?";
-
+        $updateQuery = "UPDATE request SET campus=?, building=?, floor=?, room=?, equipment=?, req_by=?, category=?, assignee=?, status=?, description=?, deadline=?, date=? WHERE request_id=?";
+    
         $stmt4 = $conn->prepare($updateQuery);
-
+    
         // Bind parameters
-        $stmt4->bind_param("ssssssssssss", $campus4, $building4, $floor4, $room4, $equipment4, $req_by4, $category4, $assignee4, $status4, $description4, $deadline4, $request_id4);
-
+        $stmt4->bind_param("ssssssssssssi", $campus4, $building4, $floor4, $room4, $equipment4, $req_by4, $category4, $assignee4, $status4, $description4, $deadline4, $adjusted_date, $request_id4);
+    
         // Execute the query
         if ($stmt4->execute()) {
             // Log activity for admin approval with outsource as new assignee
