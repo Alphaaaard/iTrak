@@ -3,8 +3,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
@@ -926,9 +926,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         echo '<td>' . $row5['status'] . '</td>';
                                         echo '<td>' . $row5['assignedName'] . '</td>'; // Display assigned name under correct column
                                         echo '<td>';
-                                        echo '<form method="post" action="">';
+                                        echo '<form id="doneOutsource" method="post" action="">';
                                         echo '<input type="hidden" name="assetId" value="' . $row5['assetId'] . '">';
-                                        echo '<button type="submit" name="complete" class="btn btn-primary view-btn archive-btn">Done</button>';
+                                        echo '<button type="submit" onclick="confirmCompletion()" name="complete" class="btn btn-primary view-btn archive-btn">Done</button>';
                                         echo '</form>';
                                         echo '</td>';
                                         echo '</tr>';
@@ -988,7 +988,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="row g-3">
+                                <form id="assignPersonnelForm" method="post" class="row g-3">
                                     <h5></h5>
                                     <input type="hidden" name="assignMaintenance">
                                     <div class="col-4" style="display:none">
@@ -1077,10 +1077,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     </div>
                             </div>
                             <div class="footer">
-                                <button type="button" id="saveOutsourceBtn" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#LezgoApproval">
+                            <button type="button" id="saveOutsourceBtn" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#LezgoApproval" class="btn add-modal-btn" onclick="assignPersonnel()">
                                     Save
                                 </button>
-
                             </div>
                         </div>
                     </div>
@@ -1115,7 +1114,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
-            <!-- Edit for table 4 -->
+            <!-- Edit for table 4
             <div class="modal fade" id="LezgoApproval" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -1128,7 +1127,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!--Assign Modal for table 5-->
             <!-- <div class="modal-parent">
@@ -2402,6 +2401,41 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     });
             }
         </script>
+        <script>
+    function confirmCompletion() {
+        // Display a SweetAlert2 confirmation dialog
+        Swal.fire({
+                                text: "Task Completed",
+                                icon: "success",
+                                timer: 1000,
+                                showConfirmButton: false,
+        }).then((result) => {
+                        if (result.isConfirmed) {
+                            // AJAX
+                            let form = document.querySelector("#doneOutsource");
+                            let xhr = new XMLHttpRequest();
+
+                            xhr.open("POST", "../../users/administrator/reports.php", true);
+
+                            xhr.onerror = function() {
+                                console.error("An error occurred during the XMLHttpRequest");
+                            };
+                            // success alertbox
+                            Swal.fire({
+                                text: "Task Completed",
+                                icon: "success",
+                                timer: 1000,
+                                showConfirmButton: false,
+                            }).then((result) => {
+                                if (result.dismiss || Swal.DismissReason.timer) {
+                                    window.location.reload();
+                                }
+                            });
+                        }
+
+                    });
+            }
+</script>
         <script>
             function openModal(event) {
                 // Prevent the default behavior of the button
