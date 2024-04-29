@@ -137,19 +137,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $description2 = $_POST['description'];
         $deadline2 = $_POST['deadline'];
 
+        // Calculate the current date plus 8 hours
+        $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
+
         // SQL UPDATE query
         $sql3 = "UPDATE request 
                  SET campus = ?, building = ?, floor = ?, room = ?, 
                      equipment = ?, category = ?, assignee = ?, 
-                     status = ?, description = ?, deadline = ? 
+                     status = ?, description = ?, deadline = ?, date = ?
                  WHERE request_id = ?";
 
         // Prepare the SQL statement
         $stmt3 = $conn->prepare($sql3);
 
         // Bind parameters
-        $stmt3->bind_param("ssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $request_id2);
-
+        $stmt3->bind_param("sssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $adjusted_date, $request_id2);
+       
         // Execute the query
         if ($stmt3->execute()) {
             // Update successful, redirect back to sanFrancisco.php or any other page
