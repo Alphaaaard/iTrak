@@ -1,4 +1,11 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+
 session_start();
 include_once ("../../config/connection.php");
 date_default_timezone_set('Asia/Manila');
@@ -195,7 +202,64 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     }
 
 
+    // Function to send email notifications for approaching deadlines
+    function sendDeadlineNotifications($conn)
+    {
+        // Set up the time threshold to 1 day before the deadline
+        $deadlineThreshold = date('Y-m-d', strtotime(' +1 day'));
 
+        // Query tasks with approaching deadlines based on the input date from the modal form
+        $sql = "SELECT req.*, acc.email 
+                FROM request AS req 
+                JOIN account AS acc ON req.assignee = CONCAT(acc.firstName, ' ', acc.lastName)
+                WHERE req.deadline = ? AND req.notification_sent = 0"; // Add condition to check if notification has not been sent
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $deadlineThreshold);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Iterate through results and send email notifications
+        while ($row = $result->fetch_assoc()) {
+            $assigneeEmail = $row['email'];
+            $taskDescription = $row['description'];
+
+            // Create a new PHPMailer instance
+            $mail = new PHPMailer;
+
+            // Set up SMTP
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'qcu.upkeep@gmail.com';
+            $mail->Password = 'qvpx bbcm bgmy hcvf';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+
+            //Recipients
+            $mail->setFrom('qcu.upkeep@gmail.com', 'iTrak');
+            $mail->addAddress($assigneeEmail);
+            $mail->Subject = 'Deadline Reminder: ' . $taskDescription;
+            $mail->Body = 'This is a reminder that the deadline for task "' . $taskDescription . '" is approaching. Please ensure it is completed on time.';
+
+            // Send the email
+            if (!$mail->send()) {
+                echo 'Email could not be sent.';
+                echo 'Mailer Error: ' . $mail->ErrorInfo;
+            } else {
+                // Mark the task as notification sent
+                $taskId = $row['request_id'];
+                $updateSql = "UPDATE request SET notification_sent = 1 WHERE request_id = ?";
+                $updateStmt = $conn->prepare($updateSql);
+                $updateStmt->bind_param("i", $taskId);
+                $updateStmt->execute();
+                $updateStmt->close();
+
+            }
+        }
+    }
+
+    // Call the function when needed, for example in your PHP script:
+    sendDeadlineNotifications($conn);
 
 
 
@@ -637,6 +701,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     echo '<td style="display:none;">' . $row['description'] . '</td>';
                                     echo '<td style="display:none;">' . $row['req_by'] . '</td>';
                                     echo '<td style="display:none;">' . $row['return_reason'] . '</td>';
+                                    echo '<td></td>';
+
                                     echo '</tr>';
                                 }
                                 echo "</table>";
@@ -663,8 +729,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         <th>Location</th>
                                         <th>Equipment</th>
                                         <th>Assignee</th>
-                                        <th>Status</th>
                                         <th>Deadline</th>
+
+                                        <th>Status</th>
                                         <th></th>
                                     </tr>
                                 </table>
@@ -681,8 +748,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     echo '<td>' . $row2['building'] . ', ' . $row2['floor'] . ', ' . $row2['room'] . '</td>';
                                     echo '<td>' . $row2['equipment'] . '</td>';
                                     echo '<td>' . $row2['assignee'] . '</td>';
-                                    echo '<td >' . $row2['status'] . '</td>';
                                     echo '<td>' . $row2['deadline'] . '</td>';
+                                    echo '<td >' . $row2['status'] . '</td>';
 
                                     // Check if status is "Pending"
                                     if ($row2['status'] == 'Pending') {
@@ -705,6 +772,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     echo '<td style="display:none;">' . $row2['description'] . '</td>';
                                     echo '<td style="display:none;">' . $row2['req_by'] . '</td>';
                                     echo '<td style="display:none;">' . $row2['return_reason'] . '</td>';
+                                    echo '<td></td>';
                                     echo '</tr>';
                                 }
                                 echo "</table>";
@@ -1001,11 +1069,18 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 </select>
                                             </div>
 
+
                                             <!-- Add an empty assignee select element -->
                                             <div class="col-4">
                                                 <label id="assignee-label" for="assignee"
                                                     class="form-label">Assignee:</label>
                                                 <select class="form-select" id="assignee" name="assignee"></select>
+
+                                                <input type="text" class="form-control" id="assigneeInput"
+                                                    name="assignee" style="display: none;">
+
+                                                <input type="text" class="form-control" id="assigneeInputreal"
+                                                    name="assigneereal" style="display:none;">
                                             </div>
 
 
@@ -1086,19 +1161,19 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             <div class="col-4">
                                                 <label for="new2_building" class="form-label">Building:</label>
                                                 <input type="text" class="form-control" id="new2_building"
-                                                    name="new2_building" />
+                                                    name="new2_building" readonly />
                                             </div>
 
                                             <div class="col-4">
                                                 <label for="new2_floor" class="form-label">Floor:</label>
                                                 <input type="text" class="form-control" id="new2_floor"
-                                                    name="new2_floor" />
+                                                    name="new2_floor" readonly />
                                             </div>
 
                                             <div class="col-4">
                                                 <label for="new2_room" class="form-label">Room: </label>
-                                                <input type="text" class="form-control" id="new2_room"
-                                                    name="new2_room" />
+                                                <input type="text" class="form-control" id="new2_room" name="new2_room"
+                                                    readonly />
                                             </div>
                                             <div class="col-4" style="display:none;">
                                                 <label for="new2_campus" class="form-label">Campus:</label>
@@ -1110,7 +1185,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             <div class="col-4">
                                                 <label for="new2_equipment" class="form-label">Equipment :</label>
                                                 <input type="text" class="form-control" id="new2_equipment"
-                                                    name="new2_equipment" />
+                                                    name="new2_equipment" readonly />
                                             </div>
 
                                             <div class="col-4" style="display:none;">
@@ -1122,19 +1197,26 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             <div class="col-4">
                                                 <label for="new2_category" class="form-label">Category:</label>
                                                 <select class="form-select" id="new2_category" name="new2_category"
-                                                    onchange="fetchRandomAssignee1()">
+                                                    onchange="fetchRandomAssignee1()" readonly
+                                                    style="background-color: #d6e4f0 !important;">
                                                     <option value="Outsource">Outsource</option>
                                                     <option value="Carpentry">Carpentry</option>
                                                     <option value="Electrical">Electrical</option>
                                                     <option value="Plumbing">Plumbing</option>
-
                                                 </select>
                                             </div>
+
+                                            <script>
+                                                // Disable all options and prevent the default behavior of the select element
+                                                document.getElementById("new2_category").addEventListener("mousedown", function (event) {
+                                                    event.preventDefault();
+                                                });
+                                            </script>
 
                                             <div class="col-4">
                                                 <label for="new2_assignee" class="form-label">Assignee:</label>
                                                 <input type="text" class="form-control" id="new2_assignee"
-                                                    name="new2_assignee" />
+                                                    name="new2_assignee" readonly />
                                             </div>
 
                                             <div class="col-4" style="display: none;">
@@ -1146,7 +1228,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             <div class="col-4">
                                                 <label for="new2_deadline" class="form-label">Deadline:</label>
                                                 <input type="date" class="form-control" id="new2_deadline"
-                                                    name="new2_deadline" />
+                                                    name="new2_deadline" readonly />
                                             </div>
 
                                             <div class="col-12">
@@ -1175,6 +1257,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             </div>
                         </div>
                     </div>
+
                     <!--edit for outsource-->
                     <div class="modal fade" id="addoutsource" data-bs-backdrop="static" data-bs-keyboard="false"
                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -1231,21 +1314,19 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     <!-- Cascading Script -->
     <script>
         var subjectObject = {
-            "Batasan Campus Building": {
-                "Basement": ["Male CR", "Female CR"],
-                "1F": ["Lobby", "Com Lab 104", "Com Lab 103", "Room 102", "Room 101", "Guidance Clinic 108", "Admin Office 107", "Faculty Room 106", "Library 105"],
-                "2F": ["Male CR left", "Female CR left", "03 room 201", "04 room 202", "05 room 203", "06 room 205", "07 room 206", "08 room 207""Male CR right", "Female CR right"],
-                "3F": ["Room 301", "Room 302", "Room 303", "Room 304", "Room 305", "09 room 306", "10 room 307", "11 room 308", "12 room 309"],
-                "4F": ["20 room 401", "19 room 402", "18 room 403", "17 room 404", "Room 405", "16 room 406", "15 room 407", "14 room 408", "13 room 409"]
+            "San Francisco Campus Building": {
+                "1F": ["RM101", "RM102", "RM103"],
+                "2F": ["RM201 Admin & Guidance Office", "RM202 Library", "RM203 Faculty & PESO Room", "RM204 Isolation & Clinic"],
+                "3F": ["RM301 Regular Room", "RM302 Computer Laboratory", "RM303 Regular Room", "RM304 Regular Room"],
             },
-            "Basketball Court": {
-                "PHP": ["Variables", "Strings", "Arrays"],
-                "SQL": ["SELECT", "UPDATE", "DELETE"]
+            "Open Grounds (OG)": {
+                // "PHP": ["Variables", "Strings", "Arrays"],
+                // "SQL": ["SELECT", "UPDATE", "DELETE"]
             },
-            "Parking Area": {
-                "PHP": ["Variables", "Strings", "Arrays"],
-                "SQL": ["SELECT", "UPDATE", "DELETE"]
-            }
+            // "Parking Area": {
+            //     "PHP": ["Variables", "Strings", "Arrays"],
+            //     "SQL": ["SELECT", "UPDATE", "DELETE"]
+            // }
         }
         window.onload = function () {
             var subjectSel = document.getElementById("new_building");
@@ -1291,7 +1372,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         document.getElementById("new_deadline").min = tomorrowFormatted;
     </script>
 
-    <!--PARA SA PAGCHANGE NG LABEL-->
     <!--PARA SA PAGCHANGE NG LABEL-->
     <script>
         function fetchRandomAssignee() {
@@ -1508,6 +1588,82 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+    <script>
+        // Select the input element
+        var inputElement = document.getElementById('new2_description');
+
+        // Create a new textarea element
+        var textareaElement = document.createElement('textarea');
+
+        // Copy attributes from input to textarea
+        textareaElement.className = inputElement.className;
+        textareaElement.id = inputElement.id;
+        textareaElement.name = inputElement.name;
+        textareaElement.readOnly = true;
+
+        // Replace the input element with the textarea
+        inputElement.parentNode.replaceChild(textareaElement, inputElement);
+    </script>
+    <script>
+        // Get the input element
+        var inputElement = document.getElementById('new_description');
+
+        // Create a new textarea element
+        var textareaElement = document.createElement('textarea');
+
+        // Copy attributes from input to textarea
+        textareaElement.className = inputElement.className;
+        textareaElement.id = inputElement.id;
+        textareaElement.name = inputElement.name;
+
+        // Replace input with textarea
+        inputElement.parentNode.replaceChild(textareaElement, inputElement);
+    </script>
+
+    <script>
+        // Get today's date
+        var today = new Date();
+
+        // Set tomorrow's date
+        var tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        // Format tomorrow's date as yyyy-mm-dd
+        var tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+
+        // Set the minimum date of the input field to tomorrow
+        document.getElementById("new_deadline").min = tomorrowFormatted;
+    </script>
+
+    <script>
+        // Get today's date
+        var today = new Date();
+
+        // Set tomorrow's date
+        var tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        // Format tomorrow's date as yyyy-mm-dd
+        var tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+
+        // Set the minimum date of the input field to tomorrow
+        document.getElementById("deadline").min = tomorrowFormatted;
+    </script>
+
+    <script>
+        // Get today's date
+        var today = new Date();
+
+        // Set tomorrow's date
+        var tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        // Format tomorrow's date as yyyy-mm-dd
+        var tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+
+        // Set the minimum date of the input field to tomorrow
+        document.getElementById("new2_deadline").min = tomorrowFormatted;
+    </script>
 
 </body>
 
