@@ -10,8 +10,8 @@ function insertActivityLog($conn, $accountId, $action)
 {
     // Set default values for additional columns
     $tab = "General";
-    $seen = 0;
-    $m_seen = 0;
+    $seen = 1;
+    $m_seen = 1;
     $p_seen = 1;
 
     $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab, seen, m_seen, p_seen) VALUES (?, NOW(), ?, ?, ?, ?, ?)");

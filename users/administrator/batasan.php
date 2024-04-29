@@ -771,7 +771,27 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         echo '<td>' . $row2['equipment'] . '</td>';
                                         echo '<td>' . $row2['assignee'] . '</td>';
                                         echo '<td>' . $row2['deadline'] . '</td>';
-                                        echo '<td >' . $row2['status'] . '</td>';
+                                        $status = $row['status'];
+                                        $status_color = '';
+
+                                        // Set the color based on the status
+                                        switch ($status) {
+                                            case 'Pending':
+                                                $status_color = 'blue';
+                                                break;
+                                            case 'Done':
+                                                $status_color = 'green';
+                                                break;
+                                            case 'For Approval':
+                                                $status_color = 'red';
+                                                break;
+                                            default:
+                                                // Default color if status doesn't match
+                                                $status_color = 'black';
+                                        }
+
+                                        // Output the status with appropriate color
+                                        echo '<td class="' . $status_color . '">' . $status . '</td>';
 
                                         // Check if status is "Pending"
                                         if ($row2['status'] == 'Pending') {
@@ -841,7 +861,27 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         echo '<td>' . $row4['equipment'] . '</td>';
                                         echo '<td>' . $row4['assignee'] . '</td>';
                                         echo '<td>' . $row4['deadline'] . '</td>';
-                                        echo '<td >' . $row4['status'] . '</td>';
+                                        $status = $row['status'];
+                                        $status_color = '';
+
+                                        // Set the color based on the status
+                                        switch ($status) {
+                                            case 'Pending':
+                                                $status_color = 'blue';
+                                                break;
+                                            case 'Done':
+                                                $status_color = 'green';
+                                                break;
+                                            case 'For Approval':
+                                                $status_color = 'red';
+                                                break;
+                                            default:
+                                                // Default color if status doesn't match
+                                                $status_color = 'black';
+                                        }
+
+                                        // Output the status with appropriate color
+                                        echo '<td class="' . $status_color . '">' . $status . '</td>';
 
                                         // Check if status is "Pending"
                                         if ($row4['status'] == 'Pending') {
