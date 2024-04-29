@@ -88,11 +88,21 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sql01 = "SELECT r.* FROM request r
     INNER JOIN account a ON r.assignee = CONCAT(a.firstName, ' ', a.lastName)
     WHERE r.campus IN ('Batasan', 'San Bartolome', 'San Francisco') 
-    AND r.status IN ('Done', 'For Approval', 'Pending') AND a.accountId = ?";
+    AND r.status IN ( 'For Approval', 'Pending') AND a.accountId = ?";
     $stmt01 = $conn->prepare($sql01);
     $stmt01->bind_param("i", $accountId);
     $stmt01->execute();
     $result01 = $stmt01->get_result();
+
+    // Modify the first query to filter by the logged-in account ID
+    $sql06 = "SELECT r.* FROM request r
+    INNER JOIN account a ON r.assignee = CONCAT(a.firstName, ' ', a.lastName)
+    WHERE r.campus IN ('Batasan', 'San Bartolome', 'San Francisco') 
+    AND r.status = 'Done' AND a.accountId = ?";
+    $stmt06 = $conn->prepare($sql06);
+    $stmt06->bind_param("i", $accountId);
+    $stmt06->execute();
+    $result06 = $stmt06->get_result();
 
     // Fetch data from "request" table for "Outsource" status based on the logged-in user's name
     $sql02 = "SELECT r.* FROM request r
@@ -579,6 +589,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     <div class="new-nav">
                         <ul>
                             <li><a href="#" class="nav-link" data-bs-target="pills-manager">Request</a></li>
+                            <li><a href="#" class="nav-link" data-bs-target="pills-done">Done</a></li>
 
                         </ul>
                     </div>
@@ -594,6 +605,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
 
                 <div class="tab-content pt" id="myTabContent">
+
                     <div class="tab-pane fade show active" id="pills-manager" role="tabpanel"
                         aria-labelledby="home-tab">
                         <div class="table-content">
@@ -673,6 +685,62 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                             ?>
                         </div>
                     </div>
+
+                    <div class="tab-pane fade" id="pills-done" role="tabpanel" aria-labelledby="done-tab">
+                        <div class="table-content">
+                            <div class='table-header'>
+                                <table>
+                                    <tr>
+                                        <th>Request ID</th>
+                                        <th>Date & Time</th>
+                                        <th>Category</th>
+                                        <th>Location</th>
+                                        <th>Equipment</th>
+                                        <th>Assignee</th>
+                                        <th>Deadline</th>
+                                        <th>Status</th>
+
+                                    </tr>
+                                </table>
+                            </div>
+                            <?php
+                            if ($result06->num_rows > 0) {
+                                echo "<div class='table-container'>";
+                                echo "<table>";
+                                while ($row6 = $result06->fetch_assoc()) {
+                                    echo '<tr>';
+                                    echo '<td>' . $row6['request_id'] . '</td>';
+                                    echo '<td>' . $row6['date'] . '</td>';
+                                    echo '<td>' . $row6['category'] . '</td>';
+                                    echo '<td>' . $row6['building'] . ', ' . $row6['floor'] . ', ' . $row6['room'] . '</td>';
+                                    echo '<td>' . $row6['equipment'] . '</td>';
+                                    echo '<td>' . $row6['assignee'] . '</td>';
+                                    echo '<td>' . $row6['deadline'] . '</td>';
+                                    echo '<td >' . $row6['status'] . '</td>';
+                                    echo '<td style="display:none;">' . $row6['campus'] . '</td>';
+                                    echo '<td style="display:none;">' . $row6['building'] . '</td>';
+                                    echo '<td style="display:none;">' . $row6['floor'] . '</td>';
+                                    echo '<td style="display:none;">' . $row6['room'] . '</td>';
+                                    echo '<td style="display:none;">' . $row6['description'] . '</td>';
+                                    echo '<td style="display:none;">' . $row6['req_by'] . '</td>';
+                                    echo '<td style="display:none;">' . $row6['return_reason'] . '</td>';
+                                    echo '<td></td>';
+                                    echo '</tr>';
+                                }
+                                echo "</table>";
+                                echo "</div>";
+                            } else {
+                                echo '<table>';
+                                echo "<div class=noDataImgH>";
+                                echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
+                                echo "</div>";
+                                echo '</table>';
+                            }
+                            ?>
+                        </div>
+                    </div>
+
+
 
                     <!--MODAL FOR THE VIEW-->
                     <!-- <form action="POST" id=""> -->
