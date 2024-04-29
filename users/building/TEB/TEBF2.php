@@ -445,20 +445,20 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             </a>
             <ul class="side-menu top">
                 <li>
-                    <a href="./dashboard.php">
+                    <a href="../../administrator/dashboard.php">
                         <i class="bi bi-grid"></i>
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="./attendance-logs.php">
-                        <i class="bi bi-calendar-week"></i>
+                    <a href="../../administrator/attendance-logs.php">
+                        <i class=" bi bi-calendar-week"></i>
                         <span class="text">Attendance Logs</span>
                     </a>
                 </li>
                 <li>
-                    <a href="./staff.php">
-                        <i class="bi bi-person"></i>
+                    <a href="../../administrator/staff.php">
+                        <i class=" bi bi-person"></i>
                         <span class="text">Staff</span>
                     </a>
                 </li>
@@ -477,26 +477,26 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
                 <div class="GPS-container">
                     <li class="GPS-Tracker">
-                        <a href="./gps.php">
-                            <i class="bi bi-crosshair"></i>
+                        <a href="../../administrator/gps.php">
+                            <i class=" bi bi-crosshair"></i>
                             <span class="text">GPS Tracker</span>
                         </a>
                     </li>
                     <li class="GPS-History">
-                        <a href="./gps_history.php">
+                        <a href="../../administrator/gps_history.php">
                             <i class="bi bi-radar"></i>
                             <span class="text">GPS History</span>
                         </a>
                     </li>
                 </div>
                 <li class="active">
-                    <a href="./map.php">
+                    <a href="../../administrator/map.php">
                         <i class="bi bi-map"></i>
                         <span class="text">Map</span>
                     </a>
                 </li>
                 <li>
-                    <a href="./reports.php">
+                    <a href="../../administrator/reports.php">
                         <i class="bi bi-clipboard"></i>
                         <span class="text">Reports</span>
                     </a>
@@ -516,32 +516,32 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
                 <div class="Map-container">
                     <li class="Map-Batasan">
-                        <a href="./batasan.php">
+                        <a href="../../administrator/batasan.php">
                             <i class="bi bi-building"></i>
                             <span class="text">Batasan</span>
                         </a>
                     </li>
                     <li class="Map-SanBartolome">
-                        <a href="./sanBartolome.php">
+                        <a href="../../administrator/sanBartolome.php">
                             <i class="bi bi-building"></i>
                             <span class="text">San Bartolome</span>
                         </a>
                     </li>
                     <li class="Map-SanFrancisco">
-                        <a href="./sanFrancisco.php">
+                        <a href="../../administrator/sanFrancisco.php">
                             <i class="bi bi-building"></i>
                             <span class="text">San Francisco</span>
                         </a>
                     </li>
                 </div>
                 <li>
-                    <a href="./archive.php">
+                    <a href="../../administrator/archive.php">
                         <i class="bi bi-archive"></i>
                         <span class="text">Archive</span>
                     </a>
                 </li>
                 <li>
-                    <a href="./activity-logs.php">
+                    <a href="../../administrator/activity-logs.php">
                         <i class="bi bi-arrow-counterclockwise"></i>
                         <span class="text">Activity Logs</span>
                     </a>

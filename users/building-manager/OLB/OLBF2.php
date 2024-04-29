@@ -307,13 +307,13 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             </a>
             <ul class="side-menu top">
                 <li>
-                    <a href="./dashboard.php">
+                    <a href="../../manager/dashboard.php">
                         <i class="bi bi-grid"></i>
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="./attendance-logs.php">
+                    <a href="../../manager/attendance-logs.php">
                         <i class="bi bi-calendar-week"></i>
                         <span class="text">Attendance Logs</span>
                     </a>
@@ -333,26 +333,26 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 </div>
                 <div class="GPS-container">
                     <li class="GPS-Tracker">
-                        <a href="./gps.php">
+                        <a href="../../manager/gps.php">
                             <i class="bi bi-crosshair"></i>
                             <span class="text">GPS Tracker</span>
                         </a>
                     </li>
                     <li class="GPS-History">
-                        <a href="./gps_history.php">
+                        <a href="../../manager/gps_history.php">
                             <i class="bi bi-radar"></i>
                             <span class="text">GPS History</span>
                         </a>
                     </li>
                 </div>
                 <li class="active">
-                    <a href="./map.php">
+                    <a href="../../manager/map.php">
                         <i class="bi bi-map"></i>
                         <span class="text">Map</span>
                     </a>
                 </li>
                 <li>
-                    <a href="./reports.php">
+                    <a href="../../manager/reports.php">
                         <i class="bi bi-clipboard"></i>
                         <span class="text">Reports</span>
                     </a>
@@ -372,26 +372,26 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 </div>
                 <div class="Map-container">
                     <li class="Map-Batasan">
-                        <a href="./batasan.php">
+                        <a href="../../manager/batasan.php">
                             <i class="bi bi-building"></i>
                             <span class="text">Batasan</span>
                         </a>
                     </li>
                     <li class="Map-SanBartolome">
-                        <a href="./sanBartolome.php">
+                        <a href="../../manager/sanBartolome.php">
                             <i class="bi bi-building"></i>
                             <span class="text">San Bartolome</span>
                         </a>
                     </li>
                     <li class="Map-SanFrancisco">
-                        <a href="./sanFrancisco.php">
+                        <a href="../../manager/sanFrancisco.php">
                             <i class="bi bi-building"></i>
                             <span class="text">San Francisco</span>
                         </a>
                     </li>
                 </div>
                 <li>
-                    <a href="./activity-logs.php">
+                    <a href="../../manager/activity-logs.php">
                         <i class="bi bi-arrow-counterclockwise"></i>
                         <span class="text">Activity Logs</span>
                     </a>
