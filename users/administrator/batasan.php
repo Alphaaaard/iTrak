@@ -4,8 +4,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once ("../../config/connection.php");
@@ -1185,6 +1185,7 @@ if (isset($_POST['add'])) {
                                                     <option value="" selected="selected">Select Room</option>
                                                 </select>
                                             </div>
+
                                             <div class="col-4" style="display:none;">
                                                 <label for="new_campus" class="form-label">Campus:</label>
                                                 <input type="text" class="form-control" id="new_campus"
@@ -1592,12 +1593,18 @@ if (isset($_POST['add'])) {
     <!-- Cascading Script -->
     <script>
         var subjectObject = {
-            "Front-end": {
-                "HTML": ["Links", "Images", "Tables", "Lists"],
-                "CSS": ["Borders", "Margins", "Backgrounds", "Float"],
-                "JavaScript": ["Variables", "Operators", "Functions", "Conditions"]
+            "Batasan Campus Building": {
+                "Basement": ["Male CR", "Female CR"],
+                "1F": ["Lobby", "Com Lab 104", "Com Lab 103", "Room 102", "Room 101", "Guidance Clinic 108", "Admin Office 107", "Faculty Room 106", "Library 105"],
+                "2F": ["Male CR", "Female CR", "03 room 201", "04 room 202", "05 room 203", "Room 205"],
+                "3F": ["Variables", "Operators", "Functions", "Conditions"],
+                "4F": ["Variables", "Operators", "Functions", "Conditions"]
             },
-            "Back-end": {
+            "Basketball Court": {
+                "PHP": ["Variables", "Strings", "Arrays"],
+                "SQL": ["SELECT", "UPDATE", "DELETE"]
+            },
+            "Parking Area": {
                 "PHP": ["Variables", "Strings", "Arrays"],
                 "SQL": ["SELECT", "UPDATE", "DELETE"]
             }
