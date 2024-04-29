@@ -1373,13 +1373,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             document.getElementById("assignedNametransfer").addEventListener("change", toggleCustomInput);
         </script>
 
-
-
-
-
-
-
-
         <!-- Modal approval-->
         <div class="modal fade" id="ForSave" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -2467,6 +2460,35 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 document.getElementById('assignForm').submit();
             }
         </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const exportBtn = document.getElementById('exportBtn');
+                const tabs = document.querySelectorAll('.nav-link');
+
+                // Function to disable export button
+                function disableExportButton() {
+                    exportBtn.disabled = true;
+                }
+
+                // Function to enable export button
+                function enableExportButton() {
+                    exportBtn.disabled = false;
+                }
+
+                // Event listener to detect when any tab is clicked
+                tabs.forEach(function (tab) {
+                    tab.addEventListener('click', function () {
+                        if (tab.textContent.trim() === "Outsource") {
+                            disableExportButton();
+                        } else {
+                            enableExportButton();
+                        }
+                    });
+                });
+            });
+        </script>
+
 
 
 
