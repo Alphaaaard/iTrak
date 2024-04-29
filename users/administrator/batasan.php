@@ -644,284 +644,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 data-bs-target="#addRequest">Add Task</button>
                         </form>
 
-                        <!--MODAL FOR THE APPROVAL-->
-                        <div class="modal-parent">
-                            <div class="modal modal-xl fade" id="ForApproval" tabindex="-1"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5>For Approval:</h5>
-
-                                            <button class="btn btn-close-modal-emp close-modal-btn"
-                                                data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form id="approvalForm" method="post" class="row g-3">
-                                                <div class="col-4" style="display:none;">
-                                                    <label for="request_id" class="form-label">Request ID:</label>
-                                                    <input type="text" class="form-control" id="request_id"
-                                                        name="request_id" readonly />
-                                                </div>
-                                                <div class="col-4" style="display:none;">
-                                                    <label for="date" class="form-label">Date & Time:</label>
-                                                    <input type="text" class="form-control" id="date" name="date" />
-                                                </div>
-                                                <div class="col-4" style="display:none;">
-                                                    <label for="campus" class="form-label">Campus:</label>
-                                                    <input type="text" class="form-control" id="campus" name="campus"
-                                                        value="Batasan" />
-                                                </div>
-                                                <div class="col-4">
-                                                    <label for="building" class="form-label">Building:</label>
-                                                    <input type="text" class="form-control" id="building"
-                                                        name="building" readonly />
-                                                </div>
-
-                                                <div class="col-4">
-                                                    <label for="floor" class="form-label">Floor:</label>
-                                                    <input type="text" class="form-control" id="floor" name="floor"
-                                                        readonly />
-                                                </div>
-
-                                                <div class="col-4">
-                                                    <label for="room" class="form-label">Room: </label>
-                                                    <input type="text" class="form-control" id="room" name="room"
-                                                        readonly />
-                                                </div>
-
-                                                <div class="col-4">
-                                                    <label for="equipment" class="form-label">Equipment :</label>
-                                                    <input type="text" class="form-control" id="equipment"
-                                                        name="equipment" readonly />
-                                                </div>
-
-                                                <div class="col-4" style="display:none;">
-                                                    <label for="req_by" class="form-label">Requested By: </label>
-                                                    <input type="text" class="form-control" id="req_by" name="req_by" />
-                                                </div>
-
-                                                <div class="col-4">
-                                                    <label for="category" class="form-label">Category:</label>
-                                                    <select class="form-select" id="category" name="category"
-                                                        onchange="fetchRandomAssignee()">
-                                                        <option value="Outsource">Outsource</option>
-                                                        <option value="Carpentry">Carpentry</option>
-                                                        <option value="Electrical">Electrical</option>
-                                                        <option value="Plumbing">Plumbing</option>
-                                                    </select>
-                                                </div>
-
-                                                <!-- Add an empty assignee select element -->
-                                                <div class="col-4">
-                                                    <label id="assignee-label" for="assignee"
-                                                        class="form-label">Assignee:</label>
-                                                    <select class="form-select" id="assignee" name="assignee"></select>
-
-                                                    <input type="text" class="form-control" id="assigneeInput"
-                                                        name="assignee" style="display: none;">
-
-                                                    <input type="text" class="form-control" id="assigneeInputreal"
-                                                        name="assigneereal" style="display:none;">
-                                                </div>
-
-                                                <div class="col-4" style="display:none;">
-                                                    <label for="status" class="form-label">Status:</label>
-                                                    <input type="text" class="form-control" value="Pending"
-                                                        id="status_modal" name="status" />
-                                                </div>
-
-                                                <div class="col-4">
-                                                    <label for="deadline" class="form-label">Deadline:</label>
-                                                    <input type="date" class="form-control" id="deadline"
-                                                        name="deadline" />
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <label for="description" class="form-label">Description:</label>
-                                                    <input type="text" class="form-control" id="description"
-                                                        name="description" />
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <label for="return_reason" class="form-label">Transfer
-                                                        Reason:</label>
-                                                    <input type="text" class="form-control" id="return_reason"
-                                                        name="return_reason" readonly />
-                                                </div>
-
-                                                <div class="footer">
-                                                    <button type="button" class="btn add-modal-btn"
-                                                        data-bs-toggle="modal" data-bs-target="#ForApprovals"
-                                                        onclick="showApprovalConfirmation()">
-                                                        Save
-                                                    </button>
-                                                </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Edit for approval-->
-                        <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false"
-                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-footer">
-                                        Are you sure you want to save changes?
-                                        <div class="modal-popups">
-                                            <button type="button" class="btn close-popups"
-                                                data-bs-dismiss="modal">No</button>
-                                            <!-- <button class="btn add-modal-btn" name="approval" data-bs-dismiss="modal">Yes</button> -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </form>
-
-                        <!--MODAL FOR OUTSOURCE-->
-                        <div class="modal-parent">
-                            <div class="modal modal-xl fade" id="ForOutsource" tabindex="-1"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5>For Outsource:</h5>
-                                            <button class="btn btn-close-modal-emp close-modal-btn"
-                                                data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form id="outsourcesForm" method="post" class="row g-3">
-                                                <div class="col-4" style="display:none;">
-                                                    <label for="new_request_id" class="form-label">Request ID:</label>
-                                                    <input type="text" class="form-control" id="new2_request_id"
-                                                        name="new2_request_id" readonly />
-                                                </div>
-                                                <div class="col-4">
-                                                    <label for="new2_building" class="form-label">Building:</label>
-                                                    <input type="text" class="form-control" id="new2_building"
-                                                        name="new2_building" readonly />
-                                                </div>
-
-                                                <div class="col-4">
-                                                    <label for="new2_floor" class="form-label">Floor:</label>
-                                                    <input type="text" class="form-control" id="new2_floor"
-                                                        name="new2_floor" readonly />
-                                                </div>
-
-                                                <div class="col-4">
-                                                    <label for="new2_room" class="form-label">Room: </label>
-                                                    <input type="text" class="form-control" id="new2_room"
-                                                        name="new2_room" readonly />
-                                                </div>
-                                                <div class="col-4" style="display:none;">
-                                                    <label for="new2_campus" class="form-label">Campus:</label>
-                                                    <input type="text" class="form-control" id="new2_campus"
-                                                        name="new2_campus" value="Batasan" />
-                                                </div>
 
 
-                                                <div class="col-4">
-                                                    <label for="new2_equipment" class="form-label">Equipment :</label>
-                                                    <input type="text" class="form-control" id="new2_equipment"
-                                                        name="new2_equipment" readonly />
-                                                </div>
-
-                                                <div class="col-4" style="display:none;">
-                                                    <label for="new2_req_by" class="form-label">Requested By: </label>
-                                                    <input type="text" class="form-control" id="new2_req_by"
-                                                        name="new2_req_by" />
-                                                </div>
-
-                                                <div class="col-4">
-                                                    <label for="new2_category" class="form-label">Category:</label>
-                                                    <select class="form-select" id="new2_category" name="new2_category"
-                                                        onchange="fetchRandomAssignee1()" readonly
-                                                        style="background-color: #d6e4f0 !important;">
-                                                        <option value="Outsource">Outsource</option>
-                                                        <option value="Carpentry">Carpentry</option>
-                                                        <option value="Electrical">Electrical</option>
-                                                        <option value="Plumbing">Plumbing</option>
-                                                    </select>
-                                                </div>
-
-                                                <script>
-                                                    // Disable all options and prevent the default behavior of the select element
-                                                    document.getElementById("new2_category").addEventListener("mousedown", function (event) {
-                                                        event.preventDefault();
-                                                    });
-                                                </script>
-
-
-                                                <!-- Add an empty assignee select element -->
-                                                <div class="col-4">
-                                                    <label id="assignee-label" for="new2_assignee"
-                                                        class="form-label">Assignee:</label>
-                                                    <input type="text" class="form-control" id="new2_assignee"
-                                                        name="new2_assignee" readonly />
-                                                    <!-- <select class="form-select" id="assignee" name="assignee"></select> -->
-
-                                                </div>
-
-                                                <div class="col-4" style="display: none;">
-                                                    <label for="new2_status" class="form-label">Status:</label>
-                                                    <input type="text" class="form-control" value="Pending"
-                                                        id="new2_status" name="new2_status" />
-                                                </div>
-
-                                                <div class="col-4">
-                                                    <label for="new2_deadline" class="form-label">Deadline:</label>
-                                                    <input type="date" class="form-control" id="new2_deadline"
-                                                        name="new2_deadline" readonly />
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <label for="new2_description"
-                                                        class="form-label">Description:</label>
-                                                    <input type="text" class="form-control" id="new2_description"
-                                                        name="new2_description" readonly />
-                                                </div>
-
-
-                                                <div class="col-12">
-                                                    <label for="return_reason" class="form-label">Transfer
-                                                        Reason:</label>
-                                                    <input type="text" class="form-control" id="new2_return_reason"
-                                                        name="new2_return_reason" readonly />
-                                                </div>
-
-                                                <div class="footer">
-                                                    <button type="button" class="btn add-modal-btn"
-                                                        data-bs-toggle="modal" data-bs-target="#ForOutsourcess"
-                                                        onclick="showOutsourcesConfirmation()">
-                                                        Save
-                                                    </button>
-                                                </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--edit for outsource-->
-                        <div class="modal fade" id="addoutsource" data-bs-backdrop="static" data-bs-keyboard="false"
-                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-footer">
-                                        Are you sure you want to save changes?
-                                        <div class="modal-popups">
-                                            <button type="button" class="btn close-popups"
-                                                data-bs-dismiss="modal">No</button>
-                                            <!-- <button class="btn add-modal-btn" name="outsource"
-                                            data-bs-dismiss="modal">Yes</button> -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </form>
 
 
 
@@ -930,6 +654,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
                 <div class="tab-content pt" id="myTabContent">
+                    <!--TABLE FOR REQUEST-->
                     <div class="tab-pane fade show active" id="pills-manager" role="tabpanel"
                         aria-labelledby="home-tab">
                         <div class="table-content">
@@ -1020,6 +745,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
                     </div>
 
+                    <!--TABLE FOR OUTSOURCE-->
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="table-content">
                             <div class='table-header'>
@@ -1089,6 +815,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
                     </div>
 
+                    <!--TABLE FOR DONE-->
                     <div class="tab-pane fade" id="pills-done" role="tabpanel" aria-labelledby="done-tab">
                         <div class="table-content">
                             <div class='table-header'>
@@ -1448,7 +1175,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form id="outsourceForm" method="post" class="row g-3">
+                                        <form id="outsourcesForm" method="post" class="row g-3">
                                             <div class="col-4" style="display:none;">
                                                 <label for="new_request_id" class="form-label">Request ID:</label>
                                                 <input type="text" class="form-control" id="new2_request_id"
@@ -1457,19 +1184,19 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             <div class="col-4">
                                                 <label for="new2_building" class="form-label">Building:</label>
                                                 <input type="text" class="form-control" id="new2_building"
-                                                    name="new2_building" />
+                                                    name="new2_building" readonly />
                                             </div>
 
                                             <div class="col-4">
                                                 <label for="new2_floor" class="form-label">Floor:</label>
                                                 <input type="text" class="form-control" id="new2_floor"
-                                                    name="new2_floor" />
+                                                    name="new2_floor" readonly />
                                             </div>
 
                                             <div class="col-4">
                                                 <label for="new2_room" class="form-label">Room: </label>
-                                                <input type="text" class="form-control" id="new2_room"
-                                                    name="new2_room" />
+                                                <input type="text" class="form-control" id="new2_room" name="new2_room"
+                                                    readonly />
                                             </div>
                                             <div class="col-4" style="display:none;">
                                                 <label for="new2_campus" class="form-label">Campus:</label>
@@ -1481,7 +1208,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             <div class="col-4">
                                                 <label for="new2_equipment" class="form-label">Equipment :</label>
                                                 <input type="text" class="form-control" id="new2_equipment"
-                                                    name="new2_equipment" />
+                                                    name="new2_equipment" readonly />
                                             </div>
 
                                             <div class="col-4" style="display:none;">
@@ -1493,20 +1220,31 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             <div class="col-4">
                                                 <label for="new2_category" class="form-label">Category:</label>
                                                 <select class="form-select" id="new2_category" name="new2_category"
-                                                    onchange="fetchRandomAssignee1()">
+                                                    onchange="fetchRandomAssignee1()" readonly
+                                                    style="background-color: #d6e4f0 !important;">
                                                     <option value="Outsource">Outsource</option>
                                                     <option value="Carpentry">Carpentry</option>
                                                     <option value="Electrical">Electrical</option>
                                                     <option value="Plumbing">Plumbing</option>
-
                                                 </select>
                                             </div>
 
+                                            <script>
+                                                // Disable all options and prevent the default behavior of the select element
+                                                document.getElementById("new2_category").addEventListener("mousedown", function (event) {
+                                                    event.preventDefault();
+                                                });
+                                            </script>
+
+
                                             <!-- Add an empty assignee select element -->
                                             <div class="col-4">
-                                                <label id="assignee-label" for="assignee"
+                                                <label id="assignee-label" for="new2_assignee"
                                                     class="form-label">Assignee:</label>
-                                                <select class="form-select" id="assignee" name="assignee"></select>
+                                                <input type="text" class="form-control" id="new2_assignee"
+                                                    name="new2_assignee" readonly />
+                                                <!-- <select class="form-select" id="assignee" name="assignee"></select> -->
+
                                             </div>
 
                                             <div class="col-4" style="display: none;">
@@ -1518,13 +1256,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             <div class="col-4">
                                                 <label for="new2_deadline" class="form-label">Deadline:</label>
                                                 <input type="date" class="form-control" id="new2_deadline"
-                                                    name="new2_deadline" />
+                                                    name="new2_deadline" readonly />
                                             </div>
 
                                             <div class="col-12">
                                                 <label for="new2_description" class="form-label">Description:</label>
                                                 <input type="text" class="form-control" id="new2_description"
-                                                    name="new2_description" />
+                                                    name="new2_description" readonly />
                                             </div>
 
 
@@ -1537,8 +1275,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                             <div class="footer">
                                                 <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                                    data-bs-target="#ForOutsources"
-                                                    onclick="showOutsourceConfirmation()">
+                                                    data-bs-target="#ForOutsourcess"
+                                                    onclick="showOutsourcesConfirmation()">
                                                     Save
                                                 </button>
                                             </div>
@@ -1565,6 +1303,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
                     </div>
                     </form>
+
 
 
 
@@ -1660,7 +1399,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         document.getElementById("new_deadline").min = tomorrowFormatted;
     </script>
 
-    <!--PARA SA PAGCHANGE NG LABEL-->
+    <!--PARA SA PAGCHANGE NG LABEL/DROPDOWN NAMES-->
     <script>
         function fetchRandomAssignee() {
             // Get the selected category

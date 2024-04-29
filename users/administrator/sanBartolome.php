@@ -1234,14 +1234,51 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     <!-- Cascading Script -->
     <script>
         var subjectObject = {
-            "Building 1": {
-                "Floor 1": ["Room 1", "Images", "Tables", "Lists"],
-                "CSS": ["Borders", "Margins", "Backgrounds", "Float"],
-                "JavaScript": ["Variables", "Operators", "Functions", "Conditions"]
+            "New Academic": {
+                "1F": ["Pantry", "Recovery Room", "Dental Clinic", "Guidance Office", "Faculty Lounge", "CR", "Lobby", "Landing", "Storage", "Counseling Room", "Medical and Dental Clinic", "Nurse Room", "Dental Room", "Generator Room", "EE Room", "Server Room", "Medical Consultation"],
+                "2F": ["Librarians Office", "Digital Library", "University Library", "Baggage Counter", "Meeting Room 1", "Meeting Room 2", "Meeting Room 3", "Meeting Room 4", "Meeting Room 5", "Meeting Room 6", "Emergency Exit", "Server Room", "EE RM", "Coffee Shop", "CR"],
+                "3F": ["Lobby", "Lec Rm 301", "Lec Rm 302", "Lec Rm 303", "Lec Rm 304", "Lec Rm 305", "Lec Rm 306", "AV Rm 307", "CR", "Storage"],
+                "4F": ["Lec Rm 401", "Lec Rm 402", "Lec Rm 403", "Lec Rm 404", "Lec Rm 405", "Lec Rm 406", "Rm 407", "Landing", "EE RM"],
+                "5F": ["Lec Rm 501", "Lec Rm 502", "Lec Rm 503", "Lec Rm 504", "Lec Rm 505", "Lec Rm 506", "Rm 507", "Landing", "EE RM"],
+                "6F": ["Lec Rm 601", "Lec Rm 602", "Lec Rm 603", "Lec Rm 604", "Lec Rm 605", "Lec Rm 606", "Rm 607", "Landing", "EE RM"],
+                "7F": ["Lec Rm 701", "Lec Rm 702", "Lec Rm 703", "Lec Rm 704", "Lec Rm 705", "Lec Rm 706", "Rm 707", "Landing", "EE RM", "Rain Water Tank", "Storage Rm"]
             },
-            "Back-end": {
-                "PHP": ["Variables", "Strings", "Arrays"],
-                "SQL": ["SELECT", "UPDATE", "DELETE"]
+            "Yellow": {
+                "1F": ["IB101A", "IB102A", "IB103A", "IB104A", "IB105A", "IB106A", "IB107A", "IB108A", "IB109A", "IB110A", "CR FEMALE", "CR MALE", "HALLWAY"],
+                "2F": ["IB201F", "IB202C", "IB203B", "IB204B", "IB205B", "IB206B", "IB207B", "IB208B", "IB209C", "IB210D", "CR FEMALE", "CR MALE", "HALLWAY"]
+            },
+            "Techvoc": {
+                "1F": ["Dress Making Lab", "PF-BAGM Department", "OSAS", "Auto Mechanic Lab", "Carpentry", "Conference Room", "BDC Office", "Power RM", "Cuisine Art & Banquet Service", "PF-Stock RM", "Electrical Installation and Maintenance Lab", "Refrigeration and Aircon Lab", "Techvoc Gym", "CR"],
+                "2F": ["IA205", "IA206e", "IA207e", "IA208e", "IA209e", "IA210", "IA211a", "IA212a", "IA213a", "IA214a", "IA215a", "IA216", "Scholarship Office", "Management Information System Office", "Auto Mechanic Lec.", "Consumer Electronic Lab.", "CR"]
+            },
+            "Korphil": {
+                "1F": ["Room A", "Room B", "Directors's RM", "Lobby", "Room C", "Room D", "Room E", "Medical Staff", "Waiting Area", "Electric RM", "Generator RM", "Student Affairs Office", "Proposed Cafeteria"],
+                "2F": ["Utility RM", "Course Coord. RM", "E-Learning RM", "Server RM", "Lecture RM", "Utility RM", "Com Lab", "Temporary Lab"],
+                "3F": ["Storage", "Seminar RM", "Com Lab", "Storage", "Multi Purpose RM"]
+            },
+            "Admin": {
+                "Ground Floor": ["Lobby"]
+            },
+            "Belmonte": {
+                "1F": ["IC101a", "IC102a", "IC103a", "IC104a", "PE Faculty Room", "IC105a", "IC106a", "CR"],
+                "2F": ["IC201a", "IC202a", "IC203a", "IC204a", "Guidance Office", "IC205a", "IC206a", "IC207a", "CR"],
+                "3F": ["IC301a", "IC302a", "IC303a", "IC304a", "Stock Room", "IC305a", "IC306a", "IC307a", "CR"],
+                "4F": ["IC401a", "IC402a", "IC403a", "IC404a", "Research & Extension Office", "IC405a", "IC406a", "IC407a"]
+            },
+            "Bautista": {
+                "Basement": ["Canteen", "Entrance", "CR", "Storage", "Fire Exit", "Kitchen", "HE Room", "Food Stall", "Security Room", "RM 106", "Main Stairs", "PWD CR", "EE Room"],
+                "Ground Floor": ["Pump Room", "Receiving Area", "Lobby", "Room 1", "Storage Room", "Control Room", "Room 2", "Fire Exit", "AUX Exit", "Room 3", "Room 4", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Toilet", "Janitor Room", "Corridor"],
+                "2F": ["Faculty Office", "Humanities Faculty Office", "Storage Room", "Control Room", "IK201", "Fire Exit", "IK202", "Storage Room", "Control Room", "EE Room", "AUX Room", "IK203", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Janitor Room", "PWD", "Toilet", "Corridor"],
+                "3F": ["Storage Room", "Control Room", "Fire Exit", "Toilet", "Corridor", "Dry Pantry", "Archive", "Faculty", "IK301", "IK302", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Janitor Room", "PWD"],
+                "4F": ["Storage Room", "Faculty", "Control Room", "IK401", "Fire Exit", "IK402", "IK403", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Toilet", "Janitor Room", "Corridor", "PWD"],
+                "5F": ["Storage", "Archive", "Dry Pantry", "Faculty", "Control Room", "IK501", "Fire Exit", "IK502", "IK503", "AUX Room", "EE Room", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Toilet", "Janitor Room", "PWD", "Corridor"],
+                "6F": ["Storage", "Faculty", "Control Room", "IK601", "Fire Exit", "IK602", "AUX Room", "EE Room", "IK603", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Toilet", "Janitor Room", "PWD", "Corridor"]
+            },
+            "Multipurpose": {
+                "1F": ["Lobby"]
+            },
+            "Chinese B": {
+                "1F": ["Lobby"]
             }
         }
         window.onload = function () {
