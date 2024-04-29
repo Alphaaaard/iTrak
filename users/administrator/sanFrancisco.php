@@ -1,4 +1,11 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+
 session_start();
 include_once("../../config/connection.php");
 date_default_timezone_set('Asia/Manila');
@@ -195,7 +202,63 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     }
 
 
+    // Function to send email notifications for approaching deadlines
+    function sendDeadlineNotifications($conn) {
+        // Set up the time threshold to 1 day before the deadline
+        $deadlineThreshold = date('Y-m-d', strtotime(' +1 day'));
 
+        // Query tasks with approaching deadlines based on the input date from the modal form
+        $sql = "SELECT req.*, acc.email 
+                FROM request AS req 
+                JOIN account AS acc ON req.assignee = CONCAT(acc.firstName, ' ', acc.lastName)
+                WHERE req.deadline = ? AND req.notification_sent = 0"; // Add condition to check if notification has not been sent
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $deadlineThreshold);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Iterate through results and send email notifications
+        while ($row = $result->fetch_assoc()) {
+            $assigneeEmail = $row['email'];
+            $taskDescription = $row['description'];
+
+            // Create a new PHPMailer instance
+            $mail = new PHPMailer;
+
+            // Set up SMTP
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'qcu.upkeep@gmail.com';
+            $mail->Password = 'qvpx bbcm bgmy hcvf';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+
+            //Recipients
+            $mail->setFrom('qcu.upkeep@gmail.com', 'iTrak');
+            $mail->addAddress($assigneeEmail);
+            $mail->Subject = 'Deadline Reminder: ' . $taskDescription;
+            $mail->Body = 'This is a reminder that the deadline for task "' . $taskDescription . '" is approaching. Please ensure it is completed on time.';
+            
+            // Send the email
+            if (!$mail->send()) {
+                echo 'Email could not be sent.';
+                echo 'Mailer Error: ' . $mail->ErrorInfo;
+            } else {
+                // Mark the task as notification sent
+                $taskId = $row['request_id'];
+                $updateSql = "UPDATE request SET notification_sent = 1 WHERE request_id = ?";
+                $updateStmt = $conn->prepare($updateSql);
+                $updateStmt->bind_param("i", $taskId);
+                $updateStmt->execute();
+                $updateStmt->close();
+
+            }
+        }
+    }
+
+    // Call the function when needed, for example in your PHP script:
+    sendDeadlineNotifications($conn);
 
 
 
@@ -1450,6 +1513,51 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             // Replace input with textarea
             inputElement.parentNode.replaceChild(textareaElement, inputElement);
         </script>
+
+        <script>
+                // Get today's date
+                var today = new Date();
+
+                // Set tomorrow's date
+                var tomorrow = new Date(today);
+                tomorrow.setDate(tomorrow.getDate() + 1);
+
+                // Format tomorrow's date as yyyy-mm-dd
+                var tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+
+                // Set the minimum date of the input field to tomorrow
+                document.getElementById("new_deadline").min = tomorrowFormatted;
+            </script>
+
+        <script>
+                // Get today's date
+                var today = new Date();
+
+                // Set tomorrow's date
+                var tomorrow = new Date(today);
+                tomorrow.setDate(tomorrow.getDate() + 1);
+
+                // Format tomorrow's date as yyyy-mm-dd
+                var tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+
+                // Set the minimum date of the input field to tomorrow
+                document.getElementById("deadline").min = tomorrowFormatted;
+            </script>
+
+        <script>
+                // Get today's date
+                var today = new Date();
+
+                // Set tomorrow's date
+                var tomorrow = new Date(today);
+                tomorrow.setDate(tomorrow.getDate() + 1);
+
+                // Format tomorrow's date as yyyy-mm-dd
+                var tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+
+                // Set the minimum date of the input field to tomorrow
+                document.getElementById("new2_deadline").min = tomorrowFormatted;
+            </script>  
 
     </body>
 
