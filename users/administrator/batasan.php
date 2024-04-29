@@ -1,10 +1,11 @@
+@ -1,1633 +1,1673 @@
 <?php
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
@@ -771,27 +772,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         echo '<td>' . $row2['equipment'] . '</td>';
                                         echo '<td>' . $row2['assignee'] . '</td>';
                                         echo '<td>' . $row2['deadline'] . '</td>';
-                                         $status = $row['status'];
-                                        $status_color = '';
-
-                                        // Set the color based on the status
-                                        switch ($status) {
-                                            case 'Pending':
-                                                $status_color = 'blue';
-                                                break;
-                                            case 'Done':
-                                                $status_color = 'green';
-                                                break;
-                                            case 'For Approval':
-                                                $status_color = 'red';
-                                                break;
-                                            default:
-                                                // Default color if status doesn't match
-                                                $status_color = 'black';
-                                        }
-
-                                        // Output the status with appropriate color
-                                        echo '<td class="' . $status_color . '">' . $status . '</td>';
+                                        echo '<td >' . $row2['status'] . '</td>';
 
                                         // Check if status is "Pending"
                                         if ($row2['status'] == 'Pending') {
