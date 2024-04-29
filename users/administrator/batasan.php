@@ -77,15 +77,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     {
         // Add 8 hours to the current date
         $date = date('Y-m-d H:i:s', strtotime('+8 hours'));
-
-        $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, ?, ?, ?)");
+    
+        $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab, seen, m_seen, p_seen) VALUES (?, ?, ?, ?, 1, 1, 1)");
         $stmt->bind_param("isss", $accountId, $date, $actionDescription, $tabValue);
         if (!$stmt->execute()) {
             echo "Error logging activity: " . $stmt->error;
         }
         $stmt->close();
     }
-
 
 
     if (isset($_POST['add'])) {
