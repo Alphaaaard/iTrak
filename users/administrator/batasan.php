@@ -151,7 +151,7 @@ if (isset($_POST['add'])) {
         $deadline2 = $_POST['deadline'];
     
         // Calculate the current date plus 8 hours
-        $adjusted_date = date('Y-m-d H:i:s', strtotime('+8 hours'));
+        $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
     
         // SQL UPDATE query
         $sql3 = "UPDATE request 
