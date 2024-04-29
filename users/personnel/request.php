@@ -88,7 +88,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sql01 = "SELECT r.* FROM request r
     INNER JOIN account a ON r.assignee = CONCAT(a.firstName, ' ', a.lastName)
     WHERE r.campus IN ('Batasan', 'San Bartolome', 'San Francisco') 
-    AND r.status IN ( 'For Approval', 'Pending') AND a.accountId = ?";
+    AND r.status IN ('Done', 'For Approval', 'Pending') AND a.accountId = ?";
     $stmt01 = $conn->prepare($sql01);
     $stmt01->bind_param("i", $accountId);
     $stmt01->execute();
@@ -592,6 +592,268 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                             <li><a href="#" class="nav-link" data-bs-target="pills-done">Done</a></li>
 
                         </ul>
+
+                    <div class="tab-content pt" id="myTabContent">
+                        <div class="tab-pane fade show active" id="pills-manager" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="table-content">
+                                <div class='table-header'>
+                                    <table>
+                                        <tr>
+                                            <th>Request ID</th>
+                                            <th>Date & Time</th>
+                                            <th>Category</th>
+                                            <th>Location</th>
+                                            <th>Equipment</th>
+                                            <th>Deadline</th>
+                                            <th>Status</th>
+
+                                            <th></th>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <?php
+                                if ($result01->num_rows > 0) {
+                                    echo "<div class='table-container'>";
+                                    echo "<table>";
+                                    while ($row = $result01->fetch_assoc()) {
+                                        echo '<tr>';
+                                        echo '<td>' . $row['request_id'] . '</td>';
+                                        echo '<td>' . $row['date'] . '</td>';
+                                        echo '<td>' . $row['category'] . '</td>';
+                                        echo '<td>' . $row['building'] . ', ' . $row['floor'] . ', ' . $row['room'] . '</td>';
+                                        echo '<td>' . $row['equipment'] . '</td>';
+                                        echo '<td style="display:none;">' . $row['assignee'] . '</td>';
+                                        echo '<td>' . $row['deadline'] . '</td>';
+                                        $status = $row['status'];
+
+                                        $status_color = '';
+
+                                        // Set the color based on the status
+                                        switch ($status) {
+                                            case 'Pending':
+                                                $status_color = 'blue';
+                                                break;
+                                            case 'Done':
+                                                $status_color = 'green';
+                                                break;
+                                            case 'For Approval':
+                                                $status_color = 'red';
+                                                break;
+                                            default:
+                                                // Default color if status doesn't match
+                                                $status_color = 'black';
+                                        }
+
+                                        // Output the status with appropriate color
+
+                                        echo '<td class="' . $status_color . '">' . $status . '</td>';
+                                        echo '<td>';
+                                        echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#ForView">View</button>';
+                                        echo '</td>';
+                                        echo '<td style="display:none;">' . $row['campus'] . '</td>';
+                                        echo '<td style="display:none;">' . $row['building'] . '</td>';
+                                        echo '<td style="display:none;">' . $row['floor'] . '</td>';
+                                        echo '<td style="display:none;">' . $row['room'] . '</td>';
+                                        echo '<td style="display:none;">' . $row['description'] . '</td>';
+                                        echo '<td style="display:none;">' . $row['req_by'] . '</td>';
+                                        echo '<td style="display:none;">' . $row['return_reason'] . '</td>';
+                                        echo '<td></td>';
+                                        echo '</tr>';
+                                    }
+                                    echo "</table>";
+                                    echo "</div>";
+                                } else {
+                                    echo '<table>';
+                                    echo "<div class=noDataImgH>";
+                                    echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
+                                    echo "</div>";
+                                    echo '</table>';
+                                }
+                                ?>
+                            </div>
+                        </div>
+
+                        <!--MODAL FOR THE VIEW-->
+                        <!-- <form action="POST" id=""> -->
+                        <div class="modal-parent">
+                            <div class="modal modal-xl fade" id="ForView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5>View Task</h5>
+                                            <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <form id="requestForm" method="post" class="row g-3">
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="request_id" class="form-label">Request ID:</label>
+                                                    <input type="text" class="form-control" id="request_id" name="request_id" readonly />
+                                                </div>
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="date" class="form-label">Date & Time:</label>
+                                                    <input type="text" class="form-control" id="date" name="date" readonly />
+                                                </div>
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="campus" class="form-label">Campus:</label>
+                                                    <input type="text" class="form-control" id="campus" name="campus"/>
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="building" class="form-label">Building:</label>
+                                                    <input type="text" class="form-control" id="building" name="building" readonly />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="floor" class="form-label">Floor:</label>
+                                                    <input type="text" class="form-control" id="floor" name="floor" readonly />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="room" class="form-label">Room: </label>
+                                                    <input type="text" class="form-control" id="room" name="room" readonly />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="equipment" class="form-label">Equipment :</label>
+                                                    <input type="text" class="form-control" id="equipment" name="equipment" readonly />
+                                                </div>
+
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="req_by" class="form-label">Requested By: </label>
+                                                    <input type="text" class="form-control" id="req_by" name="req_by" />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="category" class="form-label">Category:</label>
+                                                    <input type="text" class="form-control" id="category" name="category" value="Carpentry" readonly>
+                                                </div>
+
+
+                                                <div class="col-4" style="display:none;">
+                                                    <label id="assignee-label" for="assignee" class="form-label">Assignee:</label>
+                                                    <input type="text" class="form-control" id="assignee" name="assignee" readonly />
+                                                </div>
+
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="status" class="form-label">Status:</label>
+                                                    <input type="text" class="form-control" id="status" name="status" readonly />
+                                                </div>
+
+
+                                                <div class="col-4">
+                                                    <label for="deadline" class="form-label">Deadline:</label>
+                                                    <input type="date" class="form-control" id="deadline" name="deadline" readonly />
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <label for="description" class="form-label">Description:</label>
+                                                    <input type="text" class="form-control" id="description" name="description" readonly />
+                                                </div>
+
+                                                <div class="col-12" style="display:none">
+                                                    <label for="return_reason_show" class="form-label">Transfer
+                                                        Reason:</label>
+                                                    <input type="text" class="form-control" id="return_reason_show" name="return_reason" readonly />
+                                                </div>
+
+                                                <div class="footer">
+                                                    <button type="button" class="btn add-modal-btn" id="transferBtn" data-bs-toggle="modal" data-bs-target="#ForTransfer">
+                                                        Transfer
+                                                    </button>
+                                                    <button type="button" class="btn add-modal-btn" id="doneBtn" data-bs-toggle="modal" data-bs-target="#ForDones" onclick="showTaskConfirmation()">
+                                                        Done
+                                                    </button>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--MODAL FOR THE TRANSFER-->
+                        <div class="modal-parent">
+                            <div class="modal modal-xl fade" id="ForTransfer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5>Transfer Task</h5>
+
+                                            <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                        </div>
+                                        <div class="modal-body" id="transfer-body">
+
+                                            <div class="col-12">
+                                                <label class="form-label">Select a reason:</label>
+                                            </div>
+
+                                            <div class="col-12" id="transfer-options">
+                                                <div class="form-check">
+                                                    <div>
+                                                        <input class="form-check-input" type="radio" value="Lack of Tools" id="reason_lack_of_tools" name="reason" onchange="updateTextInput(this)">
+                                                        <label class="form-check-label" for="reason_lack_of_tools">Lack of Tools</label>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" value="Insufficient Personnel" id="reason_insufficient_personnel" name="reason" onchange="updateTextInput(this)">
+                                                    <label class="form-check-label" for="reason_insufficient_personnel">Insufficient Personnel</label>
+                                                </div>
+
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" value="Skills Mismatch" id="reason_skills_mismatch" name="reason" onchange="updateTextInput(this)">
+                                                    <label class="form-check-label" for="reason_skills_mismatch">Skills
+                                                        Mismatch</label>
+                                                </div>
+
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" value="Coordination with Other Departments" id="reason_coordination_with_other_departments" name="reason" onchange="updateTextInput(this)">
+                                                    <label class="form-check-label" for="reason_coordination_with_other_departments">Coordination with
+                                                        Other Departments</label>
+                                                </div>
+
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" value="Outsource" id="reason_outsource" name="reason" onchange="updateTextInput(this)">
+                                                    <label class="form-check-label" for="reason_outsource">Outsource</label>
+                                                </div>
+
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" id="reason_others" value="" name="reason" onchange="updateTextInput(this)">
+                                                    <label class=" form-check-label" for="reason_others">Others</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12" id="othersInput" style="display:none;">
+                                                <label for="description" class="form-label">Others:</label>
+                                                <textarea class="form-control" id="return_reason" name="return_reason"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="footer" id="transfer-footer">
+                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#ForSaves" onclick="showTransferConfirmation()">
+                                                Save
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Edit for done-->
+                        <div class="modal fade" id="ForDone" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-footer">
+                                        Are you sure you want to mark this task as completed?
+                                        <div class="modal-popups">
+                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                            <!-- <button class="btn add-modal-btn" name="done" data-bs-dismiss="modal">Yes</button> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
                     </div>
 
                     <!-- Export button -->
@@ -1121,9 +1383,6 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             });
         });
     </script>
-
-
-
 
 
     <script>

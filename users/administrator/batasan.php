@@ -1,10 +1,10 @@
-<?php
+    <?php
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once ("../../config/connection.php");
@@ -179,7 +179,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt3->close();
     }
 
-    if (isset($_POST['Outsource'])) {
+    if (isset($_POST['outsource'])) {
         $request_id4 = $_POST['new2_request_id'];
         $campus4 = $_POST['new2_campus'];
         $building4 = $_POST['new2_building'];
@@ -636,6 +636,240 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             <button type="button" id="exportBtn" class="btn btn-outline-danger" data-bs-toggle="modal"
                                 data-bs-target="#addRequest">Add Task</button>
                         </form>
+
+                        <!--MODAL FOR THE APPROVAL-->
+                        <div class="modal-parent">
+                            <div class="modal modal-xl fade" id="ForApproval" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5>For Approval:</h5>
+
+                                            <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="approvalForm" method="post" class="row g-3">
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="request_id" class="form-label">Request ID:</label>
+                                                    <input type="text" class="form-control" id="request_id" name="request_id" readonly />
+                                                </div>
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="date" class="form-label">Date & Time:</label>
+                                                    <input type="text" class="form-control" id="date" name="date" />
+                                                </div>
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="campus" class="form-label">Campus:</label>
+                                                    <input type="text" class="form-control" id="campus" name="campus" value="Batasan" />
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="building" class="form-label">Building:</label>
+                                                    <input type="text" class="form-control" id="building" name="building" readonly />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="floor" class="form-label">Floor:</label>
+                                                    <input type="text" class="form-control" id="floor" name="floor" readonly />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="room" class="form-label">Room: </label>
+                                                    <input type="text" class="form-control" id="room" name="room" readonly />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="equipment" class="form-label">Equipment :</label>
+                                                    <input type="text" class="form-control" id="equipment" name="equipment" readonly />
+                                                </div>
+
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="req_by" class="form-label">Requested By: </label>
+                                                    <input type="text" class="form-control" id="req_by" name="req_by" />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="category" class="form-label">Category:</label>
+                                                    <select class="form-select" id="category" name="category" onchange="fetchRandomAssignee()">
+                                                        <option value="Outsource">Outsource</option>
+                                                        <option value="Carpentry">Carpentry</option>
+                                                        <option value="Electrical">Electrical</option>
+                                                        <option value="Plumbing">Plumbing</option>
+                                                    </select>
+                                                </div>
+
+                                                <!-- Add an empty assignee select element -->
+                                                <div class="col-4">
+                                                    <label id="assignee-label" for="assignee" class="form-label">Assignee:</label>
+                                                    <select class="form-select" id="assignee" name="assignee"></select>
+
+                                                    <input type="text" class="form-control" id="assigneeInput" name="assignee" style="display: none;">
+
+                                                    <input type="text" class="form-control" id="assigneeInputreal" name="assigneereal" style="display:none;">
+                                                </div>
+
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="status" class="form-label">Status:</label>
+                                                    <input type="text" class="form-control" value="Pending" id="status_modal" name="status" />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="deadline" class="form-label">Deadline:</label>
+                                                    <input type="date" class="form-control" id="deadline" name="deadline" />
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <label for="description" class="form-label">Description:</label>
+                                                    <input type="text" class="form-control" id="description" name="description" />
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <label for="return_reason" class="form-label">Transfer
+                                                        Reason:</label>
+                                                    <input type="text" class="form-control" id="return_reason" name="return_reason" readonly />
+                                                </div>
+
+                                                <div class="footer">
+                                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#ForApprovals" onclick="showApprovalConfirmation()">
+                                                        Save
+                                                    </button>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Edit for approval-->
+                        <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-footer">
+                                        Are you sure you want to save changes?
+                                        <div class="modal-popups">
+                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                            <!-- <button class="btn add-modal-btn" name="approval" data-bs-dismiss="modal">Yes</button> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+
+                        <!--MODAL FOR OUTSOURCE-->
+                        <div class="modal-parent">
+                            <div class="modal modal-xl fade" id="ForOutsource" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5>For Outsource:</h5>
+                                            <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="outsourcesForm" method="post" class="row g-3">
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="new_request_id" class="form-label">Request ID:</label>
+                                                    <input type="text" class="form-control" id="new2_request_id" name="new2_request_id" readonly />
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="new2_building" class="form-label">Building:</label>
+                                                    <input type="text" class="form-control" id="new2_building" name="new2_building" />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="new2_floor" class="form-label">Floor:</label>
+                                                    <input type="text" class="form-control" id="new2_floor" name="new2_floor" />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="new2_room" class="form-label">Room: </label>
+                                                    <input type="text" class="form-control" id="new2_room" name="new2_room" />
+                                                </div>
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="new2_campus" class="form-label">Campus:</label>
+                                                    <input type="text" class="form-control" id="new2_campus" name="new2_campus" value="Batasan" />
+                                                </div>
+
+
+                                                <div class="col-4">
+                                                    <label for="new2_equipment" class="form-label">Equipment :</label>
+                                                    <input type="text" class="form-control" id="new2_equipment" name="new2_equipment" />
+                                                </div>
+
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="new2_req_by" class="form-label">Requested By: </label>
+                                                    <input type="text" class="form-control" id="new2_req_by" name="new2_req_by" />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="new2_category" class="form-label">Category:</label>
+                                                    <select class="form-select" id="new2_category" name="new2_category" onchange="fetchRandomAssignee1()">
+                                                        <option value="Outsource">Outsource</option>
+                                                        <option value="Carpentry">Carpentry</option>
+                                                        <option value="Electrical">Electrical</option>
+                                                        <option value="Plumbing">Plumbing</option>
+
+                                                    </select>
+                                                </div>
+
+                                                <!-- Add an empty assignee select element -->
+                                                <div class="col-4">
+                                                    <label id="assignee-label" for="assignee" class="form-label">Assignee:</label>
+                                                    <input type="text" class="form-control" id="assignee"
+                                                    name="assignee" />
+                                                    <!-- <select class="form-select" id="assignee" name="assignee"></select> -->
+                                                    
+                                                </div>
+
+                                                <div class="col-4" style="display: none;">
+                                                    <label for="new2_status" class="form-label">Status:</label>
+                                                    <input type="text" class="form-control" value="Pending" id="new2_status" name="new2_status" />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="new2_deadline" class="form-label">Deadline:</label>
+                                                    <input type="date" class="form-control" id="new2_deadline" name="new2_deadline" />
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <label for="new2_description" class="form-label">Description:</label>
+                                                    <input type="text" class="form-control" id="new2_description" name="new2_description" />
+                                                </div>
+
+
+                                                <div class="col-12">
+                                                    <label for="return_reason" class="form-label">Transfer
+                                                        Reason:</label>
+                                                    <input type="text" class="form-control" id="new2_return_reason" name="new2_return_reason" readonly />
+                                                </div>
+
+                                                <div class="footer">
+                                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#ForOutsourcess" onclick="showOutsourcesConfirmation()">
+                                                        Save
+                                                    </button>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--edit for outsource-->
+                        <div class="modal fade" id="addoutsource" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-footer">
+                                        Are you sure you want to save changes?
+                                        <div class="modal-popups">
+                                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                            <!-- <button class="btn add-modal-btn" name="outsource"
+                                            data-bs-dismiss="modal">Yes</button> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+
+
+
                     </div>
                 </div>
 
