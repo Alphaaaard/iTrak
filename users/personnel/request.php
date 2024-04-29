@@ -811,7 +811,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                             </div>
                                             <div class="col-4" >
                                                 <label for="campus" class="form-label">Campus:</label>
-                                                <input type="text" class="form-control" id="campus" name="campus" />
+                                                <input type="text" class="form-control" id="campus" name="campus"  readonly />
                                             </div>
                                             <div class="col-4">
                                                 <label for="building" class="form-label">Building:</label>
