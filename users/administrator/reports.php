@@ -81,30 +81,30 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         header("Location: reports.php");
     }
 
-    //Edit
-    if (isset($_POST['assignedMPOUT'])) {
-        $assetId = $_POST['assetId'];
-        $category = $_POST['category'];
-        $building = $_POST['building'];
-        $floor = $_POST['floor'];
-        $room = $_POST['room'];
+    // //Edit
+    // if (isset($_POST['assignedMPOUT'])) {
+    //     $assetId = $_POST['assetId'];
+    //     $category = $_POST['category'];
+    //     $building = $_POST['building'];
+    //     $floor = $_POST['floor'];
+    //     $room = $_POST['room'];
 
-        $status = $_POST['status'];
-        $assignedName = $_POST['assignedName'];
-        $assignedBy = $_POST['assignedBy'];
-        $date = $_POST['date'];
+    //     $status = $_POST['status'];
+    //     $assignedName = $_POST['assignedName'];
+    //     $assignedBy = $_POST['assignedBy'];
+    //     $date = $_POST['date'];
 
-        // New column
-        $os_identity = $_POST['os_identity'];
+    //     // New column
+    //     $os_identity = $_POST['os_identity'];
 
-        $updateSql = "UPDATE `asset` SET `category`='$category', `building`='$building', `floor`='$floor', `room`='$room', `status`='$status', `assignedName`='$assignedName', `assignedBy`='$assignedBy', `date`='$date', `os_identity`='$os_identity' WHERE `assetId`='$assetId'";
-        if ($conn->query($updateSql) === TRUE) {
-            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId to $status.", 'Report');
-        } else {
-            echo "Error updating asset: " . $conn->error;
-        }
-        header("Location: reports.php");
-    }
+    //     $updateSql = "UPDATE `asset` SET `category`='$category', `building`='$building', `floor`='$floor', `room`='$room', `status`='$status', `assignedName`='$assignedName', `assignedBy`='$assignedBy', `date`='$date', `os_identity`='$os_identity' WHERE `assetId`='$assetId'";
+    //     if ($conn->query($updateSql) === TRUE) {
+    //         logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId to $status.", 'Report');
+    //     } else {
+    //         echo "Error updating asset: " . $conn->error;
+    //     }
+    //     header("Location: reports.php");
+    // }
 
 
     // for notif below
@@ -924,11 +924,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             echo '<input type="hidden" name="assetId" value="' . $row5['assetId'] . '">';
                                             echo '<button type="submit" name="complete" class="btn btn-primary view-btn archive-btn">Done</button>';
                                             echo '</form>';
-                                        } elseif ($row5['status'] === 'Need Repair' && (empty($row5['assignedName']) || is_null($row5['assignedName']))) {
-                                            echo '<form method="post" action="">';
-                                            echo '<input type="hidden" name="assetId" value="' . $row5['assetId'] . '">';
-                                            echo '<button type="submit" class="btn btn-primary view-btn archive-btn" onclick="openModal(event)">Assign</button>';
-                                            echo '</form>';
                                         } elseif ($row5['status'] === 'Complete') {
                                             echo $row5['assignedName'] . '</td>';
                                         }
@@ -1104,7 +1099,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             </div>
 
             <!--Assign Modal for table 5-->
-            <div class="modal-parent">
+            <!-- <div class="modal-parent">
                 <div class="modal modal-xl fade" id="assignOutsource" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content assingee-container">
@@ -1212,10 +1207,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Edit for table 4 -->
-            <div class="modal fade" id="assignmelods" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <!-- <div class="modal fade" id="assignmelods" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-footer">
@@ -1227,7 +1222,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             </form>
         </section>
