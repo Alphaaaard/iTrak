@@ -41,20 +41,18 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         exit;
     }
 
-    $sql = "SELECT * FROM asset WHERE status = 'Working' LIMIT 50";
+   
 
+
+    $sql = "SELECT * FROM asset WHERE status = 'Working' ORDER BY `date` LIMIT 50";
     $result = $conn->query($sql) or die($conn->error);
-
-    $sql2 = "SELECT * FROM asset WHERE status = 'Under Maintenance' LIMIT 50";
-
+    
+    $sql2 = "SELECT * FROM asset WHERE status = 'Under Maintenance' ORDER BY `date` LIMIT 50";
     $result2 = $conn->query($sql2) or die($conn->error);
-
-    $sql3 = "SELECT * FROM asset WHERE status = 'For Replacement' LIMIT 50";
-
+    
+    $sql3 = "SELECT * FROM asset WHERE status = 'For Replacement' ORDER BY `date` LIMIT 50";
     $result3 = $conn->query($sql3) or die($conn->error);
-
-
-
+    
 
 
 
