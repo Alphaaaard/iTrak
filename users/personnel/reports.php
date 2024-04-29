@@ -38,8 +38,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sql3 = "SELECT * FROM asset WHERE status = 'For Replacement'";
     $result3 = $conn->query($sql3) or die($conn->error);
 
-    $sql4 = "SELECT * FROM asset WHERE status = 'Need Repair'";
+    $sql4 = "SELECT * FROM asset WHERE status = 'Need Repair' ORDER BY date";
+
     $result4 = $conn->query($sql4) or die($conn->error);
+    
 
     $sql5 = "SELECT * FROM asset WHERE status = 'Outsource'";
     $result5 = $conn->query($sql5) or die($conn->error);
