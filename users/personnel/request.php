@@ -89,7 +89,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     INNER JOIN account a ON r.assignee = CONCAT(a.firstName, ' ', a.lastName)
     WHERE r.campus IN ('Batasan', 'San Bartolome', 'San Francisco') 
     AND r.status IN ('For Approval', 'Pending') AND a.accountId = ?
-    ORDER BY r.date";
+    ORDER BY r.date DESC";
 
 $stmt01 = $conn->prepare($sql01);
 $stmt01->bind_param("i", $accountId);
