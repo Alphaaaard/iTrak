@@ -51,12 +51,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->fetch();
     $stmt->close();
 
-    $sql = "SELECT * FROM request WHERE campus = 'San Bartolome' AND status IN ('Pending', 'Done', 'For Approval') AND category != 'Outsource'";
+    $sql = "SELECT * FROM request WHERE campus = 'San Bartolome' AND status IN ('Pending', 'Done', 'For Approval') AND category != 'Outsource' ORDER BY date DESC";
     $result = $conn->query($sql) or die($conn->error);
 
 
-    $sql2 = "SELECT * FROM request WHERE campus = 'San Bartolome' AND category = 'Outsource'";
+    $sql2 = "SELECT * FROM request WHERE campus = 'San Bartolome' AND category = 'Outsource' ORDER BY date DESC";
     $result2 = $conn->query($sql2) or die($conn->error);
+
+
 
     function logActivity($conn, $accountId, $actionDescription, $tabValue)
     {
