@@ -1,4 +1,3 @@
-
 <?php
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -90,32 +89,32 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt->close();
     }
 
-if (isset($_POST['add'])) {
-    $request_id = $_POST['new_request_id'];
-    $campus = $_POST['new_campus'];
-    $building = $_POST['new_building'];
-    $floor = $_POST['new_floor'];
-    $room = $_POST['new_room'];
-    $equipment = $_POST['new_equipment'];
-    $req_by = $_POST['new_req_by'];
-    $category = $_POST['new_category'];
-    $assignee = $_POST['new_assignee'];
-    $status = $_POST['new_status'];
-    $description = $_POST['new_description'];
-    $deadline = $_POST['new_deadline'];
+    if (isset($_POST['add'])) {
+        $request_id = $_POST['new_request_id'];
+        $campus = $_POST['new_campus'];
+        $building = $_POST['new_building'];
+        $floor = $_POST['new_floor'];
+        $room = $_POST['new_room'];
+        $equipment = $_POST['new_equipment'];
+        $req_by = $_POST['new_req_by'];
+        $category = $_POST['new_category'];
+        $assignee = $_POST['new_assignee'];
+        $status = $_POST['new_status'];
+        $description = $_POST['new_description'];
+        $deadline = $_POST['new_deadline'];
 
-    // Calculate the current date plus 8 hours
-    $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
+        // Calculate the current date plus 8 hours
+        $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
 
-    // Insert data into the request table
-    $insertQuery = "INSERT INTO request (request_id, campus, building, floor, room, equipment, req_by, category, assignee, status, description, deadline, date)
+        // Insert data into the request table
+        $insertQuery = "INSERT INTO request (request_id, campus, building, floor, room, equipment, req_by, category, assignee, status, description, deadline, date)
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    $stmt = $conn->prepare($insertQuery);
-    $stmt->bind_param("sssssssssssss", $request_id, $campus, $building, $floor, $room, $equipment, $req_by, $category, $assignee, $status, $description, $deadline, $adjusted_date);
+        $stmt = $conn->prepare($insertQuery);
+        $stmt->bind_param("sssssssssssss", $request_id, $campus, $building, $floor, $room, $equipment, $req_by, $category, $assignee, $status, $description, $deadline, $adjusted_date);
 
 
-    // Rest of your code after insertion
+        // Rest of your code after insertion
 
 
         if ($stmt->execute()) {
@@ -1602,17 +1601,15 @@ if (isset($_POST['add'])) {
             "Batasan Campus Building": {
                 "Basement": ["Male CR", "Female CR"],
                 "1F": ["Lobby", "Com Lab 104", "Com Lab 103", "Room 102", "Room 101", "Guidance Clinic 108", "Admin Office 107", "Faculty Room 106", "Library 105"],
-                "2F": ["Male CR", "Female CR", "03 room 201", "04 room 202", "05 room 203", "Room 205"],
-                "3F": ["Variables", "Operators", "Functions", "Conditions"],
-                "4F": ["Variables", "Operators", "Functions", "Conditions"]
+                "2F": ["Male CR left", "Female CR left", "03 room 201", "04 room 202", "05 room 203", "06 room 205", "07 room 206", "08 room 207", "Male CR right", "Female CR right"],
+                "3F": ["Room 301", "Room 302", "Room 303", "Room 304", "Room 305", "09 room 306", "10 room 307", "11 room 308", "12 room 309"],
+                "4F": ["20 room 401", "19 room 402", "18 room 403", "17 room 404", "Room 405", "16 room 406", "15 room 407", "14 room 408", "13 room 409"]
             },
             "Basketball Court": {
-                "PHP": ["Variables", "Strings", "Arrays"],
-                "SQL": ["SELECT", "UPDATE", "DELETE"]
+                " ": [" "]
             },
             "Parking Area": {
-                "PHP": ["Variables", "Strings", "Arrays"],
-                "SQL": ["SELECT", "UPDATE", "DELETE"]
+                " ": [" "]
             }
         }
         window.onload = function () {
