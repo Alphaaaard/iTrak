@@ -67,46 +67,46 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
     $stmt->fetch();
     $stmt->close();
 
-// Your PHPMailer settings and email credentials
-$mail = new PHPMailer(true);
+    // Your PHPMailer settings and email credentials
+    $mail = new PHPMailer(true);
 
-try {
-    //Server settings
-    // $mail->SMTPDebug = SMTP::DEBUG_SERVER;              // Enable verbose debug output
-    $mail->isSMTP();                                      // Send using SMTP
-    $mail->Host = 'smtp.gmail.com';               // Set the SMTP server to send through
-    $mail->SMTPAuth = true;                             // Enable SMTP authentication
-    $mail->Username = 'qcu.upkeep@gmail.com';         // SMTP username
-    $mail->Password = 'qvpx bbcm bgmy hcvf';                  // SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;   // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
-    $mail->Port = 587;                              // TCP port to connect to
+    try {
+        //Server settings
+        // $mail->SMTPDebug = SMTP::DEBUG_SERVER;              // Enable verbose debug output
+        $mail->isSMTP();                                      // Send using SMTP
+        $mail->Host = 'smtp.gmail.com';               // Set the SMTP server to send through
+        $mail->SMTPAuth = true;                             // Enable SMTP authentication
+        $mail->Username = 'qcu.upkeep@gmail.com';         // SMTP username
+        $mail->Password = 'qvpx bbcm bgmy hcvf';                  // SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;   // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+        $mail->Port = 587;                              // TCP port to connect to
 
-    //Recipients
-    $mail->setFrom('qcu.upkeep@gmail.com', 'iTrak');
-    $mail->addAddress('qcu.upkeep@gmail.com', 'Admin');     // Baguhin niyo email to test
+        //Recipients
+        $mail->setFrom('qcu.upkeep@gmail.com', 'iTrak');
+        $mail->addAddress('qcu.upkeep@gmail.com', 'Admin');     // Baguhin niyo email to test
 
-    // Content
-    $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'Asset Status Changed';
+        // Content
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->Subject = 'Asset Status Changed';
 
-    // Handle form submission
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        foreach ($_POST as $key => $value) {
-            if (strpos($key, 'edit') === 0) {
-                $assetId = str_replace('edit', '', $key);
-                $status = $_POST['status']; // Ensure you have a field with name 'status' in your form
-                // Add your mail body content
-                $mail->Body = "The status of asset with ID $assetId has been changed to $status.";
+        // Handle form submission
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            foreach ($_POST as $key => $value) {
+                if (strpos($key, 'edit') === 0) {
+                    $assetId = str_replace('edit', '', $key);
+                    $status = $_POST['status']; // Ensure you have a field with name 'status' in your form
+                    // Add your mail body content
+                    $mail->Body = "The status of asset with ID $assetId has been changed to $status.";
 
-                $mail->send();
-                echo 'Message has been sent';
-                break; // Stop the loop after sending the email
+                    $mail->send();
+                    echo 'Message has been sent';
+                    break; // Stop the loop after sending the email
+                }
             }
         }
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-}
 
     //FOR ID 5762 BULB
     $sql5762 = "SELECT assetId, category, building, floor, room, images, assignedName, assignedBy, status, date,upload_img, description FROM asset WHERE assetId = 5762";
@@ -1702,22 +1702,23 @@ try {
                 </div>
             </nav>
         </div>
+        <!-- SIDEBAR -->
         <section id="sidebar">
-            <div href="#" class="brand" title="logo">
-                <i><img src="../../../src/img/UpKeep.png" alt="" class="logo" /></i>
+            <a href="./dashboard.php" class="brand" title="logo">
+                <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
                 <div class="mobile-sidebar-close">
                     <i class="bi bi-arrow-left-circle"></i>
                 </div>
-            </div>
+            </a>
             <ul class="side-menu top">
                 <li>
-                    <a href="../../manager/dashboard.php">
+                    <a href="./dashboard.php">
                         <i class="bi bi-grid"></i>
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../../manager/attendance-logs.php">
+                    <a href="./attendance-logs.php">
                         <i class="bi bi-calendar-week"></i>
                         <span class="text">Attendance Logs</span>
                     </a>
@@ -1737,38 +1738,72 @@ try {
                 </div>
                 <div class="GPS-container">
                     <li class="GPS-Tracker">
-                        <a href="../../manager/gps.php">
+                        <a href="./gps.php">
                             <i class="bi bi-crosshair"></i>
                             <span class="text">GPS Tracker</span>
                         </a>
                     </li>
                     <li class="GPS-History">
-                        <a href="../../manager/gps-history.php">
+                        <a href="./gps_history.php">
                             <i class="bi bi-radar"></i>
                             <span class="text">GPS History</span>
                         </a>
                     </li>
                 </div>
                 <li class="active">
-                    <a href="../../manager/map.php">
+                    <a href="./map.php">
                         <i class="bi bi-map"></i>
                         <span class="text">Map</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../../manager/reports.php">
+                    <a href="./reports.php">
                         <i class="bi bi-clipboard"></i>
                         <span class="text">Reports</span>
                     </a>
                 </li>
+                <div class="Map-cont" onclick="toggleMAP()">
+                    <li class="Map-dropdown">
+                        <div class="Map-drondown-content">
+                            <div class="Map-side-cont">
+                                <i class="bi bi-receipt"></i>
+                                <span class="text">Request</span>
+                            </div>
+                            <div class="Map-ind">
+                                <i id="map-chevron-icon" class="bi bi-chevron-down"></i>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <div class="Map-container">
+                    <li class="Map-Batasan">
+                        <a href="./batasan.php">
+                            <i class="bi bi-building"></i>
+                            <span class="text">Batasan</span>
+                        </a>
+                    </li>
+                    <li class="Map-SanBartolome">
+                        <a href="./sanBartolome.php">
+                            <i class="bi bi-building"></i>
+                            <span class="text">San Bartolome</span>
+                        </a>
+                    </li>
+                    <li class="Map-SanFrancisco">
+                        <a href="./sanFrancisco.php">
+                            <i class="bi bi-building"></i>
+                            <span class="text">San Francisco</span>
+                        </a>
+                    </li>
+                </div>
                 <li>
-                    <a href="../../manager/activity-logs.php">
+                    <a href="./activity-logs.php">
                         <i class="bi bi-arrow-counterclockwise"></i>
                         <span class="text">Activity Logs</span>
                     </a>
                 </li>
             </ul>
         </section>
+        <!-- SIDEBAR -->
         <div id="map-top-nav">
             <a href="../../manager/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
 

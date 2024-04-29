@@ -7,7 +7,7 @@ use PHPMailer\PHPMailer\Exception;
 require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
-include_once ("../../../config/connection.php");
+include_once("../../../config/connection.php");
 date_default_timezone_set('Asia/Manila');
 $conn = connection();
 //need ata to sa lahat ng page para sa security hahah 
@@ -72,7 +72,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
     // Your PHPMailer settings and email credentials
     $mail = new PHPMailer(true);
-    
+
     try {
         //Server settings
         // $mail->SMTPDebug = SMTP::DEBUG_SERVER;              // Enable verbose debug output
@@ -83,15 +83,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $mail->Password   = 'qvpx bbcm bgmy hcvf';                  // SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;   // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
         $mail->Port       = 587;                              // TCP port to connect to
-    
+
         //Recipients
         $mail->setFrom('qcu.upkeep@gmail.com', 'iTrak');
         $mail->addAddress('qcu.upkeep@gmail.com', 'Admin');     // Baguhin niyo email to test
-    
+
         // Content
         $mail->isHTML(true);                                  // Set email format to HTML
         $mail->Subject = 'Asset Status Changed';
-    
+
         // Handle form submission
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             foreach ($_POST as $key => $value) {
@@ -100,7 +100,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     $status = $_POST['status']; // Ensure you have a field with name 'status' in your form
                     // Add your mail body content
                     $mail->Body    = "The status of asset with ID $assetId has been changed to $status.";
-    
+
                     $mail->send();
                     echo 'Message has been sent';
                     break; // Stop the loop after sending the email
@@ -111,8 +111,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
 
-     //ENCABS 1 DITO
- $assetIds = [16795, 16796];
+    //ENCABS 1 DITO
+    $assetIds = [16795, 16796];
 
     // Loop through each asset ID
     foreach ($assetIds as $id) {
@@ -196,7 +196,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     }
     //ENCABS DITO
     // Call updateAsset function for each asset ID you want to handle
-    $assetIds = [16795 ,16796]; // Add more asset IDs here
+    $assetIds = [16795, 16796]; // Add more asset IDs here
     foreach ($assetIds as $id) {
         updateAsset($conn, $id);
     }
@@ -256,7 +256,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->fetch();
     $stmt->close();
 
-    ?>
+?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -266,8 +266,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>iTrak | Map</title>
         <link rel="icon" type="image/x-icon" href="../../../src/img/tab-logo.png">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -305,7 +304,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <a href="#" class="notification" id="notification-button">
                             <i class="fa fa-bell" aria-hidden="true"></i>
                             <!-- Notification Indicator Dot -->
-                            <?php if ($unseenCount > 0): ?>
+                            <?php if ($unseenCount > 0) : ?>
                                 <span class="notification-indicator"></span>
                             <?php endif; ?>
                         </a>
@@ -403,45 +402,44 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </a></div>
                             <hr>
                         </div>
-                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i
-                                class="bi bi-person profile-icons"></i>Profile</a>
+                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i class="bi bi-person profile-icons"></i>Profile</a>
                         <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
                     </div>
-                    <?php
-} else {
-    header("Location:../../index.php");
-    exit();
-}
-?>
-            </div>
-        </nav>
-    </div>
-    <section id="sidebar">
-        <div href="#" class="brand" title="logo">
-            <i><img src="../../../src/img/UpKeep.png" alt="" class="logo" /></i>
-            <div class="mobile-sidebar-close">
-                <i class="bi bi-arrow-left-circle"></i>
-            </div>
+                <?php
+            } else {
+                header("Location:../../index.php");
+                exit();
+            }
+                ?>
+                </div>
+            </nav>
         </div>
-        <ul class="side-menu top">
-            <li>
-                <a href="../../administrator/dashboard.php">
-                    <i class="bi bi-grid"></i>
-                    <span class="text">Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="../../administrator/attendance-logs.php">
-                    <i class="bi bi-calendar-week"></i>
-                    <span class="text">Attendance Logs</span>
-                </a>
-            </li>
-            <li>
-                <a href="../../administrator/staff.php">
-                    <i class="bi bi-person"></i>
-                    <span class="text">Staff</span>
-                </a>
-            </li>
+        <section id="sidebar">
+            <a href="./dashboard.php" class="brand" title="logo">
+                <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
+                <div class="mobile-sidebar-close">
+                    <i class="bi bi-arrow-left-circle"></i>
+                </div>
+            </a>
+            <ul class="side-menu top">
+                <li>
+                    <a href="./dashboard.php">
+                        <i class="bi bi-grid"></i>
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./attendance-logs.php">
+                        <i class="bi bi-calendar-week"></i>
+                        <span class="text">Attendance Logs</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./staff.php">
+                        <i class="bi bi-person"></i>
+                        <span class="text">Staff</span>
+                    </a>
+                </li>
                 <div class="GPS-cont" onclick="toggleGPS()">
                     <li class="GPS-dropdown">
                         <div class="GPS-drondown-content">
@@ -457,332 +455,341 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 </div>
                 <div class="GPS-container">
                     <li class="GPS-Tracker">
-                        <a href="../../administrator/gps.php">
+                        <a href="./gps.php">
                             <i class="bi bi-crosshair"></i>
                             <span class="text">GPS Tracker</span>
                         </a>
                     </li>
                     <li class="GPS-History">
-                        <a href="../../administrator/gps-history.php">
+                        <a href="./gps_history.php">
                             <i class="bi bi-radar"></i>
                             <span class="text">GPS History</span>
                         </a>
                     </li>
                 </div>
-            <li class="active">
-                <a href="../../administrator/map.php">
-                    <i class="bi bi-map"></i>
-                    <span class="text">Map</span>
-                </a>
-            </li>
-            <li>
-                <a href="../../administrator/reports.php">
-                    <i class="bi bi-clipboard"></i>
-                    <span class="text">Reports</span>
-                </a>
-            </li>
-            <li>
-                <a href="../../administrator/archive.php">
-                    <i class="bi bi-archive"></i>
-                    <span class="text">Archive</span>
-                </a>
-            </li>
-            <li>
-                <a href="../../administrator/activity-logs.php">
-                    <i class="bi bi-arrow-counterclockwise"></i>
-                    <span class="text">Activity Logs</span>
-                </a>
-            </li>
-        </ul>
-    </section>
-    <div id="map-top-nav">
-        <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
+                <li class="active">
+                    <a href="./map.php">
+                        <i class="bi bi-map"></i>
+                        <span class="text">Map</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./reports.php">
+                        <i class="bi bi-clipboard"></i>
+                        <span class="text">Reports</span>
+                    </a>
+                </li>
+                <div class="Map-cont" onclick="toggleMAP()">
+                    <li class="Map-dropdown">
+                        <div class="Map-drondown-content">
+                            <div class="Map-side-cont">
+                                <i class="bi bi-receipt"></i>
+                                <span class="text">Request</span>
+                            </div>
+                            <div class="Map-ind">
+                                <i id="map-chevron-icon" class="bi bi-chevron-down"></i>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <div class="Map-container">
+                    <li class="Map-Batasan">
+                        <a href="./batasan.php">
+                            <i class="bi bi-building"></i>
+                            <span class="text">Batasan</span>
+                        </a>
+                    </li>
+                    <li class="Map-SanBartolome">
+                        <a href="./sanBartolome.php">
+                            <i class="bi bi-building"></i>
+                            <span class="text">San Bartolome</span>
+                        </a>
+                    </li>
+                    <li class="Map-SanFrancisco">
+                        <a href="./sanFrancisco.php">
+                            <i class="bi bi-building"></i>
+                            <span class="text">San Francisco</span>
+                        </a>
+                    </li>
+                </div>
+                <li>
+                    <a href="./archive.php">
+                        <i class="bi bi-archive"></i>
+                        <span class="text">Archive</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./activity-logs.php">
+                        <i class="bi bi-arrow-counterclockwise"></i>
+                        <span class="text">Activity Logs</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <div id="map-top-nav">
+            <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
 
-        <div class="legend-button" id="legendButton">
-            <i class="bi bi-info-circle"></i>
+            <div class="legend-button" id="legendButton">
+                <i class="bi bi-info-circle"></i>
+            </div>
         </div>
-    </div>
-    <section id="content">
-        <main>
-            <div class="content-container" id="content-container">
-                <div id="belmonte-F1" class="content">
-                    <!-- FLOOR PLAN -->
-                    <img class="Floor-container-1" src="../../../src/floors/newAcademicB/NAB4F.png" alt="">
+        <section id="content">
+            <main>
+                <div class="content-container" id="content-container">
+                    <div id="belmonte-F1" class="content">
+                        <!-- FLOOR PLAN -->
+                        <img class="Floor-container-1" src="../../../src/floors/newAcademicB/NAB4F.png" alt="">
 
-                    <div class="legend-body" id="legendBody">
-                        <!-- Your legend body content goes here -->
-                        <div class="legend-item"><img src="../../../src/legend/BED.jpg" alt="" class="legend-img">
-                            <p>BED</p>
-                        </div>
-                        <div class="legend-item"><img src="../../../src/legend/BULB.jpg" alt="" class="legend-img">
-                            <p>BULB</p>
-                        </div>
-                        <div class="legend-item"><img src="../../../src/legend/CHAIR.jpg" alt="" class="legend-img">
-                            <p>CHAIR</p>
-                        </div>
-                        <div class="legend-item"><img src="../../../src/legend/DESK.jpg" alt="" class="legend-img">
-                            <p>DESK</p>
-                        </div>
-                        <div class="legend-item"><img src="../../../src/legend/SOFA.jpg" alt="" class="legend-img">
-                            <p>SOFA</p>
-                        </div>
-                        <div class="legend-item"><img src="../../../src/legend/TABLE.jpg" alt="" class="legend-img">
-                            <p>TABLE</p>
-                        </div>
-                        <div class="legend-item"><img src="../../../src/legend/TOILET-SEAT.jpg" alt=""
-                                class="legend-img">
-                            <p>TOILET SEAT</p>
-                        </div>
-                    </div>
-
-                    <div class="map-nav">
-                        <div class="map-legend">
-                            <div class="legend-item" data-status="Working">
-                                <div class="legend-color-green"></div>
-                                <button class="legend-toggle">Working</button>
+                        <div class="legend-body" id="legendBody">
+                            <!-- Your legend body content goes here -->
+                            <div class="legend-item"><img src="../../../src/legend/BED.jpg" alt="" class="legend-img">
+                                <p>BED</p>
                             </div>
-                            <div class="legend-item" data-status="Under Maintenance">
-                                <div class="legend-color-under-maintenance"></div>
-                                <button class="legend-toggle">Under maintenance</button>
+                            <div class="legend-item"><img src="../../../src/legend/BULB.jpg" alt="" class="legend-img">
+                                <p>BULB</p>
                             </div>
-                            <div class="legend-item" data-status="Need Repair">
-                                <div class="legend-color-need-repair"></div>
-                                <button class="legend-toggle">Need repair</button>
+                            <div class="legend-item"><img src="../../../src/legend/CHAIR.jpg" alt="" class="legend-img">
+                                <p>CHAIR</p>
                             </div>
-                            <div class="legend-item" data-status="For Replacement">
-                                <div class="legend-color-for-replacement"></div>
-                                <button class="legend-toggle">For replacement</button>
+                            <div class="legend-item"><img src="../../../src/legend/DESK.jpg" alt="" class="legend-img">
+                                <p>DESK</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/SOFA.jpg" alt="" class="legend-img">
+                                <p>SOFA</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/TABLE.jpg" alt="" class="legend-img">
+                                <p>TABLE</p>
+                            </div>
+                            <div class="legend-item"><img src="../../../src/legend/TOILET-SEAT.jpg" alt="" class="legend-img">
+                                <p>TOILET SEAT</p>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- START OF ASSETS -->
-                    <!-- DITO START ENCABS THEN WALA KANA GAGALAWIN SA TAAS NG PART NA CODE MORE ON ASSETS NALANG -->
+                        <div class="map-nav">
+                            <div class="map-legend">
+                                <div class="legend-item" data-status="Working">
+                                    <div class="legend-color-green"></div>
+                                    <button class="legend-toggle">Working</button>
+                                </div>
+                                <div class="legend-item" data-status="Under Maintenance">
+                                    <div class="legend-color-under-maintenance"></div>
+                                    <button class="legend-toggle">Under maintenance</button>
+                                </div>
+                                <div class="legend-item" data-status="Need Repair">
+                                    <div class="legend-color-need-repair"></div>
+                                    <button class="legend-toggle">Need repair</button>
+                                </div>
+                                <div class="legend-item" data-status="For Replacement">
+                                    <div class="legend-color-for-replacement"></div>
+                                    <button class="legend-toggle">For replacement</button>
+                                </div>
+                            </div>
+                        </div>
 
-                    <!-- ASSET 16795 -->
-                    <img src='../image.php?id=7183'
-                        style='width:15px; z-index:1; cursor:pointer; position:absolute; top:400px; left:612px;'
-                        alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal16795'
-                        onclick='fetchAssetData(16795);' class="asset-image" data-id="<?php echo $assetId16795; ?>"
-                        data-room="<?php echo htmlspecialchars($room16795); ?>"
-                        data-floor="<?php echo htmlspecialchars($floor16795); ?>"
-                        data-image="<?php echo base64_encode($upload_img16795); ?>"
-                        data-status="<?php echo htmlspecialchars($status16795); ?>"
-                        data-category="<?php echo htmlspecialchars($category16795); ?>"
-                        data-assignedname="<?php echo htmlspecialchars($assignedName16795); ?>">
-                    <div style='width:7px; height:7px; z-index:2; border-radius:50%; background-color: <?php echo getStatusColor($status16795); ?>; 
+                        <!-- START OF ASSETS -->
+                        <!-- DITO START ENCABS THEN WALA KANA GAGALAWIN SA TAAS NG PART NA CODE MORE ON ASSETS NALANG -->
+
+                        <!-- ASSET 16795 -->
+                        <img src='../image.php?id=7183' style='width:15px; z-index:1; cursor:pointer; position:absolute; top:400px; left:612px;' alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal16795' onclick='fetchAssetData(16795);' class="asset-image" data-id="<?php echo $assetId16795; ?>" data-room="<?php echo htmlspecialchars($room16795); ?>" data-floor="<?php echo htmlspecialchars($floor16795); ?>" data-image="<?php echo base64_encode($upload_img16795); ?>" data-status="<?php echo htmlspecialchars($status16795); ?>" data-category="<?php echo htmlspecialchars($category16795); ?>" data-assignedname="<?php echo htmlspecialchars($assignedName16795); ?>">
+                        <div style='width:7px; height:7px; z-index:2; border-radius:50%; background-color: <?php echo getStatusColor($status16795); ?>; 
     position:absolute; top:395px; left:622px;'>
+                        </div>
+
+                        <!--Start of hover-->
+                        <div id="hover-asset" class="hover-asset" style="display: none;">
+                            <!-- Content will be added dynamically -->
+                        </div>
+
+                        <!--End of hover-->
+
                     </div>
 
-                    <!--Start of hover-->
-                    <div id="hover-asset" class="hover-asset" style="display: none;">
-                        <!-- Content will be added dynamically -->
-                    </div>
+                    <?php
 
-                    <!--End of hover-->
-
-                </div>
-
-                <?php
-
-// Function to generate modal structure for a given asset
-function generateModal($assetId, $room, $floor, $upload_img, $status, $category, $assignedName, $assignedBy, $description)
-{
-    ?>
-    <!-- Modal structure for asset with ID <?php echo $assetId; ?> -->
-    <div class='modal fade' id='imageModal<?php echo $assetId; ?>' tabindex=' -1'
-        aria-labelledby='imageModalLabel<?php echo $assetId; ?>' aria-hidden='true'>
-        <div class='modal-dialog modal-xl modal-dialog-centered'>
-            <div class='modal-content'>
-                <!-- Modal header -->
-                <div class='modal-header'>
-                    <button type='button' class='btn-close' data-bs-dismiss='modal'
-                        aria-label='Close'></button>
-                </div>
-                <!-- Modal body -->
-                <div class='modal-body'>
-                    <form method="post" class="row g-3" enctype="multipart/form-data">
-                        <input type="hidden" name="assetId"
-                            value=" <?php echo htmlspecialchars($assetId); ?>">
-                        <!--START DIV FOR IMAGE -->
-                        <!--First Row-->
-                        <!--IMAGE HERE-->
-                        <div class="col-12 center-content">
-                            <img src=" data:image/jpeg;base64,<?php echo base64_encode($upload_img); ?>
+                    // Function to generate modal structure for a given asset
+                    function generateModal($assetId, $room, $floor, $upload_img, $status, $category, $assignedName, $assignedBy, $description)
+                    {
+                    ?>
+                        <!-- Modal structure for asset with ID <?php echo $assetId; ?> -->
+                        <div class='modal fade' id='imageModal<?php echo $assetId; ?>' tabindex=' -1' aria-labelledby='imageModalLabel<?php echo $assetId; ?>' aria-hidden='true'>
+                            <div class='modal-dialog modal-xl modal-dialog-centered'>
+                                <div class='modal-content'>
+                                    <!-- Modal header -->
+                                    <div class='modal-header'>
+                                        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                                    </div>
+                                    <!-- Modal body -->
+                                    <div class='modal-body'>
+                                        <form method="post" class="row g-3" enctype="multipart/form-data">
+                                            <input type="hidden" name="assetId" value=" <?php echo htmlspecialchars($assetId); ?>">
+                                            <!--START DIV FOR IMAGE -->
+                                            <!--First Row-->
+                                            <!--IMAGE HERE-->
+                                            <div class="col-12 center-content">
+                                                <img src=" data:image/jpeg;base64,<?php echo base64_encode($upload_img); ?>
             " alt="No Image" style="width: 100%; max-width: 50px; height: 50px;">
-                        </div>
-                        <!--END DIV FOR IMAGE -->
-                        <div class="col-4" style="display:none">
-                            <label for="assetId" class="form-label">Tracking #:</label>
-                            <input type="text" class="form-control" id="assetId" name="assetId"
-                                value=" <?php echo htmlspecialchars($assetId); ?>" readonly />
-                        </div>
+                                            </div>
+                                            <!--END DIV FOR IMAGE -->
+                                            <div class="col-4" style="display:none">
+                                                <label for="assetId" class="form-label">Tracking #:</label>
+                                                <input type="text" class="form-control" id="assetId" name="assetId" value=" <?php echo htmlspecialchars($assetId); ?>" readonly />
+                                            </div>
 
-                        <!--Second Row-->
-                        <div class="col-6">
-                            <input type=" text" class="form-control" id="room" name="room"
-                                value="<?php echo htmlspecialchars($room); ?>" readonly />
-                        </div>
+                                            <!--Second Row-->
+                                            <div class="col-6">
+                                                <input type=" text" class="form-control" id="room" name="room" value="<?php echo htmlspecialchars($room); ?>" readonly />
+                                            </div>
 
-                        <!--End of Second Row-->
-                        <!--Third Row-->
-                        <div class="col-6">
-                            <input type="text" class="form-control" id="floor" name="floor"
-                                value="<?php echo htmlspecialchars($floor); ?>" readonly />
-                        </div>
-                        <div class="col-12 center-content">
-                            <input type="text" class="form-control  center-content" id="category"
-                                name=" category" value="<?php echo htmlspecialchars($category); ?>"
-                                readonly />
-                        </div>
-                        <div class=" col-4" style="display:none">
-                            <label for=" images" class="form-label">Images:</label>
-                            <input type=" text" class="form-control" id="" name="images" readonly />
-                        </div>
-                        <!--End of Third Row-->
-                        <!--Fourth Row-->
-                        <div class="col-2 ">
-                            <label for=" status" class="form-label">Status:</label>
-                        </div>
-                        <div class="col-6">
-                            <select class="form-select" id="status" name="status">
-                                <option value="Working" <?php echo ($status == 'Working') ? 'selected="selected"' : ''; ?>>Working</option>
-                                <option value="Under Maintenance" <?php echo ($status == 'Under Maintenance') ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
-                                <option value="For Replacement" <?php echo ($status == 'For Replacement') ? 'selected="selected"' : ''; ?>>For Replacement</option>
-                                <option value="Need Repair" <?php echo ($status == 'Need Repair') ? 'selected="selected"' : ''; ?>>Need Repair</option>
-                            </select>
-                        </div>
-                        <div class="col-4" style="display:none">
-                            <label for=" assignedName" class="form-label">Assigned Name:</label>
-                            <input type="text" class="form-control" id="assignedName" name="assignedName"
-                                value="<?php echo htmlspecialchars($assignedName); ?>" readonly />
-                        </div>
-                        <div class="col-4" style="display:none">
-                            <label for="assignedBy" class="form-label">Assigned By:</label>
-                            <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="
+                                            <!--End of Second Row-->
+                                            <!--Third Row-->
+                                            <div class="col-6">
+                                                <input type="text" class="form-control" id="floor" name="floor" value="<?php echo htmlspecialchars($floor); ?>" readonly />
+                                            </div>
+                                            <div class="col-12 center-content">
+                                                <input type="text" class="form-control  center-content" id="category" name=" category" value="<?php echo htmlspecialchars($category); ?>" readonly />
+                                            </div>
+                                            <div class=" col-4" style="display:none">
+                                                <label for=" images" class="form-label">Images:</label>
+                                                <input type=" text" class="form-control" id="" name="images" readonly />
+                                            </div>
+                                            <!--End of Third Row-->
+                                            <!--Fourth Row-->
+                                            <div class="col-2 ">
+                                                <label for=" status" class="form-label">Status:</label>
+                                            </div>
+                                            <div class="col-6">
+                                                <select class="form-select" id="status" name="status">
+                                                    <option value="Working" <?php echo ($status == 'Working') ? 'selected="selected"' : ''; ?>>Working</option>
+                                                    <option value="Under Maintenance" <?php echo ($status == 'Under Maintenance') ? 'selected="selected"' : ''; ?>>Under Maintenance</option>
+                                                    <option value="For Replacement" <?php echo ($status == 'For Replacement') ? 'selected="selected"' : ''; ?>>For Replacement</option>
+                                                    <option value="Need Repair" <?php echo ($status == 'Need Repair') ? 'selected="selected"' : ''; ?>>Need Repair</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-4" style="display:none">
+                                                <label for=" assignedName" class="form-label">Assigned Name:</label>
+                                                <input type="text" class="form-control" id="assignedName" name="assignedName" value="<?php echo htmlspecialchars($assignedName); ?>" readonly />
+                                            </div>
+                                            <div class="col-4" style="display:none">
+                                                <label for="assignedBy" class="form-label">Assigned By:</label>
+                                                <input type="text" class="form-control" id="assignedBy" name="assignedBy" value="
                     <?php echo htmlspecialchars($assignedBy); ?>" readonly />
+                                            </div>
+                                            <!--End of Fourth Row-->
+                                            <!--Fifth Row-->
+                                            <div class="col-12">
+                                                <input type="text" class="form-control" id="description" name=" description" value="<?php echo htmlspecialchars($description); ?>" />
+                                            </div>
+                                            <!--End of Fifth Row-->
+                                            <!--Sixth Row-->
+                                            <div class=" col-2 Upload">
+                                                <label for="upload_img" class="form-label">Upload:</label>
+                                            </div>
+                                            <div class="col-9">
+                                                <input type="file" class="form-control" id="upload_img" name="upload_img" />
+                                            </div>
+                                            <!--End of Sixth Row-->
+                                            <!-- Modal footer -->
+                                            <div class="button-submit-container">
+                                                <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?php echo $assetId; ?>">
+                                                    Save
+                                                </button>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <!--End of Fourth Row-->
-                        <!--Fifth Row-->
-                        <div class="col-12">
-                            <input type="text" class="form-control" id="description" name=" description"
-                                value="<?php echo htmlspecialchars($description); ?>" />
+                        <!--Edit for table <?php echo $assetId; ?>-->
+                        <div class="map-alert">
+                            <div class="modal fade" id="staticBackdrop<?php echo $assetId; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-footer">
+                                            <p>Are you sure you want to save changes?</p>
+                                            <div class="modal-popups">
+                                                <button type="submit" class="btn add-modal-btn" name="edit<?php echo $assetId; ?>">Yes</button>
+                                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <!--End of Fifth Row-->
-                        <!--Sixth Row-->
-                        <div class=" col-2 Upload">
-                            <label for="upload_img" class="form-label">Upload:</label>
-                        </div>
-                        <div class="col-9">
-                            <input type="file" class="form-control" id="upload_img" name="upload_img" />
-                        </div>
-                        <!--End of Sixth Row-->
-                        <!-- Modal footer -->
-                        <div class="button-submit-container">
-                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop<?php echo $assetId; ?>">
-                                Save
-                            </button>
-                        </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Edit for table <?php echo $assetId; ?>-->
-    <div class="map-alert">
-        <div class="modal fade" id="staticBackdrop<?php echo $assetId; ?>" data-bs-backdrop="static"
-            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-footer">
-                        <p>Are you sure you want to save changes?</p>
-                        <div class="modal-popups">
-                            <button type="submit" class="btn add-modal-btn"
-                                name="edit<?php echo $assetId; ?>">Yes</button>
-                            <button type="button" class="btn close-popups"
-                                data-bs-dismiss="modal">No</button>
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </form>
-    <?php
-}
-
-// Call the generateModal function for each asset
-foreach ($assetIds as $id) {
-    generateModal($id, ${'room' . $id}, ${'floor' . $id}, ${'upload_img' . $id}, ${'status' . $id}, ${'category' . $id}, ${'assignedName' . $id}, ${'assignedBy' . $id}, ${'description' . $id});
-}
-?>
-
-
-            </div>
-        </main>
-    </section>
-    <script>
-        $(document).ready(function () {
-            $('.notification-item').on('click', function (e) {
-                e.preventDefault();
-                var activityId = $(this).data('activity-id');
-                var notificationItem = $(this); // Store the clicked element
-
-                $.ajax({
-                    type: "POST",
-                    url: "../../administrator/update_single_notification.php", // The URL to the PHP file
-                    data: {
-                        activityId: activityId
-                    },
-                    success: function (response) {
-                        if (response.trim() === "Notification updated successfully") {
-                            // If the notification is updated successfully, remove the clicked element
-                            notificationItem.remove();
-
-                            // Update the notification count
-                            var countElement = $('#noti_number');
-                            var count = parseInt(countElement.text()) || 0;
-                            countElement.text(count > 1 ? count - 1 : '');
-                        } else {
-                            // Handle error
-                            console.error("Failed to update notification:", response);
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        // Handle AJAX error
-                        console.error("AJAX error:", status, error);
+                        </form>
+                    <?php
                     }
+
+                    // Call the generateModal function for each asset
+                    foreach ($assetIds as $id) {
+                        generateModal($id, ${'room' . $id}, ${'floor' . $id}, ${'upload_img' . $id}, ${'status' . $id}, ${'category' . $id}, ${'assignedName' . $id}, ${'assignedBy' . $id}, ${'description' . $id});
+                    }
+                    ?>
+
+
+                </div>
+            </main>
+        </section>
+        <script>
+            $(document).ready(function() {
+                $('.notification-item').on('click', function(e) {
+                    e.preventDefault();
+                    var activityId = $(this).data('activity-id');
+                    var notificationItem = $(this); // Store the clicked element
+
+                    $.ajax({
+                        type: "POST",
+                        url: "../../administrator/update_single_notification.php", // The URL to the PHP file
+                        data: {
+                            activityId: activityId
+                        },
+                        success: function(response) {
+                            if (response.trim() === "Notification updated successfully") {
+                                // If the notification is updated successfully, remove the clicked element
+                                notificationItem.remove();
+
+                                // Update the notification count
+                                var countElement = $('#noti_number');
+                                var count = parseInt(countElement.text()) || 0;
+                                countElement.text(count > 1 ? count - 1 : '');
+                            } else {
+                                // Handle error
+                                console.error("Failed to update notification:", response);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle AJAX error
+                            console.error("AJAX error:", status, error);
+                        }
+                    });
                 });
             });
-        });
-    </script>
-    <!--Start of JS Hover-->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const assetImages = document.querySelectorAll('.asset-image');
-            const hoverElement = document.getElementById('hover-asset');
+        </script>
+        <!--Start of JS Hover-->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const assetImages = document.querySelectorAll('.asset-image');
+                const hoverElement = document.getElementById('hover-asset');
 
-            assetImages.forEach(image => {
-                image.addEventListener('mouseenter', function () {
-                    const id = this.dataset.id;
-                    const room = this.dataset.room;
-                    const floor = this.dataset.floor;
-                    const base64Data = this.dataset.image;
-                    const category = this.dataset.category; // Get the category from the data attribute
-                    const assignedName = this.dataset.assignedname; // Add this line to get the assignedName from the data attribute
+                assetImages.forEach(image => {
+                    image.addEventListener('mouseenter', function() {
+                        const id = this.dataset.id;
+                        const room = this.dataset.room;
+                        const floor = this.dataset.floor;
+                        const base64Data = this.dataset.image;
+                        const category = this.dataset.category; // Get the category from the data attribute
+                        const assignedName = this.dataset.assignedname; // Add this line to get the assignedName from the data attribute
 
-                    let imageHTML = '';
-                    if (base64Data && base64Data.trim() !== '') {
-                        const imageSrc = "data:image/jpeg;base64," + base64Data;
-                        imageHTML = `<img src="${imageSrc}" alt="Asset Image">`;
-                    } else {
-                        imageHTML = '<p class="NoImage">No Image uploaded</p>';
-                    }
+                        let imageHTML = '';
+                        if (base64Data && base64Data.trim() !== '') {
+                            const imageSrc = "data:image/jpeg;base64," + base64Data;
+                            imageHTML = `<img src="${imageSrc}" alt="Asset Image">`;
+                        } else {
+                            imageHTML = '<p class="NoImage">No Image uploaded</p>';
+                        }
 
-                    // Update hover element's content
-                    hoverElement.innerHTML = `
+                        // Update hover element's content
+                        hoverElement.innerHTML = `
                     <div class="top-side-hover">
                         <div class="center-content-hover">
                             ${imageHTML}
@@ -817,123 +824,119 @@ foreach ($assetIds as $id) {
                     </div>
             `;
 
-                    // Show hover element
-                    hoverElement.style.display = 'block';
-                });
+                        // Show hover element
+                        hoverElement.style.display = 'block';
+                    });
 
-                image.addEventListener('mouseleave', function () {
-                    // Hide hover element
-                    hoverElement.style.display = 'none';
-                });
-            });
-        });
-
-
-    </script>
-
-    <script>
-        $(document).ready(function () {
-            var urlParams = new URLSearchParams(window.location.search);
-            var assetId = urlParams.get('assetId'); // Get the assetId from the URL
-
-            if (assetId) {
-                var modalId = '#imageModal' + assetId;
-                $(modalId).modal('show'); // Open the modal with the corresponding ID
-            }
-        });
-    </script>
-    <script>
-        // Find all input elements with ID 'description'
-        var inputElements = document.querySelectorAll('input#description');
-
-        // Iterate through each input element
-        inputElements.forEach(function (inputElement) {
-            // Create a new textarea element
-            var textareaElement = document.createElement('textarea');
-
-            // Copy attributes from the input element
-            textareaElement.className = inputElement.className;
-            textareaElement.id = inputElement.id;
-            textareaElement.name = inputElement.name;
-            textareaElement.value = inputElement.value;
-
-            // Replace the input element with the textarea element
-            inputElement.parentNode.replaceChild(textareaElement, inputElement);
-        });
-    </script>
-    <!--FOR LEGEND FILTER-->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const legendItems = document.querySelectorAll('.legend-item button');
-            let activeStatuses = []; // Keep track of active statuses
-
-            legendItems.forEach(item => {
-                item.addEventListener('click', function () {
-                    const legendItem = this.closest('.legend-item');
-                    const status = legendItem.getAttribute('data-status');
-                    // Toggle the active status in the array
-                    const isActive = activeStatuses.includes(status);
-                    if (isActive) {
-                        // Remove the status if it's already active
-                        activeStatuses = activeStatuses.filter(s => s !== status);
-                    } else {
-                        // Add the status if it's not already active
-                        activeStatuses.push(status);
-                    }
-                    // Toggle visibility of assets
-                    toggleAssetVisibility(status);
-                    // Update the opacity of legend items
-                    updateLegendItems();
+                    image.addEventListener('mouseleave', function() {
+                        // Hide hover element
+                        hoverElement.style.display = 'none';
+                    });
                 });
             });
+        </script>
 
-            function toggleAssetVisibility(status) {
-                const assets = document.querySelectorAll(`.asset-image[data-status="${status}"]`);
-                assets.forEach(asset => {
-                    const isHidden = asset.classList.contains('hidden-asset');
-                    const statusIndicator = asset.nextElementSibling;
+        <script>
+            $(document).ready(function() {
+                var urlParams = new URLSearchParams(window.location.search);
+                var assetId = urlParams.get('assetId'); // Get the assetId from the URL
 
-                    if (isHidden) {
-                        asset.classList.remove('hidden-asset');
-                        if (statusIndicator) {
-                            statusIndicator.classList.remove('hidden-asset');
+                if (assetId) {
+                    var modalId = '#imageModal' + assetId;
+                    $(modalId).modal('show'); // Open the modal with the corresponding ID
+                }
+            });
+        </script>
+        <script>
+            // Find all input elements with ID 'description'
+            var inputElements = document.querySelectorAll('input#description');
+
+            // Iterate through each input element
+            inputElements.forEach(function(inputElement) {
+                // Create a new textarea element
+                var textareaElement = document.createElement('textarea');
+
+                // Copy attributes from the input element
+                textareaElement.className = inputElement.className;
+                textareaElement.id = inputElement.id;
+                textareaElement.name = inputElement.name;
+                textareaElement.value = inputElement.value;
+
+                // Replace the input element with the textarea element
+                inputElement.parentNode.replaceChild(textareaElement, inputElement);
+            });
+        </script>
+        <!--FOR LEGEND FILTER-->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const legendItems = document.querySelectorAll('.legend-item button');
+                let activeStatuses = []; // Keep track of active statuses
+
+                legendItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        const legendItem = this.closest('.legend-item');
+                        const status = legendItem.getAttribute('data-status');
+                        // Toggle the active status in the array
+                        const isActive = activeStatuses.includes(status);
+                        if (isActive) {
+                            // Remove the status if it's already active
+                            activeStatuses = activeStatuses.filter(s => s !== status);
+                        } else {
+                            // Add the status if it's not already active
+                            activeStatuses.push(status);
                         }
-                    } else {
-                        asset.classList.add('hidden-asset');
-                        if (statusIndicator) {
-                            statusIndicator.classList.add('hidden-asset');
+                        // Toggle visibility of assets
+                        toggleAssetVisibility(status);
+                        // Update the opacity of legend items
+                        updateLegendItems();
+                    });
+                });
+
+                function toggleAssetVisibility(status) {
+                    const assets = document.querySelectorAll(`.asset-image[data-status="${status}"]`);
+                    assets.forEach(asset => {
+                        const isHidden = asset.classList.contains('hidden-asset');
+                        const statusIndicator = asset.nextElementSibling;
+
+                        if (isHidden) {
+                            asset.classList.remove('hidden-asset');
+                            if (statusIndicator) {
+                                statusIndicator.classList.remove('hidden-asset');
+                            }
+                        } else {
+                            asset.classList.add('hidden-asset');
+                            if (statusIndicator) {
+                                statusIndicator.classList.add('hidden-asset');
+                            }
                         }
-                    }
-                });
-            }
+                    });
+                }
 
-            function updateLegendItems() {
-                // Update the opacity of all legend items based on activeStatuses
-                const allLegendItems = document.querySelectorAll('.legend-item');
-                allLegendItems.forEach(legendItem => {
-                    const status = legendItem.getAttribute('data-status');
-                    if (activeStatuses.includes(status)) {
-                        // If the status is active, change opacity to 50%
-                        legendItem.style.opacity = '0.2';
-                    } else {
-                        // If the status is not active, revert opacity to 100%
-                        legendItem.style.opacity = '1';
-                    }
-                });
-            }
-        });
-    </script>
-
+                function updateLegendItems() {
+                    // Update the opacity of all legend items based on activeStatuses
+                    const allLegendItems = document.querySelectorAll('.legend-item');
+                    allLegendItems.forEach(legendItem => {
+                        const status = legendItem.getAttribute('data-status');
+                        if (activeStatuses.includes(status)) {
+                            // If the status is active, change opacity to 50%
+                            legendItem.style.opacity = '0.2';
+                        } else {
+                            // If the status is not active, revert opacity to 100%
+                            legendItem.style.opacity = '1';
+                        }
+                    });
+                }
+            });
+        </script>
 
 
 
-    <script src="../../../src/js/main.js"></script>
+
+        <script src="../../../src/js/main.js"></script>
         <script src="../../../src/js/logoutMap.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-</body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    </body>
 
-</html>
+    </html>

@@ -3,8 +3,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
@@ -70,18 +70,18 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sql2 = "SELECT * FROM request WHERE campus = 'Batasan' AND category = 'Outsource' ORDER BY date DESC";
     $result2 = $conn->query($sql2) or die($conn->error);
 
-function logActivity($conn, $accountId, $actionDescription, $tabValue)
-{
-    // Add 8 hours to the current date
-    $date = date('Y-m-d H:i:s', strtotime('+8 hours'));
+    function logActivity($conn, $accountId, $actionDescription, $tabValue)
+    {
+        // Add 8 hours to the current date
+        $date = date('Y-m-d H:i:s', strtotime('+8 hours'));
 
-    $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("isss", $accountId, $date, $actionDescription, $tabValue);
-    if (!$stmt->execute()) {
-        echo "Error logging activity: " . $stmt->error;
+        $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("isss", $accountId, $date, $actionDescription, $tabValue);
+        if (!$stmt->execute()) {
+            echo "Error logging activity: " . $stmt->error;
+        }
+        $stmt->close();
     }
-    $stmt->close();
-}
 
 
 
@@ -154,25 +154,25 @@ function logActivity($conn, $accountId, $actionDescription, $tabValue)
         $stmt3->bind_param("ssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $request_id2);
 
         // Execute the query
-    if ($stmt3->execute()) {
-        // Log activity for admin approval with new assignee
-        $approval_action = "Task ID $request_id2 approved with $assignee2 as new assignee.";
-        $reassignment_action =  "Task ID $request_id2 reassigned to $assignee2.";
-        logActivity($conn, $_SESSION['accountId'], $approval_action, 'General');
-        logActivity($conn, $_SESSION['accountId'], $reassignment_action, 'General');
-    
-        // Redirect back to the page
-        header("Location: batasan.php");
-        
-        exit();
-    } else {
-        // Error occurred while updating
-        echo "Error updating request: " . $stmt3->error;
-    }
+        if ($stmt3->execute()) {
+            // Log activity for admin approval with new assignee
+            $approval_action = "Task ID $request_id2 approved with $assignee2 as new assignee.";
+            $reassignment_action =  "Task ID $request_id2 reassigned to $assignee2.";
+            logActivity($conn, $_SESSION['accountId'], $approval_action, 'General');
+            logActivity($conn, $_SESSION['accountId'], $reassignment_action, 'General');
 
-    // Close statement
-    $stmt3->close();
-}
+            // Redirect back to the page
+            header("Location: batasan.php");
+
+            exit();
+        } else {
+            // Error occurred while updating
+            echo "Error updating request: " . $stmt3->error;
+        }
+
+        // Close statement
+        $stmt3->close();
+    }
 
     if (isset($_POST['Outsource'])) {
         $request_id4 = $_POST['new2_request_id'];
@@ -196,81 +196,81 @@ function logActivity($conn, $accountId, $actionDescription, $tabValue)
         // Bind parameters
         $stmt4->bind_param("ssssssssssss", $campus4, $building4, $floor4, $room4, $equipment4, $req_by4, $category4, $assignee4, $status4, $description4, $deadline4, $request_id4);
 
-       // Execute the query
-    if ($stmt4->execute()) {
-        // Log activity for admin approval with outsource as new assignee
-        $action4 = "Task ID $request_id4 approved with Outsource ($assignee4) as new assignee.";
+        // Execute the query
+        if ($stmt4->execute()) {
+            // Log activity for admin approval with outsource as new assignee
+            $action4 = "Task ID $request_id4 approved with Outsource ($assignee4) as new assignee.";
 
-        logActivity($conn, $_SESSION['accountId'], $action4, 'General');
+            logActivity($conn, $_SESSION['accountId'], $action4, 'General');
 
-        // Redirect back to the page
-        header("Location: batasan.php");
-        exit();
-    } else {
-        echo "Error updating data: " . $conn->error;
+            // Redirect back to the page
+            header("Location: batasan.php");
+            exit();
+        } else {
+            echo "Error updating data: " . $conn->error;
+        }
+
+        $stmt4->close();
     }
 
-    $stmt4->close();
-}
 
+    // Function to send email notifications for approaching deadlines
+    function sendDeadlineNotifications($conn)
+    {
+        // Set up the time threshold to 1 day before the deadline
+        $deadlineThreshold = date('Y-m-d', strtotime(' +1 day'));
 
-// Function to send email notifications for approaching deadlines
-function sendDeadlineNotifications($conn) {
-    // Set up the time threshold to 1 day before the deadline
-    $deadlineThreshold = date('Y-m-d', strtotime(' +1 day'));
-
-    // Query tasks with approaching deadlines based on the input date from the modal form
-    $sql = "SELECT req.*, acc.email 
+        // Query tasks with approaching deadlines based on the input date from the modal form
+        $sql = "SELECT req.*, acc.email 
             FROM request AS req 
             JOIN account AS acc ON req.assignee = CONCAT(acc.firstName, ' ', acc.lastName)
             WHERE req.deadline = ? AND req.notification_sent = 0"; // Add condition to check if notification has not been sent
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $deadlineThreshold);
-    $stmt->execute();
-    $result = $stmt->get_result();
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $deadlineThreshold);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    // Iterate through results and send email notifications
-    while ($row = $result->fetch_assoc()) {
-        $assigneeEmail = $row['email'];
-        $taskDescription = $row['description'];
+        // Iterate through results and send email notifications
+        while ($row = $result->fetch_assoc()) {
+            $assigneeEmail = $row['email'];
+            $taskDescription = $row['description'];
 
-        // Create a new PHPMailer instance
-        $mail = new PHPMailer;
+            // Create a new PHPMailer instance
+            $mail = new PHPMailer;
 
-        // Set up SMTP
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'qcu.upkeep@gmail.com';
-        $mail->Password = 'qvpx bbcm bgmy hcvf';
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 587;
+            // Set up SMTP
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'qcu.upkeep@gmail.com';
+            $mail->Password = 'qvpx bbcm bgmy hcvf';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
 
-        //Recipients
-        $mail->setFrom('qcu.upkeep@gmail.com', 'iTrak');
-        $mail->addAddress($assigneeEmail);
-        $mail->Subject = 'Deadline Reminder: ' . $taskDescription;
-        $mail->Body = 'This is a reminder that the deadline for task "' . $taskDescription . '" is approaching. Please ensure it is completed on time.';
-        
-        // Send the email
-        if (!$mail->send()) {
-            echo 'Email could not be sent.';
-            echo 'Mailer Error: ' . $mail->ErrorInfo;
-        } else {
-            // Mark the task as notification sent
-            $taskId = $row['request_id'];
-            $updateSql = "UPDATE request SET notification_sent = 1 WHERE request_id = ?";
-            $updateStmt = $conn->prepare($updateSql);
-            $updateStmt->bind_param("i", $taskId);
-            $updateStmt->execute();
-            $updateStmt->close();
+            //Recipients
+            $mail->setFrom('qcu.upkeep@gmail.com', 'iTrak');
+            $mail->addAddress($assigneeEmail);
+            $mail->Subject = 'Deadline Reminder: ' . $taskDescription;
+            $mail->Body = 'This is a reminder that the deadline for task "' . $taskDescription . '" is approaching. Please ensure it is completed on time.';
 
+            // Send the email
+            if (!$mail->send()) {
+                echo 'Email could not be sent.';
+                echo 'Mailer Error: ' . $mail->ErrorInfo;
+            } else {
+                // Mark the task as notification sent
+                $taskId = $row['request_id'];
+                $updateSql = "UPDATE request SET notification_sent = 1 WHERE request_id = ?";
+                $updateStmt = $conn->prepare($updateSql);
+                $updateStmt->bind_param("i", $taskId);
+                $updateStmt->execute();
+                $updateStmt->close();
+            }
         }
     }
-}
 
-// Call the function when needed, for example in your PHP script:
-sendDeadlineNotifications($conn);
+    // Call the function when needed, for example in your PHP script:
+    sendDeadlineNotifications($conn);
 
 
 

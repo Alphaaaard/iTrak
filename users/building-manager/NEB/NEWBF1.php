@@ -6470,22 +6470,23 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             </div>
         </nav>
     </div>
+        <!-- SIDEBAR -->
         <section id="sidebar">
-            <div href="#" class="brand" title="logo">
-                <i><img src="../../../src/img/UpKeep.png" alt="" class="logo" /></i>
+            <a href="./dashboard.php" class="brand" title="logo">
+                <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
                 <div class="mobile-sidebar-close">
                     <i class="bi bi-arrow-left-circle"></i>
                 </div>
-            </div>
+            </a>
             <ul class="side-menu top">
                 <li>
-                    <a href="../../manager/dashboard.php">
+                    <a href="./dashboard.php">
                         <i class="bi bi-grid"></i>
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../../manager/attendance-logs.php">
+                    <a href="./attendance-logs.php">
                         <i class="bi bi-calendar-week"></i>
                         <span class="text">Attendance Logs</span>
                     </a>
@@ -6505,38 +6506,72 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 </div>
                 <div class="GPS-container">
                     <li class="GPS-Tracker">
-                        <a href="../../manager/gps.php">
+                        <a href="./gps.php">
                             <i class="bi bi-crosshair"></i>
                             <span class="text">GPS Tracker</span>
                         </a>
                     </li>
                     <li class="GPS-History">
-                        <a href="../../manager/gps-history.php">
+                        <a href="./gps_history.php">
                             <i class="bi bi-radar"></i>
                             <span class="text">GPS History</span>
                         </a>
                     </li>
                 </div>
                 <li class="active">
-                    <a href="../../manager/map.php">
+                    <a href="./map.php">
                         <i class="bi bi-map"></i>
                         <span class="text">Map</span>
                     </a>
                 </li>
                 <li>
-                    <a href="../../manager/reports.php">
+                    <a href="./reports.php">
                         <i class="bi bi-clipboard"></i>
                         <span class="text">Reports</span>
                     </a>
                 </li>
+                <div class="Map-cont" onclick="toggleMAP()">
+                    <li class="Map-dropdown">
+                        <div class="Map-drondown-content">
+                            <div class="Map-side-cont">
+                                <i class="bi bi-receipt"></i>
+                                <span class="text">Request</span>
+                            </div>
+                            <div class="Map-ind">
+                                <i id="map-chevron-icon" class="bi bi-chevron-down"></i>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <div class="Map-container">
+                    <li class="Map-Batasan">
+                        <a href="./batasan.php">
+                            <i class="bi bi-building"></i>
+                            <span class="text">Batasan</span>
+                        </a>
+                    </li>
+                    <li class="Map-SanBartolome">
+                        <a href="./sanBartolome.php">
+                            <i class="bi bi-building"></i>
+                            <span class="text">San Bartolome</span>
+                        </a>
+                    </li>
+                    <li class="Map-SanFrancisco">
+                        <a href="./sanFrancisco.php">
+                            <i class="bi bi-building"></i>
+                            <span class="text">San Francisco</span>
+                        </a>
+                    </li>
+                </div>
                 <li>
-                    <a href="../../manager/activity-logs.php">
+                    <a href="./activity-logs.php">
                         <i class="bi bi-arrow-counterclockwise"></i>
                         <span class="text">Activity Logs</span>
                     </a>
                 </li>
             </ul>
         </section>
+        <!-- SIDEBAR -->
     <div id="map-top-nav">
         <a href="../../manager/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
 

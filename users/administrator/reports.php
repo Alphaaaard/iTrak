@@ -1290,13 +1290,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     ?>
 
                                     <div class="col-6" id="outsourceAssigneeSection" style="display: none;">
-                                            <label for="outsource_assignee" class="form-label">Outsource Name:</label>
-                                            <input type="text" class="form-control" id="outsource_assignee" name="outsource_assignee"/>
+                                        <label for="outsource_assignee" class="form-label">Outsource Name:</label>
+                                        <input type="text" class="form-control" id="outsource_assignee" name="outsource_assignee" />
                                     </div>
 
                                 </div>
 
-                                
+
 
                                 <div class="col-12">
                                     <label for="description" class="form-label">Description:</label>
@@ -1330,14 +1330,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <script>
             function toggleCustomInput() {
-            var assignedNameSelect = document.getElementById("assignedNametransfer");
-            var outsourceAssigneeSection = document.getElementById("outsourceAssigneeSection");
+                var assignedNameSelect = document.getElementById("assignedNametransfer");
+                var outsourceAssigneeSection = document.getElementById("outsourceAssigneeSection");
 
-            if (assignedNameSelect.value === "custom") {
-                outsourceAssigneeSection.style.display = "block";
-            } else {
-                outsourceAssigneeSection.style.display = "none";
-            }
+                if (assignedNameSelect.value === "custom") {
+                    outsourceAssigneeSection.style.display = "block";
+                } else {
+                    outsourceAssigneeSection.style.display = "none";
+                }
             }
 
             // Call toggleCustomInput() when the page loads to ensure correct initial state
@@ -1347,7 +1347,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             document.getElementById("assignedNametransfer").addEventListener("change", toggleCustomInput);
         </script>
 
-     
+
 
 
 
