@@ -1085,12 +1085,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 <label id="assignee-label" for="assignee"
                                                     class="form-label">Assignee:</label>
                                                 <select class="form-select" id="assignee" name="assignee"></select>
-                                            </div>
-                                            <input type="text" class="form-control" id="assigneeInput" name="assignee"
-                                                style="display:none;">
 
-                                            <input type="text" class="form-control" id="assigneeInputreal"
-                                                name="assigneereal" style="display:none;">
+                                                <input type="text" class="form-control" id="assigneeInput"
+                                                    name="assignee" style="display: none;">
+
+                                                <input type="text" class="form-control" id="assigneeInputreal"
+                                                    name="assigneereal" style="display:none;">
+                                            </div>
 
 
                                             <div class="col-4" style="display:none;">
