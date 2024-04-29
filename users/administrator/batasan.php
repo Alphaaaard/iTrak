@@ -105,7 +105,7 @@ if (isset($_POST['add'])) {
     $deadline = $_POST['new_deadline'];
 
     // Calculate the current date plus 8 hours
-    $adjusted_date = date('Y-m-d H:i:s', strtotime(''));
+    $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
 
     // Insert data into the request table
     $insertQuery = "INSERT INTO request (request_id, campus, building, floor, room, equipment, req_by, category, assignee, status, description, deadline, date)
