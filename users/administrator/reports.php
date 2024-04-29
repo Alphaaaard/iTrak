@@ -54,13 +54,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $result3 = $conn->query($sql3) or die($conn->error);
 
 
-$sql4 = "SELECT * FROM asset 
+    $sql4 = "SELECT * FROM asset 
          WHERE (status IN ('For Approval', 'Need Repair') AND os_identity != 'Outsource')
          OR (status IN ('For Approval', 'Need Repair') AND NOT EXISTS 
              (SELECT 1 FROM asset WHERE status IN ('For Approval', 'Need Repair') AND os_identity = 'Outsource'))
          ORDER BY (status = 'For Approval') DESC, 
                   (status = 'Need Repair') DESC, 
-                  date_updated DESC,  -- Add this line to order by date_updated in descending order
                   assignedName IS NULL, 
                   assignedName 
          LIMIT 50";
