@@ -153,7 +153,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         // Bind parameters
         $stmt3->bind_param("sssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $adjusted_date, $request_id2);
-       
+
         // Execute the query
         if ($stmt3->execute()) {
             // Log activity for admin approval with new assignee
@@ -960,8 +960,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                             <div class="col-4">
                                                 <label for="new_equipment" class="form-label">Equipment :</label>
-                                                <input type="text" class="form-control" id="new_equipment"
-                                                    name="new_equipment" />
+                                                <select class="form-select" id="new_equipment" name="new_equipment">
+                                                    <option value="Bed">Bed</option>
+                                                    <option value="Bulb">Bulb</option>
+                                                    <option value="LED Light">LED Light</option>
+                                                    <option value="Chair">Chair</option>
+                                                    <option value="Desk">Desk</option>
+                                                    <option value="Sofa">Sofa</option>
+                                                    <option value="Table">Table</option>
+                                                    <option value="Toilet Seat">Toilet Seat</option>
+                                                    <option value="Conference Table">Conference Table</option>
+                                                    <option value="Ceiling Fan">Ceiling Fan</option>
+                                                    <option value="Aircon">Aircon</option>
+                                                    <option value="Cassette Aircon">Cassette Aircon</option>
+                                                    <option value="Door">Door</option>
+                                                    <option value="Swing Door">Swing Door</option>
+                                                </select>
                                             </div>
 
                                             <div class="col-4" style="display:none;">
