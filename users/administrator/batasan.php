@@ -67,11 +67,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $result = $conn->query($sql) or die($conn->error);
 
 
-    $sql2 = "SELECT * FROM request WHERE campus = 'Batasan' AND category = 'Outsource' AND status = 'Pending' ORDER BY date DESC";
-    $result2 = $conn->query($sql2) or die($conn->error);
 
-    $sql4 = "SELECT * FROM request WHERE campus = 'Batasan' AND status = 'Done' ORDER BY date DESC";
+    $sql2 = "SELECT *, date(date, INTERVAL 8 HOUR) AS adjusted_date FROM request WHERE campus = 'Batasan' AND category = 'Outsource' AND status = 'Pending' ORDER BY adjusted_date DESC";
+    $result2 = $conn->query($sql2) or die($conn->error);
+    
+    $sql4 = "SELECT *, date(date, INTERVAL 8 HOUR) AS adjusted_date FROM request WHERE campus = 'Batasan' AND status = 'Done' ORDER BY adjusted_date DESC";
     $result4 = $conn->query($sql4) or die($conn->error);
+    
 
     function logActivity($conn, $accountId, $actionDescription, $tabValue)
     {
