@@ -1313,42 +1313,30 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 var subjectSel = document.getElementById("new_building");
                 var topicSel = document.getElementById("new_floor");
                 var chapterSel = document.getElementById("new_room");
+
                 for (var x in subjectObject) {
                     subjectSel.options[subjectSel.options.length] = new Option(x, x);
                 }
+
                 subjectSel.onchange = function() {
-                    //empty Chapters- and Topics- dropdowns
+                    // Empty Floors- and Rooms-dropdowns
                     chapterSel.length = 1;
                     topicSel.length = 1;
-                    //display correct values
+                    
+                    // Display correct values for Floors
                     for (var y in subjectObject[this.value]) {
                         topicSel.options[topicSel.options.length] = new Option(y, y);
                     }
                 }
-                window.onload = function() {
-                    var subjectSel = document.getElementById("new_building");
-                    var topicSel = document.getElementById("new_floor");
-                    var chapterSel = document.getElementById("new_room");
-                    for (var x in subjectObject) {
-                        subjectSel.options[subjectSel.options.length] = new Option(x, x);
-                    }
-                    subjectSel.onchange = function() {
-                        //empty Chapters- and Topics- dropdowns
-                        chapterSel.length = 1;
-                        topicSel.length = 1;
-                        //display correct values
-                        for (var y in subjectObject[this.value]) {
-                            topicSel.options[topicSel.options.length] = new Option(y, y);
-                        }
-                    }
-                    topicSel.onchange = function() {
-                        //empty Chapters dropdown
-                        chapterSel.length = 1;
-                        //display correct values
-                        var z = subjectObject[subjectSel.value][this.value];
-                        for (var i = 0; i < z.length; i++) {
-                            chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
-                        }
+
+                topicSel.onchange = function() {
+                    // Empty Rooms dropdown
+                    chapterSel.length = 1;
+                    
+                    // Display correct values for Rooms
+                    var rooms = subjectObject[subjectSel.value][this.value];
+                    for (var i = 0; i < rooms.length; i++) {
+                        chapterSel.options[chapterSel.options.length] = new Option(rooms[i], rooms[i]);
                     }
                 }
             }
@@ -1377,29 +1365,68 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 // Get the selected category
                 var category = document.getElementById('category').value;
 
-                // Make an AJAX request
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', 'fetchAssignees.php?category=' + category, true);
-                xhr.onload = function() {
-                    if (xhr.status == 200) {
-                        // Parse the JSON response
-                        var assignees = JSON.parse(xhr.responseText);
+                // Get the assignee select and input elements
+                var assigneeSelect = document.getElementById('assignee');
+                var assigneeInput = document.getElementById('assigneeInput');
+                var assigneeInputReal = document.getElementById('assigneeInputreal');
 
-                        // Clear previous options
-                        var assigneeSelect = document.getElementById('assignee');
-                        assigneeSelect.innerHTML = '';
+                // Function to update assigneeInputreal value
+                function updateAssigneeInputReal(value) {
+                    assigneeInputReal.value = value;
+                }
 
-                        // Populate the assignee select element
-                        for (var i = 0; i < assignees.length; i++) {
-                            var option = document.createElement('option');
-                            // Set the option value to concatenated firstName and lastName
-                            option.value = assignees[i].firstName + ' ' + assignees[i].lastName;
-                            option.textContent = assignees[i].firstName + ' ' + assignees[i].lastName;
-                            assigneeSelect.appendChild(option);
+                // Event listener for assigneeInput
+                assigneeInput.addEventListener('input', function () {
+                    updateAssigneeInputReal(this.value);
+                });
+
+                // Check if the selected category is "Outsource"
+                if (category === "Outsource") {
+                    // If it is, show the input and hide the select
+                    assigneeSelect.style.display = 'none';
+                    assigneeInput.style.display = 'block';
+
+                    // Copy the value from the input to assigneeInputreal
+                    updateAssigneeInputReal(assigneeInput.value);
+                } else {
+                    // Otherwise, show the select and hide the input
+                    assigneeInput.style.display = 'none';
+                    assigneeSelect.style.display = 'block';
+
+                    // Make an AJAX request to fetch assignees
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', 'fetchAssignees.php?category=' + category, true);
+                    xhr.onload = function () {
+                        if (xhr.status == 200) {
+                            // Parse the JSON response
+                            var assignees = JSON.parse(xhr.responseText);
+
+                            // Clear previous options
+                            assigneeSelect.innerHTML = '';
+
+                            // Populate the assignee select element
+                            for (var i = 0; i < assignees.length; i++) {
+                                var option = document.createElement('option');
+                                // Set the option value to concatenated firstName and lastName
+                                option.value = assignees[i].firstName + ' ' + assignees[i].lastName;
+                                option.textContent = assignees[i].firstName + ' ' + assignees[i].lastName;
+                                assigneeSelect.appendChild(option);
+                            }
+
+                            // Automatically select the first option if available
+                            if (assignees.length > 0) {
+                                assigneeSelect.value = assignees[0].firstName + ' ' + assignees[0].lastName;
+                                updateAssigneeInputReal(assignees[0].firstName + ' ' + assignees[0].lastName);
+                            }
+
+                            // Event listener for assigneeSelect
+                            assigneeSelect.addEventListener('change', function () {
+                                updateAssigneeInputReal(assigneeSelect.value);
+                            });
                         }
-                    }
-                };
-                xhr.send();
+                    };
+                    xhr.send();
+                }
             }
         </script>
 
