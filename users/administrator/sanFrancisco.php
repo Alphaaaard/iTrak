@@ -1231,21 +1231,19 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     <!-- Cascading Script -->
     <script>
         var subjectObject = {
-            "Batasan Campus Building": {
-                "Basement": ["Male CR", "Female CR"],
-                "1F": ["Lobby", "Com Lab 104", "Com Lab 103", "Room 102", "Room 101", "Guidance Clinic 108", "Admin Office 107", "Faculty Room 106", "Library 105"],
-                "2F": ["Male CR", "Female CR", "03 room 201", "04 room 202", "05 room 203", "Room 205"],
-                "3F": ["Variables", "Operators", "Functions", "Conditions"],
-                "4F": ["Variables", "Operators", "Functions", "Conditions"]
+            "San Francisco Campus Building": {
+                "1F": ["RM101", "RM102", "RM103"],
+                "2F": ["RM201 Admin & Guidance Office", "RM202 Library", "RM203 Faculty & PESO Room", "RM204 Isolation & Clinic"],
+                "3F": ["RM301 Regular Room", "RM302 Computer Laboratory", "RM303 Regular Room", "RM304 Regular Room"],
             },
-            "Basketball Court": {
-                "PHP": ["Variables", "Strings", "Arrays"],
-                "SQL": ["SELECT", "UPDATE", "DELETE"]
+            "Open Grounds (OG)": {
+                // "PHP": ["Variables", "Strings", "Arrays"],
+                // "SQL": ["SELECT", "UPDATE", "DELETE"]
             },
-            "Parking Area": {
-                "PHP": ["Variables", "Strings", "Arrays"],
-                "SQL": ["SELECT", "UPDATE", "DELETE"]
-            }
+            // "Parking Area": {
+            //     "PHP": ["Variables", "Strings", "Arrays"],
+            //     "SQL": ["SELECT", "UPDATE", "DELETE"]
+            // }
         }
         window.onload = function () {
             var subjectSel = document.getElementById("new_building");
