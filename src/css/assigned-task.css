@@ -13,3 +13,108 @@
     font-size: 0.8em;
   }
 }
+
+
+#transfer-options {
+  margin: 1em;
+}
+
+.btn.disabled,
+.btn:disabled,
+fieldset:disabled .btn {
+  background-color: #f6f6f6;
+  color: #aaaaaa;
+}
+
+.add-modal-btn {
+  padding: 0.5em 5em;
+  border-radius: 17.5px;
+}
+
+#transfer-body {
+  margin: 30px 30px 0 30px;
+}
+
+#transfer-footer {
+  margin-bottom: 15px;
+}
+
+.form-check .form-check-input {
+  float: left;
+  margin-left: -1.3em;
+  margin-top: 0.35em;
+}
+
+.form-check-input[type="radio"] {
+  border: 1px solid #3d3b40;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  outline: none !important;
+  box-shadow: none;
+}
+
+.form-check-input:checked {
+  background-color: #3d3b40;
+  color: #3d3b40;
+}
+
+.g-3,
+.gy-3 {
+  --bs-gutter-y: unset;
+}
+
+
+
+@media (max-width: 600px) {
+  .modal-header {
+    padding: 0.5em;
+  }
+  .modal-body {
+    padding: 1rem !important;
+    margin-bottom: unset;
+    display: unset;
+  }
+
+  .add-modal-btn {
+    padding: 0.5em 2em;
+  }
+
+  .content-container {
+    margin-top: 3em;
+  }
+
+  .footer {
+    gap: 100px;
+  }
+
+  .form-select {
+    font-size: 1em !important;
+  }
+
+  .form-control {
+    font-size: 0.875rem;
+  }
+  .table-header table tr th:nth-child(3) {
+    display: none;
+  }
+  .table-header table tr th:nth-child(4) {
+    display: none;
+  }
+
+  .table-header table tr th:nth-child(5) {
+    display: none;
+  }
+
+  .table-container table tbody tr td:nth-child(3) {
+    display: none;
+  }
+
+  .table-container table tbody tr td:nth-child(4) {
+    display: none;
+  }
+
+  .table-container table tbody tr td:nth-child(5) {
+    display: none;
+  }
+}
