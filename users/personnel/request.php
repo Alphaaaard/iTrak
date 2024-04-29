@@ -263,7 +263,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         $deadline5 = $_POST['deadline'];
     
         // Calculate the current date plus 8 hours
-        $adjusted_date = date('Y-m-d H:i:s', strtotime('+8 hours'));
+        $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
 
         // Retrieve selected return_reason from radio buttons
         $return_reason5 = $_POST['return_reason'];
