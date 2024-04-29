@@ -3,8 +3,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once ("../../config/connection.php");
@@ -89,29 +89,33 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt->close();
     }
 
+if (isset($_POST['add'])) {
+    $request_id = $_POST['new_request_id'];
+    $campus = $_POST['new_campus'];
+    $building = $_POST['new_building'];
+    $floor = $_POST['new_floor'];
+    $room = $_POST['new_room'];
+    $equipment = $_POST['new_equipment'];
+    $req_by = $_POST['new_req_by'];
+    $category = $_POST['new_category'];
+    $assignee = $_POST['new_assignee'];
+    $status = $_POST['new_status'];
+    $description = $_POST['new_description'];
+    $deadline = $_POST['new_deadline'];
 
-    if (isset($_POST['add'])) {
-        $request_id = $_POST['new_request_id'];
-        $campus = $_POST['new_campus'];
-        $building = $_POST['new_building'];
-        $floor = $_POST['new_floor'];
-        $room = $_POST['new_room'];
-        $equipment = $_POST['new_equipment'];
-        $req_by = $_POST['new_req_by'];
-        $category = $_POST['new_category'];
-        $assignee = $_POST['new_assignee'];
-        $status = $_POST['new_status'];
-        $description = $_POST['new_description'];
-        $deadline = $_POST['new_deadline'];
+    // Calculate the current date plus 8 hours
+    $adjusted_date = date('Y-m-d H:i:s', strtotime('+8 hours'));
 
-        // Insert data into the request table
-        $insertQuery = "INSERT INTO request (request_id, campus, building, floor, room, equipment, req_by, category, assignee, status, description, deadline)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    // Insert data into the request table
+    $insertQuery = "INSERT INTO request (request_id, campus, building, floor, room, equipment, req_by, category, assignee, status, description, deadline, date)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        $stmt = $conn->prepare($insertQuery);
+    $stmt = $conn->prepare($insertQuery);
+    $stmt->bind_param("sssssssssssss", $request_id, $campus, $building, $floor, $room, $equipment, $req_by, $category, $assignee, $status, $description, $deadline, $adjusted_date);
 
-        // Bind parameters
-        $stmt->bind_param("ssssssssssss", $request_id, $campus, $building, $floor, $room, $equipment, $req_by, $category, $assignee, $status, $description, $deadline);
+
+    // Rest of your code after insertion
+
 
         if ($stmt->execute()) {
             // Log activity for task creation and assignment
@@ -132,7 +136,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     if (isset($_POST['approval'])) {
         // Retrieve request_id from the form
         $request_id2 = $_POST['request_id'];
-
+    
         // Retrieve other form data
         $campus2 = $_POST['campus'];
         $building2 = $_POST['building'];
@@ -144,20 +148,23 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status2 = $_POST['status'];
         $description2 = $_POST['description'];
         $deadline2 = $_POST['deadline'];
-
+    
+        // Calculate the current date plus 8 hours
+        $adjusted_date = date('Y-m-d H:i:s', strtotime('+8 hours'));
+    
         // SQL UPDATE query
         $sql3 = "UPDATE request 
                  SET campus = ?, building = ?, floor = ?, room = ?, 
                      equipment = ?, category = ?, assignee = ?, 
-                     status = ?, description = ?, deadline = ? 
+                     status = ?, description = ?, deadline = ?, date = ?
                  WHERE request_id = ?";
-
+    
         // Prepare the SQL statement
         $stmt3 = $conn->prepare($sql3);
-
+    
         // Bind parameters
-        $stmt3->bind_param("ssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $request_id2);
-
+        $stmt3->bind_param("ssssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $adjusted_date, $request_id2);
+    
         // Execute the query
         if ($stmt3->execute()) {
             // Log activity for admin approval with new assignee

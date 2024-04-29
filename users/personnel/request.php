@@ -182,7 +182,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
     if (isset($_POST['approval'])) {
         // Retrieve request_id from the form
         $request_id2 = $_POST['request_id'];
-
+    
         // Retrieve other form data
         $campus2 = $_POST['campus'];
         $building2 = $_POST['building'];
@@ -194,7 +194,10 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         $status2 = "For Approval";
         $description2 = $_POST['description'];
         $deadline2 = $_POST['deadline'];
-
+    
+        // Calculate the current date plus 8 hours
+        $adjusted_date = date('Y-m-d H:i:s', strtotime('+8 hours'));
+    
         // Retrieve selected return_reason from radio buttons
         $return_reason = $_POST['return_reason'];
         // Check if status is being updated from pending to for approval
@@ -206,21 +209,21 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         $row_status = $result_status->fetch_assoc();
         $status_before_update = $row_status['status'];
         $stmt_check_status->close();
-
+    
         // SQL UPDATE query
         $sql3 = "UPDATE request 
-             SET campus = ?, building = ?, floor = ?, room = ?, 
-                 equipment = ?, category = ?, assignee = ?, 
-                 status = ?, description = ?, deadline = ?,
-                 return_reason = ?
-             WHERE request_id = ?";
-
+                 SET campus = ?, building = ?, floor = ?, room = ?, 
+                     equipment = ?, category = ?, assignee = ?, 
+                     status = ?, description = ?, deadline = ?,
+                     return_reason = ?, date = ?
+                 WHERE request_id = ?";
+    
         // Prepare the SQL statement
         $stmt3 = $conn->prepare($sql3);
-
+    
         // Bind parameters
-        $stmt3->bind_param("sssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $return_reason, $request_id2);
-
+        $stmt3->bind_param("ssssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $return_reason, $adjusted_date, $request_id2);
+    
         // Execute the query
         if ($stmt3->execute()) {
             // Check if status changed from pending to for approval
@@ -246,7 +249,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
     if (isset($_POST['done'])) {
         // Retrieve request_id from the form
         $request_id5 = $_POST['request_id'];
-
+    
         // Retrieve other form data
         $campus5 = $_POST['campus'];
         $building5 = $_POST['building'];
@@ -258,34 +261,39 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         $status5 = "Done";
         $description5 = $_POST['description'];
         $deadline5 = $_POST['deadline'];
+    
+        // Calculate the current date plus 8 hours
+        $adjusted_date = date('Y-m-d H:i:s', strtotime('+8 hours'));
 
         // Retrieve selected return_reason from radio buttons
         $return_reason5 = $_POST['return_reason'];
 
         $status_before_update_query = "SELECT status FROM request WHERE request_id = ?";
-        $stmt_check_status = $conn->prepare($status_before_update_query);
-        $stmt_check_status->bind_param("i", $request_id5);
-        $stmt_check_status->execute();
-        $result_status = $stmt_check_status->get_result();
-        $row_status = $result_status->fetch_assoc();
-        $status_before_update = $row_status['status'];
-        $stmt_check_status->close();
+    $stmt_check_status = $conn->prepare($status_before_update_query);
+    $stmt_check_status->bind_param("i", $request_id5);
+    $stmt_check_status->execute();
+    $result_status = $stmt_check_status->get_result();
+    $row_status = $result_status->fetch_assoc();
+    $status_before_update = $row_status['status'];
+    $stmt_check_status->close();
 
 
         // SQL UPDATE query
         $sql5 = "UPDATE request 
-             SET campus = ?, building = ?, floor = ?, room = ?, 
-                 equipment = ?, category = ?, assignee = ?, 
-                 status = ?, description = ?, deadline = ?,
-                 return_reason = ?
-             WHERE request_id = ?";
+        SET campus = ?, building = ?, floor = ?, room = ?, 
+            equipment = ?, category = ?, assignee = ?, 
+            status = ?, description = ?, deadline = ?,
+            return_reason = ?, date = ?
+        WHERE request_id = ?";
 
         // Prepare the SQL statement
         $stmt5 = $conn->prepare($sql5);
 
-        // Bind parameters
-        $stmt5->bind_param("sssssssssssi", $campus5, $building5, $floor5, $room5, $equipment5, $category5, $assignee5, $status5, $description5, $deadline5, $return_reason5, $request_id5);
+        
+      
 
+    // Bind parameters
+    $stmt5->bind_param("ssssssssssssi", $campus5, $building5, $floor5, $room5, $equipment5, $category5, $assignee5, $status5, $description5, $deadline5, $return_reason5, $adjusted_date, $request_id5);
 
         // Execute the query
         if ($stmt5->execute()) {
