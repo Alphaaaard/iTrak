@@ -75,12 +75,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
-    
+
     function logActivity($conn, $accountId, $actionDescription, $tabValue)
     {
         // Add 8 hours to the current date
         $date = date('Y-m-d H:i:s', strtotime('+8 hours'));
-    
+
         $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab, seen, m_seen, p_seen) VALUES (?, ?, ?, ?, 1, 1, 1)");
         $stmt->bind_param("isss", $accountId, $date, $actionDescription, $tabValue);
         if (!$stmt->execute()) {
@@ -1123,19 +1123,23 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             </div>
                                             <div class="col-4">
                                                 <label for="new_building" class="form-label">Building:</label>
-                                                <input type="text" class="form-control" id="new_building"
-                                                    name="new_building" />
+                                                <select class="form-control" id="new_building" name="new_building">
+                                                    <option value="" selected="selected">Select Building</option>
+                                                </select>
                                             </div>
 
                                             <div class="col-4">
                                                 <label for="new_floor" class="form-label">Floor:</label>
-                                                <input type="text" class="form-control" id="new_floor"
-                                                    name="new_floor" />
+                                                <select class="form-control" id="new_floor" name="new_floor">
+                                                    <option value="" selected="selected">Select Floor</option>
+                                                </select>
                                             </div>
 
                                             <div class="col-4">
                                                 <label for="new_room" class="form-label">Room: </label>
-                                                <input type="text" class="form-control" id="new_room" name="new_room" />
+                                                <select class="form-control" id="new_room" name="new_room">
+                                                    <option value="" selected="selected">Select Room</option>
+                                                </select>
                                             </div>
                                             <div class="col-4" style="display:none;">
                                                 <label for="new_campus" class="form-label">Campus:</label>
@@ -1541,7 +1545,46 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     <script src="../../src/js/logout.js"></script>
     <script src="../../src/js/batasan.js"></script>
 
-
+    <!-- Cascading Script -->
+    <script>
+        var subjectObject = {
+            "Front-end": {
+                "HTML": ["Links", "Images", "Tables", "Lists"],
+                "CSS": ["Borders", "Margins", "Backgrounds", "Float"],
+                "JavaScript": ["Variables", "Operators", "Functions", "Conditions"]
+            },
+            "Back-end": {
+                "PHP": ["Variables", "Strings", "Arrays"],
+                "SQL": ["SELECT", "UPDATE", "DELETE"]
+            }
+        }
+        window.onload = function () {
+            var subjectSel = document.getElementById("new_building");
+            var topicSel = document.getElementById("new_floor");
+            var chapterSel = document.getElementById("new_room");
+            for (var x in subjectObject) {
+                subjectSel.options[subjectSel.options.length] = new Option(x, x);
+            }
+            subjectSel.onchange = function () {
+                //empty Chapters- and Topics- dropdowns
+                chapterSel.length = 1;
+                topicSel.length = 1;
+                //display correct values
+                for (var y in subjectObject[this.value]) {
+                    topicSel.options[topicSel.options.length] = new Option(y, y);
+                }
+            }
+            topicSel.onchange = function () {
+                //empty Chapters dropdown
+                chapterSel.length = 1;
+                //display correct values
+                var z = subjectObject[subjectSel.value][this.value];
+                for (var i = 0; i < z.length; i++) {
+                    chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+                }
+            }
+        }
+    </script>
 
     <script>
         // Get today's date
