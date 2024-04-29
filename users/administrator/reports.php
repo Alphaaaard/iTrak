@@ -53,15 +53,25 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
     $result3 = $conn->query($sql3) or die($conn->error);
 
-    $sql4 = "SELECT * FROM asset 
+
+
+
+$sql4 = "SELECT * FROM asset 
          WHERE (status IN ('For Approval', 'Need Repair') AND os_identity != 'Outsource')
          OR (status IN ('For Approval', 'Need Repair') AND NOT EXISTS 
              (SELECT 1 FROM asset WHERE status IN ('For Approval', 'Need Repair') AND os_identity = 'Outsource'))
-         ORDER BY (status = 'For Approval') DESC, 
-                  (status = 'Need Repair') DESC, 
-                  assignedName IS NULL, 
-                  assignedName 
+         ORDER BY 
+             CASE 
+                 WHEN status = 'For Approval' THEN 1 
+                 WHEN status = 'Need Repair' THEN 2 
+                 ELSE 3 
+             END, 
+             date_column ASC,
+             priority_column ASC,
+             assignedName IS NULL, 
+             assignedName 
          LIMIT 50";
+
 
     $result4 = $conn->query($sql4) or die($conn->error);
 
