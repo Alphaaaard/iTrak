@@ -1340,7 +1340,7 @@ $sql4 = "SELECT * FROM asset
                                         echo '<option value="' . htmlspecialchars($fullName) . '">' . htmlspecialchars($fullName) . '</option>';
                                     }
                                     // Add an input box option
-                                    echo '<option value="custom">Outsource</option>';
+                                    echo '<option value="custom">Outsource *Select Only if the Transfer Reason is Outsource* </option>';
                                     echo '</select>';
                                 } else {
                                     // Handle potential errors or no results
