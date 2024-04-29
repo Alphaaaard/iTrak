@@ -809,7 +809,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                                 <input type="text" class="form-control" id="date" name="date"
                                                     readonly />
                                             </div>
-                                            <div class="col-4" style="display:none;">
+                                            <div class="col-4" >
                                                 <label for="campus" class="form-label">Campus:</label>
                                                 <input type="text" class="form-control" id="campus" name="campus" />
                                             </div>
