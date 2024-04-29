@@ -3,8 +3,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once ("../../config/connection.php");
@@ -67,11 +67,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $result = $conn->query($sql) or die($conn->error);
 
 
-    $sql2 = "SELECT * FROM request WHERE campus = 'Batasan' AND category = 'Outsource' ORDER BY date DESC";
+    $sql2 = "SELECT * FROM request WHERE campus = 'Batasan' AND category = 'Outsource' AND status = 'Pending' ORDER BY date DESC";
     $result2 = $conn->query($sql2) or die($conn->error);
 
-    $sql3 = "SELECT * FROM request WHERE campus = 'Batasan' AND status = 'Done' ORDER BY date DESC";
-    $result3 = $conn->query($sql3) or die($conn->error);
+    $sql4 = "SELECT * FROM request WHERE campus = 'Batasan' AND status = 'Done' ORDER BY date DESC";
+    $result4 = $conn->query($sql4) or die($conn->error);
 
     function logActivity($conn, $accountId, $actionDescription, $tabValue)
     {
@@ -816,26 +816,26 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </table>
                             </div>
                             <?php
-                            if ($result3->num_rows > 0) {
+                            if ($result4->num_rows > 0) {
                                 echo "<div class='table-container'>";
                                 echo "<table>";
-                                while ($row3 = $result3->fetch_assoc()) {
+                                while ($row4 = $result4->fetch_assoc()) {
                                     echo '<tr>';
-                                    echo '<td>' . $row3['request_id'] . '</td>';
-                                    echo '<td>' . $row3['date'] . '</td>';
-                                    echo '<td>' . $row3['category'] . '</td>';
-                                    echo '<td>' . $row3['building'] . ', ' . $row3['floor'] . ', ' . $row3['room'] . '</td>';
-                                    echo '<td>' . $row3['equipment'] . '</td>';
-                                    echo '<td>' . $row3['assignee'] . '</td>';
-                                    echo '<td>' . $row3['deadline'] . '</td>';
-                                    echo '<td >' . $row3['status'] . '</td>';
+                                    echo '<td>' . $row4['request_id'] . '</td>';
+                                    echo '<td>' . $row4['date'] . '</td>';
+                                    echo '<td>' . $row4['category'] . '</td>';
+                                    echo '<td>' . $row4['building'] . ', ' . $row4['floor'] . ', ' . $row4['room'] . '</td>';
+                                    echo '<td>' . $row4['equipment'] . '</td>';
+                                    echo '<td>' . $row4['assignee'] . '</td>';
+                                    echo '<td>' . $row4['deadline'] . '</td>';
+                                    echo '<td >' . $row4['status'] . '</td>';
 
                                     // Check if status is "Pending"
-                                    if ($row3['status'] == 'Pending') {
+                                    if ($row4['status'] == 'Pending') {
                                         // Display the button
                                         echo '<td>';
                                         echo '<form method="post" action="">';
-                                        echo '<input type="hidden" name="request_id" value="' . $row3['request_id'] . '">';
+                                        echo '<input type="hidden" name="request_id" value="' . $row4['request_id'] . '">';
                                         echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#ForOutsource">Done</button>';
                                         echo '</form>';
                                         echo '</td>';
@@ -844,13 +844,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         echo '<td></td>';
                                     }
 
-                                    echo '<td style="display:none;">' . $row3['campus'] . '</td>';
-                                    echo '<td style="display:none;">' . $row3['building'] . '</td>';
-                                    echo '<td style="display:none;">' . $row3['floor'] . '</td>';
-                                    echo '<td style="display:none;">' . $row3['room'] . '</td>';
-                                    echo '<td style="display:none;">' . $row3['description'] . '</td>';
-                                    echo '<td style="display:none;">' . $row3['req_by'] . '</td>';
-                                    echo '<td style="display:none;">' . $row3['return_reason'] . '</td>';
+                                    echo '<td style="display:none;">' . $row4['campus'] . '</td>';
+                                    echo '<td style="display:none;">' . $row4['building'] . '</td>';
+                                    echo '<td style="display:none;">' . $row4['floor'] . '</td>';
+                                    echo '<td style="display:none;">' . $row4['room'] . '</td>';
+                                    echo '<td style="display:none;">' . $row4['description'] . '</td>';
+                                    echo '<td style="display:none;">' . $row4['req_by'] . '</td>';
+                                    echo '<td style="display:none;">' . $row4['return_reason'] . '</td>';
                                     echo '<td></td>';
                                     echo '</tr>';
                                 }
