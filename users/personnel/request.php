@@ -95,14 +95,19 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $result01 = $stmt01->get_result();
 
     // Modify the first query to filter by the logged-in account ID
+
+
     $sql06 = "SELECT r.* FROM request r
     INNER JOIN account a ON r.assignee = CONCAT(a.firstName, ' ', a.lastName)
     WHERE r.campus IN ('Batasan', 'San Bartolome', 'San Francisco') 
-    AND r.status = 'Done' AND a.accountId = ?";
-    $stmt06 = $conn->prepare($sql06);
-    $stmt06->bind_param("i", $accountId);
-    $stmt06->execute();
-    $result06 = $stmt06->get_result();
+    AND r.status = 'Done' AND a.accountId = ?
+    ORDER BY r.date DESC";
+
+$stmt06 = $conn->prepare($sql06);
+$stmt06->bind_param("i", $accountId);
+$stmt06->execute();
+$result06 = $stmt06->get_result();
+
 
     // Fetch data from "request" table for "Outsource" status based on the logged-in user's name
     $sql02 = "SELECT r.* FROM request r
@@ -724,7 +729,29 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                     echo '<td>' . $row6['equipment'] . '</td>';
                                     echo '<td>' . $row6['assignee'] . '</td>';
                                     echo '<td>' . $row6['deadline'] . '</td>';
-                                    echo '<td >' . $row6['status'] . '</td>';
+                                    $status = $row6['status'];
+
+                                    $status_color = '';
+
+                                    // Set the color based on the status
+                                    switch ($status) {
+                                        case 'Pending':
+                                            $status_color = 'blue';
+                                            break;
+                                        case 'Done':
+                                            $status_color = 'green';
+                                            break;
+                                        case 'For Approval':
+                                            $status_color = 'red';
+                                            break;
+                                        default:
+                                            // Default color if status doesn't match
+                                            $status_color = 'black';
+                                    }
+
+                                    // Output the status with appropriate color
+                            
+                                    echo '<td class="' . $status_color . '">' . $status . '</td>';
                                     echo '<td style="display:none;">' . $row6['campus'] . '</td>';
                                     echo '<td style="display:none;">' . $row6['building'] . '</td>';
                                     echo '<td style="display:none;">' . $row6['floor'] . '</td>';
