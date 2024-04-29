@@ -7,6 +7,16 @@
   padding: 0;
 }
 
+#approve-btn {
+  background-color: #91d694 !important;
+  border: 1px solid #91d694;
+}
+
+#approve-btn:hover {
+  background-color: white !important;
+  border: 1px solid #91d694 !important;
+}
+
 #transfer-reason-for-modal {
   display: block !important;
 }
@@ -93,44 +103,92 @@ table {
 /*TAB 4*/
 .headerskie4 {
   display: flex;
-  padding: 10px 10px 10px 5%;
+  /* padding: 10px 10px 10px 5%; */
   font-size: 14px;
   font-weight: bold;
+  padding: 1em;
 }
 
 .headerskie4 span.tab4:nth-child(1) {
   text-align: center;
-  width: 10%;
+  width: 14%;
 }
 
 .headerskie4 span.tab4:nth-child(2) {
   text-align: center;
-  width: 10%;
-  margin: 0 1% 0 4%;
+  width: 16%;
+  /* margin: 0 1% 0 4%; */
 }
 
 .headerskie4 span.tab4:nth-child(3) {
   text-align: center;
-  width: 5%;
-  margin: 0 1% 0 6.5%;
+  width: 15%;
+  /* margin: 0 1% 0 6.5%; */
 }
 
 .headerskie4 span.tab4:nth-child(4) {
   text-align: center;
-  width: 5%;
-  margin: 0 1% 0 11.5%;
+  width: 19%;
+  /* margin: 0 1% 0 11.5%; */
 }
 
 .headerskie4 span.tab4:nth-child(5) {
   text-align: center;
-  width: 5%;
-  margin: 0 1% 0 14%;
+  width: 17%;
+  /* margin: 0 1% 0 14%; */
 }
 
 .headerskie4 span.tab4:nth-child(6) {
   text-align: center;
+  width: 19%;
+  /* margin: 0 1% 0 11%; */
+}
+
+.headerskie4 span.tab4:nth-child(7) {
+  text-align: center;
   width: 10%;
-  margin: 0 1% 0 11%;
+  /* margin: 0 1% 0 11%; */
+}
+
+.headerskie4 span.tab5:nth-child(1) {
+  text-align: center;
+  width: 11%;
+}
+
+.headerskie4 span.tab5:nth-child(2) {
+  text-align: center;
+  width: 14%;
+  /* margin: 0 1% 0 4%; */
+}
+
+.headerskie4 span.tab5:nth-child(3) {
+  text-align: center;
+  width: 12%;
+  /* margin: 0 1% 0 6.5%; */
+}
+
+.headerskie4 span.tab5:nth-child(4) {
+  text-align: center;
+  width: 16%;
+  /* margin: 0 1% 0 11.5%; */
+}
+
+.headerskie4 span.tab5:nth-child(5) {
+  text-align: center;
+  width: 14%;
+  /* margin: 0 1% 0 14%; */
+}
+
+.headerskie4 span.tab5:nth-child(6) {
+  text-align: center;
+  width: 19%;
+  /* margin: 0 1% 0 11%; */
+}
+
+.headerskie4 span.tab5:nth-child(7) {
+  text-align: center;
+  width: 10%;
+  /* margin: 0 1% 0 11%; */
 }
 
 /* .table-content table{
