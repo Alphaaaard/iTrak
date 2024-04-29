@@ -96,14 +96,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $description = $_POST['new_description'];
         $deadline = $_POST['new_deadline'];
 
+        // Calculate the current date plus 8 hours
+        $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
+
         // Insert data into the request table
-        $insertQuery = "INSERT INTO request (request_id, campus, building, floor, room, equipment, req_by, category, assignee, status, description, deadline)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $insertQuery = "INSERT INTO request (request_id, campus, building, floor, room, equipment, req_by, category, assignee, status, description, deadline, date)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         $stmt = $conn->prepare($insertQuery);
-
-        // Bind parameters
-        $stmt->bind_param("ssssssssssss", $request_id, $campus, $building, $floor, $room, $equipment, $req_by, $category, $assignee, $status, $description, $deadline);
+        $stmt->bind_param("sssssssssssss", $request_id, $campus, $building, $floor, $room, $equipment, $req_by, $category, $assignee, $status, $description, $deadline, $adjusted_date);
 
         if ($stmt->execute()) {
             // Log activity for task creation and assignment
@@ -155,7 +156,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
        
         // Execute the query
         if ($stmt3->execute()) {
-            // Update successful, redirect back to sanFrancisco.php or any other page
+            // Log activity for admin approval with new assignee
+            $approval_action = "Task ID $request_id2 approved with $assignee2 as new assignee.";
+            $reassignment_action = "Task ID $request_id2 reassigned to $assignee2.";
+            logActivity($conn, $_SESSION['accountId'], $approval_action, 'General');
+            logActivity($conn, $_SESSION['accountId'], $reassignment_action, 'General');
+
             header("Location: sanFrancisco.php");
             exit();
         } else {
@@ -181,13 +187,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $description4 = $_POST['new2_description'];
         $deadline4 = $_POST['new2_deadline'];
 
+        // Calculate the current date plus 8 hours
+        $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
+
         // Update data in the request table
-        $updateQuery = "UPDATE request SET campus=?, building=?, floor=?, room=?, equipment=?, req_by=?, category=?, assignee=?, status=?, description=?, deadline=? WHERE request_id=?";
+        $updateQuery = "UPDATE request SET campus=?, building=?, floor=?, room=?, equipment=?, req_by=?, category=?, assignee=?, status=?, description=?, deadline=?, date=? WHERE request_id=?";
 
         $stmt4 = $conn->prepare($updateQuery);
 
         // Bind parameters
-        $stmt4->bind_param("ssssssssssss", $campus4, $building4, $floor4, $room4, $equipment4, $req_by4, $category4, $assignee4, $status4, $description4, $deadline4, $request_id4);
+        $stmt4->bind_param("ssssssssssssi", $campus4, $building4, $floor4, $room4, $equipment4, $req_by4, $category4, $assignee4, $status4, $description4, $deadline4, $adjusted_date, $request_id4);
 
         if ($stmt4->execute()) {
             // Log activity for task update
