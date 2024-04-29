@@ -137,7 +137,7 @@ if (isset($_POST['add'])) {
     if (isset($_POST['approval'])) {
         // Retrieve request_id from the form
         $request_id2 = $_POST['request_id'];
-    
+
         // Retrieve other form data
         $campus2 = $_POST['campus'];
         $building2 = $_POST['building'];
@@ -149,23 +149,19 @@ if (isset($_POST['add'])) {
         $status2 = $_POST['status'];
         $description2 = $_POST['description'];
         $deadline2 = $_POST['deadline'];
-    
-        // Calculate the current date plus 8 hours
-        $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
-    
+
         // SQL UPDATE query
         $sql3 = "UPDATE request 
                  SET campus = ?, building = ?, floor = ?, room = ?, 
                      equipment = ?, category = ?, assignee = ?, 
-                     status = ?, description = ?, deadline = ?, date = ?
+                     status = ?, description = ?, deadline = ? 
                  WHERE request_id = ?";
-    
+
         // Prepare the SQL statement
         $stmt3 = $conn->prepare($sql3);
-    
+
         // Bind parameters
-        $stmt3->bind_param("ssssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $adjusted_date, $request_id2);
-    
+        $stmt3->bind_param("ssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $request_id2);
         // Execute the query
         if ($stmt3->execute()) {
             // Log activity for admin approval with new assignee
