@@ -88,11 +88,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sql01 = "SELECT r.* FROM request r
     INNER JOIN account a ON r.assignee = CONCAT(a.firstName, ' ', a.lastName)
     WHERE r.campus IN ('Batasan', 'San Bartolome', 'San Francisco') 
-    AND r.status IN ( 'For Approval', 'Pending') AND a.accountId = ?";
-    $stmt01 = $conn->prepare($sql01);
-    $stmt01->bind_param("i", $accountId);
-    $stmt01->execute();
-    $result01 = $stmt01->get_result();
+    AND r.status IN ('For Approval', 'Pending') AND a.accountId = ?
+    ORDER BY r.date";
+
+$stmt01 = $conn->prepare($sql01);
+$stmt01->bind_param("i", $accountId);
+$stmt01->execute();
+$result01 = $stmt01->get_result();
+
 
     // Modify the first query to filter by the logged-in account ID
 
@@ -111,12 +114,15 @@ $result06 = $stmt06->get_result();
 
     // Fetch data from "request" table for "Outsource" status based on the logged-in user's name
     $sql02 = "SELECT r.* FROM request r
-INNER JOIN account a ON r.assignee = CONCAT(a.firstName, ' ', a.lastName)
-WHERE r.campus = 'Batasan' AND r.status = 'Outsource' AND a.accountId = ?";
+    INNER JOIN account a ON r.assignee = CONCAT(a.firstName, ' ', a.lastName)
+    WHERE r.campus = 'Batasan' AND r.status = 'Outsource' AND a.accountId = ?
+    ORDER BY r.date DESC";
+    
     $stmt02 = $conn->prepare($sql02);
     $stmt02->bind_param("i", $accountId);
     $stmt02->execute();
     $result02 = $stmt02->get_result();
+    
 
     // for notif below
     // Update the SQL to join with the account and asset tables to get the admin's name and asset information
@@ -601,8 +607,9 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     <!--Content start of tabs-->
                     <div class="new-nav">
                         <ul>
-                            <li><a href="#" class="nav-link" data-bs-target="pills-manager">Request</a></li>
-                            <li><a href="#" class="nav-link" data-bs-target="pills-done">Done</a></li>
+                        <li><a href="#" class="nav-link active" data-bs-target="pills-manager">Request</a></li>
+<li><a href="#" class="nav-link" data-bs-target="pills-done">Done</a></li>
+
 
                         </ul>
                     </div>
