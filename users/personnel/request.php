@@ -91,25 +91,35 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     AND r.status IN ('For Approval', 'Pending') AND a.accountId = ?
     ORDER BY r.date DESC";
 
-$stmt01 = $conn->prepare($sql01);
-$stmt01->bind_param("i", $accountId);
-$stmt01->execute();
-$result01 = $stmt01->get_result();
+    $stmt01 = $conn->prepare($sql01);
+    $stmt01->bind_param("i", $accountId);
+    $stmt01->execute();
+    $result01 = $stmt01->get_result();
 
 
     // Modify the first query to filter by the logged-in account ID
-
-
     $sql06 = "SELECT r.* FROM request r
     INNER JOIN account a ON r.assignee = CONCAT(a.firstName, ' ', a.lastName)
     WHERE r.campus IN ('Batasan', 'San Bartolome', 'San Francisco') 
     AND r.status = 'Done' AND a.accountId = ?
     ORDER BY r.date DESC";
 
-$stmt06 = $conn->prepare($sql06);
-$stmt06->bind_param("i", $accountId);
-$stmt06->execute();
-$result06 = $stmt06->get_result();
+    $stmt06 = $conn->prepare($sql06);
+    $stmt06->bind_param("i", $accountId);
+    $stmt06->execute();
+    $result06 = $stmt06->get_result();
+
+    // PARA ITO SA FEEDBACK TABLE
+    $sql07 = "SELECT r.* FROM request r
+    INNER JOIN account a ON r.assignee = CONCAT(a.firstName, ' ', a.lastName)
+    WHERE r.campus IN ('Batasan', 'San Bartolome', 'San Francisco') 
+    AND r.status = 'Done' AND a.accountId = ?
+    ORDER BY r.date DESC";
+
+    $stmt07 = $conn->prepare($sql07);
+    $stmt07->bind_param("i", $accountId);
+    $stmt07->execute();
+    $result07 = $stmt07->get_result();
 
 
     // Fetch data from "request" table for "Outsource" status based on the logged-in user's name
@@ -117,12 +127,12 @@ $result06 = $stmt06->get_result();
     INNER JOIN account a ON r.assignee = CONCAT(a.firstName, ' ', a.lastName)
     WHERE r.campus = 'Batasan' AND r.status = 'Outsource' AND a.accountId = ?
     ORDER BY r.date DESC";
-    
+
     $stmt02 = $conn->prepare($sql02);
     $stmt02->bind_param("i", $accountId);
     $stmt02->execute();
     $result02 = $stmt02->get_result();
-    
+
 
     // for notif below
     // Update the SQL to join with the account and asset tables to get the admin's name and asset information
@@ -193,7 +203,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
     if (isset($_POST['approval'])) {
         // Retrieve request_id from the form
         $request_id2 = $_POST['request_id'];
-    
+
         // Retrieve other form data
         $campus2 = $_POST['campus'];
         $building2 = $_POST['building'];
@@ -205,10 +215,10 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         $status2 = "For Approval";
         $description2 = $_POST['description'];
         $deadline2 = $_POST['deadline'];
-    
+
         // Calculate the current date plus 8 hours
         $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
-    
+
         // Retrieve selected return_reason from radio buttons
         $return_reason = $_POST['return_reason'];
         // Check if status is being updated from pending to for approval
@@ -220,7 +230,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         $row_status = $result_status->fetch_assoc();
         $status_before_update = $row_status['status'];
         $stmt_check_status->close();
-    
+
         // SQL UPDATE query
         $sql3 = "UPDATE request 
                  SET campus = ?, building = ?, floor = ?, room = ?, 
@@ -228,13 +238,13 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                      status = ?, description = ?, deadline = ?,
                      return_reason = ?, date = ?
                  WHERE request_id = ?";
-    
+
         // Prepare the SQL statement
         $stmt3 = $conn->prepare($sql3);
-    
+
         // Bind parameters
         $stmt3->bind_param("ssssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $return_reason, $adjusted_date, $request_id2);
-    
+
         // Execute the query
         if ($stmt3->execute()) {
             // Check if status changed from pending to for approval
@@ -260,7 +270,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
     if (isset($_POST['done'])) {
         // Retrieve request_id from the form
         $request_id5 = $_POST['request_id'];
-    
+
         // Retrieve other form data
         $campus5 = $_POST['campus'];
         $building5 = $_POST['building'];
@@ -272,7 +282,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         $status5 = "Done";
         $description5 = $_POST['description'];
         $deadline5 = $_POST['deadline'];
-    
+
         // Calculate the current date plus 8 hours
         $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
 
@@ -280,13 +290,13 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         $return_reason5 = $_POST['return_reason'];
 
         $status_before_update_query = "SELECT status FROM request WHERE request_id = ?";
-    $stmt_check_status = $conn->prepare($status_before_update_query);
-    $stmt_check_status->bind_param("i", $request_id5);
-    $stmt_check_status->execute();
-    $result_status = $stmt_check_status->get_result();
-    $row_status = $result_status->fetch_assoc();
-    $status_before_update = $row_status['status'];
-    $stmt_check_status->close();
+        $stmt_check_status = $conn->prepare($status_before_update_query);
+        $stmt_check_status->bind_param("i", $request_id5);
+        $stmt_check_status->execute();
+        $result_status = $stmt_check_status->get_result();
+        $row_status = $result_status->fetch_assoc();
+        $status_before_update = $row_status['status'];
+        $stmt_check_status->close();
 
 
         // SQL UPDATE query
@@ -300,11 +310,11 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         // Prepare the SQL statement
         $stmt5 = $conn->prepare($sql5);
 
-        
-      
 
-    // Bind parameters
-    $stmt5->bind_param("ssssssssssssi", $campus5, $building5, $floor5, $room5, $equipment5, $category5, $assignee5, $status5, $description5, $deadline5, $return_reason5, $adjusted_date, $request_id5);
+
+
+        // Bind parameters
+        $stmt5->bind_param("ssssssssssssi", $campus5, $building5, $floor5, $room5, $equipment5, $category5, $assignee5, $status5, $description5, $deadline5, $return_reason5, $adjusted_date, $request_id5);
 
         // Execute the query
         if ($stmt5->execute()) {
@@ -607,8 +617,9 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     <!--Content start of tabs-->
                     <div class="new-nav">
                         <ul>
-                        <li><a href="#" class="nav-link active" data-bs-target="pills-manager">Request</a></li>
-<li><a href="#" class="nav-link" data-bs-target="pills-done">Done</a></li>
+                            <li><a href="#" class="nav-link active" data-bs-target="pills-manager">Request</a></li>
+                            <li><a href="#" class="nav-link" data-bs-target="pills-done">Done</a></li>
+                            <li><a href="#" class="nav-link" data-bs-target="pills-done">Feedback</a></li>
 
 
                         </ul>
@@ -782,6 +793,83 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         </div>
                     </div>
 
+                    <div class="tab-pane fade" id="pills-feedback" role="tabpanel" aria-labelledby="done-tab">
+                        <div class="table-content">
+                            <div class='table-header'>
+                                <table>
+                                    <tr>
+                                        <th>Request ID</th>
+                                        <th>Date & Time</th>
+                                        <th>Category</th>
+                                        <th>Location</th>
+                                        <th>Equipment</th>
+                                        <th>Assignee</th>
+                                        <th>Deadline</th>
+                                        <th>Status</th>
+
+                                    </tr>
+                                </table>
+                            </div>
+                            <?php
+                            if ($result07->num_rows > 0) {
+                                echo "<div class='table-container'>";
+                                echo "<table>";
+                                while ($row7 = $result07->fetch_assoc()) {
+                                    echo '<tr>';
+                                    echo '<td>' . $row7['request_id'] . '</td>';
+                                    echo '<td>' . $row7['date'] . '</td>';
+                                    echo '<td>' . $row7['category'] . '</td>';
+                                    echo '<td>' . $row7['building'] . ', ' . $row7['floor'] . ', ' . $row7['room'] . '</td>';
+                                    echo '<td>' . $row7['equipment'] . '</td>';
+                                    echo '<td>' . $row7['assignee'] . '</td>';
+                                    echo '<td>' . $row7['deadline'] . '</td>';
+                                    $status = $row7['status'];
+
+                                    $status_color = '';
+
+                                    // Set the color based on the status
+                                    switch ($status) {
+                                        case 'Pending':
+                                            $status_color = 'blue';
+                                            break;
+                                        case 'Done':
+                                            $status_color = 'green';
+                                            break;
+                                        case 'For Approval':
+                                            $status_color = 'red';
+                                            break;
+                                        default:
+                                            // Default color if status doesn't match
+                                            $status_color = 'black';
+                                    }
+
+                                    // Output the status with appropriate color
+                            
+                                    echo '<td class="' . $status_color . '">' . $status . '</td>';
+                                    echo '<td style="display:none;">' . $row7['campus'] . '</td>';
+                                    echo '<td style="display:none;">' . $row7['building'] . '</td>';
+                                    echo '<td style="display:none;">' . $row7['floor'] . '</td>';
+                                    echo '<td style="display:none;">' . $row7['room'] . '</td>';
+                                    echo '<td style="display:none;">' . $row7['description'] . '</td>';
+                                    echo '<td style="display:none;">' . $row7['req_by'] . '</td>';
+                                    echo '<td style="display:none;">' . $row7['return_reason'] . '</td>';
+                                    echo '<td></td>';
+                                    echo '</tr>';
+                                }
+                                echo "</table>";
+                                echo "</div>";
+                            } else {
+                                echo '<table>';
+                                echo "<div class=noDataImgH>";
+                                echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
+                                echo "</div>";
+                                echo '</table>';
+                            }
+                            ?>
+                        </div>
+                    </div>
+
+
 
 
                     <!--MODAL FOR THE VIEW-->
@@ -809,9 +897,10 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                                 <input type="text" class="form-control" id="date" name="date"
                                                     readonly />
                                             </div>
-                                            <div class="col-4" >
+                                            <div class="col-4">
                                                 <label for="campus" class="form-label">Campus:</label>
-                                                <input type="text" class="form-control" id="campus" name="campus"  readonly />
+                                                <input type="text" class="form-control" id="campus" name="campus"
+                                                    readonly />
                                             </div>
                                             <div class="col-4">
                                                 <label for="building" class="form-label">Building:</label>
