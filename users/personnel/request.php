@@ -111,10 +111,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
     // PARA ITO SA FEEDBACK TABLE
     $sql07 = "SELECT r.* FROM request r
-    INNER JOIN account a ON r.assignee = CONCAT(a.firstName, ' ', a.lastName)
+    INNER JOIN account a ON r.first_assignee = CONCAT(a.firstName, ' ', a.lastName)
     WHERE r.campus IN ('Batasan', 'San Bartolome', 'San Francisco') 
-    AND r.status = 'Done' AND a.accountId = ?
+    AND (r.status = 'Pending' OR r.category = 'Outsource') 
+    AND a.accountId = ?
     ORDER BY r.date DESC";
+    
 
     $stmt07 = $conn->prepare($sql07);
     $stmt07->bind_param("i", $accountId);
