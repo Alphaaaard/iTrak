@@ -14,7 +14,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
     // For personnel page, check if userLevel is 3
-    if ($_SESSION['userLevel'] != 2) {
+    if ($_SESSION['userLevel'] != 1) {
         // If not personnel, redirect to an error page or login
         header("Location:error.php");
         exit;
@@ -58,18 +58,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->fetch();
     $stmt->close();
 
-    $sql = "SELECT * FROM request WHERE campus = 'San Bartolome' AND status IN ('Pending','For Approval') AND category != 'Outsource' ORDER BY date DESC";
+    $sql = "SELECT * FROM request WHERE campus = 'San Francisco' AND status IN ('Pending', 'For Approval') AND category != 'Outsource' ORDER BY date DESC";
     $result = $conn->query($sql) or die($conn->error);
 
 
-    $sql2 = "SELECT * FROM request WHERE campus = 'San Bartolome' AND category = 'Outsource' AND status = 'Pending' ORDER BY date DESC";
+    $sql2 = "SELECT * FROM request WHERE campus = 'San Francisco' AND category = 'Outsource' AND status = 'Pending' ORDER BY date DESC";
     $result2 = $conn->query($sql2) or die($conn->error);
 
-    $sql4 = "SELECT * FROM request WHERE campus = 'San Bartolome' AND status = 'Done' ORDER BY date DESC";
+    $sql4 = "SELECT * FROM request WHERE campus = 'San Francisco' AND status = 'Done' ORDER BY date DESC";
     $result4 = $conn->query($sql4) or die($conn->error);
-
-
-
 
     function logActivity($conn, $accountId, $actionDescription, $tabValue)
     {
@@ -83,7 +80,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         }
         $stmt->close();
     }
-
 
 
     if (isset($_POST['add'])) {
@@ -116,7 +112,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             logActivity($conn, $_SESSION['accountId'], $action, 'General');
 
             // Redirect to the desired page
-            header("Location: sanBartolome.php");
+            header("Location: sanFrancisco.php");
             exit(); // Make sure to exit to prevent further execution
         } else {
             echo "Error inserting data: " . $conn->error;
@@ -158,6 +154,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         // Bind parameters
         $stmt3->bind_param("sssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $adjusted_date, $request_id2);
 
+        // Execute the query
         if ($stmt3->execute()) {
             // Log activity for admin approval with new assignee
             $approval_action = "Task ID $request_id2 approved with $assignee2 as new assignee.";
@@ -165,9 +162,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             logActivity($conn, $_SESSION['accountId'], $approval_action, 'General');
             logActivity($conn, $_SESSION['accountId'], $reassignment_action, 'General');
 
-            // Redirect back to the page
-            header("Location: sanBartolome.php");
-
+            header("Location: sanFrancisco.php");
             exit();
         } else {
             // Error occurred while updating
@@ -209,7 +204,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             logActivity($conn, $_SESSION['accountId'], $action4, 'General');
 
             // Redirect to the desired page
-            header("Location: sanBartolome.php");
+            header("Location: sanFrancisco.php");
             exit(); // Make sure to exit to prevent further execution
         } else {
             echo "Error updating data: " . $conn->error;
@@ -217,7 +212,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         $conn->close();
     }
-
 
 
     // Function to send email notifications for approaching deadlines
@@ -281,9 +275,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
+
     ?>
 
-<!DOCTYPE html>
+
+    <!DOCTYPE html>
     <html lang="en">
 
     <head>
@@ -300,6 +296,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link rel="stylesheet" href="../../src/css/archive.css" />
         <link rel="stylesheet" href="../../src/css/reports.css" />
         <link rel="stylesheet" href="../../src/css/admin-request.css" />
+
 
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
         <script>
@@ -367,6 +364,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         }
     </style>
 
+
+
     <body>
         <div id="navbar" class="">
             <nav>
@@ -382,7 +381,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <a href="#" class="notification" id="notification-button">
                             <i class="fa fa-bell" aria-hidden="true"></i>
                             <!-- Notification Indicator Dot -->
-                            <?php if ($unseenCount > 0) : ?>
+                            <?php if ($unseenCount > 0): ?>
                                 <span class="notification-indicator"></span>
                             <?php endif; ?>
                         </a>
@@ -467,203 +466,169 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 ?>
                             </div>
                             <div class="profile-name-container " id="desktop">
-                                <div><a class="profile-name">
-                                        <?php echo $_SESSION['firstName']; ?>
-                                    </a></div>
-                                <div><a class="profile-role">
-                                        <?php echo $_SESSION['role']; ?>
-                                    </a></div>
+                                <div><a class="profile-name"><?php echo $_SESSION['firstName']; ?></a></div>
+                                <div><a class="profile-role"><?php echo $_SESSION['role']; ?></a></div>
                             </div>
                         </div>
                     </a>
 
                     <div id="settings-dropdown" class="dropdown-content1">
                         <div class="profile-name-container" id="mobile">
-                            <div><a class="profile-name">
-                                    <?php echo $_SESSION['firstName']; ?>
-                                </a></div>
-                            <div><a class="profile-role">
-                                    <?php echo $_SESSION['role']; ?>
-                                </a></div>
+                            <div><a class="profile-name"><?php echo $_SESSION['firstName']; ?></a></div>
+                            <div><a class="profile-role"><?php echo $_SESSION['role']; ?></a></div>
                             <hr>
                         </div>
-                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><img src="../../src/icons/Profile.svg" alt="" class="profile-icons">Profile</a>
+                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i
+                                class="bi bi-person profile-icons"></i>Profile</a>
                         <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
                     </div>
-                <?php
-            } else {
-                header("Location:../../index.php");
-                exit();
-            }
-                ?>
-                </div>
-            </nav>
-        </div>
-        <!-- SIDEBAR -->
-        <section id="sidebar">
-            <a href="./dashboard.php" class="brand" title="logo">
-                <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
-                <div class="mobile-sidebar-close">
-                    <i class="bi bi-arrow-left-circle"></i>
-                </div>
-            </a>
-            <ul class="side-menu top">
-                <li>
-                    <a href="./dashboard.php">
-                        <i class="bi bi-grid"></i>
-                        <span class="text">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="./attendance-logs.php">
-                        <i class="bi bi-calendar-week"></i>
-                        <span class="text">Attendance Logs</span>
-                    </a>
-                </li>
-                <div class="GPS-cont" onclick="toggleGPS()">
-                    <li class="GPS-dropdown">
-                        <div class="GPS-drondown-content">
-                            <div class="GPS-side-cont">
-                                <i class="bi bi-geo-alt"></i>
-                                <span class="text">GPS</span>
-                            </div>
-                            <div class="GPS-ind">
-                                <i id="chevron-icon" class="bi bi-chevron-down"></i>
-                            </div>
+                    <?php
+} else {
+    header("Location:../../index.php");
+    exit();
+}
+?>
+            </div>
+        </nav>
+    </div>
+    <section id="sidebar">
+        <a href="./dashboard.php" class="brand" title="logo">
+            <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
+            <div class="mobile-sidebar-close">
+                <i class="bi bi-arrow-left-circle"></i>
+            </div>
+        </a>
+        <ul class="side-menu top">
+            <li>
+                <a href="./dashboard.php">
+                    <i class="bi bi-grid"></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="./attendance-logs.php">
+                    <i class="bi bi-calendar-week"></i>
+                    <span class="text">Attendance Logs</span>
+                </a>
+            </li>
+            <li>
+                <a href="./staff.php">
+                    <i class="bi bi-person"></i>
+                    <span class="text">Staff</span>
+                </a>
+            </li>
+            <div class="GPS-cont" onclick="toggleGPS()">
+                <li class="GPS-dropdown">
+                    <div class="GPS-drondown-content">
+                        <div class="GPS-side-cont">
+                            <i class="bi bi-geo-alt"></i>
+                            <span class="text">GPS</span>
                         </div>
-                    </li>
-                </div>
-                <div class="GPS-container">
-                    <li class="GPS-Tracker">
-                        <a href="./gps.php">
-                            <i class="bi bi-crosshair"></i>
-                            <span class="text">GPS Tracker</span>
-                        </a>
-                    </li>
-                    <li class="GPS-History">
-                        <a href="./gps_history.php">
-                            <i class="bi bi-radar"></i>
-                            <span class="text">GPS History</span>
-                        </a>
-                    </li>
-                </div>
-                <li>
-                    <a href="./map.php">
-                        <i class="bi bi-map"></i>
-                        <span class="text">Map</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="./reports.php">
-                        <i class="bi bi-clipboard"></i>
-                        <span class="text">Reports</span>
-                    </a>
-                </li>
-                <div class="Map-cont" onclick="toggleMAP()">
-                    <li class="Map-dropdown active">
-                        <div class="Map-drondown-content">
-                            <div class="Map-side-cont">
-                                <i class="bi bi-receipt"></i>
-                                <span class="text">Request</span>
-                            </div>
-                            <div class="Map-ind">
-                                <i id="map-chevron-icon" class="bi bi-chevron-down"></i>
-                            </div>
+                        <div class="GPS-ind">
+                            <i id="chevron-icon" class="bi bi-chevron-down"></i>
                         </div>
-                    </li>
-                </div>
-                <div class="Map-container aaa">
-                    <li class="Map-Batasan">
-                        <a href="./batasan.php">
-                            <i class="bi bi-building"></i>
-                            <span class="text">Batasan</span>
-                        </a>
-                    </li>
-                    <li class="Map-SanBartolome active">
-                        <a href="./sanBartolome.php">
-                            <i class="bi bi-building"></i>
-                            <span class="text">San Bartolome</span>
-                        </a>
-                    </li>
-                    <li class="Map-SanFrancisco">
-                        <a href="./sanFrancisco.php">
-                            <i class="bi bi-building"></i>
-                            <span class="text">San Francisco</span>
-                        </a>
-                    </li>
-                </div>
-                <li>
-                    <a href="./activity-logs.php">
-                        <i class="bi bi-arrow-counterclockwise"></i>
-                        <span class="text">Activity Logs</span>
+                    </div>
+                </li>
+            </div>
+            <div class="GPS-container">
+                <li class="GPS-Tracker">
+                    <a href="./gps.php">
+                        <i class="bi bi-crosshair"></i>
+                        <span class="text">GPS Tracker</span>
                     </a>
                 </li>
-            </ul>
-        </section>
-        <!-- SIDEBAR -->
-
-        <section id="content">
-            <main>
-                <div class="content-container">
-                    <header>
-                        <div class="cont-header">
-                            <!-- <h1 class="tab-name">Reports</h1> -->
-                            <div class="tbl-filter">
-                                <select id="filter-criteria">
-                                    <option value="all">All</option> <!-- Added "All" option -->
-                                    <option value="reportId">Tracking ID</option>
-                                    <option value="date">Date</option>
-                                    <option value="category">Category</option>
-                                    <option value="location">Location</option>
-                                </select>
-
-
-                                <select id="rows-display-dropdown" class="form-select dropdown-rows" aria-label="Default select example">
-                                    <option value="20" selected>Show 20 rows</option>
-                                    <option class="hidden"></option>
-                                    <option value="50">Show 50 rows</option>
-                                    <option value="100">Show 100 rows</option>
-                                    <option value="150">Show 150 rows</option>
-                                    <option value="200">Show 200 rows</option>
-                                </select>
-
-                                <!-- Search Box -->
-                                <!-- Search Box -->
-                                <form class="d-flex col-sm-5" role="search" id="searchForm">
-                                    <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" name="q" />
-                                </form>
-                            </div>
+                <li class="GPS-History">
+                    <a href="./gps_history.php">
+                        <i class="bi bi-radar"></i>
+                        <span class="text">GPS History</span>
+                    </a>
+                </li>
+            </div>
+            <li>
+                <a href="./map.php">
+                    <i class="bi bi-map"></i>
+                    <span class="text">Map</span>
+                </a>
+            </li>
+            <li>
+                <a href="./reports.php">
+                    <i class="bi bi-clipboard"></i>
+                    <span class="text">Reports</span>
+                </a>
+            </li>
+            <div class="Map-cont" onclick="toggleMAP()">
+                <li class="Map-dropdown active">
+                    <div class="Map-drondown-content">
+                        <div class="Map-side-cont">
+                            <i class="bi bi-receipt"></i>
+                            <span class="text">Request</span>
                         </div>
-                    </header>
-                    <script>
-                        // Get elements from the DOM
-                        const filterCriteria = document.getElementById('filter-criteria');
-                        const searchBox = document.getElementById('search-box');
-
-                        // Event listener for the filter dropdown changes
-                        filterCriteria.addEventListener('change', function() {
-                            if (this.value === 'date') {
-                                // If "Date" is selected, change the search box to a date picker
-                                searchBox.type = 'date';
-                                searchBox.placeholder = 'Select a date';
-                            } else {
-                                // For all other options, change it back to a regular search box
-                                searchBox.type = 'search';
-                                searchBox.placeholder = 'Search';
-                            }
-                        });
-                    </script>
-                    <div class="new-nav-container">
-                        <!--Content start of tabs-->
-                        <div class="new-nav">
+                        <div class="Map-ind">
+                            <i id="map-chevron-icon" class="bi bi-chevron-down"></i>
+                        </div>
+                    </div>
+                </li>
+            </div>
+            <div class="Map-container aaa">
+                <li class="Map-Batasan">
+                    <a href="./batasan.php">
+                        <i class="bi bi-building"></i>
+                        <span class="text">Batasan</span>
+                    </a>
+                </li>
+                <li class="Map-SanBartolome">
+                    <a href="./sanBartolome.php">
+                        <i class="bi bi-building"></i>
+                        <span class="text">San Bartolome</span>
+                    </a>
+                </li>
+                <li class="Map-SanFrancisco active">
+                    <a href="./sanFrancisco.php">
+                        <i class="bi bi-building"></i>
+                        <span class="text">San Francisco</span>
+                    </a>
+                </li>
+            </div>
+            <li>
+                <a href="./archive.php">
+                    <i class="bi bi-archive"></i>
+                    <span class="text">Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="./activity-logs.php">
+                    <i class="bi bi-arrow-counterclockwise"></i>
+                    <span class="text">Activity Logs</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <section id="content">
+        <main>
+            <div class="content-container">
+                <header>
+                    <div class="cont-header">
+                        <h1 class="tab-name"></h1>
+                        <div class="tbl-filter">
+                            <form class="d-flex" role="search" id="searchForm">
+                                <input class="form-control icon" type="search" placeholder="Search" aria-label="Search"
+                                    id="search-box" name="q" />
+                            </form>
+                        </div>
+                    </div>
+                </header>
+                <div class="new-nav-container">
+                    <!--Content start of tabs-->
+                    <div class="new-nav">
                         <ul>
                             <li><a href="#" class="nav-link" data-bs-target="pills-manager">Request</a></li>
                             <li><a href="#" class="nav-link" data-bs-target="pills-profile">Outsource</a></li>
                             <li><a href="#" class="nav-link" data-bs-target="pills-done">Done</a></li>
                         </ul>
                     </div>
-  <!-- Export button -->
-  <div class="export-mob-hide">
+
+                    <!-- Export button -->
+                    <div class="export-mob-hide">
                         <form method="post" id="exportForm">
                             <input type="hidden" name="status" id="statusField" value="For Replacement">
                             <button type="button" id="exportBtn" class="btn btn-outline-danger" data-bs-toggle="modal"
@@ -748,6 +713,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     echo '<td style="display:none;">' . $row['description'] . '</td>';
                                     echo '<td style="display:none;">' . $row['req_by'] . '</td>';
                                     echo '<td style="display:none;">' . $row['return_reason'] . '</td>';
+                                    echo '<td></td>';
+
                                     echo '</tr>';
                                 }
                                 echo "</table>";
@@ -774,8 +741,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         <th>Location</th>
                                         <th>Equipment</th>
                                         <th>Assignee</th>
-                                        <th>Status</th>
                                         <th>Deadline</th>
+
+                                        <th>Status</th>
                                         <th></th>
                                     </tr>
                                 </table>
@@ -792,6 +760,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     echo '<td>' . $row2['building'] . ', ' . $row2['floor'] . ', ' . $row2['room'] . '</td>';
                                     echo '<td>' . $row2['equipment'] . '</td>';
                                     echo '<td>' . $row2['assignee'] . '</td>';
+                                    echo '<td>' . $row2['deadline'] . '</td>';
                                     $status = $row2['status'];
                                     $status_color = '';
 
@@ -813,7 +782,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                     // Output the status with appropriate color
                                     echo '<td class="' . $status_color . '">' . $status . '</td>';
-                                    echo '<td>' . $row2['deadline'] . '</td>';
+
 
                                     // Check if status is "Pending"
                                     if ($row2['status'] == 'Pending') {
@@ -836,6 +805,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     echo '<td style="display:none;">' . $row2['description'] . '</td>';
                                     echo '<td style="display:none;">' . $row2['req_by'] . '</td>';
                                     echo '<td style="display:none;">' . $row2['return_reason'] . '</td>';
+                                    echo '<td></td>';
                                     echo '</tr>';
                                 }
                                 echo "</table>";
@@ -903,6 +873,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     // Output the status with appropriate color
                                     echo '<td class="' . $status_color . '">' . $status . '</td>';
 
+
                                     // Check if status is "Pending"
                                     if ($row4['status'] == 'Pending') {
                                         // Display the button
@@ -958,6 +929,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 <input type="text" class="form-control" id="new_request_id"
                                                     name="new_request_id" readonly />
                                             </div>
+
                                             <div class="col-4">
                                                 <label for="new_building" class="form-label">Building:</label>
                                                 <select class="form-control" id="new_building" name="new_building">
@@ -982,7 +954,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             <div class="col-4" style="display:none;">
                                                 <label for="new_campus" class="form-label">Campus:</label>
                                                 <input type="text" class="form-control" id="new_campus"
-                                                    name="new_campus" value="San Bartolome" />
+                                                    name="new_campus" value="San Francisco" />
                                             </div>
 
 
@@ -1123,7 +1095,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             <div class="col-4" style="display:none;">
                                                 <label for="campus" class="form-label">Campus:</label>
                                                 <input type="text" class="form-control" id="campus" name="campus"
-                                                    value="San Bartolome" />
+                                                    value="San Francisco" />
                                             </div>
                                             <div class="col-4">
                                                 <label for="building" class="form-label">Building:</label>
@@ -1165,6 +1137,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 </select>
                                             </div>
 
+
                                             <!-- Add an empty assignee select element -->
                                             <div class="col-4">
                                                 <label id="assignee-label" for="assignee"
@@ -1177,6 +1150,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 <input type="text" class="form-control" id="assigneeInputreal"
                                                     name="assigneereal" style="display:none;">
                                             </div>
+
 
 
                                             <div class="col-4" style="display:none;">
@@ -1272,7 +1246,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             <div class="col-4" style="display:none;">
                                                 <label for="new2_campus" class="form-label">Campus:</label>
                                                 <input type="text" class="form-control" id="new2_campus"
-                                                    name="new2_campus" value="San Bartolome" />
+                                                    name="new2_campus" value="San Francisco" />
                                             </div>
 
 
@@ -1351,6 +1325,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             </div>
                         </div>
                     </div>
+
                     <!--edit for outsource-->
                     <div class="modal fade" id="addoutsource" data-bs-backdrop="static" data-bs-keyboard="false"
                         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -1402,92 +1377,52 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     <script src="../../src/js/archive.js"></script>
     <script src="../../src/js/profileModalController.js"></script>
     <script src="../../src/js/logout.js"></script>
-    <script src="../../src/js/sanbartolome.js"></script>
-
+    <script src="../../src/js/sanfrancisco.js"></script>
 
     <!-- Cascading Script -->
     <script>
         var subjectObject = {
-            "New Academic": {
-                "1F": ["Pantry", "Recovery Room", "Dental Clinic", "Guidance Office", "Faculty Lounge", "CR", "Lobby", "Landing", "Storage", "Counseling Room", "Medical and Dental Clinic", "Nurse Room", "Dental Room", "Generator Room", "EE Room", "Server Room", "Medical Consultation"],
-                "2F": ["Librarians Office", "Digital Library", "University Library", "Baggage Counter", "Meeting Room 1", "Meeting Room 2", "Meeting Room 3", "Meeting Room 4", "Meeting Room 5", "Meeting Room 6", "Emergency Exit", "Server Room", "EE RM", "Coffee Shop", "CR"],
-                "3F": ["Lobby", "Lec Rm 301", "Lec Rm 302", "Lec Rm 303", "Lec Rm 304", "Lec Rm 305", "Lec Rm 306", "AV Rm 307", "CR", "Storage"],
-                "4F": ["Lec Rm 401", "Lec Rm 402", "Lec Rm 403", "Lec Rm 404", "Lec Rm 405", "Lec Rm 406", "Rm 407", "Landing", "EE RM"],
-                "5F": ["Lec Rm 501", "Lec Rm 502", "Lec Rm 503", "Lec Rm 504", "Lec Rm 505", "Lec Rm 506", "Rm 507", "Landing", "EE RM"],
-                "6F": ["Lec Rm 601", "Lec Rm 602", "Lec Rm 603", "Lec Rm 604", "Lec Rm 605", "Lec Rm 606", "Rm 607", "Landing", "EE RM"],
-                "7F": ["Lec Rm 701", "Lec Rm 702", "Lec Rm 703", "Lec Rm 704", "Lec Rm 705", "Lec Rm 706", "Rm 707", "Landing", "EE RM", "Rain Water Tank", "Storage Rm"]
+            "San Francisco Campus Building": {
+                "1F": ["RM101", "RM102", "RM103"],
+                "2F": ["RM201 Admin & Guidance Office", "RM202 Library", "RM203 Faculty & PESO Room", "RM204 Isolation & Clinic"],
+                "3F": ["RM301 Regular Room", "RM302 Computer Laboratory", "RM303 Regular Room", "RM304 Regular Room"],
             },
-            "Yellow": {
-                "1F": ["IB101A", "IB102A", "IB103A", "IB104A", "IB105A", "IB106A", "IB107A", "IB108A", "IB109A", "IB110A", "CR FEMALE", "CR MALE", "HALLWAY"],
-                "2F": ["IB201F", "IB202C", "IB203B", "IB204B", "IB205B", "IB206B", "IB207B", "IB208B", "IB209C", "IB210D", "CR FEMALE", "CR MALE", "HALLWAY"]
+            "Open Grounds (OG)": {
+                // "PHP": ["Variables", "Strings", "Arrays"],
+                // "SQL": ["SELECT", "UPDATE", "DELETE"]
             },
-            "Techvoc": {
-                "1F": ["Dress Making Lab", "PF-BAGM Department", "OSAS", "Auto Mechanic Lab", "Carpentry", "Conference Room", "BDC Office", "Power RM", "Cuisine Art & Banquet Service", "PF-Stock RM", "Electrical Installation and Maintenance Lab", "Refrigeration and Aircon Lab", "Techvoc Gym", "CR"],
-                "2F": ["IA205", "IA206e", "IA207e", "IA208e", "IA209e", "IA210", "IA211a", "IA212a", "IA213a", "IA214a", "IA215a", "IA216", "Scholarship Office", "Management Information System Office", "Auto Mechanic Lec.", "Consumer Electronic Lab.", "CR"]
-            },
-            "Korphil": {
-                "1F": ["Room A", "Room B", "Directors's RM", "Lobby", "Room C", "Room D", "Room E", "Medical Staff", "Waiting Area", "Electric RM", "Generator RM", "Student Affairs Office", "Proposed Cafeteria"],
-                "2F": ["Utility RM", "Course Coord. RM", "E-Learning RM", "Server RM", "Lecture RM", "Utility RM", "Com Lab", "Temporary Lab"],
-                "3F": ["Storage", "Seminar RM", "Com Lab", "Storage", "Multi Purpose RM"]
-            },
-            "Admin": {
-                "Ground Floor": ["Lobby"]
-            },
-            "Belmonte": {
-                "1F": ["IC101a", "IC102a", "IC103a", "IC104a", "PE Faculty Room", "IC105a", "IC106a", "CR"],
-                "2F": ["IC201a", "IC202a", "IC203a", "IC204a", "Guidance Office", "IC205a", "IC206a", "IC207a", "CR"],
-                "3F": ["IC301a", "IC302a", "IC303a", "IC304a", "Stock Room", "IC305a", "IC306a", "IC307a", "CR"],
-                "4F": ["IC401a", "IC402a", "IC403a", "IC404a", "Research & Extension Office", "IC405a", "IC406a", "IC407a"]
-            },
-            "Bautista": {
-                "Basement": ["Canteen", "Entrance", "CR", "Storage", "Fire Exit", "Kitchen", "HE Room", "Food Stall", "Security Room", "RM 106", "Main Stairs", "PWD CR", "EE Room"],
-                "Ground Floor": ["Pump Room", "Receiving Area", "Lobby", "Room 1", "Storage Room", "Control Room", "Room 2", "Fire Exit", "AUX Exit", "Room 3", "Room 4", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Toilet", "Janitor Room", "Corridor"],
-                "2F": ["Faculty Office", "Humanities Faculty Office", "Storage Room", "Control Room", "IK201", "Fire Exit", "IK202", "Storage Room", "Control Room", "EE Room", "AUX Room", "IK203", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Janitor Room", "PWD", "Toilet", "Corridor"],
-                "3F": ["Storage Room", "Control Room", "Fire Exit", "Toilet", "Corridor", "Dry Pantry", "Archive", "Faculty", "IK301", "IK302", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Janitor Room", "PWD"],
-                "4F": ["Storage Room", "Faculty", "Control Room", "IK401", "Fire Exit", "IK402", "IK403", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Toilet", "Janitor Room", "Corridor", "PWD"],
-                "5F": ["Storage", "Archive", "Dry Pantry", "Faculty", "Control Room", "IK501", "Fire Exit", "IK502", "IK503", "AUX Room", "EE Room", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Toilet", "Janitor Room", "PWD", "Corridor"],
-                "6F": ["Storage", "Faculty", "Control Room", "IK601", "Fire Exit", "IK602", "AUX Room", "EE Room", "IK603", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Toilet", "Janitor Room", "PWD", "Corridor"]
-            },
-            "Multipurpose": {
-                "1F": ["Lobby"]
-            },
-            "Chinese B": {
-                "1F": ["Lobby"]
-            }
+            // "Parking Area": {
+            //     "PHP": ["Variables", "Strings", "Arrays"],
+            //     "SQL": ["SELECT", "UPDATE", "DELETE"]
+            // }
         }
         window.onload = function () {
             var subjectSel = document.getElementById("new_building");
             var topicSel = document.getElementById("new_floor");
             var chapterSel = document.getElementById("new_room");
-
             for (var x in subjectObject) {
                 subjectSel.options[subjectSel.options.length] = new Option(x, x);
             }
-
             subjectSel.onchange = function () {
-                // Empty Floors- and Rooms-dropdowns
+                //empty Chapters- and Topics- dropdowns
                 chapterSel.length = 1;
                 topicSel.length = 1;
-
-                // Display correct values for Floors
+                //display correct values
                 for (var y in subjectObject[this.value]) {
                     topicSel.options[topicSel.options.length] = new Option(y, y);
                 }
             }
-
             topicSel.onchange = function () {
-                // Empty Rooms dropdown
+                //empty Chapters dropdown
                 chapterSel.length = 1;
-
-                // Display correct values for Rooms
-                var rooms = subjectObject[subjectSel.value][this.value];
-                for (var i = 0; i < rooms.length; i++) {
-                    chapterSel.options[chapterSel.options.length] = new Option(rooms[i], rooms[i]);
+                //display correct values
+                var z = subjectObject[subjectSel.value][this.value];
+                for (var i = 0; i < z.length; i++) {
+                    chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
                 }
             }
         }
     </script>
-
 
 
     <script>
@@ -1722,33 +1657,21 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <script>
-        // JavaScript code to replace input with textarea and set readonly attribute
-        document.addEventListener("DOMContentLoaded", function () {
-            var descriptionInput = document.getElementById("new2_description");
-            var returnReasonInput = document.getElementById("new2_return_reason");
+        // Select the input element
+        var inputElement = document.getElementById('new2_description');
 
-            var descriptionValue = descriptionInput.value;
-            var returnReasonValue = returnReasonInput.value;
+        // Create a new textarea element
+        var textareaElement = document.createElement('textarea');
 
-            var descriptionTextarea = document.createElement("textarea");
-            descriptionTextarea.className = "form-control";
-            descriptionTextarea.id = "new2_description";
-            descriptionTextarea.name = "new2_description";
-            descriptionTextarea.value = descriptionValue;
-            descriptionTextarea.setAttribute("readonly", "readonly");
+        // Copy attributes from input to textarea
+        textareaElement.className = inputElement.className;
+        textareaElement.id = inputElement.id;
+        textareaElement.name = inputElement.name;
+        textareaElement.readOnly = true;
 
-            var returnReasonTextarea = document.createElement("textarea");
-            returnReasonTextarea.className = "form-control";
-            returnReasonTextarea.id = "new2_return_reason";
-            returnReasonTextarea.name = "new2_return_reason";
-            returnReasonTextarea.value = returnReasonValue;
-            returnReasonTextarea.setAttribute("readonly", "readonly");
-
-            descriptionInput.parentNode.replaceChild(descriptionTextarea, descriptionInput);
-            returnReasonInput.parentNode.replaceChild(returnReasonTextarea, returnReasonInput);
-        });
+        // Replace the input element with the textarea
+        inputElement.parentNode.replaceChild(textareaElement, inputElement);
     </script>
-
     <script>
         // Get the input element
         var inputElement = document.getElementById('new_description');
