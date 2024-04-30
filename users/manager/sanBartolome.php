@@ -14,7 +14,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
     // For personnel page, check if userLevel is 3
-    if ($_SESSION['userLevel'] != 1) {
+    if ($_SESSION['userLevel'] != 2) {
         // If not personnel, redirect to an error page or login
         header("Location:error.php");
         exit;
