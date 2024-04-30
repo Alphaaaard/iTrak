@@ -3,8 +3,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once ("../../config/connection.php");
@@ -88,7 +88,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         }
         $stmt->close();
     }
-
     if (isset($_POST['add'])) {
         $request_id = $_POST['new_request_id'];
         $campus = $_POST['new_campus'];
@@ -102,18 +101,24 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status = $_POST['new_status'];
         $description = $_POST['new_description'];
         $deadline = $_POST['new_deadline'];
-
+        $outsource_info = $_POST['new_outsource_info'];
+        $first_assignee = $_POST['new_first_assignee'];
+        $admins_remark = $_POST['new_admins_remark'];
+        $mp_remark = $_POST['new_mp_remark'];
+    
         // Calculate the current date plus 8 hours
         $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
-
+    
         // Insert data into the request table
-        $insertQuery = "INSERT INTO request (request_id, campus, building, floor, room, equipment, req_by, category, assignee, status, description, deadline, date)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+        $insertQuery = "INSERT INTO request (request_id, campus, building, floor, room, equipment, req_by, category, assignee, status, description, deadline, date, outsource_info, first_assignee, admins_remark, mp_remark)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
         $stmt = $conn->prepare($insertQuery);
-        $stmt->bind_param("sssssssssssss", $request_id, $campus, $building, $floor, $room, $equipment, $req_by, $category, $assignee, $status, $description, $deadline, $adjusted_date);
-
-
+        $stmt->bind_param("sssssssssssssssss", $request_id, $campus, $building, $floor, $room, $equipment, $req_by, $category, $assignee, $status, $description, $deadline, $adjusted_date, $outsource_info, $first_assignee, $admins_remark, $mp_remark);
+    
+        // Execute the statement
+   
+    
         // Rest of your code after insertion
 
 
@@ -147,23 +152,28 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status2 = $_POST['status'];
         $description2 = $_POST['description'];
         $deadline2 = $_POST['deadline'];
+        $outsource_info2 = $_POST['outsource_info'];
+        $first_assignee2 = $_POST['first_assignee'];
+        $admins_remark2 = $_POST['admins_remark'];
+        $mp_remark2= $_POST['mp_remark'];
 
         // Calculate the current date plus 8 hours
         $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
 
-        // SQL UPDATE query
-        $sql3 = "UPDATE request 
-                 SET campus = ?, building = ?, floor = ?, room = ?, 
-                     equipment = ?, category = ?, assignee = ?, 
-                     status = ?, description = ?, deadline = ?, date = ?
-                 WHERE request_id = ?";
+       // SQL UPDATE query
+$sql3 = "UPDATE request 
+SET campus = ?, building = ?, floor = ?, room = ?, 
+    equipment = ?, category = ?, assignee = ?, 
+    status = ?, description = ?, deadline = ?, date = ?,
+    outsource_info = ?, first_assignee = ?, admins_remark = ?, mp_remark = ?
+WHERE request_id = ?";
 
-        // Prepare the SQL statement
-        $stmt3 = $conn->prepare($sql3);
+// Prepare the SQL statement
+$stmt3 = $conn->prepare($sql3);
 
-        // Bind parameters
-        $stmt3->bind_param("sssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $adjusted_date, $request_id2);
-        if ($stmt3->execute()) {
+// Bind parameters
+$stmt3->bind_param("ssssssssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $adjusted_date, $outsource_info2, $first_assignee2, $admins_remark2, $mp_remark2, $request_id2);
+if ($stmt3->execute()) {
             // Log activity for admin approval with new assignee
             $approval_action = "Task ID $request_id2 approved with $assignee2 as new assignee.";
             $reassignment_action = "Task ID $request_id2 reassigned to $assignee2.";
@@ -729,6 +739,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     echo '<td style="display:none;">' . $row['description'] . '</td>';
                                     echo '<td style="display:none;">' . $row['req_by'] . '</td>';
                                     echo '<td style="display:none;">' . $row['return_reason'] . '</td>';
+                                    echo '<td style="display:none;">' . $row['outsource_info'] . '</td>';
+                                    echo '<td style="display:none;">' . $row['first_assignee'] . '</td>';
+                                    echo '<td style="display:none;">' . $row['admins_remark'] . '</td>';
+                                    echo '<td style="display:none;">'. $row['mp_remark'] . '</td>';
+                                 
                                     echo '<td></td>';
                                     echo '</tr>';
                                 }
@@ -909,6 +924,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     echo '<td style="display:none;">' . $row4['description'] . '</td>';
                                     echo '<td style="display:none;">' . $row4['req_by'] . '</td>';
                                     echo '<td style="display:none;">' . $row4['return_reason'] . '</td>';
+                                   
                                     echo '<td></td>';
                                     echo '</tr>';
                                 }
@@ -1009,22 +1025,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             </div>
 
                                             <script>
-                                                function fetchRandomAssignee1() {
-                                                    var category = document.getElementById('new_category').value;
-                                                    $.ajax({
-                                                        url: 'fetch_random_assignee_request.php', // PHP script to fetch random assignee
-                                                        type: 'POST',
-                                                        data: {
-                                                            category: category
-                                                        },
-                                                        success: function (response) {
-                                                            $('#new_assignee').val(response);
-                                                        },
-                                                        error: function (xhr, status, error) {
-                                                            alert('Error: ' + error);
-                                                        }
-                                                    });
-                                                }
+                                              function fetchRandomAssignee1() {
+    var category = document.getElementById('new_category').value;
+    $.ajax({
+        url: 'fetch_random_assignee_request.php', // PHP script to fetch random assignee
+        type: 'POST',
+        data: { category: category },
+        success: function(response) {
+            $('#new_assignee').val(response);
+            $('#new_first_assignee').val(response); // Set first_assignee to the same value
+        },
+        error: function(xhr, status, error) {
+            alert('Error: ' + error);
+        }
+    });
+}
+
                                             </script>
 
                                             <div class="col-4">
@@ -1050,7 +1066,41 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 <input type="text" class="form-control" id="new_description"
                                                     name="new_description" />
                                             </div>
+                                            <div class="col-4" style="display:none;" id="outsourceInfoField">
+    <label for="new_outsource_info" class="form-label">Outsource Info:</label>
+    <input type="text" class="form-control" id="new_outsource_info" name="new_outsource_info" />
+</div>
+<script>
+    // Function to show or hide the outsource info field based on the selected category
+    function toggleOutsourceInfoField() {
+        var category = document.getElementById('new_category').value;
+        var outsourceInfoField = document.getElementById('outsourceInfoField');
+        if (category === 'Outsource') {
+            outsourceInfoField.style.display = 'block';
+        } else {
+            outsourceInfoField.style.display = 'none';
+        }
+    }
 
+    // Call the function initially and add an event listener to the category select element
+    toggleOutsourceInfoField();
+    document.getElementById('new_category').addEventListener('change', toggleOutsourceInfoField);
+</script>
+
+<div class="col-4" style="display:none;">
+            <label for="new_first_assignee" class="form-label">First Assignee:</label>
+            <input type="text" class="form-control" id="new_first_assignee" name="new_first_assignee" />
+        </div>
+
+        <div class="col-4" style="display:none;">
+            <label for="new_admins_remark" class="form-label">Admin's Remark:</label>
+            <input type="text" class="form-control" id="new_admins_remark" name="new_admins_remark" />
+        </div>
+
+        <div class="col-4" style="display:none;">
+            <label for="new_mp_remark" class="form-label">MP Remark:</label>
+            <input type="text" class="form-control" id="new_mp_remark" name="new_mp_remark" />
+        </div>
                                             <div class="footer">
                                                 <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
                                                     data-bs-target="#ForAdd" onclick="showAddConfirmation()">
@@ -1142,12 +1192,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 <label for="category" class="form-label">Category:</label>
                                                 <select class="form-select" id="category" name="category"
                                                     onchange="fetchRandomAssignee()">
-                                                    <option value="Outsource">Outsource</option>
+
+                                                    
                                                     <option value="Carpentry">Carpentry</option>
                                                     <option value="Electrical">Electrical</option>
                                                     <option value="Plumbing">Plumbing</option>
+                                                    <option value="Outsource">Outsource</option>
                                                 </select>
                                             </div>
+
+
 
                                             <!-- Add an empty assignee select element -->
                                             <div class="col-4">
@@ -1185,6 +1239,48 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 <input type="text" class="form-control" id="return_reason"
                                                     name="return_reason" readonly />
                                             </div>
+<!-- Add outsource_info field -->
+<div class="col-4" id="outsourceInfoFieldapprove" style="display: none;">
+    <label for="outsource_info" class="form-label">Outsource Info:</label>
+    <input type="text" class="form-control" id="outsource_info" name="outsource_info" />
+</div>
+
+<!-- JavaScript to toggle visibility based on category selection -->
+<script>
+    // Function to show or hide the outsource_info field based on the selected category
+    function toggleOutsourceInfoFieldapprove() {
+        var category = document.getElementById('category').value;
+        var outsourceInfoFieldapprove = document.getElementById('outsourceInfoFieldapprove');
+        if (category === 'Outsource') {
+            outsourceInfoFieldapprove.style.display = 'block';
+        } else {
+            outsourceInfoFieldapprove.style.display = 'none';
+        }
+    }
+
+    // Call the function initially and add an event listener to the category select element
+    toggleOutsourceInfoFieldapprove();
+    document.getElementById('category').addEventListener('change', toggleOutsourceInfoFieldapprove);
+</script>
+
+<!-- Add first_assignee field -->
+<div class="col-4">
+    <label for="first_assignee" class="form-label">First Assignee:</label>
+    <input type="text" class="form-control" id="first_assignee" name="first_assignee" />
+</div>
+
+<!-- Add admins_remark field -->
+<div class="col-4" style="display: none;">
+    <label for="admins_remark" class="form-label">Admin's Remark:</label>
+    <input type="text" class="form-control" id="admins_remark" name="admins_remark" />
+</div>
+
+<!-- Add mp_remark field -->
+<div class="col-4" style="display: none;">
+    <label for="mp_remark" class="form-label">MP Remark:</label>
+    <input type="text" class="form-control" id="mp_remark" name="mp_remark" />
+</div>
+
 
                                             <div class="footer">
                                                 <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
@@ -1463,7 +1559,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             var assigneeSelect = document.getElementById('assignee');
             var assigneeInput = document.getElementById('assigneeInput');
             var assigneeInputReal = document.getElementById('assigneeInputreal');
-
+            var firstAssigneeInput = document.getElementById('first_assignee');
+            
             // Function to update assigneeInputreal value
             function updateAssigneeInputReal(value) {
                 assigneeInputReal.value = value;
@@ -1472,6 +1569,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             // Event listener for assigneeInput
             assigneeInput.addEventListener('input', function () {
                 updateAssigneeInputReal(this.value);
+                firstAssigneeInput.value = this.value;
             });
 
             // Check if the selected category is "Outsource"
@@ -1528,41 +1626,48 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
     <!--PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
     <script>
-        $(document).ready(function () {
-            // Function to populate modal fields
-            function populateModal(row) {
-                // Populate modal fields with data from the row
-                $("#request_id").val(row.find("td:eq(0)").text());
-                $("#date").val(row.find("td:eq(1)").text());
-                $("#category").val(row.find("td:eq(2)").text());
-                // If building, floor, and room are concatenated in a single cell, split them
-                var buildingFloorRoom = row.find("td:eq(3)").text().split(', ');
-                $("#building").val(buildingFloorRoom[0]);
-                $("#floor").val(buildingFloorRoom[1]);
-                $("#room").val(buildingFloorRoom[2]);
-                $("#equipment").val(row.find("td:eq(4)").text());
-                $("#assignee").val(row.find("td:eq(5)").text());
-                $("#status").val(row.find("td:eq(6)").text());
-                $("#deadline").val(row.find("td:eq(7)").text());
-                $("#description").val(row.find("td:eq(13)").text());
-                $("#return_reason").val(row.find("td:eq(15)").text());
+    $(document).ready(function () {
+        // Function to populate modal fields
+        function populateModal(row) {
+            // Populate modal fields with data from the row
+            $("#request_id").val(row.find("td:eq(0)").text());
+            $("#date").val(row.find("td:eq(1)").text());
+            $("#category").val(row.find("td:eq(2)").text());
+            // If building, floor, and room are concatenated in a single cell, split them
+            var buildingFloorRoom = row.find("td:eq(3)").text().split(', ');
+            $("#building").val(buildingFloorRoom[0]);
+            $("#floor").val(buildingFloorRoom[1]);
+            $("#room").val(buildingFloorRoom[2]);
+            $("#equipment").val(row.find("td:eq(4)").text());
+            $("#assignee").val(row.find("td:eq(5)").text());
+            $("#status").val(row.find("td:eq(6)").text());
+            $("#deadline").val(row.find("td:eq(7)").text());
+            $("#description").val(row.find("td:eq(13)").text());
+            $("#return_reason").val(row.find("td:eq(15)").text());
 
-                // Check if return_reason has a value
-                if (row.find("td:eq(15)").text().trim() !== '') {
-                    $("#return_reason").closest('.col-12').show(); // Show the div if there's a value
-                } else {
-                    $("#return_reason").closest('.col-12').hide(); // Hide the div if there's no value
-                }
+            // Check if return_reason has a value
+            if (row.find("td:eq(15)").text().trim() !== '') {
+                $("#return_reason").closest('.col-12').show(); // Show the div if there's a value
+            } else {
+                $("#return_reason").closest('.col-12').hide(); // Hide the div if there's no value
             }
 
-            // Click event for the "Approve" button
-            $("button[data-bs-target='#ForApproval']").click(function () {
-                var row = $(this).closest("tr"); // Get the closest row to the clicked button
-                populateModal(row); // Populate modal fields with data from the row
-                $("#ForApproval").modal("show"); // Show the modal
-            });
+            // Additional fields
+            $("#new_outsource_info").val(row.find("td:eq(16)").text());
+            $("#new_first_assignee").val(row.find("td:eq(17)").text());
+            $("#new_admins_remark").val(row.find("td:eq(18)").text());
+            $("#new_mp_remark").val(row.find("td:eq(19)").text());
+        }
+
+        // Click event for the "Approve" button
+        $("button[data-bs-target='#ForApproval']").click(function () {
+            var row = $(this).closest("tr"); // Get the closest row to the clicked button
+            populateModal(row); // Populate modal fields with data from the row
+            $("#ForApproval").modal("show"); // Show the modal
         });
-    </script>
+    });
+</script>
+
 
     <!--2 PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
     <script>
@@ -1588,6 +1693,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 } else {
                     $("#new2_return_reason").closest('.col-12').hide(); // Hide the div if there's no value
                 }
+                 // Additional fields
+            $("#new_outsource_info").val(row.find("td:eq(16)").text());
+            $("#new_first_assignee").val(row.find("td:eq(17)").text());
+            $("#new_admins_remark").val(row.find("td:eq(18)").text());
+            $("#new_mp_remark").val(row.find("td:eq(19)").text());
             }
 
             // Click event for the "Done" button for modal "ForOutsource" based on row 2
