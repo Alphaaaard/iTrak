@@ -3,68 +3,21 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
-include_once("../../config/connection.php");
+include_once ("../../config/connection.php");
 date_default_timezone_set('Asia/Manila');
 $conn = connection();
-
-function logActivity($conn, $accountId, $actionDescription, $tabValue)
-{
-    $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab) VALUES (?, NOW(), ?, ?)");
-    $stmt->bind_param("iss", $accountId, $actionDescription, $tabValue);
-    if (!$stmt->execute()) {
-        echo "Error logging activity: " . $stmt->error;
-    }
-    $stmt->close();
-}
-
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
+
+
     // For personnel page, check if userLevel is 3
     if ($_SESSION['userLevel'] != 2) {
         // If not personnel, redirect to an error page or login
         header("Location:error.php");
         exit;
-    }
-
-    $sql = "SELECT * FROM asset WHERE status = 'Working'";
-    $result = $conn->query($sql) or die($conn->error);
-
-    $sql2 = "SELECT * FROM asset WHERE status = 'Under Maintenance'";
-    $result2 = $conn->query($sql2) or die($conn->error);
-
-    $sql3 = "SELECT * FROM asset WHERE status = 'For Replacement'";
-    $result3 = $conn->query($sql3) or die($conn->error);
-
-    $sql4 = "SELECT * FROM asset WHERE status = 'Need Repair'";
-    $result4 = $conn->query($sql4) or die($conn->error);
-
-
-    //Edit
-    if (isset($_POST['edit'])) {
-        $assetId = $_POST['assetId'];
-        $category = $_POST['category'];
-        $building = $_POST['building'];
-        $floor = $_POST['floor'];
-        $room = $_POST['room'];
-
-        $status = $_POST['status'];
-        $assignedName = $_POST['assignedName'];
-        $assignedBy = $_POST['assignedBy'];
-        $date = $_POST['date'];
-
-
-
-
-        $updateSql = "UPDATE `asset` SET `category`='$category', `building`='$building', `floor`='$floor', `room`='$room', `status`='$status', `assignedName`='$assignedName', `assignedBy`='$assignedBy', `date`='$date' WHERE `assetId`='$assetId'";
-        if ($conn->query($updateSql) === TRUE) {
-            logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId to $status.", 'Report');
-        } else {
-            echo "Error updating asset: " . $conn->error;
-        }
-        header("Location: reports.php");
     }
 
 
@@ -82,10 +35,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
                 FROM activitylogs AS al
                JOIN account AS acc ON al.accountID = acc.accountID
-               WHERE al.m_seen= '0' AND al.accountID != ?  AND action NOT LIKE '%logged in'
+               WHERE  al.seen = '0' AND al.accountID != ?
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
-
 
     // Prepare the SQL statement
     $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
@@ -98,7 +50,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $resultLatestLogs = $stmtLatestLogs->get_result();
 
 
-    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE m_seen= '0' AND action NOT LIKE '%logged in' AND accountID != ?";
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
     $stmt = $conn->prepare($unseenCountQuery);
     $stmt->bind_param("i", $loggedInAccountId);
     $stmt->execute();
@@ -106,90 +58,232 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->fetch();
     $stmt->close();
 
+    $sql = "SELECT * FROM request WHERE campus = 'San Bartolome' AND status IN ('Pending','For Approval') AND category != 'Outsource' ORDER BY date DESC";
+    $result = $conn->query($sql) or die($conn->error);
 
-    if (isset($_POST['assignMaintenance'])) {
-        $assetId = $_POST['assetId'];
-        $assignedName = $_POST['assignedName'];
-        $assignSql = "UPDATE `asset` SET `assignedName`='$assignedName' WHERE `assetId`='$assetId'";
 
-        if (!empty($assignSql) && $conn->query($assignSql) === TRUE) {
-            logActivity($conn, $_SESSION['accountId'], "Assigned maintenance personnel $assignedName to asset ID $assetId.", 'General');
+    $sql2 = "SELECT * FROM request WHERE campus = 'San Bartolome' AND category = 'Outsource' AND status = 'Pending' ORDER BY date DESC";
+    $result2 = $conn->query($sql2) or die($conn->error);
 
-            // Fetch the asset details
-            $assetDetailsQuery = "SELECT `category`, `building`, `floor`, `room` FROM `asset` WHERE `assetId` = ?";
-            $stmt = $conn->prepare($assetDetailsQuery);
-            $stmt->bind_param("i", $assetId);
-            $stmt->execute();
-            $assetDetailsResult = $stmt->get_result();
+    $sql4 = "SELECT * FROM request WHERE campus = 'San Bartolome' AND status = 'Done' ORDER BY date DESC";
+    $result4 = $conn->query($sql4) or die($conn->error);
 
-            if ($assetDetailsResult->num_rows > 0) {
-                $assetDetails = $assetDetailsResult->fetch_assoc();
 
-                // Fetch the email of the assigned personnel
-                $emailQuery = "SELECT email FROM account WHERE CONCAT(firstName, ' ', lastName) = ?";
-                $stmt = $conn->prepare($emailQuery);
-                $stmt->bind_param("s", $assignedName);
-                $stmt->execute();
-                $emailResult = $stmt->get_result();
 
-                if ($emailResult->num_rows > 0) {
-                    $row = $emailResult->fetch_assoc();
-                    $toEmail = $row['email'];
 
-                    // Set up PHPMailer
-                    $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
+    function logActivity($conn, $accountId, $actionDescription, $tabValue)
+    {
+        // Add 8 hours to the current date
+        $date = date('Y-m-d H:i:s', strtotime('+8 hours'));
 
-                    try {
-                        //Server settings
-                        $mail->isSMTP();
-                        $mail->Host = 'smtp.gmail.com';
-                        $mail->SMTPAuth = true;
-                        $mail->Username = 'qcu.upkeep@gmail.com';
-                        $mail->Password = 'qvpx bbcm bgmy hcvf';
-                        $mail->SMTPSecure = 'tls';
-                        $mail->Port = 587;
-
-                        //Recipients
-                        $mail->setFrom('qcu.upkeep@gmail.com', 'iTrak');
-                        $mail->addAddress($toEmail);
-
-                        // Content
-                        $mail->isHTML(true);
-                        $mail->Subject = 'Task Assignment Notification';
-                        $mail->Body = 'Dear ' . $assignedName . ',<br><br>
-
-                        I hope this message finds you well.<br><br>
-
-                        The administrator has assigned you to address the issues with the following details:<br>
-                        + Tracking Number: ' . $assetId . '<br>
-                        + Category: ' . $assetDetails['category'] . '<br> 
-                        + Location: ' . $assetDetails['building'] . ' ' . $assetDetails['floor'] . ' ' . $assetDetails['room'] . '<br><br>
-
-                        Please check the system for further details regarding this assignment.<br><br>
-
-                        Best regards,<br><br>
-
-                        Allyssa Bea Marie Cabal<br>
-
-                        Administrator<br>
-
-                        iTrak';
-
-                        $mail->send();
-                    } catch (Exception $e) {
-                        // Handle errors with mail sending here
-                    }
-                }
-            }
-        } else {
-            echo "Error assigning maintenance personnel: " . $conn->error;
+        $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab, seen, m_seen, p_seen) VALUES (?, ?, ?, ?, 1, 1, 1)");
+        $stmt->bind_param("isss", $accountId, $date, $actionDescription, $tabValue);
+        if (!$stmt->execute()) {
+            echo "Error logging activity: " . $stmt->error;
         }
-        header("Location: reports.php");
+        $stmt->close();
     }
 
 
-?>
-    <!DOCTYPE html>
+
+    if (isset($_POST['add'])) {
+        $request_id = $_POST['new_request_id'];
+        $campus = $_POST['new_campus'];
+        $building = $_POST['new_building'];
+        $floor = $_POST['new_floor'];
+        $room = $_POST['new_room'];
+        $equipment = $_POST['new_equipment'];
+        $req_by = $_POST['new_req_by'];
+        $category = $_POST['new_category'];
+        $assignee = $_POST['new_assignee'];
+        $status = $_POST['new_status'];
+        $description = $_POST['new_description'];
+        $deadline = $_POST['new_deadline'];
+
+        // Calculate the current date plus 8 hours
+        $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
+
+        // Insert data into the request table
+        $insertQuery = "INSERT INTO request (request_id, campus, building, floor, room, equipment, req_by, category, assignee, status, description, deadline, date)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        $stmt = $conn->prepare($insertQuery);
+        $stmt->bind_param("sssssssssssss", $request_id, $campus, $building, $floor, $room, $equipment, $req_by, $category, $assignee, $status, $description, $deadline, $adjusted_date);
+
+        if ($stmt->execute()) {
+            // Log activity for task creation and assignment
+            $action = "Created and assigned task to $assignee";
+            logActivity($conn, $_SESSION['accountId'], $action, 'General');
+
+            // Redirect to the desired page
+            header("Location: sanBartolome.php");
+            exit(); // Make sure to exit to prevent further execution
+        } else {
+            echo "Error inserting data: " . $conn->error;
+        }
+
+        $conn->close();
+    }
+
+
+    if (isset($_POST['approval'])) {
+        // Retrieve request_id from the form
+        $request_id2 = $_POST['request_id'];
+
+        // Retrieve other form data
+        $campus2 = $_POST['campus'];
+        $building2 = $_POST['building'];
+        $floor2 = $_POST['floor'];
+        $room2 = $_POST['room'];
+        $equipment2 = $_POST['equipment'];
+        $category2 = $_POST['category'];
+        $assignee2 = $_POST['assigneereal'];
+        $status2 = $_POST['status'];
+        $description2 = $_POST['description'];
+        $deadline2 = $_POST['deadline'];
+
+        // Calculate the current date plus 8 hours
+        $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
+
+        // SQL UPDATE query
+        $sql3 = "UPDATE request 
+                 SET campus = ?, building = ?, floor = ?, room = ?, 
+                     equipment = ?, category = ?, assignee = ?, 
+                     status = ?, description = ?, deadline = ?, date = ?
+                 WHERE request_id = ?";
+
+        // Prepare the SQL statement
+        $stmt3 = $conn->prepare($sql3);
+
+        // Bind parameters
+        $stmt3->bind_param("sssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $adjusted_date, $request_id2);
+
+        if ($stmt3->execute()) {
+            // Log activity for admin approval with new assignee
+            $approval_action = "Task ID $request_id2 approved with $assignee2 as new assignee.";
+            $reassignment_action = "Task ID $request_id2 reassigned to $assignee2.";
+            logActivity($conn, $_SESSION['accountId'], $approval_action, 'General');
+            logActivity($conn, $_SESSION['accountId'], $reassignment_action, 'General');
+
+            // Redirect back to the page
+            header("Location: sanBartolome.php");
+
+            exit();
+        } else {
+            // Error occurred while updating
+            echo "Error updating request: " . $stmt3->error;
+        }
+
+        // Close statement
+        $stmt3->close();
+    }
+
+    if (isset($_POST['outsource'])) {
+        $request_id4 = $_POST['new2_request_id'];
+        $campus4 = $_POST['new2_campus'];
+        $building4 = $_POST['new2_building'];
+        $floor4 = $_POST['new2_floor'];
+        $room4 = $_POST['new2_room'];
+        $equipment4 = $_POST['new2_equipment'];
+        $req_by4 = $_POST['new2_req_by'];
+        $category4 = $_POST['new2_category'];
+        $assignee4 = $_POST['new2_assignee'];
+        $status4 = 'Done';
+        $description4 = $_POST['new2_description'];
+        $deadline4 = $_POST['new2_deadline'];
+
+        // Calculate the current date plus 8 hours
+        $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
+
+        // Update data in the request table
+        $updateQuery = "UPDATE request SET campus=?, building=?, floor=?, room=?, equipment=?, req_by=?, category=?, assignee=?, status=?, description=?, deadline=?, date=? WHERE request_id=?";
+
+        $stmt4 = $conn->prepare($updateQuery);
+
+        // Bind parameters
+        $stmt4->bind_param("ssssssssssssi", $campus4, $building4, $floor4, $room4, $equipment4, $req_by4, $category4, $assignee4, $status4, $description4, $deadline4, $adjusted_date, $request_id4);
+
+        if ($stmt4->execute()) {
+            // Log activity for task update
+            $action4 = "Updated task for $assignee4";
+            logActivity($conn, $_SESSION['accountId'], $action4, 'General');
+
+            // Redirect to the desired page
+            header("Location: sanBartolome.php");
+            exit(); // Make sure to exit to prevent further execution
+        } else {
+            echo "Error updating data: " . $conn->error;
+        }
+
+        $conn->close();
+    }
+
+
+
+    // Function to send email notifications for approaching deadlines
+    function sendDeadlineNotifications($conn)
+    {
+        // Set up the time threshold to 1 day before the deadline
+        $deadlineThreshold = date('Y-m-d', strtotime(' +1 day'));
+
+        // Query tasks with approaching deadlines based on the input date from the modal form
+        $sql = "SELECT req.*, acc.email 
+                FROM request AS req 
+                JOIN account AS acc ON req.assignee = CONCAT(acc.firstName, ' ', acc.lastName)
+                WHERE req.deadline = ? AND req.notification_sent = 0"; // Add condition to check if notification has not been sent
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $deadlineThreshold);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Iterate through results and send email notifications
+        while ($row = $result->fetch_assoc()) {
+            $assigneeEmail = $row['email'];
+            $taskDescription = $row['description'];
+
+            // Create a new PHPMailer instance
+            $mail = new PHPMailer;
+
+            // Set up SMTP
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'qcu.upkeep@gmail.com';
+            $mail->Password = 'qvpx bbcm bgmy hcvf';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+
+            //Recipients
+            $mail->setFrom('qcu.upkeep@gmail.com', 'iTrak');
+            $mail->addAddress($assigneeEmail);
+            $mail->Subject = 'Deadline Reminder: ' . $taskDescription;
+            $mail->Body = 'This is a reminder that the deadline for task "' . $taskDescription . '" is approaching. Please ensure it is completed on time.';
+
+            // Send the email
+            if (!$mail->send()) {
+                echo 'Email could not be sent.';
+                echo 'Mailer Error: ' . $mail->ErrorInfo;
+            } else {
+                // Mark the task as notification sent
+                $taskId = $row['request_id'];
+                $updateSql = "UPDATE request SET notification_sent = 1 WHERE request_id = ?";
+                $updateStmt = $conn->prepare($updateSql);
+                $updateStmt->bind_param("i", $taskId);
+                $updateStmt->execute();
+                $updateStmt->close();
+
+            }
+        }
+    }
+
+    // Call the function when needed, for example in your PHP script:
+    sendDeadlineNotifications($conn);
+
+
+
+    ?>
+
+<!DOCTYPE html>
     <html lang="en">
 
     <head>
@@ -197,36 +291,31 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>iTrak | Request</title>
         <link rel="icon" type="image/x-icon" href="../../src/img/tab-logo.png">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <link rel="stylesheet" href="../../src/css/main.css" />
+        <link rel="stylesheet" href="../../src/css/archive.css" />
         <link rel="stylesheet" href="../../src/css/reports.css" />
-        <script src="../../src/js/reports.js"></script>
+        <link rel="stylesheet" href="../../src/css/admin-request.css" />
+
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
-
-
-
-        <!--JS for the fcking tabs-->
         <script>
-            $(document).ready(function() {
-                // this is for staying at the same pill when reloading.
-                let tabLastSelected = sessionStorage.getItem("lastTab");
+            $(document).ready(function () {
+                let lastPillSelected = sessionStorage.getItem('lastPillArchive');
 
-                if (!tabLastSelected) {
-                    // if no last tab was selected, use the pills-manager for default
+                if (!lastPillSelected) {
                     $("#pills-manager").addClass("show active");
-                    // $("#pills-profile").removeClass("show active");
+                    $("#pills-profile").removeClass("show active");
                     $(".nav-link[data-bs-target='pills-manager']").addClass("active");
-                    // $(".nav-link[data-bs-target='pills-profile']").removeClass("active");
-
+                    $(".nav-link[data-bs-target='pills-profile']").removeClass("active");
                 } else {
-
-                    //* checks the last tab that was selected
-                    switch (tabLastSelected) {
+                    switch (lastPillSelected) {
                         case 'pills-manager':
                             $("#pills-manager").addClass("show active");
+                            $("#pills-profile").removeClass("show active");
                             $(".nav-link[data-bs-target='pills-manager']").addClass("active");
                             $(".nav-link[data-bs-target='pills-profile']").removeClass("active");
                             break;
@@ -236,28 +325,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             $(".nav-link[data-bs-target='pills-profile']").addClass("active");
                             $(".nav-link[data-bs-target='pills-manager']").removeClass("active");
                             break;
-                        case 'pills-replace':
-                            $("#pills-replace").addClass("show active");
-                            $("#pills-manager").removeClass("show active");
-                            $(".nav-link[data-bs-target='pills-replace']").addClass("active");
-                            $(".nav-link[data-bs-target='pills-manager']").removeClass("active");
-                            break;
-                        case 'pills-repair':
-                            $("#pills-repair").addClass("show active");
-                            $("#pills-manager").removeClass("show active");
-                            $(".nav-link[data-bs-target='pills-repair']").addClass("active");
-                            $(".nav-link[data-bs-target='pills-manager']").removeClass("active");
-                            break;
                     }
                 }
 
-                // $("#pills-manager").addClass("show active");
-                // $("#pills-profile").removeClass("show active");
-
-                $(".nav-link").click(function() {
+                $(".nav-link").click(function () {
                     const targetId = $(this).data("bs-target");
 
-                    sessionStorage.setItem("lastTab", targetId); //* sets the targetId to the sessionStorage lastTab item
+                    sessionStorage.setItem('lastPillArchive', targetId);
 
                     $(".tab-pane").removeClass("show active");
                     $(`#${targetId}`).addClass("show active");
@@ -277,6 +351,19 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             position: absolute;
             top: 10px;
             right: 10px;
+        }
+
+
+        .blue {
+            color: blue;
+        }
+
+        .green {
+            color: green;
+        }
+
+        .red {
+            color: red;
         }
     </style>
 
@@ -576,862 +663,1154 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <li><a href="#" class="nav-link" data-bs-target="pills-repair">Need Repair</a></li>
                             </ul>
                         </div>
-
-                        <!-- Export button -->
-                        <div class="export-mob-hide">
-                            <form method="post" id="exportForm">
-                                <input type="hidden" name="status" id="statusField" value="For Replacement">
-                                <button type="button" id="exportBtn" class="btn btn-outline-danger">Export Data</button>
-                            </form>
-                        </div>
-                    </div>
-
-                    <!--Tab for table 1-->
-                    <div class="tab-content pt" id="myTabContent">
-                        <div class="tab-pane fade show active" id="pills-manager" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="table-content" id="exportContentWorking">
-                                <div class='table-header'>
-                                    <div class='headerskie'>
-                                        <span>TRACKING #</span>
-                                        <span>DATE & TIME</span>
-                                        <span>CATEGORY</span>
-                                        <span>LOCATION</span>
-                                        <span>STATUS</span>
-                                    </div>
-                                </div>
-                                <?php
-                                if ($result->num_rows > 0) {
-                                    echo "<div class='table-container working-table'>";
-                                    echo "<table>";
-                                    while ($row = $result->fetch_assoc()) {
-                                        $date = new DateTime($row['date']); // Create DateTime object from fetched date
-                                        $date->modify('+8 hours'); // Add 8 hours
-                                        $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
-                                        echo '<tr>';
-                                        echo '<td>' . $row['assetId'] . '</td>';
-                                        echo '<td>' . $formattedDate . '</td>';
-                                        echo '<td >' . $row['category'] . '</td>';
-                                        echo '<td >' . $row['building'] . " / " . $row['floor'] . " / " . $row['room'] . '</td>';
-                                        echo '<td style="display: none;">' . $row['building'] . '</td>';
-                                        echo '<td style="display: none;">' . $row['floor'] . '</td>';
-                                        echo '<td style="display: none;">' . $row['room'] . '</td>';
-                                        echo '<td style="display: none;">' . $row['images'] . '</td>';
-                                        echo '<td >' . $row['status'] . '</td>';
-
-                                        echo '</tr>';
-                                    }
-                                    echo "</table>";
-                                    echo "</div>";
-                                } else {
-                                    echo '<table>';
-                                    echo "<div class=noDataImgH>";
-                                    echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
-                                    echo "</div>";
-                                    echo '</table>';
-                                }
-                                ?>
-                            </div>
-                        </div>
-
-
-                        <!--Tab for table 2-->
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="table-content" id="exportContentUnderMaintenance">
-                                <div class='table-header'>
-                                    <div class='headerskie'>
-                                        <span>TRACKING #</span>
-                                        <span>DATE & TIME</span>
-                                        <span>CATEGORY</span>
-                                        <span>LOCATION</span>
-                                        <span>STATUS</span>
-                                    </div>
-                                </div>
-                                <!--Content of table 2-->
-                                <?php
-                                if ($result2->num_rows > 0) {
-                                    echo "<div class='table-container maintenance-table'>";
-                                    echo "<table>";
-                                    while ($row2 = $result2->fetch_assoc()) {
-                                        $date = new DateTime($row2['date']); // Create DateTime object from fetched date
-                                        $date->modify('+8 hours'); // Add 8 hours
-                                        $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
-                                        echo '<tr>';
-                                        echo '<td>' . $row2['assetId'] . '</td>';
-                                        echo '<td>' . $formattedDate . '</td>'; // Display the adjusted date
-                                        echo '<td >' . $row2['category'] . '</td>';
-                                        echo '<td >' . $row2['building'] . " / " . $row2['floor'] . " / " . $row2['room'] . '</td>';
-                                        echo '<td style="display: none;">' . $row2['building'] . '</td>';
-                                        echo '<td style="display: none;">' . $row2['floor'] . '</td>';
-                                        echo '<td style="display: none;">' . $row2['room'] . '</td>';
-                                        echo '<td style="display: none;">' . $row2['images'] . '</td>';
-                                        echo '<td >' . $row2['status'] . '</td>';
-                                        echo '</tr>';
-                                    }
-                                    echo "</table>";
-                                    echo "</div>";
-                                } else {
-                                    echo '<table>';
-                                    echo "<div class=noDataImgH>";
-                                    echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
-                                    echo "</div>";
-                                    echo '</table>';
-                                }
-                                ?>
-                            </div>
-                        </div>
-
-                        <!--Tab for table 3 - Replacement -->
-                        <div class="tab-pane fade" id="pills-replace" role="tabpanel" aria-labelledby="replace-tab">
-                            <div class="table-content" id="exportContentReplacement">
-                                <div class='table-header'>
-                                    <div class='headerskie'>
-                                        <span>TRACKING #</span>
-                                        <span>DATE & TIME</span>
-                                        <span>CATEGORY</span>
-                                        <span>LOCATION</span>
-                                        <span>STATUS</span>
-                                    </div>
-                                </div>
-                                <!--Content of table 3-->
-                                <?php
-                                if ($result3->num_rows > 0) {
-                                    echo "<div class='table-container replacement-table'>";
-                                    echo "<table>";
-                                    while ($row3 = $result3->fetch_assoc()) {
-                                        $date = new DateTime($row3['date']); // Create DateTime object from fetched date
-                                        $date->modify('+8 hours'); // Add 8 hours
-                                        $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
-                                        echo '<tr>';
-                                        echo '<td>' . $row3['assetId'] . '</td>';
-                                        echo '<td>' . $formattedDate . '</td>'; // Display the adjusted date
-                                        echo '<td >' . $row3['category'] . '</td>';
-                                        echo '<td >' . $row3['building'] . " / " . $row3['floor'] . " / " . $row3['room'] . '</td>';
-                                        echo '<td style="display: none;">' . $row3['building'] . '</td>';
-                                        echo '<td style="display: none;">' . $row3['floor'] . '</td>';
-                                        echo '<td style="display: none;">' . $row3['room'] . '</td>';
-                                        echo '<td style="display: none;">' . $row3['images'] . '</td>';
-                                        echo '<td >' . $row3['status'] . '</td>';
-                                        echo '</tr>';
-                                    }
-                                    echo "</table>";
-                                    echo "</div>";
-                                } else {
-                                    echo '<table>';
-                                    echo "<div class=noDataImgH>";
-                                    echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
-                                    echo "</div>";
-                                    echo '</table>';
-                                }
-                                ?>
-                            </div>
-                        </div>
-
-                        <!--Tab for table 4 - Repair -->
-                        <div class="tab-pane fade" id="pills-repair" role="tabpanel" aria-labelledby="repair-tab">
-                            <div class="table-content" id="exportContentNeedforRepair">
-                                <div class='table-header'>
-                                    <div class='headerskie4'>
-                                        <span class="tab4">TRACKING #</span>
-                                        <span class="tab4">DATE & TIME</span>
-                                        <span class="tab4">CATEGORY</span>
-                                        <span class="tab4">LOCATION</span>
-                                        <span class="tab4">STATUS</span>
-                                        <span class="tab4">ASSIGNED NAME</span>
-                                    </div>
-                                </div>
-                                <!--Content of table 4-->
-                                <?php
-                                if ($result4->num_rows > 0) {
-                                    echo "<div class='table-container repair-table'>";
-                                    echo "<table>";
-                                    while ($row4 = $result4->fetch_assoc()) {
-                                        $date = new DateTime($row4['date']); // Create DateTime object from fetched date
-                                        $date->modify('+8 hours'); // Add 8 hours
-                                        $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
-                                        echo '<tr>';
-                                        echo '<td>' . $row4['assetId'] . '</td>';
-                                        echo '<td>' . $formattedDate . '</td>'; // Display the adjusted date
-                                        echo '<td>' . $row4['category'] . '</td>';
-                                        echo '<td>' . $row4['building'] . " / " . $row4['floor'] . " / " . $row4['room'] . '</td>';
-                                        echo '<td style="display: none;">' . $row4['building'] . '</td>';
-                                        echo '<td style="display: none;">' . $row4['floor'] . '</td>';
-                                        echo '<td style="display: none;">' . $row4['room'] . '</td>';
-                                        echo '<td style="display: none;">' . $row4['images'] . '</td>';
-                                        echo '<td >' . $row4['status'] . '</td>';
-                                        echo '<td style="display: none;">' . $row4['assignedBy'] . '</td>';
-                                        if (empty($row4['assignedName'])) {
-                                            // Pagwalang data eto ilalabas
-                                            echo '<td>';
-                                            echo '<form method="post" action="">';
-                                            echo '<input type="hidden" name="assetId" value="' . $row4['assetId'] . '">';
-                                            echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#exampleModal5">Assign</button>';
-                                            echo '</form>';
-                                            echo '</td>';
-                                        } else {
-                                            // Pagmeron data eto ilalabas
-                                            echo '<td>' . $row4['assignedName'] . '</td>';
-                                        }
-                                        echo '</tr>';
-                                    }
-                                    echo "</table>";
-                                    echo "</div>";
-                                } else {
-                                    echo '<table>';
-                                    echo "<div class=noDataImgH>";
-                                    echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
-                                    echo "</div>";
-                                    echo '</table>';
-                                }
-
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
-            <div class="pagination-reports">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </section>
-
-        <section>
-            <!--Modal sections-->
-            <!--Assign Modal for table 4-->
-            <div class="modal-parent">
-                <div class="modal modal-xl fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content assingee-container">
-                            <div class="assignee-header">
-                                <label for="assignedName" class="form-label assignee-tag">CHOOSE A MAINTENANCE PERSONNEL:
-                                </label>
-                            </div>
-                            <div class="header">
-                                <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
-                            </div>
-                            <div class="modal-body">
-                                <form method="post" class="row g-3" id="assignPersonnelForm">
-                                    <h5></h5>
-                                    <input type="hidden" name="assignMaintenance">
-                                    <div class="col-4" style="display:none">
-                                        <label for="assetId" class="form-label">Tracking #:</label>
-                                        <input type="text" class="form-control" id="assetId" name="assetId" readonly />
-                                    </div>
-
-                                    <div class="col-4" style="display:none">
-                                        <label for="date" class="form-label">Date:</label>
-                                        <input type="text" class="form-control" id="date" name="date" readonly />
-                                    </div>
-
-                                    <div class="col-4" style="display:none">
-                                        <label for="category" class="form-label">Category:</label>
-                                        <input type="text" class="form-control" id="category" name="category" readonly />
-                                    </div>
-
-                                    <div class="col-4" style="display:none">
-                                        <label for="building" class="form-label">Building:</label>
-                                        <input type="text" class="form-control" id="building" name="building" readonly />
-                                    </div>
-
-                                    <div class="col-4" style="display:none">
-                                        <label for="floor" class="form-label">Floor:</label>
-                                        <input type="text" class="form-control" id="floor" name="floor" readonly />
-                                    </div>
-
-                                    <div class="col-4" style="display:none">
-                                        <label for="room" class="form-label">Room:</label>
-                                        <input type="text" class="form-control" id="room" name="room" readonly />
-                                    </div>
-
-                                    <div class="col-4" style="display:none">
-                                        <label for="images" class="form-label">Images:</label>
-                                        <input type="text" class="form-control" id="" name="images" readonly />
-                                    </div>
-
-                                    <div class="col-4" style="display:none">
-                                        <label for="status" class="form-label">Status:</label>
-                                        <select class="form-select" id="status" name="status">
-                                            <option value="Working">Working</option>
-                                            <option value="Under Maintenance">Under Maintenance</option>
-                                            <option value="For Replacement">For Replacement</option>
-                                            <option value="Need Repair">Need Repair</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-6">
-                                        <select class="form-select assignedName" id="assignedName" name="assignedName" style="color: black;">
-                                            <?php
-                                            // Assuming you have a database connection established in $conn
-                                            // SQL to fetch personnel with the role of "Maintenance Personnel"
-                                            $assignSql = "SELECT firstName, middleName, lastName FROM account WHERE userlevel = '3'";
-                                            $personnelResult = $conn->query($assignSql);
-
-
-                                            if ($personnelResult) {
-                                                while ($row = $personnelResult->fetch_assoc()) {
-                                                    $fullName = $row['firstName'] . ' ' . $row['lastName'];
-                                                    // Echo each option within the select
-                                                    echo '<option value="' . htmlspecialchars($fullName) . '">' . htmlspecialchars($fullName) . '</option>';
-                                                }
-                                            } else {
-                                                // Handle potential errors or no results
-                                                echo '<option value="No Maintenance Personnel Found">';
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                </form>
-
-                                <div class="col-4" style="display:none">
-                                    <label for="assignedBy" class="form-label">Assigned By:</label>
-                                    <input type="text" class="form-control" id="assignedBy" name="assignedBy" readonly />
-                                </div>
-                            </div>
-                            <div class="footer">
-                                <button type="button" class="btn add-modal-btn" onclick="assignPersonnel()">
-                                    Save
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Edit for table 4
-            <div class="modal fade" id="staticBackdrop5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-footer">
-                            Are you sure you want to save changes?
-                            <div class="modal-popups">
-                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                <button class="btn add-modal-btn" name="assignMaintenance" data-bs-dismiss="modal">Yes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </form> -->
-        </section>
-
-        <!-- PROFILE MODALS -->
-        <?php include_once 'modals/modal_layout.php'; ?>
-
-
-        <!-- RFID MODAL -->
-        <div class="modal" id="staticBackdrop112" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <img src="../../src/img/taprfid.jpg" width="100%" alt="" class="Scan" />
-
-                        <form id="rfidForm">
-                            <input type="text" id="rfid" name="rfid" value="">
+  <!-- Export button -->
+  <div class="export-mob-hide">
+                        <form method="post" id="exportForm">
+                            <input type="hidden" name="status" id="statusField" value="For Replacement">
+                            <button type="button" id="exportBtn" class="btn btn-outline-danger" data-bs-toggle="modal"
+                                data-bs-target="#addRequest">Add Task</button>
                         </form>
                     </div>
                 </div>
+
+
+                <div class="tab-content pt" id="myTabContent">
+                    <div class="tab-pane fade show active" id="pills-manager" role="tabpanel"
+                        aria-labelledby="home-tab">
+                        <div class="table-content">
+                            <div class='table-header'>
+                                <table>
+                                    <tr>
+                                        <th>Request ID</th>
+                                        <th>Date & Time</th>
+                                        <th>Category</th>
+                                        <th>Location</th>
+                                        <th>Equipment</th>
+                                        <th>Assignee</th>
+                                        <th>Deadline</th>
+                                        <th>Status</th>
+
+                                        <th></th>
+                                    </tr>
+                                </table>
+                            </div>
+                            <?php
+                            if ($result->num_rows > 0) {
+                                echo "<div class='table-container'>";
+                                echo "<table>";
+                                while ($row = $result->fetch_assoc()) {
+                                    echo '<tr>';
+                                    echo '<td>' . $row['request_id'] . '</td>';
+                                    echo '<td>' . $row['date'] . '</td>';
+                                    echo '<td>' . $row['category'] . '</td>';
+                                    echo '<td>' . $row['building'] . ', ' . $row['floor'] . ', ' . $row['room'] . '</td>';
+                                    echo '<td>' . $row['equipment'] . '</td>';
+                                    echo '<td>' . $row['assignee'] . '</td>';
+                                    echo '<td>' . $row['deadline'] . '</td>';
+                                    $status = $row['status'];
+                                    $status_color = '';
+
+                                    // Set the color based on the status
+                                    switch ($status) {
+                                        case 'Pending':
+                                            $status_color = 'blue';
+                                            break;
+                                        case 'Done':
+                                            $status_color = 'green';
+                                            break;
+                                        case 'For Approval':
+                                            $status_color = 'red';
+                                            break;
+                                        default:
+                                            // Default color if status doesn't match
+                                            $status_color = 'black';
+                                    }
+
+                                    // Output the status with appropriate color
+                                    echo '<td class="' . $status_color . '">' . $status . '</td>';
+
+                                    // Check if status is "For Approval"
+                                    if ($row['status'] == 'For Approval') {
+                                        // Display the button
+                                        echo '<td>';
+                                        echo '<form method="post" action="">';
+                                        echo '<input type="hidden" name="request_id" value="' . $row['request_id'] . '">';
+                                        echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#ForApproval">Approve</button>';
+                                        echo '</form>';
+                                        echo '</td>';
+                                    } else {
+                                        // Otherwise, display an empty cell
+                                        echo '<td></td>';
+                                    }
+                                    echo '<td style="display:none;">' . $row['campus'] . '</td>';
+                                    echo '<td style="display:none;">' . $row['building'] . '</td>';
+                                    echo '<td style="display:none;">' . $row['floor'] . '</td>';
+                                    echo '<td style="display:none;">' . $row['room'] . '</td>';
+                                    echo '<td style="display:none;">' . $row['description'] . '</td>';
+                                    echo '<td style="display:none;">' . $row['req_by'] . '</td>';
+                                    echo '<td style="display:none;">' . $row['return_reason'] . '</td>';
+                                    echo '</tr>';
+                                }
+                                echo "</table>";
+                                echo "</div>";
+                            } else {
+                                echo '<table>';
+                                echo "<div class=noDataImgH>";
+                                echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
+                                echo "</div>";
+                                echo '</table>';
+                            }
+                            ?>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="table-content">
+                            <div class='table-header'>
+                                <table>
+                                    <tr>
+                                        <th>Request ID</th>
+                                        <th>Date & Time</th>
+                                        <th>Category</th>
+                                        <th>Location</th>
+                                        <th>Equipment</th>
+                                        <th>Assignee</th>
+                                        <th>Status</th>
+                                        <th>Deadline</th>
+                                        <th></th>
+                                    </tr>
+                                </table>
+                            </div>
+                            <?php
+                            if ($result2->num_rows > 0) {
+                                echo "<div class='table-container'>";
+                                echo "<table>";
+                                while ($row2 = $result2->fetch_assoc()) {
+                                    echo '<tr>';
+                                    echo '<td>' . $row2['request_id'] . '</td>';
+                                    echo '<td>' . $row2['date'] . '</td>';
+                                    echo '<td>' . $row2['category'] . '</td>';
+                                    echo '<td>' . $row2['building'] . ', ' . $row2['floor'] . ', ' . $row2['room'] . '</td>';
+                                    echo '<td>' . $row2['equipment'] . '</td>';
+                                    echo '<td>' . $row2['assignee'] . '</td>';
+                                    $status = $row2['status'];
+                                    $status_color = '';
+
+                                    // Set the color based on the status
+                                    switch ($status) {
+                                        case 'Pending':
+                                            $status_color = 'blue';
+                                            break;
+                                        case 'Done':
+                                            $status_color = 'green';
+                                            break;
+                                        case 'For Approval':
+                                            $status_color = 'red';
+                                            break;
+                                        default:
+                                            // Default color if status doesn't match
+                                            $status_color = 'black';
+                                    }
+
+                                    // Output the status with appropriate color
+                                    echo '<td class="' . $status_color . '">' . $status . '</td>';
+                                    echo '<td>' . $row2['deadline'] . '</td>';
+
+                                    // Check if status is "Pending"
+                                    if ($row2['status'] == 'Pending') {
+                                        // Display the button
+                                        echo '<td>';
+                                        echo '<form method="post" action="">';
+                                        echo '<input type="hidden" name="request_id" value="' . $row2['request_id'] . '">';
+                                        echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#ForOutsource">Done</button>';
+                                        echo '</form>';
+                                        echo '</td>';
+                                    } else {
+                                        // Otherwise, display an empty cell
+                                        echo '<td></td>';
+                                    }
+
+                                    echo '<td style="display:none;">' . $row2['campus'] . '</td>';
+                                    echo '<td style="display:none;">' . $row2['building'] . '</td>';
+                                    echo '<td style="display:none;">' . $row2['floor'] . '</td>';
+                                    echo '<td style="display:none;">' . $row2['room'] . '</td>';
+                                    echo '<td style="display:none;">' . $row2['description'] . '</td>';
+                                    echo '<td style="display:none;">' . $row2['req_by'] . '</td>';
+                                    echo '<td style="display:none;">' . $row2['return_reason'] . '</td>';
+                                    echo '</tr>';
+                                }
+                                echo "</table>";
+                                echo "</div>";
+                            } else {
+                                echo '<table>';
+                                echo "<div class=noDataImgH>";
+                                echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
+                                echo "</div>";
+                                echo '</table>';
+                            }
+                            ?>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-done" role="tabpanel" aria-labelledby="done-tab">
+                        <div class="table-content">
+                            <div class='table-header'>
+                                <table>
+                                    <tr>
+                                        <th>Request ID</th>
+                                        <th>Date & Time</th>
+                                        <th>Category</th>
+                                        <th>Location</th>
+                                        <th>Equipment</th>
+                                        <th>Assignee</th>
+                                        <th>Deadline</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+                                </table>
+                            </div>
+                            <?php
+                            if ($result4->num_rows > 0) {
+                                echo "<div class='table-container'>";
+                                echo "<table>";
+                                while ($row4 = $result4->fetch_assoc()) {
+                                    echo '<tr>';
+                                    echo '<td>' . $row4['request_id'] . '</td>';
+                                    echo '<td>' . $row4['date'] . '</td>';
+                                    echo '<td>' . $row4['category'] . '</td>';
+                                    echo '<td>' . $row4['building'] . ', ' . $row4['floor'] . ', ' . $row4['room'] . '</td>';
+                                    echo '<td>' . $row4['equipment'] . '</td>';
+                                    echo '<td>' . $row4['assignee'] . '</td>';
+                                    echo '<td>' . $row4['deadline'] . '</td>';
+                                    $status = $row4['status'];
+                                    $status_color = '';
+
+                                    // Set the color based on the status
+                                    switch ($status) {
+                                        case 'Pending':
+                                            $status_color = 'blue';
+                                            break;
+                                        case 'Done':
+                                            $status_color = 'green';
+                                            break;
+                                        case 'For Approval':
+                                            $status_color = 'red';
+                                            break;
+                                        default:
+                                            // Default color if status doesn't match
+                                            $status_color = 'black';
+                                    }
+
+                                    // Output the status with appropriate color
+                                    echo '<td class="' . $status_color . '">' . $status . '</td>';
+
+                                    // Check if status is "Pending"
+                                    if ($row4['status'] == 'Pending') {
+                                        // Display the button
+                                        echo '<td>';
+                                        echo '<form method="post" action="">';
+                                        echo '<input type="hidden" name="request_id" value="' . $row4['request_id'] . '">';
+                                        echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#ForOutsource">Done</button>';
+                                        echo '</form>';
+                                        echo '</td>';
+                                    } else {
+                                        // Otherwise, display an empty cell
+                                        echo '<td></td>';
+                                    }
+
+                                    echo '<td style="display:none;">' . $row4['campus'] . '</td>';
+                                    echo '<td style="display:none;">' . $row4['building'] . '</td>';
+                                    echo '<td style="display:none;">' . $row4['floor'] . '</td>';
+                                    echo '<td style="display:none;">' . $row4['room'] . '</td>';
+                                    echo '<td style="display:none;">' . $row4['description'] . '</td>';
+                                    echo '<td style="display:none;">' . $row4['req_by'] . '</td>';
+                                    echo '<td style="display:none;">' . $row4['return_reason'] . '</td>';
+                                    echo '<td></td>';
+                                    echo '</tr>';
+                                }
+                                echo "</table>";
+                                echo "</div>";
+                            } else {
+                                echo '<table>';
+                                echo "<div class=noDataImgH>";
+                                echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
+                                echo "</div>";
+                                echo '</table>';
+                            }
+                            ?>
+                        </div>
+                    </div>
+
+                    <!--MODAL FOR NEW REQUEST-->
+                    <div class="modal-parent">
+                        <div class="modal modal-xl fade" id="addRequest" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5>Add New Request:</h5>
+                                        <button class="btn btn-close-modal-emp close-modal-btn"
+                                            data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="addrequestForm" method="post" class="row g-3">
+                                            <div class="col-4" style="display:none;">
+                                                <label for="new_request_id" class="form-label">Request ID:</label>
+                                                <input type="text" class="form-control" id="new_request_id"
+                                                    name="new_request_id" readonly />
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="new_building" class="form-label">Building:</label>
+                                                <select class="form-control" id="new_building" name="new_building">
+                                                    <option value="" selected="selected">Select Building</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="new_floor" class="form-label">Floor:</label>
+                                                <select class="form-control" id="new_floor" name="new_floor">
+                                                    <option value="" selected="selected">Select Floor</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="new_room" class="form-label">Room: </label>
+                                                <select class="form-control" id="new_room" name="new_room">
+                                                    <option value="" selected="selected">Select Room</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-4" style="display:none;">
+                                                <label for="new_campus" class="form-label">Campus:</label>
+                                                <input type="text" class="form-control" id="new_campus"
+                                                    name="new_campus" value="San Bartolome" />
+                                            </div>
+
+
+                                            <div class="col-4">
+                                                <label for="new_equipment" class="form-label">Equipment :</label>
+                                                <select class="form-select" id="new_equipment" name="new_equipment">
+                                                    <option value="Bed">Bed</option>
+                                                    <option value="Bulb">Bulb</option>
+                                                    <option value="LED Light">LED Light</option>
+                                                    <option value="Chair">Chair</option>
+                                                    <option value="Desk">Desk</option>
+                                                    <option value="Sofa">Sofa</option>
+                                                    <option value="Table">Table</option>
+                                                    <option value="Toilet Seat">Toilet Seat</option>
+                                                    <option value="Conference Table">Conference Table</option>
+                                                    <option value="Ceiling Fan">Ceiling Fan</option>
+                                                    <option value="Aircon">Aircon</option>
+                                                    <option value="Cassette Aircon">Cassette Aircon</option>
+                                                    <option value="Door">Door</option>
+                                                    <option value="Swing Door">Swing Door</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-4" style="display:none;">
+                                                <label for="new_req_by" class="form-label">Requested By: </label>
+                                                <input type="text" class="form-control" id="new_req_by"
+                                                    name="new_req_by" />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="new_category" class="form-label">Category:</label>
+                                                <select class="form-select" id="new_category" name="new_category"
+                                                    onchange="fetchRandomAssignee1()">
+                                                    <option value="Outsource">Outsource</option>
+                                                    <option value="Carpentry">Carpentry</option>
+                                                    <option value="Electrical">Electrical</option>
+                                                    <option value="Plumbing">Plumbing</option>
+
+                                                </select>
+                                            </div>
+
+                                            <script>
+                                                function fetchRandomAssignee1() {
+                                                    var category = document.getElementById('new_category').value;
+                                                    $.ajax({
+                                                        url: 'fetch_random_assignee_request.php', // PHP script to fetch random assignee
+                                                        type: 'POST',
+                                                        data: {
+                                                            category: category
+                                                        },
+                                                        success: function (response) {
+                                                            $('#new_assignee').val(response);
+                                                        },
+                                                        error: function (xhr, status, error) {
+                                                            alert('Error: ' + error);
+                                                        }
+                                                    });
+                                                }
+                                            </script>
+
+                                            <div class="col-4">
+                                                <label for="new_assignee" class="form-label">Assignee:</label>
+                                                <input type="text" class="form-control" id="new_assignee"
+                                                    name="new_assignee" />
+                                            </div>
+
+                                            <div class="col-4" style="display: none;">
+                                                <label for="new_status" class="form-label">Status:</label>
+                                                <input type="text" class="form-control" value="Pending" id="new_status"
+                                                    name="new_status" />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="new_deadline" class="form-label">Deadline:</label>
+                                                <input type="date" class="form-control" id="new_deadline"
+                                                    name="new_deadline" />
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label for="new_description" class="form-label">Description:</label>
+                                                <input type="text" class="form-control" id="new_description"
+                                                    name="new_description" />
+                                            </div>
+
+                                            <div class="footer">
+                                                <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                                    data-bs-target="#ForAdd" onclick="showAddConfirmation()">
+                                                    Save
+                                                </button>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--add for new request-->
+                    <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    Are you sure you want to save changes?
+                                    <div class="modal-popups">
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                        <!-- <button class="btn add-modal-btn" name="add"
+                                            data-bs-dismiss="modal">Yes</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+
+                    <!--MODAL FOR THE APPROVAL-->
+                    <div class="modal-parent">
+                        <div class="modal modal-xl fade" id="ForApproval" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5>For Approval:</h5>
+
+                                        <button class="btn btn-close-modal-emp close-modal-btn"
+                                            data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="approvalForm" method="post" class="row g-3">
+                                            <div class="col-4" style="display:none;">
+                                                <label for="request_id" class="form-label">Request ID:</label>
+                                                <input type="text" class="form-control" id="request_id"
+                                                    name="request_id" readonly />
+                                            </div>
+                                            <div class="col-4" style="display:none;">
+                                                <label for="date" class="form-label">Date & Time:</label>
+                                                <input type="text" class="form-control" id="date" name="date" />
+                                            </div>
+                                            <div class="col-4" style="display:none;">
+                                                <label for="campus" class="form-label">Campus:</label>
+                                                <input type="text" class="form-control" id="campus" name="campus"
+                                                    value="San Bartolome" />
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="building" class="form-label">Building:</label>
+                                                <input type="text" class="form-control" id="building" name="building"
+                                                    readonly />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="floor" class="form-label">Floor:</label>
+                                                <input type="text" class="form-control" id="floor" name="floor"
+                                                    readonly />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="room" class="form-label">Room: </label>
+                                                <input type="text" class="form-control" id="room" name="room"
+                                                    readonly />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="equipment" class="form-label">Equipment :</label>
+                                                <input type="text" class="form-control" id="equipment" name="equipment"
+                                                    readonly />
+                                            </div>
+
+                                            <div class="col-4" style="display:none;">
+                                                <label for="req_by" class="form-label">Requested By: </label>
+                                                <input type="text" class="form-control" id="req_by" name="req_by" />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="category" class="form-label">Category:</label>
+                                                <select class="form-select" id="category" name="category"
+                                                    onchange="fetchRandomAssignee()">
+                                                    <option value="Outsource">Outsource</option>
+                                                    <option value="Carpentry">Carpentry</option>
+                                                    <option value="Electrical">Electrical</option>
+                                                    <option value="Plumbing">Plumbing</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Add an empty assignee select element -->
+                                            <div class="col-4">
+                                                <label id="assignee-label" for="assignee"
+                                                    class="form-label">Assignee:</label>
+                                                <select class="form-select" id="assignee" name="assignee"></select>
+
+                                                <input type="text" class="form-control" id="assigneeInput"
+                                                    name="assignee" style="display: none;">
+
+                                                <input type="text" class="form-control" id="assigneeInputreal"
+                                                    name="assigneereal" style="display:none;">
+                                            </div>
+
+
+                                            <div class="col-4" style="display:none;">
+                                                <label for="status" class="form-label">Status:</label>
+                                                <input type="text" class="form-control" value="Pending"
+                                                    id="status_modal" name="status" />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="deadline" class="form-label">Deadline:</label>
+                                                <input type="date" class="form-control" id="deadline" name="deadline" />
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label for="description" class="form-label">Description:</label>
+                                                <input type="text" class="form-control" id="description"
+                                                    name="description" />
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label for="return_reason" class="form-label">Transfer
+                                                    Reason:</label>
+                                                <input type="text" class="form-control" id="return_reason"
+                                                    name="return_reason" readonly />
+                                            </div>
+
+                                            <div class="footer">
+                                                <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                                    data-bs-target="#ForApprovals" onclick="showApprovalConfirmation()">
+                                                    Save
+                                                </button>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Edit for approval-->
+                    <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    Are you sure you want to save changes?
+                                    <div class="modal-popups">
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                        <button class="btn add-modal-btn" name="approval"
+                                            data-bs-dismiss="modal">Yes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+
+                    <!--MODAL FOR OUTSOURCE-->
+                    <div class="modal-parent">
+                        <div class="modal modal-xl fade" id="ForOutsource" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5>For Outsource:</h5>
+                                        <button class="btn btn-close-modal-emp close-modal-btn"
+                                            data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="outsourcesForm" method="post" class="row g-3">
+                                            <div class="col-4" style="display:none;">
+                                                <label for="new_request_id" class="form-label">Request ID:</label>
+                                                <input type="text" class="form-control" id="new2_request_id"
+                                                    name="new2_request_id" readonly />
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="new2_building" class="form-label">Building:</label>
+                                                <input type="text" class="form-control" id="new2_building"
+                                                    name="new2_building" readonly />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="new2_floor" class="form-label">Floor:</label>
+                                                <input type="text" class="form-control" id="new2_floor"
+                                                    name="new2_floor" readonly />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="new2_room" class="form-label">Room: </label>
+                                                <input type="text" class="form-control" id="new2_room" name="new2_room"
+                                                    readonly />
+                                            </div>
+                                            <div class="col-4" style="display:none;">
+                                                <label for="new2_campus" class="form-label">Campus:</label>
+                                                <input type="text" class="form-control" id="new2_campus"
+                                                    name="new2_campus" value="San Bartolome" />
+                                            </div>
+
+
+                                            <div class="col-4">
+                                                <label for="new2_equipment" class="form-label">Equipment :</label>
+                                                <input type="text" class="form-control" id="new2_equipment"
+                                                    name="new2_equipment" readonly />
+                                            </div>
+
+                                            <div class="col-4" style="display:none;">
+                                                <label for="new2_req_by" class="form-label">Requested By: </label>
+                                                <input type="text" class="form-control" id="new2_req_by"
+                                                    name="new2_req_by" />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="new2_category" class="form-label">Category:</label>
+                                                <select class="form-select" id="new2_category" name="new2_category"
+                                                    onchange="fetchRandomAssignee1()" readonly
+                                                    style="background-color: #d6e4f0 !important;">
+                                                    <option value="Outsource">Outsource</option>
+                                                    <option value="Carpentry">Carpentry</option>
+                                                    <option value="Electrical">Electrical</option>
+                                                    <option value="Plumbing">Plumbing</option>
+                                                </select>
+                                            </div>
+
+                                            <script>
+                                                // Disable all options and prevent the default behavior of the select element
+                                                document.getElementById("new2_category").addEventListener("mousedown", function (event) {
+                                                    event.preventDefault();
+                                                });
+                                            </script>
+
+                                            <div class="col-4">
+                                                <label for="new2_assignee" class="form-label">Assignee:</label>
+                                                <input type="text" class="form-control" id="new2_assignee"
+                                                    name="new2_assignee" readonly />
+                                            </div>
+
+                                            <div class="col-4" style="display: none;">
+                                                <label for="new2_status" class="form-label">Status:</label>
+                                                <input type="text" class="form-control" value="Pending" id="new2_status"
+                                                    name="new2_status" />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="new2_deadline" class="form-label">Deadline:</label>
+                                                <input type="date" class="form-control" id="new2_deadline"
+                                                    name="new2_deadline" readonly />
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label for="new2_description" class="form-label">Description:</label>
+                                                <input type="text" class="form-control" id="new2_description"
+                                                    name="new2_description" />
+                                            </div>
+
+
+                                            <div class="col-12">
+                                                <label for="return_reason" class="form-label">Transfer
+                                                    Reason:</label>
+                                                <input type="text" class="form-control" id="new2_return_reason"
+                                                    name="new2_return_reason" readonly />
+                                            </div>
+
+                                            <div class="footer">
+                                                <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                                    data-bs-target="#ForOutsources"
+                                                    onclick="showOutsourcesConfirmation()">
+                                                    Save
+                                                </button>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--edit for outsource-->
+                    <div class="modal fade" id="addoutsource" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    Are you sure you want to save changes?
+                                    <div class="modal-popups">
+                                        <button type="button" class="btn close-popups"
+                                            data-bs-dismiss="modal">No</button>
+                                        <!-- <button class="btn add-modal-btn" name="outsource"
+                                            data-bs-dismiss="modal">Yes</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+
+
+
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <!-- PROFILE MODALS -->
+    <?php include_once 'modals/modal_layout.php'; ?>
+
+
+    <!-- RFID MODAL -->
+    <div class="modal" id="staticBackdrop112" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="../../src/img/taprfid.jpg" width="100%" alt="" class="Scan" />
+
+                    <form id="rfidForm">
+                        <input type="text" id="rfid" name="rfid" value="">
+                    </form>
+                </div>
             </div>
         </div>
-
-        <script src="../../src/js/main.js"></script>
-        <script src="../../src/js/archive.js"></script>
-        <script src="../../src/js/profileModalController.js"></script>
-        <script src="../../src/js/logout.js"></script>
-        <script src="../../src/js/reports.js"></script>
-        <!-- Add this script after your existing scripts -->
-        <!-- Add this script after your existing scripts -->
+    </div>
 
 
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
-        <script>
-            //PARA MAGDIRECT KA SA PAGE 
-            function redirectToPage(building, floor, assetId) {
-                var newLocation = '';
-                if (building === 'New Academic' && floor === '1F') {
-                    newLocation = "../../users/building-manager/NEB/NEWBF1.php";
-                } else if (building === 'Yellow' && floor === '1F') {
-                    newLocation = "../../users/building-manager/OLB/OLBF1.php";
-                } else if (building === 'Korphil' && floor === '1F') {
-                    newLocation = "../../users/building-manager/KOB/KOBF1.php";
-                } else if (building === 'Bautista' && floor === 'Basement') {
-                    newLocation = "../../users/building-manager/BAB/BABF1.php";
-                } else if (building === 'Belmonte' && floor === '1F') {
-                    newLocation = "../../users/building-manager/BEB/BEBF1.php";
-                } else if (building === 'Admin' && floor === '1F') {
-                    newLocation = "../../users/building-manager/ADB/ADBF1.php";
-                } else if (building === 'Techvoc' && floor === '1F') {
-                    newLocation = "../../users/building-manager/TEB/TEBF1.php";
-                } else if (building === 'Chinese B' && floor === '1F') {
-                    newLocation = "../../users/building-manager/CHB/CHBF1.php";
-                } else if (building === 'Multipurpose' && floor === '1F') {
-                    newLocation = "../../users/building-manager/MUB/MUBF1.php";
-                } else if (building === 'Bautista' && floor === 'Ground Floor') {
-                    newLocation = "../../users/building-manager/BAB/BABF1.php";
-                } else if (building === 'Bautista' && floor === '2F') {
-                    newLocation = "../../users/building-manager/BAB/BABF2.php";
-                } else if (building === 'Bautista' && floor === '3F') {
-                    newLocation = "../../users/building-manager/BAB/BABF3.php";
-                } else if (building === 'Bautista' && floor === '4F') {
-                    newLocation = "../../users/building-manager/BAB/BABF4.php";
-                } else if (building === 'Bautista' && floor === '5F') {
-                    newLocation = "../../users/building-manager/BAB/BABF5.php";
-                } else if (building === 'Bautista' && floor === '6F') {
-                    newLocation = "../../users/building-manager/BAB/BABF6.php";
-                } else if (building === 'Bautista' && floor === '7F') {
-                    newLocation = "../../users/building-manager/BAB/BABF7.php";
-                } else if (building === 'Bautista' && floor === '8F') {
-                    newLocation = "../../users/building-manager/BAB/BABF8.php";
-                } else if (building === 'Admin' && floor === '2F') {
-                    newLocation = "../../users/building-manager/ADB/ADBF2.php";
-                } else if (building === 'Admin' && floor === '3F') {
-                    newLocation = "../../users/building-manager/ADB/ADBF3.php";
-                } else if (building === 'Admin' && floor === '4F') {
-                    newLocation = "../../users/building-manager/ADB/ADBF4.php";
-                } else if (building === 'Admin' && floor === '5F') {
-                    newLocation = "../../users/building-manager/ADB/ADBF5.php";
-                } else if (building === 'Belmonte' && floor === '2F') {
-                    newLocation = "../../users/building-manager/BEB/BEBF2.php";
-                } else if (building === 'Belmonte' && floor === '3F') {
-                    newLocation = "../../users/building-manager/BEB/BEBF3.php";
-                } else if (building === 'Belmonte' && floor === '4F') {
-                    newLocation = "../../users/building-manager/BEB/BEBF4.php";
-                } else if (building === 'Korphil' && floor === '2F') {
-                    newLocation = "../../users/building-manager/KOB/KOBF2.php";
-                } else if (building === 'Korphil' && floor === '3F') {
-                    newLocation = "../../users/building-manager/KOB/KOBF3.php";
-                } else if (building === 'New Academic' && floor === '2F') {
-                    newLocation = "../../users/building-manager/NEB/NEWBF2.php";
-                } else if (building === 'New Academic' && floor === '3F') {
-                    newLocation = "../../users/building-manager/NEB/NEWBF3.php";
-                } else if (building === 'New Academic' && floor === '4F') {
-                    newLocation = "../../users/building-manager/NEB/NEWBF4.php";
-                } else if (building === 'New Academic' && floor === '5F') {
-                    newLocation = "../../users/building-manager/NEB/NEWBF5.php";
-                } else if (building === 'New Academic' && floor === '6F') {
-                    newLocation = "../../users/building-manager/NEB/NEWBF6.php";
-                } else if (building === 'New Academic' && floor === '7F') {
-                    newLocation = "../../users/building-manager/NEB/NEWBF7.php";
-                } else if (building === 'Yellow' && floor === '2F') {
-                    newLocation = "../../users/building-manager/OLB/OLBF2.php";
-                } else if (building === 'Techvoc' && floor === '2F') {
-                    newLocation = "../../users/building-manager/TEB/TEBF2.php";
-                }
+    <script src="../../src/js/main.js"></script>
+    <script src="../../src/js/archive.js"></script>
+    <script src="../../src/js/profileModalController.js"></script>
+    <script src="../../src/js/logout.js"></script>
+    <script src="../../src/js/sanbartolome.js"></script>
 
 
-                // Append the assetId to the URL as a query parameter
-                window.location.href = newLocation + '?assetId=' + assetId;
+    <!-- Cascading Script -->
+    <script>
+        var subjectObject = {
+            "New Academic": {
+                "1F": ["Pantry", "Recovery Room", "Dental Clinic", "Guidance Office", "Faculty Lounge", "CR", "Lobby", "Landing", "Storage", "Counseling Room", "Medical and Dental Clinic", "Nurse Room", "Dental Room", "Generator Room", "EE Room", "Server Room", "Medical Consultation"],
+                "2F": ["Librarians Office", "Digital Library", "University Library", "Baggage Counter", "Meeting Room 1", "Meeting Room 2", "Meeting Room 3", "Meeting Room 4", "Meeting Room 5", "Meeting Room 6", "Emergency Exit", "Server Room", "EE RM", "Coffee Shop", "CR"],
+                "3F": ["Lobby", "Lec Rm 301", "Lec Rm 302", "Lec Rm 303", "Lec Rm 304", "Lec Rm 305", "Lec Rm 306", "AV Rm 307", "CR", "Storage"],
+                "4F": ["Lec Rm 401", "Lec Rm 402", "Lec Rm 403", "Lec Rm 404", "Lec Rm 405", "Lec Rm 406", "Rm 407", "Landing", "EE RM"],
+                "5F": ["Lec Rm 501", "Lec Rm 502", "Lec Rm 503", "Lec Rm 504", "Lec Rm 505", "Lec Rm 506", "Rm 507", "Landing", "EE RM"],
+                "6F": ["Lec Rm 601", "Lec Rm 602", "Lec Rm 603", "Lec Rm 604", "Lec Rm 605", "Lec Rm 606", "Rm 607", "Landing", "EE RM"],
+                "7F": ["Lec Rm 701", "Lec Rm 702", "Lec Rm 703", "Lec Rm 704", "Lec Rm 705", "Lec Rm 706", "Rm 707", "Landing", "EE RM", "Rain Water Tank", "Storage Rm"]
+            },
+            "Yellow": {
+                "1F": ["IB101A", "IB102A", "IB103A", "IB104A", "IB105A", "IB106A", "IB107A", "IB108A", "IB109A", "IB110A", "CR FEMALE", "CR MALE", "HALLWAY"],
+                "2F": ["IB201F", "IB202C", "IB203B", "IB204B", "IB205B", "IB206B", "IB207B", "IB208B", "IB209C", "IB210D", "CR FEMALE", "CR MALE", "HALLWAY"]
+            },
+            "Techvoc": {
+                "1F": ["Dress Making Lab", "PF-BAGM Department", "OSAS", "Auto Mechanic Lab", "Carpentry", "Conference Room", "BDC Office", "Power RM", "Cuisine Art & Banquet Service", "PF-Stock RM", "Electrical Installation and Maintenance Lab", "Refrigeration and Aircon Lab", "Techvoc Gym", "CR"],
+                "2F": ["IA205", "IA206e", "IA207e", "IA208e", "IA209e", "IA210", "IA211a", "IA212a", "IA213a", "IA214a", "IA215a", "IA216", "Scholarship Office", "Management Information System Office", "Auto Mechanic Lec.", "Consumer Electronic Lab.", "CR"]
+            },
+            "Korphil": {
+                "1F": ["Room A", "Room B", "Directors's RM", "Lobby", "Room C", "Room D", "Room E", "Medical Staff", "Waiting Area", "Electric RM", "Generator RM", "Student Affairs Office", "Proposed Cafeteria"],
+                "2F": ["Utility RM", "Course Coord. RM", "E-Learning RM", "Server RM", "Lecture RM", "Utility RM", "Com Lab", "Temporary Lab"],
+                "3F": ["Storage", "Seminar RM", "Com Lab", "Storage", "Multi Purpose RM"]
+            },
+            "Admin": {
+                "Ground Floor": ["Lobby"]
+            },
+            "Belmonte": {
+                "1F": ["IC101a", "IC102a", "IC103a", "IC104a", "PE Faculty Room", "IC105a", "IC106a", "CR"],
+                "2F": ["IC201a", "IC202a", "IC203a", "IC204a", "Guidance Office", "IC205a", "IC206a", "IC207a", "CR"],
+                "3F": ["IC301a", "IC302a", "IC303a", "IC304a", "Stock Room", "IC305a", "IC306a", "IC307a", "CR"],
+                "4F": ["IC401a", "IC402a", "IC403a", "IC404a", "Research & Extension Office", "IC405a", "IC406a", "IC407a"]
+            },
+            "Bautista": {
+                "Basement": ["Canteen", "Entrance", "CR", "Storage", "Fire Exit", "Kitchen", "HE Room", "Food Stall", "Security Room", "RM 106", "Main Stairs", "PWD CR", "EE Room"],
+                "Ground Floor": ["Pump Room", "Receiving Area", "Lobby", "Room 1", "Storage Room", "Control Room", "Room 2", "Fire Exit", "AUX Exit", "Room 3", "Room 4", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Toilet", "Janitor Room", "Corridor"],
+                "2F": ["Faculty Office", "Humanities Faculty Office", "Storage Room", "Control Room", "IK201", "Fire Exit", "IK202", "Storage Room", "Control Room", "EE Room", "AUX Room", "IK203", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Janitor Room", "PWD", "Toilet", "Corridor"],
+                "3F": ["Storage Room", "Control Room", "Fire Exit", "Toilet", "Corridor", "Dry Pantry", "Archive", "Faculty", "IK301", "IK302", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Janitor Room", "PWD"],
+                "4F": ["Storage Room", "Faculty", "Control Room", "IK401", "Fire Exit", "IK402", "IK403", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Toilet", "Janitor Room", "Corridor", "PWD"],
+                "5F": ["Storage", "Archive", "Dry Pantry", "Faculty", "Control Room", "IK501", "Fire Exit", "IK502", "IK503", "AUX Room", "EE Room", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Toilet", "Janitor Room", "PWD", "Corridor"],
+                "6F": ["Storage", "Faculty", "Control Room", "IK601", "Fire Exit", "IK602", "AUX Room", "EE Room", "IK603", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Toilet", "Janitor Room", "PWD", "Corridor"]
+            },
+            "Multipurpose": {
+                "1F": ["Lobby"]
+            },
+            "Chinese B": {
+                "1F": ["Lobby"]
+            }
+        }
+        window.onload = function () {
+            var subjectSel = document.getElementById("new_building");
+            var topicSel = document.getElementById("new_floor");
+            var chapterSel = document.getElementById("new_room");
+
+            for (var x in subjectObject) {
+                subjectSel.options[subjectSel.options.length] = new Option(x, x);
             }
 
-            $(document).on('click', 'table tr', function() {
-                var assetId = $(this).find('td:eq(0)').text(); // Assuming first TD is the assetId
-                var building = $(this).find('td:eq(3)').text().split(' / ')[0]; // Adjust the index as needed
-                var floor = $(this).find('td:eq(3)').text().split(' / ')[1]; // Adjust the index as needed
-                redirectToPage(building, floor, assetId);
-            });
-        </script>
+            subjectSel.onchange = function () {
+                // Empty Floors- and Rooms-dropdowns
+                chapterSel.length = 1;
+                topicSel.length = 1;
 
-
-        <script>
-            $(document).ready(function() {
-
-                // Function to populate the modal fields
-                function populateModal(row, modalId) {
-                    $(modalId + " #assetId").val(row.find("td:eq(0)").text());
-                    $(modalId + " #date").val(row.find("td:eq(1)").text());
-                    $(modalId + " #category").val(row.find("td:eq(2)").text());
-                    $(modalId + " #building").val(row.find("td:eq(4)").text());
-                    $(modalId + " #floor").val(row.find("td:eq(5)").text());
-                    $(modalId + " #room").val(row.find("td:eq(6)").text());
-                    $(modalId + " #images").val(row.find("td:eq(7)").text());
-                    $(modalId + " #status").val(row.find("td:eq(8)").text());
-                    $(modalId + " #assignedBy").val(row.find("td:eq(9)").text());
-                    $(modalId + " #assignedName").val(row.find("td:eq(10)").text());
+                // Display correct values for Floors
+                for (var y in subjectObject[this.value]) {
+                    topicSel.options[topicSel.options.length] = new Option(y, y);
                 }
+            }
 
-                // Event delegation for dynamically loaded content
-                // For "Working" tab table rows
-                $(document).on("click", "#pills-manager .table-container table tbody tr", function() {
-                    var row = $(this);
-                    populateModal(row, "#exampleModal");
-                    $("#exampleModal").modal("show");
-                });
+            topicSel.onchange = function () {
+                // Empty Rooms dropdown
+                chapterSel.length = 1;
 
-                // For "Under Maintenance" tab table rows
-                $(document).on("click", "#pills-profile .table-container table tbody tr", function() {
-                    var row = $(this);
-                    populateModal(row, "#exampleModal2");
-                    $("#exampleModal2").modal("show");
-                });
-
-                $(document).on("click", "#pills-replace .table-container table tbody tr", function() {
-                    var row = $(this);
-                    populateModal(row, "#exampleModal3");
-                    $("#exampleModal3").modal("show");
-                });
-
-                $(document).on("click", "#pills-repair .table-container table tbody tr", function() {
-                    var row = $(this);
-                    populateModal(row, "#exampleModal4");
-                    $("#exampleModal4").modal("show");
-                });
-
-                //PARA TO SA PAGASSIGN MODAL
-                $(document).on("click", "#pills-repair .view-btn", function(event) {
-                    event.stopPropagation(); // Prevent the click from reaching the parent <tr>
-
-                    // Get the closest parent row of the clicked button
-                    var row = $(this).closest("tr");
-
-                    // Populate the modal with data from the row
-                    $("#exampleModal5 #assetId").val(row.find("td:eq(0)").text());
-                    $("#exampleModal5 #date").val(row.find("td:eq(1)").text());
-                    $("#exampleModal5 #category").val(row.find("td:eq(2)").text());
-                    $("#exampleModal5 #building").val(row.find("td:eq(4)").text());
-                    $("#exampleModal5 #floor").val(row.find("td:eq(5)").text());
-                    $("#exampleModal5 #room").val(row.find("td:eq(6)").text());
-                    $("#exampleModal5 #images").val(row.find("td:eq(7)").text());
-                    $("#exampleModal5 #status").val(row.find("td:eq(8)").text()).change();
-                    $("#exampleModal5 #assignedBy").val(row.find("td:eq(9)").text());
-                    $("#exampleModal5 #assignedName").val(row.find("td:eq(10)").text());
-
-                    // Finally, show the modal
-                    $("#exampleModal5").modal("show");
-                });
-            });
-        </script>
-
-        <script>
-            $(document).ready(function() {
-                // Bind the filter function to the input field
-                $("#search-box").on("input", function() {
-                    var query = $(this).val().toLowerCase();
-                    filterTable(query);
-                });
-
-                function filterTable(query) {
-                    $(".table-container tbody tr").each(function() {
-                        var row = $(this);
-                        var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
-                        var firstNameCell = row.find("td:eq(1)"); // FirstName column
-                        var middleNameCell = row.find("td:eq(2)");
-                        var lastNameCell = row.find("td:eq(3)");
-                        var dateCell = row.find("td:eq(5)");
-                        var actionCell = row.find("td:eq(6)");
-
-                        // Get the text content of each cell
-                        var archiveIDText = archiveIDCell.text().toLowerCase();
-                        var firstNameText = firstNameCell.text().toLowerCase();
-                        var middleNameText = middleNameCell.text().toLowerCase();
-                        var lastNameText = lastNameCell.text().toLowerCase();
-                        var dateText = dateCell.text().toLowerCase();
-                        var actionText = actionCell.text().toLowerCase();
-
-                        // Check if any of the cells contain the query
-                        var showRow = archiveIDText.includes(query) ||
-                            firstNameText.includes(query) ||
-                            middleNameText.includes(query) ||
-                            lastNameText.includes(query) ||
-                            dateText.includes(query) ||
-                            actionText.includes(query) ||
-                            archiveIDText == query || // Exact match for Archive ID
-                            firstNameText == query || // Exact match for FirstName
-                            middleNameText == query || // Exact match for LastName
-                            lastNameText == query || // Exact match for LastName
-                            dateText == query || // Exact match for LastName
-                            actionText == query; // Exact match for LastName
-
-                        // Show or hide the row based on the result
-                        if (showRow) {
-                            row.show();
-                        } else {
-                            row.hide();
-                        }
-                    });
+                // Display correct values for Rooms
+                var rooms = subjectObject[subjectSel.value][this.value];
+                for (var i = 0; i < rooms.length; i++) {
+                    chapterSel.options[chapterSel.options.length] = new Option(rooms[i], rooms[i]);
                 }
+            }
+        }
+    </script>
+
+
+
+    <script>
+        // Get today's date
+        var today = new Date();
+
+        // Set tomorrow's date
+        var tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        // Format tomorrow's date as yyyy-mm-dd
+        var tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+
+        // Set the minimum date of the input field to tomorrow
+        document.getElementById("new_deadline").min = tomorrowFormatted;
+    </script>
+
+    <!--PARA SA PAGCHANGE NG LABEL-->
+    <script>
+        function fetchRandomAssignee() {
+            // Get the selected category
+            var category = document.getElementById('category').value;
+
+            // Get the assignee select and input elements
+            var assigneeSelect = document.getElementById('assignee');
+            var assigneeInput = document.getElementById('assigneeInput');
+            var assigneeInputReal = document.getElementById('assigneeInputreal');
+
+            // Function to update assigneeInputreal value
+            function updateAssigneeInputReal(value) {
+                assigneeInputReal.value = value;
+            }
+
+            // Event listener for assigneeInput
+            assigneeInput.addEventListener('input', function () {
+                updateAssigneeInputReal(this.value);
             });
-        </script>
 
-        <script>
-            $(document).ready(function() {
-                function filterTable() {
-                    var searchQuery = $('#search-box').val().toLowerCase();
-                    var columnIndex = parseInt($('#search-filter').val());
+            // Check if the selected category is "Outsource"
+            if (category === "Outsource") {
+                // If it is, show the input and hide the select
+                assigneeSelect.style.display = 'none';
+                assigneeInput.style.display = 'block';
 
-                    $('#data-table tbody tr').each(function() {
-                        var cellText = $(this).find('td').eq(columnIndex).text().toLowerCase();
-                        if (cellText.indexOf(searchQuery) !== -1) {
-                            $(this).show();
-                        } else {
-                            $(this).hide();
+                // Copy the value from the input to assigneeInputreal
+                updateAssigneeInputReal(assigneeInput.value);
+            } else {
+                // Otherwise, show the select and hide the input
+                assigneeInput.style.display = 'none';
+                assigneeSelect.style.display = 'block';
+
+                // Make an AJAX request to fetch assignees
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'fetchAssignees.php?category=' + category, true);
+                xhr.onload = function () {
+                    if (xhr.status == 200) {
+                        // Parse the JSON response
+                        var assignees = JSON.parse(xhr.responseText);
+
+                        // Clear previous options
+                        assigneeSelect.innerHTML = '';
+
+                        // Populate the assignee select element
+                        for (var i = 0; i < assignees.length; i++) {
+                            var option = document.createElement('option');
+                            // Set the option value to concatenated firstName and lastName
+                            option.value = assignees[i].firstName + ' ' + assignees[i].lastName;
+                            option.textContent = assignees[i].firstName + ' ' + assignees[i].lastName;
+                            assigneeSelect.appendChild(option);
                         }
-                    });
-                }
 
-                // Event listener for search input
-                $('#search-box').on('input', filterTable);
-
-                // Event listener for filter dropdown change
-                $('#search-filter').change(function() {
-                    $('#search-box').val(''); // Clear the search input
-                    filterTable(); // Filter table with new criteria
-                });
-            });
-        </script>
-
-        <script>
-            $(document).ready(function() {
-                function searchTable() {
-                    var input, filter, table, tr, td, i;
-                    input = document.getElementById("search-box");
-                    filter = input.value.toUpperCase();
-                    table = document.getElementById("myTabContent"); // Use the ID of your table container
-                    tr = table.getElementsByTagName("tr");
-                    var selectedFilter = document.getElementById("filter-criteria").value;
-
-                    for (i = 1; i < tr.length; i++) { // Start with 1 to avoid the header
-                        td = tr[i].getElementsByTagName("td");
-                        if (td.length > 0) {
-                            var searchText = "";
-                            if (selectedFilter === "all") {
-                                // Concatenate all the text content from the cells for "All" search
-                                for (var j = 0; j < td.length; j++) {
-                                    searchText += td[j].textContent.toUpperCase();
-                                }
-                            } else {
-                                // Find the index for the selected filter
-                                var columnIndex = getColumnIndex(selectedFilter);
-                                searchText = td[columnIndex].textContent.toUpperCase();
-                            }
-
-                            // Show or hide the row based on whether the searchText contains the filter
-                            if (searchText.indexOf(filter) > -1) {
-                                tr[i].style.display = "";
-                            } else {
-                                tr[i].style.display = "none";
-                            }
+                        // Automatically select the first option if available
+                        if (assignees.length > 0) {
+                            assigneeSelect.value = assignees[0].firstName + ' ' + assignees[0].lastName;
+                            updateAssigneeInputReal(assignees[0].firstName + ' ' + assignees[0].lastName);
                         }
+
+                        // Event listener for assigneeSelect
+                        assigneeSelect.addEventListener('change', function () {
+                            updateAssigneeInputReal(assigneeSelect.value);
+                        });
                     }
-                }
+                };
+                xhr.send();
+            }
+        }
+    </script>
 
-                // Utility function to get the column index based on the filter selected
-                function getColumnIndex(filter) {
-                    // Adjust these indices to match your table's structure
-                    var columns = {
-                        'reportId': 0,
-                        'date': 1,
-                        'category': 2,
-                        'location': 3, // Assuming 'location' is a single column that includes building/floor/room
-                        'status': 4
-                    };
-                    return columns[filter] || 0; // Default to the first column if the filter is not found
-                }
 
-                // Attach the search function to the keyup event of the search box
-                $("#search-box").keyup(searchTable);
-            });
-        </script>
+    <!--PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
+    <script>
+        $(document).ready(function () {
+            // Function to populate modal fields
+            function populateModal(row) {
+                // Populate modal fields with data from the row
+                $("#request_id").val(row.find("td:eq(0)").text());
+                $("#date").val(row.find("td:eq(1)").text());
+                $("#category").val(row.find("td:eq(2)").text());
+                // If building, floor, and room are concatenated in a single cell, split them
+                var buildingFloorRoom = row.find("td:eq(3)").text().split(', ');
+                $("#building").val(buildingFloorRoom[0]);
+                $("#floor").val(buildingFloorRoom[1]);
+                $("#room").val(buildingFloorRoom[2]);
+                $("#equipment").val(row.find("td:eq(4)").text());
+                $("#assignee").val(row.find("td:eq(5)").text());
+                $("#status").val(row.find("td:eq(6)").text());
+                $("#deadline").val(row.find("td:eq(7)").text());
+                $("#description").val(row.find("td:eq(13)").text());
+                $("#return_reason").val(row.find("td:eq(15)").text());
 
-        <script>
-            $(document).ready(function() {
-                // Function to update hidden input with the active status
-                function updateStatusInput(tab) {
-                    let status;
-                    switch (tab) {
-                        case 'pills-manager':
-                            status = 'Working';
-                            break;
-                        case 'pills-profile':
-                            status = 'Under Maintenance';
-                            break;
-                        case 'pills-replace':
-                            status = 'For Replacement';
-                            break;
-                        case 'pills-repair':
-                            status = 'Need Repair';
-                            break;
-                        default:
-                            status = 'Unknown';
-                    }
-                    $('input[name="status"]').val(status); // Update the hidden input's value
-                }
-
-                // Initial tab selection handling
-                let tabLastSelected = sessionStorage.getItem("lastTab");
-                if (!tabLastSelected) {
-                    $("#pills-manager").addClass("show active");
-                    $(".nav-link[data-bs-target='pills-manager']").addClass("active");
-                    updateStatusInput('pills-manager'); // Set default status
+                // Check if return_reason has a value
+                if (row.find("td:eq(15)").text().trim() !== '') {
+                    $("#return_reason").closest('.col-12').show(); // Show the div if there's a value
                 } else {
-                    $(`#${tabLastSelected}`).addClass("show active");
-                    $(`.nav-link[data-bs-target='${tabLastSelected}']`).addClass("active");
-                    updateStatusInput(tabLastSelected); // Update status based on sessionStorage
+                    $("#return_reason").closest('.col-12').hide(); // Hide the div if there's no value
                 }
+            }
 
-                // Tab click event handling
-                $(".nav-link").click(function() {
-                    const targetId = $(this).data("bs-target");
-                    sessionStorage.setItem("lastTab", targetId); // Update lastTab in sessionStorage
-                    $(".tab-pane").removeClass("show active");
-                    $(`#${targetId}`).addClass("show active");
-                    $(".nav-link").removeClass("active");
-                    $(this).addClass("active");
-                    updateStatusInput(targetId); // Update the hidden input with the new status
-                });
+            // Click event for the "Approve" button
+            $("button[data-bs-target='#ForApproval']").click(function () {
+                var row = $(this).closest("tr"); // Get the closest row to the clicked button
+                populateModal(row); // Populate modal fields with data from the row
+                $("#ForApproval").modal("show"); // Show the modal
             });
-        </script>
+        });
+    </script>
 
-        <script>
-            document.getElementById('exportBtn').addEventListener('click', function() {
-                var filterCriteria = document.getElementById('filter-criteria').value;
-                var searchQuery = document.getElementById('search-box').value; // Get the value of the search box
-                var formData = new FormData(document.getElementById('exportForm'));
-                formData.append('filterType', filterCriteria);
-                formData.append('searchQuery', searchQuery); // Include the search query in the FormData
+    <!--2 PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
+    <script>
+        $(document).ready(function () {
+            // Function to populate modal fields for modal "ForOutsource" with data from row 2
+            function populateModalForOutsource(row) {
+                // Populate modal fields with data from the row
+                $("#new2_request_id").val(row.find("td:eq(0)").text());
+                $("#new2_building").val(row.find("td:eq(3)").text().split(', ')[0]);
+                $("#new2_floor").val(row.find("td:eq(3)").text().split(', ')[1]);
+                $("#new2_room").val(row.find("td:eq(3)").text().split(', ')[2]);
+                $("#new2_equipment").val(row.find("td:eq(4)").text());
+                $("#new2_assignee").val(row.find("td:eq(5)").text());
+                $("#new2_category").val(row.find("td:eq(2)").text());
+                $("#new2_status").val(row.find("td:eq(6)").text());
+                $("#new2_deadline").val(row.find("td:eq(7)").text());
+                $("#new2_description").val(row.find("td:eq(13)").text());
+                $("#new2_return_reason").val(row.find("td:eq(15)").text());
 
-                Swal.fire({
-                    title: 'Choose the file format',
-                    showDenyButton: true,
-                    // showCancelButton: true,
-                    confirmButtonText: 'PDF',
-                    denyButtonText: `Excel`,
-                    // cancelButtonText: 'Word',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        formData.append('submit', 'Export to PDF');
-                        performExport(formData, 'export-pdf.php');
-                    } else if (result.isDenied) {
-                        formData.append('submit', 'Export to Excel');
-                        performExport(formData, 'export-excel.php');
-                    }
-                    // else if (result.dismiss === Swal.DismissReason.cancel) {
-                    //     formData.append('submit', 'Export to Word');
-                    //     performExport(formData, 'export-word.php');
-                    // }
-                });
+                // Check if return_reason has a value
+                if (row.find("td:eq(15)").text().trim() !== '') {
+                    $("#new2_return_reason").closest('.col-12').show(); // Show the div if there's a value
+                } else {
+                    $("#new2_return_reason").closest('.col-12').hide(); // Hide the div if there's no value
+                }
+            }
+
+            // Click event for the "Done" button for modal "ForOutsource" based on row 2
+            $("button[data-bs-target='#ForOutsource']").click(function () {
+                var row = $(this).closest("tr"); // Get the closest row to the clicked button
+                populateModalForOutsource(row); // Populate modal fields with data from the row
+                $("#ForOutsource").modal("show"); // Show the modal
             });
+        });
+    </script>
 
-            function performExport(formData, endpoint) {
-                Swal.fire({
-                    title: 'Exporting...',
-                    html: 'Please wait while the file is being generated.',
-                    allowOutsideClick: false,
-                    showConfirmButton: false,
-                    willOpen: () => {
-                        Swal.showLoading();
+
+
+
+
+
+
+    <script>
+        $(document).ready(function () {
+            $('.notification-item').on('click', function (e) {
+                e.preventDefault();
+                var activityId = $(this).data('activity-id');
+                var notificationItem = $(this); // Store the clicked element
+
+                $.ajax({
+                    type: "POST",
+                    url: "single_notification.php", // The URL to the PHP file
+                    data: {
+                        activityId: activityId
                     },
-                });
+                    success: function (response) {
+                        if (response.trim() === "Notification updated successfully") {
+                            // If the notification is updated successfully, remove the clicked element
+                            notificationItem.remove();
 
-                fetch(endpoint, {
-                        method: 'POST',
-                        body: formData,
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
+                            // Update the notification count
+                            var countElement = $('#noti_number');
+                            var count = parseInt(countElement.text()) || 0;
+                            countElement.text(count > 1 ? count - 1 : '');
+                        } else {
+                            // Handle error
+                            console.error("Failed to update notification:", response);
                         }
-                        return response.blob();
-                    })
-                    .then(blob => {
-                        const tabIdentifier = sessionStorage.getItem("lastTab") || 'pills-manager';
-                        const tabNameMap = {
-                            'pills-manager': 'Working-Assets',
-                            'pills-profile': 'Under-Maintenance-Assets',
-                            'pills-replace': 'For-Replacement-Assets',
-                            'pills-repair': 'Need-Repair-Assets',
-                        };
-                        const activeTabName = tabNameMap[tabIdentifier] || 'Exported-Data';
-                        const fileExtension = getFileExtension(endpoint);
-                        const fileName = `${activeTabName}.${fileExtension}`;
-
-                        const downloadUrl = window.URL.createObjectURL(blob);
-                        const downloadLink = document.createElement('a');
-                        downloadLink.href = downloadUrl;
-                        downloadLink.download = fileName;
-                        document.body.appendChild(downloadLink);
-                        downloadLink.click();
-
-                        window.URL.revokeObjectURL(downloadUrl);
-                        document.body.removeChild(downloadLink);
-
-                        Swal.fire({
-                            title: 'Exporting Done',
-                            text: 'Your file has been successfully generated.',
-                            icon: 'success',
-                            confirmButtonText: 'OK'
-                        });
-                    })
-                    .catch(error => {
-                        Swal.fire({
-                            title: 'Error',
-                            text: 'There was an issue generating the file.',
-                            icon: 'error',
-                            confirmButtonText: 'OK'
-                        });
-                    });
-            }
-
-            function getFileExtension(endpoint) {
-                if (endpoint.includes('pdf')) return 'pdf';
-                if (endpoint.includes('excel')) return 'xlsx';
-                if (endpoint.includes('word')) return 'docx';
-                return '';
-            }
-        </script>
-
-
-        <script>
-            $(document).ready(function() {
-                $('.notification-item').on('click', function(e) {
-                    e.preventDefault();
-                    var activityId = $(this).data('activity-id');
-                    var notificationItem = $(this); // Store the clicked element
-
-                    $.ajax({
-                        type: "POST",
-                        url: "update_single_notification.php", // The URL to the PHP file
-                        data: {
-                            activityId: activityId
-                        },
-                        success: function(response) {
-                            if (response.trim() === "Notification updated successfully") {
-                                // If the notification is updated successfully, remove the clicked element
-                                notificationItem.remove();
-
-                                // Update the notification count
-                                var countElement = $('#noti_number');
-                                var count = parseInt(countElement.text()) || 0;
-                                countElement.text(count > 1 ? count - 1 : '');
-                            } else {
-                                // Handle error
-                                console.error("Failed to update notification:", response);
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            // Handle AJAX error
-                            console.error("AJAX error:", status, error);
-                        }
-                    });
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle AJAX error
+                        console.error("AJAX error:", status, error);
+                    }
                 });
             });
-        </script>
-    </body>
+        });
+    </script>
 
-    </html>
+
+
+
+
+    <!-- Add this script after your existing scripts -->
+    <!-- Add this script after your existing scripts -->
+    <script>
+        // Add a click event listener to the logout link
+        document.getElementById('logoutBtn').addEventListener('click', function () {
+            // Display SweetAlert
+            Swal.fire({
+                text: 'Are you sure you want to logout?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If user clicks "Yes, logout!" execute the logout action
+                    window.location.href = '../../logout.php';
+                }
+            });
+        });
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script>
+        // JavaScript code to replace input with textarea and set readonly attribute
+        document.addEventListener("DOMContentLoaded", function () {
+            var descriptionInput = document.getElementById("new2_description");
+            var returnReasonInput = document.getElementById("new2_return_reason");
+
+            var descriptionValue = descriptionInput.value;
+            var returnReasonValue = returnReasonInput.value;
+
+            var descriptionTextarea = document.createElement("textarea");
+            descriptionTextarea.className = "form-control";
+            descriptionTextarea.id = "new2_description";
+            descriptionTextarea.name = "new2_description";
+            descriptionTextarea.value = descriptionValue;
+            descriptionTextarea.setAttribute("readonly", "readonly");
+
+            var returnReasonTextarea = document.createElement("textarea");
+            returnReasonTextarea.className = "form-control";
+            returnReasonTextarea.id = "new2_return_reason";
+            returnReasonTextarea.name = "new2_return_reason";
+            returnReasonTextarea.value = returnReasonValue;
+            returnReasonTextarea.setAttribute("readonly", "readonly");
+
+            descriptionInput.parentNode.replaceChild(descriptionTextarea, descriptionInput);
+            returnReasonInput.parentNode.replaceChild(returnReasonTextarea, returnReasonInput);
+        });
+    </script>
+
+    <script>
+        // Get the input element
+        var inputElement = document.getElementById('new_description');
+
+        // Create a new textarea element
+        var textareaElement = document.createElement('textarea');
+
+        // Copy attributes from input to textarea
+        textareaElement.className = inputElement.className;
+        textareaElement.id = inputElement.id;
+        textareaElement.name = inputElement.name;
+
+        // Replace input with textarea
+        inputElement.parentNode.replaceChild(textareaElement, inputElement);
+    </script>
+
+    <script>
+        // Get today's date
+        var today = new Date();
+
+        // Set tomorrow's date
+        var tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        // Format tomorrow's date as yyyy-mm-dd
+        var tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+
+        // Set the minimum date of the input field to tomorrow
+        document.getElementById("new_deadline").min = tomorrowFormatted;
+    </script>
+
+    <script>
+        // Get today's date
+        var today = new Date();
+
+        // Set tomorrow's date
+        var tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        // Format tomorrow's date as yyyy-mm-dd
+        var tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+
+        // Set the minimum date of the input field to tomorrow
+        document.getElementById("deadline").min = tomorrowFormatted;
+    </script>
+
+    <script>
+        // Get today's date
+        var today = new Date();
+
+        // Set tomorrow's date
+        var tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        // Format tomorrow's date as yyyy-mm-dd
+        var tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+
+        // Set the minimum date of the input field to tomorrow
+        document.getElementById("new2_deadline").min = tomorrowFormatted;
+    </script>
+
+</body>
+
+</html>
