@@ -3,7 +3,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-//require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
@@ -50,7 +50,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $resultLatestLogs = $stmtLatestLogs->get_result();
 
 
-    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE m_seen = '0' AND accountID != ?";
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
     $stmt = $conn->prepare($unseenCountQuery);
     $stmt->bind_param("i", $loggedInAccountId);
     $stmt->execute();
@@ -163,7 +163,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         // Bind parameters
         $stmt3->bind_param("sssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $adjusted_date, $request_id2);
-       
         if ($stmt3->execute()) {
             // Log activity for admin approval with new assignee
             $approval_action = "Task ID $request_id2 approved with $assignee2 as new assignee.";
@@ -285,7 +284,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     // Call the function when needed, for example in your PHP script:
     sendDeadlineNotifications($conn);
 
+
+
     ?>
+
 
     <!DOCTYPE html>
     <html lang="en">
@@ -372,6 +374,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     </style>
 
 
+
     <body>
         <div id="navbar" class="">
             <nav>
@@ -387,7 +390,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <a href="#" class="notification" id="notification-button">
                             <i class="fa fa-bell" aria-hidden="true"></i>
                             <!-- Notification Indicator Dot -->
-                            <?php if ($unseenCount > 0) : ?>
+                            <?php if ($unseenCount > 0): ?>
                                 <span class="notification-indicator"></span>
                             <?php endif; ?>
                         </a>
@@ -472,193 +475,148 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 ?>
                             </div>
                             <div class="profile-name-container " id="desktop">
-                                <div><a class="profile-name">
-                                        <?php echo $_SESSION['firstName']; ?>
-                                    </a></div>
-                                <div><a class="profile-role">
-                                        <?php echo $_SESSION['role']; ?>
-                                    </a></div>
+                                <div><a class="profile-name"><?php echo $_SESSION['firstName']; ?></a></div>
+                                <div><a class="profile-role"><?php echo $_SESSION['role']; ?></a></div>
                             </div>
                         </div>
                     </a>
 
                     <div id="settings-dropdown" class="dropdown-content1">
                         <div class="profile-name-container" id="mobile">
-                            <div><a class="profile-name">
-                                    <?php echo $_SESSION['firstName']; ?>
-                                </a></div>
-                            <div><a class="profile-role">
-                                    <?php echo $_SESSION['role']; ?>
-                                </a></div>
+                            <div><a class="profile-name"><?php echo $_SESSION['firstName']; ?></a></div>
+                            <div><a class="profile-role"><?php echo $_SESSION['role']; ?></a></div>
                             <hr>
                         </div>
-                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><img src="../../src/icons/Profile.svg" alt="" class="profile-icons">Profile</a>
+                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i
+                                class="bi bi-person profile-icons"></i>Profile</a>
                         <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
                     </div>
-                <?php
-            } else {
-                header("Location:../../index.php");
-                exit();
-            }
-                ?>
-                </div>
-            </nav>
-        </div>
-        <!-- SIDEBAR -->
-        <section id="sidebar">
-            <a href="./dashboard.php" class="brand" title="logo">
-                <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
-                <div class="mobile-sidebar-close">
-                    <i class="bi bi-arrow-left-circle"></i>
-                </div>
-            </a>
-            <ul class="side-menu top">
-                <li>
-                    <a href="./dashboard.php">
-                        <i class="bi bi-grid"></i>
-                        <span class="text">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="./attendance-logs.php">
-                        <i class="bi bi-calendar-week"></i>
-                        <span class="text">Attendance Logs</span>
-                    </a>
-                </li>
-                <div class="GPS-cont" onclick="toggleGPS()">
-                    <li class="GPS-dropdown">
-                        <div class="GPS-drondown-content">
-                            <div class="GPS-side-cont">
-                                <i class="bi bi-geo-alt"></i>
-                                <span class="text">GPS</span>
-                            </div>
-                            <div class="GPS-ind">
-                                <i id="chevron-icon" class="bi bi-chevron-down"></i>
-                            </div>
+                    <?php
+} else {
+    header("Location:../../index.php");
+    exit();
+}
+?>
+            </div>
+        </nav>
+    </div>
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <a href="./dashboard.php" class="brand" title="logo">
+            <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
+            <div class="mobile-sidebar-close">
+                <i class="bi bi-arrow-left-circle"></i>
+            </div>
+        </a>
+        <ul class="side-menu top">
+            <li>
+                <a href="./dashboard.php">
+                    <i class="bi bi-grid"></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="./attendance-logs.php">
+                    <i class="bi bi-calendar-week"></i>
+                    <span class="text">Attendance Logs</span>
+                </a>
+            </li>
+            <div class="GPS-cont" onclick="toggleGPS()">
+                <li class="GPS-dropdown">
+                    <div class="GPS-drondown-content">
+                        <div class="GPS-side-cont">
+                            <i class="bi bi-geo-alt"></i>
+                            <span class="text">GPS</span>
                         </div>
-                    </li>
-                </div>
-                <div class="GPS-container">
-                    <li class="GPS-Tracker">
-                        <a href="./gps.php">
-                            <i class="bi bi-crosshair"></i>
-                            <span class="text">GPS Tracker</span>
-                        </a>
-                    </li>
-                    <li class="GPS-History">
-                        <a href="./gps_history.php">
-                            <i class="bi bi-radar"></i>
-                            <span class="text">GPS History</span>
-                        </a>
-                    </li>
-                </div>
-                <li>
-                    <a href="./map.php">
-                        <i class="bi bi-map"></i>
-                        <span class="text">Map</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="./reports.php">
-                        <i class="bi bi-clipboard"></i>
-                        <span class="text">Reports</span>
-                    </a>
-                </li>
-                <div class="Map-cont" onclick="toggleMAP()">
-                    <li class="Map-dropdown active">
-                        <div class="Map-drondown-content">
-                            <div class="Map-side-cont">
-                                <i class="bi bi-receipt"></i>
-                                <span class="text">Request</span>
-                            </div>
-                            <div class="Map-ind">
-                                <i id="map-chevron-icon" class="bi bi-chevron-down"></i>
-                            </div>
+                        <div class="GPS-ind">
+                            <i id="chevron-icon" class="bi bi-chevron-down"></i>
                         </div>
-                    </li>
-                </div>
-                <div class="Map-container aaa">
-                    <li class="Map-Batasan active">
-                        <a href="./batasan.php">
-                            <i class="bi bi-building"></i>
-                            <span class="text">Batasan</span>
-                        </a>
-                    </li>
-                    <li class="Map-SanBartolome">
-                        <a href="./sanBartolome.php">
-                            <i class="bi bi-building"></i>
-                            <span class="text">San Bartolome</span>
-                        </a>
-                    </li>
-                    <li class="Map-SanFrancisco">
-                        <a href="./sanFrancisco.php">
-                            <i class="bi bi-building"></i>
-                            <span class="text">San Francisco</span>
-                        </a>
-                    </li>
-                </div>
-                <li>
-                    <a href="./activity-logs.php">
-                        <i class="bi bi-arrow-counterclockwise"></i>
-                        <span class="text">Activity Logs</span>
+                    </div>
+                </li>
+            </div>
+            <div class="GPS-container">
+                <li class="GPS-Tracker">
+                    <a href="./gps.php">
+                        <i class="bi bi-crosshair"></i>
+                        <span class="text">GPS Tracker</span>
                     </a>
                 </li>
-            </ul>
-        </section>
-        <!-- SIDEBAR -->
-
-        <section id="content">
-            <main>
-                <div class="content-container">
-                    <header>
-                        <div class="cont-header">
-                            <!-- <h1 class="tab-name">Reports</h1> -->
-                            <div class="tbl-filter">
-                                <select id="filter-criteria">
-                                    <option value="all">All</option> <!-- Added "All" option -->
-                                    <option value="reportId">Tracking ID</option>
-                                    <option value="date">Date</option>
-                                    <option value="category">Category</option>
-                                    <option value="location">Location</option>
-                                </select>
-
-
-                                <select id="rows-display-dropdown" class="form-select dropdown-rows" aria-label="Default select example">
-                                    <option value="20" selected>Show 20 rows</option>
-                                    <option class="hidden"></option>
-                                    <option value="50">Show 50 rows</option>
-                                    <option value="100">Show 100 rows</option>
-                                    <option value="150">Show 150 rows</option>
-                                    <option value="200">Show 200 rows</option>
-                                </select>
-
-                                <!-- Search Box -->
-                                <!-- Search Box -->
-                                <form class="d-flex col-sm-5" role="search" id="searchForm">
-                                    <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" name="q" />
-                                </form>
-                            </div>
+                <li class="GPS-History">
+                    <a href="./gps_history.php">
+                        <i class="bi bi-radar"></i>
+                        <span class="text">GPS History</span>
+                    </a>
+                </li>
+            </div>
+            <li>
+                <a href="./map.php">
+                    <i class="bi bi-map"></i>
+                    <span class="text">Map</span>
+                </a>
+            </li>
+            <li>
+                <a href="./reports.php">
+                    <i class="bi bi-clipboard"></i>
+                    <span class="text">Reports</span>
+                </a>
+            </li>
+            <div class="Map-cont" onclick="toggleMAP()">
+                <li class="Map-dropdown">
+                    <div class="Map-drondown-content">
+                        <div class="Map-side-cont">
+                            <i class="bi bi-receipt"></i>
+                            <span class="text">Request</span>
                         </div>
-                    </header>
-                    <script>
-                        // Get elements from the DOM
-                        const filterCriteria = document.getElementById('filter-criteria');
-                        const searchBox = document.getElementById('search-box');
-
-                        // Event listener for the filter dropdown changes
-                        filterCriteria.addEventListener('change', function() {
-                            if (this.value === 'date') {
-                                // If "Date" is selected, change the search box to a date picker
-                                searchBox.type = 'date';
-                                searchBox.placeholder = 'Select a date';
-                            } else {
-                                // For all other options, change it back to a regular search box
-                                searchBox.type = 'search';
-                                searchBox.placeholder = 'Search';
-                            }
-                        });
-                    </script>
-                   <div class="new-nav-container">
+                        <div class="Map-ind">
+                            <i id="map-chevron-icon" class="bi bi-chevron-down"></i>
+                        </div>
+                    </div>
+                </li>
+            </div>
+            <div class="Map-container aaa">
+                <li class="Map-Batasan active">
+                    <a href="./batasan.php">
+                        <i class="bi bi-building"></i>
+                        <span class="text">Batasan</span>
+                    </a>
+                </li>
+                <li class="Map-SanBartolome">
+                    <a href="./sanBartolome.php">
+                        <i class="bi bi-building"></i>
+                        <span class="text">San Bartolome</span>
+                    </a>
+                </li>
+                <li class="Map-SanFrancisco">
+                    <a href="./sanFrancisco.php">
+                        <i class="bi bi-building"></i>
+                        <span class="text">San Francisco</span>
+                    </a>
+                </li>
+            </div>
+            <li>
+                <a href="./activity-logs.php">
+                    <i class="bi bi-arrow-counterclockwise"></i>
+                    <span class="text">Activity Logs</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!-- SIDEBAR -->
+    <section id="content">
+        <main>
+            <div class="content-container">
+                <header>
+                    <div class="cont-header">
+                        <h1 class="tab-name"></h1>
+                        <div class="tbl-filter">
+                            <form class="d-flex" role="search" id="searchForm">
+                                <input class="form-control icon" type="search" placeholder="Search" aria-label="Search"
+                                    id="search-box" name="q" />
+                            </form>
+                        </div>
+                    </div>
+                </header>
+                <div class="new-nav-container">
                     <!--Content start of tabs-->
                     <div class="new-nav">
                         <ul>
@@ -668,7 +626,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </ul>
                     </div>
 
-                 
                     <!-- Export button -->
                     <div class="export-mob-hide">
                         <form method="post" id="exportForm">
@@ -1005,8 +962,22 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                             <div class="col-4">
                                                 <label for="new_equipment" class="form-label">Equipment :</label>
-                                                <input type="text" class="form-control" id="new_equipment"
-                                                    name="new_equipment" />
+                                                <select class="form-select" id="new_equipment" name="new_equipment">
+                                                    <option value="Bed">Bed</option>
+                                                    <option value="Bulb">Bulb</option>
+                                                    <option value="LED Light">LED Light</option>
+                                                    <option value="Chair">Chair</option>
+                                                    <option value="Desk">Desk</option>
+                                                    <option value="Sofa">Sofa</option>
+                                                    <option value="Table">Table</option>
+                                                    <option value="Toilet Seat">Toilet Seat</option>
+                                                    <option value="Conference Table">Conference Table</option>
+                                                    <option value="Ceiling Fan">Ceiling Fan</option>
+                                                    <option value="Aircon">Aircon</option>
+                                                    <option value="Cassette Aircon">Cassette Aircon</option>
+                                                    <option value="Door">Door</option>
+                                                    <option value="Swing Door">Swing Door</option>
+                                                </select>
                                             </div>
 
                                             <div class="col-4" style="display:none;">
@@ -1659,3 +1630,109 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         });
     </script>
+
+
+
+
+
+    <!-- Add this script after your existing scripts -->
+    <!-- Add this script after your existing scripts -->
+    <script>
+        // Add a click event listener to the logout link
+        document.getElementById('logoutBtn').addEventListener('click', function () {
+            // Display SweetAlert
+            Swal.fire({
+                text: 'Are you sure you want to logout?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If user clicks "Yes, logout!" execute the logout action
+                    window.location.href = '../../logout.php';
+                }
+            });
+        });
+    </script>
+    <script>
+        // JavaScript to convert input fields to textareas
+        document.addEventListener("DOMContentLoaded", function () {
+            var descriptionInput = document.getElementById("description");
+            var returnReasonInput = document.getElementById("return_reason");
+
+            // Convert input fields to textareas
+            var descriptionTextarea = document.createElement("textarea");
+            descriptionTextarea.className = "form-control";
+            descriptionTextarea.name = "description";
+            descriptionTextarea.id = "description";
+            descriptionInput.parentNode.replaceChild(descriptionTextarea, descriptionInput);
+
+            var returnReasonTextarea = document.createElement("textarea");
+            returnReasonTextarea.className = "form-control";
+            returnReasonTextarea.name = "return_reason";
+            returnReasonTextarea.id = "return_reason";
+            returnReasonTextarea.readOnly = true;
+            returnReasonInput.parentNode.replaceChild(returnReasonTextarea, returnReasonInput);
+        });
+    </script>
+    <script>
+        // JavaScript to convert input fields to textareas
+        document.addEventListener("DOMContentLoaded", function () {
+            var descriptionInput = document.getElementById("new2_description");
+            var returnReasonInput = document.getElementById("new2_return_reason");
+
+            // Convert input fields to textareas
+            var descriptionTextarea = document.createElement("textarea");
+            descriptionTextarea.className = "form-control";
+            descriptionTextarea.name = "new2_description";
+            descriptionTextarea.id = "new2_description";
+            descriptionInput.parentNode.replaceChild(descriptionTextarea, descriptionInput);
+
+            var returnReasonTextarea = document.createElement("textarea");
+            returnReasonTextarea.className = "form-control";
+            returnReasonTextarea.name = "new2_return_reason";
+            returnReasonTextarea.id = "new2_return_reason";
+            returnReasonTextarea.readOnly = true;
+            returnReasonInput.parentNode.replaceChild(returnReasonTextarea, returnReasonInput);
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script>
+        // JavaScript to convert input fields to textareas
+        document.addEventListener("DOMContentLoaded", function () {
+            var descriptionInput = document.getElementById("new2_description");
+
+            // Convert input field to textarea
+            var descriptionTextarea = document.createElement("textarea");
+            descriptionTextarea.className = "form-control";
+            descriptionTextarea.name = "new2_description";
+            descriptionTextarea.id = "new2_description";
+            descriptionTextarea.readOnly = true; // Set readonly to true for description textarea
+            descriptionTextarea.style.backgroundColor = "lightblue"; // Change background color
+            descriptionInput.parentNode.replaceChild(descriptionTextarea, descriptionInput);
+        });
+    </script>
+
+    <script>
+        // Get the input element
+        var inputElement = document.getElementById('new_description');
+
+        // Create a new textarea element
+        var textareaElement = document.createElement('textarea');
+
+        // Copy attributes from input to textarea
+        textareaElement.className = inputElement.className;
+        textareaElement.id = inputElement.id;
+        textareaElement.name = inputElement.name;
+
+        // Replace input with textarea
+        inputElement.parentNode.replaceChild(textareaElement, inputElement);
+    </script>
+
+</body>
+
+</html>
