@@ -41,7 +41,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sql4 = "SELECT * FROM asset WHERE status = 'Need Repair' ORDER BY date";
 
     $result4 = $conn->query($sql4) or die($conn->error);
-    
+
 
     $sql5 = "SELECT * FROM asset WHERE status = 'Outsource'";
     $result5 = $conn->query($sql5) or die($conn->error);
@@ -1232,6 +1232,36 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 $("#search-box").keyup(searchTable);
             });
         </script>
+        <script>
+            // Select all <td> elements with the class "red", "blue", or "green"
+            var tdElements = document.querySelectorAll("td.red, td.blue, td.green");
+
+            // Loop through each selected <td> element
+            tdElements.forEach(function(tdElement) {
+                // Get the text content of the <td> element
+                var textContent = tdElement.textContent;
+
+                // Create a new <span> element
+                var spanElement = document.createElement("span");
+
+                // Set the text content of the <span> element to the text content of the <td> element
+                spanElement.textContent = textContent;
+
+                // Add a class name based on the color of the <td> element
+                if (tdElement.classList.contains("red")) {
+                    spanElement.classList.add("red-value");
+                } else if (tdElement.classList.contains("blue")) {
+                    spanElement.classList.add("blue-value");
+                } else if (tdElement.classList.contains("green")) {
+                    spanElement.classList.add("green-value");
+                }
+
+                // Replace the text content of the <td> element with the <span> element
+                tdElement.textContent = "";
+                tdElement.appendChild(spanElement);
+            });
+        </script>
+
 
     </body>
 

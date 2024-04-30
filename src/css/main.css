@@ -7,6 +7,27 @@
   padding: 0;
 }
 
+span.red-value {
+  background-color: red;
+  border-radius: 5px;
+  color: white;
+  padding: 0.1em 0.3em;
+}
+
+span.blue-value {
+  background-color: blue;
+  border-radius: 5px;
+  color: white;
+  padding: 0.1em 0.3em;
+}
+
+span.green-value {
+  background-color: green;
+  border-radius: 5px;
+  color: white;
+  padding: 0.1em 0.3em;
+}
+
 body {
   background-color: #f6f6f6;
 }

@@ -2,6 +2,14 @@
   padding: unset;
 }
 
+th.done-header {
+  width: 1.6% !important;
+}
+
+td.done-body {
+  width: 1% !important;
+}
+
 .footer {
   padding: 15px 0 0 0;
 }
@@ -75,7 +83,7 @@ td:last-child {
   text-align: center;
 }
 .table-header table tr th:nth-child(1) {
-  width: 11%;
+  width: 12%;
   text-align: center;
 }
 
