@@ -619,7 +619,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         <ul>
                             <li><a href="#" class="nav-link active" data-bs-target="pills-manager">Request</a></li>
                             <li><a href="#" class="nav-link" data-bs-target="pills-done">Done</a></li>
-                            <li><a href="#" class="nav-link" data-bs-target="pills-done">Feedback</a></li>
+                            <li><a href="#" class="nav-link" data-bs-target="pills-feedback">Feedback</a></li>
 
 
                         </ul>
