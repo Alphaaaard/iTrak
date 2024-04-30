@@ -658,16 +658,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             }
                         });
                     </script>
-                    <div class="new-nav-container">
-                        <!--Content start of tabs-->
-                        <div class="new-nav">
-                            <ul>
-                                <li><a href="#" class="nav-link" data-bs-target="pills-manager">Working</a></li>
-                                <li><a href="#" class="nav-link" data-bs-target="pills-profile">Under Maintenance</a></li>
-                                <li><a href="#" class="nav-link" data-bs-target="pills-replace">For Replacement</a></li>
-                                <li><a href="#" class="nav-link" data-bs-target="pills-repair">Need Repair</a></li>
-                            </ul>
-                        </div>
+                   <div class="new-nav-container">
+                    <!--Content start of tabs-->
+                    <div class="new-nav">
+                        <ul>
+                            <li><a href="#" class="nav-link" data-bs-target="pills-manager">Request</a></li>
+                            <li><a href="#" class="nav-link" data-bs-target="pills-profile">Outsource</a></li>
+                            <li><a href="#" class="nav-link" data-bs-target="pills-done">Done</a></li>
+                        </ul>
+                    </div>
 
                  
                     <!-- Export button -->
