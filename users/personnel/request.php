@@ -9,11 +9,11 @@ require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 date_default_timezone_set('Asia/Manila');
 
 
-function insertActivityLog($conn, $accountId, $action, $date = null, $tab = "General", $seen = 1, $m_seen = 1, $p_seen = 1)
+function insertActivityLog($conn, $accountId, $action, $date, $tab = "General", $seen = 1, $m_seen = 1, $p_seen = 1)
 {
     // If $date is not provided, use the current date and time
     if ($date === null) {
-        $date = date('Y-m-d H:i:s');
+        $date = date('Y-m-d H:i:s', strtotime('+8 hours'));
     }
 
     $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab, seen, m_seen, p_seen) VALUES (?, ?, ?, ?, ?, ?, ?)");
