@@ -1570,13 +1570,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                     <input type="text" class="form-control" id="first_assignee_done" name="first_assignee_done" readonly />
                                                 </div>
 
+                                          
                                                 <div class="col-12">
-                                                    <label for="mp_remark_done" class="form-label">Your Remarks:</label>
+                                                    <label for="mp_remark_done" class="form-label">Personnel Remarks:</label>
                                                     <input type="text" class="form-control" id="mp_remark_done" name="mp_remark_done" readonly />
-                                                </div>
-                                                <div class="col-12">
-                                                    <label for="first_assignee_done" class="form-label">Personnel Remarks:</label>
-                                                    <input type="text" class="form-control" id="first_assignee_done" name="first_assignee_done" readonly />
                                                 </div>
 
                                                 <div class="footer">
