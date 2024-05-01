@@ -995,8 +995,8 @@ select#timeFilter,
 select#monthFilter,
 select#employeeFilter,
 select#campusFilter {
-  color: #aaaaaa;
-  border: 1px bold #aaaaaa;
+  /* color: #aaaaaa;
+  border: 1px bold #aaaaaa; */
   background-color: #f6f6f6;
 }
 /* Style for selected option */
@@ -1015,7 +1015,6 @@ select#campusFilter {
   outline: none;
   color: #3d3b40;
 }
-
 
 #timeFilter:focus {
   outline: none;
@@ -1068,6 +1067,7 @@ select {
     width: 100%;
     justify-content: space-around;
     gap: unset;
+    font-size: 10px;
   }
 
   #attendanceChart {
@@ -1119,8 +1119,9 @@ select {
   #employeeFilter,
   #campusFilter {
     width: auto; /* Allows filters to size according to their content */
-    margin-right: 10px; /* Space between filters */
+    margin-right: 0px !important; /* Space between filters */
     margin-left: 0; /* Reset left margin */
+    height: 20px;
   }
 
   /* This ensures that when the filters cannot fit in a single row, they stack */

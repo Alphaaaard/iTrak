@@ -7,6 +7,14 @@
   padding: 0;
 }
 
+.modal-content {
+  width: 100%;
+}
+
+.modal-footer {
+  height: 9.5em;
+}
+
 #approve-btn {
   background-color: #91d694 !important;
   border: 1px solid #91d694;
@@ -486,6 +494,35 @@ img.icon.staff {
 
   .headerskie4 {
     font-size: 10px;
+  }
+
+  .headerskie {
+    font-size: 10px;
+  }
+
+  .headerskie4 span.tab5:nth-child(1) {
+    text-align: center;
+    width: 15%;
+  }
+
+  .headerskie4 span.tab5:nth-child(3) {
+    text-align: center;
+    width: 15%;
+  }
+
+  .headerskie4 span.tab5:nth-child(4) {
+    text-align: center;
+    width: 20%;
+  }
+
+  .table-container table tbody tr td:nth-child(1) {
+    width: 16.5%;
+    text-align: center;
+  }
+
+  .table-container table tbody tr td:nth-child(4) {
+    width: 20%;
+    text-align: center;
   }
 
   .table-header.personnel-table-header tr {
