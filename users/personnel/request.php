@@ -113,7 +113,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sql07 = "SELECT r.* FROM request r
     INNER JOIN account a ON r.first_assignee = CONCAT(a.firstName, ' ', a.lastName)
     WHERE r.campus IN ('Batasan', 'San Bartolome', 'San Francisco') 
-    AND (r.status = 'Pending' OR r.category = 'Outsource') 
+    AND (r.status = 'Pending' AND r.category = 'Outsource') 
     AND a.accountId = ?
     ORDER BY r.date DESC";
     
@@ -337,6 +337,61 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
         // Close statement
         $stmt5->close();
+
+        if (isset($_POST['approval'])) {
+            // Retrieve request_id from the form
+            $request_id2 = $_POST['request_id'];
+    
+            // Retrieve other form data
+            $campus2 = $_POST['campus'];
+            $building2 = $_POST['building'];
+            $floor2 = $_POST['floor'];
+            $room2 = $_POST['room'];
+            $equipment2 = $_POST['equipment'];
+            $category2 = $_POST['category'];
+            $assignee2 = $_POST['assigneereal'];
+            $status2 = $_POST['status'];
+            $description2 = $_POST['description'];
+            $deadline2 = $_POST['deadline'];
+            $outsource_info2 = $_POST['outsource_info'];
+            $first_assignee2 = $_POST['first_assignee'];
+            $admins_remark2 = $_POST['admins_remark'];
+            // Calculate the current date plus 8 hours
+            $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
+    
+            // SQL UPDATE query
+            $sql6 = "UPDATE request 
+            SET campus = ?, building = ?, floor = ?, room = ?, 
+                equipment = ?, category = ?, assignee = ?, 
+                status = ?, description = ?, deadline = ?, outsource_info = ?,first_assignee = ?, admins_remark = ?, date = ?
+            WHERE request_id = ?";
+    
+            // Prepare the SQL statement
+            $stmt6 = $conn->prepare($sql6);
+    
+            // Bind parameters
+            $stmt6->bind_param("ssssssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $outsource_info2, $first_assignee2, $admins_remark2, $adjusted_date, $request_id2);
+            if ($stmt6->execute()) {
+                // Log activity for admin approval with new assignee
+                $approval_action = "Task ID $request_id2 approved with $assignee2 as new assignee.";
+                $reassignment_action = "Task ID $request_id2 reassigned to $assignee2.";
+                logActivity($conn, $_SESSION['accountId'], $approval_action, 'General');
+                logActivity($conn, $_SESSION['accountId'], $reassignment_action, 'General');
+    
+                // Redirect back to the page
+                header("Location: batasan.php");
+    
+                exit();
+            } else {
+                // Error occurred while updating
+                echo "Error updating request: " . $stmt6->error;
+            }
+    
+            // Close statement
+            $stmt6->close();
+        }
+
+
     }
 ?>
 
@@ -791,7 +846,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="pills-feedback" role="tabpanel" aria-labelledby="done-tab">
+                        <div class="tab-pane fade" id="pills-feedback" role="tabpanel" aria-labelledby="feedback-tab">
                             <div class="table-content">
                                 <div class='table-header'>
                                     <table>
@@ -804,6 +859,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                             <th>Assignee</th>
                                             <th>Deadline</th>
                                             <th>Status</th>
+                                            <th></th>
 
                                         </tr>
                                     </table>
@@ -822,7 +878,6 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         echo '<td>' . $row7['assignee'] . '</td>';
                                         echo '<td>' . $row7['deadline'] . '</td>';
                                         $status = $row7['status'];
-
                                         $status_color = '';
 
                                         // Set the color based on the status
@@ -842,8 +897,21 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         }
 
                                         // Output the status with appropriate color
-
                                         echo '<td class="' . $status_color . '">' . $status . '</td>';
+
+                                        // Check if status is "Pending"
+                                        if ($row7['status'] == 'Pending') {
+                                            // Display the button
+                                            echo '<td>';
+                                            echo '<form method="post" action="">';
+                                            echo '<input type="hidden" name="request_id" value="' . $row7['request_id'] . '">';
+                                            echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#ForFeedback">View</button>';
+                                            echo '</form>';
+                                            echo '</td>';
+                                        } else {
+                                            // Otherwise, display an empty cell
+                                            echo '<td></td>';
+                                        }
                                         echo '<td style="display:none;">' . $row7['campus'] . '</td>';
                                         echo '<td style="display:none;">' . $row7['building'] . '</td>';
                                         echo '<td style="display:none;">' . $row7['floor'] . '</td>';
@@ -1052,6 +1120,161 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                             </div>
                         </div>
                         </form>
+
+
+                        <!--MODAL FOR THE APPROVAL-->
+                    <div class="modal-parent">
+                        <div class="modal modal-xl fade" id="ForFeedback" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5>For Approval:</h5>
+
+                                        <button class="btn btn-close-modal-emp close-modal-btn"
+                                            data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="approvalForm" method="post" class="row g-3">
+                                            <div class="col-4" style="display:none;">
+                                                <label for="request_id" class="form-label">Request ID:</label>
+                                                <input type="text" class="form-control" id="request_id"
+                                                    name="request_id" readonly />
+                                            </div>
+                                            <div class="col-4" style="display:none;">
+                                                <label for="date" class="form-label">Date & Time:</label>
+                                                <input type="text" class="form-control" id="date" name="date" />
+                                            </div>
+                                            <div class="col-4" style="display:none;">
+                                                <label for="campus" class="form-label">Campus:</label>
+                                                <input type="text" class="form-control" id="campus" name="campus"
+                                                    value="Batasan" />
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="building" class="form-label">Building:</label>
+                                                <input type="text" class="form-control" id="building" name="building"
+                                                    readonly />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="floor" class="form-label">Floor:</label>
+                                                <input type="text" class="form-control" id="floor" name="floor"
+                                                    readonly />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="room" class="form-label">Room: </label>
+                                                <input type="text" class="form-control" id="room" name="room"
+                                                    readonly />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="equipment" class="form-label">Equipment :</label>
+                                                <input type="text" class="form-control" id="equipment" name="equipment"
+                                                    readonly />
+                                            </div>
+
+                                            <div class="col-4" style="display:none;">
+                                                <label for="req_by" class="form-label">Requested By: </label>
+                                                <input type="text" class="form-control" id="req_by" name="req_by" />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="category" class="form-label">Category:</label>
+                                                <select class="form-select" id="category" name="category"
+                                                    onchange="fetchRandomAssignee()">
+                                                    
+                                                    <option value="Carpentry">Carpentry</option>
+                                                    <option value="Electrical">Electrical</option>
+                                                    <option value="Plumbing">Plumbing</option>
+                                                    <option value="Outsource">Outsource</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Add an empty assignee select element -->
+                                            <div class="col-4">
+                                                <label id="assignee-label" for="assignee"
+                                                    class="form-label">Assignee:</label>
+                                                    <select class="form-select"  id="assignee" name="assignee"></select>
+
+                                                <input type="text" class="form-control" id="assigneeInput"
+                                                    name="assignee" style="display: none;">
+
+                                                <input type="text" class="form-control" id="assigneeInputreal"
+                                                    name="assigneereal" style="display:none;">
+                                            </div>
+
+                                            <div class="col-4" style="display:none;">
+                                                <label for="status" class="form-label">Status:</label>
+                                                <input type="text" class="form-control" value="Pending"
+                                                    id="status_modal" name="status" />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="deadline" class="form-label">Deadline:</label>
+                                                <input type="date" class="form-control" id="deadline" name="deadline" />
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label for="description" class="form-label">Description:</label>
+                                                <input type="text" class="form-control" id="description"
+                                                    name="description" />
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label for="return_reason" class="form-label">Transfer
+                                                    Reason:</label>
+                                                <input type="text" class="form-control" id="return_reason"
+                                                    name="return_reason" readonly />
+                                            </div>
+
+                                        <!-- Add outsource_info field -->
+                                        <div class="col-4" id="outsourceInfoFieldapprove" style="display: none;">
+                                            <label for="outsource_info" class="form-label">Outsource Info:</label>
+                                            <input type="text" class="form-control" id="outsource_info" name="outsource_info" />
+                                        </div>
+
+                                        <!-- JavaScript to toggle visibility based on category selection -->
+                                        <script>
+                                            // Function to show or hide the outsource_info field based on the selected category
+                                            function toggleOutsourceInfoFieldapprove() {
+                                                var category = document.getElementById('category').value;
+                                                var outsourceInfoFieldapprove = document.getElementById('outsourceInfoFieldapprove');
+                                                if (category === 'Outsource') {
+                                                    outsourceInfoFieldapprove.style.display = 'block';
+                                                } else {
+                                                    outsourceInfoFieldapprove.style.display = 'none';
+                                                }
+                                            }
+
+                                            // Call the function initially and add an event listener to the category select element
+                                            toggleOutsourceInfoFieldapprove();
+                                            document.getElementById('category').addEventListener('change', toggleOutsourceInfoFieldapprove);
+                                        </script>
+
+
+
+                                        <div class="col-12" >
+                                            <label for="first_assignee" class="form-label">First Assignee:</label>
+                                            <input type="text" class="form-control" id="first_assignee" name="first_assignee" readonly />
+                                        </div>
+                                        <div class="col-12" >
+                                            <label for="admins_remark" class="form-label">Remarks</label>
+                                            <input type="text" class="form-control" id="admins_remark" name="admins_remark"  />
+                                        </div>
+                                            <div class="footer">
+                                                <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                                    data-bs-target="#ForApprovals" onclick="showApprovalConfirmation()">
+                                                    Save
+                                                </button>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>            
+
+
                     </div>
             </main>
         </section>
@@ -1210,10 +1433,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 });
             });
         </script>
-
-
-
-
+    
 
         <script>
             $(document).ready(function() {
