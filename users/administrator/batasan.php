@@ -1300,7 +1300,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
-                                                <div class="col-12" id="textareaContainer">
+                                                <div class="col-12" id="textareaContainerA">
                                                     <label for="admins_remark" class="form-label">Remarks</label>
                                                     <input type="text" class="form-control" id="admins_remark" name="admins_remark" />
                                                 </div>
@@ -1531,7 +1531,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                     <label for="deadline_done" class="form-label">Deadline:</label>
                                                     <input type="text" class="form-control" id="deadline_done" name="deadline_done" readonly />
                                                 </div>
-                                                <div class="col-12" id="textareaContainer">
+                                                <div class="col-12" id="textareaContainerD">
                                                     <label for="description_done" class="form-label">Description:</label>
                                                     <input type="text" class="form-control" id="description_done" name="description_done" readonly />
                                                 </div>
@@ -1574,7 +1574,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                     <input type="text" class="form-control" id="first_assignee_done" name="first_assignee_done" readonly />
                                                 </div>
 
-                                                <div class="col-12" id="textareaContainer">
+                                                <div class="col-12" id="textareaContainerAD">
                                                     <label for="admins_remark_done" class="form-label">Your
                                                         Remarks:</label>
                                                     <input type="text" class="form-control" id="admins_remark_done" name="admins_remark_done" readonly />
@@ -2072,7 +2072,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             textarea.name = "admins_remark";
 
             // Replace the input element with the textarea element
-            var container = document.getElementById("textareaContainer");
+            var container = document.getElementById("textareaContainerA");
             var inputElement = container.querySelector("input");
             container.replaceChild(textarea, inputElement);
         </script>
@@ -2086,7 +2086,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             textarea.setAttribute("readonly", ""); // Set readonly attribute
 
             // Replace the input element with the textarea element
-            var container = document.getElementById("textareaContainer");
+            var container = document.getElementById("textareaContainerD");
             var inputElement = container.querySelector("input");
             container.replaceChild(textarea, inputElement);
         </script>
@@ -2100,7 +2100,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             textarea.setAttribute("readonly", ""); // Set readonly attribute
 
             // Replace the input element with the textarea element
-            var container = document.getElementById("textareaContainer");
+            var container = document.getElementById("textareaContainerAD");
             var inputElement = container.querySelector("input");
             container.replaceChild(textarea, inputElement);
         </script>
