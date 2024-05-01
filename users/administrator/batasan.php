@@ -1661,13 +1661,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                     name="first_assignee_done" readonly />
                                             </div>
 
-
                                             <div class="col-12">
-                                                <label for="mp_remark_done" class="form-label">Personnel
+                                                <label for="admins_remarks" class="form-label">Personnel
                                                     Remarks:</label>
-                                                <input type="text" class="form-control" id="mp_remark_done"
-                                                    name="mp_remark_done" readonly />
-                                            </div>
+                                                <input type="text" class="form-control" id="admins_remarks"
+                                                    name="admins_remarks" readonly />
+                                            </div> 
+
+                                           
 
                                             <div class="footer">
                                                 <button type="button" class="btn add-modal-btn" data-bs-toggle="modal">
