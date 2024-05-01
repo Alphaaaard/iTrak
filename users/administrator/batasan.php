@@ -1571,8 +1571,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 </div>
 
                                                 <div class="col-12">
-                                                    <label for="admins_remark_done" class="form-label">Remarks:</label>
+                                                    <label for="admins_remark_done" class="form-label">Your Remarks:</label>
                                                     <input type="text" class="form-control" id="admins_remark_done" name="admins_remark_done" readonly />
+                                                </div>
+                                                <div class="col-12">
+                                                    <label for="mp_remark_done" class="form-label">Personnel Remarks:</label>
+                                                    <input type="text" class="form-control" id="mp_remark_done" name="mp_remark_done" readonly />
                                                 </div>
 
                                                 <div class="footer">
