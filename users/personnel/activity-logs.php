@@ -42,11 +42,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
  // Prepare the SQL statement
  $stmtg = $conn->prepare($sqlGeneral);
  
- // Bind the parameters
+ // Bind the parameters para sa pagfetch to ng data sa table
+
  $pattern1 = "Assigned maintenance personnel $loggedInUserFirstName%";
- $pattern2 = "Created and assigned task to $loggedInUserFirstName%";
- $pattern3 = "Changed status of%";
- $pattern4 = "Task ID % reassigned to $loggedInUserFirstName%";
+ $pattern2 = "%Created and assigned task to $loggedInUserFirstName%";
+ $pattern3 = "%Changed status of%";
+ $pattern4 = "%Task ID % reassigned to $loggedInUserFirstName%";
  
  $stmtg->bind_param("ssss", $pattern1, $pattern2, $pattern3, $pattern4);
  $stmtg->execute();
@@ -431,7 +432,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                 ?>
                             </div>
                             <div id="pagination-container-general" class="pagination-container"></div>
-                        </div>
+                        
                         <!-- Report History Tab Content -->
                         <div class="tab-pane fade show active" id="pills-report" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="table-content">
