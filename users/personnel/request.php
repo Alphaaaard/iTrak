@@ -3,8 +3,8 @@ session_start();
 include_once("../../config/connection.php");
 $conn = connection();
 
-require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 date_default_timezone_set('Asia/Manila');
 
@@ -1137,7 +1137,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         </div>
 
                                         <div class="footer" id="transfer-footer">
-                                        <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#ForSaves" onclick="showTransferConfirmation()">
+                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#ForSaves" onclick="showTransferConfirmation()">
                                                 Save
                                             </button>
                                         </div>
@@ -1263,11 +1263,11 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                                     <input type="text" class="form-control" id="personnel_remarks" name="personnel_remarks" />
                                                 </div>
 
-                                            <div class="footer">
-                                            <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#ForApproval" onclick="showApprovalConfirmation()">
-                                                Mark as Done
-                                            </button>
-                                            </div>
+                                                <div class="footer">
+                                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#ForApproval" onclick="showApprovalConfirmation()">
+                                                        Mark as Done
+                                                    </button>
+                                                </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1275,8 +1275,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         </div>
                     </div>
 
-                    <div class="modal fade" id="ForApproval" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="ForApproval" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-footer">
