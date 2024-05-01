@@ -3,6 +3,8 @@ session_start();
 include_once("../../config/connection.php");
 $conn = connection();
 
+require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+
 date_default_timezone_set('Asia/Manila');
 
 
