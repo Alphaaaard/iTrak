@@ -91,7 +91,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     function logActivity($conn, $accountId, $actionDescription, $tabValue)
     {
         // Add 8 hours to the current date
-        $date = date('Y-m-d H:i:s', strtotime('+8 hours'));
+        $date = date('Y-m-d H:i:s', strtotime('+0 hours'));
 
         $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab, seen, m_seen, p_seen) VALUES (?, ?, ?, ?, 1, 1, 1)");
         $stmt->bind_param("isss", $accountId, $date, $actionDescription, $tabValue);
@@ -113,13 +113,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status = $_POST['new_status'];
         $description = $_POST['new_description'];
         $deadline = $_POST['new_deadline'];
+        $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
         $outsource_info = $_POST['new_outsource_info'];
         $first_assignee = $_POST['new_first_assignee'];
         $admins_remark = $_POST['new_admins_remark'];
         $mp_remark = $_POST['new_mp_remark'];
 
         // Calculate the current date plus 8 hours
-        $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
+   
 
         // Insert data into the request table
         $insertQuery = "INSERT INTO request (request_id, campus, building, floor, room, equipment, req_by, category, assignee, status, description, deadline, date, outsource_info, first_assignee, admins_remark, mp_remark)
