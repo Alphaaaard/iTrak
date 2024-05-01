@@ -3,8 +3,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
@@ -1618,7 +1618,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/archive.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
         <script src="../../src/js/logout.js"></script>
-        <script src="../../src/js/sanfranciscopersonnel.js"></script>
+        <script src="../../src/js/sanfranciscoManager.js"></script>
 
         <!-- Cascading Script -->
         <script>
