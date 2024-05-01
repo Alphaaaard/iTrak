@@ -381,8 +381,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 // Log activity for admin approval with new assignee
                 $approval_action = "Changed status of Task ID $request_id2 from Pending to For Approval";
                 $reassignment_action = "Task ID $request_id2 reassigned to $assignee2.";
-                logActivity($conn, $_SESSION['accountId'], $approval_action, 'General');
-                logActivity($conn, $_SESSION['accountId'], $reassignment_action, 'General');
+                insertActivityLog($conn, $_SESSION['accountId'], $approval_action, 'General');
+                insertActivityLog($conn, $_SESSION['accountId'], $reassignment_action, 'General');
             } else {
                 // Error occurred while updating
                 echo "Error updating request: " . $stmt6->error;
