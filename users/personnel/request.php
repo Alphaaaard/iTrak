@@ -9,19 +9,19 @@ require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 date_default_timezone_set('Asia/Manila');
 
 
-function insertActivityLog($conn, $accountId, $action)
+function insertActivityLog($conn, $accountId, $action, $date = null, $tab = "General", $seen = 1, $m_seen = 1, $p_seen = 1)
 {
-    // Set default values for additional columns
-    $tab = "General";
-    $seen = 1;
-    $m_seen = 1;
-    $p_seen = 1;
+    // If $date is not provided, use the current date and time
+    if ($date === null) {
+        $date = date('Y-m-d H:i:s');
+    }
 
-    $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab, seen, m_seen, p_seen) VALUES (?, NOW(), ?, ?, ?, ?, ?)");
-    $stmt->bind_param("issiii", $accountId, $action, $tab, $seen, $m_seen, $p_seen);
+    $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab, seen, m_seen, p_seen) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("issiiii", $accountId, $date, $action, $tab, $seen, $m_seen, $p_seen);
     $stmt->execute();
     $stmt->close();
 }
+
 
 
 
@@ -259,7 +259,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             if ($status_before_update == 'Pending' && $status2 == 'For Approval') {
                 // Log the activity
                 $action = "Changed status of Task ID $request_id2 from Pending to For Approval";
-                insertActivityLog($conn, $accountId, $action);
+                insertActivityLog($conn, $accountId, $action, $date);
             }
 
             // Update successful, redirect back to request.php or any other page
@@ -378,8 +378,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             // Bind parameters
             $stmt6->bind_param("ssssssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $outsource_info2, $first_assignee2, $admins_remark2, $adjusted_date, $request_id2);
             if ($stmt6->execute()) {
-                // Log activity for admin approval with new assignee
-                $approval_action = "Changed status of Task ID $request_id2 from eyl";
+                // Log activity for admin approval with new assignee wala ata to 
+                $approval_action = "Changed status of Task ID $request_id2 from Pending to For Approval";
                 $reassignment_action = "Task ID $request_id2 reassigned to $assignee2.";
                 insertActivityLog($conn, $_SESSION['accountId'], $approval_action, 'General');
                 insertActivityLog($conn, $_SESSION['accountId'], $reassignment_action, 'General');
