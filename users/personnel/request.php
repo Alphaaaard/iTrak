@@ -377,11 +377,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 $reassignment_action = "Task ID $request_id2 reassigned to $assignee2.";
                 logActivity($conn, $_SESSION['accountId'], $approval_action, 'General');
                 logActivity($conn, $_SESSION['accountId'], $reassignment_action, 'General');
-    
-                // Redirect back to the page
-                header("Location: batasan.php");
-    
-                exit();
+
             } else {
                 // Error occurred while updating
                 echo "Error updating request: " . $stmt6->error;
@@ -392,6 +388,36 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         }
 
 
+    }
+
+    // UPDATE FOR APPROVAL
+    if (isset($_POST['feedback'])) {
+        // Retrieve request_id from the form
+        $request_idFeedback = $_POST['request_idFeedback'];
+        $personnel_remarks = $_POST['personnel_remarks'];
+
+        // SQL UPDATE query
+        $sqlfeedback = "UPDATE request SET mp_remark = ? WHERE request_id = ?";
+
+        // Prepare the SQL statement
+        $stmt7 = $conn->prepare($sqlfeedback);
+
+        // Bind parameters
+        $stmt7->bind_param("si", $personnel_remarks, $request_idFeedback);
+
+        // Execute the query
+        if ($stmt7->execute()) {
+            // Update successful, redirect back to batasan.php or any other page
+            // Update successful, redirect back to batasan.php or any other page
+            header("Location: request.php");
+            exit();
+        } else {
+            // Error occurred while updating
+            echo "Error updating request: " . $stmt7->error;
+        }
+
+        // Close statement
+        $stmt7->close();
     }
 ?>
 
@@ -1142,8 +1168,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         <form id="approvalForm" method="post" class="row g-3">
                                             <div class="col-4" style="display:none;">
                                                 <label for="request_id" class="form-label">Request ID:</label>
-                                                <input type="text" class="form-control" id="request_idfeedback"
-                                                    name="request_idfeedback" readonly />
+                                                <input type="text" class="form-control" id="request_idFeedback"
+                                                    name="request_idFeedback" readonly />
                                             </div>
                                             <div class="col-4" style="display:none;">
                                                 <label for="date" class="form-label">Date & Time:</label>
@@ -1240,8 +1266,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                             </div>
 
                                             <div class="footer">
-                                                <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                                    data-bs-target="#ForApprovals" onclick="showFeedbackConfirmation()">
+                                                <button class="btn add-modal-btn" name="feedback" data-bs-dismiss="modal" onclick="showFeedbackConfirmation()">
                                                     Save
                                                 </button>
                                             </div>

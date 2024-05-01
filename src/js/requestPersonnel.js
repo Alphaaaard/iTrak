@@ -93,13 +93,13 @@ function showFeedbackConfirmation() {
   }).then((result) => {
     if (result.isConfirmed) {
       let swalConfirm = document.querySelector(".swal2-confirm");
-      swalConfirm.setAttribute("name", "done");
+      swalConfirm.setAttribute("name", "feedback");
 
       // AJAX
       let form = document.querySelector("#approvalForm");
       let xhr = new XMLHttpRequest();
 
-      xhr.open("POST", "../../users/administrator/batasan.php", true);
+      xhr.open("POST", "../../users/personnel/request.php", true);
 
       xhr.onerror = function () {
         console.error("An error occurred during the XMLHttpRequest");
