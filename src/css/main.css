@@ -7,6 +7,13 @@
   padding: 0;
 }
 
+.btn.disabled,
+.btn:disabled,
+fieldset:disabled .btn {
+  background-color: #1e56a0;
+  border: 1px solid #1e56a0;
+}
+
 span.red-value {
   background-color: red;
   border-radius: 5px;
@@ -23,6 +30,13 @@ span.blue-value {
 
 span.green-value {
   background-color: green;
+  border-radius: 5px;
+  color: white;
+  padding: 0.1em 0.3em;
+}
+
+span.orange-value {
+  background-color: #cccc00;
   border-radius: 5px;
   color: white;
   padding: 0.1em 0.3em;

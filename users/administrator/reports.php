@@ -2537,7 +2537,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <script>
             // Select all <td> elements with the class "red", "blue", or "green"
-            var tdElements = document.querySelectorAll("td.red, td.blue, td.green");
+            var tdElements = document.querySelectorAll("td.red, td.blue, td.green, td.orange");
 
             // Loop through each selected <td> element
             tdElements.forEach(function(tdElement) {
@@ -2557,6 +2557,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     spanElement.classList.add("blue-value");
                 } else if (tdElement.classList.contains("green")) {
                     spanElement.classList.add("green-value");
+                } else if (tdElement.classList.contains("orange")) {
+                    spanElement.classList.add("orange-value");
                 }
 
                 // Replace the text content of the <td> element with the <span> element

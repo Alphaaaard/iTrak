@@ -119,7 +119,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     AND (r.status = 'Pending' AND r.category = 'Outsource') 
     AND a.accountId = ?
     ORDER BY r.date DESC";
-    
+
 
     $stmt07 = $conn->prepare($sql07);
     $stmt07->bind_param("i", $accountId);
@@ -344,7 +344,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         if (isset($_POST['approval'])) {
             // Retrieve request_id from the form
             $request_id2 = $_POST['request_id'];
-    
+
             // Retrieve other form data
             $campus2 = $_POST['campus'];
             $building2 = $_POST['building'];
@@ -361,17 +361,17 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             $admins_remark2 = $_POST['admins_remark'];
             // Calculate the current date plus 8 hours
             $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
-    
+
             // SQL UPDATE query
             $sql6 = "UPDATE request 
             SET campus = ?, building = ?, floor = ?, room = ?, 
                 equipment = ?, category = ?, assignee = ?, 
                 status = ?, description = ?, deadline = ?, outsource_info = ?,first_assignee = ?, admins_remark = ?, date = ?
             WHERE request_id = ?";
-    
+
             // Prepare the SQL statement
             $stmt6 = $conn->prepare($sql6);
-    
+
             // Bind parameters
             $stmt6->bind_param("ssssssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $outsource_info2, $first_assignee2, $admins_remark2, $adjusted_date, $request_id2);
             if ($stmt6->execute()) {
@@ -380,17 +380,14 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                 $reassignment_action = "Task ID $request_id2 reassigned to $assignee2.";
                 logActivity($conn, $_SESSION['accountId'], $approval_action, 'General');
                 logActivity($conn, $_SESSION['accountId'], $reassignment_action, 'General');
-
             } else {
                 // Error occurred while updating
                 echo "Error updating request: " . $stmt6->error;
             }
-    
+
             // Close statement
             $stmt6->close();
         }
-
-
     }
 
     // UPDATE FOR APPROVAL
@@ -760,24 +757,23 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         $status = $row['status'];
 
                                         $status_color = '';
-// Set the color based on the status
-switch ($status) {
-    case 'Pending':
-        $status_color = 'blue';
-        break;
-    case 'Done':
-        $status_color = 'green';
-        break;
-    case 'For Approval':
-        $status_color = 'orange';
-        break;
-    case 'Overdue':
-        $status_color = 'red'; // Choose an appropriate color for Overdue tasks
-        break;
-    default:
-        // Default color if status doesn't match
-        $status_color = 'black';
-
+                                        // Set the color based on the status
+                                        switch ($status) {
+                                            case 'Pending':
+                                                $status_color = 'blue';
+                                                break;
+                                            case 'Done':
+                                                $status_color = 'green';
+                                                break;
+                                            case 'For Approval':
+                                                $status_color = 'orange';
+                                                break;
+                                            case 'Overdue':
+                                                $status_color = 'red'; // Choose an appropriate color for Overdue tasks
+                                                break;
+                                            default:
+                                                // Default color if status doesn't match
+                                                $status_color = 'black';
                                         }
 
                                         // Output the status with appropriate color
@@ -810,8 +806,8 @@ switch ($status) {
                         </div>
 
 
-                         <!-- For FeedBack            -->
-                         <div class="tab-pane fade" id="pills-feedback" role="tabpanel" aria-labelledby="feedback-tab">
+                        <!-- For FeedBack            -->
+                        <div class="tab-pane fade" id="pills-feedback" role="tabpanel" aria-labelledby="feedback-tab">
                             <div class="table-content">
                                 <div class='table-header'>
                                     <table>
@@ -902,7 +898,7 @@ switch ($status) {
                                 }
                                 ?>
                             </div>
-                        </div>            
+                        </div>
 
 
                         <!-- For Done         -->
@@ -1168,133 +1164,118 @@ switch ($status) {
 
 
                         <!--MODAL FOR THE FEEDBACK-->
-                    <div class="modal-parent">
-                        <div class="modal modal-xl fade" id="ForFeedback" tabindex="-1"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5>Feedback:</h5>
+                        <div class="modal-parent">
+                            <div class="modal modal-xl fade" id="ForFeedback" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5>Feedback:</h5>
 
-                                        <button class="btn btn-close-modal-emp close-modal-btn"
-                                            data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form id="approvalForm" method="post" class="row g-3">
-                                            <div class="col-4" style="display:none;">
-                                                <label for="request_id" class="form-label">Request ID:</label>
-                                                <input type="text" class="form-control" id="request_idFeedback"
-                                                    name="request_idFeedback" readonly />
-                                            </div>
-                                            <div class="col-4" style="display:none;">
-                                                <label for="date" class="form-label">Date & Time:</label>
-                                                <input type="text" class="form-control" id="date" name="date" />
-                                            </div>
-                                            <div class="col-4" style="display:none;">
-                                                <label for="campus" class="form-label">Campus:</label>
-                                                <input type="text" class="form-control" id="campus" name="campus"
-                                                    value="Batasan" />
-                                            </div>
-                                            <div class="col-4">
-                                                <label for="building" class="form-label">Building:</label>
-                                                <input type="text" class="form-control" id="buildingFeedback" name="buildingFeedback"
-                                                    readonly />
-                                            </div>
+                                            <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="approvalForm" method="post" class="row g-3">
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="request_id" class="form-label">Request ID:</label>
+                                                    <input type="text" class="form-control" id="request_idFeedback" name="request_idFeedback" readonly />
+                                                </div>
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="date" class="form-label">Date & Time:</label>
+                                                    <input type="text" class="form-control" id="date" name="date" />
+                                                </div>
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="campus" class="form-label">Campus:</label>
+                                                    <input type="text" class="form-control" id="campus" name="campus" value="Batasan" />
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="building" class="form-label">Building:</label>
+                                                    <input type="text" class="form-control" id="buildingFeedback" name="buildingFeedback" readonly />
+                                                </div>
 
-                                            <div class="col-4">
-                                                <label for="floor" class="form-label">Floor:</label>
-                                                <input type="text" class="form-control" id="floorFeedback" name="floorFeedback"
-                                                    readonly />
-                                            </div>
+                                                <div class="col-4">
+                                                    <label for="floor" class="form-label">Floor:</label>
+                                                    <input type="text" class="form-control" id="floorFeedback" name="floorFeedback" readonly />
+                                                </div>
 
-                                            <div class="col-4">
-                                                <label for="room" class="form-label">Room: </label>
-                                                <input type="text" class="form-control" id="roomFeedback" name="roomFeedback"
-                                                    readonly />
-                                            </div>
+                                                <div class="col-4">
+                                                    <label for="room" class="form-label">Room: </label>
+                                                    <input type="text" class="form-control" id="roomFeedback" name="roomFeedback" readonly />
+                                                </div>
 
-                                            <div class="col-4">
-                                                <label for="equipment" class="form-label">Equipment :</label>
-                                                <input type="text" class="form-control" id="equipmentFeedback" name="equipmentFeedback"
-                                                    readonly />
-                                            </div>
+                                                <div class="col-4">
+                                                    <label for="equipment" class="form-label">Equipment :</label>
+                                                    <input type="text" class="form-control" id="equipmentFeedback" name="equipmentFeedback" readonly />
+                                                </div>
 
-                                            <div class="col-4" style="display:none;">
-                                                <label for="req_by" class="form-label">Requested By: </label>
-                                                <input type="text" class="form-control" id="req_by" name="req_by" />
-                                            </div>
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="req_by" class="form-label">Requested By: </label>
+                                                    <input type="text" class="form-control" id="req_by" name="req_by" />
+                                                </div>
 
-                                            <div class="col-4">
-                                                <label for="category" class="form-label">Category:</label>
-                                                <input type="text" class="form-control" id="categoryFeedback"
-                                                    name="categoryFeedback" readonly />
-                                            </div>
+                                                <div class="col-4">
+                                                    <label for="category" class="form-label">Category:</label>
+                                                    <input type="text" class="form-control" id="categoryFeedback" name="categoryFeedback" readonly />
+                                                </div>
 
-                                            <div class="col-4">
-                                                <label for="assignee" class="form-label">Assignee:</label>
-                                                <input type="text" class="form-control" id="AssigneeFeedback"
-                                                    name="AssigneeFeedback" readonly />
-                                            </div>
+                                                <div class="col-4">
+                                                    <label for="assignee" class="form-label">Assignee:</label>
+                                                    <input type="text" class="form-control" id="AssigneeFeedback" name="AssigneeFeedback" readonly />
+                                                </div>
 
-                                            <div class="col-4" style="display:none;">
-                                                <label for="status" class="form-label">Status:</label>
-                                                <input type="text" class="form-control" value="Pending"
-                                                    id="status_modal" name="status" />
-                                            </div>
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="status" class="form-label">Status:</label>
+                                                    <input type="text" class="form-control" value="Pending" id="status_modal" name="status" />
+                                                </div>
 
-                                            <div class="col-4">
-                                                <label for="deadline" class="form-label">Deadline:</label>
-                                                <input type="text" class="form-control" id="deadlineFeedback" name="deadlineFeedback" readonly />
-                                            </div>
+                                                <div class="col-4">
+                                                    <label for="deadline" class="form-label">Deadline:</label>
+                                                    <input type="text" class="form-control" id="deadlineFeedback" name="deadlineFeedback" readonly />
+                                                </div>
 
-                                            <div class="col-4">
-                                                <label for="outsource_info" class="form-label">Outsource Info:</label>
-                                                <input type="text" class="form-control" id="outsource_info" name="outsource_info" readonly />
-                                            </div>
+                                                <div class="col-4">
+                                                    <label for="outsource_info" class="form-label">Outsource Info:</label>
+                                                    <input type="text" class="form-control" id="outsource_info" name="outsource_info" readonly />
+                                                </div>
 
-                                            <div class="col-4">
-                                                <label for="return_reason" class="form-label">Transfer
-                                                    Reason:</label>
-                                                <input type="text" class="form-control" id="return_reasonFeedback"
-                                                    name="return_reasonFeedback" readonly />
-                                            </div>
+                                                <div class="col-4">
+                                                    <label for="return_reason" class="form-label">Transfer
+                                                        Reason:</label>
+                                                    <input type="text" class="form-control" id="return_reasonFeedback" name="return_reasonFeedback" readonly />
+                                                </div>
 
-                                            <div class="col-12">
-                                                <label for="description" class="form-label">Description:</label>
-                                                <input type="text" class="form-control" id="descriptionFeedback"
-                                                    name="descriptionFeedback" readonly />
-                                            </div>
+                                                <div class="col-12">
+                                                    <label for="description" class="form-label">Description:</label>
+                                                    <input type="text" class="form-control" id="descriptionFeedback" name="descriptionFeedback" readonly />
+                                                </div>
 
-                                            <div class="col-12" style="display:none;" >
-                                                <label for="first_assignee" class="form-label">First Assignee:</label>
-                                                <input type="text" class="form-control" id="first_assignee" name="first_assignee" readonly />
-                                            </div>
+                                                <div class="col-12" style="display:none;">
+                                                    <label for="first_assignee" class="form-label">First Assignee:</label>
+                                                    <input type="text" class="form-control" id="first_assignee" name="first_assignee" readonly />
+                                                </div>
 
-                                            <div class="col-12" >
-                                                <label for="admins_remark" class="form-label">Admin Remarks</label>
-                                                <input type="text" class="form-control" id="admins_remark" name="admins_remark"  readonly />
-                                            </div>
+                                                <div class="col-12">
+                                                    <label for="admins_remark" class="form-label">Admin Remarks</label>
+                                                    <input type="text" class="form-control" id="admins_remark" name="admins_remark" readonly />
+                                                </div>
 
-                                            <div class="col-12" >
-                                                <label for="admins_remark" class="form-label">Your Remarks</label>
-                                                <input type="text" class="form-control" id="personnel_remarks" name="personnel_remarks" />
-                                            </div>
+                                                <div class="col-12">
+                                                    <label for="admins_remark" class="form-label">Your Remarks</label>
+                                                    <input type="text" class="form-control" id="personnel_remarks" name="personnel_remarks" />
+                                                </div>
 
-                                            <div class="footer">
-                                                <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                                    data-bs-target="#ForSave">
-                                                    Mark As Done
-                                                </button>
-                                            </div>
+                                                <div class="footer">
+                                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#ForSave">
+                                                        Mark As Done
+                                                    </button>
+                                                </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>            
+                        </div>
                     </div>
 
-                    <div class="modal fade" id="ForSave" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="ForSave" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-footer">
@@ -1306,10 +1287,10 @@ switch ($status) {
                                 </div>
                             </div>
                         </div>
-                    </div>                
+                    </div>
 
-                </main>
-            </section>
+            </main>
+        </section>
 
         <!-- PROFILE MODALS -->
         <?php include_once 'modals/modal_layout.php'; ?>
@@ -1430,9 +1411,9 @@ switch ($status) {
             });
         </script>
 
-                <!--PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
-            <script>
-            $(document).ready(function () {
+        <!--PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
+        <script>
+            $(document).ready(function() {
                 // Function to populate modal fields
                 function populateModalFeedback(row) {
                     // Populate modal fields with data from the row
@@ -1460,14 +1441,14 @@ switch ($status) {
                 }
 
                 // Click event for the "Approve" button
-                $("button[data-bs-target='#ForFeedback']").click(function () {
+                $("button[data-bs-target='#ForFeedback']").click(function() {
                     var row = $(this).closest("tr"); // Get the closest row to the clicked button
                     populateModalFeedback(row); // Populate modal fields with data from the row
                     $("#ForFeedback").modal("show"); // Show the modal
                 });
             });
         </script>
-    
+
 
         <script>
             $(document).ready(function() {
@@ -1720,7 +1701,7 @@ switch ($status) {
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <script>
             // Select all <td> elements with the class "red", "blue", or "green"
-            var tdElements = document.querySelectorAll("td.red, td.blue, td.green");
+            var tdElements = document.querySelectorAll("td.red, td.blue, td.green, td.orange");
 
             // Loop through each selected <td> element
             tdElements.forEach(function(tdElement) {
@@ -1740,6 +1721,8 @@ switch ($status) {
                     spanElement.classList.add("blue-value");
                 } else if (tdElement.classList.contains("green")) {
                     spanElement.classList.add("green-value");
+                } else if (tdElement.classList.contains("orange")) {
+                    spanElement.classList.add("orange-value");
                 }
 
                 // Replace the text content of the <td> element with the <span> element

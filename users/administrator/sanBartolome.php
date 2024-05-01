@@ -3,8 +3,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
@@ -58,22 +58,29 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->fetch();
     $stmt->close();
 
+    // SQL query to retrieve tasks for the San Bartolome campus
     $sql = "SELECT * FROM request 
-    WHERE campus = 'San Bartolome' 
-    AND (status IN ('Pending','For Approval','Overdue') OR (status = 'Overdue' AND deadline < CURDATE()))
-    AND category != 'Outsource' 
-    ORDER BY date DESC";
-
+        WHERE campus = 'San Bartolome' 
+        AND (status IN ('Pending', 'For Approval', 'Overdue') OR 
+             (status = 'Overdue' AND deadline < CURDATE() AND deadline IS NOT NULL AND deadline != '0000-00-00'))
+        AND category != 'Outsource' 
+        ORDER BY date DESC";
     $result = $conn->query($sql) or die($conn->error);
 
-
+    // SQL query to retrieve tasks for the San Bartolome campus with category 'Outsource'
     $sql2 = "SELECT * FROM request 
-    WHERE campus = 'San Bartolome' 
-    AND (status IN ('Pending','Overdue') OR (status = 'Overdue' AND deadline < CURDATE()))
-    AND category = 'Outsource' ORDER BY date DESC";
+         WHERE campus = 'San Bartolome' 
+         AND (status IN ('Pending', 'Overdue') OR 
+              (status = 'Overdue' AND deadline < CURDATE() AND deadline IS NOT NULL AND deadline != '0000-00-00'))
+         AND category = 'Outsource' 
+         ORDER BY date DESC";
     $result2 = $conn->query($sql2) or die($conn->error);
 
-    $sql4 = "SELECT * FROM request WHERE campus = 'San Bartolome' AND status = 'Done' ORDER BY date DESC";
+    // SQL query to retrieve tasks for the San Bartolome campus that are 'Done'
+    $sql4 = "SELECT * FROM request 
+         WHERE campus = 'San Bartolome' 
+         AND status = 'Done' 
+         ORDER BY date DESC";
     $result4 = $conn->query($sql4) or die($conn->error);
 
 
@@ -287,22 +294,25 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     sendDeadlineNotifications($conn);
 
 
-// Function to update status to "Overdue" for tasks with overdue deadlines
-function updatePastDueTasks($conn)
-{
-    // Get today's date
-    $today = date('Y-m-d');
+    // Function to update status to "Overdue" for tasks with overdue deadlines
+    function updateOverdueTasks($conn)
+    {
+        // Get today's date
+        $today = date('Y-m-d');
 
-    // SQL query to update status for overdue tasks
-    $sql = "UPDATE request SET status = 'Overdue' WHERE deadline < ? AND status != 'Done'";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $today);
-    $stmt->execute();
-    $stmt->close();
-}
+        // SQL query to update status for overdue tasks
+        $sql = "UPDATE request SET status = 'Overdue' WHERE deadline < ? AND deadline IS NOT NULL AND deadline != '0000-00-00' AND status != 'Done'";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param(
+            "s",
+            $today
+        );
+        $stmt->execute();
+        $stmt->close();
+    }
 
-// Call the function to update Overdue tasks
-updatePastDueTasks($conn);
+    // Call the function to update overdue tasks
+    updateOverdueTasks($conn);
 
 
 
@@ -702,27 +712,27 @@ updatePastDueTasks($conn);
                                         $status = $row['status'];
                                         $status_color = '';
 
-                                       // Set the color based on the status
-                                    switch ($status) {
-                                        case 'Pending':
-                                            $status_color = 'blue';
-                                            break;
-                                        case 'Done':
-                                            $status_color = 'green';
-                                            break;
-                                        case 'For Approval':
-                                            $status_color = 'orange';
-                                            break;
-                                        case 'Overdue':
-                                            $status_color = 'red'; // Choose an appropriate color for Overdue tasks
-                                            break;
-                                        default:
-                                            // Default color if status doesn't match
-                                            $status_color = 'black';
-                                    }
+                                        // Set the color based on the status
+                                        switch ($status) {
+                                            case 'Pending':
+                                                $status_color = 'blue';
+                                                break;
+                                            case 'Done':
+                                                $status_color = 'green';
+                                                break;
+                                            case 'For Approval':
+                                                $status_color = 'orange';
+                                                break;
+                                            case 'Overdue':
+                                                $status_color = 'red'; // Choose an appropriate color for Overdue tasks
+                                                break;
+                                            default:
+                                                // Default color if status doesn't match
+                                                $status_color = 'black';
+                                        }
 
-                                    // Output the status with appropriate color
-                                    echo '<td style="color: ' . $status_color . ';">' . $status . '</td>';
+                                        // Output the status with appropriate color
+                                        echo '<td class="' . $status_color . '">' . $status . '</td>';
 
                                         // Check if status is "For Approval"
                                         if ($row['status'] == 'For Approval') {
@@ -781,20 +791,21 @@ updatePastDueTasks($conn);
                                     echo "<div class='table-container'>";
                                     echo "<table>";
                                     while ($row2 = $result2->fetch_assoc()) {
-                                    // Check if the status is "Overdue"
-                                    $status2 = $row2['status'];
-                                    $row_class2 = ($status2 == 'Overdue') ? 'past-due-row' : '';
-                                    echo '<tr class="' . $row_class2 . '">';
-                                    echo '<td style="color: ' . (($status2 == 'Overdue') ? 'red' : 'black') . ';">' . $row2['request_id'] . '</td>';
-                                    echo '<td style="color: ' . (($status2 == 'Overdue') ? 'red' : 'black') . ';">' . $row2['date'] . '</td>';
-                                    echo '<td style="color: ' . (($status2 == 'Overdue') ? 'red' : 'black') . ';">' . $row2['category'] . '</td>';
-                                    echo '<td style="color: ' . (($status2 == 'Overdue') ? 'red' : 'black') . ';">' . $row2['building'] . ', ' . $row2['floor'] . ', ' . $row2['room'] . '</td>';
-                                    echo '<td style="color: ' . (($status2 == 'Overdue') ? 'red' : 'black') . ';">' . $row2['equipment'] . '</td>';
-                                    echo '<td style="color: ' . (($status2 == 'Overdue') ? 'red' : 'black') . ';">' . $row2['assignee'] . '</td>';
-                                    echo '<td style="color: ' . (($status2 == 'Overdue') ? 'red' : 'black') . ';">' . $row2['deadline'] . '</td>';
-                                    $status = $row2['status'];
-                                    $status_color = '';
+                                        // Check if the status is "Overdue"
+                                        $status2 = $row2['status'];
+                                        $row_class2 = ($status2 == 'Overdue') ? 'past-due-row' : '';
+                                        echo '<tr class="' . $row_class2 . '">';
+                                        echo '<td style="color: ' . (($status2 == 'Overdue') ? 'red' : 'black') . ';">' . $row2['request_id'] . '</td>';
+                                        echo '<td style="color: ' . (($status2 == 'Overdue') ? 'red' : 'black') . ';">' . $row2['date'] . '</td>';
+                                        echo '<td style="color: ' . (($status2 == 'Overdue') ? 'red' : 'black') . ';">' . $row2['category'] . '</td>';
+                                        echo '<td style="color: ' . (($status2 == 'Overdue') ? 'red' : 'black') . ';">' . $row2['building'] . ', ' . $row2['floor'] . ', ' . $row2['room'] . '</td>';
+                                        echo '<td style="color: ' . (($status2 == 'Overdue') ? 'red' : 'black') . ';">' . $row2['equipment'] . '</td>';
+                                        echo '<td style="color: ' . (($status2 == 'Overdue') ? 'red' : 'black') . ';">' . $row2['assignee'] . '</td>';
+                                        echo '<td style="color: ' . (($status2 == 'Overdue') ? 'red' : 'black') . ';">' . $row2['deadline'] . '</td>';
+                                        $status = $row2['status'];
+                                        $status_color = '';
 
+                                        // Set the color based on the status
                                         // Set the color based on the status
                                         switch ($status) {
                                             case 'Pending':
@@ -804,7 +815,10 @@ updatePastDueTasks($conn);
                                                 $status_color = 'green';
                                                 break;
                                             case 'For Approval':
-                                                $status_color = 'red';
+                                                $status_color = 'orange';
+                                                break;
+                                            case 'Overdue':
+                                                $status_color = 'red'; // Choose an appropriate color for Overdue tasks
                                                 break;
                                             default:
                                                 // Default color if status doesn't match
@@ -836,23 +850,23 @@ updatePastDueTasks($conn);
                                         echo '<td style="display:none;">' . $row2['req_by'] . '</td>';
                                         echo '<td style="display:none;">' . $row2['return_reason'] . '</td>';
                                         echo '<td style="display:none;">' . $row2['outsource_info'] . '</td>';
-                                    echo '<td style="display:none;">' . $row2['first_assignee'] . '</td>';
-                                    echo '<td style="display:none;">' . $row2['admins_remark'] . '</td>';
-                                    echo '<td></td>';
-                                    echo '</tr>';
+                                        echo '<td style="display:none;">' . $row2['first_assignee'] . '</td>';
+                                        echo '<td style="display:none;">' . $row2['admins_remark'] . '</td>';
+                                        echo '<td></td>';
+                                        echo '</tr>';
+                                    }
+                                    echo "</table>";
+                                    echo "</div>";
+                                } else {
+                                    echo '<table>';
+                                    echo "<div class=noDataImgH>";
+                                    echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
+                                    echo "</div>";
+                                    echo '</table>';
                                 }
-                                echo "</table>";
-                                echo "</div>";
-                            } else {
-                                echo '<table>';
-                                echo "<div class=noDataImgH>";
-                                echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
-                                echo "</div>";
-                                echo '</table>';
-                            }
-                            ?>
+                                ?>
+                            </div>
                         </div>
-                    </div>
 
                         <div class="tab-pane fade" id="pills-done" role="tabpanel" aria-labelledby="done-tab">
                             <div class="table-content">
@@ -1788,9 +1802,9 @@ updatePastDueTasks($conn);
             });
         </script>
 
-<script>
+        <script>
             // Select all <td> elements with the class "red", "blue", or "green"
-            var tdElements = document.querySelectorAll("td.red, td.blue, td.green");
+            var tdElements = document.querySelectorAll("td.red, td.blue, td.green, td.orange");
 
             // Loop through each selected <td> element
             tdElements.forEach(function(tdElement) {
@@ -1810,6 +1824,8 @@ updatePastDueTasks($conn);
                     spanElement.classList.add("blue-value");
                 } else if (tdElement.classList.contains("green")) {
                     spanElement.classList.add("green-value");
+                } else if (tdElement.classList.contains("orange")) {
+                    spanElement.classList.add("orange-value");
                 }
 
                 // Replace the text content of the <td> element with the <span> element
