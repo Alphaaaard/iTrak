@@ -432,7 +432,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                 ?>
                             </div>
                             <div id="pagination-container-general" class="pagination-container"></div>
-                        
+                            </div>
                         <!-- Report History Tab Content -->
                         <div class="tab-pane fade show active" id="pills-report" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="table-content">
