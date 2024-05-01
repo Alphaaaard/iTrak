@@ -91,7 +91,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     function logActivity($conn, $accountId, $actionDescription, $tabValue)
     {
         // Add 8 hours to the current date
-        $date = date('Y-m-d H:i:s', strtotime('+0 hours'));
+        $date = date('Y-m-d H:i:s', strtotime('+8 hours'));
 
         $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab, seen, m_seen, p_seen) VALUES (?, ?, ?, ?, 1, 1, 1)");
         $stmt->bind_param("isss", $accountId, $date, $actionDescription, $tabValue);
