@@ -3,8 +3,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once ("../../config/connection.php");
@@ -1578,7 +1578,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             <div class="col-4">
                                                 <label for="category_done" class="form-label">Category:</label>
                                                 <input type="text" class="form-control" id="category_done"
-                                                    name="category_done" />
+                                                    name="category_done" readonly />
 
                                             </div>
 
@@ -1588,7 +1588,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 <label id="assignee-label" for="assignee_done"
                                                     class="form-label">Assignee:</label>
                                                 <input type="text" class="form-control" id="assignee_done"
-                                                    name="assignee_done" />
+                                                    name="assignee_done"  readonly />
 
 
                                                 <input type="text" class="form-control" id="assigneeInput_done"
@@ -1607,12 +1607,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             <div class="col-4">
                                                 <label for="deadline_done" class="form-label">Deadline:</label>
                                                 <input type="text" class="form-control" id="deadline_done"
-                                                    name="deadline_done" />
+                                                    name="deadline_done" readonly />
                                             </div>
                                             <div class="col-12">
                                                 <label for="description_done" class="form-label">Description:</label>
                                                 <input type="text" class="form-control" id="description_done"
-                                                    name="description_done" />
+                                                    name="description_done" readonly />
                                             </div>
 
                                             <div class="col-12">
@@ -1660,7 +1660,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             <div class="col-12">
                                                 <label for="admins_remark_done" class="form-label">Remarks:</label>
                                                 <input type="text" class="form-control" id="admins_remark_done"
-                                                    name="admins_remark_done" />
+                                                    name="admins_remark_done"  readonly/>
                                             </div>
 
                                             <div class="footer">
