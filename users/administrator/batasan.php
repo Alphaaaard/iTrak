@@ -30,6 +30,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
 
     $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
+    $nomiddlename = $loggedInUserFirstName . ' ' . $loggedInUserLastName;
     $loggedInAccountId = $_SESSION['accountId'];
     // SQL query to fetch notifications related to report activities
     $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
@@ -127,7 +128,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         if ($stmt->execute()) {
             // Log activity for task creation and assignment
-            $action = "Created and assigned task to $assignee";
+            $action = "$nomiddlename Created and assigned task to $assignee.";
             logActivity($conn, $_SESSION['accountId'], $action, 'General');
 
             // Redirect to the desired page
@@ -175,7 +176,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $stmt3->bind_param("ssssssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $outsource_info2, $first_assignee2, $admins_remark2, $adjusted_date, $request_id2);
         if ($stmt3->execute()) {
             // Log activity for admin approval with new assignee
-            $approval_action = "Task ID $request_id2 approved with $assignee2 as new assignee.";
+            $approval_action = "$nomiddlename approved Task ID $request_id2 with $assignee2 as new assignee.";
             $reassignment_action = "Task ID $request_id2 reassigned to $assignee2.";
             logActivity($conn, $_SESSION['accountId'], $approval_action, 'General');
             logActivity($conn, $_SESSION['accountId'], $reassignment_action, 'General');
@@ -221,7 +222,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         // Execute the query
         if ($stmt4->execute()) {
             // Log activity for admin approval with outsource as new assignee
-            $action4 = "Task ID $request_id4 approved with Outsource ($assignee4) as new assignee.";
+            $action4 = "$nomiddlename change the status of $request_id4  as Completed.";
 
             logActivity($conn, $_SESSION['accountId'], $action4, 'General');
 
@@ -1086,19 +1087,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 <input type="text" class="form-control" value="Pending" id="new_status"
                                                     name="new_status" />
                                             </div>
-
-                                            <div class="col-4">
-                                                <label for="new_deadline" class="form-label">Deadline:</label>
-                                                <input type="date" class="form-control" id="new_deadline"
-                                                    name="new_deadline" />
-                                            </div>
-
-                                            <div class="col-12">
-                                                <label for="new_description" class="form-label">Description:</label>
-                                                <input type="text" class="form-control" id="new_description"
-                                                    name="new_description" />
-                                            </div>
-                                            <div class="col-4" style="display:none;" id="outsourceInfoField">
+  <div class="col-4" style="display:none;" id="outsourceInfoField">
     <label for="new_outsource_info" class="form-label">Outsource Info:</label>
     <input type="text" class="form-control" id="new_outsource_info" name="new_outsource_info" />
 </div>
@@ -1119,6 +1108,19 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     document.getElementById('new_category').addEventListener('change', toggleOutsourceInfoField);
 </script>
 
+                                          <div class="col-md-4 offset-md-4">
+        <!-- Deadline textbox on the right -->
+        <label for="new_deadline" class="form-label text-end">Deadline:</label>
+        <input type="date" class="form-control" id="new_deadline" name="new_deadline" />
+    </div>
+
+
+                                            <div class="col-12">
+                                                <label for="new_description" class="form-label">Description:</label>
+                                                <input type="text" class="form-control" id="new_description"
+                                                    name="new_description" />
+                                            </div>
+                                          
 <div class="col-4" style="display:none;">
             <label for="new_first_assignee" class="form-label">First Assignee:</label>
             <input type="text" class="form-control" id="new_first_assignee" name="new_first_assignee" />
