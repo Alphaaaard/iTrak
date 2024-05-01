@@ -379,7 +379,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             $stmt6->bind_param("ssssssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $outsource_info2, $first_assignee2, $admins_remark2, $adjusted_date, $request_id2);
             if ($stmt6->execute()) {
                 // Log activity for admin approval with new assignee
-                $approval_action = "Changed status of Task ID $request_id2 from Pending to For Approval";
+                $approval_action = "Changed status of Task ID $request_id2 from eyl";
                 $reassignment_action = "Task ID $request_id2 reassigned to $assignee2.";
                 insertActivityLog($conn, $_SESSION['accountId'], $approval_action, 'General');
                 insertActivityLog($conn, $_SESSION['accountId'], $reassignment_action, 'General');
