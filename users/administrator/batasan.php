@@ -1564,7 +1564,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
-                                                <div class="col-12">
+                                                <div class="col-12" style="display:none;">
                                                     <label for="first_assignee_done" class="form-label">First
                                                         Assignee:</label>
                                                     <input type="text" class="form-control" id="first_assignee_done" name="first_assignee_done" readonly />
