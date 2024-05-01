@@ -920,6 +920,9 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         echo '<td style="display:none;">' . $row7['req_by'] . '</td>';
                                         echo '<td style="display:none;">' . $row7['return_reason'] . '</td>';
                                         echo '<td style="display:none;">' . $row7['admins_remark'] . '</td>';
+                                        echo '<td style="display:none;">' . $row7['outsource_info'] . '</td>';
+                                        echo '<td style="display:none;">' . $row7['first_assignee'] . '</td>';
+                                        echo '<td style="display:none;">' . $row7['mp_remark'] . '</td>';
                                         echo '<td></td>';
                                         echo '</tr>';
                                     }
@@ -1165,7 +1168,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
                                             <div class="col-4">
                                                 <label for="room" class="form-label">Room: </label>
-                                                <input type="text" class="form-control" id="room" name="roomFeedback"
+                                                <input type="text" class="form-control" id="roomFeedback" name="roomFeedback"
                                                     readonly />
                                             </div>
 
@@ -1204,74 +1207,52 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                             </div>
 
                                             <div class="col-4">
-                                                <label for="deadline" class="form-label">Outsource Info:</label>
-                                                <input type="text" class="form-control" id="Outsourceinfo" name="Outsourceinfo" readonly />
+                                                <label for="outsource_info" class="form-label">Outsource Info:</label>
+                                                <input type="text" class="form-control" id="outsource_info" name="outsource_info" readonly />
                                             </div>
 
+                                            <div class="col-4">
+                                                <label for="return_reason" class="form-label">Transfer
+                                                    Reason:</label>
+                                                <input type="text" class="form-control" id="return_reasonFeedback"
+                                                    name="return_reasonFeedback" readonly />
+                                            </div>
 
                                             <div class="col-12">
                                                 <label for="description" class="form-label">Description:</label>
-                                                <input type="text" class="form-control" id="description"
-                                                    name="description" />
+                                                <input type="text" class="form-control" id="descriptionFeedback"
+                                                    name="descriptionFeedback" readonly />
                                             </div>
 
-                                            <div class="col-12">
-                                                <label for="return_reason" class="form-label">Transfer
-                                                    Reason:</label>
-                                                <input type="text" class="form-control" id="return_reason"
-                                                    name="return_reason" readonly />
+                                            <div class="col-12" >
+                                                <label for="first_assignee" class="form-label">First Assignee:</label>
+                                                <input type="text" class="form-control" id="first_assignee" name="first_assignee" readonly />
                                             </div>
 
-                                        <!-- Add outsource_info field -->
-                                        <div class="col-4" id="outsourceInfoFieldapprove" style="display: none;">
-                                            <label for="outsource_info" class="form-label">Outsource Info:</label>
-                                            <input type="text" class="form-control" id="outsource_info" name="outsource_info" />
-                                        </div>
+                                            <div class="col-12" >
+                                                <label for="admins_remark" class="form-label">Admin Remarks</label>
+                                                <input type="text" class="form-control" id="admins_remark" name="admins_remark"  readonly />
+                                            </div>
 
-                                        <!-- JavaScript to toggle visibility based on category selection -->
-                                        <script>
-                                            // Function to show or hide the outsource_info field based on the selected category
-                                            function toggleOutsourceInfoFieldapprove() {
-                                                var category = document.getElementById('category').value;
-                                                var outsourceInfoFieldapprove = document.getElementById('outsourceInfoFieldapprove');
-                                                if (category === 'Outsource') {
-                                                    outsourceInfoFieldapprove.style.display = 'block';
-                                                } else {
-                                                    outsourceInfoFieldapprove.style.display = 'none';
-                                                }
-                                            }
+                                            <div class="col-12" >
+                                                <label for="admins_remark" class="form-label">Your Remarks</label>
+                                                <input type="text" class="form-control" id="personnel_remarks" name="personnel_remarks" />
+                                            </div>
 
-                                            // Call the function initially and add an event listener to the category select element
-                                            toggleOutsourceInfoFieldapprove();
-                                            document.getElementById('category').addEventListener('change', toggleOutsourceInfoFieldapprove);
-                                        </script>
-
-
-
-                                        <div class="col-12" >
-                                            <label for="first_assignee" class="form-label">First Assignee:</label>
-                                            <input type="text" class="form-control" id="first_assignee" name="first_assignee" readonly />
-                                        </div>
-                                        <div class="col-12" >
-                                            <label for="admins_remark" class="form-label">Remarks</label>
-                                            <input type="text" class="form-control" id="admins_remark" name="admins_remark"  />
-                                        </div>
                                             <div class="footer">
                                                 <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                                    data-bs-target="#ForApprovals" onclick="showApprovalConfirmation()">
+                                                    data-bs-target="#ForApprovals" onclick="showFeedbackConfirmation()">
                                                     Save
                                                 </button>
                                             </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>            
-
-
+                        </div>            
                     </div>
-            </main>
-        </section>
+                </main>
+            </section>
 
         <!-- PROFILE MODALS -->
         <?php include_once 'modals/modal_layout.php'; ?>
@@ -1410,21 +1391,15 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     $("#AssigneeFeedback").val(row.find("td:eq(5)").text());
                     $("#status").val(row.find("td:eq(6)").text());
                     $("#deadlineFeedback").val(row.find("td:eq(1)").text());
-                    $("#description").val(row.find("td:eq(13)").text());
-                    $("#return_reason").val(row.find("td:eq(15)").text());
+                    $("#descriptionFeedback").val(row.find("td:eq(13)").text());
+                    $("#return_reasonFeedback").val(row.find("td:eq(15)").text());
 
-                    // Check if return_reason has a value
-                    if (row.find("td:eq(15)").text().trim() !== '') {
-                        $("#return_reason").closest('.col-12').show(); // Show the div if there's a value
-                    } else {
-                        $("#return_reason").closest('.col-12').hide(); // Hide the div if there's no value
-                    }
 
                     // Additional fields
-                    $("#outsource_info").val(row.find("td:eq(16)").text());
-                    $("#first_assignee").val(row.find("td:eq(17)").text());
-                    $("#admins_remark").val(row.find("td:eq(18)").text());
-                    $("#mp_remark").val(row.find("td:eq(19)").text());
+                    $("#outsource_info").val(row.find("td:eq(17)").text());
+                    $("#first_assignee").val(row.find("td:eq(18)").text());
+                    $("#admins_remark").val(row.find("td:eq(16)").text());
+                    $("#personnel_remarks").val(row.find("td:eq(19)").text());
                 }
 
                 // Click event for the "Approve" button
