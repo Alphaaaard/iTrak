@@ -23,6 +23,9 @@ function insertActivityLog($conn, $accountId, $action)
     $stmt->close();
 }
 
+
+
+
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
     // For personnel page, check if userLevel is 3
     if ($_SESSION['userLevel'] != 3) {
@@ -376,7 +379,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             $stmt6->bind_param("ssssssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $outsource_info2, $first_assignee2, $admins_remark2, $adjusted_date, $request_id2);
             if ($stmt6->execute()) {
                 // Log activity for admin approval with new assignee
-                $approval_action = "Task ID $request_id2 approved with $assignee2 as new assignee.";
+                $approval_action = "Changed status of Task ID $request_id2 from Pending to For Approval";
                 $reassignment_action = "Task ID $request_id2 reassigned to $assignee2.";
                 logActivity($conn, $_SESSION['accountId'], $approval_action, 'General');
                 logActivity($conn, $_SESSION['accountId'], $reassignment_action, 'General');
@@ -396,19 +399,45 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         $request_idFeedback = $_POST['request_idFeedback'];
         $personnel_remarks = $_POST['personnel_remarks'];
         $statusFeedback = 'Done';
-
+    
+        // Calculate the current date plus 8 hours
+        $adjusted_date = date('Y-m-d H:i:s', strtotime('+8 hours'));
+    
+        // Retrieve the name of the currently logged-in user
+        $user_id = $_SESSION['accountId']; // Assuming you store the user's ID in session
+        $user_query = "SELECT firstName and lastName FROM account WHERE accountId = ?";
+        $stmt_user = $conn->prepare($user_query);
+        $stmt_user->bind_param("i", $user_id);
+        $stmt_user->execute();
+        $result_user = $stmt_user->get_result();
+    
+        if ($result_user->num_rows > 0) {
+            $row_user = $result_user->fetch_assoc();
+            $name = $row_user['name'];
+    
+            // Log the activity
+            $action = "$name set status of Task ID $request_idFeedback as completed in outsource tab";
+            insertActivityLog($conn, $accountId, $action);
+    
+            // Close the user statement
+            $stmt_user->close();
+        } else {
+            // Handle the case where user information couldn't be fetched
+            $action = "Set status of Task ID $request_idFeedback as completed in outsource tab";
+            insertActivityLog($conn, $accountId, $action);
+        }
+    
         // SQL UPDATE query
-        $sqlfeedback = "UPDATE request SET status = ?, mp_remark = ? WHERE request_id = ?";
-
+        $sqlfeedback = "UPDATE request SET status = ?, mp_remark = ?, date = ? WHERE request_id = ?";
+    
         // Prepare the SQL statement
         $stmt7 = $conn->prepare($sqlfeedback);
-
+    
         // Bind parameters
-        $stmt7->bind_param("ssi", $statusFeedback, $personnel_remarks, $request_idFeedback);
-
+        $stmt7->bind_param("sssi", $statusFeedback, $personnel_remarks, $adjusted_date, $request_idFeedback);
+    
         // Execute the query
         if ($stmt7->execute()) {
-            // Update successful, redirect back to batasan.php or any other page
             // Update successful, redirect back to batasan.php or any other page
             header("Location: request.php");
             exit();
@@ -416,10 +445,11 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             // Error occurred while updating
             echo "Error updating request: " . $stmt7->error;
         }
-
+    
         // Close statement
         $stmt7->close();
     }
+    
 ?>
 
     <!DOCTYPE html>
