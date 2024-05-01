@@ -3,8 +3,8 @@ session_start();
 include_once("../../config/connection.php");
 $conn = connection();
 
-require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 date_default_timezone_set('Asia/Manila');
 
@@ -1265,7 +1265,7 @@ switch ($status) {
                                                     name="descriptionFeedback" readonly />
                                             </div>
 
-                                            <div class="col-12" >
+                                            <div class="col-12" style="display:none;" >
                                                 <label for="first_assignee" class="form-label">First Assignee:</label>
                                                 <input type="text" class="form-control" id="first_assignee" name="first_assignee" readonly />
                                             </div>

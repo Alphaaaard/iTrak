@@ -2479,31 +2479,60 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </script>
 
         <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const exportBtn = document.getElementById('exportBtn');
-                const tabs = document.querySelectorAll('.nav-link');
+            $(document).ready(function() {
+    // Retrieve the last active tab from session storage
+    let tabLastSelected = sessionStorage.getItem("lastTab");
 
-                // Function to disable export button
-                function disableExportButton() {
-                    exportBtn.disabled = true;
-                }
+    // Function to disable export button
+    function disableExportButton() {
+        $("#exportBtn").prop("disabled", true);
+    }
 
-                // Function to enable export button
-                function enableExportButton() {
-                    exportBtn.disabled = false;
-                }
+    // Function to enable export button
+    function enableExportButton() {
+        $("#exportBtn").prop("disabled", false);
+    }
 
-                // Event listener to detect when any tab is clicked
-                tabs.forEach(function(tab) {
-                    tab.addEventListener('click', function() {
-                        if (tab.textContent.trim() === "Outsource") {
-                            disableExportButton();
-                        } else {
-                            enableExportButton();
-                        }
-                    });
-                });
-            });
+    // Check if there's a last active tab
+    if (tabLastSelected) {
+        // Show the last active tab
+        $(`#${tabLastSelected}`).addClass("show active");
+        $(`.nav-link[data-bs-target='${tabLastSelected}']`).addClass("active");
+
+        // Disable export button if the last active tab is 'Outsource'
+        if (tabLastSelected === "pills-out-source") {
+            disableExportButton();
+        } else {
+            enableExportButton();
+        }
+    } else {
+        // If no last active tab, default to 'pills-manager'
+        $("#pills-manager").addClass("show active");
+        $(".nav-link[data-bs-target='pills-manager']").addClass("active");
+        enableExportButton(); // Enable export button by default
+    }
+
+    // Event listener for tab clicks
+    $(".nav-link").click(function() {
+        const targetId = $(this).data("bs-target");
+        // Set the last active tab to session storage
+        sessionStorage.setItem("lastTab", targetId);
+
+        // Disable export button if the selected tab is 'Outsource'
+        if (targetId === "pills-out-source") {
+            disableExportButton();
+        } else {
+            enableExportButton();
+        }
+
+        // Update tab and content visibility
+        $(".tab-pane").removeClass("show active");
+        $(`#${targetId}`).addClass("show active");
+        $(".nav-link").removeClass("active");
+        $(this).addClass("active");
+    });
+});
+
         </script>
 
         <script>
