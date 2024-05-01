@@ -102,9 +102,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
     // Modify the first query to filter by the logged-in account ID
     $sql06 = "SELECT r.* FROM request r
-    INNER JOIN account a ON r.assignee = CONCAT(a.firstName, ' ', a.lastName)
+    INNER JOIN account a ON r.first_assignee = CONCAT(a.firstName, ' ', a.lastName)
     WHERE r.campus IN ('Batasan', 'San Bartolome', 'San Francisco') 
-    AND r.status = 'Done' AND a.accountId = ?
+    AND (r.status = 'Done' AND r.category = 'Outsource')AND a.accountId = ?
     ORDER BY r.date DESC";
 
     $stmt06 = $conn->prepare($sql06);
@@ -398,15 +398,16 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         // Retrieve request_id from the form
         $request_idFeedback = $_POST['request_idFeedback'];
         $personnel_remarks = $_POST['personnel_remarks'];
+        $statusFeedback = 'Done';
 
         // SQL UPDATE query
-        $sqlfeedback = "UPDATE request SET mp_remark = ? WHERE request_id = ?";
+        $sqlfeedback = "UPDATE request SET status = ?, mp_remark = ? WHERE request_id = ?";
 
         // Prepare the SQL statement
         $stmt7 = $conn->prepare($sqlfeedback);
 
         // Bind parameters
-        $stmt7->bind_param("si", $personnel_remarks, $request_idFeedback);
+        $stmt7->bind_param("ssi", $statusFeedback, $personnel_remarks, $request_idFeedback);
 
         // Execute the query
         if ($stmt7->execute()) {
@@ -701,8 +702,9 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         <div class="new-nav">
                             <ul>
                                 <li><a href="#" class="nav-link active" data-bs-target="pills-manager">Request</a></li>
-                                <li><a href="#" class="nav-link" data-bs-target="pills-done">Done</a></li>
                                 <li><a href="#" class="nav-link" data-bs-target="pills-feedback">Feedback</a></li>
+                                <li><a href="#" class="nav-link" data-bs-target="pills-done">Done</a></li>
+
 
 
                             </ul>
@@ -720,6 +722,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
                     <div class="tab-content pt" id="myTabContent">
 
+                        <!-- FOR REQUEST -->
                         <div class="tab-pane fade show active" id="pills-manager" role="tabpanel" aria-labelledby="home-tab">
                             <div class="table-content">
                                 <div class='table-header'>
@@ -799,83 +802,9 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="pills-done" role="tabpanel" aria-labelledby="done-tab">
-                            <div class="table-content">
-                                <div class='table-header'>
-                                    <table>
-                                        <tr>
-                                            <th>Request ID</th>
-                                            <th>Date & Time</th>
-                                            <th>Category</th>
-                                            <th>Location</th>
-                                            <th>Equipment</th>
-                                            <th>Assignee</th>
-                                            <th>Deadline</th>
-                                            <th>Status</th>
 
-                                        </tr>
-                                    </table>
-                                </div>
-                                <?php
-                                if ($result06->num_rows > 0) {
-                                    echo "<div class='table-container'>";
-                                    echo "<table>";
-                                    while ($row6 = $result06->fetch_assoc()) {
-                                        echo '<tr>';
-                                        echo '<td>' . $row6['request_id'] . '</td>';
-                                        echo '<td>' . $row6['date'] . '</td>';
-                                        echo '<td>' . $row6['category'] . '</td>';
-                                        echo '<td>' . $row6['building'] . ', ' . $row6['floor'] . ', ' . $row6['room'] . '</td>';
-                                        echo '<td>' . $row6['equipment'] . '</td>';
-                                        echo '<td>' . $row6['assignee'] . '</td>';
-                                        echo '<td>' . $row6['deadline'] . '</td>';
-                                        $status = $row6['status'];
-
-                                        $status_color = '';
-
-                                        // Set the color based on the status
-                                        switch ($status) {
-                                            case 'Pending':
-                                                $status_color = 'blue';
-                                                break;
-                                            case 'Done':
-                                                $status_color = 'green';
-                                                break;
-                                            case 'For Approval':
-                                                $status_color = 'red';
-                                                break;
-                                            default:
-                                                // Default color if status doesn't match
-                                                $status_color = 'black';
-                                        }
-
-                                        // Output the status with appropriate color
-
-                                        echo '<td class="' . $status_color . '">' . $status . '</td>';
-                                        echo '<td style="display:none;">' . $row6['campus'] . '</td>';
-                                        echo '<td style="display:none;">' . $row6['building'] . '</td>';
-                                        echo '<td style="display:none;">' . $row6['floor'] . '</td>';
-                                        echo '<td style="display:none;">' . $row6['room'] . '</td>';
-                                        echo '<td style="display:none;">' . $row6['description'] . '</td>';
-                                        echo '<td style="display:none;">' . $row6['req_by'] . '</td>';
-                                        echo '<td style="display:none;">' . $row6['return_reason'] . '</td>';
-                                        echo '<td></td>';
-                                        echo '</tr>';
-                                    }
-                                    echo "</table>";
-                                    echo "</div>";
-                                } else {
-                                    echo '<table>';
-                                    echo "<div class=noDataImgH>";
-                                    echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
-                                    echo "</div>";
-                                    echo '</table>';
-                                }
-                                ?>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane fade" id="pills-feedback" role="tabpanel" aria-labelledby="feedback-tab">
+                         <!-- For FeedBack            -->
+                         <div class="tab-pane fade" id="pills-feedback" role="tabpanel" aria-labelledby="feedback-tab">
                             <div class="table-content">
                                 <div class='table-header'>
                                     <table>
@@ -966,10 +895,86 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                 }
                                 ?>
                             </div>
+                        </div>            
+
+
+                        <!-- For Done         -->
+                        <div class="tab-pane fade" id="pills-done" role="tabpanel" aria-labelledby="done-tab">
+                            <div class="table-content">
+                                <div class='table-header'>
+                                    <table>
+                                        <tr>
+                                            <th>Request ID</th>
+                                            <th>Date & Time</th>
+                                            <th>Category</th>
+                                            <th>Location</th>
+                                            <th>Equipment</th>
+                                            <th>Assignee</th>
+                                            <th>Deadline</th>
+                                            <th>Status</th>
+
+
+                                        </tr>
+                                    </table>
+                                </div>
+                                <?php
+                                if ($result06->num_rows > 0) {
+                                    echo "<div class='table-container'>";
+                                    echo "<table>";
+                                    while ($row6 = $result06->fetch_assoc()) {
+                                        echo '<tr>';
+                                        echo '<td>' . $row6['request_id'] . '</td>';
+                                        echo '<td>' . $row6['date'] . '</td>';
+                                        echo '<td>' . $row6['category'] . '</td>';
+                                        echo '<td>' . $row6['building'] . ', ' . $row6['floor'] . ', ' . $row6['room'] . '</td>';
+                                        echo '<td>' . $row6['equipment'] . '</td>';
+                                        echo '<td>' . $row6['assignee'] . '</td>';
+                                        echo '<td>' . $row6['deadline'] . '</td>';
+                                        $status = $row6['status'];
+
+                                        $status_color = '';
+
+                                        // Set the color based on the status
+                                        switch ($status) {
+                                            case 'Pending':
+                                                $status_color = 'blue';
+                                                break;
+                                            case 'Done':
+                                                $status_color = 'green';
+                                                break;
+                                            case 'For Approval':
+                                                $status_color = 'red';
+                                                break;
+                                            default:
+                                                // Default color if status doesn't match
+                                                $status_color = 'black';
+                                        }
+
+                                        // Output the status with appropriate color
+
+                                        echo '<td class="' . $status_color . '">' . $status . '</td>';
+                                        echo '<td style="display:none;">' . $row6['campus'] . '</td>';
+                                        echo '<td style="display:none;">' . $row6['building'] . '</td>';
+                                        echo '<td style="display:none;">' . $row6['floor'] . '</td>';
+                                        echo '<td style="display:none;">' . $row6['room'] . '</td>';
+                                        echo '<td style="display:none;">' . $row6['description'] . '</td>';
+                                        echo '<td style="display:none;">' . $row6['req_by'] . '</td>';
+                                        echo '<td style="display:none;">' . $row6['return_reason'] . '</td>';
+                                        echo '<td></td>';
+                                        echo '</tr>';
+                                    }
+                                    echo "</table>";
+                                    echo "</div>";
+                                } else {
+                                    echo '<table>';
+                                    echo "<div class=noDataImgH>";
+                                    echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
+                                    echo "</div>";
+                                    echo '</table>';
+                                }
+                                ?>
+                            </div>
                         </div>
-
-
-
 
                         <!--MODAL FOR THE VIEW-->
                         <!-- <form action="POST" id=""> -->
@@ -1271,7 +1276,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                             <div class="footer">
                                                 <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
                                                     data-bs-target="#ForSave">
-                                                    Save
+                                                    Mark As Done
                                                 </button>
                                             </div>
                                         </div>
@@ -1286,7 +1291,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-footer">
-                                    Are you sure you want to mark this task as completed?
+                                    Are you sure you want to mark this task as Done?
                                     <div class="modal-popups">
                                         <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
                                         <button class="btn add-modal-btn" name="feedback" data-bs-dismiss="modal">Yes</button>
