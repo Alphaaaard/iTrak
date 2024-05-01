@@ -1,6 +1,8 @@
 <?php
 
-ini_set('memory_limit', '1024M'); // Adjust the value as needed
+ini_set('memory_limit', '20000M'); // Adjust the value as needed
+ini_set('max_execution_time', 400); // Set maximum execution time to 300 seconds (10 minutes)
+
 include_once("../../config/connection.php");
 // require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
@@ -33,17 +35,27 @@ if (isset($submit) && isset($status)) {
     $leftLogoData = base64_encode(file_get_contents($leftLogoPath));
     $rightLogoData = base64_encode(file_get_contents($rightLogoPath));
 
-    // Start the HTML content
-    $html = '<div style="text-align:center; margin-bottom: 20px;">';
-    $html .= '<img src="data:image/png;base64,' . $leftLogoData . '" style="height:50px;"/> ';
-    $html .= '<h1 style="display:inline; margin: 0 10px;">QUEZON CITY UNIVERSITY</h1>';
-    $html .= '<img src="data:image/png;base64,' . $rightLogoData . '" style="height:50px;"/> ';
-    $html .= '<div style="clear:both;"></div>'; // Ensure the text goes below images and header
-    $html .= '<h4 style="margin-top: 10px;">UPKEEP MAINTENANCE TEAM</h4>'; // Your additional text
-    $html .= '</div>';
+    // Start the HTML content for PDF
+    $html = '<div style="text-align:center; margin-bottom: 20px;">' .
+    '<div style="display:inline-block; vertical-align:middle; height:50px;">' .
+    '<img src="data:image/png;base64,' . $leftLogoData . '" style="height:100%;"/>' .
+    '</div>' .
+    '<h1 style="display:inline; vertical-align:middle; margin: 0 20px;">QUEZON CITY UNIVERSITY</h1>' .
+    '<div style="display:inline-block; vertical-align:middle; height:50px;">' .
+    '<img src="data:image/png;base64,' . $rightLogoData . '" style="height:100%;"/>' .
+    '</div>' .
+    '<div style="clear:both;"></div>' .
+    '<h4 style="margin-top: 0px;">673 Quirino Hwy, Novaliches, Quezon City, Metro Manila</h4>' .
+    '<div style="clear:both;"></div>' .
+    '<h4 style="margin-top: 5px;">ITRAK MAINTENANCE TEAM</h4>' .
+    '<hr style="border:0; height:2px; background:#333; margin-top:5px;" />' . // Horizontal line
+    '</div>';
 
 
     $html .= '<h2 align="center">' . htmlspecialchars($status) . ' Assets</h2>';
+    $html .= '<style> th, td { text-align: center; vertical-align: middle; border: 1px solid #ddd; padding: 8px; } ' .
+    'img { border-radius: 50%; width: 50px; height: 50px; object-fit: cover; border: 2px solid #000; } ' .
+    'table { border-collapse: collapse; width: 100%; } </style>';
     $html .= '<table style="width:100%; border-collapse:collapse;">';
     $html .= '<tr>';
     $html .= '<th style="border:1px solid #ddd; padding:8px;">Tracking #</th>';

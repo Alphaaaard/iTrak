@@ -13,18 +13,20 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
 if (isset($_POST['submit']) && $_POST['submit'] == 'Export to Excel') {
     $conn = connection();
-    $role = $_POST['role'];
+    $tab = $_POST['tab']; // Using tab to filter the records
     $searchQuery = isset($_POST['searchQuery']) ? $_POST['searchQuery'] : '';
 
-    $sql = "SELECT accountID, CONCAT(firstName, ' ', lastName) AS fullName, role, picture FROM account WHERE role = ?";
-    $params = [$role];
+    // Adjusted SQL to fetch from activitylogs joined with the account table
+    $sql = "SELECT CONCAT(a.firstName, ' ', a.lastName) AS fullName, l.date, l.action FROM activitylogs l INNER JOIN account a ON l.accountID = a.accountID WHERE l.tab = ?";
+    $params = [$tab];
     $types = 's';
 
     if (!empty($searchQuery)) {
-        $sql .= " AND (firstName LIKE ? OR lastName LIKE ?)";
+        $sql .= " AND (l.action LIKE ? OR a.firstName LIKE ? OR a.lastName LIKE ?)";
         $params[] = "%$searchQuery%";
         $params[] = "%$searchQuery%";
-        $types .= 'ss';
+        $params[] = "%$searchQuery%";
+        $types .= 'sss';
     }
 
     $stmt = mysqli_prepare($conn, $sql);
@@ -52,46 +54,40 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Export to Excel') {
     ];
 
     // Set headers and merge cells
-    $sheet->setCellValue('A1', 'Account ID');
+    $sheet->setCellValue('A1', 'Name');
     $sheet->mergeCells('A1:B1');
-    // $sheet->setCellValue('C1', 'Picture');
-    // $sheet->mergeCells('C1:D1');
-    $sheet->setCellValue('C1', 'Name');
+    $sheet->setCellValue('C1', 'Date');
     $sheet->mergeCells('C1:D1');
-    $sheet->setCellValue('E1', 'Role');
-    $sheet->mergeCells('E1:F1');
-    $sheet->getStyle('A1:F1')->applyFromArray($headerStyleArray);
+    $sheet->setCellValue('E1', 'Action');
+    $sheet->mergeCells('E1:H1');
+    $sheet->getStyle('A1:H1')->applyFromArray($headerStyleArray);
 
     // Set data rows
     $rowNumber = 2;
     while ($row = mysqli_fetch_assoc($result)) {
-        $sheet->setCellValue('A' . $rowNumber, $row['accountID']);
+        $sheet->setCellValue('A' . $rowNumber, $row['fullName']);
         $sheet->mergeCells('A' . $rowNumber . ':B' . $rowNumber);
-        // if ($row['picture']) {
-            // Add image to the sheet, uncomment and handle the image as needed
-        // }
-        $sheet->setCellValue('C' . $rowNumber, $row['fullName']);
+        $sheet->setCellValue('C' . $rowNumber, $row['date']);
         $sheet->mergeCells('C' . $rowNumber . ':D' . $rowNumber);
-        $sheet->setCellValue('E' . $rowNumber, $row['role']);
-        $sheet->mergeCells('E' . $rowNumber . ':F' . $rowNumber);
+        $sheet->setCellValue('E' . $rowNumber, $row['action']);
+        $sheet->mergeCells('E' . $rowNumber . ':H' . $rowNumber);
         
-        // Apply styles to each row
-        $sheet->getStyle('A' . $rowNumber . ':F' . $rowNumber)->applyFromArray($headerStyleArray);
+        $sheet->getStyle('A' . $rowNumber . ':H' . $rowNumber)->applyFromArray($headerStyleArray);
         
         $rowNumber++;
     }
 
     // Set column widths to make the content fit nicely
     $sheet->getColumnDimension('A')->setWidth(20);
-    $sheet->getColumnDimension('C')->setWidth(30);
-    $sheet->getColumnDimension('E')->setWidth(20);
+    $sheet->getColumnDimension('C')->setWidth(20);
+    $sheet->getColumnDimension('E')->setWidth(30);
 
     // Redirect output to the browser
     ob_end_clean();
     ob_start();
 
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    header('Content-Disposition: attachment; filename="' . urlencode($role) . '_accounts.xlsx"');
+    header('Content-Disposition: attachment; filename="' . urlencode($tab) . '-activity-logs.xlsx"');
     header('Cache-Control: max-age=0');
     
     $writer = new Xlsx($spreadsheet);

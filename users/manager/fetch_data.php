@@ -10,30 +10,54 @@ if ($conn->connect_error) {
 }
 
 $month = isset($_GET['month']) ? (int)$_GET['month'] : date('n');
-$employee = isset($_GET['employee']) ? $_GET['employee'] : null;
+$employee = isset($_GET['employee']) ? $_GET['employee'] : '';
+$campus = isset($_GET['campus']) ? $_GET['campus'] : ''; // Add campus filter
 
-function getCountByWeek($conn, $weekStart, $weekEnd, $employeeFullName = null) {
-    // Modified SQL query to join with the account table and to check for a specific action
-    $sql = "SELECT COUNT(*) AS num 
-            FROM activitylogs al
-            INNER JOIN account ac ON al.accountId = ac.accountId
-            WHERE CONCAT(ac.firstName, ' ', ac.lastName) LIKE CONCAT(?, '%')
-            AND al.action LIKE '%Changed Status of% to Working%'
-            AND DATE(al.date) BETWEEN ? AND ?";
+function getCountByWeek($conn, $weekStart, $weekEnd, $employeeFullName = null, $campus = null) {
+    // Modified SQL query to include the campus filter
+    $sql = "SELECT 
+                (SELECT COUNT(*) 
+                FROM activitylogs al
+                INNER JOIN account ac ON al.accountId = ac.accountId
+                WHERE CONCAT(ac.firstName, ' ', ac.lastName) LIKE CONCAT(?, '%')
+                AND al.action LIKE '%Changed Status of% to Working%'
+                AND DATE(al.date) BETWEEN ? AND ?
+                AND (al.campus = ? OR ? = 'San Bartolome')) AS num_activitylogs,
+                
+                (SELECT COUNT(*) 
+                FROM request r
+                INNER JOIN account ac ON CONCAT(ac.firstName, ' ', ac.lastName) = r.assignee
+                WHERE CONCAT(ac.firstName, ' ', ac.lastName) LIKE CONCAT(?, '%')
+                AND r.status = 'Done'
+                AND DATE(r.date) BETWEEN ? AND ?
+                AND ((r.campus = ? OR ? = '') OR (r.campus = '' OR r.campus = ''))) AS num_request";
 
     // Assuming $employeeFullName might be null, use a wildcard in such a case
     $employeeFullName = $employeeFullName ? $employeeFullName . '%' : '%';
 
-    // Updated parameters - removed the first 's' since we're no longer using the 'action' column for the employee name
-    $params = ["sss", $employeeFullName, $weekStart, $weekEnd];
+    // Updated parameters
+    // Include 's' for each parameter being used in the SQL query
+    $params = ["ssssssssss", $employeeFullName, $weekStart, $weekEnd, $campus, $campus, $employeeFullName, $weekStart, $weekEnd, $campus, $campus];
 
     $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("Prepare failed: " . $conn->error);
+    }
     $stmt->bind_param(...$params);
-    $stmt->execute();
+    if (!$stmt->execute()) {
+        die("Execute failed: " . $stmt->error);
+    }
     $result = $stmt->get_result();
+    if (!$result) {
+        die("Get result failed: " . $conn->error);
+    }
 
     $row = $result->fetch_assoc();
-    return $row ? $row['num'] : 0;
+    
+    // Summing up the counts from both activitylogs and request tables
+    $total = ($row['num_activitylogs'] ?? 0) + ($row['num_request'] ?? 0);
+
+    return $total;
 }
 
 
@@ -92,7 +116,7 @@ $labels = array_keys($weeksData);
 $data = array_fill(0, count($weeksData), 0); // Initialize data array with zeros
 
 foreach ($weeksData as $weekLabel => $weekData) {
-    $data[array_search($weekLabel, $labels)] = getCountByWeek($conn, $weekData['start'], $weekData['end'], $employee);
+    $data[array_search($weekLabel, $labels)] = getCountByWeek($conn, $weekData['start'], $weekData['end'], $employee, $campus);
 }
 
 $conn->close();

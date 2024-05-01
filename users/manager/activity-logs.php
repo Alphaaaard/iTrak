@@ -124,6 +124,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="../../src/js/activity-logs.js"></script>
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/activity-logs.css" />
 
@@ -379,21 +380,43 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="cont-header">
                             <h1 class="tab-name"></h1>
                             <div class="tbl-filter">
+
                                 <select name="filterRole" id="filterRole" onchange="filterDate(this.value)">
                                     <option value="newest">Newest</option>
                                     <option value="oldest">Oldest</option>
                                 </select>
+
+                                <select id="rows-display-dropdown" class="form-select dropdown-rows" aria-label="Default select example">
+                                    <option value="20" selected>Show 20 rows</option>
+                                    <option class="hidden"></option>
+                                    <option value="50">Show 50 rows</option>
+                                    <option value="100">Show 100 rows</option>
+                                    <option value="150">Show 150 rows</option>
+                                    <option value="200">Show 200 rows</option>
+                                </select>
+
                                 <form class="d-flex" role="search">
                                     <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" onkeyup="searchTable()" />
                                 </form>
+
                             </div>
                         </div>
                     </header>
-                    <div class="new-nav">
-                        <ul>
-                            <li><a href="#" class="nav-link active" data-bs-target="pills-general">General History</a></li>
-                            <li><a href="#" class="nav-link" data-bs-target="pills-report">Report History</a></li>
-                        </ul>
+                    <div class="new-nav-container">
+                        <!--Content start of tabs-->
+                        <div class="new-nav">
+                            <ul>
+                                <li><a href="#" class="nav-link active pills-general" data-bs-target="pills-general">General History</a></li>
+                                <li><a href="#" class="nav-link pills-report" data-bs-target="pills-report">Report History</a></li>
+                            </ul>
+                        </div>
+                        <!-- Export button -->
+                        <div class="export-mob-hide">
+                            <form method="post" id="exportForm">
+                                <input type="hidden" name="status" id="statusField" value="For Replacement">
+                                <button type="button" id="exportBtn" class="btn btn-outline-danger">Export Data</button>
+                            </form>
+                        </div>
                     </div>
                     <div class="tab-content pt" id="myTabContent">
                         <div class="tab-pane fade show active" id="pills-general" role="tabpanel" aria-labelledby="home-tab">
@@ -412,7 +435,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <!-- General History Tab Content -->
                                 <?php
                                 if ($resultGeneral->num_rows > 0) {
-                                    echo "<div class='table-container'>";
+                                    echo "<div class='table-container general-table'>";
                                     echo "<table>";
                                     echo "<tbody>";
                                     while ($row = $resultGeneral->fetch_assoc()) {
@@ -439,7 +462,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 }
                                 ?>
                             </div>
-                            <div id="pagination-container-general" class="pagination-container"></div>
+                            <!-- <div id="pagination-container-general" class="pagination-container"></div> -->
                         </div>
                         <!-- Report History Tab Content -->
                         <div class="tab-pane fade" id="pills-report" role="tabpanel" aria-labelledby="profile-tab">
@@ -455,17 +478,17 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                                 <?php
                                 if ($resultReport->num_rows > 0) {
-                                    echo "<div class='table-container'>";
+                                    echo "<div class='table-container report-table'>";
                                     echo "<table>";
                                     echo "<tbody>";
                                     while ($row = $resultReport->fetch_assoc()) {
 
 
-
-
                                         $date = new DateTime($row['date']); // Create DateTime object from fetched date
                                         $date->modify('+8 hours'); // Add 8 hours
                                         $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
+
+
 
                                         echo '<tr>';
                                         echo '<td>' . $row['firstName'] . " " . $row['lastName'] . '</td>';
@@ -473,7 +496,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         echo '<td style="display:none">' . $row['firstName'] . '</td>';
                                         echo '<td style="display:none">' . $row['middleName'] . '</td>';
                                         echo '<td style="display:none">' . $row['lastName'] . '</td>';
-                                        echo '<td>' . $formattedDate . '</td>'; // Displa
+                                        echo '<td>' . $formattedDate . '</td>'; // Display the adjusted date
+
                                         echo '<td>' . $row['action'] . '</td>';
                                         echo '</tr>';
                                     }
@@ -490,14 +514,34 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 }
                                 ?>
                             </div>
-                            <div id="pagination-container-report" class="pagination-container"></div>
+                            <!-- <div id="pagination-container-report" class="pagination-container"></div> -->
                         </div>
                         <!--EMPLOYEE INFORMATION MODALS-->
 
                     </div>
                 </div>
             </main>
-            <!-- MAIN -->
+            <div class="pagination-reports">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </section>
 
         <!-- MODALS -->
@@ -745,6 +789,106 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 createPaginationControls();
             }
         });
+    </script>
+
+<script>
+        document.getElementById('exportBtn').addEventListener('click', function() {
+            console.log("Export button clicked");
+            var searchQuery = document.getElementById('search-box').value;
+            var formData = new FormData(document.getElementById('exportForm'));
+
+            // Determine the tab based on the active tab class
+            var activeTab = document.querySelector('.nav-link.active').getAttribute('data-bs-target');
+            var tab = activeTab === 'pills-general' ? 'General' : 'Report';
+
+            formData.append('searchQuery', searchQuery);
+            formData.append('tab', tab); // Append the active tab context to formData instead of role
+
+            Swal.fire({
+                title: 'Choose the file format',
+                showDenyButton: true,
+                confirmButtonText: 'PDF',
+                denyButtonText: 'Excel',
+                didOpen: () => {
+                    Swal.getConfirmButton().style.setProperty('background-color', '#ff4c4c', 'important');
+                    Swal.getConfirmButton().style.setProperty('color', 'white', 'important');
+
+                    Swal.getDenyButton().style.setProperty('background-color', '#09ba23', 'important');
+                    Swal.getDenyButton().style.setProperty('color', 'white', 'important');
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    formData.append('submit', 'Export to PDF');
+                    performExport(formData, 'export-pdf-activitylogs.php');
+                } else if (result.isDenied) {
+                    formData.append('submit', 'Export to Excel');
+                    performExport(formData, 'export-excel-activitylogs.php');
+                }
+            });
+        });
+
+        function performExport(formData, endpoint) {
+            Swal.fire({
+                title: 'Exporting...',
+                html: 'Please wait while the file is being generated.',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                willOpen: () => {
+                    Swal.showLoading();
+                },
+            });
+
+            fetch(endpoint, {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.blob();
+                })
+                .then(blob => {
+                    const tabFormatted = formData.get('tab').replace(/ /g, '-'); // Get the tab and replace spaces with hyphens for the file name
+                    const fileExtension = getFileExtension(endpoint);
+                    const fileName = `${tabFormatted}.${fileExtension}`;
+
+                    const downloadUrl = window.URL.createObjectURL(blob);
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = downloadUrl;
+                    downloadLink.download = fileName;
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+
+                    window.URL.revokeObjectURL(downloadUrl);
+                    document.body.removeChild(downloadLink);
+
+                    Swal.fire({
+                        title: 'Exporting Done',
+                        text: 'Your file has been successfully generated.',
+                        icon: 'success',
+                        allowOutsideClick: false,
+                        showConfirmButton: false,
+                        timer: 1300, // closes after 2000 milliseconds (2 seconds)
+                        timerProgressBar: true // shows a visual progress bar for the timer
+                    });
+                })
+                .catch(error => {
+                    console.error('Export Error:', error);
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'There was an issue generating the file.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                });
+        }
+
+        function getFileExtension(endpoint) {
+            if (endpoint.includes('pdf')) return 'pdf';
+            if (endpoint.includes('excel')) return 'xlsx';
+            return '';
+        }
     </script>
 
 
