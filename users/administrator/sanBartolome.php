@@ -1182,12 +1182,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                     <input type="date" class="form-control" id="deadline" name="deadline" />
                                                 </div>
 
-                                                <div class="col-12">
+                                                <div class="col-12" id="textareaContainerD">
                                                     <label for="description" class="form-label">Description:</label>
                                                     <input type="text" class="form-control" id="description" name="description" />
                                                 </div>
 
-                                                <div class="col-12">
+                                                <div class="col-12" id="textareaContainerR">
                                                     <label for="return_reason" class="form-label">Transfer
                                                         Reason:</label>
                                                     <input type="text" class="form-control" id="return_reason" name="return_reason" readonly />
@@ -1834,7 +1834,32 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 tdElement.appendChild(spanElement);
             });
         </script>
+        <script>
+            // Create a textarea element
+            var textarea = document.createElement("textarea");
+            textarea.className = "form-control";
+            textarea.id = "description";
+            textarea.name = "description";
 
+            // Replace the input element with the textarea element
+            var container = document.getElementById("textareaContainerD");
+            var inputElement = container.querySelector("input");
+            container.replaceChild(textarea, inputElement);
+        </script>
+
+        <script>
+            // Create a textarea element
+            var textarea = document.createElement("textarea");
+            textarea.className = "form-control";
+            textarea.id = "return_reason";
+            textarea.name = "return_reason";
+            textarea.setAttribute("readonly", ""); // Set readonly attribute
+
+            // Replace the input element with the textarea element
+            var container = document.getElementById("textareaContainerR");
+            var inputElement = container.querySelector("input");
+            container.replaceChild(textarea, inputElement);
+        </script>
 
 
     </body>
