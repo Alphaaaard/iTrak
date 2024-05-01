@@ -21,49 +21,6 @@ span.red-value {
   padding: 0.1em 0.3em;
 }
 
-.accordion-item {
-  border: none; /* Remove border from accordion item */
-}
-.accordion-button:not(.collapsed) {
-  color: unset;
-  background-color: unset;
-  box-shadow: unset;
-}
-
-.accordion-button{
-  font-size: 0.75rem;
-  color: #3d3b40;
-  font-weight: bold;
-  padding: 0 !important;
-  margin: 15px 0 10px 0;
-}
-
-.accordion-button:focus {
- z-index: 3; 
- border-color: unset !important;
- outline: unset !important;
- box-shadow: unset !important;
-}
-.accordion-button::after {
-  flex-shrink: 0;
-  width: var(--bs-accordion-btn-icon-width);
-  height: var(--bs-accordion-btn-icon-width);
-  margin-left: 1rem !important; /* Adjust as needed */
-  margin-right: 15px; /* Add margin to move the icon */
-
-  content: "";
-  background-image: var(--bs-accordion-btn-icon);
-  background-repeat: no-repeat;
-  background-size: var(--bs-accordion-btn-icon-width);
-  transition: var(--bs-accordion-btn-icon-transition);
-}
-.accordion-collapse {
-  border: none; /* Remove border from accordion collapse content */
-}
-
-.accordion-body {
-  padding: 0; /* Optionally remove padding from accordion body */
-}
 
 span.blue-value {
   background-color: blue;
