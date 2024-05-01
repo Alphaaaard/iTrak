@@ -919,6 +919,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         echo '<td style="display:none;">' . $row7['description'] . '</td>';
                                         echo '<td style="display:none;">' . $row7['req_by'] . '</td>';
                                         echo '<td style="display:none;">' . $row7['return_reason'] . '</td>';
+                                        echo '<td style="display:none;">' . $row7['admins_remark'] . '</td>';
                                         echo '<td></td>';
                                         echo '</tr>';
                                     }
@@ -1138,8 +1139,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                         <form id="approvalForm" method="post" class="row g-3">
                                             <div class="col-4" style="display:none;">
                                                 <label for="request_id" class="form-label">Request ID:</label>
-                                                <input type="text" class="form-control" id="request_id"
-                                                    name="request_id" readonly />
+                                                <input type="text" class="form-control" id="request_idfeedback"
+                                                    name="request_idfeedback" readonly />
                                             </div>
                                             <div class="col-4" style="display:none;">
                                                 <label for="date" class="form-label">Date & Time:</label>
@@ -1152,25 +1153,25 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                             </div>
                                             <div class="col-4">
                                                 <label for="building" class="form-label">Building:</label>
-                                                <input type="text" class="form-control" id="building" name="building"
+                                                <input type="text" class="form-control" id="buildingFeedback" name="buildingFeedback"
                                                     readonly />
                                             </div>
 
                                             <div class="col-4">
                                                 <label for="floor" class="form-label">Floor:</label>
-                                                <input type="text" class="form-control" id="floor" name="floor"
+                                                <input type="text" class="form-control" id="floorFeedback" name="floorFeedback"
                                                     readonly />
                                             </div>
 
                                             <div class="col-4">
                                                 <label for="room" class="form-label">Room: </label>
-                                                <input type="text" class="form-control" id="room" name="room"
+                                                <input type="text" class="form-control" id="room" name="roomFeedback"
                                                     readonly />
                                             </div>
 
                                             <div class="col-4">
                                                 <label for="equipment" class="form-label">Equipment :</label>
-                                                <input type="text" class="form-control" id="equipment" name="equipment"
+                                                <input type="text" class="form-control" id="equipmentFeedback" name="equipmentFeedback"
                                                     readonly />
                                             </div>
 
@@ -1181,27 +1182,14 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
                                             <div class="col-4">
                                                 <label for="category" class="form-label">Category:</label>
-                                                <select class="form-select" id="category" name="category"
-                                                    onchange="fetchRandomAssignee()">
-                                                    
-                                                    <option value="Carpentry">Carpentry</option>
-                                                    <option value="Electrical">Electrical</option>
-                                                    <option value="Plumbing">Plumbing</option>
-                                                    <option value="Outsource">Outsource</option>
-                                                </select>
+                                                <input type="text" class="form-control" id="categoryFeedback"
+                                                    name="categoryFeedback" readonly />
                                             </div>
 
-                                            <!-- Add an empty assignee select element -->
                                             <div class="col-4">
-                                                <label id="assignee-label" for="assignee"
-                                                    class="form-label">Assignee:</label>
-                                                    <select class="form-select"  id="assignee" name="assignee"></select>
-
-                                                <input type="text" class="form-control" id="assigneeInput"
-                                                    name="assignee" style="display: none;">
-
-                                                <input type="text" class="form-control" id="assigneeInputreal"
-                                                    name="assigneereal" style="display:none;">
+                                                <label for="assignee" class="form-label">Assignee:</label>
+                                                <input type="text" class="form-control" id="AssigneeFeedback"
+                                                    name="AssigneeFeedback" readonly />
                                             </div>
 
                                             <div class="col-4" style="display:none;">
@@ -1212,8 +1200,14 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
                                             <div class="col-4">
                                                 <label for="deadline" class="form-label">Deadline:</label>
-                                                <input type="date" class="form-control" id="deadline" name="deadline" />
+                                                <input type="text" class="form-control" id="deadlineFeedback" name="deadlineFeedback" readonly />
                                             </div>
+
+                                            <div class="col-4">
+                                                <label for="deadline" class="form-label">Outsource Info:</label>
+                                                <input type="text" class="form-control" id="Outsourceinfo" name="Outsourceinfo" readonly />
+                                            </div>
+
 
                                             <div class="col-12">
                                                 <label for="description" class="form-label">Description:</label>
@@ -1357,42 +1351,6 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             });
         </script>
 
-
-
-
-
-        <!--PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
-        <!-- <script>
-        $(document).ready(function () {
-            // Function to populate modal fields
-            function populateModal(row) {
-                // Populate modal fields with data from the row
-                $("#request_id").val(row.find("td:eq(0)").text());
-                $("#date").val(row.find("td:eq(1)").text());
-                $("#category").val(row.find("td:eq(2)").text());
-                // If building, floor, and room are concatenated in a single cell, split them
-                var buildingFloorRoom = row.find("td:eq(3)").text().split(', ');
-                $("#building").val(buildingFloorRoom[0]);
-                $("#floor").val(buildingFloorRoom[1]);
-                $("#room").val(buildingFloorRoom[2]);
-                $("#equipment").val(row.find("td:eq(4)").text());
-                $("#assignee").val(row.find("td:eq(5)").text());
-                $("#status").val(row.find("td:eq(6)").text());
-                $("#deadline").val(row.find("td:eq(7)").text());
-                $("#description").val(row.find("td:eq(13)").text());
-                $("#return_reason_show").val(row.find("td:eq(15)").text());
-
-            }
-
-            // Click event for the "Approve" button
-            $("button[data-bs-target='#ForView']").click(function () {
-                var row = $(this).closest("tr"); // Get the closest row to the clicked button
-                populateModal(row); // Populate modal fields with data from the row
-                $("#ForView").modal("show"); // Show the modal
-            });
-        });
-    </script> -->
-
         <script>
             $(document).ready(function() {
                 // Function to populate modal fields
@@ -1430,6 +1388,50 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     }
 
                     $("#ForView").modal("show"); // Show the modal
+                });
+            });
+        </script>
+
+                <!--PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
+            <script>
+            $(document).ready(function () {
+                // Function to populate modal fields
+                function populateModalFeedback(row) {
+                    // Populate modal fields with data from the row
+                    $("#request_idFeedback").val(row.find("td:eq(0)").text());
+                    $("#date").val(row.find("td:eq(1)").text());
+                    $("#categoryFeedback").val(row.find("td:eq(2)").text());
+                    // If building, floor, and room are concatenated in a single cell, split them
+                    var buildingFloorRoom = row.find("td:eq(3)").text().split(', ');
+                    $("#buildingFeedback").val(buildingFloorRoom[0]);
+                    $("#floorFeedback").val(buildingFloorRoom[1]);
+                    $("#roomFeedback").val(buildingFloorRoom[2]);
+                    $("#equipmentFeedback").val(row.find("td:eq(4)").text());
+                    $("#AssigneeFeedback").val(row.find("td:eq(5)").text());
+                    $("#status").val(row.find("td:eq(6)").text());
+                    $("#deadlineFeedback").val(row.find("td:eq(1)").text());
+                    $("#description").val(row.find("td:eq(13)").text());
+                    $("#return_reason").val(row.find("td:eq(15)").text());
+
+                    // Check if return_reason has a value
+                    if (row.find("td:eq(15)").text().trim() !== '') {
+                        $("#return_reason").closest('.col-12').show(); // Show the div if there's a value
+                    } else {
+                        $("#return_reason").closest('.col-12').hide(); // Hide the div if there's no value
+                    }
+
+                    // Additional fields
+                    $("#outsource_info").val(row.find("td:eq(16)").text());
+                    $("#first_assignee").val(row.find("td:eq(17)").text());
+                    $("#admins_remark").val(row.find("td:eq(18)").text());
+                    $("#mp_remark").val(row.find("td:eq(19)").text());
+                }
+
+                // Click event for the "Approve" button
+                $("button[data-bs-target='#ForFeedback']").click(function () {
+                    var row = $(this).closest("tr"); // Get the closest row to the clicked button
+                    populateModalFeedback(row); // Populate modal fields with data from the row
+                    $("#ForFeedback").modal("show"); // Show the modal
                 });
             });
         </script>
