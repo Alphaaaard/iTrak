@@ -1662,10 +1662,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             </div>
 
                                             <div class="col-12">
-                                                <label for="admins_remark" class="form-label">Your
+                                                <label for="admins_remark_done" class="form-label">Your
                                                     Remarks:</label>
-                                                <input type="text" class="form-control" id="admins_remark"
-                                                    name="admins_remark" readonly />
+                                                <input type="text" class="form-control" id="admins_remark_done"
+                                                    name="admins_remark_done" readonly />
                                             </div> 
 
                                            
