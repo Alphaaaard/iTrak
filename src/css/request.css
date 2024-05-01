@@ -216,3 +216,17 @@ td:last-child {
     display: none;
   }
 }
+
+#ForDoneModal .modal-footer {
+  display: flex;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+#ForDoneModal .modal-popups {
+  display: flex;
+}
+
+#ForDoneModal .modal-popups .btn {
+  margin: 0 5px; /* Adjust as needed */
+}

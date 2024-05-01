@@ -3,7 +3,8 @@ session_start();
 include_once("../../config/connection.php");
 $conn = connection();
 
-require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 date_default_timezone_set('Asia/Manila');
 
@@ -1138,11 +1139,11 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         </div>
 
                         <!--Edit for done-->
-                        <div class="modal fade" id="ForDone" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal fade" id="ForDoneModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-footer">
-                                        Are you sure you want to mark this task as completed?
+                                        Are you sure you want to send this Remarks?
                                         <div class="modal-popups">
                                             <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
                                             <!-- <button class="btn add-modal-btn" name="done" data-bs-dismiss="modal">Yes</button> -->
@@ -1154,14 +1155,14 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         </form>
 
 
-                        <!--MODAL FOR THE APPROVAL-->
+                        <!--MODAL FOR THE FEEDBACK-->
                     <div class="modal-parent">
                         <div class="modal modal-xl fade" id="ForFeedback" tabindex="-1"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5>For Approval:</h5>
+                                        <h5>Feedback:</h5>
 
                                         <button class="btn btn-close-modal-emp close-modal-btn"
                                             data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
@@ -1268,7 +1269,8 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                             </div>
 
                                             <div class="footer">
-                                                <button class="btn add-modal-btn" name="feedback" data-bs-dismiss="modal" onclick="showFeedbackConfirmation()">
+                                                <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                                    data-bs-target="#ForSave">
                                                     Save
                                                 </button>
                                             </div>
@@ -1278,6 +1280,22 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                             </div>
                         </div>            
                     </div>
+
+                    <div class="modal fade" id="ForSave" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-footer">
+                                    Are you sure you want to mark this task as completed?
+                                    <div class="modal-popups">
+                                        <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                        <button class="btn add-modal-btn" name="feedback" data-bs-dismiss="modal">Yes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                
+
                 </main>
             </section>
 
