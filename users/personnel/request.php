@@ -3,8 +3,8 @@ session_start();
 include_once ("../../config/connection.php");
 $conn = connection();
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 date_default_timezone_set('Asia/Manila');
 
@@ -1347,17 +1347,37 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                                     name="first_assignee" readonly />
                                             </div>
 
-                                            <div class="col-12">
-                                                <label for="admins_remark" class="form-label">Admin Remarks</label>
-                                                <input type="text" class="form-control" id="admins_remark"
-                                                    name="admins_remark" readonly />
+
+                                            <div class="accordion" id="accordionExample">
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header">
+                                                        <button class="accordion-button" type="button"
+                                                            data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                                            aria-expanded="false" aria-controls="collapseOne">
+                                                            Expand to see remarks
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapseOne" class="accordion-collapse collapse"
+                                                        data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body">
+                                                            <div class="col-12">
+                                                                <label for="admins_remark" class="form-label">Admin
+                                                                    Remarks</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="admins_remark" name="admins_remark" readonly />
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <label for="admins_remark" class="form-label">Your
+                                                                    Remarks</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="personnel_remarks" name="personnel_remarks"
+                                                                    placeholder="Add remarks here" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
 
-                                            <div class="col-12">
-                                                <label for="admins_remark" class="form-label">Your Remarks</label>
-                                                <input type="text" class="form-control" id="personnel_remarks"
-                                                    name="personnel_remarks" />
-                                            </div>
 
                                             <div class="footer">
                                                 <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
