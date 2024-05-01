@@ -3,8 +3,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
 include_once("../../config/connection.php");
@@ -58,14 +58,29 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->fetch();
     $stmt->close();
 
-    $sql = "SELECT * FROM request WHERE campus = 'San Francisco' AND status IN ('Pending', 'For Approval') AND category != 'Outsource' ORDER BY date DESC";
+    // SQL query to retrieve tasks for the San Francisco campus
+    $sql = "SELECT * FROM request 
+        WHERE campus = 'San Francisco' 
+        AND (status IN ('Pending', 'For Approval', 'Overdue') OR 
+             (status = 'Overdue' AND deadline < CURDATE() AND deadline IS NOT NULL AND deadline != '0000-00-00'))
+        AND category != 'Outsource' 
+        ORDER BY date DESC";
     $result = $conn->query($sql) or die($conn->error);
 
+    // SQL query to retrieve tasks for the Batasan campus with category 'Outsource'
+    $sql2 = "SELECT * FROM request 
+         WHERE campus = 'San Francisco' 
+         AND (status IN ('Pending', 'Overdue') OR (status = 'Overdue' AND deadline < CURDATE() AND deadline IS NOT NULL AND deadline != '0000-00-00'))
+         AND category = 'Outsource' 
+         ORDER BY date DESC";
 
-    $sql2 = "SELECT * FROM request WHERE campus = 'San Francisco' AND category = 'Outsource' AND status = 'Pending' ORDER BY date DESC";
     $result2 = $conn->query($sql2) or die($conn->error);
 
-    $sql4 = "SELECT * FROM request WHERE campus = 'San Francisco' AND status = 'Done' ORDER BY date DESC";
+    // SQL query to retrieve tasks for the San Francisco campus that are 'Done'
+    $sql4 = "SELECT * FROM request 
+         WHERE campus = 'San Francisco' 
+         AND status = 'Done' 
+         ORDER BY date DESC";
     $result4 = $conn->query($sql4) or die($conn->error);
 
     function logActivity($conn, $accountId, $actionDescription, $tabValue)
@@ -95,20 +110,30 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status = $_POST['new_status'];
         $description = $_POST['new_description'];
         $deadline = $_POST['new_deadline'];
+        $outsource_info = $_POST['new_outsource_info'];
+        $first_assignee = $_POST['new_first_assignee'];
+        $admins_remark = $_POST['new_admins_remark'];
+        $mp_remark = $_POST['new_mp_remark'];
 
         // Calculate the current date plus 8 hours
         $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
 
         // Insert data into the request table
-        $insertQuery = "INSERT INTO request (request_id, campus, building, floor, room, equipment, req_by, category, assignee, status, description, deadline, date)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $insertQuery = "INSERT INTO request (request_id, campus, building, floor, room, equipment, req_by, category, assignee, status, description, deadline, date, outsource_info, first_assignee, admins_remark, mp_remark)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         $stmt = $conn->prepare($insertQuery);
-        $stmt->bind_param("sssssssssssss", $request_id, $campus, $building, $floor, $room, $equipment, $req_by, $category, $assignee, $status, $description, $deadline, $adjusted_date);
+        $stmt->bind_param("sssssssssssssssss", $request_id, $campus, $building, $floor, $room, $equipment, $req_by, $category, $assignee, $status, $description, $deadline, $adjusted_date, $outsource_info, $first_assignee, $admins_remark, $mp_remark);
+
+        // Execute the statement
+
+
+        // Rest of your code after insertion
+
 
         if ($stmt->execute()) {
             // Log activity for task creation and assignment
-            $action = "Created and assigned task to $assignee";
+            $action = "$nomiddlename Created and assigned task to $assignee.";
             logActivity($conn, $_SESSION['accountId'], $action, 'General');
 
             // Redirect to the desired page
@@ -198,19 +223,21 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         // Bind parameters
         $stmt4->bind_param("ssssssssssssi", $campus4, $building4, $floor4, $room4, $equipment4, $req_by4, $category4, $assignee4, $status4, $description4, $deadline4, $adjusted_date, $request_id4);
 
+        // Execute the query
         if ($stmt4->execute()) {
-            // Log activity for task update
-            $action4 = "Updated task for $assignee4";
+            // Log activity for admin approval with outsource as new assignee
+            $action4 = "$nomiddlename change the status of $request_id4  as Completed.";
+
             logActivity($conn, $_SESSION['accountId'], $action4, 'General');
 
-            // Redirect to the desired page
-            header("Location: sanFrancisco.php");
-            exit(); // Make sure to exit to prevent further execution
+            // Redirect back to the page
+            header("Location: batasan.php");
+            exit();
         } else {
             echo "Error updating data: " . $conn->error;
         }
 
-        $conn->close();
+        $stmt4->close();
     }
 
 
@@ -269,12 +296,30 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         }
     }
 
+
+
     // Call the function when needed, for example in your PHP script:
     sendDeadlineNotifications($conn);
 
+    // Function to update status to "Overdue" for tasks with overdue deadlines
+    function updateOverdueTasks($conn)
+    {
+        // Get today's date
+        $today = date('Y-m-d');
 
+        // SQL query to update status for overdue tasks
+        $sql = "UPDATE request SET status = 'Overdue' WHERE deadline < ? AND deadline IS NOT NULL AND deadline != '0000-00-00' AND status != 'Done'";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param(
+            "s",
+            $today
+        );
+        $stmt->execute();
+        $stmt->close();
+    }
 
-
+    // Call the function to update overdue tasks
+    updateOverdueTasks($conn);
 ?>
 
 
@@ -624,6 +669,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
                     <div class="tab-content pt" id="myTabContent">
+                        <!--TABLE FOR REQUEST-->
                         <div class="tab-pane fade show active" id="pills-manager" role="tabpanel" aria-labelledby="home-tab">
                             <div class="table-content">
                                 <div class='table-header'>
@@ -647,14 +693,19 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     echo "<div class='table-container'>";
                                     echo "<table>";
                                     while ($row = $result->fetch_assoc()) {
-                                        echo '<tr>';
-                                        echo '<td>' . $row['request_id'] . '</td>';
-                                        echo '<td>' . $row['date'] . '</td>';
-                                        echo '<td>' . $row['category'] . '</td>';
-                                        echo '<td>' . $row['building'] . ', ' . $row['floor'] . ', ' . $row['room'] . '</td>';
-                                        echo '<td>' . $row['equipment'] . '</td>';
-                                        echo '<td>' . $row['assignee'] . '</td>';
-                                        echo '<td>' . $row['deadline'] . '</td>';
+                                        // Check if the status is "Overdue"
+                                        $status = $row['status'];
+                                        $row_class = ($status == 'Overdue') ? 'past-due-row' : '';
+
+                                        // Output the table row with the appropriate CSS class
+                                        echo '<tr class="' . $row_class . '">';
+                                        echo '<td style="color: ' . (($status == 'Overdue') ? 'red' : 'black') . ';">' . $row['request_id'] . '</td>';
+                                        echo '<td style="color: ' . (($status == 'Overdue') ? 'red' : 'black') . ';">' . $row['date'] . '</td>';
+                                        echo '<td style="color: ' . (($status == 'Overdue') ? 'red' : 'black') . ';">' . $row['category'] . '</td>';
+                                        echo '<td style="color: ' . (($status == 'Overdue') ? 'red' : 'black') . ';">' . $row['building'] . ', ' . $row['floor'] . ', ' . $row['room'] . '</td>';
+                                        echo '<td style="color: ' . (($status == 'Overdue') ? 'red' : 'black') . ';">' . $row['equipment'] . '</td>';
+                                        echo '<td style="color: ' . (($status == 'Overdue') ? 'red' : 'black') . ';">' . $row['assignee'] . '</td>';
+                                        echo '<td style="color: ' . (($status == 'Overdue') ? 'red' : 'black') . ';">' . $row['deadline'] . '</td>';
                                         $status = $row['status'];
                                         $status_color = '';
 
@@ -667,7 +718,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 $status_color = 'green';
                                                 break;
                                             case 'For Approval':
-                                                $status_color = 'red';
+                                                $status_color = 'orange';
+                                                break;
+                                            case 'Overdue':
+                                                $status_color = 'red'; // Choose an appropriate color for Overdue tasks
                                                 break;
                                             default:
                                                 // Default color if status doesn't match
@@ -676,6 +730,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                         // Output the status with appropriate color
                                         echo '<td class="' . $status_color . '">' . $status . '</td>';
+
 
                                         // Check if status is "For Approval"
                                         if ($row['status'] == 'For Approval') {
@@ -697,8 +752,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         echo '<td style="display:none;">' . $row['description'] . '</td>';
                                         echo '<td style="display:none;">' . $row['req_by'] . '</td>';
                                         echo '<td style="display:none;">' . $row['return_reason'] . '</td>';
-                                        echo '<td></td>';
+                                        echo '<td style="display:none;">' . $row['outsource_info'] . '</td>';
+                                        echo '<td style="display:none;">' . $row['first_assignee'] . '</td>';
+                                        echo '<td style="display:none;">' . $row['admins_remark'] . '</td>';
+                                        echo '<td style="display:none;">' . $row['mp_remark'] . '</td>';
 
+                                        echo '<td></td>';
                                         echo '</tr>';
                                     }
                                     echo "</table>";
@@ -714,6 +773,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             </div>
                         </div>
 
+                        <!--TABLE FOR OUTSOURCE-->
                         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="table-content">
                                 <div class='table-header'>
@@ -726,7 +786,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             <th>Equipment</th>
                                             <th>Assignee</th>
                                             <th>Deadline</th>
-
                                             <th>Status</th>
                                             <th></th>
                                         </tr>
@@ -737,14 +796,17 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     echo "<div class='table-container'>";
                                     echo "<table>";
                                     while ($row2 = $result2->fetch_assoc()) {
-                                        echo '<tr>';
-                                        echo '<td>' . $row2['request_id'] . '</td>';
-                                        echo '<td>' . $row2['date'] . '</td>';
-                                        echo '<td>' . $row2['category'] . '</td>';
-                                        echo '<td>' . $row2['building'] . ', ' . $row2['floor'] . ', ' . $row2['room'] . '</td>';
-                                        echo '<td>' . $row2['equipment'] . '</td>';
-                                        echo '<td>' . $row2['assignee'] . '</td>';
-                                        echo '<td>' . $row2['deadline'] . '</td>';
+                                        // Check if the status is "Overdue"
+                                        $status2 = $row2['status'];
+                                        $row_class2 = ($status2 == 'Overdue') ? 'past-due-row' : '';
+                                        echo '<tr class="' . $row_class2 . '">';
+                                        echo '<td style="color: ' . (($status2 == 'Overdue') ? 'red' : 'black') . ';">' . $row2['request_id'] . '</td>';
+                                        echo '<td style="color: ' . (($status2 == 'Overdue') ? 'red' : 'black') . ';">' . $row2['date'] . '</td>';
+                                        echo '<td style="color: ' . (($status2 == 'Overdue') ? 'red' : 'black') . ';">' . $row2['category'] . '</td>';
+                                        echo '<td style="color: ' . (($status2 == 'Overdue') ? 'red' : 'black') . ';">' . $row2['building'] . ', ' . $row2['floor'] . ', ' . $row2['room'] . '</td>';
+                                        echo '<td style="color: ' . (($status2 == 'Overdue') ? 'red' : 'black') . ';">' . $row2['equipment'] . '</td>';
+                                        echo '<td style="color: ' . (($status2 == 'Overdue') ? 'red' : 'black') . ';">' . $row2['assignee'] . '</td>';
+                                        echo '<td style="color: ' . (($status2 == 'Overdue') ? 'red' : 'black') . ';">' . $row2['deadline'] . '</td>';
                                         $status = $row2['status'];
                                         $status_color = '';
 
@@ -757,7 +819,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 $status_color = 'green';
                                                 break;
                                             case 'For Approval':
-                                                $status_color = 'red';
+                                                $status_color = 'orange';
+                                                break;
+                                            case 'Overdue':
+                                                $status_color = 'red'; // Choose an appropriate color for Overdue tasks
                                                 break;
                                             default:
                                                 // Default color if status doesn't match
@@ -766,7 +831,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                         // Output the status with appropriate color
                                         echo '<td class="' . $status_color . '">' . $status . '</td>';
-
 
                                         // Check if status is "Pending"
                                         if ($row2['status'] == 'Pending') {
@@ -789,6 +853,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         echo '<td style="display:none;">' . $row2['description'] . '</td>';
                                         echo '<td style="display:none;">' . $row2['req_by'] . '</td>';
                                         echo '<td style="display:none;">' . $row2['return_reason'] . '</td>';
+                                        echo '<td style="display:none;">' . $row2['outsource_info'] . '</td>';
+                                        echo '<td style="display:none;">' . $row2['first_assignee'] . '</td>';
+                                        echo '<td style="display:none;">' . $row2['admins_remark'] . '</td>';
                                         echo '<td></td>';
                                         echo '</tr>';
                                     }
@@ -805,6 +872,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             </div>
                         </div>
 
+                        <!--TABLE FOR DONE-->
                         <div class="tab-pane fade" id="pills-done" role="tabpanel" aria-labelledby="done-tab">
                             <div class="table-content">
                                 <div class='table-header'>
@@ -847,7 +915,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 $status_color = 'green';
                                                 break;
                                             case 'For Approval':
-                                                $status_color = 'red';
+                                                $status_color = 'orange';
+                                                break;
+                                            case 'Overdue':
+                                                $status_color = 'red'; // Choose an appropriate color for Overdue tasks
                                                 break;
                                             default:
                                                 // Default color if status doesn't match
@@ -857,14 +928,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         // Output the status with appropriate color
                                         echo '<td class="' . $status_color . '">' . $status . '</td>';
 
-
-                                        // Check if status is "Pending"
-                                        if ($row4['status'] == 'Pending') {
+                                        // Check if status is "Done"
+                                        if ($row4['status'] == 'Done') {
                                             // Display the button
                                             echo '<td>';
                                             echo '<form method="post" action="">';
                                             echo '<input type="hidden" name="request_id" value="' . $row4['request_id'] . '">';
-                                            echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#ForOutsource">Done</button>';
+                                            echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#ForViewDone">View</button>';
                                             echo '</form>';
                                             echo '</td>';
                                         } else {
@@ -879,6 +949,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         echo '<td style="display:none;">' . $row4['description'] . '</td>';
                                         echo '<td style="display:none;">' . $row4['req_by'] . '</td>';
                                         echo '<td style="display:none;">' . $row4['return_reason'] . '</td>';
+                                        echo '<td style="display:none;">' . $row4['outsource_info'] . '</td>';
+                                        echo '<td style="display:none;">' . $row4['first_assignee'] . '</td>';
+                                        echo '<td style="display:none;">' . $row4['admins_remark'] . '</td>';
+                                        echo '<td style="display:none;">' . $row4['mp_remark'] . '</td>';
+
                                         echo '<td></td>';
                                         echo '</tr>';
                                     }
@@ -899,7 +974,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="modal-parent">
                             <div class="modal modal-xl fade" id="addRequest" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
+                                <div class="modal-content">
                                         <div class="modal-header">
                                             <h5>Add New Request:</h5>
                                             <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
@@ -910,7 +985,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                     <label for="new_request_id" class="form-label">Request ID:</label>
                                                     <input type="text" class="form-control" id="new_request_id" name="new_request_id" readonly />
                                                 </div>
-
                                                 <div class="col-4">
                                                     <label for="new_building" class="form-label">Building:</label>
                                                     <select class="form-control" id="new_building" name="new_building">
@@ -931,7 +1005,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                         <option value="" selected="selected">Select Room</option>
                                                     </select>
                                                 </div>
-
                                                 <div class="col-4" style="display:none;">
                                                     <label for="new_campus" class="form-label">Campus:</label>
                                                     <input type="text" class="form-control" id="new_campus" name="new_campus" value="San Francisco" />
@@ -985,6 +1058,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                             },
                                                             success: function(response) {
                                                                 $('#new_assignee').val(response);
+                                                                $('#new_first_assignee').val(response); // Set first_assignee to the same value
                                                             },
                                                             error: function(xhr, status, error) {
                                                                 alert('Error: ' + error);
@@ -1003,8 +1077,35 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                     <input type="text" class="form-control" value="Pending" id="new_status" name="new_status" />
                                                 </div>
 
-                                                <div class="col-4">
-                                                    <label for="new_deadline" class="form-label">Deadline:</label>
+                                                <div class="col-4" style="display: none;">
+                                                    <label for="new_status" class="form-label">Status:</label>
+                                                    <input type="text" class="form-control" value="Pending" id="new_status" name="new_status" />
+                                                </div>
+                                                <div class="col-4" style="display:none;" id="outsourceInfoField">
+                                                    <label for="new_outsource_info" class="form-label">Outsource
+                                                        Info:</label>
+                                                    <input type="text" class="form-control" id="new_outsource_info" name="new_outsource_info" />
+                                                </div>
+
+                                                <script>
+                                                    // Function to show or hide the outsource info field based on the selected category
+                                                    function toggleOutsourceInfoField() {
+                                                        var category = document.getElementById('new_category').value;
+                                                        var outsourceInfoField = document.getElementById('outsourceInfoField');
+                                                        if (category === 'Outsource') {
+                                                            outsourceInfoField.style.display = 'block';
+                                                        } else {
+                                                            outsourceInfoField.style.display = 'none';
+                                                        }
+                                                    }
+
+                                                    toggleOutsourceInfoField();
+                                                    document.getElementById('new_category').addEventListener('change', toggleOutsourceInfoField);
+                                                </script>
+
+                                                <div class="col-md-4 offset-md-4">
+                                                    <!-- Deadline textbox on the right -->
+                                                    <label for="new_deadline" class="form-label text-end">Deadline:</label>
                                                     <input type="date" class="form-control" id="new_deadline" name="new_deadline" />
                                                 </div>
 
@@ -1013,6 +1114,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                     <input type="text" class="form-control" id="new_description" name="new_description" />
                                                 </div>
 
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="new_first_assignee" class="form-label">First
+                                                        Assignee:</label>
+                                                    <input type="text" class="form-control" id="new_first_assignee" name="new_first_assignee" />
+                                                </div>
+
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="new_mp_remark" class="form-label">MP Remark:</label>
+                                                    <input type="text" class="form-control" id="new_mp_remark" name="new_mp_remark" />
+                                                </div>
                                                 <div class="footer">
                                                     <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#ForAdd" onclick="showAddConfirmation()">
                                                         Save
@@ -1040,109 +1151,162 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
                         </form>
 
-                        <!--MODAL FOR THE APPROVAL-->
-                        <div class="modal-parent">
-                            <div class="modal modal-xl fade" id="ForApproval" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5>For Approval:</h5>
+                       <!--MODAL FOR THE APPROVAL-->
+                    <div class="modal-parent">
+                        <div class="modal modal-xl fade" id="ForApproval" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5>For Approval:</h5>
 
-                                            <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form id="approvalForm" method="post" class="row g-3">
-                                                <div class="col-4" style="display:none;">
-                                                    <label for="request_id" class="form-label">Request ID:</label>
-                                                    <input type="text" class="form-control" id="request_id" name="request_id" readonly />
-                                                </div>
-                                                <div class="col-4" style="display:none;">
-                                                    <label for="date" class="form-label">Date & Time:</label>
-                                                    <input type="text" class="form-control" id="date" name="date" />
-                                                </div>
-                                                <div class="col-4" style="display:none;">
-                                                    <label for="campus" class="form-label">Campus:</label>
-                                                    <input type="text" class="form-control" id="campus" name="campus" value="San Francisco" />
-                                                </div>
-                                                <div class="col-4">
-                                                    <label for="building" class="form-label">Building:</label>
-                                                    <input type="text" class="form-control" id="building" name="building" readonly />
-                                                </div>
+                                        <button class="btn btn-close-modal-emp close-modal-btn"
+                                            data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="approvalForm" method="post" class="row g-3">
+                                            <div class="col-4" style="display:none;">
+                                                <label for="request_id" class="form-label">Request ID:</label>
+                                                <input type="text" class="form-control" id="request_id"
+                                                    name="request_id" readonly />
+                                            </div>
+                                            <div class="col-4" style="display:none;">
+                                                <label for="date" class="form-label">Date & Time:</label>
+                                                <input type="text" class="form-control" id="date" name="date" />
+                                            </div>
+                                            <div class="col-4" style="display:none;">
+                                                <label for="campus" class="form-label">Campus:</label>
+                                                <input type="text" class="form-control" id="campus" name="campus"
+                                                    value="San Francisco" />
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="building" class="form-label">Building:</label>
+                                                <input type="text" class="form-control" id="building" name="building"
+                                                    readonly />
+                                            </div>
 
-                                                <div class="col-4">
-                                                    <label for="floor" class="form-label">Floor:</label>
-                                                    <input type="text" class="form-control" id="floor" name="floor" readonly />
-                                                </div>
+                                            <div class="col-4">
+                                                <label for="floor" class="form-label">Floor:</label>
+                                                <input type="text" class="form-control" id="floor" name="floor"
+                                                    readonly />
+                                            </div>
 
-                                                <div class="col-4">
-                                                    <label for="room" class="form-label">Room: </label>
-                                                    <input type="text" class="form-control" id="room" name="room" readonly />
-                                                </div>
+                                            <div class="col-4">
+                                                <label for="room" class="form-label">Room: </label>
+                                                <input type="text" class="form-control" id="room" name="room"
+                                                    readonly />
+                                            </div>
 
-                                                <div class="col-4">
-                                                    <label for="equipment" class="form-label">Equipment :</label>
-                                                    <input type="text" class="form-control" id="equipment" name="equipment" readonly />
-                                                </div>
+                                            <div class="col-4">
+                                                <label for="equipment" class="form-label">Equipment :</label>
+                                                <input type="text" class="form-control" id="equipment" name="equipment"
+                                                    readonly />
+                                            </div>
 
-                                                <div class="col-4" style="display:none;">
-                                                    <label for="req_by" class="form-label">Requested By: </label>
-                                                    <input type="text" class="form-control" id="req_by" name="req_by" />
-                                                </div>
+                                            <div class="col-4" style="display:none;">
+                                                <label for="req_by" class="form-label">Requested By: </label>
+                                                <input type="text" class="form-control" id="req_by" name="req_by" />
+                                            </div>
 
-                                                <div class="col-4">
-                                                    <label for="category" class="form-label">Category:</label>
-                                                    <select class="form-select" id="category" name="category" onchange="fetchRandomAssignee()">
-                                                        <option value="Outsource">Outsource</option>
-                                                        <option value="Carpentry">Carpentry</option>
-                                                        <option value="Electrical">Electrical</option>
-                                                        <option value="Plumbing">Plumbing</option>
-                                                    </select>
-                                                </div>
+                                            <div class="col-4">
+                                                <label for="category" class="form-label">Category:</label>
+                                                <select class="form-select" id="category" name="category"
+                                                    onchange="fetchRandomAssignee()">
+
+                                                    <option value="Carpentry">Carpentry</option>
+                                                    <option value="Electrical">Electrical</option>
+                                                    <option value="Plumbing">Plumbing</option>
+                                                    <option value="Outsource">Outsource</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Add an empty assignee select element -->
+                                            <div class="col-4">
+                                                <label id="assignee-label" for="assignee"
+                                                    class="form-label">Assignee:</label>
+                                                <select class="form-select" id="assignee" name="assignee"></select>
+
+                                                <input type="text" class="form-control" id="assigneeInput"
+                                                    name="assignee" style="display: none;">
+
+                                                <input type="text" class="form-control" id="assigneeInputreal"
+                                                    name="assigneereal" style="display:none;">
+                                            </div>
+
+                                            <div class="col-4" style="display:none;">
+                                                <label for="status" class="form-label">Status:</label>
+                                                <input type="text" class="form-control" value="Pending"
+                                                    id="status_modal" name="status" />
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="deadline" class="form-label">Deadline:</label>
+                                                <input type="date" class="form-control" id="deadline" name="deadline" />
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="first_assignee" class="form-label">First
+                                                    Assignee:</label>
+                                                <input type="text" class="form-control" id="first_assignee"
+                                                    name="first_assignee" readonly />
+                                            </div>
+
+                                            <!-- Add outsource_info field -->
+                                            <div class="col-4" id="outsourceInfoFieldapprove" style="display: none;">
+                                                <label for="outsource_info" class="form-label">Outsource Info:</label>
+                                                <input type="text" class="form-control" id="outsource_info"
+                                                    name="outsource_info" />
+                                            </div>
 
 
-                                                <!-- Add an empty assignee select element -->
-                                                <div class="col-4">
-                                                    <label id="assignee-label" for="assignee" class="form-label">Assignee:</label>
-                                                    <select class="form-select" id="assignee" name="assignee"></select>
-
-                                                    <input type="text" class="form-control" id="assigneeInput" name="assignee" style="display: none;">
-
-                                                    <input type="text" class="form-control" id="assigneeInputreal" name="assigneereal" style="display:none;">
-                                                </div>
-
-
-
-                                                <div class="col-4" style="display:none;">
-                                                    <label for="status" class="form-label">Status:</label>
-                                                    <input type="text" class="form-control" value="Pending" id="status_modal" name="status" />
-                                                </div>
-
-                                                <div class="col-4">
-                                                    <label for="deadline" class="form-label">Deadline:</label>
-                                                    <input type="date" class="form-control" id="deadline" name="deadline" />
-                                                </div>
-
-                                                <div class="col-12">
+                                                <div class="col-12" id="textareaContainerD">
                                                     <label for="description" class="form-label">Description:</label>
                                                     <input type="text" class="form-control" id="description" name="description" />
                                                 </div>
 
-                                                <div class="col-12">
+                                                <div class="col-12" id="textareaContainerR">
                                                     <label for="return_reason" class="form-label">Transfer
                                                         Reason:</label>
                                                     <input type="text" class="form-control" id="return_reason" name="return_reason" readonly />
                                                 </div>
 
-                                                <div class="footer">
-                                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#ForApprovals" onclick="showApprovalConfirmation()">
-                                                        Save
-                                                    </button>
-                                                </div>
+                                            <!-- JavaScript to toggle visibility based on category selection -->
+                                            <script>
+                                                // Function to show or hide the outsource_info field based on the selected category
+                                                function toggleOutsourceInfoFieldapprove() {
+                                                    var category = document.getElementById('category').value;
+                                                    var outsourceInfoFieldapprove = document.getElementById('outsourceInfoFieldapprove');
+                                                    if (category === 'Outsource') {
+                                                        outsourceInfoFieldapprove.style.display = 'block';
+                                                    } else {
+                                                        outsourceInfoFieldapprove.style.display = 'none';
+                                                    }
+                                                }
+
+                                                // Call the function initially and add an event listener to the category select element
+                                                toggleOutsourceInfoFieldapprove();
+                                                document.getElementById('category').addEventListener('change', toggleOutsourceInfoFieldapprove);
+                                            </script>
+
+
+
+
+                                            <div class="col-12">
+                                                <label for="admins_remark" class="form-label">Remarks</label>
+                                                <input type="text" class="form-control" id="admins_remark"
+                                                    name="admins_remark" />
+                                            </div>
+                                            <div class="footer">
+                                                <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
+                                                    data-bs-target="#ForApprovals" onclick="showApprovalConfirmation()">
+                                                    Save
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
 
                         <!--Edit for approval-->
                         <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -1160,8 +1324,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
                         </form>
 
-                        <!--MODAL FOR OUTSOURCE-->
-                        <div class="modal-parent">
+                                                <!--MODAL FOR OUTSOURCE-->
+                                                <div class="modal-parent">
                             <div class="modal modal-xl fade" id="ForOutsource" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
@@ -1222,9 +1386,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                     });
                                                 </script>
 
+
+                                                <!-- Add an empty assignee select element -->
                                                 <div class="col-4">
-                                                    <label for="new2_assignee" class="form-label">Assignee:</label>
+                                                    <label id="assignee-label" for="new2_assignee" class="form-label">Assignee:</label>
                                                     <input type="text" class="form-control" id="new2_assignee" name="new2_assignee" readonly />
+                                                    <!-- <select class="form-select" id="assignee" name="assignee"></select> -->
+
                                                 </div>
 
                                                 <div class="col-4" style="display: none;">
@@ -1239,7 +1407,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                                 <div class="col-12">
                                                     <label for="new2_description" class="form-label">Description:</label>
-                                                    <input type="text" class="form-control" id="new2_description" name="new2_description" />
+                                                    <input type="text" class="form-control" id="new2_description" name="new2_description" readonly />
                                                 </div>
 
 
@@ -1250,7 +1418,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 </div>
 
                                                 <div class="footer">
-                                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#ForOutsources" onclick="showOutsourcesConfirmation()">
+                                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#ForOutsourcess" onclick="showOutsourcesConfirmation()">
                                                         Save
                                                     </button>
                                                 </div>
@@ -1259,7 +1427,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 </div>
                             </div>
                         </div>
-
                         <!--edit for outsource-->
                         <div class="modal fade" id="addoutsource" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
@@ -1276,6 +1443,149 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             </div>
                         </div>
                         </form>
+
+                        <!--MODAL FOR THE DONE VIEW-->
+                        <div class="modal-parent">
+                            <div class="modal modal-xl fade" id="ForViewDone" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5>View Done Request:</h5>
+
+                                            <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="post" class="row g-3">
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="request_id_done" class="form-label">Request ID:</label>
+                                                    <input type="text" class="form-control" id="request_id_done" name="request_id_done" readonly />
+                                                </div>
+
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="date_done" class="form-label">Date & Time:</label>
+                                                    <input type="text" class="form-control" id="date_done" name="date_done" />
+                                                </div>
+
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="campus_done" class="form-label">Campus:</label>
+                                                    <input type="text" class="form-control" id="campus_done" name="campus_done" value="San Francisco" />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="building_done" class="form-label">Building:</label>
+                                                    <input type="text" class="form-control" id="building_done" name="building_done" readonly />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="floor_done" class="form-label">Floor:</label>
+                                                    <input type="text" class="form-control" id="floor_done" name="floor_done" readonly />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="room_done" class="form-label">Room:</label>
+                                                    <input type="text" class="form-control" id="room_done" name="room_done" readonly />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="equipment_done" class="form-label">Equipment :</label>
+                                                    <input type="text" class="form-control" id="equipment_done" name="equipment_done" readonly />
+                                                </div>
+
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="req_by_done" class="form-label">Requested By:</label>
+                                                    <input type="text" class="form-control" id="req_by_done" name="req_by_done" />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="category_done" class="form-label">Category:</label>
+                                                    <input type="text" class="form-control" id="category_done" name="category_done" readonly />
+
+                                                </div>
+
+
+                                                <!-- Add an empty assignee select element -->
+                                                <div class="col-4">
+                                                    <label id="assignee-label" for="assignee_done" class="form-label">Assignee:</label>
+                                                    <input type="text" class="form-control" id="assignee_done" name="assignee_done" readonly />
+
+
+                                                    <input type="text" class="form-control" id="assigneeInput_done" name="assignee_done" style="display: none;">
+
+                                                    <input type="text" class="form-control" id="assigneeInputreal_done" name="assigneereal_done" style="display:none;">
+                                                </div>
+
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="status_done" class="form-label">Status:</label>
+                                                    <input type="text" class="form-control" value="Pending" id="status_modal_done" name="status_done" />
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label for="deadline_done" class="form-label">Deadline:</label>
+                                                    <input type="text" class="form-control" id="deadline_done" name="deadline_done" readonly />
+                                                </div>
+                                                <div class="col-12">
+                                                    <label for="description_done" class="form-label">Description:</label>
+                                                    <input type="text" class="form-control" id="description_done" name="description_done" readonly />
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <label for="return_reason_done" class="form-label">Transfer
+                                                        Reason:</label>
+                                                    <input type="text" class="form-control" id="return_reason_done" name="return_reason_done" readonly />
+                                                </div>
+
+                                                <div class="col-4" id="outsourceInfoFieldapprove_done" style="display: none;">
+                                                    <label for="outsource_info_done" class="form-label">Outsource
+                                                        Info:</label>
+                                                    <input type="text" class="form-control" id="outsource_info_done" name="outsource_info_done" />
+                                                </div>
+
+                                                <!-- JavaScript to toggle visibility based on category selection -->
+                                                <script>
+                                                    // Function to show or hide the outsource_info field based on the selected category
+                                                    function toggleOutsourceInfoFieldapprove() {
+                                                        var category = document.getElementById('category').value;
+                                                        var outsourceInfoFieldapprove = document.getElementById('outsourceInfoFieldapprove');
+                                                        if (category === 'Outsource') {
+                                                            outsourceInfoFieldapprove.style.display = 'block';
+                                                        } else {
+                                                            outsourceInfoFieldapprove.style.display = 'none';
+                                                        }
+                                                    }
+
+                                                    // Call the function initially and add an event listener to the category select element
+                                                    toggleOutsourceInfoFieldapprove();
+                                                    document.getElementById('category').addEventListener('change', toggleOutsourceInfoFieldapprove);
+                                                </script>
+
+
+
+                                                <div class="col-12" style="display:none;">
+                                                    <label for="first_assignee_done" class="form-label">First
+                                                        Assignee:</label>
+                                                    <input type="text" class="form-control" id="first_assignee_done" name="first_assignee_done" readonly />
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <label for="admins_remark_done" class="form-label">Your Remarks:</label>
+                                                    <input type="text" class="form-control" id="admins_remark_done" name="admins_remark_done" readonly />
+                                                </div>
+                                                <div class="col-12">
+                                                    <label for="mp_remark_done" class="form-label">Personnel Remarks:</label>
+                                                    <input type="text" class="form-control" id="mp_remark_done" name="mp_remark_done" readonly />
+                                                </div>
+
+                                                <div class="footer">
+                                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal">
+                                                        Close
+                                                    </button>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
 
 
@@ -1308,7 +1618,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/archive.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
         <script src="../../src/js/logout.js"></script>
-        <script src="../../src/js/sanfrancisco.js"></script>
+        <script src="../../src/js/sanfranciscopersonnel.js"></script>
 
         <!-- Cascading Script -->
         <script>
@@ -1443,43 +1753,49 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </script>
 
 
-        <!--PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
-        <script>
-            $(document).ready(function() {
-                // Function to populate modal fields
-                function populateModal(row) {
-                    // Populate modal fields with data from the row
-                    $("#request_id").val(row.find("td:eq(0)").text());
-                    $("#date").val(row.find("td:eq(1)").text());
-                    $("#category").val(row.find("td:eq(2)").text());
-                    // If building, floor, and room are concatenated in a single cell, split them
-                    var buildingFloorRoom = row.find("td:eq(3)").text().split(', ');
-                    $("#building").val(buildingFloorRoom[0]);
-                    $("#floor").val(buildingFloorRoom[1]);
-                    $("#room").val(buildingFloorRoom[2]);
-                    $("#equipment").val(row.find("td:eq(4)").text());
-                    $("#assignee").val(row.find("td:eq(5)").text());
-                    $("#status").val(row.find("td:eq(6)").text());
-                    $("#deadline").val(row.find("td:eq(7)").text());
-                    $("#description").val(row.find("td:eq(13)").text());
-                    $("#return_reason").val(row.find("td:eq(15)").text());
+            <!--PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
+            <script>
+                $(document).ready(function() {
+                    // Function to populate modal fields
+                    function populateModal(row) {
+                        // Populate modal fields with data from the row
+                        $("#request_id").val(row.find("td:eq(0)").text());
+                        $("#date").val(row.find("td:eq(1)").text());
+                        $("#category").val(row.find("td:eq(2)").text());
+                        // If building, floor, and room are concatenated in a single cell, split them
+                        var buildingFloorRoom = row.find("td:eq(3)").text().split(', ');
+                        $("#building").val(buildingFloorRoom[0]);
+                        $("#floor").val(buildingFloorRoom[1]);
+                        $("#room").val(buildingFloorRoom[2]);
+                        $("#equipment").val(row.find("td:eq(4)").text());
+                        $("#assignee").val(row.find("td:eq(5)").text());
+                        $("#status").val(row.find("td:eq(6)").text());
+                        $("#deadline").val(row.find("td:eq(7)").text());
+                        $("#description").val(row.find("td:eq(13)").text());
+                        $("#return_reason").val(row.find("td:eq(15)").text());
 
-                    // Check if return_reason has a value
-                    if (row.find("td:eq(15)").text().trim() !== '') {
-                        $("#return_reason").closest('.col-12').show(); // Show the div if there's a value
-                    } else {
-                        $("#return_reason").closest('.col-12').hide(); // Hide the div if there's no value
+                        // Check if return_reason has a value
+                        if (row.find("td:eq(15)").text().trim() !== '') {
+                            $("#return_reason").closest('.col-12').show(); // Show the div if there's a value
+                        } else {
+                            $("#return_reason").closest('.col-12').hide(); // Hide the div if there's no value
+                        }
+
+                        // Additional fields
+                        $("#outsource_info").val(row.find("td:eq(16)").text());
+                        $("#first_assignee").val(row.find("td:eq(17)").text());
+                        $("#admins_remark").val(row.find("td:eq(18)").text());
+                        $("#mp_remark").val(row.find("td:eq(19)").text());
                     }
-                }
 
-                // Click event for the "Approve" button
-                $("button[data-bs-target='#ForApproval']").click(function() {
-                    var row = $(this).closest("tr"); // Get the closest row to the clicked button
-                    populateModal(row); // Populate modal fields with data from the row
-                    $("#ForApproval").modal("show"); // Show the modal
+                    // Click event for the "Approve" button
+                    $("button[data-bs-target='#ForApproval']").click(function() {
+                        var row = $(this).closest("tr"); // Get the closest row to the clicked button
+                        populateModal(row); // Populate modal fields with data from the row
+                        $("#ForApproval").modal("show"); // Show the modal
+                    });
                 });
-            });
-        </script>
+            </script>
 
         <!--2 PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
         <script>
@@ -1512,6 +1828,47 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     var row = $(this).closest("tr"); // Get the closest row to the clicked button
                     populateModalForOutsource(row); // Populate modal fields with data from the row
                     $("#ForOutsource").modal("show"); // Show the modal
+                });
+            });
+        </script>
+
+        <!--2 PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
+        <script>
+            $(document).ready(function() {
+                // Function to populate modal fields for modal "ForViewDone" with data from row 2
+                function populateModalForViewDone(row) {
+                    // Populate modal fields with data from the row
+                    $("#request_id_done").val(row.find("td:eq(0)").text());
+                    $("#building_done").val(row.find("td:eq(3)").text().split(', ')[0]);
+                    $("#floor_done").val(row.find("td:eq(3)").text().split(', ')[1]);
+                    $("#room_done").val(row.find("td:eq(3)").text().split(', ')[2]);
+                    $("#equipment_done").val(row.find("td:eq(4)").text());
+                    $("#assignee_done").val(row.find("td:eq(5)").text());
+                    $("#category_done").val(row.find("td:eq(2)").text());
+                    $("#status_done").val(row.find("td:eq(6)").text());
+                    $("#deadline_done").val(row.find("td:eq(6)").text());
+                    $("#description_done").val(row.find("td:eq(13)").text());
+                    $("#return_reason_done").val(row.find("td:eq(15)").text());
+
+                    // Check if return_reason has a value
+                    if (row.find("td:eq(15)").text().trim() !== '') {
+                        $("#return_reason_done").closest('.col-12').show(); // Show the div if there's a value
+                    } else {
+                        $("#return_reason_done").closest('.col-12').hide(); // Hide the div if there's no value
+                    }
+
+                    // Additional fields
+                    $("#outsource_info_done").val(row.find("td:eq(16)").text());
+                    $("#first_assignee_done").val(row.find("td:eq(17)").text());
+                    $("#admins_remark_done").val(row.find("td:eq(18)").text());
+                    $("#mp_remark_done").val(row.find("td:eq(19)").text());
+                }
+
+                // Click event for the "Done" button for modal "ForViewDone" based on row 2
+                $("button[data-bs-target='#ForViewDone']").click(function() {
+                    var row = $(this).closest("tr"); // Get the closest row to the clicked button
+                    populateModalForViewDone(row); // Populate modal fields with data from the row
+                    $("#ForViewDone").modal("show"); // Show the modal
                 });
             });
         </script>
@@ -1692,6 +2049,64 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         </script>
 
+        <script>
+            // Select all <td> elements with the class "red", "blue", or "green"
+            var tdElements = document.querySelectorAll("td.red, td.blue, td.green, td.orange");
+
+            // Loop through each selected <td> element
+            tdElements.forEach(function(tdElement) {
+                // Get the text content of the <td> element
+                var textContent = tdElement.textContent;
+
+                // Create a new <span> element
+                var spanElement = document.createElement("span");
+
+                // Set the text content of the <span> element to the text content of the <td> element
+                spanElement.textContent = textContent;
+
+                // Add a class name based on the color of the <td> element
+                if (tdElement.classList.contains("red")) {
+                    spanElement.classList.add("red-value");
+                } else if (tdElement.classList.contains("blue")) {
+                    spanElement.classList.add("blue-value");
+                } else if (tdElement.classList.contains("green")) {
+                    spanElement.classList.add("green-value");
+                } else if (tdElement.classList.contains("orange")) {
+                    spanElement.classList.add("orange-value");
+                }
+
+                // Replace the text content of the <td> element with the <span> element
+                tdElement.textContent = "";
+                tdElement.appendChild(spanElement);
+            });
+        </script>
+
+        <script>
+            // Create a textarea element
+            var textarea = document.createElement("textarea");
+            textarea.className = "form-control";
+            textarea.id = "description";
+            textarea.name = "description";
+
+            // Replace the input element with the textarea element
+            var container = document.getElementById("textareaContainerD");
+            var inputElement = container.querySelector("input");
+            container.replaceChild(textarea, inputElement);
+        </script>
+
+        <script>
+            // Create a textarea element
+            var textarea = document.createElement("textarea");
+            textarea.className = "form-control";
+            textarea.id = "return_reason";
+            textarea.name = "return_reason";
+            textarea.setAttribute("readonly", ""); // Set readonly attribute
+
+            // Replace the input element with the textarea element
+            var container = document.getElementById("textareaContainerR");
+            var inputElement = container.querySelector("input");
+            container.replaceChild(textarea, inputElement);
+        </script>
 
     </body>
 
