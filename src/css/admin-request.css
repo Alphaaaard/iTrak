@@ -215,3 +215,7 @@ td:last-child {
     display: none;
   }
 }
+
+.past-due-row {
+  background-color: #ffcccc; /* or any other red color */
+}

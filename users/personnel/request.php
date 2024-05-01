@@ -91,7 +91,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sql01 = "SELECT r.* FROM request r
     INNER JOIN account a ON r.assignee = CONCAT(a.firstName, ' ', a.lastName)
     WHERE r.campus IN ('Batasan', 'San Bartolome', 'San Francisco') 
-    AND r.status IN ('For Approval', 'Pending') AND a.accountId = ?
+    AND r.status IN ('For Approval', 'Pending' ,'Overdue') AND a.accountId = ?
     ORDER BY r.date DESC";
 
     $stmt01 = $conn->prepare($sql01);
@@ -745,32 +745,39 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                     echo "<div class='table-container'>";
                                     echo "<table>";
                                     while ($row = $result01->fetch_assoc()) {
-                                        echo '<tr>';
-                                        echo '<td>' . $row['request_id'] . '</td>';
-                                        echo '<td>' . $row['date'] . '</td>';
-                                        echo '<td>' . $row['category'] . '</td>';
-                                        echo '<td>' . $row['building'] . ', ' . $row['floor'] . ', ' . $row['room'] . '</td>';
-                                        echo '<td>' . $row['equipment'] . '</td>';
+                                        // Check if the status is "Overdue"
+                                        $status = $row['status'];
+                                        $row_class = ($status == 'Overdue') ? 'past-due-row' : '';
+                                        // Output the table row with the appropriate CSS class
+                                        echo '<tr class="' . $row_class . '">';
+                                        echo '<td style="color: ' . (($status == 'Overdue') ? 'red' : 'black') . ';">' . $row['request_id'] . '</td>';
+                                        echo '<td style="color: ' . (($status == 'Overdue') ? 'red' : 'black') . ';">' . $row['date'] . '</td>';
+                                        echo '<td style="color: ' . (($status == 'Overdue') ? 'red' : 'black') . ';">' . $row['category'] . '</td>';
+                                        echo '<td style="color: ' . (($status == 'Overdue') ? 'red' : 'black') . ';">' . $row['building'] . ', ' . $row['floor'] . ', ' . $row['room'] . '</td>';
+                                        echo '<td style="color: ' . (($status == 'Overdue') ? 'red' : 'black') . ';">' . $row['equipment'] . '</td>';
                                         echo '<td style="display:none;">' . $row['assignee'] . '</td>';
-                                        echo '<td>' . $row['deadline'] . '</td>';
+                                        echo '<td style="color: ' . (($status == 'Overdue') ? 'red' : 'black') . ';">' . $row['deadline'] . '</td>';
                                         $status = $row['status'];
 
                                         $status_color = '';
+// Set the color based on the status
+switch ($status) {
+    case 'Pending':
+        $status_color = 'blue';
+        break;
+    case 'Done':
+        $status_color = 'green';
+        break;
+    case 'For Approval':
+        $status_color = 'orange';
+        break;
+    case 'Overdue':
+        $status_color = 'red'; // Choose an appropriate color for Overdue tasks
+        break;
+    default:
+        // Default color if status doesn't match
+        $status_color = 'black';
 
-                                        // Set the color based on the status
-                                        switch ($status) {
-                                            case 'Pending':
-                                                $status_color = 'blue';
-                                                break;
-                                            case 'Done':
-                                                $status_color = 'green';
-                                                break;
-                                            case 'For Approval':
-                                                $status_color = 'red';
-                                                break;
-                                            default:
-                                                // Default color if status doesn't match
-                                                $status_color = 'black';
                                         }
 
                                         // Output the status with appropriate color
