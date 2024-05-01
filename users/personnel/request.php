@@ -17,9 +17,11 @@ function insertActivityLog($conn, $accountId, $action)
     $m_seen = 1;
     $p_seen = 1;
 
-    $date = date('Y-m-d H:i:s', strtotime('+0 hours'));
-    $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab, seen, m_seen, p_seen) VALUES (?, NOW(), ?, ?, ?, ?, ?)");
-    $stmt->bind_param("isssiii", $accountId, $action, $date, $tab, $seen, $m_seen, $p_seen);
+    // Use the current date and time
+    $date = date('Y-m-d H:i:s');
+
+    $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab, seen, m_seen, p_seen) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("issssii", $accountId, $date, $action, $tab, $seen, $m_seen, $p_seen);
     $stmt->execute();
     $stmt->close();
 }
