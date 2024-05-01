@@ -759,7 +759,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             echo '<td>';
                                             echo '<form method="post" action="">';
                                             echo '<input type="hidden" name="request_id" value="' . $row['request_id'] . '">';
-                                            echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#ForApproval">Approve</button>';
+                                            echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#ForApproval">View</button>';
                                             echo '</form>';
                                             echo '</td>';
                                         } else {
@@ -859,7 +859,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             echo '<td>';
                                             echo '<form method="post" action="">';
                                             echo '<input type="hidden" name="request_id" value="' . $row2['request_id'] . '">';
-                                            echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#ForOutsource">Done</button>';
+                                            echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#ForOutsource">View</button>';
                                             echo '</form>';
                                             echo '</td>';
                                         } else {
@@ -955,7 +955,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             echo '<td>';
                                             echo '<form method="post" action="">';
                                             echo '<input type="hidden" name="request_id" value="' . $row4['request_id'] . '">';
-                                            echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#ForOutsource">Done</button>';
+                                            echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#ForOutsource">View</button>';
                                             echo '</form>';
                                             echo '</td>';
                                         } else {
@@ -1297,7 +1297,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 </div>
                                                 <div class="footer">
                                                     <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#ForApprovals" onclick="showApprovalConfirmation()">
-                                                        Save
+                                                        Approve
                                                     </button>
                                                 </div>
                                         </div>
@@ -1417,7 +1417,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                                 <div class="footer">
                                                     <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#ForOutsourcess" onclick="showOutsourcesConfirmation()">
-                                                        Save
+                                                        Done
                                                     </button>
                                                 </div>
                                         </div>
