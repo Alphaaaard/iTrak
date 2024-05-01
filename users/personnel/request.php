@@ -474,6 +474,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <link rel="stylesheet" href="../../src/css/archive.css" />
         <link rel="stylesheet" href="../../src/css/reports.css" />
         <link rel="stylesheet" href="../../src/css/request.css" />
+        <link rel="stylesheet" href="../../src/css/accordion.css" />
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
         <script>
             $(document).ready(function () {
