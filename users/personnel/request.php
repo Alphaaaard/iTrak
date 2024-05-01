@@ -225,7 +225,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         $deadline2 = $_POST['deadline'];
 
         // Calculate the current date plus 8 hours
-        $adjusted_date = date('Y-m-d H:i:s', strtotime('+8 hours'));
+        $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
 
         // Retrieve selected return_reason from radio buttons
         $return_reason = $_POST['return_reason'];
@@ -363,7 +363,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             $first_assignee2 = $_POST['first_assignee'];
             $admins_remark2 = $_POST['admins_remark'];
             // Calculate the current date plus 8 hours
-            $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
+            $adjusted_date = date('Y-m-d H:i:s', strtotime('+8 hours'));
 
             // SQL UPDATE query
             $sql6 = "UPDATE request 
