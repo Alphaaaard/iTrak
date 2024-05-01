@@ -865,7 +865,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         echo '<td>';
                                         echo '<form method="post" action="">';
                                         echo '<input type="hidden" name="request_id" value="' . $row2['request_id'] . '">';
-                                        echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#ForOutsource">Done</button>';
+                                        echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#ForOutsource">View</button>';
                                         echo '</form>';
                                         echo '</td>';
                                     } else {
@@ -1500,7 +1500,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
                                                     data-bs-target="#ForOutsourcess"
                                                     onclick="showOutsourcesConfirmation()">
-                                                    Save
+                                                    Mark As Done
                                                 </button>
                                             </div>
                                     </div>
