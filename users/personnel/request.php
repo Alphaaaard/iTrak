@@ -401,7 +401,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         $statusFeedback = 'Done';
     
         // Calculate the current date plus 8 hours
-        $adjusted_date = date('Y-m-d H:i:s', strtotime('+8 hours'));
+        $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
     
         // Retrieve the name of the currently logged-in user
         $user_id = $_SESSION['accountId']; // Assuming you store the user's ID in session
