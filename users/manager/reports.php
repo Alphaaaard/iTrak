@@ -630,10 +630,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <header>
                         <div class="cont-header">
                         <section id="content">
-            <main>
-                <div class="content-container">
-                    <header>
-                        <div class="cont-header">
+        
                             <!-- <h1 class="tab-name">Reports</h1> -->
                             <div class="tbl-filter">
                                 <select id="filter-criteria">
