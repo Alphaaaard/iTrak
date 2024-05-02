@@ -578,7 +578,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <li><a href="#" class="nav-link" data-bs-target="pills-profile">Under Maintenance</a></li>
                                 <li><a href="#" class="nav-link" data-bs-target="pills-replace">For Replacement</a></li>
                                 <li><a href="#" class="nav-link" data-bs-target="pills-repair">Need Repair</a></li>
-                                <li><a href="#" class="nav-link" data-bs-target="pills-out-source">Need Repair</a></li>
+                                <li><a href="#" class="nav-link" data-bs-target="pills-out-source">Outsource</a></li>
                             </ul>
                         </div>
 
