@@ -58,9 +58,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmt->fetch();
     $stmt->close();
 
-    // SQL query to retrieve tasks for the San Francisco campus
+    // SQL query to retrieve tasks for the Batasan campus
     $sql = "SELECT * FROM request 
-        WHERE campus = 'San Francisco' 
+        WHERE campus = 'Batasan' 
         AND (status IN ('Pending', 'For Approval', 'Overdue') OR 
              (status = 'Overdue' AND deadline < CURDATE() AND deadline IS NOT NULL AND deadline != '0000-00-00'))
         AND category != 'Outsource' 
@@ -69,16 +69,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
     // SQL query to retrieve tasks for the Batasan campus with category 'Outsource'
     $sql2 = "SELECT * FROM request 
-         WHERE campus = 'San Francisco' 
+         WHERE campus = 'Batasan' 
          AND (status IN ('Pending', 'Overdue') OR (status = 'Overdue' AND deadline < CURDATE() AND deadline IS NOT NULL AND deadline != '0000-00-00'))
          AND category = 'Outsource' 
          ORDER BY date DESC";
 
     $result2 = $conn->query($sql2) or die($conn->error);
 
-    // SQL query to retrieve tasks for the San Francisco campus that are 'Done'
+    // SQL query to retrieve tasks for the Batasan campus that are 'Done'
     $sql4 = "SELECT * FROM request 
-         WHERE campus = 'San Francisco' 
+         WHERE campus = 'Batasan' 
          AND status = 'Done' 
          ORDER BY date DESC";
     $result4 = $conn->query($sql4) or die($conn->error);
@@ -110,13 +110,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status = $_POST['new_status'];
         $description = $_POST['new_description'];
         $deadline = $_POST['new_deadline'];
+        $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
         $outsource_info = $_POST['new_outsource_info'];
         $first_assignee = $_POST['new_first_assignee'];
         $admins_remark = $_POST['new_admins_remark'];
         $mp_remark = $_POST['new_mp_remark'];
 
         // Calculate the current date plus 8 hours
-        $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
+       
 
         // Insert data into the request table
         $insertQuery = "INSERT INTO request (request_id, campus, building, floor, room, equipment, req_by, category, assignee, status, description, deadline, date, outsource_info, first_assignee, admins_remark, mp_remark)
@@ -137,7 +138,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             logActivity($conn, $_SESSION['accountId'], $action, 'General');
 
             // Redirect to the desired page
-            header("Location: sanFrancisco.php");
+            header("Location: batasan.php");
             exit(); // Make sure to exit to prevent further execution
         } else {
             echo "Error inserting data: " . $conn->error;
@@ -187,7 +188,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             logActivity($conn, $_SESSION['accountId'], $approval_action, 'General');
             logActivity($conn, $_SESSION['accountId'], $reassignment_action, 'General');
 
-            header("Location: sanFrancisco.php");
+            header("Location: batasan.php");
             exit();
         } else {
             // Error occurred while updating
@@ -323,7 +324,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 ?>
 
 
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="en">
 
     <head>
@@ -607,7 +608,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </li>
                 </div>
                 <div class="Map-container aaa">
-                    <li class="Map-Batasan">
+                    <li class="Map-Batasan active">
                         <a href="./batasan.php">
                             <i class="bi bi-building"></i>
                             <span class="text">Batasan</span>
@@ -619,7 +620,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             <span class="text">San Bartolome</span>
                         </a>
                     </li>
-                    <li class="Map-SanFrancisco  active">
+                    <li class="Map-SanFrancisco">
                         <a href="./sanFrancisco.php">
                             <i class="bi bi-building"></i>
                             <span class="text">San Francisco</span>
@@ -649,8 +650,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
                     </header>
                     <div class="new-nav-container">
-                        <!--Content start of tabs-->
-                        <div class="new-nav">
+                          <!--Content start of tabs-->
+                          <div class="new-nav">
                             <ul>
                                 <li><a href="#" class="nav-link" data-bs-target="pills-manager">Request</a></li>
                                 <li><a href="#" class="nav-link" data-bs-target="pills-profile">Outsource</a></li>
@@ -1007,7 +1008,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 </div>
                                                 <div class="col-4" style="display:none;">
                                                     <label for="new_campus" class="form-label">Campus:</label>
-                                                    <input type="text" class="form-control" id="new_campus" name="new_campus" value="San Francisco" />
+                                                    <input type="text" class="form-control" id="new_campus" name="new_campus" value="Batasan" />
                                                 </div>
 
 
@@ -1177,7 +1178,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             <div class="col-4" style="display:none;">
                                                 <label for="campus" class="form-label">Campus:</label>
                                                 <input type="text" class="form-control" id="campus" name="campus"
-                                                    value="San Francisco" />
+                                                    value="Batasan" />
                                             </div>
                                             <div class="col-4">
                                                 <label for="building" class="form-label">Building:</label>
@@ -1355,7 +1356,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 </div>
                                                 <div class="col-4" style="display:none;">
                                                     <label for="new2_campus" class="form-label">Campus:</label>
-                                                    <input type="text" class="form-control" id="new2_campus" name="new2_campus" value="San Francisco" />
+                                                    <input type="text" class="form-control" id="new2_campus" name="new2_campus" value="Batasan" />
                                                 </div>
 
 
@@ -1468,7 +1469,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                                                 <div class="col-4" style="display:none;">
                                                     <label for="campus_done" class="form-label">Campus:</label>
-                                                    <input type="text" class="form-control" id="campus_done" name="campus_done" value="San Francisco" />
+                                                    <input type="text" class="form-control" id="campus_done" name="campus_done" value="Batasan" />
                                                 </div>
 
                                                 <div class="col-4">
@@ -1597,7 +1598,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <!-- PROFILE MODALS -->
         <?php include_once 'modals/modal_layout.php'; ?>
 
-
         <!-- RFID MODAL -->
         <div class="modal" id="staticBackdrop112" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -1618,55 +1618,54 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/archive.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
         <script src="../../src/js/logout.js"></script>
-        <script src="../../src/js/sanfranciscoManager.js"></script>
+        <script src="../../src/js/batasan_manager.js"></script>
 
         <!-- Cascading Script -->
-        <script>
-            var subjectObject = {
-                "San Francisco Campus Building": {
-                    "1F": ["RM101", "RM102", "RM103"],
-                    "2F": ["RM201 Admin & Guidance Office", "RM202 Library", "RM203 Faculty & PESO Room", "RM204 Isolation & Clinic"],
-                    "3F": ["RM301 Regular Room", "RM302 Computer Laboratory", "RM303 Regular Room", "RM304 Regular Room"],
-                },
-                "Open Grounds (OG)": {
-                    // "PHP": ["Variables", "Strings", "Arrays"],
-                    // "SQL": ["SELECT", "UPDATE", "DELETE"]
-                },
-                // "Parking Area": {
-                //     "PHP": ["Variables", "Strings", "Arrays"],
-                //     "SQL": ["SELECT", "UPDATE", "DELETE"]
-                // }
+    <script>
+        var subjectObject = {
+            "Batasan Campus Building": {
+                "Basement": ["Male CR", "Female CR"],
+                "1F": ["Lobby", "Com Lab 104", "Com Lab 103", "Room 102", "Room 101", "Guidance Clinic 108", "Admin Office 107", "Faculty Room 106", "Library 105"],
+                "2F": ["Male CR left", "Female CR left", "03 room 201", "04 room 202", "05 room 203", "06 room 205", "07 room 206", "08 room 207", "Male CR right", "Female CR right"],
+                "3F": ["Room 301", "Room 302", "Room 303", "Room 304", "Room 305", "09 room 306", "10 room 307", "11 room 308", "12 room 309"],
+                "4F": ["20 room 401", "19 room 402", "18 room 403", "17 room 404", "Room 405", "16 room 406", "15 room 407", "14 room 408", "13 room 409"]
+            },
+            "Basketball Court": {
+                "None": ["None"]
+            },
+            "Parking Area": {
+                "None": ["None"]
             }
-            window.onload = function() {
-                var subjectSel = document.getElementById("new_building");
-                var topicSel = document.getElementById("new_floor");
-                var chapterSel = document.getElementById("new_room");
-                for (var x in subjectObject) {
-                    subjectSel.options[subjectSel.options.length] = new Option(x, x);
-                }
-                subjectSel.onchange = function() {
-                    //empty Chapters- and Topics- dropdowns
-                    chapterSel.length = 1;
-                    topicSel.length = 1;
-                    //display correct values
-                    for (var y in subjectObject[this.value]) {
-                        topicSel.options[topicSel.options.length] = new Option(y, y);
-                    }
-                }
-                topicSel.onchange = function() {
-                    //empty Chapters dropdown
-                    chapterSel.length = 1;
-                    //display correct values
-                    var z = subjectObject[subjectSel.value][this.value];
-                    for (var i = 0; i < z.length; i++) {
-                        chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
-                    }
+        }
+        window.onload = function () {
+            var subjectSel = document.getElementById("new_building");
+            var topicSel = document.getElementById("new_floor");
+            var chapterSel = document.getElementById("new_room");
+            for (var x in subjectObject) {
+                subjectSel.options[subjectSel.options.length] = new Option(x, x);
+            }
+            subjectSel.onchange = function () {
+                //empty Chapters- and Topics- dropdowns
+                chapterSel.length = 1;
+                topicSel.length = 1;
+                //display correct values
+                for (var y in subjectObject[this.value]) {
+                    topicSel.options[topicSel.options.length] = new Option(y, y);
                 }
             }
-        </script>
+            topicSel.onchange = function () {
+                //empty Chapters dropdown
+                chapterSel.length = 1;
+                //display correct values
+                var z = subjectObject[subjectSel.value][this.value];
+                for (var i = 0; i < z.length; i++) {
+                    chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+                }
+            }
+        }
+    </script>
 
-
-        <script>
+<script>
             // Get today's date
             var today = new Date();
 
