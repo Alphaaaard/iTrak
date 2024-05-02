@@ -1618,7 +1618,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/archive.js"></script>
         <script src="../../src/js/profileModalController.js"></script>
         <script src="../../src/js/logout.js"></script>
-        <script src="../../src/js/batasan_manager.js"></script>
+        <script src="../../src/js/batasanmanager.js"></script>
 
         <!-- Cascading Script -->
     <script>
