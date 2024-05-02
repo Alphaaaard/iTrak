@@ -51,7 +51,7 @@ function showAddConfirmation() {
     }).then((result) => {
       if (result.isConfirmed) {
         let swalConfirm = document.querySelector(".swal2-confirm");
-        swalConfirm.setAttribute("name", "outsource");
+        swalConfirm.setAttribute("name", "done");
   
         // AJAX
         let form = document.querySelector("#outsourcesForm");
