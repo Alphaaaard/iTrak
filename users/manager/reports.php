@@ -621,16 +621,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </a>
                 </li>
             </ul>
-        </section>
-        <!-- SIDEBAR -->
-
+            </section>
         <section id="content">
             <main>
                 <div class="content-container">
                     <header>
                         <div class="cont-header">
-                        <section id="content">
-        
                             <!-- <h1 class="tab-name">Reports</h1> -->
                             <div class="tbl-filter">
                                 <select id="filter-criteria">
