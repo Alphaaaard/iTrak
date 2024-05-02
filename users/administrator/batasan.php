@@ -120,7 +120,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $mp_remark = $_POST['new_mp_remark'];
 
         // Calculate the current date plus 8 hours
-   
+
 
         // Insert data into the request table
         $insertQuery = "INSERT INTO request (request_id, campus, building, floor, room, equipment, req_by, category, assignee, status, description, deadline, date, outsource_info, first_assignee, admins_remark, mp_remark)
@@ -216,17 +216,18 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status4 = 'Done';
         $description4 = $_POST['new2_description'];
         $deadline4 = $_POST['new2_deadline'];
+        $admins_remark4 = $_POST['new2_admins_remark']; // Assuming this is the input field for admin's remark
 
         // Calculate the current date plus 8 hours
         $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
 
         // Update data in the request table
-        $updateQuery = "UPDATE request SET campus=?, building=?, floor=?, room=?, equipment=?, req_by=?, category=?, assignee=?, status=?, description=?, deadline=?, date=? WHERE request_id=?";
+        $updateQuery = "UPDATE request SET campus=?, building=?, floor=?, room=?, equipment=?, req_by=?, category=?, assignee=?, status=?, description=?, deadline=?, admins_remark=?, date=? WHERE request_id=?";
 
         $stmt4 = $conn->prepare($updateQuery);
 
         // Bind parameters
-        $stmt4->bind_param("ssssssssssssi", $campus4, $building4, $floor4, $room4, $equipment4, $req_by4, $category4, $assignee4, $status4, $description4, $deadline4, $adjusted_date, $request_id4);
+        $stmt4->bind_param("sssssssssssssi", $campus4, $building4, $floor4, $room4, $equipment4, $req_by4, $category4, $assignee4, $status4, $description4, $deadline4, $admins_remark4, $adjusted_date, $request_id4);
 
         // Execute the query
         if ($stmt4->execute()) {
@@ -244,6 +245,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         $stmt4->close();
     }
+
 
 
     // Function to send email notifications for approaching deadlines
@@ -1493,6 +1495,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 <label for="new2_description" class="form-label">Description:</label>
                                                 <input type="text" class="form-control" id="new2_description"
                                                     name="new2_description" readonly />
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label for="new2_admins_remark" class="form-label">Your Remarks:</label>
+                                                <input type="text" class="form-control" id="new2_admins_remark"
+                                                    name="new2_admins_remark" />
                                             </div>
 
 

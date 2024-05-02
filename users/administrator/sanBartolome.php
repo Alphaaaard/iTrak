@@ -3,11 +3,11 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
-require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+// require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
-include_once("../../config/connection.php");
+include_once ("../../config/connection.php");
 date_default_timezone_set('Asia/Manila');
 $conn = connection();
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
@@ -214,17 +214,18 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status4 = 'Done';
         $description4 = $_POST['new2_description'];
         $deadline4 = $_POST['new2_deadline'];
+        $admins_remark4 = $_POST['new2_admins_remark']; // Assuming this is the input field for admin's remark
 
         // Calculate the current date plus 8 hours
         $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
 
         // Update data in the request table
-        $updateQuery = "UPDATE request SET campus=?, building=?, floor=?, room=?, equipment=?, req_by=?, category=?, assignee=?, status=?, description=?, deadline=?, date=? WHERE request_id=?";
+        $updateQuery = "UPDATE request SET campus=?, building=?, floor=?, room=?, equipment=?, req_by=?, category=?, assignee=?, status=?, description=?, deadline=?, admins_remark=?, date=? WHERE request_id=?";
 
         $stmt4 = $conn->prepare($updateQuery);
 
         // Bind parameters
-        $stmt4->bind_param("ssssssssssssi", $campus4, $building4, $floor4, $room4, $equipment4, $req_by4, $category4, $assignee4, $status4, $description4, $deadline4, $adjusted_date, $request_id4);
+        $stmt4->bind_param("sssssssssssssi", $campus4, $building4, $floor4, $room4, $equipment4, $req_by4, $category4, $assignee4, $status4, $description4, $deadline4, $admins_remark4, $adjusted_date, $request_id4);
 
         // Execute the query
         if ($stmt4->execute()) {
@@ -233,15 +234,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
             logActivity($conn, $_SESSION['accountId'], $action4, 'General');
 
-            // Redirect to the desired page
-            header("Location: sanBartolome.php");
-            exit(); // Make sure to exit to prevent further execution
+            // Redirect back to the page
+            header("Location: batasan.php");
+            exit();
         } else {
             echo "Error updating data: " . $conn->error;
         }
 
-        $conn->close();
+        $stmt4->close();
     }
+
 
 
 
@@ -327,7 +329,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
-?>
+    ?>
 
 
     <!DOCTYPE html>
@@ -338,7 +340,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>iTrak | Request</title>
         <link rel="icon" type="image/x-icon" href="../../src/img/tab-logo.png">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -349,7 +352,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
         <script>
-            $(document).ready(function() {
+            $(document).ready(function () {
                 let lastPillSelected = sessionStorage.getItem('lastPillArchive');
 
                 if (!lastPillSelected) {
@@ -374,7 +377,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     }
                 }
 
-                $(".nav-link").click(function() {
+                $(".nav-link").click(function () {
                     const targetId = $(this).data("bs-target");
 
                     sessionStorage.setItem('lastPillArchive', targetId);
@@ -430,7 +433,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <a href="#" class="notification" id="notification-button">
                             <i class="fa fa-bell" aria-hidden="true"></i>
                             <!-- Notification Indicator Dot -->
-                            <?php if ($unseenCount > 0) : ?>
+                            <?php if ($unseenCount > 0): ?>
                                 <span class="notification-indicator"></span>
                             <?php endif; ?>
                         </a>
@@ -527,165 +530,168 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             <div><a class="profile-role"><?php echo $_SESSION['role']; ?></a></div>
                             <hr>
                         </div>
-                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i class="bi bi-person profile-icons"></i>Profile</a>
+                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i
+                                class="bi bi-person profile-icons"></i>Profile</a>
                         <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
                     </div>
-                <?php
-            } else {
-                header("Location:../../index.php");
-                exit();
-            }
-                ?>
-                </div>
-            </nav>
-        </div>
-        <section id="sidebar">
-            <a href="./dashboard.php" class="brand" title="logo">
-                <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
-                <div class="mobile-sidebar-close">
-                    <i class="bi bi-arrow-left-circle"></i>
-                </div>
-            </a>
-            <ul class="side-menu top">
-                <li>
-                    <a href="./dashboard.php">
-                        <i class="bi bi-grid"></i>
-                        <span class="text">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="./attendance-logs.php">
-                        <i class="bi bi-calendar-week"></i>
-                        <span class="text">Attendance Logs</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="./staff.php">
-                        <i class="bi bi-person"></i>
-                        <span class="text">Staff</span>
-                    </a>
-                </li>
-                <div class="GPS-cont" onclick="toggleGPS()">
-                    <li class="GPS-dropdown">
-                        <div class="GPS-drondown-content">
-                            <div class="GPS-side-cont">
-                                <i class="bi bi-geo-alt"></i>
-                                <span class="text">GPS</span>
-                            </div>
-                            <div class="GPS-ind">
-                                <i id="chevron-icon" class="bi bi-chevron-down"></i>
-                            </div>
+                    <?php
+} else {
+    header("Location:../../index.php");
+    exit();
+}
+?>
+            </div>
+        </nav>
+    </div>
+    <section id="sidebar">
+        <a href="./dashboard.php" class="brand" title="logo">
+            <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
+            <div class="mobile-sidebar-close">
+                <i class="bi bi-arrow-left-circle"></i>
+            </div>
+        </a>
+        <ul class="side-menu top">
+            <li>
+                <a href="./dashboard.php">
+                    <i class="bi bi-grid"></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="./attendance-logs.php">
+                    <i class="bi bi-calendar-week"></i>
+                    <span class="text">Attendance Logs</span>
+                </a>
+            </li>
+            <li>
+                <a href="./staff.php">
+                    <i class="bi bi-person"></i>
+                    <span class="text">Staff</span>
+                </a>
+            </li>
+            <div class="GPS-cont" onclick="toggleGPS()">
+                <li class="GPS-dropdown">
+                    <div class="GPS-drondown-content">
+                        <div class="GPS-side-cont">
+                            <i class="bi bi-geo-alt"></i>
+                            <span class="text">GPS</span>
                         </div>
-                    </li>
-                </div>
-                <div class="GPS-container">
-                    <li class="GPS-Tracker">
-                        <a href="./gps.php">
-                            <i class="bi bi-crosshair"></i>
-                            <span class="text">GPS Tracker</span>
-                        </a>
-                    </li>
-                    <li class="GPS-History">
-                        <a href="./gps_history.php">
-                            <i class="bi bi-radar"></i>
-                            <span class="text">GPS History</span>
-                        </a>
-                    </li>
-                </div>
-                <li>
-                    <a href="./map.php">
-                        <i class="bi bi-map"></i>
-                        <span class="text">Map</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="./reports.php">
-                        <i class="bi bi-clipboard"></i>
-                        <span class="text">Reports</span>
-                    </a>
-                </li>
-                <div class="Map-cont" onclick="toggleMAP()">
-                    <li class="Map-dropdown active">
-                        <div class="Map-drondown-content">
-                            <div class="Map-side-cont">
-                                <i class="bi bi-receipt"></i>
-                                <span class="text">Request</span>
-                            </div>
-                            <div class="Map-ind">
-                                <i id="map-chevron-icon" class="bi bi-chevron-down"></i>
-                            </div>
+                        <div class="GPS-ind">
+                            <i id="chevron-icon" class="bi bi-chevron-down"></i>
                         </div>
-                    </li>
-                </div>
-                <div class="Map-container aaa">
-                    <li class="Map-Batasan">
-                        <a href="./batasan.php">
-                            <i class="bi bi-building"></i>
-                            <span class="text">Batasan</span>
-                        </a>
-                    </li>
-                    <li class="Map-SanBartolome active">
-                        <a href="./sanBartolome.php">
-                            <i class="bi bi-building"></i>
-                            <span class="text">San Bartolome</span>
-                        </a>
-                    </li>
-                    <li class="Map-SanFrancisco">
-                        <a href="./sanFrancisco.php">
-                            <i class="bi bi-building"></i>
-                            <span class="text">San Francisco</span>
-                        </a>
-                    </li>
-                </div>
-                <li>
-                    <a href="./archive.php">
-                        <i class="bi bi-archive"></i>
-                        <span class="text">Archive</span>
+                    </div>
+                </li>
+            </div>
+            <div class="GPS-container">
+                <li class="GPS-Tracker">
+                    <a href="./gps.php">
+                        <i class="bi bi-crosshair"></i>
+                        <span class="text">GPS Tracker</span>
                     </a>
                 </li>
-                <li>
-                    <a href="./activity-logs.php">
-                        <i class="bi bi-arrow-counterclockwise"></i>
-                        <span class="text">Activity Logs</span>
+                <li class="GPS-History">
+                    <a href="./gps_history.php">
+                        <i class="bi bi-radar"></i>
+                        <span class="text">GPS History</span>
                     </a>
                 </li>
-            </ul>
-        </section>
-        <section id="content">
-            <main>
-                <div class="content-container">
-                    <header>
-                        <div class="cont-header">
-                            <h1 class="tab-name"></h1>
-                            <div class="tbl-filter">
-                                <form class="d-flex" role="search" id="searchForm">
-                                    <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" name="q" />
-                                </form>
-                            </div>
+            </div>
+            <li>
+                <a href="./map.php">
+                    <i class="bi bi-map"></i>
+                    <span class="text">Map</span>
+                </a>
+            </li>
+            <li>
+                <a href="./reports.php">
+                    <i class="bi bi-clipboard"></i>
+                    <span class="text">Reports</span>
+                </a>
+            </li>
+            <div class="Map-cont" onclick="toggleMAP()">
+                <li class="Map-dropdown active">
+                    <div class="Map-drondown-content">
+                        <div class="Map-side-cont">
+                            <i class="bi bi-receipt"></i>
+                            <span class="text">Request</span>
                         </div>
-                    </header>
-                    <div class="new-nav-container">
-                        <!--Content start of tabs-->
-                        <div class="new-nav">
-                            <ul>
-                                <li><a href="#" class="nav-link" data-bs-target="pills-manager">Request</a></li>
-                                <li><a href="#" class="nav-link" data-bs-target="pills-profile">Outsource</a></li>
-                                <li><a href="#" class="nav-link" data-bs-target="pills-done">Done</a></li>
-                            </ul>
+                        <div class="Map-ind">
+                            <i id="map-chevron-icon" class="bi bi-chevron-down"></i>
                         </div>
-
-                        <!-- Export button -->
-                        <div class="export-mob-hide">
-                            <form method="post" id="exportForm">
-                                <input type="hidden" name="status" id="statusField" value="For Replacement">
-                                <button type="button" id="exportBtn" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#addRequest">Add Task</button>
+                    </div>
+                </li>
+            </div>
+            <div class="Map-container aaa">
+                <li class="Map-Batasan">
+                    <a href="./batasan.php">
+                        <i class="bi bi-building"></i>
+                        <span class="text">Batasan</span>
+                    </a>
+                </li>
+                <li class="Map-SanBartolome active">
+                    <a href="./sanBartolome.php">
+                        <i class="bi bi-building"></i>
+                        <span class="text">San Bartolome</span>
+                    </a>
+                </li>
+                <li class="Map-SanFrancisco">
+                    <a href="./sanFrancisco.php">
+                        <i class="bi bi-building"></i>
+                        <span class="text">San Francisco</span>
+                    </a>
+                </li>
+            </div>
+            <li>
+                <a href="./archive.php">
+                    <i class="bi bi-archive"></i>
+                    <span class="text">Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="./activity-logs.php">
+                    <i class="bi bi-arrow-counterclockwise"></i>
+                    <span class="text">Activity Logs</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <section id="content">
+        <main>
+            <div class="content-container">
+                <header>
+                    <div class="cont-header">
+                        <h1 class="tab-name"></h1>
+                        <div class="tbl-filter">
+                            <form class="d-flex" role="search" id="searchForm">
+                                <input class="form-control icon" type="search" placeholder="Search" aria-label="Search"
+                                    id="search-box" name="q" />
                             </form>
                         </div>
                     </div>
+                </header>
+                <div class="new-nav-container">
+                    <!--Content start of tabs-->
+                    <div class="new-nav">
+                        <ul>
+                            <li><a href="#" class="nav-link" data-bs-target="pills-manager">Request</a></li>
+                            <li><a href="#" class="nav-link" data-bs-target="pills-profile">Outsource</a></li>
+                            <li><a href="#" class="nav-link" data-bs-target="pills-done">Done</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Export button -->
+                    <div class="export-mob-hide">
+                        <form method="post" id="exportForm">
+                            <input type="hidden" name="status" id="statusField" value="For Replacement">
+                            <button type="button" id="exportBtn" class="btn btn-outline-danger" data-bs-toggle="modal"
+                                data-bs-target="#addRequest">Add Task</button>
+                        </form>
+                    </div>
+                </div>
 
 
-                    <div class="tab-content pt" id="myTabContent">
-                         <!--TABLE FOR REQUEST-->
+                <div class="tab-content pt" id="myTabContent">
+                    <!--TABLE FOR REQUEST-->
                     <div class="tab-pane fade show active" id="pills-manager" role="tabpanel"
                         aria-labelledby="home-tab">
                         <div class="table-content">
@@ -1183,7 +1189,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
                     </div>
                     </form>
-                         <!--MODAL FOR THE APPROVAL-->
+                    <!--MODAL FOR THE APPROVAL-->
                     <div class="modal-parent">
                         <div class="modal modal-xl fade" id="ForApproval" tabindex="-1"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1365,7 +1371,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                     </form>
 
-                           <!--MODAL FOR OUTSOURCE-->
+                    <!--MODAL FOR OUTSOURCE-->
                     <div class="modal-parent">
                         <div class="modal modal-xl fade" id="ForOutsource" tabindex="-1"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1468,11 +1474,18 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                             </div>
 
 
+
                                             <div class="col-12">
                                                 <label for="return_reason" class="form-label">Transfer
                                                     Reason:</label>
                                                 <input type="text" class="form-control" id="new2_return_reason"
                                                     name="new2_return_reason" readonly />
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label for="new2_admins_remark" class="form-label">Your Remarks:</label>
+                                                <input type="text" class="form-control" id="new2_admins_remark"
+                                                    name="new2_admins_remark" />
                                             </div>
 
                                             <div class="footer">
@@ -1656,9 +1669,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                     Remarks:</label>
                                                 <input type="text" class="form-control" id="admins_remark_done"
                                                     name="admins_remark_done" readonly />
-                                            </div> 
+                                            </div>
 
-                                           
+
 
                                             <div class="footer">
                                                 <button type="button" class="btn add-modal-btn" data-bs-toggle="modal">
@@ -1683,202 +1696,203 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     <?php include_once 'modals/modal_layout.php'; ?>
 
 
-        <!-- RFID MODAL -->
-        <div class="modal" id="staticBackdrop112" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <img src="../../src/img/taprfid.jpg" width="100%" alt="" class="Scan" />
+    <!-- RFID MODAL -->
+    <div class="modal" id="staticBackdrop112" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="../../src/img/taprfid.jpg" width="100%" alt="" class="Scan" />
 
-                        <form id="rfidForm">
-                            <input type="text" id="rfid" name="rfid" value="">
-                        </form>
-                    </div>
+                    <form id="rfidForm">
+                        <input type="text" id="rfid" name="rfid" value="">
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 
 
-        <script src="../../src/js/main.js"></script>
-        <script src="../../src/js/archive.js"></script>
-        <script src="../../src/js/profileModalController.js"></script>
-        <script src="../../src/js/logout.js"></script>
-        <script src="../../src/js/sanbartolome.js"></script>
+    <script src="../../src/js/main.js"></script>
+    <script src="../../src/js/archive.js"></script>
+    <script src="../../src/js/profileModalController.js"></script>
+    <script src="../../src/js/logout.js"></script>
+    <script src="../../src/js/sanbartolome.js"></script>
 
 
-        <!-- Cascading Script -->
-        <script>
-            var subjectObject = {
-                "New Academic": {
-                    "1F": ["Pantry", "Recovery Room", "Dental Clinic", "Guidance Office", "Faculty Lounge", "CR", "Lobby", "Landing", "Storage", "Counseling Room", "Medical and Dental Clinic", "Nurse Room", "Dental Room", "Generator Room", "EE Room", "Server Room", "Medical Consultation"],
-                    "2F": ["Librarians Office", "Digital Library", "University Library", "Baggage Counter", "Meeting Room 1", "Meeting Room 2", "Meeting Room 3", "Meeting Room 4", "Meeting Room 5", "Meeting Room 6", "Emergency Exit", "Server Room", "EE RM", "Coffee Shop", "CR"],
-                    "3F": ["Lobby", "Lec Rm 301", "Lec Rm 302", "Lec Rm 303", "Lec Rm 304", "Lec Rm 305", "Lec Rm 306", "AV Rm 307", "CR", "Storage"],
-                    "4F": ["Lec Rm 401", "Lec Rm 402", "Lec Rm 403", "Lec Rm 404", "Lec Rm 405", "Lec Rm 406", "Rm 407", "Landing", "EE RM"],
-                    "5F": ["Lec Rm 501", "Lec Rm 502", "Lec Rm 503", "Lec Rm 504", "Lec Rm 505", "Lec Rm 506", "Rm 507", "Landing", "EE RM"],
-                    "6F": ["Lec Rm 601", "Lec Rm 602", "Lec Rm 603", "Lec Rm 604", "Lec Rm 605", "Lec Rm 606", "Rm 607", "Landing", "EE RM"],
-                    "7F": ["Lec Rm 701", "Lec Rm 702", "Lec Rm 703", "Lec Rm 704", "Lec Rm 705", "Lec Rm 706", "Rm 707", "Landing", "EE RM", "Rain Water Tank", "Storage Rm"]
-                },
-                "Yellow": {
-                    "1F": ["IB101A", "IB102A", "IB103A", "IB104A", "IB105A", "IB106A", "IB107A", "IB108A", "IB109A", "IB110A", "CR FEMALE", "CR MALE", "HALLWAY"],
-                    "2F": ["IB201F", "IB202C", "IB203B", "IB204B", "IB205B", "IB206B", "IB207B", "IB208B", "IB209C", "IB210D", "CR FEMALE", "CR MALE", "HALLWAY"]
-                },
-                "Techvoc": {
-                    "1F": ["Dress Making Lab", "PF-BAGM Department", "OSAS", "Auto Mechanic Lab", "Carpentry", "Conference Room", "BDC Office", "Power RM", "Cuisine Art & Banquet Service", "PF-Stock RM", "Electrical Installation and Maintenance Lab", "Refrigeration and Aircon Lab", "Techvoc Gym", "CR"],
-                    "2F": ["IA205", "IA206e", "IA207e", "IA208e", "IA209e", "IA210", "IA211a", "IA212a", "IA213a", "IA214a", "IA215a", "IA216", "Scholarship Office", "Management Information System Office", "Auto Mechanic Lec.", "Consumer Electronic Lab.", "CR"]
-                },
-                "Korphil": {
-                    "1F": ["Room A", "Room B", "Directors's RM", "Lobby", "Room C", "Room D", "Room E", "Medical Staff", "Waiting Area", "Electric RM", "Generator RM", "Student Affairs Office", "Proposed Cafeteria"],
-                    "2F": ["Utility RM", "Course Coord. RM", "E-Learning RM", "Server RM", "Lecture RM", "Utility RM", "Com Lab", "Temporary Lab"],
-                    "3F": ["Storage", "Seminar RM", "Com Lab", "Storage", "Multi Purpose RM"]
-                },
-                "Admin": {
-                    "Ground Floor": ["Lobby"]
-                },
-                "Belmonte": {
-                    "1F": ["IC101a", "IC102a", "IC103a", "IC104a", "PE Faculty Room", "IC105a", "IC106a", "CR"],
-                    "2F": ["IC201a", "IC202a", "IC203a", "IC204a", "Guidance Office", "IC205a", "IC206a", "IC207a", "CR"],
-                    "3F": ["IC301a", "IC302a", "IC303a", "IC304a", "Stock Room", "IC305a", "IC306a", "IC307a", "CR"],
-                    "4F": ["IC401a", "IC402a", "IC403a", "IC404a", "Research & Extension Office", "IC405a", "IC406a", "IC407a"]
-                },
-                "Bautista": {
-                    "Basement": ["Canteen", "Entrance", "CR", "Storage", "Fire Exit", "Kitchen", "HE Room", "Food Stall", "Security Room", "RM 106", "Main Stairs", "PWD CR", "EE Room"],
-                    "Ground Floor": ["Pump Room", "Receiving Area", "Lobby", "Room 1", "Storage Room", "Control Room", "Room 2", "Fire Exit", "AUX Exit", "Room 3", "Room 4", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Toilet", "Janitor Room", "Corridor"],
-                    "2F": ["Faculty Office", "Humanities Faculty Office", "Storage Room", "Control Room", "IK201", "Fire Exit", "IK202", "Storage Room", "Control Room", "EE Room", "AUX Room", "IK203", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Janitor Room", "PWD", "Toilet", "Corridor"],
-                    "3F": ["Storage Room", "Control Room", "Fire Exit", "Toilet", "Corridor", "Dry Pantry", "Archive", "Faculty", "IK301", "IK302", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Janitor Room", "PWD"],
-                    "4F": ["Storage Room", "Faculty", "Control Room", "IK401", "Fire Exit", "IK402", "IK403", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Toilet", "Janitor Room", "Corridor", "PWD"],
-                    "5F": ["Storage", "Archive", "Dry Pantry", "Faculty", "Control Room", "IK501", "Fire Exit", "IK502", "IK503", "AUX Room", "EE Room", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Toilet", "Janitor Room", "PWD", "Corridor"],
-                    "6F": ["Storage", "Faculty", "Control Room", "IK601", "Fire Exit", "IK602", "AUX Room", "EE Room", "IK603", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Toilet", "Janitor Room", "PWD", "Corridor"]
-                },
-                "Multipurpose": {
-                    "1F": ["Lobby"]
-                },
-                "Chinese B": {
-                    "1F": ["Lobby"]
+    <!-- Cascading Script -->
+    <script>
+        var subjectObject = {
+            "New Academic": {
+                "1F": ["Pantry", "Recovery Room", "Dental Clinic", "Guidance Office", "Faculty Lounge", "CR", "Lobby", "Landing", "Storage", "Counseling Room", "Medical and Dental Clinic", "Nurse Room", "Dental Room", "Generator Room", "EE Room", "Server Room", "Medical Consultation"],
+                "2F": ["Librarians Office", "Digital Library", "University Library", "Baggage Counter", "Meeting Room 1", "Meeting Room 2", "Meeting Room 3", "Meeting Room 4", "Meeting Room 5", "Meeting Room 6", "Emergency Exit", "Server Room", "EE RM", "Coffee Shop", "CR"],
+                "3F": ["Lobby", "Lec Rm 301", "Lec Rm 302", "Lec Rm 303", "Lec Rm 304", "Lec Rm 305", "Lec Rm 306", "AV Rm 307", "CR", "Storage"],
+                "4F": ["Lec Rm 401", "Lec Rm 402", "Lec Rm 403", "Lec Rm 404", "Lec Rm 405", "Lec Rm 406", "Rm 407", "Landing", "EE RM"],
+                "5F": ["Lec Rm 501", "Lec Rm 502", "Lec Rm 503", "Lec Rm 504", "Lec Rm 505", "Lec Rm 506", "Rm 507", "Landing", "EE RM"],
+                "6F": ["Lec Rm 601", "Lec Rm 602", "Lec Rm 603", "Lec Rm 604", "Lec Rm 605", "Lec Rm 606", "Rm 607", "Landing", "EE RM"],
+                "7F": ["Lec Rm 701", "Lec Rm 702", "Lec Rm 703", "Lec Rm 704", "Lec Rm 705", "Lec Rm 706", "Rm 707", "Landing", "EE RM", "Rain Water Tank", "Storage Rm"]
+            },
+            "Yellow": {
+                "1F": ["IB101A", "IB102A", "IB103A", "IB104A", "IB105A", "IB106A", "IB107A", "IB108A", "IB109A", "IB110A", "CR FEMALE", "CR MALE", "HALLWAY"],
+                "2F": ["IB201F", "IB202C", "IB203B", "IB204B", "IB205B", "IB206B", "IB207B", "IB208B", "IB209C", "IB210D", "CR FEMALE", "CR MALE", "HALLWAY"]
+            },
+            "Techvoc": {
+                "1F": ["Dress Making Lab", "PF-BAGM Department", "OSAS", "Auto Mechanic Lab", "Carpentry", "Conference Room", "BDC Office", "Power RM", "Cuisine Art & Banquet Service", "PF-Stock RM", "Electrical Installation and Maintenance Lab", "Refrigeration and Aircon Lab", "Techvoc Gym", "CR"],
+                "2F": ["IA205", "IA206e", "IA207e", "IA208e", "IA209e", "IA210", "IA211a", "IA212a", "IA213a", "IA214a", "IA215a", "IA216", "Scholarship Office", "Management Information System Office", "Auto Mechanic Lec.", "Consumer Electronic Lab.", "CR"]
+            },
+            "Korphil": {
+                "1F": ["Room A", "Room B", "Directors's RM", "Lobby", "Room C", "Room D", "Room E", "Medical Staff", "Waiting Area", "Electric RM", "Generator RM", "Student Affairs Office", "Proposed Cafeteria"],
+                "2F": ["Utility RM", "Course Coord. RM", "E-Learning RM", "Server RM", "Lecture RM", "Utility RM", "Com Lab", "Temporary Lab"],
+                "3F": ["Storage", "Seminar RM", "Com Lab", "Storage", "Multi Purpose RM"]
+            },
+            "Admin": {
+                "Ground Floor": ["Lobby"]
+            },
+            "Belmonte": {
+                "1F": ["IC101a", "IC102a", "IC103a", "IC104a", "PE Faculty Room", "IC105a", "IC106a", "CR"],
+                "2F": ["IC201a", "IC202a", "IC203a", "IC204a", "Guidance Office", "IC205a", "IC206a", "IC207a", "CR"],
+                "3F": ["IC301a", "IC302a", "IC303a", "IC304a", "Stock Room", "IC305a", "IC306a", "IC307a", "CR"],
+                "4F": ["IC401a", "IC402a", "IC403a", "IC404a", "Research & Extension Office", "IC405a", "IC406a", "IC407a"]
+            },
+            "Bautista": {
+                "Basement": ["Canteen", "Entrance", "CR", "Storage", "Fire Exit", "Kitchen", "HE Room", "Food Stall", "Security Room", "RM 106", "Main Stairs", "PWD CR", "EE Room"],
+                "Ground Floor": ["Pump Room", "Receiving Area", "Lobby", "Room 1", "Storage Room", "Control Room", "Room 2", "Fire Exit", "AUX Exit", "Room 3", "Room 4", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Toilet", "Janitor Room", "Corridor"],
+                "2F": ["Faculty Office", "Humanities Faculty Office", "Storage Room", "Control Room", "IK201", "Fire Exit", "IK202", "Storage Room", "Control Room", "EE Room", "AUX Room", "IK203", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Janitor Room", "PWD", "Toilet", "Corridor"],
+                "3F": ["Storage Room", "Control Room", "Fire Exit", "Toilet", "Corridor", "Dry Pantry", "Archive", "Faculty", "IK301", "IK302", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Janitor Room", "PWD"],
+                "4F": ["Storage Room", "Faculty", "Control Room", "IK401", "Fire Exit", "IK402", "IK403", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Toilet", "Janitor Room", "Corridor", "PWD"],
+                "5F": ["Storage", "Archive", "Dry Pantry", "Faculty", "Control Room", "IK501", "Fire Exit", "IK502", "IK503", "AUX Room", "EE Room", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Toilet", "Janitor Room", "PWD", "Corridor"],
+                "6F": ["Storage", "Faculty", "Control Room", "IK601", "Fire Exit", "IK602", "AUX Room", "EE Room", "IK603", "Elevator Lobby", "Elevator 1", "Elevator 2", "Main Stair", "Toilet", "Janitor Room", "PWD", "Corridor"]
+            },
+            "Multipurpose": {
+                "1F": ["Lobby"]
+            },
+            "Chinese B": {
+                "1F": ["Lobby"]
+            }
+        }
+        window.onload = function () {
+            var subjectSel = document.getElementById("new_building");
+            var topicSel = document.getElementById("new_floor");
+            var chapterSel = document.getElementById("new_room");
+
+            for (var x in subjectObject) {
+                subjectSel.options[subjectSel.options.length] = new Option(x, x);
+            }
+
+            subjectSel.onchange = function () {
+                // Empty Floors- and Rooms-dropdowns
+                chapterSel.length = 1;
+                topicSel.length = 1;
+
+                // Display correct values for Floors
+                for (var y in subjectObject[this.value]) {
+                    topicSel.options[topicSel.options.length] = new Option(y, y);
                 }
             }
-            window.onload = function() {
-                var subjectSel = document.getElementById("new_building");
-                var topicSel = document.getElementById("new_floor");
-                var chapterSel = document.getElementById("new_room");
 
-                for (var x in subjectObject) {
-                    subjectSel.options[subjectSel.options.length] = new Option(x, x);
-                }
+            topicSel.onchange = function () {
+                // Empty Rooms dropdown
+                chapterSel.length = 1;
 
-                subjectSel.onchange = function() {
-                    // Empty Floors- and Rooms-dropdowns
-                    chapterSel.length = 1;
-                    topicSel.length = 1;
-
-                    // Display correct values for Floors
-                    for (var y in subjectObject[this.value]) {
-                        topicSel.options[topicSel.options.length] = new Option(y, y);
-                    }
-                }
-
-                topicSel.onchange = function() {
-                    // Empty Rooms dropdown
-                    chapterSel.length = 1;
-
-                    // Display correct values for Rooms
-                    var rooms = subjectObject[subjectSel.value][this.value];
-                    for (var i = 0; i < rooms.length; i++) {
-                        chapterSel.options[chapterSel.options.length] = new Option(rooms[i], rooms[i]);
-                    }
+                // Display correct values for Rooms
+                var rooms = subjectObject[subjectSel.value][this.value];
+                for (var i = 0; i < rooms.length; i++) {
+                    chapterSel.options[chapterSel.options.length] = new Option(rooms[i], rooms[i]);
                 }
             }
-        </script>
+        }
+    </script>
 
 
 
-        <script>
-            // Get today's date
-            var today = new Date();
+    <script>
+        // Get today's date
+        var today = new Date();
 
-            // Set tomorrow's date
-            var tomorrow = new Date(today);
-            tomorrow.setDate(tomorrow.getDate() + 1);
+        // Set tomorrow's date
+        var tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
 
-            // Format tomorrow's date as yyyy-mm-dd
-            var tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+        // Format tomorrow's date as yyyy-mm-dd
+        var tomorrowFormatted = tomorrow.toISOString().split('T')[0];
 
-            // Set the minimum date of the input field to tomorrow
-            document.getElementById("new_deadline").min = tomorrowFormatted;
-        </script>
+        // Set the minimum date of the input field to tomorrow
+        document.getElementById("new_deadline").min = tomorrowFormatted;
+    </script>
 
-        <!--PARA SA PAGCHANGE NG LABEL-->
-        <script>
-            function fetchRandomAssignee() {
-                // Get the selected category
-                var category = document.getElementById('category').value;
+    <!--PARA SA PAGCHANGE NG LABEL-->
+    <script>
+        function fetchRandomAssignee() {
+            // Get the selected category
+            var category = document.getElementById('category').value;
 
-                // Get the assignee select and input elements
-                var assigneeSelect = document.getElementById('assignee');
-                var assigneeInput = document.getElementById('assigneeInput');
-                var assigneeInputReal = document.getElementById('assigneeInputreal');
+            // Get the assignee select and input elements
+            var assigneeSelect = document.getElementById('assignee');
+            var assigneeInput = document.getElementById('assigneeInput');
+            var assigneeInputReal = document.getElementById('assigneeInputreal');
 
-                // Function to update assigneeInputreal value
-                function updateAssigneeInputReal(value) {
-                    assigneeInputReal.value = value;
-                }
+            // Function to update assigneeInputreal value
+            function updateAssigneeInputReal(value) {
+                assigneeInputReal.value = value;
+            }
 
-                // Event listener for assigneeInput
-                assigneeInput.addEventListener('input', function() {
-                    updateAssigneeInputReal(this.value);
-                });
+            // Event listener for assigneeInput
+            assigneeInput.addEventListener('input', function () {
+                updateAssigneeInputReal(this.value);
+            });
 
-                // Check if the selected category is "Outsource"
-                if (category === "Outsource") {
-                    // If it is, show the input and hide the select
-                    assigneeSelect.style.display = 'none';
-                    assigneeInput.style.display = 'block';
+            // Check if the selected category is "Outsource"
+            if (category === "Outsource") {
+                // If it is, show the input and hide the select
+                assigneeSelect.style.display = 'none';
+                assigneeInput.style.display = 'block';
 
-                    // Copy the value from the input to assigneeInputreal
-                    updateAssigneeInputReal(assigneeInput.value);
-                } else {
-                    // Otherwise, show the select and hide the input
-                    assigneeInput.style.display = 'none';
-                    assigneeSelect.style.display = 'block';
+                // Copy the value from the input to assigneeInputreal
+                updateAssigneeInputReal(assigneeInput.value);
+            } else {
+                // Otherwise, show the select and hide the input
+                assigneeInput.style.display = 'none';
+                assigneeSelect.style.display = 'block';
 
-                    // Make an AJAX request to fetch assignees
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('GET', 'fetchAssignees.php?category=' + category, true);
-                    xhr.onload = function() {
-                        if (xhr.status == 200) {
-                            // Parse the JSON response
-                            var assignees = JSON.parse(xhr.responseText);
+                // Make an AJAX request to fetch assignees
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'fetchAssignees.php?category=' + category, true);
+                xhr.onload = function () {
+                    if (xhr.status == 200) {
+                        // Parse the JSON response
+                        var assignees = JSON.parse(xhr.responseText);
 
-                            // Clear previous options
-                            assigneeSelect.innerHTML = '';
+                        // Clear previous options
+                        assigneeSelect.innerHTML = '';
 
-                            // Populate the assignee select element
-                            for (var i = 0; i < assignees.length; i++) {
-                                var option = document.createElement('option');
-                                // Set the option value to concatenated firstName and lastName
-                                option.value = assignees[i].firstName + ' ' + assignees[i].lastName;
-                                option.textContent = assignees[i].firstName + ' ' + assignees[i].lastName;
-                                assigneeSelect.appendChild(option);
-                            }
-
-                            // Automatically select the first option if available
-                            if (assignees.length > 0) {
-                                assigneeSelect.value = assignees[0].firstName + ' ' + assignees[0].lastName;
-                                updateAssigneeInputReal(assignees[0].firstName + ' ' + assignees[0].lastName);
-                            }
-
-                            // Event listener for assigneeSelect
-                            assigneeSelect.addEventListener('change', function() {
-                                updateAssigneeInputReal(assigneeSelect.value);
-                            });
+                        // Populate the assignee select element
+                        for (var i = 0; i < assignees.length; i++) {
+                            var option = document.createElement('option');
+                            // Set the option value to concatenated firstName and lastName
+                            option.value = assignees[i].firstName + ' ' + assignees[i].lastName;
+                            option.textContent = assignees[i].firstName + ' ' + assignees[i].lastName;
+                            assigneeSelect.appendChild(option);
                         }
-                    };
-                    xhr.send();
-                }
+
+                        // Automatically select the first option if available
+                        if (assignees.length > 0) {
+                            assigneeSelect.value = assignees[0].firstName + ' ' + assignees[0].lastName;
+                            updateAssigneeInputReal(assignees[0].firstName + ' ' + assignees[0].lastName);
+                        }
+
+                        // Event listener for assigneeSelect
+                        assigneeSelect.addEventListener('change', function () {
+                            updateAssigneeInputReal(assigneeSelect.value);
+                        });
+                    }
+                };
+                xhr.send();
             }
-        </script>
+        }
+    </script>
 
 
-      
+
 
     <!--PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
     <script>
@@ -2015,49 +2029,49 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
 
-        <script>
-            $(document).ready(function() {
-                $('.notification-item').on('click', function(e) {
-                    e.preventDefault();
-                    var activityId = $(this).data('activity-id');
-                    var notificationItem = $(this); // Store the clicked element
+    <script>
+        $(document).ready(function () {
+            $('.notification-item').on('click', function (e) {
+                e.preventDefault();
+                var activityId = $(this).data('activity-id');
+                var notificationItem = $(this); // Store the clicked element
 
-                    $.ajax({
-                        type: "POST",
-                        url: "single_notification.php", // The URL to the PHP file
-                        data: {
-                            activityId: activityId
-                        },
-                        success: function(response) {
-                            if (response.trim() === "Notification updated successfully") {
-                                // If the notification is updated successfully, remove the clicked element
-                                notificationItem.remove();
+                $.ajax({
+                    type: "POST",
+                    url: "single_notification.php", // The URL to the PHP file
+                    data: {
+                        activityId: activityId
+                    },
+                    success: function (response) {
+                        if (response.trim() === "Notification updated successfully") {
+                            // If the notification is updated successfully, remove the clicked element
+                            notificationItem.remove();
 
-                                // Update the notification count
-                                var countElement = $('#noti_number');
-                                var count = parseInt(countElement.text()) || 0;
-                                countElement.text(count > 1 ? count - 1 : '');
-                            } else {
-                                // Handle error
-                                console.error("Failed to update notification:", response);
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            // Handle AJAX error
-                            console.error("AJAX error:", status, error);
+                            // Update the notification count
+                            var countElement = $('#noti_number');
+                            var count = parseInt(countElement.text()) || 0;
+                            countElement.text(count > 1 ? count - 1 : '');
+                        } else {
+                            // Handle error
+                            console.error("Failed to update notification:", response);
                         }
-                    });
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle AJAX error
+                        console.error("AJAX error:", status, error);
+                    }
                 });
             });
-        </script>
+        });
+    </script>
 
 
 
 
 
-        <!-- Add this script after your existing scripts -->
-        <!-- Add this script after your existing scripts -->
-        <script>
+    <!-- Add this script after your existing scripts -->
+    <!-- Add this script after your existing scripts -->
+    <script>
         // Add a click event listener to the logout link
         document.getElementById('logoutBtn').addEventListener('click', function () {
             // Display SweetAlert
