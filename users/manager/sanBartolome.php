@@ -559,12 +559,7 @@ updateOverdueTasks($conn);
                         <span class="text">Attendance Logs</span>
                     </a>
                 </li>
-                <li>
-                    <a href="./staff.php">
-                        <i class="bi bi-person"></i>
-                        <span class="text">Staff</span>
-                    </a>
-                </li>
+                
                 <div class="GPS-cont" onclick="toggleGPS()">
                     <li class="GPS-dropdown">
                         <div class="GPS-drondown-content">
