@@ -1649,401 +1649,448 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         }
     </script>
 
-    <script>
-        // Get today's date
-        var today = new Date();
+<script>
+            // Get today's date
+            var today = new Date();
 
-        // Set tomorrow's date
-        var tomorrow = new Date(today);
-        tomorrow.setDate(tomorrow.getDate() + 1);
+            // Set tomorrow's date
+            var tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
 
-        // Format tomorrow's date as yyyy-mm-dd
-        var tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+            // Format tomorrow's date as yyyy-mm-dd
+            var tomorrowFormatted = tomorrow.toISOString().split('T')[0];
 
-        // Set the minimum date of the input field to tomorrow
-        document.getElementById("new_deadline").min = tomorrowFormatted;
-    </script>
+            // Set the minimum date of the input field to tomorrow
+            document.getElementById("new_deadline").min = tomorrowFormatted;
+        </script>
 
-    <!--PARA SA PAGCHANGE NG LABEL/DROPDOWN NAMES-->
-    <script>
-        function fetchRandomAssignee() {
-            // Get the selected category
-            var category = document.getElementById('category').value;
+        <!--PARA SA PAGCHANGE NG LABEL-->
+        <script>
+            function fetchRandomAssignee() {
+                // Get the selected category
+                var category = document.getElementById('category').value;
 
-            // Get the assignee select and input elements
-            var assigneeSelect = document.getElementById('assignee');
-            var assigneeInput = document.getElementById('assigneeInput');
-            var assigneeInputReal = document.getElementById('assigneeInputreal');
+                // Get the assignee select and input elements
+                var assigneeSelect = document.getElementById('assignee');
+                var assigneeInput = document.getElementById('assigneeInput');
+                var assigneeInputReal = document.getElementById('assigneeInputreal');
 
-            // Function to update assigneeInputreal value
-            function updateAssigneeInputReal(value) {
-                assigneeInputReal.value = value;
-            }
+                // Function to update assigneeInputreal value
+                function updateAssigneeInputReal(value) {
+                    assigneeInputReal.value = value;
+                }
 
-            // Event listener for assigneeInput
-            assigneeInput.addEventListener('input', function () {
-                updateAssigneeInputReal(this.value);
-            });
+                // Event listener for assigneeInput
+                assigneeInput.addEventListener('input', function() {
+                    updateAssigneeInputReal(this.value);
+                });
 
-            // Check if the selected category is "Outsource"
-            if (category === "Outsource") {
-                // If it is, show the input and hide the select
-                assigneeSelect.style.display = 'none';
-                assigneeInput.style.display = 'block';
+                // Check if the selected category is "Outsource"
+                if (category === "Outsource") {
+                    // If it is, show the input and hide the select
+                    assigneeSelect.style.display = 'none';
+                    assigneeInput.style.display = 'block';
 
-                // Copy the value from the input to assigneeInputreal
-                updateAssigneeInputReal(assigneeInput.value);
-            } else {
-                // Otherwise, show the select and hide the input
-                assigneeInput.style.display = 'none';
-                assigneeSelect.style.display = 'block';
+                    // Copy the value from the input to assigneeInputreal
+                    updateAssigneeInputReal(assigneeInput.value);
+                } else {
+                    // Otherwise, show the select and hide the input
+                    assigneeInput.style.display = 'none';
+                    assigneeSelect.style.display = 'block';
 
-                // Make an AJAX request to fetch assignees
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', 'fetchAssignees.php?category=' + category, true);
-                xhr.onload = function () {
-                    if (xhr.status == 200) {
-                        // Parse the JSON response
-                        var assignees = JSON.parse(xhr.responseText);
+                    // Make an AJAX request to fetch assignees
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', 'fetchAssignees.php?category=' + category, true);
+                    xhr.onload = function() {
+                        if (xhr.status == 200) {
+                            // Parse the JSON response
+                            var assignees = JSON.parse(xhr.responseText);
 
-                        // Clear previous options
-                        assigneeSelect.innerHTML = '';
+                            // Clear previous options
+                            assigneeSelect.innerHTML = '';
 
-                        // Populate the assignee select element
-                        for (var i = 0; i < assignees.length; i++) {
-                            var option = document.createElement('option');
-                            // Set the option value to concatenated firstName and lastName
-                            option.value = assignees[i].firstName + ' ' + assignees[i].lastName;
-                            option.textContent = assignees[i].firstName + ' ' + assignees[i].lastName;
-                            assigneeSelect.appendChild(option);
+                            // Populate the assignee select element
+                            for (var i = 0; i < assignees.length; i++) {
+                                var option = document.createElement('option');
+                                // Set the option value to concatenated firstName and lastName
+                                option.value = assignees[i].firstName + ' ' + assignees[i].lastName;
+                                option.textContent = assignees[i].firstName + ' ' + assignees[i].lastName;
+                                assigneeSelect.appendChild(option);
+                            }
+
+                            // Automatically select the first option if available
+                            if (assignees.length > 0) {
+                                assigneeSelect.value = assignees[0].firstName + ' ' + assignees[0].lastName;
+                                updateAssigneeInputReal(assignees[0].firstName + ' ' + assignees[0].lastName);
+                            }
+
+                            // Event listener for assigneeSelect
+                            assigneeSelect.addEventListener('change', function() {
+                                updateAssigneeInputReal(assigneeSelect.value);
+                            });
                         }
-
-                        // Automatically select the first option if available
-                        if (assignees.length > 0) {
-                            assigneeSelect.value = assignees[0].firstName + ' ' + assignees[0].lastName;
-                            updateAssigneeInputReal(assignees[0].firstName + ' ' + assignees[0].lastName);
-                        }
-
-                        // Event listener for assigneeSelect
-                        assigneeSelect.addEventListener('change', function () {
-                            updateAssigneeInputReal(assigneeSelect.value);
-                        });
-                    }
-                };
-                xhr.send();
-            }
-        }
-    </script>
-
-
-
-
-
-
-    <!--PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
-    <script>
-        $(document).ready(function () {
-            // Function to populate modal fields
-            function populateModal(row) {
-                // Populate modal fields with data from the row
-                $("#request_id").val(row.find("td:eq(0)").text());
-                $("#date").val(row.find("td:eq(1)").text());
-                $("#category").val(row.find("td:eq(2)").text());
-                // If building, floor, and room are concatenated in a single cell, split them
-                var buildingFloorRoom = row.find("td:eq(3)").text().split(', ');
-                $("#building").val(buildingFloorRoom[0]);
-                $("#floor").val(buildingFloorRoom[1]);
-                $("#room").val(buildingFloorRoom[2]);
-                $("#equipment").val(row.find("td:eq(4)").text());
-                $("#assignee").val(row.find("td:eq(5)").text());
-                $("#status").val(row.find("td:eq(6)").text());
-                $("#deadline").val(row.find("td:eq(7)").text());
-                $("#description").val(row.find("td:eq(13)").text());
-                $("#return_reason").val(row.find("td:eq(15)").text());
-
-                // Check if return_reason has a value
-                if (row.find("td:eq(15)").text().trim() !== '') {
-                    $("#return_reason").closest('.col-12').show(); // Show the div if there's a value
-                } else {
-                    $("#return_reason").closest('.col-12').hide(); // Hide the div if there's no value
+                    };
+                    xhr.send();
                 }
-
-                // Additional fields
-                $("#outsource_info").val(row.find("td:eq(16)").text());
-                $("#first_assignee").val(row.find("td:eq(17)").text());
-                $("#admins_remark").val(row.find("td:eq(18)").text());
-                $("#mp_remark").val(row.find("td:eq(19)").text());
             }
-
-            // Click event for the "Approve" button
-            $("button[data-bs-target='#ForApproval']").click(function () {
-                var row = $(this).closest("tr"); // Get the closest row to the clicked button
-                populateModal(row); // Populate modal fields with data from the row
-                $("#ForApproval").modal("show"); // Show the modal
-            });
-        });
-    </script>
+        </script>
 
 
-    <!--2 PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
-    <script>
-        $(document).ready(function () {
-            // Function to populate modal fields for modal "ForOutsource" with data from row 2
-            function populateModalForOutsource(row) {
-                // Populate modal fields with data from the row
-                $("#new2_request_id").val(row.find("td:eq(0)").text());
-                $("#new2_building").val(row.find("td:eq(3)").text().split(', ')[0]);
-                $("#new2_floor").val(row.find("td:eq(3)").text().split(', ')[1]);
-                $("#new2_room").val(row.find("td:eq(3)").text().split(', ')[2]);
-                $("#new2_equipment").val(row.find("td:eq(4)").text());
-                $("#new2_assignee").val(row.find("td:eq(5)").text());
-                $("#new2_category").val(row.find("td:eq(2)").text());
-                $("#new2_status").val(row.find("td:eq(6)").text());
-                $("#new2_deadline").val(row.find("td:eq(6)").text());
-                $("#new2_description").val(row.find("td:eq(13)").text());
-                $("#new2_return_reason").val(row.find("td:eq(15)").text());
+            <!--PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
+            <script>
+                $(document).ready(function() {
+                    // Function to populate modal fields
+                    function populateModal(row) {
+                        // Populate modal fields with data from the row
+                        $("#request_id").val(row.find("td:eq(0)").text());
+                        $("#date").val(row.find("td:eq(1)").text());
+                        $("#category").val(row.find("td:eq(2)").text());
+                        // If building, floor, and room are concatenated in a single cell, split them
+                        var buildingFloorRoom = row.find("td:eq(3)").text().split(', ');
+                        $("#building").val(buildingFloorRoom[0]);
+                        $("#floor").val(buildingFloorRoom[1]);
+                        $("#room").val(buildingFloorRoom[2]);
+                        $("#equipment").val(row.find("td:eq(4)").text());
+                        $("#assignee").val(row.find("td:eq(5)").text());
+                        $("#status").val(row.find("td:eq(6)").text());
+                        $("#deadline").val(row.find("td:eq(7)").text());
+                        $("#description").val(row.find("td:eq(13)").text());
+                        $("#return_reason").val(row.find("td:eq(15)").text());
 
-                // Check if return_reason has a value
-                if (row.find("td:eq(15)").text().trim() !== '') {
-                    $("#new2_return_reason").closest('.col-12').show(); // Show the div if there's a value
-                } else {
-                    $("#new2_return_reason").closest('.col-12').hide(); // Hide the div if there's no value
-                }
-                // Additional fields
-                $("#new2_outsource_info").val(row.find("td:eq(16)").text());
-                $("#new2_first_assignee").val(row.find("td:eq(17)").text());
-                $("#new2_admins_remark").val(row.find("td:eq(18)").text());
-                $("#new2_mp_remark").val(row.find("td:eq(19)").text());
-            }
-
-            // Click event for the "Done" button for modal "ForOutsource" based on row 2
-            $("button[data-bs-target='#ForOutsource']").click(function () {
-                var row = $(this).closest("tr"); // Get the closest row to the clicked button
-                populateModalForOutsource(row); // Populate modal fields with data from the row
-                $("#ForOutsource").modal("show"); // Show the modal
-            });
-        });
-    </script>
-
-
-    <!--2 PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
-    <script>
-        $(document).ready(function () {
-            // Function to populate modal fields for modal "ForViewDone" with data from row 2
-            function populateModalForViewDone(row) {
-                // Populate modal fields with data from the row
-                $("#request_id_done").val(row.find("td:eq(0)").text());
-                $("#building_done").val(row.find("td:eq(3)").text().split(', ')[0]);
-                $("#floor_done").val(row.find("td:eq(3)").text().split(', ')[1]);
-                $("#room_done").val(row.find("td:eq(3)").text().split(', ')[2]);
-                $("#equipment_done").val(row.find("td:eq(4)").text());
-                $("#assignee_done").val(row.find("td:eq(5)").text());
-                $("#category_done").val(row.find("td:eq(2)").text());
-                $("#status_done").val(row.find("td:eq(6)").text());
-                $("#deadline_done").val(row.find("td:eq(6)").text());
-                $("#description_done").val(row.find("td:eq(13)").text());
-                $("#return_reason_done").val(row.find("td:eq(15)").text());
-
-                // Check if return_reason has a value
-                if (row.find("td:eq(15)").text().trim() !== '') {
-                    $("#return_reason_done").closest('.col-12').show(); // Show the div if there's a value
-                } else {
-                    $("#return_reason_done").closest('.col-12').hide(); // Hide the div if there's no value
-                }
-
-                // Additional fields
-                $("#outsource_info_done").val(row.find("td:eq(16)").text());
-                $("#first_assignee_done").val(row.find("td:eq(17)").text());
-                $("#admins_remark_done").val(row.find("td:eq(18)").text());
-                $("#mp_remark_done").val(row.find("td:eq(19)").text());
-            }
-
-            // Click event for the "Done" button for modal "ForViewDone" based on row 2
-            $("button[data-bs-target='#ForViewDone']").click(function () {
-                var row = $(this).closest("tr"); // Get the closest row to the clicked button
-                populateModalForViewDone(row); // Populate modal fields with data from the row
-                $("#ForViewDone").modal("show"); // Show the modal
-            });
-        });
-    </script>
-
-
-
-
-
-
-
-
-    <script>
-        $(document).ready(function () {
-            $('.notification-item').on('click', function (e) {
-                e.preventDefault();
-                var activityId = $(this).data('activity-id');
-                var notificationItem = $(this); // Store the clicked element
-
-                $.ajax({
-                    type: "POST",
-                    url: "single_notification.php", // The URL to the PHP file
-                    data: {
-                        activityId: activityId
-                    },
-                    success: function (response) {
-                        if (response.trim() === "Notification updated successfully") {
-                            // If the notification is updated successfully, remove the clicked element
-                            notificationItem.remove();
-
-                            // Update the notification count
-                            var countElement = $('#noti_number');
-                            var count = parseInt(countElement.text()) || 0;
-                            countElement.text(count > 1 ? count - 1 : '');
+                        // Check if return_reason has a value
+                        if (row.find("td:eq(15)").text().trim() !== '') {
+                            $("#return_reason").closest('.col-12').show(); // Show the div if there's a value
                         } else {
-                            // Handle error
-                            console.error("Failed to update notification:", response);
+                            $("#return_reason").closest('.col-12').hide(); // Hide the div if there's no value
                         }
-                    },
-                    error: function (xhr, status, error) {
-                        // Handle AJAX error
-                        console.error("AJAX error:", status, error);
+
+                        // Additional fields
+                        $("#outsource_info").val(row.find("td:eq(16)").text());
+                        $("#first_assignee").val(row.find("td:eq(17)").text());
+                        $("#admins_remark").val(row.find("td:eq(18)").text());
+                        $("#mp_remark").val(row.find("td:eq(19)").text());
+                    }
+
+                    // Click event for the "Approve" button
+                    $("button[data-bs-target='#ForApproval']").click(function() {
+                        var row = $(this).closest("tr"); // Get the closest row to the clicked button
+                        populateModal(row); // Populate modal fields with data from the row
+                        $("#ForApproval").modal("show"); // Show the modal
+                    });
+                });
+            </script>
+
+        <!--2 PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
+        <script>
+            $(document).ready(function() {
+                // Function to populate modal fields for modal "ForOutsource" with data from row 2
+                function populateModalForOutsource(row) {
+                    // Populate modal fields with data from the row
+                    $("#new2_request_id").val(row.find("td:eq(0)").text());
+                    $("#new2_building").val(row.find("td:eq(3)").text().split(', ')[0]);
+                    $("#new2_floor").val(row.find("td:eq(3)").text().split(', ')[1]);
+                    $("#new2_room").val(row.find("td:eq(3)").text().split(', ')[2]);
+                    $("#new2_equipment").val(row.find("td:eq(4)").text());
+                    $("#new2_assignee").val(row.find("td:eq(5)").text());
+                    $("#new2_category").val(row.find("td:eq(2)").text());
+                    $("#new2_status").val(row.find("td:eq(6)").text());
+                    $("#new2_deadline").val(row.find("td:eq(7)").text());
+                    $("#new2_description").val(row.find("td:eq(13)").text());
+                    $("#new2_return_reason").val(row.find("td:eq(15)").text());
+
+                    // Check if return_reason has a value
+                    if (row.find("td:eq(15)").text().trim() !== '') {
+                        $("#new2_return_reason").closest('.col-12').show(); // Show the div if there's a value
+                    } else {
+                        $("#new2_return_reason").closest('.col-12').hide(); // Hide the div if there's no value
+                    }
+                }
+
+                // Click event for the "Done" button for modal "ForOutsource" based on row 2
+                $("button[data-bs-target='#ForOutsource']").click(function() {
+                    var row = $(this).closest("tr"); // Get the closest row to the clicked button
+                    populateModalForOutsource(row); // Populate modal fields with data from the row
+                    $("#ForOutsource").modal("show"); // Show the modal
+                });
+            });
+        </script>
+
+        <!--2 PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
+        <script>
+            $(document).ready(function() {
+                // Function to populate modal fields for modal "ForViewDone" with data from row 2
+                function populateModalForViewDone(row) {
+                    // Populate modal fields with data from the row
+                    $("#request_id_done").val(row.find("td:eq(0)").text());
+                    $("#building_done").val(row.find("td:eq(3)").text().split(', ')[0]);
+                    $("#floor_done").val(row.find("td:eq(3)").text().split(', ')[1]);
+                    $("#room_done").val(row.find("td:eq(3)").text().split(', ')[2]);
+                    $("#equipment_done").val(row.find("td:eq(4)").text());
+                    $("#assignee_done").val(row.find("td:eq(5)").text());
+                    $("#category_done").val(row.find("td:eq(2)").text());
+                    $("#status_done").val(row.find("td:eq(6)").text());
+                    $("#deadline_done").val(row.find("td:eq(6)").text());
+                    $("#description_done").val(row.find("td:eq(13)").text());
+                    $("#return_reason_done").val(row.find("td:eq(15)").text());
+
+                    // Check if return_reason has a value
+                    if (row.find("td:eq(15)").text().trim() !== '') {
+                        $("#return_reason_done").closest('.col-12').show(); // Show the div if there's a value
+                    } else {
+                        $("#return_reason_done").closest('.col-12').hide(); // Hide the div if there's no value
+                    }
+
+                    // Additional fields
+                    $("#outsource_info_done").val(row.find("td:eq(16)").text());
+                    $("#first_assignee_done").val(row.find("td:eq(17)").text());
+                    $("#admins_remark_done").val(row.find("td:eq(18)").text());
+                    $("#mp_remark_done").val(row.find("td:eq(19)").text());
+                }
+
+                // Click event for the "Done" button for modal "ForViewDone" based on row 2
+                $("button[data-bs-target='#ForViewDone']").click(function() {
+                    var row = $(this).closest("tr"); // Get the closest row to the clicked button
+                    populateModalForViewDone(row); // Populate modal fields with data from the row
+                    $("#ForViewDone").modal("show"); // Show the modal
+                });
+            });
+        </script>
+
+
+
+
+
+
+
+        <script>
+            $(document).ready(function() {
+                $('.notification-item').on('click', function(e) {
+                    e.preventDefault();
+                    var activityId = $(this).data('activity-id');
+                    var notificationItem = $(this); // Store the clicked element
+
+                    $.ajax({
+                        type: "POST",
+                        url: "single_notification.php", // The URL to the PHP file
+                        data: {
+                            activityId: activityId
+                        },
+                        success: function(response) {
+                            if (response.trim() === "Notification updated successfully") {
+                                // If the notification is updated successfully, remove the clicked element
+                                notificationItem.remove();
+
+                                // Update the notification count
+                                var countElement = $('#noti_number');
+                                var count = parseInt(countElement.text()) || 0;
+                                countElement.text(count > 1 ? count - 1 : '');
+                            } else {
+                                // Handle error
+                                console.error("Failed to update notification:", response);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle AJAX error
+                            console.error("AJAX error:", status, error);
+                        }
+                    });
+                });
+            });
+        </script>
+
+
+
+
+
+        <!-- Add this script after your existing scripts -->
+        <!-- Add this script after your existing scripts -->
+        <script>
+            // Add a click event listener to the logout link
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                // Display SweetAlert
+                Swal.fire({
+                    text: 'Are you sure you want to logout?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'No'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If user clicks "Yes, logout!" execute the logout action
+                        window.location.href = '../../logout.php';
                     }
                 });
             });
-        });
-    </script>
+        </script>
 
 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script>
+            // Select the input element
+            var inputElement = document.getElementById('new2_description');
 
+            // Create a new textarea element
+            var textareaElement = document.createElement('textarea');
 
+            // Copy attributes from input to textarea
+            textareaElement.className = inputElement.className;
+            textareaElement.id = inputElement.id;
+            textareaElement.name = inputElement.name;
+            textareaElement.readOnly = true;
 
-    <!-- Add this script after your existing scripts -->
-    <!-- Add this script after your existing scripts -->
-    <script>
-        // Add a click event listener to the logout link
-        document.getElementById('logoutBtn').addEventListener('click', function () {
-            // Display SweetAlert
-            Swal.fire({
-                text: 'Are you sure you want to logout?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes',
-                cancelButtonText: 'No'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // If user clicks "Yes, logout!" execute the logout action
-                    window.location.href = '../../logout.php';
+            // Replace the input element with the textarea
+            inputElement.parentNode.replaceChild(textareaElement, inputElement);
+        </script>
+        <script>
+            // Get the input element
+            var inputElement = document.getElementById('new_description');
+
+            // Create a new textarea element
+            var textareaElement = document.createElement('textarea');
+
+            // Copy attributes from input to textarea
+            textareaElement.className = inputElement.className;
+            textareaElement.id = inputElement.id;
+            textareaElement.name = inputElement.name;
+
+            // Replace input with textarea
+            inputElement.parentNode.replaceChild(textareaElement, inputElement);
+        </script>
+
+        <script>
+            // Get today's date
+            var today = new Date();
+
+            // Set tomorrow's date
+            var tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+
+            // Format tomorrow's date as yyyy-mm-dd
+            var tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+
+            // Set the minimum date of the input field to tomorrow
+            document.getElementById("new_deadline").min = tomorrowFormatted;
+        </script>
+
+        <script>
+            // Get today's date
+            var today = new Date();
+
+            // Set tomorrow's date
+            var tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+
+            // Format tomorrow's date as yyyy-mm-dd
+            var tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+
+            // Set the minimum date of the input field to tomorrow
+            document.getElementById("deadline").min = tomorrowFormatted;
+        </script>
+
+        <script>
+            // Get today's date
+            var today = new Date();
+
+            // Set tomorrow's date
+            var tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+
+            // Format tomorrow's date as yyyy-mm-dd
+            var tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+
+            // Set the minimum date of the input field to tomorrow
+            document.getElementById("new2_deadline").min = tomorrowFormatted;
+        </script>
+
+        <script>
+            // Select all <td> elements with the class "red", "blue", or "green"
+            var tdElements = document.querySelectorAll("td.red, td.blue, td.green");
+
+            // Loop through each selected <td> element
+            tdElements.forEach(function(tdElement) {
+                // Get the text content of the <td> element
+                var textContent = tdElement.textContent;
+
+                // Create a new <span> element
+                var spanElement = document.createElement("span");
+
+                // Set the text content of the <span> element to the text content of the <td> element
+                spanElement.textContent = textContent;
+
+                // Add a class name based on the color of the <td> element
+                if (tdElement.classList.contains("red")) {
+                    spanElement.classList.add("red-value");
+                } else if (tdElement.classList.contains("blue")) {
+                    spanElement.classList.add("blue-value");
+                } else if (tdElement.classList.contains("green")) {
+                    spanElement.classList.add("green-value");
                 }
+
+                // Replace the text content of the <td> element with the <span> element
+                tdElement.textContent = "";
+                tdElement.appendChild(spanElement);
             });
-        });
-    </script>
-    <script>
-        // JavaScript to convert input fields to textareas
-        document.addEventListener("DOMContentLoaded", function () {
-            var descriptionInput = document.getElementById("description");
-            var returnReasonInput = document.getElementById("return_reason");
+        </script>
 
-            // Convert input fields to textareas
-            var descriptionTextarea = document.createElement("textarea");
-            descriptionTextarea.className = "form-control";
-            descriptionTextarea.name = "description";
-            descriptionTextarea.id = "description";
-            descriptionInput.parentNode.replaceChild(descriptionTextarea, descriptionInput);
+        <script>
+            // Select all <td> elements with the class "red", "blue", or "green"
+            var tdElements = document.querySelectorAll("td.red, td.blue, td.green, td.orange");
 
-            var returnReasonTextarea = document.createElement("textarea");
-            returnReasonTextarea.className = "form-control";
-            returnReasonTextarea.name = "return_reason";
-            returnReasonTextarea.id = "return_reason";
-            returnReasonTextarea.readOnly = true;
-            returnReasonInput.parentNode.replaceChild(returnReasonTextarea, returnReasonInput);
-        });
-    </script>
-    <script>
-        // JavaScript to convert input fields to textareas
-        document.addEventListener("DOMContentLoaded", function () {
-            var descriptionInput = document.getElementById("new2_description");
-            var returnReasonInput = document.getElementById("new2_return_reason");
+            // Loop through each selected <td> element
+            tdElements.forEach(function(tdElement) {
+                // Get the text content of the <td> element
+                var textContent = tdElement.textContent;
 
-            // Convert input fields to textareas
-            var descriptionTextarea = document.createElement("textarea");
-            descriptionTextarea.className = "form-control";
-            descriptionTextarea.name = "new2_description";
-            descriptionTextarea.id = "new2_description";
-            descriptionInput.parentNode.replaceChild(descriptionTextarea, descriptionInput);
+                // Create a new <span> element
+                var spanElement = document.createElement("span");
 
-            var returnReasonTextarea = document.createElement("textarea");
-            returnReasonTextarea.className = "form-control";
-            returnReasonTextarea.name = "new2_return_reason";
-            returnReasonTextarea.id = "new2_return_reason";
-            returnReasonTextarea.readOnly = true;
-            returnReasonInput.parentNode.replaceChild(returnReasonTextarea, returnReasonInput);
-        });
-    </script>
+                // Set the text content of the <span> element to the text content of the <td> element
+                spanElement.textContent = textContent;
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
-    <script>
-        // JavaScript to convert input fields to textareas
-        document.addEventListener("DOMContentLoaded", function () {
-            var descriptionInput = document.getElementById("new2_description");
+                // Add a class name based on the color of the <td> element
+                if (tdElement.classList.contains("red")) {
+                    spanElement.classList.add("red-value");
+                } else if (tdElement.classList.contains("blue")) {
+                    spanElement.classList.add("blue-value");
+                } else if (tdElement.classList.contains("green")) {
+                    spanElement.classList.add("green-value");
+                } else if (tdElement.classList.contains("orange")) {
+                    spanElement.classList.add("orange-value");
+                }
 
-            // Convert input field to textarea
-            var descriptionTextarea = document.createElement("textarea");
-            descriptionTextarea.className = "form-control";
-            descriptionTextarea.name = "new2_description";
-            descriptionTextarea.id = "new2_description";
-            descriptionTextarea.readOnly = true; // Set readonly to true for description textarea
-            descriptionTextarea.style.backgroundColor = "lightblue"; // Change background color
-            descriptionInput.parentNode.replaceChild(descriptionTextarea, descriptionInput);
-        });
-    </script>
+                // Replace the text content of the <td> element with the <span> element
+                tdElement.textContent = "";
+                tdElement.appendChild(spanElement);
+            });
+        </script>
 
-    <script>
-        // Get the input element
-        var inputElement = document.getElementById('new_description');
+        <script>
+            // Create a textarea element
+            var textarea = document.createElement("textarea");
+            textarea.className = "form-control";
+            textarea.id = "description";
+            textarea.name = "description";
 
-        // Create a new textarea element
-        var textareaElement = document.createElement('textarea');
+            // Replace the input element with the textarea element
+            var container = document.getElementById("textareaContainerD");
+            var inputElement = container.querySelector("input");
+            container.replaceChild(textarea, inputElement);
+        </script>
 
-        // Copy attributes from input to textarea
-        textareaElement.className = inputElement.className;
-        textareaElement.id = inputElement.id;
-        textareaElement.name = inputElement.name;
+        <script>
+            // Create a textarea element
+            var textarea = document.createElement("textarea");
+            textarea.className = "form-control";
+            textarea.id = "return_reason";
+            textarea.name = "return_reason";
+            textarea.setAttribute("readonly", ""); // Set readonly attribute
 
-        // Replace input with textarea
-        inputElement.parentNode.replaceChild(textareaElement, inputElement);
-    </script>
+            // Replace the input element with the textarea element
+            var container = document.getElementById("textareaContainerR");
+            var inputElement = container.querySelector("input");
+            container.replaceChild(textarea, inputElement);
+        </script>
 
-    <script>
-        // Select all <td> elements with the class "red", "blue", or "green"
-        var tdElements = document.querySelectorAll("td.red, td.blue, td.green, td.orange");
+    </body>
 
-        // Loop through each selected <td> element
-        tdElements.forEach(function (tdElement) {
-            // Get the text content of the <td> element
-            var textContent = tdElement.textContent;
-
-            // Create a new <span> element
-            var spanElement = document.createElement("span");
-
-            // Set the text content of the <span> element to the text content of the <td> element
-            spanElement.textContent = textContent;
-
-            // Add a class name based on the color of the <td> element
-            if (tdElement.classList.contains("red")) {
-                spanElement.classList.add("red-value");
-            } else if (tdElement.classList.contains("blue")) {
-                spanElement.classList.add("blue-value");
-            } else if (tdElement.classList.contains("green")) {
-                spanElement.classList.add("green-value");
-            } else if (tdElement.classList.contains("orange")) {
-                spanElement.classList.add("orange-value");
-            }
-
-            // Replace the text content of the <td> element with the <span> element
-            tdElement.textContent = "";
-            tdElement.appendChild(spanElement);
-        });
-    </script>
-
-</body>
-
-</html>
+    </html>
