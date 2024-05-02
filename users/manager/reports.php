@@ -21,27 +21,61 @@ function logActivity($conn, $accountId, $actionDescription, $tabValue)
     $stmt->close();
 }
 
+// Process form submission
+if (isset($_POST['complete'])) {
+    $assetId = $_POST['assetId'];
+    $sqlUpdate = "UPDATE asset SET status = 'Working', os_identity = '' WHERE assetId = '$assetId'";
+    if ($conn->query($sqlUpdate) === TRUE) {
+        header("Location: {$_SERVER['PHP_SELF']}");
+        exit();
+    } else {
+        echo "Error updating record: " . $conn->error;
+    }
+}
+
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
     // For personnel page, check if userLevel is 3
-    if ($_SESSION['userLevel'] != 2) {
+    if ($_SESSION['userLevel'] != 1) {
         // If not personnel, redirect to an error page or login
         header("Location:error.php");
         exit;
     }
 
-    $sql = "SELECT * FROM asset WHERE status = 'Working'";
+
+
+
+    $sql = "SELECT * FROM asset WHERE status = 'Working' ORDER BY `date` LIMIT 50";
     $result = $conn->query($sql) or die($conn->error);
 
-    $sql2 = "SELECT * FROM asset WHERE status = 'Under Maintenance'";
+    $sql2 = "SELECT * FROM asset WHERE status = 'Under Maintenance' ORDER BY `date` LIMIT 50";
     $result2 = $conn->query($sql2) or die($conn->error);
 
-    $sql3 = "SELECT * FROM asset WHERE status = 'For Replacement'";
+    $sql3 = "SELECT * FROM asset WHERE status = 'For Replacement' ORDER BY `date` LIMIT 50";
     $result3 = $conn->query($sql3) or die($conn->error);
 
-    $sql4 = "SELECT * FROM asset WHERE status = 'Need Repair'";
+
+
+
+
+    $sql4 = "SELECT * FROM asset 
+         WHERE (status IN ('For Approval', 'Need Repair') AND os_identity != 'Outsource')
+         OR (status IN ('For Approval', 'Need Repair') AND NOT EXISTS 
+             (SELECT 1 FROM asset WHERE status IN ('For Approval', 'Need Repair') AND os_identity = 'Outsource'))
+         ORDER BY
+         date DESC,
+         (status = 'For Approval') DESC, 
+                  (status = 'Need Repair') DESC, 
+                   -- Use the 'date' column for ordering
+                  assignedName IS NULL, 
+                  assignedName 
+         LIMIT 50";
+
+
+
     $result4 = $conn->query($sql4) or die($conn->error);
 
-    $sql5 = "SELECT * FROM asset WHERE status = 'Outsource'";
+    $sql5 = "SELECT * FROM asset WHERE os_identity = 'Outsource' ORDER BY CASE WHEN assignedName IS NULL THEN 1 ELSE 0 END, assignedName LIMIT 50";
+
     $result5 = $conn->query($sql5) or die($conn->error);
 
     //Edit
@@ -57,7 +91,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $assignedBy = $_POST['assignedBy'];
         $date = $_POST['date'];
 
-        $updateSql = "UPDATE `asset` SET `category`='$category', `building`='$building', `floor`='$floor', `room`='$room', `status`='$status', `assignedName`='$assignedName', `assignedBy`='$assignedBy', `date`='$date' WHERE `assetId`='$assetId'";
+        // New column
+        $os_identity = $_POST['os_identity'];
+
+        $updateSql = "UPDATE `asset` SET `category`='$category', `building`='$building', `floor`='$floor', `room`='$room', `status`='$status', `assignedName`='$assignedName', `assignedBy`='$assignedBy', `date`='$date', `os_identity`='$os_identity' WHERE `assetId`='$assetId'";
         if ($conn->query($updateSql) === TRUE) {
             logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId to $status.", 'Report');
         } else {
@@ -65,6 +102,31 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         }
         header("Location: reports.php");
     }
+
+    // //Edit
+    // if (isset($_POST['assignedMPOUT'])) {
+    //     $assetId = $_POST['assetId'];
+    //     $category = $_POST['category'];
+    //     $building = $_POST['building'];
+    //     $floor = $_POST['floor'];
+    //     $room = $_POST['room'];
+
+    //     $status = $_POST['status'];
+    //     $assignedName = $_POST['assignedName'];
+    //     $assignedBy = $_POST['assignedBy'];
+    //     $date = $_POST['date'];
+
+    //     // New column
+    //     $os_identity = $_POST['os_identity'];
+
+    //     $updateSql = "UPDATE `asset` SET `category`='$category', `building`='$building', `floor`='$floor', `room`='$room', `status`='$status', `assignedName`='$assignedName', `assignedBy`='$assignedBy', `date`='$date', `os_identity`='$os_identity' WHERE `assetId`='$assetId'";
+    //     if ($conn->query($updateSql) === TRUE) {
+    //         logActivity($conn, $_SESSION['accountId'], "Changed status of asset ID $assetId to $status.", 'Report');
+    //     } else {
+    //         echo "Error updating asset: " . $conn->error;
+    //     }
+    //     header("Location: reports.php");
+    // }
 
 
     // for notif below
@@ -81,10 +143,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
                 FROM activitylogs AS al
                JOIN account AS acc ON al.accountID = acc.accountID
-               WHERE al.m_seen= '0' AND al.accountID != ?  AND action NOT LIKE '%logged in'
+               WHERE  al.seen = '0' AND al.accountID != ?
                ORDER BY al.date DESC 
                LIMIT 5"; // Set limit to 5
-
 
     // Prepare the SQL statement
     $stmtLatestLogs = $conn->prepare($sqlLatestLogs);
@@ -96,8 +157,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     $stmtLatestLogs->execute();
     $resultLatestLogs = $stmtLatestLogs->get_result();
 
-
-    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE m_seen= '0' AND action NOT LIKE '%logged in' AND accountID != ?";
+    $unseenCountQuery = "SELECT COUNT(*) as unseenCount FROM activitylogs WHERE seen = '0' AND accountID != ?";
     $stmt = $conn->prepare($unseenCountQuery);
     $stmt->bind_param("i", $loggedInAccountId);
     $stmt->execute();
@@ -185,6 +245,51 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         header("Location: reports.php");
     }
 
+    // Check if the form is submitted
+    if (isset($_POST['transfer'])) {
+        // Retrieve assetId from the form
+        $assetIdtransfer = $_POST['asset_Idtransfer'];
+
+        /// Determine the value for assignedName
+        if ($_POST['assignedNametransfer'] == 'custom') {
+            $assignedNametransfer = $_POST['outsource_assignee']; // Use outsource_assignee value if custom input is selected
+        } else {
+            $assignedNametransfer = $_POST['assignedNametransfer']; // Use assignedNametransfer value otherwise
+        }
+
+        $return_reasontransfer = $_POST['return_reasontransfer']; // Assuming this field is optional
+        $statustransfer = 'Need Repair';
+        $os_identitytransfer = $_POST['os_identitytransfer'];
+        // SQL UPDATE query
+        $sql6 = "UPDATE asset 
+             SET assignedName = ?, return_reason = ?, status = ?, os_identity = ?
+             WHERE assetId = ?";
+
+        // Prepare the SQL statement
+        $stmt6 = $conn->prepare($sql6);
+
+        if ($stmt6 === false) {
+            // Error occurred in preparing the statement
+            echo "Error preparing statement: " . $conn->error;
+            exit();
+        }
+
+        // Bind parameters
+        $stmt6->bind_param("ssssi", $assignedNametransfer, $return_reasontransfer, $statustransfer, $os_identitytransfer, $assetIdtransfer);
+
+        // Execute the query
+        if ($stmt6->execute()) {
+            // Update successful, redirect back to the page or any other page
+            header("Location: reports.php");
+            exit();
+        } else {
+            // Error occurred while updating
+            echo "Error transferring asset: " . $stmt6->error;
+        }
+
+        // Close statement
+        $stmt6->close();
+    }
 
 ?>
     <!DOCTYPE html>
@@ -201,7 +306,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/reports.css" />
-        <script src="../../src/js/reports.js"></script>
+        <script src="../../src/js/reportsmanager.js"></script>
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
 
 
@@ -524,6 +629,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 <div class="content-container">
                     <header>
                         <div class="cont-header">
+                        <section id="content">
+            <main>
+                <div class="content-container">
+                    <header>
+                        <div class="cont-header">
                             <!-- <h1 class="tab-name">Reports</h1> -->
                             <div class="tbl-filter">
                                 <select id="filter-criteria">
@@ -534,7 +644,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <option value="location">Location</option>
                                 </select>
 
-
                                 <select id="rows-display-dropdown" class="form-select dropdown-rows" aria-label="Default select example">
                                     <option value="20" selected>Show 20 rows</option>
                                     <option class="hidden"></option>
@@ -544,7 +653,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     <option value="200">Show 200 rows</option>
                                 </select>
 
-                                <!-- Search Box -->
                                 <!-- Search Box -->
                                 <form class="d-flex col-sm-5" role="search" id="searchForm">
                                     <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" name="q" />
@@ -570,6 +678,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             }
                         });
                     </script>
+
                     <div class="new-nav-container">
                         <!--Content start of tabs-->
                         <div class="new-nav">
@@ -762,20 +871,28 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         echo '<td style="display: none;">' . $row4['floor'] . '</td>';
                                         echo '<td style="display: none;">' . $row4['room'] . '</td>';
                                         echo '<td style="display: none;">' . $row4['images'] . '</td>';
-                                        echo '<td >' . $row4['status'] . '</td>';
+                                        echo '<td>' . $row4['status'] . '</td>';
                                         echo '<td style="display: none;">' . $row4['assignedBy'] . '</td>';
-                                        if (empty($row4['assignedName'])) {
-                                            // Pagwalang data eto ilalabas
-                                            echo '<td>';
+                                        echo '<td style="display: none;">' . $row4['description'] . '</td>';
+                                        echo '<td style="display: none;">' . $row4['return_reason'] . '</td>';
+                                        echo '<td>';
+
+                                        if ($row4['status'] == 'For Approval') {
                                             echo '<form method="post" action="">';
                                             echo '<input type="hidden" name="assetId" value="' . $row4['assetId'] . '">';
-                                            echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#exampleModal5">Assign</button>';
+                                            echo '<button type="button" id="approve-btn" class="btn btn-primary archive-btn" data-bs-toggle="modal" data-bs-target="#exampleModal6">Approve</button>';
                                             echo '</form>';
-                                            echo '</td>';
+                                        } elseif ($row4['status'] == 'Need Repair' && empty($row4['assignedName'])) {
+                                            // If status is 'Need Repair' and assignedName is empty, display the assign button
+                                            echo '<form method="post" action="">';
+                                            echo '<input type="hidden" name="assetId" value="' . $row4['assetId'] . '">';
+                                            echo '<button type="button" id="assign-btn" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#exampleModal5">Assign</button>';
+                                            echo '</form>';
                                         } else {
                                             // Pagmeron data eto ilalabas
-                                            echo '<td>' . $row4['assignedName'] . '</td>';
+                                            echo $row4['assignedName'] . '</td>';
                                         }
+                                        echo '</td>';
                                         echo '</tr>';
                                     }
                                     echo "</table>";
@@ -787,71 +904,67 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     echo "</div>";
                                     echo '</table>';
                                 }
-
                                 ?>
                             </div>
                         </div>
 
-                        <!--Tab for table 5 - Outsource -->
+                        <!-- Tab for table 5 - out-source -->
+                        <!-- Tab for table 5 - out-source -->
                         <div class="tab-pane fade" id="pills-out-source" role="tabpanel" aria-labelledby="out-source-tab">
                             <div class="table-content" id="exportContentNeedforout-source">
                                 <div class='table-header'>
                                     <div class='headerskie4'>
-                                        <span class="tab4">TRACKING #</span>
-                                        <span class="tab4">DATE & TIME</span>
-                                        <span class="tab4">CATEGORY</span>
-                                        <span class="tab4">LOCATION</span>
-                                        <span class="tab4">STATUS</span>
-                                        <span class="tab4">ASSIGNED NAME</span>
+                                        <span class="tab5">TRACKING #</span>
+                                        <span class="tab5">DATE & TIME</span>
+                                        <span class="tab5">CATEGORY</span>
+                                        <span class="tab5">LOCATION</span>
+                                        <span class="tab5">STATUS</span>
+                                        <span class="tab5">ASSIGNED NAME</span>
+                                        <span class="tab5"></span><!-- Empty header for "Done" button -->
                                     </div>
                                 </div>
-                                <!--Content of table 5-->
+                                <!-- Content of table 5 -->
                                 <?php
                                 if ($result5->num_rows > 0) {
                                     echo "<div class='table-container out-source-table'>";
                                     echo "<table>";
                                     while ($row5 = $result5->fetch_assoc()) {
-                                        $date = new DateTime($row5['date']); // Create DateTime object from fetched date
-                                        $date->modify('+8 hours'); // Add 8 hours
-                                        $formattedDate = $date->format('Y-m-d H:i:s'); // Format to SQL datetime format
+                                        $date = new DateTime($row5['date']);
+                                        $date->modify('+8 hours');
+                                        $formattedDate = $date->format('Y-m-d H:i:s');
                                         echo '<tr>';
                                         echo '<td>' . $row5['assetId'] . '</td>';
-                                        echo '<td>' . $formattedDate . '</td>'; // Display the adjusted date
+                                        echo '<td>' . $formattedDate . '</td>';
                                         echo '<td>' . $row5['category'] . '</td>';
                                         echo '<td>' . $row5['building'] . " / " . $row5['floor'] . " / " . $row5['room'] . '</td>';
                                         echo '<td style="display: none;">' . $row5['building'] . '</td>';
                                         echo '<td style="display: none;">' . $row5['floor'] . '</td>';
                                         echo '<td style="display: none;">' . $row5['room'] . '</td>';
                                         echo '<td style="display: none;">' . $row5['images'] . '</td>';
-                                        echo '<td >' . $row5['status'] . '</td>';
-                                        echo '<td style="display: none;">' . $row5['assignedBy'] . '</td>';
-                                        if (empty($row5['assignedName'])) {
-                                            // Pagwalang data eto ilalabas
-                                            echo '<td>';
-                                            echo '<form method="post" action="">';
-                                            echo '<input type="hidden" name="assetId" value="' . $row5['assetId'] . '">';
-                                            echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#exampleModal5">Assign</button>';
-                                            echo '</form>';
-                                            echo '</td>';
-                                        } else {
-                                            // Pagmeron data eto ilalabas
-                                            echo '<td>' . $row5['assignedName'] . '</td>';
-                                        }
+                                        echo '<td style="display: none;">' . $row5['os_identity'] . '</td>';
+                                        echo '<td>' . $row5['status'] . '</td>';
+                                        echo '<td>' . $row5['assignedName'] . '</td>'; // Display assigned name under correct column
+                                        echo '<td>';
+                                        echo '<form id="doneOutsource" method="post" action="">';
+                                        echo '<input type="hidden" name="assetId" value="' . $row5['assetId'] . '">';
+                                        echo '<button type="submit" onclick="confirmCompletion()" name="complete" class="btn btn-primary view-btn archive-btn">Done</button>';
+                                        echo '</form>';
+                                        echo '</td>';
                                         echo '</tr>';
                                     }
                                     echo "</table>";
                                     echo "</div>";
                                 } else {
-                                    echo '<table>';
-                                    echo "<div class=noDataImgH>";
+                                    echo "<div class='noDataImgH'>";
                                     echo '<img src="../../src/img/emptyTable.png" alt="No data available" class="noDataImg"/>';
                                     echo "</div>";
-                                    echo '</table>';
                                 }
 
                                 ?>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             </main>
@@ -880,6 +993,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <section>
             <!--Modal sections-->
+
             <!--Assign Modal for table 4-->
             <div class="modal-parent">
                 <div class="modal modal-xl fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -893,7 +1007,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
                             </div>
                             <div class="modal-body">
-                                <form method="post" class="row g-3" id="assignPersonnelForm">
+                                <form method="post" class="row g-3">
                                     <h5></h5>
                                     <input type="hidden" name="assignMaintenance">
                                     <div class="col-4" style="display:none">
@@ -942,15 +1056,16 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                     </div>
 
                                     <div class="col-6">
-                                        <select class="form-select assignedName" id="assignedName" name="assignedName" style="color: black;">
+                                        <select class="form-select assignedName2" id="assignedName2" name="assignedName" style="color: black;">
+                                            <option value="" selected disabled>Select Personnel</option>
+                                            <!-- Placeholder option -->
                                             <?php
                                             // Assuming you have a database connection established in $conn
                                             // SQL to fetch personnel with the role of "Maintenance Personnel"
                                             $assignSql = "SELECT firstName, middleName, lastName FROM account WHERE userlevel = '3'";
                                             $personnelResult = $conn->query($assignSql);
 
-
-                                            if ($personnelResult) {
+                                            if ($personnelResult && $personnelResult->num_rows > 0) {
                                                 while ($row = $personnelResult->fetch_assoc()) {
                                                     $fullName = $row['firstName'] . ' ' . $row['lastName'];
                                                     // Echo each option within the select
@@ -958,20 +1073,32 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                 }
                                             } else {
                                                 // Handle potential errors or no results
-                                                echo '<option value="No Maintenance Personnel Found">';
+                                                echo '<option value="No Maintenance Personnel Found">No Maintenance Personnel Found</option>';
                                             }
+
+                                            // Add the fixed option for "Outsource"
+                                            echo '<option value="Outsource">Outsource</option>';
                                             ?>
                                         </select>
-                                    </div>
-                                </form>
 
-                                <div class="col-4" style="display:none">
-                                    <label for="assignedBy" class="form-label">Assigned By:</label>
-                                    <input type="text" class="form-control" id="assignedBy" name="assignedBy" readonly />
-                                </div>
+                                        <label for="os_identity" class="form-label" style="display:none;">Outsource
+                                            Name:</label>
+                                        <input type="text" class="form-control" id="os_identity" name="os_identity" style="display:none;" />
+                                    </div>
+
+
+                                    <div class="col-6" id="outsourceNameField" style="display:none;">
+                                        <label for="assignedBy" class="form-label">Outsource Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName">
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy" readonly />
+                                    </div>
                             </div>
                             <div class="footer">
-                                <button type="button" class="btn add-modal-btn" onclick="assignPersonnel()">
+                                <button type="button" id="saveOutsourceBtn" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#LezgoApproval">
                                     Save
                                 </button>
                             </div>
@@ -979,22 +1106,358 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </div>
                 </div>
             </div>
-            <!-- Edit for table 4
-            <div class="modal fade" id="staticBackdrop5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    var selectPersonnel = document.getElementById("assignedName2");
+                    var outsourceNameField = document.getElementById("assignedName");
+                    var saveButton = document.getElementById("saveOutsourceBtn");
+
+                    function toggleSaveButton() {
+                        if (selectPersonnel.value === "" || (selectPersonnel.value === "Outsource" && outsourceNameField.value === "")) {
+                            saveButton.disabled = true;
+                        } else {
+                            saveButton.disabled = false;
+                        }
+                    }
+
+                    // Toggle save button on select change
+                    selectPersonnel.addEventListener("change", toggleSaveButton);
+
+                    // Toggle save button when input field value changes
+                    outsourceNameField.addEventListener("input", toggleSaveButton);
+
+                    // Disable the button initially if the placeholder option or "Outsource" option is selected on page load
+                    toggleSaveButton();
+                });
+            </script>
+
+
+
+
+            <!-- Edit for table 4 -->
+            <div class="modal fade" id="LezgoApproval" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-footer">
                             Are you sure you want to save changes?
                             <div class="modal-popups">
                                 <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
-                                <button class="btn add-modal-btn" name="assignMaintenance" data-bs-dismiss="modal">Yes</button>
+                                <button class="btn add-modal-btn" name="edit" data-bs-dismiss=" modal">Yes</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            </form> -->
+
+            <!--Assign Modal for table 5-->
+            <!-- <div class="modal-parent">
+                <div class="modal modal-xl fade" id="assignOutsource" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content assingee-container">
+                            <div class="assignee-header">
+                                <label for="assignedName" class="form-label assignee-tag">CHOOSE A MAINTENANCE nel:
+                                </label>
+                            </div>
+                            <div class="header">
+                                <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" class="row g-3">
+                                    <h5></h5>
+                                    <input type="hidden" name="assignMaintenance">
+                                    <div class="col-4" style="display:none">
+                                        <label for="assetId" class="form-label">Tracking #:</label>
+                                        <input type="text" class="form-control" id="assetId" name="assetId" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="date" class="form-label">Date:</label>
+                                        <input type="text" class="form-control" id="date" name="date" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="category" class="form-label">Category:</label>
+                                        <input type="text" class="form-control" id="category" name="category" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="building" class="form-label">Building:</label>
+                                        <input type="text" class="form-control" id="building" name="building" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="floor" class="form-label">Floor:</label>
+                                        <input type="text" class="form-control" id="floor" name="floor" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="room" class="form-label">Room:</label>
+                                        <input type="text" class="form-control" id="room" name="room" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="text" class="form-control" id="" name="images" readonly />
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="status" class="form-label">Status:</label>
+                                        <select class="form-select" id="status" name="status">
+                                            <option value="Working">Working</option>
+                                            <option value="Under Maintenance">Under Maintenance</option>
+                                            <option value="For Replacement">For Replacement</option>
+                                            <option value="Need Repair">Need Repair</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <select class="form-select assignedName2" id="assignedName2" name="assignedName" style="color: black;">
+                                            <?php
+                                            // Assuming you have a database connection established in $conn
+                                            // SQL to fetch personnel with the role of "Maintenance Personnel"
+                                            $assignSql = "SELECT firstName, middleName, lastName FROM account WHERE userlevel = '3'";
+                                            $personnelResult = $conn->query($assignSql);
+
+                                            if ($personnelResult && $personnelResult->num_rows > 0) {
+                                                while ($row = $personnelResult->fetch_assoc()) {
+                                                    $fullName = $row['firstName'] . ' ' . $row['lastName'];
+                                                    // Echo each option within the select
+                                                    echo '<option value="' . htmlspecialchars($fullName) . '">' . htmlspecialchars($fullName) . '</option>';
+                                                }
+                                            } else {
+                                                // Handle potential errors or no results
+                                                echo '<option value="No Maintenance Personnel Found">No Maintenance Personnel Found</option>';
+                                            }
+
+                                            // Add the fixed option for "Outsource"
+                                            echo '<option value="Outsource">Outsource</option>';
+                                            ?>
+                                        </select>
+
+                                        <label for="os_identity" class="form-label" style="display:none;">Outsource
+                                            Name:</label>
+                                        <input type="text" class="form-control" id="os_identity" name="os_identity" style="display:none;" />
+                                    </div>
+
+                                    <div class="col-4" id="outsourceNameField" style="display:none;">
+                                        <label for="assignedBy" class="form-label">Outsource Name:</label>
+                                        <input type="text" class="form-control" id="assignedName" name="assignedName">
+                                    </div>
+
+                                    <div class="col-4" style="display:none">
+                                        <label for="assignedBy" class="form-label">Assigned By:</label>
+                                        <input type="text" class="form-control" id="assignedBy" name="assignedBy" readonly />
+                                    </div>
+                            </div>
+                            <div class="footer">
+                                <button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#assignmelods">
+                                    Save
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- Edit for table 4 -->
+            <!-- <div class="modal fade" id="assignmelods" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-footer">
+                            Are you sure you want to save changes?
+                            <div class="modal-popups">
+                                <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                                <button class="btn add-modal-btn" name="assignedMPOUT" data-bs-dismiss=" modal">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            </form>
         </section>
+
+        <!--MODAL FOR THE VIEW-->
+        <div class="modal-parent">
+            <div class="modal modal-xl fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5>View Task</h5>
+
+                            <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="reportOutsource" method="post" class="row g-3">
+                                <div class="col-4">
+                                    <label for="asset_Id" class="form-label">Tracking ID:</label>
+                                    <input type="text" class="form-control" id="asset_Idtransfer" name="asset_Idtransfer" readonly />
+                                </div>
+                                <div class="col-4">
+                                    <label for="eandtime" class="form-label">Date & Time:</label>
+                                    <input type="text" class="form-control" id="dateandtime" name="eandtime" readonly />
+                                </div>
+                                <div class="col-4">
+                                    <label for="categorychuchu" class="form-label">Category:</label>
+                                    <input type="text" class="form-control" id="categorychuchu" name="categorychuchu" readonly />
+                                </div>
+                                <div class="col-4">
+                                    <label for="buildingdet" class="form-label">Location:</label>
+                                    <input type="text" class="form-control" id="buildingdet" name="buildingdet" readonly />
+                                </div>
+
+                                <div class="col-4">
+                                    <label for="statusq" class="form-label">Status:</label>
+                                    <input type="text" class="form-control" id="statusq" name="statusq" readonly />
+                                </div>
+
+                                <div class="col-6" id="assignedNameContainer">
+                                    <?php
+                                    // Assuming you have a database connection established in $conn
+                                    // SQL to fetch personnel with the role of "Maintenance Personnel"
+                                    $assignSql = "SELECT firstName, middleName, lastName FROM account WHERE userlevel = '3'";
+                                    $personnelResult = $conn->query($assignSql);
+
+                                    if ($personnelResult) {
+                                        echo '<select class="form-select assignedName" id="assignedNametransfer" name="assignedNametransfer" style="color: black;">';
+                                        while ($row = $personnelResult->fetch_assoc()) {
+                                            $fullName = $row['firstName'] . ' ' . $row['lastName'];
+                                            // Echo each option within the select
+                                            echo '<option value="' . htmlspecialchars($fullName) . '">' . htmlspecialchars($fullName) . '</option>';
+                                        }
+                                        // Add an input box option
+                                        echo '<option value="custom">Outsource *Select Only if the Transfer Reason is Outsource* </option>';
+                                        echo '</select>';
+                                    } else {
+                                        // Handle potential errors or no results
+                                        echo '<input type="text" class="form-control assignedName" id="assignedNametransfer" name="assignedNametransfer" placeholder="Enter custom input" style="color: black; display: none;">';
+                                    }
+                                    ?>
+
+                                    <div class="col-6" id="outsourceAssigneeSection" style="display: none;">
+                                        <label for="outsource_assignee" class="form-label">Outsource Name:</label>
+                                        <input type="text" class="form-control" id="outsource_assignee" name="outsource_assignee" />
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="col-12">
+                                    <label for="description" class="form-label">Description:</label>
+                                    <input type="text" class="form-control" id="description" name="description" readonly />
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="return_reason" class="form-label">Transfer Reason:</label>
+                                    <input type="text" class="form-control" id="return_reasontransfer" name="return_reasontransfer" readonly />
+                                </div>
+
+                                <div class="col-12" style="display:none;">
+                                    <label for="return_reason" class="form-label">OS Identity:</label>
+                                    <input type="text" class="form-control" id="os_identitytransfer" name="os_identitytransfer" readonly />
+                                </div>
+
+                                <div class="footer">
+                                    <button type="button" class="btn add-modal-btn" id="transferBtn" data-bs-toggle="modal" data-bs-target="#ForSaves" onclick="showTransferConfirmation()">
+                                        Transfer
+                                    </button>
+                                </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+
+        <script>
+            function toggleCustomInput() {
+                var assignedNameSelect = document.getElementById("assignedNametransfer");
+                var outsourceAssigneeSection = document.getElementById("outsourceAssigneeSection");
+
+                if (assignedNameSelect.value === "custom") {
+                    outsourceAssigneeSection.style.display = "block";
+                } else {
+                    outsourceAssigneeSection.style.display = "none";
+                }
+            }
+
+            // Call toggleCustomInput() when the page loads to ensure correct initial state
+            toggleCustomInput();
+
+            // Adding an event listener to trigger toggleCustomInput() when the select value changes
+            document.getElementById("assignedNametransfer").addEventListener("change", toggleCustomInput);
+        </script>
+
+        <!-- Modal approval-->
+        <div class="modal fade" id="ForSave" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-footer">
+                        Are you sure you want to transfer this task?
+                        <div class="modal-popups">
+                            <button type="button" class="btn close-popups" data-bs-dismiss="modal">No</button>
+                            <button class="btn add-modal-btn" name="transfer" data-bs-dismiss="modal">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="../../src/js/main.js"></script>
+        <script src="../../src/js/archive.js"></script>
+        <script src="../../src/js/profileModalController.js"></script>
+        <script src="../../src/js/logout.js"></script>
+        <script src="../../src/js/reports.js"></script>
+        <!-- Add this script after your existing scripts -->
+        <!-- Add this script after your existing scripts -->
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+        <!--PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
+        <script>
+            $(document).ready(function() {
+                // Function to populate modal fields
+                function populateModal(row) {
+                    // Populate modal fields with data from the row
+                    $("#asset_Idtransfer").val(row.find("td:eq(0)").text());
+                    $("#dateandtime").val(row.find("td:eq(1)").text());
+                    $("#categorychuchu").val(row.find("td:eq(2)").text());
+                    // If building, floor, and room are concatenated in a single cell, split them
+                    var buildingFloorRoom = row.find("td:eq(3)").text().split(', ');
+                    $("#buildingdet").val(buildingFloorRoom[0]);
+                    $("#floor").val(buildingFloorRoom[1]);
+                    $("#room").val(buildingFloorRoom[2]);
+                    $("#equipment").val(row.find("td:eq(4)").text());
+                    $("#assignee").val(row.find("td:eq(5)").text());
+                    $("#statusq").val(row.find("td:eq(8)").text());
+                    $("#deadline").val(row.find("td:eq(6)").text());
+                    $("#description").val(row.find("td:eq(10)").text());
+                    $("#return_reasontransfer").val(row.find("td:eq(11)").text());
+                    $("#os_identitytransfer").val(row.find("td:eq(11)").text());
+
+                }
+
+                // Click event for the "View" button
+                $("button[data-bs-target='#exampleModal6']").click(function() {
+                    event.stopPropagation(); // Prevent the click from reaching the parent <tr>
+
+                    var row = $(this).closest("tr"); // Get the closest row to the clicked button
+                    populateModal(row); // Populate modal fields with data from the row
+
+
+
+                    $("#exampleModal6").modal("show"); // Show the modal
+                });
+            });
+        </script>
 
         <!-- PROFILE MODALS -->
         <?php include_once 'modals/modal_layout.php'; ?>
@@ -1026,6 +1489,46 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+        <!-- TESTING/DELETE -->
+        <script>
+            document.getElementById('assignedName2').addEventListener('change', function() {
+                var selectedOption = this.options[this.selectedIndex];
+                var selectedValue = selectedOption.value;
+                var osIdentityInput = document.getElementById('os_identity');
+
+                // Update os_identity input value based on the selected option
+                osIdentityInput.value = selectedValue === 'Outsource' ? 'Outsource' : '';
+
+                // Clear the value of assignedName input if selected value is not 'Outsource'
+                var assignedNameInput = document.getElementById('assignedName');
+                assignedNameInput.value = selectedValue === 'Outsource' ? '' : selectedValue;
+            });
+        </script>
+        <!-- TESTING/DELETE -->
+        <script>
+            document.getElementById('assignedName2').addEventListener('change', function() {
+                var selectedOption = this.options[this.selectedIndex];
+                var selectedValue = selectedOption.value;
+                var outsourceNameField = document.getElementById('outsourceNameField');
+                var assignedNameInput = document.getElementById('assignedName');
+                var osIdentityInput = document.getElementById('os_identity'); // Corrected variable name
+
+                // Check if selected value is "Outsource"
+                if (selectedValue === 'Outsource') {
+                    // If "Outsource" is selected, show the outsourceNameField and clear the values of assignedNameInput and osIdentityInput
+                    outsourceNameField.style.display = 'block';
+                    assignedNameInput.value = ''; // Clear assigned name
+                    osIdentityInput.value = 'Outsource'; // Set os_identity value to "Outsource"
+                } else {
+                    // If a value other than "Outsource" is selected, hide the outsourceNameField, copy the selected value to assignedNameInput, and clear osIdentityInput
+                    outsourceNameField.style.display = 'none';
+                    assignedNameInput.value = selectedValue; // Copy selected value to assigned name
+                    osIdentityInput.value = ''; // Clear os_identity value
+                }
+            });
+        </script>
+
 
         <script>
             //PARA MAGDIRECT KA SA PAGE 
@@ -1184,7 +1687,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         </script>
 
-        <script>
+         <script>
             $(document).ready(function() {
                 // Bind the filter function to the input field
                 $("#search-box").on("input", function() {
@@ -1193,7 +1696,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 });
 
                 function filterTable(query) {
-                    $(".table-container tbody tr").each(function() {
+                    let workingHasData = false;
+                    let maintenanceHasData = false;
+                    let replacementHasData = false;
+                    let repairHasData = false;
+
+
+                    //* checks every table if there is a match or no match
+                    $(".working-table tbody tr").each(function() {
                         var row = $(this);
                         var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
                         var firstNameCell = row.find("td:eq(1)"); // FirstName column
@@ -1226,11 +1736,158 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                         // Show or hide the row based on the result
                         if (showRow) {
+                            workingHasData = true;
                             row.show();
                         } else {
                             row.hide();
                         }
                     });
+
+                    $(".maintenance-table tbody tr").each(function() {
+                        var row = $(this);
+                        var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
+                        var firstNameCell = row.find("td:eq(1)"); // FirstName column
+                        var middleNameCell = row.find("td:eq(2)");
+                        var lastNameCell = row.find("td:eq(3)");
+                        var dateCell = row.find("td:eq(5)");
+                        var actionCell = row.find("td:eq(6)");
+
+                        // Get the text content of each cell
+                        var archiveIDText = archiveIDCell.text().toLowerCase();
+                        var firstNameText = firstNameCell.text().toLowerCase();
+                        var middleNameText = middleNameCell.text().toLowerCase();
+                        var lastNameText = lastNameCell.text().toLowerCase();
+                        var dateText = dateCell.text().toLowerCase();
+                        var actionText = actionCell.text().toLowerCase();
+
+                        // Check if any of the cells contain the query
+                        var showRow = archiveIDText.includes(query) ||
+                            firstNameText.includes(query) ||
+                            middleNameText.includes(query) ||
+                            lastNameText.includes(query) ||
+                            dateText.includes(query) ||
+                            actionText.includes(query) ||
+                            archiveIDText == query || // Exact match for Archive ID
+                            firstNameText == query || // Exact match for FirstName
+                            middleNameText == query || // Exact match for LastName
+                            lastNameText == query || // Exact match for LastName
+                            dateText == query || // Exact match for LastName
+                            actionText == query; // Exact match for LastName
+
+                        // Show or hide the row based on the result
+                        if (showRow) {
+                            maintenanceHasData = true;
+                            row.show();
+                        } else {
+                            row.hide();
+                        }
+                    });
+
+                    $(".replacement-table tbody tr").each(function() {
+                        var row = $(this);
+                        var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
+                        var firstNameCell = row.find("td:eq(1)"); // FirstName column
+                        var middleNameCell = row.find("td:eq(2)");
+                        var lastNameCell = row.find("td:eq(3)");
+                        var dateCell = row.find("td:eq(5)");
+                        var actionCell = row.find("td:eq(6)");
+
+                        // Get the text content of each cell
+                        var archiveIDText = archiveIDCell.text().toLowerCase();
+                        var firstNameText = firstNameCell.text().toLowerCase();
+                        var middleNameText = middleNameCell.text().toLowerCase();
+                        var lastNameText = lastNameCell.text().toLowerCase();
+                        var dateText = dateCell.text().toLowerCase();
+                        var actionText = actionCell.text().toLowerCase();
+
+                        // Check if any of the cells contain the query
+                        var showRow = archiveIDText.includes(query) ||
+                            firstNameText.includes(query) ||
+                            middleNameText.includes(query) ||
+                            lastNameText.includes(query) ||
+                            dateText.includes(query) ||
+                            actionText.includes(query) ||
+                            archiveIDText == query || // Exact match for Archive ID
+                            firstNameText == query || // Exact match for FirstName
+                            middleNameText == query || // Exact match for LastName
+                            lastNameText == query || // Exact match for LastName
+                            dateText == query || // Exact match for LastName
+                            actionText == query; // Exact match for LastName
+
+                        // Show or hide the row based on the result
+                        if (showRow) {
+                            replacementHasData = true;
+                            row.show();
+                        } else {
+                            row.hide();
+                        }
+                    });
+
+                    $(".repair-table tbody tr").each(function() {
+                        var row = $(this);
+                        var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
+                        var firstNameCell = row.find("td:eq(1)"); // FirstName column
+                        var middleNameCell = row.find("td:eq(2)");
+                        var lastNameCell = row.find("td:eq(3)");
+                        var dateCell = row.find("td:eq(5)");
+                        var actionCell = row.find("td:eq(6)");
+
+                        // Get the text content of each cell
+                        var archiveIDText = archiveIDCell.text().toLowerCase();
+                        var firstNameText = firstNameCell.text().toLowerCase();
+                        var middleNameText = middleNameCell.text().toLowerCase();
+                        var lastNameText = lastNameCell.text().toLowerCase();
+                        var dateText = dateCell.text().toLowerCase();
+                        var actionText = actionCell.text().toLowerCase();
+
+                        // Check if any of the cells contain the query
+                        var showRow = archiveIDText.includes(query) ||
+                            firstNameText.includes(query) ||
+                            middleNameText.includes(query) ||
+                            lastNameText.includes(query) ||
+                            dateText.includes(query) ||
+                            actionText.includes(query) ||
+                            archiveIDText == query || // Exact match for Archive ID
+                            firstNameText == query || // Exact match for FirstName
+                            middleNameText == query || // Exact match for LastName
+                            lastNameText == query || // Exact match for LastName
+                            dateText == query || // Exact match for LastName
+                            actionText == query; // Exact match for LastName
+
+                        // Show or hide the row based on the result
+                        if (showRow) {
+                            repairHasData = true;
+                            row.show();
+                        } else {
+                            row.hide();
+                        }
+                    });
+
+                    // * checks if rows are empty or not using the HasData variables
+                    //* appends the tr-td child on the manager or personnel table 
+                    if (!workingHasData) {
+                        $(".working-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+                    } else {
+                        $('.working-table tbody .emptyMsg').remove();
+                    }
+
+                    if (!maintenanceHasData) {
+                        $(".maintenance-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+                    } else {
+                        $('.maintenance-table tbody .emptyMsg').remove();
+                    }
+
+                    if (!replacementHasData) {
+                        $(".replacement-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+                    } else {
+                        $('.replacement-table tbody .emptyMsg').remove();
+                    }
+
+                    if (!repairHasData) {
+                        $(".repair-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+                    } else {
+                        $('.repair-table tbody .emptyMsg').remove();
+                    }
                 }
             });
         </script>
@@ -1256,7 +1913,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
                 // Event listener for filter dropdown change
                 $('#search-filter').change(function() {
-                    $('#search-box').val(''); // Clear the search input
+                    $('#search-box').val(''); // Clear the search inputaaaaaaaaa
                     filterTable(); // Filter table with new criteria
                 });
             });
@@ -1288,11 +1945,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                             }
 
                             // Show or hide the row based on whether the searchText contains the filter
-                            if (searchText.indexOf(filter) > -1) {
-                                tr[i].style.display = "";
-                            } else {
-                                tr[i].style.display = "none";
-                            }
+                            // if (searchText.indexOf(filter) > -1) {
+                            //     tr[i].style.display = "";
+                            // } else {
+                            //     tr[i].style.display = "none";
+                            // }
                         }
                     }
                 }
@@ -1317,6 +1974,202 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         <script>
             $(document).ready(function() {
+
+                function filterTable(query) {
+                    let workingHasData = false;
+                    let maintenanceHasData = false;
+                    let replacementHasData = false;
+                    let repairHasData = false;
+
+
+                    //* checks every table if there is a match or no match
+                    $(".working-table tbody tr").each(function() {
+                        var row = $(this);
+                        var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
+                        var firstNameCell = row.find("td:eq(1)"); // FirstName column
+                        var middleNameCell = row.find("td:eq(2)");
+                        var lastNameCell = row.find("td:eq(3)");
+                        var dateCell = row.find("td:eq(5)");
+                        var actionCell = row.find("td:eq(6)");
+
+                        // Get the text content of each cell
+                        var archiveIDText = archiveIDCell.text().toLowerCase();
+                        var firstNameText = firstNameCell.text().toLowerCase();
+                        var middleNameText = middleNameCell.text().toLowerCase();
+                        var lastNameText = lastNameCell.text().toLowerCase();
+                        var dateText = dateCell.text().toLowerCase();
+                        var actionText = actionCell.text().toLowerCase();
+
+                        // Check if any of the cells contain the query
+                        var showRow = archiveIDText.includes(query) ||
+                            firstNameText.includes(query) ||
+                            middleNameText.includes(query) ||
+                            lastNameText.includes(query) ||
+                            dateText.includes(query) ||
+                            actionText.includes(query) ||
+                            archiveIDText == query || // Exact match for Archive ID
+                            firstNameText == query || // Exact match for FirstName
+                            middleNameText == query || // Exact match for LastName
+                            lastNameText == query || // Exact match for LastName
+                            dateText == query || // Exact match for LastName
+                            actionText == query; // Exact match for LastName
+
+                        // Show or hide the row based on the result
+                        if (showRow) {
+                            workingHasData = true;
+                            row.show();
+                        } else {
+                            row.hide();
+                        }
+                    });
+
+                    $(".maintenance-table tbody tr").each(function() {
+                        var row = $(this);
+                        var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
+                        var firstNameCell = row.find("td:eq(1)"); // FirstName column
+                        var middleNameCell = row.find("td:eq(2)");
+                        var lastNameCell = row.find("td:eq(3)");
+                        var dateCell = row.find("td:eq(5)");
+                        var actionCell = row.find("td:eq(6)");
+
+                        // Get the text content of each cell
+                        var archiveIDText = archiveIDCell.text().toLowerCase();
+                        var firstNameText = firstNameCell.text().toLowerCase();
+                        var middleNameText = middleNameCell.text().toLowerCase();
+                        var lastNameText = lastNameCell.text().toLowerCase();
+                        var dateText = dateCell.text().toLowerCase();
+                        var actionText = actionCell.text().toLowerCase();
+
+                        // Check if any of the cells contain the query
+                        var showRow = archiveIDText.includes(query) ||
+                            firstNameText.includes(query) ||
+                            middleNameText.includes(query) ||
+                            lastNameText.includes(query) ||
+                            dateText.includes(query) ||
+                            actionText.includes(query) ||
+                            archiveIDText == query || // Exact match for Archive ID
+                            firstNameText == query || // Exact match for FirstName
+                            middleNameText == query || // Exact match for LastName
+                            lastNameText == query || // Exact match for LastName
+                            dateText == query || // Exact match for LastName
+                            actionText == query; // Exact match for LastName
+
+                        // Show or hide the row based on the result
+                        if (showRow) {
+                            maintenanceHasData = true;
+                            row.show();
+                        } else {
+                            row.hide();
+                        }
+                    });
+
+                    $(".replacement-table tbody tr").each(function() {
+                        var row = $(this);
+                        var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
+                        var firstNameCell = row.find("td:eq(1)"); // FirstName column
+                        var middleNameCell = row.find("td:eq(2)");
+                        var lastNameCell = row.find("td:eq(3)");
+                        var dateCell = row.find("td:eq(5)");
+                        var actionCell = row.find("td:eq(6)");
+
+                        // Get the text content of each cell
+                        var archiveIDText = archiveIDCell.text().toLowerCase();
+                        var firstNameText = firstNameCell.text().toLowerCase();
+                        var middleNameText = middleNameCell.text().toLowerCase();
+                        var lastNameText = lastNameCell.text().toLowerCase();
+                        var dateText = dateCell.text().toLowerCase();
+                        var actionText = actionCell.text().toLowerCase();
+
+                        // Check if any of the cells contain the query
+                        var showRow = archiveIDText.includes(query) ||
+                            firstNameText.includes(query) ||
+                            middleNameText.includes(query) ||
+                            lastNameText.includes(query) ||
+                            dateText.includes(query) ||
+                            actionText.includes(query) ||
+                            archiveIDText == query || // Exact match for Archive ID
+                            firstNameText == query || // Exact match for FirstName
+                            middleNameText == query || // Exact match for LastName
+                            lastNameText == query || // Exact match for LastName
+                            dateText == query || // Exact match for LastName
+                            actionText == query; // Exact match for LastName
+
+                        // Show or hide the row based on the result
+                        if (showRow) {
+                            replacementHasData = true;
+                            row.show();
+                        } else {
+                            row.hide();
+                        }
+                    });
+
+                    $(".repair-table tbody tr").each(function() {
+                        var row = $(this);
+                        var archiveIDCell = row.find("td:eq(0)"); // Archive ID column
+                        var firstNameCell = row.find("td:eq(1)"); // FirstName column
+                        var middleNameCell = row.find("td:eq(2)");
+                        var lastNameCell = row.find("td:eq(3)");
+                        var dateCell = row.find("td:eq(5)");
+                        var actionCell = row.find("td:eq(6)");
+
+                        // Get the text content of each cell
+                        var archiveIDText = archiveIDCell.text().toLowerCase();
+                        var firstNameText = firstNameCell.text().toLowerCase();
+                        var middleNameText = middleNameCell.text().toLowerCase();
+                        var lastNameText = lastNameCell.text().toLowerCase();
+                        var dateText = dateCell.text().toLowerCase();
+                        var actionText = actionCell.text().toLowerCase();
+
+                        // Check if any of the cells contain the query
+                        var showRow = archiveIDText.includes(query) ||
+                            firstNameText.includes(query) ||
+                            middleNameText.includes(query) ||
+                            lastNameText.includes(query) ||
+                            dateText.includes(query) ||
+                            actionText.includes(query) ||
+                            archiveIDText == query || // Exact match for Archive ID
+                            firstNameText == query || // Exact match for FirstName
+                            middleNameText == query || // Exact match for LastName
+                            lastNameText == query || // Exact match for LastName
+                            dateText == query || // Exact match for LastName
+                            actionText == query; // Exact match for LastName
+
+                        // Show or hide the row based on the result
+                        if (showRow) {
+                            repairHasData = true;
+                            row.show();
+                        } else {
+                            row.hide();
+                        }
+                    });
+
+                    // * checks if rows are empty or not using the HasData variables
+                    //* appends the tr-td child on the manager or personnel table 
+                    if (!workingHasData) {
+                        $(".working-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+                    } else {
+                        $('.working-table tbody .emptyMsg').remove();
+                    }
+
+                    if (!maintenanceHasData) {
+                        $(".maintenance-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+                    } else {
+                        $('.maintenance-table tbody .emptyMsg').remove();
+                    }
+
+                    if (!replacementHasData) {
+                        $(".replacement-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+                    } else {
+                        $('.replacement-table tbody .emptyMsg').remove();
+                    }
+
+                    if (!repairHasData) {
+                        $(".repair-table tbody").append("<tr class='emptyMsg'><td>No results found</td></tr>");
+                    } else {
+                        $('.repair-table tbody .emptyMsg').remove();
+                    }
+                }
+
                 // Function to update hidden input with the active status
                 function updateStatusInput(tab) {
                     let status;
@@ -1336,11 +2189,15 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         default:
                             status = 'Unknown';
                     }
+
                     $('input[name="status"]').val(status); // Update the hidden input's value
+
+
                 }
 
-                // Initial tab selection handling
+                // // Initial tab selection handling
                 let tabLastSelected = sessionStorage.getItem("lastTab");
+
                 if (!tabLastSelected) {
                     $("#pills-manager").addClass("show active");
                     $(".nav-link[data-bs-target='pills-manager']").addClass("active");
@@ -1361,6 +2218,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     $(this).addClass("active");
                     updateStatusInput(targetId); // Update the hidden input with the new status
                 });
+
             });
         </script>
 
@@ -1509,9 +2367,175 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         </script>
 
+
+        <script>
+            function showTransferConfirmation() {
+                Swal.fire({
+                        icon: "info",
+                        title: `Are you sure you want to transfer this task?`,
+                        showCancelButton: true,
+                        cancelButtonText: "No",
+                        focusConfirm: false,
+                        confirmButtonText: "Yes",
+                    })
+                    .then((result) => {
+                        if (result.isConfirmed) {
+                            // AJAX
+                            let form = document.querySelector("#reportOutsource");
+                            let xhr = new XMLHttpRequest();
+
+                            xhr.open("POST", "../../users/administrator/reports.php", true);
+
+                            xhr.onerror = function() {
+                                console.error("An error occurred during the XMLHttpRequest");
+                            };
+
+                            let formData = new FormData(form);
+                            formData.set("transfer", "transfer"); // Corrected line
+                            xhr.send(formData);
+
+                            // success alertbox
+                            Swal.fire({
+                                text: "Transfer Completed",
+                                icon: "success",
+                                timer: 1000,
+                                showConfirmButton: false,
+                            }).then((result) => {
+                                if (result.dismiss || Swal.DismissReason.timer) {
+                                    window.location.reload();
+                                }
+                            });
+                        }
+
+                    });
+            }
+        </script>
+        <script>
+            function confirmCompletion() {
+                // Display a SweetAlert2 confirmation dialog
+                Swal.fire({
+                    text: "Task Completed",
+                    icon: "success",
+                    timer: 1000,
+                    showConfirmButton: false,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // AJAX
+                        let form = document.querySelector("#doneOutsource");
+                        let xhr = new XMLHttpRequest();
+
+                        xhr.open("POST", "../../users/administrator/reports.php", true);
+
+                        xhr.onerror = function() {
+                            console.error("An error occurred during the XMLHttpRequest");
+                        };
+                        // success alertbox
+                        Swal.fire({
+                            text: "Task Completed",
+                            icon: "success",
+                            timer: 1000,
+                            showConfirmButton: false,
+                        }).then((result) => {
+                            if (result.dismiss || Swal.DismissReason.timer) {
+                                window.location.reload();
+                            }
+                        });
+                    }
+
+                });
+            }
+        </script>
+        <script>
+            function openModal(event) {
+                // Prevent the default behavior of the button
+                event.preventDefault();
+                // Stop the event from propagating to parent elements
+                event.stopPropagation();
+
+                // Get the modal element by ID
+                var modal = document.getElementById('assignOutsource');
+                // Show the modal
+                var modalInstance = new bootstrap.Modal(modal);
+                modalInstance.show();
+            }
+        </script>
+
+
+        <script>
+            // Add event listener to the form
+            document.getElementById('assignForm').addEventListener('submit', function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
+                // Submit the form
+                submitForm();
+            });
+
+            // Function to submit the form
+            function submitForm() {
+                // Your form submission logic here
+                document.getElementById('assignForm').submit();
+            }
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                // Retrieve the last active tab from session storage
+                let tabLastSelected = sessionStorage.getItem("lastTab");
+
+                // Function to disable export button
+                function disableExportButton() {
+                    $("#exportBtn").prop("disabled", true);
+                }
+
+                // Function to enable export button
+                function enableExportButton() {
+                    $("#exportBtn").prop("disabled", false);
+                }
+
+                // Check if there's a last active tab
+                if (tabLastSelected) {
+                    // Show the last active tab
+                    $(`#${tabLastSelected}`).addClass("show active");
+                    $(`.nav-link[data-bs-target='${tabLastSelected}']`).addClass("active");
+
+                    // Disable export button if the last active tab is 'Outsource'
+                    if (tabLastSelected === "pills-out-source") {
+                        disableExportButton();
+                    } else {
+                        enableExportButton();
+                    }
+                } else {
+                    // If no last active tab, default to 'pills-manager'
+                    $("#pills-manager").addClass("show active");
+                    $(".nav-link[data-bs-target='pills-manager']").addClass("active");
+                    enableExportButton(); // Enable export button by default
+                }
+
+                // Event listener for tab clicks
+                $(".nav-link").click(function() {
+                    const targetId = $(this).data("bs-target");
+                    // Set the last active tab to session storage
+                    sessionStorage.setItem("lastTab", targetId);
+
+                    // Disable export button if the selected tab is 'Outsource'
+                    if (targetId === "pills-out-source") {
+                        disableExportButton();
+                    } else {
+                        enableExportButton();
+                    }
+
+                    // Update tab and content visibility
+                    $(".tab-pane").removeClass("show active");
+                    $(`#${targetId}`).addClass("show active");
+                    $(".nav-link").removeClass("active");
+                    $(this).addClass("active");
+                });
+            });
+        </script>
+
         <script>
             // Select all <td> elements with the class "red", "blue", or "green"
-            var tdElements = document.querySelectorAll("td.red, td.blue, td.green");
+            var tdElements = document.querySelectorAll("td.red, td.blue, td.green, td.orange");
 
             // Loop through each selected <td> element
             tdElements.forEach(function(tdElement) {
@@ -1531,6 +2555,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     spanElement.classList.add("blue-value");
                 } else if (tdElement.classList.contains("green")) {
                     spanElement.classList.add("green-value");
+                } else if (tdElement.classList.contains("orange")) {
+                    spanElement.classList.add("orange-value");
                 }
 
                 // Replace the text content of the <td> element with the <span> element
@@ -1538,6 +2564,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 tdElement.appendChild(spanElement);
             });
         </script>
+
+
+
+
 
     </body>
 
