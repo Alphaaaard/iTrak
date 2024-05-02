@@ -7,7 +7,7 @@ use PHPMailer\PHPMailer\Exception;
 require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
-include_once ("../../config/connection.php");
+include_once("../../config/connection.php");
 date_default_timezone_set('Asia/Manila');
 $conn = connection();
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
@@ -30,7 +30,6 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     // Assuming $loggedInUserFirstName, $loggedInUserMiddleName, $loggedInUserLastName are set
 
     $loggedInFullName = $loggedInUserFirstName . ' ' . $loggedInUserMiddleName . ' ' . $loggedInUserLastName;
-    $nomiddlename = $loggedInUserFirstName . ' ' . $loggedInUserLastName;
     $loggedInAccountId = $_SESSION['accountId'];
     // SQL query to fetch notifications related to report activities
     $sqlLatestLogs = "SELECT al.*, acc.firstName AS adminFirstName, acc.middleName AS adminMiddleName, acc.lastName AS adminLastName, acc.role AS adminRole
@@ -62,10 +61,10 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     // SQL query to retrieve tasks for the Batasan campus
     $sql = "SELECT * FROM request 
         WHERE campus = 'Batasan' 
-        AND (status IN ('Pending', 'For Approval', 'Overdue') OR (status = 'Overdue' AND deadline < CURDATE() AND deadline IS NOT NULL AND deadline != '0000-00-00'))
+        AND (status IN ('Pending', 'For Approval', 'Overdue') OR 
+             (status = 'Overdue' AND deadline < CURDATE() AND deadline IS NOT NULL AND deadline != '0000-00-00'))
         AND category != 'Outsource' 
         ORDER BY date DESC";
-
     $result = $conn->query($sql) or die($conn->error);
 
     // SQL query to retrieve tasks for the Batasan campus with category 'Outsource'
@@ -82,16 +81,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
          WHERE campus = 'Batasan' 
          AND status = 'Done' 
          ORDER BY date DESC";
-
     $result4 = $conn->query($sql4) or die($conn->error);
-
-
-
 
     function logActivity($conn, $accountId, $actionDescription, $tabValue)
     {
         // Add 8 hours to the current date
-        $date = date('Y-m-d H:i:s', strtotime('+0 hours'));
+        $date = date('Y-m-d H:i:s', strtotime('+8 hours'));
 
         $stmt = $conn->prepare("INSERT INTO activitylogs (accountId, date, action, tab, seen, m_seen, p_seen) VALUES (?, ?, ?, ?, 1, 1, 1)");
         $stmt->bind_param("isss", $accountId, $date, $actionDescription, $tabValue);
@@ -100,6 +95,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         }
         $stmt->close();
     }
+
+
     if (isset($_POST['add'])) {
         $request_id = $_POST['new_request_id'];
         $campus = $_POST['new_campus'];
@@ -113,14 +110,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status = $_POST['new_status'];
         $description = $_POST['new_description'];
         $deadline = $_POST['new_deadline'];
-        $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
         $outsource_info = $_POST['new_outsource_info'];
         $first_assignee = $_POST['new_first_assignee'];
         $admins_remark = $_POST['new_admins_remark'];
         $mp_remark = $_POST['new_mp_remark'];
 
         // Calculate the current date plus 8 hours
-   
+        $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
 
         // Insert data into the request table
         $insertQuery = "INSERT INTO request (request_id, campus, building, floor, room, equipment, req_by, category, assignee, status, description, deadline, date, outsource_info, first_assignee, admins_remark, mp_remark)
@@ -150,6 +146,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $conn->close();
     }
 
+
     if (isset($_POST['approval'])) {
         // Retrieve request_id from the form
         $request_id2 = $_POST['request_id'];
@@ -165,34 +162,32 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $status2 = $_POST['status'];
         $description2 = $_POST['description'];
         $deadline2 = $_POST['deadline'];
-        $outsource_info2 = $_POST['outsource_info'];
-        $first_assignee2 = $_POST['first_assignee'];
-        $admins_remark2 = $_POST['admins_remark'];
+
         // Calculate the current date plus 8 hours
         $adjusted_date = date('Y-m-d H:i:s', strtotime('+0 hours'));
 
         // SQL UPDATE query
         $sql3 = "UPDATE request 
-        SET campus = ?, building = ?, floor = ?, room = ?, 
-            equipment = ?, category = ?, assignee = ?, 
-            status = ?, description = ?, deadline = ?, outsource_info = ?,first_assignee = ?, admins_remark = ?, date = ?
-        WHERE request_id = ?";
+                 SET campus = ?, building = ?, floor = ?, room = ?, 
+                     equipment = ?, category = ?, assignee = ?, 
+                     status = ?, description = ?, deadline = ?, date = ?
+                 WHERE request_id = ?";
 
         // Prepare the SQL statement
         $stmt3 = $conn->prepare($sql3);
 
         // Bind parameters
-        $stmt3->bind_param("ssssssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $outsource_info2, $first_assignee2, $admins_remark2, $adjusted_date, $request_id2);
+        $stmt3->bind_param("sssssssssssi", $campus2, $building2, $floor2, $room2, $equipment2, $category2, $assignee2, $status2, $description2, $deadline2, $adjusted_date, $request_id2);
+
+        // Execute the query
         if ($stmt3->execute()) {
             // Log activity for admin approval with new assignee
-            $approval_action = "$nomiddlename approved Task ID $request_id2 with $assignee2 as new assignee.";
+            $approval_action = "Task ID $request_id2 approved with $assignee2 as new assignee.";
             $reassignment_action = "Task ID $request_id2 reassigned to $assignee2.";
             logActivity($conn, $_SESSION['accountId'], $approval_action, 'General');
             logActivity($conn, $_SESSION['accountId'], $reassignment_action, 'General');
 
-            // Redirect back to the page
             header("Location: batasan.php");
-
             exit();
         } else {
             // Error occurred while updating
@@ -254,9 +249,9 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
         // Query tasks with approaching deadlines based on the input date from the modal form
         $sql = "SELECT req.*, acc.email 
-            FROM request AS req 
-            JOIN account AS acc ON req.assignee = CONCAT(acc.firstName, ' ', acc.lastName)
-            WHERE req.deadline = ? AND req.notification_sent = 0"; // Add condition to check if notification has not been sent
+                FROM request AS req 
+                JOIN account AS acc ON req.assignee = CONCAT(acc.firstName, ' ', acc.lastName)
+                WHERE req.deadline = ? AND req.notification_sent = 0"; // Add condition to check if notification has not been sent
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $deadlineThreshold);
         $stmt->execute();
@@ -301,12 +296,32 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         }
     }
 
+
+
     // Call the function when needed, for example in your PHP script:
     sendDeadlineNotifications($conn);
 
+    // Function to update status to "Overdue" for tasks with overdue deadlines
+    function updateOverdueTasks($conn)
+    {
+        // Get today's date
+        $today = date('Y-m-d');
 
+        // SQL query to update status for overdue tasks
+        $sql = "UPDATE request SET status = 'Overdue' WHERE deadline < ? AND deadline IS NOT NULL AND deadline != '0000-00-00' AND status != 'Done'";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param(
+            "s",
+            $today
+        );
+        $stmt->execute();
+        $stmt->close();
+    }
 
+    // Call the function to update overdue tasks
+    updateOverdueTasks($conn);
 ?>
+
 
 <!DOCTYPE html>
     <html lang="en">
