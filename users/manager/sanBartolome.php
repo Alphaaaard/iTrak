@@ -944,7 +944,7 @@ updateOverdueTasks($conn);
                                     }
 
                                     // Output the status with appropriate color
-                                    echo '<td class="status-cell ' . $status_color . '">' . $status . '</td>';
+                                    echo '<td class="' . $status_color . '">' . $status . '</td>';
 
                                     // Check if status is "Done"
                                     if ($row4['status'] == 'Done') {

@@ -1001,7 +1001,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
                                     // Output the status with appropriate color
                             
-                                    echo '<td class="status-cell ' . $status_color . '">' . $status . '</td>';
+                                    echo '<td class="' . $status_color . '">' . $status . '</td>';
                                     echo '<td style="display:none;">' . $row6['campus'] . '</td>';
                                     echo '<td style="display:none;">' . $row6['building'] . '</td>';
                                     echo '<td style="display:none;">' . $row6['floor'] . '</td>';
