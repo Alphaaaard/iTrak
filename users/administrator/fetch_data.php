@@ -26,7 +26,7 @@ function getCountByWeek($conn, $weekStart, $weekEnd, $employeeFullName = null, $
                 
                 (SELECT COUNT(*) 
                 FROM request r
-                INNER JOIN account ac ON CONCAT(ac.firstName, ' ', ac.lastName) = r.assignee
+                INNER JOIN account ac ON CONCAT(ac.firstName, ' ', ac.lastName) = r.first_assignee
                 WHERE CONCAT(ac.firstName, ' ', ac.lastName) LIKE CONCAT(?, '%')
                 AND r.status = 'Done'
                 AND DATE(r.date) BETWEEN ? AND ?
