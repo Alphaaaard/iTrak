@@ -476,7 +476,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <link rel="stylesheet" href="../../src/css/request.css" />
         <link rel="stylesheet" href="../../src/css/accordion.css" />
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
-        <script>
+        <!-- <script>
             $(document).ready(function () {
                 let lastPillSelected = sessionStorage.getItem('lastPillArchive');
 
@@ -513,7 +513,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     $(this).addClass("active");
                 });
             });
-        </script>
+        </script> -->
     </head>
     <style>
         .notification-indicator {
@@ -726,6 +726,12 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                     <div class="cont-header">
                         <h1 class="tab-name"></h1>
                         <div class="tbl-filter">
+                            <select id="status-filter">
+                                <option value="all">Choose a status</option>
+                                <option value="Pending">Pending</option>
+                                <option value="For Approval">For Approval</option>
+                                <option value="Overdue">Overdue</option>
+                            </select>
                             <form class="d-flex" role="search" id="searchForm">
                                 <input class="form-control icon" type="search" placeholder="Search" aria-label="Search"
                                     id="search-box" name="q" />
@@ -818,7 +824,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
                                     // Output the status with appropriate color
                             
-                                    echo '<td class="' . $status_color . '">' . $status . '</td>';
+                                    echo '<td class="status-cell ' . $status_color . '">' . $status . '</td>';
                                     echo '<td>';
                                     echo '<button type="button" class="btn btn-primary view-btn archive-btn" data-bs-toggle="modal" data-bs-target="#ForView">View</button>';
                                     echo '</td>';
@@ -898,7 +904,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                     }
 
                                     // Output the status with appropriate color
-                                    echo '<td class="' . $status_color . '">' . $status . '</td>';
+                                    echo '<td class="status-cell ' . $status_color . '">' . $status . '</td>';
 
                                     // Check if status is "Pending"
                                     if ($row7['status'] == 'Pending') {
@@ -995,7 +1001,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
 
                                     // Output the status with appropriate color
                             
-                                    echo '<td class="' . $status_color . '">' . $status . '</td>';
+                                    echo '<td class="status-cell ' . $status_color . '">' . $status . '</td>';
                                     echo '<td style="display:none;">' . $row6['campus'] . '</td>';
                                     echo '<td style="display:none;">' . $row6['building'] . '</td>';
                                     echo '<td style="display:none;">' . $row6['floor'] . '</td>';
@@ -1894,6 +1900,116 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         var inputElement = container.querySelector("input");
         container.replaceChild(textarea, inputElement);
     </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const statusFilter = document.getElementById('status-filter');
+
+        statusFilter.addEventListener('change', function() {
+            const selectedStatus = statusFilter.value;
+            const rows = document.querySelectorAll('.table-container table tr');
+
+            rows.forEach(row => {
+                const statusCell = row.querySelector('.status-cell');
+                if (selectedStatus === 'all' || statusCell.textContent === selectedStatus) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    });
+    </script>
+
+<script>
+    $(document).ready(function() {
+        let lastPillSelected = sessionStorage.getItem('lastPillArchive');
+
+        if (!lastPillSelected) {
+            $("#pills-manager").addClass("show active");
+            $("#pills-feedback").removeClass("show active");
+            $("#pills-done").removeClass("show active");
+            $(".nav-link[data-bs-target='pills-manager']").addClass("active");
+            $(".nav-link[data-bs-target='pills-feedback']").removeClass("active");
+            $(".nav-link[data-bs-target='pills-done']").removeClass("active");
+        } else {
+            switch (lastPillSelected) {
+                case 'pills-manager':
+                    $("#pills-manager").addClass("show active");
+                    $("#pills-feedback").removeClass("show active");
+                    $("#pills-done").removeClass("show active");
+                    $(".nav-link[data-bs-target='pills-manager']").addClass("active");
+                    $(".nav-link[data-bs-target='pills-feedback']").removeClass("active");
+                    $(".nav-link[data-bs-target='pills-done']").removeClass("active");
+                    break;
+                case 'pills-feedback':
+                    $("#pills-feedback").addClass("show active");
+                    $("#pills-manager").removeClass("show active");
+                    $("#pills-done").removeClass("show active");
+                    $(".nav-link[data-bs-target='pills-feedback']").addClass("active");
+                    $(".nav-link[data-bs-target='pills-manager']").removeClass("active");
+                    $(".nav-link[data-bs-target='pills-done']").removeClass("active");
+                    break;
+                case 'pills-done':
+                    $("#pills-done").addClass("show active");
+                    $("#pills-manager").removeClass("show active");
+                    $("#pills-feedback").removeClass("show active");
+                    $(".nav-link[data-bs-target='pills-done']").addClass("active");
+                    $(".nav-link[data-bs-target='pills-manager']").removeClass("active");
+                    $(".nav-link[data-bs-target='pills-feedback']").removeClass("active");
+                    break;
+            }
+        }
+
+        // Check the active tab on page load
+        let activeTab = $('.nav-link.active').data('bs-target');
+
+        // If the active tab is "Outsource", remove the "For Approval" option from the dropdown
+        if (activeTab === 'pills-feedback') {
+            $("#status-filter option[value='For Approval']").remove();
+            $("#status-filter").prop('disabled', false);
+        } else if (activeTab === 'pills-done') {
+            // Disable the dropdown when the "Done" tab is active
+            $("#status-filter").prop('disabled', true);
+        } else {
+            // If the active tab is neither "Outsource" nor "Done", enable the dropdown and ensure that "For Approval" option exists
+            $("#status-filter").prop('disabled', false);
+            if ($("#status-filter option[value='For Approval']").length === 0) {
+                // Add "For Approval" option back if it doesn't exist
+                $("#status-filter").append('<option value="For Approval">For Approval</option>');
+            }
+        }
+
+        $(".nav-link").click(function() {
+            const targetId = $(this).data("bs-target");
+
+            sessionStorage.setItem('lastPillArchive', targetId);
+
+            $(".tab-pane").removeClass("show active");
+            $(`#${targetId}`).addClass("show active");
+            $(".nav-link").removeClass("active");
+            $(this).addClass("active");
+
+            // Check if the last tab is "Outsource"
+            if (targetId === 'pills-feedback') {
+                // Remove the "For Approval" option from the dropdown
+                $("#status-filter option[value='For Approval']").remove();
+                // Enable the dropdown
+                $("#status-filter").prop('disabled', false);
+            } else if (targetId === 'pills-done') {
+                // Disable the dropdown when the "Done" tab is active
+                $("#status-filter").prop('disabled', true);
+            } else {
+                // If the last tab is neither "Outsource" nor "Done", enable the dropdown and ensure that "For Approval" option exists
+                $("#status-filter").prop('disabled', false);
+                if ($("#status-filter option[value='For Approval']").length === 0) {
+                    // Add "For Approval" option back if it doesn't exist
+                    $("#status-filter").append('<option value="For Approval">For Approval</option>');
+                }
+            }
+        });
+    });
+</script>
 </body>
 
 </html>
