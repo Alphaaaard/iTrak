@@ -3,7 +3,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
@@ -7473,12 +7473,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <img src='../image.php?id=7264'
                         style='width:30px; cursor:pointer; position:absolute; top:247px; left:650px;  transform: rotate(-90deg);'
                         alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal7264'
-                        onclick=' fetchAssetData(7264);' class="asset-image" data-id=" <?php echo $assetId7264; ?>"
-                        data-room="
-            <?php echo htmlspecialchars($room7264); ?>" data-floor=" <?php echo htmlspecialchars($floor7264); ?>"
+                        onclick=' fetchAssetData(7264);' class="asset-image" data-id="<?php echo $assetId7264; ?>"
+                        data-room="<?php echo htmlspecialchars($room7264); ?>"
+                        data-status="<?php echo htmlspecialchars($status7264); ?>"
+                        data-floor=" <?php echo htmlspecialchars($floor7264); ?>"
                         data-image="<?php echo base64_encode($upload_img7264); ?>"
                         data-category=" <?php echo htmlspecialchars($category7264); ?>"
-                        data-status="<?php echo htmlspecialchars($status7264); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName7264); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7264); ?>;
             position:absolute; top:242px; left:670px; z-index:1;'>
