@@ -2682,7 +2682,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 <script>
 $(document).ready(function() {
     // Define default month and week as January and Week 1
-    var defaultMonth = 4; // January
+    var defaultMonth = 5; // January
     var defaultWeek = 1; // Week 1
     // var defaultCampus = "San Bartolome";
 

@@ -9,7 +9,7 @@ if ($conn->connect_error) {
 }
 
 // Hardcoded campus names
-$campusNames = array("San Bartolome", "San Francisco", "Batasan");
+$campusNames = array("Batasan", "San Bartolome", "San Francisco");
 
 // Return employee names as JSON
 header('Content-Type: application/json');
