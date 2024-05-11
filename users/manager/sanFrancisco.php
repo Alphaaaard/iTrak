@@ -642,6 +642,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="cont-header">
                             <h1 class="tab-name"></h1>
                             <div class="tbl-filter">
+                                <select id="status-filter">
+                                    <option value="all">Choose a status</option>
+                                    <option value="Pending">Pending</option>
+                                    <option value="For Approval">For Approval</option>
+                                    <option value="Overdue">Overdue</option>
+                                </select>
                                 <form class="d-flex" role="search" id="searchForm">
                                     <input class="form-control icon" type="search" placeholder="Search" aria-label="Search" id="search-box" name="q" />
                                 </form>
@@ -729,7 +735,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         }
 
                                         // Output the status with appropriate color
-                                        echo '<td class="' . $status_color . '">' . $status . '</td>';
+                                        echo '<td class="status-cell ' . $status_color . '">' . $status . '</td>';
 
 
                                         // Check if status is "For Approval"
@@ -2107,6 +2113,26 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             var inputElement = container.querySelector("input");
             container.replaceChild(textarea, inputElement);
         </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const statusFilter = document.getElementById('status-filter');
+
+                statusFilter.addEventListener('change', function() {
+                    const selectedStatus = statusFilter.value;
+                    const rows = document.querySelectorAll('.table-container table tr');
+
+                    rows.forEach(row => {
+                        const statusCell = row.querySelector('.status-cell');
+                        if (selectedStatus === 'all' || statusCell.textContent === selectedStatus) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        </script> 
 
     </body>
 
