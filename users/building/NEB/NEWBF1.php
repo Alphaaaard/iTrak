@@ -3,7 +3,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
+require 'C:\xampp\htdocs\iTrak\vendor\autoload.php';
 require '/home/u579600805/domains/itrak.site/public_html/vendor/autoload.php';
 
 session_start();
@@ -6551,118 +6551,118 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             </div>
         </nav>
     </div>
-        <section id="sidebar">
-            <a href="./dashboard.php" class="brand" title="logo">
-                <i><img src="../../../src/img/UpKeep.png" alt="" class="logo" /></i>
-                <div class="mobile-sidebar-close">
-                    <i class="bi bi-arrow-left-circle"></i>
-                </div>
-            </a>
-            <ul class="side-menu top">
-                <li>
-                    <a href="../../administrator/dashboard.php">
-                        <i class="bi bi-grid"></i>
-                        <span class="text">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../../administrator/attendance-logs.php">
-                        <i class=" bi bi-calendar-week"></i>
-                        <span class="text">Attendance Logs</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../../administrator/staff.php">
-                        <i class=" bi bi-person"></i>
-                        <span class="text">Staff</span>
-                    </a>
-                </li>
-                <div class="GPS-cont" onclick="toggleGPS()">
-                    <li class="GPS-dropdown">
-                        <div class="GPS-drondown-content">
-                            <div class="GPS-side-cont">
-                                <i class="bi bi-geo-alt"></i>
-                                <span class="text">GPS</span>
-                            </div>
-                            <div class="GPS-ind">
-                                <i id="chevron-icon" class="bi bi-chevron-down"></i>
-                            </div>
+    <section id="sidebar">
+        <a href="./dashboard.php" class="brand" title="logo">
+            <i><img src="../../../src/img/UpKeep.png" alt="" class="logo" /></i>
+            <div class="mobile-sidebar-close">
+                <i class="bi bi-arrow-left-circle"></i>
+            </div>
+        </a>
+        <ul class="side-menu top">
+            <li>
+                <a href="../../administrator/dashboard.php">
+                    <i class="bi bi-grid"></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="../../administrator/attendance-logs.php">
+                    <i class=" bi bi-calendar-week"></i>
+                    <span class="text">Attendance Logs</span>
+                </a>
+            </li>
+            <li>
+                <a href="../../administrator/staff.php">
+                    <i class=" bi bi-person"></i>
+                    <span class="text">Staff</span>
+                </a>
+            </li>
+            <div class="GPS-cont" onclick="toggleGPS()">
+                <li class="GPS-dropdown">
+                    <div class="GPS-drondown-content">
+                        <div class="GPS-side-cont">
+                            <i class="bi bi-geo-alt"></i>
+                            <span class="text">GPS</span>
                         </div>
-                    </li>
-                </div>
-                <div class="GPS-container">
-                    <li class="GPS-Tracker">
-                        <a href="../../administrator/gps.php">
-                            <i class=" bi bi-crosshair"></i>
-                            <span class="text">GPS Tracker</span>
-                        </a>
-                    </li>
-                    <li class="GPS-History">
-                        <a href="../../administrator/gps_history.php">
-                            <i class="bi bi-radar"></i>
-                            <span class="text">GPS History</span>
-                        </a>
-                    </li>
-                </div>
-                <li class="active">
-                    <a href="../../administrator/map.php">
-                        <i class="bi bi-map"></i>
-                        <span class="text">Map</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../../administrator/reports.php">
-                        <i class="bi bi-clipboard"></i>
-                        <span class="text">Reports</span>
-                    </a>
-                </li>
-                <div class="Map-cont" onclick="toggleMAP()">
-                    <li class="Map-dropdown">
-                        <div class="Map-drondown-content">
-                            <div class="Map-side-cont">
-                                <i class="bi bi-receipt"></i>
-                                <span class="text">Request</span>
-                            </div>
-                            <div class="Map-ind">
-                                <i id="map-chevron-icon" class="bi bi-chevron-down"></i>
-                            </div>
+                        <div class="GPS-ind">
+                            <i id="chevron-icon" class="bi bi-chevron-down"></i>
                         </div>
-                    </li>
-                </div>
-                <div class="Map-container">
-                    <li class="Map-Batasan">
-                        <a href="../../administrator/batasan.php">
-                            <i class="bi bi-building"></i>
-                            <span class="text">Batasan</span>
-                        </a>
-                    </li>
-                    <li class="Map-SanBartolome">
-                        <a href="../../administrator/sanBartolome.php">
-                            <i class="bi bi-building"></i>
-                            <span class="text">San Bartolome</span>
-                        </a>
-                    </li>
-                    <li class="Map-SanFrancisco">
-                        <a href="../../administrator/sanFrancisco.php">
-                            <i class="bi bi-building"></i>
-                            <span class="text">San Francisco</span>
-                        </a>
-                    </li>
-                </div>
-                <li>
-                    <a href="../../administrator/archive.php">
-                        <i class="bi bi-archive"></i>
-                        <span class="text">Archive</span>
+                    </div>
+                </li>
+            </div>
+            <div class="GPS-container">
+                <li class="GPS-Tracker">
+                    <a href="../../administrator/gps.php">
+                        <i class=" bi bi-crosshair"></i>
+                        <span class="text">GPS Tracker</span>
                     </a>
                 </li>
-                <li>
-                    <a href="../../administrator/activity-logs.php">
-                        <i class="bi bi-arrow-counterclockwise"></i>
-                        <span class="text">Activity Logs</span>
+                <li class="GPS-History">
+                    <a href="../../administrator/gps_history.php">
+                        <i class="bi bi-radar"></i>
+                        <span class="text">GPS History</span>
                     </a>
                 </li>
-            </ul>
-        </section>
+            </div>
+            <li class="active">
+                <a href="../../administrator/map.php">
+                    <i class="bi bi-map"></i>
+                    <span class="text">Map</span>
+                </a>
+            </li>
+            <li>
+                <a href="../../administrator/reports.php">
+                    <i class="bi bi-clipboard"></i>
+                    <span class="text">Reports</span>
+                </a>
+            </li>
+            <div class="Map-cont" onclick="toggleMAP()">
+                <li class="Map-dropdown">
+                    <div class="Map-drondown-content">
+                        <div class="Map-side-cont">
+                            <i class="bi bi-receipt"></i>
+                            <span class="text">Request</span>
+                        </div>
+                        <div class="Map-ind">
+                            <i id="map-chevron-icon" class="bi bi-chevron-down"></i>
+                        </div>
+                    </div>
+                </li>
+            </div>
+            <div class="Map-container">
+                <li class="Map-Batasan">
+                    <a href="../../administrator/batasan.php">
+                        <i class="bi bi-building"></i>
+                        <span class="text">Batasan</span>
+                    </a>
+                </li>
+                <li class="Map-SanBartolome">
+                    <a href="../../administrator/sanBartolome.php">
+                        <i class="bi bi-building"></i>
+                        <span class="text">San Bartolome</span>
+                    </a>
+                </li>
+                <li class="Map-SanFrancisco">
+                    <a href="../../administrator/sanFrancisco.php">
+                        <i class="bi bi-building"></i>
+                        <span class="text">San Francisco</span>
+                    </a>
+                </li>
+            </div>
+            <li>
+                <a href="../../administrator/archive.php">
+                    <i class="bi bi-archive"></i>
+                    <span class="text">Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="../../administrator/activity-logs.php">
+                    <i class="bi bi-arrow-counterclockwise"></i>
+                    <span class="text">Activity Logs</span>
+                </a>
+            </li>
+        </ul>
+    </section>
     <div id="map-top-nav">
         <a href="../../administrator/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
 
@@ -7110,10 +7110,11 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <!-- ASSET 25 -->
                     <img src='../image.php?id=25'
                         style='width:12px; cursor:pointer; position:absolute; top:190px; left:523px;' alt='Asset Image'
-                        data-bs-toggle='modal' data-bs-target='#imageModal25' onclick='fetchAssetData(25);'
-                        class=" asset-image" data-id="<?php echo $assetId25; ?>" data-room="
-            <?php echo htmlspecialchars($room25); ?>" data-floor=" <?php echo htmlspecialchars($floor25); ?>"
+                        data-bs-toggle='modal' data-bs-target='#imageModal25' onclick=' fetchAssetData(25);'
+                        class="asset-image" data-id="<?php echo $assetId25; ?>"
+                        data-room="<?php echo htmlspecialchars($room25); ?>"
                         data-status="<?php echo htmlspecialchars($status25); ?>"
+                        data-floor=" <?php echo htmlspecialchars($floor25); ?>"
                         data-image="<?php echo base64_encode($upload_img25); ?>"
                         data-category=" <?php echo htmlspecialchars($category25); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName25); ?>">
@@ -7125,7 +7126,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <img src='../image.php?id=26'
                         style='width:12px; cursor:pointer; position:absolute; top:174.6px; left:524px;'
                         alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal26'
-                        onclick=' fetchAssetData(26);' class="asset-image" data-id="<?php echo $assetId26; ?>"
+                        onclick=' fetchAssetData(26);' class=" asset-image" data-id="<?php echo $assetId26; ?>"
                         data-room="<?php echo htmlspecialchars($room26); ?>"
                         data-status="<?php echo htmlspecialchars($status26); ?>"
                         data-floor=" <?php echo htmlspecialchars($floor26); ?>"
@@ -7375,11 +7376,12 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <!-- ASSET 898 -->
                     <img src='../image.php?id=898'
                         style='width:34px; cursor:pointer; position:absolute; top:193px; left:636px;' alt='Asset Image'
-                        data-bs-toggle='modal' data-bs-target='#imageModal898' onclick='fetchAssetData(898);'
-                        class=" asset-image" data-id="<?php echo $assetId898; ?>" data-room="
-            <?php echo htmlspecialchars($room898); ?>" data-floor=" <?php echo htmlspecialchars($floor898); ?>"
-                        data-image="<?php echo base64_encode($upload_img898); ?>"
+                        data-bs-toggle='modal' data-bs-target='#imageModal898' onclick=' fetchAssetData(898);'
+                        class="asset-image" data-id="<?php echo $assetId898; ?>"
+                        data-room="<?php echo htmlspecialchars($room898); ?>"
                         data-status="<?php echo htmlspecialchars($status898); ?>"
+                        data-floor=" <?php echo htmlspecialchars($floor898); ?>"
+                        data-image="<?php echo base64_encode($upload_img898); ?>"
                         data-category=" <?php echo htmlspecialchars($category898); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName898); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status898); ?>; 
@@ -7407,13 +7409,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <img src='../image.php?id=901'
                         style='width:34px; cursor:pointer; position:absolute; top:242px; left:800px; transform: rotate(-90deg);'
                         alt='Asset Image' data-bs-toggle='modal' data-bs-target='#imageModal901'
-                        onclick=' fetchAssetData(901);' class="asset-image" data-id=" <?php echo $assetId901; ?>"
-                        data-room="
-            <?php echo htmlspecialchars($room901); ?>" data-floor=" <?php echo htmlspecialchars($floor901); ?>"
+                        onclick=' fetchAssetData(901);' class="asset-image" data-id="<?php echo $assetId901; ?>"
+                        data-room="<?php echo htmlspecialchars($room901); ?>"
+                        data-status="<?php echo htmlspecialchars($status901); ?>"
+                        data-floor=" <?php echo htmlspecialchars($floor901); ?>"
                         data-image="<?php echo base64_encode($upload_img901); ?>"
                         data-category=" <?php echo htmlspecialchars($category901); ?>"
-                        data-status="<?php echo htmlspecialchars($status901); ?>"
-                        data-assignedname="<?php echo htmlspecialchars($assignedName901); ?>">
+                        data-assignedname="<?php echo htmlspecialchars($assignedName902); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status901); ?>; 
                         position:absolute; top:265px; left:800px;'>
                     </div>
@@ -7438,12 +7440,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <!-- ASSET 7262 -->
                     <img src='../image.php?id=7262'
                         style='width:30px; cursor:pointer; position:absolute; top:155px; left:500px; ' alt='Asset Image'
-                        data-bs-toggle='modal' data-bs-target='#imageModal7262' onclick='fetchAssetData(7262);'
-                        class=" asset-image" data-id="<?php echo $assetId7262; ?>" data-room="
-            <?php echo htmlspecialchars($room7262); ?>" data-floor=" <?php echo htmlspecialchars($floor7262); ?>"
+                        data-bs-toggle='modal' data-bs-target='#imageModal7262' onclick=' fetchAssetData(7262);'
+                        class="asset-image" data-id="<?php echo $assetId7262; ?>"
+                        data-room="<?php echo htmlspecialchars($room7262); ?>"
+                        data-status="<?php echo htmlspecialchars($status7262); ?>"
+                        data-floor=" <?php echo htmlspecialchars($floor7262); ?>"
                         data-image="<?php echo base64_encode($upload_img7262); ?>"
                         data-category=" <?php echo htmlspecialchars($category7262); ?>"
-                        data-status="<?php echo htmlspecialchars($status7262); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName7262); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7262); ?>;
             position:absolute; top:175px; left:512px;'>
@@ -7499,12 +7502,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <!-- ASSET 7266 -->
                     <img src='../image.php?id=7266'
                         style='width:30px; cursor:pointer; position:absolute; top:150px; left:765px; ' alt='Asset Image'
-                        data-bs-toggle='modal' data-bs-target='#imageModal7266' onclick='fetchAssetData(7266);'
-                        class=" asset-image" data-id="<?php echo $assetId7266; ?>" data-room="
-            <?php echo htmlspecialchars($room7266); ?>" data-floor=" <?php echo htmlspecialchars($floor7266); ?>"
+                        data-bs-toggle='modal' data-bs-target='#imageModal7266' onclick=' fetchAssetData(7266);'
+                        class="asset-image" data-id="<?php echo $assetId7266; ?>"
+                        data-room="<?php echo htmlspecialchars($room7266); ?>"
+                        data-status="<?php echo htmlspecialchars($status7266); ?>"
+                        data-floor=" <?php echo htmlspecialchars($floor7266); ?>"
                         data-image="<?php echo base64_encode($upload_img7266); ?>"
                         data-category=" <?php echo htmlspecialchars($category7266); ?>"
-                        data-status="<?php echo htmlspecialchars($status7266); ?>"
                         data-assignedname="<?php echo htmlspecialchars($assignedName7266); ?>">
                     <div style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7266); ?>;
             position:absolute; top:150px; left:790px;'>
@@ -8661,14 +8665,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     <!-- ASSET 7197 -->
                     <img src='../image.php?id=7197'
                         style=' width:12px; cursor:pointer; position:absolute; top:100px; left:420px;' alt='Asset Image'
-                        data-bs-toggle='modal' data-bs-target='#imageModal7197' onclick='fetchAssetData(7197);'
+                        data-bs-toggle='modal' data-bs-target='#imageModal7197' onclick=' fetchAssetData(7197);'
                         class="asset-image" data-id="<?php echo $assetId7197; ?>"
-                        data-room=" <?php echo htmlspecialchars($room7197); ?>"
-                        data-status="<?php echo htmlspecialchars($status7197); ?>" data-floor="
-            <?php echo htmlspecialchars($floor7197); ?>" data-image="
-            <?php echo base64_encode($upload_img7197); ?>" data-category="
-            <?php echo htmlspecialchars($category7197); ?>" data-assignedname="
-            <?php echo htmlspecialchars($assignedName7197); ?>">
+                        data-room="<?php echo htmlspecialchars($room7197); ?>"
+                        data-status="<?php echo htmlspecialchars($status7197); ?>"
+                        data-floor=" <?php echo htmlspecialchars($floor7197); ?>"
+                        data-image="<?php echo base64_encode($upload_img7197); ?>"
+                        data-category=" <?php echo htmlspecialchars($category7197); ?>"
+                        data-assignedname="<?php echo htmlspecialchars($assignedName7197); ?>">
                     <div
                         style='width:8px; height:8px; border-radius:50%; background-color: <?php echo getStatusColor($status7197); ?>; position:absolute; top:105px; left:430px;'>
                     </div>
@@ -30206,6 +30210,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="center-content-hover">
                             ${imageHTML}
                         </div>
+                        
                         <input type="text" class="form-control input-hover" id="category-hover" value="${category}" readonly />
                     </div>
 

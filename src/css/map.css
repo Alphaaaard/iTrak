@@ -78,12 +78,13 @@
 
 .hover-asset {
   z-index: 9999;
-  position: absolute;
-  top: 30px;
-  left: 1130px;
+  position: relative;
+  top: -620px;
+  left: 89.5%;
+  z-index: 999;
   border: 2px solid #3d3b40;
   height: 200px;
-  width: 125px;
+ width: 125px;
   border-radius: 15px;
   padding: 15px 5px 5px 5px;
   color: #3d3b40;
@@ -106,7 +107,7 @@
 }
 #category-hover {
   text-align: center;
-  font-size: 1.1em;
+  font-size: 1em;
   font-weight: bold;
   text-transform: uppercase;
 }
@@ -339,6 +340,7 @@
 .top-side-hover {
   border-bottom: 2px solid #aaaaaa;
   margin-bottom: 5px;
+
 }
 .hover-location {
   display: flex;
