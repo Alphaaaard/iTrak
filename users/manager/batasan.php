@@ -343,7 +343,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 
 
         <script src="https://kit.fontawesome.com/64b2e81e03.js" crossorigin="anonymous"></script>
-        <script>
+        <!-- <script>
             $(document).ready(function() {
                 let lastPillSelected = sessionStorage.getItem('lastPillArchive');
 
@@ -380,7 +380,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     $(this).addClass("active");
                 });
             });
-        </script>
+        </script> -->
     </head>
     <style>
         .notification-indicator {
@@ -837,7 +837,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         }
 
                                         // Output the status with appropriate color
-                                        echo '<td class="' . $status_color . '">' . $status . '</td>';
+                                        echo '<td class="status-cell ' . $status_color . '">' . $status . '</td>';
 
                                         // Check if status is "Pending"
                                         if ($row2['status'] == 'Pending') {
@@ -933,7 +933,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                         }
 
                                         // Output the status with appropriate color
-                                        echo '<td class="' . $status_color . '">' . $status . '</td>';
+                                        echo '<td class="status-cell ' . $status_color . '">' . $status . '</td>';
 
                                         // Check if status is "Done"
                                         if ($row4['status'] == 'Done') {
@@ -2131,7 +2131,97 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     });
                 });
             });
-        </script>   
+        </script>
+        
+        <script>
+            $(document).ready(function() {
+                let lastPillSelected = sessionStorage.getItem('lastPillArchive');
+
+                if (!lastPillSelected) {
+                    $("#pills-manager").addClass("show active");
+                    $("#pills-profile").removeClass("show active");
+                    $("#pills-done").removeClass("show active");
+                    $(".nav-link[data-bs-target='pills-manager']").addClass("active");
+                    $(".nav-link[data-bs-target='pills-profile']").removeClass("active");
+                    $(".nav-link[data-bs-target='pills-done']").removeClass("active");
+                } else {
+                    switch (lastPillSelected) {
+                        case 'pills-manager':
+                            $("#pills-manager").addClass("show active");
+                            $("#pills-profile").removeClass("show active");
+                            $("#pills-done").removeClass("show active");
+                            $(".nav-link[data-bs-target='pills-manager']").addClass("active");
+                            $(".nav-link[data-bs-target='pills-profile']").removeClass("active");
+                            $(".nav-link[data-bs-target='pills-done']").removeClass("active");
+                            break;
+                        case 'pills-profile':
+                            $("#pills-profile").addClass("show active");
+                            $("#pills-manager").removeClass("show active");
+                            $("#pills-done").removeClass("show active");
+                            $(".nav-link[data-bs-target='pills-profile']").addClass("active");
+                            $(".nav-link[data-bs-target='pills-manager']").removeClass("active");
+                            $(".nav-link[data-bs-target='pills-done']").removeClass("active");
+                            break;
+                        case 'pills-done':
+                            $("#pills-done").addClass("show active");
+                            $("#pills-manager").removeClass("show active");
+                            $("#pills-profile").removeClass("show active");
+                            $(".nav-link[data-bs-target='pills-done']").addClass("active");
+                            $(".nav-link[data-bs-target='pills-manager']").removeClass("active");
+                            $(".nav-link[data-bs-target='pills-profile']").removeClass("active");
+                            break;
+                    }
+                }
+
+                // Check the active tab on page load
+                let activeTab = $('.nav-link.active').data('bs-target');
+
+                // If the active tab is "Outsource", remove the "For Approval" option from the dropdown
+                if (activeTab === 'pills-profile') {
+                    $("#status-filter option[value='For Approval']").remove();
+                    $("#status-filter").prop('disabled', false);
+                } else if (activeTab === 'pills-done') {
+                    // Disable the dropdown when the "Done" tab is active
+                    $("#status-filter").prop('disabled', true);
+                } else {
+                    // If the active tab is neither "Outsource" nor "Done", enable the dropdown and ensure that "For Approval" option exists
+                    $("#status-filter").prop('disabled', false);
+                    if ($("#status-filter option[value='For Approval']").length === 0) {
+                        // Add "For Approval" option back if it doesn't exist
+                        $("#status-filter").append('<option value="For Approval">For Approval</option>');
+                    }
+                }
+
+                $(".nav-link").click(function() {
+                    const targetId = $(this).data("bs-target");
+
+                    sessionStorage.setItem('lastPillArchive', targetId);
+
+                    $(".tab-pane").removeClass("show active");
+                    $(`#${targetId}`).addClass("show active");
+                    $(".nav-link").removeClass("active");
+                    $(this).addClass("active");
+
+                    // Check if the last tab is "Outsource"
+                    if (targetId === 'pills-profile') {
+                        // Remove the "For Approval" option from the dropdown
+                        $("#status-filter option[value='For Approval']").remove();
+                        // Enable the dropdown
+                        $("#status-filter").prop('disabled', false);
+                    } else if (targetId === 'pills-done') {
+                        // Disable the dropdown when the "Done" tab is active
+                        $("#status-filter").prop('disabled', true);
+                    } else {
+                        // If the last tab is neither "Outsource" nor "Done", enable the dropdown and ensure that "For Approval" option exists
+                        $("#status-filter").prop('disabled', false);
+                        if ($("#status-filter option[value='For Approval']").length === 0) {
+                            // Add "For Approval" option back if it doesn't exist
+                            $("#status-filter").append('<option value="For Approval">For Approval</option>');
+                        }
+                    }
+                });
+            });
+        </script>
 
     </body>
 
