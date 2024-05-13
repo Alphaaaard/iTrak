@@ -698,7 +698,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
 
                         <div class="col-4" id="addExpertise">
-                          <label for="expertise">Expertise:</label>
+                          <label for="expertise" class="form-label">Expertise</label>
                           <div class="input-group">
                             <select class="form-select shadow-none" name="expertise" id="expertise" required>
                               <option value="" disabled selected hidden>Select expertise</option>
