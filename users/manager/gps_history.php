@@ -3,6 +3,7 @@ session_start();
 include_once("../../config/connection.php");
 date_default_timezone_set('Asia/Manila'); //need ata to sa lahat ng page para sa security hahah 
 $conn = connection();
+ini_set('display_errors', 0);
 
 if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSION['role']) && isset($_SESSION['userLevel'])) {
     // For personnel page, check if userLevel is 3
@@ -206,7 +207,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <!-- NAVBAR -->
         <!-- SIDEBAR -->
         <section id="sidebar">
-            <a href="./dashboard.php" class="brand" title="logo">
+            <a href="#" class="brand" title="logo">
                 <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
                 <div class="mobile-sidebar-close">
                     <i class="bi bi-arrow-left-circle"></i>

@@ -127,6 +127,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/activity-logs.js"></script>
         <link rel="stylesheet" href="../../src/css/main.css" />
         <link rel="stylesheet" href="../../src/css/activity-logs.css" />
+        <link rel="stylesheet" href="../../src/css/reports.css" />
+
 
     </head>
     <style>
@@ -270,7 +272,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <!-- NAVBAR -->
         <!-- SIDEBAR -->
         <section id="sidebar">
-            <a href="./dashboard.php" class="brand" title="logo">
+            <a href="#" class="brand" title="logo">
                 <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
                 <div class="mobile-sidebar-close">
                     <i class="bi bi-arrow-left-circle"></i>
@@ -791,7 +793,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         });
     </script>
 
-<script>
+    <script>
         document.getElementById('exportBtn').addEventListener('click', function() {
             console.log("Export button clicked");
             var searchQuery = document.getElementById('search-box').value;

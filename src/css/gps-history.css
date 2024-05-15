@@ -301,7 +301,7 @@ button.reset-btn:hover {
   }
 
   #content .content-container {
-    height: 84vh;
+    height: 80vh;
   }
   #locationTbl {
     display: block !important;
@@ -319,6 +319,7 @@ button.reset-btn:hover {
     left: 10px !important;
     color: #3d3b40;
     border-radius: 25px;
+    max-width: 55px;
   }
 
   .calendar-container {

@@ -21,7 +21,6 @@ span.red-value {
   padding: 0.1em 0.3em;
 }
 
-
 span.blue-value {
   background-color: blue;
   border-radius: 5px;
@@ -533,6 +532,30 @@ hr {
 }
 
 #sidebar.hide .side-menu .GPS-container .GPS-Tracker {
+  padding-left: 10px !important;
+}
+
+#sidebar .side-menu .Map-container .Map-Batasan {
+  transition: 0.3s ease;
+}
+
+#sidebar .side-menu .Map-container .Map-SanBartolome {
+  transition: 0.3s ease;
+}
+
+#sidebar .side-menu .Map-container .Map-SanFrancisco {
+  transition: 0.3s ease;
+}
+
+#sidebar.hide .side-menu .Map-container .Map-Batasan {
+  padding-left: 10px !important;
+}
+
+#sidebar.hide .side-menu .Map-container .Map-SanBartolome {
+  padding-left: 10px !important;
+}
+
+#sidebar.hide .side-menu .Map-container .Map-SanFrancisco {
   padding-left: 10px !important;
 }
 

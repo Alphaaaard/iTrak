@@ -201,7 +201,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <!-- NAVBAR -->
         <!-- SIDEBAR -->
         <section id="sidebar">
-            <a href="./dashboard.php" class="brand" title="logo">
+            <a href="#" class="brand" title="logo">
                 <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
                 <div class="mobile-sidebar-close">
                     <i class="bi bi-arrow-left-circle"></i>
@@ -234,13 +234,13 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </li>
                 </div>
                 <div class="GPS-container aaa">
-                    <li class="GPS-Tracker">
+                    <li class="GPS-Tracker active">
                         <a href="./gps.php">
                             <i class="bi bi-crosshair"></i>
                             <span class="text">GPS Tracker</span>
                         </a>
                     </li>
-                    <li class="GPS-History active">
+                    <li class="GPS-History ">
                         <a href="./gps_history.php">
                             <i class="bi bi-radar"></i>
                             <span class="text">GPS History</span>

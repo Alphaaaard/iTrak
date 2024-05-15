@@ -6552,7 +6552,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </nav>
     </div>
     <section id="sidebar">
-        <a href="./dashboard.php" class="brand" title="logo">
+        <a href="#" class="brand" title="logo">
             <i><img src="../../../src/img/UpKeep.png" alt="" class="logo" /></i>
             <div class="mobile-sidebar-close">
                 <i class="bi bi-arrow-left-circle"></i>

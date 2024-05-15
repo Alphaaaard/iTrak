@@ -523,7 +523,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </div>
         <!-- SIDEBAR -->
         <section id="sidebar">
-            <a href="./dashboard.php" class="brand" title="logo">
+            <a href="#" class="brand" title="logo">
                 <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
                 <div class="mobile-sidebar-close">
                     <i class="bi bi-arrow-left-circle"></i>
@@ -621,7 +621,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                     </a>
                 </li>
             </ul>
-            </section>
+        </section>
         <section id="content">
             <main>
                 <div class="content-container">
@@ -1680,7 +1680,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
             });
         </script>
 
-         <script>
+        <script>
             $(document).ready(function() {
                 // Bind the filter function to the input field
                 $("#search-box").on("input", function() {

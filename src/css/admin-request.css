@@ -214,6 +214,21 @@ td:last-child {
   .table-container table tbody tr td:nth-child(5) {
     display: none;
   }
+
+  .table-header table tr th {
+    font-size: 10px !important;
+  }
+
+  .table-container table tbody tr td {
+    font-size: 8.4px !important;
+  }
+
+  .tbl-filter {
+    justify-content: unset !important;
+  }
+  .tbl-filter select {
+    margin-top: unset !important;
+  }
 }
 
 .past-due-row {

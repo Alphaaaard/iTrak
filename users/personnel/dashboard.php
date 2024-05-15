@@ -350,7 +350,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <!-- NAVBAR -->
         <!-- SIDEBAR -->
         <section id="sidebar">
-            <a href="./dashboard.php" class="brand" title="logo">
+            <a href="#" class="brand" title="logo">
                 <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
                 <div class="mobile-sidebar-close">
                     <i class="bi bi-arrow-left-circle"></i>
@@ -842,186 +842,186 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             });
         </script>
 
-<script>
-$(document).ready(function() {
-    // Define default month and week as January and Week 1
-    var defaultMonth = 5; // January
-    var defaultWeek = 1; // Week 1
-    // var defaultCampus = "San Bartolome";
+        <script>
+            $(document).ready(function() {
+                // Define default month and week as January and Week 1
+                var defaultMonth = 5; // January
+                var defaultWeek = 1; // Week 1
+                // var defaultCampus = "San Bartolome";
 
-    // Set default selections for month and week filters
-    $('#monthFilter').val(defaultMonth);
-    $('#weekFilter').val(defaultWeek);
-    // $('#campusFilter').val(defaultCampus);
+                // Set default selections for month and week filters
+                $('#monthFilter').val(defaultMonth);
+                $('#weekFilter').val(defaultWeek);
+                // $('#campusFilter').val(defaultCampus);
 
-    // Fetch employee names separately
-    $.ajax({
-        url: 'get_employee_names.php',
-        type: 'GET',
-        dataType: 'json',
-        success: function(employeeNames) {
-            $('#employeeFilter').empty().append($('<option>').text('Choose Personnel').attr('value', ''));
-            employeeNames.forEach(function(name) {
-                $('#employeeFilter').append($('<option>').text(name).attr('value', name));
-            });
-        },
-        error: function(xhr, status, error) {
-            console.error("Error fetching employee names:", error);
-        }
-    }); // Closing curly brace for AJAX request
-
-    // Fetch campus names separately
-    $.ajax({
-        url: 'get_campus_names.php', // This should be the URL to fetch campus names
-        type: 'GET',
-        dataType: 'json',
-        success: function(campusNames) {
-            $('#campusFilter').empty().append($('<option>').text('Choose Campus').attr('value', ''));
-            campusNames.forEach(function(campus) {
-                $('#campusFilter').append($('<option>').text(campus).attr('value', campus));
-            });
-        },
-    error: function(xhr, status, error) {
-        console.error("Error fetching campus names:", error);
-    }
-});
-
-    var statusChart;
-
-    function updateWeekOptions() {
-        $('#weekFilter').empty().append($('<option>').text('Select Week').attr('value', ''));
-        for (var i = 1; i <= 5; i++) {
-            $('#weekFilter').append($('<option>').text('Week ' + i).attr('value', i));
-        }
-    }
-
-    // Update week options when month selection changes
-    $('#monthFilter').on('change', updateWeekOptions);
-
-    function fetchData() {
-    var month = $('#monthFilter').val() || defaultMonth;
-    var week = $('#weekFilter').val() || defaultWeek;
-    var employee = $('#employeeFilter').val() || '';
-    var campus = $('#campusFilter').val() || '';
-
-    // Calculate the start date of the selected week within the selected month
-    var startDate = moment([new Date().getFullYear(), month - 1]).startOf('month').add((week - 1) * 7, 'days');
-    // Adjust to the start of the week (Monday)
-    var weekStart = startDate.clone().startOf('isoWeek');
-    if (weekStart.month() + 1 !== month) { // Ensure week start is within the month
-        weekStart = startDate.clone();
-    }
-
-    // Calculate the end date of the selected week within the selected month
-    var endDate = weekStart.clone().add(6, 'days');
-    if (endDate.month() + 1 !== month) { // Ensure week end is within the month
-        endDate = moment([new Date().getFullYear(), month - 1]).endOf('month');
-    }
-
-    // Ensure both month and week are selected
-    if (!month || !week) {
-        console.log('Both month and week need to be selected.');
-        return; // Exit the function if either is not selected
-    }
-
-    // Fetch chart data
-    $.ajax({
-        url: 'fetch_data.php',
-        type: 'GET',
-        data: {
-            month: month,
-            employee: employee,
-            start: weekStart.format('YYYY-MM-DD'),
-            end: endDate.format('YYYY-MM-DD'),
-            campus: campus // Include the selected campus value
-        },
-        dataType: 'json', // Expecting JSON response
-        success: function(response) {
-            if (statusChart) {
-                statusChart.destroy(); // Destroy existing chart if it exists
-            }
-            var ctx = document.getElementById('statusChart').getContext('2d');
-            statusChart = new Chart(ctx, {
-                type: 'bar', // Type of chart
-                data: {
-                    labels: response.labels,
-                    datasets: [{
-                        label: 'Task Completion',
-                        data: response.data,
-                        backgroundColor: [
-                            'rgba(22, 49, 114)',
-                            'rgba(22, 49, 114)',
-                            'rgba(22, 49, 114)',
-                            'rgba(22, 49, 114)'
-                        ],
-                        borderColor: [
-                            'rgba(22, 49, 114)',
-                            'rgba(22, 49, 114)',
-                            'rgba(22, 49, 114)',
-                            'rgba(22, 49, 114)'
-                        ],
-                        borderWidth: 1,
-                        borderRadius: 30
-                    }]
-                },
-                options: {
-                    plugins: {
-                        legend: {
-                            display: false // This will hide the legend
-                        }
+                // Fetch employee names separately
+                $.ajax({
+                    url: 'get_employee_names.php',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(employeeNames) {
+                        $('#employeeFilter').empty().append($('<option>').text('Choose Personnel').attr('value', ''));
+                        employeeNames.forEach(function(name) {
+                            $('#employeeFilter').append($('<option>').text(name).attr('value', name));
+                        });
                     },
-                    scales: {
-                        x: {
-                            grid: {
-                                drawBorder: false,
-                                drawTicks: false,
-                                display: false
-                            },
-                            ticks: {
-                                display: true // Keep this true to show the labels
-                            }
-                        },
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                callback: function(value, index, values) {
-                                    // Only return the tick if it is an even number
-                                    if (value % 2 === 0) {
-                                        return value;
-                                    }
-                                }
-                            }
-                        }
+                    error: function(xhr, status, error) {
+                        console.error("Error fetching employee names:", error);
+                    }
+                }); // Closing curly brace for AJAX request
+
+                // Fetch campus names separately
+                $.ajax({
+                    url: 'get_campus_names.php', // This should be the URL to fetch campus names
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(campusNames) {
+                        $('#campusFilter').empty().append($('<option>').text('Choose Campus').attr('value', ''));
+                        campusNames.forEach(function(campus) {
+                            $('#campusFilter').append($('<option>').text(campus).attr('value', campus));
+                        });
                     },
-                    tooltips: {
-                        callbacks: {
-                            label: function(context) {
-                                let label = context.dataset.label || '';
-                                if (label) {
-                                    label += ': ';
-                                }
-                                label += new Intl.NumberFormat().format(context.parsed.y);
-                                return label;
-                            }
-                        }
+                    error: function(xhr, status, error) {
+                        console.error("Error fetching campus names:", error);
+                    }
+                });
+
+                var statusChart;
+
+                function updateWeekOptions() {
+                    $('#weekFilter').empty().append($('<option>').text('Select Week').attr('value', ''));
+                    for (var i = 1; i <= 5; i++) {
+                        $('#weekFilter').append($('<option>').text('Week ' + i).attr('value', i));
                     }
                 }
+
+                // Update week options when month selection changes
+                $('#monthFilter').on('change', updateWeekOptions);
+
+                function fetchData() {
+                    var month = $('#monthFilter').val() || defaultMonth;
+                    var week = $('#weekFilter').val() || defaultWeek;
+                    var employee = $('#employeeFilter').val() || '';
+                    var campus = $('#campusFilter').val() || '';
+
+                    // Calculate the start date of the selected week within the selected month
+                    var startDate = moment([new Date().getFullYear(), month - 1]).startOf('month').add((week - 1) * 7, 'days');
+                    // Adjust to the start of the week (Monday)
+                    var weekStart = startDate.clone().startOf('isoWeek');
+                    if (weekStart.month() + 1 !== month) { // Ensure week start is within the month
+                        weekStart = startDate.clone();
+                    }
+
+                    // Calculate the end date of the selected week within the selected month
+                    var endDate = weekStart.clone().add(6, 'days');
+                    if (endDate.month() + 1 !== month) { // Ensure week end is within the month
+                        endDate = moment([new Date().getFullYear(), month - 1]).endOf('month');
+                    }
+
+                    // Ensure both month and week are selected
+                    if (!month || !week) {
+                        console.log('Both month and week need to be selected.');
+                        return; // Exit the function if either is not selected
+                    }
+
+                    // Fetch chart data
+                    $.ajax({
+                        url: 'fetch_data.php',
+                        type: 'GET',
+                        data: {
+                            month: month,
+                            employee: employee,
+                            start: weekStart.format('YYYY-MM-DD'),
+                            end: endDate.format('YYYY-MM-DD'),
+                            campus: campus // Include the selected campus value
+                        },
+                        dataType: 'json', // Expecting JSON response
+                        success: function(response) {
+                            if (statusChart) {
+                                statusChart.destroy(); // Destroy existing chart if it exists
+                            }
+                            var ctx = document.getElementById('statusChart').getContext('2d');
+                            statusChart = new Chart(ctx, {
+                                type: 'bar', // Type of chart
+                                data: {
+                                    labels: response.labels,
+                                    datasets: [{
+                                        label: 'Task Completion',
+                                        data: response.data,
+                                        backgroundColor: [
+                                            'rgba(22, 49, 114)',
+                                            'rgba(22, 49, 114)',
+                                            'rgba(22, 49, 114)',
+                                            'rgba(22, 49, 114)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(22, 49, 114)',
+                                            'rgba(22, 49, 114)',
+                                            'rgba(22, 49, 114)',
+                                            'rgba(22, 49, 114)'
+                                        ],
+                                        borderWidth: 1,
+                                        borderRadius: 30
+                                    }]
+                                },
+                                options: {
+                                    plugins: {
+                                        legend: {
+                                            display: false // This will hide the legend
+                                        }
+                                    },
+                                    scales: {
+                                        x: {
+                                            grid: {
+                                                drawBorder: false,
+                                                drawTicks: false,
+                                                display: false
+                                            },
+                                            ticks: {
+                                                display: true // Keep this true to show the labels
+                                            }
+                                        },
+                                        y: {
+                                            beginAtZero: true,
+                                            ticks: {
+                                                callback: function(value, index, values) {
+                                                    // Only return the tick if it is an even number
+                                                    if (value % 2 === 0) {
+                                                        return value;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    tooltips: {
+                                        callbacks: {
+                                            label: function(context) {
+                                                let label = context.dataset.label || '';
+                                                if (label) {
+                                                    label += ': ';
+                                                }
+                                                label += new Intl.NumberFormat().format(context.parsed.y);
+                                                return label;
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error fetching data:", error);
+                        }
+                    });
+                }
+
+                // Trigger fetchData when selections change
+                $('#monthFilter, #weekFilter, #employeeFilter, #campusFilter ').change(fetchData);
+
+                // Call updateWeekOptions and fetchData on page load to display the default data
+                updateWeekOptions(); // This will populate the week filter based on the current month
+                fetchData(); // This will fetch and display data for the current month and week
             });
-        },
-        error: function(xhr, status, error) {
-            console.error("Error fetching data:", error);
-        }
-    });
-}
-
-    // Trigger fetchData when selections change
-    $('#monthFilter, #weekFilter, #employeeFilter, #campusFilter ').change(fetchData);
-
-    // Call updateWeekOptions and fetchData on page load to display the default data
-    updateWeekOptions(); // This will populate the week filter based on the current month
-    fetchData(); // This will fetch and display data for the current month and week
-});
-</script>
+        </script>
 
         <!-- BOOTSTRAP -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

@@ -117,7 +117,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         $mp_remark = $_POST['new_mp_remark'];
 
         // Calculate the current date plus 8 hours
-       
+
 
         // Insert data into the request table
         $insertQuery = "INSERT INTO request (request_id, campus, building, floor, room, equipment, req_by, category, assignee, status, description, deadline, date, outsource_info, first_assignee, admins_remark, mp_remark)
@@ -324,7 +324,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
 ?>
 
 
-<!DOCTYPE html>
+    <!DOCTYPE html>
     <html lang="en">
 
     <head>
@@ -536,7 +536,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </div>
         <!-- SIDEBAR -->
         <section id="sidebar">
-            <a href="./dashboard.php" class="brand" title="logo">
+            <a href="#" class="brand" title="logo">
                 <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
                 <div class="mobile-sidebar-close">
                     <i class="bi bi-arrow-left-circle"></i>
@@ -656,8 +656,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
                     </header>
                     <div class="new-nav-container">
-                          <!--Content start of tabs-->
-                          <div class="new-nav">
+                        <!--Content start of tabs-->
+                        <div class="new-nav">
                             <ul>
                                 <li><a href="#" class="nav-link" data-bs-target="pills-manager">Request</a></li>
                                 <li><a href="#" class="nav-link" data-bs-target="pills-profile">Outsource</a></li>
@@ -682,15 +682,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <div class='table-header'>
                                     <table>
                                         <tr>
-                                            <th>Request ID</th>
-                                            <th>Date & Time</th>
-                                            <th>Category</th>
-                                            <th>Location</th>
-                                            <th>Equipment</th>
-                                            <th>Assignee</th>
-                                            <th>Deadline</th>
-                                            <th>Status</th>
-
+                                            <th>REQUEST ID</th>
+                                            <th>DATE & TIME</th>
+                                            <th>CATEGORY</th>
+                                            <th>LOCATION</th>
+                                            <th>EQUIPMENT</th>
+                                            <th>ASSIGNEE</th>
+                                            <th>DEADLINE</th>
+                                            <th>STATUS</th>
                                             <th></th>
                                         </tr>
                                     </table>
@@ -786,14 +785,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <div class='table-header'>
                                     <table>
                                         <tr>
-                                            <th>Request ID</th>
-                                            <th>Date & Time</th>
-                                            <th>Category</th>
-                                            <th>Location</th>
-                                            <th>Equipment</th>
-                                            <th>Assignee</th>
-                                            <th>Deadline</th>
-                                            <th>Status</th>
+                                            <th>REQUEST ID</th>
+                                            <th>DATE & TIME</th>
+                                            <th>CATEGORY</th>
+                                            <th>LOCATION</th>
+                                            <th>EQUIPMENT</th>
+                                            <th>ASSIGNEE</th>
+                                            <th>DEADLINE</th>
+                                            <th>STATUS</th>
                                             <th></th>
                                         </tr>
                                     </table>
@@ -885,14 +884,14 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                 <div class='table-header'>
                                     <table>
                                         <tr>
-                                            <th>Request ID</th>
-                                            <th>Date & Time</th>
-                                            <th>Category</th>
-                                            <th>Location</th>
-                                            <th>Equipment</th>
-                                            <th>Assignee</th>
-                                            <th>Deadline</th>
-                                            <th>Status</th>
+                                            <th>REQUEST ID</th>
+                                            <th>DATE & TIME</th>
+                                            <th>CATEGORY</th>
+                                            <th>LOCATION</th>
+                                            <th>EQUIPMENT</th>
+                                            <th>ASSIGNEE</th>
+                                            <th>DEADLINE</th>
+                                            <th>STATUS</th>
                                             <th></th>
                                         </tr>
                                     </table>
@@ -981,7 +980,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         <div class="modal-parent">
                             <div class="modal modal-xl fade" id="addRequest" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
+                                    <div class="modal-content">
                                         <div class="modal-header">
                                             <h5>Add New Request:</h5>
                                             <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
@@ -1158,111 +1157,96 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
                         </form>
 
-                       <!--MODAL FOR THE APPROVAL-->
-                    <div class="modal-parent">
-                        <div class="modal modal-xl fade" id="ForApproval" tabindex="-1"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5>For Approval:</h5>
+                        <!--MODAL FOR THE APPROVAL-->
+                        <div class="modal-parent">
+                            <div class="modal modal-xl fade" id="ForApproval" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5>For Approval:</h5>
 
-                                        <button class="btn btn-close-modal-emp close-modal-btn"
-                                            data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form id="approvalForm" method="post" class="row g-3">
-                                            <div class="col-4" style="display:none;">
-                                                <label for="request_id" class="form-label">Request ID:</label>
-                                                <input type="text" class="form-control" id="request_id"
-                                                    name="request_id" readonly />
-                                            </div>
-                                            <div class="col-4" style="display:none;">
-                                                <label for="date" class="form-label">Date & Time:</label>
-                                                <input type="text" class="form-control" id="date" name="date" />
-                                            </div>
-                                            <div class="col-4" style="display:none;">
-                                                <label for="campus" class="form-label">Campus:</label>
-                                                <input type="text" class="form-control" id="campus" name="campus"
-                                                    value="Batasan" />
-                                            </div>
-                                            <div class="col-4">
-                                                <label for="building" class="form-label">Building:</label>
-                                                <input type="text" class="form-control" id="building" name="building"
-                                                    readonly />
-                                            </div>
+                                            <button class="btn btn-close-modal-emp close-modal-btn" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="approvalForm" method="post" class="row g-3">
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="request_id" class="form-label">Request ID:</label>
+                                                    <input type="text" class="form-control" id="request_id" name="request_id" readonly />
+                                                </div>
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="date" class="form-label">Date & Time:</label>
+                                                    <input type="text" class="form-control" id="date" name="date" />
+                                                </div>
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="campus" class="form-label">Campus:</label>
+                                                    <input type="text" class="form-control" id="campus" name="campus" value="Batasan" />
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="building" class="form-label">Building:</label>
+                                                    <input type="text" class="form-control" id="building" name="building" readonly />
+                                                </div>
 
-                                            <div class="col-4">
-                                                <label for="floor" class="form-label">Floor:</label>
-                                                <input type="text" class="form-control" id="floor" name="floor"
-                                                    readonly />
-                                            </div>
+                                                <div class="col-4">
+                                                    <label for="floor" class="form-label">Floor:</label>
+                                                    <input type="text" class="form-control" id="floor" name="floor" readonly />
+                                                </div>
 
-                                            <div class="col-4">
-                                                <label for="room" class="form-label">Room: </label>
-                                                <input type="text" class="form-control" id="room" name="room"
-                                                    readonly />
-                                            </div>
+                                                <div class="col-4">
+                                                    <label for="room" class="form-label">Room: </label>
+                                                    <input type="text" class="form-control" id="room" name="room" readonly />
+                                                </div>
 
-                                            <div class="col-4">
-                                                <label for="equipment" class="form-label">Equipment :</label>
-                                                <input type="text" class="form-control" id="equipment" name="equipment"
-                                                    readonly />
-                                            </div>
+                                                <div class="col-4">
+                                                    <label for="equipment" class="form-label">Equipment :</label>
+                                                    <input type="text" class="form-control" id="equipment" name="equipment" readonly />
+                                                </div>
 
-                                            <div class="col-4" style="display:none;">
-                                                <label for="req_by" class="form-label">Requested By: </label>
-                                                <input type="text" class="form-control" id="req_by" name="req_by" />
-                                            </div>
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="req_by" class="form-label">Requested By: </label>
+                                                    <input type="text" class="form-control" id="req_by" name="req_by" />
+                                                </div>
 
-                                            <div class="col-4">
-                                                <label for="category" class="form-label">Category:</label>
-                                                <select class="form-select" id="category" name="category"
-                                                    onchange="fetchRandomAssignee()">
+                                                <div class="col-4">
+                                                    <label for="category" class="form-label">Category:</label>
+                                                    <select class="form-select" id="category" name="category" onchange="fetchRandomAssignee()">
 
-                                                    <option value="Carpentry">Carpentry</option>
-                                                    <option value="Electrical">Electrical</option>
-                                                    <option value="Plumbing">Plumbing</option>
-                                                    <option value="Outsource">Outsource</option>
-                                                </select>
-                                            </div>
+                                                        <option value="Carpentry">Carpentry</option>
+                                                        <option value="Electrical">Electrical</option>
+                                                        <option value="Plumbing">Plumbing</option>
+                                                        <option value="Outsource">Outsource</option>
+                                                    </select>
+                                                </div>
 
-                                            <!-- Add an empty assignee select element -->
-                                            <div class="col-4">
-                                                <label id="assignee-label" for="assignee"
-                                                    class="form-label">Assignee:</label>
-                                                <select class="form-select" id="assignee" name="assignee"></select>
+                                                <!-- Add an empty assignee select element -->
+                                                <div class="col-4">
+                                                    <label id="assignee-label" for="assignee" class="form-label">Assignee:</label>
+                                                    <select class="form-select" id="assignee" name="assignee"></select>
 
-                                                <input type="text" class="form-control" id="assigneeInput"
-                                                    name="assignee" style="display: none;">
+                                                    <input type="text" class="form-control" id="assigneeInput" name="assignee" style="display: none;">
 
-                                                <input type="text" class="form-control" id="assigneeInputreal"
-                                                    name="assigneereal" style="display:none;">
-                                            </div>
+                                                    <input type="text" class="form-control" id="assigneeInputreal" name="assigneereal" style="display:none;">
+                                                </div>
 
-                                            <div class="col-4" style="display:none;">
-                                                <label for="status" class="form-label">Status:</label>
-                                                <input type="text" class="form-control" value="Pending"
-                                                    id="status_modal" name="status" />
-                                            </div>
+                                                <div class="col-4" style="display:none;">
+                                                    <label for="status" class="form-label">Status:</label>
+                                                    <input type="text" class="form-control" value="Pending" id="status_modal" name="status" />
+                                                </div>
 
-                                            <div class="col-4">
-                                                <label for="deadline" class="form-label">Deadline:</label>
-                                                <input type="date" class="form-control" id="deadline" name="deadline" />
-                                            </div>
-                                            <div class="col-4">
-                                                <label for="first_assignee" class="form-label">First
-                                                    Assignee:</label>
-                                                <input type="text" class="form-control" id="first_assignee"
-                                                    name="first_assignee" readonly />
-                                            </div>
+                                                <div class="col-4">
+                                                    <label for="deadline" class="form-label">Deadline:</label>
+                                                    <input type="date" class="form-control" id="deadline" name="deadline" />
+                                                </div>
+                                                <div class="col-4">
+                                                    <label for="first_assignee" class="form-label">First
+                                                        Assignee:</label>
+                                                    <input type="text" class="form-control" id="first_assignee" name="first_assignee" readonly />
+                                                </div>
 
-                                            <!-- Add outsource_info field -->
-                                            <div class="col-4" id="outsourceInfoFieldapprove" style="display: none;">
-                                                <label for="outsource_info" class="form-label">Outsource Info:</label>
-                                                <input type="text" class="form-control" id="outsource_info"
-                                                    name="outsource_info" />
-                                            </div>
+                                                <!-- Add outsource_info field -->
+                                                <div class="col-4" id="outsourceInfoFieldapprove" style="display: none;">
+                                                    <label for="outsource_info" class="form-label">Outsource Info:</label>
+                                                    <input type="text" class="form-control" id="outsource_info" name="outsource_info" />
+                                                </div>
 
 
                                                 <div class="col-12" id="textareaContainerD">
@@ -1276,38 +1260,36 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                                                     <input type="text" class="form-control" id="return_reason" name="return_reason" readonly />
                                                 </div>
 
-                                            <!-- JavaScript to toggle visibility based on category selection -->
-                                            <script>
-                                                // Function to show or hide the outsource_info field based on the selected category
-                                                function toggleOutsourceInfoFieldapprove() {
-                                                    var category = document.getElementById('category').value;
-                                                    var outsourceInfoFieldapprove = document.getElementById('outsourceInfoFieldapprove');
-                                                    if (category === 'Outsource') {
-                                                        outsourceInfoFieldapprove.style.display = 'block';
-                                                    } else {
-                                                        outsourceInfoFieldapprove.style.display = 'none';
+                                                <!-- JavaScript to toggle visibility based on category selection -->
+                                                <script>
+                                                    // Function to show or hide the outsource_info field based on the selected category
+                                                    function toggleOutsourceInfoFieldapprove() {
+                                                        var category = document.getElementById('category').value;
+                                                        var outsourceInfoFieldapprove = document.getElementById('outsourceInfoFieldapprove');
+                                                        if (category === 'Outsource') {
+                                                            outsourceInfoFieldapprove.style.display = 'block';
+                                                        } else {
+                                                            outsourceInfoFieldapprove.style.display = 'none';
+                                                        }
                                                     }
-                                                }
 
-                                                // Call the function initially and add an event listener to the category select element
-                                                toggleOutsourceInfoFieldapprove();
-                                                document.getElementById('category').addEventListener('change', toggleOutsourceInfoFieldapprove);
-                                            </script>
-
+                                                    // Call the function initially and add an event listener to the category select element
+                                                    toggleOutsourceInfoFieldapprove();
+                                                    document.getElementById('category').addEventListener('change', toggleOutsourceInfoFieldapprove);
+                                                </script>
 
 
 
-                                            <div class="col-12">
-                                                <label for="admins_remark" class="form-label">Remarks</label>
-                                                <input type="text" class="form-control" id="admins_remark"
-                                                    name="admins_remark" />
-                                            </div>
-                                            <div class="footer">
-                                                <button type="button" class="btn add-modal-btn" data-bs-toggle="modal"
-                                                    data-bs-target="#ForApprovals" onclick="showApprovalConfirmation()">
-                                                    Save
-                                                </button>
-                                            </div>
+
+                                                <div class="col-12">
+                                                    <label for="admins_remark" class="form-label">Remarks</label>
+                                                    <input type="text" class="form-control" id="admins_remark" name="admins_remark" />
+                                                </div>
+                                                <div class="footer">
+                                                    <button type="button" class="btn add-modal-btn" data-bs-toggle="modal" data-bs-target="#ForApprovals" onclick="showApprovalConfirmation()">
+                                                        Save
+                                                    </button>
+                                                </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1331,8 +1313,8 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                         </div>
                         </form>
 
-                                                <!--MODAL FOR OUTSOURCE-->
-                                                <div class="modal-parent">
+                        <!--MODAL FOR OUTSOURCE-->
+                        <div class="modal-parent">
                             <div class="modal modal-xl fade" id="ForOutsource" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
@@ -1627,51 +1609,51 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         <script src="../../src/js/batasanmanager.js"></script>
 
         <!-- Cascading Script -->
-    <script>
-        var subjectObject = {
-            "Batasan Campus Building": {
-                "Basement": ["Male CR", "Female CR"],
-                "1F": ["Lobby", "Com Lab 104", "Com Lab 103", "Room 102", "Room 101", "Guidance Clinic 108", "Admin Office 107", "Faculty Room 106", "Library 105"],
-                "2F": ["Male CR left", "Female CR left", "03 room 201", "04 room 202", "05 room 203", "06 room 205", "07 room 206", "08 room 207", "Male CR right", "Female CR right"],
-                "3F": ["Room 301", "Room 302", "Room 303", "Room 304", "Room 305", "09 room 306", "10 room 307", "11 room 308", "12 room 309"],
-                "4F": ["20 room 401", "19 room 402", "18 room 403", "17 room 404", "Room 405", "16 room 406", "15 room 407", "14 room 408", "13 room 409"]
-            },
-            "Basketball Court": {
-                "None": ["None"]
-            },
-            "Parking Area": {
-                "None": ["None"]
-            }
-        }
-        window.onload = function () {
-            var subjectSel = document.getElementById("new_building");
-            var topicSel = document.getElementById("new_floor");
-            var chapterSel = document.getElementById("new_room");
-            for (var x in subjectObject) {
-                subjectSel.options[subjectSel.options.length] = new Option(x, x);
-            }
-            subjectSel.onchange = function () {
-                //empty Chapters- and Topics- dropdowns
-                chapterSel.length = 1;
-                topicSel.length = 1;
-                //display correct values
-                for (var y in subjectObject[this.value]) {
-                    topicSel.options[topicSel.options.length] = new Option(y, y);
+        <script>
+            var subjectObject = {
+                "Batasan Campus Building": {
+                    "Basement": ["Male CR", "Female CR"],
+                    "1F": ["Lobby", "Com Lab 104", "Com Lab 103", "Room 102", "Room 101", "Guidance Clinic 108", "Admin Office 107", "Faculty Room 106", "Library 105"],
+                    "2F": ["Male CR left", "Female CR left", "03 room 201", "04 room 202", "05 room 203", "06 room 205", "07 room 206", "08 room 207", "Male CR right", "Female CR right"],
+                    "3F": ["Room 301", "Room 302", "Room 303", "Room 304", "Room 305", "09 room 306", "10 room 307", "11 room 308", "12 room 309"],
+                    "4F": ["20 room 401", "19 room 402", "18 room 403", "17 room 404", "Room 405", "16 room 406", "15 room 407", "14 room 408", "13 room 409"]
+                },
+                "Basketball Court": {
+                    "None": ["None"]
+                },
+                "Parking Area": {
+                    "None": ["None"]
                 }
             }
-            topicSel.onchange = function () {
-                //empty Chapters dropdown
-                chapterSel.length = 1;
-                //display correct values
-                var z = subjectObject[subjectSel.value][this.value];
-                for (var i = 0; i < z.length; i++) {
-                    chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+            window.onload = function() {
+                var subjectSel = document.getElementById("new_building");
+                var topicSel = document.getElementById("new_floor");
+                var chapterSel = document.getElementById("new_room");
+                for (var x in subjectObject) {
+                    subjectSel.options[subjectSel.options.length] = new Option(x, x);
+                }
+                subjectSel.onchange = function() {
+                    //empty Chapters- and Topics- dropdowns
+                    chapterSel.length = 1;
+                    topicSel.length = 1;
+                    //display correct values
+                    for (var y in subjectObject[this.value]) {
+                        topicSel.options[topicSel.options.length] = new Option(y, y);
+                    }
+                }
+                topicSel.onchange = function() {
+                    //empty Chapters dropdown
+                    chapterSel.length = 1;
+                    //display correct values
+                    var z = subjectObject[subjectSel.value][this.value];
+                    for (var i = 0; i < z.length; i++) {
+                        chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+                    }
                 }
             }
-        }
-    </script>
+        </script>
 
-<script>
+        <script>
             // Get today's date
             var today = new Date();
 
@@ -1758,49 +1740,49 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
         </script>
 
 
-            <!--PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
-            <script>
-                $(document).ready(function() {
-                    // Function to populate modal fields
-                    function populateModal(row) {
-                        // Populate modal fields with data from the row
-                        $("#request_id").val(row.find("td:eq(0)").text());
-                        $("#date").val(row.find("td:eq(1)").text());
-                        $("#category").val(row.find("td:eq(2)").text());
-                        // If building, floor, and room are concatenated in a single cell, split them
-                        var buildingFloorRoom = row.find("td:eq(3)").text().split(', ');
-                        $("#building").val(buildingFloorRoom[0]);
-                        $("#floor").val(buildingFloorRoom[1]);
-                        $("#room").val(buildingFloorRoom[2]);
-                        $("#equipment").val(row.find("td:eq(4)").text());
-                        $("#assignee").val(row.find("td:eq(5)").text());
-                        $("#status").val(row.find("td:eq(6)").text());
-                        $("#deadline").val(row.find("td:eq(7)").text());
-                        $("#description").val(row.find("td:eq(13)").text());
-                        $("#return_reason").val(row.find("td:eq(15)").text());
+        <!--PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
+        <script>
+            $(document).ready(function() {
+                // Function to populate modal fields
+                function populateModal(row) {
+                    // Populate modal fields with data from the row
+                    $("#request_id").val(row.find("td:eq(0)").text());
+                    $("#date").val(row.find("td:eq(1)").text());
+                    $("#category").val(row.find("td:eq(2)").text());
+                    // If building, floor, and room are concatenated in a single cell, split them
+                    var buildingFloorRoom = row.find("td:eq(3)").text().split(', ');
+                    $("#building").val(buildingFloorRoom[0]);
+                    $("#floor").val(buildingFloorRoom[1]);
+                    $("#room").val(buildingFloorRoom[2]);
+                    $("#equipment").val(row.find("td:eq(4)").text());
+                    $("#assignee").val(row.find("td:eq(5)").text());
+                    $("#status").val(row.find("td:eq(6)").text());
+                    $("#deadline").val(row.find("td:eq(7)").text());
+                    $("#description").val(row.find("td:eq(13)").text());
+                    $("#return_reason").val(row.find("td:eq(15)").text());
 
-                        // Check if return_reason has a value
-                        if (row.find("td:eq(15)").text().trim() !== '') {
-                            $("#return_reason").closest('.col-12').show(); // Show the div if there's a value
-                        } else {
-                            $("#return_reason").closest('.col-12').hide(); // Hide the div if there's no value
-                        }
-
-                        // Additional fields
-                        $("#outsource_info").val(row.find("td:eq(16)").text());
-                        $("#first_assignee").val(row.find("td:eq(17)").text());
-                        $("#admins_remark").val(row.find("td:eq(18)").text());
-                        $("#mp_remark").val(row.find("td:eq(19)").text());
+                    // Check if return_reason has a value
+                    if (row.find("td:eq(15)").text().trim() !== '') {
+                        $("#return_reason").closest('.col-12').show(); // Show the div if there's a value
+                    } else {
+                        $("#return_reason").closest('.col-12').hide(); // Hide the div if there's no value
                     }
 
-                    // Click event for the "Approve" button
-                    $("button[data-bs-target='#ForApproval']").click(function() {
-                        var row = $(this).closest("tr"); // Get the closest row to the clicked button
-                        populateModal(row); // Populate modal fields with data from the row
-                        $("#ForApproval").modal("show"); // Show the modal
-                    });
+                    // Additional fields
+                    $("#outsource_info").val(row.find("td:eq(16)").text());
+                    $("#first_assignee").val(row.find("td:eq(17)").text());
+                    $("#admins_remark").val(row.find("td:eq(18)").text());
+                    $("#mp_remark").val(row.find("td:eq(19)").text());
+                }
+
+                // Click event for the "Approve" button
+                $("button[data-bs-target='#ForApproval']").click(function() {
+                    var row = $(this).closest("tr"); // Get the closest row to the clicked button
+                    populateModal(row); // Populate modal fields with data from the row
+                    $("#ForApproval").modal("show"); // Show the modal
                 });
-            </script>
+            });
+        </script>
 
         <!--2 PANTAWAG SA MODAL TO DISPLAY SA INPUT BOXES-->
         <script>
@@ -2132,7 +2114,7 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
                 });
             });
         </script>
-        
+
         <script>
             $(document).ready(function() {
                 let lastPillSelected = sessionStorage.getItem('lastPillArchive');

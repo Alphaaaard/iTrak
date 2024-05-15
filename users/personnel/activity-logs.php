@@ -31,29 +31,29 @@ if (isset($_SESSION['accountId']) && isset($_SESSION['email']) && isset($_SESSIO
     // Concatenate first name and last name for the action field check
     $loggedInFullName = $loggedInUserFirstName . " " . $loggedInUsermiddleName . " " . $loggedInUserLastName; //kung ano ung naka declare dito eto lang ung magiging data 
 
- // Fetch General activity logs where the user's name appears in 'Assigned maintenance personnel' or 'Created and assigned task' actions
- $sqlGeneral = "SELECT ac.*, a.firstName, a.middleName, a.lastName
+    // Fetch General activity logs where the user's name appears in 'Assigned maintenance personnel' or 'Created and assigned task' actions
+    $sqlGeneral = "SELECT ac.*, a.firstName, a.middleName, a.lastName
  FROM activitylogs AS ac
  LEFT JOIN account AS a ON ac.accountID = a.accountID
  WHERE ac.tab = 'General' AND 
  (ac.action LIKE ? OR ac.action LIKE ? OR ac.action LIKE ? OR ac.action LIKE ?)
  ORDER BY ac.date DESC";
- 
- // Prepare the SQL statement
- $stmtg = $conn->prepare($sqlGeneral);
- 
- // Bind the parameters para sa pagfetch to ng data sa table
 
- $pattern1 = "Assigned maintenance personnel $loggedInUserFirstName%";
- $pattern2 = "%Created and assigned task to $loggedInUserFirstName%";
- $pattern3 = "%Changed status of%";
- $pattern4 = "%Task ID % reassigned to $loggedInUserFirstName%";
- 
- $stmtg->bind_param("ssss", $pattern1, $pattern2, $pattern3, $pattern4);
- $stmtg->execute();
- $resultGeneral = $stmtg->get_result();
- 
- 
+    // Prepare the SQL statement
+    $stmtg = $conn->prepare($sqlGeneral);
+
+    // Bind the parameters para sa pagfetch to ng data sa table
+
+    $pattern1 = "Assigned maintenance personnel $loggedInUserFirstName%";
+    $pattern2 = "%Created and assigned task to $loggedInUserFirstName%";
+    $pattern3 = "%Changed status of%";
+    $pattern4 = "%Task ID % reassigned to $loggedInUserFirstName%";
+
+    $stmtg->bind_param("ssss", $pattern1, $pattern2, $pattern3, $pattern4);
+    $stmtg->execute();
+    $resultGeneral = $stmtg->get_result();
+
+
 
 
 
@@ -308,7 +308,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <!-- NAVBAR -->
         <!-- SIDEBAR -->
         <section id="sidebar">
-            <a href="./dashboard.php" class="brand" title="logo">
+            <a href="#" class="brand" title="logo">
                 <i><img src="../../src/img/UpKeep.png" alt="" class="logo" /></i>
                 <div class="mobile-sidebar-close">
                     <i class="bi bi-arrow-left-circle"></i>
@@ -432,7 +432,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                 ?>
                             </div>
                             <div id="pagination-container-general" class="pagination-container"></div>
-                            </div>
+                        </div>
                         <!-- Report History Tab Content -->
                         <div class="tab-pane fade show active" id="pills-report" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="table-content">

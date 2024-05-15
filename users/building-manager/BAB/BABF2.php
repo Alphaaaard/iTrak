@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once ("../../../config/connection.php");
+include_once("../../../config/connection.php");
 $conn = connection();
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -10230,7 +10230,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             echo "<script>alert('Failed to upload image. Error: " . $_FILES['upload_img']['error'] . "');</script>";
         }
     }
-    ?>
+?>
 
 
     <!DOCTYPE html>
@@ -10241,8 +10241,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>iTrak | Map</title>
         <link rel="icon" type="image/x-icon" href="../../../src/img/tab-logo.png">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" />
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -10280,7 +10279,7 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                         <a href="#" class="notification" id="notification-button">
                             <i class="fa fa-bell" aria-hidden="true"></i>
                             <!-- Notification Indicator Dot -->
-                            <?php if ($unseenCount > 0): ?>
+                            <?php if ($unseenCount > 0) : ?>
                                 <span class="notification-indicator"></span>
                             <?php endif; ?>
                         </a>
@@ -10378,22 +10377,21 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
                                 </a></div>
                             <hr>
                         </div>
-                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i
-                                class="bi bi-person profile-icons"></i>Profile</a>
+                        <a class="profile-hover" href="#" data-bs-toggle="modal" data-bs-target="#viewModal"><i class="bi bi-person profile-icons"></i>Profile</a>
                         <a class="profile-hover" href="#" id="logoutBtn"><i class="bi bi-box-arrow-left "></i>Logout</a>
                     </div>
-                    <?php
-} else {
-    header("Location:../../index.php");
-    exit();
-}
-?>
-            </div>
-        </nav>
-    </div>
+                <?php
+            } else {
+                header("Location:../../index.php");
+                exit();
+            }
+                ?>
+                </div>
+            </nav>
+        </div>
         <!-- SIDEBAR -->
         <section id="sidebar">
-            <a href="./dashboard.php" class="brand" title="logo">
+            <a href="#" class="brand" title="logo">
                 <i><img src="../../../src/img/UpKeep.png" alt="" class="logo" /></i>
                 <div class="mobile-sidebar-close">
                     <i class="bi bi-arrow-left-circle"></i>
@@ -10493,17 +10491,17 @@ WHERE p_seen = '0' AND accountID != ? AND action LIKE 'Assigned maintenance pers
             </ul>
         </section>
         <!-- SIDEBAR -->
-    <div id="map-top-nav">
-        <a href="../../manager/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
+        <div id="map-top-nav">
+            <a href="../../manager/map.php" class="closeFloor"><i class="bi bi-box-arrow-left"></i></i></a>
 
-        <div class="legend-button" id="legendButton">
-            <i class="bi bi-info-circle"></i>
+            <div class="legend-button" id="legendButton">
+                <i class="bi bi-info-circle"></i>
+            </div>
         </div>
-    </div>
-    <section id="content">
-        <main>
-            <div class="content-container" id="content-container">
-                <div id="belmonte-F1" class="content">
+        <section id="content">
+            <main>
+                <div class="content-container" id="content-container">
+                    <div id="belmonte-F1" class="content">
                         <!-- FLOOR PLAN -->
                         <img src="../../../src/floors/bautistaB/BB2F.png" alt="" class="Floor-container">
 
