@@ -548,15 +548,15 @@ hr {
 }
 
 #sidebar.hide .side-menu .Map-container .Map-Batasan {
-  padding-left: 10px !important;
+  padding-left: 10px;
 }
 
 #sidebar.hide .side-menu .Map-container .Map-SanBartolome {
-  padding-left: 10px !important;
+  padding-left: 10px;
 }
 
 #sidebar.hide .side-menu .Map-container .Map-SanFrancisco {
-  padding-left: 10px !important;
+  padding-left: 10px;
 }
 
 #sidebar .side-menu.top li.active a span {
@@ -1855,6 +1855,18 @@ h5 {
   }
   .modal-body .col-4 {
     width: 50% !important;
+  }
+
+  #sidebar .side-menu .Map-container .Map-Batasan {
+    padding-left: 2em !important;
+  }
+
+  #sidebar .side-menu .Map-container .Map-SanBartolome {
+    padding-left: 2em !important;
+  }
+
+  #sidebar .side-menu .Map-container .Map-SanFrancisco {
+    padding-left: 2em !important;
   }
 }
 

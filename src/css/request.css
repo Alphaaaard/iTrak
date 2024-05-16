@@ -45,8 +45,6 @@ fieldset:disabled .btn {
   box-shadow: none;
 }
 
-
-
 .form-check-input:checked {
   background-color: #3d3b40;
   color: #3d3b40;
@@ -217,12 +215,19 @@ td:last-child {
   .table-container table tbody tr td:nth-child(5) {
     display: none;
   }
+  .tbl-filter {
+    justify-content: unset !important;
+  }
+
+  .tbl-filter select {
+    margin-top: unset !important;
+  }
 }
 
 #ForDoneModal .modal-footer {
   display: flex;
   justify-content: center;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 #ForDoneModal .modal-popups {
